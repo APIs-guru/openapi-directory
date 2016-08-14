@@ -249,11 +249,10 @@ paths:
       description: Deletes a  contact
       parameters:
         - description: contactId
-          format: int64
           in: path
           name: contactId
           required: true
-          type: integer
+          type: string
       produces:
         - application/json
         - application/xml
@@ -277,11 +276,10 @@ paths:
       description: Returns details for a single contact
       parameters:
         - description: contactId
-          format: int64
           in: path
           name: contactId
           required: true
-          type: integer
+          type: string
       produces:
         - application/json
         - application/xml
@@ -395,11 +393,10 @@ paths:
       description: Deletes a  group
       parameters:
         - description: groupId
-          format: int64
           in: path
           name: groupId
           required: true
-          type: integer
+          type: string
       produces:
         - application/json
         - application/xml
@@ -423,11 +420,10 @@ paths:
       description: Returns details for a single group
       parameters:
         - description: groupId
-          format: int64
           in: path
           name: groupId
           required: true
-          type: integer
+          type: string
       produces:
         - application/json
         - application/xml
@@ -574,11 +570,10 @@ paths:
       description: Deletes a  message
       parameters:
         - description: messageId
-          format: int64
           in: path
           name: messageId
           required: true
-          type: integer
+          type: string
       produces:
         - application/json
         - application/xml
@@ -602,11 +597,10 @@ paths:
       description: Returns details for a single message
       parameters:
         - description: messageId
-          format: int64
           in: path
           name: messageId
           required: true
-          type: integer
+          type: string
       produces:
         - application/json
         - application/xml
@@ -622,6 +616,132 @@ paths:
         '404':
           description: Not Found
       summary: get
+      tags:
+        - messages
+  '/api/rest/v1/messages/{messageId}/markRead':
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Marks a  message as read
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: markRead
+      tags:
+        - messages
+    put:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Marks a  message as read
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: markRead
+      tags:
+        - messages
+  '/api/rest/v1/messages/{messageId}/markUnread':
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Marks a  message as unread
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: markUnread
+      tags:
+        - messages
+    put:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Marks a  message as unread
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: markUnread
       tags:
         - messages
   /api/rest/v1/sms/send:
@@ -781,8 +901,7 @@ paths:
         '200':
           description: OK
           schema:
-            format: int64
-            type: integer
+            type: string
         '401':
           description: Unauthorized
         '403':
@@ -832,8 +951,7 @@ paths:
         '200':
           description: Description was not specified
           schema:
-            format: int64
-            type: integer
+            type: string
         '201':
           description: Created
         '401':
@@ -966,8 +1084,7 @@ definitions:
     description: WebServiceContact
     properties:
       contactId:
-        format: int64
-        type: integer
+        type: string
       contactNumber:
         type: string
       firstName:
@@ -984,8 +1101,7 @@ definitions:
     description: WebServiceContactLink
     properties:
       contactId:
-        format: int64
-        type: integer
+        type: string
       links:
         items:
           $ref: '#/definitions/Link'
@@ -1005,8 +1121,7 @@ definitions:
     description: WebServiceGroup
     properties:
       groupId:
-        format: int64
-        type: integer
+        type: string
       links:
         items:
           $ref: '#/definitions/Link'
@@ -1054,8 +1169,7 @@ definitions:
       message:
         type: string
       messageId:
-        format: int64
-        type: integer
+        type: string
       messageStatus:
         type: string
       messageType:

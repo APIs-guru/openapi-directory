@@ -2,33 +2,34 @@ swagger: '2.0'
 schemes:
   - https
 host: www.googleapis.com
-basePath: /dfareporting/v2.2
+basePath: /dfareporting/v2.6
 info:
   contact:
     name: Google
     url: 'https://google.com'
   description: Manages your DoubleClick Campaign Manager ad campaigns and reports.
   title: DCM/DFA Reporting And Trafficking
-  version: v2.2
+  version: v2.6
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.2/rest'
+    url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.6/rest'
     version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: dfareporting
 externalDocs:
-  url: 'https://developers.google.com/doubleclick-advertisers/reporting/'
+  url: 'https://developers.google.com/doubleclick-advertisers/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
+      'https://www.googleapis.com/auth/ddmconversions': Manage DoubleClick Digital Marketing conversions
       'https://www.googleapis.com/auth/dfareporting': View and manage DoubleClick for Advertisers reports
       'https://www.googleapis.com/auth/dfatrafficking': View and manage your DoubleClick Campaign Manager's (DCM) display ad campaigns
     type: oauth2
@@ -88,6 +89,7 @@ tags:
   - name: cities
   - name: connectionTypes
   - name: contentCategories
+  - name: conversions
   - name: countries
   - name: creativeAssets
   - name: creativeFieldValues
@@ -97,6 +99,7 @@ tags:
   - name: dimensionValues
   - name: directorySiteContacts
   - name: directorySites
+  - name: dynamicTargetingKeys
   - name: eventTags
   - name: files
   - name: floodlightActivities
@@ -104,6 +107,7 @@ tags:
   - name: floodlightConfigurations
   - name: inventoryItems
   - name: landingPages
+  - name: languages
   - name: metros
   - name: mobileCarriers
   - name: operatingSystemVersions
@@ -124,6 +128,7 @@ tags:
   - name: sizes
   - name: subaccounts
   - name: targetableRemarketingLists
+  - name: targetingTemplates
   - name: userProfiles
   - name: userRolePermissionGroups
   - name: userRolePermissions
@@ -736,13 +741,13 @@ paths:
             type: string
           name: campaignIds
           type: array
-        - description: 'Select default ads with the specified compatibility. Applicable when type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
+        - description: 'Select default ads with the specified compatibility. Applicable when type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
           enum:
             - APP
             - APP_INTERSTITIAL
+            - DISPLAY
+            - DISPLAY_INTERSTITIAL
             - IN_STREAM_VIDEO
-            - WEB
-            - WEB_INTERSTITIAL
           in: query
           name: compatibility
           type: string
@@ -763,29 +768,29 @@ paths:
         - description: Select only ads with the specified creativeType.
           enum:
             - BRAND_SAFE_DEFAULT_INSTREAM_VIDEO
-            - CUSTOM_INPAGE
-            - CUSTOM_INTERSTITIAL
-            - ENHANCED_BANNER
-            - ENHANCED_IMAGE
+            - CUSTOM_DISPLAY
+            - CUSTOM_DISPLAY_INTERSTITIAL
+            - DISPLAY
+            - DISPLAY_IMAGE_GALLERY
+            - DISPLAY_REDIRECT
             - FLASH_INPAGE
             - HTML5_BANNER
             - IMAGE
             - INSTREAM_VIDEO
+            - INSTREAM_VIDEO_REDIRECT
             - INTERNAL_REDIRECT
             - INTERSTITIAL_INTERNAL_REDIRECT
-            - REDIRECT
-            - RICH_MEDIA_EXPANDING
+            - RICH_MEDIA_DISPLAY_BANNER
+            - RICH_MEDIA_DISPLAY_EXPANDING
+            - RICH_MEDIA_DISPLAY_INTERSTITIAL
+            - RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL
             - RICH_MEDIA_IM_EXPAND
-            - RICH_MEDIA_INPAGE
             - RICH_MEDIA_INPAGE_FLOATING
-            - RICH_MEDIA_INTERSTITIAL_FLOAT
             - RICH_MEDIA_MOBILE_IN_APP
-            - RICH_MEDIA_MULTI_FLOATING
             - RICH_MEDIA_PEEL_DOWN
             - TRACKING_TEXT
-            - VAST_REDIRECT
-            - VPAID_LINEAR
-            - VPAID_NON_LINEAR
+            - VPAID_LINEAR_VIDEO
+            - VPAID_NON_LINEAR_VIDEO
           in: query
           name: creativeType
           type: string
@@ -2371,6 +2376,38 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/conversions/batchinsert':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts conversions.
+      operationId: dfareporting.conversions.batchinsert
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConversionsBatchInsertRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ConversionsBatchInsertResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ddmconversions'
+      tags:
+        - conversions
   '/userprofiles/{profileId}/countries':
     get:
       description: Retrieves a list of countries.
@@ -3164,29 +3201,29 @@ paths:
           items:
             enum:
               - BRAND_SAFE_DEFAULT_INSTREAM_VIDEO
-              - CUSTOM_INPAGE
-              - CUSTOM_INTERSTITIAL
-              - ENHANCED_BANNER
-              - ENHANCED_IMAGE
+              - CUSTOM_DISPLAY
+              - CUSTOM_DISPLAY_INTERSTITIAL
+              - DISPLAY
+              - DISPLAY_IMAGE_GALLERY
+              - DISPLAY_REDIRECT
               - FLASH_INPAGE
               - HTML5_BANNER
               - IMAGE
               - INSTREAM_VIDEO
+              - INSTREAM_VIDEO_REDIRECT
               - INTERNAL_REDIRECT
               - INTERSTITIAL_INTERNAL_REDIRECT
-              - REDIRECT
-              - RICH_MEDIA_EXPANDING
+              - RICH_MEDIA_DISPLAY_BANNER
+              - RICH_MEDIA_DISPLAY_EXPANDING
+              - RICH_MEDIA_DISPLAY_INTERSTITIAL
+              - RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL
               - RICH_MEDIA_IM_EXPAND
-              - RICH_MEDIA_INPAGE
               - RICH_MEDIA_INPAGE_FLOATING
-              - RICH_MEDIA_INTERSTITIAL_FLOAT
               - RICH_MEDIA_MOBILE_IN_APP
-              - RICH_MEDIA_MULTI_FLOATING
               - RICH_MEDIA_PEEL_DOWN
               - TRACKING_TEXT
-              - VAST_REDIRECT
-              - VPAID_LINEAR
-              - VPAID_NON_LINEAR
+              - VPAID_LINEAR_VIDEO
+              - VPAID_NON_LINEAR_VIDEO
             type: string
           name: types
           type: array
@@ -3595,6 +3632,127 @@ paths:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySites
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/dynamicTargetingKeys':
+    get:
+      description: Retrieves a list of dynamic targeting keys.
+      operationId: dfareporting.dynamicTargetingKeys.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Select only dynamic targeting keys whose object has this advertiser ID.
+          in: query
+          name: advertiserId
+          type: string
+        - collectionFormat: multi
+          description: Select only dynamic targeting keys exactly matching these names.
+          in: query
+          items:
+            type: string
+          name: names
+          type: array
+        - description: Select only dynamic targeting keys with this object ID.
+          in: query
+          name: objectId
+          type: string
+        - description: Select only dynamic targeting keys with this object type.
+          enum:
+            - OBJECT_AD
+            - OBJECT_ADVERTISER
+            - OBJECT_CREATIVE
+            - OBJECT_PLACEMENT
+          in: query
+          name: objectType
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DynamicTargetingKeysListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - dynamicTargetingKeys
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Inserts a new dynamic targeting key. Keys must be created at the advertiser level before being assigned to the advertiser''s ads, creatives, or placements. There is a maximum of 1000 keys per advertiser, out of which a maximum of 20 keys can be assigned per ad, creative, or placement.'
+      operationId: dfareporting.dynamicTargetingKeys.insert
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DynamicTargetingKey'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DynamicTargetingKey'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - dynamicTargetingKeys
+  '/userprofiles/{profileId}/dynamicTargetingKeys/{objectId}':
+    delete:
+      description: Deletes an existing dynamic targeting key.
+      operationId: dfareporting.dynamicTargetingKeys.delete
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: ID of the object of this dynamic targeting key. This is a required field.
+          in: path
+          name: objectId
+          required: true
+          type: string
+        - description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
+          in: query
+          name: name
+          required: true
+          type: string
+        - description: Type of the object of this dynamic targeting key. This is a required field.
+          enum:
+            - OBJECT_AD
+            - OBJECT_ADVERTISER
+            - OBJECT_CREATIVE
+            - OBJECT_PLACEMENT
+          in: query
+          name: objectType
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - dynamicTargetingKeys
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -4286,28 +4444,6 @@ paths:
       tags:
         - floodlightActivityGroups
   '/userprofiles/{profileId}/floodlightActivityGroups/{id}':
-    delete:
-      description: Deletes an existing floodlight activity group.
-      operationId: dfareporting.floodlightActivityGroups.delete
-      parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
-        - description: Floodlight activity Group ID.
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-      tags:
-        - floodlightActivityGroups
     get:
       description: Gets one floodlight activity group by ID.
       operationId: dfareporting.floodlightActivityGroups.get
@@ -4451,6 +4587,34 @@ paths:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - floodlightConfigurations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/languages':
+    get:
+      description: Retrieves a list of languages.
+      operationId: dfareporting.languages.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LanguagesListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - languages
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -5140,15 +5304,15 @@ paths:
           name: campaignIds
           type: array
         - collectionFormat: multi
-          description: Select only placements that are associated with these compatibilities. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
+          description: Select only placements that are associated with these compatibilities. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
           in: query
           items:
             enum:
               - APP
               - APP_INTERSTITIAL
+              - DISPLAY
+              - DISPLAY_INTERSTITIAL
               - IN_STREAM_VIDEO
-              - WEB
-              - WEB_INTERSTITIAL
             type: string
           name: compatibilities
           type: array
@@ -5738,6 +5902,13 @@ paths:
             - DESCENDING
           in: query
           name: sortOrder
+          type: string
+        - description: Select only inventory items with this type.
+          enum:
+            - PLANNING_PLACEMENT_TYPE_CREDIT
+            - PLANNING_PLACEMENT_TYPE_REGULAR
+          in: query
+          name: type
           type: string
       responses:
         '200':
@@ -7263,6 +7434,178 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/targetingTemplates':
+    get:
+      description: 'Retrieves a list of targeting templates, optionally filtered.'
+      operationId: dfareporting.targetingTemplates.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Select only targeting templates with this advertiser ID.
+          in: query
+          name: advertiserId
+          type: string
+        - collectionFormat: multi
+          description: Select only targeting templates with these IDs.
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          type: integer
+        - description: Value of the nextPageToken from the previous result page.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "template*2015" will return objects with names like "template June 2015", "template April 2015", or simply "template 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "template" will match objects with name "my template", "template 2015", or simply "template".'
+          in: query
+          name: searchString
+          type: string
+        - description: Field by which to sort the list.
+          enum:
+            - ID
+            - NAME
+          in: query
+          name: sortField
+          type: string
+        - description: 'Order of sorted results, default is ASCENDING.'
+          enum:
+            - ASCENDING
+            - DESCENDING
+          in: query
+          name: sortOrder
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TargetingTemplatesListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - targetingTemplates
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates an existing targeting template. This method supports patch semantics.
+      operationId: dfareporting.targetingTemplates.patch
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Targeting template ID.
+          in: query
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - targetingTemplates
+    post:
+      description: Inserts a new targeting template.
+      operationId: dfareporting.targetingTemplates.insert
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - targetingTemplates
+    put:
+      description: Updates an existing targeting template.
+      operationId: dfareporting.targetingTemplates.update
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - targetingTemplates
+  '/userprofiles/{profileId}/targetingTemplates/{id}':
+    get:
+      description: Gets one targeting template by ID.
+      operationId: dfareporting.targetingTemplates.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Targeting template ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - targetingTemplates
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/userRolePermissionGroups':
     get:
       description: Gets a list of all supported user role permission groups.
@@ -7628,9 +7971,6 @@ definitions:
           format: int64
           type: string
         type: array
-      comscoreVceEnabled:
-        description: Whether campaigns created in this account will be enabled for comScore vCE by default.
-        type: boolean
       countryId:
         description: ID of the country associated with this account.
         format: int64
@@ -7737,6 +8077,9 @@ definitions:
       reportsConfiguration:
         $ref: '#/definitions/ReportsConfiguration'
         description: Reporting configuration of this account.
+      shareReportsWithTwitter:
+        description: Share Path to Conversion reports with Twitter.
+        type: boolean
       teaserSizeLimit:
         description: File size limit in kilobytes of Rich Media teaser creatives. Must be between 1 and 10240.
         format: int64
@@ -8026,13 +8369,13 @@ definitions:
         description: Comments for this ad.
         type: string
       compatibility:
-        description: 'Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
+        description: 'Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to either rendering on desktop or on mobile devices or in mobile apps for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are only used for existing default ads. New mobile placements must be assigned DISPLAY or DISPLAY_INTERSTITIAL and default ads created for those placements will be limited to those compatibility types. IN_STREAM_VIDEO refers to rendering in-stream video ads developed with the VAST standard.'
         enum:
           - APP
           - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
           - IN_STREAM_VIDEO
-          - WEB
-          - WEB_INTERSTITIAL
         type: string
       createInfo:
         $ref: '#/definitions/LastModifiedInfo'
@@ -8083,6 +8426,9 @@ definitions:
         default: 'dfareporting#ad'
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#ad".'
         type: string
+      languageTargeting:
+        $ref: '#/definitions/LanguageTargeting'
+        description: Language targeting information for this ad. This field must be left blank if the ad is using a targeting template. Applicable when type is AD_SERVING_STANDARD_AD.
       lastModifiedInfo:
         $ref: '#/definitions/LastModifiedInfo'
         description: Information about the most recent modification of this ad. This is a read-only field.
@@ -8114,6 +8460,10 @@ definitions:
         description: Subaccount ID of this ad. This is a read-only field that can be left blank.
         format: int64
         type: string
+      targetingTemplateId:
+        description: 'Targeting template ID, used to apply preconfigured targeting information to this ad. This cannot be set while any of dayPartTargeting, geoTargeting, keyValueTargetingExpression, languageTargeting, remarketingListExpression, or technologyTargeting are set. Applicable when type is AD_SERVING_STANDARD_AD.'
+        format: int64
+        type: string
       technologyTargeting:
         $ref: '#/definitions/TechnologyTargeting'
         description: Technology platform targeting information for this ad. This field must be left blank if the ad is using a targeting template. Applicable when type is AD_SERVING_STANDARD_AD.
@@ -8133,13 +8483,13 @@ definitions:
         description: Comment for this ad slot.
         type: string
       compatibility:
-        description: Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
+        description: 'Ad slot compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop, mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.'
         enum:
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_APP
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL
+          - APP
+          - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
+          - IN_STREAM_VIDEO
         type: string
       height:
         description: Height of this ad slot.
@@ -8405,9 +8755,6 @@ definitions:
       comment:
         description: Arbitrary comments about this campaign. Must be less than 256 characters long.
         type: string
-      comscoreVceEnabled:
-        description: Whether comScore vCE reports are enabled for this campaign.
-        type: boolean
       createInfo:
         $ref: '#/definitions/LastModifiedInfo'
         description: Information about the creation of this campaign. This is a read-only field.
@@ -8639,10 +8986,10 @@ definitions:
     description: Creative Click Tag.
     properties:
       eventName:
-        description: 'Advertiser event name associated with the click tag. This field is used by ENHANCED_IMAGE, and HTML5_BANNER creatives. Applicable to ENHANCED_BANNER when the primary asset type is not HTML_IMAGE'
+        description: Advertiser event name associated with the click tag. This field is used by DISPLAY_IMAGE_GALLERY and HTML5_BANNER creatives. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
         type: string
       name:
-        description: 'Parameter name for the specified click tag. For ENHANCED_IMAGE creative assets, this field must match the value of the creative asset''s creativeAssetId.name field.'
+        description: 'Parameter name for the specified click tag. For DISPLAY_IMAGE_GALLERY creative assets, this field must match the value of the creative asset''s creativeAssetId.name field.'
         type: string
       value:
         description: Parameter value for the specified click tag. This field contains a click-through url.
@@ -8776,6 +9123,126 @@ definitions:
         description: Name of this content category. This is a required field and must be less than 256 characters long and unique among content categories of the same account.
         type: string
     type: object
+  Conversion:
+    description: A Conversion represents when a user successfully performs a desired action after seeing an ad.
+    properties:
+      childDirectedTreatment:
+        description: Whether the conversion was directed toward children.
+        type: boolean
+      customVariables:
+        description: Custom floodlight variables.
+        items:
+          $ref: '#/definitions/CustomFloodlightVariable'
+        type: array
+      encryptedUserId:
+        description: 'The alphanumeric encrypted user ID. When set, encryptionInfo should also be specified. This field is mutually exclusive with encryptedUserIdCandidates[] and mobileDeviceId. This or encryptedUserIdCandidates[] or mobileDeviceId is a required field.'
+        type: string
+      encryptedUserIdCandidates:
+        description: 'A list of the alphanumeric encrypted user IDs. Any user ID with exposure prior to the conversion timestamp will be used in the inserted conversion. If no such user ID is found then the conversion will be rejected with NO_COOKIE_MATCH_FOUND error. When set, encryptionInfo should also be specified. This field should only be used when calling conversions.batchinsert. This field is mutually exclusive with encryptedUserId and mobileDeviceId. This or encryptedUserId or mobileDeviceId is a required field.'
+        items:
+          type: string
+        type: array
+      floodlightActivityId:
+        description: Floodlight Activity ID of this conversion. This is a required field.
+        format: int64
+        type: string
+      floodlightConfigurationId:
+        description: Floodlight Configuration ID of this conversion. This is a required field.
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#conversion'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversion".'
+        type: string
+      limitAdTracking:
+        description: Whether the user has Limit Ad Tracking set.
+        type: boolean
+      mobileDeviceId:
+        description: 'The mobile device ID. This field is mutually exclusive with encryptedUserId and encryptedUserIdCandidates[]. This or encryptedUserId or encryptedUserIdCandidates[] is a required field.'
+        type: string
+      ordinal:
+        description: The ordinal of the conversion. Use this field to control how conversions of the same user and day are de-duplicated. This is a required field.
+        type: string
+      quantity:
+        description: The quantity of the conversion.
+        format: int64
+        type: string
+      timestampMicros:
+        description: 'The timestamp of conversion, in Unix epoch micros. This is a required field.'
+        format: int64
+        type: string
+      value:
+        description: The value of the conversion.
+        format: double
+        type: number
+    type: object
+  ConversionError:
+    description: The error code and description for a conversion that failed to insert or update.
+    properties:
+      code:
+        description: The error code.
+        enum:
+          - INTERNAL
+          - INVALID_ARGUMENT
+          - NOT_FOUND
+          - PERMISSION_DENIED
+        type: string
+      kind:
+        default: 'dfareporting#conversionError'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionError".'
+        type: string
+      message:
+        description: A description of the error.
+        type: string
+    type: object
+  ConversionStatus:
+    description: The original conversion that was inserted or updated and whether there were any errors.
+    properties:
+      conversion:
+        $ref: '#/definitions/Conversion'
+        description: The original conversion that was inserted or updated.
+      errors:
+        description: A list of errors related to this conversion.
+        items:
+          $ref: '#/definitions/ConversionError'
+        type: array
+      kind:
+        default: 'dfareporting#conversionStatus'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionStatus".'
+        type: string
+    type: object
+  ConversionsBatchInsertRequest:
+    description: Insert Conversions Request.
+    properties:
+      conversions:
+        description: The set of conversions to insert.
+        items:
+          $ref: '#/definitions/Conversion'
+        type: array
+      encryptionInfo:
+        $ref: '#/definitions/EncryptionInfo'
+        description: 'Describes how encryptedUserId or encryptedUserIdCandidates[] is encrypted. This is a required field if encryptedUserId or encryptedUserIdCandidates[] is used.'
+      kind:
+        default: 'dfareporting#conversionsBatchInsertRequest'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionsBatchInsertRequest".'
+        type: string
+    type: object
+  ConversionsBatchInsertResponse:
+    description: Insert Conversions Response.
+    properties:
+      hasFailures:
+        description: Indicates that some or all conversions failed to insert.
+        type: boolean
+      kind:
+        default: 'dfareporting#conversionsBatchInsertResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionsBatchInsertResponse".'
+        type: string
+      status:
+        description: The status of each conversion's insertion status. The status is returned in the same order that conversions are inserted.
+        items:
+          $ref: '#/definitions/ConversionStatus'
+        type: array
+    type: object
   CountriesListResponse:
     description: Country List Response
     properties:
@@ -8846,6 +9313,13 @@ definitions:
           - ARTWORK_TYPE_IMAGE
           - ARTWORK_TYPE_MIXED
         type: string
+      authoringSource:
+        description: 'Source application where creative was authored. Presently, only DBM authored creatives will have this field set. Applicable to all creative types.'
+        enum:
+          - CREATIVE_AUTHORING_SOURCE_DBM
+          - CREATIVE_AUTHORING_SOURCE_DCM
+          - CREATIVE_AUTHORING_SOURCE_STUDIO
+        type: string
       authoringTool:
         description: 'Authoring tool for HTML5 banner creatives. This is a read-only field. Applicable to the following creative types: HTML5_BANNER.'
         enum:
@@ -8853,16 +9327,16 @@ definitions:
           - SWIFFY
         type: string
       auto_advance_images:
-        description: 'Whether images are automatically advanced for enhanced image creatives. Applicable to the following creative types: ENHANCED_IMAGE.'
+        description: 'Whether images are automatically advanced for image gallery creatives. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY.'
         type: boolean
       backgroundColor:
         description: 'The 6-character HTML color code, beginning with #, for the background of the window area where the Flash file is displayed. Default is white. Applicable to the following creative types: FLASH_INPAGE.'
         type: string
       backupImageClickThroughUrl:
-        description: 'Click-through URL for backup image. Applicable to the following creative types: FLASH_INPAGE, and HTML5_BANNER. Applicable to ENHANCED_BANNER when the primary asset type is not HTML_IMAGE.'
+        description: 'Click-through URL for backup image. Applicable to the following creative types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         type: string
       backupImageFeatures:
-        description: 'List of feature dependencies that will cause a backup image to be served if the browser that serves the ad does not support them. Feature dependencies are features that a browser must be able to support in order to render your HTML5 creative asset correctly. This field is initially auto-generated to contain all features detected by DCM for all the assets of this creative and can then be modified by the client. To reset this field, copy over all the creativeAssets'' detected features. Applicable to the following creative types: HTML5_BANNER. Applicable to ENHANCED_BANNER when the primary asset is not HTML_IMAGE.'
+        description: 'List of feature dependencies that will cause a backup image to be served if the browser that serves the ad does not support them. Feature dependencies are features that a browser must be able to support in order to render your HTML5 creative asset correctly. This field is initially auto-generated to contain all features detected by DCM for all the assets of this creative and can then be modified by the client. To reset this field, copy over all the creativeAssets'' detected features. Applicable to the following creative types: HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         items:
           enum:
             - APPLICATION_CACHE
@@ -8934,13 +9408,13 @@ definitions:
           type: string
         type: array
       backupImageReportingLabel:
-        description: Reporting label used for HTML5 banner backup image. Applicable to ENHANCED_BANNER when the primary asset type is not HTML_IMAGE.
+        description: 'Reporting label used for HTML5 banner backup image. Applicable to the following creative types: DISPLAY when the primary asset type is not HTML_IMAGE.'
         type: string
       backupImageTargetWindow:
         $ref: '#/definitions/TargetWindow'
-        description: 'Target window for backup image. Applicable to the following creative types: FLASH_INPAGE, and HTML5_BANNER. Applicable to ENHANCED_BANNER when the primary asset type is not HTML_IMAGE.'
+        description: 'Target window for backup image. Applicable to the following creative types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
       clickTags:
-        description: 'Click tags of the creative. For ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER creatives, this is a subset of detected click tags for the assets associated with this creative. After creating a flash asset, detected click tags will be returned in the creativeAssetMetadata. When inserting the creative, populate the creative clickTags field using the creativeAssetMetadata.clickTags field. For ENHANCED_IMAGE creatives, there should be exactly one entry in this list for each image creative asset. A click tag is matched with a corresponding creative asset by matching the clickTag.name field with the creativeAsset.assetIdentifier.name field. Applicable to the following creative types: ENHANCED_IMAGE, FLASH_INPAGE HTML5_BANNER. Applicable to ENHANCED_BANNER when the primary asset type is not HTML_IMAGE.'
+        description: 'Click tags of the creative. For DISPLAY, FLASH_INPAGE, and HTML5_BANNER creatives, this is a subset of detected click tags for the assets associated with this creative. After creating a flash asset, detected click tags will be returned in the creativeAssetMetadata. When inserting the creative, populate the creative clickTags field using the creativeAssetMetadata.clickTags field. For DISPLAY_IMAGE_GALLERY creatives, there should be exactly one entry in this list for each image creative asset. A click tag is matched with a corresponding creative asset by matching the clickTag.name field with the creativeAsset.assetIdentifier.name field. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         items:
           $ref: '#/definitions/ClickTag'
         type: array
@@ -8948,38 +9422,41 @@ definitions:
         description: 'Industry standard ID assigned to creative for reach and frequency. Applicable to the following creative types: all INSTREAM_VIDEO and all VPAID.'
         type: string
       companionCreatives:
-        description: 'List of companion creatives assigned to an in-Stream videocreative. Acceptable values include IDs of existing flash and image creatives. Applicable to the following creative types: all INSTREAM_VIDEO and all VPAID.'
+        description: 'List of companion creatives assigned to an in-Stream videocreative. Acceptable values include IDs of existing flash and image creatives. Applicable to the following creative types: all VPAID and all INSTREAM_VIDEO with dynamicAssetSelection set to false.'
         items:
           format: int64
           type: string
         type: array
       compatibility:
         description: |-
-          Compatibilities associated with this creative. This is a read-only field. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
+          Compatibilities associated with this creative. This is a read-only field. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices or in mobile apps for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. Only pre-existing creatives may have these compatibilities since new creatives will either be assigned DISPLAY or DISPLAY_INTERSTITIAL instead. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
 
           Acceptable values are:
           - "APP"
           - "APP_INTERSTITIAL"
           - "IN_STREAM_VIDEO"
-          - "WEB"
-          - "WEB_INTERSTITIAL"
+          - "DISPLAY"
+          - "DISPLAY_INTERSTITIAL"
         items:
           enum:
             - APP
             - APP_INTERSTITIAL
+            - DISPLAY
+            - DISPLAY_INTERSTITIAL
             - IN_STREAM_VIDEO
-            - WEB
-            - WEB_INTERSTITIAL
           type: string
         type: array
       convertFlashToHtml5:
-        description: 'Whether Flash assets associated with the creative need to be automatically converted to HTML5. This flag is enabled by default and users can choose to disable it if they don''t want the system to generate and use HTML5 asset for this creative. Applicable to the following creative type: FLASH_INPAGE. Applicable to ENHANCED_BANNER when the primary asset type is not HTML_IMAGE.'
+        description: 'Whether Flash assets associated with the creative need to be automatically converted to HTML5. This flag is enabled by default and users can choose to disable it if they don''t want the system to generate and use HTML5 asset for this creative. Applicable to the following creative type: FLASH_INPAGE. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         type: boolean
       counterCustomEvents:
-        description: 'List of counter events configured for the creative. For ENHANCED_IMAGE creatives, these are read-only and auto-generated from clickTags. Applicable to the following creative types: ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID.'
+        description: 'List of counter events configured for the creative. For DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated from clickTags. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID.'
         items:
           $ref: '#/definitions/CreativeCustomEvent'
         type: array
+      creativeAssetSelection:
+        $ref: '#/definitions/CreativeAssetSelection'
+        description: Required if dynamicAssetSelection is true.
       creativeAssets:
         description: 'Assets associated with a creative. Applicable to all but the following creative types: INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, and REDIRECT'
         items:
@@ -8995,8 +9472,11 @@ definitions:
         items:
           type: string
         type: array
+      dynamicAssetSelection:
+        description: 'Set this to true to enable the use of rules to target individual assets in this creative. When set to true creativeAssetSelection must be set. This also controls asset-level companions. When this is true, companion creatives should be assigned to creative assets. Learn more. Applicable to INSTREAM_VIDEO creatives.'
+        type: boolean
       exitCustomEvents:
-        description: 'List of exit events configured for the creative. For ENHANCED_BANNER and ENHANCED_IMAGE creatives, these are read-only and auto-generated from clickTags, For ENHANCED_BANNER, an event is also created from the backupImageReportingLabel. Applicable to the following creative types: ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID. Applicable to ENHANCED_BANNER when the primary asset is not HTML_IMAGE.'
+        description: 'List of exit events configured for the creative. For DISPLAY and DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated from clickTags, For DISPLAY, an event is also created from the backupImageReportingLabel. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         items:
           $ref: '#/definitions/CreativeCustomEvent'
         type: array
@@ -9034,7 +9514,7 @@ definitions:
         description: 'Override CSS value for rich media creatives. Applicable to the following creative types: all RICH_MEDIA.'
         type: string
       redirectUrl:
-        description: 'URL of hosted image or hosted video or another ad tag. For INSTREAM_VIDEO_REDIRECT creatives this is the in-stream video redirect URL. The standard for a VAST (Video Ad Serving Template) ad response allows for a redirect link to another VAST 2.0 or 3.0 call. This is a required field when applicable. Applicable to the following creative types: INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, REDIRECT, and INSTREAM_VIDEO_REDIRECT'
+        description: 'URL of hosted image or hosted video or another ad tag. For INSTREAM_VIDEO_REDIRECT creatives this is the in-stream video redirect URL. The standard for a VAST (Video Ad Serving Template) ad response allows for a redirect link to another VAST 2.0 or 3.0 call. This is a required field when applicable. Applicable to the following creative types: DISPLAY_REDIRECT, INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, and INSTREAM_VIDEO_REDIRECT'
         type: string
       renderingId:
         description: ID of current rendering version. This is a read-only field. Applicable to all creative types.
@@ -9047,12 +9527,12 @@ definitions:
         description: 'The minimum required Flash plugin version for this creative. For example, 11.2.202.235. This is a read-only field. Applicable to the following creative types: all RICH_MEDIA, and all VPAID.'
         type: string
       requiredFlashVersion:
-        description: 'The internal Flash version for this creative as calculated by DoubleClick Studio. This is a read-only field. Applicable to the following creative types: FLASH_INPAGE, all RICH_MEDIA, and all VPAID. Applicable to ENHANCED_BANNER when the primary asset type is not HTML_IMAGE.'
+        description: 'The internal Flash version for this creative as calculated by DoubleClick Studio. This is a read-only field. Applicable to the following creative types: FLASH_INPAGE all RICH_MEDIA, and all VPAID. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         format: int32
         type: integer
       size:
         $ref: '#/definitions/Size'
-        description: 'Size associated with this creative. When inserting or updating a creative either the size ID field or size width and height fields can be used. This is a required field when applicable; however for IMAGE and FLASH_INPAGE creatives, and for ENHANCED_BANNER creatives with a primary asset of type HTML_IMAGE, if left blank, this field will be automatically set using the actual size of the associated image assets. Applicable to the following creative types: ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA.'
+        description: 'Size associated with this creative. When inserting or updating a creative either the size ID field or size width and height fields can be used. This is a required field when applicable; however for IMAGE, FLASH_INPAGE creatives, and for DISPLAY creatives with a primary asset of type HTML_IMAGE, if left blank, this field will be automatically set using the actual size of the associated image assets. Applicable to the following creative types: DISPLAY, DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA.'
       skippable:
         description: 'Whether the user can choose to skip the creative. Applicable to the following creative types: all INSTREAM_VIDEO and all VPAID.'
         type: boolean
@@ -9090,7 +9570,7 @@ definitions:
           $ref: '#/definitions/ThirdPartyTrackingUrl'
         type: array
       timerCustomEvents:
-        description: 'List of timer events configured for the creative. For ENHANCED_IMAGE creatives, these are read-only and auto-generated from clickTags. Applicable to the following creative types: ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID. Applicable to ENHANCED_BANNER when the primary asset is not HTML_IMAGE.'
+        description: 'List of timer events configured for the creative. For DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated from clickTags. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID. Applicable to DISPLAY when the primary asset is not HTML_IMAGE.'
         items:
           $ref: '#/definitions/CreativeCustomEvent'
         type: array
@@ -9099,32 +9579,35 @@ definitions:
         format: int64
         type: string
       type:
-        description: Type of this creative.This is a required field. Applicable to all creative types.
+        description: |-
+          Type of this creative. This is a required field. Applicable to all creative types.
+
+          Note: FLASH_INPAGE, HTML5_BANNER, and IMAGE are only used for existing creatives. New creatives should use DISPLAY as a replacement for these types.
         enum:
           - BRAND_SAFE_DEFAULT_INSTREAM_VIDEO
-          - CUSTOM_INPAGE
-          - CUSTOM_INTERSTITIAL
-          - ENHANCED_BANNER
-          - ENHANCED_IMAGE
+          - CUSTOM_DISPLAY
+          - CUSTOM_DISPLAY_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_IMAGE_GALLERY
+          - DISPLAY_REDIRECT
           - FLASH_INPAGE
           - HTML5_BANNER
           - IMAGE
           - INSTREAM_VIDEO
+          - INSTREAM_VIDEO_REDIRECT
           - INTERNAL_REDIRECT
           - INTERSTITIAL_INTERNAL_REDIRECT
-          - REDIRECT
-          - RICH_MEDIA_EXPANDING
+          - RICH_MEDIA_DISPLAY_BANNER
+          - RICH_MEDIA_DISPLAY_EXPANDING
+          - RICH_MEDIA_DISPLAY_INTERSTITIAL
+          - RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL
           - RICH_MEDIA_IM_EXPAND
-          - RICH_MEDIA_INPAGE
           - RICH_MEDIA_INPAGE_FLOATING
-          - RICH_MEDIA_INTERSTITIAL_FLOAT
           - RICH_MEDIA_MOBILE_IN_APP
-          - RICH_MEDIA_MULTI_FLOATING
           - RICH_MEDIA_PEEL_DOWN
           - TRACKING_TEXT
-          - VAST_REDIRECT
-          - VPAID_LINEAR
-          - VPAID_NON_LINEAR
+          - VPAID_LINEAR_VIDEO
+          - VPAID_NON_LINEAR_VIDEO
         type: string
       version:
         description: 'The version number helps you keep track of multiple versions of your creative in your reports. The version number will always be auto-generated during insert operations to start at 1. For tracking creatives the version cannot be incremented and will always remain at 1. For all other creative types the version can be incremented only by 1 during update operations. In addition, the version will be automatically incremented by 1 when undergoing Rich Media creative merging. Applicable to all creative types.'
@@ -9142,13 +9625,13 @@ definitions:
     description: Creative Asset.
     properties:
       actionScript3:
-        description: 'Whether ActionScript3 is enabled for the flash asset. This is a read-only field. Applicable to the following creative type: FLASH_INPAGE. Applicable to ENHANCED_BANNER when the primary asset type is not HTML_IMAGE.'
+        description: 'Whether ActionScript3 is enabled for the flash asset. This is a read-only field. Applicable to the following creative type: FLASH_INPAGE. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         type: boolean
       active:
-        description: 'Whether the video asset is active. This is a read-only field for VPAID_NON_LINEAR assets. Applicable to the following creative types: INSTREAM_VIDEO and all VPAID.'
+        description: 'Whether the video asset is active. This is a read-only field for VPAID_NON_LINEAR_VIDEO assets. Applicable to the following creative types: INSTREAM_VIDEO and all VPAID.'
         type: boolean
       alignment:
-        description: 'Possible alignments for an asset. This is a read-only field. Applicable to the following creative types: RICH_MEDIA_MULTI_FLOATING.'
+        description: 'Possible alignments for an asset. This is a read-only field. Applicable to the following creative types: RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL.'
         enum:
           - ALIGNMENT_BOTTOM
           - ALIGNMENT_LEFT
@@ -9184,12 +9667,18 @@ definitions:
       collapsedSize:
         $ref: '#/definitions/Size'
         description: 'Size of an asset when collapsed. This is a read-only field. Applicable to the following creative types: all RICH_MEDIA and all VPAID. Additionally, applicable to assets whose displayType is ASSET_DISPLAY_TYPE_EXPANDING or ASSET_DISPLAY_TYPE_PEEL_DOWN.'
+      companionCreativeIds:
+        description: List of companion creatives assigned to an in-stream video creative asset. Acceptable values include IDs of existing flash and image creatives. Applicable to INSTREAM_VIDEO creative type with dynamicAssetSelection set to true.
+        items:
+          format: int64
+          type: string
+        type: array
       customStartTimeValue:
         description: 'Custom start time in seconds for making the asset visible. Applicable to the following creative types: all RICH_MEDIA.'
         format: int32
         type: integer
       detectedFeatures:
-        description: 'List of feature dependencies for the creative asset that are detected by DCM. Feature dependencies are features that a browser must be able to support in order to render your HTML5 creative correctly. This is a read-only, auto-generated field. Applicable to the following creative types: ENHANCED_BANNER and HTML5_BANNER.'
+        description: 'List of feature dependencies for the creative asset that are detected by DCM. Feature dependencies are features that a browser must be able to support in order to render your HTML5 creative correctly. This is a read-only, auto-generated field. Applicable to the following creative types: HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         items:
           enum:
             - APPLICATION_CACHE
@@ -9275,7 +9764,7 @@ definitions:
           - ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR
         type: string
       duration:
-        description: 'Duration in seconds for which an asset will be displayed. Applicable to the following creative types: INSTREAM_VIDEO and VPAID_LINEAR.'
+        description: 'Duration in seconds for which an asset will be displayed. Applicable to the following creative types: INSTREAM_VIDEO and VPAID_LINEAR_VIDEO.'
         format: int32
         type: integer
       durationType:
@@ -9293,7 +9782,7 @@ definitions:
         format: int64
         type: string
       flashVersion:
-        description: 'Flash version of the asset. This is a read-only field. Applicable to the following creative types: FLASH_INPAGE, all RICH_MEDIA, and all VPAID. Applicable to ENHANCED_BANNER when the primary asset type is not HTML_IMAGE.'
+        description: 'Flash version of the asset. This is a read-only field. Applicable to the following creative types: FLASH_INPAGE, all RICH_MEDIA, and all VPAID. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         format: int32
         type: integer
       hideFlashObjects:
@@ -9309,6 +9798,9 @@ definitions:
         description: 'Numeric ID of this creative asset. This is a required field and should not be modified. Applicable to all but the following creative types: all REDIRECT and TRACKING_TEXT.'
         format: int64
         type: string
+      idDimensionValue:
+        $ref: '#/definitions/DimensionValue'
+        description: 'Dimension value for the ID of the asset. This is a read-only, auto-generated field.'
       mimeType:
         description: 'Detected MIME type for video asset. This is a read-only field. Applicable to the following creative types: INSTREAM_VIDEO and all VPAID.'
         type: string
@@ -9348,14 +9840,14 @@ definitions:
       role:
         description: |-
           Role of the asset in relation to creative. Applicable to all but the following creative types: all REDIRECT and TRACKING_TEXT. This is a required field.
-          PRIMARY applies to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, IMAGE, IMAGE_GALLERY, all RICH_MEDIA (which may contain multiple primary assets), and all VPAID creatives.
-          BACKUP_IMAGE applies to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives.
+          PRIMARY applies to DISPLAY, FLASH_INPAGE, HTML5_BANNER, IMAGE, DISPLAY_IMAGE_GALLERY, all RICH_MEDIA (which may contain multiple primary assets), and all VPAID creatives.
+          BACKUP_IMAGE applies to FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
           ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to FLASH_INPAGE creatives.
           OTHER refers to assets from sources other than DCM, such as Studio uploaded assets, applicable to all RICH_MEDIA and all VPAID creatives.
-          PARENT_VIDEO refers to videos uploaded by the user in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
-          TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
+          PARENT_VIDEO refers to videos uploaded by the user in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO creatives.
+          TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO creatives.
           ALTERNATE_VIDEO refers to the DCM representation of child asset videos from Studio, and is applicable to VPAID_LINEAR_VIDEO creatives. These cannot be added or removed within DCM.
-          For VPAID_LINEAR creatives, PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are marked active serve as backup in case the VPAID creative cannot be served. Only PARENT_VIDEO assets can be added or removed for an INSTREAM_VIDEO or VPAID_LINEAR creative.
+          For VPAID_LINEAR_VIDEO creatives, PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are marked active serve as backup in case the VPAID creative cannot be served. Only PARENT_VIDEO assets can be added or removed for an INSTREAM_VIDEO or VPAID_LINEAR_VIDEO creative.
         enum:
           - ADDITIONAL_FLASH
           - ADDITIONAL_IMAGE
@@ -9368,7 +9860,7 @@ definitions:
         type: string
       size:
         $ref: '#/definitions/Size'
-        description: 'Size associated with this creative asset. This is a required field when applicable; however for IMAGE and FLASH_INPAGE creatives, if left blank, this field will be automatically set using the actual size of the associated image asset. Applicable to the following creative types: ENHANCED_IMAGE, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA. Applicable to ENHANCED_BANNER when the primary asset type is not HTML_IMAGE.'
+        description: 'Size associated with this creative asset. This is a required field when applicable; however for IMAGE and FLASH_INPAGE, creatives if left blank, this field will be automatically set using the actual size of the associated image asset. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
       sslCompliant:
         description: 'Whether the asset is SSL-compliant. This is a read-only field. Applicable to all but the following creative types: all REDIRECT and TRACKING_TEXT.'
         type: boolean
@@ -9392,7 +9884,7 @@ definitions:
         format: float
         type: number
       windowMode:
-        description: 'Window mode options for flash assets. Applicable to the following creative types: FLASH_INPAGE, RICH_MEDIA_EXPANDING, RICH_MEDIA_IM_EXPAND, RICH_MEDIA_INPAGE, and RICH_MEDIA_INPAGE_FLOATING.'
+        description: 'Window mode options for flash assets. Applicable to the following creative types: FLASH_INPAGE, RICH_MEDIA_DISPLAY_EXPANDING, RICH_MEDIA_IM_EXPAND, RICH_MEDIA_DISPLAY_BANNER, and RICH_MEDIA_INPAGE_FLOATING.'
         enum:
           - OPAQUE
           - TRANSPARENT
@@ -9416,7 +9908,7 @@ definitions:
         description: 'Name of the creative asset. This is a required field while inserting an asset. After insertion, this assetIdentifier is used to identify the uploaded asset. Characters in the name must be alphanumeric or one of the following: ".-_ ". Spaces are allowed.'
         type: string
       type:
-        description: Type of asset to upload. This is a required field. IMAGE is solely used for IMAGE creatives. Other image assets should use HTML_IMAGE.
+        description: Type of asset to upload. This is a required field. FLASH and IMAGE are no longer supported for new uploads. All image assets should use HTML_IMAGE.
         enum:
           - FLASH
           - HTML
@@ -9508,6 +10000,13 @@ definitions:
             - WEB_WORKERS
           type: string
         type: array
+      id:
+        description: 'Numeric ID of the asset. This is a read-only, auto-generated field.'
+        format: int64
+        type: string
+      idDimensionValue:
+        $ref: '#/definitions/DimensionValue'
+        description: 'Dimension value for the numeric ID of the asset. This is a read-only, auto-generated field.'
       kind:
         default: 'dfareporting#creativeAssetMetadata'
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#creativeAssetMetadata".'
@@ -9568,6 +10067,19 @@ definitions:
             - SVG_INVALID
             - ZIP_INVALID
           type: string
+        type: array
+    type: object
+  CreativeAssetSelection:
+    description: Encapsulates the list of rules for asset selection and a default asset in case none of the rules match. Applicable to INSTREAM_VIDEO creatives.
+    properties:
+      defaultAssetId:
+        description: 'A creativeAssets[].id. This should refer to one of the parent assets in this creative, and will be served if none of the rules match. This is a required field.'
+        format: int64
+        type: string
+      rules:
+        description: Rules determine which asset will be served to a viewer. Rules will be evaluated in the order in which they are stored in this list. This list must contain at least one rule. Applicable to INSTREAM_VIDEO creatives.
+        items:
+          $ref: '#/definitions/Rule'
         type: array
     type: object
   CreativeAssignment:
@@ -9640,6 +10152,10 @@ definitions:
   CreativeCustomEvent:
     description: Creative Custom Event.
     properties:
+      advertiserCustomEventId:
+        description: Unique ID of this event used by DDM Reporting and Data Transfer. This is a read-only field.
+        format: int64
+        type: string
       advertiserCustomEventName:
         description: User-entered name for the event.
         type: string
@@ -9946,6 +10462,121 @@ definitions:
         items:
           $ref: '#/definitions/Metric'
         type: array
+    type: object
+  CustomFloodlightVariable:
+    description: A custom floodlight variable.
+    properties:
+      kind:
+        default: 'dfareporting#customFloodlightVariable'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#customFloodlightVariable".'
+        type: string
+      type:
+        description: 'The type of custom floodlight variable to supply a value for. These map to the "u[1-20]=" in the tags.'
+        enum:
+          - U1
+          - U10
+          - U100
+          - U11
+          - U12
+          - U13
+          - U14
+          - U15
+          - U16
+          - U17
+          - U18
+          - U19
+          - U2
+          - U20
+          - U21
+          - U22
+          - U23
+          - U24
+          - U25
+          - U26
+          - U27
+          - U28
+          - U29
+          - U3
+          - U30
+          - U31
+          - U32
+          - U33
+          - U34
+          - U35
+          - U36
+          - U37
+          - U38
+          - U39
+          - U4
+          - U40
+          - U41
+          - U42
+          - U43
+          - U44
+          - U45
+          - U46
+          - U47
+          - U48
+          - U49
+          - U5
+          - U50
+          - U51
+          - U52
+          - U53
+          - U54
+          - U55
+          - U56
+          - U57
+          - U58
+          - U59
+          - U6
+          - U60
+          - U61
+          - U62
+          - U63
+          - U64
+          - U65
+          - U66
+          - U67
+          - U68
+          - U69
+          - U7
+          - U70
+          - U71
+          - U72
+          - U73
+          - U74
+          - U75
+          - U76
+          - U77
+          - U78
+          - U79
+          - U8
+          - U80
+          - U81
+          - U82
+          - U83
+          - U84
+          - U85
+          - U86
+          - U87
+          - U88
+          - U89
+          - U9
+          - U90
+          - U91
+          - U92
+          - U93
+          - U94
+          - U95
+          - U96
+          - U97
+          - U98
+          - U99
+        type: string
+      value:
+        description: The value of the custom floodlight variable. The length of string must not exceed 50 characters.
+        type: string
     type: object
   CustomRichMediaEvents:
     description: Represents a Custom Rich Media Events group.
@@ -10433,6 +11064,71 @@ definitions:
         type: string
       nextPageToken:
         description: Pagination token to be used for the next list operation.
+        type: string
+    type: object
+  DynamicTargetingKey:
+    description: 'Contains properties of a dynamic targeting key. Dynamic targeting keys are unique, user-friendly labels, created at the advertiser level in DCM, that can be assigned to ads, creatives, and placements and used for targeting with DoubleClick Studio dynamic creatives. Use these labels instead of numeric DCM IDs (such as placement IDs) to save time and avoid errors in your dynamic feeds.'
+    properties:
+      kind:
+        default: 'dfareporting#dynamicTargetingKey'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#dynamicTargetingKey".'
+        type: string
+      name:
+        description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
+        type: string
+      objectId:
+        description: ID of the object of this dynamic targeting key. This is a required field.
+        format: int64
+        type: string
+      objectType:
+        description: Type of the object of this dynamic targeting key. This is a required field.
+        enum:
+          - OBJECT_AD
+          - OBJECT_ADVERTISER
+          - OBJECT_CREATIVE
+          - OBJECT_PLACEMENT
+        type: string
+    type: object
+  DynamicTargetingKeysListResponse:
+    description: Dynamic Targeting Key List Response
+    properties:
+      dynamicTargetingKeys:
+        description: Dynamic targeting key collection.
+        items:
+          $ref: '#/definitions/DynamicTargetingKey'
+        type: array
+      kind:
+        default: 'dfareporting#dynamicTargetingKeysListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#dynamicTargetingKeysListResponse".'
+        type: string
+    type: object
+  EncryptionInfo:
+    description: A description of how user IDs are encrypted.
+    properties:
+      encryptionEntityId:
+        description: The encryption entity ID. This should match the encryption configuration for ad serving or Data Transfer.
+        format: int64
+        type: string
+      encryptionEntityType:
+        description: The encryption entity type. This should match the encryption configuration for ad serving or Data Transfer.
+        enum:
+          - ADWORDS_CUSTOMER
+          - DBM_ADVERTISER
+          - DBM_PARTNER
+          - DCM_ACCOUNT
+          - DCM_ADVERTISER
+          - ENCRYPTION_ENTITY_TYPE_UNKNOWN
+        type: string
+      encryptionSource:
+        description: Describes whether the encrypted cookie was received from ad serving (the %m macro) or from Data Transfer.
+        enum:
+          - AD_SERVING
+          - DATA_TRANSFER
+          - ENCRYPTION_SCOPE_UNKNOWN
+        type: string
+      kind:
+        default: 'dfareporting#encryptionInfo'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#encryptionInfo".'
         type: string
     type: object
   EventTag:
@@ -11054,9 +11750,6 @@ definitions:
       omnitureSettings:
         $ref: '#/definitions/OmnitureSettings'
         description: Settings for DCM Omniture integration.
-      sslRequired:
-        description: Whether floodlight activities owned by this configuration are required to be SSL-compliant.
-        type: boolean
       standardVariableTypes:
         description: |-
           List of standard variables enabled for this configuration.
@@ -11272,6 +11965,12 @@ definitions:
         description: Subaccount ID of this inventory item.
         format: int64
         type: string
+      type:
+        description: Type of inventory item.
+        enum:
+          - PLANNING_PLACEMENT_TYPE_CREDIT
+          - PLANNING_PLACEMENT_TYPE_REGULAR
+        type: string
     type: object
   InventoryItemsListResponse:
     description: Inventory item List Response
@@ -11328,6 +12027,46 @@ definitions:
         description: Landing page collection
         items:
           $ref: '#/definitions/LandingPage'
+        type: array
+    type: object
+  Language:
+    description: Contains information about a language that can be targeted by ads.
+    properties:
+      id:
+        description: Language ID of this language. This is the ID used for targeting and generating reports.
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#language'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#language".'
+        type: string
+      languageCode:
+        description: Format of language code is an ISO 639 two-letter language code optionally followed by an underscore followed by an ISO 3166 code. Examples are "en" for English or "zh_CN" for Simplified Chinese.
+        type: string
+      name:
+        description: Name of this language.
+        type: string
+    type: object
+  LanguageTargeting:
+    description: Language Targeting.
+    properties:
+      languages:
+        description: Languages that this ad targets. For each language only languageId is required. The other fields are populated automatically when the ad is inserted or updated.
+        items:
+          $ref: '#/definitions/Language'
+        type: array
+    type: object
+  LanguagesListResponse:
+    description: Language List Response
+    properties:
+      kind:
+        default: 'dfareporting#languagesListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#languagesListResponse".'
+        type: string
+      languages:
+        description: Language collection.
+        items:
+          $ref: '#/definitions/Language'
         type: array
     type: object
   LastModifiedInfo:
@@ -11906,13 +12645,13 @@ definitions:
         description: Comments for this placement.
         type: string
       compatibility:
-        description: 'Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. This field is required on insertion.'
+        description: 'Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering on desktop, on mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are no longer allowed for new placement insertions. Instead, use DISPLAY or DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. This field is required on insertion.'
         enum:
           - APP
           - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
           - IN_STREAM_VIDEO
-          - WEB
-          - WEB_INTERSTITIAL
         type: string
       contentCategoryId:
         description: ID of the content category assigned to this placement.
@@ -12552,6 +13291,10 @@ definitions:
         type: string
       targetCpcNanos:
         description: CPC that the advertiser is targeting.
+        format: int64
+        type: string
+      targetCpmActiveViewNanos:
+        description: vCPM from Active View that the advertiser is targeting.
         format: int64
         type: string
       targetCpmNanos:
@@ -13196,16 +13939,31 @@ definitions:
   RichMediaExitOverride:
     description: Rich Media Exit Override.
     properties:
-      customExitUrl:
-        description: Click-through URL to override the default exit URL. Applicable if the useCustomExitUrl field is set to true.
-        type: string
+      clickThroughUrl:
+        $ref: '#/definitions/ClickThroughUrl'
+        description: Click-through URL of this rich media exit override. Applicable if the enabled field is set to true.
+      enabled:
+        description: 'Whether to use the clickThroughUrl. If false, the creative-level exit will be used.'
+        type: boolean
       exitId:
         description: ID for the override to refer to a specific exit in the creative.
         format: int64
         type: string
-      useCustomExitUrl:
-        description: Whether to use the custom exit URL.
-        type: boolean
+    type: object
+  Rule:
+    description: A rule associates an asset with a targeting template for asset-level targeting. Applicable to INSTREAM_VIDEO creatives.
+    properties:
+      assetId:
+        description: 'A creativeAssets[].id. This should refer to one of the parent assets in this creative. This is a required field.'
+        format: int64
+        type: string
+      name:
+        description: A user-friendly name for this rule. This is a required field.
+        type: string
+      targetingTemplateId:
+        description: A targeting template ID. The targeting from the targeting template will be used to determine whether this asset should be served. This is a required field.
+        format: int64
+        type: string
     type: object
   Site:
     description: Contains properties of a site.
@@ -13307,6 +14065,9 @@ definitions:
       tagSetting:
         $ref: '#/definitions/TagSetting'
         description: Configuration settings for dynamic and image floodlight tags.
+      videoActiveViewOptOut:
+        description: 'Whether Verification and ActiveView are disabled for in-stream video creatives on this site. The same setting videoActiveViewOptOut exists on the directory site level -- the opt out occurs if either of these settings are true. These settings are distinct from DirectorySites.settings.activeViewOptOut or Sites.siteSettings.activeViewOptOut which only apply to display ads. However, Accounts.activeViewOptOut opts out both video traffic, as well as display ads, from Verification and ActiveView.'
+        type: boolean
     type: object
   SitesListResponse:
     description: Site List Response
@@ -13575,6 +14336,70 @@ definitions:
         description: Targetable remarketing list collection.
         items:
           $ref: '#/definitions/TargetableRemarketingList'
+        type: array
+    type: object
+  TargetingTemplate:
+    description: Contains properties of a targeting template. A targeting template encapsulates targeting information which can be reused across multiple ads.
+    properties:
+      accountId:
+        description: 'Account ID of this targeting template. This field, if left unset, will be auto-generated on insert and is read-only after insert.'
+        format: int64
+        type: string
+      advertiserId:
+        description: Advertiser ID of this targeting template. This is a required field on insert and is read-only after insert.
+        format: int64
+        type: string
+      advertiserIdDimensionValue:
+        $ref: '#/definitions/DimensionValue'
+        description: 'Dimension value for the ID of the advertiser. This is a read-only, auto-generated field.'
+      dayPartTargeting:
+        $ref: '#/definitions/DayPartTargeting'
+        description: Time and day targeting criteria.
+      geoTargeting:
+        $ref: '#/definitions/GeoTargeting'
+        description: Geographical targeting criteria.
+      id:
+        description: 'ID of this targeting template. This is a read-only, auto-generated field.'
+        format: int64
+        type: string
+      keyValueTargetingExpression:
+        $ref: '#/definitions/KeyValueTargetingExpression'
+        description: Key-value targeting criteria.
+      kind:
+        default: 'dfareporting#targetingTemplate'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#targetingTemplate".'
+        type: string
+      languageTargeting:
+        $ref: '#/definitions/LanguageTargeting'
+        description: Language targeting criteria.
+      listTargetingExpression:
+        $ref: '#/definitions/ListTargetingExpression'
+        description: Remarketing list targeting criteria.
+      name:
+        description: Name of this targeting template. This field is required. It must be less than 256 characters long and unique within an advertiser.
+        type: string
+      subaccountId:
+        description: 'Subaccount ID of this targeting template. This field, if left unset, will be auto-generated on insert and is read-only after insert.'
+        format: int64
+        type: string
+      technologyTargeting:
+        $ref: '#/definitions/TechnologyTargeting'
+        description: Technology platform targeting criteria.
+    type: object
+  TargetingTemplatesListResponse:
+    description: Targeting Template List Response
+    properties:
+      kind:
+        default: 'dfareporting#targetingTemplatesListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#targetingTemplatesListResponse".'
+        type: string
+      nextPageToken:
+        description: Pagination token to be used for the next list operation.
+        type: string
+      targetingTemplates:
+        description: Targeting template collection.
+        items:
+          $ref: '#/definitions/TargetingTemplate'
         type: array
     type: object
   TechnologyTargeting:

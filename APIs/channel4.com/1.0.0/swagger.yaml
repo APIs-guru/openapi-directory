@@ -48,8 +48,9 @@ parameters:
       - ps3
       - yv
       - ios
+      - fm
       - p06
-      - flashmobile
+      - ctv
       - freesat
       - android
       - samsung
@@ -2013,9 +2014,9 @@ paths:
       tags:
         - metadataresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clips_Landing_Feed_Brand_Series_and_Episode_Levels'
-  '/{brand-web-safe-title}/videos/series-{SERIES_SEQUENCE_NUMBER}.atom':
+  '/{brand-web-safe-title}/videos/series-{series_number}.atom':
     get:
-      description: "A feed containing metadata about all the short-form (clip) videos. The clips \n  feed can be accessed at different levels: the content is then filtered \n  depending on the level, but the structure is identical.When accessed: from \n  the top, the feed contains all the clips for the brand;\_ at series level, \n  the feed contains only clips from the series; and\_ at episode level, the \n  feed contains only clips for the episode (and is very unlikely to require \n  pagination). The entries for the Clips Landing Feed contain references to \n  each short-form asset.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/videos/series-SERIES_SEQUENCE_NUMBER.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/peep-show/videos.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      description: "A feed containing metadata about all the short-form (clip) videos. The clips \n  feed can be accessed at different levels: the content is then filtered \n  depending on the level, but the structure is identical.When accessed: from \n  the top, the feed contains all the clips for the brand;\_ at series level, \n  the feed contains only clips from the series; and\_ at episode level, the \n  feed contains only clips for the episode (and is very unlikely to require \n  pagination). The entries for the Clips Landing Feed contain references to \n  each short-form asset.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/videos/series-series_number.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/peep-show/videos.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: Clips_Landing_Feed_Brand_Series_and_Episode_Levels(2)
       parameters:
         - $ref: '#/parameters/platform'
@@ -2026,7 +2027,7 @@ paths:
           type: string
         - description: Unique identifier of series to which clips belong
           in: path
-          name: SERIES_SEQUENCE_NUMBER
+          name: series_number
           required: true
           type: string
       produces:
@@ -2040,9 +2041,9 @@ paths:
       tags:
         - metadataresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clips_Landing_Feed_Brand_Series_and_Episode_Levels'
-  '/{brand-web-safe-title}/videos/series-{SERIES_SEQUENCE_NUMBER}/episode-{EPISODE_SEQUENCE_NUMBER}.atom':
+  '/{brand-web-safe-title}/videos/series-{series_number}/episode-{episode_number}.atom':
     get:
-      description: "A feed containing metadata about all the short-form (clip) videos. The clips \n  feed can be accessed at different levels: the content is then filtered \n  depending on the level, but the structure is identical.When accessed: from \n  the top, the feed contains all the clips for the brand;\_ at series level, \n  the feed contains only clips from the series; and\_ at episode level, the \n  feed contains only clips for the episode (and is very unlikely to require \n  pagination). The entries for the Clips Landing Feed contain references to \n  each short-form asset.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/videos/series-SERIES_SEQUENCE_NUMBER/episode-EPISODE_SEQUENCE_NUMBER.atom?apikey=xxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/peep-show/videos.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      description: "A feed containing metadata about all the short-form (clip) videos. The clips \n  feed can be accessed at different levels: the content is then filtered \n  depending on the level, but the structure is identical.When accessed: from \n  the top, the feed contains all the clips for the brand;\_ at series level, \n  the feed contains only clips from the series; and\_ at episode level, the \n  feed contains only clips for the episode (and is very unlikely to require \n  pagination). The entries for the Clips Landing Feed contain references to \n  each short-form asset.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/videos/series-series_number/episode-episode_number.atom?apikey=xxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/peep-show/videos.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: Clips_Landing_Feed_Brand_Series_and_Episode_Levels(3)
       parameters:
         - $ref: '#/parameters/platform'
@@ -2053,12 +2054,12 @@ paths:
           type: string
         - description: Unique identifier of series to which clips belong
           in: path
-          name: SERIES_SEQUENCE_NUMBER
+          name: series_number
           required: true
           type: string
         - description: Unique identifier of episode to which clips belong
           in: path
-          name: EPISODE_SEQUENCE_NUMBER
+          name: episode_number
           required: true
           type: string
       produces:
@@ -2105,330 +2106,645 @@ paths:
         - metadataresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clip_Detail_Atom_Feed'
 definitions:
+  ContentTypeType:
+    additionalProperties: false
+    type: object
+    x-oneOf:
+      - $ref: '#/definitions/textTypeType'
+      - $ref: '#/definitions/MimeType'
+  KnownRelCodeType:
+    description: 'alternate: The value "alternate" signifies that the IRI in the value of the href attribute identifies an alternate version of the resource described by the containing element.related: The value "related" signifies that the IRI in the value of the href attribute identifies a resource related to the resource described by the containing element. For example, the feed for a site that discusses the performance of the search engine at "http://search.example.com" might contain, as a child of atom:feed. An identical link might appear as a child of any atom:entry whose content contains a discussion of that same search engine.self: The value "self" signifies that the IRI in the value of the href attribute identifies a resource equivalent to the containing element.enclosure: The value "enclosure" signifies that the IRI in the value of the href attribute identifies a related resource that is potentially large in size and might require special handling. For atom:link elements with rel="enclosure", the length attribute SHOULD be provided.via: The value "via" signifies that the IRI in the value of the href attribute identifies a resource that is the source of the information provided in the containing element.'
+    enum:
+      - alternate
+      - related
+      - self
+      - enclosure
+      - via
+  MimeType:
+    description: 'XML encoded identifier of a standard MIME type, possibly a parameterized MIME type. Copied from ows 2.0.1'
+    pattern: (application|audio|image|text|video|message|multipart|model)/.+(;\s*.+=.+)*
+    type: string
+  RelCodeType:
+    additionalProperties: false
+    type: object
+    x-oneOf:
+      - $ref: '#/definitions/KnownRelCodeType'
+      - type: string
   atom:
-    additionalProperties: true
+    additionalProperties: false
+    description: |-
+      This version of the Atom schema is based on version 1.0 of the format specifications, found here http://www.atomenabled.org/developers/syndication/atom-format-spec.php. The original namespace was http://www.w3.org/2005/Atom but we changed it to http://www.opengis.net/atom/2005 to avoid conflicting definitions of the same namespace in the future. NOT DONE YET. There is no XSD official schema for atom but this one seems to be the most known: http://www.kbcafe.com/rss/atom.xsd.xml (The Atom Publishing Protocol was issued as a Proposed Standard in IETF RFC 5023 in October 2007 http://tools.ietf.org/html/rfc5023)
+      An Atom document may have two root elements, feed and entry, as defined in section 2.
     properties:
       feed:
-        $ref: '#/definitions/feed'
+        $ref: '#/definitions/feedType'
     required:
       - feed
+    title: converted/atomSchema.xsd
     type: object
+  categoryType:
+    additionalProperties: false
+    description: The Atom category construct is defined in section 4.2.2 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+        required:
+          - term
+      - properties:
+          label:
+            type: string
+          scheme:
+            format: uri
+            type: string
+          term:
+            type: string
+  commonAttributes:
+    additionalProperties: true
+    properties:
+      'xml:base':
+        type: string
+      'xml:lang':
+        type: string
+    type: object
+  contentType:
+    additionalProperties: true
+    description: The Atom content construct is defined in section 4.1.3 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          src:
+            format: uri
+            type: string
+          type:
+            $ref: '#/definitions/ContentTypeType'
+  dateTimeType:
+    additionalProperties: false
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          '#text':
+            format: date-time
+            type: string
+  emailType:
+    description: Schema definition for an email address.
+    pattern: \w+@(\w+\.)+\w+
+    type: string
   entry:
+    $ref: '#/definitions/entryType'
+  entryType:
     additionalProperties: true
-    properties:
-      Link@Related title="4oD":
-        description: 'URL to Brand 4oD feed, if available'
-        format: uri
-        type: string
-      Link@Related title="Episode Guide":
-        description: URL to brand episode guide feed
-        format: uri
-        type: string
-      dc.relation.sortLetter:
-        description: Starting letter for this programme
-        type: integer
-      'dc:date.Last':
-        description: Timestamp of the previous TX from this brand (if applicable)
-        format: date-time
-        type: string
-      'dc:date.Next':
-        description: Timestamp of the next TX from this brand (if applicable)
-        format: date-time
-        type: string
-      'dc:date.TXDate':
-        description: If this programme is available on 4oD then this element indicates the broadcast date/time of the episode selected for 4oD. If the programme is not on 4oD then this element is omitted.(Indicates whether pre- or post-watershed)
-        format: date-time
-        type: string
-      'dc:date.firstTXDate':
-        description: First TX date information for this episode
-        format: date-time
-        type: string
-      'dc:date.slotTXDate':
-        description: Current TX date information for this slot's episode
-        format: date-time
-        type: string
-      'dc:relataion.BrandTitle':
-        description: Title for the brand that the clip is associated with (directly or indirectly)
-        type: string
-      'dc:relataion.BrandWebSafeTitle':
-        description: Web-safe title for the brand that the clip is associated with (directly or indirectly)
-        type: string
-      'dc:relation.4oDProgrammeCount':
-        description: 'The number of 4oD available programmes in the collection, including all Brand/Series/Episodes.'
-        type: integer
-      'dc:relation.AgeRating':
-        description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
-        type: integer
-      'dc:relation.AllProgrammeCount':
-        description: Number of available brands in this category (all programmes)
-        type: integer
-      'dc:relation.AudioDescription':
-        description: Boolean indicating if an audio description is available for this episode
-        type: boolean
-      'dc:relation.BrandTitle':
-        description: Title of brand
-        type: string
-      'dc:relation.BrandWebSafeTitle':
-        description: Programme's Brand name in Web safe format
-        type: string
-      'dc:relation.BrandWebsafeTitle':
-        description: The associated brand web-safe title
-        type: string
-      'dc:relation.CategoryOrder':
-        description: 'Enumerated order of category within its type (e.g., ''Channel'' might have Food=1, More4=2, etc.) (Appears in feed only if CategoryType<>''None''.)'
-        type: integer
-      'dc:relation.CategoryType':
-        description: 'Type to which the category belongs (if applicable). (Valid values are ''Channel'', ''Display'' or ''None''.)'
-        type: string
-      'dc:relation.Duration':
-        description: Length in minutes and seconds - does not include ad breaks
-        type: string
-      'dc:relation.EpisodeNumber':
-        description: The episode number within the series.
-        type: integer
-      'dc:relation.ExternalVideoId':
-        description: This is the clip asset id (from column CLIP_ASSET.ASSET_ID. For the current implementation this is the Brightcove Id.
-        type: integer
-      'dc:relation.Guidance':
-        description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
-        type: string
-      'dc:relation.LastChannel':
-        description: The channel on which the previous TX from this brand(if applicable)
-        type: string
-      'dc:relation.LoginRequired':
-        description: Boolean indicating if the requestType is ARCHIVE and the user needs to be logged in to watch.
-        type: boolean
-      'dc:relation.Movie':
-        description: Boolean indicating if the SLOT is a Movie or not.
-        type: boolean
-      'dc:relation.NextChannel':
-        description: The channel on which the next TX from this brand (if applicable)
-        type: string
-      'dc:relation.ParentCollectionId':
-        description: The ID of the Parent Collection where the resource is assigned to.
-        type: string
-      'dc:relation.Platform':
-        description: The platform code that this episode is available on
-        type: string
-      'dc:relation.ProgrammeType':
-        description: "Displays metadata code (as detailed in the following table)\_in a meaningful way on the application according to the specified programme type."
-        type: string
-      'dc:relation.RelatedEntryId':
-        description: The episode guide entry related to this episode
-        type: string
-      'dc:relation.Repeat':
-        description: Boolean indicating if the Slot includes an indicator marked as repeat.
-        type: boolean
-      'dc:relation.SeriesNumber':
-        description: The series to which this episode belongs.
-        type: integer
-      'dc:relation.Signing':
-        description: 'Boolean value is true if signing slot_indicator exists for this slot, otherwise false.'
-        type: boolean
-      'dc:relation.SimulcastRights':
-        description: Boolean indicating if the episode has rights to be streamed on the live simulcast service.
-        type: boolean
-      'dc:relation.Subtitles':
-        description: Boolean indicating if subtitles are available for this episode
-        type: boolean
-      'dc:relation.Synopsys':
-        description: The synopsis of this brand
-        type: string
-      'dc:relation.TXChannel':
-        description: If this programme is available on 4oD then this element indicates the broadcast channel that the episode selected for 4oD. If the programme is not on 4oD then this element is omitted.
-        type: string
-      'dc:relation.TXStartTime':
-        description: Start date and time of the broadcast
-        type: string
-      'dc:relation.WideScreen':
-        description: 'Boolean value is true if widescreen slot_indicator exists for this slot, otherwise false'
-        type: boolean
-      'dc:relation.comingSoonTo4oD':
-        description: If the brand is coming to be available on 4oD soon this empty element should be included.
-        type: string
-      'dc:relation.firstTXChannel':
-        description: First TX channel information for this episode
-        type: string
-      'dc:relation.hd':
-        description: Boolean indicating if the SLOT is HD on linear
-        type: boolean
-      'dc:relation.platformClientVersion':
-        description: Identifies the version of the client application compatible with this feed.
-        type: number
-      'dc:relation.programmeId':
-        description: The episode identifier.
-        type: string
-      'dc:relation.requestType':
-        description: Indicates catchup or archive content
-        enum:
-          - ARCHIVE
-          - CATCHUP
-        type: string
-      'dc:relation.resourceType':
-        description: The type of the entry
-        type: string
-      'dc:relation.slotTXChannel':
-        description: Current TX channel information for this slot's episode
-        type: string
-      'dc:relation.sortLetter':
-        description: Starting letter for this programme
-        type: string
-      'dc:relation.sortOrder':
-        description: Starting letter for this programme
-        type: integer
-      'dcterms:available':
-        description: 'Start date, end date and date / time format for the period of time when episode is available on 4oD. This element is not returned if the programme is not currently available on 4oD.'
-        type: string
-      generator:
-        description: Identifies the agent used to generate the feed
-        type: string
-      generator@version:
-        description: Identifies the version of the agent used to generate the feed
-        type: number
-      id:
-        description: ID of the entry
-        type: string
-      link@EpisodeUrl:
-        description: 'Episode URL, if applicable'
-        format: uri
-        type: string
-      link@alternate:
-        description: URL to HTML version of episode (if available)
-        format: uri
-        type: string
-      link@rel=alternate @type=text:
-        properties:
-          html:
-            description: URL to HTML version of brand (if available)
-            format: uri
-            type: string
-        type: object
-      link@rel=related@title=4oD:
-        description: URL of ATOM 4oD feed of current brand (if available)
-        format: uri
-        type: string
-      link@rel=related@title=Clips:
-        description: URL of ATOM Clips feed of current brand (if available)
-        format: uri
-        type: string
-      link@rel=related@title=Episode Guide:
-        description: URL of ATOM Episode Guide details feed of current brand (if available)
-        format: uri
-        type: string
-      link@rel=self@type=application:
-        properties:
-          atom+xml:
-            description: URL of ATOM feed of current brand
-            format: uri
-            type: string
-        type: object
-      link@related:
-        description: URL of ATOM feed of current episode
-        format: uri
-        type: string
-      link@related (4oD Programmes by TX Date):
-        description: 4oD programmes in category by TX date
-        format: uri
-        type: string
-      link@related (4oD Programmes by Title):
-        description: 4oD programmes in category by title
-        format: uri
-        type: string
-      link@related (4oD):
-        description: "URL to 4oD feed, if available\_(self-referential in 4oD feeds)"
-        format: uri
-        type: string
-      link@related (All Programmes by Title):
-        description: All programmes in category by title
-        format: uri
-        type: string
-      link@related (Clips):
-        description: 'URL to short-form video feed, if available'
-        format: uri
-        type: string
-      link@related (Episode Guide):
-        description: 'URL to Episode Guide feed, if available'
-        format: uri
-        type: string
-      link@related (Official Site):
-        description: 'URL to the brand''s official site, if available'
-        format: uri
-        type: string
-      link@relative (4oD):
-        description: 'URL to 4oD feed, if available (self-referential in 4oD feeds)'
-        format: uri
-        type: string
-      link@relative (Clips):
-        description: 'URL to short-form video feed, if available'
-        format: uri
-        type: string
-      link@relative (Episode Guide):
-        description: 'URL to Episode Guide feed, if available'
-        format: uri
-        type: string
-      link@relative (Official Site):
-        description: 'URL to the brand''s official site, if available'
-        type: string
-      link@self:
-        description: URL to the Channel 4 XML feed for this brand
-        format: uri
-        type: string
-      link@up:
-        description: Parent brand feed URL
-        format: uri
-        type: string
-      'media:content':
-        properties:
-          'media:credit':
-            description: List of credits/cast for the episode
-            type: string
-          'media:thumbnail':
-            description: URL to medium-sized image of this brand
-            type: string
-        type: object
-      'media:context':
-        properties:
-          'media:thumbnail':
-            description: URL to medium-sized image of this brand
-            type: string
-        type: object
-      'media:group':
-        properties:
-          'media:category':
-            description: Defines the type of short-form item.
-            type: string
-          'media:content':
+    description: The Atom entry construct is defined in section 4.1.2 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          author:
+            items:
+              $ref: '#/definitions/personType'
+            type: array
+          category:
+            items:
+              $ref: '#/definitions/categoryType'
+            type: array
+          content:
+            $ref: '#/definitions/contentType'
+          contributor:
+            items:
+              $ref: '#/definitions/personType'
+            type: array
+          dc:
             properties:
-              'dc:relation.AgeRating':
+              relation:
+                properties:
+                  sortLetter:
+                    description: Starting letter for this programme
+                    type: integer
+                type: object
+            type: object
+          'dc:date':
+            properties:
+              Last:
+                description: Timestamp of the previous TX from this brand (if applicable)
+                format: date-time
+                type: string
+              Next:
+                description: Timestamp of the next TX from this brand (if applicable)
+                format: date-time
+                type: string
+              TXDate:
+                description: If this programme is available on 4oD then this element indicates the broadcast date/time of the episode selected for 4oD. If the programme is not on 4oD then this element is omitted.(Indicates whether pre- or post-watershed)
+                format: date-time
+                type: string
+              firstTXDate:
+                description: First TX date information for this episode
+                format: date-time
+                type: string
+              slotTXDate:
+                description: Current TX date information for this slot's episode
+                format: date-time
+                type: string
+            type: object
+          'dc:relataion':
+            properties:
+              BrandTitle:
+                description: Title for the brand that the clip is associated with (directly or indirectly)
+                type: string
+              BrandWebSafeTitle:
+                description: Web-safe title for the brand that the clip is associated with (directly or indirectly)
+                type: string
+            type: object
+          'dc:relation':
+            properties:
+              4oDProgrammeCount:
+                description: 'The number of 4oD available programmes in the collection, including all Brand/Series/Episodes.'
+                type: integer
+              AgeRating:
                 description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
                 type: integer
-              'dc:relation.AudioDescription':
+              AllProgrammeCount:
+                description: Number of available brands in this category (all programmes)
+                type: integer
+              AudioDescription:
                 description: Boolean indicating if an audio description is available for this episode
                 type: boolean
-              'dc:relation.Duration':
+              BrandTitle:
+                description: Title of brand
+                type: string
+              BrandWebSafeTitle:
+                description: Programme's Brand name in Web safe format
+                type: string
+              BrandWebsafeTitle:
+                description: The associated brand web-safe title
+                type: string
+              CategoryOrder:
+                description: 'Enumerated order of category within its type (e.g., ''Channel'' might have Food=1, More4=2, etc.) (Appears in feed only if CategoryType<>''None''.)'
+                type: integer
+              CategoryType:
+                description: 'Type to which the category belongs (if applicable). (Valid values are ''Channel'', ''Display'' or ''None''.)'
+                type: string
+              Duration:
                 description: Length in minutes and seconds - does not include ad breaks
                 type: string
-              'dc:relation.Guidance':
+              EpisodeNumber:
+                description: The episode number within the series.
+                type: integer
+              ExternalVideoId:
+                description: This is the clip asset id (from column CLIP_ASSET.ASSET_ID. For the current implementation this is the Brightcove Id.
+                type: integer
+              Guidance:
                 description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
                 type: string
-              'dc:relation.Subtitles':
+              LastChannel:
+                description: The channel on which the previous TX from this brand(if applicable)
+                type: string
+              LoginRequired:
+                description: Boolean indicating if the requestType is ARCHIVE and the user needs to be logged in to watch.
+                type: boolean
+              Movie:
+                description: Boolean indicating if the SLOT is a Movie or not.
+                type: boolean
+              NextChannel:
+                description: The channel on which the next TX from this brand (if applicable)
+                type: string
+              ParentCollectionId:
+                description: The ID of the Parent Collection where the resource is assigned to.
+                type: string
+              Platform:
+                description: The platform code that this episode is available on
+                type: string
+              ProgrammeType:
+                description: "Displays metadata code (as detailed in the following table)\_in a meaningful way on the application according to the specified programme type."
+                type: string
+              RelatedEntryId:
+                description: The episode guide entry related to this episode
+                type: string
+              Repeat:
+                description: Boolean indicating if the Slot includes an indicator marked as repeat.
+                type: boolean
+              SeriesNumber:
+                description: The series to which this episode belongs.
+                type: integer
+              Signing:
+                description: 'Boolean value is true if signing slot_indicator exists for this slot, otherwise false.'
+                type: boolean
+              SimulcastRights:
+                description: Boolean indicating if the episode has rights to be streamed on the live simulcast service.
+                type: boolean
+              Subtitles:
                 description: Boolean indicating if subtitles are available for this episode
                 type: boolean
-              'dc:relation.deliveryType':
-                description: Indicates STREAMING or FOR DOWNLOAD content
-                enum:
-                  - STREAM
-                  - DOWNLOAD
+              Synopsys:
+                description: The synopsis of this brand
                 type: string
-              'dc:relation.requestType':
+              TXChannel:
+                description: If this programme is available on 4oD then this element indicates the broadcast channel that the episode selected for 4oD. If the programme is not on 4oD then this element is omitted.
+                type: string
+              TXStartTime:
+                description: Start date and time of the broadcast
+                type: string
+              WideScreen:
+                description: 'Boolean value is true if widescreen slot_indicator exists for this slot, otherwise false'
+                type: boolean
+              comingSoonTo4oD:
+                description: If the brand is coming to be available on 4oD soon this empty element should be included.
+                type: string
+              firstTXChannel:
+                description: First TX channel information for this episode
+                type: string
+              hd:
+                description: Boolean indicating if the SLOT is HD on linear
+                type: boolean
+              platformClientVersion:
+                description: Identifies the version of the client application compatible with this feed.
+                type: number
+              programmeId:
+                description: The episode identifier.
+                type: string
+              requestType:
                 description: Indicates catchup or archive content
                 enum:
                   - ARCHIVE
                   - CATCHUP
                 type: string
-              'dcterms:available':
-                description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
+              resourceType:
+                description: The type of the entry
                 type: string
+              slotTXChannel:
+                description: Current TX channel information for this slot's episode
+                type: string
+              sortLetter:
+                description: Starting letter for this programme
+                type: string
+              sortOrder:
+                description: Starting letter for this programme
+                type: integer
+            type: object
+          'dcterms:available':
+            description: 'Start date, end date and date / time format for the period of time when episode is available on 4oD. This element is not returned if the programme is not currently available on 4oD.'
+            type: string
+          generator:
+            description: Identifies the agent used to generate the feed
+            properties:
+              version:
+                description: Identifies the version of the agent used to generate the feed
+                type: number
+            type: object
+          id:
+            $ref: '#/definitions/idType'
+          link:
+            items:
+              $ref: '#/definitions/linkType'
+            type: array
+          'media:content':
+            properties:
+              'media:credit':
+                description: List of credits/cast for the episode
+                type: string
+              'media:thumbnail':
+                description: URL to medium-sized image of this brand
+                type: string
+            type: object
+          'media:context':
+            properties:
+              'media:thumbnail':
+                description: URL to medium-sized image of this brand
+                type: string
+            type: object
+          'media:group':
+            properties:
+              'media:category':
+                description: Defines the type of short-form item.
+                type: string
+              'media:content':
+                properties:
+                  'dc:relation':
+                    properties:
+                      AgeRating:
+                        description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
+                        type: integer
+                      AudioDescription:
+                        description: Boolean indicating if an audio description is available for this episode
+                        type: boolean
+                      Duration:
+                        description: Length in minutes and seconds - does not include ad breaks
+                        type: string
+                      Guidance:
+                        description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
+                        type: string
+                      Subtitles:
+                        description: Boolean indicating if subtitles are available for this episode
+                        type: boolean
+                      deliveryType:
+                        description: Indicates STREAMING or FOR DOWNLOAD content
+                        enum:
+                          - STREAM
+                          - DOWNLOAD
+                        type: string
+                      requestType:
+                        description: Indicates catchup or archive content
+                        enum:
+                          - ARCHIVE
+                          - CATCHUP
+                        type: string
+                    type: object
+                  'dcterms:available':
+                    description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
+                    type: string
+                  'media:copyright':
+                    description: Link to copyright / T&C information
+                    type: string
+                  'media:player':
+                    description: URL to media-player version of episode
+                    format: uri
+                    type: string
+                  'media:rating':
+                    description: Flag to show whether episode is suitable for adults only ("adult") or for all viewers ("nonadult")
+                    type: string
+                  'media:restriction':
+                    description: Restriction flag ("allow") and list of country or state codes where episode is accessible to website users
+                    type: string
+                  'media:rights':
+                    description: Status of media rights under which Channel 4 provides episode content
+                    type: string
+                  'media:thumbnail':
+                    description: URL to medium-sized image of this episode
+                    type: string
+                type: object
+              'media:copyright':
+                description: "Link to 4oD \_copyright / T&C information (if available)"
+                type: string
+              'media:player':
+                description: URL to 4oD media-player version of episode (if available)
+                format: uri
+                type: string
+              'media:rating':
+                description: Flag to show whether the 4oD version of the episode is suitable for adults only ("adult") or for all viewers ("nonadult") (if available)
+                type: string
+              'media:restriction':
+                description: Restriction flag ("allow") and list of country or state codes where 4oD episode is accessible to website users (if available)
+                type: string
+              'media:rights':
+                description: Status of 4oD media rights under which Channel 4 provides episode content (if available)
+                type: string
+              'media:thumbnail':
+                description: URL to 4oD medium-sized image of this episode (if available)
+                type: string
+            type: object
+          'media:thumbnail':
+            description: URL to medium sized image of this series
+            type: string
+          published:
+            $ref: '#/definitions/dateTimeType'
+          rights:
+            $ref: '#/definitions/textType'
+          source:
+            $ref: '#/definitions/textType'
+          subtitle:
+            description: The synopsis of the series.
+            type: string
+          summary:
+            $ref: '#/definitions/textType'
+          title:
+            $ref: '#/definitions/textType'
+          updated:
+            $ref: '#/definitions/dateTimeType'
+  feedType:
+    additionalProperties: true
+    description: The Atom feed construct is defined in section 4.1.1 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          author:
+            properties:
+              name:
+                description: Name of author / owner
+                type: string
+            type: object
+          category:
+            items:
+              $ref: '#/definitions/categoryType'
+            type: array
+          category (primary):
+            description: Primary category (brand must have ONE)
+            type: string
+          category (secondary):
+            description: Secondary category (brand may have any number)
+            type: string
+          contributor:
+            items:
+              $ref: '#/definitions/personType'
+            type: array
+          'dc:date':
+            properties:
+              TXDate:
+                description: First TX date information for this episode
+                format: date-time
+                type: string
+              firstTXDate:
+                description: First TX date information for this episode
+                format: date-time
+                type: string
+            type: object
+          'dc:relation':
+            properties:
+              4oDProgrammeCount:
+                description: Number of available brands in this category beginning with this letter (4oD only)
+                type: integer
+              4oDSeriesCount:
+                description: Number of available 4oD series for this Brand
+                type: integer
+              AgeRating:
+                description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
+                type: integer
+              AllProgrammeCount:
+                description: Number of available brands in this category beginning with this letter (all programmes)
+                type: integer
+              AudioDescription:
+                description: Boolean indicating if an audio description is available for this episode
+                type: boolean
+              BrandFlattened:
+                description: Boolean indicating whether there is no Series -> Episode structure in this brand ("false" indicating that there is such a structure)
+                type: boolean
+              BrandTitle:
+                description: Title of brand
+                type: string
+              BrandWebSafeTitle:
+                description: 'Title of the brand safe for web linking (no whitespaces, no special chars...)'
+                type: string
+              CategoryOrder:
+                description: 'Enumerated order of category within its type(e.g., ''Channel'' might have Food=1, More4=2, etc.)(Appears in feed only if CategoryType<>''None''.)'
+                type: integer
+              CategoryType:
+                description: 'Type to which the category belongs (if applicable).(Valid values are ''Channel'', ''Display'' or ''None''.)'
+                type: string
+              Duration:
+                description: Length in minutes and seconds - does not include ad breaks
+                type: string
+              EpisodeNumber:
+                description: The episode number within the series
+                type: integer
+              ExternalVideoId:
+                description: Clip Asset_id value from the Clip table (a.k.a. Brightcode id).
+                type: string
+              Guidance:
+                description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
+                type: string
+              LoginRequired:
+                description: Boolean indicating if the user has to be logged-in in order to play this episode.
+                type: boolean
+              New4oDSeriesAvailable:
+                description: Flags that notifies clients when a Brand contains NEW series.
+                type: boolean
+              ParentCollectionId:
+                description: The ID of the Parent Collection where the resource is assigned to.
+                type: string
+              ProgrammeType:
+                description: "Displays metadata code (as detailed in the following table)\_in a meaningful way on the application according to the specified programme type."
+                type: string
+              RelatedEntryId:
+                description: The episode guide entry related to this episode
+                type: string
+              SeriesNumber:
+                description: The series to which this episode belongs
+                type: integer
+              Sharable:
+                description: Boolean value indicating if clips for this brand are sharable
+                type: boolean
+              StartOffset:
+                description: ''
+                type: integer
+              Subtitles:
+                description: Boolean indicating if subtitles are available for this episode
+                type: boolean
+              Synopsis:
+                description: Summary of this feed
+                type: string
+              TXChannel:
+                description: First TX channel information for this episode
+                type: string
+              TotalResults:
+                description: Number of entries what match the search-term
+                type: integer
+              comingSoonTo4oD:
+                description: If the brand is coming to be available on 4oD soon this empty element should be included.
+                type: string
+              firstTXChannel:
+                description: First TX channel information for this episode
+                type: string
+              firstTXDate:
+                description: 'Date of first broadcast (optional). This is based on EPG or, when EPG data is not available for the episode, it can be set editorially (significant date)'
+                format: date-time
+                type: string
+              lastTXChannel:
+                description: "Channel of last broadcast\_(optional).\_This is based on EPG ignoring repeats and giving preference to the channel that the brand is primarily targeted at (preferred channel)"
+                type: string
+              lastTXDate:
+                description: "Date of last broadcast\_(optional). This is based on EPG ignoring repeats and giving preference to the channel that the brand is primarily targeted at (preferred channel)"
+                format: date-time
+                type: string
+              platformClientVersion:
+                description: Identifies the version of the specified platform client application compatible with this feed.
+                type: number
+              presentationBrand:
+                description: The presentation brand
+                type: string
+              programmeId:
+                description: Indicates the contract and programme numbers
+                type: string
+              resourceType:
+                description: The type of the entry
+                type: string
+            type: object
+          'dcterms:available':
+            description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
+            type: string
+          entry:
+            items:
+              $ref: '#/definitions/entryType'
+            type: array
+          'fh:complete':
+            description: Presence of this element indicates no pagination
+            type: string
+          generator:
+            description: Identifies the agent used to generate the feed
+            properties:
+              version:
+                description: Identifies the version of the agent used to generate the feed
+                type: number
+            type: object
+          icon:
+            $ref: '#/definitions/iconType'
+          id:
+            $ref: '#/definitions/idType'
+          link:
+            items:
+              $ref: '#/definitions/linkType'
+            type: array
+          logo:
+            $ref: '#/definitions/logoType'
+          'media:group':
+            properties:
+              'media:category':
+                description: 'Defines the type of short-form item. Its value can be one of the next: EXTRACT, PREVIEW, EXTRA, TRAILER'
+                type: string
+              'media:content':
+                properties:
+                  'dc:relation':
+                    properties:
+                      AgeRating:
+                        description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
+                        type: integer
+                      AudioDescription:
+                        description: Boolean indicating if an audio description is available for this episode
+                        type: boolean
+                      Duration:
+                        description: Length in minutes and seconds - does not include ad breaks
+                        type: string
+                      Guidance:
+                        description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
+                        type: string
+                      Subtitles:
+                        description: Boolean indicating if subtitles are available for this episode
+                        type: boolean
+                      deliveryType:
+                        description: Indicates STREAMING or FOR DOWNLOAD content
+                        enum:
+                          - STREAM
+                          - DOWNLOAD
+                        type: string
+                      requestType:
+                        description: Indicates catchup or archive content
+                        enum:
+                          - ARCHIVE
+                          - CATCHUP
+                        type: string
+                    type: object
+                  'dcterms:available':
+                    description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
+                    type: string
+                  'media:copyright':
+                    description: Link to copyright / T&C information
+                    type: string
+                  'media:player':
+                    description: URL to media-player version of episode
+                    format: uri
+                    type: string
+                  'media:rating':
+                    description: Flag to show whether episode is suitable for adults only ("adult") or for all viewers ("nonadult")
+                    type: string
+                  'media:restriction':
+                    description: Restriction flag ("allow") and list of country or state codes where episode is accessible to website users
+                    type: string
+                  'media:rights':
+                    description: Status of media rights under which Channel 4 provides episode content
+                    type: string
+                  'media:thumbnail':
+                    description: URL to medium-sized image of this episode
+                    type: string
+                type: object
               'media:copyright':
                 description: Link to copyright / T&C information
                 type: string
@@ -2449,332 +2765,163 @@ definitions:
                 description: URL to medium-sized image of this episode
                 type: string
             type: object
-          'media:copyright':
-            description: "Link to 4oD \_copyright / T&C information (if available)"
+          'media:thumbnail':
+            description: URL to medium sized image of this series
+            properties:
+              'media:thumbnail':
+                description: URL to medium-sized image of this episode
+                type: string
+            type: object
+          rights:
+            $ref: '#/definitions/textType'
+          subtitle:
+            $ref: '#/definitions/textType'
+          summary:
+            description: Synopsis of episode
             type: string
-          'media:player':
-            description: URL to 4oD media-player version of episode (if available)
+          title:
+            $ref: '#/definitions/textType'
+          updated:
+            $ref: '#/definitions/dateTimeType'
+  generatorType:
+    additionalProperties: false
+    description: The Atom generator element is defined in section 4.2.4 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          '#text':
+            type: string
+          uri:
             format: uri
             type: string
-          'media:rating':
-            description: Flag to show whether the 4oD version of the episode is suitable for adults only ("adult") or for all viewers ("nonadult") (if available)
+          version:
             type: string
-          'media:restriction':
-            description: Restriction flag ("allow") and list of country or state codes where 4oD episode is accessible to website users (if available)
-            type: string
-          'media:rights':
-            description: Status of 4oD media rights under which Channel 4 provides episode content (if available)
-            type: string
-          'media:thumbnail':
-            description: URL to 4oD medium-sized image of this episode (if available)
-            type: string
-        type: object
-      'media:thumbnail':
-        description: URL to medium sized image of this series
-        type: string
-      subtitle:
-        description: The synopsis of the series.
-        type: string
-      summary:
-        description: Synopsis of this episode
-        type: string
-      title:
-        description: 'Episode Title. If available on 4oD then the 4oD episode title is returned. If not, then the title attributed to the slot is returned. It is possible for these to be different'
-        type: string
-      updated:
-        description: Date & time episode last updated
-        format: date-time
-        type: string
+  iconType:
+    additionalProperties: false
+    description: The Atom icon construct is defined in section 4.2.5 of the format spec.
     type: object
-  feed:
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          '#text':
+            format: uri
+            type: string
+  idType:
+    additionalProperties: false
+    description: The Atom id construct is defined in section 4.2.6 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          '#text':
+            format: uri
+            type: string
+  linkType:
+    additionalProperties: false
+    description: The Atom link construct is defined in section 3.4 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+        required:
+          - href
+      - properties:
+          href:
+            format: uri
+            type: string
+          hreflang:
+            type: string
+          length:
+            minimum: 1
+            type: integer
+          rel:
+            $ref: '#/definitions/RelCodeType'
+          title:
+            type: string
+          type:
+            type: string
+  logoType:
+    additionalProperties: false
+    description: The Atom logo construct is defined in section 4.2.8 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          '#text':
+            format: uri
+            type: string
+  personType:
     additionalProperties: true
-    properties:
-      Link@Related title="4oD":
-        description: 'URL to Brand 4oD feed, if available'
-        format: uri
-        type: string
-      author:
-        properties:
+    description: The Atom person construct is defined in section 3.2 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          email:
+            $ref: '#/definitions/emailType'
           name:
-            description: Name of author / owner
             type: string
-        type: object
-      category (primary):
-        description: Primary category (brand must have ONE)
-        type: string
-      category (secondary):
-        description: Secondary category (brand may have any number)
-        type: string
-      'dc:date.TXDate':
-        description: First TX date information for this episode
-        format: date-time
-        type: string
-      'dc:date.firstTXDate':
-        description: First TX date information for this episode
-        format: date-time
-        type: string
-      'dc:relation.4oDProgrammeCount':
-        description: Number of available brands in this category beginning with this letter (4oD only)
-        type: integer
-      'dc:relation.4oDSeriesCount':
-        description: Number of available 4oD series for this Brand
-        type: integer
-      'dc:relation.AgeRating':
-        description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
-        type: integer
-      'dc:relation.AllProgrammeCount':
-        description: Number of available brands in this category beginning with this letter (all programmes)
-        type: integer
-      'dc:relation.AudioDescription':
-        description: Boolean indicating if an audio description is available for this episode
-        type: boolean
-      'dc:relation.BrandFlattened':
-        description: Boolean indicating whether there is no Series -> Episode structure in this brand ("false" indicating that there is such a structure)
-        type: boolean
-      'dc:relation.BrandTitle':
-        description: Title of brand
-        type: string
-      'dc:relation.BrandWebSafeTitle':
-        description: 'Title of the brand safe for web linking (no whitespaces, no special chars...)'
-        type: string
-      'dc:relation.CategoryOrder':
-        description: 'Enumerated order of category within its type(e.g., ''Channel'' might have Food=1, More4=2, etc.)(Appears in feed only if CategoryType<>''None''.)'
-        type: integer
-      'dc:relation.CategoryType':
-        description: 'Type to which the category belongs (if applicable).(Valid values are ''Channel'', ''Display'' or ''None''.)'
-        type: string
-      'dc:relation.Duration':
-        description: Length in minutes and seconds - does not include ad breaks
-        type: string
-      'dc:relation.EpisodeNumber':
-        description: The episode number within the series
-        type: integer
-      'dc:relation.ExternalVideoId':
-        description: Clip Asset_id value from the Clip table (a.k.a. Brightcode id).
-        type: string
-      'dc:relation.Guidance':
-        description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
-        type: string
-      'dc:relation.LoginRequired':
-        description: Boolean indicating if the user has to be logged-in in order to play this episode.
-        type: boolean
-      'dc:relation.New4oDSeriesAvailable':
-        description: Flags that notifies clients when a Brand contains NEW series.
-        type: boolean
-      'dc:relation.ParentCollectionId':
-        description: The ID of the Parent Collection where the resource is assigned to.
-        type: string
-      'dc:relation.ProgrammeType':
-        description: "Displays metadata code (as detailed in the following table)\_in a meaningful way on the application according to the specified programme type."
-        type: string
-      'dc:relation.RelatedEntryId':
-        description: The episode guide entry related to this episode
-        type: string
-      'dc:relation.SeriesNumber':
-        description: The series to which this episode belongs
-        type: integer
-      'dc:relation.Sharable':
-        description: Boolean value indicating if clips for this brand are sharable
-        type: boolean
-      'dc:relation.StartOffset':
-        description: ''
-        type: integer
-      'dc:relation.Subtitles':
-        description: Boolean indicating if subtitles are available for this episode
-        type: boolean
-      'dc:relation.Synopsis':
-        description: Summary of this feed
-        type: string
-      'dc:relation.TXChannel':
-        description: First TX channel information for this episode
-        type: string
-      'dc:relation.TotalResults':
-        description: Number of entries what match the search-term
-        type: integer
-      'dc:relation.comingSoonTo4oD':
-        description: If the brand is coming to be available on 4oD soon this empty element should be included.
-        type: string
-      'dc:relation.firstTXChannel':
-        description: First TX channel information for this episode
-        type: string
-      'dc:relation.firstTXDate':
-        description: 'Date of first broadcast (optional). This is based on EPG or, when EPG data is not available for the episode, it can be set editorially (significant date)'
-        format: date-time
-        type: string
-      'dc:relation.lastTXChannel':
-        description: "Channel of last broadcast\_(optional).\_This is based on EPG ignoring repeats and giving preference to the channel that the brand is primarily targeted at (preferred channel)"
-        type: string
-      'dc:relation.lastTXDate':
-        description: "Date of last broadcast\_(optional). This is based on EPG ignoring repeats and giving preference to the channel that the brand is primarily targeted at (preferred channel)"
-        format: date-time
-        type: string
-      'dc:relation.platformClientVersion':
-        description: Identifies the version of the specified platform client application compatible with this feed.
-        type: number
-      'dc:relation.presentationBrand':
-        description: The presentation brand
-        type: string
-      'dc:relation.programmeId':
-        description: Indicates the contract and programme numbers
-        type: string
-      'dc:relation.resourceType':
-        description: The type of the entry
-        type: string
-      'dcterms:available':
-        description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
-        type: string
-      entry:
-        $ref: '#/definitions/entry'
-      'fh:complete':
-        description: Presence of this element indicates no pagination
-        type: string
-      generator:
-        description: Identifies the agent used to generate the feed
-        type: string
-      generator@version:
-        description: Identifies the version of the agent used to generate the feed
-        type: number
-      id:
-        description: Unique identifier of this feed
-        type: string
-      link@alternate:
-        description: 'URL to HTML version, i.e., player page'
-        format: uri
-        type: string
-      link@next:
-        description: Link to next day's page / feed (if available)
-        format: uri
-        type: string
-      link@previous:
-        description: Link to previous day's page / feed (if available)
-        format: uri
-        type: string
-      link@related:
-        description: 4oD programmes in category by title
-        format: uri
-        type: string
-      link@related (4oD Episode):
-        description: 'URL to HTML version of 4oD page for full episode, if available'
-        format: uri
-        type: string
-      link@related (4oD):
-        description: 'URL to 4oD feed, if available'
-        format: uri
-        type: string
-      link@related (Clips):
-        description: 'URL to short-form video feed for this episode, if available'
-        format: uri
-        type: string
-      link@related (Episode Guide):
-        description: 'URL to Episode Guide feed, if available'
-        format: uri
-        type: string
-      link@self:
-        description: URL of current page / feed
-        format: uri
-        type: string
-      link@up:
-        description: URL to parent feed
-        format: uri
-        type: string
-      logo:
-        description: Default Image URL
-        format: uri
-        type: string
-      'media:group':
-        properties:
-          'media:category':
-            description: 'Defines the type of short-form item. Its value can be one of the next: EXTRACT, PREVIEW, EXTRA, TRAILER'
-            type: string
-          'media:content':
-            properties:
-              'dc:relation.AgeRating':
-                description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
-                type: integer
-              'dc:relation.AudioDescription':
-                description: Boolean indicating if an audio description is available for this episode
-                type: boolean
-              'dc:relation.Duration':
-                description: Length in minutes and seconds - does not include ad breaks
-                type: string
-              'dc:relation.Guidance':
-                description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
-                type: string
-              'dc:relation.Subtitles':
-                description: Boolean indicating if subtitles are available for this episode
-                type: boolean
-              'dc:relation.deliveryType':
-                description: Indicates STREAMING or FOR DOWNLOAD content
-                enum:
-                  - STREAM
-                  - DOWNLOAD
-                type: string
-              'dc:relation.requestType':
-                description: Indicates catchup or archive content
-                enum:
-                  - ARCHIVE
-                  - CATCHUP
-                type: string
-              'dcterms:available':
-                description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
-                type: string
-              'media:copyright':
-                description: Link to copyright / T&C information
-                type: string
-              'media:player':
-                description: URL to media-player version of episode
-                format: uri
-                type: string
-              'media:rating':
-                description: Flag to show whether episode is suitable for adults only ("adult") or for all viewers ("nonadult")
-                type: string
-              'media:restriction':
-                description: Restriction flag ("allow") and list of country or state codes where episode is accessible to website users
-                type: string
-              'media:rights':
-                description: Status of media rights under which Channel 4 provides episode content
-                type: string
-              'media:thumbnail':
-                description: URL to medium-sized image of this episode
-                type: string
-            type: object
-          'media:copyright':
-            description: Link to copyright / T&C information
-            type: string
-          'media:player':
-            description: URL to media-player version of episode
+          uri:
+            $ref: '#/definitions/uriType'
+  sourceType:
+    additionalProperties: true
+    description: The Atom source construct is defined in section 4.2.11 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          author:
+            items:
+              $ref: '#/definitions/personType'
+            type: array
+          category:
+            items:
+              $ref: '#/definitions/categoryType'
+            type: array
+          contributor:
+            items:
+              $ref: '#/definitions/personType'
+            type: array
+          generator:
+            $ref: '#/definitions/generatorType'
+          icon:
+            $ref: '#/definitions/iconType'
+          id:
+            $ref: '#/definitions/idType'
+          link:
+            items:
+              $ref: '#/definitions/linkType'
+            type: array
+          logo:
+            $ref: '#/definitions/logoType'
+          rights:
+            $ref: '#/definitions/textType'
+          subtitle:
+            $ref: '#/definitions/textType'
+          title:
+            $ref: '#/definitions/textType'
+          updated:
+            $ref: '#/definitions/dateTimeType'
+  textType:
+    additionalProperties: true
+    description: The Atom text construct is defined in section 3.1 of the format spec.
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          type:
+            $ref: '#/definitions/textTypeType'
+  textTypeType:
+    enum:
+      - text
+      - html
+      - xhtml
+  uriType:
+    additionalProperties: false
+    type: object
+    x-anyOf:
+      - $ref: '#/definitions/commonAttributes'
+      - properties:
+          '#text':
             format: uri
             type: string
-          'media:rating':
-            description: Flag to show whether episode is suitable for adults only ("adult") or for all viewers ("nonadult")
-            type: string
-          'media:restriction':
-            description: Restriction flag ("allow") and list of country or state codes where episode is accessible to website users
-            type: string
-          'media:rights':
-            description: Status of media rights under which Channel 4 provides episode content
-            type: string
-          'media:thumbnail':
-            description: URL to medium-sized image of this episode
-            type: string
-        type: object
-      'media:thumbnail':
-        properties:
-          'media:thumbnail':
-            description: URL to medium-sized image of this episode
-            type: string
-        type: object
-      subtitle:
-        description: The synopsis of the series.
-        type: string
-      summary:
-        description: Synopsis of episode
-        type: string
-      title:
-        description: 'Channel 4 EPG for [date selected]'
-        type: string
-      updated:
-        description: Date & time feed rendered
-        format: date-time
-        type: string
-    type: object

@@ -514,6 +514,17 @@ definitions:
       entity:
         $ref: '#/definitions/Entity'
         description: The resulting entity.
+      version:
+        description: |-
+          The version of the entity, a strictly positive number that monotonically
+          increases with changes to the entity.
+
+          This field is set for `FULL` entity results.
+          For missing entities in
+          `LookupResponse`, this is the version of the snapshot that was used to look
+          up the entity, and it is always set except for eventually consistent reads.
+        format: int64
+        type: string
     type: object
   Filter:
     description: A holder for any type of filter.
@@ -710,6 +721,12 @@ definitions:
   Mutation:
     description: A mutation to apply to an entity.
     properties:
+      baseVersion:
+        description: |-
+          The version of the entity that this mutation is being applied to. If this
+          does not match the current version on the server, the mutation conflicts.
+        format: int64
+        type: string
       delete:
         $ref: '#/definitions/Key'
         description: |-
@@ -734,11 +751,25 @@ definitions:
   MutationResult:
     description: The result of applying a mutation.
     properties:
+      conflictDetected:
+        description: |-
+          Whether a conflict was detected for this mutation. Always false when a
+          conflict detection strategy field is not set in the mutation.
+        type: boolean
       key:
         $ref: '#/definitions/Key'
         description: |-
           The automatically allocated key.
           Set only when the mutation allocated a key.
+      version:
+        description: |-
+          The version of the entity on the server after processing the mutation. If
+          the mutation doesn't change anything on the server, then the version will
+          be the version of the current entity or, if no entity is present, a version
+          that is strictly greater than the version of any previous entity and less
+          than the version of any possible future entity.
+        format: int64
+        type: string
     type: object
   PartitionId:
     description: |-
@@ -948,6 +979,18 @@ definitions:
         description: 'The number of results skipped, typically because of an offset.'
         format: int32
         type: integer
+      snapshotVersion:
+        description: |-
+          The version number of the snapshot this batch was returned from.
+          This applies to the range of results from the query's `start_cursor` (or
+          the beginning of the query if no cursor was given) to this batch's
+          `end_cursor` (not the query's `end_cursor`).
+
+          In a single transaction, subsequent query result batches for the same query
+          can have a greater snapshot version number. Each batch's snapshot version
+          is valid for all preceding batches.
+        format: int64
+        type: string
     type: object
   ReadOptions:
     description: The options shared by read requests.

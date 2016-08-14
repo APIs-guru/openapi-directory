@@ -358,6 +358,11 @@ definitions:
         items:
           type: string
         type: array
+      logUrl:
+        description: |-
+          URL to logs for this build in Google Cloud Logging.
+          @OutputOnly
+        type: string
       logsBucket:
         description: |-
           Google Cloud Storage bucket where logs should be written (see
@@ -626,9 +631,7 @@ definitions:
     description: Results describes the artifacts created by the build pipeline.
     properties:
       buildStepImages:
-        description: |-
-          List of build step digests, in order corresponding to build step indices.
-          next id = 4
+        description: 'List of build step digests, in order corresponding to build step indices.'
         items:
           type: string
         type: array

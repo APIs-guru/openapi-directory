@@ -198,8 +198,8 @@ paths:
       operationId: servicemanagement.services.delete
       parameters:
         - description: |-
-            The name of the service.  See the `ServiceManager` overview for naming
-            requirements.  For example: `example.googleapis.com`.
+            The name of the service.  See the [overview](/service-management/overview)
+            for naming requirements.  For example: `example.googleapis.com`.
           in: path
           name: serviceName
           required: true
@@ -263,8 +263,8 @@ paths:
       operationId: servicemanagement.services.getConfig
       parameters:
         - description: |-
-            The name of the service.  See the `ServiceManager` overview for naming
-            requirements.  For example: `example.googleapis.com`.
+            The name of the service.  See the [overview](/service-management/overview)
+            for naming requirements.  For example: `example.googleapis.com`.
           in: path
           name: serviceName
           required: true
@@ -310,8 +310,8 @@ paths:
       operationId: servicemanagement.services.configs.list
       parameters:
         - description: |-
-            The name of the service.  See the `ServiceManager` overview for naming
-            requirements.  For example: `example.googleapis.com`.
+            The name of the service.  See the [overview](/service-management/overview)
+            for naming requirements.  For example: `example.googleapis.com`.
           in: path
           name: serviceName
           required: true
@@ -363,8 +363,8 @@ paths:
       operationId: servicemanagement.services.configs.create
       parameters:
         - description: |-
-            The name of the service.  See the `ServiceManager` overview for naming
-            requirements.  For example: `example.googleapis.com`.
+            The name of the service.  See the [overview](/service-management/overview)
+            for naming requirements.  For example: `example.googleapis.com`.
           in: path
           name: serviceName
           required: true
@@ -391,8 +391,8 @@ paths:
       operationId: servicemanagement.services.configs.get
       parameters:
         - description: |-
-            The name of the service.  See the `ServiceManager` overview for naming
-            requirements.  For example: `example.googleapis.com`.
+            The name of the service.  See the [overview](/service-management/overview)
+            for naming requirements.  For example: `example.googleapis.com`.
           in: path
           name: serviceName
           required: true
@@ -460,8 +460,8 @@ paths:
       operationId: servicemanagement.services.configs.submit
       parameters:
         - description: |-
-            The name of the service.  See the `ServiceManager` overview for naming
-            requirements.  For example: `example.googleapis.com`.
+            The name of the service.  See the [overview](/service-management/overview)
+            for naming requirements.  For example: `example.googleapis.com`.
           in: path
           name: serviceName
           required: true
@@ -490,8 +490,8 @@ paths:
       operationId: servicemanagement.services.rollouts.list
       parameters:
         - description: |-
-            The name of the service.  See the `ServiceManager` overview for naming
-            requirements.  For example: `example.googleapis.com`.
+            The name of the service.  See the [overview](/service-management/overview)
+            for naming requirements.  For example: `example.googleapis.com`.
           in: path
           name: serviceName
           required: true
@@ -545,8 +545,8 @@ paths:
       operationId: servicemanagement.services.rollouts.create
       parameters:
         - description: |-
-            The name of the service.  See the `ServiceManager` overview for naming
-            requirements.  For example: `example.googleapis.com`.
+            The name of the service.  See the [overview](/service-management/overview)
+            for naming requirements.  For example: `example.googleapis.com`.
           in: path
           name: serviceName
           required: true
@@ -573,8 +573,8 @@ paths:
       operationId: servicemanagement.services.rollouts.get
       parameters:
         - description: |-
-            The name of the service.  See the `ServiceManager` overview for naming
-            requirements.  For example: `example.googleapis.com`.
+            The name of the service.  See the [overview](/service-management/overview)
+            for naming requirements.  For example: `example.googleapis.com`.
           in: path
           name: serviceName
           required: true
@@ -730,8 +730,8 @@ paths:
       operationId: servicemanagement.services.undelete
       parameters:
         - description: |-
-            The name of the service. See the `ServiceManager` overview for naming
-            requirements. For example: `example.googleapis.com`.
+            The name of the service. See the [overview](/service-management/overview)
+            for naming requirements. For example: `example.googleapis.com`.
           in: path
           name: serviceName
           required: true
@@ -1388,12 +1388,6 @@ definitions:
           - FILE_DESCRIPTOR_SET_PROTO
         type: string
     type: object
-  ConfigOptions:
-    description: |-
-      A set of options to cover use of source config within `ServiceManager`
-      and related tools.
-    properties: {}
-    type: object
   ConfigRef:
     description: Represents a service configuration with its name and id.
     properties:
@@ -1421,11 +1415,6 @@ definitions:
           by the client for tracking purpose. If empty, the server may choose to
           generate one instead.
         type: string
-      options:
-        $ref: '#/definitions/ConfigOptions'
-        description: |-
-          Options to cover use of source configuration within ServiceManager and
-          tools
     type: object
   Context:
     description: |-
@@ -2377,8 +2366,6 @@ definitions:
         description: |-
           The name of the service. See the [overview](/service-management/overview)
           for naming requirements.
-          This name must match `google.api.Service.name` in the
-          `service_config` field.
         type: string
     type: object
   MediaDownload:

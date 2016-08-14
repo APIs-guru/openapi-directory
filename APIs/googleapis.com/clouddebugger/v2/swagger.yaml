@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Examines the call stack and variables of a running application without stopping or slowing it down.
-  title: Google Cloud Debugger
+  title: Stackdriver Debugger
   version: v2
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -22,7 +22,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: clouddebugger
 externalDocs:
-  url: 'https://cloud.google.com/tools/cloud-debugger'
+  url: 'http://cloud.google.com/debugger'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -31,7 +31,6 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud_debugger': Manage cloud debugger
-      'https://www.googleapis.com/auth/cloud_debugletcontroller': Manage active breakpoints in cloud debugger
     type: oauth2
 parameters:
   $.xgafv:
@@ -138,7 +137,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugletcontroller'
+            - 'https://www.googleapis.com/auth/cloud_debugger'
       tags:
         - controller
   '/v2/controller/debuggees/{debuggeeId}/breakpoints':
@@ -168,7 +167,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugletcontroller'
+            - 'https://www.googleapis.com/auth/cloud_debugger'
       tags:
         - controller
     parameters:
@@ -227,7 +226,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugletcontroller'
+            - 'https://www.googleapis.com/auth/cloud_debugger'
       tags:
         - controller
   /v2/debugger/debuggees:

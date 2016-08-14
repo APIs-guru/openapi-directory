@@ -18,7 +18,7 @@ info:
     format: google
     url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.5/rest'
     version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: dfareporting
 externalDocs:
@@ -1997,6 +1997,7 @@ paths:
             - OBJECT_SD_SITE
             - OBJECT_SIZE
             - OBJECT_SUBACCOUNT
+            - OBJECT_TARGETING_TEMPLATE
             - OBJECT_USER_PROFILE
             - OBJECT_USER_PROFILE_FILTER
             - OBJECT_USER_ROLE
@@ -4898,6 +4899,7 @@ paths:
               - PRICING_TYPE_CPA
               - PRICING_TYPE_CPC
               - PRICING_TYPE_CPM
+              - PRICING_TYPE_CPM_ACTIVEVIEW
               - PRICING_TYPE_FLAT_RATE_CLICKS
               - PRICING_TYPE_FLAT_RATE_IMPRESSIONS
             type: string
@@ -5358,6 +5360,7 @@ paths:
               - PRICING_TYPE_CPA
               - PRICING_TYPE_CPC
               - PRICING_TYPE_CPM
+              - PRICING_TYPE_CPM_ACTIVEVIEW
               - PRICING_TYPE_FLAT_RATE_CLICKS
               - PRICING_TYPE_FLAT_RATE_IMPRESSIONS
             type: string
@@ -7754,6 +7757,7 @@ definitions:
           - ACTIVE_ADS_TIER_200K
           - ACTIVE_ADS_TIER_300K
           - ACTIVE_ADS_TIER_40K
+          - ACTIVE_ADS_TIER_500K
           - ACTIVE_ADS_TIER_75K
         type: string
       activeViewOptOut:
@@ -7897,6 +7901,7 @@ definitions:
           - ACTIVE_ADS_TIER_200K
           - ACTIVE_ADS_TIER_300K
           - ACTIVE_ADS_TIER_40K
+          - ACTIVE_ADS_TIER_500K
           - ACTIVE_ADS_TIER_75K
         type: string
       availableAds:
@@ -8172,7 +8177,7 @@ definitions:
         type: string
       createInfo:
         $ref: '#/definitions/LastModifiedInfo'
-        description: Information about the creation of this ad.This is a read-only field.
+        description: Information about the creation of this ad. This is a read-only field.
       creativeGroupAssignments:
         description: Creative group assignments for this ad. Applicable when type is AD_SERVING_CLICK_TRACKER. Only one assignment per creative group number is allowed for a maximum of two assignments.
         items:
@@ -8183,7 +8188,7 @@ definitions:
         description: 'Creative rotation for this ad. Applicable when type is AD_SERVING_DEFAULT_AD, AD_SERVING_STANDARD_AD, or AD_SERVING_TRACKING. When type is AD_SERVING_DEFAULT_AD, this field should have exactly one creativeAssignment.'
       dayPartTargeting:
         $ref: '#/definitions/DayPartTargeting'
-        description: Time and day targeting information for this ad. Applicable when type is AD_SERVING_STANDARD_AD.
+        description: Time and day targeting information for this ad. This field must be left blank if the ad is using a targeting template. Applicable when type is AD_SERVING_STANDARD_AD.
       defaultClickThroughEventTagProperties:
         $ref: '#/definitions/DefaultClickThroughEventTagProperties'
         description: Default click-through event tag properties for this ad.
@@ -8204,7 +8209,7 @@ definitions:
         type: array
       geoTargeting:
         $ref: '#/definitions/GeoTargeting'
-        description: Geographical targeting information for this ad.Applicable when type is AD_SERVING_STANDARD_AD.
+        description: Geographical targeting information for this ad. This field must be left blank if the ad is using a targeting template. Applicable when type is AD_SERVING_STANDARD_AD.
       id:
         description: 'ID of this ad. This is a read-only, auto-generated field.'
         format: int64
@@ -8214,7 +8219,7 @@ definitions:
         description: 'Dimension value for the ID of this ad. This is a read-only, auto-generated field.'
       keyValueTargetingExpression:
         $ref: '#/definitions/KeyValueTargetingExpression'
-        description: Key-value targeting information for this ad. Applicable when type is AD_SERVING_STANDARD_AD.
+        description: Key-value targeting information for this ad. This field must be left blank if the ad is using a targeting template. Applicable when type is AD_SERVING_STANDARD_AD.
       kind:
         default: 'dfareporting#ad'
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#ad".'
@@ -8232,7 +8237,7 @@ definitions:
         type: array
       remarketingListExpression:
         $ref: '#/definitions/ListTargetingExpression'
-        description: Applicable when type is AD_SERVING_STANDARD_AD. Remarketing list targeting expression for this ad.
+        description: Remarketing list targeting expression for this ad. This field must be left blank if the ad is using a targeting template. Applicable when type is AD_SERVING_STANDARD_AD.
       size:
         $ref: '#/definitions/Size'
         description: Size of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
@@ -8252,7 +8257,7 @@ definitions:
         type: string
       technologyTargeting:
         $ref: '#/definitions/TechnologyTargeting'
-        description: Technology platform targeting information for this ad. Applicable when type is AD_SERVING_STANDARD_AD.
+        description: Technology platform targeting information for this ad. This field must be left blank if the ad is using a targeting template. Applicable when type is AD_SERVING_STANDARD_AD.
       type:
         description: Type of ad. This is a required field on insertion. Note that default ads (AD_SERVING_DEFAULT_AD) cannot be created directly (see Creative resource).
         enum:
@@ -8775,10 +8780,10 @@ definitions:
     description: Creative Click Tag.
     properties:
       eventName:
-        description: 'Advertiser event name associated with the click tag. This field is used by ENHANCED_BANNER, ENHANCED_IMAGE, and HTML5_BANNER creatives.'
+        description: Advertiser event name associated with the click tag. This field is used by DISPLAY_IMAGE_GALLERY and HTML5_BANNER creatives. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
         type: string
       name:
-        description: 'Parameter name for the specified click tag. For ENHANCED_IMAGE creative assets, this field must match the value of the creative asset''s creativeAssetId.name field.'
+        description: 'Parameter name for the specified click tag. For DISPLAY_IMAGE_GALLERY creative assets, this field must match the value of the creative asset''s creativeAssetId.name field.'
         type: string
       value:
         description: Parameter value for the specified click tag. This field contains a click-through url.
@@ -8924,7 +8929,7 @@ definitions:
           $ref: '#/definitions/CustomFloodlightVariable'
         type: array
       encryptedUserId:
-        description: 'The alphanumeric encrypted user ID. When set, encryptionInfo should also be specified. This field is mutually exclusive with mobileDeviceId. This or mobileDeviceId is a required field.'
+        description: 'The alphanumeric encrypted user ID. When set, encryptionInfo should also be specified. This field is mutually exclusive with encryptedUserIdCandidates[] and mobileDeviceId. This or encryptedUserIdCandidates[] or mobileDeviceId is a required field.'
         type: string
       floodlightActivityId:
         description: Floodlight Activity ID of this conversion. This is a required field.
@@ -8942,7 +8947,7 @@ definitions:
         description: Whether the user has Limit Ad Tracking set.
         type: boolean
       mobileDeviceId:
-        description: The mobile device ID. This field is mutually exclusive with encryptedUserId. This or encryptedUserId is a required field.
+        description: 'The mobile device ID. This field is mutually exclusive with encryptedUserId and encryptedUserIdCandidates[]. This or encryptedUserId or encryptedUserIdCandidates[] is a required field.'
         type: string
       ordinal:
         description: The ordinal of the conversion. Use this field to control how conversions of the same user and day are de-duplicated. This is a required field.
@@ -8961,7 +8966,7 @@ definitions:
         type: number
     type: object
   ConversionError:
-    description: The error code and description for a conversion that failed to insert.
+    description: The error code and description for a conversion that failed to insert or update.
     properties:
       code:
         description: The error code.
@@ -8980,11 +8985,11 @@ definitions:
         type: string
     type: object
   ConversionStatus:
-    description: The original conversion that was inserted and whether there were any errors.
+    description: The original conversion that was inserted or updated and whether there were any errors.
     properties:
       conversion:
         $ref: '#/definitions/Conversion'
-        description: The original conversion that was inserted.
+        description: The original conversion that was inserted or updated.
       errors:
         description: A list of errors related to this conversion.
         items:
@@ -9111,7 +9116,7 @@ definitions:
           - SWIFFY
         type: string
       auto_advance_images:
-        description: 'Whether images are automatically advanced for enhanced image creatives. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY.'
+        description: 'Whether images are automatically advanced for image gallery creatives. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY.'
         type: boolean
       backgroundColor:
         description: 'The 6-character HTML color code, beginning with #, for the background of the window area where the Flash file is displayed. Default is white. Applicable to the following creative types: FLASH_INPAGE.'
@@ -9213,7 +9218,7 @@ definitions:
         type: array
       compatibility:
         description: |-
-          Compatibilities associated with this creative. This is a read-only field. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices or in mobile apps for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL  are for rendering in mobile apps. Only pre-existing creatives may have these compatibilities since new creatives will either be assigned DISPLAY or DISPLAY_INTERSTITIAL instead. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
+          Compatibilities associated with this creative. This is a read-only field. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices or in mobile apps for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. Only pre-existing creatives may have these compatibilities since new creatives will either be assigned DISPLAY or DISPLAY_INTERSTITIAL instead. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
 
           Acceptable values are:
           - "APP"
@@ -9521,6 +9526,7 @@ definitions:
       displayType:
         description: 'Type of rich media asset. This is a read-only field. Applicable to the following creative types: all RICH_MEDIA.'
         enum:
+          - ASSET_DISPLAY_TYPE_BACKDROP
           - ASSET_DISPLAY_TYPE_EXPANDING
           - ASSET_DISPLAY_TYPE_FLASH_IN_FLASH
           - ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING
@@ -10220,6 +10226,7 @@ definitions:
         enum:
           - U1
           - U10
+          - U100
           - U11
           - U12
           - U13
@@ -10231,13 +10238,92 @@ definitions:
           - U19
           - U2
           - U20
+          - U21
+          - U22
+          - U23
+          - U24
+          - U25
+          - U26
+          - U27
+          - U28
+          - U29
           - U3
+          - U30
+          - U31
+          - U32
+          - U33
+          - U34
+          - U35
+          - U36
+          - U37
+          - U38
+          - U39
           - U4
+          - U40
+          - U41
+          - U42
+          - U43
+          - U44
+          - U45
+          - U46
+          - U47
+          - U48
+          - U49
           - U5
+          - U50
+          - U51
+          - U52
+          - U53
+          - U54
+          - U55
+          - U56
+          - U57
+          - U58
+          - U59
           - U6
+          - U60
+          - U61
+          - U62
+          - U63
+          - U64
+          - U65
+          - U66
+          - U67
+          - U68
+          - U69
           - U7
+          - U70
+          - U71
+          - U72
+          - U73
+          - U74
+          - U75
+          - U76
+          - U77
+          - U78
+          - U79
           - U8
+          - U80
+          - U81
+          - U82
+          - U83
+          - U84
+          - U85
+          - U86
+          - U87
+          - U88
+          - U89
           - U9
+          - U90
+          - U91
+          - U92
+          - U93
+          - U94
+          - U95
+          - U96
+          - U97
+          - U98
+          - U99
         type: string
       value:
         description: The value of the custom floodlight variable. The length of string must not exceed 50 characters.
@@ -11158,6 +11244,7 @@ definitions:
           enum:
             - U1
             - U10
+            - U100
             - U11
             - U12
             - U13
@@ -11169,13 +11256,92 @@ definitions:
             - U19
             - U2
             - U20
+            - U21
+            - U22
+            - U23
+            - U24
+            - U25
+            - U26
+            - U27
+            - U28
+            - U29
             - U3
+            - U30
+            - U31
+            - U32
+            - U33
+            - U34
+            - U35
+            - U36
+            - U37
+            - U38
+            - U39
             - U4
+            - U40
+            - U41
+            - U42
+            - U43
+            - U44
+            - U45
+            - U46
+            - U47
+            - U48
+            - U49
             - U5
+            - U50
+            - U51
+            - U52
+            - U53
+            - U54
+            - U55
+            - U56
+            - U57
+            - U58
+            - U59
             - U6
+            - U60
+            - U61
+            - U62
+            - U63
+            - U64
+            - U65
+            - U66
+            - U67
+            - U68
+            - U69
             - U7
+            - U70
+            - U71
+            - U72
+            - U73
+            - U74
+            - U75
+            - U76
+            - U77
+            - U78
+            - U79
             - U8
+            - U80
+            - U81
+            - U82
+            - U83
+            - U84
+            - U85
+            - U86
+            - U87
+            - U88
+            - U89
             - U9
+            - U90
+            - U91
+            - U92
+            - U93
+            - U94
+            - U95
+            - U96
+            - U97
+            - U98
+            - U99
           type: string
         type: array
     type: object
@@ -12674,6 +12840,7 @@ definitions:
           - PLANNING_PLACEMENT_PRICING_TYPE_CPA
           - PLANNING_PLACEMENT_PRICING_TYPE_CPC
           - PLANNING_PLACEMENT_PRICING_TYPE_CPM
+          - PLANNING_PLACEMENT_PRICING_TYPE_CPM_ACTIVEVIEW
           - PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_CLICKS
           - PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS
           - PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS
@@ -12718,6 +12885,7 @@ definitions:
           - PRICING_TYPE_CPA
           - PRICING_TYPE_CPC
           - PRICING_TYPE_CPM
+          - PRICING_TYPE_CPM_ACTIVEVIEW
           - PRICING_TYPE_FLAT_RATE_CLICKS
           - PRICING_TYPE_FLAT_RATE_IMPRESSIONS
         type: string
@@ -13866,12 +14034,12 @@ definitions:
     description: Technology Targeting.
     properties:
       browsers:
-        description: 'Browsers that this ad targets. For each browser either set browserVersionId or dartId along with the version numbers. If both are specified, only browserVersionId will be used.The other fields are populated automatically when the ad is inserted or updated.'
+        description: 'Browsers that this ad targets. For each browser either set browserVersionId or dartId along with the version numbers. If both are specified, only browserVersionId will be used. The other fields are populated automatically when the ad is inserted or updated.'
         items:
           $ref: '#/definitions/Browser'
         type: array
       connectionTypes:
-        description: Connection types that this ad targets. For each connection type only id is required.The other fields are populated automatically when the ad is inserted or updated.
+        description: Connection types that this ad targets. For each connection type only id is required. The other fields are populated automatically when the ad is inserted or updated.
         items:
           $ref: '#/definitions/ConnectionType'
         type: array
@@ -13953,6 +14121,7 @@ definitions:
         enum:
           - U1
           - U10
+          - U100
           - U11
           - U12
           - U13
@@ -13964,13 +14133,92 @@ definitions:
           - U19
           - U2
           - U20
+          - U21
+          - U22
+          - U23
+          - U24
+          - U25
+          - U26
+          - U27
+          - U28
+          - U29
           - U3
+          - U30
+          - U31
+          - U32
+          - U33
+          - U34
+          - U35
+          - U36
+          - U37
+          - U38
+          - U39
           - U4
+          - U40
+          - U41
+          - U42
+          - U43
+          - U44
+          - U45
+          - U46
+          - U47
+          - U48
+          - U49
           - U5
+          - U50
+          - U51
+          - U52
+          - U53
+          - U54
+          - U55
+          - U56
+          - U57
+          - U58
+          - U59
           - U6
+          - U60
+          - U61
+          - U62
+          - U63
+          - U64
+          - U65
+          - U66
+          - U67
+          - U68
+          - U69
           - U7
+          - U70
+          - U71
+          - U72
+          - U73
+          - U74
+          - U75
+          - U76
+          - U77
+          - U78
+          - U79
           - U8
+          - U80
+          - U81
+          - U82
+          - U83
+          - U84
+          - U85
+          - U86
+          - U87
+          - U88
+          - U89
           - U9
+          - U90
+          - U91
+          - U92
+          - U93
+          - U94
+          - U95
+          - U96
+          - U97
+          - U98
+          - U99
         type: string
     type: object
   UserProfile:

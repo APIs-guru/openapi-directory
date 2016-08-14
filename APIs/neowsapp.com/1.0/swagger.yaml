@@ -50,6 +50,11 @@ paths:
           name: end_date
           required: true
           type: string
+        - description: detailed
+          in: query
+          name: detailed
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
@@ -73,6 +78,12 @@ paths:
       deprecated: false
       description: Get a list of Near Earth Objects for today
       operationId: retrieveNEOFeedToday
+      parameters:
+        - description: detailed
+          in: query
+          name: detailed
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:

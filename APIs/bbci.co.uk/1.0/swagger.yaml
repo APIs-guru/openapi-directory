@@ -23,7 +23,7 @@ info:
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
     version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '401'
+  x-release: '405'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -1471,6 +1471,178 @@ definitions:
       - master_brand_id
       - master_brand_title
     type: object
+  clip:
+    additionalProperties: false
+    properties:
+      id:
+        type: string
+      images:
+        additionalProperties: false
+        properties:
+          inherited_from:
+            type: string
+          standard:
+            type: string
+          type:
+            enum:
+              - image
+        required:
+          - type
+          - standard
+        type: object
+      labels:
+        additionalProperties: false
+        properties:
+          editorial:
+            type: string
+        type: object
+      master_brand:
+        $ref: '#/definitions/master_brand'
+      onward_journey:
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+          type:
+            enum:
+              - episode
+        type: object
+      promotion_type:
+        enum:
+          - available_now
+          - coming_soon
+      synopses:
+        additionalProperties: false
+        properties:
+          editorial:
+            type: string
+          large:
+            type: string
+          medium:
+            type: string
+          small:
+            type: string
+        type: object
+      title:
+        type: string
+      tleo_id:
+        type: string
+      tleo_type:
+        enum:
+          - episode
+          - brand
+          - series
+      type:
+        enum:
+          - clip
+      versions:
+        items:
+          additionalProperties: false
+          properties:
+            availability:
+              additionalProperties: false
+              properties:
+                end:
+                  type: string
+                remaining:
+                  additionalProperties: false
+                  properties:
+                    text:
+                      type: string
+                  required:
+                    - text
+                  type: object
+                start:
+                  type: string
+              required:
+                - start
+              type: object
+            credits_start:
+              type: number
+            download:
+              type: boolean
+            duration:
+              additionalProperties: false
+              properties:
+                text:
+                  type: string
+                value:
+                  type: string
+              required:
+                - text
+                - value
+              type: object
+            first_broadcast:
+              type: string
+            guidance:
+              additionalProperties: false
+              properties:
+                id:
+                  type: string
+                text:
+                  additionalProperties: false
+                  properties:
+                    large:
+                      type: string
+                    medium:
+                      type: string
+                    small:
+                      type: string
+                  type: object
+              required:
+                - id
+              type: object
+            hd:
+              type: boolean
+            id:
+              type: string
+            kind:
+              type: string
+            rrc:
+              additionalProperties: false
+              properties:
+                description:
+                  additionalProperties: false
+                  properties:
+                    large:
+                      type: string
+                    small:
+                      type: string
+                  required:
+                    - small
+                    - large
+                  type: object
+                url:
+                  type: string
+              required:
+                - description
+              type: object
+            service_id:
+              type: string
+            type:
+              enum:
+                - version
+                - version_large
+          required:
+            - id
+            - type
+            - hd
+            - download
+            - duration
+            - kind
+            - availability
+          type: object
+        type: array
+    required:
+      - id
+      - type
+      - title
+      - images
+      - tleo_id
+      - synopses
+      - versions
+      - master_brand
+    type: object
   episode:
     additionalProperties: false
     properties:
@@ -2178,6 +2350,16 @@ definitions:
         required:
           - service
           - release
+        type: object
+      trailers:
+        additionalProperties: false
+        properties:
+          elements:
+            items:
+              $ref: '#/definitions/clip'
+            type: array
+        required:
+          - elements
         type: object
       user_recommendations:
         additionalProperties: false

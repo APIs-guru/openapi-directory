@@ -106,6 +106,8 @@ paths:
       summary: Gets the source controls available for Azure websites
       tags:
         - Provider
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/providers/Microsoft.Web/sourcecontrols/{sourceControlType}':
     get:
       consumes: []
@@ -183,6 +185,8 @@ paths:
       summary: Lists all domains in a subscription
       tags:
         - GlobalCertificateOrder
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.CertificateRegistration/validateCertificateRegistrationInformation':
     post:
       consumes:
@@ -266,6 +270,8 @@ paths:
       summary: Lists all domains in a subscription
       tags:
         - GlobalDomainRegistration
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/generateSsoRequest':
     post:
       consumes: []
@@ -317,6 +323,8 @@ paths:
       summary: Lists domain recommendations based on keywords
       tags:
         - GlobalDomainRegistration
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains':
     get:
       consumes: []
@@ -336,6 +344,8 @@ paths:
       summary: Lists all top level domains supported for registration
       tags:
         - TopLevelDomains
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains/{name}':
     get:
       consumes: []
@@ -397,6 +407,8 @@ paths:
       summary: Lists legal agreements that user needs to accept before purchasing domain
       tags:
         - TopLevelDomains
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/validateDomainRegistrationInformation':
     post:
       consumes:
@@ -448,6 +460,8 @@ paths:
       summary: Get all certificates for a subscription
       tags:
         - Global
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Web/checknameavailability':
     post:
       consumes:
@@ -499,6 +513,8 @@ paths:
       summary: Gets all mobile services for a subscription
       tags:
         - Global
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Web/geoRegions':
     get:
       consumes: []
@@ -522,6 +538,8 @@ paths:
       summary: Gets list of available geo regions
       tags:
         - Global
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Web/hostingEnvironments':
     get:
       consumes: []
@@ -541,6 +559,8 @@ paths:
       summary: Gets all hostingEnvironments (App Service Environment) for a subscription
       tags:
         - Global
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Web/ishostingenvironmentnameavailable':
     get:
       consumes: []
@@ -612,6 +632,8 @@ paths:
       summary: Gets all managed hosting environments for a subscription
       tags:
         - Global
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Web/premieraddonoffers':
     get:
       consumes: []
@@ -737,6 +759,8 @@ paths:
       summary: Gets all App Service Plans for a subcription
       tags:
         - Global
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Web/sites':
     get:
       consumes: []
@@ -756,6 +780,8 @@ paths:
       summary: Gets all Web Apps for a subscription
       tags:
         - Global
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources':
     post:
       consumes:
@@ -808,6 +834,8 @@ paths:
       summary: Get certificate orders in a resource group
       tags:
         - CertificateOrders
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates':
     get:
       consumes: []
@@ -837,6 +865,8 @@ paths:
       summary: List all certificates associated with a certificate order (only one certificate can be associated with an order at a time)
       tags:
         - CertificateOrders
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}':
     delete:
       consumes: []
@@ -1371,6 +1401,8 @@ paths:
       summary: Lists domains under a resource group
       tags:
         - Domains
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}':
     delete:
       consumes: []
@@ -1630,6 +1662,8 @@ paths:
       summary: Get certificates for a subscription in the specified resource group.
       tags:
         - Certificates
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/certificates/{name}':
     delete:
       consumes: []
@@ -1793,6 +1827,8 @@ paths:
       summary: Get all mobile services in a resource group.
       tags:
         - ClassicMobileServices
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/classicMobileServices/{name}':
     delete:
       consumes: []
@@ -2053,6 +2089,8 @@ paths:
       summary: Gets deleted web apps in subscription
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments':
     get:
       consumes: []
@@ -2077,6 +2115,8 @@ paths:
       summary: Get all hostingEnvironments (App Service Environments) in a resource group.
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}':
     delete:
       consumes: []
@@ -2232,6 +2272,8 @@ paths:
       summary: 'Get used, available, and total worker capacity for hostingEnvironment (App Service Environment).'
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/capacities/virtualip':
     get:
       consumes: []
@@ -2400,6 +2442,8 @@ paths:
       summary: Get global metrics of hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools':
     get:
       consumes: []
@@ -2429,6 +2473,8 @@ paths:
       summary: Get all multi role pools
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default':
     get:
       consumes: []
@@ -2615,6 +2661,8 @@ paths:
       summary: Get metric definitions for a multiRole pool of a hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/metrics':
     get:
       consumes: []
@@ -2664,6 +2712,8 @@ paths:
       summary: Get metrics for a multiRole pool of a hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/skus':
     get:
       consumes: []
@@ -2693,6 +2743,8 @@ paths:
       summary: Get available skus for scaling a multiRole pool.
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/usages':
     get:
       consumes: []
@@ -2722,6 +2774,8 @@ paths:
       summary: Get usages for a multiRole pool of a hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/operations':
     get:
       consumes: []
@@ -2868,6 +2922,8 @@ paths:
       tags:
         - HostingEnvironments
       x-ms-long-running-operation: true
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/serverfarms':
     get:
       consumes: []
@@ -2897,6 +2953,8 @@ paths:
       summary: Get all serverfarms (App Service Plans) on the hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/sites':
     get:
       consumes: []
@@ -2930,6 +2988,8 @@ paths:
       summary: Get all sites on the hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/suspend':
     post:
       consumes: []
@@ -2964,6 +3024,8 @@ paths:
       tags:
         - HostingEnvironments
       x-ms-long-running-operation: true
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/usages':
     get:
       consumes: []
@@ -2997,6 +3059,8 @@ paths:
       summary: Get global usages of hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/webhostingplans':
     get:
       consumes: []
@@ -3026,6 +3090,8 @@ paths:
       summary: Get all serverfarms (App Service Plans) on the hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools':
     get:
       consumes: []
@@ -3055,6 +3121,8 @@ paths:
       summary: Get all worker pools
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}':
     get:
       consumes: []
@@ -3270,6 +3338,8 @@ paths:
       summary: Get metric definitions for a worker pool of a hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/metrics':
     get:
       consumes: []
@@ -3312,6 +3382,8 @@ paths:
       summary: Get metrics for a worker pool of a hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/skus':
     get:
       consumes: []
@@ -3346,6 +3418,8 @@ paths:
       summary: Get available skus for scaling a worker pool.
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/usages':
     get:
       consumes: []
@@ -3380,6 +3454,8 @@ paths:
       summary: Get usages for a worker pool of a hostingEnvironment (App Service Environment).
       tags:
         - HostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/managedHostingEnvironments':
     get:
       consumes: []
@@ -3404,6 +3480,8 @@ paths:
       summary: Get all managed hosting environments in a resource group.
       tags:
         - ManagedHostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/managedHostingEnvironments/{name}':
     delete:
       consumes: []
@@ -3626,6 +3704,8 @@ paths:
       summary: Get all serverfarms (App Service Plans) on the managed hosting environment.
       tags:
         - ManagedHostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/managedHostingEnvironments/{name}/sites':
     get:
       consumes: []
@@ -3659,6 +3739,8 @@ paths:
       summary: Get all sites on the managed hosting environment.
       tags:
         - ManagedHostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/managedHostingEnvironments/{name}/webhostingplans':
     get:
       consumes: []
@@ -3688,6 +3770,8 @@ paths:
       summary: Get all serverfarms (App Service Plans) on the managed hosting environment.
       tags:
         - ManagedHostingEnvironments
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms':
     get:
       consumes: []
@@ -3712,6 +3796,8 @@ paths:
       summary: Gets collection of App Service Plans in a resource group for a given subscription.
       tags:
         - ServerFarms
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}':
     delete:
       consumes: []
@@ -3850,6 +3936,8 @@ paths:
       summary: List of metrics that can be queried for an App Service Plan
       tags:
         - ServerFarms
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/metrics':
     get:
       consumes: []
@@ -3887,6 +3975,8 @@ paths:
       summary: Queries for App Serice Plan metrics
       tags:
         - ServerFarms
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/operationresults/{operationId}':
     get:
       consumes: []
@@ -4465,6 +4555,8 @@ paths:
       summary: Gets the web apps for a subscription in the specified resource group
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}':
     delete:
       consumes: []
@@ -4717,6 +4809,8 @@ paths:
       summary: Lists all available backups for web app
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/discover':
     put:
       consumes:
@@ -5584,6 +5678,8 @@ paths:
       summary: List deployments
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deployments/{id}':
     delete:
       consumes: []
@@ -5728,6 +5824,8 @@ paths:
       summary: Get web app hostname bindings
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings/{hostName}':
     delete:
       consumes: []
@@ -6062,6 +6160,8 @@ paths:
       summary: Gets all instance of a web app
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/deployments':
     get:
       consumes: []
@@ -6096,6 +6196,8 @@ paths:
       summary: List deployments
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/deployments/{id}':
     delete:
       consumes: []
@@ -6286,6 +6388,8 @@ paths:
       summary: Gets metric definitions for web app
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/metrics':
     get:
       consumes: []
@@ -6323,6 +6427,8 @@ paths:
       summary: Gets metrics for web app
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkFeatures/{view}':
     get:
       consumes: []
@@ -6748,6 +6854,8 @@ paths:
       summary: Gets all the slots for a web apps
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}':
     delete:
       consumes: []
@@ -7030,6 +7138,8 @@ paths:
       summary: Lists all available backups for web app
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backups/discover':
     put:
       consumes:
@@ -7937,6 +8047,8 @@ paths:
       summary: List deployments
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/deployments/{id}':
     delete:
       consumes: []
@@ -8101,6 +8213,8 @@ paths:
       summary: Get web app hostname bindings
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hostNameBindings/{hostName}':
     delete:
       consumes: []
@@ -8480,6 +8594,8 @@ paths:
       summary: Gets all instance of a web app
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/deployments':
     get:
       consumes: []
@@ -8519,6 +8635,8 @@ paths:
       summary: List deployments
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/deployments/{id}':
     delete:
       consumes: []
@@ -8734,6 +8852,8 @@ paths:
       summary: Gets metric definitions for web app
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/metrics':
     get:
       consumes: []
@@ -8776,6 +8896,8 @@ paths:
       summary: Gets metrics for web app
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkFeatures/{view}':
     get:
       consumes: []
@@ -9264,6 +9386,8 @@ paths:
       summary: Get the difference in configuration settings between two web app slots
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/slotsswap':
     post:
       consumes:
@@ -9653,6 +9777,8 @@ paths:
       summary: Gets the quota usage numbers for web app
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/virtualNetworkConnections':
     get:
       consumes: []
@@ -10066,6 +10192,8 @@ paths:
       summary: Get the difference in configuration settings between two web app slots
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slotsswap':
     post:
       consumes:
@@ -10406,6 +10534,8 @@ paths:
       summary: Gets the quota usage numbers for web app
       tags:
         - Sites
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/virtualNetworkConnections':
     get:
       consumes: []

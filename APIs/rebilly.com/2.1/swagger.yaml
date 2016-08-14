@@ -6440,6 +6440,10 @@ definitions:
     properties:
       _links:
         $ref: '#/definitions/Links'
+      apiUser:
+        description: API user name
+        readOnly: true
+        type: string
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -6460,10 +6464,6 @@ definitions:
         readOnly: true
       secretKey:
         description: API secret key's value
-        readOnly: true
-        type: string
-      userName:
-        description: API user name
         readOnly: true
         type: string
     type: object
@@ -6843,17 +6843,22 @@ definitions:
   Customer:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/NotesLink'
+          - $ref: '#/definitions/DefaultPaymentInstrumentLink'
+        minItems: 3
+        readOnly: true
+        type: array
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: The customer created time
       customFields:
         $ref: '#/definitions/ResourceCustomFields'
-      defaultCardId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The customer default card ID
+      defaultPaymentInstrument:
+        $ref: '#/definitions/PaymentInstrument'
       email:
         description: The customer email
         format: email
@@ -6889,6 +6894,18 @@ definitions:
       - Friday
       - Saturday
     type: string
+  DefaultPaymentInstrumentLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - defaultPaymentInstrument
+        type: string
+    required:
+      - rel
+    type: object
   Dispute:
     properties:
       _links:
@@ -7449,7 +7466,7 @@ definitions:
     type: object
   InvoiceIssue:
     properties:
-      issueTime:
+      issuedTime:
         format: date-time
         type: string
     type: object
@@ -7635,6 +7652,14 @@ definitions:
       - payment-card
       - paypal
     type: string
+  NewLink:
+    properties:
+      href:
+        description: The link URL
+        type: string
+    required:
+      - href
+    type: object
   Note:
     properties:
       _links:
@@ -7683,6 +7708,18 @@ definitions:
       - content
       - relatedType
       - relatedId
+    type: object
+  NotesLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - notes
+        type: string
+    required:
+      - rel
     type: object
   Organization:
     properties:
@@ -7734,7 +7771,6 @@ definitions:
       - name
     type: object
   Payment:
-    discriminator: method
     properties:
       _links:
         $ref: '#/definitions/Links'
@@ -7782,9 +7818,8 @@ definitions:
         items:
           $ref: '#/definitions/ResourceId'
         type: array
-      method:
-        $ref: '#/definitions/Method'
-        description: Payment Method
+      paymentInstrument:
+        $ref: '#/definitions/PaymentInstrument'
       result:
         description: Payment result
         enum:
@@ -7826,7 +7861,6 @@ definitions:
       - customerId
       - currency
       - amount
-      - method
     type: object
   PaymentCard:
     properties:
@@ -7890,26 +7924,18 @@ definitions:
         description: Card updated time
     type: object
   PaymentInstrument:
-    description: Payment instrument object
+    discriminator: method
     properties:
-      gatewayAccountId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The payment gateway identifier string
-      paymentCardId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: 'The payment card identifier string, required when paying by payment card'
-    type: object
-  PaymentInstrumentAch:
-    description: Payment instrument object
-    properties:
-      bankAccountId:
-        $ref: '#/definitions/ResourceId'
-        description: 'The bank account identifier string, required when paying by ach'
-      gatewayAccountId:
-        $ref: '#/definitions/ResourceId'
-        description: The payment gateway identifier string
+      method:
+        description: The payment method
+        enum:
+          - ach
+          - cash
+          - payment-card
+          - paypal
+        type: string
+    required:
+      - method
     type: object
   PaymentToken:
     properties:
@@ -8369,6 +8395,18 @@ definitions:
         type: string
     required:
       - method
+    type: object
+  SelfLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - self
+        type: string
+    required:
+      - rel
     type: object
   ServerTimestamp:
     description: 'Read-only timestamp, automatically assigned on back-end.'
@@ -9122,14 +9160,20 @@ definitions:
     type: object
   ach:
     allOf:
-      - $ref: '#/definitions/Payment'
+      - $ref: '#/definitions/PaymentInstrument'
       - properties:
-          paymentInstrument:
-            $ref: '#/definitions/PaymentInstrumentAch'
+          bankAccountId:
+            allOf:
+              - $ref: '#/definitions/ResourceId'
+            description: The bank account identifier string
+          gatewayAccountId:
+            allOf:
+              - $ref: '#/definitions/ResourceId'
+            description: The payment gateway identifier string
         required:
-          - paymentInstrument
+          - bankAccountId
         type: object
-    description: An Payment using ACH
+    description: ACH payment instrument object
   and:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -9157,6 +9201,15 @@ definitions:
         type: object
     description: Between condition
     type: object
+  cash:
+    allOf:
+      - $ref: '#/definitions/PaymentInstrument'
+      - properties:
+          receivedBy:
+            description: The receiver's name
+            type: string
+        type: object
+    description: Cash payment instrument object
   compare:
     properties:
       path:
@@ -9312,16 +9365,38 @@ definitions:
         required:
           - amount
         type: object
-  payment_card:
+  payment-card:
     allOf:
-      - $ref: '#/definitions/Payment'
+      - $ref: '#/definitions/PaymentInstrument'
       - properties:
-          paymentInstrument:
-            $ref: '#/definitions/PaymentInstrument'
+          gatewayAccountId:
+            allOf:
+              - $ref: '#/definitions/ResourceId'
+            description: The payment gateway identifier string
+          paymentCardId:
+            allOf:
+              - $ref: '#/definitions/ResourceId'
+            description: The payment card identifier string
         required:
-          - paymentInstrument
+          - paymentCardId
         type: object
-    description: A Payment using a Payment Card
+    description: Payment card payment instrument object
+  paypal:
+    allOf:
+      - $ref: '#/definitions/PaymentInstrument'
+      - properties:
+          gatewayAccountId:
+            allOf:
+              - $ref: '#/definitions/ResourceId'
+            description: The payment gateway identifier string
+          payPalAccountId:
+            allOf:
+              - $ref: '#/definitions/ResourceId'
+            description: The PayPal account identifier string
+        required:
+          - payPalAccountId
+        type: object
+    description: PayPal payment instrument object
   rate-discount:
     allOf:
       - $ref: '#/definitions/AmountAdjustment'

@@ -153,10 +153,24 @@ definitions:
         description: earliest start of break
         format: int64
         type: integer
+      initial_driving_time:
+        description: 'initial driving time, i.e. the time your driver has already spent for driving'
+        format: int64
+        type: integer
       latest:
         description: latest start of break
         format: int64
         type: integer
+      max_driving_time:
+        description: max driving time without break
+        format: int64
+        type: integer
+      possible_split:
+        description: array of splits
+        items:
+          format: int64
+          type: integer
+        type: array
     type: object
   CostMatrix:
     properties:

@@ -2982,6 +2982,188 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/management/accounts/{accountId}/webproperties/{webPropertyId}/remarketingAudiences':
+    get:
+      description: Lists remarketing audiences to which the user has access.
+      operationId: analytics.management.remarketingAudience.list
+      parameters:
+        - description: Account ID for the remarketing audience to retrieve.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Web property ID for the remarketing audience to retrieve.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
+        - description: The maximum number of remarketing audiences to include in this response.
+          in: query
+          name: max-results
+          type: integer
+        - description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+          in: query
+          minimum: 1
+          name: start-index
+          type: integer
+        - default: all
+          in: query
+          name: type
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingAudiences'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+      tags:
+        - management
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a new remarketing audiences.
+      operationId: analytics.management.remarketingAudience.insert
+      parameters:
+        - description: Account ID to create the remarketing audience for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Web property ID to create the remarketing audience for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingAudience'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingAudience'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+      tags:
+        - management
+  '/management/accounts/{accountId}/webproperties/{webPropertyId}/remarketingAudiences/{remarketingAudienceId}':
+    get:
+      description: Gets remarketing audiences to which the user has access.
+      operationId: analytics.management.remarketingAudience.get
+      parameters:
+        - description: Account ID for the remarketing audience to retrieve.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Web property ID for the remarketing audience to retrieve.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
+        - description: The ID to retrieve the Remarketing Audience for.
+          in: path
+          name: remarketingAudienceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingAudience'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+      tags:
+        - management
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates an existing remarketing audiences. This method supports patch semantics.
+      operationId: analytics.management.remarketingAudience.patch
+      parameters:
+        - description: Account ID for the remarketing audience to update.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Web property ID for the remarketing audience to update.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
+        - description: Remarketing audience ID of the remarketing audience to update.
+          in: path
+          name: remarketingAudienceId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingAudience'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingAudience'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+      tags:
+        - management
+    put:
+      description: Updates an existing remarketing audiences.
+      operationId: analytics.management.remarketingAudience.update
+      parameters:
+        - description: Account ID for the remarketing audience to update.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Web property ID for the remarketing audience to update.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
+        - description: Remarketing audience ID of the remarketing audience to update.
+          in: path
+          name: remarketingAudienceId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingAudience'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingAudience'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+      tags:
+        - management
   /management/segments:
     get:
       description: Lists segments to which the user has access.
@@ -4554,6 +4736,65 @@ definitions:
         description: Email ID of the authenticated user
         type: string
     type: object
+  IncludeConditions:
+    description: JSON template for an Analytics Remarketing Include Conditions.
+    properties:
+      daysToLookBack:
+        description: 'The look-back window lets you specify a time frame for evaluating the behavior that qualifies users for your audience. For example, if your filters include users from Central Asia, and Transactions Greater than 2, and you set the look-back window to 14 days, then any user from Central Asia whose cumulative transactions exceed 2 during the last 14 days is added to the audience.'
+        format: int32
+        type: integer
+      isSmartList:
+        description: 'Boolean indicating whether this segment is a smart list. https://support.google.com/analytics/answer/4628577'
+        type: boolean
+      kind:
+        default: 'analytics#includeConditions'
+        description: Resource type for include conditions.
+        type: string
+      membershipDurationDays:
+        description: 'Number of days a user remains in the audience. Use any integer from 1-540. In remarketing audiences for search ads, membership duration is truncated to 180 days.'
+        format: int32
+        type: integer
+      segment:
+        description: The segment condition that will cause a user to be added to an audience.
+        type: string
+    type: object
+  LinkedForeignAccount:
+    description: JSON template for an Analytics Remarketing Audience Foreign Link.
+    properties:
+      accountId:
+        description: Account ID to which this linked foreign account belongs.
+        type: string
+      eligibleForSearch:
+        description: Boolean indicating whether this is eligible for search.
+        readOnly: true
+        type: boolean
+      id:
+        description: Entity ad account link ID.
+        type: string
+      internalWebPropertyId:
+        description: Internal ID for the web property to which this linked foreign account belongs.
+        readOnly: true
+        type: string
+      kind:
+        default: 'analytics#linkedForeignAccount'
+        description: Resource type for linked foreign account.
+        type: string
+      linkedAccountId:
+        description: The foreign account ID. For example the an AdWords `linkedAccountId` has the following format XXX-XXX-XXXX.
+        type: string
+      remarketingAudienceId:
+        description: Remarketing audience ID to which this linked foreign account belongs.
+        type: string
+      status:
+        description: The status of this foreign account link.
+        type: string
+      type:
+        description: The type of the foreign account. For example `ADWORDS_LINKS`.
+        type: string
+      webPropertyId:
+        description: Web property ID of the form UA-XXXXX-YY to which this linked foreign account belongs.
+        type: string
+    type: object
   McfData:
     description: Multi-Channel Funnels data for a given view (profile).
     properties:
@@ -5056,6 +5297,115 @@ definitions:
           type: string
         description: 'Total values for the requested metrics over all the results, not just the results returned in this response. The order of the metric totals is same as the metric order specified in the request.'
         type: object
+    type: object
+  RemarketingAudience:
+    description: JSON template for an Analytics remarketing audience.
+    properties:
+      accountId:
+        description: Account ID to which this remarketing audience belongs.
+        type: string
+      audienceDefinition:
+        description: The simple audience definition that will cause a user to be added to an audience.
+        properties:
+          includeConditions:
+            $ref: '#/definitions/IncludeConditions'
+            description: Defines the conditions to include users to the audience.
+        type: object
+      audienceType:
+        description: 'The type of audience, either SIMPLE or STATE_BASED.'
+        type: string
+      created:
+        description: Time this remarketing audience was created.
+        format: date-time
+        readOnly: true
+        type: string
+      description:
+        description: The description of this remarketing audience.
+        readOnly: true
+        type: string
+      id:
+        description: Remarketing Audience ID.
+        type: string
+      internalWebPropertyId:
+        description: Internal ID for the web property to which this remarketing audience belongs.
+        readOnly: true
+        type: string
+      kind:
+        default: 'analytics#remarketingAudience'
+        description: Collection type.
+        type: string
+      linkedAdAccounts:
+        description: The linked ad accounts associated with this remarketing audience. A remarketing audience can have only one linkedAdAccount currently.
+        items:
+          $ref: '#/definitions/LinkedForeignAccount'
+        type: array
+      linkedViews:
+        description: The views (profiles) that this remarketing audience is linked to.
+        items:
+          type: string
+        type: array
+      name:
+        description: The name of this remarketing audience.
+        type: string
+      stateBasedAudienceDefinition:
+        description: A state based audience definition that will cause a user to be added or removed from an audience.
+        properties:
+          excludeConditions:
+            description: Defines the conditions to exclude users from the audience.
+            properties:
+              exclusionDuration:
+                description: Whether to make the exclusion TEMPORARY or PERMANENT.
+                type: string
+              segment:
+                description: The segment condition that will cause a user to be removed from an audience.
+                type: string
+            type: object
+          includeConditions:
+            $ref: '#/definitions/IncludeConditions'
+            description: Defines the conditions to include users to the audience.
+        type: object
+      updated:
+        description: Time this remarketing audience was last modified.
+        format: date-time
+        readOnly: true
+        type: string
+      webPropertyId:
+        description: Web property ID of the form UA-XXXXX-YY to which this remarketing audience belongs.
+        type: string
+    type: object
+  RemarketingAudiences:
+    description: A remarketing audience collection lists Analytics remarketing audiences to which the user has access. Each resource in the collection corresponds to a single Analytics remarketing audience.
+    properties:
+      items:
+        description: A list of remarketing audiences.
+        items:
+          $ref: '#/definitions/RemarketingAudience'
+        type: array
+      itemsPerPage:
+        description: 'The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter.'
+        format: int32
+        type: integer
+      kind:
+        default: 'analytics#remarketingAudiences'
+        description: Collection type.
+        type: string
+      nextLink:
+        description: Link to next page for this remarketing audience collection.
+        type: string
+      previousLink:
+        description: Link to previous page for this view (profile) collection.
+        type: string
+      startIndex:
+        description: 'The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter.'
+        format: int32
+        type: integer
+      totalResults:
+        description: 'The total number of results for the query, regardless of the number of results in the response.'
+        format: int32
+        type: integer
+      username:
+        description: Email ID of the authenticated user
+        type: string
     type: object
   Segment:
     description: JSON template for an Analytics segment.

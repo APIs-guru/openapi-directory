@@ -269,7 +269,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: A board id.
+        - description: A board ID.
           in: path
           name: board_id
           required: true
@@ -284,6 +284,8 @@ paths:
           description: InvalidParameterValue
         '401':
           description: Unauthorized
+        '403':
+          description: InsufficientAccess
         '404':
           description: BoardNotFound
       summary: <b>***BETA***</b> Delete a board
@@ -302,7 +304,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: A board id.
+        - description: A board ID.
           in: path
           name: board_id
           required: true
@@ -345,7 +347,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: A board id.
+        - description: A board ID.
           in: path
           name: board_id
           required: true
@@ -360,6 +362,8 @@ paths:
           description: BoardNameRequired
         '401':
           description: Unauthorized
+        '403':
+          description: InsufficientAccess
         '404':
           description: BoardNotFound
       summary: <b>***BETA***</b> Update a board
@@ -379,12 +383,12 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: An asset id.
+        - description: An asset ID.
           in: path
           name: asset_id
           required: true
           type: string
-        - description: A board id.
+        - description: A board ID.
           in: path
           name: board_id
           required: true
@@ -399,6 +403,8 @@ paths:
           description: InvalidParameterValue
         '401':
           description: Unauthorized
+        '403':
+          description: InsufficientAccess
         '404':
           description: BoardNotFound
       summary: <b>***BETA***</b> Remove an asset from a board
@@ -419,12 +425,12 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: 'An asset id. If it is already in the board''s asset collection, no action is taken.'
+        - description: 'An asset ID. If it is already in the board''s asset collection, no action is taken.'
           in: path
           name: asset_id
           required: true
           type: string
-        - description: A board id.
+        - description: A board ID.
           in: path
           name: board_id
           required: true
@@ -444,7 +450,7 @@ paths:
         '401':
           description: Unauthorized
         '403':
-          description: AssetNotFound
+          description: InsufficientAccess
         '404':
           description: BoardNotFound
       summary: <b>***BETA***</b> Add an asset to a board

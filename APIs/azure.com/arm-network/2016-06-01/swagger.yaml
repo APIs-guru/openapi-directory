@@ -49,7 +49,7 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGateways':
     get:
-      description: The List applicationgateway opertion retrieves all the applicationgateways in a subscription.
+      description: The List applicationgateway operation retrieves all the applicationgateways in a subscription.
       operationId: ApplicationGateways_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -65,7 +65,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteCircuits':
     get:
-      description: The List ExpressRouteCircuit opertion retrieves all the ExpressRouteCircuits in a subscription.
+      description: The List ExpressRouteCircuit operation retrieves all the ExpressRouteCircuits in a subscription.
       operationId: ExpressRouteCircuits_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -81,7 +81,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteServiceProviders':
     get:
-      description: The List ExpressRouteServiceProvider opertion retrieves all the available ExpressRouteServiceProviders.
+      description: The List ExpressRouteServiceProvider operation retrieves all the available ExpressRouteServiceProviders.
       operationId: ExpressRouteServiceProviders_List
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -97,7 +97,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/loadBalancers':
     get:
-      description: The List loadBalancer opertion retrieves all the loadbalancers in a subscription.
+      description: The List loadBalancer operation retrieves all the loadbalancers in a subscription.
       operationId: LoadBalancers_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -157,7 +157,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkInterfaces':
     get:
-      description: The List networkInterfaces opertion retrieves all the networkInterfaces in a subscription.
+      description: The List networkInterfaces operation retrieves all the networkInterfaces in a subscription.
       operationId: NetworkInterfaces_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -189,7 +189,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPAddresses':
     get:
-      description: The List publicIpAddress opertion retrieves all the publicIpAddresses in a subscription.
+      description: The List publicIpAddress operation retrieves all the publicIpAddresses in a subscription.
       operationId: PublicIPAddresses_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -237,7 +237,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways':
     get:
-      description: The List ApplicationGateway opertion retrieves all the applicationgateways in a resource group.
+      description: The List ApplicationGateway operation retrieves all the applicationgateways in a resource group.
       operationId: ApplicationGateways_List
       parameters:
         - description: The name of the resource group.
@@ -589,7 +589,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits':
     get:
-      description: The List ExpressRouteCircuit opertion retrieves all the ExpressRouteCircuits in a resource group.
+      description: The List ExpressRouteCircuit operation retrieves all the ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_List
       parameters:
         - description: The name of the resource group.
@@ -944,7 +944,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}':
     post:
-      description: The ListArpTable from ExpressRouteCircuit opertion retrieves the currently advertised arp table associated with the ExpressRouteCircuits in a resource group.
+      description: The ListArpTable from ExpressRouteCircuit operation retrieves the currently advertised arp table associated with the ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_ListArpTable
       parameters:
         - description: The name of the resource group.
@@ -981,7 +981,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}':
     post:
-      description: The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
+      description: The ListRoutesTable from ExpressRouteCircuit operation retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_ListRoutesTable
       parameters:
         - description: The name of the resource group.
@@ -1018,7 +1018,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}':
     post:
-      description: The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
+      description: The ListRoutesTable from ExpressRouteCircuit operation retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_ListRoutesTableSummary
       parameters:
         - description: The name of the resource group.
@@ -1055,7 +1055,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats':
     get:
-      description: The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.
+      description: The Liststats ExpressRouteCircuit operation retrieves all the stats from a ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_GetPeeringStats
       parameters:
         - description: The name of the resource group.
@@ -1084,7 +1084,7 @@ paths:
         - ExpressRouteCircuitStats
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats':
     get:
-      description: The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.
+      description: The Liststats ExpressRouteCircuit operation retrieves all the stats from a ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_GetStats
       parameters:
         - description: The name of the resource group.
@@ -1108,7 +1108,7 @@ paths:
         - ExpressRouteCircuitStats
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers':
     get:
-      description: The List loadBalancer opertion retrieves all the loadbalancers in a resource group.
+      description: The List loadBalancer operation retrieves all the loadbalancers in a resource group.
       operationId: LoadBalancers_List
       parameters:
         - description: The name of the resource group.
@@ -1218,7 +1218,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways':
     get:
-      description: The List LocalNetworkGateways opertion retrieves all the local network gateways stored.
+      description: The List LocalNetworkGateways operation retrieves all the local network gateways stored.
       operationId: LocalNetworkGateways_List
       parameters:
         - description: The name of the resource group.
@@ -1323,7 +1323,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces':
     get:
-      description: The List networkInterfaces opertion retrieves all the networkInterfaces in a resource group.
+      description: The List networkInterfaces operation retrieves all the networkInterfaces in a resource group.
       operationId: NetworkInterfaces_List
       parameters:
         - description: The name of the resource group.
@@ -1597,7 +1597,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}/securityRules':
     get:
-      description: The List network security rule opertion retrieves all the security rules in a network security group.
+      description: The List network security rule operation retrieves all the security rules in a network security group.
       operationId: SecurityRules_List
       parameters:
         - description: The name of the resource group.
@@ -1722,7 +1722,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses':
     get:
-      description: The List publicIpAddress opertion retrieves all the publicIpAddresses in a resource group.
+      description: The List publicIpAddress operation retrieves all the publicIpAddresses in a resource group.
       operationId: PublicIPAddresses_List
       parameters:
         - description: The name of the resource group.
@@ -1942,7 +1942,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables/{routeTableName}/routes':
     get:
-      description: The List network security rule opertion retrieves all the routes in a route table.
+      description: The List network security rule operation retrieves all the routes in a route table.
       operationId: Routes_List
       parameters:
         - description: The name of the resource group.
@@ -2067,7 +2067,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways':
     get:
-      description: The List VirtualNetworkGateways opertion retrieves all the virtual network gateways stored.
+      description: The List VirtualNetworkGateways operation retrieves all the virtual network gateways stored.
       operationId: VirtualNetworkGateways_List
       parameters:
         - description: The name of the resource group.
@@ -2343,9 +2343,36 @@ paths:
       tags:
         - VirtualNetworks
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability':
+    get:
+      description: Checks whether a private Ip address is available for use.
+      operationId: VirtualNetworks_CheckIPAddressAvailability
+      parameters:
+        - description: The private IP address to be verified.
+          in: query
+          name: ipAddress
+          required: false
+          type: string
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the virtual network.
+          in: path
+          name: virtualNetworkName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: private IP address availability and list of other free addresses if the requested one is not available
+          schema:
+            $ref: '#/definitions/IPAddressAvailabilityResult'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets':
     get:
-      description: The List subnets opertion retrieves all the subnets in a virtual network.
+      description: The List subnets operation retrieves all the subnets in a virtual network.
       operationId: Subnets_List
       parameters:
         - description: The name of the resource group.
@@ -2475,7 +2502,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings':
     get:
-      description: The List virtual network peerings opertion retrieves all the peerings in a virtual network.
+      description: The List virtual network peerings operation retrieves all the peerings in a virtual network.
       operationId: VirtualNetworkPeerings_List
       parameters:
         - description: The name of the resource group.
@@ -4018,6 +4045,17 @@ definitions:
       subnet:
         $ref: '#/definitions/Subnet'
         description: Gets or sets the reference of the subnet resource
+  IPAddressAvailabilityResult:
+    description: Response for CheckIPAddressAvailability Api service call
+    properties:
+      available:
+        description: Private IP address availability
+        type: boolean
+      availableIPAddresses:
+        description: Contains other available private IP addresses if the asked for address is taken
+        items:
+          type: string
+        type: array
   IPConfiguration:
     allOf:
       - $ref: '#/definitions/SubResource'
@@ -4699,6 +4737,34 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  ResourceNavigationLink:
+    allOf:
+      - $ref: '#/definitions/SubResource'
+    description: ResourceNavigationLink resource
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated
+        readOnly: true
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
+        type: string
+      properties:
+        $ref: '#/definitions/ResourceNavigationLinkFormat'
+        x-ms-client-flatten: true
+  ResourceNavigationLinkFormat:
+    description: Properties of ResourceNavigationLink
+    properties:
+      link:
+        description: Link to the external resource
+        type: string
+      linkedResourceType:
+        description: Resource type of the linked resource
+        type: string
+      provisioningState:
+        description: Provisioning state of the ResourceNavigationLink resource
+        readOnly: true
+        type: string
   Route:
     allOf:
       - $ref: '#/definitions/SubResource'
@@ -4920,6 +4986,11 @@ definitions:
       provisioningState:
         description: Gets provisioning state of the resource
         type: string
+      resourceNavigationLinks:
+        description: Gets array of references to the external resources using subnet
+        items:
+          $ref: '#/definitions/ResourceNavigationLink'
+        type: array
       routeTable:
         $ref: '#/definitions/RouteTable'
         description: Gets or sets the reference of the RouteTable resource
