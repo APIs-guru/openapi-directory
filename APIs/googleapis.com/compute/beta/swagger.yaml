@@ -3631,6 +3631,41 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/networks/{network}/switchToCustomMode':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Switches the network mode from auto subnet mode to custom subnet mode.
+      operationId: compute.networks.switchToCustomMode
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the network to be updated.
+          in: path
+          name: network
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - networks
   '/{project}/global/networks/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -7957,6 +7992,50 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/subnetworks/{subnetwork}/expandIpCidrRange':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Expands the IP CIDR range of the subnetwork to a specified value.
+      operationId: compute.subnetworks.expandIpCidrRange
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Subnetwork resource to update.
+          in: path
+          name: subnetwork
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SubnetworksExpandIpCidrRangeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - subnetworks
   '/{project}/regions/{region}/targetPools':
     get:
       description: Retrieves a list of target pools available to the specified project and region.
@@ -12468,6 +12547,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -12633,7 +12713,7 @@ definitions:
         description: |-
           The configuration parameters for the autoscaling algorithm. You can define one or more of the policies for an autoscaler: cpuUtilization, customMetricUtilizations, and loadBalancingUtilization.
 
-          If none of these are specified, the default will be to autoscale based on cpuUtilization to 0.8 or 80%.
+          If none of these are specified, the default will be to autoscale based on cpuUtilization to 0.6 or 60%.
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -12658,11 +12738,24 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      status:
+        description: '[Output Only] The status of the autoscaler configuration.'
+        enum:
+          - ACTIVE
+          - DELETING
+          - ERROR
+          - PENDING
+        type: string
+      statusDetails:
+        description: '[Output Only] Human-readable details about the current state of the autoscaler. Examples: ?Error when fetching replicas: Replica Pool xxx doesn?t exist.? ?Autoscaling capped at min_num_replicas: 2.?'
+        items:
+          $ref: '#/definitions/AutoscalerStatusDetails'
+        type: array
       target:
         description: URL of the managed instance group that this autoscaler will scale.
         type: string
       zone:
-        description: '[Output Only] URL of the zone where the instance group resides.'
+        description: '[Output Only] URL of the zone where the instance group resides (for autoscalers living in zonal scope).'
         type: string
     type: object
   AutoscalerAggregatedList:
@@ -12709,6 +12802,27 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
+  AutoscalerStatusDetails:
+    properties:
+      message:
+        type: string
+      type:
+        enum:
+          - ALL_INSTANCES_UNHEALTHY
+          - BACKEND_SERVICE_DOES_NOT_EXIST
+          - CAPPED_AT_MAX_NUM_REPLICAS
+          - CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE
+          - CUSTOM_METRIC_INVALID
+          - MIN_EQUALS_MAX
+          - MISSING_CUSTOM_METRIC_DATA_POINTS
+          - MISSING_LOAD_BALANCING_DATA_POINTS
+          - MORE_THAN_ONE_BACKEND_SERVICE
+          - NOT_ENOUGH_QUOTA_AVAILABLE
+          - SCALING_TARGET_DOES_NOT_EXIST
+          - UNKNOWN
+          - UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION
+        type: string
+    type: object
   AutoscalersScopedList:
     properties:
       autoscalers:
@@ -12725,6 +12839,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -12792,7 +12907,7 @@ definitions:
     properties:
       utilizationTarget:
         description: |-
-          The target CPU utilization that the autoscaler should maintain. Must be a float value in the range (0, 1]. If not specified, the default is 0.8.
+          The target CPU utilization that the autoscaler should maintain. Must be a float value in the range (0, 1]. If not specified, the default is 0.6.
 
           If the CPU level is below the target utilization, the autoscaler scales down the number of instances until it reaches the minimum number of instances you specified or until the average CPU of your instances reaches the target utilization.
 
@@ -13394,6 +13509,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -13449,6 +13565,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -13689,6 +13806,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -14360,7 +14478,7 @@ definitions:
         description: The URL of the network to which all instances in the instance group belong.
         type: string
       region:
-        description: The URL of the region where the instance group is located.
+        description: The URL of the region where the instance group is located (for regional resources).
         type: string
       selfLink:
         description: '[Output Only] The URL for this instance group. The server generates this URL.'
@@ -14373,7 +14491,7 @@ definitions:
         description: The URL of the subnetwork to which all instances in the instance group belong.
         type: string
       zone:
-        description: '[Output Only] The URL of the zone where the instance group is located.'
+        description: '[Output Only] The URL of the zone where the instance group is located (for zonal resources).'
         type: string
     type: object
   InstanceGroupAggregatedList:
@@ -14475,7 +14593,7 @@ definitions:
           $ref: '#/definitions/NamedPort'
         type: array
       region:
-        description: '[Output Only] URL of the region where the managed instance group resides.'
+        description: '[Output Only] The URL of the region where the managed instance group resides (for regional resources).'
         type: string
       selfLink:
         description: '[Output Only] The URL for this managed instance group. The server defines this URL.'
@@ -14490,7 +14608,7 @@ definitions:
         format: int32
         type: integer
       zone:
-        description: The name of the zone where the managed instance group is located.
+        description: '[Output Only] The URL of the zone where the managed instance group is located (for zonal resources).'
         type: string
     type: object
   InstanceGroupManagerActionsSummary:
@@ -14650,6 +14768,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -14769,6 +14888,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -14989,6 +15109,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -15183,6 +15304,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -15518,6 +15640,7 @@ definitions:
                 - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -15614,6 +15737,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -15761,6 +15885,7 @@ definitions:
           - TARGET_HTTP_PROXIES
           - TARGET_INSTANCES
           - TARGET_POOLS
+          - TARGET_SSL_PROXIES
           - TARGET_VPN_GATEWAYS
           - URL_MAPS
           - VPN_TUNNELS
@@ -16081,6 +16206,7 @@ definitions:
                 - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -16355,6 +16481,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -16699,6 +16826,12 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
+  SubnetworksExpandIpCidrRangeRequest:
+    properties:
+      ipCidrRange:
+        description: The IP (in CIDR format or netmask) of internal addresses that are legal on this Subnetwork. This range should be disjoint from other subnetworks within this network. This range can only be larger than (i.e. a superset of) the range previously defined before the update.
+        type: string
+    type: object
   SubnetworksScopedList:
     properties:
       subnetworks:
@@ -16715,6 +16848,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -17002,6 +17136,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -17212,6 +17347,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -17442,6 +17578,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -17765,6 +17902,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD

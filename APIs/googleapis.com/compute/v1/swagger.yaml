@@ -8816,6 +8816,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -8975,7 +8976,7 @@ definitions:
         description: |-
           The configuration parameters for the autoscaling algorithm. You can define one or more of the policies for an autoscaler: cpuUtilization, customMetricUtilizations, and loadBalancingUtilization.
 
-          If none of these are specified, the default will be to autoscale based on cpuUtilization to 0.8 or 80%.
+          If none of these are specified, the default will be to autoscale based on cpuUtilization to 0.6 or 60%.
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -9001,7 +9002,7 @@ definitions:
         description: URL of the managed instance group that this autoscaler will scale.
         type: string
       zone:
-        description: '[Output Only] URL of the zone where the instance group resides.'
+        description: '[Output Only] URL of the zone where the instance group resides (for autoscalers living in zonal scope).'
         type: string
     type: object
   AutoscalerAggregatedList:
@@ -9064,6 +9065,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -9131,7 +9133,7 @@ definitions:
     properties:
       utilizationTarget:
         description: |-
-          The target CPU utilization that the autoscaler should maintain. Must be a float value in the range (0, 1]. If not specified, the default is 0.8.
+          The target CPU utilization that the autoscaler should maintain. Must be a float value in the range (0, 1]. If not specified, the default is 0.6.
 
           If the CPU level is below the target utilization, the autoscaler scales down the number of instances until it reaches the minimum number of instances you specified or until the average CPU of your instances reaches the target utilization.
 
@@ -9679,6 +9681,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -9734,6 +9737,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -9974,6 +9978,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -10470,7 +10475,7 @@ definitions:
         description: The URL of the subnetwork to which all instances in the instance group belong.
         type: string
       zone:
-        description: '[Output Only] The URL of the zone where the instance group is located.'
+        description: '[Output Only] The URL of the zone where the instance group is located (for zonal resources).'
         type: string
     type: object
   InstanceGroupAggregatedList:
@@ -10573,7 +10578,7 @@ definitions:
         format: int32
         type: integer
       zone:
-        description: The name of the zone where the managed instance group is located.
+        description: '[Output Only] The URL of the zone where the managed instance group is located (for zonal resources).'
         type: string
     type: object
   InstanceGroupManagerActionsSummary:
@@ -10587,6 +10592,10 @@ definitions:
           [Output Only] The number of instances in the managed instance group that are scheduled to be created or are currently being created. If the group fails to create any of these instances, it tries again until it creates the instance successfully.
 
           If you have disabled creation retries, this field will not be populated; instead, the creatingWithoutRetries field will be populated.
+        format: int32
+        type: integer
+      creatingWithoutRetries:
+        description: '[Output Only] The number of instances that the managed instance group will attempt to create. The group attempts to create each instance only once. If the group fails to create any of these instances, it decreases the group''s target_size value accordingly.'
         format: int32
         type: integer
       deleting:
@@ -10702,6 +10711,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -10814,6 +10824,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -11029,6 +11040,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -11222,6 +11234,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -11270,6 +11283,7 @@ definitions:
         enum:
           - ABANDONING
           - CREATING
+          - CREATING_WITHOUT_RETRIES
           - DELETING
           - NONE
           - RECREATING
@@ -11556,6 +11570,7 @@ definitions:
                 - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -11652,6 +11667,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -11797,6 +11813,7 @@ definitions:
           - TARGET_HTTP_PROXIES
           - TARGET_INSTANCES
           - TARGET_POOLS
+          - TARGET_SSL_PROXIES
           - TARGET_VPN_GATEWAYS
           - URL_MAPS
           - VPN_TUNNELS
@@ -11948,6 +11965,7 @@ definitions:
                 - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -12222,6 +12240,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -12540,6 +12559,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -12805,6 +12825,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -13015,6 +13036,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -13161,6 +13183,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -13468,6 +13491,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD

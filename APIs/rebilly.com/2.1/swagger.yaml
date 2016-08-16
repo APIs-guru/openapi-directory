@@ -6439,7 +6439,13 @@ definitions:
     description: API secret Key.
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       apiUser:
         description: API user name
         readOnly: true
@@ -6471,7 +6477,13 @@ definitions:
     description: Tracking API Requests.
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -6509,6 +6521,18 @@ definitions:
         type: string
     readOnly: true
     type: object
+  ApprovalUrlLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - approval_url
+        type: string
+    required:
+      - rel
+    type: object
   AuthenticationOptions:
     properties:
       authTokenTtl:
@@ -6527,7 +6551,13 @@ definitions:
   AuthenticationToken:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       credentialId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -6560,7 +6590,15 @@ definitions:
   BankAccount:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/CustomerLink'
+          - $ref: '#/definitions/ContactLink'
+        maxItems: 3
+        minItems: 1
+        readOnly: true
+        type: array
       accountNumber:
         description: Bank's Account Number. Required if bank account is not created from Token. This field is write-only
         type: string
@@ -6606,10 +6644,40 @@ definitions:
           - $ref: '#/definitions/ServerTimestamp'
         description: Bank Account updated time
     type: object
+  BankAccountLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - bankAccount
+        type: string
+    required:
+      - rel
+    type: object
+  BillingContactLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - billingContact
+        type: string
+    required:
+      - rel
+    type: object
   Blacklist:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -6652,7 +6720,13 @@ definitions:
   CheckoutPage:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       allowCustomCustomerId:
         description: If to enable your own customer ID in requests
         type: boolean
@@ -6715,7 +6789,14 @@ definitions:
   Contact:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/CustomerLink'
+        maxItems: 2
+        minItems: 1
+        readOnly: true
+        type: array
       address:
         description: The contact street address
         maxLength: 60
@@ -6772,10 +6853,29 @@ definitions:
           - $ref: '#/definitions/ServerTimestamp'
         description: The contact updated time
     type: object
+  ContactLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - contact
+        type: string
+    required:
+      - rel
+    type: object
   Credential:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/CustomerLink'
+        maxItems: 2
+        minItems: 1
+        readOnly: true
+        type: array
       customerId:
         description: The credential's customer ID
         type: string
@@ -6803,6 +6903,14 @@ definitions:
   CustomField:
     description: A separate Custom Field schema
     properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       additionalSchema:
         description: |
           Additional parameters which can be added according to type:
@@ -6884,6 +6992,18 @@ definitions:
           - $ref: '#/definitions/ServerTimestamp'
         description: The customer updated time
     type: object
+  CustomerLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - customer
+        type: string
+    required:
+      - rel
+    type: object
   DayOfWeek:
     enum:
       - Sunday
@@ -6906,10 +7026,28 @@ definitions:
     required:
       - rel
     type: object
+  DeliveryContactLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - deliveryContact
+        type: string
+    required:
+      - rel
+    type: object
   Dispute:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       acquirerReferenceNumber:
         description: The dispute's acquirer reference number
         type: string
@@ -7182,7 +7320,13 @@ definitions:
   EmailCredential:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       authenticationMethod:
         description: Credential's authentication method
         enum:
@@ -7253,7 +7397,14 @@ definitions:
   GatewayAccount:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/OnBoardingUrlLink'
+        maxItems: 2
+        minItems: 1
+        readOnly: true
+        type: array
       acceptedCurrencies:
         description: Accepted currencies (array of the currency three letter code)
         items:
@@ -7399,7 +7550,17 @@ definitions:
   Invoice:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/CustomerLink'
+          - $ref: '#/definitions/WebsiteLink'
+          - $ref: '#/definitions/BillingContactLink'
+          - $ref: '#/definitions/DeliveryContactLink'
+        maxItems: 5
+        minItems: 1
+        readOnly: true
+        type: array
       abandonedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -7473,7 +7634,14 @@ definitions:
   InvoiceItem:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/SubscriptionLink'
+        maxItems: 2
+        minItems: 1
+        readOnly: true
+        type: array
       description:
         description: Invoice item's description
         type: string
@@ -7507,10 +7675,29 @@ definitions:
       - type
       - unitPrice
     type: object
+  ItemsLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - items
+        type: string
+    required:
+      - rel
+    type: object
   Layout:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/ItemsLink'
+        maxItems: 2
+        minItems: 2
+        readOnly: true
+        type: array
       createdBy:
         description: The process that created this layout
         readOnly: true
@@ -7547,6 +7734,14 @@ definitions:
     type: object
   LayoutItem:
     properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       order:
         description: Item's order in Layout
         readOnly: true
@@ -7562,7 +7757,14 @@ definitions:
   LeadSource:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/CustomerLink'
+        maxItems: 2
+        minItems: 1
+        readOnly: true
+        type: array
       affiliate:
         description: 'Lead Source''s affiliate (eg 123, Bob Smith)'
         type: string
@@ -7623,26 +7825,6 @@ definitions:
     required:
       - customerId
     type: object
-  Link:
-    properties:
-      href:
-        description: The link URL
-        type: string
-      rel:
-        description: The link type
-        enum:
-          - self
-        type: string
-    required:
-      - rel
-      - href
-    type: object
-  Links:
-    description: The links related to resource
-    items:
-      $ref: '#/definitions/Link'
-    readOnly: true
-    type: array
   Method:
     description: The payment method
     enum:
@@ -7663,7 +7845,13 @@ definitions:
   Note:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       archived:
         description: Is the note archived (excluded from List method)
         type: boolean
@@ -7721,12 +7909,28 @@ definitions:
     required:
       - rel
     type: object
+  OnBoardingUrlLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - onBoardingUrl
+        type: string
+    required:
+      - rel
+    type: object
   Organization:
     properties:
       _links:
-        allOf:
-          - $ref: '#/definitions/Links'
-        description: The links related to organization
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       address:
         description: The organization street address
         maxLength: 60
@@ -7773,7 +7977,16 @@ definitions:
   Payment:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/WebsiteLink'
+          - $ref: '#/definitions/TransactionLink'
+          - $ref: '#/definitions/ApprovalUrlLink'
+        maxItems: 4
+        minItems: 1
+        readOnly: true
+        type: array
       amount:
         description: The payment amount
         format: double
@@ -7865,7 +8078,15 @@ definitions:
   PaymentCard:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/CustomerLink'
+          - $ref: '#/definitions/BillingContactLink'
+        maxItems: 3
+        minItems: 1
+        readOnly: true
+        type: array
       billingContactId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -7923,6 +8144,18 @@ definitions:
           - $ref: '#/definitions/ServerTimestamp'
         description: Card updated time
     type: object
+  PaymentCardLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - paymentCard
+        type: string
+    required:
+      - rel
+    type: object
   PaymentInstrument:
     discriminator: method
     properties:
@@ -7937,10 +8170,28 @@ definitions:
     required:
       - method
     type: object
+  PaymentLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - payment
+        type: string
+    required:
+      - rel
+    type: object
   PaymentToken:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       address:
         description: Customer's billing address 1
         type: string
@@ -8018,7 +8269,13 @@ definitions:
   Plan:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       contractTermLength:
         description: The length that corresponds with the contractTermUnit
         type: integer
@@ -8112,6 +8369,30 @@ definitions:
       - name
       - currency
     type: object
+  PlanLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - plan
+        type: string
+    required:
+      - rel
+    type: object
+  ProcessorAccountLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - processorAccount
+        type: string
+    required:
+      - rel
+    type: object
   Product:
     description: |
       Your product includes digital goods, services, and physical goods.
@@ -8135,7 +8416,13 @@ definitions:
       }
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -8348,7 +8635,13 @@ definitions:
   ResetPasswordToken:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       credential:
         description: Token's credential ID
         type: string
@@ -8416,7 +8709,13 @@ definitions:
   Session:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -8533,7 +8832,18 @@ definitions:
   Subscription:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/CustomerLink'
+          - $ref: '#/definitions/PlanLink'
+          - $ref: '#/definitions/WebsiteLink'
+          - $ref: '#/definitions/BillingContactLink'
+          - $ref: '#/definitions/DeliveryContactLink'
+        maxItems: 6
+        minItems: 1
+        readOnly: true
+        type: array
       activationTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -8621,6 +8931,18 @@ definitions:
     required:
       - policy
     type: object
+  SubscriptionLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - subscription
+        type: string
+    required:
+      - rel
+    type: object
   SubscriptionSwitch:
     properties:
       planId:
@@ -8648,9 +8970,6 @@ definitions:
   SubscriptionTracking:
     description: Tracking subscription log
     properties:
-      _links:
-        $ref: '#/definitions/Links'
-        description: The links related to resource
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -8680,7 +8999,13 @@ definitions:
   TaxCategory:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       description:
         description: The tax category description
         maxLength: 512
@@ -8707,7 +9032,13 @@ definitions:
   ThreeDSecure:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       amount:
         description: Transaction amount
         format: double
@@ -8805,7 +9136,18 @@ definitions:
   Transaction:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/ProcessorAccountLink'
+          - $ref: '#/definitions/CustomerLink'
+          - $ref: '#/definitions/WebsiteLink'
+          - $ref: '#/definitions/PaymentCardLink'
+          - $ref: '#/definitions/PaymentLink'
+        maxItems: 6
+        minItems: 1
+        readOnly: true
+        type: array
       acquirerName:
         description: 'Acquirer name, available only when method is ''payment_card'', else null'
         readOnly: true
@@ -8902,6 +9244,18 @@ definitions:
         description: Website's ID
         readOnly: true
     type: object
+  TransactionLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - transaction
+        type: string
+    required:
+      - rel
+    type: object
   TransactionRefund:
     properties:
       amount:
@@ -8925,7 +9279,13 @@ definitions:
   User:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       businessPhone:
         description: The user business phone number
         type: string
@@ -9063,7 +9423,14 @@ definitions:
   Website:
     properties:
       _links:
-        $ref: '#/definitions/Links'
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/NotesLink'
+        maxItems: 2
+        minItems: 1
+        readOnly: true
+        type: array
       checkoutPageUri:
         description: Your own custom URI for this Checkout Page
         type: string
@@ -9101,6 +9468,18 @@ definitions:
       - servicePhone
       - serviceEmail
     type: object
+  WebsiteLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - website
+        type: string
+    required:
+      - rel
+    type: object
   WebsiteWebhook:
     properties:
       webHookPassword:
@@ -9121,8 +9500,13 @@ definitions:
     description: Webhook Tracking Requests.
     properties:
       _links:
-        $ref: '#/definitions/Links'
         description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'

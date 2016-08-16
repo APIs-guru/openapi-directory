@@ -271,6 +271,169 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/projects/{projectId}/triggers':
+    get:
+      description: |-
+        Lists existing BuildTrigger.
+
+        This API is experimental.
+      operationId: cloudbuild.projects.triggers.list
+      parameters:
+        - description: ID of the project for which to list BuildTriggers.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListBuildTriggersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a new BuildTrigger.
+
+        This API is experimental.
+      operationId: cloudbuild.projects.triggers.create
+      parameters:
+        - description: ID of the project for which to configure automatic builds.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BuildTrigger'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BuildTrigger'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/triggers/{triggerId}':
+    delete:
+      description: |-
+        Deletes an BuildTrigger by its project ID and trigger ID.
+
+        This API is experimental.
+      operationId: cloudbuild.projects.triggers.delete
+      parameters:
+        - description: ID of the project that owns the trigger.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: ID of the BuildTrigger to delete.
+          in: path
+          name: triggerId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: |-
+        Gets information about a BuildTrigger.
+
+        This API is experimental.
+      operationId: cloudbuild.projects.triggers.get
+      parameters:
+        - description: ID of the project that owns the trigger.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: ID of the BuildTrigger to get.
+          in: path
+          name: triggerId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BuildTrigger'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: |-
+        Updates an BuildTrigger by its project ID and trigger ID.
+
+        This API is experimental.
+      operationId: cloudbuild.projects.triggers.patch
+      parameters:
+        - description: ID of the project that owns the trigger.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: ID of the BuildTrigger to update.
+          in: path
+          name: triggerId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BuildTrigger'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BuildTrigger'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/{name}':
     get:
       description: |-
@@ -496,6 +659,36 @@ definitions:
           type: string
         type: array
     type: object
+  BuildTrigger:
+    description: |-
+      Configuration for an automated build in response to source repository
+      changes.
+    properties:
+      build:
+        $ref: '#/definitions/Build'
+        description: Contents of the build template.
+      createTime:
+        description: |-
+          Time when the trigger was created.
+
+          @OutputOnly
+        format: google-datetime
+        type: string
+      id:
+        description: |-
+          Unique identifier of the trigger.
+
+          @OutputOnly
+        type: string
+      triggerTemplate:
+        $ref: '#/definitions/RepoSource'
+        description: |-
+          Template describing the types of source changes to trigger a build.
+
+          Branch and tag names in trigger templates are interpreted as regular
+          expressions. Any branch or tag change that matches that regular expression
+          will trigger a build.
+    type: object
   BuiltImage:
     description: BuiltImage describes an image built by the pipeline.
     properties:
@@ -510,6 +703,19 @@ definitions:
     type: object
   CancelBuildRequest:
     description: Request to cancel an ongoing build.
+    properties: {}
+    type: object
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
     type: object
   FileHashes:
@@ -536,6 +742,15 @@ definitions:
         description: The hash value.
         format: byte
         type: string
+    type: object
+  ListBuildTriggersResponse:
+    description: Response containing existing BuildTriggers.
+    properties:
+      triggers:
+        description: 'BuildTriggers for the project, sorted by create_time descending.'
+        items:
+          $ref: '#/definitions/BuildTrigger'
+        type: array
     type: object
   ListBuildsResponse:
     description: Response including listed builds.

@@ -287,6 +287,71 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/backendServices':
+    get:
+      description: 'Retrieves the list of all BackendService resources, regional and global, available to the specified project.'
+      operationId: compute.backendServices.aggregatedList
+      parameters:
+        - description: Name of the project scoping this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BackendServiceAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - backendServices
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/aggregated/diskTypes':
     get:
       description: Retrieves an aggregated list of disk types.
@@ -7980,6 +8045,76 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
+      operationId: compute.regionInstanceGroupManagers.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: The name of the instance group manager.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManager'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionInstanceGroupManagers
+    put:
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method.
+      operationId: compute.regionInstanceGroupManagers.update
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: The name of the instance group manager.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManager'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionInstanceGroupManagers
   '/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/abandonInstances':
     parameters:
       - $ref: '#/parameters/alt'
@@ -14292,6 +14427,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -14469,7 +14605,7 @@ definitions:
         description: |-
           The configuration parameters for the autoscaling algorithm. You can define one or more of the policies for an autoscaler: cpuUtilization, customMetricUtilizations, and loadBalancingUtilization.
 
-          If none of these are specified, the default will be to autoscale based on cpuUtilization to 0.8 or 80%.
+          If none of these are specified, the default will be to autoscale based on cpuUtilization to 0.6 or 60%.
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -14511,7 +14647,7 @@ definitions:
         description: URL of the managed instance group that this autoscaler will scale.
         type: string
       zone:
-        description: '[Output Only] URL of the zone where the instance group resides.'
+        description: '[Output Only] URL of the zone where the instance group resides (for autoscalers living in zonal scope).'
         type: string
     type: object
   AutoscalerAggregatedList:
@@ -14595,6 +14731,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -14665,7 +14802,7 @@ definitions:
     properties:
       utilizationTarget:
         description: |-
-          The target CPU utilization that the autoscaler should maintain. Must be a float value in the range (0, 1]. If not specified, the default is 0.8.
+          The target CPU utilization that the autoscaler should maintain. Must be a float value in the range (0, 1]. If not specified, the default is 0.6.
 
           If the CPU level is below the target utilization, the autoscaler scales down the number of instances until it reaches the minimum number of instances you specified or until the average CPU of your instances reaches the target utilization.
 
@@ -14979,6 +15116,29 @@ definitions:
         format: int32
         type: integer
     type: object
+  BackendServiceAggregatedList:
+    description: Contains a list of BackendServicesScopedList.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/BackendServicesScopedList'
+          description: Name of the scope containing this set of BackendServices.
+        description: A map of scoped BackendService lists.
+        type: object
+      kind:
+        default: 'compute#backendServiceAggregatedList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        description: '[Output Only] A token used to continue a truncated list request.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
   BackendServiceGroupHealth:
     properties:
       healthStatus:
@@ -15023,6 +15183,55 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+    type: object
+  BackendServicesScopedList:
+    properties:
+      backendServices:
+        description: List of BackendServices contained in this scope.
+        items:
+          $ref: '#/definitions/BackendService'
+        type: array
+      warning:
+        description: Informational warning which replaces the list of backend services when the list is empty.
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_NOT_DELETED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   Binding:
     description: Associates `members` with a `role`.
@@ -15456,6 +15665,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -15511,6 +15721,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -15805,6 +16016,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -16503,7 +16715,7 @@ definitions:
         description: The URL of the network to which all instances in the instance group belong.
         type: string
       region:
-        description: The URL of the region where the instance group is located.
+        description: The URL of the region where the instance group is located (for regional resources).
         type: string
       selfLink:
         description: '[Output Only] The URL for this instance group. The server generates this URL.'
@@ -16516,7 +16728,7 @@ definitions:
         description: The URL of the subnetwork to which all instances in the instance group belong.
         type: string
       zone:
-        description: '[Output Only] The URL of the zone where the instance group is located.'
+        description: '[Output Only] The URL of the zone where the instance group is located (for zonal resources).'
         type: string
     type: object
   InstanceGroupAggregatedList:
@@ -16621,7 +16833,7 @@ definitions:
         $ref: '#/definitions/InstanceGroupManagerPendingActionsSummary'
         description: '[Output Only] The list of instance actions and the number of instances in this managed instance group that are pending for each of those actions.'
       region:
-        description: '[Output Only] URL of the region where the managed instance group resides.'
+        description: '[Output Only] The URL of the region where the managed instance group resides (for regional resources).'
         type: string
       selfLink:
         description: '[Output Only] The URL for this managed instance group. The server defines this URL.'
@@ -16644,7 +16856,7 @@ definitions:
           $ref: '#/definitions/InstanceGroupManagerVersion'
         type: array
       zone:
-        description: The name of the zone where the managed instance group is located.
+        description: '[Output Only] The URL of the zone where the managed instance group is located (for zonal resources).'
         type: string
     type: object
   InstanceGroupManagerActionsSummary:
@@ -16858,6 +17070,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -16977,6 +17190,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -17203,6 +17417,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -17431,6 +17646,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -17777,6 +17993,7 @@ definitions:
                 - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -17873,6 +18090,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -18487,6 +18705,7 @@ definitions:
                 - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -18761,6 +18980,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -19172,6 +19392,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -19462,6 +19683,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -19673,6 +19895,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -19906,6 +20129,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
@@ -20229,6 +20453,7 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD

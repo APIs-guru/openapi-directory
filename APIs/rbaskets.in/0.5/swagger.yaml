@@ -9,7 +9,7 @@ info:
     url: 'https://github.com/darklynx'
   description: RESTful API of Request Baskets service
   title: Request Baskets
-  version: '0.4'
+  version: '0.5'
   x-logo:
     url: 'https://raw.githubusercontent.com/darklynx/request-baskets/master/doc/logo.svg'
   x-origin:
@@ -30,12 +30,14 @@ securityDefinitions:
 tags:
   - description: Manage baskets
     name: baskets
+  - description: Configure basket responses
+    name: responses
   - description: Manage collected requests
     name: requests
 paths:
   /baskets:
     get:
-      description: Returns list of registered basket names
+      description: Fetches a list of basket names managed by service.
       parameters:
         - description: Maximum number of basket names to return; default 20
           in: query
@@ -59,12 +61,12 @@ paths:
             $ref: '#/definitions/Baskets'
         '204':
           description: No Content. No baskets available for specified limits
-      summary: Retrieve registered basket names
+      summary: Get baskets
       tags:
         - baskets
   '/baskets/{name}':
     delete:
-      description: Delete basket and all collected requests
+      description: Permanently deletes this basket and all collected requests.
       parameters:
         - description: The basket name
           in: path
@@ -84,7 +86,7 @@ paths:
       tags:
         - baskets
     get:
-      description: Get current configuration of a basket
+      description: Retrieves configuration settings of this basket.
       parameters:
         - description: The basket name
           in: path
@@ -102,13 +104,13 @@ paths:
           description: Not Found. No basket with such name
       security:
         - basket_token: []
-      summary: Get basket configuration
+      summary: Get basket settings
       tags:
         - baskets
     post:
-      description: Creates a new basket with specified name
+      description: Creates a new basket with this name.
       parameters:
-        - description: The name of basket to create
+        - description: The name of new basket
           in: path
           name: name
           required: true
@@ -124,16 +126,20 @@ paths:
           description: Created. Indicates that basket is successfully created
           schema:
             $ref: '#/definitions/Token'
+        '400':
+          description: Bad Request. Failed to parse JSON into basket configuration object.
         '403':
           description: 'Forbidden. Indicates that basket name conflicts with reserved paths; e.g. `baskets`, `web`, etc.'
         '409':
           description: Conflict. Indicates that basket with such name already exists
-      summary: Create a new basket
+        '422':
+          description: Unprocessable Entity. Basket configuration is not valid.
+      summary: Create new basket
       tags:
         - baskets
     put:
       description: |
-        Update current configuration of basket.
+        Updates configuration settings of this basket.
 
         Special configuration parameters for request forwarding:
           * `insecure_tls` controls certificate verification when forwarding requests. Setting this parameter to `true`
@@ -161,18 +167,22 @@ paths:
       responses:
         '204':
           description: No Content. Basket configuration is updated
+        '400':
+          description: Bad Request. Failed to parse JSON into basket configuration object.
         '401':
           description: Unauthorized. Invalid or missing basket token
         '404':
           description: Not Found. No basket with such name
+        '422':
+          description: Unprocessable Entity. Basket configuration is not valid.
       security:
         - basket_token: []
-      summary: Update basket configuration
+      summary: Update basket settings
       tags:
         - baskets
   '/baskets/{name}/requests':
     delete:
-      description: Delete all requests collected by this basket
+      description: Deletes all requests collected by this basket.
       parameters:
         - description: The basket name
           in: path
@@ -192,7 +202,7 @@ paths:
       tags:
         - requests
     get:
-      description: Returns list of collected requests
+      description: Fetches collection of requests collected by this basket.
       parameters:
         - description: The basket name
           in: path
@@ -240,9 +250,100 @@ paths:
           description: Not Found. No basket with such name
       security:
         - basket_token: []
-      summary: Retrieve requests collected by basket
+      summary: Get collected requests
       tags:
         - requests
+  '/baskets/{name}/responses/{method}':
+    get:
+      description: |
+        Retrieves information about configured response of the basket. Service will reply with this response to any
+        HTTP request sent to the basket with appropriate HTTP method.
+
+        If nothing is configured, the default response is HTTP 200 - OK with empty content.
+      parameters:
+        - description: The basket name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: The HTTP method this response is configured for
+          enum:
+            - GET
+            - HEAD
+            - POST
+            - PUT
+            - PATCH
+            - DELETE
+            - CONNECT
+            - OPTIONS
+            - TRACE
+          in: path
+          name: method
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. Returns configured response information
+          schema:
+            $ref: '#/definitions/Response'
+        '401':
+          description: Unauthorized. Invalid or missing basket token
+        '404':
+          description: Not Found. No basket with such name
+      security:
+        - basket_token: []
+      summary: Get response settings
+      tags:
+        - responses
+    put:
+      description: |
+        Allows to configure HTTP response of this basket. The service will reply with configured response to any HTTP
+        request sent to the basket with appropriate HTTP method.
+
+        If nothing is configured, the default response is HTTP 200 - OK with empty content.
+      parameters:
+        - description: The basket name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: The HTTP method this response is configured for
+          enum:
+            - GET
+            - HEAD
+            - POST
+            - PUT
+            - PATCH
+            - DELETE
+            - CONNECT
+            - OPTIONS
+            - TRACE
+          in: path
+          name: method
+          required: true
+          type: string
+        - description: HTTP response configuration
+          in: body
+          name: response
+          required: true
+          schema:
+            $ref: '#/definitions/Response'
+      responses:
+        '204':
+          description: No Content. Response configuration is updated
+        '400':
+          description: Bad Request. Failed to parse JSON into response configuration object.
+        '401':
+          description: Unauthorized. Invalid or missing basket token
+        '404':
+          description: Not Found. No basket with such name
+        '422':
+          description: Unprocessable Entity. Response configuration is not valid.
+      security:
+        - basket_token: []
+      summary: Update response settings
+      tags:
+        - responses
 definitions:
   Baskets:
     properties:
@@ -284,7 +385,7 @@ definitions:
       items:
         type: string
       type: array
-    description: 'Map of request headers, key represents name, value is array of values'
+    description: 'Map of HTTP headers, key represents name, value is array of values'
     type: object
   Request:
     properties:
@@ -329,6 +430,22 @@ definitions:
     required:
       - requests
       - has_more
+    type: object
+  Response:
+    properties:
+      body:
+        description: Content of response body
+        type: string
+      headers:
+        $ref: '#/definitions/Headers'
+      is_template:
+        description: |
+          If set to `true` the body is treated as [HTML template](https://golang.org/pkg/html/template) that accepts
+          input from request parameters.
+        type: boolean
+      status:
+        description: The HTTP status code to reply with
+        type: integer
     type: object
   Token:
     properties:

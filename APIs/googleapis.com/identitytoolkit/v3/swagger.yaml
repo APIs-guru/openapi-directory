@@ -593,6 +593,9 @@ definitions:
       appId:
         description: 'The app ID of the mobile app, base64(CERT_SHA1):PACKAGE_NAME for Android, BUNDLE_ID for iOS.'
         type: string
+      authFlowType:
+        description: Explicitly specify the auth flow type. Currently only support "CODE_FLOW" type. The field is only used for Google provider.
+        type: string
       clientId:
         description: The relying party OAuth client ID.
         type: string
@@ -622,6 +625,9 @@ definitions:
         type: string
       providerId:
         description: 'The IdP ID. For white listed IdPs it''s a short domain name e.g. google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it''s the OP identifier.'
+        type: string
+      sessionId:
+        description: The session_id passed by client.
         type: string
     type: object
   IdentitytoolkitRelyingpartyDeleteAccountRequest:
@@ -1244,11 +1250,17 @@ definitions:
             rawId:
               description: User's raw identifier directly returned from IDP.
               type: string
+            screenName:
+              description: User's screen name at Twitter.
+              type: string
           type: object
         type: array
       salt:
         description: The user's password salt.
         format: byte
+        type: string
+      screenName:
+        description: User's screen name at Twitter.
         type: string
       validSince:
         description: Timestamp in seconds for valid login token.
