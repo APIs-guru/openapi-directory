@@ -182,8 +182,9 @@ function validatePrefered(specs) {
     _.each(versions, function (value) {
       assert(_.isBoolean(value), 'Non boolean value for "x-preferred" in "' + id + '"');
       assert(value !== true || !seenTrue, 'Multiply preferred versions in "' + id + '"');
-      seenTrue = value;
+      seenTrue = value || seenTrue;
     });
+    assert(seenTrue, `At least one preferred should be true in "${id}"`);
   });
 }
 
