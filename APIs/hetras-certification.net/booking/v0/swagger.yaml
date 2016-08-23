@@ -149,7 +149,7 @@ paths:
           name: to
           required: true
           type: string
-        - description: "You can expand the room types breakdown per business day for the availibility numbers if need be.\r\n            is limited to 365 days."
+        - description: You can expand the room types breakdown per business day for the availibility numbers if need be.
           enum:
             - RoomTypes
           in: query
@@ -1428,13 +1428,9 @@ definitions:
         items:
           $ref: '#/definitions/DailyAvailability'
         type: array
-      hotel_id:
-        description: The hotel id you requsted the availability numbers for
-        format: int32
-        type: integer
-      hotel_name:
-        description: The name of the hotel you requsted the availability numbers for
-        type: string
+      hotel:
+        $ref: '#/definitions/EmbeddedHotel'
+        description: The hotel info you requsted the availability numbers for
     type: object
   BaseResponse:
     properties:
@@ -2069,6 +2065,19 @@ definitions:
         format: date-time
         type: string
     type: object
+  EmbeddedHotel:
+    properties:
+      code:
+        description: The code of the hotel
+        type: string
+      id:
+        description: The id of the hotel
+        format: int32
+        type: integer
+      name:
+        description: The name of the hotel
+        type: string
+    type: object
   EmbeddedRoom:
     description: "Represents a short version of room information. To get the full version\r\n            please follow the self link from the links collection"
     properties:
@@ -2171,7 +2180,7 @@ definitions:
   GetAvailabilityRequest:
     properties:
       expand:
-        description: "You can expand the room types breakdown per business day for the availibility numbers if need be.\r\n            is limited to 365 days."
+        description: You can expand the room types breakdown per business day for the availibility numbers if need be.
         enum:
           - RoomTypes
         type: string

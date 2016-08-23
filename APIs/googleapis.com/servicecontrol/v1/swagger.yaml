@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: The Service Control API
+  description: 'Google Service Control provides control plane functionality to managed services, such as logging, monitoring, and status checks.'
   title: Google Service Control
   version: v1
   x-apiClientRegistration:
@@ -267,6 +267,9 @@ definitions:
         description: |-
           The same operation_id value used in the CheckRequest.
           Used for logging and diagnostics purposes.
+        type: string
+      serviceConfigId:
+        description: The actual config id used to process the request.
         type: string
     type: object
   Distribution:
@@ -552,7 +555,7 @@ definitions:
         format: google-datetime
         type: string
       importance:
-        description: The importance of the data contained in the operation.
+        description: DO NOT USE. This is an experimental field.
         enum:
           - LOW
           - HIGH
@@ -667,6 +670,9 @@ definitions:
         items:
           $ref: '#/definitions/ReportError'
         type: array
+      serviceConfigId:
+        description: The actual config id used to process the request.
+        type: string
     type: object
   Status:
     description: |-

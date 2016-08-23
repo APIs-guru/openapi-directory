@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: The service management API for Google Cloud Platform
+  description: Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
   title: Google Service Management
   version: v1
   x-apiClientRegistration:
@@ -541,6 +541,10 @@ paths:
         different backend services. For example, the logging configuration will be
         pushed to Google Cloud Logging.
 
+        Please note that any previous pending and running Rollouts and associated
+        Operations will be automatically cancelled so that the latest Rollout will
+        not be blocked by previous Rollouts.
+
         Operation<response: Rollout>
       operationId: servicemanagement.services.rollouts.create
       parameters:
@@ -679,6 +683,9 @@ paths:
         Enable a managed service for a project with default setting.
 
         Operation<response: EnableServiceResponse>
+
+        google.rpc.Status errors may contain a
+        google.rpc.PreconditionFailure error detail.
       operationId: servicemanagement.services.enable
       parameters:
         - description: |-
@@ -1171,8 +1178,13 @@ definitions:
     properties:
       allowWithoutCredential:
         description: |-
-          Whether to allow requests without a credential.  If quota is enabled, an
-          API key is required for such request to pass the quota check.
+          Whether to allow requests without a credential. The credential can be
+          an OAuth token, Google cookies (first-party auth) or EndUserCreds.
+
+          For requests without credentials, if the service control environment is
+          specified, each incoming request **must** be associated with a service
+          consumer. This can be done by passing an API key that belongs to a consumer
+          project.
         type: boolean
       oauth:
         $ref: '#/definitions/OAuthRequirements'
@@ -2658,7 +2670,9 @@ definitions:
       displayName:
         description: |-
           Optional. A concise name for the monitored resource type that might be
-          displayed in user interfaces. For example, `"Google Cloud SQL Database"`.
+          displayed in user interfaces. It should be a Title Cased Noun Phrase,
+          without any article or other determiners. For example,
+          `"Google Cloud SQL Database"`.
         type: string
       labels:
         description: |-

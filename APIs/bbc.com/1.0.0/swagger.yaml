@@ -2908,6 +2908,8 @@ definitions:
         $ref: '#/definitions/franchises'
       genre_groupings:
         $ref: '#/definitions/genre_groupings'
+      identifiers:
+        $ref: '#/definitions/identifiers'
       image_link:
         $ref: '#/definitions/image_link'
       images_mixin:
@@ -2955,6 +2957,8 @@ definitions:
         items:
           $ref: '#/definitions/broadcast_of'
         type: array
+      identifiers:
+        $ref: '#/definitions/identifiers'
       ids:
         $ref: '#/definitions/ids'
       image_link:
@@ -3047,6 +3051,8 @@ definitions:
         $ref: '#/definitions/genre_groupings'
       genre_groups:
         $ref: '#/definitions/genre_groups'
+      identifiers:
+        $ref: '#/definitions/identifiers'
       image_link:
         $ref: '#/definitions/image_link'
       images_mixin:
@@ -3258,6 +3264,8 @@ definitions:
         $ref: '#/definitions/disambiguation'
       href:
         type: string
+      identifiers:
+        $ref: '#/definitions/identifiers'
       ids:
         $ref: '#/definitions/ids'
       partner:
@@ -3450,6 +3458,8 @@ definitions:
         $ref: '#/definitions/genre_groups'
       has_guidance:
         $ref: '#/definitions/has_guidance'
+      identifiers:
+        $ref: '#/definitions/identifiers'
       image_link:
         $ref: '#/definitions/image_link'
       images_mixin:
@@ -3736,6 +3746,8 @@ definitions:
         $ref: '#/definitions/embargoed'
       for_programmes:
         $ref: '#/definitions/for_programmes'
+      identifiers:
+        $ref: '#/definitions/identifiers'
       ids:
         $ref: '#/definitions/ids'
       images_mixin:
@@ -3798,6 +3810,27 @@ definitions:
       type:
         type: string
     type: object
+  identifier:
+    additionalProperties: false
+    properties:
+      '#text':
+        type: string
+      authority:
+        type: string
+      type:
+        type: string
+    type: object
+  identifiers:
+    additionalProperties: false
+    properties:
+      identifier:
+        items:
+          $ref: '#/definitions/identifier'
+        minItems: 1
+        type: array
+    required:
+      - identifier
+    type: object
   ids:
     additionalProperties: false
     properties:
@@ -3816,6 +3849,8 @@ definitions:
         type: string
       embargoed:
         $ref: '#/definitions/embargoed'
+      identifiers:
+        $ref: '#/definitions/identifiers'
       partner:
         $ref: '#/definitions/partner'
       pid:
@@ -3956,6 +3991,8 @@ definitions:
       duration:
         format: float
         type: number
+      identifiers:
+        $ref: '#/definitions/identifiers'
       ids:
         $ref: '#/definitions/ids'
       images_mixin:
@@ -4024,6 +4061,8 @@ definitions:
         type: object
       ident:
         type: string
+      identifiers:
+        $ref: '#/definitions/identifiers'
       image_link:
         $ref: '#/definitions/image_link'
       images_mixin:
@@ -4479,6 +4518,8 @@ definitions:
         $ref: '#/definitions/context'
       end_time:
         $ref: '#/definitions/end_time'
+      identifiers:
+        $ref: '#/definitions/identifiers'
       partner:
         $ref: '#/definitions/partner'
       pid:
@@ -4733,6 +4774,8 @@ definitions:
         $ref: '#/definitions/expected_child_count'
       genre_groupings:
         $ref: '#/definitions/genre_groupings'
+      identifiers:
+        $ref: '#/definitions/identifiers'
       image_link:
         $ref: '#/definitions/image_link'
       images_mixin:
@@ -4780,6 +4823,8 @@ definitions:
         $ref: '#/definitions/date_range'
       description:
         $ref: '#/definitions/description'
+      identifiers:
+        $ref: '#/definitions/identifiers'
       ids:
         $ref: '#/definitions/ids'
       is_concrete:
@@ -5160,6 +5205,8 @@ definitions:
           duration:
             pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
             type: string
+          identifiers:
+            $ref: '#/definitions/identifiers'
           ids:
             $ref: '#/definitions/ids'
           pid:
@@ -5178,6 +5225,8 @@ definitions:
               duration:
                 pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
                 type: string
+              identifiers:
+                $ref: '#/definitions/identifiers'
               ids:
                 $ref: '#/definitions/ids'
               pid:
@@ -5366,6 +5415,8 @@ definitions:
         $ref: '#/definitions/ancestor_titles'
       ancestors_titles:
         $ref: '#/definitions/ancestors_titles'
+      identifiers:
+        $ref: '#/definitions/identifiers'
       ids:
         $ref: '#/definitions/ids'
       image_link:

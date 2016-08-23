@@ -1590,9 +1590,6 @@ definitions:
       companyId:
         description: Unique Id of the company can be retrieved from the company dashboard
         type: string
-      costCenter:
-        description: Cost center
-        type: string
       currency:
         description: 'Currency as ISO 4217, e.g. EUR'
         type: string
@@ -1618,9 +1615,6 @@ definitions:
         description: 'Price of the product in format ##.##'
         format: double
         type: number
-      revenueAccount:
-        description: Revenue account
-        type: string
       secret:
         description: Company secret can be retrieved from the company administration area
         type: string

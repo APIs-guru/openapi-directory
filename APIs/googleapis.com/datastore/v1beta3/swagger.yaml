@@ -358,7 +358,7 @@ paths:
         - projects
 definitions:
   AllocateIdsRequest:
-    description: The request for google.datastore.v1beta3.Datastore.AllocateIds.
+    description: The request for Datastore.AllocateIds.
     properties:
       keys:
         description: |-
@@ -369,7 +369,7 @@ definitions:
         type: array
     type: object
   AllocateIdsResponse:
-    description: The response for google.datastore.v1beta3.Datastore.AllocateIds.
+    description: The response for Datastore.AllocateIds.
     properties:
       keys:
         description: |-
@@ -392,11 +392,11 @@ definitions:
         type: array
     type: object
   BeginTransactionRequest:
-    description: The request for google.datastore.v1beta3.Datastore.BeginTransaction.
+    description: The request for Datastore.BeginTransaction.
     properties: {}
     type: object
   BeginTransactionResponse:
-    description: The response for google.datastore.v1beta3.Datastore.BeginTransaction.
+    description: The response for Datastore.BeginTransaction.
     properties:
       transaction:
         description: The transaction identifier (always present).
@@ -404,7 +404,7 @@ definitions:
         type: string
     type: object
   CommitRequest:
-    description: The request for google.datastore.v1beta3.Datastore.Commit.
+    description: The request for Datastore.Commit.
     properties:
       mode:
         description: The type of commit to perform. Defaults to `TRANSACTIONAL`.
@@ -435,12 +435,12 @@ definitions:
         description: |-
           The identifier of the transaction associated with the commit. A
           transaction identifier is returned by a call to
-          BeginTransaction.
+          Datastore.BeginTransaction.
         format: byte
         type: string
     type: object
   CommitResponse:
-    description: The response for google.datastore.v1beta3.Datastore.Commit.
+    description: The response for Datastore.Commit.
     properties:
       indexUpdates:
         description: |-
@@ -519,10 +519,12 @@ definitions:
           The version of the entity, a strictly positive number that monotonically
           increases with changes to the entity.
 
-          This field is set for `FULL` entity results.
-          For missing entities in
-          `LookupResponse`, this is the version of the snapshot that was used to look
-          up the entity, and it is always set except for eventually consistent reads.
+          This field is set for `FULL` entity
+          results.
+
+          For missing entities in `LookupResponse`, this
+          is the version of the snapshot that was used to look up the entity, and it
+          is always set except for eventually consistent reads.
         format: int64
         type: string
     type: object
@@ -541,8 +543,8 @@ definitions:
     properties:
       allowLiterals:
         description: |-
-          When false, the query string must not contain any literals and instead
-          must bind all values. For example,
+          When false, the query string must not contain any literals and instead must
+          bind all values. For example,
           `SELECT * FROM Kind WHERE a = 'string literal'` is not allowed, while
           `SELECT * FROM Kind WHERE a = @value` is.
         type: boolean
@@ -550,9 +552,9 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/GqlQueryParameter'
         description: |-
-          For each non-reserved named binding site in the query string,
-          there must be a named parameter with that name,
-          but not necessarily the inverse.
+          For each non-reserved named binding site in the query string, there must be
+          a named parameter with that name, but not necessarily the inverse.
+
           Key must match regex `A-Za-z_$*`, must not match regex
           `__.*__`, and must not be `""`.
         type: object
@@ -560,9 +562,9 @@ definitions:
         description: |-
           Numbered binding site @1 references the first numbered parameter,
           effectively using 1-based indexing, rather than the usual 0.
-          For each binding site numbered i in `query_string`,
-          there must be an i-th numbered parameter.
-          The inverse must also be true.
+
+          For each binding site numbered i in `query_string`, there must be an i-th
+          numbered parameter. The inverse must also be true.
         items:
           $ref: '#/definitions/GqlQueryParameter'
         type: array
@@ -679,7 +681,7 @@ definitions:
         type: number
     type: object
   LookupRequest:
-    description: The request for google.datastore.v1beta3.Datastore.Lookup.
+    description: The request for Datastore.Lookup.
     properties:
       keys:
         description: Keys of entities to look up.
@@ -691,7 +693,7 @@ definitions:
         description: The options for this lookup request.
     type: object
   LookupResponse:
-    description: The response for google.datastore.v1beta3.Datastore.Lookup.
+    description: The response for Datastore.Lookup.
     properties:
       deferred:
         description: |-
@@ -1008,28 +1010,28 @@ definitions:
         description: |-
           The identifier of the transaction in which to read. A
           transaction identifier is returned by a call to
-          BeginTransaction.
+          Datastore.BeginTransaction.
         format: byte
         type: string
     type: object
   RollbackRequest:
-    description: The request for google.datastore.v1beta3.Datastore.Rollback.
+    description: The request for Datastore.Rollback.
     properties:
       transaction:
         description: |-
           The transaction identifier, returned by a call to
-          google.datastore.v1beta3.Datastore.BeginTransaction.
+          Datastore.BeginTransaction.
         format: byte
         type: string
     type: object
   RollbackResponse:
     description: |-
-      The response for google.datastore.v1beta3.Datastore.Rollback
+      The response for Datastore.Rollback.
       (an empty message).
     properties: {}
     type: object
   RunQueryRequest:
-    description: The request for google.datastore.v1beta3.Datastore.RunQuery.
+    description: The request for Datastore.RunQuery.
     properties:
       gqlQuery:
         $ref: '#/definitions/GqlQuery'
@@ -1049,7 +1051,7 @@ definitions:
         description: The options for this query.
     type: object
   RunQueryResponse:
-    description: The response for google.datastore.v1beta3.Datastore.RunQuery.
+    description: The response for Datastore.RunQuery.
     properties:
       batch:
         $ref: '#/definitions/QueryResultBatch'

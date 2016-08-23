@@ -1390,6 +1390,11 @@ definitions:
       schemaInlineFormat:
         description: '[Deprecated] The format of the schemaInline property.'
         type: string
+      schemaUpdateOptions:
+        description: '[Experimental] Allows the schema of the desitination table to be updated as a side effect of the load job. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
+        items:
+          type: string
+        type: array
       skipLeadingRows:
         description: '[Optional] The number of rows at the top of a CSV file that BigQuery will skip when loading the data. The default value is 0. This property is useful if you have header rows in the file that should be skipped.'
         format: int32
@@ -1442,6 +1447,11 @@ definitions:
       query:
         description: '[Required] BigQuery SQL query to execute.'
         type: string
+      schemaUpdateOptions:
+        description: '[Experimental] Allows the schema of the desitination table to be updated as a side effect of the query job. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
+        items:
+          type: string
+        type: array
       tableDefinitions:
         additionalProperties:
           $ref: '#/definitions/ExternalDataConfiguration'

@@ -5,6 +5,9 @@ host: management.azure.com
 info:
   title: UsageManagementClient
   version: 2015-06-01-preview
+  x-apisguru-categories:
+    - ecommerce
+    - cloud
   x-logo:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
@@ -14,6 +17,12 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: arm-commerce
+  x-tags:
+    - Azure
+    - Microsoft
+    - commerce usage aggregates
+    - eCommerce
+    - statistics
 consumes:
   - application/json
   - text/json
@@ -28,7 +37,7 @@ parameters:
     required: true
     type: string
   SubscriptionIdParameter:
-    description: It uniquely identifes Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: It uniquely identifies Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true

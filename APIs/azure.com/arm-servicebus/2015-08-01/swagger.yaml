@@ -6,6 +6,8 @@ info:
   description: Azure Service Bus client
   title: ServiceBusManagementClient
   version: '2015-08-01'
+  x-apisguru-categories:
+    - cloud
   x-logo:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
@@ -15,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: arm-servicebus
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
   - text/json
@@ -770,7 +775,7 @@ paths:
       description: Returns the description for the specified topic
       externalDocs:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx'
-      operationId: Topics_GetTopic
+      operationId: Topics_Get
       parameters:
         - description: The name of the resource group.
           in: path
@@ -898,7 +903,7 @@ paths:
         '200':
           description: Topics AuthorizationRule deleted
       tags:
-        - Namespaces
+        - Topics
     get:
       description: Returns the specified authorizationRule.
       externalDocs:
@@ -915,14 +920,14 @@ paths:
           name: namespaceName
           required: true
           type: string
-        - description: Authorization rule name.
-          in: path
-          name: authorizationRuleName
-          required: true
-          type: string
         - description: The topic name.
           in: path
           name: topicName
+          required: true
+          type: string
+        - description: Authorization rule name.
+          in: path
+          name: authorizationRuleName
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
@@ -1010,7 +1015,7 @@ paths:
           schema:
             $ref: '#/definitions/ResourceListKeys'
       tags:
-        - Namespaces
+        - Topics
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}/regenerateKeys':
     post:
       description: Regenerates Primary or Secondary ConnectionStrings to the topic
@@ -1197,26 +1202,54 @@ paths:
       tags:
         - Subscriptions
 definitions:
+  EntityAvailabilityStatus:
+    description: Entity availability status.
+    enum:
+      - Available
+      - Limited
+      - Renaming
+      - Restoring
+      - Unknown
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: EntityAvailabilityStatus
+  EntityStatus:
+    description: Entity status.
+    enum:
+      - Active
+      - Creating
+      - Deleting
+      - Disabled
+      - ReceiveDisabled
+      - Renaming
+      - Restoring
+      - SendDisabled
+      - Unknown
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: EntityStatus
   MessageCountDetails:
     description: Message Count Details.
     properties:
-      ActiveMessageCount:
+      activeMessageCount:
         description: 'Number of active messages in the queue, topic, or subscription.'
         format: int64
         type: integer
-      DeadLetterMessageCount:
+      deadLetterMessageCount:
         description: Number of messages that are dead letters.
         format: int64
         type: integer
-      ScheduledMessageCount:
+      scheduledMessageCount:
         description: Number scheduled messages.
         format: int64
         type: integer
-      TransferDeadLetterMessageCount:
+      transferDeadLetterMessageCount:
         description: Number of messages transferred into dead letters.
         format: int64
         type: integer
-      TransferMessageCount:
+      transferMessageCount:
         description: 'Number of messages transferred to another queue, topic, or subscription.'
         format: int64
         type: integer
@@ -1224,14 +1257,6 @@ definitions:
   NamespaceCreateOrUpdateParameters:
     description: Parameters supplied to the CreateOrUpdate Namespace operation.
     properties:
-      kind:
-        description: 'Specifies the namespace type; for example: Messaging.'
-        enum:
-          - Messaging
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: Kind
       location:
         description: Namespace location.
         type: string
@@ -1308,14 +1333,6 @@ definitions:
       - $ref: '#/definitions/Resource'
     description: Description of a Namespace resource.
     properties:
-      kind:
-        description: Kind of the Namespace.
-        enum:
-          - Messaging
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: Kind
       properties:
         $ref: '#/definitions/NamespaceProperties'
         x-ms-client-flatten: true
@@ -1348,115 +1365,81 @@ definitions:
         type: array
   QueueProperties:
     properties:
-      AccessedAt:
+      accessedAt:
         description: 'Last time a message was sent, or the last time there was a receive request to this queue.'
         format: date-time
         type: string
-      AutoDeleteOnIdle:
+      autoDeleteOnIdle:
         description: the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes.
         format: duration
         type: string
-      'AvailabilityStatus ':
-        description: entity availability status for the queue.
-        enum:
-          - Available
-          - Limited
-          - Renaming
-          - Restoring
-          - Unknown
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: AvailabilityStatus
-      CreatedAt:
+      countDetails:
+        $ref: '#/definitions/MessageCountDetails'
+      createdAt:
         description: the exact time the message was created.
         format: date-time
         type: string
-      DefaultMessageTimeToLive:
+      deadLetteringOnMessageExpiration:
+        description: a value that indicates whether this queue has dead letter support when a message expires.
+        type: boolean
+      defaultMessageTimeToLive:
         description: 'the default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.'
         format: duration
         type: string
-      'DuplicateDetectionHistoryTimeWindow ':
+      'duplicateDetectionHistoryTimeWindow ':
         description: TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes..
         format: duration
         type: string
-      EnableBatchedOperations:
+      enableBatchedOperations:
         description: value that indicates whether server-side batched operations are enabled..
         type: boolean
-      EnableDeadLetteringOnMessageExpiration:
-        description: a value that indicates whether this queue has dead letter support when a message expires.
-        type: boolean
-      EnableExpress:
+      enableExpress:
         description: a value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage.
         type: boolean
-      EnablePartitioning:
+      enablePartitioning:
         description: value that indicates whether the queue to be partitioned across multiple message brokers is enabled.
         type: boolean
-      ForwardDeadLetteredMessagesTo:
-        description: the path to the recipient to which the dead lettered message is forwarded.
-        type: string
-      ForwardTo:
-        description: the path to the recipient to which the message is forwarded.
-        type: string
-      IsAnonymousAccessible:
+      'entityAvailabilityStatus ':
+        $ref: '#/definitions/EntityAvailabilityStatus'
+        description: Entity availability status for the queue.
+      isAnonymousAccessible:
         description: a value that indicates whether the message is anonymous accessible.
         type: boolean
-      'LockDuration ':
+      'lockDuration ':
         description: 'the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute.'
         format: duration
         type: string
-      'MaxDeliveryCount ':
+      'maxDeliveryCount ':
         description: the maximum delivery count. A message is automatically deadlettered after this number of deliveries.
         format: int32
         type: integer
-      'MaxSizeInMegabytes ':
+      maxSizeInMegabytes:
         description: 'the maximum size of the queue in megabytes, which is the size of memory allocated for the queue.'
         format: int64
         type: integer
-      'MessageCount ':
+      'messageCount ':
         description: the number of messages in the queue.
         format: int64
         type: integer
-      MessageCountDetails:
-        $ref: '#/definitions/MessageCountDetails'
-      Path:
-        description: the name of the queue.
-        type: string
-      RequiresDuplicateDetection:
+      requiresDuplicateDetection:
         description: the value indicating if this queue requires duplicate detection.
         type: boolean
-      RequiresSession:
+      requiresSession:
         description: a value that indicates whether the queue supports the concept of session.
         type: boolean
-      'SizeInBytes ':
+      'sizeInBytes ':
         description: the size of the queue in bytes.
         format: int64
         type: integer
-      Status:
+      status:
+        $ref: '#/definitions/EntityStatus'
         description: Enumerates the possible values for the status of a messaging entity.
-        enum:
-          - Active
-          - Creating
-          - Deleting
-          - Disabled
-          - ReceiveDisabled
-          - Renaming
-          - Restoring
-          - SendDisabled
-          - Unknown
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: EntityStatus
-      SupportOrdering:
+      supportOrdering:
         description: a value that indicates whether the queue supports ordering.
         type: boolean
-      UpdatedAt:
+      updatedAt:
         description: the exact time the message has been updated.
         format: date-time
-        type: string
-      UserMetadata:
-        description: Represents the metadata description of the queue.
         type: string
   QueueResource:
     allOf:
@@ -1473,7 +1456,7 @@ definitions:
         description: Key that needs to be regenerated .
         enum:
           - PrimaryKey
-          - SecondayKey
+          - SecondaryKey
         type: string
         x-ms-enum:
           modelAsString: false
@@ -1623,94 +1606,60 @@ definitions:
   SubscriptionProperties:
     description: Description of Subscription Resource.
     properties:
-      AccessedAt:
+      accessedAt:
         description: Last time a there was a receive request to this subscription.
         format: date-time
         type: string
-      AutoDeleteOnIdle:
+      autoDeleteOnIdle:
         description: TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes.
         format: duration
         type: string
-      'AvailabilityStatus ':
-        description: Entity availability status for the topic.
-        enum:
-          - Available
-          - Limited
-          - Renaming
-          - Restoring
-          - Unknown
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: AvailabilityStatus
-      CreatedAt:
+      countDetails:
+        $ref: '#/definitions/MessageCountDetails'
+      createdAt:
         description: Exact time the message was created.
         format: date-time
         type: string
-      DefaultMessageTimeToLive:
+      deadLetteringOnFilterEvaluationExceptions:
+        description: Value that indicates if a subscription has dead letter support on Filter evaluation exceptions.
+        type: boolean
+      deadLetteringOnMessageExpiration:
+        description: Value that indicates if a subscription has dead letter support when a message expires.
+        type: boolean
+      defaultMessageTimeToLive:
         description: 'Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.'
         format: duration
         type: string
-      EnableBatchedOperations:
+      enableBatchedOperations:
         description: Value that indicates whether server-side batched operations are enabled..
         type: boolean
-      EnableDeadLetteringOnFilterEvaluationExceptions:
-        description: Value that indicates if a subscription has dead letter support on Filter evaluation exceptions.
-        type: boolean
-      EnableDeadLetteringOnMessageExpiration:
-        description: Value that indicates if a subscription has dead letter support when a message expires.
-        type: boolean
-      ForwardDeadLetteredMessagesTo:
-        description: Path to the recipient to which the dead lettered messages are forwarded.
-        type: string
-      ForwardTo:
-        description: Path to the recipient to which the message is forwarded.
-        type: string
-      IsReadOnly:
+      entityAvailabilityStatus:
+        $ref: '#/definitions/EntityAvailabilityStatus'
+        description: Entity availability status for the topic.
+      isReadOnly:
         description: Value that indicates whether the entity description is read-only.
         type: boolean
-      LockDuration:
+      lockDuration:
         description: The lock duration time span for the subscription.
         format: duration
         type: string
-      MaxDeliveryCount:
+      maxDeliveryCount:
         description: Number of maximum deliveries.
         format: int32
         type: integer
-      MessageCount:
+      messageCount:
         description: Number of messages.
         format: int64
         type: integer
-      MessageCountDetails:
-        $ref: '#/definitions/MessageCountDetails'
-      RequiresSession:
+      requiresSession:
         description: Value indicating if a subscription supports the concept of session.
         type: boolean
-      Status:
+      status:
+        $ref: '#/definitions/EntityStatus'
         description: Enumerates the possible values for the status of a messaging entity.
-        enum:
-          - Active
-          - Creating
-          - Deleting
-          - Disabled
-          - ReceiveDisabled
-          - Renaming
-          - Restoring
-          - SendDisabled
-          - Unknown
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: EntityStatus
-      TopicPath:
-        description: Path of the topic that this subscription description belongs to.
-        type: string
-      UpdatedAt:
+      updatedAt:
         description: The exact time the message has been updated.
         format: date-time
-        type: string
-      UserMetadata:
-        description: Represents the metadata description of the Subscription.
         type: string
   SubscriptionResource:
     allOf:
@@ -1747,98 +1696,76 @@ definitions:
         type: array
   TopicProperties:
     properties:
-      AccessedAt:
+      accessedAt:
         description: Last time the message was sent or a request was received for this topic.
         format: date-time
         type: string
-      AutoDeleteOnIdle:
+      autoDeleteOnIdle:
         description: TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes.
         format: duration
         type: string
-      'AvailabilityStatus ':
-        description: Entity availability status for the topic.
-        enum:
-          - Available
-          - Limited
-          - Renaming
-          - Restoring
-          - Unknown
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: AvailabilityStatus
-      CreatedAt:
+      countDetails:
+        $ref: '#/definitions/MessageCountDetails'
+      createdAt:
         description: Exact time the message was created.
         format: date-time
         type: string
-      DefaultMessageTimeToLive:
+      defaultMessageTimeToLive:
         description: 'Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.'
         format: duration
         type: string
-      'DuplicateDetectionHistoryTimeWindow ':
+      'duplicateDetectionHistoryTimeWindow ':
         description: TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes..
         format: duration
         type: string
-      EnableBatchedOperations:
+      enableBatchedOperations:
         description: Value that indicates whether server-side batched operations are enabled..
         type: boolean
-      EnableExpress:
+      enableExpress:
         description: Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
         type: boolean
-      EnableFilteringMessagesBeforePublishing:
-        description: Whether messages should be filtered before publishing.
-        type: boolean
-      EnablePartitioning:
+      enablePartitioning:
         description: Value that indicates whether the topic to be partitioned across multiple message brokers is enabled.
         type: boolean
-      IsAnonymousAccessible:
+      enableSubscriptionPartitioning:
+        description: Value that indicates whether partitioning is enabled or disabled..
+        type: boolean
+      'entityAvailabilityStatus ':
+        $ref: '#/definitions/EntityAvailabilityStatus'
+        description: Entity availability status for the topic.
+      filteringMessagesBeforePublishing:
+        description: Whether messages should be filtered before publishing.
+        type: boolean
+      isAnonymousAccessible:
         description: Value that indicates whether the message is anonymous accessible.
         type: boolean
-      'MaxSizeInMegabytes ':
+      isExpress:
+        description: ''
+        type: boolean
+      maxSizeInMegabytes:
         description: 'Maximum size of the topic in megabytes, which is the size of memory allocated for the topic.'
         format: int64
         type: integer
-      MessageCountDetails:
-        $ref: '#/definitions/MessageCountDetails'
-      Path:
-        description: Name of the topic.
-        type: string
-      RequiresDuplicateDetection:
+      requiresDuplicateDetection:
         description: Value indicating if this topic requires duplicate detection.
         type: boolean
-      'SizeInBytes ':
+      sizeInBytes:
         description: Size of the topic in bytes.
         format: int64
         type: integer
-      Status:
+      status:
+        $ref: '#/definitions/EntityStatus'
         description: Enumerates the possible values for the status of a messaging entity.
-        enum:
-          - Active
-          - Creating
-          - Deleting
-          - Disabled
-          - ReceiveDisabled
-          - Renaming
-          - Restoring
-          - SendDisabled
-          - Unknown
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: EntityStatus
-      SubscriptionCount:
+      subscriptionCount:
         description: Number of subscriptions.
         format: int32
         type: integer
-      SupportOrdering:
+      supportOrdering:
         description: Value that indicates whether the topic supports ordering.
         type: boolean
-      UpdatedAt:
+      updatedAt:
         description: The exact time the message has been updated.
         format: date-time
-        type: string
-      UserMetadata:
-        description: Represents the metadata description of the topic
         type: string
   TopicResource:
     allOf:

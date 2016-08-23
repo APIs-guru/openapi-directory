@@ -106,6 +106,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "With this call you can find rateplans for a hotel by different filters. By default and without any filter criteria\r\n            defined it will return you all active rateplans."
       parameters:
         - description: Application identifier
           in: header
@@ -125,7 +126,7 @@ paths:
           name: hotelId
           required: true
           type: integer
-        - description: Return all rateplans having an active date today or in the future
+        - description: "Specify which rateplans to return. If you do not specify a value you will by default get active\r\n            rateplans."
           enum:
             - Active
             - Inactive
@@ -248,7 +249,7 @@ paths:
           name: hotelId
           required: true
           type: integer
-        - description: Return all rateplans having an active date today or in the future
+        - description: "Specify which rateplans to return. If you do not specify a value you will by default get active\r\n            rateplans."
           enum:
             - Active
             - Inactive
@@ -330,6 +331,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: Read the details about a specific rateplan for the defined hotel.
       parameters:
         - description: Application identifier
           in: header
@@ -375,6 +377,371 @@ paths:
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Get all the details for a specific rateplan in the hotel.
+      tags:
+        - RatePlans
+  '/api/hotel/v0/hotels/{hotelId}/rateplans/{rateplanCode}/rates':
+    get:
+      consumes: []
+      deprecated: false
+      description: "With this call you can read the daily rates setup including the cancellation policy and minimum guarantee per day for the\r\n            specified rateplan. You can specify a timeperiod to read the daily rates for. The rateplan needs to be active for at least\r\n            one business day in the defined time period and have rates loaded."
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The hotel id the rateplan belongs to.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: The code of the rateplan you want to see details for.
+          in: path
+          name: rateplanCode
+          required: true
+          type: string
+        - description: You can expand the supplements per room type on demand. By default they are not shown.
+          enum:
+            - RoomTypeSupplements
+          in: query
+          name: expand
+          required: false
+          type: string
+        - description: "Defines the last business day you would like to get rates for. The maximum time span between <i>from</i>´and <i>to</i>\r\n            is limited to 365 days."
+          format: date-time
+          in: query
+          name: from
+          required: true
+          type: string
+        - description: Defines the first business day you would like to get rates for.
+          format: date-time
+          in: query
+          name: to
+          required: true
+          type: string
+        - description: Amount of items to skip.
+          format: int32
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Amount of items to select.
+          format: int32
+          in: query
+          name: top
+          required: false
+          type: integer
+        - description: Return total amount of items for a given filter criteria.
+          enum:
+            - None
+            - AllPages
+          in: query
+          name: inlinecount
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: List of daily rates within the specified time preiod.
+          schema:
+            $ref: '#/definitions/RatesResponse'
+        '204':
+          description: The rateplan does not have any active date or is not loaded within the defined time period.
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI or the requested rateplan could not be found.
+        '422':
+          description: The request failed to validate.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Get the setup of the daily rates for a specific rateplan and a defined timeperiod.
+      tags:
+        - RatePlans
+    patch:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: "The hetras API is using <a href=\"https://tools.ietf.org/html/rfc6902\" onfocus=\"this.blur()\" target=\"_blank\">IETF JSON Patch RFC 6902</a>\r\n            to partially update an existing resource. Currently this call only allows to set the base price for non-derived rateplans if the rateplan\r\n            is active and already loaded for the specified time period.\r\n            <br /><br />\r\n            A request example:<br /><pre>\r\n            [\r\n              {\r\n                \"op\": \"replace\", \"path\": \"/base_price\", \"value\": 120.00\r\n              }\r\n            ]\r\n            </pre><br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>.<br />"
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The hotel id the rateplan belongs to.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: The code of the rateplan you want to update the daily rate details for.
+          in: path
+          name: rateplanCode
+          required: true
+          type: string
+        - description: A set of JSON Patch operations.
+          in: body
+          name: patchRequest
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/JsonPatchOperationRequest'
+            type: array
+        - description: "Defines the last business day you would like to get rates for. The maximum time span between <i>from</i>´and <i>to</i>\r\n            is limited to 365 days."
+          format: date-time
+          in: query
+          name: from
+          required: true
+          type: string
+        - description: Defines the first business day you would like to get rates for.
+          format: date-time
+          in: query
+          name: to
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The update was successful
+          schema:
+            $ref: '#/definitions/Object'
+        '400':
+          description: Bad request. Request body erroneous.
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: The request failed to validate.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Partially update a rate of the specified rateplan for the defined time period.
+      tags:
+        - RatePlans
+  '/api/hotel/v0/hotels/{hotelId}/rateplans/{rateplanCode}/rates/$count':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The hotel id the rateplan belongs to.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: The code of the rateplan you want to count daily rates for.
+          in: path
+          name: rateplanCode
+          required: true
+          type: string
+        - description: You can expand the supplements per room type on demand. By default they are not shown.
+          enum:
+            - RoomTypeSupplements
+          in: query
+          name: expand
+          required: false
+          type: string
+        - description: "Defines the last business day you would like to get rates for. The maximum time span between <i>from</i>´and <i>to</i>\r\n            is limited to 365 days."
+          format: date-time
+          in: query
+          name: from
+          required: true
+          type: string
+        - description: Defines the first business day you would like to get rates for.
+          format: date-time
+          in: query
+          name: to
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The count of daily rates for the specified time period.
+          schema:
+            $ref: '#/definitions/TotalCountResponse'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI or the requested room could not be found.
+        '422':
+          description: The request failed to validate.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Get the count of all active and loaded daily rates for the defined rateplan in a specified time period.
+      tags:
+        - RatePlans
+  '/api/hotel/v0/hotels/{hotelId}/rateplans/{rateplanCode}/rates/{businessDay}':
+    get:
+      consumes: []
+      deprecated: false
+      description: Read the setup of the daily rate for the defined rateplan for that specific business day.
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The hotel id the rateplan belongs to.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: The code of the rateplan you want to see details for.
+          in: path
+          name: rateplanCode
+          required: true
+          type: string
+        - description: The business day you want to get the rate setup for.
+          format: date-time
+          in: path
+          name: businessDay
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Daily rate with room type supplements for the specified rateplan and business day.
+          schema:
+            $ref: '#/definitions/RateResponse'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: "Not Found. The server has not found anything matching the Request-URI or the requested\r\n            rateplan could not be found or the rate is inactive on this business day."
+        '422':
+          description: The request failed to validate.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Get the setup of a daily rate for a specific business day and rateplan.
+      tags:
+        - RatePlans
+    patch:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: "The hetras API is using <a href=\"https://tools.ietf.org/html/rfc6902\" onfocus=\"this.blur()\" target=\"_blank\">IETF JSON Patch RFC 6902</a>\r\n            to partially update an existing resource. Currently this call only allows to set the base price for non-derived rateplans if the rateplan\r\n            is active and already loaded for the specified business day.\r\n            <br /><br />\r\n            A request example:<br /><pre>\r\n            [\r\n              {\r\n                \"op\": \"replace\", \"path\": \"/base_price\", \"value\": 120.00\r\n              }\r\n            ]\r\n            </pre><br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>.<br />"
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The hotel id the rateplan belongs to.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: The code of the rateplan you want to update the daily rate details for.
+          in: path
+          name: rateplanCode
+          required: true
+          type: string
+        - description: The business day of the daily rate you want to update.
+          format: date-time
+          in: path
+          name: businessDay
+          required: true
+          type: string
+        - description: A set of JSON Patch operations.
+          in: body
+          name: patchRequest
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/JsonPatchOperationRequest'
+            type: array
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The update was successful
+          schema:
+            $ref: '#/definitions/Object'
+        '400':
+          description: Bad request. Request body erroneous.
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: The request failed to validate.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Partially update a rate of the specified rateplan for a defined business day.
       tags:
         - RatePlans
   '/api/hotel/v0/hotels/{hotelId}/room_types':
@@ -1206,6 +1573,25 @@ definitions:
       - from
       - to
     type: object
+  GetRatesRequest:
+    properties:
+      Expand:
+        description: You can expand the supplements per room type on demand. By default they are not shown.
+        enum:
+          - RoomTypeSupplements
+        type: string
+      From:
+        description: "Defines the last business day you would like to get rates for. The maximum time span between <i>from</i>´and <i>to</i>\r\n            is limited to 365 days."
+        format: date-time
+        type: string
+      To:
+        description: Defines the first business day you would like to get rates for.
+        format: date-time
+        type: string
+    required:
+      - From
+      - To
+    type: object
   GetRoomListRequest:
     properties:
       amenities:
@@ -1461,6 +1847,75 @@ definitions:
         format: int32
         type: integer
     type: object
+  Policy:
+    properties:
+      description:
+        description: The description of the policy
+        type: string
+      name:
+        description: The name of the policy
+        type: string
+    type: object
+  PriceDerivation:
+    properties:
+      adjustment:
+        description: Mode for the calculation of the daily rates adjustment
+        enum:
+          - Amount
+          - Percentage
+        type: string
+      value:
+        description: The value the rate of the base rateplan is adjusted by based on the calculation mode
+        format: double
+        type: number
+    type: object
+  RateResponse:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      base_price:
+        description: "The price for this business day for the default room type and occupancy of one adult. The price is\r\n            only available for base rateplans. Please be aware that it might be the case that the default room\r\n            type is not sold by the rateplan. Nevertheless the supplements will always be added to the price for \r\n            the default room type and one adult"
+        format: double
+        type: number
+      business_day:
+        description: The business day
+        format: date-time
+        type: string
+      cancellation_policy:
+        $ref: '#/definitions/Policy'
+        description: The cancellation policy
+      derivation:
+        $ref: '#/definitions/PriceDerivation'
+        description: Information on how the rate is derived from its base rateplan
+      minimum_guarantee_type:
+        description: The minimum guarantee
+        enum:
+          - PM4Hold
+          - PM6Hold
+          - GuaranteeToCreditCard
+          - GuaranteeToGuestAccount
+          - GuaranteeByTravelAgent
+          - GuaranteeByCompany
+          - Deposit
+          - Voucher
+          - Prepayment
+          - NonGuaranteed
+          - Tentative
+          - Waitlist
+        type: string
+      per_person_surcharge:
+        description: The surcharge per additional adult staying in the room. It is only available on base rateplans
+        format: double
+        type: number
+      room_type_supplements:
+        description: List of supplements added to the price per room type
+        items:
+          $ref: '#/definitions/RoomTypeSupplement'
+        type: array
+    type: object
   RateplanGroup:
     properties:
       code:
@@ -1503,7 +1958,7 @@ definitions:
           type: string
         type: array
       sellingStatus:
-        description: Return all rateplans having an active date today or in the future
+        description: "Specify which rateplans to return. If you do not specify a value you will by default get active\r\n            rateplans."
         enum:
           - Active
           - Inactive
@@ -1525,6 +1980,37 @@ definitions:
         description: List of rateplans
         items:
           $ref: '#/definitions/ListRateplanEntry'
+        type: array
+    type: object
+  RatesRequest:
+    properties:
+      From:
+        description: "Defines the last business day you would like to get rates for. The maximum time span between <i>from</i>´and <i>to</i>\r\n            is limited to 365 days."
+        format: date-time
+        type: string
+      To:
+        description: Defines the first business day you would like to get rates for.
+        format: date-time
+        type: string
+    required:
+      - From
+      - To
+    type: object
+  RatesResponse:
+    properties:
+      _count:
+        description: The number of items matching your request in total for all pages.
+        format: int32
+        type: integer
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      rates:
+        description: 'The list of rates, cancellation policy and minimum guarantee per business day.'
+        items:
+          $ref: '#/definitions/RateResponse'
         type: array
     type: object
   RelatedRateplan:
@@ -1766,6 +2252,25 @@ definitions:
           $ref: '#/definitions/SimpleAttribute'
         type: array
     type: object
+  RoomTypeSupplement:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      code:
+        description: The code of the room type
+        type: string
+      default:
+        description: Specifies if the room type is the default room type of the hotel
+        type: boolean
+      supplements:
+        description: The supplements per adults in the room. The per person surcharge will be added on top
+        items:
+          $ref: '#/definitions/Supplement'
+        type: array
+    type: object
   SimpleAttribute:
     description: Represents a simple attribute
     properties:
@@ -1775,6 +2280,23 @@ definitions:
       name:
         description: The name of the attribute
         type: string
+    type: object
+  Supplement:
+    properties:
+      adjustment:
+        description: Mode for the calculation of the supplement value
+        enum:
+          - Amount
+          - Percentage
+        type: string
+      adults:
+        description: The number of adults per room
+        format: int32
+        type: integer
+      supplement:
+        description: The amount or percentage that will be added for this room type and number of adults per room
+        format: double
+        type: number
     type: object
   TotalCountResponse:
     properties:

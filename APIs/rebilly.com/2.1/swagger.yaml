@@ -143,7 +143,7 @@ tags:
 
       Rebilly also offers JSON Web Tokens (JWT) authentication, where you can control
       the specific granular permissions and expiration for that JWT.  We call our resource
-      for generating JWT [Sessions](#tag/Session).
+      for generating JWT [Sessions](#tag/Sessions).
 
       Rebilly also has a client-side authentication scheme that uses an
       apiUser and HMAC-SHA1 signature (only for the Tokens resource), so
@@ -154,14 +154,20 @@ tags:
       The client-side authentication scheme uses one HTTP header named REB-AUTH.
     name: Authentication
   - description: |
-      Customers are your customers, sometimes known as accounts, clients,
-      members, patrons, or players in other systems.
-    name: Customers
+      3D Secure is a way to authenticate and protect transactions.  Typically,
+      it's only possible to protect the initial transaction in a subscription
+      with 3D Secure.
+    name: 3D Secure
   - description: |
-      Contacts belong to Customers. A Customer can have many contacts.
-      Some contacts are associated to Invoices, Payment Cards, Subscriptions
-      and Transactions.
-    name: Contacts
+      Always keep your API Keys private.  In addition to your API Keys, you may use
+      JSON Web Tokens (JWT) to authenticate to the API.  See
+      our [Sessions](#tag/Sessions) resource for more information.
+    name: API Keys
+  - description: |
+      Bank Accounts are a type of payment instrument used to collect
+      ACH (echeck) payments, similar to how a payment
+      card would be used to for a credit card payment.
+    name: Bank Accounts
   - description: |
       Your blacklists contains values of customerIds, email addresses,
       ipAddresses, bank identification numbers, countries or payment cards that
@@ -170,10 +176,59 @@ tags:
       greylist.
     name: Blacklists
   - description: |
+      Hosted checkout pages.
+    name: Checkout Pages
+  - description: |
+      Contacts belong to Customers. A Customer can have many contacts.
+      Some contacts are associated to Invoices, Payment Cards, Subscriptions
+      and Transactions.
+    name: Contacts
+  - description: |
+      Customers are your customers, sometimes known as accounts, clients,
+      members, patrons, or players in other systems.
+    name: Customers
+  - description: |
+      Create authentication credentials, login, logout, and verify your customers.
+    name: Customer Authentication
+  - description: |
+      If system events can't solve your problems, you are able to create a custom event
+      that can fit your requirements, and use it to solve your own business logic.
+    name: Custom Events
+  - description: |
+      Create additional custom fields for particular resources.  You may name,
+      describe, and determine the type of the schema.
+    name: Custom Fields
+  - description: |
+      Handle disputes (chargebacks and retrievals).
+    name: Disputes
+  - description: |
+      Send automated emails through our system by connecting to your third party
+      SMTP server (or your third party email service provider's SMTP server).
+    name: Email Credentials
+  - description: |
+      Gateway accounts connect payment request to third party networks and platforms.
+    name: Gateway Accounts
+  - description: |
+      Histograms are for particular kinds of reports.
+    name: Histograms
+  - description: |
+      Invoices leave a record for both you and your customer of the products sold.
+    name: Invoices
+  - description: |
       Layouts are used to hold collections of plans. A layout can be used to
       power a pricing page. You can make multiple layouts, and use rules to
       target them to different audiences.
     name: Layouts
+  - description: |
+      Lead sources track the marketing source of the customer.  Use lead sources
+      to tie marketing analysis further into the customer lifecycle: such as
+      recurring revenues and disputes.  Lead sources can also be used as attributes
+      by rules.
+    name: Lead Sources
+  - description: |
+      Leave notes on a customer record to have a handy location to share with
+      others who may interface with the customer.  It's great for customer service.
+    name: Notes
   - description: |
       Organizations include the name and address of the entities related to your
       account. An account may be multi-national, and support multiple
@@ -182,7 +237,7 @@ tags:
   - description: |
       Collect money from your customers with payments.  You can schedule a payment
       to occur in the future.  You can assign a dunning schedule to a payment to collect
-      in the case of a decline
+      in the case of a decline.
 
       Some payments may be, what we term, suspended payments.  These types of payments
       require user interaction.  For example, an initial PayPal purchase, a 3D Secure
@@ -190,26 +245,32 @@ tags:
       complete the payment.  We call these a "suspended" payment flow.
     name: Payments
   - description: |
+      Payment cards are a type of payment instrument used for credit and debit card
+      sales.  Rebilly securely vaults the full payment card number, and can pass it
+      onward securely to any gateway account to transact business.
+    name: Payment Cards
+  - description: |
+      Payment tokens are used to reduce the scope of PCI DSS compliance.  A payment
+      token can be made using a different authentication scheme (refer to the public key
+      authentication scheme in the Authentication section), which allows you to
+      create a payment token directly from the browser, bypassing the need to send
+      sensitive cardholder info to your servers.  We recommend using this with our
+      Rebilly.js library, which helps you wire a form into this API resource and create
+      payment tokens.
+    name: Payment Tokens
+  - description: |
+      Plans are a template for making a subscription.  For example, you may have a plan
+      that has a 30-day free trial followed by a recurring charge of $19.95 per month
+      until canceled.  The combination of the plan and a request to make a subscription
+      will apply those instructions to create the invoices according to the plan's
+      schedule.
+    name: Plans
+  - description: |
       Proposed:  Your product includes digital goods, services, and physical goods.
     name: Products
   - description: |
-      Proposed: You can map a product to a tax category.  The tax category is used by
-      tax providers to calculate taxes for invoices.
-    name: Taxes
-  - description: |
-      A Website represents the website/brand that customers interact with... You
-      could think of it like a brand.  For example, Nestle owns Perrier and Purina
-      and PowerBar.
-
-      We recognize that some enterprises have more than one website (or brand).  The
-      website is related to each invoice and each payment gateway account.  This feature
-      would allow you to have gateway accounts that are related to multiple websites, or
-      exclusive to particular websites.  And gives you more control over your business.
-    name: Websites
-  - description: |
-      A User represents a person who can login to Rebilly, and take actions subject to
-      their granted permissions.
-    name: Users
+      Collect summary information.
+    name: Reports
   - description: |
       A session contains a token, which is a JSON Web Token.  The token is created
       with a user's signin credentials.
@@ -222,10 +283,39 @@ tags:
       client to simulate a "session."
     name: Sessions
   - description: |
+      Check the status of the Rebilly API (no authentication required).
+    name: Status
+  - description: |
+      A subscription applies a plan's template to create invoices for a customer at the
+      appropriate scheduled intervals.  A subscription may also determine if the payment
+      is collected automatically (with autopay set true).
+    name: Subscriptions
+  - description: |
+      Proposed: You can map a product to a tax category.  The tax category is used by
+      tax providers to calculate taxes for invoices.
+    name: Taxes
+  - description: |
       Tracking is a layer for accessing all the activity (API requests,
       subscriptions, webhooks, events, etc.), thus providing easier
       debugging and issues auditing.
     name: Tracking
+  - description: |
+      Get and refund transactions.
+    name: Transactions
+  - description: |
+      A User represents a person who can login to Rebilly, and take actions subject to
+      their granted permissions.
+    name: Users
+  - description: |
+      A Website represents the website/brand that customers interact with... You
+      could think of it like a brand.  For example, Nestle owns Perrier and Purina
+      and PowerBar.
+
+      We recognize that some enterprises have more than one website (or brand).  The
+      website is related to each invoice and each payment gateway account.  This feature
+      would allow you to have gateway accounts that are related to multiple websites, or
+      exclusive to particular websites.  And gives you more control over your business.
+    name: Websites
 paths:
   /3dsecure:
     get:
@@ -1577,6 +1667,175 @@ paths:
       summary: Create or update a credential with predefined ID
       tags:
         - Customer Authentication
+  /custom-events:
+    get:
+      description: |
+        Retrieve a list of custom events
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of custom events was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/CustomEvent'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of custom events
+      tags:
+        - Custom Events
+    post:
+      description: |
+        Create a custom event
+      parameters:
+        - description: Custom event resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CustomEvent'
+      responses:
+        '202':
+          description: Custom event was accepted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/CustomEvent'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Create a custom event
+      tags:
+        - Custom Events
+  '/custom-events/{id}':
+    delete:
+      description: |
+        Delete a custom event with predefined identifier string
+      responses:
+        '204':
+          description: Custom event was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          $ref: '#/responses/Conflict'
+          description: Custom event has related rules and cannot be deleted
+      summary: Delete a custom event
+      tags:
+        - Custom Events
+    get:
+      description: |
+        Retrieve a custom event with predefined identifier string
+      responses:
+        '200':
+          description: Custom event was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/CustomEvent'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a custom event
+      tags:
+        - Custom Events
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      description: |
+        Create or update a custom event with predefined identifier string
+      parameters:
+        - description: Custom event resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CustomEvent'
+      responses:
+        '202':
+          description: Custom event was accepted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/CustomEvent'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '409':
+          $ref: '#/responses/Conflict'
+          description: Custom event can't be modified
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Create or update a custom event with predefined ID
+      tags:
+        - Custom Events
   '/custom-fields/{resource}':
     get:
       description: |
@@ -2548,9 +2807,7 @@ paths:
             $ref: '#/definitions/HistogramData'
       summary: Get Transaction histogram report data
       tags:
-        - Transaction
-        - Histogram
-        - Report
+        - Histograms
   /invoices:
     get:
       description: |
@@ -4374,6 +4631,117 @@ paths:
       summary: Create a product with predefined ID
       tags:
         - Products
+  /queue/custom-events:
+    get:
+      description: |
+        Retrieve a list of scheduled custom events
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of scheduled custom events was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/CustomEvent'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of scheduled custom events
+      tags:
+        - Custom Events
+  '/queue/custom-events/{id}':
+    delete:
+      description: |
+        Delete a scheduled custom event with predefined identifier string
+      responses:
+        '204':
+          description: Scheduled custom event was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Delete a scheduled custom event
+      tags:
+        - Custom Events
+    get:
+      description: |
+        Retrieve a scheduled custom event with predefined identifier string
+      responses:
+        '200':
+          description: Scheduled custom event was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/CustomEvent'
+        '303':
+          description: Custom event was successfully processed and moved out from queue
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/CustomEvent'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a scheduled custom event
+      tags:
+        - Custom Events
+    parameters:
+      - $ref: '#/parameters/resourceId'
   /queue/payments:
     get:
       description: |
@@ -6423,14 +6791,36 @@ paths:
       tags:
         - Websites
 definitions:
+  A1:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            description: A1 Gateway credentials object
+            properties:
+              accountId:
+                description: A1 Gateway account ID
+                type: string
+              password:
+                description: A1 Gateway password
+                format: password
+                type: string
+            required:
+              - accountId
+              - password
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: A1 Gateway config
   AmountAdjustment:
     discriminator: amountPolicy
     properties:
       amountPolicy:
         enum:
-          - full-price
-          - partial-amount
-          - rate-discount
+          - none
+          - partial
+          - discount
         type: string
     required:
       - amountPolicy
@@ -6587,6 +6977,27 @@ definitions:
       - username
       - password
     type: object
+  AuthorizeNet:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiLoginId:
+                description: AuthorizeNet Gateway api login ID
+                type: string
+              transactionKey:
+                description: AuthorizeNet Gateway Transaction Key
+                format: password
+                type: string
+            required:
+              - apiLoginId
+              - transactionKey
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: AuthorizeNet Gateway config
   BankAccount:
     properties:
       _links:
@@ -6656,6 +7067,27 @@ definitions:
     required:
       - rel
     type: object
+  Beanstream:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiPasscode:
+                description: Beanstream Gateway API Passcode
+                format: password
+                type: string
+              merchantId:
+                description: Beanstream Gateway merchant ID
+                type: string
+            required:
+              - merchantId
+              - apiPasscode
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Beanstream Gateway config
   BillingContactLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -6717,6 +7149,92 @@ definitions:
       - type
       - value
     type: object
+  BraintreePayments:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              merchantAccountId:
+                description: BraintreePayments merchant account ID
+                format: password
+                type: string
+              merchantId:
+                description: BraintreePayments merchant ID
+                format: password
+                type: string
+              privateKey:
+                description: BraintreePayments Private Key
+                format: password
+                type: string
+              publicKey:
+                description: BraintreePayments Public Key
+                type: string
+            required:
+              - publicKey
+              - privateKey
+              - merchantId
+              - merchantAccountId
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: BraintreePayments Gateway config
+  Cashflows:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              authId:
+                description: Cashflows Gateway auth ID
+                type: string
+              authPassword:
+                description: Cashflows Gateway auth password
+                format: password
+                type: string
+            required:
+              - authPassword
+              - authId
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Cashflows Gateway config
+  Chase:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              bin:
+                description: Chase Gateway bin
+                format: password
+                type: string
+              merchantId:
+                description: Chase Gateway merchant ID
+                type: string
+              password:
+                description: Chase Gateway password
+                format: password
+                type: string
+              terminalId:
+                description: Chase Gateway terminal ID
+                type: string
+              username:
+                description: Chase Gateway username
+                type: string
+            required:
+              - username
+              - password
+              - merchantId
+              - bin
+              - terminalId
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Chase Gateway config
   CheckoutPage:
     properties:
       _links:
@@ -6766,6 +7284,39 @@ definitions:
       - websiteId
       - uriPath
     type: object
+  ChinaUnionPay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              accountId:
+                description: China Union Pay Gateway account ID
+                type: string
+              goods:
+                description: China Union Pay Gateway goods
+                type: string
+              md5key:
+                description: China Union Pay Gateway md5key
+                format: password
+                type: string
+              mobilePay:
+                description: China Union Pay Gateway mobile pay param
+                type: string
+              partyId:
+                description: China Union Pay Gateway party ID
+                type: string
+            required:
+              - accountId
+              - partyId
+              - goods
+              - md5key
+              - mobilePay
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: China Union Pay Gateway config
   Condition:
     discriminator: op
     properties:
@@ -6900,6 +7451,67 @@ definitions:
       - password
       - customerId
     type: object
+  Credorax:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              merchantId:
+                description: Credorax Gateway merchant ID
+                type: string
+              merchantMd5Signature:
+                description: Credorax Gateway md5 signature
+                format: password
+                type: string
+            required:
+              - merchantId
+              - merchantMd5Signature
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Credorax Gateway config
+  CustomEvent:
+    properties:
+      chronology:
+        description: The arrangement of events in the order of their occurrence
+        enum:
+          - before
+          - after
+        type: string
+      createdTime:
+        $ref: '#/definitions/ServerTimestamp'
+      description:
+        description: The custom event description
+        type: string
+      eventType:
+        $ref: '#/definitions/CustomEventType'
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The custom event identifier string
+        readOnly: true
+      scheduleInstruction:
+        $ref: '#/definitions/ScheduleMethod'
+      title:
+        description: The custom event title
+        type: string
+    required:
+      - eventType
+      - title
+      - chronology
+      - scheduleInstruction
+    type: object
+  CustomEventType:
+    description: Rebilly custom event type
+    enum:
+      - subscription-ended
+      - subscription-trial-ended
+      - payment-card-expired
+      - invoice-past-due
+    readOnly: true
+    type: string
   CustomField:
     description: A separate Custom Field schema
     properties:
@@ -7004,6 +7616,27 @@ definitions:
     required:
       - rel
     type: object
+  Datacash:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              client:
+                description: Datacash Gateway client
+                type: string
+              password:
+                description: Datacash Gateway password
+                format: password
+                type: string
+            required:
+              - client
+              - password
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Datacash Gateway config
   DayOfWeek:
     enum:
       - Sunday
@@ -7038,6 +7671,32 @@ definitions:
     required:
       - rel
     type: object
+  Dengi:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              projectId:
+                description: Dengi Gateway project ID
+                type: string
+              publicKey:
+                description: Dengi Gateway public key
+                format: password
+                type: string
+              refundKey:
+                description: Dengi Gateway refund key
+                format: password
+                type: string
+            required:
+              - projectId
+              - publicKey
+              - refundKey
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Dengi Gateway config
   Dispute:
     properties:
       _links:
@@ -7308,6 +7967,27 @@ definitions:
       - afterAttemptPolicy
       - afterDunningEndPolicy
     type: object
+  EMerchantPay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiKey:
+                description: EMerchantPay Gateway api key
+                format: password
+                type: string
+              clientId:
+                description: EMerchantPay Gateway client ID
+                type: string
+            required:
+              - clientId
+              - apiKey
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: EMerchantPay Gateway config
   Email:
     properties:
       email:
@@ -7394,7 +8074,59 @@ definitions:
         minimum: 100
         type: integer
     type: object
+  Forte:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              accountId:
+                description: Forte Gateway account ID
+                type: string
+              apiAccessId:
+                description: Forte Gateway api access id
+                format: password
+                type: string
+              apiSecretKey:
+                description: Forte Gateway api secret key
+                format: password
+                type: string
+              locationId:
+                description: Forte Gateway location id
+                type: string
+            required:
+              - accountId
+              - locationId
+              - apiAccessId
+              - apiSecretKey
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Forte Gateway config
+  FundSend:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              clientId:
+                description: FundSend Gateway client ID
+                type: string
+              secretWord:
+                description: FundSend Gateway secret word
+                format: password
+                type: string
+            required:
+              - clientId
+              - secretWord
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: FundSend Gateway config
   GatewayAccount:
+    discriminator: gatewayName
     properties:
       _links:
         description: The links related to resource
@@ -7412,6 +8144,64 @@ definitions:
         type: array
       acquirerName:
         description: Acquirer name
+        enum:
+          - AIB
+          - B+S
+          - Bank of America
+          - Bank of Moscow
+          - Bank of Rebilly
+          - Bank One
+          - Beanstream
+          - BMO Harris Bank
+          - Borgun
+          - BraintreePayments
+          - Catalunya Caixa
+          - Chase
+          - ChinaUnionPay
+          - CIM
+          - Credorax
+          - Elavon
+          - EMS
+          - Fifth Third Bank
+          - First Data Buypass
+          - First Data Nashville
+          - First Data North
+          - First Data Omaha
+          - Forte
+          - FundSend
+          - GlobalCollect
+          - Global East
+          - Heartland
+          - HSBC
+          - iCheque
+          - Ilixium
+          - Masapay
+          - Merrick
+          - Mission Valley Bank
+          - Moneris
+          - NATWEST
+          - NMI
+          - Ochapay
+          - Other
+          - Panda Bank
+          - PayPal
+          - PayR
+          - Privatbank
+          - RBC
+          - RBS WorldPay
+          - RealTime
+          - RebillyProcessor
+          - State Bank of Mauritius
+          - Stripe
+          - TBI
+          - TrustPay
+          - TSYS
+          - Vantiv
+          - VoicePay
+          - Wells Fargo
+          - Wing Hang Bank
+          - Wirecard
+          - WorldPay
         type: string
       city:
         description: The gateway's city field
@@ -7439,11 +8229,48 @@ definitions:
       dynamicDescriptor:
         description: 'True, if Gateway Account allows dynamic descriptor'
         type: boolean
-      gatewayConfig:
-        description: Gateway config. Fields depends on gatewayName
-        type: object
       gatewayName:
         description: The gateway name
+        enum:
+          - A1 Gateway
+          - AuthorizeNet
+          - Beanstream
+          - BraintreePayments
+          - Cashflows
+          - Chase
+          - ChinaUnionPay
+          - Credorax
+          - Datacash
+          - Dengi
+          - FundSend
+          - eMerchantPay
+          - Forte
+          - GlobalCollect
+          - GlobalOne
+          - iCheque
+          - Ilixium
+          - Merchant Warehouse
+          - Moneris
+          - NMI
+          - OchaPay
+          - Optimal
+          - Panda Gateway
+          - PayPal
+          - PayR
+          - Payvision
+          - Plugnpay
+          - Realex
+          - RealTime
+          - RebillyProcessor
+          - Redsys
+          - Sagepay
+          - Stripe
+          - USAePay
+          - VantivLitle
+          - vegaaH
+          - Walpay
+          - Wirecard
+          - Worldpay
         type: string
       id:
         allOf:
@@ -7516,12 +8343,58 @@ definitions:
         type: array
     required:
       - gatewayName
+      - acquirerName
       - merchantCategoryCode
       - websites
-      - acquirerName
       - acceptedCurrencies
       - organizationId
     type: object
+  GlobalCollect:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiKeyId:
+                description: GlobalCollect Gateway api key id
+                type: string
+              apiSecretKey:
+                description: GlobalCollect Gateway api secret key
+                format: password
+                type: string
+              merchantId:
+                description: GlobalCollect Gateway merchant ID
+                type: string
+            required:
+              - merchantId
+              - apiKeyId
+              - apiSecretKey
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: GlobalCollect Gateway config
+  GlobalOne:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              sharedSecret:
+                description: GlobalOne Gateway shared secret
+                format: password
+                type: string
+              terminalId:
+                description: GlobalOne Gateway terminal ID
+                type: string
+            required:
+              - terminalId
+              - sharedSecret
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: GlobalOne Gateway config
   HistogramData:
     properties:
       data:
@@ -7538,6 +8411,31 @@ definitions:
           type: object
         type: array
     type: object
+  Ilixium:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              accountId:
+                description: Ilixium Gateway account ID
+                type: string
+              digestPassword:
+                description: Ilixium Gateway digest password
+                format: password
+                type: string
+              merchantId:
+                description: Ilixium Gateway merchant ID
+                type: string
+            required:
+              - merchantId
+              - accountId
+              - digestPassword
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Ilixium Gateway config
   InvalidError:
     allOf:
       - $ref: '#/definitions/Error'
@@ -7825,6 +8723,31 @@ definitions:
     required:
       - customerId
     type: object
+  MerchantWarehouse:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              merchantKey:
+                description: MerchantWarehouse Gateway merchant key
+                format: password
+                type: string
+              merchantName:
+                description: MerchantWarehouse Gateway merchant name
+                type: string
+              merchantSiteId:
+                description: MerchantWarehouse Gateway merchant site ID
+                type: string
+            required:
+              - merchantSiteId
+              - merchantName
+              - merchantKey
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: MerchantWarehouse Gateway config
   Method:
     description: The payment method
     enum:
@@ -7834,6 +8757,48 @@ definitions:
       - payment-card
       - paypal
     type: string
+  Moneris:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiToken:
+                description: Moneris Gateway api token
+                format: password
+                type: string
+              storeId:
+                description: Moneris Gateway store ID
+                type: string
+            required:
+              - storeId
+              - apiToken
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Moneris Gateway config
+  NMI:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              password:
+                description: NMI Gateway store ID
+                format: password
+                type: string
+              username:
+                description: NMI Gateway api token
+                type: string
+            required:
+              - username
+              - password
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: NMI Gateway config
   NewLink:
     properties:
       href:
@@ -7909,6 +8874,32 @@ definitions:
     required:
       - rel
     type: object
+  Ochapay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiPassword:
+                description: Ochapay Gateway api password
+                format: password
+                type: string
+              apiUsername:
+                description: Ochapay Gateway username
+                type: string
+              secretWord:
+                description: Ochapay Gateway secret word
+                format: password
+                type: string
+            required:
+              - apiUsername
+              - apiPassword
+              - secretWord
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Ochapay Gateway config
   OnBoardingUrlLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -7921,6 +8912,31 @@ definitions:
     required:
       - rel
     type: object
+  Optimal:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              accountNum:
+                description: Optimal Gateway account number
+                type: string
+              storeId:
+                description: Optimal Gateway store ID
+                type: string
+              storePwd:
+                description: Optimal Gateway store password
+                format: password
+                type: string
+            required:
+              - storeId
+              - storePwd
+              - accountNum
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Optimal Gateway config
   Organization:
     properties:
       _links:
@@ -7974,6 +8990,73 @@ definitions:
     required:
       - name
     type: object
+  PandaGateway:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiCode:
+                description: Panda Gateway api code
+                type: string
+              merchantCode:
+                description: Panda Gateway merchant code
+                type: string
+              signKey:
+                description: Panda Gateway sign key
+                format: password
+                type: string
+            required:
+              - merchantCode
+              - apiCode
+              - signKey
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Panda Gateway config
+  PayPal:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              merchantIdInPayPal:
+                description: PayPal Gateway merchant id
+                type: string
+              redirectUrl:
+                description: PayPal Gateway redirect url
+                format: url
+                type: string
+            required:
+              - merchantIdInPayPal
+              - redirectUrl
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: PayPal Gateway config
+  PayR:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              clientId:
+                description: PayR Gateway client ID
+                type: string
+              secretWord:
+                description: PayR Gateway secret word
+                format: password
+                type: string
+            required:
+              - clientId
+              - secretWord
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: PayR Gateway config
   Payment:
     properties:
       _links:
@@ -8266,6 +9349,35 @@ definitions:
         description: Routing Number
         type: integer
     type: object
+  Payvision:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              avs:
+                description: Payvision Gateway avs
+                type: string
+              delay:
+                description: Payvision Gateway delay
+                type: integer
+              memberGuid:
+                description: Payvision Gateway member guid
+                format: password
+                type: string
+              memberId:
+                description: Payvision Gateway member id
+                type: string
+            required:
+              - memberId
+              - avs
+              - delay
+              - memberGuid
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Payvision Gateway config
   Plan:
     properties:
       _links:
@@ -8381,6 +9493,27 @@ definitions:
     required:
       - rel
     type: object
+  Plugnpay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              publisher-name:
+                description: Plugnpay Gateway member id
+                type: string
+              publisher-password:
+                description: Plugnpay Gateway avs
+                format: password
+                type: string
+            required:
+              - publisher-name
+              - publisher-password
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Plugnpay Gateway config
   ProcessorAccountLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -8459,6 +9592,83 @@ definitions:
           - $ref: '#/definitions/ServerTimestamp'
         description: The product updated time
     type: object
+  RealTime:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              clientId:
+                description: RealTime Gateway client ID
+                type: string
+              secretWord:
+                description: RealTime Gateway secret word
+                format: password
+                type: string
+            required:
+              - clientId
+              - secretWord
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: RealTime Gateway config
+  Realex:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              account:
+                description: Realex Gateway account
+                type: string
+              merchantId:
+                description: Realex Gateway merchant id
+                type: string
+              rebatePassword:
+                description: Realex Gateway rebate password
+                format: password
+                type: string
+              secretKey:
+                description: Realex Gateway secret key
+                format: password
+                type: string
+            required:
+              - merchantId
+              - secretKey
+              - rebatePassword
+              - account
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Realex Gateway config
+  RebillyProcessor:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+    description: RebillyProcessor Gateway config
+  Redsys:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              merchantCode:
+                description: Redsys Gateway merchant code
+                format: password
+                type: string
+              secretCode:
+                description: Redsys Gateway secret code
+                format: password
+                type: string
+            required:
+              - merchantCode
+              - secretCode
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Redsys Gateway config
   ReportDisputes:
     items:
       properties:
@@ -8674,6 +9884,27 @@ definitions:
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
     maxLength: 50
     type: string
+  Sagepay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              M_ID:
+                description: Sagepay Gateway merchant ID
+                type: string
+              M_KEY:
+                description: Sagepay Gateway merchant key
+                format: password
+                type: string
+            required:
+              - M_ID
+              - M_KEY
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Sagepay Gateway config
   ScheduleMethod:
     description: The calculation instruction of scheduled time
     discriminator: method
@@ -8829,6 +10060,23 @@ definitions:
           - $ref: '#/definitions/ServerTimestamp'
         description: Current time
     type: object
+  Stripe:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              redirectUrl:
+                description: Stripe Gateway redirect url
+                format: url
+                type: string
+            required:
+              - redirectUrl
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Stripe Gateway config
   Subscription:
     properties:
       _links:
@@ -8970,6 +10218,14 @@ definitions:
   SubscriptionTracking:
     description: Tracking subscription log
     properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -9265,6 +10521,28 @@ definitions:
     required:
       - amount
     type: object
+  USAePay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              pin:
+                description: USAePay Gateway pin
+                format: password
+                type: string
+              sourceKey:
+                description: USAePay Gateway source key
+                format: password
+                type: string
+            required:
+              - sourceKey
+              - pin
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: USAePay Gateway config
   UpdatePassword:
     properties:
       currentPassword:
@@ -9420,6 +10698,53 @@ definitions:
       type: object
     minItems: 1
     type: array
+  VantivLitle:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              merchantId:
+                description: VantivLitle Gateway merchant ID
+                type: string
+              password:
+                description: VantivLitle Gateway password
+                format: password
+                type: string
+              username:
+                description: VantivLitle Gateway username
+                format: password
+                type: string
+            required:
+              - username
+              - password
+              - merchantId
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: VantivLitle Gateway config
+  Walpay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              merchantName:
+                description: Walpay Gateway merchant name
+                type: string
+              merchantPin:
+                description: Walpay Gateway merchant pin
+                format: password
+                type: string
+            required:
+              - merchantName
+              - merchantPin
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Walpay Gateway config
   Website:
     properties:
       _links:
@@ -9542,6 +10867,58 @@ definitions:
           - $ref: '#/definitions/ResourceId'
     readOnly: true
     type: object
+  Wirecard:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              businessCaseSignature:
+                description: Wirecard Gateway merchant business case signature
+                format: password
+                type: string
+              delay:
+                description: Wirecard Gateway delay
+                type: integer
+              merchantPassword:
+                description: Wirecard Gateway merchant password
+                format: password
+                type: string
+              merchantUsername:
+                description: Wirecard Gateway merchant username
+                type: string
+            required:
+              - merchantUsername
+              - merchantPassword
+              - businessCaseSignature
+              - delay
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Wirecard Gateway config
+  Worldpay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              merchantCode:
+                description: Worldpay Gateway merchant code
+                format: password
+                type: string
+              merchantPassword:
+                description: Worldpay Gateway merchant password
+                format: password
+                type: string
+            required:
+              - merchantCode
+              - merchantPassword
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Worldpay Gateway config
   ach:
     allOf:
       - $ref: '#/definitions/PaymentInstrument'
@@ -9652,15 +11029,30 @@ definitions:
         required:
           - day
         type: object
+  discount:
+    allOf:
+      - $ref: '#/definitions/AmountAdjustment'
+      - properties:
+          type:
+            description: The payment amount discount type
+            enum:
+              - percent
+              - fixed
+            type: string
+          value:
+            description: The payment amount discount
+            format: float
+            type: number
+        required:
+          - value
+          - type
+        type: object
   equals:
     allOf:
       - $ref: '#/definitions/Condition'
       - $ref: '#/definitions/compare'
     description: Equals condition
     type: object
-  full-price:
-    allOf:
-      - $ref: '#/definitions/AmountAdjustment'
   gt:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -9673,6 +11065,27 @@ definitions:
       - $ref: '#/definitions/compare'
     description: Greater than or equals condition
     type: object
+  iCheque:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              clientId:
+                description: iCheque Gateway client ID
+                type: string
+              secretWord:
+                description: iCheque Gateway secret word
+                format: password
+                type: string
+            required:
+              - clientId
+              - secretWord
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: iCheque Gateway config
   immediately:
     allOf:
       - $ref: '#/definitions/ScheduleMethod'
@@ -9727,6 +11140,9 @@ definitions:
       - $ref: '#/definitions/compare'
     description: Less than or equals condition
     type: object
+  none:
+    allOf:
+      - $ref: '#/definitions/AmountAdjustment'
   not:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -9739,15 +11155,23 @@ definitions:
       - $ref: '#/definitions/logical'
     description: Logical OR
     type: object
-  partial-amount:
+  partial:
     allOf:
       - $ref: '#/definitions/AmountAdjustment'
       - properties:
-          amount:
-            description: The payment amount
+          type:
+            description: The payment amount type
+            enum:
+              - percent
+              - fixed
             type: string
+          value:
+            description: The payment amount
+            format: float
+            type: number
         required:
-          - amount
+          - value
+          - type
         type: object
   payment-card:
     allOf:
@@ -9781,13 +11205,24 @@ definitions:
           - payPalAccountId
         type: object
     description: PayPal payment instrument object
-  rate-discount:
+  vegaaH:
     allOf:
-      - $ref: '#/definitions/AmountAdjustment'
+      - $ref: '#/definitions/GatewayAccount'
       - properties:
-          rate:
-            description: The rate of payment amount
-            type: string
+          gatewayConfig:
+            properties:
+              password:
+                description: vegaaH Gateway password
+                format: password
+                type: string
+              terminalId:
+                description: vegaaH Gateway terminal ID
+                type: string
+            required:
+              - terminalId
+              - password
+            type: object
         required:
-          - rate
+          - gatewayConfig
         type: object
+    description: vegaaH Gateway config

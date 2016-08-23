@@ -964,6 +964,9 @@ definitions:
       requestUri:
         description: The URI to which the IDP redirects the user back. It may contain federated login result params added by the IDP.
         type: string
+      returnIdpCredential:
+        description: Whether return 200 and IDP credential rather than throw exception when federated id is already linked.
+        type: boolean
       returnRefreshToken:
         description: Whether to return refresh tokens.
         type: boolean
@@ -1250,6 +1253,9 @@ definitions:
             rawId:
               description: User's raw identifier directly returned from IDP.
               type: string
+            rawUserInfo:
+              description: Raw IDP-returned user info.
+              type: string
             screenName:
               description: User's screen name at Twitter.
               type: string
@@ -1301,6 +1307,9 @@ definitions:
       emailVerified:
         description: The value is true if the IDP is also the email provider. It means the user owns the email.
         type: boolean
+      errorMessage:
+        description: Client error code.
+        type: string
       expiresIn:
         description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
         format: int64
@@ -1372,6 +1381,9 @@ definitions:
         type: string
       providerId:
         description: 'The IdP ID. For white listed IdPs it''s a short domain name e.g. google.com, aol.com, live.net and yahoo.com. If the "providerId" param is set to OpenID OP identifer other than the whilte listed IdPs the OP identifier is returned. If the "identifier" param is federated ID in the createAuthUri request. The domain part of the federated ID is returned.'
+        type: string
+      rawUserInfo:
+        description: Raw IDP-returned user info.
         type: string
       refreshToken:
         description: 'If idToken is STS id token, then this field will be refresh token.'

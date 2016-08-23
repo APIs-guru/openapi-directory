@@ -47,6 +47,81 @@ paths:
       summary: Creates a Access Token to write on a Card (e.g. NFC)
       tags:
         - AccessToken
+  /api/CustomDevice:
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets all Devices
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/CustomDeviceToPost'
+            type: array
+      summary: Gets all Custom Devices
+      tags:
+        - CustomDevice
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "Creates or updates a Custom Device or updates it's values.\r\n            A Custom Device can be any device that like to add some measurement values to the smart-me Cloud.\r\n            Only use a custom device for all non meters.\r\n            For a new device leave the ID empty. To create a device you have to set the DeviceEnergyType.\r\n            To update values, add the ID of the device and the values you like to set.  (See the Data Type Model for more Information)"
+      parameters:
+        - description: Device object with all the data
+          in: body
+          name: newDevice
+          required: true
+          schema:
+            $ref: '#/definitions/CustomDeviceToPost'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CustomDeviceToPost'
+        '401':
+          description: Unauthorized
+      summary: Creates or updates a Custom Device or updates it's values.
+      tags:
+        - CustomDevice
+  '/api/CustomDevice/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets a Device by it's ID
+      parameters:
+        - description: The ID of the device
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CustomDeviceToPost'
+      summary: Gets a Custom Device by it's ID
+      tags:
+        - CustomDevice
   /api/DeviceBySerial:
     get:
       consumes: []
@@ -196,6 +271,8 @@ paths:
             - MeterTypeTemperature
             - MeterTypeMBusGateway
             - MeterTypeRS485Gateway
+            - MeterTypeCustomDevice
+            - MeterTypeCompressedAir
           in: query
           name: meterEnergyType
           required: true
@@ -472,11 +549,57 @@ definitions:
         format: int64
         type: integer
     type: object
+  CustomDeviceToPost:
+    description: Container Class for the Web API
+    properties:
+      Id:
+        description: The ID of the device
+        type: string
+      Name:
+        description: The Name of the Device
+        type: string
+      Serial:
+        description: The Serial number
+        format: int64
+        type: integer
+      ValueDate:
+        description: The Date of the Value (in UTC). If this is null the Server Time is used.
+        format: date-time
+        type: string
+      Values:
+        description: The Values of the custom Device
+        items:
+          $ref: '#/definitions/CustomDeviceValues'
+        type: array
+    type: object
+  CustomDeviceValues:
+    description: Container Class for the Custom Device Values
+    properties:
+      Name:
+        description: The Name of the Value.
+        type: string
+      Value:
+        description: The Value
+        format: double
+        type: number
+    type: object
   Device:
     description: Container Class for the Web API
     properties:
       ActivePower:
         description: The Actvie Power or current flow rate
+        format: double
+        type: number
+      ActivePowerL1:
+        description: The Actvie Power Phase L1
+        format: double
+        type: number
+      ActivePowerL2:
+        description: The Actvie Power Phase L2
+        format: double
+        type: number
+      ActivePowerL3:
+        description: The Actvie Power Phase L3
         format: double
         type: number
       ActiveTariff:
@@ -538,6 +661,8 @@ definitions:
           - MeterTypeTemperature
           - MeterTypeMBusGateway
           - MeterTypeRS485Gateway
+          - MeterTypeCustomDevice
+          - MeterTypeCompressedAir
         type: string
       FamilyType:
         description: The Family Type of the device.
@@ -564,6 +689,18 @@ definitions:
         type: string
       PowerFactor:
         description: 'The Power Factor (cos phi). Range: 0 - 1'
+        format: double
+        type: number
+      PowerFactorL1:
+        description: 'The Power Factor (cos phi) Phase L1. Range: 0 - 1'
+        format: double
+        type: number
+      PowerFactorL2:
+        description: 'The Power Factor (cos phi) Phase L2. Range: 0 - 1'
+        format: double
+        type: number
+      PowerFactorL3:
+        description: 'The Power Factor (cos phi) Phase L3. Range: 0 - 1'
         format: double
         type: number
       Serial:
@@ -708,6 +845,8 @@ definitions:
           - MeterTypeTemperature
           - MeterTypeMBusGateway
           - MeterTypeRS485Gateway
+          - MeterTypeCustomDevice
+          - MeterTypeCompressedAir
         type: string
       Id:
         description: The ID of the device

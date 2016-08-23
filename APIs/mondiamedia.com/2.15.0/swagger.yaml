@@ -2,47 +2,46 @@ swagger: '2.0'
 schemes:
   - https
 host: queen.mondiamedia.com
-basePath: /
+basePath: /v2/api
 info:
-  contact:
-    email: Research.and.Development.Music@mondiamedia.com
   description: '<p>This is the API for building Mondia-Media-Products, like Tops.</p><p>Every call need a valid client or user-token.</p><p><ol><li>Client-Token can be get at our Police-API</li><li>User-Token can be get through a login on a customer specific Life-Cycle-Service</li><li>UseCases regarding Login, Register, Subscribe (incl. Payment) will be done by the Life-Cycle-Service</li></ol></p>'
   title: Queen
-  version: 2.9.18
+  version: 2.15.0
   x-logo:
-    url: 'https://queen.mondiamedia.com/swagger/swaggerui/images/mm_developer_schwarz.png'
+    url: 'https://www.mondiamedia.com/content/themes/mondiamedia/library/assets_dist/img/logo_mm.png'
   x-origin:
     format: swagger
-    url: 'https://queen.mondiamedia.com/swagger'
-    version: '1.2'
+    url: 'https://queen.mondiamedia.com/v2/swagger'
+    version: '2.0'
   x-providerName: mondiamedia.com
-tags:
-  - description: MMPlaylist Application - Next Generation
-    name: api
-  - description: MMPlaylist Application
-    name: mmplaylist
+tags: []
 paths:
   /api/v3/mmplaylist/article/download:
     post:
+      consumes:
+        - application/json
       description: 'This call retrieve a download URL for a Article (Preview/Full).<p> Please note, that a Full-Binary is only available with a User-Token.</p>'
       parameters:
-        - in: body
-          name: Body
-          required: true
+        - description: ArticleDownload
+          in: body
+          name: ArticleIdModel
+          required: false
           schema:
-            $ref: '#/definitions/ArticleDownload'
+            $ref: '#/definitions/ArticleIdModel'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: Binary
           schema:
-            $ref: '#/definitions/Binary'
-        '201':
-          description: Created
+            $ref: '#/definitions/UrlTicketPreviewEncryptionModel'
       summary: (Client/User-Token) Get a download URL for a article.
       tags:
         - api
   '/api/v3/mmplaylist/article/report/{ticket}':
     post:
+      consumes:
+        - application/json
       description: 'This call store a event for a article, that was downloaded, removed or listened.'
       parameters:
         - description: Ticket of the corresponding download
@@ -50,18 +49,19 @@ paths:
           name: ticket
           required: true
           type: string
-        - in: body
-          name: Body
-          required: true
+        - description: ArticleReport
+          in: body
+          name: ArticleReport
+          required: false
           schema:
             $ref: '#/definitions/ArticleReport'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: CreatedEntityResponse
           schema:
-            $ref: '#/definitions/CreatedEntityResponse'
-        '201':
-          description: Created
+            $ref: '#/definitions/IdModel'
       summary: (Client/User-Token) Provide a event for a article.
       tags:
         - api
@@ -129,73 +129,77 @@ paths:
           name: isrc
           required: false
           type: string
-        - default: false
-          description: Exclude Songs from Compilations (Default false)
+        - description: Exclude Songs from Compilations
           in: query
           name: excludeCompilations
           required: false
           type: boolean
-        - default: false
-          description: Exclude Karaoke Songs (Default false)
+        - description: Exclude Karaoke Songs
           in: query
           name: excludeKaraoke
           required: false
           type: boolean
-        - default: false
-          description: Exclude Songs that are not streamable (Default false)
+        - description: Exclude Songs that are not streamable
           in: query
           name: excludeNonStreamable
           required: false
           type: boolean
         - default: 0
-          description: zero-based offset the request (Default 0)
+          description: zero-based offset the request
           in: query
+          maximum: 2147483647
+          minimum: 0
           name: offset
           required: false
           type: number
         - default: 10
-          description: Number of items to be returned (Default 10)
+          description: Number of items to be returned
           in: query
+          maximum: 2147483647
+          minimum: 0
           name: limit
           required: false
           type: number
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       summary: (Client/User-Token) Search complete catalogue.
       tags:
         - api
   /api/v3/mmplaylist/article/streaming:
     post:
+      consumes:
+        - application/json
       description: 'This call retrieve a streaming URL for a Article (Preview/Full).<p> Please note, that a Full-Binary is only available with a User-Token.</p>'
       parameters:
-        - in: body
-          name: Body
-          required: true
+        - description: ArticleStreaming
+          in: body
+          name: ArticleIdPreviewModel
+          required: false
           schema:
-            $ref: '#/definitions/ArticleStreaming'
+            $ref: '#/definitions/ArticleIdPreviewModel'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: StreamingLink
           schema:
-            $ref: '#/definitions/StreamingLink'
-        '201':
-          description: Created
+            $ref: '#/definitions/UrlTicketPreviewModel'
       summary: (Client/User-Token) Get a streaming URL for a article.
       tags:
         - api
   /api/v3/mmplaylist/config:
     get:
       description: This call retrieve the config for a MMPlaylist product.
+      produces:
+        - application/json
       responses:
-        '200':
-          description: Ok
+        default:
+          description: Config
           schema:
-            $ref: '#/definitions/Config'
-        '401':
-          description: Unauthorized - Valid Client-Token is needed for this call.
-        '404':
-          description: Not-Found - No MMPlaylist Configuration configured for this Client
+            $ref: '#/definitions/Config_keyClient_template_keyLifecycleAPIPagesModel'
       summary: (Client-Token) Get MMPlaylist Config
       tags:
         - api
@@ -203,26 +207,22 @@ paths:
     get:
       description: This call retrieve all available playlists for this client.
       parameters:
-        - default: false
-          description: 'Include Items of the Playlist (Tracks, Collections, AudioBooks) (Default false)'
+        - description: 'Include Items of the Playlist (Tracks, Collections, AudioBooks)'
           in: query
           name: includeEntities
           required: false
           type: boolean
-        - default: false
-          description: 'Include Items of the Playlist (Chapters, Tracks of a Collection (Default false)'
+        - description: 'Include Items of the Playlist (Chapters, Tracks of a Collection'
           in: query
           name: includeSubEntities
           required: false
           type: boolean
-        - default: false
-          description: 'Keep Items of the Playlist that are not available. Items will be marked as "notAvailable": true (Default false)'
+        - description: 'Keep Items of the Playlist that are not available. Items will be marked as "notAvailable": true'
           in: query
           name: keepUnavailableItems
           required: false
           type: boolean
-        - default: true
-          description: Include restricted playlists.  (Default true)
+        - description: 'Include restricted playlists. '
           in: query
           name: includeRestricted
           required: false
@@ -232,15 +232,16 @@ paths:
           name: subscriptionTypeId
           required: false
           type: number
+      produces:
+        - application/json
       responses:
-        '200':
-          description: Ok
+        default:
+          description: Playlists
           schema:
+            description: Playlists
             items:
-              $ref: '#/definitions/playlist'
+              $ref: '#/definitions/PlaylistKeyPlaylistNamePlaylistDescriptionCoverUrlEntitiesModel'
             type: array
-        '401':
-          description: Unauthorized - Valid Client-Token is needed for this call.
       summary: (Client-Token) Get all available playlists of a MMPlaylist config.
       tags:
         - api
@@ -252,27 +253,23 @@ paths:
           name: playlistKey
           required: true
           type: string
-        - default: false
-          description: 'Include Sub-Items of the Playlist (Chapters, Tracks of a Collection (Default false)'
+        - description: 'Include Sub-Items of the Playlist (Chapters, Tracks of a Collection'
           in: query
           name: includeSubEntities
           required: false
           type: boolean
-        - default: false
-          description: 'Keep Items of the Playlist that are not available. Items will be marked as "notAvailable": true (Default false)'
+        - description: 'Keep Items of the Playlist that are not available. Items will be marked as "notAvailable": true'
           in: query
           name: keepUnavailableItems
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
-          description: Ok
+        default:
+          description: PlaylistModel
           schema:
-            $ref: '#/definitions/PlaylistModel'
-        '401':
-          description: Unauthorized - Valid Client-Token is needed for this call.
-        '404':
-          description: Not Found - PlaylistKey not found for this client
+            $ref: '#/definitions/PlaylistKeyPlaylistNamePlaylistDescriptionCoverUrlEntitiesModel'
       summary: (Client-Token) Get a playlist for a given key
       tags:
         - api
@@ -284,29 +281,26 @@ paths:
           name: playlistKey
           required: true
           type: string
-        - default: false
-          description: 'Include Items of the Playlist (Chapters, Tracks of a Collection (Default false)'
+        - description: 'Include Items of the Playlist (Chapters, Tracks of a Collection'
           in: query
           name: includeSubEntities
           required: false
           type: boolean
-        - default: false
-          description: 'Keep Items of the Playlist that are not available. Items will be marked as "notAvailable": true (Default false)'
+        - description: 'Keep Items of the Playlist that are not available. Items will be marked as "notAvailable": true'
           in: query
           name: keepUnavailableItems
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
-          description: Ok
+        default:
+          description: Entries
           schema:
+            description: Entries
             items:
-              $ref: '#/definitions/playlistEntity'
+              $ref: '#/definitions/TypeSongModel'
             type: array
-        '401':
-          description: Unauthorized - Valid Client-Token is needed for this call.
-        '404':
-          description: Not Found - PlaylistKey not found for this client
       summary: (Client-Token) Get a playlist for a given key
       tags:
         - api
@@ -314,44 +308,55 @@ paths:
     get:
       description: This call retrieve the personal playlist for the current user.
       parameters:
-        - default: false
-          description: 'Include Sub-Items of the Playlist (Chapters, Tracks of a Collection (Default false)'
+        - description: 'Include Sub-Items of the Playlist (Chapters, Tracks of a Collection'
           in: query
           name: includeSubEntities
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       summary: (User-Token) Get the personal playlist for the curren user.
       tags:
         - api
     put:
+      consumes:
+        - application/json
       description: 'This call put changes of the content (remove, position-change) for a personal playlist for the current user.'
       parameters:
-        - in: body
-          name: Body
-          required: true
+        - description: PersonalPlaylistIds
+          in: body
+          name: ItemsModel
+          required: false
           schema:
-            $ref: '#/definitions/PersonalPlaylistIds'
+            $ref: '#/definitions/ItemsModel'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       summary: (User-Token) Put new personal playlist.
       tags:
         - api
   /api/v3/mmplaylist/user/playlist/article:
     post:
+      consumes:
+        - application/json
       description: This call post a new article to the personal playlist for the current user.
       parameters:
-        - in: body
-          name: Body
-          required: true
+        - description: Article
+          in: body
+          name: IdModel_2
+          required: false
           schema:
-            $ref: '#/definitions/Article'
+            $ref: '#/definitions/IdModel_2'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       summary: (User-Token) Add a article to the personal playlist
       tags:
         - api
@@ -364,24 +369,31 @@ paths:
           name: id
           required: true
           type: number
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       summary: (User-Token) Remove a article to the personal playlist
       tags:
         - api
   /api/v3/mmplaylist/user/playlist/articles:
     post:
+      consumes:
+        - application/json
       description: This call post a new articles to the personal playlist for the current user.
       parameters:
-        - in: body
-          name: Body
-          required: true
+        - description: Articles
+          in: body
+          name: IdsModel
+          required: false
           schema:
-            $ref: '#/definitions/Articles'
+            $ref: '#/definitions/IdsModel'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       summary: (User-Token) Add articles to the personal playlist
       tags:
         - api
@@ -393,40 +405,52 @@ paths:
           name: playlistKey
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       summary: (User-Token) Add a complete playlist to the personal playlist
       tags:
         - api
   /mmplaylist/article/download:
     post:
+      consumes:
+        - application/json
       parameters:
-        - in: body
-          name: Body
-          required: true
+        - description: DownloadResponse
+          in: body
+          name: ArticleIdModel
+          required: false
           schema:
-            $ref: '#/definitions/DownloadResponse'
+            $ref: '#/definitions/ArticleIdModel'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
   '/mmplaylist/article/report/{ticket}':
     post:
+      consumes:
+        - application/json
       parameters:
         - in: path
           name: ticket
           required: true
           type: string
-        - in: body
-          name: Body
-          required: true
+        - description: ArticleReport
+          in: body
+          name: ArticleReport_2
+          required: false
           schema:
-            $ref: '#/definitions/ArticleReport'
+            $ref: '#/definitions/ArticleReport_2'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
   /mmplaylist/article/search:
@@ -492,73 +516,79 @@ paths:
           name: isrc
           required: false
           type: string
-        - default: false
-          description: Exclude Songs from Compilations (Default false)
+        - description: Exclude Songs from Compilations
           in: query
           name: excludeCompilations
           required: false
           type: boolean
-        - default: false
-          description: Exclude Karaoke Songs (Default false)
+        - description: Exclude Karaoke Songs
           in: query
           name: excludeKaraoke
           required: false
           type: boolean
-        - default: false
-          description: Exclude Songs that are not streamable (Default false)
+        - description: Exclude Songs that are not streamable
           in: query
           name: excludeNonStreamable
           required: false
           type: boolean
         - default: 0
-          description: zero-based offset the request (Default 0)
+          description: zero-based offset the request
           in: query
+          maximum: 2147483647
+          minimum: 0
           name: offset
           required: false
           type: number
         - default: 10
-          description: Number of items to be returned (Default 10)
+          description: Number of items to be returned
           in: query
+          maximum: 2147483647
+          minimum: 0
           name: limit
           required: false
           type: number
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
   /mmplaylist/article/streaming:
     post:
+      consumes:
+        - application/json
       parameters:
-        - in: body
-          name: Body
-          required: true
+        - description: StreamingResponse
+          in: body
+          name: ArticleIdPreviewModel
+          required: false
           schema:
-            $ref: '#/definitions/StreamingResponse'
+            $ref: '#/definitions/ArticleIdPreviewModel'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
   /mmplaylist/config:
     get:
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
   /mmplaylist/playlist:
     get:
       parameters:
-        - default: true
-          description: null (Default true)
-          in: query
+        - in: query
           name: includeSongs
           required: false
           type: boolean
-        - default: true
-          description: null (Default true)
-          in: query
+        - in: query
           name: includeRestricted
           required: false
           type: boolean
@@ -566,15 +596,11 @@ paths:
           name: subscriptionTypeId
           required: false
           type: number
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
-      tags:
-        - mmplaylist
-    head:
-      responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
   '/mmplaylist/playlist/{playlistKey}':
@@ -584,47 +610,59 @@ paths:
           name: playlistKey
           required: true
           type: string
-        - default: false
-          description: null (Default false)
-          in: query
+        - in: query
           name: keepUnavailableItems
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
   /mmplaylist/user/playlist:
     get:
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
     put:
+      consumes:
+        - application/json
       parameters:
-        - in: body
-          name: Body
-          required: true
+        - description: PersonalPlaylistIds
+          in: body
+          name: ItemsModel
+          required: false
           schema:
-            $ref: '#/definitions/PersonalPlaylistIds'
+            $ref: '#/definitions/ItemsModel'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
   /mmplaylist/user/playlist/article:
     post:
+      consumes:
+        - application/json
       parameters:
-        - in: body
-          name: Body
-          required: true
+        - description: Article
+          in: body
+          name: IdModel_2
+          required: false
           schema:
-            $ref: '#/definitions/Article'
+            $ref: '#/definitions/IdModel_2'
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
   '/mmplaylist/user/playlist/article/{id}':
@@ -635,9 +673,11 @@ paths:
           name: id
           required: true
           type: number
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
   '/mmplaylist/user/playlist/{playlistKey}':
@@ -647,23 +687,26 @@ paths:
           name: playlistKey
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: ''
       tags:
         - mmplaylist
 definitions:
-  Article:
-    properties:
-      id:
-        description: Id of the item
-        type: number
-    required:
-      - id
-  ArticleDownload:
+  ArticleIdModel:
     properties:
       articleId:
         type: number
+    required:
+      - articleId
+  ArticleIdPreviewModel:
+    properties:
+      articleId:
+        type: number
+      preview:
+        type: boolean
     required:
       - articleId
   ArticleReport:
@@ -675,12 +718,11 @@ definitions:
         description: Maximal onblock duration in seconds (for usage-Event)
         type: number
       offline:
-        default: false
-        description: Information if the Track was listend offline (for usage-event) (Default false)
+        description: Information if the Track was listend offline (for usage-event)
         type: boolean
       realm:
         default: app
-        description: Realm/Client of the event (Default app)
+        description: Realm/Client of the event
         enum:
           - app
           - web
@@ -690,7 +732,7 @@ definitions:
         type: string
       trigger:
         default: playlist
-        description: 'Did the user trigger the play of this item (Play, Skip) (for usage-Event) (Default playlist)'
+        description: 'Did the user trigger the play of this item (Play, Skip) (for usage-Event)'
         enum:
           - user
           - playlist
@@ -706,37 +748,42 @@ definitions:
         description: Total duration in seconds (for usage-Event)
         type: number
     required:
-      - date
       - type
-  ArticleStreaming:
+      - date
+  ArticleReport_2:
     properties:
-      articleId:
+      date:
+        type: string
+      maxUsageDuration:
         type: number
-      preview:
+      offline:
         type: boolean
+      realm:
+        default: app
+        enum:
+          - app
+          - web
+        type: string
+      source:
+        type: string
+      trigger:
+        default: playlist
+        enum:
+          - user
+          - playlist
+        type: string
+      type:
+        enum:
+          - downloaded
+          - removed
+          - listened
+        type: string
+      usageDuration:
+        type: number
     required:
-      - articleId
-  Articles:
-    properties:
-      ids:
-        description: Ids of the items
-        items:
-          type: number
-        type: array
-    required:
-      - ids
-  Binary:
-    properties:
-      encryption:
-        description: used encryption for this song
-        type: string
-      preview:
-        type: boolean
-      ticket:
-        type: string
-      url:
-        type: string
-  Config:
+      - type
+      - date
+  Config_keyClient_template_keyLifecycleAPIPagesModel:
     properties:
       client_template_key:
         description: Corresponding Client Template Key
@@ -747,31 +794,59 @@ definitions:
         description: Endpoint for the Lifecycle Service
         type: string
       pages:
-        items: {}
+        items:
+          $ref: '#/definitions/KeyPageTypeTitlesContentModel'
         type: array
-  CreatedEntityResponse:
+  EmptyModel:
+    properties: {}
+  IdModel:
     properties:
       id:
         type: string
-  DownloadResponse:
+  IdModel_2:
     properties:
-      articleId:
+      id:
+        description: Id of the item
+        maximum: 2147483647
+        minimum: 1
         type: number
     required:
-      - articleId
-  PersonalPlaylistIds:
+      - id
+  IdsModel:
+    properties:
+      ids:
+        description: Ids of the items
+        items:
+          type: number
+        type: array
+    required:
+      - ids
+  ItemsModel:
     properties:
       items:
         items:
-          $ref: '#/definitions/Article'
+          $ref: '#/definitions/IdModel_2'
         type: array
-  PlaylistModel:
+  KeyPageTypeTitlesContentModel:
+    properties:
+      content:
+        $ref: '#/definitions/EmptyModel'
+      key:
+        type: string
+      pageType:
+        type: string
+      titles:
+        $ref: '#/definitions/EmptyModel'
+    required:
+      - key
+      - pageType
+  PlaylistKeyPlaylistNamePlaylistDescriptionCoverUrlEntitiesModel:
     properties:
       coverUrl:
         type: string
       entities:
         items:
-          $ref: '#/definitions/playlistEntity'
+          $ref: '#/definitions/TypeSongModel'
         type: array
       playlistDescription:
         type: string
@@ -782,52 +857,28 @@ definitions:
     required:
       - playlistKey
       - playlistName
-  StreamingLink:
+  TypeSongModel:
     properties:
+      song:
+        $ref: '#/definitions/EmptyModel'
+      type:
+        type: string
+  UrlTicketPreviewEncryptionModel:
+    properties:
+      encryption:
+        description: used encryption for this song
+        type: string
       preview:
         type: boolean
       ticket:
         type: string
       url:
         type: string
-  StreamingResponse:
+  UrlTicketPreviewModel:
     properties:
-      articleId:
-        type: number
       preview:
         type: boolean
-    required:
-      - articleId
-  'null':
-    properties:
-      content: {}
-      key:
+      ticket:
         type: string
-      pageType:
-        type: string
-      titles: {}
-    required:
-      - key
-      - pageType
-  playlist:
-    properties:
-      coverUrl:
-        type: string
-      entities:
-        items:
-          $ref: '#/definitions/playlistEntity'
-        type: array
-      playlistDescription:
-        type: string
-      playlistKey:
-        type: string
-      playlistName:
-        type: string
-    required:
-      - playlistKey
-      - playlistName
-  playlistEntity:
-    properties:
-      song: {}
-      type:
+      url:
         type: string

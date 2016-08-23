@@ -23,7 +23,7 @@ info:
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
     version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '405'
+  x-release: '411'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -644,6 +644,48 @@ paths:
       summary: Get schedule by channel
       tags:
         - Channels
+  '/clips/{pid}':
+    get:
+      description: Get Clips
+      operationId: Get_Clips_
+      parameters:
+        - description: The programme identifier.
+          in: path
+          minLength: 8
+          name: pid
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: true
+          type: string
+        - default: web
+          description: The rights group to limit results to.
+          enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - default: available
+          description: 'Whether to return all, or available programmes'
+          enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      summary: Get Clips
+      tags:
+        - Episodes
   '/episodes/{pid}':
     get:
       description: Get the episode for a given episode identifier.
@@ -2157,6 +2199,11 @@ definitions:
       channels:
         items:
           $ref: '#/definitions/channel'
+        type: array
+      clips:
+        items:
+          $ref: '#/definitions/clip'
+        maxItems: 1
         type: array
       episode_recommendations:
         additionalProperties: false

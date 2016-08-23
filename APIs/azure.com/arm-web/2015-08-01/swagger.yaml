@@ -6,6 +6,8 @@ info:
   description: 'Use these APIs to manage Azure Websites resources through the Azure Resource Manager. All task operations conform to the HTTP/1.1 protocol specification and each operation returns an x-ms-request-id header that can be used to obtain information about the request. You must make sure that requests made to these resources are secure. For more information, see <a href="https://msdn.microsoft.com/en-us/library/azure/dn790557.aspx">Authenticating Azure Resource Manager requests.</a>'
   title: WebSite Management Client
   version: '2015-08-01'
+  x-apisguru-categories:
+    - cloud
   x-logo:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
@@ -15,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: arm-web
+  x-tags:
+    - Azure
+    - Microsoft
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'

@@ -721,6 +721,9 @@ definitions:
         description: The minimum amount of RAM to use. Defaults to 3.75 (GB)
         format: double
         type: number
+      noAddress:
+        description: 'Whether to assign an external IP to the instance. Defaults to false. Corresponds to `--no_address` flag for [gcloud compute instances create] (https://cloud.google.com/sdk/gcloud/reference/compute/instances/create). Cannot be true at run time if false at create time.'
+        type: boolean
       preemptible:
         description: 'At create time means that preemptible machines may be used for the run. At run time, means they should be used. Cannot be true at run time if false at create time. Defaults to `false`.'
         type: boolean

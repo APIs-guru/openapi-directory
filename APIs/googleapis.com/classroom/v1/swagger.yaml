@@ -114,8 +114,8 @@ parameters:
     type: string
 tags:
   - name: courses
-  - name: invitations
   - name: userProfiles
+  - name: invitations
 paths:
   /v1/courses:
     get:
@@ -387,7 +387,7 @@ paths:
           name: courseId
           required: true
           type: string
-        - description: 'Identifer of the student work to request. If `user_id` is specified, this may be set to the string literal `"-"` to request student work for all course work in the specified course.'
+        - description: Identifer of the student work to request. This may be set to the string literal `"-"` to request student work for all course work in the specified course.
           in: path
           name: courseWorkId
           required: true
@@ -1345,6 +1345,245 @@ paths:
             - 'https://www.googleapis.com/auth/classroom.rosters'
       tags:
         - invitations
+  '/v1/userProfiles/{studentId}/guardianInvitations':
+    get:
+      description: 'Returns a list of guardian invitations that the requesting user is permitted to view, filtered by the parameters provided. This method returns the following error codes: * `PERMISSION_DENIED` if a `student_id` is specified, and the requesting user is not permitted to view guardian invitations for that student, if guardians are not enabled for the domain in question, or for other access errors. * `INVALID_ARGUMENT` if a `student_id` is specified, but its format cannot be recognized (it is not an email address, nor a `student_id` from the API, nor the literal string `me`). May also be returned if an invalid `page_token` or `state` is provided. * `NOT_FOUND` if a `student_id` is specified, and its format can be recognized, but Classroom has no record of that student.'
+      operationId: classroom.userProfiles.guardianInvitations.list
+      parameters:
+        - description: 'The ID of the student whose guardian invitations are to be returned. The identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
+          in: path
+          name: studentId
+          required: true
+          type: string
+        - description: 'If specified, only results with the specified `invited_email_address` will be returned.'
+          in: query
+          name: invitedEmailAddress
+          type: string
+        - collectionFormat: multi
+          description: 'If specified, only results with the specified `state` values will be returned. Otherwise, results with a `state` of `PENDING` will be returned.'
+          in: query
+          items:
+            enum:
+              - GUARDIAN_INVITATION_STATE_UNSPECIFIED
+              - PENDING
+              - COMPLETE
+            type: string
+          name: states
+          type: array
+        - description: 'nextPageToken value returned from a previous list call, indicating that the subsequent page of results should be returned. The list request must be otherwise identical to the one that resulted in this token.'
+          in: query
+          name: pageToken
+          type: string
+        - description: Maximum number of items to return. Zero or unspecified indicates that the server may assign a maximum. The server may return fewer than the specified number of results.
+          in: query
+          name: pageSize
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListGuardianInvitationsResponse'
+      tags:
+        - userProfiles
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Creates a guardian invitation, and sends an email to the guardian asking them to confirm that they are the student''s guardian. Once the guardian accepts the invitation, their `state` will change to `COMPLETED` and they will start receiving guardian notifications. A `Guardian` resource will also be created to represent the active guardian. The request object must have the `student_id` and `invited_email_address` fields set. Failing to set these fields, or setting any other fields in the request, will result in an error. This method returns the following error codes: * `PERMISSION_DENIED` if the current user does not have permission to manage guardians, if the guardian in question has already rejected too many requests for that student, if guardians are not enabled for the domain in question, or for other access errors. * `RESOURCE_EXHAUSTED` if the student or guardian has exceeded the guardian link limit. * `INVALID_ARGUMENT` if the guardian email address is not valid (for example, if it is too long), or if the format of the student ID provided cannot be recognized (it is not an email address, nor a `user_id` from this API). This error will also be returned if read-only fields are set, or if the `state` field is set to to a value other than `PENDING`. * `NOT_FOUND` if the student ID provided is a valid student ID, but Classroom has no record of that student. * `ALREADY_EXISTS` if there is already a pending guardian invitation for the student and `invited_email_address` provided, or if the provided `invited_email_address` matches the Google account of an existing `Guardian` for this user.'
+      operationId: classroom.userProfiles.guardianInvitations.create
+      parameters:
+        - description: ID of the student (in standard format)
+          in: path
+          name: studentId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GuardianInvitation'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GuardianInvitation'
+      tags:
+        - userProfiles
+  '/v1/userProfiles/{studentId}/guardianInvitations/{invitationId}':
+    get:
+      description: 'Returns a specific guardian invitation. This method returns the following error codes: * `PERMISSION_DENIED` if the requesting user is not permitted to view guardian invitations for the student identified by the `student_id`, if guardians are not enabled for the domain in question, or for other access errors. * `INVALID_ARGUMENT` if a `student_id` is specified, but its format cannot be recognized (it is not an email address, nor a `student_id` from the API, nor the literal string `me`). * `NOT_FOUND` if Classroom cannot find any record of the given student or `invitation_id`. May also be returned if the student exists, but the requesting user does not have access to see that student.'
+      operationId: classroom.userProfiles.guardianInvitations.get
+      parameters:
+        - description: The ID of the student whose guardian invitation is being requested.
+          in: path
+          name: studentId
+          required: true
+          type: string
+        - description: The `id` field of the `GuardianInvitation` being requested.
+          in: path
+          name: invitationId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GuardianInvitation'
+      tags:
+        - userProfiles
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    patch:
+      description: 'Modifies a guardian invitation. Currently, the only valid modification is to change the `state` from `PENDING` to `COMPLETE`. This has the effect of withdrawing the invitation. This method returns the following error codes: * `PERMISSION_DENIED` if the current user does not have permission to manage guardians, if guardians are not enabled for the domain in question or for other access errors. * `FAILED_PRECONDITION` if the guardian link is not in the `PENDING` state. * `INVALID_ARGUMENT` if the format of the student ID provided cannot be recognized (it is not an email address, nor a `user_id` from this API), or if the passed `GuardianInvitation` has a `state` other than `COMPLETE`, or if it modifies fields other than `state`. * `NOT_FOUND` if the student ID provided is a valid student ID, but Classroom has no record of that student, or if the `id` field does not refer to a guardian invitation known to Classroom.'
+      operationId: classroom.userProfiles.guardianInvitations.patch
+      parameters:
+        - description: The ID of the student whose guardian invitation is to be modified.
+          in: path
+          name: studentId
+          required: true
+          type: string
+        - description: The `id` field of the `GuardianInvitation` to be modified.
+          in: path
+          name: invitationId
+          required: true
+          type: string
+        - description: 'Mask that identifies which fields on the course to update. This field is required to do an update. The update will fail if invalid fields are specified. The following fields are valid: * `state` When set in a query parameter, this field should be specified as `updateMask=,,...`'
+          in: query
+          name: updateMask
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GuardianInvitation'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GuardianInvitation'
+      tags:
+        - userProfiles
+  '/v1/userProfiles/{studentId}/guardians':
+    get:
+      description: 'Returns a list of guardians that the requesting user is permitted to view, restricted to those that match the request. This method returns the following error codes: * `PERMISSION_DENIED` if a `student_id` is specified, and the requesting user is not permitted to view guardian information for that student, if guardians are not enabled for the domain in question, if the `invited_email_address` filter is set by a user who is not a domain administrator, or for other access errors. * `INVALID_ARGUMENT` if a `student_id` is specified, but its format cannot be recognized (it is not an email address, nor a `student_id` from the API, nor the literal string `me`). May also be returned if an invalid `page_token` is provided. * `NOT_FOUND` if a `student_id` is specified, and its format can be recognized, but Classroom has no record of that student.'
+      operationId: classroom.userProfiles.guardians.list
+      parameters:
+        - description: 'Filter results by the student who the guardian is linked to. The identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
+          in: path
+          name: studentId
+          required: true
+          type: string
+        - description: 'Filter results by the email address that the original invitation was sent to, resulting in this guardian link. This filter can only be used by domain administrators.'
+          in: query
+          name: invitedEmailAddress
+          type: string
+        - description: 'nextPageToken value returned from a previous list call, indicating that the subsequent page of results should be returned. The list request must be otherwise identical to the one that resulted in this token.'
+          in: query
+          name: pageToken
+          type: string
+        - description: Maximum number of items to return. Zero or unspecified indicates that the server may assign a maximum. The server may return fewer than the specified number of results.
+          in: query
+          name: pageSize
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListGuardiansResponse'
+      tags:
+        - userProfiles
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1/userProfiles/{studentId}/guardians/{guardianId}':
+    delete:
+      description: 'Deletes a guardian. The guardian will no longer receive guardian notifications and the guardian will no longer be accessible via the API. This method returns the following error codes: * `PERMISSION_DENIED` if the requesting user is not permitted to manage guardians for the student identified by the `student_id`, if guardians are not enabled for the domain in question, or for other access errors. * `INVALID_ARGUMENT` if a `student_id` is specified, but its format cannot be recognized (it is not an email address, nor a `student_id` from the API). * `NOT_FOUND` if Classroom cannot find any record of the given `student_id` or `guardian_id`, or if the guardian has already been disabled.'
+      operationId: classroom.userProfiles.guardians.delete
+      parameters:
+        - description: 'The student whose guardian is to be deleted. One of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
+          in: path
+          name: studentId
+          required: true
+          type: string
+        - description: The `id` field from a `Guardian`.
+          in: path
+          name: guardianId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      tags:
+        - userProfiles
+    get:
+      description: 'Returns a specific guardian. This method returns the following error codes: * `PERMISSION_DENIED` if the requesting user is not permitted to view guardian information for the student identified by the `student_id`, if guardians are not enabled for the domain in question, or for other access errors. * `INVALID_ARGUMENT` if a `student_id` is specified, but its format cannot be recognized (it is not an email address, nor a `student_id` from the API, nor the literal string `me`). * `NOT_FOUND` if Classroom cannot find any record of the given student or `guardian_id`, or if the guardian has been disabled.'
+      operationId: classroom.userProfiles.guardians.get
+      parameters:
+        - description: 'The student whose guardian is being requested. One of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
+          in: path
+          name: studentId
+          required: true
+          type: string
+        - description: The `id` field from a `Guardian`.
+          in: path
+          name: guardianId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Guardian'
+      tags:
+        - userProfiles
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
   '/v1/userProfiles/{userId}':
     get:
       description: 'Returns a user profile. This method returns the following error codes: * `PERMISSION_DENIED` if the requesting user is not permitted to access this user profile or if no profile exists with the requested ID or for access errors.'
@@ -1544,19 +1783,19 @@ definitions:
         description: 'Classroom-assigned identifier of this course work, unique per course. Read-only.'
         type: string
       materials:
-        description: Additional materials.
+        description: Additional materials. CourseWork must have no more than 20 material items.
         items:
           $ref: '#/definitions/Material'
         type: array
       maxPoints:
-        description: 'Maximum grade for this course work. If zero or unspecified, this assignment is considered ungraded. This must be an integer value.'
+        description: 'Maximum grade for this course work. If zero or unspecified, this assignment is considered ungraded. This must be a non-negative integer value.'
         format: double
         type: number
       multipleChoiceQuestion:
         $ref: '#/definitions/MultipleChoiceQuestion'
         description: Multiple choice question details. This is populated only when `work_type` is `MULTIPLE_CHOICE_QUESTION`.
       state:
-        description: 'Status of this course work.. If unspecified, the default state is `DRAFT`.'
+        description: 'Status of this course work. If unspecified, the default state is `DRAFT`.'
         enum:
           - COURSE_WORK_STATE_UNSPECIFIED
           - PUBLISHED
@@ -1659,6 +1898,45 @@ definitions:
           - CREATE_COURSE
         type: string
     type: object
+  Guardian:
+    description: Association between a student and a guardian of that student. The guardian may receive information about the student's course work.
+    properties:
+      guardianId:
+        description: Identifier for the guardian.
+        type: string
+      guardianProfile:
+        $ref: '#/definitions/UserProfile'
+        description: User profile for the guardian.
+      invitedEmailAddress:
+        description: The email address to which the initial guardian invitation was sent. This field is only visible to domain administrators.
+        type: string
+      studentId:
+        description: Identifier for the student to whom the guardian relationship applies.
+        type: string
+    type: object
+  GuardianInvitation:
+    description: 'An invitation to become the guardian of a specified user, sent to a specified email address.'
+    properties:
+      creationTime:
+        description: The time that this invitation was created. Read-only.
+        type: string
+      invitationId:
+        description: Unique identifier for this invitation. Read-only.
+        type: string
+      invitedEmailAddress:
+        description: Email address that the invitation was sent to. This field is only visible to domain administrators.
+        type: string
+      state:
+        description: The state that this invitation is in.
+        enum:
+          - GUARDIAN_INVITATION_STATE_UNSPECIFIED
+          - PENDING
+          - COMPLETE
+        type: string
+      studentId:
+        description: ID of the student (in standard format)
+        type: string
+    type: object
   Invitation:
     description: An invitation to join a course.
     properties:
@@ -1723,6 +2001,30 @@ definitions:
         description: Courses that match the list request.
         items:
           $ref: '#/definitions/Course'
+        type: array
+      nextPageToken:
+        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
+        type: string
+    type: object
+  ListGuardianInvitationsResponse:
+    description: Response when listing guardian invitations.
+    properties:
+      guardianInvitations:
+        description: Guardian invitations that matched the list request.
+        items:
+          $ref: '#/definitions/GuardianInvitation'
+        type: array
+      nextPageToken:
+        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
+        type: string
+    type: object
+  ListGuardiansResponse:
+    description: Response when listing guardians.
+    properties:
+      guardians:
+        description: Guardians on this page of results that met the criteria specified in the request.
+        items:
+          $ref: '#/definitions/Guardian'
         type: array
       nextPageToken:
         description: 'Token identifying the next page of results to return. If empty, no further results are available.'
@@ -1796,7 +2098,7 @@ definitions:
     description: Request to modify the attachments of a student submission.
     properties:
       addAttachments:
-        description: Attachments to add. This may only contain link attachments.
+        description: Attachments to add. A student submission may not have more than 20 attachments. This may only contain link attachments.
         items:
           $ref: '#/definitions/Attachment'
         type: array
@@ -1881,7 +2183,7 @@ definitions:
         description: Absolute link to the submission in the Classroom web UI. Read-only.
         type: string
       assignedGrade:
-        description: 'Optional grade. If unset, no grade was set. This must be an integer value. This may be modified only by course teachers.'
+        description: 'Optional grade. If unset, no grade was set. This must be a non-negative integer value. This may be modified only by course teachers.'
         format: double
         type: number
       assignmentSubmission:
@@ -1905,10 +2207,10 @@ definitions:
           - MULTIPLE_CHOICE_QUESTION
         type: string
       creationTime:
-        description: Creation time of this submission.. This may be unset if the student has not accessed this item. Read-only.
+        description: Creation time of this submission. This may be unset if the student has not accessed this item. Read-only.
         type: string
       draftGrade:
-        description: 'Optional pending grade. If unset, no grade was set. This must be an integer value. This is only visible to and modifiable by course teachers.'
+        description: 'Optional pending grade. If unset, no grade was set. This must be a non-negative integer value. This is only visible to and modifiable by course teachers.'
         format: double
         type: number
       id:
@@ -1919,7 +2221,7 @@ definitions:
         type: boolean
       multipleChoiceSubmission:
         $ref: '#/definitions/MultipleChoiceSubmission'
-        description: Submission content when course_work_type is MUTIPLE_CHOICE_QUESTION.
+        description: Submission content when course_work_type is MULTIPLE_CHOICE_QUESTION.
       shortAnswerSubmission:
         $ref: '#/definitions/ShortAnswerSubmission'
         description: Submission content when course_work_type is SHORT_ANSWER_QUESTION.
