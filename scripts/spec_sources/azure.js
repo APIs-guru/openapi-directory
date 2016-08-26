@@ -19,8 +19,10 @@ module.exports = function () {
     //Workaround for https://github.com/Azure/azure-rest-api-specs/issues/229
     var service = result[2];
     var filename = path.basename(result[1], '.json');
-    if (service === 'arm-compute' && !service.endsWith(filename))
+    if (['arm-compute', 'arm-machinelearning'].indexOf(service) !== -1
+      && !service.endsWith(filename)) {
       service += '-' + filename;
+    }
 
     return {
       info: {
