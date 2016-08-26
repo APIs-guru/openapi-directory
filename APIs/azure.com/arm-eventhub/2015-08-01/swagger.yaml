@@ -1,0 +1,1190 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Azure EventHub client
+  title: EventHubManagementClient
+  version: '2015-08-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-eventhub/2015-08-01/swagger/EventHub.json'
+    version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: arm-eventhub
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+  - text/json
+produces:
+  - application/json
+  - text/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  SubscriptionIdParameter:
+    description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/namespaces':
+    get:
+      description: Lists all the available namespaces within the subscription irrespective of the resourceGroups.
+      operationId: Namespaces_ListBySubscription
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespaces returned successfully
+          schema:
+            $ref: '#/definitions/NamespaceListResult'
+      tags:
+        - Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces':
+    get:
+      description: Lists the available namespaces within a resourceGroup.
+      operationId: Namespaces_ListByResourceGroup
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespaces returned successfully
+          schema:
+            $ref: '#/definitions/NamespaceListResult'
+      tags:
+        - Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}':
+    delete:
+      description: Deletes an existing namespace. This operation also removes all associated resources under the namespace.
+      operationId: Namespaces_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace delete successful
+        '202':
+          description: Namespace delete accepted
+        '204':
+          description: No Content
+      tags:
+        - Namespaces
+      x-ms-long-running-operation: true
+    get:
+      description: Returns the description for the specified namespace.
+      operationId: Namespaces_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace returned successfully
+          schema:
+            $ref: '#/definitions/NamespaceResource'
+      tags:
+        - Namespaces
+    put:
+      description: 'Creates Updates namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
+      operationId: Namespaces_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: Parameters supplied to create a Namespace Resource.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/NamespaceCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace create request successful
+          schema:
+            $ref: '#/definitions/NamespaceResource'
+        '201':
+          description: Namespace create request accepted
+          schema:
+            $ref: '#/definitions/NamespaceResource'
+      tags:
+        - Namespaces
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules':
+    get:
+      description: Authorization rules for a namespace.
+      operationId: Namespaces_ListAuthorizationRules
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace Authorization rule returned successfully
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleListResult'
+      tags:
+        - Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}':
+    delete:
+      description: Deletes a namespace authorization rule
+      operationId: Namespaces_DeleteAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: Authorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace Authorization rule deleted
+        '204':
+          description: No Content
+      tags:
+        - Namespaces
+    get:
+      description: Authorization rule for a namespace by name.
+      operationId: Namespaces_GetAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: Authorization rule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace Authorization rule returned successfully
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Namespaces
+    put:
+      description: Creates an authorization rule for a namespace
+      operationId: Namespaces_CreateOrUpdateAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: Namespace Aauthorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: The shared access authorization rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace Authorization rule created
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Namespaces
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys':
+    post:
+      description: 'Primary and Secondary ConnectionStrings to the namespace '
+      operationId: Namespaces_ListKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The authorizationRule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/ResourceListKeys'
+      tags:
+        - Namespaces
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys':
+    post:
+      description: 'Regenerats the Primary or Secondary ConnectionStrings to the namespace '
+      operationId: Namespaces_RegenerateKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The authorizationRule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to regenerate Auth Rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/RegenerateKeysParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/ResourceListKeys'
+      tags:
+        - Namespaces
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs':
+    get:
+      description: Enumerates the Event Hubs in a namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639493.aspx'
+      operationId: EventHubs_ListAll
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved list of EventHubs.
+          schema:
+            $ref: '#/definitions/EventHubListResult'
+      tags:
+        - EventHubs
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}':
+    delete:
+      description: Deletes an Event hub from the specified namespace and resource group.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639496.aspx'
+      operationId: EventHubs_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The EventHub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: EventHub deleted.
+        '204':
+          description: No Content
+      tags:
+        - EventHubs
+    get:
+      description: Returns an Event Hub description for the specified Event Hub.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639501.aspx'
+      operationId: EventHubs_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The EventHub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the Event Hub description.
+          schema:
+            $ref: '#/definitions/EventHubResource'
+      tags:
+        - EventHubs
+    put:
+      description: Creates/Updates a new Event Hub as a nested resource within a namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639497.aspx'
+      operationId: EventHubs_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The EventHub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - description: Parameters supplied to create a EventHub Resource.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/EventHubCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Event Hub created.
+          schema:
+            $ref: '#/definitions/EventHubResource'
+      tags:
+        - EventHubs
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules':
+    get:
+      description: Authorization rules for a EventHub.
+      operationId: EventHubs_ListAuthorizationRules
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The NameSpace name
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The EventHub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: EventHub AuthorizationRule returned successfully
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleListResult'
+      tags:
+        - Eventhubs
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules/{authorizationRuleName}':
+    delete:
+      description: Deletes a EventHub authorization rule
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt706100.aspx'
+      operationId: EventHubs_DeleteAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The Eventhub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - description: Authorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: EventHub Authorization rule deleted
+        '204':
+          description: No Content
+      tags:
+        - EventHubs
+    get:
+      description: Authorization rule for a EventHub by name.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt706097.aspx'
+      operationId: EventHubs_GetAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The Event Hub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - description: Authorization rule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: EventHub Authorization rule returned successfully
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - EventHubs
+    put:
+      description: Creates an authorization rule for the specified Event Hub.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt706096.aspx'
+      operationId: EventHubs_CreateOrUpdateAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The Event Hub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - description: Aauthorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: The shared access authorization rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: EventHub Authorization rule created
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - EventHubs
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules/{authorizationRuleName}/ListKeys':
+    post:
+      description: Returns the ACS and SAS connection strings for the Event Hub.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt706098.aspx'
+      operationId: EventHubs_ListKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The event hub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - description: The connection string of the namespace for the specified authorizationRule.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/ResourceListKeys'
+      tags:
+        - EventHubs
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules/{authorizationRuleName}/regenerateKeys':
+    post:
+      description: Regenerates the ACS and SAS connection strings for the Event Hub.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt706099.aspx'
+      operationId: EventHubs_RegenerateKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The event hub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - description: The connection string of the EventHub for the specified authorizationRule.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to regenerate Auth Rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/RegenerateKeysParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/ResourceListKeys'
+      tags:
+        - EventHubs
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/consumergroups':
+    get:
+      description: Enumerates the consumer groups in a namespace. An empty feed is returned if no consumer group exists in the namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639503.aspx'
+      operationId: ConsumerGroups_ListAll
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The EventHub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved list of Consumer Group.
+          schema:
+            $ref: '#/definitions/ConsumerGroupListResult'
+      tags:
+        - ConsumerGroups
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/consumergroups/{consumerGroupName}':
+    delete:
+      description: Deletes an ConsumerGroup from the specified EventHub and resource group.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639491.aspx'
+      operationId: ConsumerGroups_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The EventHub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - description: The Consumer Group name.
+          in: path
+          name: consumerGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Consumer Group deleted.
+        '204':
+          description: No Content
+      tags:
+        - ConsumerGroups
+    get:
+      description: Returns an Consumer Group description for the specified Consumer Group.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639488.aspx'
+      operationId: ConsumerGroups_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The EventHub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - description: The Consumer Group name.
+          in: path
+          name: consumerGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the consumer group description.
+          schema:
+            $ref: '#/definitions/ConsumerGroupResource'
+      tags:
+        - ConsumerGroups
+    put:
+      description: Creates/Updates a consumer group as a nested resource within a namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639498.aspx'
+      operationId: ConsumerGroups_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The EventHub name.
+          in: path
+          name: eventHubName
+          required: true
+          type: string
+        - description: The Consumer Group name.
+          in: path
+          name: consumerGroupName
+          required: true
+          type: string
+        - description: Parameters supplied to create a Consumer Group Resource.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ConsumerGroupCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Consumer Group created.
+          schema:
+            $ref: '#/definitions/ConsumerGroupResource'
+      tags:
+        - ConsumerGroups
+definitions:
+  ConsumerGroupCreateOrUpdateParameters:
+    description: Parameters supplied to the CreateOrUpdate Consumer Group operation.
+    properties:
+      location:
+        description: Location of the resource.
+        type: string
+      name:
+        description: Name of the consumer group.
+        type: string
+      properties:
+        $ref: '#/definitions/ConsumerGroupProperties'
+        x-ms-client-flatten: true
+      type:
+        description: ARM type of the namespace.
+        type: string
+    required:
+      - location
+  ConsumerGroupListResult:
+    description: The response of the List Consumer Group operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of Consumer Group
+        type: string
+      value:
+        description: Result of the List Consumer Group operation.
+        items:
+          $ref: '#/definitions/ConsumerGroupResource'
+        type: array
+  ConsumerGroupProperties:
+    properties:
+      createdAt:
+        description: Exact time the message was created.
+        format: date-time
+        type: string
+      eventHubPath:
+        description: The path of the event hub.
+        type: string
+      updatedAt:
+        description: The exact time the message has been updated.
+        format: date-time
+        type: string
+      userMetadata:
+        description: The user metadata.
+        type: string
+  ConsumerGroupResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of Consumer Group Resource.
+    properties:
+      properties:
+        $ref: '#/definitions/ConsumerGroupProperties'
+        x-ms-client-flatten: true
+  EventHubCreateOrUpdateParameters:
+    description: Parameters supplied to the CreateOrUpdate EventHub operation.
+    properties:
+      location:
+        description: Location of the resource.
+        type: string
+      name:
+        description: Name of the Event Hub.
+        type: string
+      properties:
+        $ref: '#/definitions/EventHubProperties'
+      type:
+        description: ARM type of the namespace.
+        type: string
+    required:
+      - location
+  EventHubListResult:
+    description: The response of the List EventHub operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of EventHub
+        type: string
+      value:
+        description: Result of the List EventHub operation.
+        items:
+          $ref: '#/definitions/EventHubResource'
+        type: array
+  EventHubProperties:
+    properties:
+      createdAt:
+        description: Exact time the Event was created.
+        format: date-time
+        type: string
+      messageRetentionInDays:
+        description: Number of days to retain the events for this Event Hub.
+        format: int64
+        type: integer
+      partitionCount:
+        description: Number of partitions created for EventHub.
+        format: int64
+        type: integer
+      partitionIds:
+        description: Current number of shards on the Event Hub.
+        items:
+          type: integer
+        type: array
+      status:
+        description: Enumerates the possible values for the status of the EventHub.
+        enum:
+          - Active
+          - Disabled
+          - Restoring
+          - SendDisabled
+          - ReceiveDisabled
+          - Creating
+          - Deleting
+          - Renaming
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EntityStatus
+      updatedAt:
+        description: The exact time the message has been updated.
+        format: date-time
+        type: string
+  EventHubResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of EventHub Resource.
+    properties:
+      properties:
+        $ref: '#/definitions/EventHubProperties'
+        x-ms-client-flatten: true
+  NamespaceCreateOrUpdateParameters:
+    description: Parameters supplied to the CreateOrUpdate Namespace operation.
+    properties:
+      location:
+        description: Namespace location.
+        type: string
+      properties:
+        $ref: '#/definitions/NamespaceProperties'
+        x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/Sku'
+      tags:
+        additionalProperties:
+          type: string
+        description: Namespace tags.
+        type: object
+    required:
+      - location
+  NamespaceListResult:
+    description: The response of the List Namespace operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of Namespaces
+        type: string
+      value:
+        description: Result of the List Namespace operation.
+        items:
+          $ref: '#/definitions/NamespaceResource'
+        type: array
+  NamespaceProperties:
+    description: Properties of the Namespace.
+    properties:
+      createACSNamespace:
+        description: Indicates whether to create ACS namespace.
+        type: boolean
+      createdAt:
+        description: The time the namespace was created.
+        format: date-time
+        type: string
+      enabled:
+        description: Specifies whether this instance is enabled.
+        type: boolean
+      provisioningState:
+        description: Provisioning state of the Namespace.
+        type: string
+      serviceBusEndpoint:
+        description: Endpoint you can use to perform ServiceBus operations.
+        externalDocs:
+          url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+        type: string
+      status:
+        description: State of the namespace.
+        enum:
+          - Unknown
+          - Creating
+          - Created
+          - Activating
+          - Enabling
+          - Active
+          - Disabling
+          - Disabled
+          - SoftDeleting
+          - SoftDeleted
+          - Removing
+          - Removed
+          - Failed
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: NamespaceState
+      updatedAt:
+        description: The time the namespace was updated.
+        format: date-time
+        type: string
+  NamespaceResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of a Namespace resource.
+    properties:
+      properties:
+        $ref: '#/definitions/NamespaceProperties'
+        x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/Sku'
+  RegenerateKeysParameters:
+    description: Parameters supplied to the Regenerate Auth Rule.
+    properties:
+      Policykey:
+        description: Key that needs to be regenerated .
+        enum:
+          - PrimaryKey
+          - SecondaryKey
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: Policykey
+  Resource:
+    properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+    required:
+      - location
+    x-ms-azure-resource: true
+  ResourceListKeys:
+    description: Namespace/EventHub Connection String
+    properties:
+      keyName:
+        description: A string that describes the authorization rule
+        type: string
+      primaryConnectionString:
+        description: PrimaryConnectionString of the created Namespace AuthorizationRule.
+        type: string
+      primaryKey:
+        description: A base64-encoded 256-bit primary key for signing and validating the SAS token
+        type: string
+      secondaryConnectionString:
+        description: SecondaryConnectionString of the created Namespace AuthorizationRule
+        type: string
+      secondaryKey:
+        description: A base64-encoded 256-bit primary key for signing and validating the SAS token
+        type: string
+  SharedAccessAuthorizationRuleCreateOrUpdateParameters:
+    description: Parameters supplied to the CreateOrUpdate  AuthorizationRules.
+    properties:
+      location:
+        description: data center location.
+        type: string
+      name:
+        description: Name of the AuthorizationRule.
+        type: string
+      properties:
+        $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'
+        x-ms-client-flatten: true
+  SharedAccessAuthorizationRuleListResult:
+    description: The response of the List Namespace operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules
+        type: string
+      value:
+        description: Result of the List AuthorizationRules operation.
+        items:
+          $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+        type: array
+  SharedAccessAuthorizationRuleProperties:
+    description: SharedAccessAuthorizationRule properties.
+    properties:
+      rights:
+        description: The rights associated with the rule.
+        items:
+          enum:
+            - Manage
+            - Send
+            - Listen
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: AccessRights
+        type: array
+    required:
+      - rights
+  SharedAccessAuthorizationRuleResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of a Namespace AuthorizationRules.
+    properties:
+      properties:
+        $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'
+        x-ms-client-flatten: true
+  Sku:
+    description: Sku of the Namespace.
+    properties:
+      capacity:
+        description: The eventhub throughput units
+        format: int32
+        type: integer
+      name:
+        description: Name of this Sku
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SkuName
+      tier:
+        description: The tier of this particular SKU
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SkuTier
+    required:
+      - tier
+    type: object

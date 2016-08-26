@@ -115,7 +115,9 @@ paths:
         '200':
           description: Namespace delete successful
         '202':
-          description: Namespace delete accepted
+          description: Namespace delete request has been accepted
+        '204':
+          description: No Content
       tags:
         - Namespaces
       x-ms-long-running-operation: true
@@ -235,6 +237,8 @@ paths:
       responses:
         '200':
           description: Namespace Authorization rule deleted
+        '204':
+          description: No Content
       tags:
         - Namespaces
     get:
@@ -426,6 +430,8 @@ paths:
       responses:
         '200':
           description: Queue deleted.
+        '204':
+          description: No Content
       tags:
         - Queues
     get:
@@ -559,6 +565,8 @@ paths:
       responses:
         '200':
           description: Queue authorizationRule deleted
+        '204':
+          description: No Content
       tags:
         - Queues
     get:
@@ -768,9 +776,10 @@ paths:
       responses:
         '200':
           description: Topic delete successful
+        '204':
+          description: No Content
       tags:
         - Topics
-      x-ms-long-running-operation: true
     get:
       description: Returns the description for the specified topic
       externalDocs:
@@ -902,6 +911,8 @@ paths:
       responses:
         '200':
           description: Topics AuthorizationRule deleted
+        '204':
+          description: No Content
       tags:
         - Topics
     get:
@@ -1123,6 +1134,8 @@ paths:
       responses:
         '200':
           description: Subscription deleted.
+        '204':
+          description: No Content
       tags:
         - Subscriptions
     get:
@@ -1371,7 +1384,6 @@ definitions:
         type: string
       autoDeleteOnIdle:
         description: the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes.
-        format: duration
         type: string
       countDetails:
         $ref: '#/definitions/MessageCountDetails'
@@ -1384,11 +1396,9 @@ definitions:
         type: boolean
       defaultMessageTimeToLive:
         description: 'the default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.'
-        format: duration
         type: string
       'duplicateDetectionHistoryTimeWindow ':
         description: TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes..
-        format: duration
         type: string
       enableBatchedOperations:
         description: value that indicates whether server-side batched operations are enabled..
@@ -1407,7 +1417,6 @@ definitions:
         type: boolean
       'lockDuration ':
         description: 'the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute.'
-        format: duration
         type: string
       'maxDeliveryCount ':
         description: the maximum delivery count. A message is automatically deadlettered after this number of deliveries.
@@ -1483,6 +1492,8 @@ definitions:
         description: Resource type
         readOnly: true
         type: string
+    required:
+      - location
     x-ms-azure-resource: true
   ResourceListKeys:
     description: Namespace/ServiceBus Connection String
@@ -1514,8 +1525,6 @@ definitions:
       properties:
         $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'
         x-ms-client-flatten: true
-    required:
-      - properties
   SharedAccessAuthorizationRuleListResult:
     description: The response of the List Namespace operation.
     properties:
@@ -1542,6 +1551,8 @@ definitions:
             modelAsString: false
             name: AccessRights
         type: array
+    required:
+      - rights
   SharedAccessAuthorizationRuleResource:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -1554,11 +1565,11 @@ definitions:
     description: Sku of the Namespace.
     properties:
       capacity:
-        description: The messaging units or eventhub throughput units
+        description: The messaging units for the tier specified
         format: int32
         type: integer
       name:
-        description: 'The resource type that this object applies to. Eg: NamespaceType'
+        description: Name of this Sku
         enum:
           - Basic
           - Standard
@@ -1577,6 +1588,8 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: SkuTier
+    required:
+      - tier
     type: object
   SubscriptionCreateOrUpdateParameters:
     description: Parameters supplied to the CreateOrUpdate Subscription operation.
@@ -1612,7 +1625,6 @@ definitions:
         type: string
       autoDeleteOnIdle:
         description: TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes.
-        format: duration
         type: string
       countDetails:
         $ref: '#/definitions/MessageCountDetails'
@@ -1628,7 +1640,6 @@ definitions:
         type: boolean
       defaultMessageTimeToLive:
         description: 'Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.'
-        format: duration
         type: string
       enableBatchedOperations:
         description: Value that indicates whether server-side batched operations are enabled..
@@ -1641,7 +1652,6 @@ definitions:
         type: boolean
       lockDuration:
         description: The lock duration time span for the subscription.
-        format: duration
         type: string
       maxDeliveryCount:
         description: Number of maximum deliveries.
@@ -1702,7 +1712,6 @@ definitions:
         type: string
       autoDeleteOnIdle:
         description: TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes.
-        format: duration
         type: string
       countDetails:
         $ref: '#/definitions/MessageCountDetails'
@@ -1712,11 +1721,9 @@ definitions:
         type: string
       defaultMessageTimeToLive:
         description: 'Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.'
-        format: duration
         type: string
       'duplicateDetectionHistoryTimeWindow ':
         description: TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes..
-        format: duration
         type: string
       enableBatchedOperations:
         description: Value that indicates whether server-side batched operations are enabled..
