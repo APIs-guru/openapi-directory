@@ -1,38 +1,36 @@
 'use strict';
 
-var path = require('path');
+var Path = require('path');
 var assert = require('assert');
 
 var _ = require('lodash');
 var util = require('../util');
 
 module.exports = function () {
-  var regex = RegExp('^[^/]+/(([^/]+)/[^/]+/swagger/[^/]+)$');
+  var files = util.listGitHubFiles('Azure', 'azure-rest-api-specs', '*/swagger/*.json');
 
-  //TODO: use makeRequest lib to dowload archive
-  var files = util.exec('wget -q -O- https://codeload.github.com/Azure/azure-rest-api-specs/tar.gz/master | tar -tz');
-  return _(files).split('\n').map(function (filename) {
-    var result = regex.exec(filename);
-    if (!result)
-      return;
+  //Workaround
+  files = _.filter(files, x => (x.split('/').length == 4));
+
+  return _.map(files, filename => {
 
     //Workaround for https://github.com/Azure/azure-rest-api-specs/issues/229
-    var service = result[2];
-    var filename = path.basename(result[1], '.json');
+    var service = filename.split('/')[0];
+    var basename = Path.basename(filename, '.json');
     if (['arm-compute', 'arm-machinelearning'].indexOf(service) !== -1
-      && !service.endsWith(filename)) {
-      service += '-' + filename;
+      && !service.endsWith(basename)) {
+      service += '-' + basename;
     }
 
     return {
       info: {
         'x-serviceName': service,
         'x-origin': {
-          url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/' + result[1],
+          url: util.rawGitHubUrl('Azure', 'azure-rest-api-specs', filename),
           format: 'swagger',
           version: '2.0'
         }
       }
     }
-  }).compact().value();
+  });
 }

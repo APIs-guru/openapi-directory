@@ -200,3 +200,17 @@ exports.editFile = function (str) {
     });
   });
 }
+
+exports.listGitHubFiles = function (user, repo, glob) {
+  //TODO: use makeRequest lib to dowload archive
+  var files = exports.exec(`wget -q -O- https://codeload.github.com/${user}/${repo}/tar.gz/master | tar -tz '*/${glob}'`);
+  return _(files)
+    .split('\n')
+    .map(file => file.replace(repo + '-master/', ''))
+    .filter(line => line != '' && line.slice(-1) != '/')
+    .value();
+};
+
+exports.rawGitHubUrl = function (user, repo, path) {
+  return `https://raw.githubusercontent.com/${user}/${repo}/master/${path}`;
+}
