@@ -78,7 +78,7 @@ Some specs are taken from Open Source projects:
  - [warehouseman/trello-swagger-generator](https://github.com/warehouseman/trello-swagger-generator/) - OpenAPI(aka Swagger) spec for Trello API
  - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(aka Swagger) spec for Instagram API
  - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(aka Swagger) spec for BBC Nitro API
- - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - API spec for medium.com using OpenAPI Specification (aka Swagger 2.0)
+ - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI (aka Swagger 2.0) spec for Medium API
 
 [banner]: https://apis.guru/branding/banner.svg "APIs.guru"
 [twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social
