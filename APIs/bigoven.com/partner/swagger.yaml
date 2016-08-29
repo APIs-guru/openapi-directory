@@ -73,6 +73,31 @@ paths:
       summary: Gets a recipe collection. A recipe collection is a curated set of recipes.
       tags:
         - Collection
+  '/collection/{id}/meta':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Collection_GetCollectionMeta
+      parameters:
+        - description: the collection identifier
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BigOven.Model.API2.CollectionInfo'
+      summary: Gets a recipe collection metadata. A recipe collection is a curated set of recipes.
+      tags:
+        - Collection
   /collections:
     get:
       consumes: []

@@ -581,7 +581,7 @@ paths:
       description: Updates a call set. This method supports patch semantics.
       operationId: genomics.callsets.patch
       parameters:
-        - description: The ID of the call set to be updated.
+        - description: Required. The ID of the call set to be updated.
           in: path
           name: callSetId
           required: true
@@ -606,7 +606,7 @@ paths:
       description: Updates a call set.
       operationId: genomics.callsets.update
       parameters:
-        - description: The ID of the call set to be updated.
+        - description: Required. The ID of the call set to be updated.
           in: path
           name: callSetId
           required: true

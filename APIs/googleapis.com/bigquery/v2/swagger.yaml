@@ -1438,6 +1438,9 @@ definitions:
         description: '[Optional] Limits the bytes billed for this job. Queries that will have bytes billed beyond this limit will fail (without incurring a charge). If unspecified, this will be set to your project default.'
         format: int64
         type: string
+      parameterMode:
+        description: '[Experimental] Standard SQL only. Whether to use positional (?) or named (@myparam) query parameters in this query.'
+        type: string
       preserveNulls:
         description: '[Deprecated] This property is deprecated.'
         type: boolean
@@ -1447,6 +1450,11 @@ definitions:
       query:
         description: '[Required] BigQuery SQL query to execute.'
         type: string
+      queryParameters:
+        description: '[Experimental] Query parameters for Standard SQL queries.'
+        items:
+          $ref: '#/definitions/QueryParameter'
+        type: array
       schemaUpdateOptions:
         description: '[Experimental] Allows the schema of the desitination table to be updated as a side effect of the query job. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
         items:
@@ -1611,6 +1619,11 @@ definitions:
         description: '[Output-only] Total bytes processed for the job.'
         format: int64
         type: string
+      undeclaredQueryParameters:
+        description: '[Output-only, Experimental] Standard SQL only: list of undeclared query parameters detected during a dry run validation.'
+        items:
+          $ref: '#/definitions/QueryParameter'
+        type: array
     type: object
   JobStatistics3:
     properties:
@@ -1706,6 +1719,58 @@ definitions:
         description: '[Required] ID of the project. Can be either the numeric ID or the assigned ID of the project.'
         type: string
     type: object
+  QueryParameter:
+    properties:
+      name:
+        description: '[Optional] If unset, this is a positional parameter. Otherwise, should be unique within a query.'
+        type: string
+      parameterType:
+        $ref: '#/definitions/QueryParameterType'
+        description: '[Required] The type of this parameter.'
+      parameterValue:
+        $ref: '#/definitions/QueryParameterValue'
+        description: '[Required] The value of this parameter.'
+    type: object
+  QueryParameterType:
+    properties:
+      arrayType:
+        $ref: '#/definitions/QueryParameterType'
+        description: '[Optional] The type of the array''s elements, if this is an array.'
+      structTypes:
+        description: '[Optional] The types of the fields of this struct, in order, if this is a struct.'
+        items:
+          properties:
+            description:
+              description: '[Optional] Human-oriented description of the field.'
+              type: string
+            name:
+              description: '[Optional] The name of this field.'
+              type: string
+            type:
+              $ref: '#/definitions/QueryParameterType'
+              description: '[Required] The type of this field.'
+          type: object
+        type: array
+      type:
+        description: '[Required] The top level type of this field.'
+        type: string
+    type: object
+  QueryParameterValue:
+    properties:
+      arrayValues:
+        description: '[Optional] The array values, if this is an array type.'
+        items:
+          $ref: '#/definitions/QueryParameterValue'
+        type: array
+      structValues:
+        description: '[Optional] The struct field values, in order of the struct type''s declaration.'
+        items:
+          $ref: '#/definitions/QueryParameterValue'
+        type: array
+      value:
+        description: '[Optional] The value of this value, if a simple scalar type.'
+        type: string
+    type: object
   QueryRequest:
     properties:
       defaultDataset:
@@ -1722,17 +1787,26 @@ definitions:
         description: '[Optional] The maximum number of rows of data to return per page of results. Setting this flag to a small value such as 1000 and then paging through results might improve reliability when the query result set is large. In addition to this limit, responses are also limited to 10 MB. By default, there is no maximum row count, and only the byte limit applies.'
         format: uint32
         type: integer
+      parameterMode:
+        description: '[Experimental] Standard SQL only. Whether to use positional (?) or named (@myparam) query parameters in this query.'
+        type: string
       preserveNulls:
         description: '[Deprecated] This property is deprecated.'
         type: boolean
       query:
         description: '[Required] A query string, following the BigQuery query syntax, of the query to execute. Example: "SELECT count(f1) FROM [myProjectId:myDatasetId.myTableId]".'
         type: string
+      queryParameters:
+        description: '[Experimental] Query parameters for Standard SQL queries.'
+        items:
+          $ref: '#/definitions/QueryParameter'
+        type: array
       timeoutMs:
         description: '[Optional] How long to wait for the query to complete, in milliseconds, before the request times out and returns. Note that this is only a timeout for the request, not the query. If the query takes longer to run than the timeout value, the call returns without any results and with the ''jobComplete'' flag set to false. You can call GetQueryResults() to wait for the query to complete and read the results. The default value is 10000 milliseconds (10 seconds).'
         format: uint32
         type: integer
       useLegacySql:
+        default: true
         description: '[Experimental] Specifies whether to use BigQuery''s legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/ When useLegacySql is set to false, the values of allowLargeResults and flattenResults are ignored; query will be run as if allowLargeResults is true and flattenResults is false.'
         type: boolean
       useQueryCache:

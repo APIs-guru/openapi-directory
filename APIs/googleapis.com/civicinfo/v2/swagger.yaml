@@ -261,6 +261,11 @@ paths:
           in: query
           name: officialOnly
           type: boolean
+        - default: false
+          description: 'If set to true, the query will return the success codeand include any partial information when it is unable to determine a matching address or unable to determine the election for electionId=0 queries.'
+          in: query
+          name: returnAllAvailableData
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -431,7 +436,7 @@ definitions:
         description: 'If this is a partisan election, the name of the party it is for.'
         type: string
       referendumBallotResponses:
-        description: 'The set of ballot responses for the referendum. A ballot response represents a line on the ballot. Common examples might include "yes" or "no" for referenda, or a judge''s name for a retention contest. This field is only populated for contests of type ''Referendum''.'
+        description: The set of ballot responses for the referendum. A ballot response represents a line on the ballot. Common examples might include "yes" or "no" for referenda. This field is only populated for contests of type 'Referendum'.
         items:
           type: string
         type: array
@@ -476,7 +481,7 @@ definitions:
         description: '"Yes" or "No" depending on whether this a contest being held outside the normal election cycle.'
         type: string
       type:
-        description: 'The type of contest. Usually this will be ''General'', ''Primary'', or ''Run-off'' for contests with candidates. For referenda this will be ''Referendum''.'
+        description: 'The type of contest. Usually this will be ''General'', ''Primary'', or ''Run-off'' for contests with candidates. For referenda this will be ''Referendum''. For Retention contests this will typically be ''Retention''.'
         type: string
     type: object
   DivisionSearchResponse:
@@ -560,6 +565,8 @@ definitions:
     properties:
       id:
         description: 'An identifier for this district, relative to its scope. For example, the 34th State Senate district would have id "34" and a scope of stateUpper.'
+        type: string
+      kgForeignKey:
         type: string
       name:
         description: The name of the district.

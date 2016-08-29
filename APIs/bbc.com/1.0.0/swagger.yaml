@@ -2640,8 +2640,6 @@ definitions:
                       type: string
                     available_versions_media_sets:
                       $ref: '#/definitions/available_versions_media_sets'
-                    available_versions_services:
-                      $ref: '#/definitions/available_versions_services'
                     media_availability_end:
                       format: date-time
                       type: string
@@ -2682,8 +2680,6 @@ definitions:
                   type: string
                 available_versions_media_sets:
                   $ref: '#/definitions/available_versions_media_sets'
-                available_versions_services:
-                  $ref: '#/definitions/available_versions_services'
                 media_availability_end:
                   format: date-time
                   type: string
@@ -2844,40 +2840,6 @@ definitions:
             type: array
         required:
           - media_set
-        type: object
-    type: object
-  available_versions_services:
-    additionalProperties: false
-    properties:
-      services:
-        additionalProperties: false
-        properties:
-          service:
-            items:
-              additionalProperties: false
-              properties:
-                services:
-                  additionalProperties: false
-                  properties:
-                    service:
-                      items:
-                        additionalProperties: false
-                        properties:
-                          sid:
-                            type: string
-                        type: object
-                      minItems: 1
-                      type: array
-                  required:
-                    - service
-                  type: object
-                sid:
-                  type: string
-              type: object
-            minItems: 1
-            type: array
-        required:
-          - service
         type: object
     type: object
   available_webcasts:

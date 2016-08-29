@@ -674,6 +674,11 @@ definitions:
           @OutputOnly
         format: google-datetime
         type: string
+      filename:
+        description: |-
+          Path, from the source root, to a file whose contents is used for the
+          template.
+        type: string
       id:
         description: |-
           Unique identifier of the trigger.
