@@ -1421,7 +1421,7 @@ paths:
           type: string
         - description: 'Specify the stores for which the offer level filter apply. Allowed values - storeId (apply filters to only stores in storeId), alsoSoldAt (apply filters to only stores in alsoSoldAt), storeIdOrAlsoSoldAt (apply filters to stores present in both storeId and alsoSoldAt), any (apply filters across all offers)'
           in: query
-          name: applyFilterTo
+          name: applyFiltersTo
           required: false
           type: string
         - description: 'Specify the stores for which offers will be returned in the response. Allowed values - storeId (select offers matching filters from storeId), alsoSoldAt (select offers matching filters from alsoSoldAt), storeIdAndAlsoSoldAt (select offers matching filters from stores in both storeId and alsoSoldAt), all (select all offers irrespective of matching or storeId or alsoSoldAt data)'
