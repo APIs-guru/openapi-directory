@@ -1,0 +1,156 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.nytimes.com
+basePath: /svc/topstories/v1
+info:
+  description: Deprecated.  The Top Stories API provides JSON and JSONP lists of articles and associated images by section.
+  termsOfService: 'http://developer.nytimes.com/tou'
+  title: Top Stories V1
+  version: 1.0.0
+  x-apiClientRegistration:
+    url: 'http://developer.nytimes.com/signup'
+  x-apisguru-categories:
+    - media
+    - open_data
+  x-logo:
+    url: 'https://a1.nyt.com/assets/homepage/20160830-114229/images/foundation/logos/nyt-logo-379x64.svg'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/NYTimes/public_api_specs/master/top_stories/top_stories.json'
+    version: '2.0'
+  x-providerName: nytimes.com
+  x-serviceName: top_stories
+externalDocs:
+  url: 'http://developer.nytimes.com/'
+produces:
+  - application/json
+securityDefinitions:
+  apikey:
+    in: query
+    name: api-key
+    type: apiKey
+security:
+  - apikey: []
+paths:
+  '/{section}.{format}':
+    get:
+      description: |
+        The Top Stories API provides JSON and JSONP lists of articles and associated images by section.
+      parameters:
+        - description: The section the story appears in.
+          enum:
+            - home
+            - world
+            - national
+            - politics
+            - nyregion
+            - business
+            - opinion
+            - technology
+            - science
+            - health
+            - sports
+            - arts
+            - fashion
+            - dining
+            - travel
+            - magazine
+            - realestate
+          in: path
+          name: section
+          required: true
+          type: string
+          x-consoleDefault: home
+        - description: if this is JSONP or JSON
+          enum:
+            - json
+            - jsonp
+          in: path
+          name: format
+          required: true
+          type: string
+          x-consoleDefault: json
+        - description: |
+            The name of the function the API call results will be passed to. Required when using JSONP. This parameter has only one valid value: callback=callbackTopStories
+          in: query
+          name: callback
+          required: false
+          type: string
+      responses:
+        '200':
+          description: An array of articles
+          schema:
+            properties:
+              results:
+                items:
+                  $ref: '#/definitions/Article'
+                type: array
+            type: object
+      summary: Top Stories
+      tags:
+        - Stories
+definitions:
+  Article:
+    properties:
+      abstract:
+        type: string
+      byline:
+        type: string
+      created_date:
+        type: string
+      des_facet:
+        items:
+          type: string
+        type: array
+      geo_facet:
+        items:
+          type: string
+        type: array
+      item_type:
+        type: string
+      kicker:
+        type: string
+      material_type_facet:
+        type: string
+      multimedia:
+        items:
+          properties:
+            caption:
+              type: string
+            copyright:
+              type: string
+            format:
+              type: string
+            height:
+              type: integer
+            subtype:
+              type: string
+            type:
+              type: string
+            url:
+              type: string
+            width:
+              type: integer
+          type: object
+        type: array
+      org_facet:
+        type: string
+      per_facet:
+        items:
+          type: string
+        type: array
+      published_date:
+        type: string
+      section:
+        type: string
+      subsection:
+        type: string
+      title:
+        type: string
+      updated_date:
+        type: string
+      url:
+        type: string
+    type: object

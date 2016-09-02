@@ -1,0 +1,3878 @@
+swagger: '2.0'
+schemes:
+  - http
+host: api.nytimes.com
+basePath: /svc/politics/v3/us/legislative/congress
+x-hasEquivalentPaths: true
+info:
+  description: 'Deprecated. Now provided by ProPublica (https://propublica.github.io/congress-api-docs/).'
+  termsOfService: 'http://developer.nytimes.com/tou'
+  title: Congress
+  version: v3
+  x-apiClientRegistration:
+    url: 'http://developer.nytimes.com/signup'
+  x-apisguru-categories:
+    - media
+    - open_data
+  x-logo:
+    url: 'https://a1.nyt.com/assets/homepage/20160830-114229/images/foundation/logos/nyt-logo-379x64.svg'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/NYTimes/public_api_specs/master/congress_api/congress_api.json'
+    version: '2.0'
+  x-providerName: nytimes.com
+  x-serviceName: congress_api
+externalDocs:
+  url: 'http://developer.nytimes.com/'
+securityDefinitions:
+  api-key:
+    in: query
+    name: api-key
+    type: apiKey
+paths:
+  '/members/house/{state}/{district-number}/current.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_members-house-state-district-number-current-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - api_url: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/G000570.json'
+                  district: '1'
+                  gender: M
+                  id: G000570
+                  name: Frank Guinta
+                  next_election: ''
+                  party: R
+                  role: Representative
+                  seniority: '2'
+                  times_topics_url: ''
+                  twitter_id: RepFrankGuinta
+                  youtube_id: ''
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    api_url:
+                      type: string
+                    district:
+                      type: string
+                    gender:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    next_election:
+                      type: string
+                    party:
+                      type: string
+                    role:
+                      type: string
+                    seniority:
+                      type: string
+                    times_topics_url:
+                      type: string
+                    twitter_id:
+                      type: string
+                    youtube_id:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Current House Members by State/District Number
+    parameters:
+      - in: path
+        name: state
+        required: true
+        type: string
+      - in: path
+        name: district-number
+        required: true
+        type: string
+  /members/new.json:
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_members-new-json
+      parameters:
+        - in: query
+          name: api-key
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company.  All Rights Reserved.
+              results:
+                - cspan_id: ''
+                  current_party: ''
+                  date_of_birth: '1947-10-26'
+                  domain: ''
+                  facebook_account: ''
+                  facebook_id: ''
+                  first_name: Hillary
+                  gender: F
+                  govtrack_id: '300022'
+                  icpsr_id: '40105'
+                  last_name: Clinton
+                  member_id: C001041
+                  members:
+                    - chamber: House
+                      district: '18'
+                      first_name: Darin
+                      id: L000585
+                      last_name: LaHood
+                      middle_name: M.
+                      party: R
+                      start_date: '2015-09-17'
+                      state: IL
+                  middle_name: Rodham
+                  most_recent_vote: '2009-01-21'
+                  num_results: '20'
+                  offset: '0'
+                  roles:
+                    - bills_cosponsored: '17'
+                      bills_sponsored: '2'
+                      chamber: Senate
+                      committees: []
+                      congress: '111'
+                      district: N/A
+                      end_date: '2009-01-21'
+                      missed_votes_pct: '16.67'
+                      party: D
+                      seniority: '9'
+                      start_date: '2009-01-06'
+                      state: NY
+                      title: 'Senator, 1st Class'
+                      votes_with_party_pct: '100.00'
+                  rss_url: ''
+                  thomas_id: '1631'
+                  times_tag: 'Clinton, Hillary Rodham (Per)'
+                  times_topics_url: 'http://topics.nytimes.com/top/reference/timestopics/people/c/hillary_rodham_clinton/index.html'
+                  twitter_account: ''
+                  url: ''
+                  youtube_account: ''
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    cspan_id:
+                      type: string
+                    current_party:
+                      type: string
+                    date_of_birth:
+                      type: string
+                    domain:
+                      type: string
+                    facebook_account:
+                      type: string
+                    facebook_id:
+                      type: string
+                    first_name:
+                      type: string
+                    gender:
+                      type: string
+                    govtrack_id:
+                      type: string
+                    icpsr_id:
+                      type: string
+                    last_name:
+                      type: string
+                    member_id:
+                      type: string
+                    members:
+                      items:
+                        properties:
+                          chamber:
+                            type: string
+                          district:
+                            type: string
+                          first_name:
+                            type: string
+                          id:
+                            type: string
+                          last_name:
+                            type: string
+                          middle_name:
+                            type: string
+                          party:
+                            type: string
+                          start_date:
+                            type: string
+                          state:
+                            type: string
+                        type: object
+                      type: array
+                    middle_name:
+                      type: string
+                    most_recent_vote:
+                      type: string
+                    num_results:
+                      type: string
+                    offset:
+                      type: string
+                    roles:
+                      items:
+                        properties:
+                          bills_cosponsored:
+                            type: string
+                          bills_sponsored:
+                            type: string
+                          chamber:
+                            type: string
+                          committees:
+                            items:
+                              properties: {}
+                              type: object
+                            type: array
+                          congress:
+                            type: string
+                          district:
+                            type: string
+                          end_date:
+                            type: string
+                          missed_votes_pct:
+                            type: string
+                          party:
+                            type: string
+                          seniority:
+                            type: string
+                          start_date:
+                            type: string
+                          state:
+                            type: string
+                          title:
+                            type: string
+                          votes_with_party_pct:
+                            type: string
+                        type: object
+                      type: array
+                    rss_url:
+                      type: string
+                    thomas_id:
+                      type: string
+                    times_tag:
+                      type: string
+                    times_topics_url:
+                      type: string
+                    twitter_account:
+                      type: string
+                    url:
+                      type: string
+                    youtube_account:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: New Members
+    parameters: []
+  '/members/senate/{state}/current.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_members-senate-state-current-json
+      parameters:
+        - in: query
+          name: api-key
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - api_url: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S001181.json'
+                  gender: F
+                  id: S001181
+                  name: Jeanne Shaheen
+                  next_election: '2014'
+                  party: D
+                  role: 'Senator, 2nd Class'
+                  seniority: '7'
+                  times_topics_url: 'http://topics.nytimes.com/top/reference/timestopics/people/s/jeanne_shaheen/index.html'
+                  twitter_id: SenatorShaheen
+                  youtube_id: senatorshaheen
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    api_url:
+                      type: string
+                    gender:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    next_election:
+                      type: string
+                    party:
+                      type: string
+                    role:
+                      type: string
+                    seniority:
+                      type: string
+                    times_topics_url:
+                      type: string
+                    twitter_id:
+                      type: string
+                    youtube_id:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Current Senate Members by State
+    parameters:
+      - in: path
+        name: state
+        required: true
+        type: string
+  '/members/{member-id-1}/bills/{member-id-2}/{congress-number}/{chamber}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_members-member-id-1-bills-member-id-2-congress-number-chamber-json
+      parameters:
+        - in: query
+          name: api-key
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - agree_percent: '47.98'
+                  chamber: Senate
+                  common_votes: '642'
+                  congress: '113'
+                  disagree_percent: '52.02'
+                  disagree_votes: '334'
+                  first_member_api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S001181.json'
+                  first_member_id: S001181
+                  second_member_api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/A000368.json'
+                  second_member_id: A000368
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    agree_percent:
+                      type: string
+                    chamber:
+                      type: string
+                    common_votes:
+                      type: string
+                    congress:
+                      type: string
+                    disagree_percent:
+                      type: string
+                    disagree_votes:
+                      type: string
+                    first_member_api_uri:
+                      type: string
+                    first_member_id:
+                      type: string
+                    second_member_api_uri:
+                      type: string
+                    second_member_id:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Member Sponsorship Comparison
+    parameters:
+      - description: 'To find a member''s ID number, get the list of members for the appropriate House or Senate.'
+        in: path
+        name: member-id-1
+        required: true
+        type: string
+      - description: 'To find a member''s ID number, get the list of members for the appropriate House or Senate.'
+        in: path
+        name: member-id-2
+        required: true
+        type: string
+      - description: 105–113
+        in: path
+        name: congress-number
+        required: true
+        type: integer
+      - description: The chamber in which the members served
+        enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+  '/members/{member-id-1}/votes/{member-id-2}/{congress-number}/{chamber}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_members-member-id-1-votes-member-id-2-congress-number-chamber-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - agree_percent: '47.98'
+                  chamber: Senate
+                  common_votes: '642'
+                  congress: '113'
+                  disagree_percent: '52.02'
+                  disagree_votes: '334'
+                  first_member_api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S001181.json'
+                  first_member_id: S001181
+                  second_member_api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/A000368.json'
+                  second_member_id: A000368
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    agree_percent:
+                      type: string
+                    chamber:
+                      type: string
+                    common_votes:
+                      type: string
+                    congress:
+                      type: string
+                    disagree_percent:
+                      type: string
+                    disagree_votes:
+                      type: string
+                    first_member_api_uri:
+                      type: string
+                    first_member_id:
+                      type: string
+                    second_member_api_uri:
+                      type: string
+                    second_member_id:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Member Vote Comparison
+    parameters:
+      - description: 'To find a member''s ID number, get the list of members for the appropriate House or Senate.'
+        in: path
+        name: member-id-1
+        required: true
+        type: string
+      - description: 'To find a member''s ID number, get the list of members for the appropriate House or Senate.'
+        in: path
+        name: member-id-2
+        required: true
+        type: string
+      - description: |-
+          Senate: 101–113
+          House: 102–113
+        in: path
+        name: congress-number
+        required: true
+        type: integer
+      - description: The chamber in which the members served
+        enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+  '/members/{member-id}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_members-member-id-json
+      parameters:
+        - in: query
+          name: api-key
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company.  All Rights Reserved.
+              results:
+                - cspan_id: ''
+                  current_party: ''
+                  date_of_birth: '1947-10-26'
+                  domain: ''
+                  facebook_account: ''
+                  facebook_id: ''
+                  first_name: Hillary
+                  gender: F
+                  govtrack_id: '300022'
+                  icpsr_id: '40105'
+                  last_name: Clinton
+                  member_id: C001041
+                  members:
+                    - chamber: House
+                      district: '18'
+                      first_name: Darin
+                      id: L000585
+                      last_name: LaHood
+                      middle_name: M.
+                      party: R
+                      start_date: '2015-09-17'
+                      state: IL
+                  middle_name: Rodham
+                  most_recent_vote: '2009-01-21'
+                  num_results: '20'
+                  offset: '0'
+                  roles:
+                    - bills_cosponsored: '17'
+                      bills_sponsored: '2'
+                      chamber: Senate
+                      committees: []
+                      congress: '111'
+                      district: N/A
+                      end_date: '2009-01-21'
+                      missed_votes_pct: '16.67'
+                      party: D
+                      seniority: '9'
+                      start_date: '2009-01-06'
+                      state: NY
+                      title: 'Senator, 1st Class'
+                      votes_with_party_pct: '100.00'
+                  rss_url: ''
+                  thomas_id: '1631'
+                  times_tag: 'Clinton, Hillary Rodham (Per)'
+                  times_topics_url: 'http://topics.nytimes.com/top/reference/timestopics/people/c/hillary_rodham_clinton/index.html'
+                  twitter_account: ''
+                  url: ''
+                  youtube_account: ''
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    cspan_id:
+                      type: string
+                    current_party:
+                      type: string
+                    date_of_birth:
+                      type: string
+                    domain:
+                      type: string
+                    facebook_account:
+                      type: string
+                    facebook_id:
+                      type: string
+                    first_name:
+                      type: string
+                    gender:
+                      type: string
+                    govtrack_id:
+                      type: string
+                    icpsr_id:
+                      type: string
+                    last_name:
+                      type: string
+                    member_id:
+                      type: string
+                    members:
+                      items:
+                        properties:
+                          chamber:
+                            type: string
+                          district:
+                            type: string
+                          first_name:
+                            type: string
+                          id:
+                            type: string
+                          last_name:
+                            type: string
+                          middle_name:
+                            type: string
+                          party:
+                            type: string
+                          start_date:
+                            type: string
+                          state:
+                            type: string
+                        type: object
+                      type: array
+                    middle_name:
+                      type: string
+                    most_recent_vote:
+                      type: string
+                    num_results:
+                      type: string
+                    offset:
+                      type: string
+                    roles:
+                      items:
+                        properties:
+                          bills_cosponsored:
+                            type: string
+                          bills_sponsored:
+                            type: string
+                          chamber:
+                            type: string
+                          committees:
+                            items:
+                              properties: {}
+                              type: object
+                            type: array
+                          congress:
+                            type: string
+                          district:
+                            type: string
+                          end_date:
+                            type: string
+                          missed_votes_pct:
+                            type: string
+                          party:
+                            type: string
+                          seniority:
+                            type: string
+                          start_date:
+                            type: string
+                          state:
+                            type: string
+                          title:
+                            type: string
+                          votes_with_party_pct:
+                            type: string
+                        type: object
+                      type: array
+                    rss_url:
+                      type: string
+                    thomas_id:
+                      type: string
+                    times_tag:
+                      type: string
+                    times_topics_url:
+                      type: string
+                    twitter_account:
+                      type: string
+                    url:
+                      type: string
+                    youtube_account:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Member Bios & Roles
+    parameters:
+      - in: path
+        name: member-id
+        required: true
+        type: string
+  '/members/{member-id}/bills/{type}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_members-member-id-bills-type-json
+      parameters:
+        - in: query
+          name: api-key
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - bills:
+                    - bill_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/bills/s2645.json'
+                      committees: Senate Foreign Relations
+                      congress: '114'
+                      cosponsored_date: '2009-01-16'
+                      cosponsors: '7'
+                      introduced_date: '2016-03-07'
+                      latest_major_action: 'Referred to Senate committee. Status: Read twice and referred to the Committee on Foreign Relations.'
+                      latest_major_action_date: '2016-03-07'
+                      number: S.2645
+                      sponsor_id: S001181
+                      title: Global Respect Act
+                  id: S001181
+                  member_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S001181.json'
+                  name: Jeanne Shaheen
+                  num_results: '20'
+                  offset: '0'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    bills:
+                      items:
+                        properties:
+                          bill_uri:
+                            type: string
+                          committees:
+                            type: string
+                          congress:
+                            type: string
+                          cosponsored_date:
+                            type: string
+                          cosponsors:
+                            type: string
+                          introduced_date:
+                            type: string
+                          latest_major_action:
+                            type: string
+                          latest_major_action_date:
+                            type: string
+                          number:
+                            type: string
+                          sponsor_id:
+                            type: string
+                          title:
+                            type: string
+                        type: object
+                      type: array
+                    id:
+                      type: string
+                    member_uri:
+                      type: string
+                    name:
+                      type: string
+                    num_results:
+                      type: string
+                    offset:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Bills by a Member
+    parameters:
+      - description: The member's unique ID number
+        in: path
+        name: member-id
+        required: true
+        type: string
+      - description: |-
+          cosponsored: the 20 bills most recently cosponsored by member-id.
+          withdrawn: the 20 most recently withdrawn cosponsorships for member-id.
+
+          When type = introduced, the introduced_date determines the set of recent bills. When type = updated, the latest_major_action_date determines the result set. See the sample responses for examples of bill summary data.
+        enum:
+          - cosponsored
+          - withdrawn
+          - introduced
+          - updated
+        in: path
+        name: type
+        required: true
+        type: string
+  '/members/{member-id}/floor_appearances.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_members-member-id-floor_appearances-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001041.json'
+                  appearances: []
+                  member_id: C001041
+                  name: Hillary Rodham Clinton
+                  num_results: '0'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    api_uri:
+                      type: string
+                    appearances:
+                      items:
+                        properties: {}
+                        type: object
+                      type: array
+                    member_id:
+                      type: string
+                    name:
+                      type: string
+                    num_results:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Member Floor Appearances
+    parameters:
+      - description: The member's unique ID number
+        in: path
+        name: member-id
+        required: true
+        type: string
+  '/members/{member-id}/votes.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_members-member-id-votes-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - member_id: C001041
+                  offset: '0'
+                  total_votes: '100'
+                  votes:
+                    - bill:
+                        bill_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/111/bills/sjres5.json'
+                        latest_action: 'Failed of passage/not agreed to in Senate. Status: Failed of passage in Senate by Yea-Nay Vote. 42 - 52. Record Vote Number: 5.'
+                        number: S.J.Res. 5
+                        title: A joint resolution relating to the disapproval of obligations under the Emergency Economic Stabilization Act of 2008.
+                      chamber: Senate
+                      congress: '111'
+                      date: '2009-01-15'
+                      description: A joint resolution relating to the disapproval of obligations under the Emergency Economic Stabilization Act of 2008.
+                      member_id: C001041
+                      position: 'No'
+                      question: On the Joint Resolution
+                      roll_call: '5'
+                      session: '1'
+                      time: '16:28:00'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    member_id:
+                      type: string
+                    offset:
+                      type: string
+                    total_votes:
+                      type: string
+                    votes:
+                      items:
+                        properties:
+                          bill:
+                            properties:
+                              bill_uri:
+                                type: string
+                              latest_action:
+                                type: string
+                              number:
+                                type: string
+                              title:
+                                type: string
+                            type: object
+                          chamber:
+                            type: string
+                          congress:
+                            type: string
+                          date:
+                            type: string
+                          description:
+                            type: string
+                          member_id:
+                            type: string
+                          position:
+                            type: string
+                          question:
+                            type: string
+                          roll_call:
+                            type: string
+                          session:
+                            type: string
+                          time:
+                            type: string
+                        type: object
+                      type: array
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Member Vote Positions
+    parameters:
+      - in: path
+        name: member-id
+        required: true
+        type: string
+  /states/members/party.json:
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_states-members-party-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company.  All Rights Reserved.
+              results:
+                house:
+                  - AK:
+                      - REP: '1'
+                senate:
+                  - AK:
+                      - REP: '2'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                properties:
+                  house:
+                    items:
+                      properties:
+                        AK:
+                          items:
+                            properties:
+                              REP:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  senate:
+                    items:
+                      properties:
+                        AK:
+                          items:
+                            properties:
+                              REP:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                type: object
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: State Party Counts
+    parameters: []
+  '/{chamber}/schedule.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_chamber-schedule-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - chamber: House
+                  congress: '114'
+                  date: '2016-03-16'
+                  description: No schedule available.
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    chamber:
+                      type: string
+                    congress:
+                      type: string
+                    date:
+                      type: string
+                    description:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Chamber Schedule
+    parameters:
+      - enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+  '/{chamber}/votes/{date-1}/{date-2}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_chamber-votes-date-1-date-2-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                chamber: House
+                month: Jan.
+                num_results: '43'
+                votes:
+                  - bill_number: H R 757
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '0'
+                      not_voting: '6'
+                      present: '0'
+                      'yes': '182'
+                    description: North Korea Sanctions Enforcement Act of 2016
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: 'On Motion to Suspend the Rules and Pass, as Amended'
+                    republican:
+                      majority_position: 'Yes'
+                      'no': '2'
+                      not_voting: '8'
+                      present: '0'
+                      'yes': '236'
+                    result: Passed
+                    roll_call: '43'
+                    session: '2'
+                    time: '17:06:00'
+                    total:
+                      'no': '2'
+                      not_voting: '13'
+                      present: '0'
+                      'yes': '418'
+                    vote_type: 2/3 YEA-AND-NAY
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/43.json'
+                  - bill_number: H R 1644
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'No'
+                      'no': '178'
+                      not_voting: '6'
+                      present: '0'
+                      'yes': '4'
+                    description: Supporting Transparent Regulatory and Environmental Actions in Mining (STREAM) Act
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Passage
+                    republican:
+                      majority_position: 'Yes'
+                      'no': '10'
+                      not_voting: '5'
+                      present: '0'
+                      'yes': '231'
+                    result: Passed
+                    roll_call: '42'
+                    session: '2'
+                    time: '16:59:00'
+                    total:
+                      'no': '188'
+                      not_voting: '10'
+                      present: '0'
+                      'yes': '235'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/42.json'
+                  - bill_number: H R 1644
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '1'
+                      not_voting: '3'
+                      present: '0'
+                      'yes': '184'
+                    description: Supporting Transparent Regulatory and Environmental Actions in Mining (STREAM) Act
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Motion to Recommit with Instructions
+                    republican:
+                      majority_position: 'No'
+                      'no': '236'
+                      not_voting: '8'
+                      present: '0'
+                      'yes': '2'
+                    result: Failed
+                    roll_call: '41'
+                    session: '2'
+                    time: '16:53:00'
+                    total:
+                      'no': '237'
+                      not_voting: '10'
+                      present: '0'
+                      'yes': '186'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/41.json'
+                  - bill_number: H R 1644
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '2'
+                      not_voting: '4'
+                      present: '0'
+                      'yes': '182'
+                    description: Sewell of Alabama Amendment No. 4
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Agreeing to the Amendment
+                    republican:
+                      majority_position: 'No'
+                      'no': '233'
+                      not_voting: '5'
+                      present: '0'
+                      'yes': '8'
+                    result: Failed
+                    roll_call: '40'
+                    session: '2'
+                    time: '16:36:00'
+                    total:
+                      'no': '235'
+                      not_voting: '8'
+                      present: '0'
+                      'yes': '190'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/40.json'
+                  - bill_number: H R 1644
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '3'
+                      not_voting: '4'
+                      present: '0'
+                      'yes': '181'
+                    description: Cartwright of Pennsylvania Amendment No. 3
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Agreeing to the Amendment
+                    republican:
+                      majority_position: 'No'
+                      'no': '216'
+                      not_voting: '8'
+                      present: '0'
+                      'yes': '22'
+                    result: Failed
+                    roll_call: '39'
+                    session: '2'
+                    time: '16:33:00'
+                    total:
+                      'no': '219'
+                      not_voting: '11'
+                      present: '0'
+                      'yes': '203'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/39.json'
+                  - bill_number: H R 1644
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '3'
+                      not_voting: '11'
+                      present: '0'
+                      'yes': '174'
+                    description: Kildee of Michigan Amendment No. 2
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Agreeing to the Amendment
+                    republican:
+                      majority_position: 'No'
+                      'no': '220'
+                      not_voting: '11'
+                      present: '0'
+                      'yes': '15'
+                    result: Failed
+                    roll_call: '38'
+                    session: '2'
+                    time: '16:28:00'
+                    total:
+                      'no': '223'
+                      not_voting: '21'
+                      present: '0'
+                      'yes': '189'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/38.json'
+                  - bill_number: H RES 583
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'No'
+                      'no': '183'
+                      not_voting: '5'
+                      present: '0'
+                      'yes': '0'
+                    description: Providing for consideration of the bill (H.R. 1644) STREAM Act; providing for consideration of the joint resolution (S.J.Res. 22) congressional disapproval of the rule submitted by the Corps of Engineers and the EPA relating to “waters of the U.S.”; and consideration of (H.R. 3662) Iran Terror Finance Transparency Act
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Agreeing to the Resolution
+                    republican:
+                      majority_position: 'Yes'
+                      'no': '0'
+                      not_voting: '7'
+                      present: '0'
+                      'yes': '239'
+                    result: Passed
+                    roll_call: '37'
+                    session: '2'
+                    time: '14:29:00'
+                    total:
+                      'no': '183'
+                      not_voting: '11'
+                      present: '0'
+                      'yes': '239'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/37.json'
+                year: '2016'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                properties:
+                  chamber:
+                    type: string
+                  month:
+                    type: string
+                  num_results:
+                    type: string
+                  votes:
+                    items:
+                      properties:
+                        bill_number:
+                          type: string
+                        congress:
+                          type: string
+                        date:
+                          type: string
+                        democratic:
+                          properties:
+                            majority_position:
+                              type: string
+                            'no':
+                              type: string
+                            not_voting:
+                              type: string
+                            present:
+                              type: string
+                            'yes':
+                              type: string
+                          type: object
+                        description:
+                          type: string
+                        independent:
+                          properties:
+                            'no':
+                              type: string
+                            not_voting:
+                              type: string
+                            present:
+                              type: string
+                            'yes':
+                              type: string
+                          type: object
+                        question:
+                          type: string
+                        republican:
+                          properties:
+                            majority_position:
+                              type: string
+                            'no':
+                              type: string
+                            not_voting:
+                              type: string
+                            present:
+                              type: string
+                            'yes':
+                              type: string
+                          type: object
+                        result:
+                          type: string
+                        roll_call:
+                          type: string
+                        session:
+                          type: string
+                        time:
+                          type: string
+                        total:
+                          properties:
+                            'no':
+                              type: string
+                            not_voting:
+                              type: string
+                            present:
+                              type: string
+                            'yes':
+                              type: string
+                          type: object
+                        vote_type:
+                          type: string
+                        vote_uri:
+                          type: string
+                      type: object
+                    type: array
+                  year:
+                    type: string
+                type: object
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Votes by Date Range
+    parameters:
+      - enum:
+          - senate
+          - house
+        in: path
+        name: chamber
+        required: true
+        type: string
+      - description: 'Start Date for vote range in the format: YYYY-MM-DD'
+        in: path
+        name: date-1
+        required: true
+        type: string
+      - description: 'End Date for vote range in the format: YYYY-MM-DD'
+        in: path
+        name: date-2
+        required: true
+        type: string
+  '/{chamber}/votes/{year}/{month}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_chamber-votes-year-month-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                chamber: House
+                month: Jan.
+                num_results: '43'
+                votes:
+                  - bill_number: H R 757
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '0'
+                      not_voting: '6'
+                      present: '0'
+                      'yes': '182'
+                    description: North Korea Sanctions Enforcement Act of 2016
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: 'On Motion to Suspend the Rules and Pass, as Amended'
+                    republican:
+                      majority_position: 'Yes'
+                      'no': '2'
+                      not_voting: '8'
+                      present: '0'
+                      'yes': '236'
+                    result: Passed
+                    roll_call: '43'
+                    session: '2'
+                    time: '17:06:00'
+                    total:
+                      'no': '2'
+                      not_voting: '13'
+                      present: '0'
+                      'yes': '418'
+                    vote_type: 2/3 YEA-AND-NAY
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/43.json'
+                  - bill_number: H R 1644
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'No'
+                      'no': '178'
+                      not_voting: '6'
+                      present: '0'
+                      'yes': '4'
+                    description: Supporting Transparent Regulatory and Environmental Actions in Mining (STREAM) Act
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Passage
+                    republican:
+                      majority_position: 'Yes'
+                      'no': '10'
+                      not_voting: '5'
+                      present: '0'
+                      'yes': '231'
+                    result: Passed
+                    roll_call: '42'
+                    session: '2'
+                    time: '16:59:00'
+                    total:
+                      'no': '188'
+                      not_voting: '10'
+                      present: '0'
+                      'yes': '235'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/42.json'
+                  - bill_number: H R 1644
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '1'
+                      not_voting: '3'
+                      present: '0'
+                      'yes': '184'
+                    description: Supporting Transparent Regulatory and Environmental Actions in Mining (STREAM) Act
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Motion to Recommit with Instructions
+                    republican:
+                      majority_position: 'No'
+                      'no': '236'
+                      not_voting: '8'
+                      present: '0'
+                      'yes': '2'
+                    result: Failed
+                    roll_call: '41'
+                    session: '2'
+                    time: '16:53:00'
+                    total:
+                      'no': '237'
+                      not_voting: '10'
+                      present: '0'
+                      'yes': '186'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/41.json'
+                  - bill_number: H R 1644
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '2'
+                      not_voting: '4'
+                      present: '0'
+                      'yes': '182'
+                    description: Sewell of Alabama Amendment No. 4
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Agreeing to the Amendment
+                    republican:
+                      majority_position: 'No'
+                      'no': '233'
+                      not_voting: '5'
+                      present: '0'
+                      'yes': '8'
+                    result: Failed
+                    roll_call: '40'
+                    session: '2'
+                    time: '16:36:00'
+                    total:
+                      'no': '235'
+                      not_voting: '8'
+                      present: '0'
+                      'yes': '190'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/40.json'
+                  - bill_number: H R 1644
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '3'
+                      not_voting: '4'
+                      present: '0'
+                      'yes': '181'
+                    description: Cartwright of Pennsylvania Amendment No. 3
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Agreeing to the Amendment
+                    republican:
+                      majority_position: 'No'
+                      'no': '216'
+                      not_voting: '8'
+                      present: '0'
+                      'yes': '22'
+                    result: Failed
+                    roll_call: '39'
+                    session: '2'
+                    time: '16:33:00'
+                    total:
+                      'no': '219'
+                      not_voting: '11'
+                      present: '0'
+                      'yes': '203'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/39.json'
+                  - bill_number: H R 1644
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '3'
+                      not_voting: '11'
+                      present: '0'
+                      'yes': '174'
+                    description: Kildee of Michigan Amendment No. 2
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Agreeing to the Amendment
+                    republican:
+                      majority_position: 'No'
+                      'no': '220'
+                      not_voting: '11'
+                      present: '0'
+                      'yes': '15'
+                    result: Failed
+                    roll_call: '38'
+                    session: '2'
+                    time: '16:28:00'
+                    total:
+                      'no': '223'
+                      not_voting: '21'
+                      present: '0'
+                      'yes': '189'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/38.json'
+                  - bill_number: H RES 583
+                    congress: '114'
+                    date: '2016-01-12'
+                    democratic:
+                      majority_position: 'No'
+                      'no': '183'
+                      not_voting: '5'
+                      present: '0'
+                      'yes': '0'
+                    description: Providing for consideration of the bill (H.R. 1644) STREAM Act; providing for consideration of the joint resolution (S.J.Res. 22) congressional disapproval of the rule submitted by the Corps of Engineers and the EPA relating to “waters of the U.S.”; and consideration of (H.R. 3662) Iran Terror Finance Transparency Act
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '0'
+                    question: On Agreeing to the Resolution
+                    republican:
+                      majority_position: 'Yes'
+                      'no': '0'
+                      not_voting: '7'
+                      present: '0'
+                      'yes': '239'
+                    result: Passed
+                    roll_call: '37'
+                    session: '2'
+                    time: '14:29:00'
+                    total:
+                      'no': '183'
+                      not_voting: '11'
+                      present: '0'
+                      'yes': '239'
+                    vote_type: RECORDED VOTE
+                    vote_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/house/sessions/2/votes/37.json'
+                year: '2016'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                properties:
+                  chamber:
+                    type: string
+                  month:
+                    type: string
+                  num_results:
+                    type: string
+                  votes:
+                    items:
+                      properties:
+                        bill_number:
+                          type: string
+                        congress:
+                          type: string
+                        date:
+                          type: string
+                        democratic:
+                          properties:
+                            majority_position:
+                              type: string
+                            'no':
+                              type: string
+                            not_voting:
+                              type: string
+                            present:
+                              type: string
+                            'yes':
+                              type: string
+                          type: object
+                        description:
+                          type: string
+                        independent:
+                          properties:
+                            'no':
+                              type: string
+                            not_voting:
+                              type: string
+                            present:
+                              type: string
+                            'yes':
+                              type: string
+                          type: object
+                        question:
+                          type: string
+                        republican:
+                          properties:
+                            majority_position:
+                              type: string
+                            'no':
+                              type: string
+                            not_voting:
+                              type: string
+                            present:
+                              type: string
+                            'yes':
+                              type: string
+                          type: object
+                        result:
+                          type: string
+                        roll_call:
+                          type: string
+                        session:
+                          type: string
+                        time:
+                          type: string
+                        total:
+                          properties:
+                            'no':
+                              type: string
+                            not_voting:
+                              type: string
+                            present:
+                              type: string
+                            'yes':
+                              type: string
+                          type: object
+                        vote_type:
+                          type: string
+                        vote_uri:
+                          type: string
+                      type: object
+                    type: array
+                  year:
+                    type: string
+                type: object
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Votes by Date
+    parameters:
+      - enum:
+          - senate
+          - house
+        in: path
+        name: chamber
+        required: true
+        type: string
+      - description: 'YYYY, 1991 to present'
+        in: path
+        name: year
+        required: true
+        type: integer
+      - in: path
+        name: month
+        required: true
+        type: string
+  '/{congress-id}/nominees/state/{state}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-id-nominees-state-state-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              congress: 114
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              num_results: 2
+              results:
+                - committee: Committee on the Judiciary
+                  date_received: '2015-10-08'
+                  description: 'Emily Gray Rice, of New Hampshire, to be United States Attorney for the District of New Hampshire for the term of four years, vice John P. Kacavas, resigned.'
+                  id: PN903
+                  latest_action_date: '2015-12-15'
+                  nominee_state: NH
+                  status: Confirmed
+                  uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/nominees/PN903.json'
+              state: NH
+              status: OK
+          schema:
+            properties:
+              congress:
+                type: integer
+              copyright:
+                type: string
+              num_results:
+                type: integer
+              results:
+                items:
+                  properties:
+                    committee:
+                      type: string
+                    date_received:
+                      type: string
+                    description:
+                      type: string
+                    id:
+                      type: string
+                    latest_action_date:
+                      type: string
+                    nominee_state:
+                      type: string
+                    status:
+                      type: string
+                    uri:
+                      type: string
+                  type: object
+                type: array
+              state:
+                type: string
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Nominees by State
+    parameters:
+      - description: The number of the Congress during which the nominees were nominated
+        in: path
+        name: congress-id
+        required: true
+        type: integer
+      - description: Two-letter state abbreviation
+        in: path
+        name: state
+        required: true
+        type: string
+  '/{congress-number}/bills/{bill-id}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-bills-bill-id-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - actions:
+                    - datetime: '2015-09-20 20:00:00 -0400'
+                      description: 'Message on House action received in Senate and at desk: House amendment to Senate bill.'
+                  bill: S.764
+                  bill_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/bills/s764.json'
+                  committees: 'Senate Commerce, Science, and Transportation; House Natural Resources'
+                  congress: '114'
+                  cosponsors: '1'
+                  gpo_pdf_uri: 'http://beta.congress.gov/114/bills/s764/BILLS-114s764is.pdf'
+                  introduced_date: '2015-03-17'
+                  latest_major_action: 'Resolving differences -- Senate actions. Status: Considered by Senate (Message from the House considered).'
+                  latest_major_action_date: '2016-03-15'
+                  sponsor: Roger Wicker
+                  sponsor_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/W000437.json'
+                  title: Defund Planned Parenthood Act of 2015
+                  versions: []
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    actions:
+                      items:
+                        properties:
+                          datetime:
+                            type: string
+                          description:
+                            type: string
+                        type: object
+                      type: array
+                    bill:
+                      type: string
+                    bill_uri:
+                      type: string
+                    committees:
+                      type: string
+                    congress:
+                      type: string
+                    cosponsors:
+                      type: string
+                    gpo_pdf_uri:
+                      type: string
+                    house_passage_vote:
+                      type: 'null'
+                    introduced_date:
+                      type: string
+                    latest_major_action:
+                      type: string
+                    latest_major_action_date:
+                      type: string
+                    senate_passage_vote:
+                      type: 'null'
+                    sponsor:
+                      type: string
+                    sponsor_uri:
+                      type: string
+                    title:
+                      type: string
+                    versions:
+                      items:
+                        properties: {}
+                        type: object
+                      type: array
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Bill Details
+    parameters:
+      - description: 105–114
+        in: path
+        name: congress-number
+        required: true
+        type: string
+      - description: |-
+          The bill's unique ID number.
+
+          Bill ID numbers are included in bill summary responses as url_number
+        in: path
+        name: bill-id
+        required: true
+        type: string
+  '/{congress-number}/bills/{bill-id}/cosponsors.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-bills-bill-id-cosponsors-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - bill: S.764
+                  committees: 'Senate Commerce, Science, and Transportation; House Natural Resources'
+                  congress: '114'
+                  cosponsors:
+                    - cosponsor_id: S001194
+                      date: '2015-03-17'
+                      name: Brian Schatz
+                    - cosponsor_id: S001198
+                      date: '2015-03-17'
+                      name: Dan Sullivan
+                    - cosponsor_id: C000127
+                      date: '2015-03-17'
+                      name: Maria Cantwell
+                  cosponsors_by_party:
+                    - party:
+                        id: D
+                        sponsors: '2'
+                    - party:
+                        id: R
+                        sponsors: '1'
+                  house_passage_vote: ''
+                  introduced_date: '2015-03-17'
+                  latest_major_action: 'Resolving differences -- Senate actions. Status: Considered by Senate (Message from the House considered).'
+                  latest_major_action_date: '2016-03-15'
+                  senate_passage_vote: ''
+                  sponsor: Roger Wicker
+                  sponsor_id: W000437
+                  title: Defund Planned Parenthood Act of 2015
+                  url_number: s764
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    bill:
+                      type: string
+                    committees:
+                      type: string
+                    congress:
+                      type: string
+                    cosponsors:
+                      items:
+                        properties:
+                          cosponsor_id:
+                            type: string
+                          date:
+                            type: string
+                          name:
+                            type: string
+                        type: object
+                      type: array
+                    cosponsors_by_party:
+                      items:
+                        properties:
+                          party:
+                            properties:
+                              id:
+                                type: string
+                              sponsors:
+                                type: string
+                            type: object
+                        type: object
+                      type: array
+                    house_passage_vote:
+                      type: string
+                    introduced_date:
+                      type: string
+                    latest_major_action:
+                      type: string
+                    latest_major_action_date:
+                      type: string
+                    senate_passage_vote:
+                      type: string
+                    sponsor:
+                      type: string
+                    sponsor_id:
+                      type: string
+                    subjects:
+                      items:
+                        properties:
+                          name:
+                            type: string
+                          url_name:
+                            type: string
+                        type: object
+                      type: array
+                    title:
+                      type: string
+                    url_number:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Bill Cosponsors
+    parameters:
+      - description: The number of the Congress in which the bill was introduced/updated. 105-114
+        in: path
+        name: congress-number
+        required: true
+        type: integer
+      - description: The bill's unique ID number.  The bill's unique ID number
+        in: path
+        name: bill-id
+        required: true
+        type: string
+  '/{congress-number}/bills/{bill-id}/{resource}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-bills-bill-id-resource-json
+      parameters:
+        - in: query
+          name: api-key
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - bill: S.764
+                  committees: 'Senate Commerce, Science, and Transportation; House Natural Resources'
+                  congress: '114'
+                  cosponsors:
+                    - cosponsor_id: S001194
+                      date: '2015-03-17'
+                      name: Brian Schatz
+                  cosponsors_by_party:
+                    - party:
+                        id: D
+                        sponsors: '2'
+                  house_passage_vote: ''
+                  introduced_date: '2015-03-17'
+                  latest_major_action: 'Resolving differences -- Senate actions. Status: Considered by Senate (Message from the House considered).'
+                  latest_major_action_date: '2016-03-15'
+                  senate_passage_vote: ''
+                  sponsor: Roger Wicker
+                  sponsor_id: W000437
+                  subjects:
+                    - name: Public lands and natural resources
+                      url_name: public-lands-and-natural-resources
+                  title: Defund Planned Parenthood Act of 2015
+                  url_number: s764
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    bill:
+                      type: string
+                    committees:
+                      type: string
+                    congress:
+                      type: string
+                    cosponsors:
+                      items:
+                        properties:
+                          cosponsor_id:
+                            type: string
+                          date:
+                            type: string
+                          name:
+                            type: string
+                        type: object
+                      type: array
+                    cosponsors_by_party:
+                      items:
+                        properties:
+                          party:
+                            properties:
+                              id:
+                                type: string
+                              sponsors:
+                                type: string
+                            type: object
+                        type: object
+                      type: array
+                    house_passage_vote:
+                      type: string
+                    introduced_date:
+                      type: string
+                    latest_major_action:
+                      type: string
+                    latest_major_action_date:
+                      type: string
+                    senate_passage_vote:
+                      type: string
+                    sponsor:
+                      type: string
+                    sponsor_id:
+                      type: string
+                    subjects:
+                      items:
+                        properties:
+                          name:
+                            type: string
+                          url_name:
+                            type: string
+                        type: object
+                      type: array
+                    title:
+                      type: string
+                    url_number:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: 'Bill Subjects, Amendments, and Related Bills'
+    parameters:
+      - description: The number of the Congress in which the bill was introduced/updated. 105-114
+        in: path
+        name: congress-number
+        required: true
+        type: integer
+      - description: The bill's unique ID number.  The bill's unique ID number
+        in: path
+        name: bill-id
+        required: true
+        type: string
+      - enum:
+          - subjects
+          - amendments
+          - related
+        in: path
+        name: resource
+        required: true
+        type: string
+  '/{congress-number}/nominations.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-nominations-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - offset: '0'
+                  total_votes: '125'
+                  votes:
+                    - congress: '113'
+                      date: '2014-12-16'
+                      democratic:
+                        majority_position: 'Yes'
+                        'no': '1'
+                        not_voting: '2'
+                        present: '0'
+                        'yes': '50'
+                      description: 'Stephen R. Bough, of Missouri, to be United States District Judge for the Western District of Missouri'
+                      independent:
+                        'no': '0'
+                        not_voting: '1'
+                        present: '0'
+                        'yes': '1'
+                      nominee_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/113/nominees/PN1345.json'
+                      question: On the Nomination
+                      republican:
+                        majority_position: 'No'
+                        'no': '37'
+                        not_voting: '8'
+                        present: '0'
+                        'yes': '0'
+                      result: Nomination Confirmed
+                      roll_call: '366'
+                      session: '2'
+                      time: '21:23:00'
+                      total:
+                        margin: '13'
+                        'no': '38'
+                        not_voting: '11'
+                        present: '0'
+                        'yes': '51'
+                      vote_type: 1/2
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    offset:
+                      type: string
+                    total_votes:
+                      type: string
+                    votes:
+                      items:
+                        properties:
+                          congress:
+                            type: string
+                          date:
+                            type: string
+                          democratic:
+                            properties:
+                              majority_position:
+                                type: string
+                              'no':
+                                type: string
+                              not_voting:
+                                type: string
+                              present:
+                                type: string
+                              'yes':
+                                type: string
+                            type: object
+                          description:
+                            type: string
+                          independent:
+                            properties:
+                              'no':
+                                type: string
+                              not_voting:
+                                type: string
+                              present:
+                                type: string
+                              'yes':
+                                type: string
+                            type: object
+                          nominee_uri:
+                            type: string
+                          question:
+                            type: string
+                          republican:
+                            properties:
+                              majority_position:
+                                type: string
+                              'no':
+                                type: string
+                              not_voting:
+                                type: string
+                              present:
+                                type: string
+                              'yes':
+                                type: string
+                            type: object
+                          result:
+                            type: string
+                          roll_call:
+                            type: string
+                          session:
+                            type: string
+                          time:
+                            type: string
+                          total:
+                            properties:
+                              margin:
+                                type: string
+                              'no':
+                                type: string
+                              not_voting:
+                                type: string
+                              present:
+                                type: string
+                              'yes':
+                                type: string
+                            type: object
+                          vote_type:
+                            type: string
+                        type: object
+                      type: array
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Nomination Votes
+    parameters:
+      - description: The number of the Congress during which the nomination votes were taken. 101 to 113
+        in: path
+        name: congress-number
+        required: true
+        type: integer
+  '/{congress-number}/nominees/received.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-nominees-received-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              congress: 114
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - committee_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/senate/committees/SSJU.json'
+                  date_received: '2016-03-15'
+                  description: 'Kathleen Marie Sweet, of New York, to be United States District Judge for the Western District of New York, vice William M. Skretny, retired.'
+                  id: PN1233
+                  latest_action_date: '2016-03-15'
+                  nominee_state: NY
+                  status: Pending
+                  uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/nominees/PN1233.json'
+              status: OK
+          schema:
+            properties:
+              congress:
+                type: integer
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    committee_uri:
+                      type: string
+                    date_received:
+                      type: string
+                    description:
+                      type: string
+                    id:
+                      type: string
+                    latest_action_date:
+                      type: string
+                    nominee_state:
+                      type: string
+                    status:
+                      type: string
+                    uri:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Nominee Lists
+    parameters:
+      - in: path
+        name: congress-number
+        required: true
+        type: integer
+  '/{congress-number}/nominees/{nominee-ID}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-nominees-nominee-ID-json
+      parameters:
+        - in: path
+          name: nominee-ID
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - actions:
+                    - date: '2016-03-15'
+                      description: Received in the Senate and referred to the Committee on the Judiciary.
+                  committee_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/114/senate/committees/SSJU.json'
+                  congress: 114
+                  date_received: '2016-03-15'
+                  description: 'Kathleen Marie Sweet, of New York, to be United States District Judge for the Western District of New York, vice William M. Skretny, retired.'
+                  id: PN1233
+                  latest_action_date: '2016-03-15'
+                  nominee_state: NY
+                  status: Pending
+                  votes: []
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    actions:
+                      items:
+                        properties:
+                          date:
+                            type: string
+                          description:
+                            type: string
+                        type: object
+                      type: array
+                    committee_uri:
+                      type: string
+                    congress:
+                      type: integer
+                    date_received:
+                      type: string
+                    description:
+                      type: string
+                    id:
+                      type: string
+                    latest_action_date:
+                      type: string
+                    nominee_state:
+                      type: string
+                    status:
+                      type: string
+                    votes:
+                      items:
+                        properties: {}
+                        type: object
+                      type: array
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Nominee Details
+    parameters:
+      - in: path
+        name: congress-number
+        required: true
+        type: string
+  '/{congress-number}/{chamber}/bills/{type}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-chamber-bills-type-json
+      parameters:
+        - in: query
+          name: api-key
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - bills:
+                    - bill_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/113/bills/hr5889.json'
+                      committees: House Judiciary
+                      cosponsors: '0'
+                      introduced_date: 'January  2, 2015'
+                      latest_major_action: 'Referred to House committee. Status: Referred to the House Committee on the Judiciary.'
+                      latest_major_action_date: 'January  2, 2015'
+                      number: H.R.5889
+                      sponsor_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/J000032.json'
+                      title: Justifiable Homicide Accuracy in Reporting Act of 2014
+                  chamber: House
+                  congress: '113'
+                  num_results: '20'
+                  offset: '0'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    bills:
+                      items:
+                        properties:
+                          bill_uri:
+                            type: string
+                          committees:
+                            type: string
+                          cosponsors:
+                            type: string
+                          introduced_date:
+                            type: string
+                          latest_major_action:
+                            type: string
+                          latest_major_action_date:
+                            type: string
+                          number:
+                            type: string
+                          sponsor_uri:
+                            type: string
+                          title:
+                            type: string
+                        type: object
+                      type: array
+                    chamber:
+                      type: string
+                    congress:
+                      type: string
+                    num_results:
+                      type: string
+                    offset:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Recent Bills
+    parameters:
+      - description: The number of the Congress in which the bill was introduced/updated
+        in: path
+        name: congress-number
+        required: true
+        type: string
+      - enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+      - description: |-
+          Types introduced, updated and passed are the 20 most recent bills in each category as reported by the THOMAS site.
+
+          The parameter major retrieves the 20 most recent bills (for the specified chamber) that have been labeled as significant by The New York Times.
+
+          When type = introduced, the introduced_date determines the set of recent bills. When type = updated, the latest_major_action_date determines the result set. 
+        enum:
+          - introduced
+          - updated
+          - passed
+          - major
+        in: path
+        name: type
+        required: true
+        type: string
+  '/{congress-number}/{chamber}/committees.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-chamber-committees-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - chamber: Senate
+                  committees:
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/113/senate/committees/SSAF.json'
+                      chair: Debbie Stabenow
+                      chair_id: S000770
+                      chair_party: D
+                      chair_state: MI
+                      chair_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S000770.json'
+                      democratic_rss: 'http://www.ag.senate.gov/rss/feeds/?type=press&amp;groups=democrat'
+                      id: SSAF
+                      name: 'Committee on Agriculture, Nutrition, and Forestry'
+                      ranking_member_id: C000567
+                      republican_rss: 'http://www.ag.senate.gov/rss/feeds/?type=press&amp;groups=republican'
+                      url: 'http://agriculture.senate.gov/'
+                  congress: '113'
+                  num_results: '20'
+                  offset: '0'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    chamber:
+                      type: string
+                    committees:
+                      items:
+                        properties:
+                          api_uri:
+                            type: string
+                          chair:
+                            type: string
+                          chair_id:
+                            type: string
+                          chair_party:
+                            type: string
+                          chair_state:
+                            type: string
+                          chair_uri:
+                            type: string
+                          democratic_rss:
+                            type: string
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          ranking_member_id:
+                            type: string
+                          republican_rss:
+                            type: string
+                          url:
+                            type: string
+                        type: object
+                      type: array
+                    congress:
+                      type: string
+                    num_results:
+                      type: string
+                    offset:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Committees
+    parameters:
+      - description: 110 -113
+        in: path
+        name: congress-number
+        required: true
+        type: string
+      - enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+  '/{congress-number}/{chamber}/committees/{commitee-id}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-chamber-committees-commitee-id-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - chairman_id: S000770
+                  chamber: Senate
+                  committee: 'Committee on Agriculture, Nutrition, and Forestry'
+                  congress: '113'
+                  current_members:
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S000770.json'
+                      begin_date: '2013-01-03'
+                      id: S000770
+                      name: Debbie Stabenow
+                      note: ''
+                      party: D
+                      rank_in_party: '1'
+                      state: MI
+                  democratic_rss: 'http://www.ag.senate.gov/rss/feeds/?type=press&amp;groups=democrat'
+                  former_members: []
+                  num_results: '20'
+                  offset: '0'
+                  ranking_member_id: C000567
+                  republican_rss: 'http://www.ag.senate.gov/rss/feeds/?type=press&amp;groups=republican'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    chairman_id:
+                      type: string
+                    chamber:
+                      type: string
+                    committee:
+                      type: string
+                    congress:
+                      type: string
+                    current_members:
+                      items:
+                        properties:
+                          api_uri:
+                            type: string
+                          begin_date:
+                            type: string
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          note:
+                            type: string
+                          party:
+                            type: string
+                          rank_in_party:
+                            type: string
+                          state:
+                            type: string
+                        type: object
+                      type: array
+                    democratic_rss:
+                      type: string
+                    former_members:
+                      items:
+                        properties: {}
+                        type: object
+                      type: array
+                    num_results:
+                      type: string
+                    offset:
+                      type: string
+                    ranking_member_id:
+                      type: string
+                    republican_rss:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Committee Members
+    parameters:
+      - description: 'Congress Numbers: 110 -113'
+        in: path
+        name: congress-number
+        required: true
+        type: integer
+      - enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+      - description: |-
+          Committee abbreviation
+
+          Use this parameter to get a committee roster.
+        in: path
+        name: commitee-id
+        required: true
+        type: string
+  '/{congress-number}/{chamber}/members.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-chamber-members-json
+      parameters:
+        - description: 'Two-letter state code (e.g., CA)'
+          in: query
+          name: state
+          type: string
+        - description: 'House of Representatives district number. If you specify a district, you must also specify a state.'
+          in: query
+          name: district
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company.  All Rights Reserved.
+              results:
+                - chamber: Senate
+                  congress: '101'
+                  members:
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/H000951.json'
+                      domain: ''
+                      dw_nominate: ''
+                      facebook_account: ''
+                      facebook_id: ''
+                      first_name: Gordon
+                      id: H000951
+                      ideal_point: ''
+                      last_name: Humphrey
+                      middle_name: John
+                      missed_votes: '24'
+                      missed_votes_pct: '3.76'
+                      party: R
+                      rss_url: ''
+                      seniority: '11'
+                      state: NH
+                      thomas_id: '1365'
+                      total_present: '1'
+                      total_votes: '638'
+                      twitter_account: ''
+                      url: ''
+                      votes_with_party_pct: '78.18'
+                  num_results: '2'
+                  offset: '0'
+                  state: NH
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    chamber:
+                      type: string
+                    congress:
+                      type: string
+                    members:
+                      items:
+                        properties:
+                          api_uri:
+                            type: string
+                          domain:
+                            type: string
+                          dw_nominate:
+                            type: string
+                          facebook_account:
+                            type: string
+                          facebook_id:
+                            type: string
+                          first_name:
+                            type: string
+                          id:
+                            type: string
+                          ideal_point:
+                            type: string
+                          last_name:
+                            type: string
+                          middle_name:
+                            type: string
+                          missed_votes:
+                            type: string
+                          missed_votes_pct:
+                            type: string
+                          party:
+                            type: string
+                          rss_url:
+                            type: string
+                          seniority:
+                            type: string
+                          state:
+                            type: string
+                          thomas_id:
+                            type: string
+                          total_present:
+                            type: string
+                          total_votes:
+                            type: string
+                          twitter_account:
+                            type: string
+                          url:
+                            type: string
+                          votes_with_party_pct:
+                            type: string
+                        type: object
+                      type: array
+                    num_results:
+                      type: string
+                    offset:
+                      type: string
+                    state:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Members by Congress Number + Chamber
+    parameters:
+      - description: |-
+          House of Representatives: 102–113
+          Senate: 80–113
+        in: path
+        name: congress-number
+        required: true
+        type: integer
+      - description: House or Senate
+        enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+  '/{congress-number}/{chamber}/members/current.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-chamber-members-current-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company.  All Rights Reserved.
+              results:
+                - chamber: Senate
+                  congress: '101'
+                  members:
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/A000031.json'
+                      district: '7'
+                      domain: ''
+                      dw_nominate: ''
+                      facebook_account: ''
+                      facebook_id: ''
+                      first_name: Brockman
+                      id: A000031
+                      ideal_point: ''
+                      last_name: Adams
+                      missed_votes: '7'
+                      missed_votes_pct: '1.10'
+                      party: D
+                      rss_url: ''
+                      seniority: '3'
+                      state: WA
+                      thomas_id: '5'
+                      total_present: '0'
+                      total_votes: '638'
+                      twitter_account: ''
+                      url: ''
+                      votes_with_party_pct: '89.22'
+                  num_results: '100'
+                  offset: '0'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    chamber:
+                      type: string
+                    congress:
+                      type: string
+                    members:
+                      items:
+                        properties:
+                          api_uri:
+                            type: string
+                          district:
+                            type: string
+                          domain:
+                            type: string
+                          dw_nominate:
+                            type: string
+                          facebook_account:
+                            type: string
+                          facebook_id:
+                            type: string
+                          first_name:
+                            type: string
+                          id:
+                            type: string
+                          ideal_point:
+                            type: string
+                          last_name:
+                            type: string
+                          middle_name:
+                            type: 'null'
+                          missed_votes:
+                            type: string
+                          missed_votes_pct:
+                            type: string
+                          party:
+                            type: string
+                          rss_url:
+                            type: string
+                          seniority:
+                            type: string
+                          state:
+                            type: string
+                          thomas_id:
+                            type: string
+                          total_present:
+                            type: string
+                          total_votes:
+                            type: string
+                          twitter_account:
+                            type: string
+                          url:
+                            type: string
+                          votes_with_party_pct:
+                            type: string
+                        type: object
+                      type: array
+                    num_results:
+                      type: string
+                    offset:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Current Congress Members
+    parameters:
+      - description: |-
+          House of Representatives: 102–113
+          Senate: 80–113
+        in: path
+        name: congress-number
+        required: true
+        type: integer
+      - enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+  '/{congress-number}/{chamber}/members/leaving.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-chamber-members-leaving-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company.  All Rights Reserved.
+              results:
+                - chamber: Senate
+                  congress: '113'
+                  members:
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/L000550.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-02'
+                      first_name: Mary
+                      id: L000550
+                      last_name: Landrieu
+                      middle_name: L.
+                      note: Defeated in general runoff election.
+                      party: D
+                      state: LA
+                      status: Defeated in general election
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/P000590.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-02'
+                      first_name: Mark
+                      id: P000590
+                      last_name: Pryor
+                      middle_name: ''
+                      note: Defeated in general election.
+                      party: D
+                      state: AR
+                      status: Defeated in general election
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/H001049.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-02'
+                      first_name: Kay
+                      id: H001049
+                      last_name: Hagan
+                      middle_name: ''
+                      note: Defeated in general election.
+                      party: D
+                      state: NC
+                      status: Defeated in general election
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/U000038.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-02'
+                      first_name: Mark
+                      id: U000038
+                      last_name: Udall
+                      middle_name: ''
+                      note: Defeated in general election.
+                      party: D
+                      state: CO
+                      status: Defeated in general election
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/W000818.json'
+                      begin_date: '2014-02-11'
+                      end_date: '2015-01-03'
+                      first_name: John
+                      id: W000818
+                      last_name: Walsh
+                      middle_name: ''
+                      note: 'Appointed to replace Max S. Baucus; sworn in on Feb. 11, 2014.'
+                      party: D
+                      state: MT
+                      status: Retiring
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C000560.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-03'
+                      first_name: Tom
+                      id: C000560
+                      last_name: Coburn
+                      middle_name: ''
+                      note: Announced that he would leave office at the end of 2014.
+                      party: R
+                      state: OK
+                      status: Retiring
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001099.json'
+                      begin_date: '2013-02-07'
+                      end_date: '2013-07-15'
+                      first_name: William
+                      id: C001099
+                      last_name: Cowan
+                      middle_name: ''
+                      note: 'Appointed to Senate on Feb. 1, 2013, to replace John Kerry. Replaced by Edward J. Markey on July 16, 2013.'
+                      party: D
+                      state: MA
+                      status: Left Congress
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/L000123.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2013-06-03'
+                      first_name: Frank
+                      id: L000123
+                      last_name: Lautenberg
+                      middle_name: R.
+                      note: 'Died on June 3, 2013.'
+                      party: D
+                      state: NJ
+                      status: Left Congress
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B000243.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2014-02-06'
+                      first_name: Max
+                      id: B000243
+                      last_name: Baucus
+                      middle_name: ''
+                      note: 'Announced retirement on April 23, 2013. Appointed ambassador to China and resigned on Feb. 6, 2014.'
+                      party: D
+                      state: MT
+                      status: Appointed to federal post
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/J000177.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-02'
+                      first_name: Tim
+                      id: J000177
+                      last_name: Johnson
+                      middle_name: ''
+                      note: 'Announced retirement on March 26, 2013.'
+                      party: D
+                      state: SD
+                      status: Retiring
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/L000261.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-02'
+                      first_name: Carl
+                      id: L000261
+                      last_name: Levin
+                      middle_name: ''
+                      note: 'Announced retirement on March 7, 2013.'
+                      party: D
+                      state: MI
+                      status: Retiring
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/J000291.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-02'
+                      first_name: Mike
+                      id: J000291
+                      last_name: Johanns
+                      middle_name: ''
+                      note: 'Announced retirement on Feb. 18, 2013.'
+                      party: R
+                      state: NE
+                      status: Retiring
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/K000148.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2013-02-01'
+                      first_name: John
+                      id: K000148
+                      last_name: Kerry
+                      middle_name: ''
+                      note: 'Resigned on Feb. 1, 2013 to become Secretary of State.'
+                      party: D
+                      state: MA
+                      status: Appointed to federal post
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/H000206.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-02'
+                      first_name: Tom
+                      id: H000206
+                      last_name: Harkin
+                      middle_name: ''
+                      note: 'Announced retirement on Jan. 26, 2013.'
+                      party: D
+                      state: IA
+                      status: Retiring
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C000286.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-03'
+                      first_name: Saxby
+                      id: C000286
+                      last_name: Chambliss
+                      middle_name: ''
+                      note: 'Announced retirement on Jan. 25, 2013.'
+                      party: R
+                      state: GA
+                      status: Retiring
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000361.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-02'
+                      first_name: John
+                      id: R000361
+                      last_name: Rockefeller IV
+                      middle_name: D.
+                      note: 'Announced retirement on Jan. 11, 2013.'
+                      party: D
+                      state: WV
+                      status: Retiring
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001100.json'
+                      begin_date: '2013-06-10'
+                      end_date: '2013-10-30'
+                      first_name: Jeffrey
+                      id: C001100
+                      last_name: Chiesa
+                      middle_name: S.
+                      note: Filled vacancy created by the death of Democrat Frank R. Lautenberg. Replaced by Cory Booker.
+                      party: R
+                      state: NJ
+                      status: Left Congress
+                    - api_uri: 'http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B001265.json'
+                      begin_date: '2013-01-03'
+                      end_date: '2015-01-02'
+                      first_name: Mark
+                      id: B001265
+                      last_name: Begich
+                      middle_name: ''
+                      note: Defeated by Dan Sullivan.
+                      party: D
+                      state: AK
+                      status: Defeated in general election
+                  num_results: '18'
+                  offset: '0'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    chamber:
+                      type: string
+                    congress:
+                      type: string
+                    cspan_id:
+                      type: string
+                    current_party:
+                      type: string
+                    date_of_birth:
+                      type: string
+                    domain:
+                      type: string
+                    facebook_account:
+                      type: string
+                    facebook_id:
+                      type: string
+                    first_name:
+                      type: string
+                    gender:
+                      type: string
+                    govtrack_id:
+                      type: string
+                    icpsr_id:
+                      type: string
+                    last_name:
+                      type: string
+                    member_id:
+                      type: string
+                    members:
+                      items:
+                        properties:
+                          api_uri:
+                            type: string
+                          begin_date:
+                            type: string
+                          chamber:
+                            type: string
+                          district:
+                            type: string
+                          end_date:
+                            type: string
+                          first_name:
+                            type: string
+                          id:
+                            type: string
+                          last_name:
+                            type: string
+                          middle_name:
+                            type: string
+                          note:
+                            type: string
+                          party:
+                            type: string
+                          start_date:
+                            type: string
+                          state:
+                            type: string
+                          status:
+                            type: string
+                        type: object
+                      type: array
+                    middle_name:
+                      type: string
+                    most_recent_vote:
+                      type: string
+                    num_results:
+                      type: string
+                    offset:
+                      type: string
+                    roles:
+                      items:
+                        properties:
+                          bills_cosponsored:
+                            type: string
+                          bills_sponsored:
+                            type: string
+                          chamber:
+                            type: string
+                          committees:
+                            items:
+                              properties: {}
+                              type: object
+                            type: array
+                          congress:
+                            type: string
+                          district:
+                            type: string
+                          end_date:
+                            type: string
+                          missed_votes_pct:
+                            type: string
+                          party:
+                            type: string
+                          seniority:
+                            type: string
+                          start_date:
+                            type: string
+                          state:
+                            type: string
+                          title:
+                            type: string
+                          votes_with_party_pct:
+                            type: string
+                        type: object
+                      type: array
+                    rss_url:
+                      type: string
+                    thomas_id:
+                      type: string
+                    times_tag:
+                      type: string
+                    times_topics_url:
+                      type: string
+                    twitter_account:
+                      type: string
+                    url:
+                      type: string
+                    youtube_account:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+        '404':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              errors:
+                - error: Record not found
+              status: ERROR
+          schema:
+            properties:
+              copyright:
+                type: string
+              errors:
+                items:
+                  properties:
+                    error:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Members Leaving Office
+    parameters:
+      - description: The number of the Congress during which the members served
+        enum:
+          - 111
+          - 112
+          - 113
+        in: path
+        name: congress-number
+        required: true
+        type: integer
+      - enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+  '/{congress-number}/{chamber}/sessions/{session-number}/votes/{roll-call-number}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-chamber-sessions-session-number-votes-roll-call-number-json
+      parameters:
+        - in: query
+          name: api-key
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                votes:
+                  vacant_seats: []
+                  vote:
+                    chamber: Senate
+                    congress: '113'
+                    date: '2014-02-24'
+                    democratic:
+                      majority_position: 'Yes'
+                      'no': '0'
+                      not_voting: '1'
+                      present: '0'
+                      'yes': '52'
+                    description: 'Jeffrey Alker Meyer, of Connecticut, to be United States District Judge for the District of Connecticut'
+                    independent:
+                      'no': '0'
+                      not_voting: '0'
+                      present: '0'
+                      'yes': '2'
+                    positions:
+                      - dw_nominate: '0.348'
+                        member_id: A000360
+                        vote_position: 'Yes'
+                    question: On the Nomination
+                    republican:
+                      majority_position: 'Yes'
+                      'no': '2'
+                      not_voting: '6'
+                      present: '0'
+                      'yes': '37'
+                    result: Nomination Confirmed
+                    roll_call: '37'
+                    session: '2'
+                    time: '19:06:00'
+                    total:
+                      'no': '2'
+                      not_voting: '7'
+                      present: '0'
+                      'yes': '91'
+                    vote_type: 1/2
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                properties:
+                  votes:
+                    properties:
+                      vacant_seats:
+                        items:
+                          properties: {}
+                          type: object
+                        type: array
+                      vote:
+                        properties:
+                          chamber:
+                            type: string
+                          congress:
+                            type: string
+                          date:
+                            type: string
+                          democratic:
+                            properties:
+                              majority_position:
+                                type: string
+                              'no':
+                                type: string
+                              not_voting:
+                                type: string
+                              present:
+                                type: string
+                              'yes':
+                                type: string
+                            type: object
+                          description:
+                            type: string
+                          independent:
+                            properties:
+                              'no':
+                                type: string
+                              not_voting:
+                                type: string
+                              present:
+                                type: string
+                              'yes':
+                                type: string
+                            type: object
+                          positions:
+                            items:
+                              properties:
+                                dw_nominate:
+                                  type: string
+                                member_id:
+                                  type: string
+                                vote_position:
+                                  type: string
+                              type: object
+                            type: array
+                          question:
+                            type: string
+                          republican:
+                            properties:
+                              majority_position:
+                                type: string
+                              'no':
+                                type: string
+                              not_voting:
+                                type: string
+                              present:
+                                type: string
+                              'yes':
+                                type: string
+                            type: object
+                          result:
+                            type: string
+                          roll_call:
+                            type: string
+                          session:
+                            type: string
+                          time:
+                            type: string
+                          total:
+                            properties:
+                              'no':
+                                type: string
+                              not_voting:
+                                type: string
+                              present:
+                                type: string
+                              'yes':
+                                type: string
+                            type: object
+                          vote_type:
+                            type: string
+                        type: object
+                    type: object
+                type: object
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Roll Call Votes
+    parameters:
+      - description: |-
+          The number of the Congress during which the vote was taken. 
+
+          House of Representatives: 102–113
+          Senate: 101–113
+        in: path
+        name: congress-number
+        required: true
+        type: string
+      - enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+      - description: '1 | 2 | [special session number]'
+        in: path
+        name: session-number
+        required: true
+        type: integer
+      - description: 'To get roll-call numbers, see the official sites of the U.S. Senate and U.S. House of Representatives.'
+        in: path
+        name: roll-call-number
+        required: true
+        type: string
+  '/{congress-number}/{chamber}/votes/{vote-type}.json':
+    get:
+      consumes:
+        - application/json
+      description: ''
+      operationId: GET_congress-number-chamber-votes-vote-type-json
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              copyright: Copyright (c) 2016 The New York Times Company. All Rights Reserved.
+              results:
+                - chamber: House
+                  congress: '113'
+                  members:
+                    - district: '4'
+                      id: M000309
+                      missed_votes: '687'
+                      missed_votes_pct: '57.63'
+                      name: Carolyn McCarthy
+                      notes: Will retire at the end of 113th Congress.
+                      party: D
+                      rank: '1'
+                      state: NY
+                      total_votes: '1192'
+                  num_results: '450'
+                  offset: '0'
+              status: OK
+          schema:
+            properties:
+              copyright:
+                type: string
+              results:
+                items:
+                  properties:
+                    chamber:
+                      type: string
+                    congress:
+                      type: string
+                    members:
+                      items:
+                        properties:
+                          district:
+                            type: string
+                          id:
+                            type: string
+                          missed_votes:
+                            type: string
+                          missed_votes_pct:
+                            type: string
+                          name:
+                            type: string
+                          notes:
+                            type: string
+                          party:
+                            type: string
+                          rank:
+                            type: string
+                          state:
+                            type: string
+                          total_votes:
+                            type: string
+                        type: object
+                      type: array
+                    num_results:
+                      type: string
+                    offset:
+                      type: string
+                  type: object
+                type: array
+              status:
+                type: string
+            type: object
+      security:
+        - api-key: []
+      summary: Votes by Type
+    parameters:
+      - description: |-
+          The number of the Congress during which the vote was taken.
+          House of Representatives: 102–113
+          Senate: 101–113
+        in: path
+        name: congress-number
+        required: true
+        type: integer
+      - enum:
+          - house
+          - senate
+        in: path
+        name: chamber
+        required: true
+        type: string
+      - enum:
+          - missed
+          - party
+          - loneno
+          - perfect
+        in: path
+        name: vote-type
+        required: true
+        type: string
+definitions: {}
