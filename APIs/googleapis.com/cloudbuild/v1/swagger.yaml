@@ -129,6 +129,10 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: The raw filter text to constrain the results.
+          in: query
+          name: filter
+          type: string
         - description: Token to provide to skip to a particular spot in the list.
           in: query
           name: pageToken

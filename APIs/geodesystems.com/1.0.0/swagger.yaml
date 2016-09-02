@@ -14260,7 +14260,7 @@ paths:
           name: search.db_registrations.email
           required: false
           type: string
-        - description: Organization or Company
+        - description: Organization
           in: query
           name: search.db_registrations.organization
           required: false
@@ -14285,17 +14285,21 @@ paths:
           name: search.db_registrations.url
           required: false
           type: string
-        - description: Amount
-          format: double
-          in: query
-          name: search.db_registrations.amount
-          required: false
-          type: number
         - description: '# users'
           in: query
           name: search.db_registrations.users
           required: false
           type: integer
+        - description: Organization type
+          in: query
+          name: search.db_registrations.organization_type
+          required: false
+          type: string
+        - description: Support tier
+          in: query
+          name: search.db_registrations.support_tier
+          required: false
+          type: string
       produces:
         - application/json
         - application/xml

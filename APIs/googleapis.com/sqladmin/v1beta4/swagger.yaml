@@ -334,7 +334,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a new backup run on demand.
+      description: Creates a new backup run on demand. This method is applicable only to Second Generation instances.
       operationId: sql.backupRuns.insert
       parameters:
         - description: Project ID of the project that contains the instance.

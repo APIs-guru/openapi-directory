@@ -5091,7 +5091,7 @@ definitions:
           $ref: '#/definitions/VirtualNetworkGatewayConnection'
         type: array
   VirtualNetworkGatewayConnectionPropertiesFormat:
-    description: VirtualNeworkGatewayConnection properties
+    description: VirtualNetworkGatewayConnection properties
     properties:
       authorizationKey:
         description: The authorizationKey.
@@ -5198,8 +5198,11 @@ definitions:
           $ref: '#/definitions/VirtualNetworkGateway'
         type: array
   VirtualNetworkGatewayPropertiesFormat:
-    description: VirtualNeworkGateay properties
+    description: VirtualNetworkGateway properties
     properties:
+      activeActive:
+        description: ActiveActive flag
+        type: boolean
       bgpSettings:
         $ref: '#/definitions/BgpSettings'
         description: Virtual network gateway's BGP speaker settings
@@ -5252,21 +5255,23 @@ definitions:
         format: int32
         type: integer
       name:
-        description: Gateway sku name -Basic/HighPerformance/Standard
+        description: Gateway sku name -Basic/HighPerformance/Standard/UltraPerformance
         enum:
           - Basic
           - HighPerformance
           - Standard
+          - UltraPerformance
         type: string
         x-ms-enum:
           modelAsString: true
           name: VirtualNetworkGatewaySkuName
       tier:
-        description: Gateway sku tier -Basic/HighPerformance/Standard
+        description: Gateway sku tier -Basic/HighPerformance/Standard/UltraPerformance
         enum:
           - Basic
           - HighPerformance
           - Standard
+          - UltraPerformance
         type: string
         x-ms-enum:
           modelAsString: true

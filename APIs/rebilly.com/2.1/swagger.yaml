@@ -3916,6 +3916,116 @@ paths:
         - Customer Authentication
     parameters:
       - $ref: '#/parameters/resourceId'
+  /passwords:
+    get:
+      description: |
+        Retrieve a list of passwords
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of passwords was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/Password'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of passwords
+      tags:
+        - Passwords
+    post:
+      description: |
+        Create an password
+      parameters:
+        - description: Password resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Password'
+      responses:
+        '201':
+          description: Password was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Password'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a password
+      tags:
+        - Passwords
+  '/passwords/{token}':
+    get:
+      description: |
+        Retrieve a password with specified token
+      responses:
+        '200':
+          description: Password was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Password'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a password
+      tags:
+        - Passwords
+    parameters:
+      - description: The password token
+        in: path
+        name: token
+        required: true
+        type: string
   /payment-cards:
     get:
       description: |
@@ -6559,6 +6669,34 @@ paths:
       summary: Reset user password
       tags:
         - Users
+  '/users/{id}/totp-reset':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Reset (renew) totpSecret
+      responses:
+        '201':
+          description: totpSecret reset (renewed) successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Reset (renew) totpSecret
+      tags:
+        - Users
   /websites:
     get:
       description: |
@@ -9015,6 +9153,28 @@ definitions:
           - gatewayConfig
         type: object
     description: Panda Gateway config
+  Password:
+    properties:
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Password created time
+      description:
+        description: 'The password description, can be used to find password token'
+        type: string
+      password:
+        description: The password. This field is write-only
+        maxLength: 50
+        minLength: 1
+        type: string
+      token:
+        description: The password token
+        readOnly: true
+        type: string
+    required:
+      - description
+      - password
+    type: object
   PayPal:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -10439,6 +10599,14 @@ definitions:
         description: The transactions's processor response
         readOnly: true
         type: string
+      gatewayResponseCode:
+        description: The gateway's response code
+        readOnly: true
+        type: string
+      gatewayResponseMessage:
+        description: The gateway's response message
+        readOnly: true
+        type: string
       gatewayTransactionId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -10564,6 +10732,12 @@ definitions:
         minItems: 1
         readOnly: true
         type: array
+      availableCurrencies:
+        description: An array of reporting currencies enabled for the merchant
+        items:
+          type: string
+        readOnly: true
+        type: array
       businessPhone:
         description: The user business phone number
         type: string
@@ -10671,28 +10845,45 @@ definitions:
           type: array
         resourceName:
           enum:
+            - 3dsecure
+            - api-keys
+            - api-tracking
             - authentication-options
             - authentication-tokens
             - bank-accounts
             - blacklists
+            - checkout-pages
             - contacts
             - credentials
-            - customers
+            - custom-events
             - custom-fields
+            - customers
             - disputes
+            - email-credentials
+            - events
             - gateway-accounts
             - invoices
-            - lead-sources
             - layouts
+            - lead-sources
+            - notes
+            - oct-batch
             - organizations
-            - payment-cards
-            - payments
             - password-tokens
+            - payments
+            - payment-cards
+            - paypal-accounts
             - plans
-            - queue
+            - reports
+            - reset-sandbox
+            - rulesets
+            - sessions
             - subscriptions
-            - transactions
+            - subscription-tracking
             - tokens
+            - transactions
+            - users
+            - webhook
+            - webhook-tracking
             - websites
           type: string
       type: object
@@ -10842,10 +11033,10 @@ definitions:
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
-      nextSentTime:
+      nextSendTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
-        description: Next sent time
+        description: Next send time
       pushData:
         description: Event's data information JSON-string
         type: string

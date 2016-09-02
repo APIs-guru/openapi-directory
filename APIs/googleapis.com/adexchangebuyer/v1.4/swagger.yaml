@@ -144,6 +144,10 @@ paths:
           name: id
           required: true
           type: integer
+        - description: Confirmation for erasing bidder and cookie matching urls.
+          in: query
+          name: confirmUnsafeAccountChange
+          type: boolean
         - in: body
           name: body
           schema:
@@ -167,6 +171,10 @@ paths:
           name: id
           required: true
           type: integer
+        - description: Confirmation for erasing bidder and cookie matching urls.
+          in: query
+          name: confirmUnsafeAccountChange
+          type: boolean
         - in: body
           name: body
           schema:
@@ -1125,11 +1133,12 @@ paths:
           name: revisionNumber
           required: true
           type: string
-        - description: The proposed action to take on the proposal.
+        - description: The proposed action to take on the proposal. This field is required and it must be set when updating a proposal.
           enum:
             - accept
             - cancel
             - propose
+            - proposeAndAccept
             - unknownAction
             - updateFinalized
           in: path
@@ -1164,11 +1173,12 @@ paths:
           name: revisionNumber
           required: true
           type: string
-        - description: The proposed action to take on the proposal.
+        - description: The proposed action to take on the proposal. This field is required and it must be set when updating a proposal.
           enum:
             - accept
             - cancel
             - propose
+            - proposeAndAccept
             - unknownAction
             - updateFinalized
           in: path
@@ -1752,6 +1762,9 @@ definitions:
     properties:
       brandingType:
         description: Visibilty of the URL in bid requests.
+        type: string
+      crossListedExternalDealIdType:
+        description: 'Indicates that this ExternalDealId exists under at least two different AdxInventoryDeals. Currently, the only case that the same ExternalDealId will exist is programmatic cross sell case.'
         type: string
       description:
         description: Description for the proposed terms of the deal.
