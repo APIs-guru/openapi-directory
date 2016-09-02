@@ -9,7 +9,8 @@ var util = require('../util');
 var specSources = {
   'googleapis.com': require('./google'),
   'azure.com': require('./azure'),
-  'windows.net': require('./azure')
+  'windows.net': require('./azure'),
+  'nytimes.com': require('./ny_times')
 };
 var catalogProviders = _.keys(specSources);
 

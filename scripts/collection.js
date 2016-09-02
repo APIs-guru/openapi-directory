@@ -646,6 +646,9 @@ function patchSwagger(swagger, exPatch) {
   if (_.isUndefined(swagger.info.version))
     swagger.info.version = '1.0.0';
 
+  if (swagger.info.logo && swagger.host === 'api.nytimes.com')
+    delete swagger.info.logo;
+
   //swagger-converter if title is absent use host as default
   if (swagger.info.title === swagger.host)
     delete swagger.info.title;
