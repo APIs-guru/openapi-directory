@@ -1,0 +1,824 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.netlify.com
+basePath: /api/v1
+info:
+  title: Netlify's API definition
+  version: 0.1.0
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/netlify/open-api/master/swagger.yml'
+    version: '2.0'
+  x-providerName: netlify.com
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  netlifyAuth:
+    authorizationUrl: 'https://app.netlify.com/authorize'
+    flow: implicit
+    type: oauth2
+security:
+  - netlifyAuth: []
+paths:
+  '/deploys/{deploy_id}/files/{path}':
+    put:
+      consumes:
+        - application/octet-stream
+      operationId: uploadDeployFile
+      parameters:
+        - in: path
+          name: deploy_id
+          required: true
+          type: string
+        - in: path
+          name: path
+          required: true
+          type: string
+        - in: body
+          name: file_body
+          required: true
+          schema:
+            format: binary
+            type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/file'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  /forms:
+    get:
+      operationId: listForms
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/form'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/forms/{form_id}/submissions':
+    get:
+      operationId: listFormSubmissions
+      parameters:
+        - in: path
+          name: form_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/submission'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  /hooks:
+    get:
+      operationId: listHooksBySiteId
+      parameters:
+        - in: query
+          name: site_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/hook'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    post:
+      consumes:
+        - application/json
+      operationId: createHookBySiteId
+      parameters:
+        - in: body
+          name: hook
+          required: true
+          schema:
+            $ref: '#/definitions/hook'
+      responses:
+        '201':
+          description: OK
+          schema:
+            $ref: '#/definitions/hook'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  /hooks/types:
+    get:
+      operationId: listHookTypes
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/hookType'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/hooks/{hook_id}':
+    delete:
+      operationId: deleteHookBySiteId
+      parameters:
+        - in: path
+          name: hook_id
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No content
+  /sites:
+    get:
+      operationId: listSites
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/site'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    post:
+      consumes:
+        - application/json
+      operationId: createSite
+      parameters:
+        - in: body
+          name: site
+          required: true
+          schema:
+            $ref: '#/definitions/site'
+        - in: query
+          name: configure_dns
+          required: false
+          type: boolean
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/site'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}':
+    delete:
+      operationId: deleteSite
+      responses:
+        '200':
+          description: OK
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    get:
+      operationId: getSite
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/site'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    parameters:
+      - in: path
+        name: site_id
+        required: true
+        type: string
+    patch:
+      consumes:
+        - application/json
+      operationId: updateSite
+      parameters:
+        - in: body
+          name: site
+          required: true
+          schema:
+            $ref: '#/definitions/site'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/site'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/deploys':
+    get:
+      operationId: listSiteDeploys
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/deploy'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    parameters:
+      - in: path
+        name: site_id
+        required: true
+        type: string
+    post:
+      operationId: createSiteDeploy
+      parameters:
+        - in: body
+          name: deploy
+          required: true
+          schema:
+            $ref: '#/definitions/deployFiles'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/deploy'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/deploys/{deploy_id}':
+    get:
+      operationId: getSiteDeploy
+      parameters:
+        - in: path
+          name: site_id
+          required: true
+          type: string
+        - in: path
+          name: deploy_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/deploy'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/deploys/{deploy_id}/restore':
+    post:
+      operationId: restoreSiteDeploy
+      parameters:
+        - in: path
+          name: site_id
+          required: true
+          type: string
+        - in: path
+          name: deploy_id
+          required: true
+          type: string
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/deploy'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/dns':
+    get:
+      operationId: getDNSForSite
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dnsZone'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    parameters:
+      - in: path
+        name: site_id
+        required: true
+        type: string
+    put:
+      operationId: configureDNSForSite
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dnsZone'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/files':
+    get:
+      operationId: listSiteFiles
+      parameters:
+        - in: path
+          name: site_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/file'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/files/{file_path}':
+    get:
+      operationId: getSiteFileByPathName
+      parameters:
+        - in: path
+          name: site_id
+          required: true
+          type: string
+        - in: path
+          name: file_path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/file'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/forms':
+    get:
+      operationId: listSiteForms
+      parameters:
+        - in: path
+          name: site_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/form'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/metadata':
+    get:
+      operationId: getSiteMetadata
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/metadata'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    parameters:
+      - in: path
+        name: site_id
+        required: true
+        type: string
+    put:
+      operationId: updateSiteMetadata
+      parameters:
+        - in: body
+          name: metadata
+          required: true
+          schema:
+            $ref: '#/definitions/metadata'
+      responses:
+        '204':
+          description: No content
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/snippets':
+    get:
+      operationId: listSiteSnippets
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/snippet'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    parameters:
+      - in: path
+        name: site_id
+        required: true
+        type: string
+    post:
+      consumes:
+        - application/json
+      operationId: createSiteSnippet
+      parameters:
+        - in: body
+          name: snippet
+          required: true
+          schema:
+            $ref: '#/definitions/snippet'
+      responses:
+        '201':
+          description: OK
+          schema:
+            $ref: '#/definitions/snippet'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/snippets/{snippet_id}':
+    delete:
+      operationId: deleteSiteSnippet
+      responses:
+        '204':
+          description: No content
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    get:
+      operationId: getSiteSnippet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/snippet'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    parameters:
+      - in: path
+        name: site_id
+        required: true
+        type: string
+      - in: path
+        name: snippet_id
+        required: true
+        type: string
+    put:
+      consumes:
+        - application/json
+      operationId: updateSiteSnippet
+      parameters:
+        - in: body
+          name: snippet
+          required: true
+          schema:
+            $ref: '#/definitions/snippet'
+      responses:
+        '204':
+          description: No content
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/ssl':
+    get:
+      operationId: showSiteTLSCertificate
+      parameters:
+        - in: path
+          name: site_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/sniCertificate'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+    post:
+      operationId: provisionSiteTLSCertificate
+      parameters:
+        - in: path
+          name: site_id
+          required: true
+          type: string
+        - in: query
+          name: certificate
+          required: false
+          type: string
+        - in: query
+          name: key
+          required: false
+          type: string
+        - in: query
+          name: ca_certificates
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/sniCertificate'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+  '/sites/{site_id}/submissions':
+    get:
+      operationId: listSiteSubmissions
+      parameters:
+        - in: path
+          name: site_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/submission'
+            type: array
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+definitions:
+  deploy:
+    properties:
+      commit_ref:
+        type: string
+      created_at:
+        format: dateTime
+        type: string
+      deploy_ssl_url:
+        type: string
+      deploy_url:
+        type: string
+      id:
+        type: string
+      required:
+        items:
+          type: string
+        type: array
+      review_id:
+        type: string
+      screenshot_url:
+        type: string
+      site_id:
+        type: string
+      state:
+        type: string
+      updated_at:
+        format: dateTime
+        type: string
+      url:
+        type: string
+      user_id:
+        type: string
+    type: object
+  deployFiles:
+    properties:
+      async:
+        type: boolean
+      files:
+        type: object
+    type: object
+  dnsRecord:
+    properties:
+      hostname:
+        type: string
+      id:
+        type: string
+      priority:
+        format: int64
+        type: integer
+      ttl:
+        format: int64
+        type: integer
+      type:
+        type: string
+      value:
+        type: string
+    type: object
+  dnsZone:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      records:
+        items:
+          $ref: '#/definitions/dnsRecord'
+        type: array
+    type: object
+  error:
+    properties:
+      code:
+        format: int64
+        type: integer
+      message:
+        type: string
+    required:
+      - message
+    type: object
+  file:
+    properties:
+      id:
+        type: string
+      mime_type:
+        type: string
+      path:
+        type: string
+      sha:
+        type: string
+      size:
+        format: int64
+        type: integer
+    type: object
+  form:
+    properties:
+      created_at:
+        format: dateTime
+        type: string
+      fields:
+        items:
+          type: object
+        type: array
+      id:
+        type: string
+      name:
+        type: string
+      paths:
+        items:
+          type: string
+        type: array
+      site_id:
+        type: string
+      submission_count:
+        format: int32
+        type: integer
+    type: object
+  hook:
+    properties:
+      created_at:
+        format: dateTime
+        type: string
+      data:
+        type: object
+      event:
+        type: string
+      id:
+        type: string
+      site_id:
+        type: string
+      type:
+        type: string
+      updated_at:
+        format: dateTime
+        type: string
+    type: object
+  hookType:
+    properties:
+      events:
+        items:
+          type: string
+        type: array
+      fields:
+        items:
+          type: object
+        type: array
+      name:
+        type: string
+    type: object
+  metadata:
+    type: object
+  site:
+    properties:
+      admin_url:
+        type: string
+      created_at:
+        format: dateTime
+        type: string
+      custom_domain:
+        type: string
+      force_ssl:
+        type: boolean
+      id:
+        type: string
+      name:
+        type: string
+      notification_email:
+        type: string
+      screenshot_url:
+        type: string
+      updated_at:
+        format: dateTime
+        type: string
+      url:
+        type: string
+      user_id:
+        type: string
+    type: object
+  sniCertificate:
+    properties:
+      created_at:
+        format: dateTime
+        type: string
+      domains:
+        items:
+          type: string
+        type: array
+      expires_at:
+        format: dateTime
+        type: string
+      state:
+        type: string
+      updated_at:
+        format: dateTime
+        type: string
+    type: object
+  snippet:
+    properties:
+      general:
+        type: string
+      general_position:
+        type: string
+      goal:
+        type: string
+      goal_position:
+        type: string
+      id:
+        format: int32
+        type: integer
+      site_id:
+        type: string
+      title:
+        type: string
+    type: object
+  submission:
+    properties:
+      body:
+        type: string
+      company:
+        type: string
+      created_at:
+        format: dateTime
+        type: string
+      data:
+        type: object
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      last_name:
+        type: string
+      name:
+        type: string
+      number:
+        format: int32
+        type: integer
+      site_url:
+        type: string
+      summary:
+        type: string
+    type: object
