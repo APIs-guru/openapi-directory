@@ -63,7 +63,9 @@ tags:
     name: service/bio_sra_to_sam
   - description: ' API for Convert SRA to SFF format'
     name: service/bio_sra_to_sff
-  - description: ' API for Create image from GeoTIFF'
+  - description: ' API for GDAL Info'
+    name: service/gdal_info
+  - description: ' API for Create image from GeoTIFF/NITF'
     name: service/gdal_tiff2image
   - description: ' API for CDO Info'
     name: service/geo_cdo_info
@@ -187,6 +189,8 @@ tags:
     name: type/gdata_docs
   - description: Search API for 'Google Web Albums View' entry type
     name: type/gdata_photos
+  - description: Search API for 'GeoTIFF' entry type
+    name: type/geo_geotiff
   - description: Search API for 'GPX GPS File' entry type
     name: type/geo_gpx
   - description: Search API for 'HDF5 File' entry type
@@ -253,6 +257,8 @@ tags:
     name: type/media_youtubevideo
   - description: Search API for 'Multiple Search' entry type
     name: type/multisearch
+  - description: Search API for 'NGA Tracks' entry type
+    name: type/nga_tracks
   - description: Search API for 'Notes' entry type
     name: type/notes
   - description: Search API for 'Note' entry type
@@ -385,6 +391,8 @@ tags:
     name: type/type_esri_gpserver
   - description: Search API for 'ESRI Image Server' entry type
     name: type/type_esri_imageserver
+  - description: Search API for 'ESRI Layer' entry type
+    name: type/type_esri_layer
   - description: Search API for 'ESRI Map Server' entry type
     name: type/type_esri_mapserver
   - description: Search API for 'ESRI Services Folder' entry type
@@ -397,12 +405,16 @@ tags:
     name: type/type_fred_category
   - description: Search API for 'FRED Series' entry type
     name: type/type_fred_series
+  - description: Search API for 'Hazard Data' entry type
+    name: type/type_hazarddata
   - description: Search API for 'Colorado DNR Stream Gage' entry type
     name: type/type_hydro_colorado
   - description: Search API for 'IDV Bundle' entry type
     name: type/type_idv_bundle
   - description: Search API for 'Image' entry type
     name: type/type_image
+  - description: Search API for 'Airport Image' entry type
+    name: type/type_image_airport
   - description: Search API for 'MB Bathymetry' entry type
     name: type/type_mb
   - description: Search API for 'Bathymetry Collection' entry type
@@ -423,6 +435,8 @@ tags:
     name: type/type_nist_isotope
   - description: Search API for 'NIST JANAF Thermochemical Table' entry type
     name: type/type_nist_janaffile
+  - description: Search API for 'NITF File' entry type
+    name: type/type_nitf
   - description: Search API for 'Ameriflux Level 2 CSV File' entry type
     name: type/type_point_ameriflux_level2
   - description: Search API for 'AMRC Final QC Data' entry type
@@ -495,6 +509,8 @@ tags:
     name: type/type_resilience_assessment
   - description: Search API for 'Resiliency Project' entry type
     name: type/type_resilience_project
+  - description: Search API for 'Reuters Document' entry type
+    name: type/type_reuters_document
   - description: Search API for 'Service Group' entry type
     name: type/type_service_group
   - description: Search API for 'Service Link' entry type
@@ -6017,6 +6033,117 @@ paths:
       summary: Search API for 'Google Web Albums View' entry type
       tags:
         - type/gdata_photos
+  /repository/search/type/geo_geotiff:
+    get:
+      description: API to search for entries of type GeoTIFF
+      operationId: search_geo_geotiff
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'GeoTIFF' entry type
+      tags:
+        - type/geo_geotiff
   /repository/search/type/geo_gpx:
     get:
       description: API to search for entries of type GPX GPS File
@@ -9856,6 +9983,132 @@ paths:
       summary: Search API for 'Multiple Search' entry type
       tags:
         - type/multisearch
+  /repository/search/type/nga_tracks:
+    get:
+      description: API to search for entries of type NGA Tracks
+      operationId: search_nga_tracks
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Track ID
+          in: query
+          name: search.db_nga_tracks.track_id
+          required: false
+          type: string
+        - description: Timestamp
+          in: query
+          name: search.db_nga_tracks.timestamp
+          required: false
+          type: string
+        - description: Location
+          in: query
+          name: search.db_nga_tracks.location
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'NGA Tracks' entry type
+      tags:
+        - type/nga_tracks
   /repository/search/type/notes:
     get:
       description: API to search for entries of type Notes
@@ -17666,6 +17919,122 @@ paths:
       summary: Search API for 'ESRI Image Server' entry type
       tags:
         - type/type_esri_imageserver
+  /repository/search/type/type_esri_layer:
+    get:
+      description: API to search for entries of type ESRI Layer
+      operationId: search_type_esri_layer
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Layer Type
+          in: query
+          name: search.type_esri_layer.layer_type
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'ESRI Layer' entry type
+      tags:
+        - type/type_esri_layer
   /repository/search/type/type_esri_mapserver:
     get:
       description: API to search for entries of type ESRI Map Server
@@ -18332,6 +18701,122 @@ paths:
       summary: Search API for 'FRED Series' entry type
       tags:
         - type/type_fred_series
+  /repository/search/type/type_hazarddata:
+    get:
+      description: API to search for entries of type Hazard Data
+      operationId: search_type_hazarddata
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Source Agency
+          in: query
+          name: search.type_hazarddata.source
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Hazard Data' entry type
+      tags:
+        - type/type_hazarddata
   /repository/search/type/type_hydro_colorado:
     get:
       description: API to search for entries of type Colorado DNR Stream Gage
@@ -18670,6 +19155,117 @@ paths:
       summary: Search API for 'Image' entry type
       tags:
         - type/type_image
+  /repository/search/type/type_image_airport:
+    get:
+      description: API to search for entries of type Airport Image
+      operationId: search_type_image_airport
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Airport Image' entry type
+      tags:
+        - type/type_image_airport
   /repository/search/type/type_mb:
     get:
       description: API to search for entries of type MB Bathymetry
@@ -19880,6 +20476,117 @@ paths:
       summary: Search API for 'NIST JANAF Thermochemical Table' entry type
       tags:
         - type/type_nist_janaffile
+  /repository/search/type/type_nitf:
+    get:
+      description: API to search for entries of type NITF File
+      operationId: search_type_nitf
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'NITF File' entry type
+      tags:
+        - type/type_nitf
   /repository/search/type/type_point_ameriflux_level2:
     get:
       description: API to search for entries of type Ameriflux Level 2 CSV File
@@ -24181,6 +24888,117 @@ paths:
       summary: Search API for 'Resiliency Project' entry type
       tags:
         - type/type_resilience_project
+  /repository/search/type/type_reuters_document:
+    get:
+      description: API to search for entries of type Reuters Document
+      operationId: search_type_reuters_document
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Reuters Document' entry type
+      tags:
+        - type/type_reuters_document
   /repository/search/type/type_service_group:
     get:
       description: API to search for entries of type Service Group
