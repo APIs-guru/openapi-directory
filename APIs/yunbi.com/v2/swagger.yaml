@@ -20,6 +20,7 @@ info:
     - bitcoin
     - digital currency
 tags:
+  - name: addresses
   - name: deposit
   - name: deposit_address
   - name: deposits
@@ -36,6 +37,22 @@ tags:
   - name: trades
   - name: withdraw
 paths:
+  '/v2/addresses/{address}.json':
+    get:
+      operationId: GET--version-addresses--address---format-
+      parameters:
+        - in: path
+          name: address
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+      summary: Check Deposit Address
+      tags:
+        - addresses
   /v2/deposit.json:
     get:
       operationId: GET--version-deposit---format-
@@ -86,7 +103,7 @@ paths:
           name: signature
           required: true
           type: string
-        - description: 'The account to which you want to deposit. Available values: cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc'
+        - description: 'The account to which you want to deposit. Available values: cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc, amp, 1st'
           in: query
           name: currency
           required: true
@@ -118,7 +135,7 @@ paths:
           name: signature
           required: true
           type: string
-        - description: 'Currency value contains  cny,btc,eth,pls,note,bts,bitcny,bitusd,bitbtc,yun,nxt,ltc,doge,sc,dgd,dcs,dao,etc'
+        - description: 'Currency value contains  cny,btc,eth,pls,note,bts,bitcny,bitusd,bitbtc,yun,nxt,ltc,doge,sc,dgd,dcs,dao,etc,amp,1st'
           in: query
           name: currency
           required: false

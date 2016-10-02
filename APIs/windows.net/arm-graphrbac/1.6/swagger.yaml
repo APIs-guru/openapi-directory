@@ -71,7 +71,9 @@ paths:
       tags:
         - Application
       x-ms-odata: '#/definitions/Application'
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: Applications_ListNext
     post:
       description: 'Create a new application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
       operationId: Applications_Create
@@ -1004,6 +1006,9 @@ definitions:
   ApplicationListResult:
     description: Role assignment list operation result.
     properties:
+      odata.nextLink:
+        description: the URL to get the next set of results.
+        type: string
       value:
         description: Application list.
         items:
@@ -1183,6 +1188,8 @@ definitions:
         items:
           $ref: '#/definitions/KeyCredential'
         type: array
+    required:
+      - value
   OdataError:
     description: Active Directory odata error information
     properties:
@@ -1227,6 +1234,8 @@ definitions:
         items:
           $ref: '#/definitions/PasswordCredential'
         type: array
+    required:
+      - value
   PasswordProfile:
     description: Contains the password profile associated with a user.
     properties:
@@ -1385,6 +1394,33 @@ definitions:
         $ref: '#/definitions/PasswordProfile'
         description: Password Profile
 x-ms-paths:
+  '/{tenantID}/{nextLink}?Applications_ListNext':
+    get:
+      description: Gets list of applications from the current tenant.
+      operationId: Applications_ListNext
+      parameters:
+        - description: Next link for list operation.
+          in: path
+          name: nextLink
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ApplicationListResult'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/GraphError'
+      tags:
+        - Applications
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: Applications_ListNext
   '/{tenantID}/{nextLink}?Groups_GetGroupMembersNext':
     get:
       description: Gets the members of a group.

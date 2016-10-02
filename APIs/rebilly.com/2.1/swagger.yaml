@@ -56,7 +56,7 @@ security:
   - ApiKey: []
 parameters:
   collectionExpand:
-    description: Expand response to get full related object intead of ID.  See the expand guide for more info.
+    description: Expand response to get full related object instead of ID.  See the expand guide for more info.
     in: query
     name: expand
     type: string
@@ -95,6 +95,12 @@ parameters:
     description: The collection items sort field and order (prefix with "-" for descending sort).
     in: query
     name: sort
+    type: string
+  hash:
+    description: The token identifier string
+    in: path
+    name: hash
+    required: true
     type: string
   resourceId:
     description: The resource identifier string
@@ -199,6 +205,9 @@ tags:
       describe, and determine the type of the schema.
     name: Custom Fields
   - description: |
+      Get and create SMTP and Webhook credential hashes.
+    name: Credential Hashes
+  - description: |
       Handle disputes (chargebacks and retrievals).
     name: Disputes
   - description: |
@@ -253,7 +262,7 @@ tags:
       Payment tokens are used to reduce the scope of PCI DSS compliance.  A payment
       token can be made using a different authentication scheme (refer to the public key
       authentication scheme in the Authentication section), which allows you to
-      create a payment token directly from the browser, bypassing the need to send
+      create a payment tokeng directly from the browser, bypassing the need to send
       sensitive cardholder info to your servers.  We recommend using this with our
       Rebilly.js library, which helps you wire a form into this API resource and create
       payment tokens.
@@ -1482,6 +1491,140 @@ paths:
       summary: Create or update a contact with predefined ID
       tags:
         - Contacts
+  /credential-hashes/emails:
+    post:
+      description: |
+        Create an email credential
+      parameters:
+        - description: Email credential resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SmtpCredential'
+      responses:
+        '201':
+          description: Email credential was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/SmtpCredential'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create an email credential
+      tags:
+        - Credential Hashes
+  '/credential-hashes/emails/{hash}':
+    get:
+      description: |
+        Retrieve an email credential with specified token identifier string
+      responses:
+        '200':
+          description: Email credential was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/SmtpCredential'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve an email credential
+      tags:
+        - Credential Hashes
+    parameters:
+      - $ref: '#/parameters/hash'
+  /credential-hashes/webhooks:
+    post:
+      description: |
+        Create a webhook credential
+      parameters:
+        - description: Credential resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/WebhookCredential'
+      responses:
+        '201':
+          description: Webhook credential was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/WebhookCredential'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a webhook credential
+      tags:
+        - Credential Hashes
+  '/credential-hashes/webhooks/{hash}':
+    get:
+      description: |
+        Retrieve a webhook credential with specified token identifier string
+      responses:
+        '200':
+          description: Webhook credential was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/WebhookCredential'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a webhook credential
+      tags:
+        - Credential Hashes
+    parameters:
+      - $ref: '#/parameters/hash'
   /credentials:
     get:
       description: |
@@ -3005,7 +3148,7 @@ paths:
       description: |
         Issue an invoice with specified identifier string
       parameters:
-        - description: InvoiceItem resource
+        - description: InvoiceIssue resource
           in: body
           name: body
           required: true
@@ -3013,7 +3156,7 @@ paths:
             $ref: '#/definitions/InvoiceIssue'
       responses:
         '201':
-          description: Invoice was abandoned successfully
+          description: Invoice was issued successfully
           headers:
             Rate-Limit-Limit:
               description: The number of allowed requests in the current period
@@ -5029,375 +5172,6 @@ paths:
       summary: Cancel a scheduled payment
       tags:
         - Payments
-  /reports/disputes:
-    get:
-      description: |
-        Retrieve a disputes report
-      parameters:
-        - description: Report will be aggregated by this field
-          enum:
-            - website
-            - processor
-            - currency
-            - bin
-            - country
-            - rebillNumber
-            - dunningIndex
-            - gatewayAccount
-          in: query
-          name: aggregationField
-          required: true
-          type: string
-        - description: Report month
-          in: query
-          name: periodMonth
-          required: true
-          type: string
-        - $ref: '#/parameters/collectionLimit'
-        - $ref: '#/parameters/collectionOffset'
-      responses:
-        '200':
-          description: Report was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/ReportDisputes'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a disputes report
-      tags:
-        - Reports
-  /reports/dunning:
-    get:
-      description: |
-        Retrieve a dunning report
-      parameters:
-        - description: Report start date
-          format: date-time
-          in: query
-          name: periodStart
-          required: true
-          type: string
-        - description: Report end date
-          format: date-time
-          in: query
-          name: periodEnd
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Report was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/ReportDunning'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a dunning report
-      tags:
-        - Reports
-  /reports/retention-percentage:
-    get:
-      description: |
-        Retrieve a retention percentage report
-      parameters:
-        - description: Report aggregation field
-          enum:
-            - day
-            - month
-            - quarter
-            - year
-          in: query
-          name: aggregationField
-          required: true
-          type: string
-        - description: Report aggregation period
-          enum:
-            - day
-            - month
-            - quarter
-            - year
-            - cycle
-          in: query
-          name: aggregationPeriod
-          required: true
-          type: string
-        - description: If to include switched subscriptions
-          in: query
-          name: includeSwitchedSubscriptions
-          type: string
-        - description: Report start date
-          in: query
-          name: periodStart
-          required: true
-          type: string
-        - description: Report end date
-          in: query
-          name: periodEnd
-          required: true
-          type: string
-        - $ref: '#/parameters/collectionLimit'
-        - $ref: '#/parameters/collectionOffset'
-      responses:
-        '200':
-          description: Report was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/HistogramData'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a retention percentage report
-      tags:
-        - Reports
-  /reports/retention-value:
-    get:
-      description: |
-        The retention value report shows the count of new customers
-        per aggregation bucket and the corresponding per customer value over time.
-      parameters:
-        - description: Report aggregation field
-          enum:
-            - day
-            - month
-            - quarter
-            - year
-            - leadsSource
-            - leadsMedium
-            - leadsCampaign
-            - leadsContent
-            - leadsTerm
-            - leadsAffiliate
-            - leadsSubAffiliate
-            - leadsSalesAgent
-          in: query
-          name: aggregationField
-          required: true
-          type: string
-        - description: Report aggregation period
-          enum:
-            - day
-            - month
-            - quarter
-            - year
-            - cycle
-          in: query
-          name: aggregationPeriod
-          required: true
-          type: string
-        - description: If to include refunds
-          in: query
-          name: includeRefunds
-          type: string
-        - description: If to include disputes
-          in: query
-          name: includeDisputes
-          type: string
-        - description: Report start date
-          in: query
-          name: periodStart
-          required: true
-          type: string
-        - description: Report end date
-          in: query
-          name: periodEnd
-          required: true
-          type: string
-        - description: Lead Source mode
-          enum:
-            - last
-            - all
-          in: query
-          name: leadSourceMode
-          type: string
-        - $ref: '#/parameters/collectionLimit'
-        - $ref: '#/parameters/collectionOffset'
-      responses:
-        '200':
-          description: Report was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/HistogramData'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a retention value report
-      tags:
-        - Reports
-  /reports/statistics:
-    get:
-      description: |
-        Retrieve a statistics report
-      responses:
-        '200':
-          description: Report was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/ReportStatistics'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a statistics report
-      tags:
-        - Reports
-  /reports/subscribers:
-    get:
-      description: |
-        Retrieve a subscribers report
-      parameters:
-        - description: Filter by website ID
-          in: query
-          name: websiteId
-          type: string
-        - $ref: '#/parameters/collectionLimit'
-        - $ref: '#/parameters/collectionOffset'
-      responses:
-        '200':
-          description: Report was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/ReportSubscribers'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a subscribers report
-      tags:
-        - Reports
-  /reports/transactions:
-    get:
-      description: |
-        Retrieve a transactions report
-      parameters:
-        - description: Report start day
-          format: date-time
-          in: query
-          name: periodStart
-          required: true
-          type: string
-        - description: Report end day
-          format: date-time
-          in: query
-          name: periodEnd
-          required: true
-          type: string
-        - description: Report aggregation field
-          enum:
-            - website
-            - currency
-            - bin
-            - rebillNumber
-            - transactionResult
-            - transactionType
-            - gatewayAccount
-            - leadsAffiliate
-            - leadsCampaign
-            - leadsContent
-            - leadsMedium
-            - leadsSalesAgent
-            - leadsSource
-            - leadsSubAffiliate
-            - leadsTerm
-          in: query
-          name: aggregationField
-          required: true
-          type: string
-        - description: Report metric
-          enum:
-            - ApprovalThroughput
-            - AuthApprovalThroughput
-            - AvgSalesPrice
-            - Refunds
-            - RefundCount
-            - Sales
-            - SalesCount
-          in: query
-          name: metric
-          required: true
-          type: string
-        - $ref: '#/parameters/collectionLimit'
-        - $ref: '#/parameters/collectionOffset'
-      responses:
-        '200':
-          description: Report was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/ReportTransactions'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a transactions report
-      tags:
-        - Reports
   /sessions:
     get:
       description: |
@@ -7339,35 +7113,60 @@ definitions:
           - gatewayConfig
         type: object
     description: Cashflows Gateway config
+  Cayan:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              merchantKey:
+                description: Cayan Gateway merchant key
+                format: password
+                type: string
+              merchantName:
+                description: Cayan Gateway merchant name
+                type: string
+              merchantSiteId:
+                description: Cayan Gateway merchant site ID
+                type: string
+            required:
+              - merchantSiteId
+              - merchantName
+              - merchantKey
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Cayan Gateway config
   Chase:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
       - properties:
           gatewayConfig:
             properties:
-              bin:
-                description: Chase Gateway bin
-                format: password
+              coNumber:
+                description: Chase Gateway CO Number used for delimited file reports
                 type: string
-              merchantId:
-                description: Chase Gateway merchant ID
+              divisionId:
+                description: Chase Gateway division ID
                 type: string
+              partialAuth:
+                default: false
+                description: Support for Partial Auths
+                type: boolean
               password:
-                description: Chase Gateway password
+                description: Chase Gateway Net Connect password
                 format: password
-                type: string
-              terminalId:
-                description: Chase Gateway terminal ID
                 type: string
               username:
-                description: Chase Gateway username
+                description: Chase Gateway Net Connect username
                 type: string
             required:
               - username
               - password
-              - merchantId
-              - bin
-              - terminalId
+              - coNumber
+              - divisionId
+              - partialAuth
             type: object
         required:
           - gatewayConfig
@@ -8032,6 +7831,7 @@ definitions:
           - forfeited
           - won
           - lost
+          - unknown
         type: string
       transactionId:
         description: The dispute's transaction ID
@@ -8375,6 +8175,7 @@ definitions:
           - Beanstream
           - BraintreePayments
           - Cashflows
+          - Cayan
           - Chase
           - ChinaUnionPay
           - Credorax
@@ -8387,7 +8188,6 @@ definitions:
           - GlobalOne
           - iCheque
           - Ilixium
-          - Merchant Warehouse
           - Moneris
           - NMI
           - OchaPay
@@ -8861,31 +8661,6 @@ definitions:
     required:
       - customerId
     type: object
-  MerchantWarehouse:
-    allOf:
-      - $ref: '#/definitions/GatewayAccount'
-      - properties:
-          gatewayConfig:
-            properties:
-              merchantKey:
-                description: MerchantWarehouse Gateway merchant key
-                format: password
-                type: string
-              merchantName:
-                description: MerchantWarehouse Gateway merchant name
-                type: string
-              merchantSiteId:
-                description: MerchantWarehouse Gateway merchant site ID
-                type: string
-            required:
-              - merchantSiteId
-              - merchantName
-              - merchantKey
-            type: object
-        required:
-          - gatewayConfig
-        type: object
-    description: MerchantWarehouse Gateway config
   Method:
     description: The payment method
     enum:
@@ -9369,6 +9144,10 @@ definitions:
       pan:
         description: The card PAN (Primary Account Number). Required if card is creating not from Token
         type: string
+      safeHash:
+        description: The card's hash. Based on bin and last 4 digits of the PAN
+        readOnly: true
+        type: string
       status:
         description: Payment Card status
         enum:
@@ -9829,170 +9608,6 @@ definitions:
           - gatewayConfig
         type: object
     description: Redsys Gateway config
-  ReportDisputes:
-    items:
-      properties:
-        aggregationFieldValue:
-          description: 'Selected aggregation field value (defined by query). It can be, for example, websiteId or country. You define it in aggregationField param in query.'
-          type: string
-        countPercentMastercard:
-          description: Disputes count / Transaction count
-          format: double
-          type: number
-        countPercentVisa:
-          description: Disputes count / Transaction count
-          format: double
-          type: number
-        disputesMastercard:
-          description: Disputes count on Mastercard
-          type: integer
-        disputesVisa:
-          description: Disputes count on Visa
-          type: integer
-        valuePercentMastercard:
-          description: Disputes count / Value of settlement transactions
-          format: double
-          type: number
-        valuePercentVisa:
-          description: Disputes count / Value of settlement transactions
-          format: double
-          type: number
-      type: object
-    type: array
-  ReportDunning:
-    properties:
-      data:
-        items:
-          properties:
-            attempts:
-              description: Attepmts count
-              type: integer
-            retryNumber:
-              description: Retry attempts number
-              type: integer
-            successRate:
-              description: Successful transactions ratio
-              format: double
-              type: number
-            successfulTransactions:
-              description: Successful transactons count
-              type: integer
-          type: object
-        readOnly: true
-        type: array
-    type: object
-  ReportStatistics:
-    properties:
-      cancels:
-        description: Cancels count in last 24 hours
-        type: integer
-      cancelsGrowthPercentage:
-        description: Cancels count growth (in percents) in last 24 hours (against previous 24 hours)
-        format: double
-        type: number
-      customers:
-        description: New customers count in last 24 hours
-        type: integer
-      customersGrowthPercentage:
-        description: Customers count growth (in percents) in last 24 hours (against previous 24 hours)
-        format: double
-        type: number
-      refunds:
-        description: Refunds count
-        type: integer
-      refundsGrowthPercentage:
-        description: Refunds count growth (in percents) in last 24 hours (against previous 24 hours)
-        format: double
-        type: number
-      revenue:
-        description: Revenue in last 24 hours
-        format: double
-        type: number
-      revenueGrowthPercentage:
-        description: Revenue growth (in percents) in last 24 hours (against previous 24 hours)
-        format: double
-        type: number
-    type: object
-  ReportSubscribers:
-    properties:
-      data:
-        description: Report data
-        items:
-          properties:
-            active:
-              description: Active count
-              type: integer
-            cancelled:
-              description: Cancelled count
-              type: integer
-            pastDue:
-              description: Past Due count
-              type: integer
-            plan:
-              description: Plan Name
-              type: string
-            trial:
-              description: On trial count
-              type: integer
-          type: object
-        type: array
-      totalActive:
-        description: Total active count
-        type: integer
-      totalCancelled:
-        description: Total cancelled count
-        type: integer
-      totalOnTrial:
-        description: Total on trial count
-        type: integer
-      totalPastDue:
-        description: Total Past Due count
-        type: integer
-    type: object
-  ReportTransactions:
-    properties:
-      data:
-        items:
-          properties:
-            aggregationFieldValue:
-              description: Selected aggregation field value
-              type: string
-            amount:
-              description: Amount
-              format: double
-              type: number
-            approvedThroughput:
-              description: Successful transactons percentage
-              type: integer
-            authApprovedThroughput:
-              description: Successful transactions count
-              type: integer
-            count:
-              description: Transactions count
-              format: double
-              type: number
-            refundsCount:
-              description: Refunds count
-              type: integer
-            refundsValue:
-              description: Refunds value
-              format: double
-              type: number
-            salesAverage:
-              description: Sales average value
-              format: double
-              type: number
-            salesCount:
-              description: Sales count
-              type: integer
-            salesValue:
-              description: Sales value
-              format: double
-              type: number
-          type: object
-        readOnly: true
-        type: array
-    type: object
   ResetPassword:
     properties:
       newPassword:
@@ -10207,6 +9822,55 @@ definitions:
       - password
       - website
     type: object
+  SmtpAuthorization:
+    discriminator: type
+    properties:
+      type:
+        default: none
+        enum:
+          - none
+          - plain
+          - login
+          - cram-md5
+        type: string
+    type: object
+  SmtpCredential:
+    description: SMTP Credential
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      auth:
+        $ref: '#/definitions/SmtpAuthorization'
+      encryption:
+        default: none
+        description: The encryption value
+        enum:
+          - none
+          - tls
+          - ssl
+        type: string
+      hash:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        readOnly: true
+      host:
+        description: The host name
+        type: string
+      port:
+        default: 25
+        description: The port value
+        maximum: 65535
+        minimum: 1
+        type: integer
+    required:
+      - host
+    type: object
   Status:
     properties:
       status:
@@ -10307,9 +9971,9 @@ definitions:
         format: date-time
         type: string
       startTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
         description: Subscription start time
+        format: date-time
+        type: string
       status:
         description: Subscription status
         readOnly: true
@@ -10586,6 +10250,47 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: Customer's ID
         readOnly: true
+      gateway:
+        description: The related gateway information
+        properties:
+          avsResponse:
+            description: The AVS gateway's response
+            properties:
+              code:
+                description: The raw response code
+                type: string
+              message:
+                description: The raw response message
+                type: string
+            type: object
+          cvvResponse:
+            description: The CVV gateway's response
+            properties:
+              code:
+                description: The raw response code
+                type: string
+              message:
+                description: The raw response message
+                type: string
+            type: object
+          response:
+            description: The gateway's response
+            properties:
+              code:
+                description: The gateway's response code
+                type: string
+              message:
+                description: The gateway's response message
+                type: string
+              originalCode:
+                description: 'The raw, unmapped gateway''s response code'
+                type: string
+              originalMessage:
+                description: 'The raw, unmapped gateway''s response message'
+                type: string
+            type: object
+        readOnly: true
+        type: object
       gatewayAccountId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -10593,18 +10298,6 @@ definitions:
         readOnly: true
       gatewayName:
         description: 'Payment Gateway name, available only when method is ''payment_card'', else null'
-        readOnly: true
-        type: string
-      gatewayResponse:
-        description: The transactions's processor response
-        readOnly: true
-        type: string
-      gatewayResponseCode:
-        description: The gateway's response code
-        readOnly: true
-        type: string
-      gatewayResponseMessage:
-        description: The gateway's response message
         readOnly: true
         type: string
       gatewayTransactionId:
@@ -10638,13 +10331,23 @@ definitions:
         description: Transaction result
         enum:
           - approved
-          - connection-error
+          - canceled
           - declined
+          - unknown
+        readOnly: true
+        type: string
+      status:
+        description: Transaction status
+        enum:
+          - completed
+          - connection-error
           - never-sent
           - pending
-          - pending-processor
+          - sending
+          - suspended
           - timeout
-          - unknown
+          - waiting-capture
+          - waiting-refund
         readOnly: true
         type: string
       type:
@@ -10809,6 +10512,17 @@ definitions:
       - firstName
       - lastName
     type: object
+  UserPasswordAuthorization:
+    properties:
+      password:
+        format: password
+        type: string
+      username:
+        type: string
+    required:
+      - username
+      - password
+    type: object
   UserPermissions:
     example:
       - methods:
@@ -10904,7 +10618,6 @@ definitions:
                 type: string
               username:
                 description: VantivLitle Gateway username
-                format: password
                 type: string
             required:
               - username
@@ -10936,6 +10649,34 @@ definitions:
           - gatewayConfig
         type: object
     description: Walpay Gateway config
+  WebhookAuthorization:
+    discriminator: type
+    properties:
+      type:
+        default: none
+        description: The authorization type
+        enum:
+          - none
+          - basic
+          - digest
+          - oauth1
+        type: string
+    type: object
+  WebhookCredential:
+    description: Webhook credential
+    properties:
+      auth:
+        $ref: '#/definitions/WebhookAuthorization'
+      hash:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        readOnly: true
+      host:
+        description: The host name
+        type: string
+    required:
+      - host
+    type: object
   Website:
     properties:
       _links:
@@ -11136,6 +10877,19 @@ definitions:
     allOf:
       - $ref: '#/definitions/ScheduleMethod'
     description: Rebilly will choose the best time to schedule the attempt
+  basic:
+    allOf:
+      - $ref: '#/definitions/WebhookAuthorization'
+      - properties:
+          password:
+            format: password
+            type: string
+          username:
+            type: string
+        required:
+          - username
+          - password
+        type: object
   between:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -11172,6 +10926,10 @@ definitions:
       - path
       - value
     type: object
+  cram-md5:
+    allOf:
+      - $ref: '#/definitions/SmtpAuthorization'
+      - $ref: '#/definitions/UserPasswordAuthorization'
   date-interval:
     allOf:
       - $ref: '#/definitions/ScheduleMethod'
@@ -11219,6 +10977,19 @@ definitions:
             type: string
         required:
           - day
+        type: object
+  digest:
+    allOf:
+      - $ref: '#/definitions/WebhookAuthorization'
+      - properties:
+          password:
+            format: password
+            type: string
+          username:
+            type: string
+        required:
+          - username
+          - password
         type: object
   discount:
     allOf:
@@ -11319,6 +11090,10 @@ definitions:
     required:
       - condition
     type: object
+  login:
+    allOf:
+      - $ref: '#/definitions/SmtpAuthorization'
+      - $ref: '#/definitions/UserPasswordAuthorization'
   lt:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -11333,6 +11108,7 @@ definitions:
     type: object
   none:
     allOf:
+      - $ref: '#/definitions/SmtpAuthorization'
       - $ref: '#/definitions/AmountAdjustment'
   not:
     allOf:
@@ -11340,6 +11116,24 @@ definitions:
       - $ref: '#/definitions/logical-not'
     description: Logical NOT
     type: object
+  oauth1:
+    allOf:
+      - $ref: '#/definitions/WebhookAuthorization'
+      - properties:
+          consumerKey:
+            type: string
+          consumerSecret:
+            type: string
+          token:
+            type: string
+          tokenSecret:
+            type: string
+        required:
+          - consumerKey
+          - consumerSecret
+          - token
+          - tokenSecret
+        type: object
   or:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -11396,6 +11190,10 @@ definitions:
           - payPalAccountId
         type: object
     description: PayPal payment instrument object
+  plain:
+    allOf:
+      - $ref: '#/definitions/SmtpAuthorization'
+      - $ref: '#/definitions/UserPasswordAuthorization'
   vegaaH:
     allOf:
       - $ref: '#/definitions/GatewayAccount'

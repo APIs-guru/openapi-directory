@@ -59,14 +59,55 @@ info:
     compatible SimplyRETS media types.
 
     ### Pagination
+
+    To paginate through listings, start your query with these
+    parameters: 'limit=500&lastId=0'. The 'lastId' is the important
+    part, you can use any limit up to 500. When you receive the
+    response from the API with the results, check the 'Link' header for
+    the 'next' link. That link is pre-built to access the next 'page'
+    of listings. Alternatively, you can use the last listing's 'mlsId'
+    from the previous request and use that in the next query. For
+    example:
+
+    First query:
+
+    curl -u username:password 'https://api.simplyrets.com/properties?limit=500&lastId=0'
+
+    If the 'mlsId' in the last listing of the results is '1234567', then the next query will be:
+
+    curl -u username:password 'https://api.simplyrets.com/properties?limit=500&lastId=1234567'
+
+    ...and so one until you have reached the final page of listings.
+
     There a few pieces of useful information about each request stored
     in the HTTP Headers:
 
     - `X-Total-Count` shows you the total amount of listings that match
       your current query.
     - `Link` contains pre-built pagination links for accessing the next
-    'page' of listings that match your query. Read more about that
-    [here](https://simplyrets.com/blog/api-pagination.html).
+    'page' of listings that match your query.
+
+    ### RETS Vendor Compliance
+
+    Many RETS vendors have strict requirements for showing disclaimers
+    with specific information embedded. For example, in many areas it's
+    required to show the time of the last listing refresh inside the
+    disclaimer.
+
+    The timestamp of the last listing refresh timestamp can be found in
+    one of two spots:
+
+    - The `X-SimplyRETS-LastUpdate` header from `GET /properties` or `GET /properties/{mlsId}`
+
+    - Calling the API root `/` or properties api endpoint `/properties`
+      with an OPTIONS request
+
+      - `OPTIONS /`
+
+        Using this route, you can see the timestamp for all RETS
+        vendors associated with your account.
+
+      - `OPTIONS /properties`
   title: SimplyRETS
   version: 1.0.0
   x-origin:
@@ -152,16 +193,24 @@ paths:
           name: startdate
           type: string
         - description: |
-            Used as a cursor for pagination. Increase the offset parameter
-            by the limit to go to the next "page" of listings. Also take
-            a look at the Link HTTP Header for pre-built pagination.
+            Increase the offset parameter by the limit to go to the
+            next "page" of listings. Also take a look at the Link HTTP
+            Header for pre-built pagination.
+
+            *NOTE:* Use the `lastId` parameter for pagination.
           in: query
           name: offset
           required: false
           type: integer
         - description: |
+            Used as a cursor for pagination.
+          in: query
+          name: lastId
+          required: false
+          type: integer
+        - description: |
             Set the number of listings to return in the response.
-            This defaults to 20 listings, and can be a maximum of 50.
+            This defaults to 20 listings, and can be a maximum of 500.
             To paginate through to the next page of listings, take a
             look at the `offset` parameter, or the Link in the HTTP
             Header.
@@ -487,7 +536,7 @@ paths:
           type: integer
         - description: |
             Set the number of listings to return in the response.
-            This defaults to 20 listings, and can be a maximum of 50.
+            This defaults to 20 listings, and can be a maximum of 500.
             To paginate through to the next page of listings, take a
             look at the `offset` parameter, or the Link in the HTTP
             Header.
@@ -496,15 +545,22 @@ paths:
           required: false
           type: integer
         - description: |
-            Used as a cursor for pagination. Increase the offset
-            parameter by the limit to go to the next "page" of
-            listings. Also take a look at the Link HTTP Header for
-            pre-built pagination.
+            Increase the offset parameter by the limit to go to the
+            next "page" of listings. Also take a look at the Link HTTP
+            Header for pre-built pagination.
+
+            *NOTE:* Use the `lastId` field to paginate response
 
             *NOTE:* If you're offset is too high, you will receive an
             `HTTP 400 offset too high` error message.
           in: query
           name: offset
+          required: false
+          type: integer
+        - description: |
+            Used as a cursor for pagination.
+          in: query
+          name: lastId
           required: false
           type: integer
         - description: |
@@ -815,6 +871,19 @@ definitions:
         description: Agent last name
         type: string
     type: object
+  Association:
+    description: Home Owners Association
+    properties:
+      amenities:
+        description: Any extra amenities granted by the HOA
+        type: string
+      fee:
+        description: Association fee
+        type: integer
+      name:
+        description: Name of the association
+        type: string
+    type: object
   Broker:
     description: SimplyRETS Broker Api
     properties:
@@ -888,6 +957,8 @@ definitions:
       agent:
         $ref: '#/definitions/Agent'
         description: Comprehensive listing agent information
+      association:
+        $ref: '#/definitions/Association'
       coAgent:
         $ref: '#/definitions/Agent'
         description: |

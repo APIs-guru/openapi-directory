@@ -176,7 +176,7 @@ paths:
           name: start_month
           required: true
           type: string
-        - description: Period end month in yyyy-MM-dd format.
+        - description: Period end month in yyyy-MM format.
           in: query
           name: end_month
           required: true
@@ -197,7 +197,7 @@ paths:
           description: 'Validation failed, see JSON body response for details.'
         '401':
           description: Incorrect token
-      summary: Calculate domestic summary.
+      summary: Calculate domestic summary
       tags:
         - reporting
   /api/v1/reports/eu/vies:
@@ -206,9 +206,14 @@ paths:
         - application/json
       operationId: getEuViesReport
       parameters:
-        - description: Output format. 'xml' and 'csv' values are accepted as well
+        - description: 'Length of report period. ''month'', ''quarter'' and ''year'' values are accepted. Required only if Large Filer Format is requested.'
           in: query
-          name: format
+          name: period_length
+          required: false
+          type: string
+        - description: Sequence number used to generate report in Large Filer Format. If not specified then '0000000001' will be used.
+          in: query
+          name: lff_sequence_number
           required: false
           type: string
         - description: Which transformation should be applied. Please note that transformation will be applied only for xml and csv formats.
@@ -216,15 +221,15 @@ paths:
           name: transformation
           required: false
           type: string
-        - description: ISO 2-letter country code which will be used for determining which country is domestic.
-          in: query
-          name: eu_country_code
-          required: true
-          type: string
         - description: 'ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.'
           in: query
           name: currency_code
           required: false
+          type: string
+        - description: Period end month in yyyy-MM format.
+          in: query
+          name: end_month
+          required: true
           type: string
         - description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used.'
           in: query
@@ -236,14 +241,19 @@ paths:
           name: start_month
           required: true
           type: string
-        - description: Period end month in yyyy-MM-dd format.
+        - description: ISO 2-letter country code which will be used for determining which country is domestic.
           in: query
-          name: end_month
+          name: eu_country_code
           required: true
           type: string
         - description: Which date should be used for FX.
           in: query
           name: fx_date_type
+          required: false
+          type: string
+        - description: 'Output format. ''xml'', ''csv'' and ''lff'' (only for Ireland) values are accepted as well'
+          in: query
+          name: format
           required: false
           type: string
       produces:
@@ -257,7 +267,7 @@ paths:
           description: 'Validation failed, see JSON body response for details.'
         '401':
           description: Incorrect token
-      summary: Calculate EU VIES report.
+      summary: Calculate EU VIES report
       tags:
         - reporting
   /api/v1/settlement/refunds:
@@ -321,7 +331,7 @@ paths:
           name: start_month
           required: false
           type: string
-        - description: Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.
+        - description: Period end month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
           in: query
           name: end_month
           required: false
@@ -386,7 +396,7 @@ paths:
           name: start_month
           required: false
           type: string
-        - description: Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.
+        - description: Period end month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
           in: query
           name: end_month
           required: false
@@ -806,6 +816,11 @@ paths:
           name: invoice_number
           required: false
           type: string
+        - description: Comma separated list of two letter ISO tax country codes.
+          in: query
+          name: tax_country_codes
+          required: false
+          type: string
         - description: 'Comma separated list of of transaction statuses. ''N'' - unconfirmed transaction, ''C'' - confirmed transaction.'
           in: query
           name: statuses
@@ -1023,7 +1038,7 @@ paths:
           description: 'Validation failed, see JSON body response for details.'
         '401':
           description: Incorrect token
-      summary: Email invoice
+      summary: Email credit note
       tags:
         - invoices
   '/api/v1/transactions/{key}/invoice/send_email':
@@ -1230,7 +1245,7 @@ paths:
           description: 'Validation failed, see JSON body response for details.'
         '401':
           description: Incorrect token
-      summary: Un-confirm the transaction. Un-confirmed transaction can be edited or canceled like a newly created one.
+      summary: Un-confirm the transaction
       tags:
         - transactions
   /api/v1/verification/sms:
@@ -1922,7 +1937,7 @@ definitions:
         description: 'ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.'
         type: string
       end_month:
-        description: Period end month in yyyy-MM-dd format.
+        description: Period end month in yyyy-MM format.
         type: string
       format:
         description: Output format. 'xml' and 'csv' values are accepted. Default format - json
@@ -1986,16 +2001,22 @@ definitions:
         description: 'ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.'
         type: string
       end_month:
-        description: Period end month in yyyy-MM-dd format.
+        description: Period end month in yyyy-MM format.
         type: string
       eu_country_code:
         description: ISO 2-letter country code which will be used for determining which country is domestic.
         type: string
       format:
-        description: Output format. 'xml' and 'csv' values are accepted as well
+        description: 'Output format. ''xml'', ''csv'' and ''lff'' (only for Ireland) values are accepted as well'
         type: string
       fx_date_type:
         description: Which date should be used for FX.
+        type: string
+      lff_sequence_number:
+        description: Sequence number used to generate report in Large Filer Format. If not specified then '0000000001' will be used.
+        type: string
+      period_length:
+        description: 'Length of report period. ''month'', ''quarter'' and ''year'' values are accepted. Required only if Large Filer Format is requested.'
         type: string
       start_month:
         description: Period start month in yyyy-MM format.
@@ -2067,7 +2088,7 @@ definitions:
         description: 'ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region''s currency code.'
         type: string
       end_month:
-        description: Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.
+        description: Period end month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
         type: string
       format:
         description: Output format. 'csv' value is accepted as well
@@ -2149,7 +2170,7 @@ definitions:
   getSettlementSummaryIn:
     properties:
       end_month:
-        description: Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.
+        description: Period end month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
         type: string
       moss_country_code:
         description: 'MOSS country code, used to determine currency. If ommited, merchant default setting is used.'
@@ -2249,6 +2270,9 @@ definitions:
         type: string
       buyer_tax_number:
         description: ' Buyer''s tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.'
+        type: string
+      comments:
+        description: Additional information about the transaction - for example if the evidence has been amended.
         type: string
       currency_code:
         description: Currency code for transaction - e.g. EUR.
@@ -2401,6 +2425,9 @@ definitions:
         type: string
       buyer_tax_number:
         description: ' Buyer''s tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.'
+        type: string
+      comments:
+        description: Additional information about the transaction - for example if the evidence has been amended.
         type: string
       currency_code:
         description: Currency code for transaction - e.g. EUR.
@@ -2568,6 +2595,9 @@ definitions:
         type: string
       tax_country_code:
         description: Two letter ISO tax country code.
+        type: string
+      tax_country_codes:
+        description: Comma separated list of two letter ISO tax country codes.
         type: string
       total_amount_greater_than:
         description: Return only transactions with total amount greater than given number. Transactions with total amount equal to a given number (e.g. 0) are not returned.
@@ -2793,6 +2823,9 @@ definitions:
       buyer_tax_number_valid:
         description: 'If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant''s country), tax number doesn''t get validated in that case.'
         type: boolean
+      comments:
+        description: Additional information about the transaction - for example if the evidence has been amended.
+        type: string
       confirm_timestamp:
         description: Date and time of transaction confirmation.
         type: string
@@ -2899,6 +2932,9 @@ definitions:
         type: boolean
       tax_entity_name:
         description: To which entity is the tax due.
+        type: string
+      tax_number_service:
+        description: Tax number service identifier - if available for a given region and the region is enabled.
         type: string
       tax_supported:
         description: Is tax calculation supported for a detected tax location?
@@ -3026,6 +3062,9 @@ definitions:
       buyer_tax_number_valid:
         description: 'If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant''s country), tax number doesn''t get validated in that case.'
         type: boolean
+      comments:
+        description: Additional information about the transaction - for example if the evidence has been amended.
+        type: string
       confirm_timestamp:
         description: Date and time of transaction confirmation.
         type: string
@@ -3132,6 +3171,9 @@ definitions:
         type: boolean
       tax_entity_name:
         description: To which entity is the tax due.
+        type: string
+      tax_number_service:
+        description: Tax number service identifier - if available for a given region and the region is enabled.
         type: string
       tax_supported:
         description: Is tax calculation supported for a detected tax location?
