@@ -627,6 +627,119 @@ paths:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - deployments
+  '/{project}/global/deployments/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: deploymentmanager.deployments.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - deployments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/deployments/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: deploymentmanager.deployments.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - deployments
+  '/{project}/global/deployments/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: deploymentmanager.deployments.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - deployments
   '/{project}/global/operations':
     get:
       description: Lists all operations for a project.
@@ -783,6 +896,67 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
 definitions:
+  AuditConfig:
+    description: Enables "data access" audit logging for a service and specifies a list of members that are log-exempted.
+    properties:
+      exemptedMembers:
+        description: Specifies the identities that are exempted from "data access" audit logging for the `service` specified above. Follows the same format of Binding.members.
+        items:
+          type: string
+        type: array
+      service:
+        description: 'Specifies a service that will be enabled for "data access" audit logging. For example, `resourcemanager`, `storage`, `compute`. `allServices` is a special value that covers all services.'
+        type: string
+    type: object
+  Binding:
+    description: Associates `members` with a `role`.
+    properties:
+      members:
+        description: |-
+          Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:
+
+          * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account.
+
+          * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
+
+          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`.
+
+          * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`.
+
+          * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`.
+
+          * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.
+        items:
+          type: string
+        type: array
+      role:
+        description: 'Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.'
+        type: string
+    type: object
+  Condition:
+    description: A condition to be met.
+    properties:
+      iam:
+        description: Trusted attributes supplied by the IAM system.
+        type: string
+      op:
+        description: An operator to apply the subject with.
+        type: string
+      svc:
+        description: Trusted attributes discharged by the service.
+        type: string
+      sys:
+        description: Trusted attributes supplied by any service that owns resources and uses the IAM system for access control.
+        type: string
+      value:
+        description: DEPRECATED. Use 'values' instead.
+        type: string
+      values:
+        description: The objects of the condition. This is mutually exclusive with 'value'.
+        items:
+          type: string
+        type: array
+    type: object
   ConfigFile:
     description: ''
     properties:
@@ -902,6 +1076,23 @@ definitions:
         type: string
       name:
         description: The name of the file.
+        type: string
+    type: object
+  LogConfig:
+    description: Specifies what kind of log the caller must write
+    properties:
+      counter:
+        $ref: '#/definitions/LogConfigCounterOptions'
+        description: Counter options.
+    type: object
+  LogConfigCounterOptions:
+    description: Options for counters
+    properties:
+      field:
+        description: The field value to attribute.
+        type: string
+      metric:
+        description: The metric to update.
         type: string
     type: object
   Manifest:
@@ -1076,9 +1267,59 @@ definitions:
           $ref: '#/definitions/Operation'
         type: array
     type: object
+  Policy:
+    description: |-
+      Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.
+
+
+
+      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
+
+      **Example**
+
+      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
+
+      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam).
+    properties:
+      auditConfigs:
+        description: |-
+          Specifies audit logging configs for "data access". "data access": generally refers to data reads/writes and admin reads. "admin activity": generally refers to admin writes.
+
+          Note: `AuditConfig` doesn't apply to "admin activity", which always enables audit logging.
+        items:
+          $ref: '#/definitions/AuditConfig'
+        type: array
+      bindings:
+        description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.
+
+          If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
+        format: byte
+        type: string
+      iamOwned:
+        description: ''
+        type: boolean
+      rules:
+        description: 'If more than one rule is specified, the rules are applied in the following manner: - All matching LOG rules are always applied. - If any DENY/DENY_WITH_LOG rule matches, permission is denied. Logging will be applied if one or more matching rule requires logging. - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is granted. Logging will be applied if one or more matching rule requires logging. - Otherwise, if no rule applies, permission is denied.'
+        items:
+          $ref: '#/definitions/Rule'
+        type: array
+      version:
+        description: Version of the `Policy`. The default version is 0.
+        format: int32
+        type: integer
+    type: object
   Resource:
     description: ''
     properties:
+      accessControl:
+        $ref: '#/definitions/ResourceAccessControl'
+        description: The Access Control Policy set on this resource.
       finalProperties:
         description: '[Output Only] The evaluated properties of the resource with references expanded. Returned as serialized YAML.'
         type: string
@@ -1137,9 +1378,19 @@ definitions:
           type: object
         type: array
     type: object
+  ResourceAccessControl:
+    description: The access controls set on the resource.
+    properties:
+      gcpIamPolicy:
+        description: The GCP IAM Policy to set on the resource.
+        type: string
+    type: object
   ResourceUpdate:
     description: ''
     properties:
+      accessControl:
+        $ref: '#/definitions/ResourceAccessControl'
+        description: The Access Control Policy to set on this resource after updating the resource itself.
       error:
         description: '[Output Only] If errors are generated during update of the resource, this field will be populated.'
         properties:
@@ -1213,6 +1464,41 @@ definitions:
           $ref: '#/definitions/Resource'
         type: array
     type: object
+  Rule:
+    description: A rule to be applied in a Policy.
+    properties:
+      action:
+        description: Required
+        type: string
+      conditions:
+        description: Additional restrictions that must be met
+        items:
+          $ref: '#/definitions/Condition'
+        type: array
+      description:
+        description: Human-readable description of the rule.
+        type: string
+      ins:
+        description: 'If one or more ''in'' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.'
+        items:
+          type: string
+        type: array
+      logConfigs:
+        description: The config returned to callers of tech.iam.IAM.CheckPolicy for any entries that match the LOG action.
+        items:
+          $ref: '#/definitions/LogConfig'
+        type: array
+      notIns:
+        description: 'If one or more ''not_in'' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.'
+        items:
+          type: string
+        type: array
+      permissions:
+        description: 'A permission is a string of form ''..'' (e.g., ''storage.buckets.list''). A value of ''*'' matches all permissions, and a verb part of ''*'' (e.g., ''storage.buckets.*'') matches all verbs.'
+        items:
+          type: string
+        type: array
+    type: object
   TargetConfiguration:
     description: ''
     properties:
@@ -1223,6 +1509,22 @@ definitions:
         description: 'Specifies any files to import for this configuration. This can be used to import templates or other files. For example, you might import a text file in order to use the file in a template.'
         items:
           $ref: '#/definitions/ImportFile'
+        type: array
+    type: object
+  TestPermissionsRequest:
+    properties:
+      permissions:
+        description: The set of permissions to check for the 'resource'. Permissions with wildcards (such as '*' or 'storage.*') are not allowed.
+        items:
+          type: string
+        type: array
+    type: object
+  TestPermissionsResponse:
+    properties:
+      permissions:
+        description: A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
+        items:
+          type: string
         type: array
     type: object
   Type:

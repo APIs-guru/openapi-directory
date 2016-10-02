@@ -1,0 +1,458 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: InsightsManagementClient
+  version: '2015-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-insights/2015-04-01/swagger/insightsManagementClient.json'
+    version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: arm-insights
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  AutoscaleSettingNameParameter:
+    description: The autoscale setting name.
+    in: path
+    name: autoscaleSettingName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  FilterParameter:
+    description: 'The filter to apply on the operation. For more information please see https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx'
+    in: query
+    name: $filter
+    required: false
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupNameParameter:
+    description: The name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The Azure subscription Id.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings':
+    get:
+      description: Lists the autoscale settings for a resource group
+      operationId: AutoscaleSettings_ListByResourceGroup
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/FilterParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful request for a list of autoscale settings
+          schema:
+            $ref: '#/definitions/AutoscaleSettingResourceCollection'
+      tags:
+        - AutoscaleSettings
+      x-ms-odata: '#/definitions/AutoscaleSettingResource'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings/{autoscaleSettingName}':
+    delete:
+      description: Deletes and autoscale setting
+      operationId: AutoscaleSettings_Delete
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AutoscaleSettingNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful request to delete an autoscale setting
+        '204':
+          description: 'No content: Successful request to delete an autoscale setting, but the response is intentionally empty'
+      tags:
+        - AutoscaleSettings
+    get:
+      description: Gets an autoscale setting
+      operationId: AutoscaleSettings_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AutoscaleSettingNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful request to get one autoscale setting
+          schema:
+            $ref: '#/definitions/AutoscaleSettingResource'
+      tags:
+        - AutoscaleSettings
+    put:
+      description: Creates or updates an autoscale setting.
+      operationId: AutoscaleSettings_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AutoscaleSettingNameParameter'
+        - description: Parameters supplied to the operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/AutoscaleSettingResource'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful request to create or update an autoscale setting
+          schema:
+            $ref: '#/definitions/AutoscaleSettingResource'
+        '201':
+          description: Created autoscale setting
+          schema:
+            $ref: '#/definitions/AutoscaleSettingResource'
+      tags:
+        - AutoscaleSettings
+definitions:
+  AutoscaleNotification:
+    description: Autoscale notification.
+    properties:
+      email:
+        $ref: '#/definitions/EmailNotification'
+        description: the email notification.
+      operation:
+        description: the operation associated with the notification and it's value must be "scale"
+        enum:
+          - Scale
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: OperationType
+      webhooks:
+        description: the collection of webhook notifications.
+        items:
+          $ref: '#/definitions/WebhookNotification'
+        type: array
+    required:
+      - operation
+  AutoscaleProfile:
+    description: Autoscale profile.
+    properties:
+      capacity:
+        $ref: '#/definitions/ScaleCapacity'
+        description: the number of instances that can be used during this profile.
+      fixedDate:
+        $ref: '#/definitions/TimeWindow'
+        description: the specific date-time for the profile. This element is not used if the Recurrence element is used.
+      name:
+        description: the name of the profile.
+        type: string
+      recurrence:
+        $ref: '#/definitions/Recurrence'
+        description: the repeating times at which this profile begins. This element is not used if the FixedDate element is used.
+      rules:
+        description: the collection of rules that provide the triggers and parameters for the scaling action. A maximum of 10 rules can be specified.
+        items:
+          $ref: '#/definitions/ScaleRule'
+        type: array
+    required:
+      - rules
+      - name
+      - capacity
+  AutoscaleSetting:
+    description: A setting that contains all of the configuration for the automatic scaling of a resource.
+    properties:
+      enabled:
+        default: true
+        description: the enabled flag. Specifies whether automatic scaling is enabled for the resource.
+        type: boolean
+      name:
+        description: the name of the autoscale setting.
+        type: string
+      notifications:
+        description: the collection of notifications.
+        items:
+          $ref: '#/definitions/AutoscaleNotification'
+        type: array
+      profiles:
+        description: the collection of automatic scaling profiles that specify different scaling parameters for different time periods. A maximum of 20 profiles can be specified.
+        items:
+          $ref: '#/definitions/AutoscaleProfile'
+        maxItems: 20
+        type: array
+      targetResourceUri:
+        description: the resource identifier of the resource that the autoscale setting should be added to.
+        type: string
+    required:
+      - profiles
+      - name
+  AutoscaleSettingResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The autoscale setting resource.
+    properties:
+      properties:
+        $ref: '#/definitions/AutoscaleSetting'
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  AutoscaleSettingResourceCollection:
+    description: Represents a collection of autoscale setting resources.
+    properties:
+      nextLink:
+        description: URL to get the next set of results.
+        type: string
+      value:
+        description: the values for the autoscale setting resources.
+        items:
+          $ref: '#/definitions/AutoscaleSettingResource'
+        type: array
+    required:
+      - value
+  EmailNotification:
+    description: Email notification.
+    properties:
+      customEmails:
+        description: the custom email list.
+        items:
+          type: string
+        type: array
+      sendToSubscriptionAdministrator:
+        description: a value indicating whether to send email to subscription administrator.
+        type: boolean
+      sendToSubscriptionCoAdministrators:
+        description: a value indicating whether to send email to subscription co-administrators.
+        type: boolean
+  MetricTrigger:
+    description: The trigger that results in a scaling action.
+    properties:
+      metricName:
+        description: the name of the metric that defines what the rule monitors.
+        type: string
+      metricResourceUri:
+        description: the resource identifier of the resource the rule monitors.
+        type: string
+      operator:
+        description: the operator that is used to compare the metric data and the threshold.
+        enum:
+          - Equals
+          - NotEquals
+          - GreaterThan
+          - GreaterThanOrEqual
+          - LessThan
+          - LessThanOrEqual
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ComparisonOperationType
+      statistic:
+        description: the metric statistic type. How the metrics from multiple instances are combined.
+        enum:
+          - Average
+          - Min
+          - Max
+          - Sum
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: MetricStatisticType
+      threshold:
+        description: the threshold of the metric that triggers the scale action.
+        format: double
+        type: number
+      timeAggregation:
+        description: time aggregation type. How the data that is collected should be combined over time. The default value is Average.
+        enum:
+          - Average
+          - Minimum
+          - Maximum
+          - Total
+          - Count
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TimeAggregationType
+      timeGrain:
+        description: the granularity of metrics the rule monitors. Must be one of the predefined values returned from metric definitions for the metric. Must be between 12 hours and 1 minute.
+        format: duration
+        type: string
+      timeWindow:
+        description: 'the range of time in which instance data is collected. This value must be greater than the delay in metric collection, which can vary from resource-to-resource. Must be between 12 hours and 5 minutes.'
+        format: duration
+        type: string
+  Recurrence:
+    description: The repeating times at which this profile begins. This element is not used if the FixedDate element is used.
+    properties:
+      frequency:
+        description: 'the recurrence frequency. How often the schedule profile should take effect. This value must be Week, meaning each week will have the same set of profiles.'
+        enum:
+          - None
+          - Second
+          - Minute
+          - Hour
+          - Day
+          - Week
+          - Month
+          - Year
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RecurrenceFrequency
+      schedule:
+        $ref: '#/definitions/RecurrentSchedule'
+        description: the scheduling constraints for when the profile begins.
+  RecurrentSchedule:
+    description: The scheduling constraints for when the profile begins.
+    properties:
+      days:
+        description: the collection of days that the profile takes effect on. Possible values are Sunday through Saturday.
+        items:
+          type: string
+        type: array
+      hours:
+        description: A collection of hours that the profile takes effect on. Values supported are 0 to 23 on the 24-hour clock (AM/PM times are not supported).
+        items:
+          format: int32
+          type: integer
+        type: array
+      minutes:
+        description: A collection of minutes at which the profile takes effect at.
+        items:
+          format: int32
+          type: integer
+        type: array
+      timeZone:
+        description: 'the time zone for the hours of the profile. See examples of valid timezone ids over here: https://msdn.microsoft.com/en-us/library/azure/dn931928.aspx'
+        type: string
+  Resource:
+    description: An azure resource object
+    properties:
+      id:
+        description: Azure resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Azure resource name
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+      type:
+        description: Azure resource type
+        readOnly: true
+        type: string
+    required:
+      - location
+    x-ms-azure-resource: true
+  ScaleAction:
+    description: The parameters for the scaling action.
+    properties:
+      cooldown:
+        description: the amount of time to wait since the last scaling action before this action occurs. It must be between 1 week and 1 minute.
+        format: duration
+        type: string
+      direction:
+        description: the scale direction. Whether the scaling action increases or decreases the number of instances.
+        enum:
+          - None
+          - Increase
+          - Decrease
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ScaleDirection
+      type:
+        description: 'the type of action that should occur, this must be set to ChangeCount.'
+        enum:
+          - ChangeCount
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ScaleType
+      value:
+        default: '1'
+        description: the number of instances that are involved in the scaling action. This value must be 1 or greater. The default value is 1.
+        type: string
+    required:
+      - direction
+      - type
+      - cooldown
+  ScaleCapacity:
+    description: The number of instances that can be used during this profile.
+    properties:
+      default:
+        description: the number of instances that will be set if metrics are not available for evaluation. The default is only used if the current instance count is lower than the default.
+        type: string
+      maximum:
+        description: the maximum number of instances for the resource. The actual maximum number may be limited by the cores that are available.
+        type: string
+      minimum:
+        description: the minimum number of instances for the resource.
+        type: string
+    required:
+      - minimum
+      - maximum
+      - default
+  ScaleRule:
+    description: A rule that provide the triggers and parameters for the scaling action.
+    properties:
+      metricTrigger:
+        $ref: '#/definitions/MetricTrigger'
+        description: the trigger that results in a scaling action.
+      scaleAction:
+        $ref: '#/definitions/ScaleAction'
+        description: the parameters for the scaling action.
+    required:
+      - scaleAction
+  TimeWindow:
+    description: A specific date-time for the profile. This element is not used if the Recurrence element is used.
+    properties:
+      end:
+        description: the end time for the profile in ISO 8601 format.
+        format: date-time
+        type: string
+      start:
+        description: the start time for the profile in ISO 8601 format.
+        format: date-time
+        type: string
+      timeZone:
+        description: 'the time zone of the start and end times for the profile. See examples of valid timezone ids over here: https://msdn.microsoft.com/en-us/library/azure/dn931928.aspx'
+        type: string
+    required:
+      - start
+      - end
+  WebhookNotification:
+    description: Webhook notification.
+    properties:
+      properties:
+        additionalProperties:
+          type: string
+        description: a property bag of settings.
+        type: object
+      serviceUri:
+        description: the service address to receive the notification.
+        type: string

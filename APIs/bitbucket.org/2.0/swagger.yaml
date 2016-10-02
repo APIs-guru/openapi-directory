@@ -425,7 +425,16 @@ paths:
         type: string
   /hook_events:
     get:
-      description: ''
+      description: |-
+        Returns the webhook resource or subject types on which webhooks can
+        be registered.
+
+        Each resource/subject type contains an `event` link that returns the
+        paginated list of specific events each individual subject type can
+        emit.
+
+        This endpoint is publicly accessible and does not require
+        authentication or scopes.
       parameters: []
       responses:
         '200':
@@ -441,7 +450,11 @@ paths:
     parameters: []
   '/hook_events/{subject_type}':
     get:
-      description: ''
+      description: |-
+        Returns a paginated list of all valid webhook events for the
+        specified entity.
+
+        This is public data that does not require any scopes or authentication.
       parameters:
         - description: A resource or subject type.
           enum:
@@ -474,7 +487,7 @@ paths:
         type: string
   /repositories:
     get:
-      description: ''
+      description: Returns all public repositories.
       parameters: []
       responses:
         '200':
@@ -491,7 +504,14 @@ paths:
     parameters: []
   '/repositories/{username}':
     get:
-      description: ''
+      description: |-
+        Returns all repositories owned by the specified account.
+
+        The result can be narrowed down based on the authenticated user's role.
+
+        E.g. with `?role=contributor`, only those repositories that the
+        authenticated user has write access to are returned (this includes any
+        repo the user is an admin on, as that implies write access).
       parameters:
         - description: |
 
@@ -533,7 +553,10 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}':
     delete:
-      description: ''
+      description: |-
+        Deletes the repository. This is an irreversible operation.
+
+        This does not affect its forks.
       parameters: []
       responses:
         '204':
@@ -554,7 +577,7 @@ paths:
       tags:
         - repositories
     get:
-      description: ''
+      description: Returns the object describing this repository.
       parameters: []
       responses:
         '200':
@@ -586,7 +609,36 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Creates a new repository.
+
+        Note: In order to set the project for the newly created repository,
+        pass in either the project key or the project UUID as part of the
+        request body as shown in the examples below:
+
+        ```
+        $ curl -X POST -H "Content-Type: application/json" -d '{
+            "scm": "git",
+            "project": {
+                "key": "MARS"
+            }
+        }' https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding
+        ```
+
+        or
+
+        ```
+        $ curl -X POST -H "Content-Type: application/json" -d '{
+            "scm": "git",
+            "project": {
+                "key": "{ba516952-992a-4c2d-acbd-17d502922f96}"
+            }
+        }' https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding
+        ```
+
+        The project must only be assigned for repositories belonging to a team.
+        If the repository owner is a team and the project is not provided, the
+        repository is automatically assigned to the oldest project in the team.
       parameters:
         - description: The repository that is to be created. Note that most object elements are optional. Elements "owner" and "full_name" are ignored as the URL implies them.
           in: body
@@ -615,7 +667,24 @@ paths:
       tags:
         - repositories
     put:
-      description: ''
+      description: |-
+        Since this endpoint can be used to both update and to create a
+        repository, the request body depends on the intent.
+
+        ### Creation
+
+        See the POST documentation for the repository endpoint for an example
+        of the request body.
+
+        ### Update
+
+        Note: Changing the `name` of the repository will cause the location to
+        be changed. This is because the URL of the repo is derived from the
+        name (a process called slugification). In such a scenario, it is
+        possible for the request to fail if the newly created slug conflicts
+        with an existing repository's slug. But if there is no conflict,
+        the new location will be returned in the `Location` header of the
+        response.
       parameters:
         - description: |
             The repository that is to be updated.
@@ -663,7 +732,9 @@ paths:
         - repositories
   '/repositories/{username}/{repo_slug}/branch-restrictions':
     get:
-      description: ''
+      description: |-
+        Returns a paginated list of all branch restrictions on the
+        repository.
       parameters: []
       responses:
         '200':
@@ -699,7 +770,33 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Creates a new branch restriction rule for a repository.
+
+        `kind` describes what will be restricted. Allowed values are: `push`,
+        `force`, `delete`, and `restrict_merges`.
+
+        Different kinds of branch restrictions have different requirements:
+
+        * `push` and `restrict_merges` require `users` and `groups` to be
+          specified. Empty lists are allowed, in which case permission is
+          denied for everybody.
+        * `force` can not be specified in a Mercurial repository.
+
+        `pattern` is used to determine which branches will be restricted.
+
+        A `'*'` in `pattern` will expand to match zero or more characters, and
+        every other character matches itself. For example, `'foo*'` will match
+        `'foo'` and `'foobar'`, but not `'barfoo'`. `'*'` will match all
+        branches.
+
+        `users` and `groups` are lists of user names and group names.
+
+        `kind` and `pattern` must be unique within a repository; adding new
+        users or groups to an existing restriction should be done via `PUT`.
+
+        Note that branch restrictions with overlapping patterns are allowed,
+        but the resulting behavior may be surprising.
       parameters:
         - description: The new rule
           in: body
@@ -733,7 +830,7 @@ paths:
         - branchrestrictions
   '/repositories/{username}/{repo_slug}/branch-restrictions/{id}':
     delete:
-      description: ''
+      description: Deletes an existing branch restriction rule.
       parameters:
         - description: The restriction rule's id
           in: path
@@ -763,7 +860,7 @@ paths:
       tags:
         - branchrestrictions
     get:
-      description: ''
+      description: Returns a specific branch restriction rule.
       parameters:
         - description: The restriction rule's id
           in: path
@@ -808,7 +905,12 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Updates an existing branch restriction rule.
+
+        Fields not present in the request body are ignored.
+
+        See [`POST`](../../branch-restrictions#post) for details.
       parameters:
         - description: The restriction rule's id
           in: path
@@ -847,7 +949,13 @@ paths:
         - branchrestrictions
   '/repositories/{username}/{repo_slug}/commit/{node}/approve':
     delete:
-      description: ''
+      description: |-
+        Redact the authenticated user's approval of the specified commit.
+
+        This operation is only available to users that have explicit access to
+        the repository. In contrast, just the fact that a repository is
+        publicly accessible to users does not give them the ability to approve
+        commits.
       parameters:
         - description: The commit's SHA1.
           in: path
@@ -882,7 +990,13 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Approve the specified commit as the authenticated user.
+
+        This operation is only available to users that have explicit access to
+        the repository. In contrast, just the fact that a repository is
+        publicly accessible to users does not give them the ability to approve
+        commits.
       parameters:
         - description: The commit's SHA1.
           in: path
@@ -907,7 +1021,7 @@ paths:
         - commits
   '/repositories/{username}/{repo_slug}/commit/{node}/statuses':
     get:
-      description: ''
+      description: Returns all statuses (e.g. build results) for a specific commit.
       parameters:
         - description: The commit's SHA1
           in: path
@@ -961,7 +1075,20 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Creates a new build status against the specified commit.
+
+        If the specified key already exists, the existing status object will
+        be overwritten.
+
+        When creating a new commit status, you can use a URI template for the URL.
+        Templates are URLs that contain variable names that Bitbucket will
+        evaluate at runtime whenever the URL is displayed anywhere similar to
+        parameter substitution in
+        [Bitbucket Connect](https://developer.atlassian.com/bitbucket/concepts/context-parameters.html).
+        For example, one could use `https://foo.com/builds/{repository.full_name}`
+        which Bitbucket will turn into `https://foo.com/builds/foo/bar` at render time.
+        The context variables available are `repository` and `commit`.
       parameters:
         - description: The commit's SHA1
           in: path
@@ -995,7 +1122,7 @@ paths:
         - commitstatuses
   '/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}':
     get:
-      description: ''
+      description: Returns the specified build status for a commit.
       parameters:
         - description: The commit's SHA1
           in: path
@@ -1044,7 +1171,19 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Used to update the current status of a build status object on the
+        specific commit.
+
+        This operation can also be used to change other properties of the
+        build status:
+
+        * `state`
+        * `name`
+        * `description`
+        * `url`
+
+        The `key` cannot be changed.
       parameters:
         - description: The commit's SHA1
           in: path
@@ -1083,7 +1222,7 @@ paths:
         - commitstatuses
   '/repositories/{username}/{repo_slug}/commit/{revision}':
     get:
-      description: ''
+      description: Returns the specified commit.
       parameters:
         - description: The commit's SHA1.
           in: path
@@ -1121,7 +1260,13 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/commit/{sha}/comments':
     get:
-      description: ''
+      description: |-
+        Returns the commit's comments.
+
+        This includes both global and inline comments.
+
+        The default sorting is oldest to newest and can be overridden with
+        the `sort` query parameter.
       parameters: []
       responses:
         default:
@@ -1150,7 +1295,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/commit/{sha}/comments/{comment_id}':
     get:
-      description: ''
+      description: Returns the specified commit comment.
       parameters: []
       responses:
         default:
@@ -1183,7 +1328,44 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/commits':
     get:
-      description: ''
+      description: |-
+        These are the repository's commits. They are paginated and returned
+        in reverse chronological order, similar to the output of `git log` and
+        `hg log`. Like these tools, the DAG can be filtered.
+
+        ## GET /repositories/{username}/{repo_slug}/commits/
+
+        Returns all commits in the repo in topological order (newest commit
+        first). All branches and tags are included (similar to
+        `git log --all` and `hg log`).
+
+        ## GET /repositories/{username}/{repo_slug}/commits/master
+
+        Returns all commits on rev `master` (similar to `git log master`,
+        `hg log master`).
+
+        ## GET /repositories/{username}/{repo_slug}/commits/dev?exclude=master
+
+        Returns all commits on ref `dev`, except those that are reachable on
+        `master` (similar to `git log dev ^master`).
+
+        ## GET /repositories/{username}/{repo_slug}/commits/?exclude=master
+
+        Returns all commits in the repo that are not on master
+        (similar to `git log --all ^master`).
+
+        ## GET /repositories/{username}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar
+
+        Returns all commits that are on refs `foo` or `bar`, but not on `fu` or
+        `fubar` (similar to `git log foo bar ^fu ^fubar`).
+
+        Because the response could include a very large number of commits, it
+        is paginated. Follow the 'next' link in the response to navigate to the
+        next page of commits. As with other paginated resources, do not
+        construct your own links.
+
+        When the include and exclude parameters are more than ca fit in a
+        query string, clients can use a `x-www-form-urlencoded` POST instead.
       parameters: []
       responses:
         default:
@@ -1207,7 +1389,12 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Identical to `GET /repositories/{username}/{repo_slug}/commits`,
+        except that POST allows clients to place the include and exclude
+        parameters in the request body to avoid URL length issues.
+
+        **Note that this resource does NOT support new commit creation.**
       parameters: []
       responses:
         default:
@@ -1223,7 +1410,44 @@ paths:
         - commits
   '/repositories/{username}/{repo_slug}/commits/{revision}':
     get:
-      description: ''
+      description: |-
+        These are the repository's commits. They are paginated and returned
+        in reverse chronological order, similar to the output of `git log` and
+        `hg log`. Like these tools, the DAG can be filtered.
+
+        ## GET /repositories/{username}/{repo_slug}/commits/
+
+        Returns all commits in the repo in topological order (newest commit
+        first). All branches and tags are included (similar to
+        `git log --all` and `hg log`).
+
+        ## GET /repositories/{username}/{repo_slug}/commits/master
+
+        Returns all commits on rev `master` (similar to `git log master`,
+        `hg log master`).
+
+        ## GET /repositories/{username}/{repo_slug}/commits/dev?exclude=master
+
+        Returns all commits on ref `dev`, except those that are reachable on
+        `master` (similar to `git log dev ^master`).
+
+        ## GET /repositories/{username}/{repo_slug}/commits/?exclude=master
+
+        Returns all commits in the repo that are not on master
+        (similar to `git log --all ^master`).
+
+        ## GET /repositories/{username}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar
+
+        Returns all commits that are on refs `foo` or `bar`, but not on `fu` or
+        `fubar` (similar to `git log foo bar ^fu ^fubar`).
+
+        Because the response could include a very large number of commits, it
+        is paginated. Follow the 'next' link in the response to navigate to the
+        next page of commits. As with other paginated resources, do not
+        construct your own links.
+
+        When the include and exclude parameters are more than ca fit in a
+        query string, clients can use a `x-www-form-urlencoded` POST instead.
       parameters: []
       responses:
         default:
@@ -1251,7 +1475,12 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Identical to `GET /repositories/{username}/{repo_slug}/commits`,
+        except that POST allows clients to place the include and exclude
+        parameters in the request body to avoid URL length issues.
+
+        **Note that this resource does NOT support new commit creation.**
       parameters: []
       responses:
         default:
@@ -1267,7 +1496,11 @@ paths:
         - commits
   '/repositories/{username}/{repo_slug}/components':
     get:
-      description: ''
+      description: |-
+        Returns the components that have been defined in the issue tracker.
+
+        This resource is only available on repositories that have the issue
+        tracker enabled.
       parameters: []
       responses:
         '200':
@@ -1296,7 +1529,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/components/{component_id}':
     get:
-      description: ''
+      description: Returns the specified issue tracker component object.
       parameters:
         - description: The component's id
           in: path
@@ -1334,7 +1567,11 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/default-reviewers':
     get:
-      description: ''
+      description: |-
+        Returns the repository's default reviewers.
+
+        These are the users that are automatically added as reviewers on every
+        new pull request that is created.
       parameters: []
       responses:
         '200':
@@ -1357,7 +1594,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/default-reviewers/{target_username}':
     delete:
-      description: ''
+      description: Removes a default reviewer from the repository.
       parameters: []
       responses:
         default:
@@ -1372,7 +1609,12 @@ paths:
       tags:
         - pullrequests
     get:
-      description: ''
+      description: |-
+        Returns the specified reviewer.
+
+        This can be used to test whether a user is among the repository's
+        default reviewers list. A 404 indicates that that specified user is not
+        a default reviewer.
       parameters: []
       responses:
         default:
@@ -1400,7 +1642,11 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Adds the specified user to the repository's list of default
+        reviewers.
+
+        This method is idempotent. Adding a user a second time has no effect.
       parameters: []
       responses:
         default:
@@ -1416,7 +1662,31 @@ paths:
         - pullrequests
   '/repositories/{username}/{repo_slug}/diff/{spec}':
     get:
-      description: ''
+      description: |-
+        Produces a raw, git-style diff for either a single commit (diffed
+        against its first parent), or a revspec of 2 commits (e.g.
+        `3a8b42..9ff173` where the first commit represents the source and the
+        second commit the destination).
+
+        In case of the latter (diffing a revspec), a 3-way diff, or merge diff,
+        is computed. This shows the changes introduced by the left branch
+        (`3a8b42` in our example) as compared againt the right branch
+        (`9ff173`).
+
+        This is equivalent to merging the left branch into the right branch and
+        then computing the diff of the merge commit against its first parent
+        (the right branch). This follows the same behavior as pull requests
+        that also show this style of 3-way, or merge diff.
+
+        While similar to patches, diffs:
+
+        * Don't have a commit header (username, commit message, etc)
+        * Support the optional `path=foo/bar.py` query param to filter
+          the diff to just that one file diff
+
+        The raw diff is returned as-is, in whatever encoding the files in the
+        repository use. It is not decoded into unicode. As such, the
+        content-type is `text/plain`.
       parameters:
         - description: Generate diffs with <n> lines of context instead of the usual three
           in: query
@@ -1463,7 +1733,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/downloads':
     get:
-      description: ''
+      description: Returns a list of download links associated with the repository.
       parameters: []
       responses:
         default:
@@ -1487,7 +1757,17 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Upload new download artifacts.
+
+        To upload files, perform a `multipart/form-data` POST containing one
+        or more `files` fields:
+
+            $ echo Hello World > hello.txt
+            $ curl -s -u evzijst -X POST https://api.bitbucket.org/2.0/repositories/evzijst/git-tests/downloads -F files=@hello.txt
+
+        When a file is uploaded with the same name as an existing artifact,
+        then the existing file will be replaced.
       parameters: []
       responses:
         default:
@@ -1503,7 +1783,7 @@ paths:
         - downloads
   '/repositories/{username}/{repo_slug}/downloads/{filename}':
     delete:
-      description: ''
+      description: Deletes the specified download artifact from the repository.
       parameters: []
       responses:
         default:
@@ -1518,7 +1798,14 @@ paths:
       tags:
         - downloads
     get:
-      description: ''
+      description: |-
+        Return a redirect to the contents of a download artifact.
+
+        This endpoint returns the actual file contents and not the artifact's
+        metadata.
+
+            $ curl -s -L https://api.bitbucket.org/2.0/repositories/evzijst/git-tests/downloads/hello.txt
+            Hello World
       parameters: []
       responses:
         default:
@@ -1547,7 +1834,9 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/forks':
     get:
-      description: ''
+      description: |-
+        Returns a paginated list of all the forks of the specified
+        repository.
       parameters: []
       responses:
         '200':
@@ -1572,7 +1861,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/hooks':
     get:
-      description: ''
+      description: Returns a paginated list of webhooks installed on this repository.
       parameters: []
       responses:
         '200':
@@ -1605,7 +1894,7 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: Creates a new webhook on the specified repository.
       parameters: []
       responses:
         '201':
@@ -1634,7 +1923,9 @@ paths:
         - webhooks
   '/repositories/{username}/{repo_slug}/hooks/{uid}':
     delete:
-      description: ''
+      description: |-
+        Deletes the specified webhook subscription from the given
+        repository.
       parameters:
         - description: The installed webhook's id
           in: path
@@ -1661,7 +1952,9 @@ paths:
         - repositories
         - webhooks
     get:
-      description: ''
+      description: |-
+        Returns the webhook with the specified id installed on the specified
+        repository.
       parameters:
         - description: The installed webhook's id.
           in: path
@@ -1699,7 +1992,15 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Updates the specified webhook subscription.
+
+        The following properties can be mutated:
+
+        * `description`
+        * `url`
+        * `active`
+        * `events`
       parameters:
         - description: The installed webhook's id
           in: path
@@ -1729,7 +2030,7 @@ paths:
         - webhooks
   '/repositories/{username}/{repo_slug}/issues':
     get:
-      description: ''
+      description: Returns the issues in the issue tracker.
       parameters: []
       responses:
         '200':
@@ -1757,7 +2058,14 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Creates a new issue.
+
+        This call requires authentication. Private repositories or private
+        issue trackers require the caller to authenticate with an account that
+        has appropriate authorisation.
+
+        The authenticated user is used for the issue's `reporter` field.
       parameters:
         - description: The new issue. Note that the only required element is `title`. All other elements can be omitted from the body.
           in: body
@@ -1795,7 +2103,9 @@ paths:
         - issue_tracker
   '/repositories/{username}/{repo_slug}/issues/{issue_id}':
     delete:
-      description: ''
+      description: |-
+        Deletes the specified issue. This requires write access to the
+        repository.
       parameters: []
       responses:
         '200':
@@ -1818,7 +2128,7 @@ paths:
       tags:
         - issue_tracker
     get:
-      description: ''
+      description: Returns the specified issue.
       parameters: []
       responses:
         '200':
@@ -1855,7 +2165,13 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments':
     get:
-      description: ''
+      description: |-
+        Returns all attachments for this issue.
+
+        This returns the files' meta data. This does not return the files'
+        actual contents.
+
+        The files are always ordered by their upload date.
       parameters:
         - description: The issue's id
           in: path
@@ -1894,7 +2210,14 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Upload new issue attachments.
+
+        To upload files, perform a `multipart/form-data` POST containing one
+        or more file fields.
+
+        When a file is uploaded with the same name as an existing attachment,
+        then the existing file will be replaced.
       parameters:
         - description: The issue's id
           in: path
@@ -1925,7 +2248,7 @@ paths:
         - issue_tracker
   '/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}':
     delete:
-      description: ''
+      description: Deletes an attachment.
       parameters: []
       responses:
         '204':
@@ -1944,7 +2267,15 @@ paths:
       tags:
         - issue_tracker
     get:
-      description: ''
+      description: |-
+        Returns the contents of the specified file attachment.
+
+        Note that this endpoint does not return a JSON response, but instead
+        returns a redirect pointing to the actual file that in turn will return
+        the raw contents.
+
+        The redirect URL contains a one-time token that has a limited lifetime.
+        As a result, the link should not be persisted, stored, or shared.
       parameters: []
       responses:
         '302':
@@ -1984,7 +2315,11 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/issues/{issue_id}/comments':
     get:
-      description: ''
+      description: |-
+        Returns all comments that were made on the specified issue.
+
+        The default sorting is oldest to newest and can be overridden with
+        the `sort` query parameter.
       parameters: []
       responses:
         default:
@@ -2013,7 +2348,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}':
     get:
-      description: ''
+      description: Returns the specified issue comment object.
       parameters: []
       responses:
         default:
@@ -2046,7 +2381,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/issues/{issue_id}/vote':
     delete:
-      description: ''
+      description: Retract your vote.
       parameters:
         - description: The issue's id
           in: path
@@ -2067,7 +2402,10 @@ paths:
       tags:
         - issue_tracker
     get:
-      description: ''
+      description: |-
+        Check whether the authenticated user has voted for this issue.
+        A 204 status code indicates that the user has voted, while a 404
+        implies they haven't.
       parameters:
         - description: The issue's id
           in: path
@@ -2109,7 +2447,11 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Vote for this issue.
+
+        To cast your vote, do an empty PUT. The 204 status code indicates that
+        the operation was successful.
       parameters:
         - description: The issue's id
           in: path
@@ -2139,7 +2481,7 @@ paths:
         - issue_tracker
   '/repositories/{username}/{repo_slug}/issues/{issue_id}/watch':
     delete:
-      description: ''
+      description: Stop watching this issue.
       parameters:
         - description: The issue's id
           in: path
@@ -2168,7 +2510,9 @@ paths:
       tags:
         - issue_tracker
     get:
-      description: ''
+      description: |-
+        Indicated whether or not the authenticated user is watching this
+        issue.
       parameters:
         - description: The issue's id
           in: path
@@ -2210,7 +2554,11 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Start watching this issue.
+
+        To start watching this issue, do an empty PUT. The 204 status code
+        indicates that the operation was successful.
       parameters:
         - description: The issue's id
           in: path
@@ -2240,7 +2588,11 @@ paths:
         - issue_tracker
   '/repositories/{username}/{repo_slug}/milestones':
     get:
-      description: ''
+      description: |-
+        Returns the milestones that have been defined in the issue tracker.
+
+        This resource is only available on repositories that have the issue
+        tracker enabled.
       parameters: []
       responses:
         '200':
@@ -2269,7 +2621,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/milestones/{milestone_id}':
     get:
-      description: ''
+      description: Returns the specified issue tracker milestone object.
       parameters:
         - description: The milestone's id
           in: path
@@ -2307,7 +2659,25 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/patch/{spec}':
     get:
-      description: ''
+      description: |-
+        Produces a raw patch for a single commit (diffed against its first
+        parent), or a patch-series for a revspec of 2 commits (e.g.
+        `3a8b42..9ff173` where the first commit represents the source and the
+        second commit the destination).
+
+        In case of the latter (diffing a revspec), a patch series is returned
+        for the commits on the source branch (`3a8b42` and its ancestors in
+        our example). For Mercurial, a single patch is returned that combines
+        the changes of all commits on the source branch.
+
+        While similar to diffs, patches:
+
+        * Have a commit header (username, commit message, etc)
+        * Do not support the `path=foo/bar.py` query parameter
+
+        The raw patch is returned as-is, in whatever encoding the files in the
+        repository use. It is not decoded into unicode. As such, the
+        content-type is `text/plain`.
       parameters: []
       responses:
         '200':
@@ -2344,7 +2714,13 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/pullrequests':
     get:
-      description: ''
+      description: |-
+        Returns all pull requests on the specified repository.
+
+        By default only open pull requests are returned. This can be controlled
+        using the `state` query parameter. To retrieve pull requests that are
+        in one of multiple states, repeat the `state` parameter for each
+        individual state.
       parameters:
         - description: Only return pull requests that in this state. This parameter can be repeated.
           enum:
@@ -2377,7 +2753,7 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: Creates a new pull request.
       parameters:
         - description: |-
             The new pull request.
@@ -2408,7 +2784,11 @@ paths:
         - pullrequests
   '/repositories/{username}/{repo_slug}/pullrequests/activity':
     get:
-      description: ''
+      description: |-
+        Returns the pull request's activity log.
+
+        This includes comments that were made by the reviewers, updates and
+        approvals.
       parameters: []
       responses:
         default:
@@ -2433,7 +2813,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}':
     get:
-      description: ''
+      description: Returns the specified pull request.
       parameters: []
       responses:
         '200':
@@ -2461,7 +2841,12 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Mutates the specified pull request.
+
+        This can be used to change the pull request's branches or description.
+
+        Only open pull requests can be mutated.
       parameters: []
       responses:
         default:
@@ -2477,7 +2862,11 @@ paths:
         - pullrequests
   '/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity':
     get:
-      description: ''
+      description: |-
+        Returns the pull request's activity log.
+
+        This includes comments that were made by the reviewers, updates and
+        approvals.
       parameters: []
       responses:
         default:
@@ -2506,7 +2895,9 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve':
     delete:
-      description: ''
+      description: |-
+        Redact the authenticated user's approval of the specified pull
+        request.
       parameters: []
       responses:
         default:
@@ -2534,7 +2925,7 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: Approve the specified pull request as the authenticated user.
       parameters: []
       responses:
         default:
@@ -2550,7 +2941,13 @@ paths:
         - pullrequests
   '/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments':
     get:
-      description: ''
+      description: |-
+        Returns all the pull request's comments.
+
+        This includes both global, inline comments and replies.
+
+        The default sorting is oldest to newest and can be overridden with
+        the `sort` query parameter.
       parameters: []
       responses:
         default:
@@ -2579,7 +2976,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}':
     get:
-      description: ''
+      description: Returns a specific pull request comment.
       parameters: []
       responses:
         default:
@@ -2612,7 +3009,11 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits':
     get:
-      description: ''
+      description: |-
+        Returns the pull request's commits.
+
+        These are the commits that are being merged into the destination
+        branch when the pull requests gets accepted.
       parameters: []
       responses:
         default:
@@ -2654,7 +3055,7 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: Declines the pull request.
       parameters: []
       responses:
         '200':
@@ -2712,7 +3113,7 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: Merges the pull request.
       parameters: []
       responses:
         '200':
@@ -2757,7 +3158,9 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses':
     get:
-      description: ''
+      description: |-
+        Returns all statuses (e.g. build results) for the given pull
+        request.
       parameters:
         - description: The pull request's id
           in: path
@@ -2932,7 +3335,11 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/versions':
     get:
-      description: ''
+      description: |-
+        Returns the versions that have been defined in the issue tracker.
+
+        This resource is only available on repositories that have the issue
+        tracker enabled.
       parameters: []
       responses:
         '200':
@@ -2961,7 +3368,7 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/versions/{version_id}':
     get:
-      description: ''
+      description: Returns the specified issue tracker version object.
       parameters:
         - description: The version's id
           in: path
@@ -2999,7 +3406,9 @@ paths:
         type: string
   '/repositories/{username}/{repo_slug}/watchers':
     get:
-      description: ''
+      description: |-
+        Returns a paginated list of all the watchers on the specified
+        repository.
       parameters: []
       responses:
         default:
@@ -3024,7 +3433,30 @@ paths:
         type: string
   /snippets:
     get:
-      description: ''
+      description: |-
+        Returns all snippets. Like pull requests, repositories and teams, the
+        full set of snippets is defined by what the current user has access to.
+
+        This includes all snippets owned by the current user, but also all snippets
+        owned by any of the teams the user is a member of, or snippets by other
+        users that the current user is either watching or has collaborated on (for
+        instance by commenting on it).
+
+        To limit the set of returned snippets, apply the
+        `?role=[owner|contributor|member]` query parameter where the roles are
+        defined as follows:
+
+        * `owner`: all snippets owned by the current user
+        * `contributor`: all snippets owned by, or watched by the current user
+        * `member`: owned by the user, their teams, or watched by the current user
+
+        When no role is specified, all public snippets are returned, as well as all
+        privately owned snippets watched or commented on.
+
+        The returned response is a normal paginated JSON list. This endpoint
+        only supports `application/json` responses and no
+        `multipart/form-data` or `multipart/related`. As a result, it is not
+        possible to include the file contents.
       parameters:
         - description: 'Filter down the result based on the authenticated user''s role (`owner`, `contributor`, or `member`).'
           enum:
@@ -3053,7 +3485,157 @@ paths:
         - snippets
     parameters: []
     post:
-      description: ''
+      description: |-
+        Creates a new snippet under the authenticated user's account.
+
+        Snippets can contain multiple files. Both text and binary files are
+        supported.
+
+        The simplest way to create a new snippet from a local file:
+
+            $ curl -u username:password -X POST https://api.bitbucket.org/2.0/snippets               -F file=@image.png
+
+        Creating snippets through curl has a few limitations and so let's look
+        at a more complicated scenario.
+
+        Snippets are created with a multipart POST. Both `multipart/form-data`
+        and `multipart/related` are supported. Both allow the creation of
+        snippets with both meta data (title, etc), as well as multiple text
+        and binary files.
+
+        The main difference is that `multipart/related` can use rich encoding
+        for the meta data (currently JSON).
+
+
+        multipart/related (RFC-2387)
+        ----------------------------
+
+        This is the most advanced and efficient way to create a paste.
+
+            POST /2.0/snippets/evzijst HTTP/1.1
+            Content-Length: 1188
+            Content-Type: multipart/related; start="snippet"; boundary="===============1438169132528273974=="
+            MIME-Version: 1.0
+
+            --===============1438169132528273974==
+            Content-Type: application/json; charset="utf-8"
+            MIME-Version: 1.0
+            Content-ID: snippet
+
+            {
+              "title": "My snippet",
+              "is_private": true,
+              "scm": "hg",
+              "files": {
+                  "foo.txt": {},
+                  "image.png": {}
+                }
+            }
+
+            --===============1438169132528273974==
+            Content-Type: text/plain; charset="us-ascii"
+            MIME-Version: 1.0
+            Content-Transfer-Encoding: 7bit
+            Content-ID: "foo.txt"
+            Content-Disposition: attachment; filename="foo.txt"
+
+            foo
+
+            --===============1438169132528273974==
+            Content-Type: image/png
+            MIME-Version: 1.0
+            Content-Transfer-Encoding: base64
+            Content-ID: "image.png"
+            Content-Disposition: attachment; filename="image.png"
+
+            iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m
+            TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB
+            cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5
+            EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ
+            73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN
+            AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==
+            --===============1438169132528273974==--
+
+        The request contains multiple parts and is structured as follows.
+
+        The first part is the JSON document that describes the snippet's
+        properties or meta data. It either has to be the first part, or the
+        request's `Content-Type` header must contain the `start` parameter to
+        point to it.
+
+        The remaining parts are the files of which there can be zero or more.
+        Each file part should contain the `Content-ID` MIME header through
+        which the JSON meta data's `files` element addresses it. The value
+        should be the name of the file.
+
+        `Content-Disposition` is an optional MIME header. The header's
+        optional `filename` parameter can be used to specify the file name
+        that Bitbucket should use when writing the file to disk. When present,
+        `filename` takes precedence over the value of `Content-ID`.
+
+        When the JSON body omits the `files` element, the remaining parts are
+        not ignored. Instead, each file is added to the new snippet as if its
+        name was explicitly linked (the use of the `files` elements is
+        mandatory for some operations like deleting or renaming files).
+
+
+        multipart/form-data
+        -------------------
+
+        The use of JSON for the snippet's meta data is optional. Meta data can
+        also be supplied as regular form fields in a more conventional
+        `multipart/form-data` request:
+
+            $ curl -X POST -u credentials https://api.bitbucket.org/2.0/snippets               -F title="My snippet"               -F file=@foo.txt -F file=@image.png
+
+            POST /2.0/snippets HTTP/1.1
+            Content-Length: 951
+            Content-Type: multipart/form-data; boundary=----------------------------63a4b224c59f
+
+            ------------------------------63a4b224c59f
+            Content-Disposition: form-data; name="file"; filename="foo.txt"
+            Content-Type: text/plain
+
+            foo
+
+            ------------------------------63a4b224c59f
+            Content-Disposition: form-data; name="file"; filename="image.png"
+            Content-Type: application/octet-stream
+
+            ?PNG
+
+            IHDR?1??I.....
+            ------------------------------63a4b224c59f
+            Content-Disposition: form-data; name="title"
+
+            My snippet
+            ------------------------------63a4b224c59f--
+
+        Here the meta data properties are included as flat, top-level form
+        fields. The file attachments use the `file` field name. To attach
+        multiple files, simply repeat the field.
+
+        The advantage of `multipart/form-data` over `multipart/related` is
+        that it can be easier to build clients.
+
+        Essentially all properties are optional, `title` and `files` included.
+
+
+        Sharing and Visibility
+        ----------------------
+
+        Snippets can be either public (visible to anyone on Bitbucket, as well
+        as anonymous users), or private (visible only to the owner, creator
+        and members of the team in case the snippet is owned by a team). This
+        is controlled through the snippet's `is_private` element:
+
+        * **is_private=false** -- everyone, including anonymous users can view
+          the snippet
+        * **is_private=true** -- only the owner and team members (for team
+          snippets) can view it
+
+        To create the snippet under a team account, just append the team name
+        to the URL (see `/2.0/snippets/{username}`).
       parameters:
         - description: The new snippet object.
           in: body
@@ -3083,7 +3665,10 @@ paths:
         - snippets
   '/snippets/{username}':
     get:
-      description: ''
+      description: |-
+        Identical to `/snippets`, except that the result is further filtered
+        by the snippet owner and only those that are owned by `{username}` are
+        returned.
       parameters:
         - description: 'Filter down the result based on the authenticated user''s role (`owner`, `contributor`, or `member`).'
           enum:
@@ -3121,7 +3706,9 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Identical to `/snippets`, except that the new snippet will be
+        created under the account specified in the path parameter `{username}`.
       parameters:
         - description: The new snippet object.
           in: body
@@ -3155,7 +3742,7 @@ paths:
         - snippets
   '/snippets/{username}/{encoded_id}':
     delete:
-      description: ''
+      description: Deletes a snippet and returns an empty response.
       parameters:
         - description: The snippet's id.
           in: path
@@ -3185,7 +3772,191 @@ paths:
       tags:
         - snippets
     get:
-      description: ''
+      description: |-
+        Retrieves a single snippet.
+
+        Snippets support multiple content types:
+
+        * application/json
+        * multipart/related
+        * multipart/form-data
+
+
+        application/json
+        ----------------
+
+        The default content type of the response is `application/json`.
+        Since JSON is always `utf-8`, it cannot reliably contain file contents
+        for files that are not text. Therefore, JSON snippet documents only
+        contain the filename and links to the file contents.
+
+        This means that in order to retrieve all parts of a snippet, N+1
+        requests need to be made (where N is the number of files in the
+        snippet).
+
+
+        multipart/related
+        -----------------
+
+        To retrieve an entire snippet in a single response, use the
+        `Accept: multipart/related` HTTP request header.
+
+            $ curl -H "Accept: multipart/related" https://api.bitbucket.org/2.0/snippets/evzijst/1
+
+        Response:
+
+            HTTP/1.1 200 OK
+            Content-Length: 2214
+            Content-Type: multipart/related; start="snippet"; boundary="===============1438169132528273974=="
+            MIME-Version: 1.0
+
+            --===============1438169132528273974==
+            Content-Type: application/json; charset="utf-8"
+            MIME-Version: 1.0
+            Content-ID: snippet
+
+            {
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/snippets/evzijst/kypj"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/snippets/evzijst/kypj"
+                },
+                "comments": {
+                  "href": "https://api.bitbucket.org/2.0/snippets/evzijst/kypj/comments"
+                },
+                "watchers": {
+                  "href": "https://api.bitbucket.org/2.0/snippets/evzijst/kypj/watchers"
+                },
+                "commits": {
+                  "href": "https://api.bitbucket.org/2.0/snippets/evzijst/kypj/commits"
+                }
+              },
+              "id": kypj,
+              "title": "My snippet",
+              "created_on": "2014-12-29T22:22:04.790331+00:00",
+              "updated_on": "2014-12-29T22:22:04.790331+00:00",
+              "is_private": false,
+              "files": {
+                "foo.txt": {
+                  "links": {
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/snippets/evzijst/kypj/files/367ab19/foo.txt"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/snippets/evzijst/kypj#file-foo.txt"
+                    }
+                  }
+                },
+                "image.png": {
+                  "links": {
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/snippets/evzijst/kypj/files/367ab19/image.png"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/snippets/evzijst/kypj#file-image.png"
+                    }
+                  }
+                }
+              ],
+              "owner": {
+                "username": "evzijst",
+                "display_name": "Erik van Zijst",
+                "uuid": "{d301aafa-d676-4ee0-88be-962be7417567}",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/evzijst"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/evzijst"
+                  },
+                  "avatar": {
+                    "href": "https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Jul/31/erik-avatar-725122544-0_avatar.png"
+                  }
+                }
+              },
+              "creator": {
+                "username": "evzijst",
+                "display_name": "Erik van Zijst",
+                "uuid": "{d301aafa-d676-4ee0-88be-962be7417567}",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/evzijst"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/evzijst"
+                  },
+                  "avatar": {
+                    "href": "https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Jul/31/erik-avatar-725122544-0_avatar.png"
+                  }
+                }
+              }
+            }
+
+            --===============1438169132528273974==
+            Content-Type: text/plain; charset="us-ascii"
+            MIME-Version: 1.0
+            Content-Transfer-Encoding: 7bit
+            Content-ID: "foo.txt"
+            Content-Disposition: attachment; filename="foo.txt"
+
+            foo
+
+            --===============1438169132528273974==
+            Content-Type: image/png
+            MIME-Version: 1.0
+            Content-Transfer-Encoding: base64
+            Content-ID: "image.png"
+            Content-Disposition: attachment; filename="image.png"
+
+            iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m
+            TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB
+            cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5
+            EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ
+            73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN
+            AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==
+            --===============1438169132528273974==--
+
+        multipart/form-data
+        -------------------
+
+        As with creating new snippets, `multipart/form-data` can be used as an
+        alternative to `multipart/related`. However, the inherently flat
+        structure of form-data means that only basic, root-level properties
+        can be returned, while nested elements like `links` are omitted:
+
+            $ curl -H "Accept: multipart/form-data" https://api.bitbucket.org/2.0/snippets/evzijst/kypj
+
+        Response:
+
+            HTTP/1.1 200 OK
+            Content-Length: 951
+            Content-Type: multipart/form-data; boundary=----------------------------63a4b224c59f
+
+            ------------------------------63a4b224c59f
+            Content-Disposition: form-data; name="title"
+            Content-Type: text/plain; charset="utf-8"
+
+            My snippet
+            ------------------------------63a4b224c59f--
+            Content-Disposition: attachment; name="file"; filename="foo.txt"
+            Content-Type: text/plain
+
+            foo
+
+            ------------------------------63a4b224c59f
+            Content-Disposition: attachment; name="file"; filename="image.png"
+            Content-Transfer-Encoding: base64
+            Content-Type: application/octet-stream
+
+            iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m
+            TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB
+            cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5
+            EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ
+            73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN
+            AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==
+            ------------------------------5957323a6b76--
       parameters:
         - description: The snippet's id.
           in: path
@@ -3234,7 +4005,205 @@ paths:
         - application/json
         - multipart/related
         - multipart/form-data
-      description: ''
+      description: |-
+        Used to update a snippet. Use this to add and delete files and to
+        change a snippet's title.
+
+        To update a snippet, one can either PUT a full snapshot, or only the
+        parts that need to be changed.
+
+        The contract for PUT on this API is that properties missing from the
+        request remain untouched so that snippets can be efficiently
+        manipulated with differential payloads.
+
+        To delete a property (e.g. the title, or a file), include its name in
+        the request, but omit its value (use `null`).
+
+        As in Git, explicit renaming of files is not supported. Instead, to
+        rename a file, delete it and add it again under another name. This can
+        be done atomically in a single request. Rename detection is left to
+        the SCM.
+
+        PUT supports three different content types for both request and
+        response bodies:
+
+        * `application/json`
+        * `multipart/related`
+        * `multipart/form-data`
+
+        The content type used for the request body can be different than that
+        used for the response. Content types are specified using standard HTTP
+        headers.
+
+        Use the `Content-Type` and `Accept` headers to select the desired
+        request and response format.
+
+
+        application/json
+        ----------------
+
+        As with creation and retrieval, the content type determines what
+        properties can be manipulated. `application/json` does not support
+        file contents and is therefore limited to a snippet's meta data.
+
+        To update the title, without changing any of its files:
+
+            $ curl -X POST -H "Content-Type: application/json" https://api.bitbucket.org/2.0/snippets/evzijst/kypj             -d '{"title": "Updated title"}'
+
+
+        To delete the title:
+
+            $ curl -X POST -H "Content-Type: application/json" https://api.bitbucket.org/2.0/snippets/evzijst/kypj             -d '{"title": null}'
+
+        Not all parts of a snippet can be manipulated. The owner and creator
+        for instance are immutable.
+
+
+        multipart/related
+        -----------------
+
+        `multipart/related` can be used to manipulate all of a snippet's
+        properties. The body is identical to a POST. properties omitted from
+        the request are left unchanged. Since the `start` part contains JSON,
+        the mechanism for manipulating the snippet's meta data is identical
+        to `application/json` requests.
+
+        To update one of a snippet's file contents, while also changing its
+        title:
+
+            PUT /2.0/snippets/evzijst/kypj HTTP/1.1
+            Content-Length: 288
+            Content-Type: multipart/related; start="snippet"; boundary="===============1438169132528273974=="
+            MIME-Version: 1.0
+
+            --===============1438169132528273974==
+            Content-Type: application/json; charset="utf-8"
+            MIME-Version: 1.0
+            Content-ID: snippet
+
+            {
+              "title": "My updated snippet",
+              "files": {
+                  "foo.txt": {}
+                }
+            }
+
+            --===============1438169132528273974==
+            Content-Type: text/plain; charset="us-ascii"
+            MIME-Version: 1.0
+            Content-Transfer-Encoding: 7bit
+            Content-ID: "foo.txt"
+            Content-Disposition: attachment; filename="foo.txt"
+
+            Updated file contents.
+
+            --===============1438169132528273974==--
+
+        Here only the parts that are changed are included in the body. The
+        other files remain untouched.
+
+        Note the use of the `files` list in the JSON part. This list contains
+        the files that are being manipulated. This list should have
+        corresponding multiparts in the request that contain the new contents
+        of these files.
+
+        If a filename in the `files` list does not have a corresponding part,
+        it will be deleted from the snippet, as shown below:
+
+            PUT /2.0/snippets/evzijst/kypj HTTP/1.1
+            Content-Length: 188
+            Content-Type: multipart/related; start="snippet"; boundary="===============1438169132528273974=="
+            MIME-Version: 1.0
+
+            --===============1438169132528273974==
+            Content-Type: application/json; charset="utf-8"
+            MIME-Version: 1.0
+            Content-ID: snippet
+
+            {
+              "files": {
+                "image.png": {}
+              }
+            }
+
+            --===============1438169132528273974==--
+
+        To simulate a rename, delete a file and add the same file under
+        another name:
+
+            PUT /2.0/snippets/evzijst/kypj HTTP/1.1
+            Content-Length: 212
+            Content-Type: multipart/related; start="snippet"; boundary="===============1438169132528273974=="
+            MIME-Version: 1.0
+
+            --===============1438169132528273974==
+            Content-Type: application/json; charset="utf-8"
+            MIME-Version: 1.0
+            Content-ID: snippet
+
+            {
+                "files": {
+                  "foo.txt": {},
+                  "bar.txt": {}
+                }
+            }
+
+            --===============1438169132528273974==
+            Content-Type: text/plain; charset="us-ascii"
+            MIME-Version: 1.0
+            Content-Transfer-Encoding: 7bit
+            Content-ID: "bar.txt"
+            Content-Disposition: attachment; filename="bar.txt"
+
+            foo
+
+            --===============1438169132528273974==--
+
+
+        multipart/form-data
+        -----------------
+
+        Again, one can also use `multipart/form-data` to manipulate file
+        contents and meta data atomically.
+
+            $ curl -X PUT http://localhost:12345/2.0/snippets/evzijst/kypj             -F title="My updated snippet" -F file=@foo.txt
+
+            PUT /2.0/snippets/evzijst/kypj HTTP/1.1
+            Content-Length: 351
+            Content-Type: multipart/form-data; boundary=----------------------------63a4b224c59f
+
+            ------------------------------63a4b224c59f
+            Content-Disposition: form-data; name="file"; filename="foo.txt"
+            Content-Type: text/plain
+
+            foo
+
+            ------------------------------63a4b224c59f
+            Content-Disposition: form-data; name="title"
+
+            My updated snippet
+            ------------------------------63a4b224c59f
+
+        To delete a file, omit its contents while including its name in the
+        `files` field:
+
+            $ curl -X PUT https://api.bitbucket.org/2.0/snippets/evzijst/kypj -F files=image.png
+
+            PUT /2.0/snippets/evzijst/kypj HTTP/1.1
+            Content-Length: 149
+            Content-Type: multipart/form-data; boundary=----------------------------ef8871065a86
+
+            ------------------------------ef8871065a86
+            Content-Disposition: form-data; name="files"
+
+            image.png
+            ------------------------------ef8871065a86--
+
+        The explicit use of the `files` element in `multipart/related` and
+        `multipart/form-data` is only required when deleting files.
+        The default mode of operation is for file parts to be processed,
+        regardless of whether or not they are listed in `files`, as a
+        convenience to the client.
       parameters:
         - description: The snippet's id.
           in: path
@@ -3271,7 +4240,14 @@ paths:
         - snippets
   '/snippets/{username}/{encoded_id}/comments':
     get:
-      description: ''
+      description: |-
+        Used to retrieve a paginated list of all comments for a specific
+        snippet.
+
+        This resource works identical to commit and pull request comments.
+
+        The default sorting is oldest to newest and can be overridden with
+        the `sort` query parameter.
       parameters: []
       responses:
         '200':
@@ -3303,7 +4279,12 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Creates a new comment.
+
+        The only required field in the body is `content.raw`.
+
+        To create a threaded reply to an existing comment, include `parent.id`.
       parameters:
         - description: The contents of the new comment.
           in: body
@@ -3337,7 +4318,10 @@ paths:
         - snippets
   '/snippets/{username}/{encoded_id}/comments/{comment_id}':
     delete:
-      description: ''
+      description: |-
+        Deletes a snippet comment.
+
+        Comments can only be removed by their author.
       parameters: []
       responses:
         '204':
@@ -3358,7 +4342,7 @@ paths:
       tags:
         - snippets
     get:
-      description: ''
+      description: Returns the specific snippet comment.
       parameters: []
       responses:
         '200':
@@ -3394,7 +4378,10 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Updates a comment.
+
+        Comments can only be updated by their author.
       parameters: []
       responses:
         '200':
@@ -3416,7 +4403,7 @@ paths:
         - snippets
   '/snippets/{username}/{encoded_id}/commits':
     get:
-      description: ''
+      description: Returns the changes (commits) made on this snippet.
       parameters: []
       responses:
         '200':
@@ -3486,7 +4473,9 @@ paths:
         type: string
   '/snippets/{username}/{encoded_id}/watch':
     delete:
-      description: ''
+      description: |-
+        Used to stop watching a specific snippet. Returns 204 (No Content)
+        to indicate success.
       parameters:
         - description: The snippet id.
           in: path
@@ -3514,7 +4503,13 @@ paths:
       tags:
         - snippets
     get:
-      description: ''
+      description: |-
+        Used to check if the current user is watching a specific snippet.
+
+        Returns 204 (No Content) if the user is watching the snippet and 404 if
+        not.
+
+        Hitting this endpoint anonymously always returns a 404.
       parameters:
         - description: The snippet id.
           in: path
@@ -3547,7 +4542,7 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: Used to start watching a specific snippet. Returns 204 (No Content).
       parameters:
         - description: The snippet id.
           in: path
@@ -3577,7 +4572,7 @@ paths:
   '/snippets/{username}/{encoded_id}/watchers':
     get:
       deprecated: true
-      description: ''
+      description: Returns a paginated list of all users watching a specific snippet.
       parameters:
         - description: The snippet id.
           in: path
@@ -3611,7 +4606,15 @@ paths:
         type: string
   '/snippets/{username}/{encoded_id}/{node_id}':
     delete:
-      description: ''
+      description: |-
+        Deletes the snippet.
+
+        Note that this only works for versioned URLs that point to the latest
+        commit of the snippet. Pointing to an older commit results in a 405
+        status code.
+
+        To delete a snippet, regardless of whether or not concurrent changes
+        are being made to it, use `DELETE /snippets/{encoded_id}` instead.
       parameters:
         - description: The snippet's id.
           in: path
@@ -3645,7 +4648,16 @@ paths:
       tags:
         - snippets
     get:
-      description: ''
+      description: |-
+        Identical to `GET /snippets/encoded_id`, except that this endpoint
+        can be used to retrieve the contents of the snippet as it was at an
+        older revision, while `/snippets/encoded_id` always returns the
+        snippet's current revision.
+
+        Note that only the snippet's file contents are versioned, not its
+        meta data properties like the title.
+
+        Other than that, the two endpoints are identical in behavior.
       parameters:
         - description: The snippet's id.
           in: path
@@ -3703,7 +4715,21 @@ paths:
         - application/json
         - multipart/related
         - multipart/form-data
-      description: ''
+      description: |-
+        Identical to `UPDATE /snippets/encoded_id`, except that this endpoint
+        takes an explicit commit revision. Only the snippet's "HEAD"/"tip"
+        (most recent) version can be updated and requests on all other,
+        older revisions fail by returning a 405 status.
+
+        Usage of this endpoint over the unrestricted `/snippets/encoded_id`
+        could be desired if the caller wants to be sure no concurrent
+        modifications have taken place between the moment of the UPDATE
+        request and the original GET.
+
+        This can be considered a so-called "Compare And Swap", or CAS
+        operation.
+
+        Other than that, the two endpoints are identical in behavior.
       parameters:
         - description: The snippet's id.
           in: path
@@ -3749,7 +4775,16 @@ paths:
         - snippets
   '/snippets/{username}/{encoded_id}/{node_id}/files/{path}':
     get:
-      description: ''
+      description: |-
+        Retrieves the raw contents of a specific file in the snippet. The
+        `Content-Disposition` header will be "attachment" to avoid issues with
+        malevolent executable files.
+
+        The file's mime type is derived from its filename and returned in the
+        `Content-Type` header.
+
+        Note that for text files, no character encoding is included as part of
+        the content type.
       parameters: []
       responses:
         '200':
@@ -3795,7 +4830,26 @@ paths:
         type: string
   '/snippets/{username}/{encoded_id}/{revision}/diff':
     get:
-      description: ''
+      description: |-
+        Returns the diff of the specified commit against its first parent.
+
+        Note that this resource is different in functionality from the `patch`
+        resource.
+
+        The differences between a diff and a patch are:
+
+        * patches have a commit header with the username, message, etc
+        * diffs support the optional `path=foo/bar.py` query param to filter the
+          diff to just that one file diff (not supported for patches)
+        * for a merge, the diff will show the diff between the merge commit and
+          its first parent (identical to how PRs work), while patch returns a
+          response containing separate patches for each commit on the second
+          parent's ancestry, up to the oldest common ancestor (identical to
+          its reachability).
+
+        Note that the character encoding of the contents of the diff is
+        unspecified as Git and Mercurial do not track this, making it hard for
+        Bitbucket to reliably determine this.
       parameters:
         - description: 'When used, only one the diff of the specified file will be returned.'
           in: query
@@ -3844,7 +4898,27 @@ paths:
         type: string
   '/snippets/{username}/{encoded_id}/{revision}/patch':
     get:
-      description: ''
+      description: |-
+        Returns the patch of the specified commit against its first
+        parent.
+
+        Note that this resource is different in functionality from the `diff`
+        resource.
+
+        The differences between a diff and a patch are:
+
+        * patches have a commit header with the username, message, etc
+        * diffs support the optional `path=foo/bar.py` query param to filter the
+          diff to just that one file diff (not supported for patches)
+        * for a merge, the diff will show the diff between the merge commit and
+          its first parent (identical to how PRs work), while patch returns a
+          response containing separate patches for each commit on the second
+          parent's ancestry, up to the oldest common ancestor (identical to
+          its reachability).
+
+        Note that the character encoding of the contents of the patch is
+        unspecified as Git and Mercurial do not track this, making it hard for
+        Bitbucket to reliably determine this.
       parameters:
         - description: The snippet id.
           in: path
@@ -3889,7 +4963,9 @@ paths:
         type: string
   /teams:
     get:
-      description: ''
+      description: |-
+        Returns all the teams that the authenticated user is associated
+        with.
       parameters:
         - description: |
 
@@ -3958,7 +5034,61 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Creates a new project.
+
+        Note that the avatar has to be embedded as either a data-url
+        or a URL to an external image as shown in the examples below:
+
+        ```
+        $ body=$(cat << EOF
+        {
+            "name": "Mars Project",
+            "key": "MARS",
+            "description": "Software for colonizing mars.",
+            "links": {
+                "avatar": {
+                    "href": "data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/..."
+                }
+            },
+            "is_private": false
+        }
+        EOF
+        )
+        $ curl -H "Content-Type: application/json" \
+               -X POST \
+               -d "$body" \
+               https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq .
+        {
+          // Serialized project document
+        }
+        ```
+
+        or even:
+
+        ```
+        $ body=$(cat << EOF
+        {
+            "name": "Mars Project",
+            "key": "MARS",
+            "description": "Software for colonizing mars.",
+            "links": {
+                "avatar": {
+                    "href": "http://i.imgur.com/72tRx4w.gif"
+                }
+            },
+            "is_private": false
+        }
+        EOF
+        )
+        $ curl -H "Content-Type: application/json" \
+               -X POST \
+               -d "$body" \
+               https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq .
+        {
+          // Serialized project document
+        }
+        ```
       parameters:
         - in: body
           name: _body
@@ -4050,7 +5180,29 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Since this endpoint can be used to both update and to create a
+        project, the request body depends on the intent.
+
+        ### Creation
+
+        See the POST documentation for the project collection for an
+        example of the request body.
+
+        Note: The `key` should not be specified in the body of request
+        (since it is already present in the URL). The `name` is required,
+        everything else is optional.
+
+        ### Update
+
+        See the POST documentation for the project collection for an
+        example of the request body.
+
+        Note: The key is not required in the body (since it is already in
+        the URL). The key may be specified in the body, if the intent is
+        to change the key itself. In such a scenario, the location of the
+        project is changed and is returned in the `Location` header of the
+        response.
       parameters:
         - in: body
           name: _body
@@ -4093,7 +5245,11 @@ paths:
         - projects
   '/teams/{username}':
     get:
-      description: ''
+      description: |-
+        Gets the public information associated with a team.
+
+        If the team's profile is private, `location`, `website` and
+        `created_on` elements are omitted.
       parameters:
         - description: The team's username or UUID.
           in: path
@@ -4122,7 +5278,7 @@ paths:
         type: string
   '/teams/{username}/followers':
     get:
-      description: ''
+      description: Returns the list of accounts that are following this team.
       parameters:
         - description: The team's username
           in: path
@@ -4151,7 +5307,7 @@ paths:
         type: string
   '/teams/{username}/following':
     get:
-      description: ''
+      description: Returns the list of accounts this team is following.
       parameters:
         - description: The team's username
           in: path
@@ -4181,7 +5337,7 @@ paths:
         type: string
   '/teams/{username}/hooks':
     get:
-      description: ''
+      description: Returns a paginated list of webhooks installed on this team.
       parameters: []
       responses:
         '200':
@@ -4210,7 +5366,13 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Creates a new webhook on the specified team.
+
+        Team webhooks are fired for events from all repositories belonging to
+        that team account.
+
+        Note that only admins can install webhooks on teams.
       parameters: []
       responses:
         '201':
@@ -4239,7 +5401,9 @@ paths:
         - webhooks
   '/teams/{username}/hooks/{uid}':
     delete:
-      description: ''
+      description: |-
+        Deletes the specified webhook subscription from the given team
+        account.
       parameters:
         - description: The installed webhook's id
           in: path
@@ -4266,7 +5430,9 @@ paths:
         - teams
         - webhooks
     get:
-      description: ''
+      description: |-
+        Returns the webhook with the specified id installed on the given
+        team account.
       parameters:
         - description: The installed webhook's id.
           in: path
@@ -4300,7 +5466,15 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Updates the specified webhook subscription.
+
+        The following properties can be mutated:
+
+        * `description`
+        * `url`
+        * `active`
+        * `events`
       parameters:
         - description: The installed webhook's id
           in: path
@@ -4330,7 +5504,15 @@ paths:
         - webhooks
   '/teams/{username}/members':
     get:
-      description: ''
+      description: |-
+        All members of a team.
+
+        Returns all members of the specified team. Any member of any of the
+        team's groups is considered a member of the team. This includes users
+        in groups that may not actually have access to any of the team's
+        repositories.
+
+        Note that members using the "private profile" feature are not included.
       parameters: []
       responses:
         '200':
@@ -4355,7 +5537,10 @@ paths:
         type: string
   '/teams/{username}/repositories':
     get:
-      description: ''
+      description: |-
+        All repositories owned by a user/team. This includes private
+        repositories, but filtered down to the ones that the calling user has
+        access to.
       parameters: []
       responses:
         default:
@@ -4377,7 +5562,7 @@ paths:
         type: string
   /user:
     get:
-      description: ''
+      description: Returns the currently logged in user.
       parameters: []
       responses:
         '200':
@@ -4398,7 +5583,9 @@ paths:
     parameters: []
   /user/emails:
     get:
-      description: ''
+      description: |-
+        Returns all the authenticated user's email addresses. Both
+        confirmed and unconfirmed.
       parameters: []
       responses:
         default:
@@ -4415,7 +5602,12 @@ paths:
     parameters: []
   '/user/emails/{email}':
     get:
-      description: ''
+      description: |-
+        Returns details about a specific one of the authenticated user's
+        email addresses.
+
+        Details describe whether the address has been confirmed by the user and
+        whether it is the user's primary address or not.
       parameters: []
       responses:
         default:
@@ -4436,7 +5628,11 @@ paths:
         type: string
   '/users/{username}':
     get:
-      description: ''
+      description: |-
+        Gets the public information associated with a user account.
+
+        If the user's profile is private, `location`, `website` and
+        `created_on` elements are omitted.
       parameters:
         - description: The account's username or UUID.
           in: path
@@ -4465,7 +5661,7 @@ paths:
         type: string
   '/users/{username}/followers':
     get:
-      description: ''
+      description: Returns the list of accounts that are following this team.
       parameters:
         - description: The account's username
           in: path
@@ -4494,7 +5690,7 @@ paths:
         type: string
   '/users/{username}/following':
     get:
-      description: ''
+      description: Returns the list of accounts this user is following.
       parameters:
         - description: The user's username
           in: path
@@ -4524,7 +5720,7 @@ paths:
         type: string
   '/users/{username}/hooks':
     get:
-      description: ''
+      description: Returns a paginated list of webhooks installed on this user account.
       parameters: []
       responses:
         '200':
@@ -4553,7 +5749,14 @@ paths:
         required: true
         type: string
     post:
-      description: ''
+      description: |-
+        Creates a new webhook on the specified user account.
+
+        Account-level webhooks are fired for events from all repositories
+        belonging to that account.
+
+        Note that one can only register webhooks on one's own account, not that
+        of others.
       parameters: []
       responses:
         '201':
@@ -4582,7 +5785,9 @@ paths:
         - webhooks
   '/users/{username}/hooks/{uid}':
     delete:
-      description: ''
+      description: |-
+        Deletes the specified webhook subscription from the given user
+        account.
       parameters:
         - description: The installed webhook's id
           in: path
@@ -4609,7 +5814,9 @@ paths:
         - users
         - webhooks
     get:
-      description: ''
+      description: |-
+        Returns the webhook with the specified id installed on the given
+        user account.
       parameters:
         - description: The installed webhook's id.
           in: path
@@ -4643,7 +5850,15 @@ paths:
         required: true
         type: string
     put:
-      description: ''
+      description: |-
+        Updates the specified webhook subscription.
+
+        The following properties can be mutated:
+
+        * `description`
+        * `url`
+        * `active`
+        * `events`
       parameters:
         - description: The installed webhook's id
           in: path
@@ -4673,7 +5888,10 @@ paths:
         - webhooks
   '/users/{username}/repositories':
     get:
-      description: ''
+      description: |-
+        All repositories owned by a user/team. This includes private
+        repositories, but filtered down to the ones that the calling user has
+        access to.
       parameters: []
       responses:
         default:
@@ -4939,12 +6157,13 @@ definitions:
               - SUCCESSFUL
               - FAILED
               - INPROGRESS
+              - STOPPED
             type: string
           updated_on:
             format: date-time
             type: string
           url:
-            description: 'A URL linking back to the vendor or build system, for providing more information about whatever process produced this status'
+            description: 'A URL linking back to the vendor or build system, for providing more information about whatever process produced this status. Accepts context variables `repository` and `commit` that Bitbucket will evaluate at runtime whenever at runtime. For example, one could use https://foo.com/builds/{repository.full_name} which Bitbucket will turn into https://foo.com/builds/foo/bar at render time.'
             type: string
           uuid:
             description: The commit status' id.
@@ -6865,7 +8084,7 @@ x-radar-pages:
           </tr>
           <tr>
               <td><code>previous</code></td>
-              <td>Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available.</br>
+              <td>Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available.
 
               Use this link to navigate the result set and refrain from constructing your own URLs.</td>
           </tr>
@@ -7363,4 +8582,4 @@ x-radar-pages:
     icon: 'data:image/png;base64,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'
     key: bb-connect
     title: Atlassian Connect
-x-revision: 0c55837759e5
+x-revision: f64ea59d0522

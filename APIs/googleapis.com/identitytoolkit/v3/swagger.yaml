@@ -605,6 +605,12 @@ definitions:
       continueUri:
         description: The URI to which the IDP redirects the user after the federated login flow.
         type: string
+      customParameter:
+        additionalProperties:
+          description: The customized query parameter.
+          type: string
+        description: 'The query parameter that client can customize by themselves in auth url. The following parameters are reserved for server so that they cannot be customized by clients: client_id, response_type, scope, redirect_uri, state.'
+        type: object
       hostedDomain:
         description: The hosted domain to restrict sign-in to accounts at that domain for Google Apps hosted accounts.
         type: string
@@ -932,6 +938,9 @@ definitions:
         description: The salt separator.
         format: byte
         type: string
+      sanityCheck:
+        description: 'If true, backend will do sanity check(including duplicate email and federated id) when uploading account.'
+        type: boolean
       signerKey:
         description: The key for to hash the password.
         format: byte
@@ -1084,11 +1093,17 @@ definitions:
     description: Response of resetting the password.
     properties:
       email:
-        description: The user's email.
+        description: 'The user''s email. If the out-of-band code is for email recovery, the user''s original email.'
         type: string
       kind:
         default: 'identitytoolkit#ResetPasswordResponse'
         description: 'The fixed string "identitytoolkit#ResetPasswordResponse".'
+        type: string
+      newEmail:
+        description: 'If the out-of-band code is for email recovery, the user''s new email.'
+        type: string
+      requestType:
+        description: The request type.
         type: string
     type: object
   SetAccountInfoResponse:
@@ -1201,6 +1216,9 @@ definitions:
         description: User creation timestamp.
         format: int64
         type: string
+      customAuth:
+        description: Whether the user is authenticated by the developer.
+        type: boolean
       disabled:
         description: Whether the user is disabled.
         type: boolean
@@ -1257,7 +1275,7 @@ definitions:
               description: Raw IDP-returned user info.
               type: string
             screenName:
-              description: User's screen name at Twitter.
+              description: User's screen name at Twitter or login name at Github.
               type: string
           type: object
         type: array
@@ -1266,7 +1284,7 @@ definitions:
         format: byte
         type: string
       screenName:
-        description: User's screen name at Twitter.
+        description: User's screen name at Twitter or login name at Github.
         type: string
       validSince:
         description: Timestamp in seconds for valid login token.
@@ -1389,7 +1407,7 @@ definitions:
         description: 'If idToken is STS id token, then this field will be refresh token.'
         type: string
       screenName:
-        description: The screen_name of a Twitter user.
+        description: The screen_name of a Twitter user or the login name at Github.
         type: string
       timeZone:
         description: The timezone of the user.

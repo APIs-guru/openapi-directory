@@ -41,6 +41,55 @@ securityDefinitions:
 security:
   - apikey: []
 parameters:
+  brand-web-safe-title:
+    description: Title of brand to which clips belong
+    in: path
+    name: brand-web-safe-title
+    required: true
+    type: string
+  category:
+    description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
+    in: path
+    name: category
+    required: true
+    type: string
+  channel:
+    description: The name of the channel for which you seek associated Channel 4oD programmes
+    enum:
+      - c4
+      - f4
+      - e4
+      - m4
+      - 4m
+      - 4s
+    in: path
+    name: channel
+    required: true
+    type: string
+  collection_name:
+    description: Web safe title for the collection.
+    in: path
+    name: collection_name
+    required: true
+    type: string
+  dd:
+    description: The date for which you wish to see programming information. Note the schedule days start from 6am and run until 6am on the next calendar day.
+    in: path
+    name: dd
+    required: true
+    type: string
+  mm:
+    description: The date for which you wish to see programming information. Note the schedule days start from 6am and run until 6am on the next calendar day.
+    in: path
+    name: mm
+    required: true
+    type: string
+  pageno:
+    description: Page number of results to return
+    in: path
+    name: pageno
+    required: true
+    type: integer
   platform:
     description: The platform to use for the query. Alias 'client'.
     enum:
@@ -57,6 +106,36 @@ parameters:
     in: query
     name: platform
     required: false
+    type: string
+  q:
+    description: 'The programme name to look for, minimum length: 2 chars.Looking for programme names with special chars might be URL encoded.'
+    in: query
+    name: q
+    required: true
+    type: string
+  q1:
+    description: 'The programme name to look for, minimum length: 2 chars.Looking for programme names with special chars might be URL encoded.'
+    in: path
+    name: q
+    required: true
+    type: string
+  series_number:
+    description: Unique identifier of series to which clips belong
+    in: path
+    name: series_number
+    required: true
+    type: string
+  start_letter:
+    description: The letter of the alphabet for which you seek associated Channel 4 programmes
+    in: path
+    name: start_letter
+    required: true
+    type: string
+  yyyy:
+    description: The date for which you wish to see programming information. Note the schedule days start from 6am and run until 6am on the next calendar day.
+    in: path
+    name: yyyy
+    required: true
     type: string
 tags:
   - description: Channel 4 data feeds
@@ -91,8 +170,6 @@ paths:
           name: dd
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -114,8 +191,6 @@ paths:
       operationId: 4oD_Most_Popular_Episodes_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -139,8 +214,6 @@ paths:
       operationId: 4oD_Clips_Catch_Up_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -163,8 +236,6 @@ paths:
       operationId: A_to_Z_Landing_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -185,13 +256,7 @@ paths:
       operationId: A_to_Z_Letter_Feed
       parameters:
         - $ref: '#/parameters/platform'
-        - description: The letter of the alphabet for which you seek associated Channel 4 programmes
-          in: path
-          name: start_letter
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/start_letter'
       responses:
         '200':
           description: Default response
@@ -212,18 +277,8 @@ paths:
       operationId: A_to_Z_Letter_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: The letter of the alphabet for which you seek associated Channel 4 programmes
-          in: path
-          name: start_letter
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/start_letter'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -239,8 +294,6 @@ paths:
       operationId: 4oD_Title_All_Brands_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -256,13 +309,7 @@ paths:
       operationId: 4oD_Title_All_Brands_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -284,8 +331,6 @@ paths:
       operationId: 4oD_Popular_All_Brands_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -307,13 +352,7 @@ paths:
       operationId: 4oD_Popular_All_Brands_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -335,8 +374,6 @@ paths:
       operationId: Popular_Brands_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -358,13 +395,7 @@ paths:
       operationId: Popular_Brands_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -385,8 +416,6 @@ paths:
       operationId: Categories_Landing_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -402,13 +431,7 @@ paths:
       operationId: All_Programmes_by_TX_Date
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx )'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -424,13 +447,7 @@ paths:
       operationId: 4oD_Programmes_by_TX_Date
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -446,18 +463,8 @@ paths:
       operationId: 4oD_Programmes_by_TX_Date(4)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -479,13 +486,7 @@ paths:
       operationId: Most_Popular_Brands_Feed
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -507,18 +508,8 @@ paths:
       operationId: Most_Popular_Brands_Feed(5)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -540,13 +531,7 @@ paths:
       operationId: 4oD_Programmes_by_Title
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -568,18 +553,8 @@ paths:
       operationId: 4oD_Programmes_by_Title(4)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -595,25 +570,8 @@ paths:
       operationId: All_Programmes_by_TX_Date(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx )'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: The name of the channel for which you seek associated Channel 4oD programmes
-          enum:
-            - c4
-            - f4
-            - e4
-            - m4
-            - 4m
-            - 4s
-          in: path
-          name: channel
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/channel'
       responses:
         '200':
           description: Default response
@@ -629,25 +587,8 @@ paths:
       operationId: 4oD_Programmes_by_TX_Date(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: The name of the channel for which you seek associated Channel 4oD programmes
-          enum:
-            - c4
-            - f4
-            - e4
-            - m4
-            - 4m
-            - 4s
-          in: path
-          name: channel
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/channel'
       responses:
         '200':
           description: Default response
@@ -663,30 +604,9 @@ paths:
       operationId: 4oD_Programmes_by_TX_Date(5)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: The name of the channel for which you seek associated Channel 4oD programmes
-          enum:
-            - c4
-            - f4
-            - e4
-            - m4
-            - 4m
-            - 4s
-          in: path
-          name: channel
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/channel'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -708,25 +628,8 @@ paths:
       operationId: Most_Popular_Brands_Feed(3)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: The name of the channel for which you seek associated Channel 4oD programmes
-          enum:
-            - c4
-            - f4
-            - e4
-            - m4
-            - 4m
-            - 4s
-          in: path
-          name: channel
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/channel'
       responses:
         '200':
           description: Default response
@@ -748,30 +651,9 @@ paths:
       operationId: Most_Popular_Brands_Feed(7)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: The name of the channel for which you seek associated Channel 4oD programmes
-          enum:
-            - c4
-            - f4
-            - e4
-            - m4
-            - 4m
-            - 4s
-          in: path
-          name: channel
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/channel'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -793,25 +675,8 @@ paths:
       operationId: 4oD_Programmes_by_Title(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: The name of the channel for which you seek associated Channel 4oD programmes
-          enum:
-            - c4
-            - f4
-            - e4
-            - m4
-            - 4m
-            - 4s
-          in: path
-          name: channel
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/channel'
       responses:
         '200':
           description: Default response
@@ -833,30 +698,9 @@ paths:
       operationId: 4oD_Programmes_by_Title(5)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: The name of the channel for which you seek associated Channel 4oD programmes
-          enum:
-            - c4
-            - f4
-            - e4
-            - m4
-            - 4m
-            - 4s
-          in: path
-          name: channel
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/channel'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -872,30 +716,9 @@ paths:
       operationId: All_Programmes_by_TX_Date(5)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx )'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: The name of the channel for which you seek associated Channel 4oD programmes
-          enum:
-            - c4
-            - f4
-            - e4
-            - m4
-            - 4m
-            - 4s
-          in: path
-          name: channel
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/channel'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -917,25 +740,8 @@ paths:
       operationId: All_Programmes_by_Title(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: The name of the channel for which you seek associated Channel 4oD programmes
-          enum:
-            - c4
-            - f4
-            - e4
-            - m4
-            - 4m
-            - 4s
-          in: path
-          name: channel
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/channel'
       responses:
         '200':
           description: Default response
@@ -957,30 +763,9 @@ paths:
       operationId: All_Programmes_by_Title(5)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: The name of the channel for which you seek associated Channel 4oD programmes
-          enum:
-            - c4
-            - f4
-            - e4
-            - m4
-            - 4m
-            - 4s
-          in: path
-          name: channel
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/channel'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -996,13 +781,7 @@ paths:
       operationId: All_Programmes_by_TX_Date(3)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx )'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -1018,13 +797,7 @@ paths:
       operationId: 4oD_Programmes_by_TX_Date(3)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -1040,18 +813,8 @@ paths:
       operationId: 4oD_Programmes_by_TX_Date(6)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -1073,13 +836,7 @@ paths:
       operationId: Most_Popular_Brands_Feed(4)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -1101,18 +858,8 @@ paths:
       operationId: Most_Popular_Brands_Feed(8)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -1134,13 +881,7 @@ paths:
       operationId: 4oD_Programmes_by_Title(3)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -1162,18 +903,8 @@ paths:
       operationId: 4oD_Programmes_by_Title(6)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -1189,18 +920,8 @@ paths:
       operationId: All_Programmes_by_TX_Date(6)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx )'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -1222,13 +943,7 @@ paths:
       operationId: All_Programmes_by_Title(3)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -1250,18 +965,8 @@ paths:
       operationId: All_Programmes_by_Title(6)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -1277,18 +982,8 @@ paths:
       operationId: All_Programmes_by_TX_Date(4)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx )'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -1310,13 +1005,7 @@ paths:
       operationId: Most_Popular_Brands_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -1338,18 +1027,8 @@ paths:
       operationId: Most_Popular_Brands_Feed(6)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4oD programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -1371,13 +1050,7 @@ paths:
       operationId: All_Programmes_by_Title
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
       responses:
         '200':
           description: Default response
@@ -1399,18 +1072,8 @@ paths:
       operationId: All_Programmes_by_Title(4)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The name of the category for which you seek associated Channel 4 programmes. (For a full list of categories, please see http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx)'
-          in: path
-          name: category
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/category'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -1426,13 +1089,7 @@ paths:
       operationId: Collections_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: Web safe title for the collection.
-          in: path
-          name: collection_name
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/collection_name'
       responses:
         '200':
           description: Default response
@@ -1448,13 +1105,7 @@ paths:
       operationId: Collections_Feed
       parameters:
         - $ref: '#/parameters/platform'
-        - description: Web safe title for the collection.
-          in: path
-          name: collection_name
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/collection_name'
       responses:
         '200':
           description: Default response
@@ -1477,13 +1128,7 @@ paths:
       operationId: Flattened_Collection_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: Web safe title for the collection.
-          in: path
-          name: collection_name
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/collection_name'
       responses:
         '200':
           description: Default response
@@ -1506,13 +1151,7 @@ paths:
       operationId: Flattened_Collection_Feed
       parameters:
         - $ref: '#/parameters/platform'
-        - description: Web safe title for the collection.
-          in: path
-          name: collection_name
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/collection_name'
       responses:
         '200':
           description: Default response
@@ -1534,8 +1173,6 @@ paths:
       operationId: Coming_Soon_feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -1562,8 +1199,6 @@ paths:
           name: category
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -1584,8 +1219,6 @@ paths:
           name: programme-id
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -1607,13 +1240,7 @@ paths:
       operationId: Search_Feed
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The programme name to look for, minimum length: 2 chars.Looking for programme names with special chars might be URL encoded.'
-          in: query
-          name: q
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/q'
       responses:
         '200':
           description: Default response
@@ -1635,18 +1262,8 @@ paths:
       operationId: Search_Feed(3)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The programme name to look for, minimum length: 2 chars.Looking for programme names with special chars might be URL encoded.'
-          in: query
-          name: q
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/q'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -1668,13 +1285,7 @@ paths:
       operationId: Search_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The programme name to look for, minimum length: 2 chars.Looking for programme names with special chars might be URL encoded.'
-          in: path
-          name: q
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/q1'
       responses:
         '200':
           description: Default response
@@ -1696,18 +1307,8 @@ paths:
       operationId: Search_Feed(4)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: 'The programme name to look for, minimum length: 2 chars.Looking for programme names with special chars might be URL encoded.'
-          in: path
-          name: q
-          required: true
-          type: string
-        - description: Page number of results to return
-          in: path
-          name: pageno
-          required: true
-          type: integer
-      produces:
-        - application/xml
+        - $ref: '#/parameters/q1'
+        - $ref: '#/parameters/pageno'
       responses:
         '200':
           description: Default response
@@ -1729,23 +1330,9 @@ paths:
       operationId: TV_Listings_Feed
       parameters:
         - $ref: '#/parameters/platform'
-        - description: The date for which you wish to see programming information. Note the schedule days start from 6am and run until 6am on the next calendar day.
-          in: path
-          name: yyyy
-          required: true
-          type: string
-        - description: The date for which you wish to see programming information. Note the schedule days start from 6am and run until 6am on the next calendar day.
-          in: path
-          name: mm
-          required: true
-          type: string
-        - description: The date for which you wish to see programming information. Note the schedule days start from 6am and run until 6am on the next calendar day.
-          in: path
-          name: dd
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/yyyy'
+        - $ref: '#/parameters/mm'
+        - $ref: '#/parameters/dd'
       responses:
         '200':
           description: Default response
@@ -1767,21 +1354,9 @@ paths:
       operationId: TV_Listings_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: The date for which you wish to see programming information. Note the schedule days start from 6am and run until 6am on the next calendar day.
-          in: path
-          name: yyyy
-          required: true
-          type: string
-        - description: The date for which you wish to see programming information. Note the schedule days start from 6am and run until 6am on the next calendar day.
-          in: path
-          name: mm
-          required: true
-          type: string
-        - description: The date for which you wish to see programming information. Note the schedule days start from 6am and run until 6am on the next calendar day.
-          in: path
-          name: dd
-          required: true
-          type: string
+        - $ref: '#/parameters/yyyy'
+        - $ref: '#/parameters/mm'
+        - $ref: '#/parameters/dd'
         - description: 'The EPG for a specific channel (c4, e4, m4, 4m, f4, 4s)'
           enum:
             - c4
@@ -1794,8 +1369,6 @@ paths:
           name: channel
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -1821,8 +1394,6 @@ paths:
           name: brand-web-safe-title
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -1850,8 +1421,6 @@ paths:
           name: brand-web-safe-title
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -1879,8 +1448,6 @@ paths:
           name: brand-web-safe-title
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -1908,8 +1475,6 @@ paths:
           name: brand-web-safe-title
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -1942,8 +1507,6 @@ paths:
           name: series_number
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -1981,8 +1544,6 @@ paths:
           name: episode_number
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -1998,13 +1559,7 @@ paths:
       operationId: Clips_Landing_Feed_Brand_Series_and_Episode_Levels
       parameters:
         - $ref: '#/parameters/platform'
-        - description: Title of brand to which clips belong
-          in: path
-          name: brand-web-safe-title
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/brand-web-safe-title'
       responses:
         '200':
           description: Default response
@@ -2020,18 +1575,8 @@ paths:
       operationId: Clips_Landing_Feed_Brand_Series_and_Episode_Levels(2)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: Title of brand to which clips belong
-          in: path
-          name: brand-web-safe-title
-          required: true
-          type: string
-        - description: Unique identifier of series to which clips belong
-          in: path
-          name: series_number
-          required: true
-          type: string
-      produces:
-        - application/xml
+        - $ref: '#/parameters/brand-web-safe-title'
+        - $ref: '#/parameters/series_number'
       responses:
         '200':
           description: Default response
@@ -2047,23 +1592,13 @@ paths:
       operationId: Clips_Landing_Feed_Brand_Series_and_Episode_Levels(3)
       parameters:
         - $ref: '#/parameters/platform'
-        - description: Title of brand to which clips belong
-          in: path
-          name: brand-web-safe-title
-          required: true
-          type: string
-        - description: Unique identifier of series to which clips belong
-          in: path
-          name: series_number
-          required: true
-          type: string
+        - $ref: '#/parameters/brand-web-safe-title'
+        - $ref: '#/parameters/series_number'
         - description: Unique identifier of episode to which clips belong
           in: path
           name: episode_number
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response
@@ -2094,8 +1629,6 @@ paths:
           name: clip-asset-id
           required: true
           type: string
-      produces:
-        - application/xml
       responses:
         '200':
           description: Default response

@@ -55,7 +55,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Batch/batchAccounts':
     get:
       description: Gets information about the Batch accounts associated with the subscription.
-      operationId: Account_List
+      operationId: BatchAccount_List
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -65,13 +65,13 @@ paths:
           schema:
             $ref: '#/definitions/BatchAccountListResult'
       tags:
-        - Account
+        - BatchAccount
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationName}/quotas':
     get:
-      description: Gets the Batch service quotas for the specified suscription.
-      operationId: Subscription_GetSubscriptionQuotas
+      description: Gets the Batch service quotas for the specified subscription at the given location.
+      operationId: Location_GetQuotas
       parameters:
         - description: The desired region for the quotas.
           in: path
@@ -84,13 +84,13 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/SubscriptionQuotasGetResult'
+            $ref: '#/definitions/BatchLocationQuota'
       tags:
-        - Subscription
+        - Location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts':
     get:
       description: Gets information about the Batch accounts associated within the specified resource group.
-      operationId: Account_ListByResourceGroup
+      operationId: BatchAccount_ListByResourceGroup
       parameters:
         - description: The name of the resource group whose Batch accounts to list.
           in: path
@@ -106,13 +106,13 @@ paths:
           schema:
             $ref: '#/definitions/BatchAccountListResult'
       tags:
-        - Account
+        - BatchAccount
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}':
     delete:
       description: Deletes the specified Batch account.
-      operationId: Account_Delete
+      operationId: BatchAccount_Delete
       parameters:
         - description: The name of the resource group that contains the Batch account to be deleted.
           in: path
@@ -138,11 +138,11 @@ paths:
         '204':
           description: ''
       tags:
-        - Account
+        - BatchAccount
       x-ms-long-running-operation: true
     get:
       description: Gets information about the specified Batch account.
-      operationId: Account_Get
+      operationId: BatchAccount_Get
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -164,12 +164,12 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/AccountResource'
+            $ref: '#/definitions/BatchAccount'
       tags:
-        - Account
+        - BatchAccount
     patch:
       description: Updates the properties of an existing Batch account.
-      operationId: Account_Update
+      operationId: BatchAccount_Update
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -197,12 +197,12 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/AccountResource'
+            $ref: '#/definitions/BatchAccount'
       tags:
-        - Account
+        - BatchAccount
     put:
       description: Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.
-      operationId: Account_Create
+      operationId: BatchAccount_Create
       parameters:
         - description: The name of the resource group that contains the new Batch account.
           in: path
@@ -230,11 +230,11 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/AccountResource'
+            $ref: '#/definitions/BatchAccount'
         '202':
           description: ''
       tags:
-        - Account
+        - BatchAccount
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications':
     get:
@@ -275,7 +275,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}':
     delete:
       description: Deletes an application.
-      operationId: Application_DeleteApplication
+      operationId: Application_Delete
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -305,7 +305,7 @@ paths:
         - Application
     get:
       description: Gets information about the specified application.
-      operationId: Application_GetApplication
+      operationId: Application_Get
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -337,7 +337,7 @@ paths:
         - Application
     patch:
       description: Updates settings for the specified application.
-      operationId: Application_UpdateApplication
+      operationId: Application_Update
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -373,7 +373,7 @@ paths:
         - Application
     put:
       description: Adds an application to the specified Batch account.
-      operationId: Application_AddApplication
+      operationId: Application_Create
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -412,7 +412,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}':
     delete:
       description: Deletes an application package record and its associated binary file.
-      operationId: Application_DeleteApplicationPackage
+      operationId: ApplicationPackage_Delete
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -444,10 +444,10 @@ paths:
         '204':
           description: ''
       tags:
-        - Application
+        - ApplicationPackage
     get:
       description: Gets information about the specified application package.
-      operationId: Application_GetApplicationPackage
+      operationId: ApplicationPackage_Get
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -479,12 +479,12 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/GetApplicationPackageResult'
+            $ref: '#/definitions/ApplicationPackage'
       tags:
-        - Application
+        - ApplicationPackage
     put:
       description: Creates an application package record.
-      operationId: Application_AddApplicationPackage
+      operationId: ApplicationPackage_Create
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -516,13 +516,13 @@ paths:
         '201':
           description: ''
           schema:
-            $ref: '#/definitions/AddApplicationPackageResult'
+            $ref: '#/definitions/ApplicationPackage'
       tags:
-        - Application
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{id}/versions/{version}/activate':
+        - ApplicationPackage
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}/activate':
     post:
       description: Activates the specified application package.
-      operationId: Application_ActivateApplicationPackage
+      operationId: ApplicationPackage_Activate
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -540,7 +540,7 @@ paths:
           type: string
         - description: The id of the application.
           in: path
-          name: id
+          name: applicationId
           required: true
           type: string
         - description: The version of the application to activate.
@@ -560,11 +560,11 @@ paths:
         '204':
           description: ''
       tags:
-        - Application
+        - ApplicationPackage
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/listKeys':
     post:
-      description: Lists the account keys for the specified Batch account.
-      operationId: Account_ListKeys
+      description: Gets the account keys for the specified Batch account.
+      operationId: BatchAccount_GetKeys
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -586,13 +586,13 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/BatchAccountListKeyResult'
+            $ref: '#/definitions/BatchAccountKeys'
       tags:
-        - Account
+        - BatchAccount
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/regenerateKeys':
     post:
       description: Regenerates the specified account key for the specified Batch account.
-      operationId: Account_RegenerateKey
+      operationId: BatchAccount_RegenerateKey
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -620,13 +620,13 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/BatchAccountRegenerateKeyResult'
+            $ref: '#/definitions/BatchAccountKeys'
       tags:
-        - Account
+        - BatchAccount
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/syncAutoStorageKeys':
     post:
       description: Synchronizes access keys for the auto storage account configured for the specified Batch account.
-      operationId: Account_SynchronizeAutoStorageKeys
+      operationId: BatchAccount_SynchronizeAutoStorageKeys
       parameters:
         - description: The name of the resource group that contains the Batch account.
           in: path
@@ -648,61 +648,8 @@ paths:
         '204':
           description: ''
       tags:
-        - Account
+        - BatchAccount
 definitions:
-  AccountBaseProperties:
-    description: The properties of a Batch account.
-    properties:
-      autoStorage:
-        $ref: '#/definitions/AutoStorageBaseProperties'
-        description: The properties related to auto storage account.
-  AccountProperties:
-    description: Account specific properties.
-    properties:
-      accountEndpoint:
-        description: The endpoint used by this account to interact with the Batch services.
-        type: string
-      activeJobAndJobScheduleQuota:
-        description: The active job and job schedule quota for this Batch account.
-        format: int32
-        type: integer
-      autoStorage:
-        $ref: '#/definitions/AutoStorageProperties'
-        description: The properties and status of any auto storage account associated with the account.
-      coreQuota:
-        description: The core quota for this Batch account.
-        format: int32
-        type: integer
-      poolQuota:
-        description: The pool quota for this Batch account.
-        format: int32
-        type: integer
-      provisioningState:
-        description: The provisioned state of the resource
-        enum:
-          - Invalid
-          - Creating
-          - Deleting
-          - Succeeded
-          - Failed
-          - Cancelled
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: AccountProvisioningState
-    required:
-      - coreQuota
-      - poolQuota
-      - activeJobAndJobScheduleQuota
-  AccountResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: Contains information about an Azure Batch account.
-    properties:
-      properties:
-        $ref: '#/definitions/AccountProperties'
-        description: The properties associated with the account.
-        x-ms-client-flatten: true
   ActivateApplicationPackageParameters:
     description: Parameters for an ApplicationOperations.ActivateApplicationPackage request.
     properties:
@@ -711,22 +658,6 @@ definitions:
         type: string
     required:
       - format
-  AddApplicationPackageResult:
-    description: Response to an ApplicationOperations.AddApplicationPackage request.
-    properties:
-      id:
-        description: The id of the application.
-        type: string
-      storageUrl:
-        description: The URL to which the application package binary file should be uploaded.
-        type: string
-      storageUrlExpiry:
-        description: The UTC time at which the storage URL will expire.
-        format: date-time
-        type: string
-      version:
-        description: The version of the application.
-        type: string
   AddApplicationParameters:
     description: Parameters for an ApplicationOperations.AddApplication request.
     properties:
@@ -757,121 +688,7 @@ definitions:
           $ref: '#/definitions/ApplicationPackage'
         type: array
   ApplicationPackage:
-    description: Contains information about an application package.
-    properties:
-      format:
-        description: 'The format of the application package, if the package has been activated.'
-        type: string
-      lastActivationTime:
-        description: 'The time at which the package was last activated, if the package is active.'
-        format: date-time
-        type: string
-      state:
-        description: The current state of the application package.
-        enum:
-          - pending
-          - active
-          - unmapped
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: PackageState
-      version:
-        description: 'The version of the application package. '
-        type: string
-  AutoStorageBaseProperties:
-    description: The properties related to auto storage account.
-    properties:
-      storageAccountId:
-        description: The resource id of the storage account to be used for auto storage account.
-        type: string
-    required:
-      - storageAccountId
-  AutoStorageProperties:
-    description: Contains information about the auto storage account associated with a Batch account.
-    properties:
-      lastKeySync:
-        description: The UTC time at which storage keys were last synchronized with the Batch account.
-        format: date-time
-        type: string
-      storageAccountId:
-        description: The resource id of the storage account to be used for auto storage account.
-        type: string
-    required:
-      - storageAccountId
-      - lastKeySync
-  BatchAccountCreateParameters:
-    description: Parameters supplied to the Create operation.
-    properties:
-      location:
-        description: The region in which the account is created.
-        type: string
-      properties:
-        $ref: '#/definitions/AccountBaseProperties'
-        description: The properties of the account.
-        x-ms-client-flatten: true
-      tags:
-        additionalProperties:
-          type: string
-        description: The user specified tags associated with the account.
-        type: object
-  BatchAccountListKeyResult:
-    description: Values returned by the GetKeys operation.
-    properties:
-      primary:
-        description: The primary key associated with the account.
-        type: string
-      secondary:
-        description: The secondary key associated with the account.
-        type: string
-  BatchAccountListResult:
-    description: Values returned by the List operation.
-    properties:
-      nextLink:
-        description: The continuation token.
-        type: string
-      value:
-        description: The collection of returned account resources.
-        items:
-          $ref: '#/definitions/AccountResource'
-        type: array
-  BatchAccountRegenerateKeyParameters:
-    description: Parameters supplied to the RegenerateKey operation.
-    properties:
-      keyName:
-        description: The type of account key to regenerate.
-        enum:
-          - Primary
-          - Secondary
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: AccountKeyType
-    required:
-      - keyName
-  BatchAccountRegenerateKeyResult:
-    description: Values returned by the RegenerateKey operation.
-    properties:
-      primary:
-        description: The primary key associated with the account.
-        type: string
-      secondary:
-        description: The secondary key associated with the account.
-        type: string
-  BatchAccountUpdateParameters:
-    description: Parameters supplied to the Update operation.
-    properties:
-      properties:
-        $ref: '#/definitions/AccountBaseProperties'
-        description: The properties of the account.
-        x-ms-client-flatten: true
-      tags:
-        additionalProperties:
-          type: string
-        description: The user specified tags associated with the account.
-        type: object
-  GetApplicationPackageResult:
-    description: Response to an ApplicationOperations.GetApplicationPackage request.
+    description: An application package which represents a particular version of an application.
     properties:
       format:
         description: 'The format of the application package, if the package is active.'
@@ -903,6 +720,151 @@ definitions:
       version:
         description: 'The version of the application package. '
         type: string
+  AutoStorageBaseProperties:
+    description: The properties related to auto storage account.
+    properties:
+      storageAccountId:
+        description: The resource id of the storage account to be used for auto storage account.
+        type: string
+    required:
+      - storageAccountId
+  AutoStorageProperties:
+    description: Contains information about the auto storage account associated with a Batch account.
+    properties:
+      lastKeySync:
+        description: The UTC time at which storage keys were last synchronized with the Batch account.
+        format: date-time
+        type: string
+      storageAccountId:
+        description: The resource id of the storage account to be used for auto storage account.
+        type: string
+    required:
+      - storageAccountId
+      - lastKeySync
+  BatchAccount:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Contains information about an Azure Batch account.
+    properties:
+      properties:
+        $ref: '#/definitions/BatchAccountProperties'
+        description: The properties associated with the account.
+        x-ms-client-flatten: true
+  BatchAccountBaseProperties:
+    description: The properties of a Batch account.
+    properties:
+      autoStorage:
+        $ref: '#/definitions/AutoStorageBaseProperties'
+        description: The properties related to auto storage account.
+  BatchAccountCreateParameters:
+    description: Parameters supplied to the Create operation.
+    properties:
+      location:
+        description: The region in which to create the account.
+        type: string
+      properties:
+        $ref: '#/definitions/BatchAccountBaseProperties'
+        description: The properties of the account.
+        x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: The user specified tags associated with the account.
+        type: object
+    required:
+      - location
+  BatchAccountKeys:
+    description: A set of Azure Batch account keys.
+    properties:
+      primary:
+        description: The primary key associated with the account.
+        type: string
+      secondary:
+        description: The secondary key associated with the account.
+        type: string
+  BatchAccountListResult:
+    description: Values returned by the List operation.
+    properties:
+      nextLink:
+        description: The continuation token.
+        type: string
+      value:
+        description: The collection of returned Batch accounts.
+        items:
+          $ref: '#/definitions/BatchAccount'
+        type: array
+  BatchAccountProperties:
+    description: Account specific properties.
+    properties:
+      accountEndpoint:
+        description: The endpoint used by this account to interact with the Batch services.
+        readOnly: true
+        type: string
+      activeJobAndJobScheduleQuota:
+        description: The active job and job schedule quota for this Batch account.
+        format: int32
+        type: integer
+      autoStorage:
+        $ref: '#/definitions/AutoStorageProperties'
+        description: The properties and status of any auto storage account associated with the account.
+      coreQuota:
+        description: The core quota for this Batch account.
+        format: int32
+        type: integer
+      poolQuota:
+        description: The pool quota for this Batch account.
+        format: int32
+        type: integer
+      provisioningState:
+        description: The provisioned state of the resource
+        enum:
+          - Invalid
+          - Creating
+          - Deleting
+          - Succeeded
+          - Failed
+          - Cancelled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ProvisioningState
+    required:
+      - coreQuota
+      - poolQuota
+      - activeJobAndJobScheduleQuota
+  BatchAccountRegenerateKeyParameters:
+    description: Parameters supplied to the RegenerateKey operation.
+    properties:
+      keyName:
+        description: The type of account key to regenerate.
+        enum:
+          - Primary
+          - Secondary
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AccountKeyType
+    required:
+      - keyName
+  BatchAccountUpdateParameters:
+    description: Parameters supplied to the Update operation.
+    properties:
+      properties:
+        $ref: '#/definitions/BatchAccountBaseProperties'
+        description: The properties of the account.
+        x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: The user specified tags associated with the account.
+        type: object
+  BatchLocationQuota:
+    description: Quotas associated with a Batch region for a particular subscription.
+    properties:
+      accountQuota:
+        description: The number of Batch accounts that may be created under the subscription in the specified region.
+        format: int32
+        type: integer
   ListApplicationsResult:
     description: Response to an ApplicationOperations.ListApplications request.
     properties:
@@ -915,6 +877,7 @@ definitions:
           $ref: '#/definitions/Application'
         type: array
   Resource:
+    description: A definition of an Azure resource.
     properties:
       id:
         description: The id of the resource
@@ -937,13 +900,6 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
-  SubscriptionQuotasGetResult:
-    description: Values returned by the Get Subscription Quotas operation.
-    properties:
-      accountQuota:
-        description: The number of Batch accounts that may be created under the subscription in the specified region.
-        format: int32
-        type: integer
   UpdateApplicationParameters:
     description: Parameters for an ApplicationOperations.UpdateApplication request.
     properties:

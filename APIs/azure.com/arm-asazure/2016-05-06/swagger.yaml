@@ -1,0 +1,326 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: 'The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete servers'
+  title: AzureAnalysisServices
+  version: '2016-05-06'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-ms-code-generation-settings:
+    name: AnalysisServicesClient
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-asazure/2016-05-06/swagger/asazure.json'
+    version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: arm-asazure
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client API Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ResourceGroupNameParameter:
+    description: Name of the Azure Resource group which a given Analysis Services server is part of.
+    in: path
+    maxLength: 90
+    minLength: 1
+    name: resourceGroupName
+    pattern: '^[-\w\._\(\)]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: A unique identifier of a Microsoft Azure subscription. The subscription id forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers':
+    get:
+      description: List all the Analysis Services servers for the given subscription
+      operationId: Servers_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AnalysisServicesResources'
+      tags:
+        - Servers
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers':
+    get:
+      description: Gets all the Analysis Services servers for the given resource group
+      operationId: Servers_ListByResourceGroup
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AnalysisServicesResources'
+      tags:
+        - Servers
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{analysisServerName}':
+    delete:
+      description: Deletes the specified Analysis Services server.
+      operationId: Servers_Delete
+      parameters:
+        - description: Name of the Analysis Services server
+          in: path
+          maxLength: 63
+          minLength: 3
+          name: analysisServerName
+          pattern: '^[a-z][a-z0-9]*$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+      tags:
+        - Servers
+      x-ms-long-running-operation: true
+    get:
+      description: Gets details about the specified Analysis Services server
+      operationId: Servers_GetDetails
+      parameters:
+        - description: Name of the Analysis Services server
+          in: path
+          maxLength: 63
+          minLength: 3
+          name: analysisServerName
+          pattern: '^[a-z][a-z0-9]*$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AnalysisServicesResource'
+      tags:
+        - Servers
+    patch:
+      description: Updates the current state of the specified Analysis Services server
+      operationId: Servers_Update
+      parameters:
+        - description: Name of the Analysis Services server
+          in: path
+          maxLength: 63
+          minLength: 3
+          name: analysisServerName
+          pattern: '^[a-z][a-z0-9]*$'
+          required: true
+          type: string
+        - description: Request object for updating the server
+          in: body
+          name: updateServerParameters
+          required: true
+          schema:
+            $ref: '#/definitions/AnalysisServicesResourceUpdateParameters'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AnalysisServicesResource'
+      tags:
+        - Servers
+      x-ms-long-running-operation: true
+    put:
+      description: Provisions the specified Analysis Services server based on the configuration specified in the request
+      operationId: Servers_Create
+      parameters:
+        - description: Request body for provisioning
+          in: body
+          name: serverParameters
+          required: true
+          schema:
+            $ref: '#/definitions/AnalysisServicesResource'
+        - description: Name of the Analysis Services server
+          in: path
+          maxLength: 63
+          minLength: 3
+          name: analysisServerName
+          pattern: '^[a-z][a-z0-9]*$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AnalysisServicesResource'
+        '201':
+          description: InProgress
+          schema:
+            $ref: '#/definitions/AnalysisServicesResource'
+      tags:
+        - Servers
+      x-ms-long-running-operation: true
+definitions:
+  AnalysisServicesResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an instance of Analysis Services resource
+    properties:
+      properties:
+        $ref: '#/definitions/AnalysisServicesResourceProperties'
+        description: Provision request properties
+        x-ms-client-flatten: true
+    type: object
+  AnalysisServicesResourceMutableProperties:
+    description: Represents a set of mutable Analysis Services resource properties
+    properties:
+      asAdministrators:
+        $ref: '#/definitions/ServerAdministrators'
+    type: object
+  AnalysisServicesResourceProperties:
+    allOf:
+      - $ref: '#/definitions/AnalysisServicesResourceMutableProperties'
+    description: Properties of Analysis Services resource
+    properties:
+      provisioningState:
+        description: The current deployment state of Analysis Services resource
+        readOnly: true
+        type: string
+      serverFullName:
+        description: Full name of the Analysis Services resource
+        readOnly: true
+        type: string
+    type: object
+  AnalysisServicesResourceUpdateParameters:
+    description: Provision request specification
+    properties:
+      properties:
+        $ref: '#/definitions/AnalysisServicesResourceMutableProperties'
+        description: Provision request properties
+        x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/ResourceSku'
+        description: Sku of the Analysis Services resource
+      tags:
+        additionalProperties:
+          type: string
+        description: Key value pairs of additional properties that can ebe specified
+        type: object
+    type: object
+  AnalysisServicesResources:
+    description: A collection of Analysis Services resources
+    properties:
+      value:
+        description: The collection of Analysis Services resources
+        items:
+          $ref: '#/definitions/AnalysisServicesResource'
+        type: array
+    required:
+      - value
+    type: object
+  Resource:
+    description: Represents an instance of Analysis Services resource
+    properties:
+      id:
+        description: Identifier that represents the Analysis Services resource
+        readOnly: true
+        type: string
+      location:
+        description: Location of the Analysis Services resource
+        type: string
+      name:
+        description: Name of the Analysis Services resource
+        readOnly: true
+        type: string
+      sku:
+        $ref: '#/definitions/ResourceSku'
+        description: Sku of the Analysis Services resource
+      tags:
+        additionalProperties:
+          type: string
+        description: Key value pairs of additional properties that can ebe specified
+        type: object
+      type:
+        description: Specifies the type of Analysis Services resource
+        readOnly: true
+        type: string
+    required:
+      - location
+      - sku
+    type: object
+    x-ms-azure-resource: true
+  ResourceSku:
+    description: Represents the SKU name and tier for Analysis Services resource
+    properties:
+      name:
+        description: Name of the Sku level for the server being provisioned.
+        enum:
+          - S1
+          - S2
+          - S4
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SkuName
+      tier:
+        description: Name of the tier to which the Sku applies.
+        enum:
+          - Developer
+          - Standard
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SkuTier
+    required:
+      - name
+      - tier
+    type: object
+  ServerAdministrators:
+    description: Array of administrator user identities
+    properties:
+      members:
+        description: Collection of administrator user identities
+        items:
+          description: UPN of the user. Example johnsmith@contoso.com.
+          type: string
+        type: array
+    type: object

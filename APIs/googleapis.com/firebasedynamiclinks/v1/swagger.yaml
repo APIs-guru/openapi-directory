@@ -1,0 +1,408 @@
+swagger: '2.0'
+schemes:
+  - https
+host: firebasedynamiclinks.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Firebase Dynamic Links API enables third party developers to programmatically create and manage Dynamic Links.
+  title: Firebase Dynamic Links
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://firebasedynamiclinks.googleapis.com/$discovery/rest?version=v1'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: firebasedynamiclinks
+externalDocs:
+  url: 'https://firebase.google.com/docs/dynamic-links/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: shortLinks
+paths:
+  /v1/shortLinks:
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a short Dynamic Link given either a valid long Dynamic Link or
+        details such as Dynamic Link domain, Android and iOS app information.
+        The created short Dynamic Link will not expire.
+
+        Repeated calls with the same long Dynamic Link or Dynamic Link information
+        will produce the same short Dynamic Link.
+
+        The Dynamic Link domain in the request must be owned by requester's
+        Firebase project.
+      operationId: firebasedynamiclinks.shortLinks.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateShortDynamicLinkRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CreateShortDynamicLinkResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+      tags:
+        - shortLinks
+definitions:
+  AnalyticsInfo:
+    description: Tracking parameters supported by Dynamic Link.
+    properties:
+      googlePlayAnalytics:
+        $ref: '#/definitions/GooglePlayAnalytics'
+        description: Google Play Campaign Measurements.
+      itunesConnectAnalytics:
+        $ref: '#/definitions/ITunesConnectAnalytics'
+        description: iTunes Connect App Analytics.
+    type: object
+  AndroidInfo:
+    description: Android related attributes to the Dynamic Link.
+    properties:
+      androidFallbackLink:
+        description: Link to open on Android if the app is not installed.
+        type: string
+      androidLink:
+        description: 'If specified, this overrides the ‘link’ parameter on Android.'
+        type: string
+      androidMinPackageVersionCode:
+        description: |-
+          Minimum version code for the Android app. If the installed app’s version
+          code is lower, then the user is taken to the Play Store.
+        type: string
+      androidPackageName:
+        description: Android package name of the app.
+        type: string
+    type: object
+  CreateShortDynamicLinkRequest:
+    description: Request to create a short Dynamic Link.
+    properties:
+      dynamicLinkInfo:
+        $ref: '#/definitions/DynamicLinkInfo'
+        description: |-
+          Information about the Dynamic Link to be shortened.
+          [Learn more](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+      longDynamicLink:
+        description: |-
+          Full long Dynamic Link URL with desired query parameters specified.
+          For example,
+          "https://sample.app.goo.gl/?link=http://www.google.com&apn=com.sample",
+          [Learn more](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+        type: string
+      suffix:
+        $ref: '#/definitions/Suffix'
+        description: Short Dynamic Link suffix. Optional.
+    type: object
+  CreateShortDynamicLinkResponse:
+    description: Response to create a short Dynamic Link.
+    properties:
+      previewLink:
+        description: Preivew link to show the link flow chart.
+        type: string
+      shortLink:
+        description: 'Short Dynamic Link value. e.g. https://abcd.app.goo.gl/wxyz'
+        type: string
+      warning:
+        description: Information about potential warnings on link creation.
+        items:
+          $ref: '#/definitions/DynamicLinkWarning'
+        type: array
+    type: object
+  DynamicLinkInfo:
+    description: Information about a Dynamic Link.
+    properties:
+      analyticsInfo:
+        $ref: '#/definitions/AnalyticsInfo'
+        description: |-
+          Parameters used for tracking. See all tracking parameters in the
+          [documentation](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+      androidInfo:
+        $ref: '#/definitions/AndroidInfo'
+        description: |-
+          Android related information. See Android related parameters in the
+          [documentation](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+      dynamicLinkDomain:
+        description: |-
+          Dynamic Links domain that the project owns, e.g. abcd.app.goo.gl
+          [Learn more](https://firebase.google.com/docs/dynamic-links/android#set-up-firebase-and-the-dynamic-links-sdk)
+          on how to set up Dynamic Link domain associated with your Firebase project.
+
+          Required.
+        type: string
+      iosInfo:
+        $ref: '#/definitions/IosInfo'
+        description: |-
+          iOS related information. See iOS related parameters in the
+          [documentation](https://firebase.google.com/docs/dynamic-links/ios#create-a-dynamic-link-programmatically).
+      isAd:
+        description: |-
+          Declares that the Dynamic Link is used in an advertisement.
+          See the 'ad' parameter in the
+          [documentation](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+        type: boolean
+      link:
+        description: |-
+          The link your app will open, You can specify any URL your app can handle.
+          This link must be a well-formatted URL, be properly URL-encoded, and use
+          the HTTP or HTTPS scheme. See 'link' parameters in the
+          [documentation](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+
+          Required.
+        type: string
+      socialMetaTagInfo:
+        $ref: '#/definitions/SocialMetaTagInfo'
+        description: |-
+          Parameters for social meta tag params.
+          Used to set meta tag data for link previews on social sites.
+    type: object
+  DynamicLinkWarning:
+    description: Dynamic Links warning messages.
+    properties:
+      warningCode:
+        description: The warning code.
+        enum:
+          - CODE_UNSPECIFIED
+          - NOT_IN_PROJECT_ANDROID_PACKAGE_NAME
+          - NOT_INTEGER_ANDROID_PACKAGE_MIN_VERSION
+          - UNNECESSARY_ANDROID_PACKAGE_MIN_VERSION
+          - NOT_URI_ANDROID_LINK
+          - UNNECESSARY_ANDROID_LINK
+          - NOT_URI_ANDROID_FALLBACK_LINK
+          - BAD_URI_SCHEME_ANDROID_FALLBACK_LINK
+          - NOT_IN_PROJECT_IOS_BUNDLE_ID
+          - NOT_IN_PROJECT_IPAD_BUNDLE_ID
+          - UNNECESSARY_IOS_URL_SCHEME
+          - NOT_NUMERIC_IOS_APP_STORE_ID
+          - UNNECESSARY_IOS_APP_STORE_ID
+          - NOT_URI_IOS_FALLBACK_LINK
+          - BAD_URI_SCHEME_IOS_FALLBACK_LINK
+          - NOT_URI_IPAD_FALLBACK_LINK
+          - BAD_URI_SCHEME_IPAD_FALLBACK_LINK
+          - BAD_DEBUG_PARAM
+          - BAD_AD_PARAM
+          - DEPRECATED_PARAM
+          - UNRECOGNIZED_PARAM
+          - TOO_LONG_PARAM
+          - NOT_URI_SOCIAL_IMAGE_LINK
+          - BAD_URI_SCHEME_SOCIAL_IMAGE_LINK
+          - NOT_URI_SOCIAL_URL
+          - BAD_URI_SCHEME_SOCIAL_URL
+          - LINK_LENGTH_TOO_LONG
+          - LINK_WITH_FRAGMENTS
+          - NOT_MATCHING_IOS_BUNDLE_ID_AND_STORE_ID
+        type: string
+      warningMessage:
+        description: The warning message to help developers improve their requests.
+        type: string
+    type: object
+  GooglePlayAnalytics:
+    description: |-
+      Parameters for Google Play Campaign Measurements.
+      [Learn more](https://developers.google.com/analytics/devguides/collection/android/v4/campaigns#campaign-params)
+    properties:
+      gclid:
+        description: |-
+          [AdWords autotagging parameter](https://support.google.com/analytics/answer/1033981?hl=en);
+          used to measure Google AdWords ads. This value is generated dynamically
+          and should never be modified.
+        type: string
+      utmCampaign:
+        description: |-
+          Campaign name; used for keyword analysis to identify a specific product
+          promotion or strategic campaign.
+        type: string
+      utmContent:
+        description: |-
+          Campaign content; used for A/B testing and content-targeted ads to
+          differentiate ads or links that point to the same URL.
+        type: string
+      utmMedium:
+        description: Campaign medium; used to identify a medium such as email or cost-per-click.
+        type: string
+      utmSource:
+        description: |-
+          Campaign source; used to identify a search engine, newsletter, or other
+          source.
+        type: string
+      utmTerm:
+        description: Campaign term; used with paid search to supply the keywords for ads.
+        type: string
+    type: object
+  ITunesConnectAnalytics:
+    description: Parameters for iTunes Connect App Analytics.
+    properties:
+      at:
+        description: Affiliate token used to create affiliate-coded links.
+        type: string
+      ct:
+        description: |-
+          Campaign text that developers can optionally add to any link in order to
+          track sales from a specific marketing campaign.
+        type: string
+      mt:
+        description: 'iTune media types, including music, podcasts, audiobooks and so on.'
+        type: string
+      pt:
+        description: |-
+          Provider token that enables analytics for Dynamic Links from within iTunes
+          Connect.
+        type: string
+    type: object
+  IosInfo:
+    description: iOS related attributes to the Dynamic Link..
+    properties:
+      iosAppStoreId:
+        description: iOS App Store ID.
+        type: string
+      iosBundleId:
+        description: iOS bundle ID of the app.
+        type: string
+      iosCustomScheme:
+        description: |-
+          Custom (destination) scheme to use for iOS. By default, we’ll use the
+          bundle ID as the custom scheme. Developer can override this behavior using
+          this param.
+        type: string
+      iosFallbackLink:
+        description: Link to open on iOS if the app is not installed.
+        type: string
+      iosIpadBundleId:
+        description: iPad bundle ID of the app.
+        type: string
+      iosIpadFallbackLink:
+        description: 'If specified, this overrides the ios_fallback_link value on iPads.'
+        type: string
+    type: object
+  SocialMetaTagInfo:
+    description: |-
+      Parameters for social meta tag params.
+      Used to set meta tag data for link previews on social sites.
+    properties:
+      socialDescription:
+        description: A short description of the link. Optional.
+        type: string
+      socialImageLink:
+        description: An image url string. Optional.
+        type: string
+      socialTitle:
+        description: Title to be displayed. Optional.
+        type: string
+    type: object
+  Suffix:
+    description: Short Dynamic Link suffix.
+    properties:
+      option:
+        description: Suffix option.
+        enum:
+          - OPTION_UNSPECIFIED
+          - UNGUESSABLE
+          - SHORT
+        type: string
+    type: object

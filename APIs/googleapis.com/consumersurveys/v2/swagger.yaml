@@ -367,7 +367,7 @@ paths:
         - surveys
   '/surveys/{surveyUrlId}/results':
     get:
-      description: Retrieves any survey results that have been produced so far. Results are formatted as an Excel file.
+      description: Retrieves any survey results that have been produced so far. Results are formatted as an Excel file. You must add "?alt=media" to the URL as an argument to get results.
       operationId: consumersurveys.results.get
       parameters:
         - description: External URL ID for the survey.
@@ -503,6 +503,9 @@ definitions:
         items:
           $ref: '#/definitions/SurveyQuestion'
         type: array
+      rejectionReason:
+        $ref: '#/definitions/SurveyRejection'
+        description: Reason for the survey being rejected. Only present if the survey state is 'rejected'.
       state:
         description: State that the survey is in.
         type: string
@@ -642,6 +645,16 @@ definitions:
         type: string
       url:
         description: The read-only URL for the hosted images.
+        type: string
+    type: object
+  SurveyRejection:
+    description: 'Message representing why the survey was rejected from review, if it was.'
+    properties:
+      explanation:
+        description: A human-readable explanation of what was wrong with the survey.
+        type: string
+      type:
+        description: Which category of rejection this was. See the GCS Help Center for additional details on each category.
         type: string
     type: object
   SurveyResults:

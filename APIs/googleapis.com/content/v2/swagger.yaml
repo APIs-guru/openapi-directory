@@ -3382,6 +3382,9 @@ definitions:
       acknowledged:
         description: Whether the order was acknowledged.
         type: boolean
+      channelType:
+        description: 'The channel type of the order: "purchaseOnGoogle" or "googleExpress".'
+        type: string
       customer:
         $ref: '#/definitions/OrderCustomer'
         description: The details of the customer who placed the order.

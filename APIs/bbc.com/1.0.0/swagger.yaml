@@ -1818,13 +1818,18 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: 'filter for specified type of linear services. one of: TV, Local Radio, National Radio, Regional Radio'
+          description: filter for specified type of linear services
           enum:
-            - TV
-            - Local Radio
-            - National Radio
-            - Regional Radio
             - Interactive
+            - Local Radio
+            - Master Brand Only
+            - National Radio
+            - On Demand
+            - Regional Radio
+            - Simulcast
+            - TV
+            - Web Only
+            - Webcast
           in: query
           items:
             format: string
@@ -4571,6 +4576,16 @@ definitions:
   related_link:
     additionalProperties: false
     properties:
+      availability:
+        additionalProperties: false
+        properties:
+          end:
+            format: date-time
+            type: string
+          start:
+            format: date-time
+            type: string
+        type: object
       is_external:
         $ref: '#/definitions/is_external'
       pid:

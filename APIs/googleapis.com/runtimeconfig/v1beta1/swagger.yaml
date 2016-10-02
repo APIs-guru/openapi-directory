@@ -334,6 +334,17 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            An optional unique request_id. If server receives two Create requests with
+            the same request_id then second request will be ignored and the resource
+            stored in the backend will be returned. Empty request_id fields are
+            ignored.
+            It is responsibility of the client to ensure uniqueness of the request_id
+            strings.
+            The strings are limited to 64 characters.
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -433,6 +444,17 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            An optional unique request_id. If server receives two Create requests with
+            the same request_id then second request will be ignored and the resource
+            stored in the backend will be returned. Empty request_id fields are
+            ignored.
+            It is responsibility of the client to ensure uniqueness of the request_id
+            strings.
+            The strings are limited to 64 characters.
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -521,6 +543,17 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            An optional unique request_id. If server receives two Create requests with
+            the same request_id then second request will be ignored and information
+            stored in the backend will be returned. Empty request_id fields are
+            ignored.
+            It is responsibility of the client to ensure uniqueness of the request_id
+            strings.
+            The strings are limited to 64 characters.
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:

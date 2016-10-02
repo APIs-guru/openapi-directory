@@ -637,7 +637,7 @@ paths:
       description: 'Lists datasets within a project. For the definitions of datasets and other genomics resources, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)'
       operationId: genomics.datasets.list
       parameters:
-        - description: Required. The project to list datasets for.
+        - description: Required. The Google Cloud project ID to list datasets for.
           in: query
           name: projectId
           type: string
@@ -2293,7 +2293,7 @@ definitions:
         description: The dataset name.
         type: string
       projectId:
-        description: The Google Developers Console project ID that this dataset belongs to.
+        description: The Google Cloud project ID that this dataset belongs to.
         type: string
     type: object
   Empty:
@@ -2345,7 +2345,7 @@ definitions:
         description: Required. A Google Cloud Storage URI for the exported BAM file. The currently authenticated user must have write access to the new file. An error will be returned if the URI already contains data.
         type: string
       projectId:
-        description: Required. The Google Developers Console project ID that owns this export. The caller must have WRITE access to this project.
+        description: Required. The Google Cloud project ID that owns this export. The caller must have WRITE access to this project.
         type: string
       referenceNames:
         description: 'The reference names to export. If this is not specified, all reference sequences, including unmapped reads, are exported. Use `*` to export only unmapped reads.'
@@ -3265,7 +3265,7 @@ definitions:
         format: int64
         type: string
       projectId:
-        description: The Google Developers Console project ID or number which will be billed for this access. The caller must have WRITE access to this project. Required.
+        description: The Google Cloud project ID which will be billed for this access. The caller must have WRITE access to this project. Required.
         type: string
       readGroupSetId:
         description: The ID of the read group set from which to stream reads.
@@ -3306,7 +3306,7 @@ definitions:
         format: int64
         type: string
       projectId:
-        description: The Google Developers Console project ID or number which will be billed for this access. The caller must have WRITE access to this project. Required.
+        description: The Google Cloud project ID which will be billed for this access. The caller must have WRITE access to this project. Required.
         type: string
       referenceName:
         description: Required. Only return variants in this reference sequence.

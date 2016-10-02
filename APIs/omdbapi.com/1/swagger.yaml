@@ -38,7 +38,7 @@ paths:
   /:
     get:
       description: 'Find a movie, series or episode from the OMDb by title, IMDb-id or by free-text search'
-      operationId: Get_OMDb Search_
+      operationId: Get_OMDb Search
       parameters:
         - description: 'Movie title to search for. One of t, i or s is required.'
           in: query
@@ -111,9 +111,6 @@ paths:
           name: callback
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Default response

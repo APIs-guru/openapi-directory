@@ -168,6 +168,35 @@ paths:
             $ref: '#/definitions/NamespaceResource'
       tags:
         - Namespaces
+    patch:
+      description: Patches the existing namespace
+      operationId: Namespaces_Patch
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: Parameters supplied to patch a Namespace Resource.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/NamespacePatchParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace is Updated
+          schema:
+            $ref: '#/definitions/NamespaceResource'
+      tags:
+        - Namespaces
     put:
       description: 'Creates/Updates a service namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
       externalDocs:
@@ -847,15 +876,36 @@ definitions:
         description: Baidu Secret Key
         type: string
   CheckAvailabilityParameters:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Parameters supplied to the Check Name Availability for Namespace and NotificationHubs.
     properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
       isAvailiable:
         description: True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false.
         type: boolean
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Resource name
+        type: string
+      sku:
+        $ref: '#/definitions/Sku'
+        description: The sku of the created namespace
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
     required:
       - name
+      - location
   CheckAvailabilityResult:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -921,6 +971,17 @@ definitions:
         items:
           $ref: '#/definitions/NamespaceResource'
         type: array
+  NamespacePatchParameters:
+    description: Parameters supplied to the Patch Namespace operation.
+    properties:
+      sku:
+        $ref: '#/definitions/Sku'
+        description: The sku of the created namespace
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
   NamespaceProperties:
     description: Namespace properties.
     properties:
@@ -1092,6 +1153,9 @@ definitions:
         description: Resource name
         readOnly: true
         type: string
+      sku:
+        $ref: '#/definitions/Sku'
+        description: The sku of the created namespace
       tags:
         additionalProperties:
           type: string
@@ -1167,6 +1231,33 @@ definitions:
         $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'
         description: Pproperties of the Namespace AuthorizationRule.
         x-ms-client-flatten: true
+  Sku:
+    description: The Sku description for a namespace
+    properties:
+      capacity:
+        description: The capacity of the resource
+        type: integer
+      family:
+        description: The Sku Family
+        type: string
+      name:
+        description: Name of the notification hub sku
+        enum:
+          - Free
+          - Basic
+          - Standard
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SkuName
+      size:
+        description: The Sku size
+        type: string
+      tier:
+        description: The tier of particular sku
+        type: string
+    required:
+      - name
   SubResource:
     properties:
       id:

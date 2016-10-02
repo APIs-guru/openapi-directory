@@ -96,6 +96,14 @@ definitions:
         description: arrival time at this activity in ms
         format: int64
         type: integer
+      distance:
+        description: cumulated distance from start to this activity in m
+        format: int64
+        type: integer
+      driving_time:
+        description: driving time of driver in ms
+        format: int64
+        type: integer
       end_time:
         description: end time of and thus departure time at this activity
         format: int64
@@ -103,6 +111,20 @@ definitions:
       id:
         description: 'id referring to the underlying service or shipment, i.e. the shipment or service this activity belongs to'
         type: string
+      load_after:
+        description: Array with size/capacity dimensions after this activity
+        items:
+          description: dimension value
+          format: int32
+          type: integer
+        type: array
+      load_before:
+        description: Array with size/capacity dimensions before this activity
+        items:
+          description: dimension value
+          format: int32
+          type: integer
+        type: array
       location_id:
         description: id that refers to address
         type: string
@@ -114,7 +136,13 @@ definitions:
           - service
           - pickupShipment
           - deliverShipment
+          - pickup
+          - delivery
         type: string
+      waiting_time:
+        description: waiting time at this activity in ms
+        format: int64
+        type: integer
     type: object
   Address:
     properties:
@@ -266,6 +294,11 @@ definitions:
     type: object
   Response:
     properties:
+      copyrights:
+        items:
+          description: attribution
+          type: string
+        type: array
       job_id:
         description: unique identify of job - which you get when posting your request to the large problem solver
         type: string
@@ -295,9 +328,25 @@ definitions:
         items:
           $ref: '#/definitions/Activity'
         type: array
+      completion_time:
+        description: completion time of route in ms
+        format: int64
+        type: integer
+      distance:
+        description: distance of route in meter
+        format: int64
+        type: integer
+      transport_time:
+        description: transport time of route in ms
+        format: int64
+        type: integer
       vehicle_id:
         description: id of vehicle that operates route
         type: string
+      waiting_time:
+        description: waiting time of route in ms
+        format: int64
+        type: integer
     type: object
   Service:
     properties:
@@ -389,8 +438,16 @@ definitions:
         description: overall travel distance in meters
         format: int32
         type: integer
+      max_operation_time:
+        description: operation time of the longest route in ms
+        format: int64
+        type: integer
       no_unassigned:
         description: number of jobs that could not be assigned to final solution
+        format: int32
+        type: integer
+      no_vehicles:
+        description: number of employed vehicles
         format: int32
         type: integer
       routes:
@@ -399,7 +456,11 @@ definitions:
           $ref: '#/definitions/Route'
         type: array
       time:
-        description: overall travel time in ms
+        description: overall transport time in ms
+        format: int64
+        type: integer
+      transport_time:
+        description: overall transport time in ms
         format: int64
         type: integer
       unassigned:
@@ -417,6 +478,10 @@ definitions:
               type: string
             type: array
         type: object
+      waiting_time:
+        description: total waiting time in ms
+        format: int64
+        type: integer
     type: object
   Stop:
     properties:

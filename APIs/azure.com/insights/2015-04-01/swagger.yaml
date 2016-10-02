@@ -1,0 +1,277 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: InsightsClient
+  version: '2015-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2015-04-01/swagger/insightsClient.json'
+    version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: insights
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  FilterParameter:
+    description: 'The filter to apply on the operation. For more information please see https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx'
+    in: query
+    name: $filter
+    required: false
+    type: string
+    x-ms-parameter-location: method
+  SelectParameter:
+    description: 'The list of property names to be returned. Possible values are: authorization, channels, claims, correlationId, description, eventDataId, eventName, eventTimestamp, httpRequest, level, operationId, operationName, properties, resourceGroupName, resourceProviderName, resourceId, status, submissionTimestamp, subStatus, subscriptionId'
+    in: query
+    name: $select
+    required: false
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The Azure subscription Id.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  /providers/microsoft.insights/eventtypes/management/eventcategories:
+    get:
+      description: The list of event categories.
+      operationId: EventCategories_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successful request to get the list of event categories
+          schema:
+            $ref: '#/definitions/EventCategoryCollection'
+      tags:
+        - EventCategories
+      x-ms-pageable: {}
+  /providers/microsoft.insights/eventtypes/management/values:
+    get:
+      description: Provides the list of tenant events.
+      operationId: TenantEvents_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/FilterParameter'
+        - $ref: '#/parameters/SelectParameter'
+      responses:
+        '200':
+          description: Successful request to get a page of tenant events
+          schema:
+            $ref: '#/definitions/EventDataCollection'
+      tags:
+        - TenantEvents
+      x-ms-odata: '#/definitions/EventData'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/microsoft.insights/eventtypes/management/values':
+    get:
+      description: Provides the list of events.
+      operationId: Events_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/FilterParameter'
+        - $ref: '#/parameters/SelectParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful request to get a page of events
+          schema:
+            $ref: '#/definitions/EventDataCollection'
+      tags:
+        - Events
+      x-ms-odata: '#/definitions/EventData'
+      x-ms-pageable:
+        nextLinkName: nextLink
+definitions:
+  EventCategoryCollection:
+    description: Represents collection of event categories.
+    properties:
+      value:
+        description: the list that includes the Azure event categories.
+        items:
+          $ref: '#/definitions/LocalizableString'
+        type: array
+    required:
+      - value
+  EventData:
+    description: The Azure event log entries are of type EventData
+    properties:
+      authorization:
+        $ref: '#/definitions/SenderAuthorization'
+        description: the authorization used by the user who has performed the operation that led to this event.
+      caller:
+        description: 'the email address of the user who has performed the operation, the UPN claim or SPN claim based on availability.'
+        type: string
+      category:
+        $ref: '#/definitions/LocalizableString'
+        description: the event category.
+      channels:
+        description: 'the event channels. The regular event logs, that you see in the Azure Management Portals, flow through the ''Operation'' channel.'
+        enum:
+          - Admin
+          - Operation
+          - Debug
+          - Analytics
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EventChannels
+      claims:
+        additionalProperties:
+          type: string
+        description: key value pairs to identify ARM permissions.
+        type: object
+      correlationId:
+        description: the correlation Id. The correlation Id is shared among the events that belong to the same deployment.
+        type: string
+      description:
+        description: the description of the event.
+        type: string
+      eventDataId:
+        description: the event data Id. This is a unique identifier for an event.
+        type: string
+      eventName:
+        $ref: '#/definitions/LocalizableString'
+        description: 'the event name. This value should not be confused with OperationName. For practical purposes, OperationName might be more appealing to end users.'
+      eventTimestamp:
+        description: the occurrence time of event in ISO 8601 format
+        format: date-time
+        type: string
+      httpRequest:
+        $ref: '#/definitions/HttpRequestInfo'
+        description: the HTTP request info. The client IP address of the user who initiated the event is captured as part of the HTTP request info.
+      id:
+        description: the resource Id.
+        type: string
+      level:
+        description: the event level
+        enum:
+          - Critical
+          - Error
+          - Warning
+          - Informational
+          - Verbose
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EventLevel
+      operationId:
+        description: It is usually a GUID shared among the events corresponding to single operation. This value should not be confused with EventName.
+        type: string
+      operationName:
+        $ref: '#/definitions/LocalizableString'
+        description: the operation name.
+      properties:
+        additionalProperties:
+          type: string
+        description: the property bag that includes details about the event.
+        type: object
+      resourceGroupName:
+        description: the resource group name.
+        externalDocs:
+          url: 'http://msdn.microsoft.com/en-us/library/azure/dn790546.aspx'
+        type: string
+      resourceId:
+        description: the resource uri
+        externalDocs:
+          url: 'http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx'
+        type: string
+      resourceProviderName:
+        $ref: '#/definitions/LocalizableString'
+        description: the resource provider name.
+        externalDocs:
+          url: 'http://msdn.microsoft.com/en-us/library/azure/dn790572.aspx'
+      resourceType:
+        $ref: '#/definitions/LocalizableString'
+        description: the resource type
+        externalDocs:
+          url: 'http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx'
+      status:
+        $ref: '#/definitions/LocalizableString'
+        description: 'the event status. Some typical values are: Started, Succeeded, Failed. For more information see: https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx'
+      subStatus:
+        $ref: '#/definitions/LocalizableString'
+        description: 'the event sub status. Most of the time, when included, this captures the HTTP status code. For more information see: https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx'
+      submissionTimestamp:
+        description: 'the event submission time in ISO 8601 format. This value should not be confused eventTimestamp. As there might be a delay between the occurence time of the event, and the time that the event is submitted to the Azure logging infrastructure.'
+        format: date-time
+        type: string
+      subscriptionId:
+        description: the Azure subscription Id
+        type: string
+      tenantId:
+        description: the Azure tenant Id
+        type: string
+    required:
+      - channels
+      - level
+      - eventTimestamp
+      - submissionTimestamp
+  EventDataCollection:
+    description: Represents collection of events.
+    properties:
+      value:
+        description: this list that includes the Azure audit logs.
+        items:
+          $ref: '#/definitions/EventData'
+        type: array
+    required:
+      - value
+  HttpRequestInfo:
+    description: The Http request info.
+    properties:
+      clientIpAddress:
+        description: the client Ip Address
+        type: string
+      clientRequestId:
+        description: the client request id.
+        type: string
+      method:
+        description: the Http request method.
+        type: string
+      uri:
+        description: the Uri.
+        type: string
+  LocalizableString:
+    description: The localizable string class.
+    properties:
+      localizedValue:
+        description: the locale specific value.
+        type: string
+      value:
+        description: the invariant value.
+        type: string
+  SenderAuthorization:
+    description: The RBAC properties of the event.
+    properties:
+      action:
+        description: 'the permissible actions. For instance: microsoft.support/supporttickets/write'
+        type: string
+      condition:
+        description: the condition.
+        type: string
+      role:
+        description: 'the role of the user. For instance: Subscription Admin'
+        type: string
+      scope:
+        description: the scope.
+        type: string

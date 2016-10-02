@@ -550,6 +550,7 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
+            - creditpack
           in: query
           name: product_type
           required: false
@@ -625,6 +626,7 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
+            - creditpack
           in: query
           name: product_type
           required: false
@@ -742,6 +744,7 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
+            - creditpack
           in: query
           name: product_type
           required: false
@@ -1941,6 +1944,7 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
+            - creditpack
           in: query
           items:
             enum:
@@ -1949,6 +1953,7 @@ paths:
               - image_pack
               - premium_access
               - royalty_free_subscription
+              - credit_pack
             type: string
           name: product_types
           required: false
@@ -2391,6 +2396,7 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
+            - creditpack
           in: query
           items:
             enum:
@@ -2399,6 +2405,7 @@ paths:
               - image_pack
               - premium_access
               - royalty_free_subscription
+              - credit_pack
             type: string
           name: product_types
           required: false
@@ -2868,6 +2875,7 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
+            - creditpack
           in: query
           items:
             enum:
@@ -2876,6 +2884,7 @@ paths:
               - image_pack
               - premium_access
               - royalty_free_subscription
+              - credit_pack
             type: string
           name: product_types
           required: false
@@ -3162,6 +3171,7 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
+            - creditpack
           in: query
           items:
             enum:
@@ -3170,6 +3180,7 @@ paths:
               - image_pack
               - premium_access
               - royalty_free_subscription
+              - credit_pack
             type: string
           name: product_types
           required: false
@@ -3454,6 +3465,7 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
+            - creditpack
           in: query
           items:
             enum:
@@ -3462,6 +3474,7 @@ paths:
               - image_pack
               - premium_access
               - royalty_free_subscription
+              - credit_pack
             type: string
           name: product_types
           required: false
@@ -3733,6 +3746,7 @@ paths:
             - imagepack
             - premiumaccess
             - royaltyfreesubscription
+            - creditpack
           in: query
           items:
             enum:
@@ -3741,6 +3755,7 @@ paths:
               - image_pack
               - premium_access
               - royalty_free_subscription
+              - credit_pack
             type: string
           name: product_types
           required: false
@@ -4098,14 +4113,19 @@ definitions:
     description: partner_channel
     properties:
       AssetFamily:
+        description: Specifies the asset family for the channel (e.g. "editorial" or "creative")
         type: string
       ChannelId:
-        description: The id to the channel of content
+        description: Specifies the identification number for the channel
         format: int32
         type: integer
       ChannelType:
-        description: 'Contains the channel type (i.e. "New," "Updated" or "Deleted")'
+        description: 'Specifies the channel type (i.e. "New," "Updated" or "Deleted")'
         type: string
+      NotificationCount:
+        description: Specifies the current count of notifications pending in the channel
+        format: int32
+        type: integer
       StartDate:
         format: date-time
         type: string
@@ -4332,7 +4352,7 @@ definitions:
         description: Specifies the name of the collection.
         type: string
       product_types:
-        description: 'Specifies the license agreements applied to this collection. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription.'
+        description: 'Specifies the license agreements applied to this collection. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, creditpack.'
         items:
           type: string
         type: array
@@ -4445,7 +4465,7 @@ definitions:
         description: Specifies the image is in the curated Prestige collection.
         type: boolean
       product_types:
-        description: 'Lists the product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription.'
+        description: 'Lists the product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, creditpack.'
         items:
           type: string
         type: array
@@ -4509,7 +4529,7 @@ definitions:
         description: Specifies the unique identifier of the asset.
         type: string
       product_type:
-        description: 'Specifies the license agreement applied to this download. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, sandbox.'
+        description: 'Specifies the license agreement applied to this download. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, creditpack, sandbox.'
         type: string
       thumb_uri:
         description: GET this URI to download the thumbnail.
@@ -4684,7 +4704,7 @@ definitions:
           type: string
         type: array
       product_types:
-        description: 'Lists the product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription.'
+        description: 'Lists the product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, creditpack.'
         items:
           type: string
         type: array
@@ -4923,7 +4943,7 @@ definitions:
         description: Specifies the image is in the curated Prestige collection.
         type: boolean
       product_types:
-        description: 'Lists the product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription.'
+        description: 'Lists the product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, creditpack.'
         items:
           type: string
         type: array
@@ -5042,7 +5062,7 @@ definitions:
         description: Specifies the image is in the curated Prestige collection.
         type: boolean
       product_types:
-        description: 'Lists the product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription.'
+        description: 'Lists the product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, creditpack.'
         items:
           type: string
         type: array
@@ -5143,6 +5163,10 @@ definitions:
       application_website:
         description: URI of application website.
         type: string
+      credits_remaining:
+        description: Specifies the remaining credit pack limit
+        format: int32
+        type: integer
       download_limit:
         description: Specifies the download limit for product or package.
         format: int32
@@ -5179,13 +5203,14 @@ definitions:
           - inactive
         type: string
       type:
-        description: 'List of product types available. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription.'
+        description: 'List of product types available. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, creditpack.'
         enum:
           - easyaccess
           - editorialsubscription
           - imagepack
           - premiumaccess
           - royaltyfreesubscription
+          - creditpack
         type: string
     type: object
   referral_destination:
@@ -5292,7 +5317,7 @@ definitions:
         description: Specifies the media the video was originally shot on.
         type: string
       product_types:
-        description: 'Lists the product types for the video. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription.'
+        description: 'Lists the product types for the video. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, creditpack.'
         items:
           type: string
         type: array
@@ -5374,7 +5399,7 @@ definitions:
         description: Specifies the film stock originally shot on.
         type: string
       product_types:
-        description: 'Lists the product types for the video. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription.'
+        description: 'Lists the product types for the video. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, creditpack.'
         items:
           type: string
         type: array

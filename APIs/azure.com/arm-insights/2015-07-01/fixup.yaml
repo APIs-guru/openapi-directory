@@ -1,0 +1,16 @@
+paths:
+  '/{resourceUri}/providers/microsoft.insights/diagnosticSettings/service':
+    get:
+      parameters:
+        '_2':
+          - $ref: '#/parameters/SubscriptionIdParameter'
+          - 0
+          - 0
+        _t: a
+    put:
+      parameters:
+        '_3':
+          - $ref: '#/parameters/SubscriptionIdParameter'
+          - 0
+          - 0
+        _t: a

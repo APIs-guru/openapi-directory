@@ -405,6 +405,18 @@ tags:
     name: type/type_fred_category
   - description: Search API for 'FRED Series' entry type
     name: type/type_fred_series
+  - description: Search API for 'Transit Agency' entry type
+    name: type/type_gtfs_agency
+  - description: Search API for 'Transit Route' entry type
+    name: type/type_gtfs_route
+  - description: Search API for 'Transit Route Collection' entry type
+    name: type/type_gtfs_routes
+  - description: Search API for 'Transit Stop' entry type
+    name: type/type_gtfs_stop
+  - description: Search API for 'Transit Stop Collection' entry type
+    name: type/type_gtfs_stops
+  - description: Search API for 'Transit Trip' entry type
+    name: type/type_gtfs_trip
   - description: Search API for 'Hazard Data' entry type
     name: type/type_hazarddata
   - description: Search API for 'Colorado DNR Stream Gage' entry type
@@ -18701,6 +18713,722 @@ paths:
       summary: Search API for 'FRED Series' entry type
       tags:
         - type/type_fred_series
+  /repository/search/type/type_gtfs_agency:
+    get:
+      description: API to search for entries of type Transit Agency
+      operationId: search_type_gtfs_agency
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Transit Agency' entry type
+      tags:
+        - type/type_gtfs_agency
+  /repository/search/type/type_gtfs_route:
+    get:
+      description: API to search for entries of type Transit Route
+      operationId: search_type_gtfs_route
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Route ID
+          in: query
+          name: search.type_gtfs_route.route_id
+          required: false
+          type: string
+        - description: Stop Names
+          in: query
+          name: search.type_gtfs_route.stop_names
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Transit Route' entry type
+      tags:
+        - type/type_gtfs_route
+  /repository/search/type/type_gtfs_routes:
+    get:
+      description: API to search for entries of type Transit Route Collection
+      operationId: search_type_gtfs_routes
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Transit Route Collection' entry type
+      tags:
+        - type/type_gtfs_routes
+  /repository/search/type/type_gtfs_stop:
+    get:
+      description: API to search for entries of type Transit Stop
+      operationId: search_type_gtfs_stop
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Stop ID
+          in: query
+          name: search.type_gtfs_stop.stop_id
+          required: false
+          type: string
+        - description: Stop Code
+          in: query
+          name: search.type_gtfs_stop.stop_code
+          required: false
+          type: string
+        - description: Zone ID
+          in: query
+          name: search.type_gtfs_stop.zone_id
+          required: false
+          type: string
+        - description: Location Type
+          in: query
+          name: search.type_gtfs_stop.location_type
+          required: false
+          type: string
+        - description: Wheelchair Boarding
+          in: query
+          name: search.type_gtfs_stop.wheelchair_boarding
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Transit Stop' entry type
+      tags:
+        - type/type_gtfs_stop
+  /repository/search/type/type_gtfs_stops:
+    get:
+      description: API to search for entries of type Transit Stop Collection
+      operationId: search_type_gtfs_stops
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Transit Stop Collection' entry type
+      tags:
+        - type/type_gtfs_stops
+  /repository/search/type/type_gtfs_trip:
+    get:
+      description: API to search for entries of type Transit Trip
+      operationId: search_type_gtfs_trip
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Stop IDS
+          in: query
+          name: search.type_gtfs_trip.stop_ids
+          required: false
+          type: string
+        - description: Wheelchair Accessible
+          in: query
+          name: search.type_gtfs_trip.wheelchair_accessible
+          required: false
+          type: string
+        - description: Bikes Allowed
+          in: query
+          name: search.type_gtfs_trip.bikes_allowed
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Transit Trip' entry type
+      tags:
+        - type/type_gtfs_trip
   /repository/search/type/type_hazarddata:
     get:
       description: API to search for entries of type Hazard Data

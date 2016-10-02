@@ -602,7 +602,7 @@ definitions:
         description: |-
           The role which is assigned to the client buyer. Each role implies a set of
           permissions granted to the client. Must be one of `CLIENT_DEAL_VIEWER`,
-          `CLIENT_DEAL_NEGOTIATOR`, or `CLIENT_DEAL_APPROVER`.
+          `CLIENT_DEAL_NEGOTIATOR` or `CLIENT_DEAL_APPROVER`.
         enum:
           - CLIENT_ROLE_UNSPECIFIED
           - CLIENT_DEAL_VIEWER
@@ -666,8 +666,8 @@ definitions:
     type: object
   ClientUserInvitation:
     description: |-
-      An invitation for a new client user to get access to the AdExchange Buyer UI.
-
+      An invitation for a new client user to get access to the Ad Exchange
+      Buyer UI.
       All fields are required unless otherwise specified.
     properties:
       clientAccountId:

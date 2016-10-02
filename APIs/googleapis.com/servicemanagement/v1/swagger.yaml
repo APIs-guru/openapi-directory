@@ -2527,7 +2527,9 @@ definitions:
           $ref: '#/definitions/LabelDescriptor'
         type: array
       metricKind:
-        description: 'Whether the metric records instantaneous values, changes to a value, etc.'
+        description: |-
+          Whether the metric records instantaneous values, changes to a value, etc.
+          Some combinations of `metric_kind` and `value_type` might not be supported.
         enum:
           - METRIC_KIND_UNSPECIFIED
           - GAUGE
@@ -2625,7 +2627,9 @@ definitions:
              containing '{' or '}'.
         type: string
       valueType:
-        description: 'Whether the measurement is an integer, a floating-point number, etc.'
+        description: |-
+          Whether the measurement is an integer, a floating-point number, etc.
+          Some combinations of `metric_kind` and `value_type` might not be supported.
         enum:
           - VALUE_TYPE_UNSPECIFIED
           - BOOL
@@ -3192,22 +3196,23 @@ definitions:
     type: object
   Service:
     description: |-
-      `Service` is the root object of the configuration schema. It
-      describes basic information like the name of the service and the
-      exposed API interfaces, and delegates other aspects to configuration
-      sub-sections.
+      `Service` is the root object of Google service configuration schema. It
+      describes basic information about a service, such as the name and the
+      title, and delegates other aspects to sub-sections. Each sub-section is
+      either a proto message or a repeated proto message that configures a
+      specific aspect, such as auth. See each proto message definition for details.
 
       Example:
 
           type: google.api.Service
-          config_version: 1
+          config_version: 3
           name: calendar.googleapis.com
           title: Google Calendar API
           apis:
-          - name: google.calendar.Calendar
+          - name: google.calendar.v3.Calendar
           backend:
             rules:
-            - selector: "*"
+            - selector: "google.calendar.v3.*"
               address: calendar.example.com
     properties:
       apis:
@@ -3277,7 +3282,7 @@ definitions:
         type: string
       logging:
         $ref: '#/definitions/Logging'
-        description: Logging configuration of the service.
+        description: Logging configuration.
       logs:
         description: Defines the logs used by this service.
         items:
@@ -3297,7 +3302,7 @@ definitions:
         type: array
       monitoring:
         $ref: '#/definitions/Monitoring'
-        description: Monitoring configuration of the service.
+        description: Monitoring configuration.
       name:
         description: |-
           The DNS address at which this service is available,
@@ -3311,7 +3316,7 @@ definitions:
         type: string
       systemParameters:
         $ref: '#/definitions/SystemParameters'
-        description: Configuration for system parameters.
+        description: System parameter configuration.
       systemTypes:
         description: |-
           A list of all proto message types included in this API service.
@@ -3773,8 +3778,8 @@ definitions:
     properties:
       restriction:
         description: |-
-          Lists the visibility labels for this rule. Any of the listed labels grants
-          visibility to the element.
+          A comma-separated list of visibility labels that apply to the `selector`.
+          Any of the listed labels can be used to grant the visibility.
 
           If a rule has multiple labels, removing one of the labels but not all of
           them can break clients.

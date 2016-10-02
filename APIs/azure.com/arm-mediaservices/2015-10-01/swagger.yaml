@@ -56,7 +56,7 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Media/CheckNameAvailability':
     post:
-      operationId: MediaService_CheckNameAvailabilty
+      operationId: MediaService_CheckNameAvailability
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
@@ -359,18 +359,21 @@ definitions:
         pattern: '^[a-z0-9]'
         type: string
       type:
+        $ref: '#/definitions/ResourceType'
         description: Specifies the type of the resource.
-        type: string
+    required:
+      - name
+      - type
   CheckNameAvailabilityOutput:
     description: The response body for CheckNameAvailability API.
     properties:
-      message:
+      Message:
         description: Specifies the detailed reason if the name is not available.
         type: string
-      nameAvailable:
+      NameAvailable:
         description: Specifies if the name is available.
         type: boolean
-      reason:
+      Reason:
         description: Specifies the reason if the name is not available.
         enum:
           - None
@@ -441,6 +444,15 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  ResourceType:
+    description: Type of MediaService resource used in CheckNameAvailability.
+    enum:
+      - mediaservices
+    readOnly: true
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: ResourceType
   ServiceKeys:
     description: The response body for a ListKeys API.
     properties:

@@ -847,10 +847,6 @@ paths:
           in: query
           name: ifMetagenerationNotMatch
           type: string
-        - description: 'Resource name of the Cloud KMS key, of the form projects/my-project/locations/global/keyRings/my-kr/cryptoKeys/my-key, that will be used to encrypt the object. Overrides the object metadata''s kms_key_name value, if any.'
-          in: query
-          name: kmsKeyName
-          type: string
         - description: 'Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata''s name value, if any. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.'
           in: query
           name: name
@@ -1479,10 +1475,6 @@ paths:
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: 'Resource name of the Cloud KMS key, of the form projects/my-project/locations/global/keyRings/my-kr/cryptoKeys/my-key, that will be used to encrypt the object. Overrides the object metadata''s kms_key_name value, if any.'
-          in: query
-          name: kmsKeyName
-          type: string
         - in: body
           name: body
           schema:
@@ -1639,10 +1631,6 @@ paths:
           name: destinationObject
           required: true
           type: string
-        - description: 'Resource name of the Cloud KMS key, of the form projects/my-project/locations/global/keyRings/my-kr/cryptoKeys/my-key, that will be used to encrypt the object. Overrides the object metadata''s kms_key_name value, if any.'
-          in: query
-          name: destinationKmsKeyName
-          type: string
         - description: Apply a predefined set of access controls to the destination object.
           enum:
             - authenticatedRead
@@ -1795,12 +1783,6 @@ definitions:
         items:
           $ref: '#/definitions/ObjectAccessControl'
         type: array
-      encryption:
-        description: 'Encryption configuration used by default for newly inserted objects, when no encryption config is specified.'
-        properties:
-          default_kms_key_name:
-            type: string
-        type: object
       etag:
         description: HTTP 1.1 Entity tag for the bucket.
         type: string
@@ -2127,9 +2109,6 @@ definitions:
         default: 'storage#object'
         description: 'The kind of item this is. For objects, this is always storage#object.'
         type: string
-      kmsKeyName:
-        description: 'Cloud KMS Key used to encrypt this object, if the object is encrypted by such a key.'
-        type: string
       md5Hash:
         description: 'MD5 hash of the data; encoded using base64. For more information about using the MD5 hash, see Hashes and ETags: Best Practices.'
         type: string
@@ -2216,7 +2195,7 @@ definitions:
         description: HTTP 1.1 Entity tag for the access-control entry.
         type: string
       generation:
-        description: The content generation of the object.
+        description: 'The content generation of the object, if applied to an object.'
         format: int64
         type: string
       id:
@@ -2227,7 +2206,7 @@ definitions:
         description: 'The kind of item this is. For object access control entries, this is always storage#objectAccessControl.'
         type: string
       object:
-        description: The name of the object.
+        description: 'The name of the object, if applied to an object.'
         type: string
       projectTeam:
         description: 'The project team associated with the entity, if any.'
@@ -2251,7 +2230,8 @@ definitions:
     properties:
       items:
         description: The list of items.
-        items: {}
+        items:
+          $ref: '#/definitions/ObjectAccessControl'
         type: array
       kind:
         default: 'storage#objectAccessControls'

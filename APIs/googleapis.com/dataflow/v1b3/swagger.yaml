@@ -975,6 +975,9 @@ definitions:
           description: Properties of the object.
         description: The Dataflow SDK pipeline options specified by the user. These options are passed through the service and are used to recreate the SDK pipeline options on the worker in a language agnostic and platform independent way.
         type: object
+      serviceAccountEmail:
+        description: Identity to run virtual machines as. Defaults to the default account.
+        type: string
       tempStoragePrefix:
         description: 'The prefix of the resources the system should use for temporary storage. The system will append the suffix "/temp-{JOBNAME} to this resource prefix, where {JOBNAME} is the value of the job_name field. The resulting bucket and object prefix is used as the prefix of the resources used to store temporary data needed during the job execution. NOTE: This will override the value in taskrunner_settings. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}'
         type: string

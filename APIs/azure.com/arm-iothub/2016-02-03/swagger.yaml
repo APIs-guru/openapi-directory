@@ -1000,6 +1000,11 @@ definitions:
       hostName:
         description: The name of the host.
         type: string
+      ipFilterRules:
+        description: The IP filter rules.
+        items:
+          $ref: '#/definitions/IpFilterRule'
+        type: array
       messagingEndpoints:
         additionalProperties:
           $ref: '#/definitions/MessagingEndpointProperties'
@@ -1094,6 +1099,29 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: IotHubSkuTier
+    type: object
+  IpFilterRule:
+    description: IP filter Rule
+    properties:
+      action:
+        description: The action desired - accept or reject.
+        enum:
+          - Accept
+          - Reject
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: IpFilterActionType
+      filterName:
+        description: The name of the IP filter rule.
+        type: string
+      ipMask:
+        description: A string containing the IPAddress/range in CIDR notation.
+        type: string
+    required:
+      - filterName
+      - action
+      - ipMask
     type: object
   JobResponse:
     description: The properties describing a Job Response.

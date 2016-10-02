@@ -489,7 +489,8 @@ paths:
           minimum: 1
           name: maxAttendees
           type: integer
-        - description: Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
+        - default: 250
+          description: Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
           in: query
           minimum: 1
           name: maxResults
@@ -729,7 +730,8 @@ paths:
           minimum: 1
           name: maxAttendees
           type: integer
-        - description: Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
+        - default: 250
+          description: Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
           in: query
           minimum: 1
           name: maxResults

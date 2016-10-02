@@ -586,6 +586,9 @@ definitions:
   ClassicAdministratorListResult:
     description: ClassicAdministrator list result information.
     properties:
+      nextLink:
+        description: Gets or sets the URL to get the next set of classic administrators results.
+        type: string
       value:
         description: Gets or sets ClassicAdministrators.
         items:
@@ -616,6 +619,9 @@ definitions:
   PermissionGetResult:
     description: Permissions information.
     properties:
+      nextLink:
+        description: Gets or sets the URL to get the next set of permissions results.
+        type: string
       value:
         description: Gets or sets permissions.
         items:
@@ -667,6 +673,9 @@ definitions:
   ProviderOperationsMetadataListResult:
     description: Provider operations metadata list
     properties:
+      nextLink:
+        description: Gets or sets the URL to get the next set of provider operations metadata results.
+        type: string
       value:
         description: Gets or sets the list of providers.
         items:
@@ -769,6 +778,9 @@ definitions:
   RoleDefinitionListResult:
     description: Role definition list operation result.
     properties:
+      nextLink:
+        description: Gets or sets the URL to get the next set of role definitions results.
+        type: string
       value:
         description: Role definition list.
         items:

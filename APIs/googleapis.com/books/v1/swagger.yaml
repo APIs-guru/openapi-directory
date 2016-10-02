@@ -1500,6 +1500,13 @@ paths:
           in: query
           name: libraryRestrict
           type: string
+        - description: The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
+          enum:
+            - mature
+            - not-mature
+          in: query
+          name: maxAllowedMaturityRating
+          type: string
         - description: Maximum number of results to return.
           in: query
           maximum: 40

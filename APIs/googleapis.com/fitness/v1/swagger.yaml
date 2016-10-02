@@ -669,6 +669,7 @@ definitions:
         type: string
     type: object
   AggregateRequest:
+    description: 'Next id: 10'
     properties:
       aggregateBy:
         description: The specification of data to be aggregated. At least one aggregateBy spec must be provided. All data that is specified will be aggregated using the same bucketing criteria. There will be one dataset in the response for every aggregateBy spec.
@@ -991,6 +992,9 @@ definitions:
         items:
           $ref: '#/definitions/Session'
         type: array
+      hasMoreData:
+        description: Flag to indicate server has more data to transfer
+        type: boolean
       nextPageToken:
         description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
         type: string

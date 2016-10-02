@@ -356,6 +356,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - backupRuns
   '/projects/{project}/instances/{instance}/backupRuns/{id}':

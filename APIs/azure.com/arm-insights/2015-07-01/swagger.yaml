@@ -1,0 +1,184 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: InsightsManagementClient
+  version: '2015-07-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-insights/2015-07-01/swagger/insightsManagementClient.json'
+    version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: arm-insights
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ResourceUriParameter:
+    description: The identifier of the resource.
+    in: path
+    name: resourceUri
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The Azure subscription Id.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/{resourceUri}/providers/microsoft.insights/diagnosticSettings/service':
+    get:
+      description: Gets the active diagnostic settings for the specified resource.
+      operationId: ServiceDiagnosticSettings_Get
+      parameters:
+        - $ref: '#/parameters/ResourceUriParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successful request to get more information about service diagnostic setting
+          schema:
+            $ref: '#/definitions/ServiceDiagnosticSettingsResource'
+      tags:
+        - ServiceDiagnosticSettings
+    put:
+      description: Create or update new diagnostic settings for the specified resource.
+      operationId: ServiceDiagnosticSettings_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ResourceUriParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: Parameters supplied to the operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ServiceDiagnosticSettingsCreateOrUpdateParameters'
+      responses:
+        '200':
+          description: Successful request to create a service diagnostic setting
+          schema:
+            $ref: '#/definitions/ServiceDiagnosticSettingsResource'
+      tags:
+        - ServiceDiagnosticSettings
+definitions:
+  LogSettings:
+    description: Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log.
+    properties:
+      category:
+        description: the name of the logs to which this setting is applied.
+        type: string
+      enabled:
+        description: a value indicating whether this log is enabled.
+        type: boolean
+      retentionPolicy:
+        $ref: '#/definitions/RetentionPolicy'
+        description: the retention policy for this log.
+    required:
+      - enabled
+  MetricSettings:
+    description: Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric.
+    properties:
+      enabled:
+        description: a value indicating whether this timegrain is enabled.
+        type: boolean
+      retentionPolicy:
+        $ref: '#/definitions/RetentionPolicy'
+        description: the retention policy for this timegrain.
+      timeGrain:
+        description: the timegrain of the metric in ISO8601 format.
+        format: duration
+        type: string
+    required:
+      - enabled
+      - timeGrain
+  Resource:
+    description: An azure resource object
+    properties:
+      id:
+        description: Azure resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Azure resource name
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+      type:
+        description: Azure resource type
+        readOnly: true
+        type: string
+    required:
+      - location
+    x-ms-azure-resource: true
+  RetentionPolicy:
+    description: Specifies the retention policy for the log.
+    properties:
+      days:
+        description: the number of days for the retention.
+        format: int32
+        type: integer
+      enabled:
+        description: a value indicating whether the retention policy is enabled.
+        type: boolean
+    required:
+      - enabled
+      - days
+  ServiceDiagnosticSettings:
+    description: The diagnostic settings for service.
+    properties:
+      logs:
+        description: the list of logs.
+        items:
+          $ref: '#/definitions/LogSettings'
+        type: array
+      metrics:
+        description: the list of metrics.
+        items:
+          $ref: '#/definitions/MetricSettings'
+        type: array
+      serviceBusRuleId:
+        description: the id of the service bus rule.
+        type: string
+      storageAccountId:
+        description: the resource id of the storage account.
+        type: string
+      workspaceId:
+        description: the OMS workspace Id.
+        type: string
+  ServiceDiagnosticSettingsCreateOrUpdateParameters:
+    description: Parameters supplied to the Create or Update service configuration.
+    properties:
+      properties:
+        $ref: '#/definitions/ServiceDiagnosticSettings'
+        description: the public configuration settings.
+        x-ms-client-flatten: true
+  ServiceDiagnosticSettingsResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of a service diagnostic setting
+    properties:
+      properties:
+        $ref: '#/definitions/ServiceDiagnosticSettings'
+        x-ms-client-flatten: true
+    type: object

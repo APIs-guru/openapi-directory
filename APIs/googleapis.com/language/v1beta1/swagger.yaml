@@ -195,10 +195,8 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Advanced API that analyzes the document and provides a full set of text
-        annotations, including semantic, syntactic, and sentiment information. This
-        API is intended for users who are familiar with machine learning and need
-        in-depth text features to build upon.
+        A convenience method that provides all the features that analyzeSentiment,
+        analyzeEntities, and analyzeSyntax provide in one call.
       operationId: language.documents.annotateText
       parameters:
         - in: body
@@ -243,6 +241,7 @@ definitions:
         description: |-
           The language of the text, which will be the same as the language specified
           in the request or, if not specified, the automatically-detected language.
+          See Document.language field for more details.
         type: string
     type: object
   AnalyzeSentimentRequest:
@@ -268,8 +267,8 @@ definitions:
     type: object
   AnnotateTextRequest:
     description: |-
-      The request message for the advanced text annotation API, which performs all
-      the above plus syntactic analysis.
+      The request message for the text annotation API, which can perform multiple
+      analysis types (sentiment, entities, and syntax) in one call.
     properties:
       document:
         $ref: '#/definitions/Document'
@@ -306,6 +305,7 @@ definitions:
         description: |-
           The language of the text, which will be the same as the language specified
           in the request or, if not specified, the automatically-detected language.
+          See Document.language field for more details.
         type: string
       sentences:
         description: |-

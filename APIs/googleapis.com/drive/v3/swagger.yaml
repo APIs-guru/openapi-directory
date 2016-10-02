@@ -1473,7 +1473,7 @@ definitions:
         type: object
       kind:
         default: 'drive#about'
-        description: 'This is always drive#about.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#about".'
         type: string
       maxImportSizes:
         additionalProperties:
@@ -1520,7 +1520,7 @@ definitions:
         type: string
       kind:
         default: 'drive#change'
-        description: 'This is always drive#change.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#change".'
         type: string
       removed:
         description: 'Whether the file has been removed from the view of the changes list, for example by deletion or lost access.'
@@ -1540,7 +1540,7 @@ definitions:
         type: array
       kind:
         default: 'drive#changeList'
-        description: 'This is always drive#changeList.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#changeList".'
         type: string
       newStartPageToken:
         description: The starting page token for future changes. This will be present only if the end of the current changes list has been reached.
@@ -1615,7 +1615,7 @@ definitions:
         type: string
       kind:
         default: 'drive#comment'
-        description: 'This is always drive#comment.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#comment".'
         type: string
       modifiedTime:
         description: The last time the comment or any of its replies was modified (RFC 3339 date-time).
@@ -1650,7 +1650,7 @@ definitions:
         type: array
       kind:
         default: 'drive#commentList'
-        description: 'This is always drive#commentList.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#commentList".'
         type: string
       nextPageToken:
         description: The page token for the next page of comments. This will be absent if the end of the comments list has been reached.
@@ -1830,7 +1830,7 @@ definitions:
         type: boolean
       kind:
         default: 'drive#file'
-        description: 'This is always drive#file.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#file".'
         type: string
       lastModifyingUser:
         $ref: '#/definitions/User'
@@ -1969,7 +1969,7 @@ definitions:
         type: array
       kind:
         default: 'drive#fileList'
-        description: 'This is always drive#fileList.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#fileList".'
         type: string
       nextPageToken:
         description: The page token for the next page of files. This will be absent if the end of the files list has been reached.
@@ -1985,7 +1985,7 @@ definitions:
         type: array
       kind:
         default: 'drive#generatedIds'
-        description: 'This is always drive#generatedIds'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#generatedIds".'
         type: string
       space:
         description: The type of file that can be created with these IDs.
@@ -2015,7 +2015,7 @@ definitions:
         type: string
       kind:
         default: 'drive#permission'
-        description: 'This is always drive#permission.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#permission".'
         type: string
       photoLink:
         description: 'A link to the user''s profile photo, if available.'
@@ -2042,7 +2042,7 @@ definitions:
     properties:
       kind:
         default: 'drive#permissionList'
-        description: 'This is always drive#permissionList.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#permissionList".'
         type: string
       permissions:
         description: The full list of permissions.
@@ -2080,7 +2080,7 @@ definitions:
         type: string
       kind:
         default: 'drive#reply'
-        description: 'This is always drive#reply.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#reply".'
         type: string
       modifiedTime:
         description: The last time the reply was modified (RFC 3339 date-time).
@@ -2092,7 +2092,7 @@ definitions:
     properties:
       kind:
         default: 'drive#replyList'
-        description: 'This is always drive#replyList.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#replyList".'
         type: string
       nextPageToken:
         description: The page token for the next page of replies. This will be absent if the end of the replies list has been reached.
@@ -2116,7 +2116,7 @@ definitions:
         type: boolean
       kind:
         default: 'drive#revision'
-        description: 'This is always drive#revision.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#revision".'
         type: string
       lastModifyingUser:
         $ref: '#/definitions/User'
@@ -2153,7 +2153,7 @@ definitions:
     properties:
       kind:
         default: 'drive#revisionList'
-        description: 'This is always drive#revisionList.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#revisionList".'
         type: string
       revisions:
         description: The full list of revisions.
@@ -2165,7 +2165,7 @@ definitions:
     properties:
       kind:
         default: 'drive#startPageToken'
-        description: 'This is always drive#startPageToken.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#startPageToken".'
         type: string
       startPageToken:
         description: The starting page token for listing changes.
@@ -2182,7 +2182,7 @@ definitions:
         type: string
       kind:
         default: 'drive#user'
-        description: 'This is always drive#user.'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#user".'
         type: string
       me:
         description: Whether this user is the requesting user.

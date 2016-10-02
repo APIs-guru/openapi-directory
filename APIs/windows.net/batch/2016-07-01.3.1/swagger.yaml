@@ -2411,6 +2411,112 @@ paths:
       tags:
         - Files
       x-ms-request-id: request-id
+  '/jobs/{jobId}/tasks/{taskId}/reactivate':
+    post:
+      description: 'Reactivation makes a task eligible to be retried again up to its maximum retry count. This will fail for tasks that are not completed or that previously completed successfully (with an exit code of 0). Additionally, this will fail if the job has completed (or is terminating or deleting).'
+      operationId: Task_Reactivate
+      parameters:
+        - description: The id of the job containing the task.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: The id of the task to reactivate.
+          in: path
+          name: taskId
+          required: true
+          type: string
+        - default: 30
+          description: 'The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+          format: int32
+          in: query
+          name: timeout
+          required: false
+          type: integer
+          x-ms-parameter-grouping:
+            postfix: Options
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+          in: header
+          name: client-request-id
+          required: false
+          type: string
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            postfix: Options
+        - description: Whether the server should return the client-request-id identifier in the response.
+          in: header
+          name: return-client-request-id
+          required: false
+          type: boolean
+          x-ms-parameter-grouping:
+            postfix: Options
+        - description: 'The time the request was issued. If not specified, this header will be automatically populated with the current system clock time.'
+          format: date-time-rfc1123
+          in: header
+          name: ocp-date
+          required: false
+          type: string
+          x-ms-parameter-grouping:
+            postfix: Options
+        - description: An ETag is specified. Specify this header to perform the operation only if the resource's ETag is an exact match as specified.
+          in: header
+          name: If-Match
+          required: false
+          type: string
+          x-ms-parameter-grouping:
+            postfix: Options
+        - description: An ETag is specified. Specify this header to perform the operation only if the resource's ETag does not match the specified ETag.
+          in: header
+          name: If-None-Match
+          required: false
+          type: string
+          x-ms-parameter-grouping:
+            postfix: Options
+        - description: Specify this header to perform the operation only if the resource has been modified since the specified date/time.
+          format: date-time-rfc1123
+          in: header
+          name: If-Modified-Since
+          required: false
+          type: string
+          x-ms-parameter-grouping:
+            postfix: Options
+        - description: Specify this header to perform the operation only if the resource has not been modified since the specified date/time.
+          format: date-time-rfc1123
+          in: header
+          name: If-Unmodified-Since
+          required: false
+          type: string
+          x-ms-parameter-grouping:
+            postfix: Options
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '204':
+          description: ''
+          headers:
+            DataServiceId:
+              description: The OData id of the resource to which the request applied.
+              type: string
+            ETag:
+              description: The content of the ETag HTTP response header.
+              type: string
+            Last-Modified:
+              description: The content of the Last-Modified HTTP response header.
+              format: date-time-rfc1123
+              type: string
+            client-request-id:
+              description: 'The ClientRequestId provided by the client during the request, if present and requested to be returned.'
+              type: string
+            request-id:
+              description: The value that uniquely identifies a request.
+              type: string
+        default:
+          description: The error from the Batch service.
+          schema:
+            $ref: '#/definitions/BatchError'
+      summary: Reactivates the specified task.
+      tags:
+        - Tasks
+      x-ms-request-id: request-id
   '/jobs/{jobId}/tasks/{taskId}/subtasksinfo':
     get:
       operationId: Task_ListSubtasks

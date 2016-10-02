@@ -1575,6 +1575,10 @@ definitions:
       - $ref: '#/definitions/Resource'
     description: Default Statuses entity for the given tenant.
     properties:
+      nextlink:
+        description: Gets the URL to get the next set of results.
+        readOnly: true
+        type: string
       properties:
         $ref: '#/definitions/StatusesProperties'
         x-ms-client-flatten: true

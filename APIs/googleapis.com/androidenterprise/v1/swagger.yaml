@@ -2204,6 +2204,77 @@ paths:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
+  '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/maintenanceWindow':
+    get:
+      description: 'Gets the maintenance window for device accounts. Default value is {0, 0} which means the maintenance window is disabled.'
+      operationId: androidenterprise.devices.getMaintenanceWindow
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: The ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MaintenanceWindow'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - devices
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: 'Updates the maintenance window for device accounts. To disable the window update the value with {0, 0}.'
+      operationId: androidenterprise.devices.updateMaintenanceWindow
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: The ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MaintenanceWindow'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MaintenanceWindow'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - devices
   '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice':
     get:
       description: Lists all the per-device managed configurations for the specified device. Only the ID is set.
@@ -2923,7 +2994,7 @@ definitions:
     properties:
       defaultValue:
         $ref: '#/definitions/AppRestrictionsSchemaRestrictionRestrictionValue'
-        description: The default value of the restriction.
+        description: The default value of the restriction. bundle and bundleArray restrictions never have a default value.
       description:
         description: 'A longer description of the restriction, giving more detail of what it affects.'
         type: string
@@ -2933,7 +3004,7 @@ definitions:
           type: string
         type: array
       entryValue:
-        description: 'For choice or multiselect restrictions, the list of possible entries'' machine-readable values.'
+        description: 'For choice or multiselect restrictions, the list of possible entries'' machine-readable values. These values should be used in the configuration, either as a single string value for a choice restriction or in a stringArray for a multiselect restriction.'
         items:
           type: string
         type: array
@@ -2941,7 +3012,7 @@ definitions:
         description: 'The unique key that the product uses to identify the restriction, e.g. "com.google.android.gm.fieldname".'
         type: string
       nestedRestriction:
-        description: 'For bundle or bundleArray restrictions, the list of nested restrictions.'
+        description: 'For bundle or bundleArray restrictions, the list of nested restrictions. A bundle restriction is always nested within a bundleArray restriction, and a bundleArray restriction is at most two levels deep.'
         items:
           $ref: '#/definitions/AppRestrictionsSchemaRestriction'
         type: array
@@ -3084,11 +3155,12 @@ definitions:
       managementType:
         description: |-
           Identifies the extent to which the device is controlled by an Android for Work EMM in various deployment configurations.
+
           Possible values include: 
-          - "managedDevice"—A device that has the EMM's device policy controller (DPC) as the device owner.
-          - "managedProfile"—A device that has a work profile managed by the DPC (DPC is profile owner) in addition to a separate, personal profile that is unavailable to the DPC.
-          - "containerApp"—A device running the Android for Work App. The Android for Work App is managed by the DPC.
-          - "unmanagedProfile"—A device that has been allowed (by the domain's admin, using the Admin Console to enable the privilege) to use Android for Work apps or Google Apps for Work, but the profile is itself not owned by a DPC.
+          - "managedDevice", a device that has the EMM's device policy controller (DPC) as the device owner, 
+          - "managedProfile", a device that has a work profile managed by the DPC (DPC is profile owner) in addition to a separate, personal profile that is unavailable to the DPC, 
+          - "containerApp", a device running the Android for Work App. The Android for Work App is managed by the DPC, 
+          - "unmanagedProfile", a device that has been allowed (by the domain's admin, using the Admin Console to enable the privilege) to use Android for Work apps or Google Apps for Work, but the profile is itself not owned by a DPC.
         type: string
     type: object
   DeviceState:
@@ -3334,6 +3406,18 @@ definitions:
         type: string
       text:
         description: The text localized in the associated locale.
+        type: string
+    type: object
+  MaintenanceWindow:
+    description: Maintenance window for Android for Work device accounts. This allows Play Store to update the apps on the foreground in the designated window.
+    properties:
+      durationMs:
+        description: 'Duration of the maintenance window, in milliseconds. This should be at least 30 minutes.'
+        format: int64
+        type: string
+      startTimeAfterMidnightMs:
+        description: 'Start time of the maintenance window, in milliseconds after local midnight. Can be at most 24 hours. Windows can span the midnight.'
+        format: int64
         type: string
     type: object
   ManagedConfiguration:

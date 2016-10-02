@@ -146,7 +146,9 @@ definitions:
           type: object
         type: array
       org_facet:
-        type: string
+        items:
+          type: string
+        type: array
       per_facet:
         items:
           type: string
