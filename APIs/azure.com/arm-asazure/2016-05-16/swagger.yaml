@@ -3,19 +3,20 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: 'The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete servers'
+  description: 'The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Analysis Services servers'
   title: AzureAnalysisServices
-  version: '2016-05-06'
+  version: '2016-05-16'
   x-apisguru-categories:
     - cloud
   x-logo:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-ms-code-generation-settings:
-    name: AnalysisServicesClient
+    name: AnalysisServicesManagementClient
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-asazure/2016-05-06/swagger/asazure.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-asazure/2016-05-16/swagger/asazure.json'
     version: '2.0'
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: arm-asazure
   x-tags:
@@ -71,7 +72,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/AnalysisServicesResources'
+            $ref: '#/definitions/AnalysisServicesServers'
       tags:
         - Servers
       x-ms-pageable: {}
@@ -87,29 +88,33 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/AnalysisServicesResources'
+            $ref: '#/definitions/AnalysisServicesServers'
       tags:
         - Servers
       x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{analysisServerName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}':
     delete:
       description: Deletes the specified Analysis Services server.
       operationId: Servers_Delete
       parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
         - description: Name of the Analysis Services server
           in: path
           maxLength: 63
           minLength: 3
-          name: analysisServerName
+          name: serverName
           pattern: '^[a-z][a-z0-9]*$'
           required: true
           type: string
-        - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: OK
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/AnalysisServicesServer'
         '204':
           description: No Content
       tags:
@@ -119,50 +124,50 @@ paths:
       description: Gets details about the specified Analysis Services server
       operationId: Servers_GetDetails
       parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
         - description: Name of the Analysis Services server
           in: path
           maxLength: 63
           minLength: 3
-          name: analysisServerName
+          name: serverName
           pattern: '^[a-z][a-z0-9]*$'
           required: true
           type: string
-        - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/AnalysisServicesResource'
+            $ref: '#/definitions/AnalysisServicesServer'
       tags:
         - Servers
     patch:
       description: Updates the current state of the specified Analysis Services server
       operationId: Servers_Update
       parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
         - description: Name of the Analysis Services server
           in: path
           maxLength: 63
           minLength: 3
-          name: analysisServerName
+          name: serverName
           pattern: '^[a-z][a-z0-9]*$'
           required: true
           type: string
         - description: Request object for updating the server
           in: body
-          name: updateServerParameters
+          name: serverUpdateParameters
           required: true
           schema:
-            $ref: '#/definitions/AnalysisServicesResourceUpdateParameters'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
+            $ref: '#/definitions/AnalysisServicesServerUpdateParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/AnalysisServicesResource'
+            $ref: '#/definitions/AnalysisServicesServer'
       tags:
         - Servers
       x-ms-long-running-operation: true
@@ -170,55 +175,55 @@ paths:
       description: Provisions the specified Analysis Services server based on the configuration specified in the request
       operationId: Servers_Create
       parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: Name of the Analysis Services server
+          in: path
+          maxLength: 63
+          minLength: 3
+          name: serverName
+          pattern: '^[a-z][a-z0-9]*$'
+          required: true
+          type: string
         - description: Request body for provisioning
           in: body
           name: serverParameters
           required: true
           schema:
-            $ref: '#/definitions/AnalysisServicesResource'
-        - description: Name of the Analysis Services server
-          in: path
-          maxLength: 63
-          minLength: 3
-          name: analysisServerName
-          pattern: '^[a-z][a-z0-9]*$'
-          required: true
-          type: string
-        - $ref: '#/parameters/ResourceGroupNameParameter'
+            $ref: '#/definitions/AnalysisServicesServer'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/AnalysisServicesResource'
+            $ref: '#/definitions/AnalysisServicesServer'
         '201':
           description: InProgress
           schema:
-            $ref: '#/definitions/AnalysisServicesResource'
+            $ref: '#/definitions/AnalysisServicesServer'
       tags:
         - Servers
       x-ms-long-running-operation: true
 definitions:
-  AnalysisServicesResource:
+  AnalysisServicesServer:
     allOf:
       - $ref: '#/definitions/Resource'
     description: Represents an instance of Analysis Services resource
     properties:
       properties:
-        $ref: '#/definitions/AnalysisServicesResourceProperties'
+        $ref: '#/definitions/AnalysisServicesServerProperties'
         description: Provision request properties
         x-ms-client-flatten: true
     type: object
-  AnalysisServicesResourceMutableProperties:
+  AnalysisServicesServerMutableProperties:
     description: Represents a set of mutable Analysis Services resource properties
     properties:
       asAdministrators:
         $ref: '#/definitions/ServerAdministrators'
     type: object
-  AnalysisServicesResourceProperties:
+  AnalysisServicesServerProperties:
     allOf:
-      - $ref: '#/definitions/AnalysisServicesResourceMutableProperties'
+      - $ref: '#/definitions/AnalysisServicesServerMutableProperties'
     description: Properties of Analysis Services resource
     properties:
       provisioningState:
@@ -230,11 +235,11 @@ definitions:
         readOnly: true
         type: string
     type: object
-  AnalysisServicesResourceUpdateParameters:
+  AnalysisServicesServerUpdateParameters:
     description: Provision request specification
     properties:
       properties:
-        $ref: '#/definitions/AnalysisServicesResourceMutableProperties'
+        $ref: '#/definitions/AnalysisServicesServerMutableProperties'
         description: Provision request properties
         x-ms-client-flatten: true
       sku:
@@ -246,13 +251,13 @@ definitions:
         description: Key value pairs of additional properties that can ebe specified
         type: object
     type: object
-  AnalysisServicesResources:
+  AnalysisServicesServers:
     description: A collection of Analysis Services resources
     properties:
       value:
         description: The collection of Analysis Services resources
         items:
-          $ref: '#/definitions/AnalysisServicesResource'
+          $ref: '#/definitions/AnalysisServicesServer'
         type: array
     required:
       - value
