@@ -480,6 +480,39 @@ paths:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - creatives
+  '/creatives/{accountId}/{buyerCreativeId}/listDeals':
+    get:
+      description: Lists the external deal ids associated with the creative.
+      operationId: adexchangebuyer.creatives.listDeals
+      parameters:
+        - description: The id for the account that will serve this creative.
+          in: path
+          name: accountId
+          required: true
+          type: integer
+        - description: The buyer-specific id for this creative.
+          in: path
+          name: buyerCreativeId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CreativeDealIds'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - creatives
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/creatives/{accountId}/{buyerCreativeId}/removeDeal/{dealId}':
     parameters:
       - $ref: '#/parameters/alt'
@@ -1566,7 +1599,7 @@ definitions:
           type: string
         type: array
       nativeAd:
-        description: 'If nativeAd is set, HTMLSnippet and videoURL should not be set.'
+        description: 'If nativeAd is set, HTMLSnippet and the videoURL outside of nativeAd should not be set. (The videoURL inside nativeAd can be set.)'
         properties:
           advertiser:
             type: string
@@ -1632,6 +1665,8 @@ definitions:
             type: number
           store:
             description: The URL to the app store to purchase/download the promoted app.
+            type: string
+          videoURL:
             type: string
         type: object
       openAuctionStatus:
@@ -1714,12 +1749,37 @@ definitions:
         format: int32
         type: integer
       videoURL:
-        description: 'The url to fetch a video ad. If set, HTMLSnippet should not be set.'
+        description: 'The URL to fetch a video ad. If set, HTMLSnippet and the nativeAd should not be set. Note, this is diffrent from resource.native_ad.video_url above.'
         type: string
       width:
         description: Ad width.
         format: int32
         type: integer
+    type: object
+  CreativeDealIds:
+    description: The external deal ids associated with a creative.
+    properties:
+      dealStatuses:
+        description: A list of external deal ids and ARC approval status.
+        items:
+          properties:
+            arcStatus:
+              description: ARC approval status.
+              type: string
+            dealId:
+              description: External deal ID.
+              format: int64
+              type: string
+            webPropertyId:
+              description: Publisher ID.
+              format: int32
+              type: integer
+          type: object
+        type: array
+      kind:
+        default: 'adexchangebuyer#creativeDealIds'
+        description: Resource type.
+        type: string
     type: object
   CreativesList:
     description: The creatives feed lists the active creatives for the Ad Exchange buyer accounts that the user has access to. Each entry in the feed corresponds to a single creative.
@@ -2044,6 +2104,9 @@ definitions:
       inventoryDescription:
         description: Description for the deal terms. (updatable)
         type: string
+      isRfpTemplate:
+        description: Indicates whether the current deal is a RFP template. RFP template is created by buyer and not based on seller created products.
+        type: boolean
       kind:
         default: 'adexchangebuyer#marketplaceDeal'
         description: 'Identifies what kind of resource this is. Value: the fixed string "adexchangebuyer#marketplaceDeal".'
@@ -2567,6 +2630,11 @@ definitions:
       buyerPrivateData:
         $ref: '#/definitions/PrivateData'
         description: Private data for buyer. (hidden from seller).
+      dbmAdvertiserIds:
+        description: IDs of DBM advertisers permission to this proposal.
+        items:
+          type: string
+        type: array
       hasBuyerSignedOff:
         description: 'When an proposal is in an accepted state, indicates whether the buyer has signed off. Once both sides have signed off on a deal, the proposal can be finalized by the seller. (seller-readonly)'
         type: boolean

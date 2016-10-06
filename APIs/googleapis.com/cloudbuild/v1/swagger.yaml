@@ -528,10 +528,16 @@ definitions:
         type: string
       images:
         description: |-
-          List of images expected to be built and pushed to Google Container
-          Registry. If an image is listed here and the image is not produced by
-          one of the build steps, the build will fail. Any images present when
-          the build steps are complete will be pushed to Container Registry.
+          A list of images to be pushed upon the successful completion of all build
+          steps.
+
+          The images will be pushed using the builder
+          service account's credentials.
+
+          The digests of the pushed images will be stored in the Build resource's
+          results field.
+
+          If any of the images fail to be pushed, the build is marked FAILURE.
         items:
           type: string
         type: array
@@ -638,7 +644,13 @@ definitions:
     description: BuildStep describes a step to perform in the build pipeline.
     properties:
       args:
-        description: Command-line arguments to use when running this step's container.
+        description: |-
+          A list of arguments that will be presented to the step when it is started.
+
+          If the image used to run the step's container has an entrypoint, these args
+          will be used as arguments to that entrypoint. If the image does not define
+          an entrypoint, the first element in args will be used as the entrypoint,
+          and the remainder will be used as arguments.
         items:
           type: string
         type: array
@@ -648,7 +660,11 @@ definitions:
           this operation's container.
         type: string
       env:
-        description: Additional environment variables to set for this step's container.
+        description: |-
+          A list of environment variable definitions to be used when running a step.
+
+          The elements are of the form "KEY=VALUE" for the environment variable "KEY"
+          being given the value "VALUE".
         items:
           type: string
         type: array
@@ -659,8 +675,23 @@ definitions:
         type: string
       name:
         description: |-
-          Name of the container image to use for creating this stage in the
-          pipeline, as presented to `docker pull`.
+          The name of the container image that will run this particular build step.
+
+          If the image is already available in the host's
+          Docker daemon's cache, it will be run directly. If not, the host will
+          attempt to pull the image first, using the builder service account's
+          credentials if necessary.
+
+          The Docker daemon's cache will already have the latest versions of all of
+          the officially supported build steps
+          (https://github.com/GoogleCloudPlatform/cloud-builders). The Docker daemon
+          will also have cached many of the layers for some popular images, like
+          "ubuntu", "debian", but they will be refreshed at the time you attempt to
+          use them.
+
+          If you built an image in a previous build step, it will be stored in the
+          host's Docker daemon's cache and is available to use as the name for a
+          later build step.
         type: string
       waitFor:
         description: |-
@@ -814,7 +845,7 @@ definitions:
         type: boolean
       error:
         $ref: '#/definitions/Status'
-        description: The error result of the operation in case of failure.
+        description: The error result of the operation in case of failure or cancellation.
       metadata:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.

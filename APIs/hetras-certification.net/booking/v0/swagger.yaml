@@ -2289,29 +2289,13 @@ definitions:
         description: Hotel name
         type: string
     type: object
-  JsonPatchOperationRequest:
-    description: Represents JSON Patch request
+  'JsonPatchDocument[ReservationPatchableModel]':
     properties:
-      op:
-        description: The operation that should be performed on the object or attribute defined in the path
-        enum:
-          - Add
-          - Remove
-          - Replace
-          - Move
-          - Copy
-          - Test
-        type: string
-      path:
-        description: The path to the object or attribute the operation should be performed on
-        type: string
-      value:
-        $ref: '#/definitions/Object'
-        description: The new value of the object or attribute after the operation has been performed
-    required:
-      - op
-      - path
-      - value
+      Operations:
+        items:
+          $ref: '#/definitions/Operation[ReservationPatchableModel]'
+        readOnly: true
+        type: array
     type: object
   LinkObject:
     description: A Link Object represents a hyperlink from the containing resource to a URI.
@@ -2449,6 +2433,17 @@ definitions:
       total_stay:
         $ref: '#/definitions/Rate'
         description: The total stay amounts for this offer
+    type: object
+  'Operation[ReservationPatchableModel]':
+    properties:
+      from:
+        type: string
+      op:
+        type: string
+      path:
+        type: string
+      value:
+        $ref: '#/definitions/Object'
     type: object
   PagedDataRequest:
     properties:
@@ -2662,7 +2657,12 @@ definitions:
           - DebitCard
           - Token
           - Miscellaneous
+          - DigitalPayment
         type: string
+      prepay_discount:
+        description: "If you create a booking for a rateplan requiring prepayment this amount will be deducted from the booking value before\r\n            the prepayment will be taken. This feature is useful when the booker redeems a gift voucher and you want to \r\n            only capture the remaining amount from the guest´s credit card"
+        format: double
+        type: number
       rate_plan:
         description: The rate plan code this reservation is related to
         type: string
@@ -2761,6 +2761,11 @@ definitions:
         description: The id of the hotel this reservation is valid for
         format: int32
         type: integer
+      labels:
+        description: A list of labels that are attached to the reservation.
+        items:
+          type: string
+        type: array
       market_code:
         description: The code of the market segment the rate plan for this reservation is linked to
         type: string
@@ -2780,6 +2785,7 @@ definitions:
           - DebitCard
           - Token
           - Miscellaneous
+          - DigitalPayment
         type: string
       rate_plan:
         $ref: '#/definitions/RatePlan'

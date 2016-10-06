@@ -3778,8 +3778,8 @@ definitions:
     properties:
       restriction:
         description: |-
-          Lists the visibility labels for this rule. Any of the listed labels grants
-          visibility to the element.
+          A comma-separated list of visibility labels that apply to the `selector`.
+          Any of the listed labels can be used to grant the visibility.
 
           If a rule has multiple labels, removing one of the labels but not all of
           them can break clients.

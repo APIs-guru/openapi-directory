@@ -507,9 +507,7 @@ paths:
           name: patchRequest
           required: true
           schema:
-            items:
-              $ref: '#/definitions/JsonPatchOperationRequest'
-            type: array
+            $ref: '#/definitions/JsonPatchDocument[RatePatchRequest]'
         - description: "Defines the last business day you would like to get rates for. The maximum time span between <i>from</i>´and <i>to</i>\r\n            is limited to 365 days."
           format: date-time
           in: query
@@ -574,13 +572,6 @@ paths:
           in: path
           name: rateplanCode
           required: true
-          type: string
-        - description: You can expand the supplements per room type on demand. By default they are not shown.
-          enum:
-            - RoomTypeSupplements
-          in: query
-          name: expand
-          required: false
           type: string
         - description: "Defines the last business day you would like to get rates for. The maximum time span between <i>from</i>´and <i>to</i>\r\n            is limited to 365 days."
           format: date-time
@@ -716,9 +707,7 @@ paths:
           name: patchRequest
           required: true
           schema:
-            items:
-              $ref: '#/definitions/JsonPatchOperationRequest'
-            type: array
+            $ref: '#/definitions/JsonPatchDocument[RatePatchRequest]'
       produces:
         - application/json
         - text/json
@@ -1280,9 +1269,7 @@ paths:
           name: patchRequest
           required: true
           schema:
-            items:
-              $ref: '#/definitions/JsonPatchOperationRequest'
-            type: array
+            $ref: '#/definitions/JsonPatchDocument[RoomPatchRequest]'
       produces:
         - application/json
         - text/json
@@ -1699,29 +1686,21 @@ definitions:
         description: "The current time offset of the hotel to UTC. This is taking into account daylight saving times and shows the offset for the time the request is handled. The response\r\n            will be in the format of \"UTC±hh:mm\". If there is no offset to UTC it will be shown as \"UTC+00:00\""
         type: string
     type: object
-  JsonPatchOperationRequest:
-    description: Represents JSON Patch request
+  'JsonPatchDocument[RatePatchRequest]':
     properties:
-      op:
-        description: The operation that should be performed on the object or attribute defined in the path
-        enum:
-          - Add
-          - Remove
-          - Replace
-          - Move
-          - Copy
-          - Test
-        type: string
-      path:
-        description: The path to the object or attribute the operation should be performed on
-        type: string
-      value:
-        $ref: '#/definitions/Object'
-        description: The new value of the object or attribute after the operation has been performed
-    required:
-      - op
-      - path
-      - value
+      Operations:
+        items:
+          $ref: '#/definitions/Operation[RatePatchRequest]'
+        readOnly: true
+        type: array
+    type: object
+  'JsonPatchDocument[RoomPatchRequest]':
+    properties:
+      Operations:
+        items:
+          $ref: '#/definitions/Operation[RoomPatchRequest]'
+        readOnly: true
+        type: array
     type: object
   LinkObject:
     description: A Link Object represents a hyperlink from the containing resource to a URI.
@@ -1829,6 +1808,28 @@ definitions:
     type: object
   Object:
     properties: {}
+    type: object
+  'Operation[RatePatchRequest]':
+    properties:
+      from:
+        type: string
+      op:
+        type: string
+      path:
+        type: string
+      value:
+        $ref: '#/definitions/Object'
+    type: object
+  'Operation[RoomPatchRequest]':
+    properties:
+      from:
+        type: string
+      op:
+        type: string
+      path:
+        type: string
+      value:
+        $ref: '#/definitions/Object'
     type: object
   PagedDataRequest:
     properties:
