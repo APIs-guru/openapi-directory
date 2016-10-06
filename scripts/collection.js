@@ -719,9 +719,13 @@ function convertToSwagger(spec) {
 }
 
 function parseHost(swagger) {
-  assert(swagger.host, 'Missing host');
-  assert(!/^localhost/.test(swagger.host), 'Can not add localhost API');
-  var p = parseDomain(swagger.host);
+  var swHost = swagger.host;
+
+  assert(swHost, 'Missing host');
+  assert(!/^localhost/.test(swHost), 'Can not add localhost API');
+  assert(swHost !== 'raw.githubusercontent.com', 'Missing host + spec hosted on GitHub');
+
+  var p = parseDomain(swHost);
   p.domain = p.domain.replace(/^www.?/, '')
   p.subdomain = p.subdomain.replace(/^www.?/, '')
   //TODO: use subdomain to detect 'x-serviceName'
