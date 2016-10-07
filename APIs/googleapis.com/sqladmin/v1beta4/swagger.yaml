@@ -1605,6 +1605,9 @@ definitions:
           SECOND_GEN: A newer Cloud SQL backend that runs in a Compute Engine VM.
           EXTERNAL: A MySQL server that is not managed by Google.
         type: string
+      connectionName:
+        description: Connection name of the Cloud SQL instance used in connection strings.
+        type: string
       currentDiskSize:
         description: 'The current disk usage of the instance in bytes. This property has been deprecated. Users should use the "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud Monitoring API instead. Please see https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ for details.'
         format: int64

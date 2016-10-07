@@ -530,6 +530,10 @@ paths:
           in: query
           name: sku
           type: string
+        - description: Filter only to regions that support linux workers
+          in: query
+          name: linuxWorkersEnabled
+          type: boolean
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       produces:
@@ -13552,6 +13556,9 @@ definitions:
             type: integer
           perSiteScaling:
             description: "If True apps assigned to this App Service Plan can be scaled independently\r\n            If False apps assigned to this App Service Plan will scale to all instances of the plan"
+            type: boolean
+          reserved:
+            description: Enables creation of a Linux App Service Plan
             type: boolean
           resourceGroup:
             description: Resource group of the serverfarm

@@ -1280,16 +1280,16 @@ definitions:
             <dt>complex_model_m</dt>
             <dd>
             A machine with roughly twice the number of cores and roughly double the
-            memory of `complex_model_s`.
+            memory of <code suppresswarning="true">complex_model_s</code>.
             </dd>
             <dt>complex_model_l</dt>
             <dd>
             A machine with roughly twice the number of cores and roughly double the
-            memory of `complex_model_m`.
+            memory of <code suppresswarning="true">complex_model_m</code>.
             </dd>
           </dl>
 
-          This value can only be used when `ScaleTier` is set to `CUSTOM`.
+          You must set this value when `scaleTier` is set to `CUSTOM`.
         type: string
       packageUris:
         description: |-
@@ -1316,7 +1316,7 @@ definitions:
           The supported values are the same as those described in the entry for
           `master_type`.
 
-          This value must be present when `scale_tier` is set to `CUSTOM` and
+          This value must be present when `scaleTier` is set to `CUSTOM` and
           `parameter_server_count` is greater than zero.
         type: string
       pythonModule:
@@ -1350,10 +1350,10 @@ definitions:
           job's worker nodes.
 
           The supported values are the same as those described in the entry for
-          `master_type`.
+          `masterType`.
 
-          This value must be present when `scale_tier` is set to `CUSTOM` and
-          `worker_count` is greater than zero.
+          This value must be present when `scaleTier` is set to `CUSTOM` and
+          `workerCount` is greater than zero.
         type: string
     type: object
   GoogleCloudMlV1beta1__TrainingOutput:

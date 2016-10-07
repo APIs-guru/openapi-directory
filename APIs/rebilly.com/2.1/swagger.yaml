@@ -56,7 +56,7 @@ security:
   - ApiKey: []
 parameters:
   collectionExpand:
-    description: Expand response to get full related object instead of ID.  See the expand guide for more info.
+    description: Expand response to get full related object intead of ID.  See the expand guide for more info.
     in: query
     name: expand
     type: string
@@ -106,6 +106,19 @@ parameters:
     description: The resource identifier string
     in: path
     name: id
+    required: true
+    type: string
+  rulesVersion:
+    description: Expand response to get full related object instead of ID.  See the expand guide for more info.
+    in: path
+    minimum: 1
+    name: version
+    required: true
+    type: integer
+  systemEventType:
+    description: The event type
+    in: path
+    name: eventType
     required: true
     type: string
 responses:
@@ -201,6 +214,19 @@ tags:
       that can fit your requirements, and use it to solve your own business logic.
     name: Custom Events
   - description: |
+      "Don't conform to the rules. Create the rules."
+      Rather than adapt your workflow and business, Rebilly can align with your business
+      objectives by giving you the power to automate certain behaviors when key events happen.
+      You can use this to your advantage to mitigate risk, maximize conversions and minimize costs.
+      You have the controls at your fingertips here. If you need more control,
+      or help dialing in on a strategy, feel free to contact us.
+
+      When an event happens, it triggers the evaluation of conditions (that you set up),
+      in order from top to bottom. If the condition is met, the corresponding actions are executed.
+      The conditions continue to be checked until either all of the conditions have been executed,
+      or a special "stop" action is executed.
+    name: Custom Rules
+  - description: |
       Create additional custom fields for particular resources.  You may name,
       describe, and determine the type of the schema.
     name: Custom Fields
@@ -217,9 +243,6 @@ tags:
   - description: |
       Gateway accounts connect payment request to third party networks and platforms.
     name: Gateway Accounts
-  - description: |
-      Histograms are for particular kinds of reports.
-    name: Histograms
   - description: |
       Invoices leave a record for both you and your customer of the products sold.
     name: Invoices
@@ -278,8 +301,22 @@ tags:
       Proposed:  Your product includes digital goods, services, and physical goods.
     name: Products
   - description: |
-      Collect summary information.
+      The Rebilly Reporting API is currently experimental.  You may see
+      the [Reports API Documentation here](https://rebilly.github.io/RebillyReportsAPI/).
     name: Reports
+  - description: |
+      "Don't conform to the rules. Create the rules."
+      Rather than adapt your workflow and business, Rebilly can align with your business
+      objectives by giving you the power to automate certain behaviors when key events happen.
+      You can use this to your advantage to mitigate risk, maximize conversions and minimize costs.
+      You have the controls at your fingertips here. If you need more control,
+      or help dialing in on a strategy, feel free to contact us.
+
+      When an event happens, it triggers the evaluation of conditions (that you set up),
+      in order from top to bottom. If the condition is met, the corresponding actions are executed.
+      The conditions continue to be checked until either all of the conditions have been executed,
+      or a special "stop" action is executed.
+    name: Rules
   - description: |
       A session contains a token, which is a JSON Web Token.  The token is created
       with a user's signin credentials.
@@ -1979,6 +2016,159 @@ paths:
       summary: Create or update a custom event with predefined ID
       tags:
         - Custom Events
+  '/custom-events/{id}/rules':
+    get:
+      responses:
+        '200':
+          description: Rules were retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/RuleSet'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a list of rules for custom event
+      tags:
+        - Custom Events
+        - Rules
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      parameters:
+        - description: Set of rules resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RuleSet'
+      responses:
+        '200':
+          description: Rules were updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/RuleSet'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Update the rules for custom event
+      tags:
+        - Custom Events
+        - Rules
+  '/custom-events/{id}/rules/history':
+    get:
+      description: |
+        Retrieve the history versions of the selected set of rules.
+        Versions are created each time you change the rules.
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+        - $ref: '#/parameters/collectionFilter'
+        - $ref: '#/parameters/collectionQuery'
+        - $ref: '#/parameters/collectionSort'
+        - $ref: '#/parameters/collectionFields'
+        - $ref: '#/parameters/collectionExpand'
+      responses:
+        '200':
+          description: History was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/RuleSetVersion'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve the history of the set of rules for custom event
+      tags:
+        - Custom Events
+        - Rules
+    parameters:
+      - $ref: '#/parameters/resourceId'
+  '/custom-events/{id}/rules/history/{version}':
+    get:
+      description: |
+        Retrieve the version of the selected set of rules.
+        Versions are created each time you change the rules.
+      parameters:
+        - $ref: '#/parameters/collectionFields'
+        - $ref: '#/parameters/collectionExpand'
+      responses:
+        '200':
+          description: Rules version was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/RuleSetVersion'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve the version of the set of rules for custom event
+      tags:
+        - Custom Events
+        - Rules
+    parameters:
+      - $ref: '#/parameters/resourceId'
+      - $ref: '#/parameters/rulesVersion'
   '/custom-fields/{resource}':
     get:
       description: |
@@ -2653,6 +2843,224 @@ paths:
       summary: Create or update email credential with predefined ID
       tags:
         - Email Credentials
+  /events:
+    get:
+      responses:
+        '200':
+          description: A list of System Events was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/SystemEvent'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of existing events
+      tags:
+        - Events
+        - Rules
+  '/events/{eventType}':
+    get:
+      responses:
+        '200':
+          description: Rules were retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/SystemEvent'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve the event information
+      tags:
+        - Events
+        - Rules
+    parameters:
+      - $ref: '#/parameters/systemEventType'
+  '/events/{eventType}/rules':
+    get:
+      responses:
+        '200':
+          description: Rules were retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/RuleSet'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a list of rules for event
+      tags:
+        - Events
+        - Rules
+    parameters:
+      - $ref: '#/parameters/systemEventType'
+    put:
+      parameters:
+        - description: Set of rules resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RuleSet'
+      responses:
+        '200':
+          description: Rules were updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/RuleSet'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Update the rules for event
+      tags:
+        - Events
+        - Rules
+  '/events/{eventType}/rules/history':
+    get:
+      description: |
+        Retrieve the history versions of the selected set of rules.
+        Versions are created each time you change the rules.
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+        - $ref: '#/parameters/collectionFilter'
+        - $ref: '#/parameters/collectionQuery'
+        - $ref: '#/parameters/collectionSort'
+        - $ref: '#/parameters/collectionFields'
+        - $ref: '#/parameters/collectionExpand'
+      responses:
+        '200':
+          description: History was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/RuleSetVersion'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve the history of the set of rules
+      tags:
+        - Events
+        - Rules
+    parameters:
+      - $ref: '#/parameters/systemEventType'
+  '/events/{eventType}/rules/history/{version}':
+    get:
+      description: |
+        Retrieve the version of the selected set of rules.
+        Versions are created each time you change the rules.
+      parameters:
+        - $ref: '#/parameters/collectionFields'
+        - $ref: '#/parameters/collectionExpand'
+      responses:
+        '200':
+          description: Rules version was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/RuleSetVersion'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve the version of the set of rules
+      tags:
+        - Events
+        - Rules
+    parameters:
+      - $ref: '#/parameters/systemEventType'
+      - $ref: '#/parameters/rulesVersion'
   /forgot-password:
     post:
       description: |
@@ -4059,116 +4467,6 @@ paths:
         - Customer Authentication
     parameters:
       - $ref: '#/parameters/resourceId'
-  /passwords:
-    get:
-      description: |
-        Retrieve a list of passwords
-      parameters:
-        - $ref: '#/parameters/collectionLimit'
-        - $ref: '#/parameters/collectionOffset'
-      responses:
-        '200':
-          description: A list of passwords was retrieved successfully
-          headers:
-            Pagination-Limit:
-              description: Items per page limit
-              type: integer
-            Pagination-Offset:
-              description: Pagination offset
-              type: integer
-            Pagination-Total:
-              description: Total items count
-              type: integer
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            items:
-              $ref: '#/definitions/Password'
-            type: array
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a list of passwords
-      tags:
-        - Passwords
-    post:
-      description: |
-        Create an password
-      parameters:
-        - description: Password resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Password'
-      responses:
-        '201':
-          description: Password was created
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/Password'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a password
-      tags:
-        - Passwords
-  '/passwords/{token}':
-    get:
-      description: |
-        Retrieve a password with specified token
-      responses:
-        '200':
-          description: Password was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/Password'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieve a password
-      tags:
-        - Passwords
-    parameters:
-      - description: The password token
-        in: path
-        name: token
-        required: true
-        type: string
   /payment-cards:
     get:
       description: |
@@ -4245,6 +4543,71 @@ paths:
       summary: Create a Payment Card
       tags:
         - Payment Cards
+  /payment-cards-migrations:
+    get:
+      description: |
+        Retrieve a list of payment cards ready for migration
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of payment cards was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/PaymentCard'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of payment cards ready for migration
+      tags:
+        - Migrate payment cards
+  /payment-cards-migrations/migrate:
+    post:
+      description: |
+        Migrate payment cards to another gateway account
+      parameters:
+        - description: Payment card migration attributes
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PaymentCardMigrationRequest'
+      responses:
+        '201':
+          description: Migration command was accepted
+          schema:
+            $ref: '#/definitions/PaymentCardMigrationResponse'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Migrate payment cards to another gateway account
+      tags:
+        - Migrate payment cards
   '/payment-cards/{id}':
     get:
       description: |
@@ -6725,17 +7088,78 @@ definitions:
           - gatewayConfig
         type: object
     description: A1 Gateway config
+  AcquirerName:
+    description: Acquirer name
+    enum:
+      - AIB
+      - B+S
+      - Bank of America
+      - Bank of Moscow
+      - Bank of Rebilly
+      - Bank One
+      - Beanstream
+      - BMO Harris Bank
+      - Borgun
+      - BraintreePayments
+      - Catalunya Caixa
+      - Chase
+      - ChinaUnionPay
+      - CIM
+      - Credorax
+      - Elavon
+      - EMS
+      - Fifth Third Bank
+      - First Data Buypass
+      - First Data Nashville
+      - First Data North
+      - First Data Omaha
+      - Forte
+      - FundSend
+      - GlobalCollect
+      - Global East
+      - Heartland
+      - HSBC
+      - iCheque
+      - Ilixium
+      - Masapay
+      - Merrick
+      - Mission Valley Bank
+      - Moneris
+      - NATWEST
+      - NMI
+      - OchaPay
+      - Other
+      - Panda Bank
+      - PayPal
+      - PayR
+      - Privatbank
+      - RBC
+      - RBS WorldPay
+      - RealTime
+      - RebillyProcessor
+      - State Bank of Mauritius
+      - Stripe
+      - TBI
+      - TrustPay
+      - TSYS
+      - Vantiv
+      - VoicePay
+      - Wells Fargo
+      - Wing Hang Bank
+      - Wirecard
+      - WorldPay
+    type: string
   AmountAdjustment:
-    discriminator: amountPolicy
+    discriminator: method
     properties:
-      amountPolicy:
+      method:
         enum:
           - none
           - partial
           - discount
         type: string
     required:
-      - amountPolicy
+      - method
     type: object
   ApiKey:
     description: API secret Key.
@@ -6796,10 +7220,6 @@ definitions:
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
-      ipAddress:
-        description: Client IP address
-        format: ipv4
-        type: string
       method:
         description: HTTP method
         enum:
@@ -6821,6 +7241,40 @@ definitions:
       url:
         description: API request address
         type: string
+      user:
+        description: The user who has made a request
+        properties:
+          apiKeyId:
+            allOf:
+              - $ref: '#/definitions/ResourceId'
+          email:
+            description: The user email
+            format: email
+            type: string
+          fingerprint:
+            description: The user device fingerprint hash
+            type: string
+          firstName:
+            description: The user first name
+            type: string
+          ipAddress:
+            description: Client IP address
+            format: ipv4
+            type: string
+          isSupport:
+            description: If user from support
+            type: boolean
+          lastName:
+            description: The user last name
+            type: string
+          userAgent:
+            description: The software that is acting on behalf of a user
+            type: string
+          userId:
+            allOf:
+              - $ref: '#/definitions/ResourceId'
+        readOnly: true
+        type: object
     readOnly: true
     type: object
   ApprovalUrlLink:
@@ -7873,38 +8327,6 @@ definitions:
         description: 'The id of a file upload with the policy materials (may include the cancellation policy, refund policy, and terms of use).'
         type: string
     type: object
-  Dunning:
-    properties:
-      afterAttemptPolicy:
-        description: The policy on the attempt finishes
-        enum:
-          - none
-          - change-renewal-time
-        type: string
-      afterDunningEndPolicy:
-        description: The policy on the dunning ends
-        enum:
-          - none
-          - cancel-subscription
-        type: string
-      attempts:
-        items:
-          properties:
-            paymentInstruction:
-              $ref: '#/definitions/AmountAdjustment'
-            scheduleInstruction:
-              $ref: '#/definitions/ScheduleMethod'
-          required:
-            - scheduleInstruction
-            - paymentInstruction
-          type: object
-        minItems: 1
-        type: array
-    required:
-      - attempts
-      - afterAttemptPolicy
-      - afterDunningEndPolicy
-    type: object
   EMerchantPay:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -8003,6 +8425,51 @@ definitions:
       - username
       - password
     type: object
+  EmailNotification:
+    properties:
+      bcc:
+        description: The hidden recipients addresses. The template palceholders are allowed.
+        items:
+          type: string
+        type: array
+      bodyHtml:
+        description: |
+          Leave empty to recieve "text/plain" email.
+          The template palceholders are allowed.
+        type: string
+      bodyText:
+        description: |
+          Leave empty to use text from "bodyHtml" without tags.
+          The template palceholders are allowed.
+        type: string
+      cc:
+        description: The recipients addresses. The template palceholders are allowed.
+        items:
+          type: string
+        type: array
+      credentialHash:
+        description: SMTP Credential identifier string.
+        type: string
+      recipients:
+        description: The recipients addresses. The template palceholders are allowed.
+        items:
+          type: string
+        minItems: 1
+        type: array
+      sender:
+        description: The sender address. The template palceholders are allowed.
+        type: string
+      subject:
+        description: The message subject. The template palceholders are allowed.
+        type: string
+    required:
+      - credentialHash
+      - sender
+      - recipients
+      - subject
+      - bodyText
+      - bodyHtml
+    type: object
   Error:
     properties:
       error:
@@ -8012,6 +8479,17 @@ definitions:
         minimum: 100
         type: integer
     type: object
+  EventType:
+    description: Rebilly event type
+    enum:
+      - dispute-created
+      - gateway-account-requested
+      - transaction-processed
+      - subscription-canceled
+      - subscription-renewed
+      - payment-card-expired
+    readOnly: true
+    type: string
   Forte:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -8081,66 +8559,7 @@ definitions:
           type: string
         type: array
       acquirerName:
-        description: Acquirer name
-        enum:
-          - AIB
-          - B+S
-          - Bank of America
-          - Bank of Moscow
-          - Bank of Rebilly
-          - Bank One
-          - Beanstream
-          - BMO Harris Bank
-          - Borgun
-          - BraintreePayments
-          - Catalunya Caixa
-          - Chase
-          - ChinaUnionPay
-          - CIM
-          - Credorax
-          - Elavon
-          - EMS
-          - Fifth Third Bank
-          - First Data Buypass
-          - First Data Nashville
-          - First Data North
-          - First Data Omaha
-          - Forte
-          - FundSend
-          - GlobalCollect
-          - Global East
-          - Heartland
-          - HSBC
-          - iCheque
-          - Ilixium
-          - Masapay
-          - Merrick
-          - Mission Valley Bank
-          - Moneris
-          - NATWEST
-          - NMI
-          - Ochapay
-          - Other
-          - Panda Bank
-          - PayPal
-          - PayR
-          - Privatbank
-          - RBC
-          - RBS WorldPay
-          - RealTime
-          - RebillyProcessor
-          - State Bank of Mauritius
-          - Stripe
-          - TBI
-          - TrustPay
-          - TSYS
-          - Vantiv
-          - VoicePay
-          - Wells Fargo
-          - Wing Hang Bank
-          - Wirecard
-          - WorldPay
-        type: string
+        $ref: '#/definitions/AcquirerName'
       city:
         description: The gateway's city field
         type: string
@@ -8168,48 +8587,7 @@ definitions:
         description: 'True, if Gateway Account allows dynamic descriptor'
         type: boolean
       gatewayName:
-        description: The gateway name
-        enum:
-          - A1 Gateway
-          - AuthorizeNet
-          - Beanstream
-          - BraintreePayments
-          - Cashflows
-          - Cayan
-          - Chase
-          - ChinaUnionPay
-          - Credorax
-          - Datacash
-          - Dengi
-          - FundSend
-          - eMerchantPay
-          - Forte
-          - GlobalCollect
-          - GlobalOne
-          - iCheque
-          - Ilixium
-          - Moneris
-          - NMI
-          - OchaPay
-          - Optimal
-          - Panda Gateway
-          - PayPal
-          - PayR
-          - Payvision
-          - Plugnpay
-          - Realex
-          - RealTime
-          - RebillyProcessor
-          - Redsys
-          - Sagepay
-          - Stripe
-          - USAePay
-          - VantivLitle
-          - vegaaH
-          - Walpay
-          - Wirecard
-          - Worldpay
-        type: string
+        $ref: '#/definitions/GatewayName'
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -8287,6 +8665,60 @@ definitions:
       - acceptedCurrencies
       - organizationId
     type: object
+  GatewayAccountPickInstruction:
+    discriminator: method
+    properties:
+      method:
+        enum:
+          - gateway-account-weights
+          - gateway-acquirer-weights
+        type: string
+    required:
+      - method
+    type: object
+  GatewayName:
+    description: The gateway name
+    enum:
+      - A1 Gateway
+      - AuthorizeNet
+      - Beanstream
+      - BraintreePayments
+      - Cashflows
+      - Cayan
+      - Chase
+      - ChinaUnionPay
+      - Credorax
+      - Datacash
+      - Dengi
+      - FundSend
+      - eMerchantPay
+      - Forte
+      - GlobalCollect
+      - GlobalOne
+      - iCheque
+      - Ilixium
+      - Moneris
+      - NMI
+      - OchaPay
+      - Optimal
+      - Panda Gateway
+      - PayPal
+      - PayR
+      - Payvision
+      - Plugnpay
+      - Realex
+      - RealTime
+      - RebillyProcessor
+      - Redsys
+      - Sagepay
+      - Stripe
+      - USAePay
+      - VantivLitle
+      - vegaaH
+      - Walpay
+      - Wirecard
+      - Worldpay
+    type: string
   GlobalCollect:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -8825,6 +9257,12 @@ definitions:
     required:
       - rel
     type: object
+  OnOff:
+    default: active
+    enum:
+      - active
+      - inactive
+    type: string
   Optimal:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -8928,28 +9366,6 @@ definitions:
           - gatewayConfig
         type: object
     description: Panda Gateway config
-  Password:
-    properties:
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Password created time
-      description:
-        description: 'The password description, can be used to find password token'
-        type: string
-      password:
-        description: The password. This field is write-only
-        maxLength: 50
-        minLength: 1
-        type: string
-      token:
-        description: The password token
-        readOnly: true
-        type: string
-    required:
-      - description
-      - password
-    type: object
   PayPal:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -9029,7 +9445,7 @@ definitions:
         description: Dunning instructions object for payment declines
         properties:
           dunning:
-            $ref: '#/definitions/Dunning'
+            $ref: '#/definitions/PaymentRetry'
           dunningIndex:
             description: The position in the sequence of dunning
             readOnly: true
@@ -9113,6 +9529,32 @@ definitions:
         description: The card's bin (the PAN's first 6 digits)
         readOnly: true
         type: string
+      binBank:
+        description: Payment Card bin bank
+        readOnly: true
+        type: string
+      binCountry:
+        description: Payment Card bin country
+        readOnly: true
+        type: string
+      brand:
+        description: Payment Card brand
+        enum:
+          - Visa
+          - MasterCard
+          - American Express
+          - Discover
+          - Maestro
+          - Solo
+          - Electron
+          - JCB
+          - Voyager
+          - Diners Club
+          - Switch
+          - Laser
+          - China UnionPay
+        readOnly: true
+        type: string
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -9178,6 +9620,34 @@ definitions:
     required:
       - rel
     type: object
+  PaymentCardMigrationRequest:
+    properties:
+      fromGatewayAccountId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: An ID of Gateway Account cards should be migrated from
+      paymentCardIds:
+        items:
+          allOf:
+            - $ref: '#/definitions/ResourceId'
+          description: An array of payment card IDs
+        minItems: 1
+        type: array
+      toGatewayAccountId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: An ID of Gateway Account cards should be migrated to
+    required:
+      - fromGatewayAccountId
+      - toGatewayAccountId
+      - paymentCardIds
+    type: object
+  PaymentCardMigrationResponse:
+    properties:
+      migratedCards:
+        description: Amount of cards that were successfully migrated
+        type: integer
+    type: object
   PaymentInstrument:
     discriminator: method
     properties:
@@ -9203,6 +9673,38 @@ definitions:
         type: string
     required:
       - rel
+    type: object
+  PaymentRetry:
+    properties:
+      afterAttemptPolicy:
+        description: The policy on the attempt finishes
+        enum:
+          - none
+          - change-renewal-time
+        type: string
+      afterRetryEndPolicy:
+        description: The policy on the retry ends
+        enum:
+          - none
+          - cancel-subscription
+        type: string
+      attempts:
+        items:
+          properties:
+            paymentInstruction:
+              $ref: '#/definitions/AmountAdjustment'
+            scheduleInstruction:
+              $ref: '#/definitions/ScheduleMethod'
+          required:
+            - scheduleInstruction
+            - paymentInstruction
+          type: object
+        minItems: 1
+        type: array
+    required:
+      - attempts
+      - afterAttemptPolicy
+      - afterRetryEndPolicy
     type: object
   PaymentToken:
     properties:
@@ -9659,6 +10161,94 @@ definitions:
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
     maxLength: 50
     type: string
+  Rule:
+    description: The rule
+    properties:
+      actions:
+        items:
+          $ref: '#/definitions/RuleAction'
+        type: array
+        uniqueItems: true
+      criteria:
+        $ref: '#/definitions/Condition'
+      final:
+        default: true
+        description: 'Whether rule is final, meaning stop further matching rules if this is matched'
+        type: boolean
+      name:
+        type: string
+      status:
+        $ref: '#/definitions/OnOff'
+    required:
+      - name
+      - actions
+    type: object
+  RuleAction:
+    discriminator: name
+    properties:
+      name:
+        description: The action name
+        enum:
+          - blacklist
+          - cancel-scheduled-payments
+          - close-invoices
+          - guess-payment-card-expiration
+          - pick-gateway-account
+          - schedule-payment-retry
+          - schedule-payment
+          - send-email
+          - trigger-webhook
+          - stop-subscriptions
+        type: string
+      status:
+        $ref: '#/definitions/OnOff'
+    required:
+      - name
+    type: object
+  RuleSet:
+    description: Set of rules for particular event
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      rules:
+        items:
+          $ref: '#/definitions/Rule'
+        type: array
+      updatedTime:
+        $ref: '#/definitions/ServerTimestamp'
+      version:
+        readOnly: true
+        type: integer
+    required:
+      - rules
+    type: object
+  RuleSetVersion:
+    description: Version of rules
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      createdTime:
+        $ref: '#/definitions/ServerTimestamp'
+      rules:
+        items:
+          $ref: '#/definitions/Rule'
+        type: array
+      version:
+        type: integer
+    readOnly: true
+    type: object
   Sagepay:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -10074,6 +10664,25 @@ definitions:
       subscriptionId:
         allOf:
           - $ref: '#/definitions/ResourceId'
+    readOnly: true
+    type: object
+  SystemEvent:
+    description: The application event
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      description:
+        type: string
+      eventType:
+        $ref: '#/definitions/EventType'
+      title:
+        type: string
     readOnly: true
     type: object
   TaxCategory:
@@ -10585,6 +11194,7 @@ definitions:
             - password-tokens
             - payments
             - payment-cards
+            - payment-cards-migrations
             - paypal-accounts
             - plans
             - reports
@@ -10649,6 +11259,39 @@ definitions:
           - gatewayConfig
         type: object
     description: Walpay Gateway config
+  Webhook:
+    properties:
+      auth:
+        $ref: '#/definitions/WebhookAuthorization'
+      body:
+        type: string
+      headers:
+        items:
+          $ref: '#/definitions/WebhookHeader'
+        type: array
+      method:
+        enum:
+          - GET
+          - POST
+          - PUT
+          - PATCH
+          - DELETE
+        type: string
+      query:
+        additionalProperties:
+          example:
+            param1: value1
+            param2: value2
+          type: string
+        description: The URI parameters
+        type: object
+      uri:
+        format: uri
+        type: string
+    required:
+      - method
+      - uri
+    type: object
   WebhookAuthorization:
     discriminator: type
     properties:
@@ -10661,6 +11304,8 @@ definitions:
           - digest
           - oauth1
         type: string
+    required:
+      - type
     type: object
   WebhookCredential:
     description: Webhook credential
@@ -10676,6 +11321,21 @@ definitions:
         type: string
     required:
       - host
+    type: object
+  WebhookHeader:
+    properties:
+      name:
+        type: string
+      status:
+        $ref: '#/definitions/OnOff'
+      value:
+        example:
+          Header1: value1
+          Header2: value2;value3
+        type: string
+    required:
+      - name
+      - value
     type: object
   Website:
     properties:
@@ -10907,6 +11567,30 @@ definitions:
         type: object
     description: Between condition
     type: object
+  blacklist:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+      - properties:
+          ttl:
+            default: 0
+            description: 'Blacklist TTL. Defaults to zero, meaning blacklist record won''t expire ever.'
+            type: integer
+          type:
+            enum:
+              - customer-id
+              - email
+              - fingerprint
+              - ip-address
+              - payment-card-id
+            type: string
+        required:
+          - type
+        type: object
+    description: Add customer data to blacklist
+  cancel-scheduled-payments:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+    description: ''
   cash:
     allOf:
       - $ref: '#/definitions/PaymentInstrument'
@@ -10916,6 +11600,10 @@ definitions:
             type: string
         type: object
     description: Cash payment instrument object
+  close-invoices:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+    description: ''
   compare:
     properties:
       path:
@@ -11015,6 +11703,60 @@ definitions:
       - $ref: '#/definitions/compare'
     description: Equals condition
     type: object
+  gateway-account-weights:
+    allOf:
+      - $ref: '#/definitions/GatewayAccountPickInstruction'
+      - properties:
+          weightedList:
+            example: |
+              [
+                {"gatewayAccountId": "my_gateway_account_1", "weight": 80},
+                {"gatewayAccountId": "my_gateway_account_2", "weight": 20}
+              ]
+            items:
+              properties:
+                gatewayAccountId:
+                  $ref: '#/definitions/ResourceId'
+                weight:
+                  type: integer
+              required:
+                - gatewayAccountId
+                - weight
+              type: object
+            minimum: 0
+            type: array
+            uniqueItems: true
+        required:
+          - weightedList
+        type: object
+  gateway-acquirer-weights:
+    allOf:
+      - $ref: '#/definitions/GatewayAccountPickInstruction'
+      - properties:
+          weightedList:
+            example: |
+              [
+                {"gatewayName": "RebillyProcessor", "acquirerName": "AIB", "weight": 80},
+                {"gatewayName": "RebillyProcessor", "acquirerName": "B+S", "weight": 20}
+            items:
+              properties:
+                acquirerName:
+                  $ref: '#/definitions/AcquirerName'
+                gatewayName:
+                  $ref: '#/definitions/GatewayName'
+                weight:
+                  type: integer
+              required:
+                - gatewayName
+                - acquirerName
+                - weight
+              type: object
+            minimum: 0
+            type: array
+            uniqueItems: true
+        required:
+          - weightedList
+        type: object
   gt:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -11027,6 +11769,10 @@ definitions:
       - $ref: '#/definitions/compare'
     description: Greater than or equals condition
     type: object
+  guess-payment-card-expiration:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+    description: ''
   iCheque:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -11108,8 +11854,9 @@ definitions:
     type: object
   none:
     allOf:
-      - $ref: '#/definitions/SmtpAuthorization'
       - $ref: '#/definitions/AmountAdjustment'
+      - $ref: '#/definitions/SmtpAuthorization'
+      - $ref: '#/definitions/WebhookAuthorization'
   not:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -11190,10 +11937,56 @@ definitions:
           - payPalAccountId
         type: object
     description: PayPal payment instrument object
+  pick-gateway-account:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+      - properties:
+          pickInstruction:
+            $ref: '#/definitions/GatewayAccountPickInstruction'
+        required:
+          - pickInstruction
+        type: object
+    description: ''
   plain:
     allOf:
       - $ref: '#/definitions/SmtpAuthorization'
       - $ref: '#/definitions/UserPasswordAuthorization'
+  schedule-payment:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+      - description: The calculation instruction of scheduled time for payment
+        properties:
+          amountPolicy:
+            enum:
+              - balance-outstanding
+              - invoice-total
+            type: string
+          scheduleInstruction:
+            $ref: '#/definitions/ScheduleMethod'
+        required:
+          - scheduleInstruction
+          - amountPolicy
+        type: object
+    description: ''
+  schedule-payment-retry:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+      - $ref: '#/definitions/PaymentRetry'
+    description: ''
+  send-email:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+      - $ref: '#/definitions/EmailNotification'
+    description: ''
+  stop-subscriptions:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+    description: Stop active subscriptions
+  trigger-webhook:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+      - $ref: '#/definitions/Webhook'
+    description: ''
   vegaaH:
     allOf:
       - $ref: '#/definitions/GatewayAccount'

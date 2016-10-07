@@ -1045,6 +1045,9 @@ definitions:
   DatabaseInstance:
     description: A Cloud SQL instance resource.
     properties:
+      connectionName:
+        description: Connection name of the Cloud SQL instance used in connection strings.
+        type: string
       currentDiskSize:
         description: The current disk usage of the instance in bytes.
         format: int64

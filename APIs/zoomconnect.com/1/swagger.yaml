@@ -23,11 +23,11 @@ info:
 tags:
   - description: Core information related to your account
     name: account
-  - description: Manage your contacts
+  - description: Manage contacts
     name: contacts
   - description: Number context service
     name: context
-  - description: Manage your groups
+  - description: Manage groups
     name: groups
   - description: Manage your messages
     name: messages
@@ -246,6 +246,41 @@ paths:
       summary: all
       tags:
         - contacts
+  /api/rest/v1/contacts/create:
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Creates a  contact
+      parameters:
+        - description: webServiceContact
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceContact'
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/WebServiceContact'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/WebServiceContact'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: create
+      tags:
+        - contacts
   '/api/rest/v1/contacts/{contactId}':
     delete:
       consumes:
@@ -301,6 +336,177 @@ paths:
         '404':
           description: Not Found
       summary: get
+      tags:
+        - contacts
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Updates a  contact
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          type: string
+        - description: webServiceContact
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceContact'
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceContact'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: update
+      tags:
+        - contacts
+  '/api/rest/v1/contacts/{contactId}/addFromGroup/{groupId}':
+    get:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Remove a contact from a group
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          type: string
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: removeFromGroup
+      tags:
+        - contacts
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Remove a contact from a group
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          type: string
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: removeFromGroup
+      tags:
+        - contacts
+  '/api/rest/v1/contacts/{contactId}/addToGroup/{groupId}':
+    get:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Add a contact to a group
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          type: string
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: addToGroup
+      tags:
+        - contacts
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Add a contact to a group
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          type: string
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: addToGroup
       tags:
         - contacts
   /api/rest/v1/context/lookup:
@@ -390,6 +596,41 @@ paths:
       summary: all
       tags:
         - groups
+  /api/rest/v1/groups/create:
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Create a  group
+      parameters:
+        - description: webServiceGroup
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceGroup'
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/WebServiceGroup'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/WebServiceGroup'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: create
+      tags:
+        - groups
   '/api/rest/v1/groups/{groupId}':
     delete:
       consumes:
@@ -445,6 +686,177 @@ paths:
         '404':
           description: Not Found
       summary: get
+      tags:
+        - groups
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Update a  group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          type: string
+        - description: webServiceGroup
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceGroup'
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceGroup'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: update
+      tags:
+        - groups
+  '/api/rest/v1/groups/{groupId}/addContact/{contactId}':
+    get:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Add a contact to a group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          type: string
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: addContact
+      tags:
+        - groups
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Add a contact to a group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          type: string
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: addContact
+      tags:
+        - groups
+  '/api/rest/v1/groups/{groupId}/removeContact/{contactId}':
+    get:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Remove a contact from a group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          type: string
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: removeContact
+      tags:
+        - groups
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Remove a contact from a group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          type: string
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: removeContact
       tags:
         - groups
   /api/rest/v1/messages/all:
