@@ -54,6 +54,7 @@ Also used as test suite in following projects:
  - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
  - [ReDoc](https://github.com/Rebilly/ReDoc) - Swagger-generated API Reference Documentation
  - [ardoq-swagger-addon](https://github.com/ardoq/ardoq-swagger-addon) - Ardoq Open API (Swagger) Addon
+ - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for Swagger(OpenApi) Request parameters and Response objects.
 
 API spec acceptance criteria
 --------------------------
