@@ -499,6 +499,10 @@ function fixSpec(swagger, errors) {
       case 'EQUIVALENT_PATH':
         swagger['x-hasEquivalentPaths'] = true;
         break;
+      case 'MISSING_PATH_PARAMETER_DECLARATION':
+        //TODO: add warning
+        jp.remove(swagger, path);
+        return true;
       case 'MISSING_PATH_PARAMETER_DEFINITION':
         var field = error.message.match(/: (.+)$/)[1];
         newValue = _.clone(value);
