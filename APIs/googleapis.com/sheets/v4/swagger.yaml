@@ -466,6 +466,99 @@ paths:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
+  '/v4/spreadsheets/{spreadsheetId}/values/{range}:clear':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Clears values from a spreadsheet.
+        The caller must specify the spreadsheet ID and range.
+        Only values are cleared -- all other properties of the cell (such as
+        formatting, data validation, etc..) are kept.
+      operationId: sheets.spreadsheets.values.clear
+      parameters:
+        - description: The ID of the spreadsheet to update.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+        - description: The A1 notation of the values to clear.
+          in: path
+          name: range
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ClearValuesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ClearValuesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
+  '/v4/spreadsheets/{spreadsheetId}/values:batchClear':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Clears one or more ranges of values from a spreadsheet.
+        The caller must specify the spreadsheet ID and one or more ranges.
+        Only values are cleared -- all other properties of the cell (such as
+        formatting, data validation, etc..) are kept.
+      operationId: sheets.spreadsheets.values.batchClear
+      parameters:
+        - description: The ID of the spreadsheet to update.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchClearValuesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchClearValuesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchGet':
     get:
       description: |-
@@ -1004,6 +1097,31 @@ definitions:
           $ref: '#/definitions/SortSpec'
         type: array
     type: object
+  BatchClearValuesRequest:
+    description: The request for clearing more than one range of values in a spreadsheet.
+    properties:
+      ranges:
+        description: 'The ranges to clear, in A1 notation.'
+        items:
+          type: string
+        type: array
+    type: object
+  BatchClearValuesResponse:
+    description: The response when updating a range of values in a spreadsheet.
+    properties:
+      clearedRanges:
+        description: |-
+          The ranges that were cleared, in A1 notation.
+          (If the requests were for an unbounded range or a ranger larger
+           than the bounds of the sheet, this will be the actual ranges
+           that were cleared, bounded to the sheet's limits.)
+        items:
+          type: string
+        type: array
+      spreadsheetId:
+        description: The spreadsheet the updates were applied to.
+        type: string
+    type: object
   BatchGetValuesResponse:
     description: The response when retrieving more than one range of values in a spreadsheet.
     properties:
@@ -1171,13 +1289,15 @@ definitions:
           - DOTTED
           - DASHED
           - SOLID
+          - SOLID_MEDIUM
+          - SOLID_THICK
           - NONE
           - DOUBLE
         type: string
       width:
         description: |-
           The width of the border, in pixels.
-          Border widths must be between 0 and 3 pixels, inclusive.
+          Deprecated; the width is determined by the "style" field.
         format: int32
         type: integer
     type: object
@@ -1394,6 +1514,24 @@ definitions:
         description: The sheet ID on which the basic filter should be cleared.
         format: int32
         type: integer
+    type: object
+  ClearValuesRequest:
+    description: The request for clearing a range of values in a spreadsheet.
+    properties: {}
+    type: object
+  ClearValuesResponse:
+    description: The response when clearing a range of values in a spreadsheet.
+    properties:
+      clearedRange:
+        description: |-
+          The range (in A1 notation) that was cleared.
+          (If the request was for an unbounded range or a ranger larger
+           than the bounds of the sheet, this will be the actual range
+           that was cleared, bounded to the sheet's limits.)
+        type: string
+      spreadsheetId:
+        description: The spreadsheet the updates were applied to.
+        type: string
     type: object
   Color:
     description: |-

@@ -23,6 +23,14 @@ info:
   x-serviceName: identitytoolkit
 externalDocs:
   url: 'https://developers.google.com/identity-toolkit/v3/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -136,6 +144,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/DownloadAccountResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
       tags:
         - relyingparty
   /getAccountInfo:
@@ -394,6 +405,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/UploadAccountResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
       tags:
         - relyingparty
   /verifyAssertion:
@@ -609,7 +623,7 @@ definitions:
         additionalProperties:
           description: The customized query parameter.
           type: string
-        description: 'The query parameter that client can customize by themselves in auth url. The following parameters are reserved for server so that they cannot be customized by clients: client_id, response_type, scope, redirect_uri, state.'
+        description: 'The query parameter that client can customize by themselves in auth url. The following parameters are reserved for server so that they cannot be customized by clients: client_id, response_type, scope, redirect_uri, state, oauth_token.'
         type: object
       hostedDomain:
         description: The hosted domain to restrict sign-in to accounts at that domain for Google Apps hosted accounts.
@@ -944,6 +958,9 @@ definitions:
       signerKey:
         description: The key for to hash the password.
         format: byte
+        type: string
+      targetProjectId:
+        description: Specify which project (field value is actually project id) to operate. Only used when provided credential.
         type: string
       users:
         description: The account info to be stored.

@@ -275,7 +275,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a bucket. This method supports patch semantics.
+      description: 'Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate. This method supports patch semantics.'
       operationId: storage.buckets.patch
       parameters:
         - description: Name of a bucket.
@@ -336,7 +336,7 @@ paths:
       tags:
         - buckets
     put:
-      description: Updates a bucket.
+      description: 'Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.'
       operationId: storage.buckets.update
       parameters:
         - description: Name of a bucket.
@@ -1803,8 +1803,11 @@ definitions:
                 action:
                   description: The action to take.
                   properties:
+                    storageClass:
+                      description: Target storage class. Required iff the type of the action is SetStorageClass.
+                      type: string
                     type:
-                      description: 'Type of the action. Currently, only Delete is supported.'
+                      description: 'Type of the action. Currently, only Delete and SetStorageClass are supported.'
                       type: string
                   type: object
                 condition:
@@ -1821,6 +1824,11 @@ definitions:
                     isLive:
                       description: 'Relevant only for versioned objects. If the value is true, this condition matches live objects; if the value is false, it matches archived objects.'
                       type: boolean
+                    matchesStorageClass:
+                      description: 'Objects having any of the storage classes specified by this condition will be matched. Values include MULTI_REGIONAL, REGIONAL, NEARLINE, COLDLINE, STANDARD, and DURABLE_REDUCED_AVAILABILITY.'
+                      items:
+                        type: string
+                      type: array
                     numNewerVersions:
                       description: 'Relevant only for versioned objects. If the value is N, this condition is satisfied when there are at least N versions (including the live version) newer than this version of the object.'
                       format: int32
@@ -1867,7 +1875,7 @@ definitions:
         description: The URI of this bucket.
         type: string
       storageClass:
-        description: 'The bucket''s storage class. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include STANDARD, NEARLINE and DURABLE_REDUCED_AVAILABILITY. Defaults to STANDARD. For more information, see storage classes.'
+        description: 'The bucket''s default storage class, used whenever no storageClass is specified for a newly-created object. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include MULTI_REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, and DURABLE_REDUCED_AVAILABILITY. If this value is not specified when the bucket is created, it will default to STANDARD. For more information, see storage classes.'
         type: string
       timeCreated:
         description: The creation time of the bucket in RFC 3339 format.

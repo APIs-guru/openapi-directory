@@ -247,7 +247,10 @@ paths:
         `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
         Operations.GetOperation or
         other methods to check whether the cancellation succeeded or whether the
-        operation completed despite cancellation.
+        operation completed despite cancellation. On successful cancellation,
+        the operation is not deleted; instead, it becomes an operation with
+        an Operation.error value with a google.rpc.Status.code of 1,
+        corresponding to `Code.CANCELLED`.
       operationId: ml.projects.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
@@ -1196,8 +1199,8 @@ definitions:
         type: array
       maxWorkerCount:
         description: |-
-          Optional. The maximum amount of workers to be used for parallel processing.
-          Defaults to 10.
+          Optional. The maximum number of workers to be used for parallel processing.
+          Defaults to 10 if not specified.
         format: int64
         type: string
       modelName:
@@ -1205,7 +1208,7 @@ definitions:
           Use this field if you want to use the default version for the specified
           model. The string must use the following format:
 
-          `"project/<var>[YOUR_PROJECT]</var>/models/<var>[YOUR_MODEL]</var>"`
+          `"projects/<var>[YOUR_PROJECT]</var>/models/<var>[YOUR_MODEL]</var>"`
         type: string
       outputPath:
         description: Required. The output Google Cloud Storage location.
@@ -1219,7 +1222,7 @@ definitions:
           string is formatted the same way as `model_version`, with the addition
           of the version information:
 
-          `"project/<var>[YOUR_PROJECT]</var>/models/<var>YOUR_MODEL/versions/<var>[YOUR_VERSION]</var>"`
+          `"projects/<var>[YOUR_PROJECT]</var>/models/<var>YOUR_MODEL/versions/<var>[YOUR_VERSION]</var>"`
         type: string
     type: object
   GoogleCloudMlV1beta1__PredictionOutput:
@@ -1442,7 +1445,7 @@ definitions:
         type: boolean
       error:
         $ref: '#/definitions/GoogleRpc__Status'
-        description: The error result of the operation in case of failure.
+        description: The error result of the operation in case of failure or cancellation.
       metadata:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.

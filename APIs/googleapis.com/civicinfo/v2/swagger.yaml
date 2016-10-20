@@ -77,6 +77,10 @@ paths:
           in: query
           name: query
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DivisionSearchRequest'
       responses:
         '200':
           description: Successful response
@@ -96,6 +100,11 @@ paths:
     get:
       description: List of available elections to query.
       operationId: civicinfo.elections.electionQuery
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ElectionsQueryRequest'
       responses:
         '200':
           description: Successful response
@@ -161,6 +170,10 @@ paths:
             type: string
           name: roles
           type: array
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RepresentativeInfoRequest'
       responses:
         '200':
           description: Successful response
@@ -226,6 +239,10 @@ paths:
             type: string
           name: roles
           type: array
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DivisionRepresentativeInfoRequest'
       responses:
         '200':
           description: Successful response
@@ -266,6 +283,10 @@ paths:
           in: query
           name: returnAllAvailableData
           type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/VoterInfoRequest'
       responses:
         '200':
           description: Successful response
@@ -369,7 +390,7 @@ definitions:
         description: The email address for the candidate's campaign.
         type: string
       name:
-        description: The candidate's name.
+        description: The candidate's name. If this is a joint ticket it will indicate the name of the candidate at the top of a ticket followed by a / and that name of candidate at the bottom of the ticket. e.g. "Mitt Romney / Paul Ryan"
         type: string
       orderOnBallot:
         description: The order the candidate appears on the ballot for this contest.
@@ -484,6 +505,23 @@ definitions:
         description: 'The type of contest. Usually this will be ''General'', ''Primary'', or ''Run-off'' for contests with candidates. For referenda this will be ''Referendum''. For Retention contests this will typically be ''Retention''.'
         type: string
     type: object
+  ContextParams:
+    properties:
+      clientProfile:
+        type: string
+    type: object
+  DivisionRepresentativeInfoRequest:
+    description: A request to look up representative information for a single division.
+    properties:
+      contextParams:
+        $ref: '#/definitions/ContextParams'
+    type: object
+  DivisionSearchRequest:
+    description: A search request for political geographies.
+    properties:
+      contextParams:
+        $ref: '#/definitions/ContextParams'
+    type: object
   DivisionSearchResponse:
     description: The result of a division search query.
     properties:
@@ -546,6 +584,11 @@ definitions:
       title:
         description: The title of the election official.
         type: string
+    type: object
+  ElectionsQueryRequest:
+    properties:
+      contextParams:
+        $ref: '#/definitions/ContextParams'
     type: object
   ElectionsQueryResponse:
     description: The list of elections available for this version of the API.
@@ -719,6 +762,12 @@ definitions:
           $ref: '#/definitions/Official'
         type: array
     type: object
+  RepresentativeInfoRequest:
+    description: A request for political geography and representative information for an address.
+    properties:
+      contextParams:
+        $ref: '#/definitions/ContextParams'
+    type: object
   RepresentativeInfoResponse:
     description: The result of a representative info lookup query.
     properties:
@@ -780,6 +829,12 @@ definitions:
       official:
         description: Whether this data comes from an official government source.
         type: boolean
+    type: object
+  VoterInfoRequest:
+    description: A request for information about a voter.
+    properties:
+      contextParams:
+        $ref: '#/definitions/ContextParams'
     type: object
   VoterInfoResponse:
     description: The result of a voter info lookup query.

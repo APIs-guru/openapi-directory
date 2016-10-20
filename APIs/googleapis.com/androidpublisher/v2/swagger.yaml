@@ -286,6 +286,52 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - edits
+  '/{packageName}/edits/{editId}/apks/{apkVersionCode}/deobfuscationFiles/{deobfuscationFileType}':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      consumes:
+        - application/octet-stream
+      description: 'Uploads the deobfuscation file of the specified APK. If a deobfuscation file already exists, it will be replaced.'
+      operationId: androidpublisher.edits.deobfuscationfiles.upload
+      parameters:
+        - description: 'Unique identifier of the Android app for which the deobfuscatiuon files are being uploaded; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
+        - description: The version code of the APK whose deobfuscation file is being uploaded.
+          in: path
+          name: apkVersionCode
+          required: true
+          type: integer
+        - enum:
+            - proguard
+          in: path
+          name: deobfuscationFileType
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeobfuscationFilesUploadResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - edits
   '/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}':
     get:
       description: Fetches the Expansion File configuration for the APK specified.
@@ -1039,10 +1085,13 @@ paths:
       consumes:
         - image/bmp
         - image/cgm
+        - image/dicom-rle
+        - image/emf
         - image/fits
         - image/g3fax
         - image/gif
         - image/ief
+        - image/jls
         - image/jp2
         - image/jpeg
         - image/jpm
@@ -1090,6 +1139,7 @@ paths:
         - image/vnd.xiff
         - image/vnd.zbrush.pcx
         - image/webp
+        - image/wmf
         - image/x-3ds
         - image/x-cmu-raster
         - image/x-cmx
@@ -2183,6 +2233,18 @@ definitions:
       userComment:
         $ref: '#/definitions/UserComment'
         description: A comment from a user.
+    type: object
+  DeobfuscationFile:
+    description: Represents a deobfuscation file.
+    properties:
+      symbolType:
+        description: The type of the deobfuscation file.
+        type: string
+    type: object
+  DeobfuscationFilesUploadResponse:
+    properties:
+      deobfuscationFile:
+        $ref: '#/definitions/DeobfuscationFile'
     type: object
   DeveloperComment:
     properties:

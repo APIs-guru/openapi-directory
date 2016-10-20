@@ -55,6 +55,11 @@ securityDefinitions:
 security:
   - ApiKey: []
 parameters:
+  collectionCriteria:
+    description: The json criteria for collection
+    in: query
+    name: criteria
+    type: string
   collectionExpand:
     description: Expand response to get full related object intead of ID.  See the expand guide for more info.
     in: query
@@ -203,6 +208,9 @@ tags:
       and Transactions.
     name: Contacts
   - description: |
+      Coupons allows to apply different types of discounts to Invoices, Subscriptions and Plans.
+    name: Coupons
+  - description: |
       Customers are your customers, sometimes known as accounts, clients,
       members, patrons, or players in other systems.
     name: Customers
@@ -251,12 +259,6 @@ tags:
       power a pricing page. You can make multiple layouts, and use rules to
       target them to different audiences.
     name: Layouts
-  - description: |
-      Lead sources track the marketing source of the customer.  Use lead sources
-      to tie marketing analysis further into the customer lifecycle: such as
-      recurring revenues and disputes.  Lead sources can also be used as attributes
-      by rules.
-    name: Lead Sources
   - description: |
       Leave notes on a customer record to have a handy location to share with
       others who may interface with the customer.  It's great for customer service.
@@ -1528,6 +1530,284 @@ paths:
       summary: Create or update a contact with predefined ID
       tags:
         - Contacts
+  /coupons:
+    get:
+      description: |
+        Retrieve a list of coupons
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+        - $ref: '#/parameters/collectionFilter'
+        - $ref: '#/parameters/collectionQuery'
+        - $ref: '#/parameters/collectionCriteria'
+        - $ref: '#/parameters/collectionSort'
+      responses:
+        '200':
+          description: A list of coupons was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/Coupon'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of coupons
+      tags:
+        - Coupons
+    post:
+      description: |
+        Create a coupon
+      parameters:
+        - description: Coupon resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Coupon'
+      responses:
+        '201':
+          description: Coupon was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Coupon'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a coupon
+      tags:
+        - Coupons
+  /coupons-redemptions:
+    get:
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+        - $ref: '#/parameters/collectionFilter'
+        - $ref: '#/parameters/collectionQuery'
+        - $ref: '#/parameters/collectionCriteria'
+        - $ref: '#/parameters/collectionSort'
+      responses:
+        '200':
+          description: Coupons redemptions were retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/CouponRedemption'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of coupon redemptions
+      tags:
+        - Coupons
+    post:
+      description: |
+        Redeem a coupon
+      parameters:
+        - description: Redeem a coupon
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CouponRedemption'
+      responses:
+        '201':
+          description: Coupon was redeemed
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/CouponRedemption'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Redeem a coupon
+      tags:
+        - Coupons
+  '/coupons-redemptions/{id}':
+    get:
+      responses:
+        '200':
+          description: Retrieve a coupon redemption with specified identifier string
+          schema:
+            $ref: '#/definitions/CouponRedemption'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a coupon redemption with specified identifier string
+      tags:
+        - Coupons
+    parameters:
+      - $ref: '#/parameters/resourceId'
+  '/coupons-redemptions/{id}/cancel':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      responses:
+        '201':
+          description: Cancel a coupon redemption
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Cancel a coupon redemption
+      tags:
+        - Coupons
+  '/coupons/{redemptionCode}':
+    get:
+      description: |
+        Retrieve a coupon with specified redemption code string
+      responses:
+        '200':
+          description: Coupon was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Coupon'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a coupon
+      tags:
+        - Coupons
+    parameters:
+      - description: The Coupon's redemption code
+        in: path
+        name: redemptionCode
+        required: true
+        type: string
+    put:
+      description: |
+        Create or update a coupon with predefined redemption code
+      parameters:
+        - description: Coupon resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Coupon'
+      responses:
+        '200':
+          description: Coupon was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Coupon'
+        '201':
+          description: Coupon was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Coupon'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          description: Coupon was redeemed already and cannot be changed
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create or update a coupon with predefined redemption code
+      tags:
+        - Coupons
   /credential-hashes/emails:
     post:
       description: |
@@ -2499,6 +2779,122 @@ paths:
         '422':
           $ref: '#/responses/InvalidDataError'
       summary: Create a customer with predefined ID
+      tags:
+        - Customers
+  '/customers/{id}/lead-source':
+    get:
+      description: |
+        Retrieve a Lead Source of given customer
+      responses:
+        '200':
+          description: Lead Source was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a customer's Lead Source
+      tags:
+        - Customers
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Create a Lead Source for a customer
+      parameters:
+        - description: Lead Source resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LeadSource'
+      responses:
+        '201':
+          description: Lead Source was created
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a Lead Source for a customer
+      tags:
+        - Customers
+  '/customers/{id}/lead-source/{leadSourceId}':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+      - description: Lead Source ID
+        in: path
+        name: leadSourceId
+        required: true
+        type: string
+    put:
+      description: |
+        Create or update a customer's Lead Source with predefined identifier string
+      parameters:
+        - description: Lead Source resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LeadSource'
+      responses:
+        '200':
+          description: Lead Source was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '201':
+          description: Lead Source was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create or update a customer's Lead Source with predefined ID
       tags:
         - Customers
   /disputes:
@@ -3657,6 +4053,122 @@ paths:
       summary: Create an invoice item
       tags:
         - Invoices
+  '/invoices/{id}/lead-source':
+    get:
+      description: |
+        Retrieve a Lead Source of given invoice
+      responses:
+        '200':
+          description: Lead Source was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve an invoice's Lead Source
+      tags:
+        - Invoices
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Create a Lead Source for an invoice
+      parameters:
+        - description: Lead Source resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LeadSource'
+      responses:
+        '201':
+          description: Lead Source was created
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a Lead Source for an invoice
+      tags:
+        - Invoices
+  '/invoices/{id}/lead-source/{leadSourceId}':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+      - description: Lead Source ID
+        in: path
+        name: leadSourceId
+        required: true
+        type: string
+    put:
+      description: |
+        Create or update an invoice's Lead Source with predefined identifier string
+      parameters:
+        - description: Lead Source resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LeadSource'
+      responses:
+        '200':
+          description: Lead Source was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '201':
+          description: Lead Source was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create or update an invoice's Lead Source with predefined ID
+      tags:
+        - Invoices
   '/invoices/{id}/void':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -3843,154 +4355,6 @@ paths:
       summary: Create or update a layout with predefined ID
       tags:
         - Layouts
-  /lead-sources:
-    get:
-      description: |
-        Retrieve a list of Lead Sources
-      parameters:
-        - $ref: '#/parameters/collectionLimit'
-        - $ref: '#/parameters/collectionOffset'
-      responses:
-        '200':
-          description: A list of LeadSources was retrieved successfully
-          headers:
-            Pagination-Limit:
-              description: Items per page limit
-              type: integer
-            Pagination-Offset:
-              description: Pagination offset
-              type: integer
-            Pagination-Total:
-              description: Total items count
-              type: integer
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            items:
-              $ref: '#/definitions/LeadSource'
-            type: array
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a list of Lead Sources
-      tags:
-        - Lead Sources
-    post:
-      description: |
-        Create a Lead Source
-      parameters:
-        - description: Lead Source resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LeadSource'
-      responses:
-        '201':
-          description: Lead Source was created
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a LeadSource
-      tags:
-        - Lead Sources
-  '/lead-sources/{id}':
-    get:
-      description: |
-        Retrieve a Lead Source with specified identifier string
-      responses:
-        '200':
-          description: Lead Source was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieve a Lead Source
-      tags:
-        - Lead Sources
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    put:
-      description: |
-        Create a Lead Source with predefined identifier string
-      parameters:
-        - description: Lead Source resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LeadSource'
-      responses:
-        '200':
-          description: Lead Source was updated
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '201':
-          description: Lead Source was created
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a Lead Source with predefined ID
-      tags:
-        - Lead Sources
   /notes:
     get:
       description: |
@@ -4918,6 +5282,122 @@ paths:
           schema:
             $ref: '#/definitions/InvalidError'
       summary: Create a payment with predefined ID
+      tags:
+        - Payments
+  '/payments/{id}/lead-source':
+    get:
+      description: |
+        Retrieve a Lead Source of given payment
+      responses:
+        '200':
+          description: Lead Source was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a payment's Lead Source
+      tags:
+        - Payments
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Create a Lead Source for a payment
+      parameters:
+        - description: Lead Source resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LeadSource'
+      responses:
+        '201':
+          description: Lead Source was created
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a Lead Source for a payment
+      tags:
+        - Payments
+  '/payments/{id}/lead-source/{leadSourceId}':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+      - description: Lead Source ID
+        in: path
+        name: leadSourceId
+        required: true
+        type: string
+    put:
+      description: |
+        Create or update an payment's Lead Source with predefined identifier string
+      parameters:
+        - description: Lead Source resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LeadSource'
+      responses:
+        '200':
+          description: Lead Source was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '201':
+          description: Lead Source was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create or update a payment's Lead Source with predefined ID
       tags:
         - Payments
   /plans:
@@ -6018,6 +6498,122 @@ paths:
           schema:
             $ref: '#/definitions/InvalidError'
       summary: Cancel a subscription
+      tags:
+        - Subscriptions
+  '/subscriptions/{id}/lead-source':
+    get:
+      description: |
+        Retrieve a Lead Source of given subscription
+      responses:
+        '200':
+          description: Lead Source was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a subscription's Lead Source
+      tags:
+        - Subscriptions
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Create a Lead Source for a Subscription
+      parameters:
+        - description: Lead Source resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LeadSource'
+      responses:
+        '201':
+          description: Lead Source was created
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a Lead Source for a Subscription
+      tags:
+        - Subscriptions
+  '/subscriptions/{id}/lead-source/{leadSourceId}':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+      - description: Lead Source ID
+        in: path
+        name: leadSourceId
+        required: true
+        type: string
+    put:
+      description: |
+        Create or update an subscription's Lead Source with predefined identifier string
+      parameters:
+        - description: Lead Source resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LeadSource'
+      responses:
+        '200':
+          description: Lead Source was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '201':
+          description: Lead Source was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create or update a subscription's Lead Source with predefined ID
       tags:
         - Subscriptions
   '/subscriptions/{id}/switch':
@@ -7807,6 +8403,114 @@ definitions:
     required:
       - rel
     type: object
+  Coupon:
+    description: Coupons and Discounts
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Coupon created time
+      discount:
+        $ref: '#/definitions/Discount'
+      expiredTime:
+        description: Coupon's expire time (end time)
+        format: date-time
+        type: string
+      issuedTime:
+        description: Coupon's issued time (start time)
+        format: date-time
+        type: string
+      redemptionCode:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Coupon's redemption code
+        readOnly: true
+      redemptionsCount:
+        description: Coupon's redemptions count
+        minimum: 0
+        readOnly: true
+        type: integer
+      restrictions:
+        description: Coupon restrictions
+        items:
+          - $ref: '#/definitions/CouponRestriction'
+        type: array
+      status:
+        description: If coupon enabled
+        enum:
+          - issued
+          - expired
+        readOnly: true
+        type: string
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Coupon updated time.
+    required:
+      - discount
+      - issuedTime
+    type: object
+  CouponRedemption:
+    description: Coupons redemption log
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      additionalRestrictions:
+        description: Additional restrictions for coupon's redemptions
+        items:
+          - $ref: '#/definitions/CouponRestriction'
+        type: array
+      canceledTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Coupon redemption canceled time
+        readOnly: true
+      customerId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Customer's ID
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        readOnly: true
+      redeemedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Coupon redeem time
+        readOnly: true
+      redemptionCode:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Coupon's redemption code
+    type: object
+  CouponRestriction:
+    description: Coupon restrictions
+    discriminator: type
+    properties:
+      type:
+        description: Coupon's restriction type
+        enum:
+          - discounts-per-redemption
+          - redemptions-per-customer
+          - restrict-to-invoices
+          - restrict-to-plans
+          - restrict-to-subscriptions
+        type: string
+    type: object
   Credential:
     properties:
       _links:
@@ -8088,6 +8792,16 @@ definitions:
           - gatewayConfig
         type: object
     description: Dengi Gateway config
+  Discount:
+    discriminator: type
+    properties:
+      type:
+        description: Discount type
+        enum:
+          - fixed
+          - percent
+        type: string
+    type: object
   Dispute:
     properties:
       _links:
@@ -8825,7 +9539,8 @@ definitions:
           - $ref: '#/definitions/WebsiteLink'
           - $ref: '#/definitions/BillingContactLink'
           - $ref: '#/definitions/DeliveryContactLink'
-        maxItems: 5
+          - $ref: '#/definitions/OrganizationLink'
+        maxItems: 6
         minItems: 1
         readOnly: true
         type: array
@@ -8880,6 +9595,11 @@ definitions:
           type: string
         readOnly: true
         type: array
+      organizationId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The organization's ID
+        readOnly: true
       voidedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -9056,10 +9776,6 @@ definitions:
       currency:
         description: 'Currency (three letter ISO 4217 alpha code) (eg USD, EUR)'
         type: string
-      customerId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Customer ID
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -9073,6 +9789,20 @@ definitions:
         type: string
       path:
         description: Lead Source's path uri (eg www.example.com/some/landing/path)
+        type: string
+      relatedId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The lead source's related resource ID
+        readOnly: true
+      relatedType:
+        description: The lead source's related resource type
+        enum:
+          - customer
+          - invoice
+          - subscription
+          - payment
+        readOnly: true
         type: string
       salesAgent:
         description: Lead Source's sales agent (eg James Bond)
@@ -9090,8 +9820,6 @@ definitions:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: LeadSource updated time
-    required:
-      - customerId
     type: object
   Method:
     description: The payment method
@@ -9341,6 +10069,18 @@ definitions:
     required:
       - name
     type: object
+  OrganizationLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - organization
+        type: string
+    required:
+      - rel
+    type: object
   PandaGateway:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -9441,16 +10181,6 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: The customer identifier string
-      declineInstructions:
-        description: Dunning instructions object for payment declines
-        properties:
-          dunning:
-            $ref: '#/definitions/PaymentRetry'
-          dunningIndex:
-            description: The position in the sequence of dunning
-            readOnly: true
-            type: integer
-        type: object
       description:
         description: The payment description
         maxLength: 255
@@ -9476,6 +10206,12 @@ definitions:
           - unknown
         readOnly: true
         type: string
+      retryInstruction:
+        $ref: '#/definitions/PaymentRetry'
+      retryNumber:
+        description: The position in the sequence of retries
+        readOnly: true
+        type: integer
       scheduledTime:
         description: The time the payment is scheduled for collection
         format: date-time
@@ -9521,20 +10257,20 @@ definitions:
         minItems: 1
         readOnly: true
         type: array
+      bankCountry:
+        description: Payment Card bank country
+        readOnly: true
+        type: string
+      bankName:
+        description: Payment Card bank name
+        readOnly: true
+        type: string
       billingContactId:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: The Billing Contact ID. Required if card is creating not from Token
       bin:
         description: The card's bin (the PAN's first 6 digits)
-        readOnly: true
-        type: string
-      binBank:
-        description: Payment Card bin bank
-        readOnly: true
-        type: string
-      binCountry:
-        description: Payment Card bin country
         readOnly: true
         type: string
       brand:
@@ -9853,7 +10589,7 @@ definitions:
       description:
         description: The plan description
         type: string
-      expireTime:
+      expiredTime:
         description: Time when the plan is not longer valid
         format: date-time
         type: string
@@ -11177,6 +11913,8 @@ definitions:
             - blacklists
             - checkout-pages
             - contacts
+            - coupons
+            - coupons-redemptions
             - credentials
             - custom-events
             - custom-fields
@@ -11697,12 +12435,39 @@ definitions:
           - value
           - type
         type: object
+  discounts-per-redemption:
+    allOf:
+      - $ref: '#/definitions/CouponRestriction'
+      - properties:
+          quantity:
+            description: Restriction quantity
+            type: integer
+        required:
+          - quantity
+        type: object
+    description: discounts-per-redemption restrictions
   equals:
     allOf:
       - $ref: '#/definitions/Condition'
       - $ref: '#/definitions/compare'
     description: Equals condition
     type: object
+  fixed:
+    allOf:
+      - $ref: '#/definitions/Discount'
+      - properties:
+          amount:
+            description: Discount amount
+            format: double
+            type: number
+          currency:
+            description: Discount currency
+            type: string
+        required:
+          - amount
+          - currency
+        type: object
+    description: Coupon fixed amount discount
   gateway-account-weights:
     allOf:
       - $ref: '#/definitions/GatewayAccountPickInstruction'
@@ -11852,6 +12617,21 @@ definitions:
       - $ref: '#/definitions/compare'
     description: Less than or equals condition
     type: object
+  minimum-order-amount:
+    allOf:
+      - $ref: '#/definitions/CouponRestriction'
+      - properties:
+          amount:
+            description: Restriction amount
+            type: string
+          currency:
+            description: Restriction currency
+            type: string
+        required:
+          - amount
+          - currency
+        type: object
+    description: minimum-order-amount restrictions
   none:
     allOf:
       - $ref: '#/definitions/AmountAdjustment'
@@ -11937,6 +12717,18 @@ definitions:
           - payPalAccountId
         type: object
     description: PayPal payment instrument object
+  percent:
+    allOf:
+      - $ref: '#/definitions/Discount'
+      - properties:
+          value:
+            description: Discount percent
+            format: double
+            type: number
+        required:
+          - value
+        type: object
+    description: Coupon percent discount
   pick-gateway-account:
     allOf:
       - $ref: '#/definitions/RuleAction'
@@ -11951,6 +12743,69 @@ definitions:
     allOf:
       - $ref: '#/definitions/SmtpAuthorization'
       - $ref: '#/definitions/UserPasswordAuthorization'
+  redemptions-per-customer:
+    allOf:
+      - $ref: '#/definitions/CouponRestriction'
+      - properties:
+          quantity:
+            description: Restriction value
+            type: integer
+        required:
+          - quantity
+        type: object
+    description: Quantity per Customer restrictions
+  restrict-to-invoices:
+    allOf:
+      - $ref: '#/definitions/CouponRestriction'
+      - properties:
+          invoiceIds:
+            description: Invoice IDs coupon can be applied to
+            items:
+              type: string
+            type: array
+        required:
+          - invoiceIds
+        type: object
+    description: restrict-to-invoices restrictions
+  restrict-to-plans:
+    allOf:
+      - $ref: '#/definitions/CouponRestriction'
+      - properties:
+          planIds:
+            description: Plan IDs coupon can be applied to
+            items:
+              type: string
+            type: array
+        required:
+          - planIds
+        type: object
+    description: restrict-to-plans restrictions
+  restrict-to-products:
+    allOf:
+      - $ref: '#/definitions/CouponRestriction'
+      - properties:
+          productIds:
+            description: Product IDs coupon can be applied to
+            items:
+              type: string
+            type: array
+        required:
+          - productIds
+        type: object
+    description: restrict-to-products restrictions
+  restrict-to-subscriptions:
+    allOf:
+      - $ref: '#/definitions/CouponRestriction'
+      - properties:
+          subscriptionIds:
+            description: Subscription IDs coupon can be applied to
+            items:
+              type: string
+            type: array
+        required:
+          - subscriptionIds
+        type: object
+    description: restrict-to-subscriptions restrictions
   schedule-payment:
     allOf:
       - $ref: '#/definitions/RuleAction'
@@ -11982,6 +12837,17 @@ definitions:
     allOf:
       - $ref: '#/definitions/RuleAction'
     description: Stop active subscriptions
+  total-redemptions:
+    allOf:
+      - $ref: '#/definitions/CouponRestriction'
+      - properties:
+          quantity:
+            description: Restriction total quantity
+            type: integer
+        required:
+          - quantity
+        type: object
+    description: Total quantity restrictions
   trigger-webhook:
     allOf:
       - $ref: '#/definitions/RuleAction'

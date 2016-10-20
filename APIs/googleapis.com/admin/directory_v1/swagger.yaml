@@ -330,6 +330,41 @@ paths:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
       tags:
         - chromeosdevices
+  '/customer/{customerId}/devices/chromeos/{resourceId}/action':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Take action on Chrome OS Device
+      operationId: directory.chromeosdevices.action
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - description: Immutable id of Chrome OS Device
+          in: path
+          name: resourceId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ChromeOsDeviceAction'
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+      tags:
+        - chromeosdevices
   '/customer/{customerId}/devices/mobile':
     get:
       description: Retrieve all Mobile Devices of a customer (paginated)
@@ -3389,6 +3424,15 @@ definitions:
         description: Will Chromebook auto renew after support end date (Read-only)
         type: boolean
     type: object
+  ChromeOsDeviceAction:
+    description: JSON request template for firing actions on ChromeOs Device in Directory Devices API.
+    properties:
+      action:
+        description: Action to be taken on the ChromeOs Device
+        type: string
+      deprovisionReason:
+        type: string
+    type: object
   ChromeOsDevices:
     description: JSON response template for List Chrome OS Devices operation in Directory API.
     properties:
@@ -3694,6 +3738,12 @@ definitions:
       basebandVersion:
         description: Mobile Device Baseband version (Read-only)
         type: string
+      bootloaderVersion:
+        description: Mobile Device Bootloader version (Read-only)
+        type: string
+      brand:
+        description: Mobile Device Brand (Read-only)
+        type: string
       buildNumber:
         description: Mobile Device Build number (Read-only)
         type: string
@@ -3709,17 +3759,26 @@ definitions:
       deviceId:
         description: Mobile Device serial number (Read-only)
         type: string
+      devicePasswordStatus:
+        description: DevicePasswordStatus (Read-only)
+        type: string
       email:
         description: List of owner user's email addresses (Read-only)
         items:
           type: string
         type: array
+      encryptionStatus:
+        description: Mobile Device Encryption Status (Read-only)
+        type: string
       etag:
         description: ETag of the resource.
         type: string
       firstSync:
         description: Date and time the device was first synchronized with the policy settings in the Google Apps administrator control panel (Read-only)
         format: date-time
+        type: string
+      hardware:
+        description: Mobile Device Hardware (Read-only)
         type: string
       hardwareId:
         description: Mobile Device Hardware Id (Read-only)
@@ -3741,6 +3800,9 @@ definitions:
       managedAccountIsOnOwnerProfile:
         description: Boolean indicating if this account is on owner/primary profile or not (Read-only)
         type: boolean
+      manufacturer:
+        description: Mobile Device manufacturer (Read-only)
+        type: string
       meid:
         description: Mobile Device MEID number (Read-only)
         type: string
@@ -3763,8 +3825,18 @@ definitions:
         items:
           type: string
         type: array
+      privilege:
+        description: DMAgentPermission (Read-only)
+        type: string
+      releaseVersion:
+        description: Mobile Device release version version (Read-only)
+        type: string
       resourceId:
         description: Unique identifier of Mobile Device (Read-only)
+        type: string
+      securityPatchLevel:
+        description: Mobile Device Security patch level (Read-only)
+        format: int64
         type: string
       serialNumber:
         description: Mobile Device SSN or Serial Number (Read-only)

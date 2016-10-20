@@ -62,8 +62,9 @@ paths:
         * RAML 0.8
         * I/O Docs - Mashery
         * HAR 1.2
-        * Postman Collection
+        * Postman Collection 1.0
         * APIMATIC Format
+        * Mashape
 
         ### OUTPUTS
         * API Blueprint
@@ -96,5 +97,7 @@ paths:
           description: The converted API specification
           schema:
             type: object
+        '429':
+          description: Rate-limit exceeded
       security: []
       summary: Transform API Descriptions from/to various formats

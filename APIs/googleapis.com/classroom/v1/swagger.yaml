@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: classroom.googleapis.com
+host: prod-day0-classroom.sandbox.googleapis.com
 basePath: /
 info:
   contact:
@@ -130,6 +130,19 @@ paths:
           in: query
           name: teacherId
           type: string
+        - collectionFormat: multi
+          description: Restricts returned courses to those in one of the specified states
+          in: query
+          items:
+            enum:
+              - COURSE_STATE_UNSPECIFIED
+              - ACTIVE
+              - ARCHIVED
+              - PROVISIONED
+              - DECLINED
+            type: string
+          name: courseStates
+          type: array
         - description: Maximum number of items to return. Zero or unspecified indicates that the server may assign a maximum. The server may return fewer than the specified number of results.
           in: query
           name: pageSize
@@ -1347,10 +1360,10 @@ paths:
         - invitations
   '/v1/userProfiles/{studentId}/guardianInvitations':
     get:
-      description: 'Returns a list of guardian invitations that the requesting user is permitted to view, filtered by the parameters provided. This method returns the following error codes: * `PERMISSION_DENIED` if a `student_id` is specified, and the requesting user is not permitted to view guardian invitations for that student, if guardians are not enabled for the domain in question, or for other access errors. * `INVALID_ARGUMENT` if a `student_id` is specified, but its format cannot be recognized (it is not an email address, nor a `student_id` from the API, nor the literal string `me`). May also be returned if an invalid `page_token` or `state` is provided. * `NOT_FOUND` if a `student_id` is specified, and its format can be recognized, but Classroom has no record of that student.'
+      description: 'Returns a list of guardian invitations that the requesting user is permitted to view, filtered by the parameters provided. This method returns the following error codes: * `PERMISSION_DENIED` if a `student_id` is specified, and the requesting user is not permitted to view guardian invitations for that student, if `"-"` is specified as the `student_id` and the user is not a domain administrator, if guardians are not enabled for the domain in question, or for other access errors. * `INVALID_ARGUMENT` if a `student_id` is specified, but its format cannot be recognized (it is not an email address, nor a `student_id` from the API, nor the literal string `me`). May also be returned if an invalid `page_token` or `state` is provided. * `NOT_FOUND` if a `student_id` is specified, and its format can be recognized, but Classroom has no record of that student.'
       operationId: classroom.userProfiles.guardianInvitations.list
       parameters:
-        - description: 'The ID of the student whose guardian invitations are to be returned. The identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
+        - description: 'The ID of the student whose guardian invitations are to be returned. The identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user * the string literal `"-"`, indicating that results should be returned for all students that the requesting user is permitted to view guardian invitations.'
           in: path
           name: studentId
           required: true
@@ -1486,10 +1499,10 @@ paths:
         - userProfiles
   '/v1/userProfiles/{studentId}/guardians':
     get:
-      description: 'Returns a list of guardians that the requesting user is permitted to view, restricted to those that match the request. This method returns the following error codes: * `PERMISSION_DENIED` if a `student_id` is specified, and the requesting user is not permitted to view guardian information for that student, if guardians are not enabled for the domain in question, if the `invited_email_address` filter is set by a user who is not a domain administrator, or for other access errors. * `INVALID_ARGUMENT` if a `student_id` is specified, but its format cannot be recognized (it is not an email address, nor a `student_id` from the API, nor the literal string `me`). May also be returned if an invalid `page_token` is provided. * `NOT_FOUND` if a `student_id` is specified, and its format can be recognized, but Classroom has no record of that student.'
+      description: 'Returns a list of guardians that the requesting user is permitted to view, restricted to those that match the request. To list guardians for any student that the requesting user may view guardians for, use the literal character `-` for the student ID. This method returns the following error codes: * `PERMISSION_DENIED` if a `student_id` is specified, and the requesting user is not permitted to view guardian information for that student, if `"-"` is specified as the `student_id` and the user is not a domain administrator, if guardians are not enabled for the domain in question, if the `invited_email_address` filter is set by a user who is not a domain administrator, or for other access errors. * `INVALID_ARGUMENT` if a `student_id` is specified, but its format cannot be recognized (it is not an email address, nor a `student_id` from the API, nor the literal string `me`). May also be returned if an invalid `page_token` is provided. * `NOT_FOUND` if a `student_id` is specified, and its format can be recognized, but Classroom has no record of that student.'
       operationId: classroom.userProfiles.guardians.list
       parameters:
-        - description: 'Filter results by the student who the guardian is linked to. The identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
+        - description: 'Filter results by the student who the guardian is linked to. The identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user * the string literal `"-"`, indicating that results should be returned for all students that the requesting user has access to view.'
           in: path
           name: studentId
           required: true
@@ -1692,6 +1705,9 @@ definitions:
       enrollmentCode:
         description: Enrollment code to use when joining this course. Specifying this field in a course update mask results in an error. Read-only.
         type: string
+      guardiansEnabled:
+        description: Whether or not guardian notifications are enabled for this course. Read-only.
+        type: boolean
       id:
         description: 'Identifier for this course assigned by Classroom. When creating a course, you may optionally set this identifier to an alias string in the request to create a corresponding alias. The `id` is still assigned by Classroom and cannot be updated after the course is created. Specifying this field in a course update mask results in an error.'
         type: string

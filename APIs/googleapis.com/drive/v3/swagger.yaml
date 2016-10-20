@@ -1258,6 +1258,15 @@ paths:
           name: fileId
           required: true
           type: string
+        - description: The maximum number of revisions to return per page.
+          in: query
+          minimum: 1
+          name: pageSize
+          type: integer
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2154,6 +2163,9 @@ definitions:
       kind:
         default: 'drive#revisionList'
         description: 'Identifies what kind of resource this is. Value: the fixed string "drive#revisionList".'
+        type: string
+      nextPageToken:
+        description: The page token for the next page of revisions. This will be absent if the end of the revisions list has been reached.
         type: string
       revisions:
         description: The full list of revisions.

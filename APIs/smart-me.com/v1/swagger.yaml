@@ -356,6 +356,29 @@ paths:
       summary: "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r\n            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest."
       tags:
         - MBus
+  /api/MeterFolderInformation:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: Sets the Name of a Meter or a Folder
+      parameters:
+        - in: body
+          name: meterFolderInformation
+          required: true
+          schema:
+            $ref: '#/definitions/MeterFolderInformationToPost'
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Sets the Name of a Meter or a Folder
+      tags:
+        - MeterFolderInformation
   '/api/MeterFolderInformation/{id}':
     get:
       consumes: []
@@ -899,6 +922,16 @@ definitions:
         items:
           $ref: '#/definitions/OutputInformation'
         type: array
+    type: object
+  MeterFolderInformationToPost:
+    description: Container for a Meter or Folder Information to Post
+    properties:
+      Id:
+        description: The ID of the device or folder
+        type: string
+      Name:
+        description: Name of the Meter or Folder
+        type: string
     type: object
   Object:
     properties: {}

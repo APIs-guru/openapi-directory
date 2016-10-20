@@ -1606,7 +1606,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the entire content of the BackendService resource. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
+      description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
       operationId: compute.backendServices.patch
       parameters:
         - description: Project ID for this request.
@@ -1636,7 +1636,7 @@ paths:
       tags:
         - backendServices
     put:
-      description: Updates the entire content of the BackendService resource. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
+      description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
       operationId: compute.backendServices.update
       parameters:
         - description: Project ID for this request.
@@ -5392,7 +5392,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the entire content of the UrlMap resource. This method supports patch semantics.
+      description: Updates the specified UrlMap resource with the data included in the request. This method supports patch semantics.
       operationId: compute.urlMaps.patch
       parameters:
         - description: Project ID for this request.
@@ -5422,7 +5422,7 @@ paths:
       tags:
         - urlMaps
     put:
-      description: Updates the entire content of the UrlMap resource.
+      description: Updates the specified UrlMap resource with the data included in the request.
       operationId: compute.urlMaps.update
       parameters:
         - description: Project ID for this request.
@@ -6380,7 +6380,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Update the entire content of the regional BackendService resource. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
+      description: Updates the specified regional BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
       operationId: compute.regionBackendServices.patch
       parameters:
         - description: Project ID for this request.
@@ -6415,7 +6415,7 @@ paths:
       tags:
         - regionBackendServices
     put:
-      description: Update the entire content of the regional BackendService resource. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
+      description: Updates the specified regional BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
       operationId: compute.regionBackendServices.update
       parameters:
         - description: Project ID for this request.
@@ -8086,7 +8086,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the entire content of the Router resource. This method supports patch semantics.
+      description: Updates the specified Router resource with the data included in the request. This method supports patch semantics.
       operationId: compute.routers.patch
       parameters:
         - description: Project ID for this request.
@@ -8121,7 +8121,7 @@ paths:
       tags:
         - routers
     put:
-      description: Updates the entire content of the Router resource.
+      description: Updates the specified Router resource with the data included in the request.
       operationId: compute.routers.update
       parameters:
         - description: Project ID for this request.
@@ -10331,6 +10331,9 @@ paths:
           name: disk
           required: true
           type: string
+        - in: query
+          name: guestFlush
+          type: boolean
         - in: body
           name: body
           schema:
@@ -13875,7 +13878,7 @@ definitions:
         description: '[Output Only] The unique ID of the snapshot used to create this disk. This value identifies the exact snapshot that was used to create this persistent disk. For example, if you created the persistent disk from a snapshot that was later deleted and recreated under the same name, the source snapshot ID would identify the exact version of the snapshot that was used.'
         type: string
       status:
-        description: '[Output Only] The status of disk creation. Applicable statuses includes: CREATING, FAILED, READY, RESTORING.'
+        description: '[Output Only] The status of disk creation.'
         enum:
           - CREATING
           - FAILED
@@ -14255,6 +14258,7 @@ definitions:
         enum:
           - AH
           - ESP
+          - ICMP
           - SCTP
           - TCP
           - UDP
@@ -14796,7 +14800,7 @@ definitions:
         format: int64
         type: string
       creationTimestamp:
-        description: Creation timestamp in RFC3339 text format.
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
       deprecated:
         $ref: '#/definitions/DeprecationStatus'
@@ -14877,8 +14881,8 @@ definitions:
       sourceDisk:
         description: |-
           URL of the The source disk used to create this image. This can be a full or valid partial URL. You must provide either this property or the rawDisk.source property but not both to create an image. For example, the following are valid values:  
-          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disk/disk 
-          - projects/project/zones/zone/disk/disk 
+          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk 
+          - projects/project/zones/zone/disks/disk 
           - zones/zone/disks/disk
         type: string
       sourceDiskEncryptionKey:
@@ -15163,7 +15167,7 @@ definitions:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
       failoverAction:
-        description: The action to perform in case of zone failure (set only for Regional instance group managers).
+        description: 'The action to perform in case of zone failure. Only one value is supported, NO_FAILOVER. The default is NO_FAILOVER.'
         enum:
           - NO_FAILOVER
           - UNKNOWN
@@ -15228,7 +15232,7 @@ definitions:
         format: int32
         type: integer
       creatingWithoutRetries:
-        description: '[Output Only] The number of instances that the managed instance group will attempt to create. The group attempts to create each instance only once. If the group fails to create any of these instances, it decreases the group''s target_size value accordingly.'
+        description: '[Output Only] The number of instances that the managed instance group will attempt to create. The group attempts to create each instance only once. If the group fails to create any of these instances, it decreases the group''s targetSize value accordingly.'
         format: int32
         type: integer
       deleting:
@@ -15303,7 +15307,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] The URL for this resource type. The server generates this URL.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   InstanceGroupManagersAbandonInstancesRequest:
@@ -16139,7 +16143,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for this resource .'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   Operation:
@@ -16894,7 +16898,7 @@ definitions:
         format: uint64
         type: string
       interfaces:
-        description: Router interfaces. Each interface requires either one linked resource (e.g. linkedVpnTunnel) or IP address and IP address range (e.g. ipRange).
+        description: 'Router interfaces. Each interface requires either one linked resource (e.g. linkedVpnTunnel), or IP address and IP address range (e.g. ipRange), or both.'
         items:
           $ref: '#/definitions/RouterInterface'
         type: array
@@ -17002,7 +17006,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   RouterStatus:
@@ -17177,7 +17181,7 @@ definitions:
         format: int64
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
       start:
         description: '[Output Only] The starting byte position of the output that was returned. This should match the start parameter sent with the request. If the serial console output exceeds the size of the buffer, older output will be overwritten by newer content and the start values will be mismatched.'
@@ -18148,7 +18152,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   TargetVpnGatewayList:
@@ -18170,7 +18174,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   TargetVpnGatewaysScopedList:
@@ -18494,7 +18498,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   VpnTunnelsScopedList:

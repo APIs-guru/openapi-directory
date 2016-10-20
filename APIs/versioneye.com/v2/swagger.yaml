@@ -17,6 +17,7 @@ info:
 tags:
   - name: github
   - name: me
+  - name: organisations
   - name: products
   - name: projects
   - name: security
@@ -260,6 +261,44 @@ paths:
       summary: shows unread notifications of authorized user
       tags:
         - me
+  '/v2/organisations/{orga_name}/inventory':
+    get:
+      description: |+
+
+        <p>Find a detailed description here: https://github.com/versioneye/versioneye-api/blob/master/docs/api/v2/organisation.md</p>
+
+      operationId: GET--version-organisations--orga_name-inventory---format-
+      parameters:
+        - in: path
+          name: orga_name
+          required: true
+          type: string
+        - description: Filter by team name
+          in: query
+          name: team_name
+          required: false
+          type: string
+        - description: Filter by programming language
+          in: query
+          name: language
+          required: false
+          type: string
+        - description: Filter down by project version
+          in: query
+          name: project_version
+          required: false
+          type: string
+        - description: 'Post processing filter. Possible values are ''ALL'', ''duplicates_only'', ''show_duplicates'''
+          in: query
+          name: post_filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Returns the inventory list of the organisation
+      tags:
+        - organisations
   '/v2/products/search/{q}':
     get:
       description: |+

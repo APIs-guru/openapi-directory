@@ -1,0 +1,152 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: InsightsClient
+  version: '2016-09-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2016-09-01/swagger/insightsClient.json'
+    version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: insights
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  FilterParameter:
+    description: 'The filter to apply on the operation. For more information please see https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx'
+    in: query
+    name: $filter
+    required: false
+    type: string
+    x-ms-parameter-location: method
+  ResourceUriParameter:
+    description: The identifier of the resource.
+    in: path
+    name: resourceUri
+    required: true
+    type: string
+    x-ms-parameter-location: method
+    x-ms-skip-url-encoding: true
+  SubscriptionIdParameter:
+    description: The Azure subscription Id.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/{resourceUri}/providers/microsoft.insights/metrics':
+    get:
+      description: Lists the metric values for a resource.
+      operationId: Metrics_List
+      parameters:
+        - $ref: '#/parameters/ResourceUriParameter'
+        - $ref: '#/parameters/FilterParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successful request to get the list of metric values
+          schema:
+            $ref: '#/definitions/MetricCollection'
+      tags:
+        - Metrics
+      x-ms-odata: '#/definitions/Metric'
+      x-ms-pageable: {}
+definitions:
+  LocalizableString:
+    description: The localizable string class.
+    properties:
+      localizedValue:
+        description: the locale specific value.
+        type: string
+      value:
+        description: the invariant value.
+        type: string
+  Metric:
+    description: A set of metric values in a time range.
+    properties:
+      data:
+        description: Array of data points representing the metric values.
+        items:
+          $ref: '#/definitions/MetricValue'
+        type: array
+      name:
+        $ref: '#/definitions/LocalizableString'
+        description: the name and the display name of the metric.
+      unit:
+        $ref: '#/definitions/Unit'
+        description: the unit of the metric.
+    required:
+      - name
+      - unit
+      - data
+  MetricCollection:
+    description: The collection of metric value sets.
+    properties:
+      value:
+        description: the value of the collection.
+        items:
+          $ref: '#/definitions/Metric'
+        type: array
+    required:
+      - value
+  MetricValue:
+    description: Represents a metric value.
+    properties:
+      average:
+        description: the average value in the time range.
+        format: double
+        type: number
+      count:
+        description: the number of samples in the time range. Can be used to determine the number of values that contributed to the average value.
+        format: int64
+        type: integer
+      maximum:
+        description: the greatest value in the time range.
+        format: double
+        type: number
+      minimum:
+        description: the least value in the time range.
+        format: double
+        type: number
+      timestamp:
+        description: the timestamp for the metric value in ISO 8601 format.
+        format: date-time
+        type: string
+      total:
+        description: the sum of all of the values in the time range.
+        format: double
+        type: number
+    required:
+      - timestamp
+  Unit:
+    description: the unit of the metric.
+    enum:
+      - Count
+      - Bytes
+      - Seconds
+      - CountPerSecond
+      - BytesPerSecond
+      - Percent
+      - MilliSeconds
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: Unit

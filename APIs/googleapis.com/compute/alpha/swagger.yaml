@@ -90,6 +90,7 @@ tags:
   - name: globalForwardingRules
   - name: globalOperations
   - name: healthChecks
+  - name: hosts
   - name: httpHealthChecks
   - name: httpsHealthChecks
   - name: images
@@ -1803,7 +1804,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Update the entire content of the BackendBucket resource. This method supports patch semantics.
+      description: Updates the specified BackendBucket resource with the data included in the request. This method supports patch semantics.
       operationId: compute.backendBuckets.patch
       parameters:
         - description: Project ID for this request.
@@ -1833,7 +1834,7 @@ paths:
       tags:
         - backendBuckets
     put:
-      description: Update the entire content of the BackendBucket resource.
+      description: Updates the specified BackendBucket resource with the data included in the request.
       operationId: compute.backendBuckets.update
       parameters:
         - description: Project ID for this request.
@@ -2135,7 +2136,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the entire content of the BackendService resource. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
+      description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
       operationId: compute.backendServices.patch
       parameters:
         - description: Project ID for this request.
@@ -2165,7 +2166,7 @@ paths:
       tags:
         - backendServices
     put:
-      description: Updates the entire content of the BackendService resource. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
+      description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
       operationId: compute.backendServices.update
       parameters:
         - description: Project ID for this request.
@@ -6234,7 +6235,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the entire content of the UrlMap resource. This method supports patch semantics.
+      description: Updates the specified UrlMap resource with the data included in the request. This method supports patch semantics.
       operationId: compute.urlMaps.patch
       parameters:
         - description: Project ID for this request.
@@ -6264,7 +6265,7 @@ paths:
       tags:
         - urlMaps
     put:
-      description: Updates the entire content of the UrlMap resource.
+      description: Updates the specified UrlMap resource with the data included in the request.
       operationId: compute.urlMaps.update
       parameters:
         - description: Project ID for this request.
@@ -7258,7 +7259,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Update the entire content of the regional BackendService resource. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
+      description: Updates the specified regional BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
       operationId: compute.regionBackendServices.patch
       parameters:
         - description: Project ID for this request.
@@ -7293,7 +7294,7 @@ paths:
       tags:
         - regionBackendServices
     put:
-      description: Update the entire content of the regional BackendService resource. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
+      description: Updates the specified regional BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
       operationId: compute.regionBackendServices.update
       parameters:
         - description: Project ID for this request.
@@ -9434,7 +9435,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the entire content of the Router resource. This method supports patch semantics.
+      description: Updates the specified Router resource with the data included in the request. This method supports patch semantics.
       operationId: compute.routers.patch
       parameters:
         - description: Project ID for this request.
@@ -9469,7 +9470,7 @@ paths:
       tags:
         - routers
     put:
-      description: Updates the entire content of the Router resource.
+      description: Updates the specified Router resource with the data included in the request.
       operationId: compute.routers.update
       parameters:
         - description: Project ID for this request.
@@ -11998,6 +11999,140 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - disks
+  '/{project}/zones/{zone}/hosts/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.hosts.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - hosts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/hosts/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.hosts.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - hosts
+  '/{project}/zones/{zone}/hosts/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.hosts.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - hosts
   '/{project}/zones/{zone}/instanceGroupManagers':
     get:
       description: Retrieves a list of managed instance groups that are contained within the specified project and zone.
@@ -13365,6 +13500,10 @@ paths:
           name: instance
           required: true
           type: string
+        - description: Whether to force attach the disk even if it's currently attached to another instance. This is only available for regional disks.
+          in: query
+          name: forceAttach
+          type: boolean
         - in: body
           name: body
           schema:
@@ -14055,6 +14194,55 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/updateAccessConfig':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates the specified access config from an instance's network interface with the data included in the request.
+      operationId: compute.instances.updateAccessConfig
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: The instance name for this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: The name of the network interface where the access config is attached.
+          in: query
+          name: networkInterface
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccessConfig'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
   '/{project}/zones/{zone}/instances/{resource}/getIamPolicy':
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -14720,6 +14908,18 @@ definitions:
         default: 'compute#address'
         description: '[Output Only] Type of the resource. Always compute#address for addresses.'
         type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this Address, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
+
+          To see the latest fingerprint, make a get() request to retrieve an Address.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this Address resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
+        type: object
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
@@ -15436,8 +15636,8 @@ definitions:
         items:
           type: string
         type: array
-      iaap:
-        $ref: '#/definitions/BackendServiceIAAP'
+      iap:
+        $ref: '#/definitions/BackendServiceIAP'
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         format: uint64
@@ -15551,8 +15751,8 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#backendServiceGroupHealth for the health of backend services.'
         type: string
     type: object
-  BackendServiceIAAP:
-    description: Identity Aware Application Proxy (Cloud Gatekeeper)
+  BackendServiceIAP:
+    description: Identity-Aware Proxy (Cloud Gatekeeper)
     properties:
       enabled:
         type: boolean
@@ -15662,7 +15862,7 @@ definitions:
   CacheInvalidationRule:
     properties:
       host:
-        description: 'If host is non-empty, this invalidation rule will only apply to requests with a Host header matching host.'
+        description: 'If set, this invalidation rule will only apply to requests with a Host header matching host.'
         type: string
       path:
         type: string
@@ -15680,12 +15880,12 @@ definitions:
         description: 'If true, include query string parameters in the cache key according to query_string_whitelist and query_string_blacklist. If neither is set, the entire query string will be included. If false, the query string will be excluded from the cache key entirely.'
         type: boolean
       queryStringBlacklist:
-        description: 'Names of query string parameters to exclude in cache keys. All other parameters will be included. Either specify query_string_whitelist or query_string_blacklist, not both. ?&? and ?=? will be percent encoded and not treated as delimiters.'
+        description: 'Names of query string parameters to exclude in cache keys. All other parameters will be included. Either specify query_string_whitelist or query_string_blacklist, not both. ''&'' and ''='' will be percent encoded and not treated as delimiters.'
         items:
           type: string
         type: array
       queryStringWhitelist:
-        description: 'Names of query string parameters to include in cache keys. All other parameters will be excluded. Either specify query_string_whitelist or query_string_blacklist, not both. ?&? and ?=? will be percent encoded and not treated as delimiters.'
+        description: 'Names of query string parameters to include in cache keys. All other parameters will be excluded. Either specify query_string_whitelist or query_string_blacklist, not both. ''&'' and ''='' will be percent encoded and not treated as delimiters.'
         items:
           type: string
         type: array
@@ -15905,7 +16105,7 @@ definitions:
         description: '[Output Only] The unique ID of the snapshot used to create this disk. This value identifies the exact snapshot that was used to create this persistent disk. For example, if you created the persistent disk from a snapshot that was later deleted and recreated under the same name, the source snapshot ID would identify the exact version of the snapshot that was used.'
         type: string
       status:
-        description: '[Output Only] The status of disk creation. Applicable statuses includes: CREATING, FAILED, READY, RESTORING.'
+        description: '[Output Only] The status of disk creation.'
         enum:
           - CREATING
           - FAILED
@@ -16341,6 +16541,18 @@ definitions:
         default: 'compute#forwardingRule'
         description: '[Output Only] Type of the resource. Always compute#forwardingRule for Forwarding Rule resources.'
         type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this resource, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
+
+          To see the latest fingerprint, make a get() request to retrieve a ForwardingRule.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this resource. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
+        type: object
       loadBalancingScheme:
         description: 'This signifies what the ForwardingRule will be used for and can only take the following values: INTERNAL EXTERNAL The value of INTERNAL means that this will be used for Internal Network Load Balancing (TCP, UDP). The value of EXTERNAL means that this will be used for External Load Balancing (HTTP(S) LB, External TCP/UDP LB, SSL Proxy)'
         enum:
@@ -16876,7 +17088,7 @@ definitions:
         format: int64
         type: string
       creationTimestamp:
-        description: Creation timestamp in RFC3339 text format.
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
       deprecated:
         $ref: '#/definitions/DeprecationStatus'
@@ -16957,8 +17169,8 @@ definitions:
       sourceDisk:
         description: |-
           URL of the The source disk used to create this image. This can be a full or valid partial URL. You must provide either this property or the rawDisk.source property but not both to create an image. For example, the following are valid values:  
-          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disk/disk 
-          - projects/project/zones/zone/disk/disk 
+          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk 
+          - projects/project/zones/zone/disks/disk 
           - zones/zone/disks/disk
         type: string
       sourceDiskEncryptionKey:
@@ -17023,6 +17235,14 @@ definitions:
         items:
           $ref: '#/definitions/AttachedDisk'
         type: array
+      host:
+        description: |-
+          Full or partial URL of the host resource that the instance should be placed on, in the format: zones/zone/hosts/host.
+
+          Optional, Private Host (physical machine) that the instance will be placed on when it's created. The instance is guaranteed to be placed on the same machine as other instances with the same private host.
+
+          The request will be rejected if the private host has run out of resources.
+        type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         format: uint64
@@ -17255,7 +17475,7 @@ definitions:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
       failoverAction:
-        description: The action to perform in case of zone failure (set only for Regional instance group managers).
+        description: 'The action to perform in case of zone failure. Only one value is supported, NO_FAILOVER. The default is NO_FAILOVER.'
         enum:
           - NO_FAILOVER
           - UNKNOWN
@@ -17331,7 +17551,7 @@ definitions:
         format: int32
         type: integer
       creatingWithoutRetries:
-        description: '[Output Only] The number of instances that the managed instance group will attempt to create. The group attempts to create each instance only once. If the group fails to create any of these instances, it decreases the group''s target_size value accordingly.'
+        description: '[Output Only] The number of instances that the managed instance group will attempt to create. The group attempts to create each instance only once. If the group fails to create any of these instances, it decreases the group''s targetSize value accordingly.'
         format: int32
         type: integer
       deleting:
@@ -17409,7 +17629,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] The URL for this resource type. The server generates this URL.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   InstanceGroupManagerPendingActionsSummary:
@@ -18271,6 +18491,12 @@ definitions:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
+      crossVmEncryption:
+        description: '[Output Only] Type of VM-to-VM traffic encryption for this network.'
+        enum:
+          - ENCRYPTED
+          - UNENCRYPTED
+        type: string
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
@@ -18285,6 +18511,12 @@ definitions:
       kind:
         default: 'compute#network'
         description: '[Output Only] Type of the resource. Always compute#network for networks.'
+        type: string
+      loadBalancerVmEncryption:
+        description: '[Output Only] Type of LB-to-VM traffic encryption for this network.'
+        enum:
+          - ENCRYPTED
+          - UNENCRYPTED
         type: string
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
@@ -18355,7 +18587,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for this resource .'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   Operation:
@@ -19257,7 +19489,7 @@ definitions:
         format: uint64
         type: string
       interfaces:
-        description: Router interfaces. Each interface requires either one linked resource (e.g. linkedVpnTunnel) or IP address and IP address range (e.g. ipRange).
+        description: 'Router interfaces. Each interface requires either one linked resource (e.g. linkedVpnTunnel), or IP address and IP address range (e.g. ipRange), or both.'
         items:
           $ref: '#/definitions/RouterInterface'
         type: array
@@ -19365,7 +19597,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   RouterStatus:
@@ -19582,7 +19814,7 @@ definitions:
         format: int64
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
       start:
         description: '[Output Only] The starting byte position of the output that was returned. This should match the start parameter sent with the request. If the serial console output exceeds the size of the buffer, older output will be overwritten by newer content and the start values will be mismatched.'
@@ -20653,7 +20885,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   TargetVpnGatewayList:
@@ -20675,7 +20907,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   TargetVpnGatewaysScopedList:
@@ -20922,6 +21154,18 @@ definitions:
         default: 'compute#vpnTunnel'
         description: '[Output Only] Type of resource. Always compute#vpnTunnel for VPN tunnels.'
         type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this VpnTunnel, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
+
+          To see the latest fingerprint, make a get() request to retrieve a VpnTunnel.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this VpnTunnel. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
+        type: object
       localTrafficSelector:
         description: 'Local traffic selector to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint.'
         items:
@@ -21015,7 +21259,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   VpnTunnelsScopedList:
@@ -21085,7 +21329,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for this resource .'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   XpnResourceId:

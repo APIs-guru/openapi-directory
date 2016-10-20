@@ -3162,6 +3162,7 @@ definitions:
         description: Resource type.
         type: string
       series:
+        description: 'Series info list. The client always expects this element in the JSON output, hence declared here as OutputAlways.'
         items:
           properties:
             bannerImageUrl:

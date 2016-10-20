@@ -2987,12 +2987,12 @@ paths:
       description: Lists remarketing audiences to which the user has access.
       operationId: analytics.management.remarketingAudience.list
       parameters:
-        - description: Account ID for the remarketing audience to retrieve.
+        - description: The account ID of the remarketing audiences to retrieve.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the remarketing audience to retrieve.
+        - description: The web property ID of the remarketing audiences to retrieve.
           in: path
           name: webPropertyId
           required: true
@@ -3031,15 +3031,15 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a new remarketing audiences.
+      description: Creates a new remarketing audience.
       operationId: analytics.management.remarketingAudience.insert
       parameters:
-        - description: Account ID to create the remarketing audience for.
+        - description: The account ID for which to create the remarketing audience.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Web property ID to create the remarketing audience for.
+        - description: Web property ID for which to create the remarketing audience.
           in: path
           name: webPropertyId
           required: true
@@ -3060,20 +3060,20 @@ paths:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/remarketingAudiences/{remarketingAudienceId}':
     get:
-      description: Gets remarketing audiences to which the user has access.
+      description: Gets a remarketing audience to which the user has access.
       operationId: analytics.management.remarketingAudience.get
       parameters:
-        - description: Account ID for the remarketing audience to retrieve.
+        - description: The account ID of the remarketing audience to retrieve.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the remarketing audience to retrieve.
+        - description: The web property ID of the remarketing audience to retrieve.
           in: path
           name: webPropertyId
           required: true
           type: string
-        - description: The ID to retrieve the Remarketing Audience for.
+        - description: The ID of the remarketing audience to retrieve.
           in: path
           name: remarketingAudienceId
           required: true
@@ -3099,20 +3099,20 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates an existing remarketing audiences. This method supports patch semantics.
+      description: Updates an existing remarketing audience. This method supports patch semantics.
       operationId: analytics.management.remarketingAudience.patch
       parameters:
-        - description: Account ID for the remarketing audience to update.
+        - description: The account ID of the remarketing audience to update.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the remarketing audience to update.
+        - description: The web property ID of the remarketing audience to update.
           in: path
           name: webPropertyId
           required: true
           type: string
-        - description: Remarketing audience ID of the remarketing audience to update.
+        - description: The ID of the remarketing audience to update.
           in: path
           name: remarketingAudienceId
           required: true
@@ -3132,20 +3132,20 @@ paths:
       tags:
         - management
     put:
-      description: Updates an existing remarketing audiences.
+      description: Updates an existing remarketing audience.
       operationId: analytics.management.remarketingAudience.update
       parameters:
-        - description: Account ID for the remarketing audience to update.
+        - description: The account ID of the remarketing audience to update.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the remarketing audience to update.
+        - description: The web property ID of the remarketing audience to update.
           in: path
           name: webPropertyId
           required: true
           type: string
-        - description: Remarketing audience ID of the remarketing audience to update.
+        - description: The ID of the remarketing audience to update.
           in: path
           name: remarketingAudienceId
           required: true
@@ -4424,6 +4424,10 @@ definitions:
       containsSampledData:
         description: Determines if Analytics data contains samples.
         type: boolean
+      dataLastRefreshed:
+        description: The last refreshed time in seconds for Analytics data.
+        format: int64
+        type: string
       dataTable:
         properties:
           cols:
@@ -4751,7 +4755,7 @@ definitions:
         description: Resource type for include conditions.
         type: string
       membershipDurationDays:
-        description: 'Number of days a user remains in the audience. Use any integer from 1-540. In remarketing audiences for search ads, membership duration is truncated to 180 days.'
+        description: Number of days (in the range 1 to 540) a user remains in the audience.
         format: int32
         type: integer
       segment:
@@ -4972,7 +4976,7 @@ definitions:
       currency:
         description: |-
           The currency type associated with this view (profile), defaults to USD. The supported values are:
-          ARS, AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HKD, HUF, IDR, INR, JPY, KRW, LTL, MXN, NOK, NZD, PHP, PLN, RUB, SEK, THB, TRY, TWD, USD, VND, ZAR
+          USD, JPY, EUR, GBP, AUD, KRW, BRL, CNY, DKK, RUB, SEK, NOK, PLN, TRY, TWD, HKD, THB, IDR, ARS, MXN, VND, PHP, INR, CHF, CAD, CZK, NZD, HUF, BGN, LTL, ZAR, UAH, AED, BOB, CLP, COP, EGP, HRK, ILS, MAD, MYR, PEN, PKR, RON, RSD, SAR, SGD, VEF, LVL
         type: string
       defaultPage:
         description: Default page for this view (profile).

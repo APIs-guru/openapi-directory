@@ -14,11 +14,11 @@ info:
     name: AnalysisServicesManagementClient
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-asazure/2016-05-16/swagger/asazure.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-analysisservices/2016-05-16/swagger/analysisservices.json'
     version: '2.0'
   x-preferred: true
   x-providerName: azure.com
-  x-serviceName: arm-asazure
+  x-serviceName: arm-analysisservices
   x-tags:
     - Azure
     - Microsoft
@@ -113,8 +113,6 @@ paths:
           description: OK
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/AnalysisServicesServer'
         '204':
           description: No Content
       tags:
@@ -170,7 +168,6 @@ paths:
             $ref: '#/definitions/AnalysisServicesServer'
       tags:
         - Servers
-      x-ms-long-running-operation: true
     put:
       description: Provisions the specified Analysis Services server based on the configuration specified in the request
       operationId: Servers_Create
@@ -201,6 +198,54 @@ paths:
           description: InProgress
           schema:
             $ref: '#/definitions/AnalysisServicesServer'
+      tags:
+        - Servers
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/resume':
+    post:
+      description: Resumes the specified Analysis Services server instance
+      operationId: Servers_Resume
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: Name of the Analysis Services server
+          in: path
+          maxLength: 63
+          minLength: 3
+          name: serverName
+          pattern: '^[a-z][a-z0-9]*$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+      tags:
+        - Servers
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend':
+    post:
+      description: Supends the specified Analysis Services server instance
+      operationId: Servers_Suspend
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: Name of the Analysis Services server
+          in: path
+          maxLength: 63
+          minLength: 3
+          name: serverName
+          pattern: '^[a-z][a-z0-9]*$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
       tags:
         - Servers
       x-ms-long-running-operation: true

@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - http
-host: magento.vg
+host: m2010.vg
 basePath: /rest/default
 x-hasEquivalentPaths: true
 info:
@@ -16,7 +16,7 @@ info:
     format: swagger
     url: 'http://devdocs.magento.com/swagger/schemas/latest-2.1.schema.json'
     version: '2.0'
-  x-providerName: magento.vg
+  x-providerName: m2010.vg
 tags:
   - description: Store repository interface
     name: storeStoreRepositoryV1
@@ -188,8 +188,12 @@ tags:
     name: salesShipmentCommentRepositoryV1
   - description: Shipment track repository interface. A shipment is a delivery package that contains products. A shipment document accompanies the shipment. This document lists the products and their quantities in the delivery package.
     name: salesShipmentTrackRepositoryV1
+  - description: Class ShipOrderInterface
+    name: salesShipOrderV1
   - description: 'Transaction repository interface. A transaction is an interaction between a merchant and a customer such as a purchase, a credit, a refund, and so on.'
     name: salesTransactionRepositoryV1
+  - description: Class InvoiceOrderInterface
+    name: salesInvoiceOrderV1
   - description: Interface CartRepositoryInterface
     name: giftMessageCartRepositoryV1
   - description: Interface ItemRepositoryInterface
@@ -6572,6 +6576,97 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - backendModuleServiceV1
+  '/V1/order/{orderId}/invoice':
+    post:
+      description: ''
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          type: integer
+        - in: body
+          name: $body
+          schema:
+            properties:
+              appendComment:
+                type: boolean
+              arguments:
+                $ref: '#/definitions/sales-data-invoice-creation-arguments-interface'
+              capture:
+                type: boolean
+              comment:
+                $ref: '#/definitions/sales-data-invoice-comment-creation-interface'
+              items:
+                items:
+                  $ref: '#/definitions/sales-data-invoice-item-creation-interface'
+                type: array
+              notify:
+                type: boolean
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: integer
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - salesInvoiceOrderV1
+  '/V1/order/{orderId}/ship':
+    post:
+      description: Creates new Shipment for given Order.
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          type: integer
+        - in: body
+          name: $body
+          schema:
+            properties:
+              appendComment:
+                type: boolean
+              arguments:
+                $ref: '#/definitions/sales-data-shipment-creation-arguments-interface'
+              comment:
+                $ref: '#/definitions/sales-data-shipment-comment-creation-interface'
+              items:
+                items:
+                  $ref: '#/definitions/sales-data-shipment-item-creation-interface'
+                type: array
+              notify:
+                type: boolean
+              packages:
+                items:
+                  $ref: '#/definitions/sales-data-shipment-package-creation-interface'
+                type: array
+              tracks:
+                items:
+                  $ref: '#/definitions/sales-data-shipment-track-creation-interface'
+                type: array
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            description: Id of created Shipment.
+            type: integer
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - salesShipOrderV1
   /V1/orders:
     get:
       description: 'Lists orders that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#OrderRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
@@ -13509,11 +13604,7 @@ definitions:
         description: Credit memo updated-at timestamp.
         type: string
     required:
-      - base_discount_tax_compensation_amount
-      - base_shipping_discount_tax_compensation_amnt
-      - discount_tax_compensation_amount
       - order_id
-      - shipping_discount_tax_compensation_amount
       - items
     type: object
   sales-data-creditmemo-item-extension-interface:
@@ -13625,11 +13716,8 @@ definitions:
         type: number
     required:
       - base_cost
-      - base_discount_amount
-      - base_discount_tax_compensation_amount
       - base_price
       - entity_id
-      - discount_tax_compensation_amount
       - order_item_id
       - qty
     type: object
@@ -13650,6 +13738,24 @@ definitions:
       - items
       - search_criteria
       - total_count
+    type: object
+  sales-data-invoice-comment-creation-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\InvoiceCommentCreationInterface
+    type: object
+  sales-data-invoice-comment-creation-interface:
+    description: Interface InvoiceCommentCreationInterface
+    properties:
+      comment:
+        description: Comment.
+        type: string
+      extension_attributes:
+        $ref: '#/definitions/sales-data-invoice-comment-creation-extension-interface'
+      is_visible_on_front:
+        description: Is-visible-on-storefront flag value.
+        type: integer
+    required:
+      - comment
+      - is_visible_on_front
     type: object
   sales-data-invoice-comment-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\InvoiceCommentInterface
@@ -13678,10 +13784,10 @@ definitions:
         description: Parent ID.
         type: integer
     required:
-      - comment
       - is_customer_notified
-      - is_visible_on_front
       - parent_id
+      - comment
+      - is_visible_on_front
     type: object
   sales-data-invoice-comment-search-result-interface:
     description: Invoice comment search result interface. An invoice is a record of the receipt of payment for an order. An invoice can include comments that detail the invoice history.
@@ -13700,6 +13806,15 @@ definitions:
       - items
       - search_criteria
       - total_count
+    type: object
+  sales-data-invoice-creation-arguments-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\InvoiceCreationArgumentsInterface
+    type: object
+  sales-data-invoice-creation-arguments-interface:
+    description: Interface for creation arguments for Invoice.
+    properties:
+      extension_attributes:
+        $ref: '#/definitions/sales-data-invoice-creation-arguments-extension-interface'
     type: object
   sales-data-invoice-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\InvoiceInterface
@@ -13852,13 +13967,27 @@ definitions:
         description: Updated-at timestamp.
         type: string
     required:
-      - base_discount_tax_compensation_amount
-      - base_shipping_discount_tax_compensation_amnt
-      - discount_tax_compensation_amount
       - order_id
-      - shipping_discount_tax_compensation_amount
       - total_qty
       - items
+    type: object
+  sales-data-invoice-item-creation-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\InvoiceItemCreationInterface
+    type: object
+  sales-data-invoice-item-creation-interface:
+    description: Input argument for invoice creation Interface InvoiceItemCreationInterface
+    properties:
+      extension_attributes:
+        $ref: '#/definitions/sales-data-invoice-item-creation-extension-interface'
+      order_item_id:
+        description: Order item ID.
+        type: integer
+      qty:
+        description: Quantity.
+        type: number
+    required:
+      - order_item_id
+      - qty
     type: object
   sales-data-invoice-item-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\InvoiceItemInterface
@@ -13941,11 +14070,9 @@ definitions:
         description: Tax amount.
         type: number
     required:
-      - base_discount_tax_compensation_amount
-      - discount_tax_compensation_amount
+      - sku
       - order_item_id
       - qty
-      - sku
     type: object
   sales-data-invoice-search-result-interface:
     description: Invoice search result interface. An invoice is a record of the receipt of payment for an order.
@@ -14499,16 +14626,8 @@ definitions:
         type: string
     required:
       - base_grand_total
-      - base_discount_tax_compensation_amount
-      - base_discount_tax_compensation_invoiced
-      - base_discount_tax_compensation_refunded
-      - base_shipping_discount_tax_compensation_amnt
       - customer_email
       - grand_total
-      - discount_tax_compensation_amount
-      - discount_tax_compensation_invoiced
-      - discount_tax_compensation_refunded
-      - shipping_discount_tax_compensation_amount
       - items
     type: object
   sales-data-order-item-extension-interface:
@@ -14803,13 +14922,6 @@ definitions:
         description: Weight.
         type: number
     required:
-      - base_discount_tax_compensation_amount
-      - base_discount_tax_compensation_invoiced
-      - base_discount_tax_compensation_refunded
-      - discount_tax_compensation_amount
-      - discount_tax_compensation_canceled
-      - discount_tax_compensation_invoiced
-      - discount_tax_compensation_refunded
       - sku
     type: object
   sales-data-order-item-search-result-interface:
@@ -15085,6 +15197,24 @@ definitions:
       - search_criteria
       - total_count
     type: object
+  sales-data-shipment-comment-creation-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShipmentCommentCreationInterface
+    type: object
+  sales-data-shipment-comment-creation-interface:
+    description: Interface ShipmentCommentCreationInterface
+    properties:
+      comment:
+        description: Comment.
+        type: string
+      extension_attributes:
+        $ref: '#/definitions/sales-data-shipment-comment-creation-extension-interface'
+      is_visible_on_front:
+        description: Is-visible-on-storefront flag value.
+        type: integer
+    required:
+      - comment
+      - is_visible_on_front
+    type: object
   sales-data-shipment-comment-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShipmentCommentInterface
     type: object
@@ -15098,7 +15228,7 @@ definitions:
         description: Created-at timestamp.
         type: string
       entity_id:
-        description: Shipment comment ID.
+        description: Invoice ID.
         type: integer
       extension_attributes:
         $ref: '#/definitions/sales-data-shipment-comment-extension-interface'
@@ -15112,10 +15242,10 @@ definitions:
         description: Parent ID.
         type: integer
     required:
-      - comment
       - is_customer_notified
-      - is_visible_on_front
       - parent_id
+      - comment
+      - is_visible_on_front
     type: object
   sales-data-shipment-comment-search-result-interface:
     description: Shipment comment search result interface. A shipment is a delivery package that contains products. A shipment document accompanies the shipment. This document lists the products and their quantities in the delivery package. A shipment document can contain comments.
@@ -15134,6 +15264,15 @@ definitions:
       - items
       - search_criteria
       - total_count
+    type: object
+  sales-data-shipment-creation-arguments-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShipmentCreationArgumentsInterface
+    type: object
+  sales-data-shipment-creation-arguments-interface:
+    description: Interface for creation arguments for Shipment.
+    properties:
+      extension_attributes:
+        $ref: '#/definitions/sales-data-shipment-creation-arguments-extension-interface'
     type: object
   sales-data-shipment-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShipmentInterface
@@ -15211,6 +15350,24 @@ definitions:
       - tracks
       - comments
     type: object
+  sales-data-shipment-item-creation-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShipmentItemCreationInterface
+    type: object
+  sales-data-shipment-item-creation-interface:
+    description: Input argument for shipment item creation Interface ShipmentItemCreationInterface
+    properties:
+      extension_attributes:
+        $ref: '#/definitions/sales-data-shipment-item-creation-extension-interface'
+      order_item_id:
+        description: Order item ID.
+        type: integer
+      qty:
+        description: Quantity.
+        type: number
+    required:
+      - order_item_id
+      - qty
+    type: object
   sales-data-shipment-item-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShipmentItemInterface
     type: object
@@ -15259,6 +15416,15 @@ definitions:
       - order_item_id
       - qty
     type: object
+  sales-data-shipment-package-creation-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShipmentPackageCreationInterface
+    type: object
+  sales-data-shipment-package-creation-interface:
+    description: Shipment package interface. A shipment is a delivery package that contains products. A shipment document accompanies the shipment. This document lists the products and their quantities in the delivery package.
+    properties:
+      extension_attributes:
+        $ref: '#/definitions/sales-data-shipment-package-creation-extension-interface'
+    type: object
   sales-data-shipment-package-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShipmentPackageInterface
     type: object
@@ -15285,6 +15451,28 @@ definitions:
       - items
       - search_criteria
       - total_count
+    type: object
+  sales-data-shipment-track-creation-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShipmentTrackCreationInterface
+    type: object
+  sales-data-shipment-track-creation-interface:
+    description: Shipment Track Creation interface.
+    properties:
+      carrier_code:
+        description: Carrier code.
+        type: string
+      extension_attributes:
+        $ref: '#/definitions/sales-data-shipment-track-creation-extension-interface'
+      title:
+        description: Title.
+        type: string
+      track_number:
+        description: Track number.
+        type: string
+    required:
+      - track_number
+      - title
+      - carrier_code
     type: object
   sales-data-shipment-track-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShipmentTrackInterface
@@ -15328,14 +15516,14 @@ definitions:
         description: Weight.
         type: number
     required:
-      - carrier_code
-      - description
       - order_id
       - parent_id
-      - qty
-      - title
-      - track_number
       - weight
+      - qty
+      - description
+      - track_number
+      - title
+      - carrier_code
     type: object
   sales-data-shipping-assignment-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\ShippingAssignmentInterface
@@ -15437,9 +15625,6 @@ definitions:
       shipping_tax_refunded:
         description: Shipping tax refunded amount.
         type: number
-    required:
-      - base_shipping_discount_tax_compensation_amnt
-      - shipping_discount_tax_compensation_amount
     type: object
   sales-data-transaction-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\TransactionInterface

@@ -19,7 +19,7 @@ info:
     format: google
     url: 'https://logging.googleapis.com/$discovery/rest?version=v2beta1'
     version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: logging
 externalDocs:
@@ -824,7 +824,7 @@ definitions:
         type: array
       resourceNames:
         description: |-
-          Optional. One or more cloud resources from which to retrieve log entries.
+          Required. One or more cloud resources from which to retrieve log entries.
           Example: `"projects/my-project-1A"`, `"projects/1234567890"`.  Projects
           listed in `projectIds` are added to this list.
         items:
@@ -1065,7 +1065,7 @@ definitions:
         type: string
     type: object
   LogSink:
-    description: Describes a sink used to export log entries outside Stackdriver Logging.
+    description: Describes a sink used to export log entries outside of Stackdriver Logging.
     properties:
       destination:
         description: |-
@@ -1076,6 +1076,10 @@ definitions:
               "storage.googleapis.com/my-gcs-bucket"
               "bigquery.googleapis.com/projects/my-project-id/datasets/my-dataset"
               "pubsub.googleapis.com/projects/my-project/topics/my-topic"
+        type: string
+      endTime:
+        description: Optional. Time at which this sink expires.
+        format: google-datetime
         type: string
       filter:
         description: |-
@@ -1107,9 +1111,17 @@ definitions:
           - V2
           - V1
         type: string
+      startTime:
+        description: |-
+          Optional. Time range for which this sink is active.
+          Logs are exported only if start_time <= entry.timestamp < end_time
+          Both start_time and end_time may be omitted to specify
+          (half) infinite ranges. The start_time must be less than the end_time.
+        format: google-datetime
+        type: string
       writerIdentity:
         description: |-
-          Output only. The iam identity to which the destination needs to grant write
+          Output only. The IAM identity to which the destination needs to grant write
           access.  This may be a service account or a group.
           Examples (Do not assume these specific values):
              "serviceAccount:cloud-logs@system.gserviceaccount.com"

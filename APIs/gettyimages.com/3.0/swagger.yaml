@@ -641,8 +641,10 @@ paths:
             type: string
         '303':
           description: See Other
+        '400':
+          description: ParameterNotSupported
         '401':
-          description: NoAgreement
+          description: InsufficientCredits
         '404':
           description: FileDownloadSizeNotFound
       summary: Download an image
@@ -759,8 +761,10 @@ paths:
             type: string
         '303':
           description: See Other
+        '400':
+          description: ParameterNotSupported
         '401':
-          description: NoAgreement
+          description: InsufficientCredits
         '404':
           description: FileDownloadSizeNotFound
       summary: Download an image

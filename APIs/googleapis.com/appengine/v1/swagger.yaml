@@ -101,8 +101,94 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: experimental
   - name: apps
 paths:
+  '/experimental/apps/{appsId}/operations':
+    get:
+      description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding below allows API services to override the binding to use different resource name schemes, such as `users/*/operations`.'
+      operationId: appengine.experimental.apps.operations.list
+      parameters:
+        - description: Part of `name`. The name of the operation collection.
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListOperationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - experimental
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/experimental/apps/{appsId}/operations/{operationsId}':
+    get:
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: appengine.experimental.apps.operations.get
+      parameters:
+        - description: Part of `name`. The name of the operation resource.
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: operationsId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - experimental
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
   '/v1/apps/{appsId}':
     get:
       description: Gets information about an application.
@@ -137,6 +223,33 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+    patch:
+      description: Updates application parameters.
+      operationId: appengine.apps.patch
+      parameters:
+        - description: 'Part of `name`. Name of the application to update. Example: `apps/myapp`.'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Standard field mask for the set of fields to be updated.
+          in: query
+          name: updateMask
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Application'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
   '/v1/apps/{appsId}/locations':
     get:
       description: Lists information about the supported locations for this service.
@@ -1257,7 +1370,7 @@ definitions:
         description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
         type: object
       locationId:
-        description: 'The cononical id for this location. For example: `"us-east1"`.'
+        description: 'The canonical id for this location. For example: `"us-east1"`.'
         type: string
       metadata:
         additionalProperties:
@@ -1695,6 +1808,7 @@ definitions:
         type: boolean
     type: object
   ZipInfo:
+    description: The zip file information for a zip deployment.
     properties:
       filesCount:
         description: 'An estimate of the number of files in a zip for a zip deployment. If set, must be greater than or equal to the actual number of files. Used for optimizing performance; if not provided, deployment may be slow.'

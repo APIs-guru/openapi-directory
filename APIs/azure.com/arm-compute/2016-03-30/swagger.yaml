@@ -1547,7 +1547,7 @@ definitions:
           modelAsString: false
           name: ComponentNames
       content:
-        description: XML formatted content that is added to the unattend.xml file in the specified pass and component.The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted.
+        description: XML formatted content that is added to the unattend.xml file in the specified pass and component. The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted.
         type: string
       passName:
         description: 'the pass name. Currently, the only allowable value is oobeSystem.'
@@ -1659,42 +1659,48 @@ definitions:
       serialConsoleLogBlobUri:
         description: the Linux serial console log blob Uri.
         type: string
+  Caching:
+    description: the caching type.
+    enum:
+      - None
+      - ReadOnly
+      - ReadWrite
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: CachingTypes
   ComputeLongRunningOperationProperties:
     description: 'Compute-specific operation properties, including output'
     properties:
       output:
         description: Operation output data (raw JSON)
         type: object
+  CreateOption:
+    description: the create option.
+    enum:
+      - fromImage
+      - empty
+      - attach
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: DiskCreateOptionTypes
   DataDisk:
     description: Describes a data disk.
     properties:
       caching:
+        $ref: '#/definitions/Caching'
         description: the caching type.
-        enum:
-          - None
-          - ReadOnly
-          - ReadWrite
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: CachingTypes
       createOption:
+        $ref: '#/definitions/CreateOption'
         description: the create option.
-        enum:
-          - fromImage
-          - empty
-          - attach
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: DiskCreateOptionTypes
       diskSizeGB:
         description: 'the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks.'
         format: int32
         type: integer
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist.'
+        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.'
       lun:
         description: the logical unit number.
         format: int32
@@ -1714,7 +1720,7 @@ definitions:
     description: Contains the data disk images information.
     properties:
       lun:
-        description: the LUN number for a data disk.This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk.The allowed character for the value is digit.
+        description: the LUN number for a data disk. This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk. The allowed character for the value is digit.
         format: int32
         readOnly: true
         type: integer
@@ -1940,25 +1946,11 @@ definitions:
     description: Describes an Operating System disk.
     properties:
       caching:
+        $ref: '#/definitions/Caching'
         description: the caching type.
-        enum:
-          - None
-          - ReadOnly
-          - ReadWrite
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: CachingTypes
       createOption:
+        $ref: '#/definitions/CreateOption'
         description: the create option.
-        enum:
-          - fromImage
-          - empty
-          - attach
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: DiskCreateOptionTypes
       diskSizeGB:
         description: 'the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks.'
         format: int32
@@ -1968,7 +1960,7 @@ definitions:
         description: the disk encryption settings.
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist.'
+        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.'
       name:
         description: the disk name.
         type: string
@@ -2060,6 +2052,7 @@ definitions:
       - name
       - product
   Resource:
+    description: The Resource model definition.
     properties:
       id:
         description: Resource Id
@@ -2109,7 +2102,7 @@ definitions:
     description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
     properties:
       keyData:
-        description: Certificate public key used to authenticate with VM through SSH.The certificate must be in Pem format with or without headers.
+        description: Certificate public key used to authenticate with VM through SSH. The certificate must be in Pem format with or without headers.
         type: string
       path:
         description: 'the full path on the created VM where SSH public key is stored. If the file already exists, the specified key is appended to the file.'
@@ -2318,7 +2311,7 @@ definitions:
         description: whether the handler can support multiple extensions.
         type: boolean
       vmScaleSetEnabled:
-        description: 'whether the extension can be used on xRP VMScaleSets.By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS.'
+        description: 'whether the extension can be used on xRP VMScaleSets. By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS.'
         type: boolean
     required:
       - operatingSystem
@@ -2464,6 +2457,8 @@ definitions:
         items:
           $ref: '#/definitions/VirtualMachine'
         type: array
+    required:
+      - value
   VirtualMachineProperties:
     description: Describes the properties of a Virtual Machine.
     properties:
@@ -2629,6 +2624,8 @@ definitions:
         items:
           $ref: '#/definitions/VirtualMachineScaleSet'
         type: array
+    required:
+      - value
   VirtualMachineScaleSetListSkusResult:
     description: The Virtual Machine Scale Set List Skus operation response.
     properties:
@@ -2639,8 +2636,9 @@ definitions:
         description: the list of skus available for the virtual machine scale set.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetSku'
-        readOnly: true
         type: array
+    required:
+      - value
   VirtualMachineScaleSetListWithLinkResult:
     description: The List Virtual Machine operation response.
     properties:
@@ -2652,6 +2650,8 @@ definitions:
         items:
           $ref: '#/definitions/VirtualMachineScaleSet'
         type: array
+    required:
+      - value
   VirtualMachineScaleSetNetworkConfiguration:
     allOf:
       - $ref: '#/definitions/SubResource'
@@ -2690,28 +2690,14 @@ definitions:
     description: Describes a virtual machine scale set operating system disk.
     properties:
       caching:
+        $ref: '#/definitions/Caching'
         description: the caching type.
-        enum:
-          - None
-          - ReadOnly
-          - ReadWrite
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: CachingTypes
       createOption:
+        $ref: '#/definitions/CreateOption'
         description: the create option.
-        enum:
-          - fromImage
-          - empty
-          - attach
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: DiskCreateOptionTypes
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist.'
+        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.'
       name:
         description: the disk name.
         type: string
@@ -2761,7 +2747,7 @@ definitions:
   VirtualMachineScaleSetProperties:
     description: Describes the properties of a Virtual Machine Scale Set.
     properties:
-      overProvision:
+      overprovision:
         description: Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         type: boolean
       provisioningState:
@@ -2928,6 +2914,8 @@ definitions:
         items:
           $ref: '#/definitions/VirtualMachineScaleSetVM'
         type: array
+    required:
+      - value
   VirtualMachineScaleSetVMProfile:
     description: Describes a virtual machine scale set virtual machine profile.
     properties:

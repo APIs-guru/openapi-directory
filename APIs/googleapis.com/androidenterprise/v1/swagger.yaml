@@ -699,6 +699,38 @@ paths:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - collectionviewers
+  '/enterprises/{enterpriseId}/createWebToken':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Returns a unique token to access an embeddable UI. To generate a web UI, pass the generated token into the Play for Work javascript API. Each token may only be used to start one UI session. See the javascript API documentation for further information.'
+      operationId: androidenterprise.enterprises.createWebToken
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AdministratorWebTokenSpec'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AdministratorWebToken'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - enterprises
   '/enterprises/{enterpriseId}/groupLicenses':
     get:
       description: Retrieves IDs of all products for which the enterprise has a group license.
@@ -2902,6 +2934,33 @@ definitions:
         description: The administrator's email address.
         type: string
     type: object
+  AdministratorWebToken:
+    description: A token authorizing an administrator to access an iframe.
+    properties:
+      kind:
+        default: 'androidenterprise#administratorWebToken'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#administratorWebToken".'
+        type: string
+      token:
+        description: An opaque token to be passed to the Play front-end to generate an iframe.
+        type: string
+    type: object
+  AdministratorWebTokenSpec:
+    description: Specification for a token used to generate iframes. The token specifies what data the admin is allowed to modify and the URI the iframe is allowed to communiate with.
+    properties:
+      kind:
+        default: 'androidenterprise#administratorWebTokenSpec'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#administratorWebTokenSpec".'
+        type: string
+      parent:
+        description: 'The URI of the parent frame hosting the iframe. To prevent XSS, the iframe may not be hosted at other URIs. This URI must be https.'
+        type: string
+      permission:
+        description: The list of permissions the admin is granted within the iframe. The admin will only be allowed to view an iframe if they have all of the permissions associated with it.
+        items:
+          type: string
+        type: array
+    type: object
   AppRestrictionsSchema:
     description: Represents the list of app restrictions available to be pre-configured for the product.
     properties:
@@ -3623,6 +3682,9 @@ definitions:
         items:
           type: string
         type: array
+      productSetBehavior:
+        description: 'The interpretation of this product set. "unknown" should never be sent and ignored if received. "whitelist" means that this product set constitutes a whitelist. "includeAll" means that all products are accessible (the value of the productId field is therefore ignored). If a value is not supplied, it is interpreted to be "whitelist" for backwards compatibility.'
+        type: string
     type: object
   ProductsApproveRequest:
     properties:
@@ -3749,6 +3811,9 @@ definitions:
       kind:
         default: 'androidenterprise#storeLayout'
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#storeLayout".'
+        type: string
+      storeLayoutType:
+        description: 'Sets a store layout type. If set to "custom", "homepageId" must be specified. If set to "basic", the layout will consist of all approved apps accessible by the user, split in pages of 100 each; in this case, "homepageId" must not be specified. The "basic" setting takes precedence over any existing collections setup for this enterprise (if any). Should the enterprise use collectionViewers for controlling access rights, these will still be respected.'
         type: string
     type: object
   StoreLayoutClustersListResponse:
