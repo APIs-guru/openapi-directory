@@ -558,9 +558,20 @@ function fixSpec(swagger, errors) {
           newValue.items = {};
         }
         break;
+      case 'INVALID_TYPE':
+        var match = error.message.match(/^Expected type (\w+) but found type (\w+)$/);
+        if (match && match[2] === 'string') {
+          try {
+            var tmp = JSON.parse(value);
+            if (typeof tmp === match[1]) {
+              newValue = tmp;
+              break;
+            }
+          }
+          catch (e) {}
+        }
       case 'ENUM_MISMATCH':
       case 'INVALID_FORMAT':
-      case 'INVALID_TYPE':
         if (_.last(error.path) === 'default') {
           var type = parentValue.type;
           if (_.isString(value) && !_.isUndefined(type) && type !== 'string') {
@@ -572,19 +583,6 @@ function fixSpec(swagger, errors) {
           delete parentValue.default;
           //TODO: add warning
           break;
-        }
-
-        var match = error.message.match(/^Expected type (\w+) but found type (\w+)$/);
-        if (match && match[2] === 'string') {
-          try {
-            var tmp = JSON.parse(value);
-            if (typeof tmp === match[1]) {
-              newValue = tmp;
-              fixed = true;
-              break;
-            }
-          }
-          catch (e) {}
         }
     }
     if (!_.isUndefined(newValue)) {
