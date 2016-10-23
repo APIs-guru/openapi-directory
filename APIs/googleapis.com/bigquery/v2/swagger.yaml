@@ -1307,6 +1307,11 @@ definitions:
       extract:
         $ref: '#/definitions/JobConfigurationExtract'
         description: '[Pick one] Configures an extract job.'
+      labels:
+        additionalProperties:
+          type: string
+        description: '[Experimental] The labels associated with this job. You can use these to organize and group your jobs. Label keys and values can be no longer than 63 characters, can only contain letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and must be unique within a dataset. Both keys and values are additionally constrained to be <= 128 bytes in size.'
+        type: object
       load:
         $ref: '#/definitions/JobConfigurationLoad'
         description: '[Pick one] Configures a load job.'
@@ -1451,12 +1456,12 @@ definitions:
         description: '[Required] BigQuery SQL query to execute.'
         type: string
       queryParameters:
-        description: '[Experimental] Query parameters for Standard SQL queries.'
+        description: Query parameters for standard SQL queries.
         items:
           $ref: '#/definitions/QueryParameter'
         type: array
       schemaUpdateOptions:
-        description: '[Experimental] Allows the schema of the desitination table to be updated as a side effect of the query job. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
+        description: '[Experimental] Allows the schema of the destination table to be updated as a side effect of the query job. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
         items:
           type: string
         type: array

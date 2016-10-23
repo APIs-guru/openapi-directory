@@ -644,7 +644,7 @@ paths:
         '400':
           description: ParameterNotSupported
         '401':
-          description: InsufficientCredits
+          description: OverageLimitReached
         '404':
           description: FileDownloadSizeNotFound
       summary: Download an image
@@ -764,7 +764,7 @@ paths:
         '400':
           description: ParameterNotSupported
         '401':
-          description: InsufficientCredits
+          description: OverageLimitReached
         '404':
           description: FileDownloadSizeNotFound
       summary: Download an image
@@ -5162,6 +5162,24 @@ definitions:
         format: int32
         type: integer
     type: object
+  overage:
+    properties:
+      count:
+        description: Count of download overages used to date on a Premium Access agreement
+        format: int32
+        type: integer
+      limit:
+        description: Maximum count of download overages allowed on a Premium Access agreement
+        format: int32
+        type: integer
+      overages_reached:
+        description: Specifies whether the download limit has been reached and download overages are being used on a Premium Access agreement
+        type: boolean
+      remaining:
+        description: Count of remaining download overages available on a Premium Access agreement
+        format: int32
+        type: integer
+    type: object
   product:
     properties:
       application_website:
@@ -5200,6 +5218,9 @@ definitions:
       name:
         description: Specifies the name of Getty Images product.
         type: string
+      overage:
+        $ref: '#/definitions/overage'
+        description: Describes the current state of the download overage provision on a Premium Access agreement
       status:
         description: Specifies if product status is active or inactive.
         enum:

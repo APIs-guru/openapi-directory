@@ -215,7 +215,10 @@ paths:
         `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
         Operations.GetOperation or
         other methods to check whether the cancellation succeeded or whether the
-        operation completed despite cancellation.
+        operation completed despite cancellation. On successful cancellation,
+        the operation is not deleted; instead, it becomes an operation with
+        an Operation.error value with a google.rpc.Status.code of 1,
+        corresponding to `Code.CANCELLED`.
       operationId: runtimeconfig.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
@@ -283,7 +286,7 @@ definitions:
         type: boolean
       error:
         $ref: '#/definitions/Status'
-        description: The error result of the operation in case of failure.
+        description: The error result of the operation in case of failure or cancellation.
       metadata:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.

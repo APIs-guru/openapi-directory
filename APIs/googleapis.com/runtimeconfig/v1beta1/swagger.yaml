@@ -690,7 +690,7 @@ definitions:
         type: boolean
       error:
         $ref: '#/definitions/Status'
-        description: The error result of the operation in case of failure.
+        description: The error result of the operation in case of failure or cancellation.
       metadata:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.

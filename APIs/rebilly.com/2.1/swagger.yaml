@@ -7662,7 +7662,7 @@ paths:
       tags:
         - Websites
 definitions:
-  A1:
+  A1_Gateway:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
       - properties:
@@ -9405,7 +9405,7 @@ definitions:
       - Datacash
       - Dengi
       - FundSend
-      - eMerchantPay
+      - EMerchantPay
       - Forte
       - GlobalCollect
       - GlobalOne
@@ -9415,7 +9415,7 @@ definitions:
       - NMI
       - OchaPay
       - Optimal
-      - Panda Gateway
+      - PandaGateway
       - PayPal
       - PayR
       - Payvision
@@ -9947,7 +9947,7 @@ definitions:
     required:
       - rel
     type: object
-  Ochapay:
+  OchaPay:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
       - properties:

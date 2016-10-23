@@ -1635,6 +1635,7 @@ definitions:
         description: the resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
+        readOnly: true
         type: array
       virtualMachines:
         description: a list containing reference to all Virtual Machines created under this Availability Set.
@@ -1920,6 +1921,8 @@ definitions:
         items:
           $ref: '#/definitions/Usage'
         type: array
+    required:
+      - value
   NetworkInterfaceReference:
     allOf:
       - $ref: '#/definitions/SubResource'

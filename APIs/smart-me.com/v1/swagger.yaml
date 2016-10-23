@@ -890,6 +890,17 @@ definitions:
         format: date-time
         type: string
     type: object
+  InputInformation:
+    description: Informations about the Inputs of a Meter or Folder
+    properties:
+      Name:
+        description: The Name of the Input
+        type: string
+      Number:
+        description: The Number of this Input. Use this as ID to switch it on or off.
+        format: int32
+        type: integer
+    type: object
   MBusData:
     properties:
       Date:
@@ -911,6 +922,11 @@ definitions:
         description: The Hardware Version of a Meter.
         format: int32
         type: integer
+      InputInformations:
+        description: Informations about the available Inputs
+        items:
+          $ref: '#/definitions/InputInformation'
+        type: array
       IsFolder:
         description: Flag if it's a Folder or a Meter
         type: boolean

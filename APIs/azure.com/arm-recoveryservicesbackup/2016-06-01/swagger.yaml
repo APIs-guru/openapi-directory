@@ -21,12 +21,8 @@ info:
     - Microsoft
 consumes:
   - application/json
-  - text/json
-  - application/octet-stream
 produces:
   - application/json
-  - text/json
-  - application/octet-stream
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
@@ -66,7 +62,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupEngines':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupEngines':
     get:
       deprecated: false
       description: Backup management servers registered to Recovery Services Vault. Returns a pageable list of servers.
@@ -88,7 +84,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -99,7 +94,7 @@ paths:
       x-ms-odata: '#/definitions/BMSBackupEngineQueryObject'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}':
     get:
       deprecated: false
       description: Provides the result of the refresh operation triggered by the BeginRefresh operation.
@@ -121,7 +116,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
@@ -129,7 +123,7 @@ paths:
           description: NoContent
       tags:
         - ProtectionContainerRefreshOperationResults
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}':
     get:
       deprecated: false
       description: Gets details of the specific container registered to your Recovery Services Vault.
@@ -151,15 +145,14 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ProtectionContainer'
+            $ref: '#/definitions/ProtectionContainerResource'
       tags:
         - ProtectionContainers
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/operationResults/{operationId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/operationResults/{operationId}':
     get:
       deprecated: false
       description: Fetches the result of any operation on the container.
@@ -186,19 +179,18 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ProtectionContainer'
+            $ref: '#/definitions/ProtectionContainerResource'
         '202':
           description: Accepted
         '204':
           description: NoContent
       tags:
         - ProtectionContainerOperationResults
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}':
     delete:
       deprecated: false
       description: 'Used to disable backup of an item within a container. This is an asynchronous operation. To know the status of the request, call the GetItemOperationResult API.'
@@ -225,7 +217,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
@@ -264,12 +255,11 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ProtectedItem'
+            $ref: '#/definitions/ProtectedItemResource'
       tags:
         - ProtectedItems
       x-ms-odata: '#/definitions/GetProtectedItemQueryObject'
@@ -302,16 +292,15 @@ paths:
           name: resourceProtectedItem
           required: true
           schema:
-            $ref: '#/definitions/ProtectedItem'
+            $ref: '#/definitions/ProtectedItemResource'
       produces:
         - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
       tags:
         - ProtectedItems
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/backup':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/backup':
     post:
       deprecated: false
       description: 'Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the operation, call GetProtectedItemOperationResult API.'
@@ -341,16 +330,15 @@ paths:
           name: resourceBackupRequest
           required: true
           schema:
-            $ref: '#/definitions/BackupRequest'
+            $ref: '#/definitions/BackupRequestResource'
       produces:
         - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
       tags:
         - Backups
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}':
     get:
       deprecated: false
       description: Fetches the result of any operation on the backup item.
@@ -382,19 +370,18 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ProtectedItem'
+            $ref: '#/definitions/ProtectedItemResource'
         '202':
           description: Accepted
         '204':
           description: NoContent
       tags:
         - ProtectedItemOperationResults
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}':
     get:
       deprecated: false
       description: 'Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed or failed. You can refer to the OperationStatus enum for all the possible states of the operation. Some operations create jobs. This method returns the list of jobs associated with the operation.'
@@ -426,7 +413,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -434,7 +420,7 @@ paths:
             $ref: '#/definitions/OperationStatus'
       tags:
         - ProtectedItemOperationStatuses
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints':
     get:
       deprecated: false
       description: Lists the backup copies for the backed up item.
@@ -466,7 +452,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -477,7 +462,7 @@ paths:
       x-ms-odata: '#/definitions/BMSRPQueryObject'
       x-ms-pageable:
         nextLinkName: 'null'
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}':
     get:
       deprecated: false
       description: 'Provides the information of the backed up data identified using RecoveryPointID. This is an asynchronous operation. To know the status of the operation, call the GetProtectedItemOperationResult API.'
@@ -509,15 +494,14 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/RecoveryPoint'
+            $ref: '#/definitions/RecoveryPointResource'
       tags:
         - RecoveryPoints
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/provisionInstantItemRecovery':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/provisionInstantItemRecovery':
     post:
       deprecated: false
       description: 'Provisions a script which invokes an iSCSI connection to the backup data. Executing this script opens a file explorer displaying all the recoverable files and folders. This is an asynchronous operation. To know the status of provisioning, call GetProtectedItemOperationResult API.'
@@ -552,16 +536,15 @@ paths:
           name: resourceILRRequest
           required: true
           schema:
-            $ref: '#/definitions/ILRRequest'
+            $ref: '#/definitions/ILRRequestResource'
       produces:
         - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
       tags:
         - ItemLevelRecoveryConnections
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore':
     post:
       deprecated: false
       description: 'Restores the specified backed up data. This is an asynchronous operation. To know the status of this API call, use GetProtectedItemOperationResult API.'
@@ -596,16 +579,15 @@ paths:
           name: resourceRestoreRequest
           required: true
           schema:
-            $ref: '#/definitions/RestoreRequest'
+            $ref: '#/definitions/RestoreRequestResource'
       produces:
         - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
       tags:
         - Restores
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/revokeInstantItemRecovery':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/revokeInstantItemRecovery':
     post:
       deprecated: false
       description: Revokes an iSCSI connection which can be used to download a script. Executing this script opens a file explorer displaying all recoverable files and folders. This is an asynchronous operation.
@@ -637,13 +619,12 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
       tags:
         - ItemLevelRecoveryConnections
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers':
     post:
       deprecated: false
       description: 'Discovers all the containers in the subscription that can be backed up to Recovery Services Vault. This is an asynchronous operation. To know the status of the operation, call GetRefreshOperationResult API.'
@@ -660,13 +641,12 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
       tags:
         - ProtectionContainers
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs':
     get:
       deprecated: false
       description: Provides a pageable list of jobs.
@@ -688,7 +668,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -699,7 +678,7 @@ paths:
       x-ms-odata: '#/definitions/JobQueryObject'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/operationResults/{operationId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/operationResults/{operationId}':
     get:
       deprecated: false
       description: Fetches the result of the operation triggered by the Export Job API.
@@ -716,17 +695,16 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/OperationResultInfoBase'
+            $ref: '#/definitions/OperationResultInfoBaseResource'
         '202':
           description: Accepted
       tags:
         - ExportJobsOperationResults
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}':
     get:
       deprecated: false
       description: Gets exteded information associated with the job.
@@ -743,15 +721,14 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Job'
+            $ref: '#/definitions/JobResource'
       tags:
         - JobDetails
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/cancel':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/cancel':
     post:
       deprecated: false
       description: 'Cancels a job. This is an asynchronous operation. To know the status of the cancellation, call GetCancelOperationResult API.'
@@ -768,13 +745,12 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
       tags:
         - JobCancellations
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/operationResults/{operationId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/operationResults/{operationId}':
     get:
       deprecated: false
       description: "Fetches the result of any operation.\r\n            the operation."
@@ -796,7 +772,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -806,7 +781,7 @@ paths:
           description: NoContent
       tags:
         - JobOperationResults
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobsExport':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport':
     post:
       deprecated: false
       description: Exports all jobs for a given SAS URL. The SAS URL will expire within 15 minutes of its creation.
@@ -823,14 +798,13 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
       tags:
         - Jobs
       x-ms-odata: '#/definitions/JobQueryObject'
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}':
     get:
       deprecated: false
       description: 'Provides the status of the delete operations such as deleting backed up item. Once the operation has started, the status code in the response would be Accepted. It will continue to be in this state till it reaches completion. On successful completion, the status code will be OK. This method expects OperationID as an argument. OperationID is part of the Location header of the operation response.'
@@ -847,7 +821,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -857,7 +830,7 @@ paths:
           description: NoContent
       tags:
         - BackupOperationResults
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}':
     get:
       deprecated: false
       description: 'Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed or failed. You can refer to the OperationStatus enum for all the possible states of an operation. Some operations create jobs. This method returns the list of jobs when the operation is complete.'
@@ -874,7 +847,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -882,7 +854,7 @@ paths:
             $ref: '#/definitions/OperationStatus'
       tags:
         - BackupOperationStatuses
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupPolicies':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies':
     get:
       deprecated: false
       description: Lists of backup policies associated with Recovery Services Vault. API provides pagination parameters to fetch scoped results.
@@ -899,7 +871,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -910,7 +881,7 @@ paths:
       x-ms-odata: '#/definitions/ProtectionPolicyQueryObject'
       x-ms-pageable:
         nextLinkName: 'null'
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}':
     delete:
       deprecated: false
       description: Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the operation can be fetched using GetPolicyOperationResult API.
@@ -927,7 +898,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -951,12 +921,11 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ProtectionPolicy'
+            $ref: '#/definitions/ProtectionPolicyResource'
       tags:
         - ProtectionPolicies
     put:
@@ -978,20 +947,19 @@ paths:
           name: resourceProtectionPolicy
           required: true
           schema:
-            $ref: '#/definitions/ProtectionPolicy'
+            $ref: '#/definitions/ProtectionPolicyResource'
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ProtectionPolicy'
+            $ref: '#/definitions/ProtectionPolicyResource'
         '202':
           description: Accepted
       tags:
         - ProtectionPolicies
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operationResults/{operationId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operationResults/{operationId}':
     get:
       deprecated: false
       description: Provides the result of an operation.
@@ -1013,15 +981,14 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ProtectionPolicy'
+            $ref: '#/definitions/ProtectionPolicyResource'
       tags:
         - ProtectionPolicyOperationResults
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operations/{operationId}':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operations/{operationId}':
     get:
       deprecated: false
       description: 'Provides the status of the asynchronous operations like backup, restore. The status can be in progress, completed or failed. You can refer to the Operation Status enum for all the possible states of an operation. Some operations create jobs. This method returns the list of jobs associated with operation.'
@@ -1043,7 +1010,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1051,7 +1017,7 @@ paths:
             $ref: '#/definitions/OperationStatus'
       tags:
         - ProtectionPolicyOperationStatuses
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupProtectableItems':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectableItems':
     get:
       deprecated: false
       description: Provides a pageable list of protectable objects within your subscription according to the query filter and the pagination parameters.
@@ -1073,7 +1039,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1084,7 +1049,7 @@ paths:
       x-ms-odata: '#/definitions/BMSPOQueryObject'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupProtectedItems':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems':
     get:
       deprecated: false
       description: Provides a pageable list of all items that can be backed up within a subscription.
@@ -1106,7 +1071,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1117,7 +1081,7 @@ paths:
       x-ms-odata: '#/definitions/ProtectedItemQueryObject'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupProtectionContainers':
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionContainers':
     get:
       deprecated: false
       description: Lists the containers registered to Recovery Services Vault.
@@ -1134,7 +1098,6 @@ paths:
           type: string
       produces:
         - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1150,35 +1113,42 @@ definitions:
     allOf:
       - $ref: '#/definitions/BackupEngineBase'
     description: Backup engine type when Azure Backup Server is used to manage the backups.
-    properties: {}
     type: object
     x-ms-discriminator-value: AzureBackupServerEngine
   AzureIaaSClassicComputeVMContainer:
     allOf:
       - $ref: '#/definitions/IaaSVMContainer'
     description: IaaS VM workload-specific backup item representing a classic virtual machine.
-    properties: {}
+    type: object
+    x-ms-discriminator-value: Microsoft.ClassicCompute/virtualMachines
+  AzureIaaSClassicComputeVMProtectableItem:
+    allOf:
+      - $ref: '#/definitions/IaaSVMProtectableItem'
+    description: IaaS VM workload-specific backup item representing the Classic Compute VM.
     type: object
     x-ms-discriminator-value: Microsoft.ClassicCompute/virtualMachines
   AzureIaaSClassicComputeVMProtectedItem:
     allOf:
       - $ref: '#/definitions/AzureIaaSVMProtectedItem'
     description: IaaS VM workload-specific backup item representing the Classic Compute VM.
-    properties: {}
     type: object
     x-ms-discriminator-value: Microsoft.ClassicCompute/virtualMachines
   AzureIaaSComputeVMContainer:
     allOf:
       - $ref: '#/definitions/IaaSVMContainer'
     description: IaaS VM workload-specific backup item representing an Azure Resource Manager virtual machine.
-    properties: {}
+    type: object
+    x-ms-discriminator-value: Microsoft.Compute/virtualMachines
+  AzureIaaSComputeVMProtectableItem:
+    allOf:
+      - $ref: '#/definitions/IaaSVMProtectableItem'
+    description: IaaS VM workload-specific backup item representing the Azure Resource Manager VM.
     type: object
     x-ms-discriminator-value: Microsoft.Compute/virtualMachines
   AzureIaaSComputeVMProtectedItem:
     allOf:
       - $ref: '#/definitions/AzureIaaSVMProtectedItem'
     description: IaaS VM workload-specific backup item representing the Azure Resource Manager VM.
-    properties: {}
     type: object
     x-ms-discriminator-value: Microsoft.Compute/virtualMachines
   AzureIaaSVMErrorInfo:
@@ -1219,6 +1189,7 @@ definitions:
         type: array
       duration:
         description: Time elapsed during the execution of this job.
+        format: duration
         type: string
       errorDetails:
         description: Error details on execution of this job.
@@ -1259,6 +1230,7 @@ definitions:
     properties:
       duration:
         description: Time elapsed for task.
+        format: duration
         type: string
       endTime:
         description: The end time.
@@ -1301,8 +1273,18 @@ definitions:
         format: date-time
         type: string
       protectionState:
-        description: 'Backup state of this backup item. Possible values: Protected, ProtectionStopped, IRPending or ProtectionError.'
+        description: Backup state of this backup item.
+        enum:
+          - Invalid
+          - IRPending
+          - Protected
+          - ProtectionError
+          - ProtectionStopped
+          - ProtectionPaused
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ProtectionState
       protectionStatus:
         description: Backup status of this backup item.
         type: string
@@ -1343,7 +1325,6 @@ definitions:
     allOf:
       - $ref: '#/definitions/ProtectionContainer'
     description: Azure Sql workload-specific container.
-    properties: {}
     type: object
     x-ms-discriminator-value: AzureSqlContainer
   AzureSqlProtectedItem:
@@ -1358,7 +1339,7 @@ definitions:
         description: Internal ID of a backup item. Used by Azure SQL Backup engine to contact Recovery Services.
         type: string
       protectionState:
-        description: 'Backup state of the backed up item. Possible values: Protected, ProtectionStopped, IRPending or ProtectionError.'
+        description: Backup state of the backed up item.
         enum:
           - Invalid
           - IRPending
@@ -1369,7 +1350,7 @@ definitions:
         type: string
         x-ms-enum:
           modelAsString: false
-          name: ProtectionState
+          name: ProtectedItemState
     type: object
     x-ms-discriminator-value: Microsoft.Sql/servers/databases
   AzureSqlProtectedItemExtendedInfo:
@@ -1414,15 +1395,35 @@ definitions:
     description: Query parameters to fetch list of backup engines.
     properties:
       backupManagementType:
-        description: 'Backup management type for the backup engine. Possible values: AzureIaasVM, MAB, DPM.'
+        description: Backup management type for the backup engine.
+        enum:
+          - Invalid
+          - AzureIaasVM
+          - MAB
+          - DPM
+          - AzureBackupServer
+          - AzureSql
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupManagementType
     type: object
   BMSContainerQueryObject:
     description: The query filters that can be used with the list containers API.
     properties:
       backupManagementType:
-        description: 'Backup management type for this container. Possible values: AzureIaasVM, MAB, DPM. Possible values: AzureIaasVM, MAB, DPM.'
+        description: Backup management type for this container.
+        enum:
+          - Invalid
+          - AzureIaasVM
+          - MAB
+          - DPM
+          - AzureBackupServer
+          - AzureSql
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupManagementType
       friendlyName:
         description: Friendly name of this container.
         type: string
@@ -1434,8 +1435,18 @@ definitions:
     description: Filters to list items that can be backed up.
     properties:
       backupManagementType:
-        description: 'Backup management type. Possible values: AzureIaasVM, MAB, DPM.'
+        description: Backup management type.
+        enum:
+          - Invalid
+          - AzureIaasVM
+          - MAB
+          - DPM
+          - AzureBackupServer
+          - AzureSql
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupManagementType
       friendlyName:
         description: Friendly name.
         type: string
@@ -1456,8 +1467,6 @@ definitions:
         type: string
     type: object
   BackupEngineBase:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: The base backup engine class. All workload specific backup engines derive from this class.
     discriminator: backupEngineType
     properties:
@@ -1468,8 +1477,18 @@ definitions:
         description: Type of the backup engine.
         type: string
       backupManagementType:
-        description: 'Type of backup management for the backup engine. Possible values: AzureIaasVM, DPM or MAB.'
+        description: Type of backup management for the backup engine.
+        enum:
+          - Invalid
+          - AzureIaasVM
+          - MAB
+          - DPM
+          - AzureBackupServer
+          - AzureSql
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupManagementType
       canReRegister:
         description: 'Flag indicating if the backup engine be registered, once already registered.'
         type: boolean
@@ -1483,6 +1502,13 @@ definitions:
         description: Registration status of the backup engine with the Recovery Services Vault.
         type: string
     type: object
+  BackupEngineBaseResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The base backup engine class. All workload specific backup engines derive from this class.
+    properties:
+      properties:
+        $ref: '#/definitions/BackupEngineBase'
   BackupEngineBaseResourceList:
     allOf:
       - $ref: '#/definitions/ResourceList'
@@ -1491,12 +1517,10 @@ definitions:
       value:
         description: List of resources.
         items:
-          $ref: '#/definitions/BackupEngineBase'
+          $ref: '#/definitions/BackupEngineBaseResource'
         type: array
     type: object
   BackupRequest:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Base class for backup request. Workload-specific backup requests are derived from this class.
     discriminator: objectType
     properties:
@@ -1504,6 +1528,13 @@ definitions:
         description: This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.
         type: string
     type: object
+  BackupRequestResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Base class for backup request. Workload-specific backup requests are derived from this class.
+    properties:
+      properties:
+        $ref: '#/definitions/BackupRequest'
   ClientScriptForConnect:
     description: Client script details for file / folder restore.
     properties:
@@ -1517,11 +1548,41 @@ definitions:
         description: 'File extension of the client script for file / folder restore - .ps1 , .sh , etc.'
         type: string
     type: object
+  DailyRetentionFormat:
+    description: Daily retention format.
+    properties:
+      daysOfTheMonth:
+        description: List of days of the month.
+        items:
+          $ref: '#/definitions/Day'
+        type: array
+    type: object
+  DailyRetentionSchedule:
+    description: Daily retention schedule.
+    properties:
+      retentionDuration:
+        $ref: '#/definitions/RetentionDuration'
+        description: Retention duration of retention Policy.
+      retentionTimes:
+        description: Retention times of retention policy.
+        items:
+          format: date-time
+          type: string
+        type: array
+    type: object
+  Day:
+    description: Day of the week.
+    properties:
+      date:
+        format: int32
+        type: integer
+      isLast:
+        type: boolean
+    type: object
   DpmBackupEngine:
     allOf:
       - $ref: '#/definitions/BackupEngineBase'
     description: Data Protection Manager (DPM) specific backup engine.
-    properties: {}
     type: object
     x-ms-discriminator-value: DpmBackupEngine
   DpmErrorInfo:
@@ -1564,6 +1625,7 @@ definitions:
         type: string
       duration:
         description: Time elapsed for job.
+        format: duration
         type: string
       errorDetails:
         description: The errors.
@@ -1600,6 +1662,7 @@ definitions:
     properties:
       duration:
         description: Time elapsed for task.
+        format: duration
         type: string
       endTime:
         description: The end time.
@@ -1676,8 +1739,6 @@ definitions:
         type: string
     type: object
   ILRRequest:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Parameters to restore file/folders API.
     discriminator: objectType
     properties:
@@ -1685,6 +1746,13 @@ definitions:
         description: This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.
         type: string
     type: object
+  ILRRequestResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Parameters to restore file/folders API.
+    properties:
+      properties:
+        $ref: '#/definitions/ILRRequest'
   IaaSVMContainer:
     allOf:
       - $ref: '#/definitions/ProtectionContainer'
@@ -1787,8 +1855,16 @@ definitions:
         description: ID of the backup copy to be recovered.
         type: string
       recoveryType:
-        description: "Type of this recovery. \r\n            Possible values: OriginalLocation, AlternateLocation, RestoreDisks."
+        description: Type of this recovery.
+        enum:
+          - Invalid
+          - OriginalLocation
+          - AlternateLocation
+          - RestoreDisks
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RecoveryType
       region:
         description: Region in which the virtual machine is restored.
         type: string
@@ -1825,8 +1901,6 @@ definitions:
         type: array
     type: object
   Job:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Defines workload agnostic properties for a job.
     discriminator: jobType
     properties:
@@ -1834,7 +1908,7 @@ definitions:
         description: ActivityId of job.
         type: string
       backupManagementType:
-        description: 'Backup management type to execute the current job. Possible values: IaasVM, DPM, MAB.'
+        description: Backup management type to execute the current job.
         enum:
           - Invalid
           - AzureIaasVM
@@ -1871,8 +1945,18 @@ definitions:
     description: Filters to list the jobs.
     properties:
       backupManagementType:
-        description: 'Type of backup managmenent for the job. Possible value: AzureIaasVM.'
+        description: Type of backup managmenent for the job.
+        enum:
+          - Invalid
+          - AzureIaasVM
+          - MAB
+          - DPM
+          - AzureBackupServer
+          - AzureSql
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupManagementType
       endTime:
         description: Job has ended at this time. Value is in UTC.
         format: date-time
@@ -1881,14 +1965,24 @@ definitions:
         description: JobID represents the job uniquely.
         type: string
       operation:
-        description: 'Type of operation. Possible values: ConfigureBackup, Backup, Restore, Unprotect, DeleteBackupData.'
+        description: Type of operation.
+        enum:
+          - Invalid
+          - ConfigureBackup
+          - Backup
+          - Restore
+          - DisableBackup
+          - DeleteBackupData
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: JobOperationType
       startTime:
         description: Job has started at this time. Value is in UTC.
         format: date-time
         type: string
       status:
-        description: 'Status of the job. Possible values: InProgress, Completed, Failed, CompletedWithWarnings, Cancelling, Cancelled.'
+        description: Status of the job.
         enum:
           - Invalid
           - InProgress
@@ -1902,6 +1996,13 @@ definitions:
           modelAsString: false
           name: JobStatus
     type: object
+  JobResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Defines workload agnostic properties for a job.
+    properties:
+      properties:
+        $ref: '#/definitions/Job'
   JobResourceList:
     allOf:
       - $ref: '#/definitions/ResourceList'
@@ -1910,7 +2011,7 @@ definitions:
       value:
         description: List of resources.
         items:
-          $ref: '#/definitions/Job'
+          $ref: '#/definitions/JobResource'
         type: array
     type: object
   KEKDetails:
@@ -1935,6 +2036,30 @@ definitions:
       kekDetails:
         $ref: '#/definitions/KEKDetails'
         description: KEK is encryption key for BEK.
+    type: object
+  LongTermRetentionPolicy:
+    allOf:
+      - $ref: '#/definitions/RetentionPolicy'
+    description: Long term retention policy.
+    properties:
+      dailySchedule:
+        $ref: '#/definitions/DailyRetentionSchedule'
+        description: Daily retention schedule of the protection policy.
+      monthlySchedule:
+        $ref: '#/definitions/MonthlyRetentionSchedule'
+        description: Monthly retention schedule of the protection policy.
+      weeklySchedule:
+        $ref: '#/definitions/WeeklyRetentionSchedule'
+        description: Weekly retention schedule of the protection policy.
+      yearlySchedule:
+        $ref: '#/definitions/YearlyRetentionSchedule'
+        description: Yearly retention schedule of the protection policy.
+    type: object
+    x-ms-discriminator-value: LongTermRetentionPolicy
+  LongTermSchedulePolicy:
+    allOf:
+      - $ref: '#/definitions/SchedulePolicy'
+    description: Long term policy schedule.
     type: object
   MabContainer:
     allOf:
@@ -1964,7 +2089,7 @@ definitions:
     description: Additional information of the container.
     properties:
       backupItemType:
-        description: 'Type of backup items associated with this container. Possible values: VM, FileFolder, AzureSqlDb.'
+        description: Type of backup items associated with this container.
         enum:
           - Invalid
           - VM
@@ -2065,6 +2190,7 @@ definitions:
         type: array
       duration:
         description: Time taken by job to run.
+        format: duration
         type: string
       errorDetails:
         description: The errors.
@@ -2078,7 +2204,7 @@ definitions:
         description: Name of server protecting the DS.
         type: string
       mabServerType:
-        description: 'Server type of MAB container. Possible values: IaasVMContainer, MABContainer, AzureSqlContainer, WindowsServer.'
+        description: Server type of MAB container.
         enum:
           - Invalid
           - Unknown
@@ -2096,7 +2222,7 @@ definitions:
           modelAsString: false
           name: MabServerType
       workloadType:
-        description: 'Workload type of backup item. Possible values: VM, FileFolder, AzureSqlDb.'
+        description: Workload type of backup item.
         enum:
           - Invalid
           - VM
@@ -2134,6 +2260,7 @@ definitions:
     properties:
       duration:
         description: Time elapsed for task.
+        format: duration
         type: string
       endTime:
         description: The end time.
@@ -2163,9 +2290,37 @@ definitions:
         description: Backup schedule of backup policy.
     type: object
     x-ms-discriminator-value: MAB
+  MonthlyRetentionSchedule:
+    description: Monthly retention schedule.
+    properties:
+      retentionDuration:
+        $ref: '#/definitions/RetentionDuration'
+        description: Retention duration of retention Policy.
+      retentionScheduleDaily:
+        $ref: '#/definitions/DailyRetentionFormat'
+        description: Daily retention format for monthly retention policy.
+      retentionScheduleFormatType:
+        description: Retention schedule format type for monthly retention policy.
+        enum:
+          - Invalid
+          - Daily
+          - Weekly
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RetentionScheduleFormat
+      retentionScheduleWeekly:
+        $ref: '#/definitions/WeeklyRetentionFormat'
+        description: Weekly retention format for monthly retention policy.
+      retentionTimes:
+        description: Retention times of retention policy.
+        items:
+          format: date-time
+          type: string
+        type: array
+    type: object
   Object:
     description: Base of all objects.
-    properties: {}
     type: object
   OperationResultInfo:
     allOf:
@@ -2180,8 +2335,6 @@ definitions:
     type: object
     x-ms-discriminator-value: OperationResultInfo
   OperationResultInfoBase:
-    allOf:
-      - $ref: '#/definitions/OperationWorkerResponse'
     description: Base class for operation result info.
     discriminator: objectType
     properties:
@@ -2189,6 +2342,13 @@ definitions:
         description: This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.
         type: string
     type: object
+  OperationResultInfoBaseResource:
+    allOf:
+      - $ref: '#/definitions/OperationWorkerResponse'
+    description: Base class for operation result info.
+    properties:
+      properties:
+        $ref: '#/definitions/OperationResultInfoBase'
   OperationStatus:
     description: Operation status.
     properties:
@@ -2213,7 +2373,7 @@ definitions:
         format: date-time
         type: string
       status:
-        description: 'Operation status. Possible values: InProgress, Succeeded, Failed, Canceled.'
+        description: Operation status.
         enum:
           - Invalid
           - InProgress
@@ -2346,14 +2506,22 @@ definitions:
           name: HttpStatusCode
     type: object
   ProtectedItem:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Base class for backup items.
     discriminator: protectedItemType
     properties:
       backupManagementType:
-        description: 'Type of backup managemenent for the backed up item. Possible values: AzureIaasVM, DPM or MAB.'
+        description: Type of backup managemenent for the backed up item.
+        enum:
+          - Invalid
+          - AzureIaasVM
+          - MAB
+          - DPM
+          - AzureBackupServer
+          - AzureSql
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupManagementType
       lastRecoveryPoint:
         description: Timestamp when the last (latest) backup copy was created for this backup item.
         format: date-time
@@ -2368,14 +2536,26 @@ definitions:
         description: ARM ID of the resource to be backed up.
         type: string
       workloadType:
-        description: 'Type of workload this item represents. Possible values: VM, FileFolder.'
+        description: Type of workload this item represents.
+        enum:
+          - Invalid
+          - VM
+          - FileFolder
+          - AzureSqlDb
+          - SQLDB
+          - Exchange
+          - Sharepoint
+          - DPMUnknown
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: DataSourceType
     type: object
   ProtectedItemQueryObject:
     description: Filters to list backup items.
     properties:
       backupManagementType:
-        description: 'Backup management type for the backed up item. Possible values: AzureIaasVM, MAB, DPM.'
+        description: Backup management type for the backed up item.
         enum:
           - Invalid
           - AzureIaasVM
@@ -2391,12 +2571,31 @@ definitions:
         description: Name of the container.
         type: string
       itemType:
-        description: 'Type of workload this item represents. Possible values: VM, FileFolder.'
+        description: Type of workload this item represents.
+        enum:
+          - Invalid
+          - VM
+          - FileFolder
+          - AzureSqlDb
+          - SQLDB
+          - Exchange
+          - Sharepoint
+          - DPMUnknown
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: DataSourceType
       policyName:
         description: Backup policy name associated with the backup item.
         type: string
     type: object
+  ProtectedItemResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Base class for backup items.
+    properties:
+      properties:
+        $ref: '#/definitions/ProtectedItem'
   ProtectedItemResourceList:
     allOf:
       - $ref: '#/definitions/ResourceList'
@@ -2405,17 +2604,15 @@ definitions:
       value:
         description: List of resources.
         items:
-          $ref: '#/definitions/ProtectedItem'
+          $ref: '#/definitions/ProtectedItemResource'
         type: array
     type: object
   ProtectionContainer:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Base class for container with backup items. Containers with specific workloads are derived from this class.
-    discriminator: containerType
+    discriminator: protectableObjectType
     properties:
       backupManagementType:
-        description: 'Type of backup managemenent for the container. Possible values: AzureIaasVM, DPM or MAB.'
+        description: Type of backup managemenent for the container.
         enum:
           - Invalid
           - AzureIaasVM
@@ -2428,8 +2625,23 @@ definitions:
           modelAsString: false
           name: BackupManagementType
       containerType:
-        description: 'Type of the container. Possible values are: IaasVMContainer, Windows.'
+        description: Type of the container.
+        enum:
+          - Invalid
+          - Unknown
+          - IaasVMContainer
+          - IaasVMServiceContainer
+          - DPMContainer
+          - DPMVenusContainer
+          - MABContainer
+          - ClusterResource
+          - AzureSqlContainer
+          - WindowsServer
+          - Windows
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ContainerType
       friendlyName:
         description: Friendly name of the container.
         type: string
@@ -2437,12 +2649,19 @@ definitions:
         description: Status of health of the container.
         type: string
       protectableObjectType:
-        description: 'Type of the protectable object associated with this container. Possible values: IaasVMContainer, MABWindowsContainer, AzureSqlContainer.'
+        description: Type of the protectable object associated with this container.
         type: string
       registrationStatus:
         description: Status of registration of the container with the Recovery Services Vault.
         type: string
     type: object
+  ProtectionContainerResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Base class for container with backup items. Containers with specific workloads are derived from this class.
+    properties:
+      properties:
+        $ref: '#/definitions/ProtectionContainer'
   ProtectionContainerResourceList:
     allOf:
       - $ref: '#/definitions/ResourceList'
@@ -2451,12 +2670,10 @@ definitions:
       value:
         description: List of resources.
         items:
-          $ref: '#/definitions/ProtectionContainer'
+          $ref: '#/definitions/ProtectionContainerResource'
         type: array
     type: object
   ProtectionPolicy:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Base class for backup policy. Workload-specific backup policies are derived from this class.
     discriminator: backupManagementType
     properties:
@@ -2472,9 +2689,26 @@ definitions:
     description: Filters the list backup policies API.
     properties:
       backupManagementType:
-        description: 'Backup management type for the backup policy. Possible values: AzureIaasVM, MAB, DPM.'
+        description: Backup management type for the backup policy.
+        enum:
+          - Invalid
+          - AzureIaasVM
+          - MAB
+          - DPM
+          - AzureBackupServer
+          - AzureSql
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupManagementType
     type: object
+  ProtectionPolicyResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Base class for backup policy. Workload-specific backup policies are derived from this class.
+    properties:
+      properties:
+        $ref: '#/definitions/ProtectionPolicy'
   ProtectionPolicyResourceList:
     allOf:
       - $ref: '#/definitions/ResourceList'
@@ -2483,12 +2717,10 @@ definitions:
       value:
         description: List of resources.
         items:
-          $ref: '#/definitions/ProtectionPolicy'
+          $ref: '#/definitions/ProtectionPolicyResource'
         type: array
     type: object
   RecoveryPoint:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Base class for backup copies. Workload-specific backup copies are derived from this class.
     discriminator: objectType
     properties:
@@ -2496,6 +2728,13 @@ definitions:
         description: This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.
         type: string
     type: object
+  RecoveryPointResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Base class for backup copies. Workload-specific backup copies are derived from this class.
+    properties:
+      properties:
+        $ref: '#/definitions/RecoveryPoint'
   RecoveryPointResourceList:
     allOf:
       - $ref: '#/definitions/ResourceList'
@@ -2504,7 +2743,7 @@ definitions:
       value:
         description: List of resources.
         items:
-          $ref: '#/definitions/RecoveryPoint'
+          $ref: '#/definitions/RecoveryPointResource'
         type: array
     type: object
   Resource:
@@ -2540,8 +2779,6 @@ definitions:
         type: string
     type: object
   RestoreRequest:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Base class for restore request. Workload-specific restore requests are derived from this class.
     discriminator: objectType
     properties:
@@ -2549,18 +2786,168 @@ definitions:
         description: This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.
         type: string
     type: object
+  RestoreRequestResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Base class for restore request. Workload-specific restore requests are derived from this class.
+    properties:
+      properties:
+        $ref: '#/definitions/RestoreRequest'
+  RetentionDuration:
+    description: Retention duration.
+    properties:
+      count:
+        description: "Count of duration types. Retention duration is obtained by the counting the duration type Count times. \r\n            For example, when Count = 3 and DurationType = Weeks, retention duration will be three weeks."
+        format: int32
+        type: integer
+      durationType:
+        description: Retention duration type of retention policy.
+        enum:
+          - Invalid
+          - Days
+          - Weeks
+          - Months
+          - Years
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RetentionDurationType
+    type: object
   RetentionPolicy:
     description: Base class for retention policy.
-    properties: {}
+    discriminator: retentionPolicyType
+    properties:
+      retentionPolicyType:
+        description: This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.
+        type: string
     type: object
   SchedulePolicy:
     description: Base class for backup schedule.
-    properties: {}
+    discriminator: schedulePolicyType
+    properties:
+      schedulePolicyType:
+        description: This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.
+        type: string
+    type: object
+  SimpleRetentionPolicy:
+    allOf:
+      - $ref: '#/definitions/RetentionPolicy'
+    description: Simple policy retention.
+    properties:
+      retentionDuration:
+        $ref: '#/definitions/RetentionDuration'
+        description: Retention duration of the protection policy.
+    type: object
+    x-ms-discriminator-value: SimpleRetentionPolicy
+  SimpleSchedulePolicy:
+    allOf:
+      - $ref: '#/definitions/SchedulePolicy'
+    description: Simple policy schedule.
+    properties:
+      scheduleRunDays:
+        description: List of days of week this schedule has to be run.
+        items:
+          enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: DayOfWeek
+        type: array
+      scheduleRunFrequency:
+        description: Frequency of the schedule operation of this policy.
+        enum:
+          - Invalid
+          - Daily
+          - Weekly
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ScheduleRunType
+      scheduleRunTimes:
+        description: List of times of day this schedule has to be run.
+        items:
+          format: date-time
+          type: string
+        type: array
+      scheduleWeeklyFrequency:
+        description: At every number weeks this schedule has to be run.
+        format: int32
+        type: integer
+    type: object
+    x-ms-discriminator-value: SimpleSchedulePolicy
+  WeeklyRetentionFormat:
+    description: Weekly retention format.
+    properties:
+      daysOfTheWeek:
+        description: List of days of the week.
+        items:
+          enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: DayOfWeek
+        type: array
+      weeksOfTheMonth:
+        description: List of weeks of month.
+        items:
+          enum:
+            - First
+            - Second
+            - Third
+            - Fourth
+            - Last
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: WeekOfMonth
+        type: array
+    type: object
+  WeeklyRetentionSchedule:
+    description: Weekly retention schedule.
+    properties:
+      daysOfTheWeek:
+        description: List of days of week for weekly retention policy.
+        items:
+          enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: DayOfWeek
+        type: array
+      retentionDuration:
+        $ref: '#/definitions/RetentionDuration'
+        description: Retention duration of retention Policy.
+      retentionTimes:
+        description: Retention times of retention policy.
+        items:
+          format: date-time
+          type: string
+        type: array
     type: object
   WorkloadProtectableItem:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Base class for backup item. Workload-specific backup items are derived from this class.
+    discriminator: protectableItemType
     properties:
       backupManagementType:
         description: Type of backup managemenent to backup an item.
@@ -2572,9 +2959,24 @@ definitions:
         description: Type of the backup item.
         type: string
       protectionState:
-        description: 'State of the back up item. Possible values: Protected, NotProtected.'
+        description: State of the back up item.
+        enum:
+          - Invalid
+          - NotProtected
+          - Protecting
+          - Protected
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ProtectionStatus
     type: object
+  WorkloadProtectableItemResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Base class for backup item. Workload-specific backup items are derived from this class.
+    properties:
+      properties:
+        $ref: '#/definitions/WorkloadProtectableItem'
   WorkloadProtectableItemResourceList:
     allOf:
       - $ref: '#/definitions/ResourceList'
@@ -2583,6 +2985,57 @@ definitions:
       value:
         description: List of resources.
         items:
-          $ref: '#/definitions/WorkloadProtectableItem'
+          $ref: '#/definitions/WorkloadProtectableItemResource'
+        type: array
+    type: object
+  YearlyRetentionSchedule:
+    description: Yearly retention schedule.
+    properties:
+      monthsOfYear:
+        description: List of months of year of yearly retention policy.
+        items:
+          enum:
+            - Invalid
+            - January
+            - February
+            - March
+            - April
+            - May
+            - June
+            - July
+            - August
+            - September
+            - October
+            - November
+            - December
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: MonthOfYear
+        type: array
+      retentionDuration:
+        $ref: '#/definitions/RetentionDuration'
+        description: Retention duration of retention Policy.
+      retentionScheduleDaily:
+        $ref: '#/definitions/DailyRetentionFormat'
+        description: Daily retention format for yearly retention policy.
+      retentionScheduleFormatType:
+        description: Retention schedule format for yearly retention policy.
+        enum:
+          - Invalid
+          - Daily
+          - Weekly
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RetentionScheduleFormat
+      retentionScheduleWeekly:
+        $ref: '#/definitions/WeeklyRetentionFormat'
+        description: Weekly retention format for yearly retention policy.
+      retentionTimes:
+        description: Retention times of retention policy.
+        items:
+          format: date-time
+          type: string
         type: array
     type: object

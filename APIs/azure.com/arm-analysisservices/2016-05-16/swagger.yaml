@@ -347,6 +347,7 @@ definitions:
           - S1
           - S2
           - S4
+          - D1
         type: string
         x-ms-enum:
           modelAsString: true
@@ -354,7 +355,7 @@ definitions:
       tier:
         description: Name of the tier to which the Sku applies.
         enum:
-          - Developer
+          - Development
           - Standard
         type: string
         x-ms-enum:
@@ -362,7 +363,6 @@ definitions:
           name: SkuTier
     required:
       - name
-      - tier
     type: object
   ServerAdministrators:
     description: Array of administrator user identities

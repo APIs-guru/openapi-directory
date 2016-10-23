@@ -569,7 +569,9 @@ definitions:
       polarity:
         description: |-
           Polarity of the sentiment in the [-1.0, 1.0] range. Larger numbers
-          represent more positive sentiments.
+          represent more positive sentiments.  This field is being deprecated in
+          favor of score. Please refer to our documentation at
+          https://cloud.google.com/natural-language/docs for more information.
         format: float
         type: number
     type: object

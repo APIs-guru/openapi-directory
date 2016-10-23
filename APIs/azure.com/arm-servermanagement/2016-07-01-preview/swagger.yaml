@@ -175,6 +175,7 @@ paths:
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           enum:
             - status
+            - download
           in: query
           name: $expand
           required: false
@@ -1114,6 +1115,10 @@ definitions:
           desiredVersion:
             description: latest available msi version
             type: string
+          installerDownload:
+            description: installer download uri
+            readOnly: true
+            type: string
           instances:
             description: names of the nodes in the gateway
             items:
@@ -1121,6 +1126,10 @@ definitions:
             type: array
           latestPublishedMsiVersion:
             description: last published msi version
+            type: string
+          minimumVersion:
+            description: minimum gateway version
+            readOnly: true
             type: string
           publishedTimeUtc:
             description: the date/time of the last published gateway
