@@ -3245,6 +3245,9 @@ definitions:
       loyaltyPoints:
         $ref: '#/definitions/LoyaltyPoints'
         description: Loyalty points that users receive after purchasing the item. Japan only.
+      pickup:
+        $ref: '#/definitions/InventoryPickup'
+        description: 'Store pickup information. Only supported for local inventory. Not setting pickup means "don''t update" while setting it to the empty value ({} in JSON) means "delete". Otherwise, pickupMethod and pickupSla must be set together, unless pickupMethod is "not supported".'
       price:
         $ref: '#/definitions/Price'
         description: The price of the product.
@@ -3319,6 +3322,15 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#inventoryCustomBatchResponseEntry".'
         type: string
     type: object
+  InventoryPickup:
+    properties:
+      pickupMethod:
+        description: 'Whether store pickup is available for this offer and whether the pickup option should be shown as buy, reserve, or not supported. Only supported for local inventory. Unless the value is "not supported", must be submitted together with pickupSla.'
+        type: string
+      pickupSla:
+        description: 'The expected date that an order will be ready for pickup, relative to when the order is placed. Only supported for local inventory. Must be submitted together with pickupMethod.'
+        type: string
+    type: object
   InventorySetRequest:
     properties:
       availability:
@@ -3330,6 +3342,9 @@ definitions:
       loyaltyPoints:
         $ref: '#/definitions/LoyaltyPoints'
         description: Loyalty points that users receive after purchasing the item. Japan only.
+      pickup:
+        $ref: '#/definitions/InventoryPickup'
+        description: 'Store pickup information. Only supported for local inventory. Not setting pickup means "don''t update" while setting it to the empty value ({} in JSON) means "delete". Otherwise, pickupMethod and pickupSla must be set together, unless pickupMethod is "not supported".'
       price:
         $ref: '#/definitions/Price'
         description: The price of the product.

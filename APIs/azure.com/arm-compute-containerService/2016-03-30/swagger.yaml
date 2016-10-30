@@ -24,10 +24,8 @@ info:
     - docker
 consumes:
   - application/json
-  - text/json
 produces:
   - application/json
-  - text/json
 parameters:
   ApiVersionParameter:
     description: Client Api Version.
@@ -36,16 +34,31 @@ parameters:
     required: true
     type: string
   SubscriptionIdParameter:
-    description: subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
     type: string
 paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/containerServices':
+    get:
+      description: Lists all container services in a subscription
+      operationId: ContainerServices_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ContainerServiceListResult'
+      tags:
+        - ContainerServices
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices':
     get:
       description: The operation to list container services.
-      operationId: ContainerService_List
+      operationId: ContainerServices_ListByResourceGroup
       parameters:
         - description: The name of the resource group.
           in: path
@@ -56,7 +69,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/ContainerServiceListResult'
       tags:
@@ -65,7 +78,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices/{containerServiceName}':
     delete:
       description: The operation to delete a container service.
-      operationId: ContainerService_Delete
+      operationId: ContainerServices_Delete
       parameters:
         - description: The name of the resource group.
           in: path
@@ -81,15 +94,15 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '202':
-          description: ''
+          description: Accepted
         '204':
-          description: ''
+          description: Not found
       tags:
         - ContainerService
       x-ms-long-running-operation: true
     get:
-      description: The operation to get a container service.
-      operationId: ContainerService_Get
+      description: Gets the specified container service.
+      operationId: ContainerServices_Get
       parameters:
         - description: The name of the resource group.
           in: path
@@ -105,14 +118,14 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/ContainerService'
       tags:
         - ContainerService
     put:
-      description: The operation to create or update a container service.
-      operationId: ContainerService_CreateOrUpdate
+      description: Creates or updates a container service.
+      operationId: ContainerServices_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
           in: path
@@ -134,19 +147,19 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/ContainerService'
         '201':
-          description: ''
+          description: Created
           schema:
             $ref: '#/definitions/ContainerService'
         '202':
-          description: ''
+          description: Accepted
           schema:
             $ref: '#/definitions/ContainerService'
       tags:
-        - ContainerService
+        - ContainerServices
       x-ms-long-running-operation: true
 definitions:
   ContainerService:
@@ -161,7 +174,7 @@ definitions:
     description: Profile for container service agent pool
     properties:
       count:
-        description: No. of agents (VMs) that will host docker containers
+        description: Number of agents (VMs) that will host docker containers
         format: int32
         maximum: 100
         minimum: 1
@@ -233,16 +246,21 @@ definitions:
     required:
       - name
       - dnsPrefix
+      - count
+      - vmSize
   ContainerServiceDiagnosticsProfile:
     properties:
       vmDiagnostics:
         $ref: '#/definitions/ContainerServiceVMDiagnostics'
         description: Profile for container service VM diagnostic agent
+    required:
+      - vmDiagnostics
   ContainerServiceLinuxProfile:
     description: Profile for Linux VMs
     properties:
       adminUsername:
         description: The administrator username to use for all Linux VMs
+        pattern: '^[a-z][a-z0-9_-]*$'
         type: string
       ssh:
         $ref: '#/definitions/ContainerServiceSshConfiguration'
@@ -251,7 +269,7 @@ definitions:
       - adminUsername
       - ssh
   ContainerServiceListResult:
-    description: The List Container Service operation response
+    description: The List Container Service operation response.
     properties:
       value:
         description: the list of container services.
@@ -262,6 +280,7 @@ definitions:
     description: Profile for container service master
     properties:
       count:
+        default: 1
         description: Number of masters (VMs) in the container cluster
         enum:
           - 1
@@ -290,6 +309,8 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: ContainerServiceOchestratorTypes
+    required:
+      - orchestratorType
   ContainerServiceProperties:
     description: Properties of container service
     properties:
@@ -329,6 +350,8 @@ definitions:
         items:
           $ref: '#/definitions/ContainerServiceSshPublicKey'
         type: array
+    required:
+      - publicKeys
   ContainerServiceSshPublicKey:
     description: Contains information about SSH certificate public key data.
     properties:
@@ -341,20 +364,24 @@ definitions:
     description: Describes VM Diagnostics.
     properties:
       enabled:
-        description: whether VM Diagnostic Agent should be provisioned on the Virtual Machine.
+        description: Whether VM Diagnostic Agent should be provisioned on the Virtual Machine.
         type: boolean
       storageUri:
-        description: whether VM Diagnostic Agent should be provisioned on the Virtual Machine.
+        description: The URI of the storage account where diagnostics will be stored.
         readOnly: true
         type: string
+    required:
+      - enabled
   ContainerServiceWindowsProfile:
     description: Profile for Windows VMs
     properties:
       adminPassword:
         description: The administrator password to use for Windows VMs
+        pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%\^&\*\(\)])[a-zA-Z\d!@#$%\^&\*\(\)]{12,123}$'
         type: string
       adminUsername:
         description: The administrator username to use for Windows VMs
+        pattern: '^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$'
         type: string
     required:
       - adminUsername

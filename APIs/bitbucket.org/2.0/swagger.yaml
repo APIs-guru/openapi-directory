@@ -6019,6 +6019,7 @@ definitions:
               - require_tasks_to_be_completed
               - require_passing_builds_to_merge
               - force
+              - require_all_dependencies_merged
               - push
               - require_approvals_to_merge
               - restrict_merges
@@ -6192,7 +6193,8 @@ definitions:
             type: string
         type: object
   error:
-    additionalProperties: false
+    additionalProperties: true
+    description: Base type for most resource objects. It defines the common `type` element that identifies an object's type. It also identifies the element as Swagger's `discriminator`.
     properties:
       error:
         additionalProperties: false
@@ -6207,6 +6209,10 @@ definitions:
         required:
           - message
         type: object
+      type:
+        type: string
+    required:
+      - type
     type: object
   group:
     allOf:
@@ -7856,171 +7862,6 @@ x-radar-pages:
     icon: 'data:image/png;base64,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'
     key: authentication
     title: Authentication methods
-  - content: |
-
-      # Cors and hypermedia
-
-      This section describes [Cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS), what content types we support in requests and responses, and hyperlinking resources in each json responses.
-
-
-      ----
-      **On this page**
-
-      * [CORS](#cors)
-      * [Supported content types](#supported-content)
-      * [Resource links](#resource-links)
-
-      ----
-
-      ## Cors <a name="cors"></a>
-
-      The Bitbucket API supports Cross-origin resource sharing to allow requests for restricted resources across domains. For more information you can refer to: 
-
-      * [Wikipedia article on CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
-      * [W3C CORS recommendation](https://www.w3.org/TR/cors/)
-
-      Sending a general request from the api to bitbucket.com: 
-
-      `curl -i https://api.bitbucket.org -H "origin: http://bitbucket.com"`
-
-      Gives this result: 
-
-          HTTP/1.1 302 FOUND
-          Server: nginx/1.6.2
-          Vary: Cookie
-          Cache-Control: max-age=900
-          Content-Type: text/html; charset=utf-8
-          Strict-Transport-Security: max-age=31536000
-          Date: Tue, 21 Jun 2016 17:54:37 GMT
-          Location: http://confluence.atlassian.com/x/IYBGDQ
-          X-Served-By: app-110
-          X-Static-Version: 2c820eb0d2b3
-          ETag: "d41d8cd98f00b204e9800998ecf8427e"
-          X-Content-Type-Options: nosniff
-          X-Render-Time: 0.00379920005798
-          Connection: Keep-Alive
-          X-Version: 2c820eb0d2b3
-          X-Frame-Options: SAMEORIGIN
-          X-Request-Count: 383
-          X-Cache-Info: cached
-          Content-Length: 0
-
-      Sending the same request with the CORS check -X OPTIONS in the call: 
-
-      `curl -i https://api.bitbucket.org -H "origin: http://bitbucket.com" -X OPTIONS`
-
-      Gives this result: 
-
-          HTTP/1.1 302 FOUND
-          Server: nginx/1.6.2
-          Vary: Cookie
-          Cache-Control: max-age=900
-          Content-Type: text/html; charset=utf-8
-          Access-Control-Expose-Headers: Accept-Ranges, Content-Encoding, Content-Length, Content-Type, ETag, Last-Modified
-          Strict-Transport-Security: max-age=31536000
-          Date: Tue, 21 Jun 2016 18:04:30 GMT
-          Access-Control-Max-Age: 86400
-          Location: http://confluence.atlassian.com/x/IYBGDQ
-          X-Served-By: app-111
-          Access-Control-Allow-Origin: *
-          X-Static-Version: 2c820eb0d2b3
-          ETag: "d41d8cd98f00b204e9800998ecf8427e"
-          X-Content-Type-Options: nosniff
-          X-Render-Time: 0.00371098518372
-          Connection: keep-alive
-          X-Version: 2c820eb0d2b3
-          X-Frame-Options: SAMEORIGIN
-          X-Request-Count: 357
-          Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS
-          Access-Control-Allow-Headers: Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Origin, Range, X-CsrftokenX-Requested-With
-          X-Cache-Info: not cacheable; request wasn't a GET or HEAD
-          Content-Length: 0
-
-
-
-      ## Supported content types <a name="supported-content"></a>
-
-      The default and primary content type for 2.0 APIs is JSON. This applies both to responses from the server and to the request bodies provided by the client.
-
-      Unless documented otherwise, whenever creating a new (POST) or modifying an existing (PUT) object, your client must provide the object's normal representation. Not every object element can be mutated. For example, a repository's created_on date is an auto-generated, immutable field. Your client can omit immutable fields from a request body.
-
-      In some cases, a resource might also accept regular application/x-www-url-form-encoded POST and PUT bodies. Such bodies can be more convenient in scripts and command line usage. Requests bodies can contain contain nested elements or they can be flat (without nested elements). Clients can send flat request bodies as either as application/json or as application/x-www-url-form-encoded. Nested objects always require JSON.
-
-      ## Resource links <a name="resource-links"></a>
-
-      Every 2.0 object contains a links element that points to related resources or alternate representations. Use links to quickly discover and traverse to related objects. Links serve a "self-documenting" function for each endpoint. For example, the following request for a specific user:
-
-
-      `$ curl https://api.bitbucket.org/2.0/users/tutorials`
-
-      ```json
-      {
-          "username": "tutorials",
-          "website": "https://tutorials.bitbucket.org/",
-          "display_name": "tutorials account",
-          "uuid": "{c788b2da-b7a2-404c-9e26-d3f077557007}",
-          "links": {
-              "self": {
-                  "href": "https://api.bitbucket.org/2.0/users/tutorials"
-              },
-              "repositories": {
-                  "href": "https://api.bitbucket.org/2.0/repositories/tutorials"
-              },
-              "html": {
-                  "href": "https://bitbucket.org/tutorials"
-              },
-              "followers": {
-                  "href": "https://api.bitbucket.org/2.0/users/tutorials/followers"
-              },
-              "avatar": {
-                  "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2013/Nov/25/tutorials-avatar-1563784409-6_avatar.png"
-              },
-              "following": {
-                  "href": "https://api.bitbucket.org/2.0/users/tutorials/following"
-              }
-          },
-          "created_on": "2011-12-20T16:34:07.132459+00:00",
-          "location": "Santa Monica, CA",
-          "type": "user"
-      }
-      ```
-      Links can be actual REST API resources or they can be informational. In this example, informative resources include the user's avatar and the HTML URL for the user's Bitbucket account. Your client should avoid hardcoding an API's URL and instead use the URLs returned in API responses.
-
-      A link's key is its `rel` (relationship) attribute and it contains a mandatory href element. For example, the following link:
-
-      ```json
-      "self": {
-            "href": "https://api.bitbucket.org/api/2.0/users/tutorials"
-      }
-      ```
-
-      The rel for this link is self and the href is https://api.bitbucket.org/api/2.0/users/tutorials. A single rel key can contain an list (array) of href objects. Your client should anticipate that any rel key can contain one or more href objects.
-
-      Finally, links can also contain optional elements. Two common optional elements are the name element and the title element. They are often used to disambiguate links that share the same rel key. In the example below, the repository object that contains a clone link with two href objects. Each object contains the optional name element to clarify its use.
-
-      ```json
-      "links": {
-        "self": {
-          "href": "https://api.bitbucket.org/2.0/repositories/evzijst/bitbucket"
-        },
-        "clone": [
-          {
-            "href": "https://api.bitbucket.org/evzijst/bitbucket.git",
-            "name": "https"
-          },
-          {
-            "href": "ssh://git@bitbucket.org/erik/bitbucket.git",
-            "name": "ssh"
-          }
-        ],
-        ...
-      }
-      ```
-      Links can support [URI Templates](https://tools.ietf.org/html/rfc6570); Those that do contain a `"templated": "true"` element.
-    description: Learn about resources and linking
-    icon: 'data:image/png;base64,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'
-    key: cors-hypermedia
-    title: Cors and hypermedia
   - content: "\n# Filter and sort API objects\n\nYou can query the 2.0 API for specific objects using a simple language which resembles SQL.\n\n---\n**On this page**\n\n* [Supported endpoints](#supp-endpoints)\n* [Operators](#operators)\n* [Data types](#data-types)\n* [Querying](#querying)\n    * [Repositoriess](#query-repo)\n    * [Pull requests](#query-pullreq)\n    * [Issues](#query-issues)\n    * [Refs, tags, bookmarks](#query-ref)\n* [Sorting query results](#query-sort)\n\n----\n\n### Supported endpoints <a name=\"supp-endpoints\"></a>\n\nSeveral 2.0 API resources that return collections of objects all support a single, shared, generic querying language that is used to filter down a result set.\n\nCurrently, the endpoints which support filtering and sorting are:\n\n    /2.0/repositories/{username}\n    /2.0/repositories/{username}/{slug}/refs\n    /2.0/repositories/{username}/{slug}/refs/branches\n    /2.0/repositories/{username}/{slug}/refs/tags\n    /2.0/repositories/{username}/{slug}/forks\n    /2.0/repositories/{username}/{slug}/issues\n    /2.0/repositories/{username}/{slug}/pullrequests\n\nFiltering and sorting supports several distinct operators and data types as well as basic features, like logical operators (AND, OR) as shown in the following examples:\n\n\t(state = \"open\" OR state = \"new\") AND assignee = null\n\treporter.username != \"evzijst\" AND priority >= \"major\"\n\t(title ~ \"unicode\" OR content.raw ~ \"unicode\") AND created_on > 2015-10-04T14:00:00-07:00\n\nFilter queries can be added to the URL using the q=<query> query parameter. To sort the response, add sort=<field>. Note that the entire query string is put in the q parameter and hence needs to be URL-encoded as shown in the following example:\n\n\t/2.0/repositories/foo/bar/issues?q=state=\"new\"&sort=-updated_on\n\n### Operators <a name=\"operators\"></a>\n\nFiltering and sorting supports the following operators:\n\n<table class='aui'>\n    <thead>\n        <tr>\n            <th>Operator</th>\n            <th>Definition</th>\n            <th>Example</th>\n        </tr>\n    </thead>\n    <tr>\n        <td>\"=\"</td>\n        <td>test for equality </td>\n        <td><code>username = \"evzijst\"</code></td>\n    </tr>\n    <tr>\n        <td>\"!=\"</td>\n        <td>not equal</td>\n        <td><code>is_private != true</code></td>\n    </tr>\n    <tr>\n        <td>\"~\"</td>\n        <td>case-insensitive text contains </td>\n        <td><code>description ~ \"beef\"</code></td>\n    </tr>\n    <tr>\n        <td>\"!~\"</td>\n        <td>case-insensitive not contains </td>\n        <td><code>description !~ \"fubar\"</code></td>\n    </tr>\n    <tr>\n        <td>\">\"</td>\n        <td>greater than</td>\n        <td><code>priority > \"major\"</code></td>\n    </tr>\n    <tr>\n        <td>\">=\"</td>\n        <td>greater than or equal</td>\n        <td><code>priority <= \"trivial\"</code></td>\n    </tr>\n    <tr>\n        <td>\"<\"</td>\n        <td>less than</td>\n        <td><code>id < 1234</code></td>\n    </tr>\n    <tr>\n        <td>\"<=\"</td>\n        <td>less than or equal </td>\n        <td><code>updated_on <= 2015-03-04</code></td>\n    </tr>\n</table>\n\n### Data types <a name=\"data-types\"></a>\n\nFiltering and sorting supports the following data types:\n\n<table class='aui'>\n    <thead>\n        <tr>\n            <th>Type</th>\n            <th>Description</th>\n            <th>Example</th>\n        </tr>\n    </thead>\n    <tr>\n        <td><b>String</b></td>\n        <td>any text inside double quotes</td>\n        <td><code>\"foo\"</code></td>\n    </tr>\n    <tr>\n        <td><b>Number</b></td>\n        <td>arbitrary precision integers and floats</td>\n        <td><code>1, -10.302</code></td>\n    </tr>\n    <tr>\n        <td><b>Null</b></td>\n        <td>to test for the absence of a value</td>\n        <td><code>null</code></td>\n    </tr>\n    <tr>\n        <td><b>boolean</b></td>\n        <td>the unquoted strings true or false</td>\n        <td><code>true, false</code></td>\n    </tr>\n    <tr>\n        <td><b>datetime</b></td>\n        <td>an unquoted <a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO-8601</a> date time string with the timezone offset, milliseconds and entire time component being optional</td>\n        <td><code>2015-03-04T14:08:59.123+02:00</code>, <code>2015-03-04T14:08:59</code> Date time strings are assumed to be in UTC, unless an explicit timezone offset is provided.</td>\n    </tr>\n</table>\n\n## Querying <a name=\"querying\"></a>\n\nObjects can be filtered based on their properties. In principle, every element in an object's JSON document can be used as a filter criterion.\n\n### Repositories <a name=\"query-repo\"></a>\n\nYou can query the following fields in the repository resource:\n\n    uuid (string)\n    full_name (string)\n    scm (string)\n    owner (embedded user object)\n    name (string)\n    description (string)\n    created_on (datetime)\n    updated_on (datetime)\n    size (number)\n    language (string)\n    parent (embedded repository object)\n    fork_policy (string)\n    is_private (boolean)\n    has_issues (boolean)\n    has_wiki (boolean)\n\nFields that contain embedded instances of other object types (e.g. owner is an embedded user object, while parent is an embedded repository) can be traversed recursively. For instance:\n\n\tparent.owner.username = \"bitbucket\"\n\n### Pull Requests <a name=\"query-pullreq\"></a>\n\nYou can query the following fields in the pull request resource:\n\n    id (number)\n    title (string)\n    description (string)\n    author (embedded user object)\n    reviewers (embedded user object)\n    state (string)\n    source.repository (embedded repository object)\n    source.branch.name (string)\n    destination.repository (embedded repository object)\n    destination.branch.name (string)\n    close_source_branch (boolean)\n    closed_by (embedded user object)\n    reason (string)\n    created_on (datetime)\n    updated_on (datetime)\n    task_count (number)\n    comment_count (number)\n\n**For example**\n\nTo find pull requests which merge into master, come from a fork of the repo rather than a branch inside the repo, and on which I am a reviewer:\n\n```\nsource.repository.full_name != \"main/repo\" AND state = \"OPEN\" AND reviewers.username = \"evzijst\" AND destination.branch.name = \"master\"\n```\n```\n/2.0/repositories/main/repo/pullrequests?q=source.repository.full_name+%21%3D+%22main%2Frepo%22+AND+state+%3D+%22OPEN%22+AND+reviewers.username+%3D+%22evzijst%22+AND+destination.branch.name+%3D+%22master%22\n```\n\n### Issues <a name=\"query-issues\"></a>\n\nYou can query the following fields in the issues resource:\n\n    id (number)\n    title (string)\n    reporter (embedded user object)\n    assignee (embedded user object)\n    content.raw (string)\n    created_on (datetime)\n    updated_on (datetime)\n    state (string)\n    kind (string)\n    priority (string)\n    version (string)\n    component (string)\n    milestone (string)\n    watches (number)\n    votes (number)\n\n**For example**\n\nTo find new or on-hold issues related to the UI, created or updated in the last day (SF local time), that have not yet been assigned to anyone:\n\n```\n(state = \"new\" OR state = \"on hold\") AND assignee = null AND component = \"UI\" and updated_on > 2015-11-11T00:00:00-07:00\n```\n```\n/2.0/repositories/main/repo/issues?q=%28state+%3D+%22new%22+OR+state+%3D+%22on+hold%22%29+AND+assignee+%3D+null+AND+component+%3D+%22UI%22+and+updated_on+%3E+2015-11-11T00%3A00%3A00-07%3A00\n```\n\n### Refs (Branches/Tags/Bookmarks) <a name=\"query-ref\"></a>\n\nYou can query the following fields in the refs resource:\n\n    name (string)\n    type (string)\n\n**For example**\n\nTo find all tags with the string \"2015\" in the name:\n\n```\nname ~ \"2015\"\n```\n```\n/2.0/repositories/{username}/{slug}/refs/tags?q=name+%7E+%222015%22\n```\nOr all my branches and bookmarks:\n\n```\nname ~ \"erik/\"\n```\n```\n/2.0/repositories/{username}/{slug}/refs/tags?q=name+%7E+%22erik%2F%22\n```\n## Sorting query results <a name=\"query-sort\"></a>\n\nYou can sort result sets using the ?sort=<field> query parameter, available on the same resources that support filtering:\n\n* In principle, every field that can be queried can also be used as a key for sorting.\n* By default the sort order is ascending. To reverse the order, prefix the field name with a hyphen (e.g. ?sort=-updated_on).\n* Only one field can be sorted on. Compound fields (e.g. sort on state first, followed by updated_on) are not supported.\n\n\n"
     description: Query the 2.0 API for specific objects
     icon: 'data:image/png;base64,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'
@@ -8057,7 +7898,7 @@ x-radar-pages:
 
       Lack of a next link in the response indicates the end of the collection.
 
-      The paginated response contains the following fields: 
+      The paginated response contains the following fields:
 
       <table class='aui'>
           <thead>
@@ -8103,6 +7944,181 @@ x-radar-pages:
     icon: 'data:image/png;base64,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'
     key: pagination
     title: Pagination
+  - content: |
+
+      # Partial responses
+
+      By default, each endpoint returns the full representation of a resource and in
+      some cases that can be a lot of data. For example, retrieving a list of pull
+      requests can amount to quite a large document.
+
+      For better performance, you can ask the server to only return the fields you
+      really need and to omit unwanted data. To request a partial response and to
+      add or remove specific fields from a response, use the `fields` query
+      parameter.
+
+
+      ## Example
+
+      Most API resources embed a substantial list of links pointing to related
+      resources. This saves the client from constructing its own URLs, but is
+      somewhat wasteful when the client doesn't need them.
+
+      To significantly reduce the size of the response, use `?fields=-links`:
+
+      ```
+      $ curl https://api.bitbucket.org/2.0/users/evzijst?fields=-links
+      {
+        "username": "evzijst",
+        "website": "",
+        "display_name": "Erik van Zijst",
+        "uuid": "{a288a0ab-e13b-43f0-a689-c4ef0a249875}",
+        "created_on": "2010-07-07T05:16:36+00:00",
+        "location": null,
+        "type": "user"
+      }
+      ```
+
+      ## Fields parameter syntax
+
+      The `fields` parameter supports 3 modes of operation:
+
+      1. Removal of select fields (e.g. `-links`)
+      2. Pulling in additional fields not normally returned by an endpoint, while
+         still getting all the default fields (e.g. `+reviewers`)
+      3. Omitting all fields, except those specified (e.g. `owner.username`)
+
+      The fields parameter can contain a list of multiple comma-separated field names
+      (e.g. `fields=owner.username,uuid,links.self.href`). The parameter itself is
+      not repeated.
+
+      As discussed at [Condensed Versus Full Objects](serialization#representations),
+      most objects that are embedded inside other objects (like how `owner` is an
+      embedded `user` object in `repository`) appear in "condensed" form that omits
+      many fields. The `fields` parameter allows us to pull in additional fields in
+      such cases.
+
+      For example, the embedded repository object in a pull request does not normally
+      contain its `owner`. To add that in we can use:
+      `+values.destination.repository.owner`.
+
+
+      ## Wildcards
+
+      The asterisk can be used to match all fields on a particular level. For
+      example, removing all entries from the `links` element can be done like this:
+
+      ```
+      $ curl https://api.bitbucket.org/2.0/users/evzijst?fields=-links.*
+      {
+        "username": "evzijst",
+        "website": "",
+        "display_name": "Erik van Zijst",
+        "uuid": "{a288a0ab-e13b-43f0-a689-c4ef0a249875}",
+        "links": {},
+        "created_on": "2010-07-07T05:16:36+00:00",
+        "location": null,
+        "type": "user"
+      }
+      ```
+
+      Wildcards can be used in combination with exclusion and inclusion. For
+      instance, `-*,+foo,+bar` will remove all elements from the root level and then
+      add in `foo` and `bar`.
+
+
+      ## URL encoding
+
+      Be aware that when using the `+foo.bar` syntax in the query string, that the
+      "+" must be URL encoded as "%2B" and so the URL will be:
+
+      ```
+      https://api.bitbucket.org/2.0/repositories/evzijst/interruptingcow?fields=%2Bowner.created_on
+      ```
+
+      Without URL escaping, "+" is interpreted as an encoded space which will not
+      match any fields.
+
+
+      ## Field discovery
+
+      While a resource's `self` URL, as well its "collection" URL typically return
+      the full object with all its fields, there are some exceptions for fields that
+      are overly verbose or costly to generate.
+
+      For instance, a pull request contains the embedded lists of reviewers and
+      participants. These fields are included from the `self` URL, but not from the
+      `/pullrequests` collections resource, as it would impact performance too much.
+
+      To discover any additional fields that might not be included by default,
+      `fields=*` can be used.
+
+
+      ## More examples
+
+      If we want to get a list of all reviewer usernames on pull requests I created,
+      we could combine a [filter](filtering) with a partial response. This will omit
+      all other data from the response:
+
+      ```
+      /2.0/repositories/bitbucket/bitbucket/pullrequests?fields=values.id,values.reviewers.username,values.state&q=author.username%3D%22erik%22
+      {
+        "values": [
+          {
+            "reviewers": [
+              {
+                "username": "abhin"
+              },
+              {
+                "username": "dtao"
+              },
+              {
+                "username": "csomme"
+              }
+            ],
+            "state": "OPEN",
+            "id": 11355
+          },
+          {
+            "reviewers": [
+              {
+                "username": "csomme"
+              },
+              {
+                "username": "abhin"
+              },
+              {
+                "username": "dstevens"
+              }
+            ],
+            "state": "MERGED",
+            "id": 11347
+          },
+          {
+            "reviewers": [
+              {
+                "username": "csomme"
+              },
+              {
+                "username": "jmooring"
+              },
+              {
+                "username": "zdavis"
+              },
+              {
+                "username": "flexbox"
+              }
+            ],
+            "state": "OPEN",
+            "id": 11344
+          }
+        ]
+      }
+      ```
+    description: Tweak which fields are returned
+    icon: 'data:image/png;base64,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'
+    key: partial-response
+    title: Partial responses
   - content: |
 
       # Open API Specification and Object Representations
@@ -8569,6 +8585,171 @@ x-radar-pages:
     title: 'URI, UUID, and structures'
   - content: |
 
+      # Cors and hypermedia
+
+      This section describes [Cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS), what content types we support in requests and responses, and hyperlinking resources in each json responses.
+
+
+      ----
+      **On this page**
+
+      * [CORS](#cors)
+      * [Supported content types](#supported-content)
+      * [Resource links](#resource-links)
+
+      ----
+
+      ## Cors <a name="cors"></a>
+
+      The Bitbucket API supports Cross-origin resource sharing to allow requests for restricted resources across domains. For more information you can refer to:
+
+      * [Wikipedia article on CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+      * [W3C CORS recommendation](https://www.w3.org/TR/cors/)
+
+      Sending a general request from the api to bitbucket.com:
+
+      `curl -i https://api.bitbucket.org -H "origin: http://bitbucket.com"`
+
+      Gives this result:
+
+          HTTP/1.1 302 FOUND
+          Server: nginx/1.6.2
+          Vary: Cookie
+          Cache-Control: max-age=900
+          Content-Type: text/html; charset=utf-8
+          Strict-Transport-Security: max-age=31536000
+          Date: Tue, 21 Jun 2016 17:54:37 GMT
+          Location: http://confluence.atlassian.com/x/IYBGDQ
+          X-Served-By: app-110
+          X-Static-Version: 2c820eb0d2b3
+          ETag: "d41d8cd98f00b204e9800998ecf8427e"
+          X-Content-Type-Options: nosniff
+          X-Render-Time: 0.00379920005798
+          Connection: Keep-Alive
+          X-Version: 2c820eb0d2b3
+          X-Frame-Options: SAMEORIGIN
+          X-Request-Count: 383
+          X-Cache-Info: cached
+          Content-Length: 0
+
+      Sending the same request with the CORS check -X OPTIONS in the call:
+
+      `curl -i https://api.bitbucket.org -H "origin: http://bitbucket.com" -X OPTIONS`
+
+      Gives this result:
+
+          HTTP/1.1 302 FOUND
+          Server: nginx/1.6.2
+          Vary: Cookie
+          Cache-Control: max-age=900
+          Content-Type: text/html; charset=utf-8
+          Access-Control-Expose-Headers: Accept-Ranges, Content-Encoding, Content-Length, Content-Type, ETag, Last-Modified
+          Strict-Transport-Security: max-age=31536000
+          Date: Tue, 21 Jun 2016 18:04:30 GMT
+          Access-Control-Max-Age: 86400
+          Location: http://confluence.atlassian.com/x/IYBGDQ
+          X-Served-By: app-111
+          Access-Control-Allow-Origin: *
+          X-Static-Version: 2c820eb0d2b3
+          ETag: "d41d8cd98f00b204e9800998ecf8427e"
+          X-Content-Type-Options: nosniff
+          X-Render-Time: 0.00371098518372
+          Connection: keep-alive
+          X-Version: 2c820eb0d2b3
+          X-Frame-Options: SAMEORIGIN
+          X-Request-Count: 357
+          Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS
+          Access-Control-Allow-Headers: Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Origin, Range, X-CsrftokenX-Requested-With
+          X-Cache-Info: not cacheable; request wasn't a GET or HEAD
+          Content-Length: 0
+
+
+
+      ## Supported content types <a name="supported-content"></a>
+
+      The default and primary content type for 2.0 APIs is JSON. This applies both to responses from the server and to the request bodies provided by the client.
+
+      Unless documented otherwise, whenever creating a new (POST) or modifying an existing (PUT) object, your client must provide the object's normal representation. Not every object element can be mutated. For example, a repository's created_on date is an auto-generated, immutable field. Your client can omit immutable fields from a request body.
+
+      In some cases, a resource might also accept regular application/x-www-url-form-encoded POST and PUT bodies. Such bodies can be more convenient in scripts and command line usage. Requests bodies can contain contain nested elements or they can be flat (without nested elements). Clients can send flat request bodies as either as application/json or as application/x-www-url-form-encoded. Nested objects always require JSON.
+
+      ## Resource links <a name="resource-links"></a>
+
+      Every 2.0 object contains a links element that points to related resources or alternate representations. Use links to quickly discover and traverse to related objects. Links serve a "self-documenting" function for each endpoint. For example, the following request for a specific user:
+
+
+      `$ curl https://api.bitbucket.org/2.0/users/tutorials`
+
+      ```json
+      {
+          "username": "tutorials",
+          "website": "https://tutorials.bitbucket.org/",
+          "display_name": "tutorials account",
+          "uuid": "{c788b2da-b7a2-404c-9e26-d3f077557007}",
+          "links": {
+              "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/tutorials"
+              },
+              "repositories": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/tutorials"
+              },
+              "html": {
+                  "href": "https://bitbucket.org/tutorials"
+              },
+              "followers": {
+                  "href": "https://api.bitbucket.org/2.0/users/tutorials/followers"
+              },
+              "avatar": {
+                  "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2013/Nov/25/tutorials-avatar-1563784409-6_avatar.png"
+              },
+              "following": {
+                  "href": "https://api.bitbucket.org/2.0/users/tutorials/following"
+              }
+          },
+          "created_on": "2011-12-20T16:34:07.132459+00:00",
+          "location": "Santa Monica, CA",
+          "type": "user"
+      }
+      ```
+      Links can be actual REST API resources or they can be informational. In this example, informative resources include the user's avatar and the HTML URL for the user's Bitbucket account. Your client should avoid hardcoding an API's URL and instead use the URLs returned in API responses.
+
+      A link's key is its `rel` (relationship) attribute and it contains a mandatory href element. For example, the following link:
+
+      ```json
+      "self": {
+            "href": "https://api.bitbucket.org/api/2.0/users/tutorials"
+      }
+      ```
+
+      The rel for this link is self and the href is https://api.bitbucket.org/api/2.0/users/tutorials. A single rel key can contain an list (array) of href objects. Your client should anticipate that any rel key can contain one or more href objects.
+
+      Finally, links can also contain optional elements. Two common optional elements are the name element and the title element. They are often used to disambiguate links that share the same rel key. In the example below, the repository object that contains a clone link with two href objects. Each object contains the optional name element to clarify its use.
+
+      ```json
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/repositories/evzijst/bitbucket"
+        },
+        "clone": [
+          {
+            "href": "https://api.bitbucket.org/evzijst/bitbucket.git",
+            "name": "https"
+          },
+          {
+            "href": "ssh://git@bitbucket.org/erik/bitbucket.git",
+            "name": "ssh"
+          }
+        ],
+        ...
+      }
+      ```
+      Links can support [URI Templates](https://tools.ietf.org/html/rfc6570); Those that do contain a `"templated": "true"` element.
+    description: Learn about resources and linking
+    icon: 'data:image/png;base64,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'
+    key: cors-hypermedia
+    title: Cors and hypermedia
+  - content: |
+
       # Atlassian Connect for Bitbucket
 
       You can use the Atlassian Connect for Bitbucket Cloud to build add-ons which
@@ -8582,4 +8763,4 @@ x-radar-pages:
     icon: 'data:image/png;base64,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'
     key: bb-connect
     title: Atlassian Connect
-x-revision: 564c96d1f0f9
+x-revision: c2f011c629a2

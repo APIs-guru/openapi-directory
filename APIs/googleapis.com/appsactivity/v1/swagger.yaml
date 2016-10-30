@@ -339,6 +339,9 @@ definitions:
       isDeleted:
         description: 'A boolean which indicates whether the specified User was deleted. If true, name, photo and permission_id will be omitted.'
         type: boolean
+      isMe:
+        description: Whether the user is the authenticated user.
+        type: boolean
       name:
         description: The displayable name of the user.
         type: string

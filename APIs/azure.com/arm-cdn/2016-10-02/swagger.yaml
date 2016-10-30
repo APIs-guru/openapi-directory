@@ -782,7 +782,7 @@ paths:
           type: string
         - description: Origin properties
           in: body
-          name: origin
+          name: originCreateProperties
           required: true
           schema:
             $ref: '#/definitions/Origin'
@@ -1064,9 +1064,17 @@ definitions:
         type: string
       httpPort:
         description: The value of the HTTP port. Must be between 1 and 65535
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        maximum: 65535
+        minimum: 1
         type: integer
       httpsPort:
         description: The value of the HTTPS port. Must be between 1 and 65535
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        maximum: 65535
+        minimum: 1
         type: integer
     required:
       - hostName
@@ -1183,12 +1191,12 @@ definitions:
         description: Action of the geo filter.
         type: string
       countryCodes:
-        description: Country codes of the geo filter.
+        description: 'Two letter country codes of the geo filter. (e.g. AU, MX, and etc.)'
         items:
           type: string
         type: array
       relativePath:
-        description: Relative path applicable to geo filter.
+        description: 'Relative path applicable to geo filter. (e.g. ''/mypictures'', ''/mypicture/kitty.jpg'', and etc.)'
         type: string
     required:
       - relativePath
@@ -1260,9 +1268,17 @@ definitions:
         type: string
       httpPort:
         description: The value of the HTTP port. Must be between 1 and 65535.
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        maximum: 65535
+        minimum: 1
         type: integer
       httpsPort:
         description: The value of the https port. Must be between 1 and 65535.
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        maximum: 65535
+        minimum: 1
         type: integer
       provisioningState:
         description: Provisioning status of the origin.
@@ -1288,9 +1304,17 @@ definitions:
         type: string
       httpPort:
         description: The value of the HTTP port. Must be between 1 and 65535.
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        maximum: 65535
+        minimum: 1
         type: integer
       httpsPort:
         description: The value of the HTTPS port. Must be between 1 and 65535.
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        maximum: 65535
+        minimum: 1
         type: integer
   OriginUpdateParameters:
     description: Origin properties needed for origin creation or update.
@@ -1311,6 +1335,8 @@ definitions:
       sku:
         $ref: '#/definitions/Sku'
         description: The SKU (pricing tier) of the CDN profile.
+    required:
+      - sku
     type: object
   ProfileListResult:
     properties:

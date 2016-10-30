@@ -114,7 +114,7 @@ parameters:
     required: true
     type: string
   rulesVersion:
-    description: Expand response to get full related object instead of ID.  See the expand guide for more info.
+    description: The rule set version. Expand response to get full related object instead of ID.  See the expand guide for more info.
     in: path
     minimum: 1
     name: version
@@ -10927,7 +10927,6 @@ definitions:
         enum:
           - blacklist
           - cancel-scheduled-payments
-          - close-invoices
           - guess-payment-card-expiration
           - pick-gateway-account
           - schedule-payment-retry
@@ -12338,10 +12337,6 @@ definitions:
             type: string
         type: object
     description: Cash payment instrument object
-  close-invoices:
-    allOf:
-      - $ref: '#/definitions/RuleAction'
-    description: ''
   compare:
     properties:
       path:

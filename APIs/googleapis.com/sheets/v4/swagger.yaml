@@ -745,6 +745,23 @@ paths:
       tags:
         - spreadsheets
 definitions:
+  AddBandingRequest:
+    description: Adds a new banded range to the spreadsheet.
+    properties:
+      bandedRange:
+        $ref: '#/definitions/BandedRange'
+        description: |-
+          The banded range to add. The bandedRangeId
+          field is optional; if one is not set, an id will be randomly generated. (It
+          is an error to specify the ID of a range that already exists.)
+    type: object
+  AddBandingResponse:
+    description: The result of adding a banded range.
+    properties:
+      bandedRange:
+        $ref: '#/definitions/BandedRange'
+        description: The banded range that was added.
+    type: object
   AddChartRequest:
     description: Adds a chart to a sheet in the spreadsheet.
     properties:
@@ -942,6 +959,68 @@ definitions:
         description: |-
           The dimensions to automatically resize.
           Only COLUMNS are supported.
+    type: object
+  BandedRange:
+    description: A banded (alternating colors) range in a sheet.
+    properties:
+      bandedRangeId:
+        description: The id of the banded range.
+        format: int32
+        type: integer
+      columnProperties:
+        $ref: '#/definitions/BandingProperties'
+        description: |-
+          Properties for column bands. These properties will be applied on a column-
+          by-column basis throughout all the columns in the range. At least one of
+          row_properties or column_properties must be specified.
+      range:
+        $ref: '#/definitions/GridRange'
+        description: The range over which these properties are applied.
+      rowProperties:
+        $ref: '#/definitions/BandingProperties'
+        description: |-
+          Properties for row bands. These properties will be applied on a row-by-row
+          basis throughout all the rows in the range. At least one of
+          row_properties or column_properties must be specified.
+    type: object
+  BandingProperties:
+    description: |-
+      Properties referring a single dimension (either row or column). If both
+      BandedRange.row_properties and BandedRange.column_properties are
+      set, the fill colors are applied to cells according to the following rules:
+
+      * header_color and footer_color take priority over band colors.
+      * first_band_color takes priority over second_band_color.
+      * row_properties takes priority over column_properties.
+
+      For example, the first row color takes priority over the first column
+      color, but the first column color takes priority over the second row color.
+      Similarly, the row header takes priority over the column header in the
+      top left cell, but the column header takes priority over the first row
+      color if the row header is not set.
+    properties:
+      firstBandColor:
+        $ref: '#/definitions/Color'
+        description: The first color that is alternating. (Required)
+      footerColor:
+        $ref: '#/definitions/Color'
+        description: |-
+          The color of the last row or column. If this field is not set, the last
+          row or column will be filled with either first_row_color or
+          second_row_color, depending on the color of the previous row or
+          column.
+      headerColor:
+        $ref: '#/definitions/Color'
+        description: |-
+          The color of the first row or column. If this field is set, the first
+          row or column will be filled with this color and the colors will
+          alternate between first_band_color and [second_band_color[] starting
+          from the second row or column. Otherwise, the first row or column will be
+          filled with first_band_color and the colors will proceed to alternate
+          as they normally would.
+      secondBandColor:
+        $ref: '#/definitions/Color'
+        description: The second color that is alternating. (Required)
     type: object
   BasicChartAxis:
     description: |-
@@ -1805,6 +1884,14 @@ definitions:
       strict:
         description: True if invalid data should be rejected.
         type: boolean
+    type: object
+  DeleteBandingRequest:
+    description: Removes the banded range with the given ID from the spreadsheet.
+    properties:
+      bandedRangeId:
+        description: The ID of the banded range to delete.
+        format: int32
+        type: integer
     type: object
   DeleteConditionalFormatRuleRequest:
     description: |-
@@ -2828,6 +2915,9 @@ definitions:
   Request:
     description: A single kind of update to apply to a spreadsheet.
     properties:
+      addBanding:
+        $ref: '#/definitions/AddBandingRequest'
+        description: Adds a new banded range
       addChart:
         $ref: '#/definitions/AddChartRequest'
         description: Adds a chart.
@@ -2869,6 +2959,9 @@ definitions:
       cutPaste:
         $ref: '#/definitions/CutPasteRequest'
         description: Cuts data from one area and pastes it to another.
+      deleteBanding:
+        $ref: '#/definitions/DeleteBandingRequest'
+        description: Removes a banded range
       deleteConditionalFormatRule:
         $ref: '#/definitions/DeleteConditionalFormatRuleRequest'
         description: Deletes an existing conditional format rule.
@@ -2929,6 +3022,9 @@ definitions:
       unmergeCells:
         $ref: '#/definitions/UnmergeCellsRequest'
         description: Unmerges merged cells.
+      updateBanding:
+        $ref: '#/definitions/UpdateBandingRequest'
+        description: Updates a banded range
       updateBorders:
         $ref: '#/definitions/UpdateBordersRequest'
         description: Updates the borders in a range of cells.
@@ -2966,6 +3062,9 @@ definitions:
   Response:
     description: A single response from an update.
     properties:
+      addBanding:
+        $ref: '#/definitions/AddBandingResponse'
+        description: A reply from adding a banded range.
       addChart:
         $ref: '#/definitions/AddChartResponse'
         description: A reply from adding a chart.
@@ -3033,6 +3132,11 @@ definitions:
   Sheet:
     description: A sheet in a spreadsheet.
     properties:
+      bandedRanges:
+        description: The banded (i.e. alternating colors) ranges on this sheet.
+        items:
+          $ref: '#/definitions/BandedRange'
+        type: array
       basicFilter:
         $ref: '#/definitions/BasicFilter'
         description: 'The filter on this sheet, if any.'
@@ -3312,6 +3416,20 @@ definitions:
           The range within which all cells should be unmerged.
           If the range spans multiple merges, all will be unmerged.
           The range must not partially span any merge.
+    type: object
+  UpdateBandingRequest:
+    description: Updates properties of the supplied banded range.
+    properties:
+      bandedRange:
+        $ref: '#/definitions/BandedRange'
+        description: The banded range to update with the new properties.
+      fields:
+        description: |-
+          The fields that should be updated.  At least one field must be specified.
+          The root `bandedRange` is implied and should not be specified.
+          A single `"*"` can be used as short-hand for listing every field.
+        format: google-fieldmask
+        type: string
     type: object
   UpdateBordersRequest:
     description: |-

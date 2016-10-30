@@ -76,7 +76,7 @@ parameters:
     type: string
 tags:
   - name: changes
-  - name: dnskeys
+  - name: dnsKeys
   - name: managedZoneOperations
   - name: managedZones
   - name: projects
@@ -479,7 +479,7 @@ paths:
   '/{project}/managedZones/{managedZone}/dnsKeys':
     get:
       description: Enumerate DnsKeys to a ResourceRecordSet collection.
-      operationId: dns.dnskeys.list
+      operationId: dns.dnsKeys.list
       parameters:
         - description: Identifies the project addressed by this request.
           in: path
@@ -518,7 +518,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
       tags:
-        - dnskeys
+        - dnsKeys
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -530,7 +530,7 @@ paths:
   '/{project}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}':
     get:
       description: Fetch the representation of an existing DnsKey.
-      operationId: dns.dnskeys.get
+      operationId: dns.dnsKeys.get
       parameters:
         - description: Identifies the project addressed by this request.
           in: path
@@ -570,7 +570,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
       tags:
-        - dnskeys
+        - dnsKeys
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'

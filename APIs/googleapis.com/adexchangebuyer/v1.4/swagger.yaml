@@ -1270,10 +1270,11 @@ definitions:
           properties:
             bidProtocol:
               description: |-
-                The protocol that the bidder endpoint is using. By default, OpenRTB protocols use JSON, except PROTOCOL_OPENRTB_PROTOBUF. PROTOCOL_OPENRTB_PROTOBUF uses protobuf encoding over the latest OpenRTB protocol version, which is 2.3 right now. Allowed values:  
+                The protocol that the bidder endpoint is using. By default, OpenRTB protocols use JSON, except PROTOCOL_OPENRTB_PROTOBUF. PROTOCOL_OPENRTB_PROTOBUF uses protobuf encoding over the latest OpenRTB protocol version, which is 2.4 right now. Allowed values:  
                 - PROTOCOL_ADX 
                 - PROTOCOL_OPENRTB_2_2 
                 - PROTOCOL_OPENRTB_2_3 
+                - PROTOCOL_OPENRTB_2_4 
                 - PROTOCOL_OPENRTB_PROTOBUF
               type: string
             maximumQps:
@@ -1621,6 +1622,9 @@ definitions:
           callToAction:
             description: A label for the button that the user is supposed to click.
             type: string
+          clickLinkUrl:
+            description: The URL that the browser/SDK will load when the user clicks the ad.
+            type: string
           clickTrackingUrl:
             description: The URL to use for click tracking.
             type: string
@@ -1667,6 +1671,7 @@ definitions:
             description: The URL to the app store to purchase/download the promoted app.
             type: string
           videoURL:
+            description: The URL of the XML VAST for a native ad. Note this is a separate field from resource.video_url.
             type: string
         type: object
       openAuctionStatus:
@@ -1749,7 +1754,7 @@ definitions:
         format: int32
         type: integer
       videoURL:
-        description: 'The URL to fetch a video ad. If set, HTMLSnippet and the nativeAd should not be set. Note, this is diffrent from resource.native_ad.video_url above.'
+        description: 'The URL to fetch a video ad. If set, HTMLSnippet and the nativeAd should not be set. Note, this is different from resource.native_ad.video_url above.'
         type: string
       width:
         description: Ad width.
@@ -2434,6 +2439,11 @@ definitions:
         description: Creative attributes should be declared here if all creatives corresponding to this pretargeting configuration have that creative attribute. Values are from pretargetable-creative-attributes.txt in the downloadable files section.
         items:
           format: int64
+          type: string
+        type: array
+      userIdentifierDataRequired:
+        description: 'Requests containing the specified type of user data will match. Possible values are HOSTED_MATCH_DATA, which means the request is cookie-targetable and has a match in the buyer''s hosted match table, and COOKIE_OR_IDFA, which means the request has either a targetable cookie or an iOS IDFA.'
+        items:
           type: string
         type: array
       userLists:

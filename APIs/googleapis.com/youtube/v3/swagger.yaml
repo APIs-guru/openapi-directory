@@ -2129,6 +2129,13 @@ paths:
           name: id
           required: true
           type: string
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
+
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2252,6 +2259,13 @@ paths:
           in: query
           name: part
           required: true
+          type: string
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
+
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
+          in: query
+          name: onBehalfOfContentOwner
           type: string
         - in: body
           name: body
@@ -3073,6 +3087,12 @@ paths:
           in: query
           name: locale
           type: string
+        - description: 'The maxHeight parameter specifies a maximum height of the embedded player. If maxWidth is provided, maxHeight may not be reached in order to not violate the width request.'
+          in: query
+          maximum: 8192
+          minimum: 72
+          name: maxHeight
+          type: integer
         - default: 5
           description: |-
             The maxResults parameter specifies the maximum number of items that should be returned in the result set.
@@ -3082,6 +3102,12 @@ paths:
           maximum: 50
           minimum: 1
           name: maxResults
+          type: integer
+        - description: 'The maxWidth parameter specifies a maximum width of the embedded player. If maxHeight is provided, maxWidth may not be reached in order to not violate the height request.'
+          in: query
+          maximum: 8192
+          minimum: 72
+          name: maxWidth
           type: integer
         - description: Set this parameter's value to like or dislike to instruct the API to only return videos liked or disliked by the authenticated user.
           enum:
@@ -4050,9 +4076,6 @@ definitions:
   ChannelContentDetails:
     description: Details about the content of a channel.
     properties:
-      googlePlusUserId:
-        description: The googlePlusUserId object identifies the Google+ profile ID associated with this channel.
-        type: string
       relatedPlaylists:
         properties:
           favorites:
@@ -4484,9 +4507,6 @@ definitions:
         type: string
       authorDisplayName:
         description: The name of the user who posted the comment.
-        type: string
-      authorGoogleplusProfileUrl:
-        description: 'Link to the author''s Google+ profile, if any.'
         type: string
       authorProfileImageUrl:
         description: The URL for the avatar of the user who posted the comment.
@@ -7430,6 +7450,9 @@ definitions:
       duration:
         description: 'The length of the video. The tag value is an ISO 8601 duration in the format PT#M#S, in which the letters PT indicate that the value specifies a period of time, and the letters M and S refer to length in minutes and seconds, respectively. The # characters preceding the M and S letters are both integers that specify the number of minutes (or seconds) of the video. For example, a value of PT15M51S indicates that the video is 15 minutes and 51 seconds long.'
         type: string
+      hasCustomThumbnail:
+        description: Indicates whether the video uploader has provided a custom thumbnail image for the video. This property is only visible to the video uploader.
+        type: boolean
       licensedContent:
         description: The value of is_license_content indicates whether the video is licensed content.
         type: boolean
@@ -7501,9 +7524,6 @@ definitions:
           - project
           - video
         type: string
-      recordingLocation:
-        $ref: '#/definitions/GeoPoint'
-        description: Geographic coordinates that identify the place where the uploaded video was recorded. Coordinates are defined using WGS 84.
       videoStreams:
         description: A list of video streams contained in the uploaded video file. Each item in the list contains detailed metadata about a video stream.
         items:
@@ -7666,8 +7686,15 @@ definitions:
   VideoPlayer:
     description: Player to be used for a video playback.
     properties:
+      embedHeight:
+        format: int64
+        type: string
       embedHtml:
         description: An <iframe> tag that embeds a player that will play the video.
+        type: string
+      embedWidth:
+        description: The embed width
+        format: int64
         type: string
     type: object
   VideoProcessingDetails:

@@ -127,6 +127,10 @@ paths:
           in: query
           name: producerProjectId
           type: string
+        - description: Include services consumed by the specified project.
+          in: query
+          name: consumerProjectId
+          type: string
         - description: |-
             Token identifying which result to start with; returned by a previous list
             call.
@@ -991,69 +995,6 @@ definitions:
           be taken to mitigate any implied risks.
         type: string
     type: object
-  Analytics:
-    description: |-
-      Analytics configuration of the service.
-
-      The example below shows how to configure monitored resources and metrics
-      for analytics. In the example, a monitored resource and two metrics are
-      defined. The `library.googleapis.com/book/returned_count` and
-      `library.googleapis.com/book/overdue_count` metric are sent
-      to the analytics.
-
-          monitored_resources:
-          - type: library.googleapis.com/branch
-            labels:
-            - key: /city
-              description: The city where the library branch is located in.
-            - key: /name
-              description: The name of the branch.
-          metrics:
-          - name: library.googleapis.com/book/returned_count
-            metric_kind: DELTA
-            value_type: INT64
-            labels:
-            - key: /customer_id
-          - name: library.googleapis.com/book/overdue_count
-            metric_kind: GAUGE
-            value_type: INT64
-            labels:
-            - key: /customer_id
-          analytics:
-            producer_destinations:
-            - monitored_resource: library.googleapis.com/branch
-              metrics:
-              - library.googleapis.com/book/returned_count
-              - library.googleapis.com/book/overdue_count
-    properties:
-      producerDestinations:
-        description: |-
-          Analytics configurations for sending metrics to the analytics backend.
-          There can be multiple producer destinations, each one must have a
-          different monitored resource type. A metric can be used in at most
-          one producer destination.
-        items:
-          $ref: '#/definitions/AnalyticsDestination'
-        type: array
-    type: object
-  AnalyticsDestination:
-    description: Configuration of a specific analytics destination.
-    properties:
-      metrics:
-        description: |-
-          Names of the metrics to report to this analytics destination.
-          Each name must be defined in Service.metrics section. Metrics
-          with value type BOOL and STRING must be of GUAGE kind, metrics with
-          value type INT64, DOUBLE and MONEY must be of DELTA kind.
-        items:
-          type: string
-        type: array
-      monitoredResource:
-        description: |-
-          The monitored resource type. The type must be defined in
-          Service.monitored_resources section.
-        type: string
-    type: object
   Api:
     description: Api is a light-weight descriptor for a protocol buffer service.
     properties:
@@ -1138,6 +1079,22 @@ definitions:
       Configuration for an anthentication provider, including support for
       [JSON Web Token (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
     properties:
+      audiences:
+        description: |-
+          The list of JWT
+          [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
+          that are allowed to access. A JWT containing any of these audiences will
+          be accepted. When this setting is absent, only JWTs with audience
+          "https://Service_name/API_name"
+          will be accepted. For example, if no audiences are in the setting,
+          LibraryService API will only accept JWTs with the following audience
+          "https://library-example.googleapis.com/google.example.library.v1.LibraryService".
+
+          Example:
+
+              audiences: bookstore_android.apps.googleusercontent.com,
+                         bookstore_web.apps.googleusercontent.com
+        type: string
       id:
         description: |-
           The unique identifier of the auth provider. It will be referred to by
@@ -1174,6 +1131,9 @@ definitions:
     properties:
       audiences:
         description: |-
+          NOTE: This will be deprecated soon, once AuthProvider.audiences is
+          implemented and accepted in all the runtime components.
+
           The list of JWT
           [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
           that are allowed to access. A JWT containing any of these audiences will
@@ -3279,12 +3239,6 @@ definitions:
             - selector: "google.calendar.v3.*"
               address: calendar.example.com
     properties:
-      analytics:
-        $ref: '#/definitions/Analytics'
-        description: |-
-          WARNING: DO NOT USE UNTIL THIS MESSAGE IS REMOVED.
-
-          Analytics configuration.
       apis:
         description: |-
           A list of API interfaces exported by this service. Only the `name` field

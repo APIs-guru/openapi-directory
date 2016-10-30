@@ -487,10 +487,10 @@ paths:
   '/v2/{parent}/sinks':
     get:
       description: Lists sinks.
-      operationId: logging.organizations.sinks.list
+      operationId: logging.billingAccounts.sinks.list
       parameters:
         - description: |-
-            Required. The cloud resource containing the sinks.
+            Required. The resource name where this sink was created.
             Example: `"projects/my-logging-project"`.
           in: path
           name: parent
@@ -527,7 +527,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/prettyPrint'
@@ -544,7 +544,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a sink.
-      operationId: logging.organizations.sinks.create
+      operationId: logging.billingAccounts.sinks.create
       parameters:
         - description: |-
             Required. The resource in which to create the sink.
@@ -555,6 +555,15 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            Optional. Whether the sink will have a dedicated service account returned
+            in the sink's writer_identity. Set this field to be true to export
+            logs from one project to a different project. This field is ignored for
+            non-project sinks (e.g. organization sinks) because those sinks are
+            required to have dedicated service accounts.
+          in: query
+          name: uniqueWriterIdentity
+          type: boolean
         - in: body
           name: body
           schema:
@@ -570,11 +579,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
   '/v2/{sinkName}':
     delete:
       description: Deletes a sink.
-      operationId: logging.organizations.sinks.delete
+      operationId: logging.billingAccounts.sinks.delete
       parameters:
         - description: |-
             Required. The resource name of the sink to delete, including the parent
@@ -597,10 +606,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     get:
       description: Gets a sink.
-      operationId: logging.organizations.sinks.get
+      operationId: logging.billingAccounts.sinks.get
       parameters:
         - description: |-
             Required. The resource name of the sink to return.
@@ -625,7 +634,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/prettyPrint'
@@ -642,7 +651,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates or creates a sink.
-      operationId: logging.organizations.sinks.update
+      operationId: logging.billingAccounts.sinks.update
       parameters:
         - description: |-
             Required. The resource name of the sink to update, including the parent
@@ -653,6 +662,15 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            Optional. Whether the sink will have a dedicated service account returned
+            in the sink's writer_identity. Set this field to be true to export
+            logs from one project to a different project. This field is ignored for
+            non-project sinks (e.g. organization sinks) because those sinks are
+            required to have dedicated service accounts.
+          in: query
+          name: uniqueWriterIdentity
+          type: boolean
         - in: body
           name: body
           schema:
@@ -668,7 +686,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
 definitions:
   Empty:
     description: |-
@@ -1065,7 +1083,12 @@ definitions:
         type: string
     type: object
   LogSink:
-    description: Describes a sink used to export log entries outside of Stackdriver Logging.
+    description: |-
+      Describes a sink used to export log entries outside of Stackdriver Logging.
+      A logs filter controls which log entries are exported.  Sinks can have a
+      start time and an end time; these can be used to place log entries from an
+      exact time range into a particular destination.  If both `start_time` and
+      `end_time` are present, then `start_time` must be less than `end_time`.
     properties:
       destination:
         description: |-
@@ -1078,7 +1101,10 @@ definitions:
               "pubsub.googleapis.com/projects/my-project/topics/my-topic"
         type: string
       endTime:
-        description: Optional. Time at which this sink expires.
+        description: |-
+          Optional. Time at which this sink will stop exporting log entries.  If this
+          value is present, then log entries are exported only if `entry.timestamp` <
+          `end_time`.
         format: google-datetime
         type: string
       filter:
@@ -1113,24 +1139,18 @@ definitions:
         type: string
       startTime:
         description: |-
-          Optional. Time range for which this sink is active.
-          Logs are exported only if start_time <= entry.timestamp < end_time
-          Both start_time and end_time may be omitted to specify
-          (half) infinite ranges. The start_time must be less than the end_time.
+          Optional. The time at which this sink will begin exporting log entries.  If
+          this value is present, then log entries are exported only if `start_time`
+          <=`entry.timestamp`.
         format: google-datetime
         type: string
       writerIdentity:
         description: |-
-          Output only. The IAM identity to which the destination needs to grant write
-          access.  This may be a service account or a group.
-          Examples (Do not assume these specific values):
-             "serviceAccount:cloud-logs@system.gserviceaccount.com"
-             "group:cloud-logs@google.com"
-
-            For GCS destinations, the role "roles/owner" is required on the bucket
-            For Cloud Pubsub destinations, the role "roles/pubsub.publisher" is
-              required on the topic
-            For BigQuery, the role "roles/editor" is required on the dataset
+          Output only. An IAM identity&mdash;a service account or group&mdash;that
+          will write exported log entries to the destination on behalf of Stackdriver
+          Logging. You must grant this identity write-access to the destination.
+          Consult the destination service's documentation to determine the exact role
+          that must be granted.
         type: string
     type: object
   MonitoredResource:
