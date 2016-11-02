@@ -6,6 +6,7 @@ basePath: /api
 info:
   contact:
     email: support@bikeindex.org
+    name: 'BikeWise API'
   description: |
     <p>This is an API for accessing information about bicycling related incidents. You can find the source code on <a href="https://github.com/bikeindex/bikewise">GitHub</a>.</p>
   title: BikeWise API v2
@@ -15,11 +16,17 @@ info:
     url: 'https://bikewise.org/api/v2/swagger_doc'
     version: '1.2'
   x-providerName: bikewise.org
+  x-logo:
+    url: 'https://www.bikewise.org/fav.ico'
 tags:
   - description: Incidents matching parameters
     name: incidents
   - description: GeoJSON response for matching incidents
     name: locations
+externalDocs:
+  url: 'https://www.bikewise.org/documentation/api_v2'
+produces:
+  - application/json
 paths:
   /v2/incidents:
     get:
