@@ -13,7 +13,7 @@ info:
     url: 'https://dev.netatmo.com/dev/resources/legal/introduction'
   termsOfService: 'https://dev.netatmo.com/dev/resources/legal/introduction'
   title: Netatmo
-  version: 1.0.0
+  version: 1.1.0
   x-apiClientRegistration:
     url: 'https://dev.netatmo.com/dev/createanapp'
   x-logo:
@@ -36,8 +36,11 @@ securityDefinitions:
     authorizationUrl: 'https://api.netatmo.net/oauth2/authorize'
     flow: accessCode
     scopes:
+      access_camera: Access welcome camera
+      read_camera: Read welcome camera's data
       read_station: Read weather station's data
       read_thermostat: Read thermostat's data
+      write_camera: Write welcome camera's data
       write_thermostat: Configure the thermostat
     tokenUrl: 'https://api.netatmo.net/oauth2/token'
     type: oauth2
@@ -58,6 +61,33 @@ tags:
   - description: Partner API specific methods
     name: partner
 paths:
+  /addwebhook:
+    get:
+      deprecated: false
+      description: |
+        Links a callback url to a user.
+      operationId: addwebhook
+      parameters:
+        - description: Your webhook callback url
+          in: query
+          name: url
+          required: true
+          type: string
+        - description: 'Webhooks are only available for Welcome, enter app_camera.'
+          in: query
+          name: app_type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NAWelcomeWebhookResponse'
+      security:
+        - code_oauth: []
+        - password_oauth: []
+      tags:
+        - welcome
   /createnewschedule:
     post:
       description: The method createnewschedule creates a new schedule stored in the backup list.
@@ -129,8 +159,149 @@ paths:
       tags:
         - station
         - thermostat
-        - welcome
         - partner
+  /dropwebhook:
+    get:
+      deprecated: false
+      description: |
+        Dissociates a webhook from a user.
+      operationId: dropwebhook
+      parameters:
+        - description: 'For Welcome, use app_camera'
+          in: query
+          name: app_type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NAWelcomeWebhookResponse'
+      security:
+        - code_oauth: []
+        - password_oauth: []
+      tags:
+        - welcome
+  /getcamerapicture:
+    get:
+      deprecated: false
+      description: |
+        Returns the snapshot associated to an event.
+      operationId: getcamerapicture
+      parameters:
+        - description: 'id of the image (can be retrieved as ''id'' in ''face'' in Gethomedata, or as ''id'' in ''snapshot'' in Getnextevents, Getlasteventof and Geteventsuntil)'
+          in: query
+          name: image_id
+          required: true
+          type: string
+        - description: Security key to access snapshots.
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            format: byte
+            type: string
+      security:
+        - code_oauth: []
+        - password_oauth: []
+      tags:
+        - welcome
+  /geteventsuntil:
+    get:
+      deprecated: false
+      description: |
+        Returns the snapshot associated to an event.
+      operationId: geteventsuntil
+      parameters:
+        - description: ID of the Home you're interested in
+          in: query
+          name: home_id
+          required: true
+          type: string
+        - description: Your request will retrieve all the events until this one
+          in: query
+          name: event_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NAWelcomeEventsResponse'
+      security:
+        - code_oauth:
+            - access_camera
+            - read_camera
+        - password_oauth: []
+      tags:
+        - welcome
+  /gethomedata:
+    get:
+      deprecated: false
+      description: |
+        Returns information about users homes and cameras.
+      operationId: gethomedata
+      parameters:
+        - description: Specify if you're looking for the events of a specific Home.
+          in: query
+          name: home_id
+          required: false
+          type: string
+        - description: Number of events to retrieve. Default is 30.
+          in: query
+          name: size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NAWelcomeHomeDataResponse'
+      security:
+        - code_oauth:
+            - access_camera
+            - read_camera
+        - password_oauth: []
+      tags:
+        - welcome
+  /getlasteventof:
+    get:
+      deprecated: false
+      description: |
+        Returns most recent events.
+      operationId: getlasteventof
+      parameters:
+        - description: ID of the Home you're interested in
+          in: query
+          name: home_id
+          required: true
+          type: string
+        - description: Your request will retrieve all events of the given home until the most recent event of the given person
+          in: query
+          name: person_id
+          required: true
+          type: string
+        - description: Number of events to retrieve. Default is 30.
+          in: query
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NAWelcomeEventsResponse'
+      security:
+        - code_oauth:
+            - access_camera
+            - read_camera
+        - password_oauth: []
+      tags:
+        - welcome
   /getmeasure:
     get:
       description: |
@@ -333,9 +504,42 @@ paths:
       tags:
         - station
         - thermostat
-        - welcome
         - partner
         - public
+  /getnextevents:
+    get:
+      deprecated: false
+      description: |
+        Returns previous events.
+      operationId: getnextevents
+      parameters:
+        - description: ID of the Home you're interested in
+          in: query
+          name: home_id
+          required: true
+          type: string
+        - description: Your request will retrieve events occured before this one
+          in: query
+          name: event_id
+          required: true
+          type: string
+        - description: Number of events to retrieve. Default is 30.
+          in: query
+          name: size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NAWelcomeEventsResponse'
+      security:
+        - code_oauth:
+            - access_camera
+            - read_camera
+        - password_oauth: []
+      tags:
+        - welcome
   /getstationsdata:
     get:
       description: The method getstationsdata Returns data from a user Weather Stations (measures and device specific data).
@@ -415,7 +619,6 @@ paths:
       tags:
         - station
         - thermostat
-        - welcome
   /partnerdevices:
     get:
       description: The method partnerdevices returns the list of device_id to which your partner application has access to.
@@ -430,6 +633,34 @@ paths:
         - password_oauth: []
       tags:
         - partner
+  /setpersonsaway:
+    get:
+      deprecated: false
+      description: |
+        Sets a person as 'Away' or the Home as 'Empty'. The event will be added to the user’s timeline.
+      operationId: setpersonsaway
+      parameters:
+        - description: ID of the Home you're interested in
+          in: query
+          name: home_id
+          required: true
+          type: string
+        - description: 'If a person_id is specified, that person will be set as ''Away''. If no person_id is specified, the Home will be set as ''Empty''.'
+          in: query
+          name: person_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NAWelcomePersonsAwayResponse'
+      security:
+        - code_oauth:
+            - write_camera
+        - password_oauth: []
+      tags:
+        - welcome
   /setthermpoint:
     post:
       description: The method setthermpoint changes the Thermostat manual temperature setpoint.
@@ -1518,6 +1749,244 @@ definitions:
       time_server:
         format: int32
         type: integer
+  NAWelcomeCameras:
+    properties:
+      alim_status:
+        description: If power supply is ok (on/off)
+        type: string
+      id:
+        description: Id of the camera
+        type: string
+      is_local:
+        description: Only for scope access_camera. If Camera and application requesting the information are on the same IP (true/false)
+        type: boolean
+      name:
+        description: Name of the camera
+        type: string
+      sd_status:
+        description: If SD card status is ok (on/off)
+        type: string
+      status:
+        description: If camera is monitoring (on/off)
+        type: string
+      type:
+        description: Type of the camera
+        type: string
+      vpn_url:
+        description: Only for scope access_camera. Address of the camera
+        type: string
+  NAWelcomeEvents:
+    properties:
+      camera_id:
+        description: Camera that detected the event
+        type: string
+      id:
+        description: Identifier of the event
+        type: string
+      is_arrival:
+        description: If person was considered away before being seen during this event
+        type: boolean
+      message:
+        description: User facing event description
+        type: string
+      person_id:
+        description: Id of the person the event is about (if any)
+        type: string
+      snapshot:
+        $ref: '#/definitions/NAWelcomeSnapshot'
+        description: 'Snapshot id, version and key. (Used in Getcamerapicture)'
+      sub_type:
+        description: Subtypes of SD and Alim events. Go to Welcome page for further details.
+        format: int32
+        type: integer
+      time:
+        description: Time of occurence of event
+        format: int32
+        type: integer
+      type:
+        description: Type of events. Go to the Welcome page for further details.
+        type: string
+      video_id:
+        description: Identifier of the video
+        type: string
+      video_status:
+        description: 'Status of the video (recording, deleted or available)'
+        type: string
+  NAWelcomeEventsData:
+    properties:
+      events_list:
+        items:
+          $ref: '#/definitions/NAWelcomeEvents'
+        type: array
+  NAWelcomeEventsResponse:
+    properties:
+      body:
+        $ref: '#/definitions/NAWelcomeEventsData'
+      status:
+        type: string
+      time_exec:
+        format: double
+        type: number
+      time_server:
+        format: int32
+        type: integer
+  NAWelcomeFace:
+    properties:
+      id:
+        description: Id of the face.
+        type: string
+      key:
+        description: Key for this face to use in getcamerapicture.
+        type: string
+      version:
+        description: Version of the face if user changed their photo.
+        format: int32
+        type: integer
+  NAWelcomeGlobalInfo:
+    properties:
+      show_tags:
+        description: show tags
+        type: boolean
+  NAWelcomeHomeData:
+    properties:
+      global_info:
+        $ref: '#/definitions/NAWelcomeGlobalInfo'
+      homes:
+        items:
+          $ref: '#/definitions/NAWelcomeHomes'
+        type: array
+      user:
+        $ref: '#/definitions/NAWelcomeUser'
+  NAWelcomeHomeDataResponse:
+    properties:
+      body:
+        $ref: '#/definitions/NAWelcomeHomeData'
+      status:
+        type: string
+      time_exec:
+        format: double
+        type: number
+      time_server:
+        format: int32
+        type: integer
+  NAWelcomeHomes:
+    properties:
+      cameras:
+        items:
+          $ref: '#/definitions/NAWelcomeCameras'
+        type: array
+      events:
+        items:
+          $ref: '#/definitions/NAWelcomeEvents'
+        type: array
+      id:
+        description: Id of the home.
+        type: string
+      modules:
+        items:
+          $ref: '#/definitions/NAWelcomeModules'
+        type: array
+      name:
+        description: Name of the home
+        type: string
+      persons:
+        items:
+          $ref: '#/definitions/NAWelcomePersons'
+        type: array
+      place:
+        $ref: '#/definitions/NAWelcomePlace'
+  NAWelcomeModules:
+    properties:
+      battery_percent:
+        description: remaining battery percentage
+        format: int32
+        type: integer
+      id:
+        description: mac address of the module
+        type: string
+      last_activity:
+        description: Timestamp of last move detected by the module
+        format: int32
+        type: integer
+      name:
+        description: name of the module (given by the user)
+        type: string
+      rf:
+        description: Radio status
+        type: string
+      status:
+        description: status of the module
+        type: string
+      type:
+        description: NACamDoorTag for tags
+        type: string
+  NAWelcomePersons:
+    properties:
+      face:
+        items:
+          $ref: '#/definitions/NAWelcomeFace'
+        type: array
+      id:
+        description: Id of the person.
+        type: string
+      last_seen:
+        description: Time at which the person was last seen.
+        format: int32
+        type: integer
+      out_of_sight:
+        description: True if the Person is out of sight.
+        type: boolean
+      pseudo:
+        description: 'Name of the person, if pseudo is missing, person is unknown.'
+        type: string
+  NAWelcomePersonsAwayResponse:
+    properties:
+      status:
+        type: string
+      time_exec:
+        format: double
+        type: number
+      time_server:
+        format: int32
+        type: integer
+  NAWelcomePlace:
+    properties:
+      city:
+        description: City of the home.
+        type: string
+      country:
+        description: Country of the home.
+        type: string
+      timezone:
+        description: Timezone of the home.
+        type: string
+  NAWelcomeSnapshot:
+    properties:
+      id:
+        description: Id of the snapshot.
+        type: string
+      key:
+        description: Key for this snapshot.
+        type: string
+      version:
+        description: Version of the snapshot.
+        format: int32
+        type: integer
+  NAWelcomeUser:
+    properties:
+      lang:
+        description: user locale
+        type: string
+      reg_locale:
+        description: user regional preferences (used for displaying date)
+        type: string
+  NAWelcomeWebhookResponse:
+    properties:
+      status:
+        type: string
+      time_exec:
+        format: double
+        type: number
   NAYearMonth:
     properties:
       m:

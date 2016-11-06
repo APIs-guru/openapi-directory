@@ -27,8 +27,8 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
-      'https://www.googleapis.com/auth/consumersurveys': View and edit your surveys and results
-      'https://www.googleapis.com/auth/consumersurveys.readonly': View the results for your surveys
+      'https://www.googleapis.com/auth/surveys': View and manage your surveys and results
+      'https://www.googleapis.com/auth/surveys.readonly': View your surveys and survey results
       'https://www.googleapis.com/auth/userinfo.email': View your email address
     type: oauth2
 parameters:
@@ -97,9 +97,9 @@ paths:
             $ref: '#/definitions/MobileAppPanelsListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys.readonly'
+            - 'https://www.googleapis.com/auth/surveys.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -129,9 +129,9 @@ paths:
             $ref: '#/definitions/MobileAppPanel'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys.readonly'
+            - 'https://www.googleapis.com/auth/surveys.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -164,7 +164,7 @@ paths:
             $ref: '#/definitions/MobileAppPanel'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -190,9 +190,9 @@ paths:
             $ref: '#/definitions/SurveysListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys.readonly'
+            - 'https://www.googleapis.com/auth/surveys.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -220,7 +220,7 @@ paths:
             $ref: '#/definitions/Survey'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -253,7 +253,7 @@ paths:
             $ref: '#/definitions/SurveysStartResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -282,7 +282,7 @@ paths:
             $ref: '#/definitions/SurveysStopResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -304,7 +304,7 @@ paths:
             $ref: '#/definitions/SurveysDeleteResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -325,9 +325,9 @@ paths:
             $ref: '#/definitions/Survey'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys.readonly'
+            - 'https://www.googleapis.com/auth/surveys.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -360,7 +360,7 @@ paths:
             $ref: '#/definitions/Survey'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -386,9 +386,9 @@ paths:
             $ref: '#/definitions/SurveyResults'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys'
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/consumersurveys.readonly'
+            - 'https://www.googleapis.com/auth/surveys.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -505,7 +505,7 @@ definitions:
         type: array
       rejectionReason:
         $ref: '#/definitions/SurveyRejection'
-        description: Reason for the survey being rejected. Only present if the survey state is 'rejected'.
+        description: Reason for the survey being rejected. Only present if the survey state is rejected.
       state:
         description: State that the survey is in.
         type: string
@@ -654,7 +654,7 @@ definitions:
         description: A human-readable explanation of what was wrong with the survey.
         type: string
       type:
-        description: Which category of rejection this was. See the GCS Help Center for additional details on each category.
+        description: Which category of rejection this was. See the  Google Surveys Help Center for additional details on each category.
         type: string
     type: object
   SurveyResults:

@@ -611,7 +611,7 @@ definitions:
     description: Metadata describing an Operation.
     properties:
       clientId:
-        description: Optionally provided by the caller when submitting the request that creates the operation.
+        description: This field is deprecated. Use `labels` instead. Optionally provided by the caller when submitting the request that creates the operation.
         type: string
       createTime:
         description: The time at which the job was submitted to the Genomics service.
@@ -624,6 +624,11 @@ definitions:
         items:
           $ref: '#/definitions/OperationEvent'
         type: array
+      labels:
+        additionalProperties:
+          type: string
+        description: Optionally provided by the caller when submitting the request that creates the operation.
+        type: object
       projectId:
         description: The Google Cloud Project in which the job is scoped.
         type: string
@@ -732,7 +737,7 @@ definitions:
     description: The pipeline run arguments.
     properties:
       clientId:
-        description: Client-specified pipeline operation identifier.
+        description: This field is deprecated. Use `labels` instead. Client-specified pipeline operation identifier.
         type: string
       inputs:
         additionalProperties:
@@ -742,6 +747,11 @@ definitions:
       keepVmAliveOnFailureDuration:
         description: 'How long to keep the VM up after a failure (for example docker command failed, copying input or output files failed, etc). While the VM is up, one can ssh into the VM to debug. Default is 0; maximum allowed value is 1 day.'
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Labels to apply to this pipeline run. Labels will also be applied to compute resources (VM, disks) created by this pipeline run. When listing operations, operations can filtered by labels. Label keys may not be empty; label values may be empty. Non-empty labels must be 1-63 characters long, and comply with [RFC1035] (https://www.ietf.org/rfc/rfc1035.txt). Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        type: object
       logging:
         $ref: '#/definitions/LoggingOptions'
         description: Required. Logging options. Used by the service to communicate results to the user.

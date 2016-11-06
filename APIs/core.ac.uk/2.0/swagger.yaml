@@ -5,8 +5,8 @@ host: core.ac.uk
 basePath: /api-v2
 info:
   description: |-
-    <p style="text-align: justify;">This is a documentation for CORE API v2.0. You can use the API to access the 
-        resources harvested and enriched by CORE. If you encounter any problems with the API, please report them to us.</p>
+    <p style="text-align: justify;">You can use the CORE API to access the 
+        resources harvested and enriched by CORE. If you encounter any problems with the API, please <a href="/contact">report them to us</a>.</p>
 
     <h2>Overview</h2>
     <p style="text-align: justify;">The API is organised by resource type. The resources are <b>articles</b>, 
@@ -24,7 +24,7 @@ info:
 
     <h2>Search query syntax</h2>
 
-    <p style="text-align: justify">All of the API search methods allow using complex search queries.
+    <p style="text-align: justify">Complex search queries can be used in all of the API search methods.
         The query can be a simple string or it can be built using terms and operators described in Elasticsearch
         <a href="http://www.elastic.co/guide/en/elasticsearch/reference/1.4/query-dsl-query-string-query.html#query-string-syntax">documentation</a>.
         The usable field names are <strong>title</strong>, <strong>description</strong>, <strong>fullText</strong>, 

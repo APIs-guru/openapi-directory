@@ -743,6 +743,73 @@ definitions:
         description: The services provided by this early vote site or drop off location. This field is not populated for polling locations.
         type: string
     type: object
+  PostalAddress:
+    properties:
+      addressLines:
+        items:
+          type: string
+        type: array
+      administrativeAreaName:
+        type: string
+      countryName:
+        type: string
+      countryNameCode:
+        type: string
+      dependentLocalityName:
+        type: string
+      dependentThoroughfareLeadingType:
+        type: string
+      dependentThoroughfareName:
+        type: string
+      dependentThoroughfarePostDirection:
+        type: string
+      dependentThoroughfarePreDirection:
+        type: string
+      dependentThoroughfareTrailingType:
+        type: string
+      dependentThoroughfaresConnector:
+        type: string
+      dependentThoroughfaresIndicator:
+        type: string
+      dependentThoroughfaresType:
+        type: string
+      firmName:
+        type: string
+      isDisputed:
+        type: boolean
+      languageCode:
+        type: string
+      localityName:
+        type: string
+      postBoxNumber:
+        type: string
+      postalCodeNumber:
+        type: string
+      postalCodeNumberExtension:
+        type: string
+      premiseName:
+        type: string
+      recipientName:
+        type: string
+      sortingCode:
+        type: string
+      subAdministrativeAreaName:
+        type: string
+      subPremiseName:
+        type: string
+      thoroughfareLeadingType:
+        type: string
+      thoroughfareName:
+        type: string
+      thoroughfareNumber:
+        type: string
+      thoroughfarePostDirection:
+        type: string
+      thoroughfarePreDirection:
+        type: string
+      thoroughfareTrailingType:
+        type: string
+    type: object
   RepresentativeInfoData:
     properties:
       divisions:
@@ -835,6 +902,8 @@ definitions:
     properties:
       contextParams:
         $ref: '#/definitions/ContextParams'
+      voterInfoSegmentResult:
+        $ref: '#/definitions/VoterInfoSegmentResult'
     type: object
   VoterInfoResponse:
     description: The result of a voter info lookup query.
@@ -884,4 +953,16 @@ definitions:
         items:
           $ref: '#/definitions/AdministrationRegion'
         type: array
+    type: object
+  VoterInfoSegmentResult:
+    properties:
+      generatedMillis:
+        format: int64
+        type: string
+      postalAddress:
+        $ref: '#/definitions/PostalAddress'
+      request:
+        $ref: '#/definitions/VoterInfoRequest'
+      response:
+        $ref: '#/definitions/VoterInfoResponse'
     type: object

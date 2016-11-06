@@ -8,6 +8,40 @@ info:
     email: integrations@rebilly.com
     name: Rebilly API Support
     url: 'https://www.rebilly.com/contact/'
+  description: |
+    # Introduction
+    The Rebilly API is built on HTTP.  Our API is RESTful.  It has predictable
+    resource URLs.  It returns HTTP response codes to indicate errors.  It also
+    accepts and returns JSON in the HTTP body.  You can use your favorite
+    HTTP/REST library for your programming language to use Rebilly's API, or
+    you can use one of our SDKs (currently available in [PHP](https://github.com/Rebilly/rebilly-php)
+    and [C#](https://github.com/Rebilly/rebilly-dotnet-client)).
+
+    # Authentication
+    When you sign up for an account, you are given your first API key.
+    You can generate additional API keys, and delete API keys (as you may
+    need to rotate your keys in the future). You authenticate to the
+    Rebilly API by providing your secret key in the request header.
+
+    Rebilly offers three forms of authentication:  private key, JSON Web Tokens, and
+    public key.
+    - private key: authenticates each request by searching for the presence
+    of an HTTP header: REB-APIKEY.
+    - JWT: authenticates each request by the HTTP header: Authorization.
+    - public key: authenticates by the HTTP header: REB-AUTH (read more on this below).
+
+    Rebilly also offers JSON Web Tokens (JWT) authentication, where you can control
+    the specific granular permissions and expiration for that JWT.  We call our resource
+    for generating JWT [Sessions](#tag/Sessions).
+
+    Rebilly also has a client-side authentication scheme that uses an
+    apiUser and HMAC-SHA1 signature (only for the Tokens resource), so
+    that you may safely create tokens from the client-side without compromising
+    your secret keys.
+
+    Never share your secret keys. Keep them guarded and secure.
+    The client-side authentication scheme uses one HTTP header named REB-AUTH.
+    <!-- ReDoc-Inject: <security-definitions> -->
   license:
     name: Rebilly
     url: 'https://www.rebilly.com/api/license/'
@@ -47,8 +81,18 @@ securityDefinitions:
       Generate a Nonce (random string), and a Timestamp (unix timestamp)
       Concatenate the values of ApiUser, Nonce, and Timestamp (in that order).
       Use that value as the input data when you calculate the <a href="http://tools.ietf.org/html/rfc2104">HMAC-SHA1</a> with your secret key, called the signature.
-      Forming the four data points into a JSON object.  {"REB-APIUSER":"abcdefg","REB-NONCE":"adfsjtreitou345fgkdafgj","REB-TIMESTAMP":"1382591345","REB-SIGNATURE":"a234fc95460401cfg09c9d09"}
-      Then base64 encode that JSON object.  This is the final value of the REB-AUTH HTTP header
+      Forming the four data points into a JSON object.
+
+      ```json
+      {
+        "REB-APIUSER": "abcdefg",
+        "REB-NONCE": "adfsjtreitou345fgkdafgj",
+        "REB-TIMESTAMP": "1382591345",
+        "REB-SIGNATURE": "a234fc95460401cfg09c9d09"
+      }
+      ```
+
+      Then base64 encode that JSON object. This is the final value of the REB-AUTH HTTP header
     in: header
     name: REB-AUTH
     type: apiKey
@@ -144,39 +188,6 @@ responses:
     schema:
       $ref: '#/definitions/Error'
 tags:
-  - description: |
-      The Rebilly API is built on HTTP.  Our API is RESTful.  It has predictable
-      resource URLs.  It returns HTTP response codes to indicate errors.  It also
-      accepts and returns JSON in the HTTP body.  You can use your favorite
-      HTTP/REST library for your programming language to use Rebilly's API, or
-      you can use one of our SDKs (currently available in [PHP](https://github.com/Rebilly/rebilly-php)
-      and [C#](https://github.com/Rebilly/rebilly-dotnet-client)).
-    name: Introduction
-  - description: |
-      When you sign up for an account, you are given your first API key.
-      You can generate additional API keys, and delete API keys (as you may
-      need to rotate your keys in the future). You authenticate to the
-      Rebilly API by providing your secret key in the request header.
-
-      Rebilly offers three forms of authentication:  private key, JSON Web Tokens, and
-      public key.
-      - private key: authenticates each request by searching for the presence
-      of an HTTP header: REB-APIKEY.
-      - JWT: authenticates each request by the HTTP header: Authorization.
-      - public key: authenticates by the HTTP header: REB-AUTH (read more on this below).
-
-      Rebilly also offers JSON Web Tokens (JWT) authentication, where you can control
-      the specific granular permissions and expiration for that JWT.  We call our resource
-      for generating JWT [Sessions](#tag/Sessions).
-
-      Rebilly also has a client-side authentication scheme that uses an
-      apiUser and HMAC-SHA1 signature (only for the Tokens resource), so
-      that you may safely create tokens from the client-side without compromising
-      your secret keys.
-
-      Never share your secret keys. Keep them guarded and secure.
-      The client-side authentication scheme uses one HTTP header named REB-AUTH.
-    name: Authentication
   - description: |
       3D Secure is a way to authenticate and protect transactions.  Typically,
       it's only possible to protect the initial transaction in a subscription
@@ -4274,6 +4285,31 @@ paths:
       tags:
         - Layouts
   '/layouts/{id}':
+    delete:
+      description: |
+        Delete a layout with predefined identifier string
+      responses:
+        '204':
+          description: Layout was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Delete a layout
+      tags:
+        - Layouts
     get:
       description: |
         Retrieve a layout with specified identifier string
@@ -5573,6 +5609,45 @@ paths:
       summary: Create or update a Plan with predefined ID
       tags:
         - Plans
+  /previews/rule-actions/send-email:
+    post:
+      description: |
+        Send a test email
+      parameters:
+        - description: Test email resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SendTestEmail'
+      responses:
+        '200':
+          description: Test email was sent
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/SendTestEmail'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      security:
+        - RebAuth: []
+      summary: Send a test email
+      tags:
+        - Rules
   /products:
     get:
       description: |
@@ -11032,6 +11107,10 @@ definitions:
     required:
       - rel
     type: object
+  SendTestEmail:
+    allOf:
+      - $ref: '#/definitions/EmailNotification'
+    description: Send a test email
   ServerTimestamp:
     description: 'Read-only timestamp, automatically assigned on back-end.'
     format: date-time
@@ -11253,6 +11332,10 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: Unique id for each billing contact
+      cancelSource:
+        description: Source of cancellation
+        readOnly: true
+        type: string
       canceledTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -11594,6 +11677,40 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: Customer's ID
         readOnly: true
+      dcc:
+        description: Dynamic Currency Conversion detailed information. Null if hasDcc is false
+        properties:
+          base:
+            description: Initial amount and currency to convert from
+            properties:
+              amount:
+                format: double
+                type: number
+              currency:
+                type: string
+            type: object
+          outcome:
+            description: Dynamic Currency Conversion outcome
+            enum:
+              - rejected
+              - selected
+              - unknown
+            type: string
+          quote:
+            description: Suggested amount and currency to convert to
+            properties:
+              amount:
+                format: double
+                type: number
+              currency:
+                type: string
+            type: object
+          usdMarkup:
+            description: The amount of markup translated to USD
+            format: double
+            type: number
+        readOnly: true
+        type: object
       gateway:
         description: The related gateway information
         properties:
@@ -11632,6 +11749,9 @@ definitions:
               originalMessage:
                 description: 'The raw, unmapped gateway''s response message'
                 type: string
+              type:
+                description: The gateway's response type
+                type: string
             type: object
         readOnly: true
         type: object
@@ -11649,6 +11769,10 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The gateway's transaction ID
         readOnly: true
+      hasDcc:
+        description: True if transaction has Dynamic Currency Conversion applied
+        readOnly: true
+        type: boolean
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'

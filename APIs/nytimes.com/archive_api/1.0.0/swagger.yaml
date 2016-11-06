@@ -1,0 +1,68 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: api.nytimes.com
+basePath: /svc/archive/v1
+info:
+  description: Alpha.  The Archive API provides JSON lists of NYT articles by month.
+  termsOfService: 'http://developer.nytimes.com/tou'
+  title: Archive API V1
+  version: 1.0.0
+  x-apiClientRegistration:
+    url: 'http://developer.nytimes.com/signup'
+  x-apisguru-categories:
+    - media
+    - open_data
+  x-logo:
+    url: 'https://static01.nyt.com/images/icons/t_logo_291_black.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/NYTimes/public_api_specs/master/archive_api/archive_api.json'
+    version: '2.0'
+  x-providerName: nytimes.com
+  x-serviceName: archive_api
+externalDocs:
+  url: 'http://developer.nytimes.com/'
+produces:
+  - application/json
+securityDefinitions:
+  apikey:
+    in: query
+    name: api-key
+    type: apiKey
+security:
+  - apikey: []
+paths:
+  '/{year}/{month}.json':
+    get:
+      description: |
+        The Archive API provides JSON lists of articles by month.
+      parameters:
+        - description: The year (e.g. 2016).
+          in: path
+          name: year
+          required: true
+          type: number
+          x-consoleDefault: '2016'
+        - description: The month number (e.g. 1 for January).
+          in: path
+          name: month
+          required: true
+          type: number
+          x-consoleDefault: json
+      responses:
+        '200':
+          description: An array of articles
+          schema:
+            properties:
+              results:
+                items:
+                  $ref: '#/definitions/Article'
+                type: array
+            type: object
+      summary: Archive API
+      tags:
+        - Archive
+definitions:
+  Article: {}

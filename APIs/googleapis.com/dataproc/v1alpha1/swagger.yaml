@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Manages Hadoop-based clusters and jobs on Google Cloud Platform.
+  description: An API for managing Hadoop-based clusters and jobs on Google Cloud Platform.
   title: Google Cloud Dataproc
   version: v1alpha1
   x-apiClientRegistration:
@@ -118,6 +118,10 @@ paths:
           in: path
           name: region
           required: true
+          type: string
+        - description: '[Optional] A filter constraining which clusters to list. Valid filters contain label terms such as: labels.key1 = val1 AND (-labels.k2 = val2 OR labels.k3 = val3)'
+          in: query
+          name: filter
           type: string
         - description: The standard List page size.
           in: query
@@ -581,6 +585,14 @@ definitions:
       createTime:
         description: '[Output-only] The timestamp of cluster creation.'
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: '[Optional] The labels to associate with this cluster. Label keys must be between 1 and 63 characters long, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}{0,62} Label values must be between 1 and 63 characters long, and must conform to the following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63} No more than 64 labels can be associated with a given cluster.'
+        type: object
+      metrics:
+        $ref: '#/definitions/ClusterMetrics'
+        description: Contains cluster daemon metrics such as HDFS and YARN stats.
       projectId:
         description: '[Required] The Google Cloud Platform project ID that the cluster belongs to.'
         type: string
@@ -641,18 +653,39 @@ definitions:
           type: string
         type: array
     type: object
+  ClusterMetrics:
+    description: 'Contains cluster daemon metrics, such as HDFS and YARN stats.'
+    properties:
+      hdfsMetrics:
+        additionalProperties:
+          format: int64
+          type: string
+        description: The HDFS metrics.
+        type: object
+      yarnMetrics:
+        additionalProperties:
+          format: int64
+          type: string
+        description: The YARN metrics.
+        type: object
+    type: object
   ClusterOperationMetadata:
     description: Metadata describing the operation.
     properties:
       clusterName:
-        description: Name of the cluster for the operation.
+        description: '[Output-only] Name of the cluster for the operation.'
         type: string
       clusterUuid:
-        description: Cluster UUId for the operation.
+        description: '[Output-only] Cluster UUID for the operation.'
         type: string
       description:
         description: '[Output-only] Short description of operation.'
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: '[Output-only] labels associated with the operation'
+        type: object
       operationType:
         description: '[Output-only] The operation type.'
         type: string
@@ -669,13 +702,13 @@ definitions:
     description: The status of the operation.
     properties:
       details:
-        description: A message containing any operation metadata details.
+        description: '[Output-only]A message containing any operation metadata details.'
         type: string
       innerState:
-        description: A message containing the detailed operation state.
+        description: '[Output-only] A message containing the detailed operation state.'
         type: string
       state:
-        description: A message containing the operation state.
+        description: '[Output-only] A message containing the operation state.'
         enum:
           - UNKNOWN
           - PENDING
@@ -683,7 +716,7 @@ definitions:
           - DONE
         type: string
       stateStartTime:
-        description: The time this state was entered.
+        description: '[Output-only] The time this state was entered.'
         type: string
     type: object
   ClusterStatus:
@@ -717,7 +750,7 @@ definitions:
     description: The location of diagnostic output.
     properties:
       outputUri:
-        description: '[Output-only] The Google Cloud Storage URI of the diagnostic output. This is a plain text file with a summary of collected diagnostics.'
+        description: '[Output-only] The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.'
         type: string
     type: object
   DiskConfiguration:
@@ -738,6 +771,9 @@ definitions:
   GceClusterConfiguration:
     description: 'Common configuration settings for resources of Google Compute Engine cluster instances, applicable to all instances in the cluster.'
     properties:
+      internalIpOnly:
+        description: 'If true, all instances in the cluser will only have internal IP addresses. By default, clusters are not restricted to internal IP addresses, and will have ephemeral external IP addresses assigned to each instance. This restriction can only be enabled for subnetwork enabled networks, and all off-cluster dependencies must be configured to be accessible without external IP addresses.'
+        type: boolean
       metadata:
         additionalProperties:
           type: string
@@ -902,6 +938,11 @@ definitions:
       interactive:
         description: '[Optional] If set to true, then the driver''s stdin will be kept open and driver_input_uri will be set to provide a path at which additional input can be sent to the driver.'
         type: boolean
+      labels:
+        additionalProperties:
+          type: string
+        description: '[Optional] The labels to associate with this job. Label keys must be between 1 and 63 characters long, and must conform to the following regular expression: \p{Ll}\p{Lo}{0,62} Label values must be between 1 and 63 characters long, and must conform to the following regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63} No more than 64 labels can be associated with a given job.'
+        type: object
       pigJob:
         $ref: '#/definitions/PigJob'
         description: Job is a Pig job.
@@ -1007,6 +1048,9 @@ definitions:
       clusterName:
         description: '[Optional] If set, the returned jobs list includes only jobs that were submitted to the named cluster.'
         type: string
+      filter:
+        description: '[Optional] A filter constraining which jobs to list. Valid filters contain job state and label terms such as: labels.key1 = val1 AND (labels.k2 = val2 OR labels.k3 = val3)'
+        type: string
       jobStateMatcher:
         description: '[Optional] Specifies enumerated categories of jobs to list.'
         enum:
@@ -1096,7 +1140,7 @@ definitions:
         description: The error result of the operation in case of failure.
       metadata:
         additionalProperties:
-          description: Properties of the object. Contains field @ype with type URL.
+          description: Properties of the object. Contains field @type with type URL.
         description: Service-specific metadata associated with the operation.
         type: object
       name:
@@ -1104,7 +1148,7 @@ definitions:
         type: string
       response:
         additionalProperties:
-          description: Properties of the object. Contains field @ype with type URL.
+          description: Properties of the object. Contains field @type with type URL.
         description: 'The operation response. If the called method returns no data on success, the response is `google.protobuf.Empty`. If the called method is `Get`,`Create` or `Update`, the response is the resource. For all other methods, the response type is a concatenation of the method name and "Response". For example, if the called method is `TakeSnapshot()`, the response type is `TakeSnapshotResponse`.'
         type: object
     type: object
@@ -1345,7 +1389,7 @@ definitions:
         description: A list of messages that carry the error details. There will be a common set of message types for APIs to use.
         items:
           additionalProperties:
-            description: Properties of the object. Contains field @ype with type URL.
+            description: Properties of the object. Contains field @type with type URL.
           type: object
         type: array
       message:

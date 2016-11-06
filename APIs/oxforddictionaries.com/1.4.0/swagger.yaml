@@ -10,7 +10,7 @@ info:
     url: 'https://developer.oxforddictionaries.com/api-terms-and-conditions'
   termsOfService: 'http://helloreverb.com/terms/'
   title: Oxford Dictionaries
-  version: 1.3.0
+  version: 1.4.0
   x-logo:
     url: 'https://developer.oxforddictionaries.com/images/logo.png'
   x-origin:
@@ -959,7 +959,7 @@ paths:
           name: filters_advanced
           required: true
           type: string
-        - description: 'Semicolon separated list of wordlist parameters to be excluded from response, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values.'
+        - description: 'Semicolon separated list of wordlist parameters to be excluded from response, presented as value pairs: LexicalCategory, domains, regions, registers, grammaticalFeatures. Parameters can take comma separated list of values.'
           in: query
           name: exclude
           required: false

@@ -2576,7 +2576,7 @@ definitions:
     description: Metadata describing an Operation.
     properties:
       clientId:
-        description: Optionally provided by the caller when submitting the request that creates the operation.
+        description: This field is deprecated. Use `labels` instead. Optionally provided by the caller when submitting the request that creates the operation.
         type: string
       createTime:
         description: The time at which the job was submitted to the Genomics service.
@@ -2589,6 +2589,11 @@ definitions:
         items:
           $ref: '#/definitions/OperationEvent'
         type: array
+      labels:
+        additionalProperties:
+          type: string
+        description: Optionally provided by the caller when submitting the request that creates the operation.
+        type: object
       projectId:
         description: The Google Cloud Project in which the job is scoped.
         type: string

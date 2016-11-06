@@ -1853,6 +1853,9 @@ definitions:
           Drive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.
           If a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource.
         type: string
+      modifiedByMe:
+        description: Whether the file has been modified by this user.
+        type: boolean
       modifiedByMeTime:
         description: The last time the file was modified by the user (RFC 3339 date-time).
         format: date-time

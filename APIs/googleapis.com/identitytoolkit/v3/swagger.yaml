@@ -717,6 +717,8 @@ definitions:
       changeEmailTemplate:
         $ref: '#/definitions/EmailTemplate'
         description: Change email template.
+      dynamicLinksDomain:
+        type: string
       enableAnonymousUser:
         description: Whether anonymous user is enabled.
         type: boolean
@@ -914,12 +916,18 @@ definitions:
       captchaResponse:
         description: Response to the captcha.
         type: string
+      disabled:
+        description: Whether to disable the user. Only can be used by service account.
+        type: boolean
       displayName:
         description: The name of the user.
         type: string
       email:
         description: The email of the user.
         type: string
+      emailVerified:
+        description: Mark the email as verified or not. Only can be used by service account.
+        type: boolean
       idToken:
         description: The GITKit token of the authenticated user.
         type: string
@@ -929,10 +937,16 @@ definitions:
       password:
         description: The new password of the user.
         type: string
+      photoUrl:
+        description: The photo url of the user.
+        type: string
     type: object
   IdentitytoolkitRelyingpartyUploadAccountRequest:
     description: Request to upload user account in batch.
     properties:
+      allowOverwrite:
+        description: Whether allow overwrite existing account when user local_id exists.
+        type: boolean
       delegatedProjectNumber:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
         format: int64
@@ -1288,14 +1302,14 @@ definitions:
             rawId:
               description: User's raw identifier directly returned from IDP.
               type: string
-            rawUserInfo:
-              description: Raw IDP-returned user info.
-              type: string
             screenName:
               description: User's screen name at Twitter or login name at Github.
               type: string
           type: object
         type: array
+      rawPassword:
+        description: The user's plain text password.
+        type: string
       salt:
         description: The user's password salt.
         format: byte

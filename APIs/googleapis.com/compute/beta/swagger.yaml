@@ -79,6 +79,7 @@ parameters:
 tags:
   - name: addresses
   - name: autoscalers
+  - name: backendBuckets
   - name: backendServices
   - name: diskTypes
   - name: disks
@@ -1452,6 +1453,219 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - globalAddresses
+  '/{project}/global/backendBuckets':
+    get:
+      description: Retrieves the list of BackendBucket resources available to the specified project.
+      operationId: compute.backendBuckets.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BackendBucketList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - backendBuckets
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a BackendBucket resource in the specified project using the data included in the request.
+      operationId: compute.backendBuckets.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendBucket'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
+  '/{project}/global/backendBuckets/{backendBucket}':
+    delete:
+      description: Deletes the specified BackendBucket resource.
+      operationId: compute.backendBuckets.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the BackendBucket resource to delete.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
+    get:
+      description: Returns the specified BackendBucket resource. Get a list of available backend buckets by making a list() request.
+      operationId: compute.backendBuckets.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the BackendBucket resource to return.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BackendBucket'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - backendBuckets
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the specified BackendBucket resource with the data included in the request. This method supports patch semantics.
+      operationId: compute.backendBuckets.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the BackendBucket resource to update.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendBucket'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
+    put:
+      description: Updates the specified BackendBucket resource with the data included in the request.
+      operationId: compute.backendBuckets.update
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the BackendBucket resource to update.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendBucket'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
   '/{project}/global/backendServices':
     get:
       description: Retrieves the list of BackendService resources available to the specified project.
@@ -7162,6 +7376,21 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - in: query
+          name: filter
+          type: string
+        - default: 500
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - in: query
+          name: order_by
+          type: string
+        - in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -8341,6 +8570,94 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - subnetworks
+  '/{project}/regions/{region}/subnetworks/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.subnetworks.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - subnetworks
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/subnetworks/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.subnetworks.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - subnetworks
   '/{project}/regions/{region}/subnetworks/{resource}/testIamPermissions':
@@ -10773,6 +11090,21 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - in: query
+          name: filter
+          type: string
+        - default: 500
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - in: query
+          name: order_by
+          type: string
+        - in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -13112,7 +13444,12 @@ definitions:
           - READ_WRITE
         type: string
       source:
-        description: 'Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks. Note that for InstanceTemplate, it is just disk name, not URL for the disk.'
+        description: |-
+          Specifies a valid partial or full URL to an existing Persistent Disk resource. When creating a new instance, one of initializeParams.sourceImage or disks.source is required.
+
+          If desired, you can also attach existing non-root persistent disks using this property. This field is only applicable for persistent disks.
+
+          Note that for InstanceTemplate, specify the disk name, not the URL for the disk.
         type: string
       type:
         description: 'Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.'
@@ -13153,7 +13490,7 @@ definitions:
         type: string
       sourceImage:
         description: |-
-          The source image used to create this disk. If the source image is deleted, this field will not be set.
+          The source image to create this disk. When creating a new instance, one of initializeParams.sourceImage or disks.source is required.
 
           To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:
 
@@ -13169,7 +13506,9 @@ definitions:
 
           You can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
 
-          global/images/family/my-private-family
+          global/images/family/my-private-family 
+
+          If the source image is deleted later, this field will not be set.
         type: string
       sourceImageEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
@@ -13177,6 +13516,18 @@ definitions:
           The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key.
 
           Instance templates do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys.
+    type: object
+  AuditConfig:
+    description: Enables "data access" audit logging for a service and specifies a list of members that are log-exempted.
+    properties:
+      exemptedMembers:
+        description: Specifies the identities that are exempted from "data access" audit logging for the `service` specified above. Follows the same format of Binding.members.
+        items:
+          type: string
+        type: array
+      service:
+        description: 'Specifies a service that will be enabled for "data access" audit logging. For example, `resourcemanager`, `storage`, `compute`. `allServices` is a special value that covers all services.'
+        type: string
     type: object
   Autoscaler:
     description: 'Represents an Autoscaler resource. Autoscalers allow you to automatically scale virtual machine instances in managed instance groups according to an autoscaling policy that you define. For more information, read Autoscaling Groups of Instances.'
@@ -13489,6 +13840,59 @@ definitions:
         format: float
         type: number
     type: object
+  BackendBucket:
+    description: A BackendBucket resource. This resource defines a Cloud Storage bucket.
+    properties:
+      bucketName:
+        description: Cloud Storage bucket name.
+        type: string
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+        type: string
+      enableCdn:
+        description: 'If true, enable Cloud CDN for this BackendBucket.'
+        type: boolean
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#backendBucket'
+        description: Type of the resource.
+        type: string
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  BackendBucketList:
+    description: Contains a list of BackendBucket resources.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of BackendBucket resources.
+        items:
+          $ref: '#/definitions/BackendBucket'
+        type: array
+      kind:
+        default: 'compute#backendBucketList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        description: '[Output Only] A token used to continue a truncated list request.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
   BackendService:
     description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity.
     properties:
@@ -13707,10 +14111,82 @@ definitions:
             type: string
         type: object
     type: object
+  Binding:
+    description: Associates `members` with a `role`.
+    properties:
+      members:
+        description: |-
+          Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:
+
+          * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account.
+
+          * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
+
+          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`.
+
+
+
+          * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`.
+
+          * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`.
+
+          * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.
+        items:
+          type: string
+        type: array
+      role:
+        description: 'Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.'
+        type: string
+    type: object
   CacheInvalidationRule:
     properties:
+      host:
+        description: 'If set, this invalidation rule will only apply to requests with a Host header matching host.'
+        type: string
       path:
         type: string
+    type: object
+  Condition:
+    description: A condition to be met.
+    properties:
+      iam:
+        description: Trusted attributes supplied by the IAM system.
+        enum:
+          - ATTRIBUTION
+          - AUTHORITY
+          - NO_ATTR
+          - SECURITY_REALM
+        type: string
+      op:
+        description: An operator to apply the subject with.
+        enum:
+          - DISCHARGED
+          - EQUALS
+          - IN
+          - NOT_EQUALS
+          - NOT_IN
+          - NO_OP
+        type: string
+      svc:
+        description: Trusted attributes discharged by the service.
+        type: string
+      sys:
+        description: Trusted attributes supplied by any service that owns resources and uses the IAM system for access control.
+        enum:
+          - IP
+          - NAME
+          - NO_ATTR
+          - REGION
+          - SERVICE
+        type: string
+      value:
+        description: DEPRECATED. Use 'values' instead.
+        type: string
+      values:
+        description: The objects of the condition. This is mutually exclusive with 'value'.
+        items:
+          type: string
+        type: array
     type: object
   ConnectionDraining:
     description: Message containing connection draining configuration.
@@ -13752,13 +14228,13 @@ definitions:
     description: Deprecation status for a public resource.
     properties:
       deleted:
-        description: An optional RFC3339 timestamp on or after which the deprecation state of this resource will be changed to DELETED.
+        description: An optional RFC3339 timestamp on or after which the state of this resource is intended to change to DELETED. This is only informational and the status will not change unless the client explicitly changes it.
         type: string
       deprecated:
-        description: An optional RFC3339 timestamp on or after which the deprecation state of this resource will be changed to DEPRECATED.
+        description: An optional RFC3339 timestamp on or after which the state of this resource is intended to change to DEPRECATED. This is only informational and the status will not change unless the client explicitly changes it.
         type: string
       obsolete:
-        description: An optional RFC3339 timestamp on or after which the deprecation state of this resource will be changed to OBSOLETE.
+        description: An optional RFC3339 timestamp on or after which the state of this resource is intended to change to OBSOLETE. This is only informational and the status will not change unless the client explicitly changes it.
         type: string
       replacement:
         description: The URL of the suggested replacement for a deprecated resource. The suggested replacement resource must be the same kind of resource as the deprecated resource.
@@ -15801,6 +16277,23 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
     type: object
+  LogConfig:
+    description: Specifies what kind of log the caller must write
+    properties:
+      counter:
+        $ref: '#/definitions/LogConfigCounterOptions'
+        description: Counter options.
+    type: object
+  LogConfigCounterOptions:
+    description: Options for counters
+    properties:
+      field:
+        description: The field value to attribute.
+        type: string
+      metric:
+        description: The metric to update.
+        type: string
+    type: object
   MachineType:
     description: A Machine Type resource.
     properties:
@@ -16232,7 +16725,7 @@ definitions:
         format: uint64
         type: string
       targetLink:
-        description: '[Output Only] The URL of the resource that the operation modifies. If creating a persistent disk snapshot, this points to the persistent disk that the snapshot was created from.'
+        description: '[Output Only] The URL of the resource that the operation modifies. For operations related to creating a snapshot, this points to the persistent disk that the snapshot was created from.'
         type: string
       user:
         description: '[Output Only] User who requested the operation, for example: user@example.com.'
@@ -16411,6 +16904,53 @@ definitions:
         description: The URL of the BackendService resource if this rule is matched.
         type: string
     type: object
+  Policy:
+    description: |-
+      Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.
+
+
+
+      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
+
+      **Example**
+
+      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
+
+      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam).
+    properties:
+      auditConfigs:
+        description: |-
+          Specifies audit logging configs for "data access". "data access": generally refers to data reads/writes and admin reads. "admin activity": generally refers to admin writes.
+
+          Note: `AuditConfig` doesn't apply to "admin activity", which always enables audit logging.
+        items:
+          $ref: '#/definitions/AuditConfig'
+        type: array
+      bindings:
+        description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.
+
+          If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
+        format: byte
+        type: string
+      iamOwned:
+        description: ''
+        type: boolean
+      rules:
+        description: 'If more than one rule is specified, the rules are applied in the following manner: - All matching LOG rules are always applied. - If any DENY/DENY_WITH_LOG rule matches, permission is denied. Logging will be applied if one or more matching rule requires logging. - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is granted. Logging will be applied if one or more matching rule requires logging. - Otherwise, if no rule applies, permission is denied.'
+        items:
+          $ref: '#/definitions/Rule'
+        type: array
+      version:
+        description: Version of the `Policy`. The default version is 0.
+        format: int32
+        type: integer
+    type: object
   Project:
     description: 'A Project resource. Projects can only be created in the Google Cloud Platform Console. Unless marked otherwise, values can only be modified in the console.'
     properties:
@@ -16471,6 +17011,7 @@ definitions:
         description: '[Output Only] Name of the quota metric.'
         enum:
           - AUTOSCALERS
+          - BACKEND_BUCKETS
           - BACKEND_SERVICES
           - CPUS
           - DISKS_TOTAL_GB
@@ -17127,6 +17668,48 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  Rule:
+    description: A rule to be applied in a Policy.
+    properties:
+      action:
+        description: Required
+        enum:
+          - ALLOW
+          - ALLOW_WITH_LOG
+          - DENY
+          - DENY_WITH_LOG
+          - LOG
+          - NO_ACTION
+        type: string
+      conditions:
+        description: Additional restrictions that must be met
+        items:
+          $ref: '#/definitions/Condition'
+        type: array
+      description:
+        description: Human-readable description of the rule.
+        type: string
+      ins:
+        description: 'If one or more ''in'' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.'
+        items:
+          type: string
+        type: array
+      logConfigs:
+        description: The config returned to callers of tech.iam.IAM.CheckPolicy for any entries that match the LOG action.
+        items:
+          $ref: '#/definitions/LogConfig'
+        type: array
+      notIns:
+        description: 'If one or more ''not_in'' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.'
+        items:
+          type: string
+        type: array
+      permissions:
+        description: 'A permission is a string of form ''..'' (e.g., ''storage.buckets.list''). A value of ''*'' matches all permissions, and a verb part of ''*'' (e.g., ''storage.buckets.*'') matches all verbs.'
+        items:
+          type: string
+        type: array
     type: object
   SSLHealthCheck:
     properties:

@@ -175,18 +175,6 @@ parameters:
     in: formData
     name: object_type_id
     type: integer
-  performAllParam:
-    default: false
-    description: Perform request on all Objects that match criteria.
-    in: query
-    name: performAll
-    type: boolean
-  performAllParamFormData:
-    default: false
-    description: Perform request on all Objects that match criteria.
-    in: formData
-    name: performAll
-    type: boolean
   rangeParam:
     description: Number of results to return (maximum=50)
     format: int32
@@ -629,7 +617,6 @@ paths:
       parameters:
         - $ref: '#/parameters/objectIdParam'
         - $ref: '#/parameters/idsParam'
-        - $ref: '#/parameters/performAllParam'
         - $ref: '#/parameters/startParam'
         - $ref: '#/parameters/rangeParam'
         - $ref: '#/parameters/sortParam'
@@ -660,7 +647,6 @@ paths:
       parameters:
         - $ref: '#/parameters/objectIdParam'
         - $ref: '#/parameters/idsParam'
-        - $ref: '#/parameters/performAllParam'
         - $ref: '#/parameters/startParam'
         - $ref: '#/parameters/rangeParam'
         - $ref: '#/parameters/sortParam'
@@ -839,7 +825,6 @@ paths:
         - $ref: '#/parameters/objectIdParamFormData'
         - $ref: '#/parameters/removeListParamFormData'
         - $ref: '#/parameters/idsParamFormData'
-        - $ref: '#/parameters/performAllParamFormData'
         - $ref: '#/parameters/startParamFormData'
         - $ref: '#/parameters/rangeParamFormData'
         - $ref: '#/parameters/sortParamFormData'
@@ -869,7 +854,6 @@ paths:
         - $ref: '#/parameters/objectIdParamFormData'
         - $ref: '#/parameters/addListParamFormData'
         - $ref: '#/parameters/idsParamFormData'
-        - $ref: '#/parameters/performAllParamFormData'
         - $ref: '#/parameters/startParamFormData'
         - $ref: '#/parameters/rangeParamFormData'
         - $ref: '#/parameters/sortParamFormData'
@@ -1289,10 +1273,6 @@ definitions:
         description: ''
         format: int32
         type: integer
-      performAll:
-        default: false
-        description: Perform request on all Objects that match criteria.
-        type: boolean
       range:
         description: Number of results to return (maximum=50)
         format: int32

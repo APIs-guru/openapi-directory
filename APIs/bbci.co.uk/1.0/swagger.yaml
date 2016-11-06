@@ -23,7 +23,7 @@ info:
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
     version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '421'
+  x-release: '424'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -1059,6 +1059,8 @@ definitions:
           - channel_title
           - scheduled_start
         type: object
+      original_title:
+        type: string
       parent_id:
         type: string
       parent_position:
@@ -1749,6 +1751,8 @@ definitions:
         properties:
           count:
             type: number
+          count_all:
+            type: number
           elements:
             items:
               $ref: '#/definitions/watching'
@@ -1756,6 +1760,7 @@ definitions:
         required:
           - elements
           - count
+          - count_all
         type: object
     required:
       - schema
@@ -1818,6 +1823,12 @@ definitions:
         items:
           $ref: '#/definitions/episode'
         type: array
+      labels:
+        additionalProperties: false
+        properties:
+          category:
+            type: string
+        type: object
       lexical_sort_letter:
         type: string
       master_brand:
@@ -2055,6 +2066,102 @@ definitions:
       - type
       - episode
     type: object
+  version:
+    additionalProperties: false
+    properties:
+      availability:
+        additionalProperties: false
+        properties:
+          end:
+            type: string
+          remaining:
+            additionalProperties: false
+            properties:
+              text:
+                type: string
+            required:
+              - text
+            type: object
+          start:
+            type: string
+        required:
+          - start
+        type: object
+      credits_start:
+        type: number
+      download:
+        type: boolean
+      duration:
+        additionalProperties: false
+        properties:
+          text:
+            type: string
+          value:
+            type: string
+        required:
+          - text
+          - value
+        type: object
+      first_broadcast:
+        type: string
+      guidance:
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+          text:
+            additionalProperties: false
+            properties:
+              large:
+                type: string
+              medium:
+                type: string
+              small:
+                type: string
+            type: object
+        required:
+          - id
+        type: object
+      hd:
+        type: boolean
+      id:
+        type: string
+      kind:
+        type: string
+      rrc:
+        additionalProperties: false
+        properties:
+          description:
+            additionalProperties: false
+            properties:
+              large:
+                type: string
+              small:
+                type: string
+            required:
+              - small
+              - large
+            type: object
+          url:
+            type: string
+        required:
+          - description
+        type: object
+      service_id:
+        type: string
+      type:
+        enum:
+          - version
+          - version_large
+    required:
+      - id
+      - type
+      - hd
+      - download
+      - duration
+      - kind
+      - availability
+    type: object
   watching:
     additionalProperties: false
     properties:
@@ -2079,10 +2186,13 @@ definitions:
           - watching
       urn:
         type: string
+      version:
+        $ref: '#/definitions/version'
     required:
       - type
       - urn
       - episode
       - programme
+      - version
       - has_next
     type: object

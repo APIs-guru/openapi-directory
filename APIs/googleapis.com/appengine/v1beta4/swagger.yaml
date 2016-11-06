@@ -29,7 +29,9 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
+      'https://www.googleapis.com/auth/appengine.admin': View and manage your applications deployed on Google App Engine
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
     type: oauth2
 parameters:
   $.xgafv:
@@ -175,7 +177,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     patch:
-      description: Updates application parameters.
+      description: Updates application fields.
       operationId: appengine.apps.patch
       parameters:
         - description: 'Part of `name`. Name of the application to update. For example: "apps/myapp".'
@@ -230,7 +232,11 @@ paths:
             $ref: '#/definitions/ListLocationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
     parameters:
@@ -269,7 +275,11 @@ paths:
             $ref: '#/definitions/Location'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
     parameters:
@@ -311,7 +321,11 @@ paths:
             $ref: '#/definitions/ListModulesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
     parameters:
@@ -374,7 +388,11 @@ paths:
             $ref: '#/definitions/Module'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
     parameters:
@@ -464,7 +482,11 @@ paths:
             $ref: '#/definitions/ListVersionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
     parameters:
@@ -572,7 +594,11 @@ paths:
             $ref: '#/definitions/Version'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
     parameters:
@@ -661,7 +687,11 @@ paths:
             $ref: '#/definitions/ListInstancesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
     parameters:
@@ -744,7 +774,11 @@ paths:
             $ref: '#/definitions/Instance'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
     parameters:
@@ -843,7 +877,11 @@ paths:
             $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
     parameters:
@@ -882,7 +920,11 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - apps
     parameters:
@@ -1050,6 +1092,10 @@ definitions:
     type: object
   DebugInstanceRequest:
     description: Request message for `Instances.DebugInstance`.
+    properties:
+      sshKey:
+        description: 'Public SSH key to add to the instance. Example: `[USERNAME]:ssh-rsa KEY_VALUE` or `[USERNAME]:ssh-rsa [KEY_VALUE] google-ssh {"userName":"[USERNAME]","expireOn":"[EXPIRE_TIME]"}` For more information, see [Adding and Removing SSH Keys](https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys)'
+        type: string
     type: object
   Deployment:
     description: Code and application artifacts used to deploy a version to App Engine.
@@ -1192,6 +1238,9 @@ definitions:
         type: string
       vmId:
         description: Virtual machine ID of this instance. Only applicable for instances in App Engine flexible environment. @OutputOnly
+        type: string
+      vmIp:
+        description: The IP address of this instance. Only applicable for instances in App Engine flexible environment. @OutputOnly
         type: string
       vmName:
         description: Name of the virtual machine where this instance lives. Only applicable for instances in App Engine flexible environment. @OutputOnly
@@ -1370,7 +1419,7 @@ definitions:
         type: boolean
       error:
         $ref: '#/definitions/Status'
-        description: The error result of the operation in case of failure.
+        description: The error result of the operation in case of failure or cancellation.
       metadata:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.
@@ -1402,6 +1451,25 @@ definitions:
         type: string
       target:
         description: 'Name of the resource that this operation is acting on. Example: `apps/myapp/modules/default`. @OutputOnly'
+        type: string
+      user:
+        description: User who requested this operation. @OutputOnly
+        type: string
+    type: object
+  OperationMetadataExperimental:
+    description: Metadata for the given google.longrunning.Operation.
+    properties:
+      endTime:
+        description: Time that this operation completed. @OutputOnly
+        type: string
+      insertTime:
+        description: Time that this operation was created. @OutputOnly
+        type: string
+      method:
+        description: 'API method that initiated this operation. Example: `google.appengine.experimental.CustomDomains.CreateCustomDomain`. @OutputOnly'
+        type: string
+      target:
+        description: 'Name of the resource that this operation is acting on. Example: `apps/myapp/customDomains/example.com`. @OutputOnly'
         type: string
       user:
         description: User who requested this operation. @OutputOnly

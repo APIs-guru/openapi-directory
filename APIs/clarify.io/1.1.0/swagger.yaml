@@ -23,9 +23,9 @@ paths:
     get:
       description: 'Gets the list of bundles. Links to each item are in the _links with link relation <b>items</b>.<br/><br/>After getting the initial list, use the <b>first</b>, <b>last</b>, <b>next</b>, <b>prev</b> link relations to get more bundles in the list. Note that <b>next</b> will not be available at the end of the list and <b>prev</b> will not be available at the start of the list. If the results are exactly one page neither <b>prev</b> nor <b>next</b> will be available.<br/><br/>The <b>embed</b> parameter specifies link relations to embed in the results. The models for the specified link relations will be in an array in the embedded object with the link relation as the key. For example, if you do embed=items, _embedded will contain a property <b>items</b> whose value is the array of bundle models. For link relations that are curies (ex. "clarify:metadata"), you may simply use the base name (ex. "metadata").'
       parameters:
-        - description: limit results to specified number of bundles. Default is 10. Max 20.
+        - description: limit results to specified number of bundles. Default is 10. Max 100.
           in: query
-          maximum: 20
+          maximum: 100
           minimum: 1
           name: limit
           required: false
@@ -547,7 +547,7 @@ paths:
           name: query_fields
           required: false
           type: string
-        - description: 'filter expression, typically programmatically generated based on input controls and data segregation rules etc. Up to 400 characters.'
+        - description: 'filter expression, typically programmatically generated based on input controls and data segregation rules etc. Up to 500 characters.'
           in: query
           name: filter
           required: false
@@ -563,9 +563,9 @@ paths:
           name: language
           required: false
           type: string
-        - description: limit results to specified number of bundles. Default is 10. Max 20.
+        - description: limit results to specified number of bundles. Default is 10. Max 100.
           in: query
-          maximum: 20
+          maximum: 100
           minimum: 1
           name: limit
           required: false

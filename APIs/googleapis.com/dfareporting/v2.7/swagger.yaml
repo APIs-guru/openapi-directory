@@ -2,23 +2,23 @@ swagger: '2.0'
 schemes:
   - https
 host: www.googleapis.com
-basePath: /dfareporting/v2.6
+basePath: /dfareporting/v2.7
 info:
   contact:
     name: Google
     url: 'https://google.com'
   description: Manages your DoubleClick Campaign Manager ad campaigns and reports.
   title: DCM/DFA Reporting And Trafficking
-  version: v2.6
+  version: v2.7
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.6/rest'
+    url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.7/rest'
     version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: dfareporting
 externalDocs:
@@ -133,6 +133,7 @@ tags:
   - name: userRolePermissionGroups
   - name: userRolePermissions
   - name: userRoles
+  - name: videoFormats
 paths:
   '/reports/{reportId}/files/{fileId}':
     get:
@@ -765,35 +766,6 @@ paths:
             type: string
           name: creativeOptimizationConfigurationIds
           type: array
-        - description: Select only ads with the specified creativeType.
-          enum:
-            - BRAND_SAFE_DEFAULT_INSTREAM_VIDEO
-            - CUSTOM_DISPLAY
-            - CUSTOM_DISPLAY_INTERSTITIAL
-            - DISPLAY
-            - DISPLAY_IMAGE_GALLERY
-            - DISPLAY_REDIRECT
-            - FLASH_INPAGE
-            - HTML5_BANNER
-            - IMAGE
-            - INSTREAM_VIDEO
-            - INSTREAM_VIDEO_REDIRECT
-            - INTERNAL_REDIRECT
-            - INTERSTITIAL_INTERNAL_REDIRECT
-            - RICH_MEDIA_DISPLAY_BANNER
-            - RICH_MEDIA_DISPLAY_EXPANDING
-            - RICH_MEDIA_DISPLAY_INTERSTITIAL
-            - RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL
-            - RICH_MEDIA_IM_EXPAND
-            - RICH_MEDIA_INPAGE_FLOATING
-            - RICH_MEDIA_MOBILE_IN_APP
-            - RICH_MEDIA_PEEL_DOWN
-            - TRACKING_TEXT
-            - VPAID_LINEAR_VIDEO
-            - VPAID_NON_LINEAR_VIDEO
-          in: query
-          name: creativeType
-          type: string
         - description: 'Select only dynamic click trackers. Applicable when type is AD_SERVING_CLICK_TRACKER. If true, select dynamic click trackers. If false, select static click trackers. Leave unset to select both.'
           in: query
           name: dynamicClickTracker
@@ -7934,6 +7906,67 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/videoFormats':
+    get:
+      description: Lists available video formats.
+      operationId: dfareporting.videoFormats.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VideoFormatsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - videoFormats
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/videoFormats/{id}':
+    get:
+      description: Gets one video format by ID.
+      operationId: dfareporting.videoFormats.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Video format ID.
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VideoFormat'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - videoFormats
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   Account:
     description: Contains properties of a DCM account.
@@ -9040,6 +9073,25 @@ definitions:
         format: int64
         type: string
     type: object
+  CompanionSetting:
+    description: Companion Settings
+    properties:
+      companionsDisabled:
+        description: Whether companions are disabled for this placement.
+        type: boolean
+      enabledSizes:
+        description: Whitelist of companion sizes to be served to this placement. Set this list to null or empty to serve all companion sizes.
+        items:
+          $ref: '#/definitions/Size'
+        type: array
+      imageOnly:
+        description: Whether to serve only static images as companions.
+        type: boolean
+      kind:
+        default: 'dfareporting#companionSetting'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#companionSetting".'
+        type: string
+    type: object
   CompatibleFields:
     description: Represents a response to the queryCompatibleFields method.
     properties:
@@ -9516,6 +9568,9 @@ definitions:
       overrideCss:
         description: 'Override CSS value for rich media creatives. Applicable to the following creative types: all RICH_MEDIA.'
         type: string
+      progressOffset:
+        $ref: '#/definitions/VideoOffset'
+        description: 'Amount of time to play the video before counting a view. Applicable to the following creative types: all INSTREAM_VIDEO.'
       redirectUrl:
         description: 'URL of hosted image or hosted video or another ad tag. For INSTREAM_VIDEO_REDIRECT creatives this is the in-stream video redirect URL. The standard for a VAST (Video Ad Serving Template) ad response allows for a redirect link to another VAST 2.0 or 3.0 call. This is a required field when applicable. Applicable to the following creative types: DISPLAY_REDIRECT, INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, and INSTREAM_VIDEO_REDIRECT'
         type: string
@@ -9536,6 +9591,9 @@ definitions:
       size:
         $ref: '#/definitions/Size'
         description: 'Size associated with this creative. When inserting or updating a creative either the size ID field or size width and height fields can be used. This is a required field when applicable; however for IMAGE, FLASH_INPAGE creatives, and for DISPLAY creatives with a primary asset of type HTML_IMAGE, if left blank, this field will be automatically set using the actual size of the associated image assets. Applicable to the following creative types: DISPLAY, DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA.'
+      skipOffset:
+        $ref: '#/definitions/VideoOffset'
+        description: 'Amount of time to play the video before the skip button appears. Applicable to the following creative types: all INSTREAM_VIDEO.'
       skippable:
         description: 'Whether the user can choose to skip the creative. Applicable to the following creative types: all INSTREAM_VIDEO and all VPAID.'
         type: boolean
@@ -12794,6 +12852,20 @@ definitions:
       tagSetting:
         $ref: '#/definitions/TagSetting'
         description: Tag settings for this placement.
+      videoActiveViewOptOut:
+        description: 'Whether Verification and ActiveView are disabled for in-stream video creatives for this placement. The same setting videoActiveViewOptOut exists on the site level -- the opt out occurs if either of these settings are true. These settings are distinct from DirectorySites.settings.activeViewOptOut or Sites.siteSettings.activeViewOptOut which only apply to display ads. However, Accounts.activeViewOptOut opts out both video traffic, as well as display ads, from Verification and ActiveView.'
+        type: boolean
+      videoSettings:
+        $ref: '#/definitions/VideoSettings'
+        description: A collection of settings which affect video creatives served through this placement. Applicable to placements with IN_STREAM_VIDEO compatibility.
+      vpaidAdapterChoice:
+        description: VPAID adapter setting for this placement. Controls which VPAID format the measurement adapter will use for in-stream video creatives assigned to this placement.
+        enum:
+          - BOTH
+          - DEFAULT
+          - FLASH
+          - HTML5
+        type: string
     type: object
   PlacementAssignment:
     description: Placement Assignment.
@@ -14068,9 +14140,17 @@ definitions:
       tagSetting:
         $ref: '#/definitions/TagSetting'
         description: Configuration settings for dynamic and image floodlight tags.
-      videoActiveViewOptOut:
-        description: 'Whether Verification and ActiveView are disabled for in-stream video creatives on this site. The same setting videoActiveViewOptOut exists on the directory site level -- the opt out occurs if either of these settings are true. These settings are distinct from DirectorySites.settings.activeViewOptOut or Sites.siteSettings.activeViewOptOut which only apply to display ads. However, Accounts.activeViewOptOut opts out both video traffic, as well as display ads, from Verification and ActiveView.'
+      videoActiveViewOptOutTemplate:
+        description: 'Whether Verification and ActiveView for in-stream video creatives are disabled by default for new placements created under this site. This value will be used to populate the placement.videoActiveViewOptOut field, when no value is specified for the new placement.'
         type: boolean
+      vpaidAdapterChoiceTemplate:
+        description: 'Default VPAID adapter setting for new placements created under this site. This value will be used to populate the placements.vpaidAdapterChoice field, when no value is specified for the new placement. Controls which VPAID format the measurement adapter will use for in-stream video creatives assigned to the placement. The publisher''s specifications will typically determine this setting. For VPAID creatives, the adapter format will match the VPAID format (HTML5 VPAID creatives use the HTML5 adapter, and Flash VPAID creatives use the Flash adapter).'
+        enum:
+          - BOTH
+          - DEFAULT
+          - FLASH
+          - HTML5
+        type: string
     type: object
   SitesListResponse:
     description: Site List Response
@@ -14123,6 +14203,23 @@ definitions:
         items:
           $ref: '#/definitions/Size'
         type: array
+    type: object
+  SkippableSetting:
+    description: Skippable Settings
+    properties:
+      kind:
+        default: 'dfareporting#skippableSetting'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#skippableSetting".'
+        type: string
+      progressOffset:
+        $ref: '#/definitions/VideoOffset'
+        description: Amount of time to play videos served to this placement before counting a view. Applicable when skippable is true.
+      skipOffset:
+        $ref: '#/definitions/VideoOffset'
+        description: Amount of time to play videos served to this placement before the skip button should appear. Applicable when skippable is true.
+      skippable:
+        description: Whether the user can skip creatives served to this placement.
+        type: boolean
     type: object
   SortedDimension:
     description: Represents a sorted dimension.
@@ -14479,6 +14576,20 @@ definitions:
         description: URL for the specified third-party URL type.
         type: string
     type: object
+  TranscodeSetting:
+    description: Transcode Settings
+    properties:
+      enabledVideoFormats:
+        description: Whitelist of video formats to be served to this placement. Set this list to null or empty to serve all video formats.
+        items:
+          format: int32
+          type: integer
+        type: array
+      kind:
+        default: 'dfareporting#transcodeSetting'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#transcodeSetting".'
+        type: string
+    type: object
   UserDefinedVariableConfiguration:
     description: User Defined Variable configuration.
     properties:
@@ -14763,4 +14874,74 @@ definitions:
         items:
           $ref: '#/definitions/UserRole'
         type: array
+    type: object
+  VideoFormat:
+    description: Contains information about supported video formats.
+    properties:
+      fileType:
+        description: File type of the video format.
+        enum:
+          - FLV
+          - M3U8
+          - MP4
+          - THREEGPP
+          - WEBM
+        type: string
+      id:
+        description: ID of the video format.
+        format: int32
+        type: integer
+      kind:
+        default: 'dfareporting#videoFormat'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#videoFormat".'
+        type: string
+      resolution:
+        $ref: '#/definitions/Size'
+        description: The resolution of this video format.
+      targetBitRate:
+        description: The target bit rate of this video format.
+        format: int32
+        type: integer
+    type: object
+  VideoFormatsListResponse:
+    description: Video Format List Response
+    properties:
+      kind:
+        default: 'dfareporting#videoFormatsListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#videoFormatsListResponse".'
+        type: string
+      videoFormats:
+        description: Video format collection.
+        items:
+          $ref: '#/definitions/VideoFormat'
+        type: array
+    type: object
+  VideoOffset:
+    description: Video Offset
+    properties:
+      offsetPercentage:
+        description: 'Duration, as a percentage of video duration. Do not set when offsetSeconds is set.'
+        format: int32
+        type: integer
+      offsetSeconds:
+        description: 'Duration, in seconds. Do not set when offsetPercentage is set.'
+        format: int32
+        type: integer
+    type: object
+  VideoSettings:
+    description: Video Settings
+    properties:
+      companionSettings:
+        $ref: '#/definitions/CompanionSetting'
+        description: Settings for the companion creatives of video creatives served to this placement.
+      kind:
+        default: 'dfareporting#videoSettings'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#videoSettings".'
+        type: string
+      skippableSettings:
+        $ref: '#/definitions/SkippableSetting'
+        description: 'Settings for the skippability of video creatives served to this placement. If this object is provided, the creative-level skippable settings will be overridden.'
+      transcodeSettings:
+        $ref: '#/definitions/TranscodeSetting'
+        description: 'Settings for the transcodes of video creatives served to this placement. If this object is provided, the creative-level transcode settings will be overridden.'
     type: object

@@ -376,7 +376,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/accountUserProfiles':
     get:
-      description: 'Retrieves a list of account user profiles, possibly filtered.'
+      description: 'Retrieves a list of account user profiles, possibly filtered. This method supports paging.'
       operationId: dfareporting.accountUserProfiles.list
       parameters:
         - description: User profile ID associated with this request.
@@ -556,7 +556,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/accounts':
     get:
-      description: 'Retrieves the list of accounts, possibly filtered.'
+      description: 'Retrieves the list of accounts, possibly filtered. This method supports paging.'
       operationId: dfareporting.accounts.list
       parameters:
         - description: User profile ID associated with this request.
@@ -705,7 +705,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/ads':
     get:
-      description: 'Retrieves a list of ads, possibly filtered.'
+      description: 'Retrieves a list of ads, possibly filtered. This method supports paging.'
       operationId: dfareporting.ads.list
       parameters:
         - description: User profile ID associated with this request.
@@ -1008,7 +1008,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/advertiserGroups':
     get:
-      description: 'Retrieves a list of advertiser groups, possibly filtered.'
+      description: 'Retrieves a list of advertiser groups, possibly filtered. This method supports paging.'
       operationId: dfareporting.advertiserGroups.list
       parameters:
         - description: User profile ID associated with this request.
@@ -1198,7 +1198,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/advertisers':
     get:
-      description: 'Retrieves a list of advertisers, possibly filtered.'
+      description: 'Retrieves a list of advertisers, possibly filtered. This method supports paging.'
       operationId: dfareporting.advertisers.list
       parameters:
         - description: User profile ID associated with this request.
@@ -1427,7 +1427,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/campaigns':
     get:
-      description: 'Retrieves a list of campaigns, possibly filtered.'
+      description: 'Retrieves a list of campaigns, possibly filtered. This method supports paging.'
       operationId: dfareporting.campaigns.list
       parameters:
         - description: User profile ID associated with this request.
@@ -1609,7 +1609,7 @@ paths:
         - campaigns
   '/userprofiles/{profileId}/campaigns/{campaignId}/campaignCreativeAssociations':
     get:
-      description: Retrieves the list of creative IDs associated with the specified campaign.
+      description: Retrieves the list of creative IDs associated with the specified campaign. This method supports paging.
       operationId: dfareporting.campaignCreativeAssociations.list
       parameters:
         - description: User profile ID associated with this request.
@@ -1905,7 +1905,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/changeLogs':
     get:
-      description: Retrieves a list of change logs.
+      description: Retrieves a list of change logs. This method supports paging.
       operationId: dfareporting.changeLogs.list
       parameters:
         - description: User profile ID associated with this request.
@@ -1995,6 +1995,7 @@ paths:
             - OBJECT_REMARKETING_LIST
             - OBJECT_RICHMEDIA_CREATIVE
             - OBJECT_SD_SITE
+            - OBJECT_SEARCH_LIFT_STUDY
             - OBJECT_SIZE
             - OBJECT_SUBACCOUNT
             - OBJECT_TARGETING_TEMPLATE
@@ -2186,7 +2187,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/contentCategories':
     get:
-      description: 'Retrieves a list of content categories, possibly filtered.'
+      description: 'Retrieves a list of content categories, possibly filtered. This method supports paging.'
       operationId: dfareporting.contentCategories.list
       parameters:
         - description: User profile ID associated with this request.
@@ -2508,7 +2509,7 @@ paths:
         - creativeAssets
   '/userprofiles/{profileId}/creativeFields':
     get:
-      description: 'Retrieves a list of creative fields, possibly filtered.'
+      description: 'Retrieves a list of creative fields, possibly filtered. This method supports paging.'
       operationId: dfareporting.creativeFields.list
       parameters:
         - description: User profile ID associated with this request.
@@ -2650,7 +2651,7 @@ paths:
         - creativeFields
   '/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues':
     get:
-      description: 'Retrieves a list of creative field values, possibly filtered.'
+      description: 'Retrieves a list of creative field values, possibly filtered. This method supports paging.'
       operationId: dfareporting.creativeFieldValues.list
       parameters:
         - description: User profile ID associated with this request.
@@ -2925,7 +2926,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/creativeGroups':
     get:
-      description: 'Retrieves a list of creative groups, possibly filtered.'
+      description: 'Retrieves a list of creative groups, possibly filtered. This method supports paging.'
       operationId: dfareporting.creativeGroups.list
       parameters:
         - description: User profile ID associated with this request.
@@ -3104,7 +3105,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/creatives':
     get:
-      description: 'Retrieves a list of creatives, possibly filtered.'
+      description: 'Retrieves a list of creatives, possibly filtered. This method supports paging.'
       operationId: dfareporting.creatives.list
       parameters:
         - description: User profile ID associated with this request.
@@ -3394,7 +3395,7 @@ paths:
         - dimensionValues
   '/userprofiles/{profileId}/directorySiteContacts':
     get:
-      description: 'Retrieves a list of directory site contacts, possibly filtered.'
+      description: 'Retrieves a list of directory site contacts, possibly filtered. This method supports paging.'
       operationId: dfareporting.directorySiteContacts.list
       parameters:
         - description: User profile ID associated with this request.
@@ -3495,7 +3496,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/directorySites':
     get:
-      description: 'Retrieves a list of directory sites, possibly filtered.'
+      description: 'Retrieves a list of directory sites, possibly filtered. This method supports paging.'
       operationId: dfareporting.directorySites.list
       parameters:
         - description: User profile ID associated with this request.
@@ -4037,7 +4038,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/floodlightActivities':
     get:
-      description: 'Retrieves a list of floodlight activities, possibly filtered.'
+      description: 'Retrieves a list of floodlight activities, possibly filtered. This method supports paging.'
       operationId: dfareporting.floodlightActivities.list
       parameters:
         - description: User profile ID associated with this request.
@@ -4293,7 +4294,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/floodlightActivityGroups':
     get:
-      description: 'Retrieves a list of floodlight activity groups, possibly filtered.'
+      description: 'Retrieves a list of floodlight activity groups, possibly filtered. This method supports paging.'
       operationId: dfareporting.floodlightActivityGroups.list
       parameters:
         - description: User profile ID associated with this request.
@@ -4806,7 +4807,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/placementGroups':
     get:
-      description: 'Retrieves a list of placement groups, possibly filtered.'
+      description: 'Retrieves a list of placement groups, possibly filtered. This method supports paging.'
       operationId: dfareporting.placementGroups.list
       parameters:
         - description: User profile ID associated with this request.
@@ -5057,7 +5058,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/placementStrategies':
     get:
-      description: 'Retrieves a list of placement strategies, possibly filtered.'
+      description: 'Retrieves a list of placement strategies, possibly filtered. This method supports paging.'
       operationId: dfareporting.placementStrategies.list
       parameters:
         - description: User profile ID associated with this request.
@@ -5247,7 +5248,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/placements':
     get:
-      description: 'Retrieves a list of placements, possibly filtered.'
+      description: 'Retrieves a list of placements, possibly filtered. This method supports paging.'
       operationId: dfareporting.placements.list
       parameters:
         - description: User profile ID associated with this request.
@@ -5712,7 +5713,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/projects':
     get:
-      description: 'Retrieves a list of projects, possibly filtered.'
+      description: 'Retrieves a list of projects, possibly filtered. This method supports paging.'
       operationId: dfareporting.projects.list
       parameters:
         - description: User profile ID associated with this request.
@@ -5813,7 +5814,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/projects/{projectId}/inventoryItems':
     get:
-      description: 'Retrieves a list of inventory items, possibly filtered.'
+      description: 'Retrieves a list of inventory items, possibly filtered. This method supports paging.'
       operationId: dfareporting.inventoryItems.list
       parameters:
         - description: User profile ID associated with this request.
@@ -5938,7 +5939,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/projects/{projectId}/orderDocuments':
     get:
-      description: 'Retrieves a list of order documents, possibly filtered.'
+      description: 'Retrieves a list of order documents, possibly filtered. This method supports paging.'
       operationId: dfareporting.orderDocuments.list
       parameters:
         - description: User profile ID associated with this request.
@@ -6060,7 +6061,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/projects/{projectId}/orders':
     get:
-      description: 'Retrieves a list of orders, possibly filtered.'
+      description: 'Retrieves a list of orders, possibly filtered. This method supports paging.'
       operationId: dfareporting.orders.list
       parameters:
         - description: User profile ID associated with this request.
@@ -6292,7 +6293,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/remarketingLists':
     get:
-      description: 'Retrieves a list of remarketing lists, possibly filtered.'
+      description: 'Retrieves a list of remarketing lists, possibly filtered. This method supports paging.'
       operationId: dfareporting.remarketingLists.list
       parameters:
         - description: User profile ID associated with this request.
@@ -6829,7 +6830,7 @@ paths:
         - reports
   '/userprofiles/{profileId}/sites':
     get:
-      description: 'Retrieves a list of sites, possibly filtered.'
+      description: 'Retrieves a list of sites, possibly filtered. This method supports paging.'
       operationId: dfareporting.sites.list
       parameters:
         - description: User profile ID associated with this request.
@@ -7142,7 +7143,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/subaccounts':
     get:
-      description: 'Gets a list of subaccounts, possibly filtered.'
+      description: 'Gets a list of subaccounts, possibly filtered. This method supports paging.'
       operationId: dfareporting.subaccounts.list
       parameters:
         - description: User profile ID associated with this request.
@@ -7310,7 +7311,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/targetableRemarketingLists':
     get:
-      description: 'Retrieves a list of targetable remarketing lists, possibly filtered.'
+      description: 'Retrieves a list of targetable remarketing lists, possibly filtered. This method supports paging.'
       operationId: dfareporting.targetableRemarketingLists.list
       parameters:
         - description: User profile ID associated with this request.
@@ -7535,7 +7536,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/userRoles':
     get:
-      description: 'Retrieves a list of user roles, possibly filtered.'
+      description: 'Retrieves a list of user roles, possibly filtered. This method supports paging.'
       operationId: dfareporting.userRoles.list
       parameters:
         - description: User profile ID associated with this request.
@@ -7758,6 +7759,7 @@ definitions:
           - ACTIVE_ADS_TIER_300K
           - ACTIVE_ADS_TIER_40K
           - ACTIVE_ADS_TIER_500K
+          - ACTIVE_ADS_TIER_750K
           - ACTIVE_ADS_TIER_75K
         type: string
       activeViewOptOut:
@@ -7902,6 +7904,7 @@ definitions:
           - ACTIVE_ADS_TIER_300K
           - ACTIVE_ADS_TIER_40K
           - ACTIVE_ADS_TIER_500K
+          - ACTIVE_ADS_TIER_750K
           - ACTIVE_ADS_TIER_75K
         type: string
       availableAds:
@@ -8134,7 +8137,7 @@ definitions:
         format: int64
         type: string
       active:
-        description: Whether this ad is active.
+        description: 'Whether this ad is active. When true, archived must be false.'
         type: boolean
       advertiserId:
         description: Advertiser ID of this ad. This is a required field on insertion.
@@ -8144,7 +8147,7 @@ definitions:
         $ref: '#/definitions/DimensionValue'
         description: 'Dimension value for the ID of the advertiser. This is a read-only, auto-generated field.'
       archived:
-        description: Whether this ad is archived.
+        description: 'Whether this ad is archived. When true, active must be false.'
         type: boolean
       audienceSegmentId:
         description: Audience segment ID that is being targeted for this ad. Applicable when type is AD_SERVING_STANDARD_AD.
@@ -8944,7 +8947,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversion".'
         type: string
       limitAdTracking:
-        description: Whether the user has Limit Ad Tracking set.
+        description: 'Whether Limit Ad Tracking is enabled. When set to true, the conversion will be used for reporting but not targeting. This will prevent remarketing.'
         type: boolean
       mobileDeviceId:
         description: 'The mobile device ID. This field is mutually exclusive with encryptedUserId and encryptedUserIdCandidates[]. This or encryptedUserId or encryptedUserIdCandidates[] is a required field.'

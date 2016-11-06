@@ -985,16 +985,12 @@ paths:
           name: recipeId
           required: true
           type: integer
-        - format: int64
-          in: query
-          name: ucId
-          required: true
-          type: integer
         - description: ''
+          format: int64
           in: path
           name: reviewId
           required: true
-          type: string
+          type: integer
       produces:
         - application/json
         - text/json
@@ -2312,6 +2308,12 @@ definitions:
     properties:
       Category:
         type: string
+      DefaultActiveMinutes:
+        format: int32
+        type: integer
+      DefaultTotalMinutes:
+        format: int32
+        type: integer
       ID:
         format: int32
         type: integer

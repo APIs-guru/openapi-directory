@@ -510,6 +510,12 @@ definitions:
       - $REVISION_ID or $COMMIT_SHA: the commit SHA specified by RepoSource or
         resolved from the specified branch or tag.
     properties:
+      buildTriggerId:
+        description: |-
+          The ID of the BuildTrigger that triggered this build, if it was
+          triggered automatically.
+          @OutputOnly
+        type: string
       createTime:
         description: |-
           Time at which the build was created.

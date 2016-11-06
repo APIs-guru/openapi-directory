@@ -289,7 +289,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Perform asynchronous speech-recognition: receive results via the
+        Performs asynchronous speech recognition: receive results via the
         google.longrunning.Operations interface. Returns either an
         `Operation.error` or an `Operation.response` which contains
         an `AsyncRecognizeResponse` message.
@@ -326,7 +326,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Perform synchronous speech-recognition: receive results after all audio
+        Performs synchronous speech recognition: receive results after all audio
         has been sent and processed.
       operationId: speech.speech.syncrecognize
       parameters:

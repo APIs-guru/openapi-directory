@@ -4087,7 +4087,7 @@ definitions:
       Uri:
         type: string
     type: object
-  DownloadData:
+  DownloadDetails:
     properties:
       download_notes:
         description: Associate a note with the download of an image.
@@ -4522,12 +4522,15 @@ definitions:
     type: object
   download:
     properties:
+      agreement_name:
+        description: Specifies the customer-defined name of the Premium Access agreement
+        type: string
       date_downloaded:
         description: 'Specifies the date the asset was downloaded, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
         format: date-time
         type: string
       download_details:
-        $ref: '#/definitions/DownloadData'
+        $ref: '#/definitions/DownloadDetails'
         description: Customer stored details associated with this download.
       id:
         description: Specifies the unique identifier of the asset.
