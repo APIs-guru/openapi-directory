@@ -246,7 +246,6 @@ definitions:
     required:
       - name
       - dnsPrefix
-      - count
       - vmSize
   ContainerServiceDiagnosticsProfile:
     properties:
@@ -260,7 +259,6 @@ definitions:
     properties:
       adminUsername:
         description: The administrator username to use for all Linux VMs
-        pattern: '^[a-z][a-z0-9_-]*$'
         type: string
       ssh:
         $ref: '#/definitions/ContainerServiceSshConfiguration'
@@ -377,11 +375,9 @@ definitions:
     properties:
       adminPassword:
         description: The administrator password to use for Windows VMs
-        pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%\^&\*\(\)])[a-zA-Z\d!@#$%\^&\*\(\)]{12,123}$'
         type: string
       adminUsername:
         description: The administrator username to use for Windows VMs
-        pattern: '^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$'
         type: string
     required:
       - adminUsername

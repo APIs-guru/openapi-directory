@@ -2438,6 +2438,7 @@ paths:
           in: query
           name: $filter
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       produces:
@@ -2708,6 +2709,7 @@ paths:
           in: query
           name: $filter
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       produces:
@@ -3055,6 +3057,7 @@ paths:
           in: query
           name: $filter
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       produces:
@@ -3298,6 +3301,7 @@ paths:
           in: query
           name: $filter
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       produces:
@@ -3378,6 +3382,7 @@ paths:
           in: query
           name: $filter
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       produces:
@@ -3971,6 +3976,7 @@ paths:
           in: query
           name: $filter
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       produces:
@@ -6423,6 +6429,7 @@ paths:
           in: query
           name: $filter
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       produces:
@@ -8892,6 +8899,7 @@ paths:
           in: query
           name: $filter
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       produces:
@@ -9639,6 +9647,10 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            $ref: '#/definitions/SiteSourceControl'
+        '201':
+          description: Created
           schema:
             $ref: '#/definitions/SiteSourceControl'
       summary: Update the source control configuration of web app
@@ -10415,6 +10427,10 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            $ref: '#/definitions/SiteSourceControl'
+        '201':
+          description: Created
           schema:
             $ref: '#/definitions/SiteSourceControl'
       summary: Update the source control configuration of web app

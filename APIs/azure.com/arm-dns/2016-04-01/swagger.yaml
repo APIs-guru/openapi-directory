@@ -3,6 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
+  description: The DNS Management Client.
   title: DnsManagementClient
   version: '2016-04-01'
   x-apisguru-categories:
@@ -23,19 +24,17 @@ info:
     - DNS
 consumes:
   - application/json
-  - text/json
 produces:
   - application/json
-  - text/json
 parameters:
   ApiVersionParameter:
-    description: Client Api Version.
+    description: Specifies the API version.
     in: query
     name: api-version
     required: true
     type: string
   SubscriptionIdParameter:
-    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: 'Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription.'
     in: path
     name: subscriptionId
     required: true
@@ -43,62 +42,64 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones':
     get:
-      description: Lists the DNS zones within a resource group.
-      operationId: Zones_ListInSubscription
+      description: Lists the DNS zones in all resource groups in a subscription.
+      operationId: Zones_List
       parameters:
-        - description: Query parameters. If null is passed returns the default number of zones.
+        - description: 'The maximum number of DNS zones to return. If not specified, returns up to 100 zones.'
+          format: int32
           in: query
           name: $top
           required: false
-          type: string
+          type: integer
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: Success.
           schema:
             $ref: '#/definitions/ZoneListResult'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
         - Zones
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones':
     get:
       description: Lists the DNS zones within a resource group.
-      operationId: Zones_ListInResourceGroup
+      operationId: Zones_ListByResourceGroup
       parameters:
         - description: The name of the resource group.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: Query parameters. If null is passed returns the default number of zones.
+        - description: 'The maximum number of record sets to return. If not specified, returns up to 100 record sets.'
+          format: int32
           in: query
           name: $top
           required: false
-          type: string
+          type: integer
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: Success.
           schema:
             $ref: '#/definitions/ZoneListResult'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
         - Zones
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}':
     delete:
-      description: Removes a DNS zone from a resource group.
+      description: 'Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.'
       operationId: Zones_Delete
       parameters:
         - description: The name of the resource group.
@@ -106,43 +107,37 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the zone without a terminating dot.
+        - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
           required: true
           type: string
-        - description: Defines the If-Match condition. The delete operation will be performed only if the ETag of the zone on the server matches this value.
+        - description: The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes.
           in: header
           name: If-Match
           required: false
           type: string
           x-ms-client-name: IfMatch
-        - description: Defines the If-None-Match condition. The delete operation will be performed only if the ETag of the zone on the server does not match this value.
-          in: header
-          name: If-None-Match
-          required: false
-          type: string
-          x-ms-client-name: IfNoneMatch
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: The DNS zone has been deleted.
           schema:
             $ref: '#/definitions/ZoneDeleteResult'
         '202':
-          description: ''
+          description: The DNS zone delete operation has been accepted and will complete asynchronously.
         '204':
-          description: Zone does not exist
+          description: The DNS zone was not found.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
         - Zones
       x-ms-long-running-operation: true
     get:
-      description: Gets a DNS zone.
+      description: 'Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.'
       operationId: Zones_Get
       parameters:
         - description: The name of the resource group.
@@ -150,7 +145,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the zone without a terminating dot.
+        - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
           required: true
@@ -159,17 +154,17 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: Success.
           schema:
             $ref: '#/definitions/Zone'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
         - Zones
     put:
-      description: Creates or Updates a DNS zone within a resource group.
+      description: Creates or updates a DNS zone. Does not modify DNS records within the zone.
       operationId: Zones_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -177,7 +172,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the zone without a terminating dot.
+        - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
           required: true
@@ -188,13 +183,13 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Zone'
-        - description: The etag of Zone.
+        - description: The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwritting any concurrent changes.
           in: header
           name: If-Match
           required: false
           type: string
           x-ms-client-name: IfMatch
-        - description: Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored.
+        - description: 'Set to ''*'' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored.'
           in: header
           name: If-None-Match
           required: false
@@ -204,65 +199,66 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: The DNS zone has been updated.
           schema:
             $ref: '#/definitions/Zone'
         '201':
-          description: ''
+          description: The DNS zone has been created.
           schema:
             $ref: '#/definitions/Zone'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
         - Zones
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}/recordsets':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets':
     get:
-      description: Lists all RecordSets in a DNS zone.
-      operationId: RecordSets_ListAllInResourceGroup
+      description: Lists all record sets in a DNS zone.
+      operationId: RecordSets_ListByDnsZone
       parameters:
-        - description: The name of the resource group that contains the zone.
+        - description: The name of the resource group.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the zone from which to enumerate RecordSets.
+        - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
           required: true
           type: string
-        - description: Query parameters. If null is passed returns the default number of zones.
+        - description: 'The maximum number of record sets to return. If not specified, returns up to 100 record sets.'
+          format: int32
           in: query
           name: $top
           required: false
-          type: string
+          type: integer
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: Success.
           schema:
             $ref: '#/definitions/RecordSetListResult'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}/{recordType}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}':
     get:
-      description: Lists the RecordSets of a specified type in a DNS zone.
+      description: Lists the record sets of a specified type in a DNS zone.
       operationId: RecordSets_ListByType
       parameters:
-        - description: The name of the resource group that contains the zone.
+        - description: The name of the resource group.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the zone from which to enumerate RecordsSets.
+        - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
           required: true
@@ -285,29 +281,30 @@ paths:
           x-ms-enum:
             modelAsString: false
             name: RecordType
-        - description: Query parameters. If null is passed returns the default number of zones.
+        - description: 'The maximum number of record sets to return. If not specified, returns up to 100 record sets.'
+          format: int32
           in: query
           name: $top
           required: false
-          type: string
+          type: integer
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: Success.
           schema:
             $ref: '#/definitions/RecordSetListResult'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}/{recordType}/{relativeRecordSetName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}':
     delete:
-      description: Removes a RecordSet from a DNS zone.
+      description: Deletes a record set from a DNS zone. This operation cannot be undone.
       operationId: RecordSets_Delete
       parameters:
         - description: The name of the resource group.
@@ -315,18 +312,18 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the zone without a terminating dot.
+        - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
           required: true
           type: string
-        - description: 'The name of the RecordSet, relative to the name of the zone.'
+        - description: 'The name of the record set, relative to the name of the zone.'
           in: path
           name: relativeRecordSetName
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: The type of DNS record.
+        - description: The type of DNS record in this record set. Record sets of type SOA cannot be deleted (they are deleted when the DNS zone is deleted).
           enum:
             - A
             - AAAA
@@ -344,33 +341,27 @@ paths:
           x-ms-enum:
             modelAsString: false
             name: RecordType
-        - description: Defines the If-Match condition. The delete operation will be performed only if the ETag of the zone on the server matches this value.
+        - description: The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes.
           in: header
           name: If-Match
           required: false
           type: string
           x-ms-client-name: IfMatch
-        - description: Defines the If-None-Match condition. The delete operation will be performed only if the ETag of the zone on the server does not match this value.
-          in: header
-          name: If-None-Match
-          required: false
-          type: string
-          x-ms-client-name: IfNoneMatch
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: The record set has been deleted.
         '204':
-          description: ''
+          description: The record set was not found.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
     get:
-      description: Gets a RecordSet.
+      description: Gets a record set.
       operationId: RecordSets_Get
       parameters:
         - description: The name of the resource group.
@@ -378,18 +369,18 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the zone without a terminating dot.
+        - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
           required: true
           type: string
-        - description: 'The name of the RecordSet, relative to the name of the zone.'
+        - description: 'The name of the record set, relative to the name of the zone.'
           in: path
           name: relativeRecordSetName
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: The type of DNS record.
+        - description: The type of DNS record in this record set.
           enum:
             - A
             - AAAA
@@ -411,17 +402,17 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: Success.
           schema:
             $ref: '#/definitions/RecordSet'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
     patch:
-      description: Updates a RecordSet within a DNS zone.
+      description: Updates a record set within a DNS zone.
       operationId: RecordSets_Update
       parameters:
         - description: The name of the resource group.
@@ -429,18 +420,18 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the zone without a terminating dot.
+        - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
           required: true
           type: string
-        - description: 'The name of the RecordSet, relative to the name of the zone.'
+        - description: 'The name of the record set, relative to the name of the zone.'
           in: path
           name: relativeRecordSetName
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: The type of DNS record.
+        - description: The type of DNS record in this record set.
           enum:
             - A
             - AAAA
@@ -464,33 +455,27 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RecordSet'
-        - description: The etag of Zone.
+        - description: The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwritting concurrent changes.
           in: header
           name: If-Match
           required: false
           type: string
           x-ms-client-name: IfMatch
-        - description: Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored.
-          in: header
-          name: If-None-Match
-          required: false
-          type: string
-          x-ms-client-name: IfNoneMatch
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Recordse has been updated successfully
+          description: The record set has been updated.
           schema:
             $ref: '#/definitions/RecordSet'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
     put:
-      description: Creates or Updates a RecordSet within a DNS zone.
+      description: Creates or updates a record set within a DNS zone.
       operationId: RecordSets_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -498,18 +483,18 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the zone without a terminating dot.
+        - description: The name of the DNS zone (without a terminating dot).
           in: path
           name: zoneName
           required: true
           type: string
-        - description: 'The name of the RecordSet, relative to the name of the zone.'
+        - description: 'The name of the record set, relative to the name of the zone.'
           in: path
           name: relativeRecordSetName
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: The type of DNS record.
+        - description: The type of DNS record in this record set. Record sets of type SOA can be updated but not created (they are created when the DNS zone is created).
           enum:
             - A
             - AAAA
@@ -533,13 +518,13 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RecordSet'
-        - description: The etag of Recordset.
+        - description: The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwritting any concurrent changes.
           in: header
           name: If-Match
           required: false
           type: string
           x-ms-client-name: IfMatch
-        - description: Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored.
+        - description: 'Set to ''*'' to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored.'
           in: header
           name: If-None-Match
           required: false
@@ -549,15 +534,15 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Record set has been updated
+          description: The record set has been updated.
           schema:
             $ref: '#/definitions/RecordSet'
         '201':
-          description: Record set has been created
+          description: The record set has been created.
           schema:
             $ref: '#/definitions/RecordSet'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion
+          description: Default response. It will be deserialized as per the Error definition.
           schema:
             $ref: '#/definitions/CloudError'
       tags:
@@ -567,13 +552,13 @@ definitions:
     description: An A record.
     properties:
       ipv4Address:
-        description: Gets or sets the IPv4 address of this A record in string notation.
+        description: The IPv4 address of this A record.
         type: string
   AaaaRecord:
     description: An AAAA record.
     properties:
       ipv6Address:
-        description: Gets or sets the IPv6 address of this AAAA record in string notation.
+        description: The IPv6 address of this AAAA record.
         type: string
   CloudError:
     properties:
@@ -599,112 +584,112 @@ definitions:
     description: A CNAME record.
     properties:
       cname:
-        description: Gets or sets the canonical name for this record without a terminating dot.
+        description: The canonical name for this CNAME record.
         type: string
   MxRecord:
     description: An MX record.
     properties:
       exchange:
-        description: 'Gets or sets the domain name of the mail host, without a terminating dot.'
+        description: The domain name of the mail host for this MX record.
         type: string
       preference:
-        description: Gets or sets the preference metric for this record.
+        description: The preference value for this MX record.
         format: int32
         type: integer
   NsRecord:
     description: An NS record.
     properties:
       nsdname:
-        description: 'Gets or sets the name server name for this record, without a terminating dot.'
+        description: The name server name for this NS record.
         type: string
   PtrRecord:
     description: A PTR record.
     properties:
       ptrdname:
-        description: Gets or sets the PTR target domain name for this record without a terminating dot.
+        description: The PTR target domain name for this PTR record.
         type: string
   RecordSet:
-    description: Describes a DNS RecordSet (a set of DNS records with the same name and type).
+    description: Describes a DNS record set (a collection of DNS records with the same name and type).
     properties:
       etag:
-        description: Gets or sets the ETag of the RecordSet.
+        description: The etag of the record set.
         type: string
       id:
-        description: Gets or sets the ID of the resource.
+        description: The ID of the record set.
         type: string
       name:
-        description: Gets or sets the name of the resource.
+        description: The name of the record set.
         type: string
       properties:
         $ref: '#/definitions/RecordSetProperties'
-        description: Gets or sets the properties of the RecordSet.
+        description: The properties of the record set.
         x-ms-client-flatten: true
       type:
-        description: Gets or sets the type of the resource.
+        description: The type of the record set.
         type: string
   RecordSetListResult:
-    description: The response to a RecordSet List operation.
+    description: The response to a record set List operation.
     properties:
       nextLink:
-        description: Gets or sets the continuation token for the next page.
+        description: The continuation token for the next page of results.
         type: string
       value:
-        description: Gets or sets information about the RecordSets in the response.
+        description: Information about the record sets in the response.
         items:
           $ref: '#/definitions/RecordSet'
         type: array
   RecordSetProperties:
-    description: Represents the properties of the records in the RecordSet.
+    description: Represents the properties of the records in the record set.
     properties:
       AAAARecords:
-        description: Gets or sets the list of AAAA records in the RecordSet.
+        description: The list of AAAA records in the record set.
         items:
           $ref: '#/definitions/AaaaRecord'
         type: array
         x-ms-client-name: AaaaRecords
       ARecords:
-        description: Gets or sets the list of A records in the RecordSet.
+        description: The list of A records in the record set.
         items:
           $ref: '#/definitions/ARecord'
         type: array
       CNAMERecord:
         $ref: '#/definitions/CnameRecord'
-        description: Gets or sets the CNAME record in the RecordSet.
+        description: The CNAME record in the  record set.
         x-ms-client-name: CnameRecord
       MXRecords:
-        description: Gets or sets the list of MX records in the RecordSet.
+        description: The list of MX records in the record set.
         items:
           $ref: '#/definitions/MxRecord'
         type: array
         x-ms-client-name: MxRecords
       NSRecords:
-        description: Gets or sets the list of NS records in the RecordSet.
+        description: The list of NS records in the record set.
         items:
           $ref: '#/definitions/NsRecord'
         type: array
         x-ms-client-name: NsRecords
       PTRRecords:
-        description: Gets or sets the list of PTR records in the RecordSet.
+        description: The list of PTR records in the record set.
         items:
           $ref: '#/definitions/PtrRecord'
         type: array
         x-ms-client-name: PtrRecords
       SOARecord:
         $ref: '#/definitions/SoaRecord'
-        description: Gets or sets the SOA record in the RecordSet.
+        description: The SOA record in the record set.
         x-ms-client-name: SoaRecord
       SRVRecords:
-        description: Gets or sets the list of SRV records in the RecordSet.
+        description: The list of SRV records in the record set.
         items:
           $ref: '#/definitions/SrvRecord'
         type: array
         x-ms-client-name: SrvRecords
       TTL:
-        description: Gets or sets the TTL of the records in the RecordSet.
+        description: The TTL (time-to-live) of the records in the record set.
         format: int64
         type: integer
       TXTRecords:
-        description: Gets or sets the list of TXT records in the RecordSet.
+        description: The list of TXT records in the record set.
         items:
           $ref: '#/definitions/TxtRecord'
         type: array
@@ -712,34 +697,34 @@ definitions:
       metadata:
         additionalProperties:
           type: string
-        description: Gets or sets the metadata attached to the resource.
+        description: The metadata attached to the record set.
         type: object
   RecordSetUpdateParameters:
-    description: Parameters supplied to update a RecordSet.
+    description: Parameters supplied to update a record set.
     properties:
       RecordSet:
         $ref: '#/definitions/RecordSet'
-        description: Gets or sets information about the RecordSet being updated.
+        description: Specifies information about the record set being updated.
   Resource:
     properties:
       id:
-        description: Resource Id
+        description: Resource ID.
         readOnly: true
         type: string
       location:
-        description: Resource location
+        description: Resource location.
         type: string
       name:
-        description: Resource name
+        description: Resource name.
         readOnly: true
         type: string
       tags:
         additionalProperties:
           type: string
-        description: Resource tags
+        description: Resource tags.
         type: object
       type:
-        description: Resource type
+        description: Resource type.
         readOnly: true
         type: string
     required:
@@ -749,61 +734,61 @@ definitions:
     description: An SOA record.
     properties:
       email:
-        description: Gets or sets the email for this record.
+        description: The email contact for this SOA record.
         type: string
       expireTime:
-        description: Gets or sets the expire time for this record.
+        description: The expire time for this SOA record.
         format: int64
         type: integer
       host:
-        description: 'Gets or sets the domain name of the authoritative name server, without a temrinating dot.'
+        description: The domain name of the authoritative name server for this SOA record.
         type: string
       minimumTTL:
-        description: Gets or sets the minimum TTL value for this record.
+        description: The minimum value for this SOA record. By convention this is used to determine the negative caching duration.
         format: int64
         type: integer
         x-ms-client-name: minimumTtl
       refreshTime:
-        description: Gets or sets the refresh value for this record.
+        description: The refresh value for this SOA record.
         format: int64
         type: integer
       retryTime:
-        description: Gets or sets the retry time for this record.
+        description: The retry time for this SOA record.
         format: int64
         type: integer
       serialNumber:
-        description: Gets or sets the serial number for this record.
+        description: The serial number for this SOA record.
         format: int64
         type: integer
   SrvRecord:
     description: An SRV record.
     properties:
       port:
-        description: Gets or sets the port of the service for this record.
+        description: The port value for this SRV record.
         format: int32
         type: integer
       priority:
-        description: Gets or sets the priority metric for this record.
+        description: The priority value for this SRV record.
         format: int32
         type: integer
       target:
-        description: 'Gets or sets the domain name of the target for this record, without a terminating dot.'
+        description: The target domain name for this SRV record.
         type: string
       weight:
-        description: Gets or sets the weight metric for this this record.
+        description: The weight value for this SRV record.
         format: int32
         type: integer
   SubResource:
     properties:
       id:
-        description: Resource Id
+        description: Resource Id.
         type: string
     x-ms-external: true
   TxtRecord:
     description: A TXT record.
     properties:
       value:
-        description: Gets or sets the text value of this record.
+        description: The text value of this TXT record.
         items:
           type: string
         type: array
@@ -813,17 +798,17 @@ definitions:
     description: Describes a DNS zone.
     properties:
       etag:
-        description: 'Gets or sets the ETag of the zone that is being updated, as received from a Get operation.'
+        description: The etag of the zone.
         type: string
       properties:
         $ref: '#/definitions/ZoneProperties'
-        description: Gets or sets the properties of the zone.
+        description: The properties of the zone.
         x-ms-client-flatten: true
   ZoneDeleteResult:
     description: The response to a Zone Delete operation.
     properties:
       azureAsyncOperation:
-        description: Users can perform a Get on Azure-AsyncOperation to get the status of their delete Zone operations
+        description: Users can perform a Get on Azure-AsyncOperation to get the status of their delete Zone operations.
         type: string
       requestId:
         type: string
@@ -888,15 +873,15 @@ definitions:
         type: string
         x-ms-enum:
           modelAsString: false
-          name: HtpStatusCode
+          name: HttpStatusCode
   ZoneListResult:
     description: The response to a Zone List or ListAll operation.
     properties:
       nextLink:
-        description: Gets or sets the continuation token for the next page.
+        description: The continuation token for the next page of results.
         type: string
       value:
-        description: Gets or sets information about the zones in the response.
+        description: Information about the DNS zones.
         items:
           $ref: '#/definitions/Zone'
         type: array
@@ -904,16 +889,16 @@ definitions:
     description: Represents the properties of the zone.
     properties:
       maxNumberOfRecordSets:
-        description: Gets or sets the maximum number of record sets that can be created in this zone.
+        description: The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.
         format: int64
         type: integer
       nameServers:
-        description: Gets the name servers populated for this zone. This is a read-only property and any attempt to set this value will be ignored.
+        description: The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored.
         items:
           type: string
         readOnly: true
         type: array
       numberOfRecordSets:
-        description: Gets or sets the current number of record sets in this zone.
+        description: The current number of record sets in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.
         format: int64
         type: integer

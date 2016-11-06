@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: 'Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure. For more information, see https://msdn.microsoft.com/en-us/library/azure/dn790557.aspx.'
+  description: Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure.
   title: CdnManagementClient
   version: '2016-10-02'
   x-apisguru-categories:
@@ -39,7 +39,7 @@ security:
       - user_impersonation
 parameters:
   apiVersionParameter:
-    description: Version of the API to be used with the client request. Current version is 2016-10-02
+    description: Version of the API to be used with the client request. Current version is 2016-10-02.
     in: query
     name: api-version
     required: true
@@ -75,7 +75,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/CheckNameAvailabilityOutput'
         default:
@@ -92,7 +92,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/OperationListResult'
         default:
@@ -105,14 +105,14 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles':
     get:
-      description: Lists the CDN profiles within an Azure subscription.
+      description: Lists all the CDN profiles within an Azure subscription.
       operationId: Profiles_List
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/ProfileListResult'
         default:
@@ -125,7 +125,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles':
     get:
-      description: Lists the CDN profiles within a resource group.
+      description: Lists all the CDN profiles within a resource group.
       operationId: Profiles_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
@@ -133,7 +133,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/ProfileListResult'
         default:
@@ -150,7 +150,7 @@ paths:
       operationId: Profiles_Delete
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
@@ -159,9 +159,9 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '202':
-          description: Accepted and the operation will complete asynchronously.
+          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
         '204':
-          description: No Content.
+          description: No Content. The request has been accepted but the profile was not found.
         default:
           description: CDN error response describing why the operation failed.
           schema:
@@ -170,11 +170,11 @@ paths:
         - Profiles
       x-ms-long-running-operation: true
     get:
-      description: Gets a CDN profile with the specified parameters.
+      description: Gets a CDN profile with the specified profile name under the specified subscription and resource group.
       operationId: Profiles_Get
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
@@ -183,7 +183,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/Profile'
         default:
@@ -193,16 +193,16 @@ paths:
       tags:
         - Profiles
     patch:
-      description: Updates an existing CDN profile with the specified parameters.
+      description: Updates an existing CDN profile with the specified profile name under the specified subscription and resource group.
       operationId: Profiles_Update
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Profile properties needed for update.
+        - description: Profile properties needed to update an existing profile.
           in: body
           name: profileUpdateParameters
           required: true
@@ -212,11 +212,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/Profile'
         '202':
-          description: Accepted and the operation will complete asynchronously.
+          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
           schema:
             $ref: '#/definitions/Profile'
         default:
@@ -227,16 +227,16 @@ paths:
         - Profiles
       x-ms-long-running-operation: true
     put:
-      description: Creates a new CDN profile with the specified parameters.
+      description: Creates a new CDN profile with a profile name under the specified subscription and resource group.
       operationId: Profiles_Create
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Profile properties needed for creation.
+        - description: Profile properties needed to create a new profile.
           in: body
           name: profile
           required: true
@@ -246,15 +246,15 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/Profile'
         '201':
-          description: Created
+          description: Created. The request has been fulfilled and a new profile has been created.
           schema:
             $ref: '#/definitions/Profile'
         '202':
-          description: Accepted and  the operation will complete asynchronously.
+          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
           schema:
             $ref: '#/definitions/Profile'
         default:
@@ -266,11 +266,11 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints':
     get:
-      description: Lists existing CDN endpoints within a profile.
+      description: Lists existing CDN endpoints.
       operationId: Endpoints_ListByProfile
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
@@ -279,7 +279,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/EndpointListResult'
         default:
@@ -296,12 +296,12 @@ paths:
       operationId: Endpoints_Delete
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -310,9 +310,9 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '202':
-          description: Accepted
+          description: Accepted.
         '204':
-          description: No Content
+          description: No Content.
         default:
           description: CDN error response describing why the operation failed.
           schema:
@@ -321,16 +321,16 @@ paths:
         - Endpoints
       x-ms-long-running-operation: true
     get:
-      description: Gets an existing CDN endpoint with the specified parameters.
+      description: 'Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.'
       operationId: Endpoints_Get
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -339,7 +339,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/Endpoint'
         default:
@@ -353,12 +353,12 @@ paths:
       operationId: Endpoints_Update
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -373,7 +373,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/Endpoint'
         '202':
@@ -392,12 +392,12 @@ paths:
       operationId: Endpoints_Create
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -412,11 +412,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/Endpoint'
         '201':
-          description: Created
+          description: Created. The request has been fulfilled and a new endpoint has been created.
           schema:
             $ref: '#/definitions/Endpoint'
         '202':
@@ -436,12 +436,12 @@ paths:
       operationId: CustomDomains_ListByEndpoint
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -450,7 +450,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/CustomDomainListResult'
         default:
@@ -467,12 +467,12 @@ paths:
       operationId: CustomDomains_Delete
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -486,13 +486,13 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
         '202':
           description: Accepted and the operation will complete asynchronously.
           schema:
             $ref: '#/definitions/CustomDomain'
         '204':
-          description: No Content
+          description: No Content.
         default:
           description: CDN error response describing why the operation failed.
           schema:
@@ -505,12 +505,12 @@ paths:
       operationId: CustomDomains_Get
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -524,7 +524,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/CustomDomain'
         default:
@@ -538,12 +538,12 @@ paths:
       operationId: CustomDomains_Create
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -563,11 +563,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/CustomDomain'
         '201':
-          description: Created
+          description: Created. The request has been fulfilled and a new custom domain has been created.
           schema:
             $ref: '#/definitions/CustomDomain'
         '202':
@@ -583,16 +583,16 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/load':
     post:
-      description: Forcibly pre-loads CDN endpoint content.
+      description: Forcibly pre-loads CDN endpoint content. Available for Verizon Profiles.
       operationId: Endpoints_LoadContent
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -621,12 +621,12 @@ paths:
       operationId: Origins_ListByEndpoint
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -635,7 +635,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/OriginListResult'
         default:
@@ -647,58 +647,22 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/origins/{originName}':
-    delete:
-      description: Deletes an existing CDN origin within an endpoint.
-      operationId: Origins_Delete
-      parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
-          in: path
-          name: profileName
-          required: true
-          type: string
-        - description: Name of the endpoint within the CDN profile.
-          in: path
-          name: endpointName
-          required: true
-          type: string
-        - description: Name of the origin. Must be unique within endpoint.
-          in: path
-          name: originName
-          required: true
-          type: string
-        - $ref: '#/parameters/subscriptionIdParameter'
-        - $ref: '#/parameters/apiVersionParameter'
-      responses:
-        '202':
-          description: Accepted and the operation will complete asynchronously.
-          schema:
-            $ref: '#/definitions/Origin'
-        '204':
-          description: No Content
-        default:
-          description: CDN error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      tags:
-        - Origins
-      x-ms-long-running-operation: true
     get:
       description: Gets an existing CDN origin within an endpoint.
       operationId: Origins_Get
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
           type: string
-        - description: 'Name of the origin, an arbitrary value but it needs to be unique under endpoint'
+        - description: Name of the origin which is unique within the endpoint.
           in: path
           name: originName
           required: true
@@ -707,7 +671,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/Origin'
         default:
@@ -721,17 +685,17 @@ paths:
       operationId: Origins_Update
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
           type: string
-        - description: Name of the origin. Must be unique within endpoint.
+        - description: Name of the origin which is unique within the endpoint.
           in: path
           name: originName
           required: true
@@ -746,55 +710,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Origin'
-        '202':
-          description: Accepted and the operation will complete asynchronously.
-          schema:
-            $ref: '#/definitions/Origin'
-        default:
-          description: CDN error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      tags:
-        - Origins
-      x-ms-long-running-operation: true
-    put:
-      description: Creates a new CDN origin within an endpoint.
-      operationId: Origins_Create
-      parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
-          in: path
-          name: profileName
-          required: true
-          type: string
-        - description: Name of the endpoint within the CDN profile.
-          in: path
-          name: endpointName
-          required: true
-          type: string
-        - description: 'Name of the origin, an arbitrary value but it needs to be unique under endpoint'
-          in: path
-          name: originName
-          required: true
-          type: string
-        - description: Origin properties
-          in: body
-          name: originCreateProperties
-          required: true
-          schema:
-            $ref: '#/definitions/Origin'
-        - $ref: '#/parameters/subscriptionIdParameter'
-        - $ref: '#/parameters/apiVersionParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Origin'
-        '201':
-          description: Created
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/Origin'
         '202':
@@ -814,17 +730,17 @@ paths:
       operationId: Endpoints_PurgeContent
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
           type: string
-        - description: The path to the content to be purged. Path can describe a file or directory.
+        - description: The path to the content to be purged. Path can describe a file or directory using the wildcard. e.g. '/my/directory/*' or '/my/file.exe/'
           in: body
           name: contentFilePaths
           required: true
@@ -848,12 +764,12 @@ paths:
       operationId: Endpoints_Start
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -878,12 +794,12 @@ paths:
       operationId: Endpoints_Stop
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -908,12 +824,12 @@ paths:
       operationId: Endpoints_ValidateCustomDomain
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
           type: string
-        - description: Name of the endpoint within the CDN profile.
+        - description: Name of the endpoint under the profile which is unique globally.
           in: path
           name: endpointName
           required: true
@@ -928,7 +844,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/ValidateCustomDomainOutput'
         default:
@@ -939,11 +855,11 @@ paths:
         - Endpoints
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/generateSsoUri':
     post:
-      description: 'Generates a dynamic SSO URI used to sign in to the CDN Supplemental Portal used for advanced management tasks, such as Country Filtering, Advanced HTTP Reports, and Real-time Stats and Alerts. The SSO URI changes approximately every 10 minutes.'
+      description: 'Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemnetal portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.'
       operationId: Profiles_GenerateSsoUri
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
-        - description: Name of the CDN profile within the resource group.
+        - description: Name of the CDN profile which is unique within the resource group.
           in: path
           name: profileName
           required: true
@@ -952,7 +868,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: OK. The request has succeeded.
           schema:
             $ref: '#/definitions/SsoUri'
         default:
@@ -991,16 +907,17 @@ definitions:
   CustomDomain:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: CDN CustomDomain represents a mapping between a user specified domain name and a CDN endpoint. This is to use custom domain names to represent the URLs for branding purposes.
+    description: CDN CustomDomain represents a mapping between a user-specified domain name and a CDN endpoint. This is to use custom domain names to represent the URLs for branding purposes.
     properties:
       properties:
         $ref: '#/definitions/CustomDomainProperties'
         x-ms-client-flatten: true
     type: object
   CustomDomainListResult:
+    description: Result of the request to list custom domains. It contains a list of custom domain objects and a URL link to get the next set of results.
     properties:
       nextLink:
-        description: URL to get the next set of results.
+        description: URL to get the next set of custom domain objects if there are any.
         type: string
       value:
         description: List of CDN CustomDomains within an endpoint.
@@ -1008,13 +925,14 @@ definitions:
           $ref: '#/definitions/CustomDomain'
         type: array
   CustomDomainParameters:
-    description: CustomDomain properties required for custom domain creation or update.
+    description: The customDomain JSON object required for custom domain creation or update.
     properties:
       properties:
         $ref: '#/definitions/CustomDomainPropertiesParameters'
         x-ms-client-flatten: true
     type: object
   CustomDomainProperties:
+    description: The JSON object that contains the properties of the custom domain to create.
     properties:
       hostName:
         description: The host name of the custom domain. Must be a domain name.
@@ -1034,9 +952,13 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: CustomDomainResourceState
+      validationData:
+        description: Special validation or data may be required when delivering CDN to some regions due to local compliance reasons. (e.g. ICP license number of a custom domain is required to deliver content in China.)
+        type: string
     required:
       - hostName
   CustomDomainPropertiesParameters:
+    description: The JSON object that contains the properties of the custom domain to create.
     properties:
       hostName:
         description: The host name of the custom domain. Must be a domain name.
@@ -1044,7 +966,7 @@ definitions:
     required:
       - hostName
   DeepCreatedOrigin:
-    description: Deep created origins within a CDN endpoint.
+    description: Origins to be added when creating a CDN endpoint.
     properties:
       name:
         description: Origin name
@@ -1057,7 +979,7 @@ definitions:
     type: object
     x-ms-azure-resource: true
   DeepCreatedOriginProperties:
-    description: Properties of deep created origin on a CDN endpoint.
+    description: Properties of origins Properties of the origin created on the CDN endpoint.
     properties:
       hostName:
         description: 'The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.'
@@ -1090,9 +1012,10 @@ definitions:
         x-ms-client-flatten: true
     type: object
   EndpointListResult:
+    description: Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the the next set of results.
     properties:
       nextLink:
-        description: URL to get the next set of results.
+        description: URL to get the next set of endpoint objects if there are any.
         type: string
       value:
         description: List of CDN endpoints within a profile
@@ -1102,6 +1025,7 @@ definitions:
   EndpointProperties:
     allOf:
       - $ref: '#/definitions/EndpointPropertiesUpdateParameters'
+    description: The JSON object that contains the properties of the endpoint to create.
     properties:
       hostName:
         description: 'The host name of the endpoint {endpointName}.{DNSZone}'
@@ -1133,6 +1057,7 @@ definitions:
     required:
       - origins
   EndpointPropertiesUpdateParameters:
+    description: Result of the request to list endpoints. It contains a list of endpoints and a URL link to get the next set of results.
     properties:
       contentTypesToCompress:
         description: List of content types on which compression will be applied. The value for the elements should be a valid MIME type.
@@ -1145,7 +1070,7 @@ definitions:
           $ref: '#/definitions/GeoFilter'
         type: array
       isCompressionEnabled:
-        description: 'Indicates whether content compression is enabled. Default value is false. If compression is enabled, the content transferred from the CDN endpoint to the end user will be compressed. The requested content must be larger than 1 byte and smaller than 1 MB.'
+        description: 'Indicates whether content compression is enabled. The default value is false. If compression is enabled, the content transferred from the CDN endpoint to the end user will be compressed. The requested content must be larger than 1 byte and smaller than 1 MB.'
         type: boolean
       isHttpAllowed:
         description: Indicates whether HTTP traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.
@@ -1153,6 +1078,9 @@ definitions:
       isHttpsAllowed:
         description: Indicates whether HTTPS traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.
         type: boolean
+      optimizationType:
+        description: 'Customer can specify what scenario they want this CDN endpoint to optimize. (e.g. Download, Media services, and etc.) With this information we can apply scenario driven optimization.'
+        type: string
       originHostHeader:
         description: The host header the CDN provider will send along with content requests to origins. The default value is the host name of the origin.
         type: string
@@ -1171,14 +1099,15 @@ definitions:
       tags:
         additionalProperties:
           type: string
-        description: Endpoint tags
+        description: Endpoint tags.
         type: object
     type: object
     x-ms-azure-resource: true
   ErrorResponse:
+    description: Error reponse indicates CDN service is not able to process the incoming request. The reason is provided in the error message.
     properties:
       code:
-        description: Error code
+        description: Error code.
         type: string
       message:
         description: Error message indicating why the operation failed.
@@ -1189,7 +1118,13 @@ definitions:
     properties:
       action:
         description: Action of the geo filter.
+        enum:
+          - Block
+          - Allow
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: GeoFilterActions
       countryCodes:
         description: 'Two letter country codes of the geo filter. (e.g. AU, MX, and etc.)'
         items:
@@ -1218,6 +1153,7 @@ definitions:
     description: CDN REST API operation
     properties:
       display:
+        description: The object that represents the operation.
         properties:
           operation:
             description: 'Operation type: Read, write, delete, etc.'
@@ -1233,9 +1169,10 @@ definitions:
         type: string
     type: object
   OperationListResult:
+    description: Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.
     properties:
       nextLink:
-        description: URL to get the next set of results.
+        description: URL to get the next set of operation list results if there are any.
         type: string
       value:
         description: List of CDN operations supported by the CDN resource provider.
@@ -1252,9 +1189,10 @@ definitions:
         x-ms-client-flatten: true
     type: object
   OriginListResult:
+    description: Result of the request to list origins. It contains a list of origin objects and a URL link to get the next set of results.
     properties:
       nextLink:
-        description: URL to get the next set of results.
+        description: URL to get the next set of origin objects if there are any.
         type: string
       value:
         description: List of CDN origins within an endpoint
@@ -1262,6 +1200,7 @@ definitions:
           $ref: '#/definitions/Origin'
         type: array
   OriginProperties:
+    description: The JSON object that contains the properties of the origin to create.
     properties:
       hostName:
         description: 'The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.'
@@ -1298,6 +1237,7 @@ definitions:
     required:
       - hostName
   OriginPropertiesParameters:
+    description: The JSON object that contains the properties of the origin to create.
     properties:
       hostName:
         description: 'The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.'
@@ -1339,9 +1279,10 @@ definitions:
       - sku
     type: object
   ProfileListResult:
+    description: Result of the request to list profiles. It contains a list of profile objects and a URL link to get the the next set of results.
     properties:
       nextLink:
-        description: URL to get the next set of results.
+        description: URL to get the next set of profile objects if there are any.
         type: string
       value:
         description: List of CDN profiles within a resource group.
@@ -1349,6 +1290,7 @@ definitions:
           $ref: '#/definitions/Profile'
         type: array
   ProfileProperties:
+    description: The JSON object that contains the properties of the profile to create.
     properties:
       provisioningState:
         description: Provisioning status of the profile.
@@ -1404,23 +1346,23 @@ definitions:
     description: The Resource definition.
     properties:
       id:
-        description: Resource ID
+        description: Resource ID.
         readOnly: true
         type: string
       location:
-        description: Resource location
+        description: Resource location.
         type: string
       name:
-        description: Resource name
+        description: Resource name.
         readOnly: true
         type: string
       tags:
         additionalProperties:
           type: string
-        description: Resource tags
+        description: Resource tags.
         type: object
       type:
-        description: Resource type
+        description: Resource type.
         readOnly: true
         type: string
     required:
@@ -1438,7 +1380,7 @@ definitions:
     description: The SKU (pricing tier) of the CDN profile.
     properties:
       name:
-        description: Name of the pricing tier
+        description: Name of the pricing tier.
         enum:
           - Standard_Verizon
           - Premium_Verizon

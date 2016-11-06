@@ -2625,23 +2625,9 @@ definitions:
           modelAsString: false
           name: BackupManagementType
       containerType:
-        description: Type of the container.
-        enum:
-          - Invalid
-          - Unknown
-          - IaasVMContainer
-          - IaasVMServiceContainer
-          - DPMContainer
-          - DPMVenusContainer
-          - MABContainer
-          - ClusterResource
-          - AzureSqlContainer
-          - WindowsServer
-          - Windows
+        description: 'Type of the container. The value of this property for: 1. Compute Azure VM is Microsoft.Compute/virtualMachines 2. Classic Compute Azure VM is Microsoft.ClassicCompute/virtualMachines 3. Windows machines (like MAB, DPM etc) is Windows 4. Azure SQL instance is AzureSqlContainer.'
+        readOnly: true
         type: string
-        x-ms-enum:
-          modelAsString: false
-          name: ContainerType
       friendlyName:
         description: Friendly name of the container.
         type: string
