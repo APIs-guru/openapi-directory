@@ -23,8 +23,6 @@ info:
   x-serviceName: storage
 externalDocs:
   url: 'https://developers.google.com/storage/docs/json_api/'
-consumes:
-  - application/octet-stream
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -497,6 +495,8 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
+      consumes:
+        - application/octet-stream
       description: Stores new data blobs and associated metadata.
       operationId: storage.objects.insert
       parameters:

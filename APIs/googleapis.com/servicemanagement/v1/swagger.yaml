@@ -1617,7 +1617,8 @@ definitions:
           applied to.
 
           The Google Service Management implementation accepts the following
-          forms: "project:<project_id>", "project_number:<project_number>".
+          forms:
+          - "project:<project_id>"
 
           Note: this is made compatible with
           google.api.servicecontrol.v1.Operation.consumer_id.
@@ -1751,7 +1752,8 @@ definitions:
           applied to.
 
           The Google Service Management implementation accepts the following
-          forms: "project:<project_id>", "project_number:<project_number>".
+          forms:
+          - "project:<project_id>"
 
           Note: this is made compatible with
           google.api.servicecontrol.v1.Operation.consumer_id.
@@ -2195,7 +2197,7 @@ definitions:
 
       The syntax `**` matches zero or more path segments. It follows the semantics
       of [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.3 Reserved
-      Expansion.
+      Expansion. NOTE: it must be the last segment in the path except the Verb.
 
       The syntax `LITERAL` matches literal text in the URL path.
 
@@ -2320,7 +2322,7 @@ definitions:
         description: Token that can be passed to `ListServices` to resume a paginated query.
         type: string
       services:
-        description: The results of the query.
+        description: The returned services will only have the name field set.
         items:
           $ref: '#/definitions/ManagedService'
         type: array
@@ -2549,11 +2551,12 @@ definitions:
         type: string
       labels:
         description: |-
-          The set of labels that can be used to describe a specific instance of this
-          metric type. For example, the
-          `compute.googleapis.com/instance/network/received_bytes_count` metric type
-          has a label, `loadbalanced`, that specifies whether the traffic was
-          received through a load balanced IP address.
+          The set of labels that can be used to describe a specific
+          instance of this metric type. For example, the
+          `appengine.googleapis.com/http/server/response_latencies` metric
+          type has a label for the HTTP response code, `response_code`, so
+          you can look at latencies for successful responses or just
+          for responses that failed.
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
@@ -2573,21 +2576,20 @@ definitions:
           implementation, the name typically includes: (1) the parent resource name
           that defines the scope of the metric type or of its data; and (2) the
           metric's URL-encoded type, which also appears in the `type` field of this
-          descriptor. For example, following is the resource name of a Compute Engine
-          metric within a GCP project:
+          descriptor. For example, following is the resource name of a custom
+          metric within the GCP project 123456789:
 
-              "projects/123456789/metricDescriptors/compute.googleapis.com%2Finstance%2Fcpu%2Futilization"
+              "projects/123456789/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
         type: string
       type:
         description: |-
           The metric type, including its DNS name prefix. The type is not
           URL-encoded.  All user-defined metric types have the DNS name
           `custom.googleapis.com`.  Metric types should use a natural hierarchical
-          grouping. Following are some sample metric types:
+          grouping. For example:
 
-              "compute.googleapis.com/instance/cpu/utilization"
-              "compute.googleapis.com/instance/disk/read_ops_count"
               "custom.googleapis.com/invoice/paid/amount"
+              "appengine.googleapis.com/http/server/response_latencies"
         type: string
       unit:
         description: |-

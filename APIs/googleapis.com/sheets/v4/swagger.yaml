@@ -286,7 +286,9 @@ paths:
           name: range
           required: true
           type: string
-        - description: How values should be represented in the output.
+        - description: |-
+            How values should be represented in the output.
+            The default render option is ValueRenderOption.FORMATTED_VALUE.
           enum:
             - FORMATTED_VALUE
             - UNFORMATTED_VALUE
@@ -298,6 +300,7 @@ paths:
             How dates, times, and durations should be represented in the output.
             This is ignored if value_render_option is
             FORMATTED_VALUE.
+            The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
           enum:
             - SERIAL_NUMBER
             - FORMATTED_STRING
@@ -366,6 +369,16 @@ paths:
           name: range
           required: true
           type: string
+        - description: |-
+            Determines how values in the response should be rendered.
+            The default render option is ValueRenderOption.FORMATTED_VALUE.
+          enum:
+            - FORMATTED_VALUE
+            - UNFORMATTED_VALUE
+            - FORMULA
+          in: query
+          name: responseValueRenderOption
+          type: string
         - description: How the input data should be interpreted.
           enum:
             - INPUT_VALUE_OPTION_UNSPECIFIED
@@ -374,6 +387,27 @@ paths:
           in: query
           name: valueInputOption
           type: string
+        - description: |-
+            Determines how dates, times, and durations in the response should be
+            rendered. This is ignored if response_value_render_option is
+            FORMATTED_VALUE.
+            The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+          enum:
+            - SERIAL_NUMBER
+            - FORMATTED_STRING
+          in: query
+          name: responseDateTimeRenderOption
+          type: string
+        - description: |-
+            Determines if the update response should include the values
+            of the cells that were updated. By default, responses
+            do not include the updated values.
+            If the range to write was larger than than the range actually written,
+            the response will include all values in the requested range (excluding
+            trailing empty rows and columns).
+          in: query
+          name: includeValuesInResponse
+          type: boolean
         - in: body
           name: body
           schema:
@@ -435,6 +469,16 @@ paths:
           name: range
           required: true
           type: string
+        - description: |-
+            Determines how values in the response should be rendered.
+            The default render option is ValueRenderOption.FORMATTED_VALUE.
+          enum:
+            - FORMATTED_VALUE
+            - UNFORMATTED_VALUE
+            - FORMULA
+          in: query
+          name: responseValueRenderOption
+          type: string
         - description: How the input data should be interpreted.
           enum:
             - INPUT_VALUE_OPTION_UNSPECIFIED
@@ -443,6 +487,24 @@ paths:
           in: query
           name: valueInputOption
           type: string
+        - description: |-
+            Determines how dates, times, and durations in the response should be
+            rendered. This is ignored if response_value_render_option is
+            FORMATTED_VALUE.
+            The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+          enum:
+            - SERIAL_NUMBER
+            - FORMATTED_STRING
+          in: query
+          name: responseDateTimeRenderOption
+          type: string
+        - description: |-
+            Determines if the update response should include the values
+            of the cells that were appended. By default, responses
+            do not include the updated values.
+          in: query
+          name: includeValuesInResponse
+          type: boolean
         - description: How the input data should be inserted.
           enum:
             - OVERWRITE
@@ -578,7 +640,9 @@ paths:
             type: string
           name: ranges
           type: array
-        - description: How values should be represented in the output.
+        - description: |-
+            How values should be represented in the output.
+            The default render option is ValueRenderOption.FORMATTED_VALUE.
           enum:
             - FORMATTED_VALUE
             - UNFORMATTED_VALUE
@@ -590,6 +654,7 @@ paths:
             How dates, times, and durations should be represented in the output.
             This is ignored if value_render_option is
             FORMATTED_VALUE.
+            The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
           enum:
             - SERIAL_NUMBER
             - FORMATTED_STRING
@@ -1218,10 +1283,28 @@ definitions:
   BatchUpdateSpreadsheetRequest:
     description: The request for updating any aspect of a spreadsheet.
     properties:
+      includeSpreadsheetInResponse:
+        description: |-
+          Determines if the update response should include the spreadsheet
+          resource.
+        type: boolean
       requests:
         description: A list of updates to apply to the spreadsheet.
         items:
           $ref: '#/definitions/Request'
+        type: array
+      responseIncludeGridData:
+        description: |-
+          True if grid data should be returned. Meaningful only if
+          if include_spreadsheet_response is 'true'.
+          This parameter is ignored if a field mask was set in the request.
+        type: boolean
+      responseRanges:
+        description: |-
+          Limits the ranges included in the response spreadsheet.
+          Meaningful only if include_spreadsheet_response is 'true'.
+        items:
+          type: string
         type: array
     type: object
   BatchUpdateSpreadsheetResponse:
@@ -1237,6 +1320,11 @@ definitions:
       spreadsheetId:
         description: The spreadsheet the updates were applied to.
         type: string
+      updatedSpreadsheet:
+        $ref: '#/definitions/Spreadsheet'
+        description: |-
+          The spreadsheet after updates were applied. This is only set if
+          [BatchUpdateSpreadsheetRequest.include_spreadsheet_in_response] is `true`.
     type: object
   BatchUpdateValuesRequest:
     description: The request for updating more than one range of values in a spreadsheet.
@@ -1246,6 +1334,35 @@ definitions:
         items:
           $ref: '#/definitions/ValueRange'
         type: array
+      includeValuesInResponse:
+        description: |-
+          Determines if the update response should include the values
+          of the cells that were updated. By default, responses
+          do not include the updated values. The `updatedData` field within
+          each of the BatchUpdateValuesResponse.responses will contain
+          the updated values. If the range to write was larger than than the range
+          actually written, the response will include all values in the requested
+          range (excluding trailing empty rows and columns).
+        type: boolean
+      responseDateTimeRenderOption:
+        description: |-
+          Determines how dates, times, and durations in the response should be
+          rendered. This is ignored if response_value_render_option is
+          FORMATTED_VALUE.
+          The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+        enum:
+          - SERIAL_NUMBER
+          - FORMATTED_STRING
+        type: string
+      responseValueRenderOption:
+        description: |-
+          Determines how values in the response should be rendered.
+          The default render option is ValueRenderOption.FORMATTED_VALUE.
+        enum:
+          - FORMATTED_VALUE
+          - UNFORMATTED_VALUE
+          - FORMULA
+        type: string
       valueInputOption:
         description: How the input data should be interpreted.
         enum:
@@ -3701,6 +3818,12 @@ definitions:
         description: The number of columns where at least one cell in the column was updated.
         format: int32
         type: integer
+      updatedData:
+        $ref: '#/definitions/ValueRange'
+        description: |-
+          The values of the cells after updates were applied.
+          This is only included if the request's `includeValuesInResponse` field
+          was `true`.
       updatedRange:
         description: The range (in A1 notation) that updates were applied to.
         type: string
