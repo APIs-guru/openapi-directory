@@ -292,7 +292,7 @@ function writeSpec(source, format, exPatch) {
       expandPathTemplates(swagger);
       replaceSpacesInSchemaNames(swagger);
       extractApiKeysFromParameters(swagger);
-
+      simplifyProduceConsume(swagger);
 
       return validateAndFix(swagger)
     })
@@ -328,6 +328,39 @@ function validateAndFix(swagger) {
 
 //TODO: move into separate lib
 var SwaggerMethods = require('swagger-methods');
+
+function simplifyProduceConsume(swagger) {
+  var operations = _(swagger.paths).values()
+    .map(path => _(path).pick(SwaggerMethods).values().value())
+    .flatten().value();
+
+  var globalProduces = swagger.produces;
+  var globalConsumes = swagger.consumes;
+  _.each(operations, function (op) {
+    if (_.isUndefined(globalProduces))
+      globalProduces = op.produces;
+    if (_.isUndefined(globalConsumes))
+      globalConsumes = op.consumes;
+
+    if (!_.isEqual(globalProduces || null, op.produces))
+      globalProduces = null;
+    if (!_.isEqual(globalConsumes || null, op.consumes))
+      globalConsumes = null;
+  });
+
+  if (_.isArray(globalProduces))
+    swagger.produces = globalProduces;
+  if (_.isArray(globalConsumes))
+    swagger.consumes = globalConsumes;
+
+  _.each(operations, function (op) {
+    if (_.isEqual(swagger.produces, op.produces))
+      delete op.produces;
+    if (_.isEqual(swagger.consumes, op.consumes))
+      delete op.consumes;
+  });
+}
+
 function extractApiKeysFromParameters(swagger) {
   if (swagger.securityDefinitions || swagger.security)
     return;
