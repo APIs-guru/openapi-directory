@@ -20,6 +20,8 @@ info:
     url: 'http://www.europeana.eu/api/api-docs/'
     version: '2.0'
   x-providerName: europeana.eu
+consumes:
+  - application/json
 tags:
   - description: ' '
     name: Search
@@ -30,8 +32,6 @@ tags:
 paths:
   '/v2/dataset/{id}.json':
     get:
-      consumes:
-        - application/json
       operationId: getDataset
       parameters:
         - description: id
@@ -67,8 +67,6 @@ paths:
         - Providers and Datasets
   /v2/datasets.json:
     get:
-      consumes:
-        - application/json
       operationId: listDatasets
       parameters:
         - description: wskey
@@ -124,8 +122,6 @@ paths:
         - Providers and Datasets
   /v2/opensearch.rss:
     get:
-      consumes:
-        - application/json
       operationId: suggestions
       parameters:
         - description: searchTerms
@@ -164,8 +160,6 @@ paths:
         - Search
   '/v2/provider/{id}.json':
     get:
-      consumes:
-        - application/json
       operationId: getProvider
       parameters:
         - description: id
@@ -201,8 +195,6 @@ paths:
         - Providers and Datasets
   '/v2/provider/{id}/datasets.json':
     get:
-      consumes:
-        - application/json
       operationId: listProviderDatasets
       parameters:
         - description: id
@@ -238,8 +230,6 @@ paths:
         - Providers and Datasets
   /v2/providers.json:
     get:
-      consumes:
-        - application/json
       operationId: listProviders
       parameters:
         - description: wskey
@@ -285,8 +275,6 @@ paths:
         - Providers and Datasets
   '/v2/record/{collectionId}/{recordId}.json':
     get:
-      consumes:
-        - application/json
       operationId: getSingleRecordJson
       parameters:
         - description: collectionId
@@ -332,8 +320,6 @@ paths:
         - Record
   '/v2/record/{collectionId}/{recordId}.jsonld':
     get:
-      consumes:
-        - application/json
       operationId: getSingleRecordJsonLD
       parameters:
         - description: collectionId
@@ -379,8 +365,6 @@ paths:
         - Record
   '/v2/record/{collectionId}/{recordId}.rdf':
     get:
-      consumes:
-        - application/json
       operationId: getSingleRecordRDF
       parameters:
         - description: collectionId
@@ -416,8 +400,6 @@ paths:
         - Record
   /v2/search.json:
     get:
-      consumes:
-        - application/json
       operationId: searchRecords
       parameters:
         - description: wskey
@@ -532,8 +514,6 @@ paths:
         - Search
   /v2/search.rss:
     get:
-      consumes:
-        - application/json
       operationId: fieldTrip
       parameters:
         - description: query
@@ -582,8 +562,6 @@ paths:
         - Search
   /v2/suggestions.json:
     get:
-      consumes:
-        - application/json
       operationId: suggestions_1
       parameters:
         - description: query
@@ -625,8 +603,6 @@ paths:
         - Search
   /v2/translateQuery.json:
     get:
-      consumes:
-        - application/json
       operationId: translateQueryUsingGET
       parameters:
         - description: term

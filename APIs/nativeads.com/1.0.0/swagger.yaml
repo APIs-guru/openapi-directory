@@ -31,8 +31,6 @@ paths:
           name: password
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: authentication response
@@ -79,8 +77,6 @@ paths:
           name: page
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: report response
@@ -127,8 +123,6 @@ paths:
           name: page
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: report response
@@ -175,8 +169,6 @@ paths:
           name: page
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: report response

@@ -17,6 +17,11 @@ info:
   x-providerName: data2crm.com
 externalDocs:
   url: 'http://www.data2crm.com/api/'
+consumes:
+  - application/json
+produces:
+  - application/json
+  - application/hal+json
 responses:
   '401':
     description: Unauthorized
@@ -58,8 +63,6 @@ tags:
 paths:
   /account:
     get:
-      consumes:
-        - application/json
       description: Returns all accounts from the system
       operationId: getAccountCollection
       parameters:
@@ -100,9 +103,6 @@ paths:
           name: filter
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -116,8 +116,6 @@ paths:
       tags:
         - Account
     post:
-      consumes:
-        - application/json
       description: Add account into the system
       operationId: createAccountEntity
       parameters:
@@ -139,9 +137,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AccountCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -158,8 +153,6 @@ paths:
         - Account
   /account/count:
     get:
-      consumes:
-        - application/json
       description: Count all accounts from the system
       operationId: getAccountCountCollection
       parameters:
@@ -175,9 +168,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -190,8 +180,6 @@ paths:
         - Account
   /account/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for accounts
       operationId: getAccountDescribe
       parameters:
@@ -207,9 +195,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -222,8 +207,6 @@ paths:
         - Account
   '/account/{account_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete account information
       operationId: deleteAccountEntity
       parameters:
@@ -244,9 +227,6 @@ paths:
           name: account_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -256,8 +236,6 @@ paths:
       tags:
         - Account
     get:
-      consumes:
-        - application/json
       description: Return account information
       operationId: getAccountEntity
       parameters:
@@ -278,9 +256,6 @@ paths:
           name: account_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -292,8 +267,6 @@ paths:
       tags:
         - Account
     put:
-      consumes:
-        - application/json
       description: Update account information
       operationId: updateAccountEntity
       parameters:
@@ -320,9 +293,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AccountUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -339,8 +309,6 @@ paths:
         - Account
   /attachment:
     get:
-      consumes:
-        - application/json
       description: Returns all attachments from the system
       operationId: getAttachmentCollection
       parameters:
@@ -399,9 +367,6 @@ paths:
           name: parent_id
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -415,8 +380,6 @@ paths:
       tags:
         - Attachment
     post:
-      consumes:
-        - application/json
       description: Add attachment into the system
       operationId: createAttachmentEntity
       parameters:
@@ -438,9 +401,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AttachmentCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -457,8 +417,6 @@ paths:
         - Attachment
   /attachment/count:
     get:
-      consumes:
-        - application/json
       description: Count all attachments from the system
       operationId: getAttachmentCountCollection
       parameters:
@@ -474,9 +432,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -489,8 +444,6 @@ paths:
         - Attachment
   /attachment/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for attachments
       operationId: getAttachmentDescribe
       parameters:
@@ -506,9 +459,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -521,8 +471,6 @@ paths:
         - Attachment
   '/attachment/{attachment_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete attachment information
       operationId: deleteAttachmentEntity
       parameters:
@@ -543,9 +491,6 @@ paths:
           name: attachment_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -555,8 +500,6 @@ paths:
       tags:
         - Attachment
     get:
-      consumes:
-        - application/json
       description: Return attachment information
       operationId: getAttachmentEntity
       parameters:
@@ -577,9 +520,6 @@ paths:
           name: attachment_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -591,8 +531,6 @@ paths:
       tags:
         - Attachment
     put:
-      consumes:
-        - application/json
       description: Update attachment information
       operationId: updateAttachmentEntity
       parameters:
@@ -619,9 +557,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AttachmentUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -638,8 +573,6 @@ paths:
         - Attachment
   /call:
     get:
-      consumes:
-        - application/json
       description: Returns all calls from the system
       operationId: getCallCollection
       parameters:
@@ -697,9 +630,6 @@ paths:
           name: parent_id
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -713,8 +643,6 @@ paths:
       tags:
         - Call
     post:
-      consumes:
-        - application/json
       description: Add call into the system
       operationId: createCallEntity
       parameters:
@@ -736,9 +664,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CallCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -755,8 +680,6 @@ paths:
         - Call
   /call/count:
     get:
-      consumes:
-        - application/json
       description: Count all calls from the system
       operationId: getCallCountCollection
       parameters:
@@ -772,9 +695,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -787,8 +707,6 @@ paths:
         - Call
   /call/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for calls
       operationId: getCallDescribe
       parameters:
@@ -804,9 +722,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -819,8 +734,6 @@ paths:
         - Call
   '/call/{call_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete call information
       operationId: deleteCallEntity
       parameters:
@@ -841,9 +754,6 @@ paths:
           name: call_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -853,8 +763,6 @@ paths:
       tags:
         - Call
     get:
-      consumes:
-        - application/json
       description: Return call information
       operationId: getCallEntity
       parameters:
@@ -875,9 +783,6 @@ paths:
           name: call_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -889,8 +794,6 @@ paths:
       tags:
         - Call
     put:
-      consumes:
-        - application/json
       description: Update call information
       operationId: updateCallEntity
       parameters:
@@ -917,9 +820,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CallUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -936,8 +836,6 @@ paths:
         - Call
   /contact:
     get:
-      consumes:
-        - application/json
       description: Returns all contacts from the system
       operationId: getContactCollection
       parameters:
@@ -978,9 +876,6 @@ paths:
           name: filter
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -994,8 +889,6 @@ paths:
       tags:
         - Contact
     post:
-      consumes:
-        - application/json
       description: Add contact into the system
       operationId: createContactEntity
       parameters:
@@ -1017,9 +910,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ContactCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -1036,8 +926,6 @@ paths:
         - Contact
   /contact/count:
     get:
-      consumes:
-        - application/json
       description: Count all contacts from the system
       operationId: getContactCountCollection
       parameters:
@@ -1053,9 +941,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1068,8 +953,6 @@ paths:
         - Contact
   /contact/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for contacts
       operationId: getContactDescribe
       parameters:
@@ -1085,9 +968,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1100,8 +980,6 @@ paths:
         - Contact
   '/contact/{contact_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete contact information
       operationId: deleteContactEntity
       parameters:
@@ -1122,9 +1000,6 @@ paths:
           name: contact_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -1134,8 +1009,6 @@ paths:
       tags:
         - Contact
     get:
-      consumes:
-        - application/json
       description: Return contact information
       operationId: getContactEntity
       parameters:
@@ -1156,9 +1029,6 @@ paths:
           name: contact_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1170,8 +1040,6 @@ paths:
       tags:
         - Contact
     put:
-      consumes:
-        - application/json
       description: Update contact information
       operationId: updateContactEntity
       parameters:
@@ -1198,9 +1066,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ContactUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1217,8 +1082,6 @@ paths:
         - Contact
   /crm:
     get:
-      consumes:
-        - application/json
       description: Returns all CRMs from the system
       operationId: getCrmCollection
       parameters:
@@ -1268,9 +1131,6 @@ paths:
           name: type
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1284,8 +1144,6 @@ paths:
       tags:
         - Crm
     post:
-      consumes:
-        - application/json
       description: 'Add CRM into the system<br><a href="http://www.data2crm.com/api/faqs/need-connect-crm-data2crm-api/" target="_blank">What do I need to connect a CRM to Data2CRM.API?</a>'
       operationId: createCrmEntity
       parameters:
@@ -1301,9 +1159,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CrmCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -1320,8 +1175,6 @@ paths:
         - Crm
   /crm/count:
     get:
-      consumes:
-        - application/json
       description: Count all CRMs from the system
       operationId: getCrmCountCollection
       parameters:
@@ -1331,9 +1184,6 @@ paths:
           name: X-API2CRM-USERKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1346,8 +1196,6 @@ paths:
         - Crm
   '/crm/{crm_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete CRM information
       operationId: deleteCrmEntity
       parameters:
@@ -1362,9 +1210,6 @@ paths:
           name: crm_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -1374,8 +1219,6 @@ paths:
       tags:
         - Crm
     get:
-      consumes:
-        - application/json
       description: Return CRM information
       operationId: getCrmEntity
       parameters:
@@ -1390,9 +1233,6 @@ paths:
           name: crm_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1404,8 +1244,6 @@ paths:
       tags:
         - Crm
     put:
-      consumes:
-        - application/json
       description: 'Update CRM information<br><a href="http://www.data2crm.com/api/faqs/need-connect-crm-data2crm-api/" target="_blank">What do I need to connect a CRM to Data2CRM.API?</a>'
       operationId: updateCrmEntity
       parameters:
@@ -1426,9 +1264,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CrmUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1445,8 +1280,6 @@ paths:
         - Crm
   /customField:
     get:
-      consumes:
-        - application/json
       description: Returns all custom field from the system
       operationId: getCustomFieldCollection
       parameters:
@@ -1515,9 +1348,6 @@ paths:
           name: name
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1531,8 +1361,6 @@ paths:
       tags:
         - CustomField
     post:
-      consumes:
-        - application/json
       description: Add custom field into the system
       operationId: createCustomFieldEntity
       parameters:
@@ -1554,9 +1382,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CustomFieldCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -1573,8 +1398,6 @@ paths:
         - CustomField
   '/customField/{custom_field_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete custom field information
       operationId: deleteCustomFieldEntity
       parameters:
@@ -1595,9 +1418,6 @@ paths:
           name: custom_field_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -1607,8 +1427,6 @@ paths:
       tags:
         - CustomField
     get:
-      consumes:
-        - application/json
       description: Return custom field information
       operationId: getCustomFieldEntity
       parameters:
@@ -1629,9 +1447,6 @@ paths:
           name: custom_field_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1643,8 +1458,6 @@ paths:
       tags:
         - CustomField
     put:
-      consumes:
-        - application/json
       description: Update custom field information
       operationId: updateCustomFieldEntity
       parameters:
@@ -1671,9 +1484,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CustomFieldUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1690,8 +1500,6 @@ paths:
         - CustomField
   /email:
     get:
-      consumes:
-        - application/json
       description: Returns all emails from the system
       operationId: getEmailCollection
       parameters:
@@ -1749,9 +1557,6 @@ paths:
           name: parent_id
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1765,8 +1570,6 @@ paths:
       tags:
         - Email
     post:
-      consumes:
-        - application/json
       description: Add email into the system
       operationId: createEmailEntity
       parameters:
@@ -1788,9 +1591,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EmailCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -1807,8 +1607,6 @@ paths:
         - Email
   /email/count:
     get:
-      consumes:
-        - application/json
       description: Count all emails from the system
       operationId: getEmailCountCollection
       parameters:
@@ -1824,9 +1622,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1839,8 +1634,6 @@ paths:
         - Email
   /email/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for emails
       operationId: getEmailDescribe
       parameters:
@@ -1856,9 +1649,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1871,8 +1661,6 @@ paths:
         - Email
   '/email/{email_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete email information
       operationId: deleteEmailEntity
       parameters:
@@ -1893,9 +1681,6 @@ paths:
           name: email_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -1905,8 +1690,6 @@ paths:
       tags:
         - Email
     get:
-      consumes:
-        - application/json
       description: Return email information
       operationId: getEmailEntity
       parameters:
@@ -1927,9 +1710,6 @@ paths:
           name: email_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1941,8 +1721,6 @@ paths:
       tags:
         - Email
     put:
-      consumes:
-        - application/json
       description: Update email information
       operationId: updateEmailEntity
       parameters:
@@ -1969,9 +1747,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EmailUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -1988,8 +1763,6 @@ paths:
         - Email
   /event:
     get:
-      consumes:
-        - application/json
       description: Returns all events from the system
       operationId: getEventCollection
       parameters:
@@ -2047,9 +1820,6 @@ paths:
           name: parent_id
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2063,8 +1833,6 @@ paths:
       tags:
         - Event
     post:
-      consumes:
-        - application/json
       description: Add event into the system
       operationId: createEventEntity
       parameters:
@@ -2086,9 +1854,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EventCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -2105,8 +1870,6 @@ paths:
         - Event
   /event/count:
     get:
-      consumes:
-        - application/json
       description: Count all events from the system
       operationId: getEventCountCollection
       parameters:
@@ -2122,9 +1885,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2137,8 +1897,6 @@ paths:
         - Event
   /event/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for events
       operationId: getEventDescribe
       parameters:
@@ -2154,9 +1912,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2169,8 +1924,6 @@ paths:
         - Event
   '/event/{event_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete event information
       operationId: deleteEventEntity
       parameters:
@@ -2191,9 +1944,6 @@ paths:
           name: event_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -2203,8 +1953,6 @@ paths:
       tags:
         - Event
     get:
-      consumes:
-        - application/json
       description: Return event information
       operationId: getEventEntity
       parameters:
@@ -2225,9 +1973,6 @@ paths:
           name: event_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2239,8 +1984,6 @@ paths:
       tags:
         - Event
     put:
-      consumes:
-        - application/json
       description: Update event information
       operationId: updateEventEntity
       parameters:
@@ -2267,9 +2010,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EventUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2286,8 +2026,6 @@ paths:
         - Event
   /lead:
     get:
-      consumes:
-        - application/json
       description: Returns all leads from the system
       operationId: getLeadCollection
       parameters:
@@ -2328,9 +2066,6 @@ paths:
           name: filter
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2344,8 +2079,6 @@ paths:
       tags:
         - Lead
     post:
-      consumes:
-        - application/json
       description: Add lead into the system
       operationId: createLeadEntity
       parameters:
@@ -2367,9 +2100,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/LeadCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -2386,8 +2116,6 @@ paths:
         - Lead
   /lead/count:
     get:
-      consumes:
-        - application/json
       description: Count all leads from the system
       operationId: getLeadCountCollection
       parameters:
@@ -2403,9 +2131,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2418,8 +2143,6 @@ paths:
         - Lead
   /lead/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for leads
       operationId: getLeadDescribe
       parameters:
@@ -2435,9 +2158,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2450,8 +2170,6 @@ paths:
         - Lead
   '/lead/{lead_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete lead information
       operationId: deleteLeadEntity
       parameters:
@@ -2472,9 +2190,6 @@ paths:
           name: lead_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -2484,8 +2199,6 @@ paths:
       tags:
         - Lead
     get:
-      consumes:
-        - application/json
       description: Return lead information
       operationId: getLeadEntity
       parameters:
@@ -2506,9 +2219,6 @@ paths:
           name: lead_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2520,8 +2230,6 @@ paths:
       tags:
         - Lead
     put:
-      consumes:
-        - application/json
       description: Update lead information
       operationId: updateLeadEntity
       parameters:
@@ -2548,9 +2256,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/LeadUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2567,8 +2272,6 @@ paths:
         - Lead
   /meeting:
     get:
-      consumes:
-        - application/json
       description: Returns all meetings from the system
       operationId: getMeetingCollection
       parameters:
@@ -2625,9 +2328,6 @@ paths:
           name: parent_id
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2641,8 +2341,6 @@ paths:
       tags:
         - Meeting
     post:
-      consumes:
-        - application/json
       description: Add meeting into the system
       operationId: createMeetingEntity
       parameters:
@@ -2664,9 +2362,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/MeetingCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -2683,8 +2378,6 @@ paths:
         - Meeting
   /meeting/count:
     get:
-      consumes:
-        - application/json
       description: Count all meetings from the system
       operationId: getMeetingCountCollection
       parameters:
@@ -2700,9 +2393,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2715,8 +2405,6 @@ paths:
         - Meeting
   /meeting/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for meetings
       operationId: getMeetingDescribe
       parameters:
@@ -2732,9 +2420,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2747,8 +2432,6 @@ paths:
         - Meeting
   '/meeting/{meeting_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete meeting information
       operationId: deleteMeetingEntity
       parameters:
@@ -2769,9 +2452,6 @@ paths:
           name: meeting_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -2781,8 +2461,6 @@ paths:
       tags:
         - Meeting
     get:
-      consumes:
-        - application/json
       description: Return meeting information
       operationId: getMeetingEntity
       parameters:
@@ -2803,9 +2481,6 @@ paths:
           name: meeting_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2817,8 +2492,6 @@ paths:
       tags:
         - Meeting
     put:
-      consumes:
-        - application/json
       description: Update meeting information
       operationId: updateMeetingEntity
       parameters:
@@ -2845,9 +2518,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/MeetingUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2864,8 +2534,6 @@ paths:
         - Meeting
   /note:
     get:
-      consumes:
-        - application/json
       description: Returns all notes from the system
       operationId: getNoteCollection
       parameters:
@@ -2924,9 +2592,6 @@ paths:
           name: parent_id
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -2940,8 +2605,6 @@ paths:
       tags:
         - Note
     post:
-      consumes:
-        - application/json
       description: Add note into the system
       operationId: createNoteEntity
       parameters:
@@ -2963,9 +2626,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/NoteCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -2982,8 +2642,6 @@ paths:
         - Note
   /note/count:
     get:
-      consumes:
-        - application/json
       description: Count all notes from the system
       operationId: getNoteCountCollection
       parameters:
@@ -2999,9 +2657,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3014,8 +2669,6 @@ paths:
         - Note
   /note/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for notes
       operationId: getNoteDescribe
       parameters:
@@ -3031,9 +2684,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3046,8 +2696,6 @@ paths:
         - Note
   '/note/{note_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete note information
       operationId: deleteNoteEntity
       parameters:
@@ -3068,9 +2716,6 @@ paths:
           name: note_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -3080,8 +2725,6 @@ paths:
       tags:
         - Note
     get:
-      consumes:
-        - application/json
       description: Return note information
       operationId: getNoteEntity
       parameters:
@@ -3102,9 +2745,6 @@ paths:
           name: note_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3116,8 +2756,6 @@ paths:
       tags:
         - Note
     put:
-      consumes:
-        - application/json
       description: Update note information
       operationId: updateNoteEntity
       parameters:
@@ -3144,9 +2782,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/NoteUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3163,8 +2798,6 @@ paths:
         - Note
   /opportunity:
     get:
-      consumes:
-        - application/json
       description: Returns all opportunities from the system
       operationId: getOpportunityCollection
       parameters:
@@ -3205,9 +2838,6 @@ paths:
           name: filter
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3221,8 +2851,6 @@ paths:
       tags:
         - Opportunity
     post:
-      consumes:
-        - application/json
       description: Add opportunity into the system
       operationId: createOpportunityEntity
       parameters:
@@ -3244,9 +2872,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OpportunityCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -3263,8 +2888,6 @@ paths:
         - Opportunity
   /opportunity/count:
     get:
-      consumes:
-        - application/json
       description: Count all opportunities from the system
       operationId: getOpportunityCountCollection
       parameters:
@@ -3280,9 +2903,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3295,8 +2915,6 @@ paths:
         - Opportunity
   /opportunity/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for opportunities
       operationId: getOpportunityDescribe
       parameters:
@@ -3312,9 +2930,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3327,8 +2942,6 @@ paths:
         - Opportunity
   '/opportunity/{opportunity_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete opportunity information
       operationId: deleteOpportunityEntity
       parameters:
@@ -3349,9 +2962,6 @@ paths:
           name: opportunity_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -3361,8 +2971,6 @@ paths:
       tags:
         - Opportunity
     get:
-      consumes:
-        - application/json
       description: Return opportunity information
       operationId: getOpportunityEntity
       parameters:
@@ -3383,9 +2991,6 @@ paths:
           name: opportunity_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3397,8 +3002,6 @@ paths:
       tags:
         - Opportunity
     put:
-      consumes:
-        - application/json
       description: Update opportunity information
       operationId: updateOpportunityEntity
       parameters:
@@ -3425,9 +3028,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OpportunityUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3444,8 +3044,6 @@ paths:
         - Opportunity
   /task:
     get:
-      consumes:
-        - application/json
       description: Returns all tasks from the system
       operationId: getTaskCollection
       parameters:
@@ -3486,9 +3084,6 @@ paths:
           name: filter
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3502,8 +3097,6 @@ paths:
       tags:
         - Task
     post:
-      consumes:
-        - application/json
       description: Add task into the system
       operationId: createTaskEntity
       parameters:
@@ -3525,9 +3118,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TaskCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -3544,8 +3134,6 @@ paths:
         - Task
   /task/count:
     get:
-      consumes:
-        - application/json
       description: Count all tasks from the system
       operationId: getTaskCountCollection
       parameters:
@@ -3561,9 +3149,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3576,8 +3161,6 @@ paths:
         - Task
   /task/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for tasks
       operationId: getTaskDescribe
       parameters:
@@ -3593,9 +3176,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3608,8 +3188,6 @@ paths:
         - Task
   '/task/{task_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete task information
       operationId: deleteTaskEntity
       parameters:
@@ -3630,9 +3208,6 @@ paths:
           name: task_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -3642,8 +3217,6 @@ paths:
       tags:
         - Task
     get:
-      consumes:
-        - application/json
       description: Return task information
       operationId: getTaskEntity
       parameters:
@@ -3664,9 +3237,6 @@ paths:
           name: task_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3678,8 +3248,6 @@ paths:
       tags:
         - Task
     put:
-      consumes:
-        - application/json
       description: Update task information
       operationId: updateTaskEntity
       parameters:
@@ -3706,9 +3274,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TaskUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3725,8 +3290,6 @@ paths:
         - Task
   /user:
     get:
-      consumes:
-        - application/json
       description: Returns all users from the system
       operationId: getUserCollection
       parameters:
@@ -3767,9 +3330,6 @@ paths:
           name: filter
           required: false
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3783,8 +3343,6 @@ paths:
       tags:
         - User
     post:
-      consumes:
-        - application/json
       description: Add user into the system
       operationId: createUserEntity
       parameters:
@@ -3806,9 +3364,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UserCreate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '201':
           description: Created
@@ -3825,8 +3380,6 @@ paths:
         - User
   /user/count:
     get:
-      consumes:
-        - application/json
       description: Count all users from the system
       operationId: getUserCountCollection
       parameters:
@@ -3842,9 +3395,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3857,8 +3407,6 @@ paths:
         - User
   /user/describe:
     get:
-      consumes:
-        - application/json
       description: Returns describe for users
       operationId: getUserDescribe
       parameters:
@@ -3874,9 +3422,6 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3889,8 +3434,6 @@ paths:
         - User
   '/user/{user_id}':
     delete:
-      consumes:
-        - application/json
       description: Delete user information
       operationId: deleteUserEntity
       parameters:
@@ -3911,9 +3454,6 @@ paths:
           name: user_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '204':
           description: No Content
@@ -3923,8 +3463,6 @@ paths:
       tags:
         - User
     get:
-      consumes:
-        - application/json
       description: Return user information
       operationId: getUserEntity
       parameters:
@@ -3945,9 +3483,6 @@ paths:
           name: user_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK
@@ -3959,8 +3494,6 @@ paths:
       tags:
         - User
     put:
-      consumes:
-        - application/json
       description: Update user information
       operationId: updateUserEntity
       parameters:
@@ -3987,9 +3520,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UserUpdate'
-      produces:
-        - application/json
-        - application/hal+json
       responses:
         '200':
           description: OK

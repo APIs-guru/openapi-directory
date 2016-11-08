@@ -25,6 +25,9 @@ info:
     - real-time
     - bi-directional
     - monitoring
+produces:
+  - application/json
+  - text/json
 security: []
 parameters:
   api-version:
@@ -50,9 +53,6 @@ paths:
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -84,9 +84,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OperationInputs'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -113,9 +110,6 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -149,9 +143,6 @@ paths:
           name: resourceName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
@@ -183,9 +174,6 @@ paths:
           name: resourceName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -224,9 +212,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/IotHubDescription'
-      produces:
-        - application/json
-        - text/json
       responses:
         '201':
           description: Created
@@ -264,9 +249,6 @@ paths:
           name: keyName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -298,9 +280,6 @@ paths:
           name: resourceName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -337,9 +316,6 @@ paths:
           name: eventHubEndpointName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -383,9 +359,6 @@ paths:
           name: name
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -424,9 +397,6 @@ paths:
           name: name
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -467,9 +437,6 @@ paths:
           name: name
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -509,9 +476,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ExportDevicesRequest'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -551,9 +515,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ImportDevicesRequest'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -585,9 +546,6 @@ paths:
           name: resourceName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -626,9 +584,6 @@ paths:
           name: jobId
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -660,9 +615,6 @@ paths:
           name: resourceName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -696,9 +648,6 @@ paths:
           name: resourceName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -732,9 +681,6 @@ paths:
           name: resourceName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK

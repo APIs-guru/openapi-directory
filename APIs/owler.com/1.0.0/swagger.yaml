@@ -14,6 +14,9 @@ info:
     url: 'https://developers.owler.com/swagger/spec.json'
     version: '1.2'
   x-providerName: owler.com
+produces:
+  - application/json
+  - application/xml
 securityDefinitions:
   user_key:
     description: API Access Key
@@ -68,9 +71,6 @@ paths:
           name: format
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Search Results
@@ -106,9 +106,6 @@ paths:
           name: format
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Competitors Data
@@ -146,9 +143,6 @@ paths:
           name: format
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Competitors Data
@@ -186,9 +180,6 @@ paths:
           name: format
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Company Data
@@ -245,9 +236,6 @@ paths:
           name: format
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Search Results
@@ -283,9 +271,6 @@ paths:
           name: format
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Company Data
@@ -352,9 +337,6 @@ paths:
           name: category
           required: false
           type: array
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Feeds Data

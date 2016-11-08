@@ -15,6 +15,8 @@ info:
     url: 'https://api.infermedica.com/v1/swagger.json'
     version: '2.0'
   x-providerName: infermedica.com
+produces:
+  - application/json
 tags:
   - name: lookup
   - name: conditions
@@ -28,8 +30,6 @@ paths:
       description: Returns a list of all available conditions.
       operationId: getAllConditions
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: successful operation
@@ -50,8 +50,6 @@ paths:
           name: id
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: successful operation
@@ -76,8 +74,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DiagnosisRequest'
-      produces:
-        - application/json
       responses:
         '200':
           description: successful operation
@@ -91,8 +87,6 @@ paths:
       description: Returns information about data used by diagnostic engine.
       operationId: getDatabaseInfo
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: successful operation
@@ -119,8 +113,6 @@ paths:
           name: sex
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: successful operation
@@ -138,8 +130,6 @@ paths:
       description: Returns a list of all available observations.
       operationId: getAllObservations
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: successful operation
@@ -160,8 +150,6 @@ paths:
           name: id
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: successful operation
@@ -179,8 +167,6 @@ paths:
       description: Returns a list of all available risk factors.
       operationId: getAllRiskFactors
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: successful operation
@@ -201,8 +187,6 @@ paths:
           name: id
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: successful operation

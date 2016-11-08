@@ -20,6 +20,12 @@ info:
   x-tags:
     - SMS
     - bulk SMS
+consumes:
+  - application/json
+  - application/xml
+produces:
+  - application/json
+  - application/xml
 tags:
   - description: Core information related to your account
     name: account
@@ -38,14 +44,8 @@ tags:
 paths:
   /api/rest/v1/account/balance:
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns your account's credit balance
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Success
@@ -62,9 +62,6 @@ paths:
         - account
   /api/rest/v1/account/transfer:
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: 'Transfers credits between two users in the same team. The <i>account email address</i> fields as well as the <i>number of credits to transfer</i> are required. '
       parameters:
@@ -74,9 +71,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/WebServiceTransferCreditsRequest'
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -93,9 +87,6 @@ paths:
         - account
   /api/rest/v1/account/user:
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Find a user for a particular email address
       parameters:
@@ -104,9 +95,6 @@ paths:
           name: searchEmail
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -122,9 +110,6 @@ paths:
       tags:
         - account
     put:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: 'Creates a new sub-account in your team. The following fields are required <i>firstname, lastname, email address, contact number</i> and <i>password.</i>'
       parameters:
@@ -134,9 +119,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/WebServiceUser'
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -155,9 +137,6 @@ paths:
         - account
   '/api/rest/v1/account/user/{userId}':
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Gets a user from a given user id
       parameters:
@@ -167,9 +146,6 @@ paths:
           name: userId
           required: true
           type: integer
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -185,9 +161,6 @@ paths:
       tags:
         - account
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: 'Updates a sub-account in your team. The following fields can be updated <i>firstname, lastname, contact number</i> and <i>password.</i>'
       parameters:
@@ -203,9 +176,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/WebServiceUser'
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -224,14 +194,8 @@ paths:
         - account
   /api/rest/v1/contacts/all:
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns all contacts
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -248,9 +212,6 @@ paths:
         - contacts
   /api/rest/v1/contacts/create:
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Creates a  contact
       parameters:
@@ -260,9 +221,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/WebServiceContact'
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -283,9 +241,6 @@ paths:
         - contacts
   '/api/rest/v1/contacts/{contactId}':
     delete:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Deletes a  contact
       parameters:
@@ -294,9 +249,6 @@ paths:
           name: contactId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -310,9 +262,6 @@ paths:
       tags:
         - contacts
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns details for a single contact
       parameters:
@@ -321,9 +270,6 @@ paths:
           name: contactId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -339,9 +285,6 @@ paths:
       tags:
         - contacts
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Updates a  contact
       parameters:
@@ -356,9 +299,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/WebServiceContact'
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -377,9 +317,6 @@ paths:
         - contacts
   '/api/rest/v1/contacts/{contactId}/addFromGroup/{groupId}':
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Remove a contact from a group
       parameters:
@@ -393,9 +330,6 @@ paths:
           name: groupId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -409,9 +343,6 @@ paths:
       tags:
         - contacts
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Remove a contact from a group
       parameters:
@@ -425,9 +356,6 @@ paths:
           name: groupId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -444,9 +372,6 @@ paths:
         - contacts
   '/api/rest/v1/contacts/{contactId}/addToGroup/{groupId}':
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Add a contact to a group
       parameters:
@@ -460,9 +385,6 @@ paths:
           name: groupId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -476,9 +398,6 @@ paths:
       tags:
         - contacts
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Add a contact to a group
       parameters:
@@ -492,9 +411,6 @@ paths:
           name: groupId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -511,9 +427,6 @@ paths:
         - contacts
   /api/rest/v1/context/lookup:
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns context information for a single provided
       parameters:
@@ -523,9 +436,6 @@ paths:
           required: false
           schema:
             type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Success
@@ -541,9 +451,6 @@ paths:
       tags:
         - context
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns context information for a single provided
       parameters:
@@ -553,9 +460,6 @@ paths:
           required: false
           schema:
             type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Success
@@ -574,14 +478,8 @@ paths:
         - context
   /api/rest/v1/groups/all:
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns all groups
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -598,9 +496,6 @@ paths:
         - groups
   /api/rest/v1/groups/create:
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Create a  group
       parameters:
@@ -610,9 +505,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/WebServiceGroup'
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -633,9 +525,6 @@ paths:
         - groups
   '/api/rest/v1/groups/{groupId}':
     delete:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Deletes a  group
       parameters:
@@ -644,9 +533,6 @@ paths:
           name: groupId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -660,9 +546,6 @@ paths:
       tags:
         - groups
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns details for a single group
       parameters:
@@ -671,9 +554,6 @@ paths:
           name: groupId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -689,9 +569,6 @@ paths:
       tags:
         - groups
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Update a  group
       parameters:
@@ -706,9 +583,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/WebServiceGroup'
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -727,9 +601,6 @@ paths:
         - groups
   '/api/rest/v1/groups/{groupId}/addContact/{contactId}':
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Add a contact to a group
       parameters:
@@ -743,9 +614,6 @@ paths:
           name: contactId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -759,9 +627,6 @@ paths:
       tags:
         - groups
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Add a contact to a group
       parameters:
@@ -775,9 +640,6 @@ paths:
           name: contactId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -794,9 +656,6 @@ paths:
         - groups
   '/api/rest/v1/groups/{groupId}/removeContact/{contactId}':
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Remove a contact from a group
       parameters:
@@ -810,9 +669,6 @@ paths:
           name: contactId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -826,9 +682,6 @@ paths:
       tags:
         - groups
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Remove a contact from a group
       parameters:
@@ -842,9 +695,6 @@ paths:
           name: contactId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -861,9 +711,6 @@ paths:
         - groups
   /api/rest/v1/messages/all:
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns all messages
       parameters:
@@ -962,9 +809,6 @@ paths:
           name: read
           required: false
           type: boolean
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -981,9 +825,6 @@ paths:
         - messages
   '/api/rest/v1/messages/{messageId}':
     delete:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Deletes a  message
       parameters:
@@ -992,9 +833,6 @@ paths:
           name: messageId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -1008,9 +846,6 @@ paths:
       tags:
         - messages
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns details for a single message
       parameters:
@@ -1019,9 +854,6 @@ paths:
           name: messageId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -1038,9 +870,6 @@ paths:
         - messages
   '/api/rest/v1/messages/{messageId}/markRead':
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Marks a  message as read
       parameters:
@@ -1049,9 +878,6 @@ paths:
           name: messageId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -1069,9 +895,6 @@ paths:
       tags:
         - messages
     put:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Marks a  message as read
       parameters:
@@ -1080,9 +903,6 @@ paths:
           name: messageId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -1101,9 +921,6 @@ paths:
         - messages
   '/api/rest/v1/messages/{messageId}/markUnread':
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Marks a  message as unread
       parameters:
@@ -1112,9 +929,6 @@ paths:
           name: messageId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -1132,9 +946,6 @@ paths:
       tags:
         - messages
     put:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Marks a  message as unread
       parameters:
@@ -1143,9 +954,6 @@ paths:
           name: messageId
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -1164,14 +972,8 @@ paths:
         - messages
   /api/rest/v1/sms/send:
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns an example of the data to POST to send a single message.
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -1187,9 +989,6 @@ paths:
       tags:
         - sms
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Sends a single message. The <i>recipientNumber</i> and <i>message</i> fields are required. All other fields are optional.
       parameters:
@@ -1199,9 +998,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/WebServiceSendSmsRequest'
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -1224,14 +1020,8 @@ paths:
         - sms
   /api/rest/v1/sms/send-bulk:
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns an example of the data to POST to send multiple messages in one transaction.
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -1247,9 +1037,6 @@ paths:
       tags:
         - sms
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Send multiple messages in one transaction.
       parameters:
@@ -1259,9 +1046,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/WebServiceSendSmsRequests'
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -1280,9 +1064,6 @@ paths:
         - sms
   /api/rest/v1/sms/send-url-parameters:
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
       parameters:
@@ -1312,9 +1093,6 @@ paths:
           name: dataField
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -1330,9 +1108,6 @@ paths:
       tags:
         - sms
     post:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
       parameters:
@@ -1362,9 +1137,6 @@ paths:
           name: dataField
           required: false
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -1383,14 +1155,8 @@ paths:
         - sms
   /api/rest/v1/templates/all:
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns all templates
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -1407,9 +1173,6 @@ paths:
         - templates
   '/api/rest/v1/templates/{templateId}':
     delete:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Deletes a  template
       parameters:
@@ -1419,9 +1182,6 @@ paths:
           name: templateId
           required: true
           type: integer
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Description was not specified
@@ -1435,9 +1195,6 @@ paths:
       tags:
         - templates
     get:
-      consumes:
-        - application/json
-        - application/xml
       deprecated: false
       description: Returns details for a single template
       parameters:
@@ -1447,9 +1204,6 @@ paths:
           name: templateId
           required: true
           type: integer
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK

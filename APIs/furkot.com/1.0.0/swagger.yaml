@@ -22,6 +22,8 @@ info:
 externalDocs:
   description: Furkot API description
   url: 'https://help.furkot.com/widgets/furkot-api.html'
+produces:
+  - application/json
 securityDefinitions:
   furkot_auth_access_code:
     authorizationUrl: 'https://trips.furkot.com/oauth/authorize'
@@ -45,8 +47,6 @@ paths:
   /trip:
     get:
       description: list user's trips
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful response
@@ -63,8 +63,6 @@ paths:
           name: trip_id
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful response

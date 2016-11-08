@@ -12,6 +12,8 @@ info:
     url: 'https://www.citycontext.com/swagger/spec.json'
     version: '1.2'
   x-providerName: citycontext.com
+produces:
+  - application/json
 securityDefinitions:
   user_key:
     description: City context user key
@@ -50,8 +52,6 @@ paths:
           name: park_search_radius
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -79,8 +79,6 @@ paths:
           name: park_search_radius
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -93,8 +91,6 @@ paths:
     get:
       operationId: usage
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified

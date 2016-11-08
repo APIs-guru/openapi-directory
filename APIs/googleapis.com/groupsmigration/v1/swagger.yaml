@@ -23,6 +23,8 @@ info:
   x-serviceName: groupsmigration
 externalDocs:
   url: 'https://developers.google.com/google-apps/groups-migration/'
+consumes:
+  - message/rfc822
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -84,8 +86,6 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      consumes:
-        - message/rfc822
       description: Inserts a new mail into the archive of the Google group.
       operationId: groupsmigration.archive.insert
       parameters:

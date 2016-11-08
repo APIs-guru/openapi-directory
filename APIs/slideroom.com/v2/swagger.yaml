@@ -14,6 +14,11 @@ info:
     url: 'https://api.slideroom.com/schema/v2'
     version: '2.0'
   x-providerName: slideroom.com
+produces:
+  - application/json
+  - text/json
+  - application/xml
+  - text/xml
 paths:
   /api/v2/applicant/attributes:
     delete:
@@ -43,11 +48,6 @@ paths:
           name: commonAppYear
           required: false
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -78,11 +78,6 @@ paths:
           name: commonAppYear
           required: false
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -136,11 +131,6 @@ paths:
           name: commonAppYear
           required: false
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -155,11 +145,6 @@ paths:
       deprecated: false
       operationId: Applicant_GetAttributeNamesV2
       parameters: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -176,11 +161,6 @@ paths:
       deprecated: false
       operationId: Application_GetAttributeNamesV2
       parameters: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -341,11 +321,6 @@ paths:
           name: email
           required: false
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -370,11 +345,6 @@ paths:
           name: name
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -393,11 +363,6 @@ paths:
           name: applicationId
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -439,11 +404,6 @@ paths:
               name1: Value1
               name2: Value2
             type: object
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -577,11 +537,6 @@ paths:
           name: delivery.folder
           required: false
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '202':
           description: Accepted
@@ -604,11 +559,6 @@ paths:
           name: token
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK

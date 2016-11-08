@@ -15,6 +15,8 @@ info:
     url: 'https://www.patientview.org/api/api-docs'
     version: '1.2'
   x-providerName: patientview.org
+consumes:
+  - application/json
 tags:
   - description: Auth Controller
     name: auth-controller
@@ -29,8 +31,6 @@ tags:
 paths:
   /auth/login:
     post:
-      consumes:
-        - application/json
       deprecated: false
       description: 'Authenticate using username and password, returns token, which must be added to X-Auth-Token in header of all future requests'
       operationId: logIn
@@ -61,8 +61,6 @@ paths:
         - auth-controller
   '/auth/logout/{token}':
     delete:
-      consumes:
-        - application/json
       deprecated: false
       description: Log Out
       operationId: logOut
@@ -88,8 +86,6 @@ paths:
         - auth-controller
   '/auth/{token}/basicuserinformation':
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: 'Once logged in and have a token, get basic user information including group role membership'
       operationId: getBasicUserInformation
@@ -117,8 +113,6 @@ paths:
         - auth-controller
   '/patient/{userId}/basic':
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: 'Given a User ID, get basic patient information for a user from clinical data stored in FHIR'
       operationId: getBasicPatientDetails
@@ -150,8 +144,6 @@ paths:
         - patient-controller
   /patientmanagement/diagnoses:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: getPatientManagementDiagnoses
       operationId: getPatientManagementDiagnoses
@@ -176,8 +168,6 @@ paths:
         - patient-management-controller
   /patientmanagement/lookuptypes:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: getPatientManagementLookupTypes
       operationId: getPatientManagementLookupTypes
@@ -202,8 +192,6 @@ paths:
         - patient-management-controller
   /patientmanagement/validate:
     post:
-      consumes:
-        - application/json
       deprecated: false
       description: validatePatientManagement
       operationId: validatePatientManagement
@@ -232,8 +220,6 @@ paths:
         - patient-management-controller
   '/patientmanagement/{userId}/group/{groupId}/identifier/{identifierId}':
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: getPatientManagement
       operationId: getPatientManagement
@@ -273,8 +259,6 @@ paths:
       tags:
         - patient-management-controller
     post:
-      consumes:
-        - application/json
       deprecated: false
       description: savePatientManagement
       operationId: savePatientManagement
@@ -321,8 +305,6 @@ paths:
         - patient-management-controller
   '/patientmanagement/{userId}/group/{groupId}/identifier/{identifierId}/surgeries':
     post:
-      consumes:
-        - application/json
       deprecated: false
       description: savePatientManagementSurgeries
       operationId: savePatientManagementSurgeries
@@ -369,8 +351,6 @@ paths:
         - patient-management-controller
   '/user/{userId}/availableobservationheadings':
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: Given a User ID retrieve a list of available observation types for that user (where they have observation data).
       operationId: getAvailableObservationHeadings
@@ -402,8 +382,6 @@ paths:
         - observation-heading-controller
   '/user/{userId}/observations':
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: 'Given a User ID and search parameters, retrieve a page of observations.'
       operationId: getObservationsByCodes
@@ -457,8 +435,6 @@ paths:
         - observation-controller
   '/user/{userId}/observations/{code}':
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: 'Given a User ID and observation code, retrieve all observations.'
       operationId: getObservationsByCode

@@ -12,6 +12,8 @@ info:
     url: 'http://posty-api.herokuapp.com/api/v1/swagger_doc.json'
     version: '1.2'
   x-providerName: posty-api.herokuapp.com
+produces:
+  - application/json
 tags:
   - name: domains
   - name: summary
@@ -21,8 +23,6 @@ paths:
   /api/v1/domains.json:
     get:
       operationId: GET-api--version-domains---format-
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -31,8 +31,6 @@ paths:
         - domains
     post:
       operationId: POST-api--version-domains---format-
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -47,8 +45,6 @@ paths:
           name: domain_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -62,8 +58,6 @@ paths:
           name: domain_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -77,8 +71,6 @@ paths:
           name: domain_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -93,8 +85,6 @@ paths:
           name: domain_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -108,8 +98,6 @@ paths:
           name: domain_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -128,8 +116,6 @@ paths:
           name: alias_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -147,8 +133,6 @@ paths:
           name: alias_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -166,8 +150,6 @@ paths:
           name: alias_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -182,8 +164,6 @@ paths:
           name: domain_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -197,8 +177,6 @@ paths:
           name: domain_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -217,8 +195,6 @@ paths:
           name: user_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -236,8 +212,6 @@ paths:
           name: user_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -255,8 +229,6 @@ paths:
           name: user_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -275,8 +247,6 @@ paths:
           name: user_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -294,8 +264,6 @@ paths:
           name: user_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -318,8 +286,6 @@ paths:
           name: alias_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -341,8 +307,6 @@ paths:
           name: alias_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -364,8 +328,6 @@ paths:
           name: alias_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -375,8 +337,6 @@ paths:
   /api/v1/summary.json:
     get:
       operationId: GET-api--version-summary---format-
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -386,8 +346,6 @@ paths:
   /api/v1/swagger_doc.json:
     get:
       operationId: GET-api-v1-swagger_doc---format-
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -403,8 +361,6 @@ paths:
           name: name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -414,8 +370,6 @@ paths:
   /api/v1/transports.json:
     get:
       operationId: GET-api--version-transports---format-
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -424,8 +378,6 @@ paths:
         - transports
     post:
       operationId: POST-api--version-transports---format-
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -440,8 +392,6 @@ paths:
           name: transport_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -455,8 +405,6 @@ paths:
           name: transport_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -470,8 +418,6 @@ paths:
           name: transport_name
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified

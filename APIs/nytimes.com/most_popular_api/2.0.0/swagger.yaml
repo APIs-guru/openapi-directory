@@ -24,6 +24,8 @@ info:
   x-serviceName: most_popular_api
 externalDocs:
   url: 'http://developer.nytimes.com/'
+consumes:
+  - application/json
 produces:
   - application/json
 securityDefinitions:
@@ -111,8 +113,6 @@ parameters:
 paths:
   '/mostemailed/{section}/{time-period}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_mostemailed-section-time-period-json
       parameters: []
@@ -172,13 +172,9 @@ paths:
       - $ref: '#/parameters/TimePeriod'
   '/mostshared/{section}/{time-period}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_mostshared-section-time-period-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: An array of Articles
@@ -259,13 +255,9 @@ paths:
       - $ref: '#/parameters/TimePeriod'
   '/mostviewed/{section}/{time-period}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_mostviewed-section-time-period-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: An array of Articles

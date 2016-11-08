@@ -23,6 +23,10 @@ info:
   x-serviceName: books_api
 externalDocs:
   url: 'http://developer.nytimes.com/'
+consumes:
+  - application/json
+produces:
+  - application/json
 securityDefinitions:
   api-key:
     in: query
@@ -31,8 +35,6 @@ securityDefinitions:
 paths:
   '/lists.{format}':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_lists-format
       parameters:
@@ -90,8 +92,6 @@ paths:
           in: query
           name: sort-order
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -228,8 +228,6 @@ paths:
         x-consoleDefault: json
   /lists/best-sellers/history.json:
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_lists-best-sellers-history-json
       parameters:
@@ -277,8 +275,6 @@ paths:
           in: query
           name: title
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -400,16 +396,12 @@ paths:
     parameters: []
   '/lists/names.{format}':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_lists-names-format
       parameters:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -464,8 +456,6 @@ paths:
         type: string
   '/lists/overview.{format}':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_lists-overview-format
       parameters:
@@ -481,8 +471,6 @@ paths:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -589,8 +577,6 @@ paths:
         type: string
   '/lists/{date}/{list}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_lists-date-list-json
       parameters:
@@ -644,8 +630,6 @@ paths:
           in: query
           name: sort-order
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -790,8 +774,6 @@ paths:
         type: string
   '/reviews.{format}':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_reviews-format
       parameters:
@@ -810,8 +792,6 @@ paths:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''

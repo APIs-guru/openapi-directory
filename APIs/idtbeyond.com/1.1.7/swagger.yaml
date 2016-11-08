@@ -37,8 +37,6 @@ paths:
           name: x-idt-beyond-app-key
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful balance JSON response
@@ -73,8 +71,6 @@ paths:
           name: date_to
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful charges JSON response
@@ -145,8 +141,6 @@ paths:
           name: mobile_number
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Local value response
@@ -169,8 +163,6 @@ paths:
           name: x-idt-beyond-app-key
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful Promotions JSON response
@@ -193,8 +185,6 @@ paths:
           name: x-idt-beyond-app-key
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Products JSON response
@@ -265,8 +255,6 @@ paths:
           name: currency_code
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Local value response
@@ -295,8 +283,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Topups'
-      produces:
-        - application/json
       responses:
         '201':
           description: The transaction has been completed successfully.
@@ -335,8 +321,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TopupsReports'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful topups JSON response
@@ -371,8 +355,6 @@ paths:
           name: date_to
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful topups JSON response
@@ -443,8 +425,6 @@ paths:
           name: date_to
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful topups JSON response
@@ -473,8 +453,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TopupsReversal'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful charges JSON response
@@ -497,8 +475,6 @@ paths:
           name: x-idt-beyond-app-key
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful status JSON response

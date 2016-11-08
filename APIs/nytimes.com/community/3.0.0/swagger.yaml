@@ -23,6 +23,10 @@ info:
   x-serviceName: community
 externalDocs:
   url: 'http://developer.nytimes.com/'
+consumes:
+  - application/json
+produces:
+  - application/json
 securityDefinitions:
   api-key:
     in: query
@@ -31,16 +35,12 @@ securityDefinitions:
 paths:
   /user-content/by-date.json:
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_user-content-by-date-json
       parameters:
         - in: query
           name: date
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -161,13 +161,9 @@ paths:
     parameters: []
   /user-content/recent.json:
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_user-content-recent-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -370,16 +366,12 @@ paths:
     parameters: []
   /user-content/url.json:
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_user-content-url-json
       parameters:
         - in: query
           name: url
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -554,16 +546,12 @@ paths:
     parameters: []
   /user-content/user.json:
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_user-content-user-json
       parameters:
         - in: query
           name: userID
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''

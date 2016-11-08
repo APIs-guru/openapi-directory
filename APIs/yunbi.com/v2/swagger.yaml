@@ -19,6 +19,8 @@ info:
   x-tags:
     - bitcoin
     - digital currency
+produces:
+  - application/json
 tags:
   - name: addresses
   - name: deposit
@@ -45,8 +47,6 @@ paths:
           name: address
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -76,8 +76,6 @@ paths:
           name: txid
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -108,8 +106,6 @@ paths:
           name: currency
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -149,8 +145,6 @@ paths:
           name: state
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -171,8 +165,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -203,8 +195,6 @@ paths:
           name: timestamp
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -240,8 +230,6 @@ paths:
           name: timestamp
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -251,8 +239,6 @@ paths:
   /v2/markets.json:
     get:
       operationId: GET--version-markets---format-
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -278,8 +264,6 @@ paths:
           name: signature
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -310,8 +294,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -342,8 +324,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -369,8 +349,6 @@ paths:
           name: bids_limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -421,8 +399,6 @@ paths:
           name: order_by
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -471,8 +447,6 @@ paths:
           name: ord_type
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -503,8 +477,6 @@ paths:
           name: side
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -560,8 +532,6 @@ paths:
           name: 'orders[ord_type]'
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -571,8 +541,6 @@ paths:
   /v2/tickers.json:
     get:
       operationId: GET--version-tickers---format-
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -588,8 +556,6 @@ paths:
           name: market
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -599,8 +565,6 @@ paths:
   /v2/timestamp.json:
     get:
       operationId: GET--version-timestamp---format-
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -641,8 +605,6 @@ paths:
           name: order_by
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -698,8 +660,6 @@ paths:
           name: order_by
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -740,8 +700,6 @@ paths:
           name: memo
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified

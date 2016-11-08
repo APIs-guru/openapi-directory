@@ -16,6 +16,8 @@ info:
   x-providerName: gavagai.se
 externalDocs:
   url: 'https://developer.gavagai.se/docs'
+consumes:
+  - application/json
 securityDefinitions:
   apiKey:
     description: Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account.
@@ -38,8 +40,6 @@ tags:
 paths:
   /keywords:
     post:
-      consumes:
-        - application/json
       description: '<p>Given a set of texts, return the top 10 keywords.</p> <p>''Keywords'' in this context means single words or short phrases of words (like ''ebola outbreak'') that are significant in the collection. The top 10 keywords will be displayed. Some words that carry little significance are filtered out before compiling the result list. These include the most common words in the language of the texts.</p> <p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>'
       operationId: keywords
       parameters:
@@ -73,8 +73,6 @@ paths:
         - keywords
   '/lexicon/{language}/{word}':
     get:
-      consumes:
-        - application/json
       operationId: lookup
       parameters:
         - description: 'The language of the text set, two letter language code (ISO 639-1)'
@@ -101,8 +99,6 @@ paths:
         - lexicon
   /stories:
     post:
-      consumes:
-        - application/json
       description: '<p>Given a set of texts, return summaries as a set of stories.</p><p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>'
       operationId: stories
       parameters:
@@ -138,8 +134,6 @@ paths:
         - stories
   /tonality:
     post:
-      consumes:
-        - application/json
       description: '<p>Given a set of texts, return their tonality based on lexical analysis in multiple dimensions. The tonality is calculated on a text level, that is, the response will return the tonality of each text.</p><p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 1&nbsp;MB.</p>'
       operationId: score
       parameters:
@@ -173,8 +167,6 @@ paths:
         - tonality
   /topics:
     post:
-      consumes:
-        - application/json
       description: '<p>Given a set of texts, return summaries as a set of topics.</p> <p>If you are only interested in texts matching specific keywords, you may provide a list of comma-separated <code>terms</code> that are used to match the relevant texts. Texts that do not contain at least one exact token match of at least one of your provided terms will not be taken into account.</p> <p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>'
       operationId: topics
       parameters:

@@ -42,6 +42,8 @@ info:
     url: 'https://api.digitalmedia.hhs.gov/swagger/api'
     version: '1.2'
   x-providerName: hhs.gov
+consumes:
+  - ''
 tags:
   - description: Information about campaigns
     name: campaigns
@@ -62,8 +64,6 @@ tags:
 paths:
   /resources.json:
     get:
-      consumes:
-        - ''
       description: 'Returns the list of Resources matching the search query ''q''.<p>The search query ''q'' is a Lucene query.<br>The syntax for a Lucene query can be found <a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html">here</a>.'
       parameters:
         - description: The search query supplied by the user
@@ -91,8 +91,6 @@ paths:
         - resources
   /resources/campaigns.json:
     get:
-      consumes:
-        - ''
       description: Returns the list of Campaigns.
       parameters:
         - description: The maximum number of records to return
@@ -132,8 +130,6 @@ paths:
         - campaigns
   '/resources/campaigns/{id}.json':
     get:
-      consumes:
-        - ''
       description: Returns the Campaign identified by the 'id'.
       parameters:
         - description: The id of the record to look up
@@ -162,8 +158,6 @@ paths:
         - campaigns
   '/resources/campaigns/{id}/media.json':
     get:
-      consumes:
-        - ''
       description: Returns the list of MediaItems for the Campaign identified by the 'id'.
       parameters:
         - description: The id of the campaign to find media items for
@@ -209,8 +203,6 @@ paths:
         - campaigns
   '/resources/campaigns/{id}/syndicate.json':
     get:
-      consumes:
-        - ''
       description: Renders the list of MediaItems associated with the Campaign identified by the 'id'.
       parameters:
         - description: The id of the record to look up
@@ -244,8 +236,6 @@ paths:
         - campaigns
   /resources/languages.json:
     get:
-      consumes:
-        - ''
       description: Returns the list Languages.
       parameters:
         - description: The maximum number of records to return
@@ -285,8 +275,6 @@ paths:
         - languages
   '/resources/languages/{id}.json':
     get:
-      consumes:
-        - ''
       description: Returns the Language identified by the 'id'.
       parameters:
         - description: The id of the language to look up
@@ -315,8 +303,6 @@ paths:
         - languages
   /resources/media.json:
     get:
-      consumes:
-        - ''
       description: Returns the list of MediaItems matching the specified query parameters.
       parameters:
         - description: The maximum number of records to return
@@ -629,8 +615,6 @@ paths:
         - media
   /resources/media/featured.json:
     get:
-      consumes:
-        - ''
       description: Get the list of featured content in the syndication system
       parameters:
         - description: '* Set of fields to sort the records by.'
@@ -670,8 +654,6 @@ paths:
         - media
   /resources/media/mostPopularMedia.json:
     get:
-      consumes:
-        - ''
       description: Returns the list of MediaItems with the highest ratings.
       parameters:
         - description: The maximum number of records to return
@@ -706,8 +688,6 @@ paths:
         - media
   /resources/media/searchResults.json:
     get:
-      consumes:
-        - ''
       description: 'Returns the list of MediaItems matching the search query ''q''.<p>The search query ''q'' is a Lucene query.<br>The syntax for a Lucene query can be found <a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html">here</a>'
       parameters:
         - description: The search query supplied by the user
@@ -747,8 +727,6 @@ paths:
         - media
   '/resources/media/{id}.json':
     get:
-      consumes:
-        - ''
       description: Returns the MediaItem identified by the 'id'.
       parameters:
         - description: The id of the record to look up
@@ -777,8 +755,6 @@ paths:
         - media
   '/resources/media/{id}/content':
     get:
-      consumes:
-        - ''
       description: 'Returns the raw content (html, image, etc...) for the MediaItem identified by the ''id''.'
       parameters:
         - description: The id of the media to show content for.
@@ -815,8 +791,6 @@ paths:
         - media
   '/resources/media/{id}/embed.json':
     get:
-      consumes:
-        - ''
       description: Returns the javascript or iframe embed code for the MediaItem identified by 'id'.
       parameters:
         - description: The id of the media to get embed code for.
@@ -889,8 +863,6 @@ paths:
         - media
   '/resources/media/{id}/preview.jpg':
     get:
-      consumes:
-        - ''
       description: 'Returns the JPG preview, where applicable, for the MediaItem identified by the ''id''.'
       parameters:
         - description: The id of the media to get a preview for.
@@ -919,8 +891,6 @@ paths:
         - media
   '/resources/media/{id}/ratings.json':
     get:
-      consumes:
-        - ''
       description: Get the Ratings (number of 'likes') for the MediaItem identified by the 'id'.
       parameters:
         - description: The ID of the media item to 'like'.
@@ -949,8 +919,6 @@ paths:
         - media
   '/resources/media/{id}/relatedMedia.json':
     get:
-      consumes:
-        - ''
       description: Returns the list of MediaItems related to the MediaItem identified by the 'id'.
       parameters:
         - description: The id of the media item to get related media for
@@ -996,8 +964,6 @@ paths:
         - media
   '/resources/media/{id}/syndicate.json':
     get:
-      consumes:
-        - ''
       description: Returns the syndicated content for a given MediaItem in the specified 'format' (HTML or JSON).
       parameters:
         - description: The id of the media to show embed code for.
@@ -1091,8 +1057,6 @@ paths:
         - media
   '/resources/media/{id}/thumbnail.jpg':
     get:
-      consumes:
-        - ''
       description: 'Returns the JPG thumbnail, where applicable, for the MediaItem identified by the ''id''.'
       parameters:
         - description: The id of the media to get a thumbnail for.
@@ -1121,8 +1085,6 @@ paths:
         - media
   '/resources/media/{id}/youtubeMetaData.json':
     get:
-      consumes:
-        - ''
       description: 'Returns the Youtube metadata, where applicable, for the MediaItem identified by the ''id''.'
       parameters:
         - description: The id of the video to show meta data for.
@@ -1151,8 +1113,6 @@ paths:
         - media
   /resources/mediaTypes.json:
     get:
-      consumes:
-        - ''
       description: Returns the list of available MediaTypes.
       produces:
         - application/json
@@ -1170,8 +1130,6 @@ paths:
         - mediaTypes
   /resources/sources.json:
     get:
-      consumes:
-        - ''
       description: Returns the list of Sources.
       parameters:
         - description: The maximum number of records to return
@@ -1211,8 +1169,6 @@ paths:
         - sources
   '/resources/sources/{id}.json':
     get:
-      consumes:
-        - ''
       description: Returns the Source identified by the 'id'.
       parameters:
         - description: The id of the source to look up
@@ -1241,8 +1197,6 @@ paths:
         - sources
   '/resources/sources/{id}/syndicate.json':
     get:
-      consumes:
-        - ''
       description: Renders the list of MediaItems associated with the Source identified by the 'id'.
       parameters:
         - description: The id of the record to look up
@@ -1276,8 +1230,6 @@ paths:
         - sources
   /resources/tags.json:
     get:
-      consumes:
-        - ''
       description: Returns the list of Tags matching the specified query parameters in the specified 'format'.
       parameters:
         - description: The name of the property to which sorting will be applied
@@ -1344,8 +1296,6 @@ paths:
         - tags
   /resources/tags/tagLanguages.json:
     get:
-      consumes:
-        - ''
       description: Returns the list of TagLanguages
       produces:
         - application/json
@@ -1363,8 +1313,6 @@ paths:
         - tags
   /resources/tags/tagTypes.json:
     get:
-      consumes:
-        - ''
       description: Returns the list of TagTypes
       produces:
         - application/json
@@ -1382,8 +1330,6 @@ paths:
         - tags
   '/resources/tags/{id}.json':
     get:
-      consumes:
-        - ''
       description: Returns the Tag identified by the 'id' in the specified 'format'.
       parameters:
         - description: The id of the record to look up
@@ -1412,8 +1358,6 @@ paths:
         - tags
   '/resources/tags/{id}/media.json':
     get:
-      consumes:
-        - ''
       description: Returns the list of MediaItems associated with the Tag identified by the 'id'.
       parameters:
         - description: The id of the record to look up
@@ -1459,8 +1403,6 @@ paths:
         - tags
   '/resources/tags/{id}/related.json':
     get:
-      consumes:
-        - ''
       description: Returns the list of Tags related to the Tag identified by the 'id' in the specified format.
       parameters:
         - description: The id of the tag to look up
@@ -1506,8 +1448,6 @@ paths:
         - tags
   '/resources/tags/{id}/syndicate.json':
     get:
-      consumes:
-        - ''
       description: Renders the list of MediaItems associated with the Tag identified by the 'id'.
       parameters:
         - description: The id of the record to look up
@@ -1541,8 +1481,6 @@ paths:
         - tags
   '/resources/userMediaLists/{id}.json':
     get:
-      consumes:
-        - ''
       description: Get a specific user media list by 'id'.
       parameters:
         - description: The id of the record to look up

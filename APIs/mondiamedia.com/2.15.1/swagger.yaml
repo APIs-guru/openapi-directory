@@ -14,6 +14,8 @@ info:
     url: 'https://queen.mondiamedia.com/v2/swagger'
     version: '2.0'
   x-providerName: mondiamedia.com
+produces:
+  - application/json
 tags: []
 paths:
   /api/v3/mmplaylist/article/download:
@@ -28,8 +30,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/ArticleIdModel'
-      produces:
-        - application/json
       responses:
         default:
           description: Binary
@@ -55,8 +55,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/ArticleReport'
-      produces:
-        - application/json
       responses:
         default:
           description: CreatedEntityResponse
@@ -160,8 +158,6 @@ paths:
           name: limit
           required: false
           type: number
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -180,8 +176,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/ArticleIdPreviewModel'
-      produces:
-        - application/json
       responses:
         default:
           description: StreamingLink
@@ -193,8 +187,6 @@ paths:
   /api/v3/mmplaylist/config:
     get:
       description: This call retrieve the config for a MMPlaylist product.
-      produces:
-        - application/json
       responses:
         default:
           description: Config
@@ -232,8 +224,6 @@ paths:
           name: subscriptionTypeId
           required: false
           type: number
-      produces:
-        - application/json
       responses:
         default:
           description: Playlists
@@ -263,8 +253,6 @@ paths:
           name: keepUnavailableItems
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         default:
           description: PlaylistModel
@@ -291,8 +279,6 @@ paths:
           name: keepUnavailableItems
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         default:
           description: Entries
@@ -313,8 +299,6 @@ paths:
           name: includeSubEntities
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -332,8 +316,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/ItemsModel'
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -352,8 +334,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/IdModel_2'
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -369,8 +349,6 @@ paths:
           name: id
           required: true
           type: number
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -389,8 +367,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/IdsModel'
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -405,8 +381,6 @@ paths:
           name: playlistKey
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -424,8 +398,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/ArticleIdModel'
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -446,8 +418,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/ArticleReport_2'
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -547,8 +517,6 @@ paths:
           name: limit
           required: false
           type: number
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -565,8 +533,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/ArticleIdPreviewModel'
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -574,8 +540,6 @@ paths:
         - mmplaylist
   /mmplaylist/config:
     get:
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -596,8 +560,6 @@ paths:
           name: subscriptionTypeId
           required: false
           type: number
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -614,8 +576,6 @@ paths:
           name: keepUnavailableItems
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -623,8 +583,6 @@ paths:
         - mmplaylist
   /mmplaylist/user/playlist:
     get:
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -640,8 +598,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/ItemsModel'
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -658,8 +614,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/IdModel_2'
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -673,8 +627,6 @@ paths:
           name: id
           required: true
           type: number
-      produces:
-        - application/json
       responses:
         default:
           description: ''
@@ -687,8 +639,6 @@ paths:
           name: playlistKey
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         default:
           description: ''

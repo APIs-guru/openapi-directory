@@ -12,6 +12,8 @@ info:
     url: 'http://scrapewebsite.email/v1/swagger_doc.json'
     version: '1.2'
   x-providerName: scrapewebsite.email
+produces:
+  - application/json
 tags:
   - name: ping
   - name: scrape_emails
@@ -21,8 +23,6 @@ paths:
       description: |
         <p>Returns ‘pong’ if the site is up</p>
       operationId: GET-v1-ping---format-
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -52,8 +52,6 @@ paths:
           name: must_include
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified

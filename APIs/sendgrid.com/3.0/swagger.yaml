@@ -50,8 +50,6 @@ paths:
           in: query
           name: limit
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -90,8 +88,6 @@ paths:
     parameters: []
   /access_settings/whitelist:
     delete:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to remove one or more IPs from your IP whitelist.**
 
@@ -134,8 +130,6 @@ paths:
         For more information, please see our [User Guide](http://sendgrid.com/docs/User_Guide/Settings/ip_access_management.html).
       operationId: GET_access_settings-whitelist
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -187,8 +181,6 @@ paths:
       summary: Retrieve a list of currently whitelisted IPs
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to add one or more IP addresses to your IP whitelist.**
 
@@ -222,8 +214,6 @@ paths:
             required:
               - ips
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -305,8 +295,6 @@ paths:
         For more information, please see our [User Guide](http://sendgrid.com/docs/User_Guide/Settings/ip_access_management.html).
       operationId: GET_access_settings-whitelist-rule_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -362,8 +350,6 @@ paths:
           in: header
           name: Authorization
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -429,8 +415,6 @@ paths:
         - Alerts
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a new alert.**
 
@@ -477,8 +461,6 @@ paths:
           in: header
           name: Authorization
           type: string
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -570,8 +552,6 @@ paths:
           in: header
           name: Authorization
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -626,8 +606,6 @@ paths:
         required: true
         type: integer
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update an alert.**
 
@@ -660,8 +638,6 @@ paths:
                   Example: 90
                 type: integer
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -721,8 +697,6 @@ paths:
         - in: query
           name: limit
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -753,8 +727,6 @@ paths:
       summary: Retrieve all API Keys belonging to the authenticated user
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This enpoint allows you to create a new random API Key for the user.**
 
@@ -791,8 +763,6 @@ paths:
             required:
               - name
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -863,8 +833,6 @@ paths:
         |api_key_id |string | required | The ID of the API Key you are deleting.|
       operationId: DELETE_api_keys-api_key_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -890,8 +858,6 @@ paths:
         If the API Key ID does not exist an HTTP 404 will be returned.
       operationId: GET_api_keys-api_key_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -934,8 +900,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update the name of an existing API Key.**
 
@@ -960,8 +924,6 @@ paths:
                 description: The new name of the API Key.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -983,8 +945,6 @@ paths:
         - Authorization: []
       summary: Update API keys
     put:
-      consumes:
-        - application/json
       description: |
         **This endpoint allows you to update the name and scopes of a given API key.**
 
@@ -1010,8 +970,6 @@ paths:
                   type: string
                 type: array
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1064,8 +1022,6 @@ paths:
           in: query
           name: id
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1092,8 +1048,6 @@ paths:
         - Suppression Management - Unsubscribe Groups
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a new suppression group.**
 
@@ -1127,8 +1081,6 @@ paths:
               - name
               - description
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -1178,8 +1130,6 @@ paths:
         Each user can create up to 25 different suppression groups.
       operationId: DELETE_asm-groups-group_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -1200,8 +1150,6 @@ paths:
         Each user can create up to 25 different suppression groups.
       operationId: GET_asm-groups-group_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1243,8 +1191,6 @@ paths:
         required: true
         type: integer
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update or change a suppression group.**
 
@@ -1280,8 +1226,6 @@ paths:
             required:
               - name
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -1302,8 +1246,6 @@ paths:
         Suppressions are recipient email addresses that are added to [unsubscribe groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html). Once a recipient's address is on the suppressions list for an unsubscribe group, they will not receive any emails that are tagged with that unsubscribe group.
       operationId: GET_asm-groups-group_id-suppressions
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1326,8 +1268,6 @@ paths:
         required: true
         type: string
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to add email addresses to an unsubscribe group.**
 
@@ -1352,8 +1292,6 @@ paths:
             required:
               - recipient_emails
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -1383,8 +1321,6 @@ paths:
         required: true
         type: string
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to search a suppression group for multiple suppressions.**
 
@@ -1410,8 +1346,6 @@ paths:
             required:
               - recipient_emails
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1462,16 +1396,12 @@ paths:
         type: string
   /asm/suppressions:
     get:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to retrieve a list of all suppressions.**
 
         Suppressions are a list of email addresses that will not receive content sent under a given [group](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html).
       operationId: GET_asm-suppressions
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1520,8 +1450,6 @@ paths:
   /asm/suppressions/global:
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to add one or more email addresses to the global suppressions group.**
 
@@ -1542,8 +1470,6 @@ paths:
                   type: string
                 type: array
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -1595,8 +1521,6 @@ paths:
         A global suppression (or global unsubscribe) is an email address of a recipient who does not want to receive any of your messages. A globally suppressed recipient will be removed from any email you send. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/global_unsubscribes.html).
       operationId: GET_asm-suppressions-global-email
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1622,16 +1546,12 @@ paths:
         type: string
   '/asm/suppressions/{email}':
     get:
-      consumes:
-        - application/json
       description: |-
         **This endpoint returns the list of all groups that the given email address has been unsubscribed from.**
 
         Suppressions are a list of email addresses that will not receive content sent under a given [group](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html).
       operationId: GET_asm-suppressions-email
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1741,8 +1661,6 @@ paths:
           name: browsers
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1807,8 +1725,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1878,8 +1794,6 @@ paths:
         - Campaigns API
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a campaign.**
 
@@ -1912,8 +1826,6 @@ paths:
               subject: New Products for Spring!
               suppression_group_id: 42
               title: March Newsletter
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -2007,8 +1919,6 @@ paths:
         * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
       operationId: DELETE_campaigns-campaign_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -2041,8 +1951,6 @@ paths:
         * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
       operationId: GET_campaigns-campaign_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2125,8 +2033,6 @@ paths:
         required: true
         type: integer
     patch:
-      consumes:
-        - application/json
       description: |-
         Update a campaign. This is especially useful if you only set up the campaign using POST /campaigns, but didn't set many of the parameters.
 
@@ -2171,8 +2077,6 @@ paths:
               - plain_content
             title: Update a Campaign request
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2283,8 +2187,6 @@ paths:
         * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
       operationId: DELETE_campaigns-campaign_id-schedules
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -2326,8 +2228,6 @@ paths:
         * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
       operationId: GET_campaigns-campaign_id-schedules
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2360,8 +2260,6 @@ paths:
         required: true
         type: integer
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows to you change the scheduled time and date for a campaign to be sent.**
 
@@ -2383,8 +2281,6 @@ paths:
               - send_at
             title: Update a Scheduled Campaign request
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2440,8 +2336,6 @@ paths:
         - Authorization: []
       summary: Update a Scheduled Campaign
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to schedule a specific date and time for your campaign to be sent.**
 
@@ -2463,8 +2357,6 @@ paths:
               - send_at
             title: Schedule a Campaign request
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -2566,8 +2458,6 @@ paths:
         * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
       operationId: POST_campaigns-campaign_id-schedules-now
       parameters: []
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -2648,8 +2538,6 @@ paths:
         required: true
         type: integer
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to send a test campaign.**
 
@@ -2673,8 +2561,6 @@ paths:
             required:
               - to
             type: object
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -2737,8 +2623,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2833,8 +2717,6 @@ paths:
           name: aggregated_by
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2987,8 +2869,6 @@ paths:
           name: aggregated_by
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3129,8 +3009,6 @@ paths:
           name: aggregated_by
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3196,8 +3074,6 @@ paths:
           name: aggregated_by
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3244,8 +3120,6 @@ paths:
         The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: GET_contactdb-custom_fields
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3293,8 +3167,6 @@ paths:
       summary: Retrieve all custom fields
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a custom field.**
 
@@ -3313,8 +3185,6 @@ paths:
               type:
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -3359,8 +3229,6 @@ paths:
         The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: DELETE_contactdb-custom_fields-custom_field_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '202':
           description: ''
@@ -3405,8 +3273,6 @@ paths:
         The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: GET_contactdb-custom_fields-custom_field_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3452,8 +3318,6 @@ paths:
         type: integer
   /contactdb/lists:
     delete:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to delete multiple recipient lists.**
 
@@ -3471,8 +3335,6 @@ paths:
             items:
               type: integer
             type: array
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -3507,8 +3369,6 @@ paths:
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: GET_contactdb-lists
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3535,8 +3395,6 @@ paths:
         - Contacts API - Lists
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a list for your recipients.**
 
@@ -3555,8 +3413,6 @@ paths:
               - name
             title: Create a List request
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -3611,8 +3467,6 @@ paths:
           in: query
           name: delete_contacts
           type: boolean
-      produces:
-        - application/json
       responses:
         '202':
           description: ''
@@ -3662,8 +3516,6 @@ paths:
           in: query
           name: list_id
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3707,8 +3559,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update the name of one of your recipient lists.**
 
@@ -3734,8 +3584,6 @@ paths:
               - name
             title: Update a List request
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3788,8 +3636,6 @@ paths:
           name: list_id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3871,8 +3717,6 @@ paths:
         required: true
         type: integer
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to add multiple recipients to a list.**
 
@@ -3890,8 +3734,6 @@ paths:
             items:
               type: string
             type: array
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -3955,8 +3797,6 @@ paths:
           name: recipient_id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -4018,8 +3858,6 @@ paths:
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: POST_contactdb-lists-list_id-recipients-recipient_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -4064,8 +3902,6 @@ paths:
       summary: Add a Single Recipient to a List
   /contactdb/recipients:
     delete:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to deletes one or more recipients.**
 
@@ -4083,8 +3919,6 @@ paths:
             items:
               type: string
             type: array
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4133,8 +3967,6 @@ paths:
           in: query
           name: page_size
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4171,8 +4003,6 @@ paths:
         - Contacts API - Recipients
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update one or more recipients.**
 
@@ -4205,8 +4035,6 @@ paths:
                 - email
               type: object
             type: array
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -4234,8 +4062,6 @@ paths:
       tags:
         - Contacts API - Recipients
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to add a Marketing Campaigns recipient.**
 
@@ -4274,8 +4100,6 @@ paths:
                 - email
               type: object
             type: array
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -4327,8 +4151,6 @@ paths:
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: GET_contactdb-recipients-billable_count
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4358,8 +4180,6 @@ paths:
         The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: GET_contactdb-recipients-count
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4403,8 +4223,6 @@ paths:
         - in: query
           name: '{field_name}'
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4462,8 +4280,6 @@ paths:
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: DELETE_contactdb-recipients-recipient_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -4504,8 +4320,6 @@ paths:
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: GET_contactdb-recipients-recipient_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4547,8 +4361,6 @@ paths:
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: GET_contactdb-recipients-recipient_id-lists
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4607,8 +4419,6 @@ paths:
         The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: GET_contactdb-reserved_fields
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4667,8 +4477,6 @@ paths:
         For more information about segments in Marketing Campaigns, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/lists.html#-Create-a-Segment).
       operationId: GET_contactdb-segments
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4714,8 +4522,6 @@ paths:
         - Contacts API - Segments
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a segment.**
 
@@ -4762,8 +4568,6 @@ paths:
                   value: '513'
               list_id: 4
               name: Last Name Miller
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4856,8 +4660,6 @@ paths:
           in: query
           name: delete_contacts
           type: boolean
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -4911,8 +4713,6 @@ paths:
           name: segment_id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -4962,8 +4762,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update a segment.**
 
@@ -5001,8 +4799,6 @@ paths:
             required:
               - name
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -5076,8 +4872,6 @@ paths:
         - in: query
           name: page_size
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -5165,8 +4959,6 @@ paths:
           name: start_date
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -5448,8 +5240,6 @@ paths:
           name: country
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -5775,8 +5565,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -5850,8 +5638,6 @@ paths:
         A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
       operationId: GET_ips-assigned
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -5906,8 +5692,6 @@ paths:
         If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
       operationId: GET_ips-pools
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -5926,8 +5710,6 @@ paths:
         - IP Pools
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create an IP pool.**
 
@@ -5953,8 +5735,6 @@ paths:
             required:
               - name
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -5981,8 +5761,6 @@ paths:
         If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
       operationId: DELETE_ips-pools-pool_name
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -6014,8 +5792,6 @@ paths:
         If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
       operationId: GET_ips-pools-pool_name
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -6064,8 +5840,6 @@ paths:
         required: true
         type: string
     put:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update the name of an IP pool.**
 
@@ -6087,8 +5861,6 @@ paths:
                 maxLength: 64
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -6127,8 +5899,6 @@ paths:
         required: true
         type: string
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to add an IP address to an IP pool.**
 
@@ -6147,8 +5917,6 @@ paths:
                 description: The IP address that you want to add to an IP pool.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -6215,8 +5983,6 @@ paths:
         A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
       operationId: DELETE_ips-pools-pool_name-ips-ip
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -6258,8 +6024,6 @@ paths:
         For more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).
       operationId: GET_ips-warmup
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -6276,8 +6040,6 @@ paths:
         - IP Warmup
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to enter an IP address into warmup mode.**
 
@@ -6296,8 +6058,6 @@ paths:
                 description: The IP address that you want to begin warming up.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -6343,8 +6103,6 @@ paths:
         For more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).
       operationId: DELETE_ips-warmup-ip_address
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -6383,8 +6141,6 @@ paths:
         For more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).
       operationId: GET_ips-warmup-ip_address
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -6430,8 +6186,6 @@ paths:
         A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
       operationId: GET_ips-ip_address
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -6507,8 +6261,6 @@ paths:
         * [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)
       operationId: POST_mail-batch
       parameters: []
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -6543,8 +6295,6 @@ paths:
         * [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)
       operationId: GET_mail-batch-batch_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -6580,8 +6330,6 @@ paths:
   /mail/send:
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         This endpoint allows you to send email over SendGrid’s v3 Web API, the most recent version of our API. If you are looking for documentation about the v2 Mail Send endpoint, please see our [v2 API Reference](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
 
@@ -6966,8 +6714,6 @@ paths:
               - subject
               - content
             type: object
-      produces:
-        - application/json
       responses:
         '202':
           description: ''
@@ -7008,8 +6754,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7099,8 +6843,6 @@ paths:
         Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-address_whitelist
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7116,8 +6858,6 @@ paths:
       summary: Retrieve address whitelist mail settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current email address whitelist settings.**
 
@@ -7144,8 +6884,6 @@ paths:
                   type: string
                 type: array
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7170,8 +6908,6 @@ paths:
         Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-bcc
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7186,8 +6922,6 @@ paths:
       summary: Retrieve all BCC mail settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current BCC mail settings.**
 
@@ -7203,8 +6937,6 @@ paths:
             example:
               email: email@example.com
               enabled: false
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7228,8 +6960,6 @@ paths:
         Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-bounce_purge
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7244,8 +6974,6 @@ paths:
       summary: Retrieve bounce purge mail settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current bounce purge settings.**
 
@@ -7262,8 +6990,6 @@ paths:
               enabled: true
               hard_bounces: 5
               soft_bounces: 5
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7286,8 +7012,6 @@ paths:
         Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-footer
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7303,8 +7027,6 @@ paths:
       summary: Retrieve footer mail settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current Footer mail settings.**
 
@@ -7321,8 +7043,6 @@ paths:
               enabled: true
               html_content: ...
               plain_content: ...
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7347,8 +7067,6 @@ paths:
         Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-forward_bounce
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7362,8 +7080,6 @@ paths:
       summary: Retrieve forward bounce mail settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current bounce forwarding mail settings.**
 
@@ -7379,8 +7095,6 @@ paths:
             example:
               email: example@example.com
               enabled: true
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7404,8 +7118,6 @@ paths:
         Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-forward_spam
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7420,8 +7132,6 @@ paths:
       summary: Retrieve forward spam mail settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current Forward Spam mail settings.**
 
@@ -7437,8 +7147,6 @@ paths:
             example:
               email: ''
               enabled: false
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7462,8 +7170,6 @@ paths:
         Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-plain_content
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7481,8 +7187,6 @@ paths:
       summary: Retrieve plain content mail settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current Plain Content mail settings.**
 
@@ -7501,8 +7205,6 @@ paths:
                 description: The new setting you would like to use for your Plain Content mail setting.
                 type: boolean
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7529,8 +7231,6 @@ paths:
         Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-spam_check
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7546,8 +7246,6 @@ paths:
       summary: Retrieve spam check mail settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current spam checker mail settings.**
 
@@ -7577,8 +7275,6 @@ paths:
                 description: The Inbound Parse URL where you would like your spam reports to be sent to.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7605,8 +7301,6 @@ paths:
         Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-template
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7622,8 +7316,6 @@ paths:
       summary: Retrieve legacy template mail settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current legacy email template settings.**
 
@@ -7648,8 +7340,6 @@ paths:
                 description: The new HTML content for your legacy email template.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -7718,8 +7408,6 @@ paths:
           name: mailbox_providers
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -8215,8 +7903,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -8267,8 +7953,6 @@ paths:
         By integrating with New Relic, you can send your SendGrid email statistics to your New Relic Dashboard. If you enable this setting, your stats will be sent to New Relic every 5 minutes. You will need your New Relic License Key to enable this setting. For more information, please see our [Classroom](https://sendgrid.com/docs/Classroom/Track/Collecting_Data/new_relic.html).
       operationId: GET_partner_settings-new_relic
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -8284,8 +7968,6 @@ paths:
       summary: Returns all New Relic partner settings.
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update or change your New Relic partner settings.**
 
@@ -8312,8 +7994,6 @@ paths:
                 description: The license key for your New Relic account.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -8336,8 +8016,6 @@ paths:
         API Keys can be used to authenticate the use of [SendGrid’s v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissios, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html). 
       operationId: GET_scopes
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -8398,8 +8076,6 @@ paths:
         Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
       operationId: GET_v3-senders
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -8436,8 +8112,6 @@ paths:
       summary: Get all Sender Identities
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a new sender identity.**
 
@@ -8513,8 +8187,6 @@ paths:
               - city
               - country
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -8595,8 +8267,6 @@ paths:
         Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
       operationId: DELETE_v3-senders-sender_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -8652,8 +8322,6 @@ paths:
         Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
       operationId: GET_v3-senders-sender_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -8708,8 +8376,6 @@ paths:
         required: true
         type: integer
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update a sender identity.**
 
@@ -8776,8 +8442,6 @@ paths:
                 description: The zipcode of the sender identity.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -8898,8 +8562,6 @@ paths:
         Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
       operationId: POST_v3-senders-sender_id-resend_verification
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -8985,8 +8647,6 @@ paths:
           name: end_date
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -9223,8 +8883,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -9257,8 +8915,6 @@ paths:
         - Subusers API
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         This endpoint allows you to retrieve a list of all of your subusers. You can choose to retrieve specific subusers as well as limit the results that come back from the API.
 
@@ -9301,8 +8957,6 @@ paths:
               - password
               - ips
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -9367,8 +9021,6 @@ paths:
         - in: query
           name: usernames
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -9445,8 +9097,6 @@ paths:
           name: end_date
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -9721,8 +9371,6 @@ paths:
           name: offset
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -9834,8 +9482,6 @@ paths:
           name: sort_by_metric
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -9863,8 +9509,6 @@ paths:
         * [Classroom > How do I add more subusers to my account?](https://sendgrid.com/docs/Classroom/Basics/Account/how_do_i_add_more_subusers_to_my_account.html)
       operationId: DELETE_subusers-subuser_name
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -9888,8 +9532,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes:
-        - application/json
       description: |-
         This endpoint allows you to enable or disable a subuser.
 
@@ -9909,8 +9551,6 @@ paths:
                 description: 'Whether or not this subuser is disabled. True means disabled, False means enabled.'
                 type: boolean
             type: object
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -9952,8 +9592,6 @@ paths:
         required: true
         type: string
     put:
-      consumes:
-        - application/json
       description: |-
         Each subuser should be assigned to an IP address, from which all of this subuser's mail will be sent. Often, this is the same IP as the parent account, but each subuser can have their own, or multiple, IP addresses as well. 
 
@@ -9973,8 +9611,6 @@ paths:
               format: ipv4
               type: string
             type: array
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10006,8 +9642,6 @@ paths:
       description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
       operationId: DELETE_subusers-subuser_name-monitor
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -10036,8 +9670,6 @@ paths:
       description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
       operationId: GET_subusers-subuser_name-monitor
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10073,8 +9705,6 @@ paths:
         required: true
         type: string
     post:
-      consumes:
-        - application/json
       description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
       operationId: POST_subusers-subuser_name-monitor
       parameters:
@@ -10085,8 +9715,6 @@ paths:
             example:
               email: example@example.com
               frequency: 50000
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10116,8 +9744,6 @@ paths:
         - Authorization: []
       summary: Create monitor settings
     put:
-      consumes:
-        - application/json
       description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
       operationId: PUT_subusers-subuser_name-monitor
       parameters:
@@ -10128,8 +9754,6 @@ paths:
             example:
               email: example@example.com
               frequency: 500
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10205,8 +9829,6 @@ paths:
           name: offset
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10247,8 +9869,6 @@ paths:
         type: string
   /suppression/blocks:
     delete:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to delete all email addresses on your blocks list.**
 
@@ -10315,8 +9935,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10382,8 +10000,6 @@ paths:
         For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/blocks.html).
       operationId: GET_suppression-blocks-email
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10427,8 +10043,6 @@ paths:
         type: string
   /suppression/bounces:
     delete:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to delete all of your bounces. You can also use this endpoint to remove a specific email address from your bounce list.**
 
@@ -10461,8 +10075,6 @@ paths:
                   type: string
                 type: array
             type: object
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -10508,8 +10120,6 @@ paths:
           name: Accept
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10571,8 +10181,6 @@ paths:
           name: email_address
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -10605,8 +10213,6 @@ paths:
         * [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)
       operationId: GET_suppression-bounces-email
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10641,8 +10247,6 @@ paths:
         type: string
   /suppression/invalid_emails:
     delete:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to remove email addresses from your invalid email address list.**
 
@@ -10711,8 +10315,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10777,8 +10379,6 @@ paths:
         For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/invalid_emails.html).
       operationId: GET_suppression-invalid_emails-email
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10840,8 +10440,6 @@ paths:
         For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).
       operationId: GET_suppression-spam_report-email
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -10879,8 +10477,6 @@ paths:
         type: string
   /suppression/spam_reports:
     delete:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to delete your spam reports.**
 
@@ -10945,8 +10541,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11005,8 +10599,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11047,8 +10639,6 @@ paths:
         Transactional templates are templates created specifically for transactional email and are not to be confused with [Marketing Campaigns templates](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/templates.html). For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).
       operationId: GET_templates
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11063,8 +10653,6 @@ paths:
         - Transactional Templates
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a transactional template.**
 
@@ -11086,8 +10674,6 @@ paths:
             required:
               - name
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -11131,8 +10717,6 @@ paths:
         Transactional templates are templates created specifically for transactional email and are not to be confused with [Marketing Campaigns templates](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/templates.html). For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).
       operationId: GET_templates-template_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11148,8 +10732,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes:
-        - application/json
       description: |
         **This endpoint allows you to edit a transactional template.**
 
@@ -11169,8 +10751,6 @@ paths:
                 maxLength: 100
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11191,8 +10771,6 @@ paths:
         required: true
         type: string
     post:
-      consumes:
-        - application/json
       description: |
         **This endpoint allows you to create a new version of a template.**
 
@@ -11212,8 +10790,6 @@ paths:
               plain_content: <%body%>
               subject: <%subject%>
               template_id: ddb96bbc-9b92-425e-8979-99464621b543
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -11284,8 +10860,6 @@ paths:
         | version_id | string |  The ID of the template version |
       operationId: GET_templates-template_id-versions-version_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11326,8 +10900,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to edit a version of one of your transactional templates.**
 
@@ -11368,8 +10940,6 @@ paths:
                 description: The subject of the template version.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11427,8 +10997,6 @@ paths:
         | version_id | string |  The ID of the template version |
       operationId: POST_templates-template_id-versions-version_id-activate
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11478,8 +11046,6 @@ paths:
           in: query
           name: offset
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11526,8 +11092,6 @@ paths:
         For more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).
       operationId: GET_tracking_settings-click
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11552,8 +11116,6 @@ paths:
       summary: Retrieve Click Track Settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to change your current click tracking setting. You can enable, or disable, click tracking using this endpoint.**
 
@@ -11572,8 +11134,6 @@ paths:
                 description: The setting you want to use for click tracking.
                 type: boolean
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11611,8 +11171,6 @@ paths:
         For more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).
       operationId: GET_tracking_settings-google_analytics
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11631,8 +11189,6 @@ paths:
       summary: Retrieve Google Analytics Settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current setting for Google Analytics.**
 
@@ -11656,8 +11212,6 @@ paths:
               utm_medium: email
               utm_source: sendgrid.com
               utm_term: ''
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11687,8 +11241,6 @@ paths:
         For more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).
       operationId: GET_tracking_settings-open
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11708,8 +11260,6 @@ paths:
       summary: Get Open Tracking Settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current settings for open tracking.**
 
@@ -11730,8 +11280,6 @@ paths:
                 description: The new status that you want to set for open tracking.
                 type: boolean
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11762,8 +11310,6 @@ paths:
         For more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).
       operationId: GET_tracking_settings-subscription
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11784,8 +11330,6 @@ paths:
       summary: Retrieve Subscription Tracking Settings
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current settings for subscription tracking.**
 
@@ -11807,8 +11351,6 @@ paths:
               plain_content: text content
               replace: replacement tag
               url: url
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11840,8 +11382,6 @@ paths:
         * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
       operationId: GET_user-account
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11880,8 +11420,6 @@ paths:
         Your monthly credit allotment limits the number of emails you may send before incurring overage charges. For more information about credits and billing, please visit our [Clssroom](https://sendgrid.com/docs/Classroom/Basics/Billing/billing_info_and_faqs.html).
       operationId: GET_user-credits
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11945,8 +11483,6 @@ paths:
         * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
       operationId: GET_user-email
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -11968,8 +11504,6 @@ paths:
         - Users API
     parameters: []
     put:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update the email address currently on file for your account.**
 
@@ -11990,8 +11524,6 @@ paths:
                 description: The new email address that you would like to use for your account.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12011,8 +11543,6 @@ paths:
   /user/password:
     parameters: []
     put:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your password.**
 
@@ -12060,8 +11590,6 @@ paths:
         * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
       operationId: GET_user-profile
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12133,8 +11661,6 @@ paths:
         - Users API
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current profile details.**
 
@@ -12155,8 +11681,6 @@ paths:
               city: Orange
               first_name: Example
               last_name: User
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12197,8 +11721,6 @@ paths:
         The Cancel Scheduled Sends feature allows the customer to cancel a scheduled send based on a Batch ID included in the SMTPAPI header.Scheduled sends cancelled less than 10 minutes before the scheduled time are not guaranteed to be cancelled.
       operationId: GET_user-scheduled_sends
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12225,8 +11747,6 @@ paths:
       summary: Retrieve all scheduled sends
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to cancel or pause an email that has been scheduled to be sent.**
 
@@ -12259,8 +11779,6 @@ paths:
               - status
             title: Cancel or pause a scheduled send request
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -12301,8 +11819,6 @@ paths:
         The Cancel Scheduled Sends feature allows the customer to cancel a scheduled send based on a Batch ID included in the SMTPAPI header.Scheduled sends cancelled less than 10 minutes before the scheduled time are not guaranteed to be cancelled.
       operationId: DELETE_user-scheduled_sends-batch_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -12335,8 +11851,6 @@ paths:
         The Cancel Scheduled Sends feature allows the customer to cancel a scheduled send based on a Batch ID included in the SMTPAPI header.Scheduled sends cancelled less than 10 minutes before the scheduled time are not guaranteed to be cancelled.
       operationId: GET_user-scheduled_sends-batch_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12368,8 +11882,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update the status of a scheduled send for the given `batch_id`.**
 
@@ -12391,8 +11903,6 @@ paths:
             required:
               - status
             type: object
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -12437,8 +11947,6 @@ paths:
         **Note:** If either setting is enabled and the recipient does not support TLS or have a valid certificate, we drop the message and send a block event with “TLS required but not supported” as the description.
       operationId: GET_user-settings-enforced_tls
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12463,8 +11971,6 @@ paths:
       summary: Retrieve current Enforced TLS settings.
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current Enforced TLS settings.**
 
@@ -12487,8 +11993,6 @@ paths:
                 description: Indicates if you want to require your recipients to have a valid certificate.
                 type: boolean
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12524,8 +12028,6 @@ paths:
         * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
       operationId: GET_user-username
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12552,8 +12054,6 @@ paths:
         - Users API
     parameters: []
     put:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update the username for your account.**
 
@@ -12574,8 +12074,6 @@ paths:
                 description: The new username you would like to use for your account.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12608,8 +12106,6 @@ paths:
         Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
       operationId: GET_user-webhooks-event-settings
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12637,8 +12133,6 @@ paths:
         - Webhooks
     parameters: []
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update your current event webhook settings.**
 
@@ -12667,8 +12161,6 @@ paths:
               spam_report: true
               unsubscribe: true
               url: url
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12697,8 +12189,6 @@ paths:
   /user/webhooks/event/test:
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to test your event webhook by sending a fake event notification post to the provided URL.**
 
@@ -12728,16 +12218,12 @@ paths:
         - Webhooks
   /user/webhooks/parse/settings:
     get:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to retrieve all of your current inbound parse settings.**
 
         The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the contnet, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
       operationId: GET_user-webhooks-parse-settings
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12763,8 +12249,6 @@ paths:
         - Settings - Inbound Parse
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a new inbound parse setting.**
 
@@ -12780,8 +12264,6 @@ paths:
               send_raw: false
               spam_check: true
               url: 'http://email.myhosthame.com'
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -12817,16 +12299,12 @@ paths:
       tags:
         - Settings - Inbound Parse
     get:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to retrieve a specific inbound parse setting.**
 
         The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the contnet, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
       operationId: GET_user-webhooks-parse-settings-hostname
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12850,8 +12328,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update a specific inbound parse setting.**
 
@@ -12866,8 +12342,6 @@ paths:
               send_raw: true
               spam_check: false
               url: 'http://newdomain.com/parse'
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -12925,8 +12399,6 @@ paths:
           name: end_date
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -13118,8 +12590,6 @@ paths:
           in: query
           name: domain
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -13308,8 +12778,6 @@ paths:
         - Whitelabel - Domains
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a whitelabel for one of your domains.**
 
@@ -13363,8 +12831,6 @@ paths:
               - domain
               - subdomain
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -13420,8 +12886,6 @@ paths:
         | domain | string  |The domain to find a default domain whitelabel for. |
       operationId: GET_whitelabel-domains-default
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -13477,8 +12941,6 @@ paths:
         | username | string  | Username of the subuser to find associated whitelabels for. |
       operationId: GET_whitelabel-domains-subuser
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -13552,8 +13014,6 @@ paths:
         For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
       operationId: GET_whitelabel-domains-domain_id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -13569,8 +13029,6 @@ paths:
         required: true
         type: number
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update the settings for a domain whitelabel.**
 
@@ -13595,8 +13053,6 @@ paths:
                 description: Indicates whether this domain whitelabel should be considered the default.
                 type: boolean
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -13620,8 +13076,6 @@ paths:
         required: true
         type: string
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to associate a specific domain whitelabel with a subuser.**
 
@@ -13649,8 +13103,6 @@ paths:
             required:
               - username
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -13700,8 +13152,6 @@ paths:
         required: true
         type: string
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to add an IP address to a domain whitelabel.**
 
@@ -13727,8 +13177,6 @@ paths:
             required:
               - ip
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -13790,8 +13238,6 @@ paths:
         | ip | string | IP to remove from the domain whitelabel. |
       operationId: DELETE_whitelabel-domains-id-ips-ip
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -13866,8 +13312,6 @@ paths:
         | id | integer  |ID of the domain whitelabel to validate. |
       operationId: POST_whitelabel-domains-id-validate
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -13984,8 +13428,6 @@ paths:
           in: query
           name: ip
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -14036,8 +13478,6 @@ paths:
         - Whitelabel - IPs
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create an IP whitelabel.**
 
@@ -14070,8 +13510,6 @@ paths:
               - subdomain
               - domain
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -14108,8 +13546,6 @@ paths:
         For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
       operationId: DELETE_whitelabel-ips-id
       parameters: []
-      produces:
-        - application/json
       responses:
         '204':
           description: ''
@@ -14148,8 +13584,6 @@ paths:
         For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
       operationId: GET_whitelabel-ips-id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -14221,8 +13655,6 @@ paths:
         For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
       operationId: POST_whitelabel-ips-id-validate
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -14334,8 +13766,6 @@ paths:
           in: query
           name: limit
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -14390,8 +13820,6 @@ paths:
         - Whitelabel - Links
     parameters: []
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to create a new link whitelabel.**
 
@@ -14434,8 +13862,6 @@ paths:
               - domain
               - subdomain
             type: object
-      produces:
-        - application/json
       responses:
         '201':
           description: ''
@@ -14489,8 +13915,6 @@ paths:
           in: query
           name: domain
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -14571,8 +13995,6 @@ paths:
           name: username
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -14635,8 +14057,6 @@ paths:
         For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
       operationId: GET_whitelabel-links-id
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -14675,8 +14095,6 @@ paths:
         required: true
         type: integer
     patch:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to update a specific link whitelabel. You can use this endpoint to change a link whitelabel's default status.**
 
@@ -14698,8 +14116,6 @@ paths:
                   - false
                 type: boolean
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -14748,8 +14164,6 @@ paths:
         For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
       operationId: POST_whitelabel-links-id-validate
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -14856,8 +14270,6 @@ paths:
         required: true
         type: integer
     post:
-      consumes:
-        - application/json
       description: |-
         **This endpoint allows you to associate a link whitelabel with a subuser account.**
 
@@ -14880,8 +14292,6 @@ paths:
                 description: The username of the subuser account that you want to associate the link whitelabel with.
                 type: string
             type: object
-      produces:
-        - application/json
       responses:
         '200':
           description: ''

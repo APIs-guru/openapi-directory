@@ -14,6 +14,10 @@ info:
     url: 'https://api.taxamo.com/swagger'
     version: '1.2'
   x-providerName: taxamo.com
+consumes:
+  - application/json
+produces:
+  - application/json
 securityDefinitions:
   apiKey:
     in: header
@@ -45,8 +49,6 @@ tags:
 paths:
   /api/v1/dictionaries/countries:
     get:
-      consumes:
-        - application/json
       operationId: getCountriesDict
       parameters:
         - description: Should only countries with tax supported be listed?
@@ -54,8 +56,6 @@ paths:
           name: tax_supported
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -70,11 +70,7 @@ paths:
         - dictionaries
   /api/v1/dictionaries/currencies:
     get:
-      consumes:
-        - application/json
       operationId: getCurrenciesDict
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -89,11 +85,7 @@ paths:
         - dictionaries
   /api/v1/dictionaries/product_types:
     get:
-      consumes:
-        - application/json
       operationId: getProductTypesDict
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -108,11 +100,7 @@ paths:
         - dictionaries
   /api/v1/geoip:
     get:
-      consumes:
-        - application/json
       operationId: locateMyIP
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -127,8 +115,6 @@ paths:
         - geoip
   '/api/v1/geoip/{ip}':
     get:
-      consumes:
-        - application/json
       operationId: locateGivenIP
       parameters:
         - description: IP address.
@@ -136,8 +122,6 @@ paths:
           name: ip
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -152,8 +136,6 @@ paths:
         - geoip
   /api/v1/reports/domestic/summary:
     get:
-      consumes:
-        - application/json
       operationId: getDomesticSummaryReport
       parameters:
         - description: Output format. 'xml' and 'csv' values are accepted. Default format - json
@@ -186,8 +168,6 @@ paths:
           name: fx_date_type
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -202,8 +182,6 @@ paths:
         - reporting
   /api/v1/reports/eu/vies:
     get:
-      consumes:
-        - application/json
       operationId: getEuViesReport
       parameters:
         - description: 'Length of report period. ''month'', ''quarter'' and ''year'' values are accepted. Required only if Large Filer Format is requested.'
@@ -256,8 +234,6 @@ paths:
           name: format
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -272,8 +248,6 @@ paths:
         - reporting
   /api/v1/settlement/refunds:
     get:
-      consumes:
-        - application/json
       operationId: getRefunds
       parameters:
         - description: Output format. 'csv' value is accepted as well
@@ -296,8 +270,6 @@ paths:
           name: date_from
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -312,8 +284,6 @@ paths:
         - settlement
   '/api/v1/settlement/summary/{quarter}':
     get:
-      consumes:
-        - application/json
       operationId: getSettlementSummary
       parameters:
         - description: 'MOSS country code, used to determine currency. If ommited, merchant default setting is used.'
@@ -341,8 +311,6 @@ paths:
           name: quarter
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -357,8 +325,6 @@ paths:
         - settlement
   '/api/v1/settlement/{quarter}':
     get:
-      consumes:
-        - application/json
       operationId: getSettlement
       parameters:
         - description: Output format. 'csv' value is accepted as well
@@ -406,8 +372,6 @@ paths:
           name: quarter
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -422,8 +386,6 @@ paths:
         - settlement
   /api/v1/stats/settlement/by_country:
     get:
-      consumes:
-        - application/json
       operationId: getSettlementStatsByCountry
       parameters:
         - description: Date from in yyyy-MM format.
@@ -436,8 +398,6 @@ paths:
           name: date_to
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -452,8 +412,6 @@ paths:
         - statistics
   /api/v1/stats/settlement/by_taxation_type:
     get:
-      consumes:
-        - application/json
       operationId: getSettlementStatsByTaxationType
       parameters:
         - description: Date from in yyyy-MM format.
@@ -466,8 +424,6 @@ paths:
           name: date_to
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -482,8 +438,6 @@ paths:
         - statistics
   /api/v1/stats/settlement/daily:
     get:
-      consumes:
-        - application/json
       operationId: getDailySettlementStats
       parameters:
         - description: 'Interval type - day, week, month.'
@@ -501,8 +455,6 @@ paths:
           name: date_to
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -517,8 +469,6 @@ paths:
         - statistics
   /api/v1/stats/transactions:
     get:
-      consumes:
-        - application/json
       operationId: getTransactionsStats
       parameters:
         - description: Date from in yyyy-MM format.
@@ -536,8 +486,6 @@ paths:
           name: interval
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -552,8 +500,6 @@ paths:
         - statistics
   /api/v1/stats/transactions/by_country:
     get:
-      consumes:
-        - application/json
       operationId: getTransactionsStatsByCountry
       parameters:
         - description: Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB.
@@ -571,8 +517,6 @@ paths:
           name: date_to
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -587,8 +531,6 @@ paths:
         - statistics
   /api/v1/tax/calculate:
     get:
-      consumes:
-        - application/json
       operationId: calculateSimpleTax
       parameters:
         - description: 'Product type, according to dictionary /dictionaries/product_types. '
@@ -666,8 +608,6 @@ paths:
           name: tax_deducted
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -681,8 +621,6 @@ paths:
       tags:
         - tax
     post:
-      consumes:
-        - application/json
       operationId: calculateTax
       parameters:
         - description: Input
@@ -691,8 +629,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/calculateTaxIn'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -707,8 +643,6 @@ paths:
         - tax
   /api/v1/tax/location/calculate:
     get:
-      consumes:
-        - application/json
       operationId: calculateTaxLocation
       parameters:
         - description: Billing two letter ISO country code.
@@ -721,8 +655,6 @@ paths:
           name: buyer_credit_card_prefix
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -737,8 +669,6 @@ paths:
         - tax
   '/api/v1/tax/vat_numbers/{tax_number}/validate':
     get:
-      consumes:
-        - application/json
       operationId: validateTaxNumber
       parameters:
         - description: Two-letter ISO country code.
@@ -751,8 +681,6 @@ paths:
           name: tax_number
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -767,8 +695,6 @@ paths:
         - tax
   /api/v1/transactions:
     get:
-      consumes:
-        - application/json
       operationId: listTransactions
       parameters:
         - description: Filtering expression
@@ -856,8 +782,6 @@ paths:
           name: tax_country_code
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -871,8 +795,6 @@ paths:
       tags:
         - transactions
     post:
-      consumes:
-        - application/json
       operationId: createTransaction
       parameters:
         - description: Input
@@ -881,8 +803,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/createTransactionIn'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -897,8 +817,6 @@ paths:
         - transactions
   '/api/v1/transactions/{key}':
     delete:
-      consumes:
-        - application/json
       operationId: cancelTransaction
       parameters:
         - description: Transaction key
@@ -906,8 +824,6 @@ paths:
           name: key
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -921,8 +837,6 @@ paths:
       tags:
         - transactions
     get:
-      consumes:
-        - application/json
       operationId: getTransaction
       parameters:
         - description: Transaction key
@@ -930,8 +844,6 @@ paths:
           name: key
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -945,8 +857,6 @@ paths:
       tags:
         - transactions
     put:
-      consumes:
-        - application/json
       operationId: updateTransaction
       parameters:
         - description: Transaction key.
@@ -960,8 +870,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/updateTransactionIn'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -976,8 +884,6 @@ paths:
         - transactions
   '/api/v1/transactions/{key}/confirm':
     post:
-      consumes:
-        - application/json
       operationId: confirmTransaction
       parameters:
         - description: Transaction key.
@@ -991,8 +897,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/confirmTransactionIn'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -1007,8 +911,6 @@ paths:
         - transactions
   '/api/v1/transactions/{key}/invoice/refunds/{refund_note_number}/send_email':
     post:
-      consumes:
-        - application/json
       operationId: emailRefund
       parameters:
         - description: Transaction key.
@@ -1027,8 +929,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/emailRefundIn'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -1043,8 +943,6 @@ paths:
         - invoices
   '/api/v1/transactions/{key}/invoice/send_email':
     post:
-      consumes:
-        - application/json
       operationId: emailInvoice
       parameters:
         - description: Transaction key.
@@ -1058,8 +956,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/emailInvoiceIn'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -1074,8 +970,6 @@ paths:
         - invoices
   '/api/v1/transactions/{key}/payments':
     get:
-      consumes:
-        - application/json
       operationId: listPayments
       parameters:
         - description: 'Max record count (no more than 100, defaults to 10).'
@@ -1093,8 +987,6 @@ paths:
           name: key
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -1108,8 +1000,6 @@ paths:
       tags:
         - payments
     post:
-      consumes:
-        - application/json
       operationId: createPayment
       parameters:
         - description: Transaction key.
@@ -1123,8 +1013,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/createPaymentIn'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -1139,8 +1027,6 @@ paths:
         - payments
   '/api/v1/transactions/{key}/payments/capture':
     post:
-      consumes:
-        - application/json
       operationId: capturePayment
       parameters:
         - description: Transaction key.
@@ -1148,8 +1034,6 @@ paths:
           name: key
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -1164,8 +1048,6 @@ paths:
         - payments
   '/api/v1/transactions/{key}/refunds':
     get:
-      consumes:
-        - application/json
       operationId: listRefunds
       parameters:
         - description: Transaction key.
@@ -1173,8 +1055,6 @@ paths:
           name: key
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -1188,8 +1068,6 @@ paths:
       tags:
         - refunds
     post:
-      consumes:
-        - application/json
       operationId: createRefund
       parameters:
         - description: Transaction key.
@@ -1203,8 +1081,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/createRefundIn'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -1219,8 +1095,6 @@ paths:
         - refunds
   '/api/v1/transactions/{key}/unconfirm':
     post:
-      consumes:
-        - application/json
       operationId: unconfirmTransaction
       parameters:
         - description: Transaction key.
@@ -1234,8 +1108,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/unconfirmTransactionIn'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -1250,8 +1122,6 @@ paths:
         - transactions
   /api/v1/verification/sms:
     post:
-      consumes:
-        - application/json
       operationId: createSMSToken
       parameters:
         - description: Input
@@ -1260,8 +1130,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/createSMSTokenIn'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -1276,8 +1144,6 @@ paths:
         - verification
   '/api/v1/verification/sms/{token}':
     get:
-      consumes:
-        - application/json
       operationId: verifySMSToken
       parameters:
         - description: Provided token.
@@ -1285,8 +1151,6 @@ paths:
           name: token
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK

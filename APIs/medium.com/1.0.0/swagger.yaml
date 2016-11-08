@@ -71,8 +71,6 @@ paths:
   /me:
     get:
       description: Returns details of the user who has granted permission to the application.
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -96,8 +94,6 @@ paths:
           name: publicationId
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -136,8 +132,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Post'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -174,8 +168,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Post'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -204,8 +196,6 @@ paths:
           name: userId
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK

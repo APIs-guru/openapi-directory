@@ -17,6 +17,8 @@ info:
   x-providerName: thenounproject.com
 externalDocs:
   url: 'https://thenounproject.com/developers/'
+produces:
+  - application/json
 tags:
   - description: Operations on collection endpoints
     name: collection
@@ -42,8 +44,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -79,8 +79,6 @@ paths:
           name: page
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -97,8 +95,6 @@ paths:
           name: slug
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -133,8 +129,6 @@ paths:
           name: page
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -164,8 +158,6 @@ paths:
           name: page
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -183,8 +175,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -201,8 +191,6 @@ paths:
           name: term
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -232,8 +220,6 @@ paths:
           name: page
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -274,8 +260,6 @@ paths:
           name: page
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -286,8 +270,6 @@ paths:
     get:
       description: Returns current oauth usage and limits
       operationId: getApiQuotaStatus
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -305,8 +287,6 @@ paths:
           name: user_id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -329,8 +309,6 @@ paths:
           name: slug
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -365,8 +343,6 @@ paths:
           name: page
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified

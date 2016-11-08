@@ -15,6 +15,8 @@ info:
     url: 'https://raw.githubusercontent.com/brandlovers/marketplace-api-documentation/master/brandlovers-marketplace-api-v1.json'
     version: '2.0'
   x-providerName: brandlovers.com
+consumes:
+  - application/json
 produces:
   - application/json
 securityDefinitions:
@@ -39,8 +41,6 @@ tags:
 paths:
   '/order/{orderId}':
     get:
-      consumes:
-        - application/json
       description: 'Returns all details of a single order, including last status, items shipped or not.'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -53,8 +53,6 @@ paths:
           name: orderId
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -73,8 +71,6 @@ paths:
         - order
   '/order/{orderId}/shipment/cancel':
     post:
-      consumes:
-        - application/json
       description: Confirm shipment canceletion (when requested by the customer) or failure to deliver one shipment
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -92,8 +88,6 @@ paths:
           name: orderId
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: success.
@@ -108,8 +102,6 @@ paths:
         - order
   '/order/{orderId}/shipment/delivered':
     post:
-      consumes:
-        - application/json
       description: Confirms that a shipment was delivered. Must inform quantity of successfully deliverd items even if items deliverd was less than the original order
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -127,8 +119,6 @@ paths:
           name: orderId
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Sucess!
@@ -143,8 +133,6 @@ paths:
         - order
   '/order/{orderId}/shipment/exchange':
     post:
-      consumes:
-        - application/json
       description: This enpoint to confirm item exchange when failure to deliver or requested by the customer. All customer requests are tracket via trouble tickets
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -162,8 +150,6 @@ paths:
           name: orderId
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Sucess!
@@ -178,8 +164,6 @@ paths:
         - order
   '/order/{orderId}/shipment/return':
     post:
-      consumes:
-        - application/json
       description: Use this endpoint to return and refund items froma a order. In order to fully return an order list all items and applicate quantity.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -197,8 +181,6 @@ paths:
           name: orderId
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Sucess!
@@ -213,8 +195,6 @@ paths:
         - order
   '/order/{orderId}/shipment/sent':
     post:
-      consumes:
-        - application/json
       description: 'Updates order to include shipment shiped information. This endpoint can be used to include a single or multiple shipments for any give order. In order to inform that all items of a order where shipped list all of them, including applicable quantities in the payload.'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -232,8 +212,6 @@ paths:
           name: orderId
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Sucess!
@@ -248,8 +226,6 @@ paths:
         - order
   /orders:
     get:
-      consumes:
-        - application/json
       description: Retuns a list of orders associated with this seller. The list is ordered by dateCreated.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -267,8 +243,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -285,8 +259,6 @@ paths:
         - orders
   /orders/shipments/delivered:
     get:
-      consumes:
-        - application/json
       description: 'Returns list of shipments. By default this will return list of the last shipments ordered by dateCreated, folowed by last update date.'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -309,8 +281,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -326,8 +296,6 @@ paths:
       tags:
         - orders
     post:
-      consumes:
-        - application/json
       description: Bulk update of order shipments status. This alows to inform multiple shipments status
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -341,8 +309,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OrdersShipments'
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -357,8 +323,6 @@ paths:
         - orders
   /orders/shipments/shipped:
     get:
-      consumes:
-        - application/json
       description: Returns a list of shipments shipped. By Default returns items ordered by dateCreated folowed by last update
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -386,8 +350,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -403,8 +365,6 @@ paths:
       tags:
         - orders
     post:
-      consumes:
-        - application/json
       description: Allows bulk updates of orders shippments.
       parameters:
         - description: JSON payload with list of shippments of orders.
@@ -413,8 +373,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OrdersShipments'
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -429,8 +387,6 @@ paths:
         - orders
   /orders/status/approved:
     get:
-      consumes:
-        - application/json
       description: Returns a list of approved orders. Orders in the `approved` state must be fullfiled imediadetelly.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -448,8 +404,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -466,8 +420,6 @@ paths:
         - orders
   /orders/status/canceled:
     get:
-      consumes:
-        - application/json
       description: Returns a list with canceled orders. Canceled orders should not be fullfiled.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -486,8 +438,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -504,8 +454,6 @@ paths:
         - orders
   /orders/status/delivered:
     get:
-      consumes:
-        - application/json
       description: Returns a list of orders successfully delivered associated with this seller.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -523,8 +471,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -541,8 +487,6 @@ paths:
         - orders
   /orders/status/new:
     get:
-      consumes:
-        - application/json
       description: Returns a list of orders flagged as new. New orders should not be fullfiled until marketplace flags them as approved.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -561,8 +505,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -579,8 +521,6 @@ paths:
         - orders
   /orders/status/partiallyDelivered:
     get:
-      consumes:
-        - application/json
       description: Returns a list of partially deliverd orders. This is a list of orders with items shipped but with not all items ackwlodged as deliverd
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -599,8 +539,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -617,8 +555,6 @@ paths:
         - orders
   /orders/status/partiallySent:
     get:
-      consumes:
-        - application/json
       description: Returns a list of orders that contain one (or more) items that where not shipped. This will list the entire order as well the items with peding shipment. Use this service to track orders that need to be fullfiled.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -636,8 +572,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -654,8 +588,6 @@ paths:
         - orders
   /orders/status/sent:
     get:
-      consumes:
-        - application/json
       description: 'Returns a list with orders completely fullfiled, this means orders with all items sent. Orders will ordered by dateCreated fowllowed by last update'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -673,8 +605,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -691,8 +621,6 @@ paths:
         - orders
   /product:
     post:
-      consumes:
-        - application/json
       description: 'Use this enpoint to create a single new product to the Marketplace. This enpoint expects a json document with one product. If you whant to upload multiple products in a single API call use POST /products method. The server will load each product as an individual item that can be manipulated using your own `skuSellerId`. This system is idenpontent, this means that once a `skuSellerId` is created it cannot be re-created using this tool. In order to update, edit a product use the PUT method with the correct reference to your `skuSellerId`'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -706,8 +634,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Product'
-      produces:
-        - application/json
       responses:
         '200':
           description: Sucess! Server received your request and will start background processing.
@@ -720,8 +646,6 @@ paths:
         - product
   '/product/{skuSellerId}':
     get:
-      consumes:
-        - application/json
       description: 'Returns detailed information of a single product with the seller `skuSellerId`. This service will return a json document with product detail, status, price, invetory among other infomarion availble in the Brand Lovers marketplace'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -734,8 +658,6 @@ paths:
           name: skuSellerId
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -753,8 +675,6 @@ paths:
       tags:
         - product
     put:
-      consumes:
-        - application/json
       description: 'Update a single product information such as name, brand, attribute, dimension, etc. Please note that data from your request will be merged with existing data. This allows you to easliy update only certain fields without the need to re-inform the other unchanged fields. For example in order to update just the field `title` simply send just this field with new information, remaining fields will not be changed. In order to erase an item the field must be informed as its default value, for example in order to erase the `videos` field must be sent as videos:[]. The `skuSellerId` field is always mandatory in the path and in the product json Object.'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -773,8 +693,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ProductUpdate'
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -793,8 +711,6 @@ paths:
         - products
   '/product/{skuSellerId}/prices':
     put:
-      consumes:
-        - application/json
       description: 'Allows seller to set the SKU prices (MSRP and/or offer price). All prices must be informed in cents. No commas or periods are accepeted. For example one dollar should be informed as 100. Same as $1,2345.67 must be informed solely as 1234567'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -813,8 +729,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ProductPrice'
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -827,8 +741,6 @@ paths:
         - product
   '/product/{skuSellerId}/status':
     put:
-      consumes:
-        - application/json
       description: 'Update product status in the Marketplace. Set to `true` to enable, `false` to disable sale.'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -847,8 +759,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SellerItemStatus'
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -861,8 +771,6 @@ paths:
         - product
   '/product/{skuSellerId}/stock':
     put:
-      consumes:
-        - application/json
       description: Update a single product inventory information. Products with zero stock will not be eligible for sale.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -881,8 +789,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Stock'
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -895,8 +801,6 @@ paths:
         - product
   /products:
     get:
-      consumes:
-        - application/json
       description: 'Get a list of my products loaded into the Marketplace. This dosen''t means that products are eligible for sale, just that they are loaded in the database.'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -914,8 +818,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -933,8 +835,6 @@ paths:
       tags:
         - products
     post:
-      consumes:
-        - application/json
       description: 'This enpoint to creates new products in the Marketplace using `skuSellerId` as a primary key. This enpoint expects a json document with array of products. The server will load each product as an individual item that can be manipulated using your own `skuSellerId`. All requests to This endpoint are idenpontent with respect of the `skuSellerId`, this means that once a `skuSellerId` is created it cannot be re-created using this tool. In order to update use the PUT method with the correct `skuSellerId`. You can also use the POST /product to create a single product per request'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -950,8 +850,6 @@ paths:
             items:
               $ref: '#/definitions/Product'
             type: array
-      produces:
-        - application/json
       responses:
         '200':
           description: Sucess! Server received your request and will start background processing.
@@ -964,8 +862,6 @@ paths:
         - products
   /products/prices:
     put:
-      consumes:
-        - application/json
       description: 'Allows bulk update of product prices. This endpoint expects a json document with an array of products with the `skuSellerId` and the new price. Server will process each new product update individually and will ackwlodge as much updates as possible, even if a single product update fails. After this request you can query product final status with GET /product/status'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -981,8 +877,6 @@ paths:
             items:
               $ref: '#/definitions/SellerItemPrices'
             type: array
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -995,8 +889,6 @@ paths:
         - products
   /products/status:
     get:
-      consumes:
-        - application/json
       description: 'Returns a list with seller products status. Please note that this endpoint will not return all details of each product, just the skuSellerId and status. Also please note that this endpoint will return 250 products per call. For full details of a given procuct use GET /product/{skuSellerId}'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -1014,8 +906,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success fetching results.
@@ -1027,8 +917,6 @@ paths:
       tags:
         - products
     put:
-      consumes:
-        - application/json
       description: Bulk enable/disable products in the marketplace. This endpoint requires an array of objects with the seller SKU `skuSellerId` and boolean value that defines if the product is enabled or not for sale. This endpoint can be used to set a single product or many products.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -1044,8 +932,6 @@ paths:
             items:
               $ref: '#/definitions/ProductStatusUpdate'
             type: array
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -1058,8 +944,6 @@ paths:
         - products
   /products/status/selling:
     get:
-      consumes:
-        - application/json
       description: Returns products that are successfully listed for sale.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -1077,8 +961,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -1095,8 +977,6 @@ paths:
         - products
   /products/stocks:
     put:
-      consumes:
-        - application/json
       description: Bulk product stock update. This endpoint expect a array of products `skuSellerId` with new inventory data
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -1112,8 +992,6 @@ paths:
             items:
               $ref: '#/definitions/ProductStock'
             type: array
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -1126,8 +1004,6 @@ paths:
         - products
   /ticket:
     post:
-      consumes:
-        - application/json
       description: 'Use this service to create a new trouble ticket. Use this to include relevant information about the order, comunicate with the customer or marketplace team. Whenever possible message will be pushed to Mobile first. This is the primary mean of comunicaiton with the customer regarding orders, shippments, shippments status. New tickets will be automatically be set to ''OPEN''. Trouble tickets need to be associated with a orderId or customer. New tickets can optionally include a new message.'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -1141,8 +1017,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/NewTicket'
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -1153,8 +1027,6 @@ paths:
         - tickets
   '/ticket/{ticketId}/message':
     post:
-      consumes:
-        - application/json
       description: Add a new message to this trouble ticket. Messages can be `CUSTOMER` (customer will be able to see it) or `INTERNAL`.
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -1173,8 +1045,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/NewTicketMessage'
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -1187,8 +1057,6 @@ paths:
         - tickets
   '/ticket/{ticketId}/messages':
     get:
-      consumes:
-        - application/json
       description: Returns trouble ticket history with all messages exchanged. Only tickets related to your seller will be returned. Attempt to read other tickets will return 403 (acess denied).
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -1211,8 +1079,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!
@@ -1229,8 +1095,6 @@ paths:
         - tickets
   '/ticket/{ticketId}/status':
     put:
-      consumes:
-        - application/json
       description: Alows the seller to update the status of a trouble ticket
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -1249,8 +1113,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TicketStatus'
-      produces:
-        - application/json
       responses:
         '200':
           description: successfully received transaction
@@ -1267,8 +1129,6 @@ paths:
         - tickets
   /tickets:
     get:
-      consumes:
-        - application/json
       description: 'Allows seller to receive and status, queries, requests and complaints from customers. As well related messages'
       parameters:
         - description: Authorization token. The Authorization token can be found in your Admin console.
@@ -1295,8 +1155,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success!

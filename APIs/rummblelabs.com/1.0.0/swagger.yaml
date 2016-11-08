@@ -14,6 +14,8 @@ info:
     url: 'http://recsvm.rummblelabs.com/api-spec/seldon.json'
     version: '2.0'
   x-providerName: rummblelabs.com
+produces:
+  - application/json
 paths:
   /actions:
     post:
@@ -33,8 +35,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Action'
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -76,8 +76,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -101,8 +99,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Item'
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -126,8 +122,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Item'
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -144,8 +138,6 @@ paths:
           name: oauth_token
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -172,8 +164,6 @@ paths:
           name: full
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -218,8 +208,6 @@ paths:
           name: timestamp
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -273,8 +261,6 @@ paths:
           name: jsonpCallback
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -296,8 +282,6 @@ paths:
           name: consumer_secret
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -329,8 +313,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -354,8 +336,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/User'
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -379,8 +359,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/User'
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -407,8 +385,6 @@ paths:
           name: full
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -440,8 +416,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters
@@ -484,8 +458,6 @@ paths:
           name: algorithms
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '400':
           description: Invalid parameters

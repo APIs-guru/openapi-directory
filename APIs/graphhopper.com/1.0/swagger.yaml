@@ -14,6 +14,8 @@ info:
     url: 'https://graphhopper.com/api/1/vrp/swagger.json'
     version: '2.0'
   x-providerName: graphhopper.com
+consumes:
+  - application/json
 produces:
   - application/json
 securityDefinitions:
@@ -26,8 +28,6 @@ security:
 paths:
   /optimize:
     post:
-      consumes:
-        - application/json
       description: |
         This endpoint for solving vehicle routing problems, i.e. traveling salesman or vehicle routing problems, and returns the solution.
       operationId: postVrp
@@ -43,8 +43,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Request'
-      produces:
-        - application/json
       responses:
         '200':
           description: A jobId you can use to retrieve your solution from server - see solution endpoint.
@@ -59,8 +57,6 @@ paths:
         - vrp
   '/solution/{jobId}':
     get:
-      consumes:
-        - application/json
       description: |
         This endpoint returns the solution of a large problems. You can fetch it with the job_id, you have been sent.
       operationId: getSolution
@@ -75,8 +71,6 @@ paths:
           name: jobId
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: A response containing the solution

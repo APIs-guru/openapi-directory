@@ -16,6 +16,9 @@ info:
   x-providerName: semantria.com
 externalDocs:
   url: 'https://semantria.com/support/developer/'
+produces:
+  - application/json
+  - application/xml
 tags:
   - description: Blacklisted output
     name: Blacklist
@@ -66,9 +69,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -100,9 +100,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with the blacklist.
@@ -140,9 +137,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -184,9 +178,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -231,9 +222,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -265,9 +253,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with the categories list.
@@ -305,9 +290,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -349,9 +331,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -394,9 +373,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
@@ -431,9 +407,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with processed collections.
@@ -469,9 +442,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted. Document canceled from processing on the server.
@@ -504,9 +474,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted. Server responds with processed document or its status.
@@ -540,9 +507,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -569,9 +533,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted. Server responds with status object.
@@ -602,9 +563,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -641,9 +599,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -686,9 +641,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
@@ -727,9 +679,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
@@ -766,9 +715,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with processed documents.
@@ -804,9 +750,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted. Document canceled from processing on the server.
@@ -839,9 +782,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted. Server responds with processed document or its status.
@@ -867,9 +807,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -901,9 +838,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with the entities list.
@@ -941,9 +875,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -985,9 +916,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -1024,9 +952,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with subscription details.
@@ -1065,9 +990,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -1099,9 +1021,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
@@ -1139,9 +1058,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -1183,9 +1099,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -1230,9 +1143,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -1264,9 +1174,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with the queries list.
@@ -1304,9 +1211,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -1348,9 +1252,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -1392,9 +1293,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted. Server responds with statistics details.
@@ -1418,9 +1316,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted. Server responds with status object.
@@ -1444,9 +1339,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with subscription details.
@@ -1483,9 +1375,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -1517,9 +1406,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Client request accepted and queued. Server responds with the taxonomy list.
@@ -1557,9 +1443,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified
@@ -1601,9 +1484,6 @@ paths:
           name: content_type
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: No response was specified

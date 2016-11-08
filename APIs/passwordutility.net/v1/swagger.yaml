@@ -11,10 +11,15 @@ info:
     url: 'http://passwordutility.net/swagger/docs/v1'
     version: '2.0'
   x-providerName: passwordutility.net
+consumes: []
+produces:
+  - application/json
+  - text/json
+  - application/xml
+  - text/xml
 paths:
   /api/password/generate:
     post:
-      consumes: []
       deprecated: false
       operationId: Password_Generate
       parameters:
@@ -35,11 +40,6 @@ paths:
           name: specialCharacters
           required: false
           type: boolean
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -49,7 +49,6 @@ paths:
         - Password
   /api/password/validate:
     post:
-      consumes: []
       deprecated: false
       operationId: Password_Validate
       parameters:
@@ -57,11 +56,6 @@ paths:
           name: password
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK

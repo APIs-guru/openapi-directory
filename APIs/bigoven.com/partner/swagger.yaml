@@ -18,6 +18,11 @@ info:
   x-providerName: bigoven.com
 externalDocs:
   url: 'http://api2.bigoven.com/web/documentation'
+produces:
+  - application/json
+  - text/json
+  - application/xml
+  - text/xml
 securityDefinitions:
   api_key:
     description: 'Pass your api_key in the header (recommended) or as a URL parameter. For the URL parameter, use api_key. For the header, send it as a header value for: X-BigOven-API-Key'
@@ -60,11 +65,6 @@ paths:
           name: sessionForLogging
           required: false
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -85,11 +85,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -108,11 +103,6 @@ paths:
           name: test
           required: false
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -134,11 +124,6 @@ paths:
           name: term
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -159,11 +144,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: Glossary article successfully returned
@@ -177,11 +157,6 @@ paths:
       consumes: []
       deprecated: false
       operationId: GroceryList_Delete
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -194,11 +169,6 @@ paths:
       consumes: []
       deprecated: false
       operationId: GroceryList_Get
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -223,11 +193,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/API2.Controllers.GroceryListController.DepartmentModel'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -255,11 +220,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/API2.Controllers.GroceryListController.PostToGroceryListRecipeRequest'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -279,11 +239,6 @@ paths:
           name: guid
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -312,11 +267,6 @@ paths:
           name: guid
           required: true
           type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -341,11 +291,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/API2.Controllers.GroceryListController.PostGroceryListRecipeRequest'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -370,11 +315,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/API2.Controllers.GroceryListController.PostGroceryListSyncRequest'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -400,11 +340,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BigOven.Model.API.Recipe'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -429,11 +364,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BigOven.Model.API.Recipe'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -459,11 +389,6 @@ paths:
           name: limit
           required: false
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -479,11 +404,6 @@ paths:
       consumes: []
       deprecated: false
       operationId: Recipe_Categories
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -518,11 +438,6 @@ paths:
           name: lng
           required: false
           type: number
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '401':
           description: Not authorized
@@ -546,11 +461,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -574,11 +484,6 @@ paths:
           name: prefetch
           required: false
           type: boolean
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -610,11 +515,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/API2.Controllers.RecipeController.FeedbackDTO'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -648,11 +548,6 @@ paths:
           name: lng
           required: false
           type: number
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: Success
@@ -679,11 +574,6 @@ paths:
           name: recipeId
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -717,11 +607,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/API2.Controllers.NoteController.NoteRequest'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -748,11 +633,6 @@ paths:
           name: noteId
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -778,11 +658,6 @@ paths:
           name: noteId
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -816,11 +691,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/API2.Controllers.NoteController.NoteRequest'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -853,11 +723,6 @@ paths:
           name: rpp
           required: false
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -888,11 +753,6 @@ paths:
           name: rpp
           required: false
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -924,11 +784,6 @@ paths:
           name: rpp
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -960,11 +815,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/API2.Controllers.ReviewController.ReviewRequest'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -991,11 +841,6 @@ paths:
           name: reviewId
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -1021,11 +866,6 @@ paths:
           name: recipeId
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -1062,11 +902,6 @@ paths:
           name: recipeId
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -1099,11 +934,6 @@ paths:
           name: rpp
           required: false
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -1126,11 +956,6 @@ paths:
           name: recipeId
           required: true
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -1321,11 +1146,6 @@ paths:
           name: cps
           required: false
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -1339,11 +1159,6 @@ paths:
       consumes: []
       deprecated: false
       operationId: Recipe_GetRandomRecipe
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -1370,11 +1185,6 @@ paths:
           name: rpp
           required: false
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -1403,11 +1213,6 @@ paths:
           name: rpp
           required: false
           type: integer
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK

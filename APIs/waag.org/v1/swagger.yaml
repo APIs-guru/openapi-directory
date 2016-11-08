@@ -14,6 +14,9 @@ info:
     url: 'http://api.citysdk.waag.org/swagger'
     version: '1.2'
   x-providerName: waag.org
+produces:
+  - application/json
+  - application/ld+json
 tags:
   - description: Operations about layers
     name: layers
@@ -29,9 +32,6 @@ paths:
   /layers:
     get:
       operationId: GET-layers---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -40,9 +40,6 @@ paths:
         - layers
     post:
       operationId: POST-layers---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -57,9 +54,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -73,9 +67,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -89,9 +80,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -106,9 +94,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -122,9 +107,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -139,9 +121,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -155,9 +134,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -176,9 +152,6 @@ paths:
           name: field
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -196,9 +169,6 @@ paths:
           name: field
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -216,9 +186,6 @@ paths:
           name: field
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -236,9 +203,6 @@ paths:
           name: field
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -253,9 +217,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -269,9 +230,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -285,9 +243,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -301,9 +256,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -322,9 +274,6 @@ paths:
           name: cdk_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -339,9 +288,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -356,9 +302,6 @@ paths:
           name: entity
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -373,9 +316,6 @@ paths:
           name: entity
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -394,9 +334,6 @@ paths:
           name: attribute
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -411,9 +348,6 @@ paths:
           name: cetype
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -432,9 +366,6 @@ paths:
           name: attribute
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -444,9 +375,6 @@ paths:
   /ngsi10/queryContext:
     post:
       operationId: POST-ngsi10-queryContext---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -456,9 +384,6 @@ paths:
   /ngsi10/subscribeContext:
     post:
       operationId: POST-ngsi10-subscribeContext---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -468,9 +393,6 @@ paths:
   /ngsi10/unsubscribeContext:
     post:
       operationId: POST-ngsi10-unsubscribeContext---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -480,9 +402,6 @@ paths:
   /ngsi10/updateContext:
     post:
       operationId: POST-ngsi10-updateContext---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -492,9 +411,6 @@ paths:
   /ngsi10/updateContextSubscription:
     post:
       operationId: POST-ngsi10-updateContextSubscription---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -504,9 +420,6 @@ paths:
   /objects:
     get:
       operationId: GET-objects---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -521,9 +434,6 @@ paths:
           name: cdk_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -537,9 +447,6 @@ paths:
           name: cdk_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -553,9 +460,6 @@ paths:
           name: cdk_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -570,9 +474,6 @@ paths:
           name: cdk_id
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -591,9 +492,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -611,9 +509,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -631,9 +526,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -651,9 +543,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -671,9 +560,6 @@ paths:
           name: layer
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -683,9 +569,6 @@ paths:
   /owners:
     get:
       operationId: GET-owners---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -694,9 +577,6 @@ paths:
         - owners
     post:
       operationId: POST-owners---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -711,9 +591,6 @@ paths:
           name: owner
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -727,9 +604,6 @@ paths:
           name: owner
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -743,9 +617,6 @@ paths:
           name: owner
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -760,9 +631,6 @@ paths:
           name: owner
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -772,9 +640,6 @@ paths:
   /session:
     delete:
       operationId: DELETE-session---format-
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified
@@ -794,9 +659,6 @@ paths:
           name: password
           required: true
           type: string
-      produces:
-        - application/json
-        - application/ld+json
       responses:
         '200':
           description: No response was specified

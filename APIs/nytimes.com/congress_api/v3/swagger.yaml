@@ -24,6 +24,10 @@ info:
   x-serviceName: congress_api
 externalDocs:
   url: 'http://developer.nytimes.com/'
+consumes:
+  - application/json
+produces:
+  - application/json
 securityDefinitions:
   api-key:
     in: query
@@ -32,13 +36,9 @@ securityDefinitions:
 paths:
   '/members/house/{state}/{district-number}/current.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_members-house-state-district-number-current-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -109,16 +109,12 @@ paths:
         type: string
   /members/new.json:
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_members-new-json
       parameters:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -298,16 +294,12 @@ paths:
     parameters: []
   '/members/senate/{state}/current.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_members-senate-state-current-json
       parameters:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -371,16 +363,12 @@ paths:
         type: string
   '/members/{member-id-1}/bills/{member-id-2}/{congress-number}/{chamber}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_members-member-id-1-bills-member-id-2-congress-number-chamber-json
       parameters:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -460,13 +448,9 @@ paths:
         type: string
   '/members/{member-id-1}/votes/{member-id-2}/{congress-number}/{chamber}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_members-member-id-1-votes-member-id-2-congress-number-chamber-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -548,16 +532,12 @@ paths:
         type: string
   '/members/{member-id}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_members-member-id-json
       parameters:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -741,16 +721,12 @@ paths:
         type: string
   '/members/{member-id}/bills/{type}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_members-member-id-bills-type-json
       parameters:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -850,13 +826,9 @@ paths:
         type: string
   '/members/{member-id}/floor_appearances.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_members-member-id-floor_appearances-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -906,13 +878,9 @@ paths:
         type: string
   '/members/{member-id}/votes.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_members-member-id-votes-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1004,13 +972,9 @@ paths:
         type: string
   /states/members/party.json:
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_states-members-party-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1065,13 +1029,9 @@ paths:
     parameters: []
   '/{chamber}/schedule.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_chamber-schedule-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1117,13 +1077,9 @@ paths:
         type: string
   '/{chamber}/votes/{date-1}/{date-2}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_chamber-votes-date-1-date-2-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1484,13 +1440,9 @@ paths:
         type: string
   '/{chamber}/votes/{year}/{month}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_chamber-votes-year-month-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1850,13 +1802,9 @@ paths:
         type: string
   '/{congress-id}/nominees/state/{state}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-id-nominees-state-state-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -1926,13 +1874,9 @@ paths:
         type: string
   '/{congress-number}/bills/{bill-id}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-bills-bill-id-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2030,13 +1974,9 @@ paths:
         type: string
   '/{congress-number}/bills/{bill-id}/cosponsors.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-bills-bill-id-cosponsors-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2158,16 +2098,12 @@ paths:
         type: string
   '/{congress-number}/bills/{bill-id}/{resource}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-bills-bill-id-resource-json
       parameters:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2291,13 +2227,9 @@ paths:
         type: string
   '/{congress-number}/nominations.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-nominations-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2444,13 +2376,9 @@ paths:
         type: integer
   '/{congress-number}/nominees/received.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-nominees-received-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2508,8 +2436,6 @@ paths:
         type: integer
   '/{congress-number}/nominees/{nominee-ID}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-nominees-nominee-ID-json
       parameters:
@@ -2517,8 +2443,6 @@ paths:
           name: nominee-ID
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2591,16 +2515,12 @@ paths:
         type: string
   '/{congress-number}/{chamber}/bills/{type}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-chamber-bills-type-json
       parameters:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2699,13 +2619,9 @@ paths:
         type: string
   '/{congress-number}/{chamber}/committees.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-chamber-committees-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2798,13 +2714,9 @@ paths:
         type: string
   '/{congress-number}/{chamber}/committees/{commitee-id}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-chamber-committees-commitee-id-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -2914,8 +2826,6 @@ paths:
         type: string
   '/{congress-number}/{chamber}/members.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-chamber-members-json
       parameters:
@@ -2927,8 +2837,6 @@ paths:
           in: query
           name: district
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3057,13 +2965,9 @@ paths:
         type: string
   '/{congress-number}/{chamber}/members/current.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-chamber-members-current-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3190,13 +3094,9 @@ paths:
         type: string
   '/{congress-number}/{chamber}/members/leaving.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-chamber-members-leaving-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3583,16 +3483,12 @@ paths:
         type: string
   '/{congress-number}/{chamber}/sessions/{session-number}/votes/{roll-call-number}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-chamber-sessions-session-number-votes-roll-call-number-json
       parameters:
         - in: query
           name: api-key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: ''
@@ -3772,13 +3668,9 @@ paths:
         type: string
   '/{congress-number}/{chamber}/votes/{vote-type}.json':
     get:
-      consumes:
-        - application/json
       description: ''
       operationId: GET_congress-number-chamber-votes-vote-type-json
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: ''

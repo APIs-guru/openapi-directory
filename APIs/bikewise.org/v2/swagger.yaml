@@ -15,6 +15,8 @@ info:
     url: 'https://bikewise.org/api/v2/swagger_doc'
     version: '1.2'
   x-providerName: bikewise.org
+produces:
+  - application/json
 tags:
   - description: Incidents matching parameters
     name: incidents
@@ -94,8 +96,6 @@ paths:
           name: query
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -113,8 +113,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -208,8 +206,6 @@ paths:
           name: all
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -284,8 +280,6 @@ paths:
           name: all
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified

@@ -24,6 +24,10 @@ info:
     url: 'http://www.neowsapp.com/api-docs'
     version: '1.2'
   x-providerName: neowsapp.com
+consumes:
+  - application/json
+produces:
+  - application/json
 tags:
   - description: Operations with NearEarthObjects
     name: feed
@@ -34,8 +38,6 @@ tags:
 paths:
   /rest/v1/feed:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: 'Get a list of Near Earth Objects within a date range, The max range in one query is 7 days'
       operationId: retrieveNearEarthObjectFeed
@@ -55,8 +57,6 @@ paths:
           name: detailed
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -73,8 +73,6 @@ paths:
         - feed
   /rest/v1/feed/today:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: Get a list of Near Earth Objects for today
       operationId: retrieveNEOFeedToday
@@ -84,8 +82,6 @@ paths:
           name: detailed
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -102,8 +98,6 @@ paths:
         - feed
   /rest/v1/neo/browse:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: Retieve a paginated list of Near Earth Objects
       operationId: browseNearEarthObjects
@@ -122,8 +116,6 @@ paths:
           name: size
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -140,8 +132,6 @@ paths:
         - neo
   '/rest/v1/neo/{asteroid_id}':
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: Retieve a Near Earth Objects with a given id
       operationId: retrieveNearEarthObjectById
@@ -151,8 +141,6 @@ paths:
           name: asteroid_id
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -169,13 +157,9 @@ paths:
         - neo
   /rest/v1/stats:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: retrieveCurrentNeoStatistics
       operationId: retrieveCurrentNeoStatistics
-      produces:
-        - application/json
       responses:
         '200':
           description: OK

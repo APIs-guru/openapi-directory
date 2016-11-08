@@ -16,13 +16,15 @@ info:
     url: 'https://spectrocoin.com/api-docs/merchant/1/'
     version: '2.0'
   x-providerName: spectrocoin.com
+consumes:
+  - application/x-www-form-urlencoded
+produces:
+  - application/json
 tags:
   - name: createOrder
 paths:
   /api/createOrder:
     post:
-      consumes:
-        - application/x-www-form-urlencoded
       description: ''
       operationId: createOrder
       parameters:
@@ -32,8 +34,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Order_request_class_used_to_provide_order_specific_information'
-      produces:
-        - application/json
       responses:
         '200':
           description: successful operation

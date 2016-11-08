@@ -14,6 +14,8 @@ info:
     url: 'http://www.datumbox.com/api-sandbox/api-docs'
     version: '1.2'
   x-providerName: datumbox.com
+produces:
+  - application/json
 tags:
   - description: Document Classification Functions
     name: Document-Classification
@@ -38,8 +40,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -62,8 +62,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -91,8 +89,6 @@ paths:
           name: copy
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -115,8 +111,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -139,8 +133,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -170,8 +162,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -194,8 +184,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -218,8 +206,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -242,8 +228,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -266,8 +250,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -290,8 +272,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -314,8 +294,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -338,8 +316,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -362,8 +338,6 @@ paths:
           name: text
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified

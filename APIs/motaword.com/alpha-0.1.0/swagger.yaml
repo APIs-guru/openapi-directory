@@ -67,8 +67,6 @@ paths:
     get:
       description: Download your corporate account's global glossary. This endpoint is available only for corporate account customers.
       operationId: downloadGlobalGlossary
-      produces:
-        - application/json
       responses:
         '200':
           description: Glossary file streamed.
@@ -94,8 +92,6 @@ paths:
           name: glossary
           required: true
           type: file
-      produces:
-        - application/json
       responses:
         '200':
           description: Success response
@@ -165,8 +161,6 @@ paths:
           in: query
           name: per_page
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Project list
@@ -216,8 +210,6 @@ paths:
           in: formData
           name: 'glossaries[]'
           type: file
-      produces:
-        - application/json
       responses:
         '200':
           description: Newly created project
@@ -257,8 +249,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Project model
@@ -304,8 +294,6 @@ paths:
             type: string
           name: custom
           type: array
-      produces:
-        - application/json
       responses:
         '200':
           description: Updated project
@@ -337,8 +325,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: 'Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.'
@@ -373,8 +359,6 @@ paths:
           name: language
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: 'Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.'
@@ -418,8 +402,6 @@ paths:
           in: formData
           name: budget_code
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Project launched successfully
@@ -462,8 +444,6 @@ paths:
           in: query
           name: async
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Packaged translation streamed.
@@ -497,8 +477,6 @@ paths:
           in: query
           name: key
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Current status of packaging process.
@@ -538,8 +516,6 @@ paths:
           in: query
           name: async
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: 'Packaging status and tracking code. With the package key, you can track the progress of translation packaging.'
@@ -573,8 +549,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Progress information
@@ -612,8 +586,6 @@ paths:
           in: query
           name: per_page
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: A list of activity models
@@ -645,8 +617,6 @@ paths:
           name: activityId
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Activity model
@@ -682,8 +652,6 @@ paths:
           name: comment
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Comment model
@@ -715,8 +683,6 @@ paths:
           name: activityId
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: A list of Comment models
@@ -750,8 +716,6 @@ paths:
           in: query
           name: per_page
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: A list of Comment models
@@ -777,8 +741,6 @@ paths:
           name: projectId
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: A list of document models
@@ -808,8 +770,6 @@ paths:
           name: 'documents[]'
           required: true
           type: file
-      produces:
-        - application/json
       responses:
         '200':
           description: A list of successfully added new documents.
@@ -891,8 +851,6 @@ paths:
           name: documentId
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Document model
@@ -928,8 +886,6 @@ paths:
           name: documents
           required: true
           type: file
-      produces:
-        - application/json
       responses:
         '200':
           description: Updated document model
@@ -998,8 +954,6 @@ paths:
           name: projectId
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: A list of glossary models
@@ -1029,8 +983,6 @@ paths:
           name: glossaries
           required: true
           type: file
-      produces:
-        - application/json
       responses:
         '200':
           description: Newly created glossary model.
@@ -1116,8 +1068,6 @@ paths:
           name: glossaryId
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Glossary model
@@ -1153,8 +1103,6 @@ paths:
           name: glossaries
           required: true
           type: file
-      produces:
-        - application/json
       responses:
         '200':
           description: Updated glossary model
@@ -1223,8 +1171,6 @@ paths:
           name: projectId
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: A list of style guide models
@@ -1254,8 +1200,6 @@ paths:
           name: 'styleguides[]'
           required: true
           type: file
-      produces:
-        - application/json
       responses:
         '200':
           description: Newly created style guide model or a list of new style guide models
@@ -1337,8 +1281,6 @@ paths:
           name: styleGuideId
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Style guide model
@@ -1374,8 +1316,6 @@ paths:
           name: styleguides
           required: true
           type: file
-      produces:
-        - application/json
       responses:
         '200':
           description: Updated style guide model
@@ -1437,8 +1377,6 @@ paths:
     get:
       description: Download your corporate account's global style guide. This endpoint is available only for corporate account customers.
       operationId: downloadGlobalStyleGuide
-      produces:
-        - application/json
       responses:
         '200':
           description: Style guide file streamed.
@@ -1464,8 +1402,6 @@ paths:
           name: styleguide
           required: true
           type: file
-      produces:
-        - application/json
       responses:
         '200':
           description: Success response

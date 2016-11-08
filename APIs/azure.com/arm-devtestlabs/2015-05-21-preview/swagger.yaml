@@ -24,6 +24,9 @@ info:
     - virtual machines
     - testing
     - environments
+produces:
+  - application/json
+  - text/json
 securityDefinitions:
   oauth2:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
@@ -72,9 +75,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -119,9 +119,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -171,9 +168,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -228,9 +222,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -276,9 +267,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -328,9 +316,6 @@ paths:
           schema:
             $ref: '#/definitions/GenerateArmTemplateRequest'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -368,9 +353,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -407,9 +389,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -453,9 +432,6 @@ paths:
           schema:
             $ref: '#/definitions/ArtifactSource'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -499,9 +475,6 @@ paths:
           schema:
             $ref: '#/definitions/ArtifactSource'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -552,9 +525,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -595,9 +565,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -635,9 +602,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -685,9 +649,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -728,9 +689,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -768,9 +726,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -818,9 +773,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -861,9 +813,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
@@ -901,9 +850,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -947,9 +893,6 @@ paths:
           schema:
             $ref: '#/definitions/CustomImage'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1001,9 +944,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1044,9 +984,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1083,9 +1020,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1129,9 +1063,6 @@ paths:
           schema:
             $ref: '#/definitions/Formula'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1183,9 +1114,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1233,9 +1161,6 @@ paths:
           schema:
             $ref: '#/definitions/EvaluatePoliciesRequest'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1287,9 +1212,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1335,9 +1257,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1379,9 +1298,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1430,9 +1346,6 @@ paths:
           schema:
             $ref: '#/definitions/Policy'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1481,9 +1394,6 @@ paths:
           schema:
             $ref: '#/definitions/Policy'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1534,9 +1444,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1577,9 +1484,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
@@ -1617,9 +1521,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1663,9 +1564,6 @@ paths:
           schema:
             $ref: '#/definitions/Schedule'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1709,9 +1607,6 @@ paths:
           schema:
             $ref: '#/definitions/Schedule'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1754,9 +1649,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1804,9 +1696,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1847,9 +1736,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
@@ -1887,9 +1773,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1933,9 +1816,6 @@ paths:
           schema:
             $ref: '#/definitions/LabVirtualMachine'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -1979,9 +1859,6 @@ paths:
           schema:
             $ref: '#/definitions/LabVirtualMachine'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2031,9 +1908,6 @@ paths:
           schema:
             $ref: '#/definitions/ApplyArtifactsRequest'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2072,9 +1946,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2113,9 +1984,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2163,9 +2031,6 @@ paths:
           required: false
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2206,9 +2071,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
@@ -2246,9 +2108,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2292,9 +2151,6 @@ paths:
           schema:
             $ref: '#/definitions/VirtualNetwork'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2338,9 +2194,6 @@ paths:
           schema:
             $ref: '#/definitions/VirtualNetwork'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2378,9 +2231,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '202':
           description: Accepted
@@ -2413,9 +2263,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2454,9 +2301,6 @@ paths:
           schema:
             $ref: '#/definitions/Lab'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2495,9 +2339,6 @@ paths:
           schema:
             $ref: '#/definitions/Lab'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2542,9 +2383,6 @@ paths:
           schema:
             $ref: '#/definitions/LabVirtualMachine'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2585,9 +2423,6 @@ paths:
           schema:
             $ref: '#/definitions/GenerateUploadUriParameter'
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -2620,9 +2455,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK

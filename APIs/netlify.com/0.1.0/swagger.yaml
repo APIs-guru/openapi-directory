@@ -110,8 +110,6 @@ paths:
           schema:
             $ref: '#/definitions/error'
     post:
-      consumes:
-        - application/json
       operationId: createHookBySiteId
       parameters:
         - in: body
@@ -168,8 +166,6 @@ paths:
           schema:
             $ref: '#/definitions/error'
     post:
-      consumes:
-        - application/json
       operationId: createSite
       parameters:
         - in: body
@@ -217,8 +213,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes:
-        - application/json
       operationId: updateSite
       parameters:
         - in: body
@@ -456,8 +450,6 @@ paths:
         required: true
         type: string
     post:
-      consumes:
-        - application/json
       operationId: createSiteSnippet
       parameters:
         - in: body
@@ -505,8 +497,6 @@ paths:
         required: true
         type: string
     put:
-      consumes:
-        - application/json
       operationId: updateSiteSnippet
       parameters:
         - in: body

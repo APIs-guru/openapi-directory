@@ -89,6 +89,10 @@ info:
     url: 'https://api.geneea.com/api-docs?group=s1'
     version: '1.2'
   x-providerName: geneea.com
+consumes:
+  - application/json
+produces:
+  - application/json
 securityDefinitions:
   user_key:
     in: query
@@ -104,13 +108,9 @@ tags:
 paths:
   /account:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: getInfo
       operationId: getInfo
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -127,8 +127,6 @@ paths:
         - account
   /s1/correction:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: '<br/><strong>Possible options:</strong><p class="markdown">An optional parameter <code>diacritize</code> with values <code>yes</code>, <code>no</code> or <code>auto</code> indicate whether the text diacritization will be performed. The default value is <code>auto</code>.</p>'
       operationId: correctionGet
@@ -161,8 +159,6 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -178,8 +174,6 @@ paths:
       tags:
         - geneea-api-s1
     post:
-      consumes:
-        - application/json
       deprecated: false
       description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation" target="_blank">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello world!"}</code></pre><pre><code>{"url": "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre><br/><strong>Possible options:</strong><p class="markdown">An optional parameter <code>diacritize</code> with values <code>yes</code>, <code>no</code> or <code>auto</code> indicate whether the text diacritization will be performed. The default value is <code>auto</code>.</p>'
       operationId: correctionPost
@@ -190,8 +184,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
-      produces:
-        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -210,8 +202,6 @@ paths:
         - geneea-api-s1
   /s1/entities:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: entitiesGet
       operationId: entitiesGet
@@ -244,8 +234,6 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -261,8 +249,6 @@ paths:
       tags:
         - geneea-api-s1
     post:
-      consumes:
-        - application/json
       deprecated: false
       description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation" target="_blank">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello world!"}</code></pre><pre><code>{"url": "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
       operationId: entitiesPost
@@ -273,8 +259,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
-      produces:
-        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -293,8 +277,6 @@ paths:
         - geneea-api-s1
   /s1/lemmatize:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: lemmatizeGet
       operationId: lemmatizeGet
@@ -327,8 +309,6 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -344,8 +324,6 @@ paths:
       tags:
         - geneea-api-s1
     post:
-      consumes:
-        - application/json
       deprecated: false
       description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation" target="_blank">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello world!"}</code></pre><pre><code>{"url": "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
       operationId: lemmatizePost
@@ -356,8 +334,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
-      produces:
-        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -376,8 +352,6 @@ paths:
         - geneea-api-s1
   /s1/sentiment:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: sentimentGet
       operationId: sentimentGet
@@ -410,8 +384,6 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -427,8 +399,6 @@ paths:
       tags:
         - geneea-api-s1
     post:
-      consumes:
-        - application/json
       deprecated: false
       description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation" target="_blank">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello world!"}</code></pre><pre><code>{"url": "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
       operationId: sentimentPost
@@ -439,8 +409,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
-      produces:
-        - application/json
       responses:
         '200':
           description: Description was not specified
@@ -459,8 +427,6 @@ paths:
         - geneea-api-s1
   /s1/topic:
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: topicGet
       operationId: topicGet
@@ -493,8 +459,6 @@ paths:
           name: returnTextInfo
           required: false
           type: boolean
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -510,8 +474,6 @@ paths:
       tags:
         - geneea-api-s1
     post:
-      consumes:
-        - application/json
       deprecated: false
       description: '<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href="https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation" target="_blank">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{"text": "Hello world!"}</code></pre><pre><code>{"url": "https://en.wikipedia.org/wiki/Pyrrhuloxia"}</code></pre>'
       operationId: topicPost
@@ -522,8 +484,6 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/Request'
-      produces:
-        - application/json
       responses:
         '200':
           description: Description was not specified

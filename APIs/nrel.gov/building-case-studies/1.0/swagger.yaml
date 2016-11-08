@@ -16,6 +16,8 @@ info:
     version: '1.2'
   x-providerName: nrel.gov
   x-serviceName: building-case-studies
+produces:
+  - text/xml
 securityDefinitions:
   api_key:
     description: API Key
@@ -71,8 +73,6 @@ paths:
           name: region
           required: false
           type: string
-      produces:
-        - text/xml
       responses:
         '200':
           description: No response was specified
@@ -98,8 +98,6 @@ paths:
           name: project_id
           required: true
           type: integer
-      produces:
-        - text/xml
       responses:
         '200':
           description: No response was specified

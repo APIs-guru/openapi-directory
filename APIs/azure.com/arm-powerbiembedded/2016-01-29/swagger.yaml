@@ -41,14 +41,10 @@ parameters:
 paths:
   /providers/Microsoft.PowerBI/operations:
     get:
-      consumes:
-        - application/json
       description: Indicates which operations can be performed by the Power BI Resource Provider.
       operationId: getAvailableOperations
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: Request completed successfully
@@ -62,8 +58,6 @@ paths:
         - Operations
   '/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/locations/{location}/checkNameAvailability':
     post:
-      consumes:
-        - application/json
       description: Check that the specified Power BI Workspace Collection name is valid and not in use.
       operationId: WorkspaceCollections_checkNameAvailability
       parameters:
@@ -80,8 +74,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CheckNameRequest'
-      produces:
-        - application/json
       responses:
         '200':
           description: Request completed successfully
@@ -95,15 +87,11 @@ paths:
         - WorkspaceCollections
   '/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/workspaceCollections':
     get:
-      consumes:
-        - application/json
       description: Retrieves all existing Power BI Workspace Collections in the specified subscription.
       operationId: WorkspaceCollections_listBySubscription
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: Get workspaces response
@@ -118,8 +106,6 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources':
     post:
-      consumes:
-        - application/json
       description: Migrates an existing Power BI Workspace Collection to a different resource group and/or subscription.
       operationId: WorkspaceCollections_migrate
       parameters:
@@ -136,8 +122,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/MigrateWorkspaceCollectionRequest'
-      produces:
-        - application/json
       responses:
         '200':
           description: Migration completed successfully
@@ -149,8 +133,6 @@ paths:
         - WorkspaceCollections
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections':
     get:
-      consumes:
-        - application/json
       description: Retrieves all existing Power BI Workspace Collections in the specified resource group.
       operationId: WorkspaceCollections_listByResourceGroup
       parameters:
@@ -161,8 +143,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: Get workspaces response
@@ -177,8 +157,6 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}':
     delete:
-      consumes:
-        - application/json
       description: Delete a Power BI Workspace Collection.
       operationId: WorkspaceCollections_delete
       parameters:
@@ -194,8 +172,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '202':
           description: Workspace collection deleted successfully
@@ -207,8 +183,6 @@ paths:
         - WorkspaceCollections
       x-ms-long-running-operation: true
     get:
-      consumes:
-        - application/json
       description: Retrieves an existing Power BI Workspace Collection.
       operationId: WorkspaceCollections_getByName
       parameters:
@@ -224,8 +198,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: Workspace collection created successfully
@@ -238,8 +210,6 @@ paths:
       tags:
         - WorkspaceCollections
     patch:
-      consumes:
-        - application/json
       description: Update an existing Power BI Workspace Collection with the specified properties.
       operationId: WorkspaceCollections_update
       parameters:
@@ -261,8 +231,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateWorkspaceCollectionRequest'
-      produces:
-        - application/json
       responses:
         '200':
           description: Workspace collection updated successfully
@@ -275,8 +243,6 @@ paths:
       tags:
         - WorkspaceCollections
     put:
-      consumes:
-        - application/json
       description: Creates a new Power BI Workspace Collection with the specified properties. A Power BI Workspace Collection contains one or more Power BI Workspaces and can be used to provision keys that provide API access to those Power BI Workspaces.
       operationId: WorkspaceCollections_create
       parameters:
@@ -298,8 +264,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateWorkspaceCollectionRequest'
-      produces:
-        - application/json
       responses:
         '200':
           description: Workspace collection created successfully
@@ -313,8 +277,6 @@ paths:
         - WorkspaceCollections
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/listKeys':
     post:
-      consumes:
-        - application/json
       description: Retrieves the primary and secondary access keys for the specified Power BI Workspace Collection.
       operationId: WorkspaceCollections_getAccessKeys
       parameters:
@@ -330,8 +292,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: Get access keys completed successfully
@@ -345,8 +305,6 @@ paths:
         - WorkspaceCollections
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/regenerateKey':
     post:
-      consumes:
-        - application/json
       description: Regenerates the primary or secondary access key for the specified Power BI Workspace Collection.
       operationId: WorkspaceCollections_regenerateKey
       parameters:
@@ -368,8 +326,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/WorkspaceCollectionAccessKey'
-      produces:
-        - application/json
       responses:
         '200':
           description: Get access keys completed successfully
@@ -383,8 +339,6 @@ paths:
         - WorkspaceCollections
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/workspaces':
     get:
-      consumes:
-        - application/json
       description: Retrieves all existing Power BI Workspaces in the specified Workspace Collection.
       operationId: Workspaces_List
       parameters:
@@ -400,8 +354,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: Get workspaces completed successfully

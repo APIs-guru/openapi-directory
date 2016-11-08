@@ -61,8 +61,6 @@ paths:
       operationId: GetLocationByHostName
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: single location response
@@ -103,8 +101,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: applications as collection response
@@ -142,8 +138,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: android Policies response
@@ -171,8 +165,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: No-Content.
@@ -202,8 +194,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: iOSMAMPolicy entity.
@@ -234,8 +224,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AndroidMAMPolicy'
-      produces:
-        - application/json
       responses:
         '200':
           description: android entity.
@@ -266,8 +254,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AndroidMAMPolicy'
-      produces:
-        - application/json
       responses:
         '200':
           description: android entity.
@@ -298,8 +284,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: No-Content.
@@ -335,8 +319,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
-      produces:
-        - application/json
       responses:
         '200':
           description: No-Content.
@@ -362,8 +344,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: groups as collection response
@@ -396,8 +376,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: No-Content.
@@ -433,8 +411,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
-      produces:
-        - application/json
       responses:
         '200':
           description: No-Content.
@@ -470,8 +446,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: applications as collection response
@@ -509,8 +483,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Flagged users as collection response
@@ -543,8 +515,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Flagged user details in response
@@ -585,8 +555,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Flagged enrolled Apps as collection response
@@ -624,8 +592,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: applications as collection response
@@ -653,8 +619,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: No-Content.
@@ -684,8 +648,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: iOSMAMPolicy entity.
@@ -716,8 +678,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/iOSMAMPolicy'
-      produces:
-        - application/json
       responses:
         '200':
           description: iOSMAMPolicy entity.
@@ -748,8 +708,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/iOSMAMPolicy'
-      produces:
-        - application/json
       responses:
         '200':
           description: iOSMAMPolicy entity.
@@ -790,8 +748,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: applications as collection response
@@ -824,8 +780,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: No-Content.
@@ -861,8 +815,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
-      produces:
-        - application/json
       responses:
         '200':
           description: No-Content.
@@ -888,8 +840,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: groups as collection response
@@ -922,8 +872,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: No-Content.
@@ -959,8 +907,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
-      produces:
-        - application/json
       responses:
         '200':
           description: No-Content.
@@ -996,8 +942,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: applications as collection response
@@ -1020,8 +964,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: applications as collection response
@@ -1064,8 +1006,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: devices as collection response
@@ -1103,8 +1043,6 @@ paths:
           name: $select
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Device entity.
@@ -1135,8 +1073,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-      produces:
-        - application/json
       responses:
         '200':
           description: Wipe operation result.

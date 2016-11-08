@@ -14,6 +14,9 @@ info:
     url: 'http://api.oceandrivers.com/static/resources.json'
     version: '1.2'
   x-providerName: oceandrivers.com
+produces:
+  - application/json
+  - text/html
 tags:
   - description: ODWeather API service
     name: ODWeather
@@ -29,9 +32,6 @@ paths:
           name: stationName
           required: true
           type: string
-      produces:
-        - application/json
-        - text/html
       responses:
         '200':
           description: No response was specified
@@ -54,9 +54,6 @@ paths:
           name: period
           required: true
           type: string
-      produces:
-        - application/json
-        - text/html
       responses:
         '200':
           description: No response was specified
@@ -77,9 +74,6 @@ paths:
           name: language
           required: true
           type: string
-      produces:
-        - application/json
-        - text/html
       responses:
         '200':
           description: No response was specified
@@ -136,9 +130,6 @@ paths:
           name: wave
           required: false
           type: string
-      produces:
-        - application/json
-        - text/html
       responses:
         '200':
           description: No response was specified
@@ -161,9 +152,6 @@ paths:
           name: period
           required: true
           type: string
-      produces:
-        - application/json
-        - text/html
       responses:
         '200':
           description: No response was specified
@@ -186,9 +174,6 @@ paths:
           name: period
           required: true
           type: string
-      produces:
-        - application/json
-        - text/html
       responses:
         '200':
           description: No response was specified
@@ -198,9 +183,6 @@ paths:
     get:
       description: Get forecast and realtime information for known points<br/>None
       operationId: getWebCams
-      produces:
-        - application/json
-        - text/html
       responses:
         '200':
           description: No response was specified

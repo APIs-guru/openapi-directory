@@ -64,16 +64,12 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults':
     get:
-      consumes:
-        - application/json
       deprecated: false
       operationId: Vaults_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/SubscriptionId'
         - $ref: '#/parameters/ResourceGroupName'
         - $ref: '#/parameters/ApiVersion'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -86,8 +82,6 @@ paths:
         nextLinkName: 'null'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}':
     delete:
-      consumes:
-        - application/json
       deprecated: false
       description: Deletes a vault.
       operationId: Vaults_Delete
@@ -96,16 +90,12 @@ paths:
         - $ref: '#/parameters/ResourceGroupName'
         - $ref: '#/parameters/VaultName'
         - $ref: '#/parameters/ApiVersion'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
       tags:
         - Vaults
     get:
-      consumes:
-        - application/json
       deprecated: false
       description: Get the Vault details.
       operationId: Vaults_Get
@@ -114,8 +104,6 @@ paths:
         - $ref: '#/parameters/ResourceGroupName'
         - $ref: '#/parameters/VaultName'
         - $ref: '#/parameters/ApiVersion'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
@@ -124,8 +112,6 @@ paths:
       tags:
         - Vaults
     put:
-      consumes:
-        - application/json
       deprecated: false
       description: Creates or updates a Recovery Services vault.
       operationId: Vaults_CreateOrUpdate
@@ -140,8 +126,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Vault'
-      produces:
-        - application/json
       responses:
         '200':
           description: OK

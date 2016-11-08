@@ -16,6 +16,8 @@ info:
     url: 'http://api.ss.solarvps.com/api-docs'
     version: '1.2'
   x-providerName: solarvps.com
+produces:
+  - application/json
 securityDefinitions:
   apiKey:
     in: query
@@ -40,8 +42,6 @@ paths:
   /contacts:
     get:
       description: Shows all contacts under the client account.
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -59,8 +59,6 @@ paths:
           name: domain
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -103,8 +101,6 @@ paths:
           name: prio
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -127,8 +123,6 @@ paths:
           name: id
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -176,8 +170,6 @@ paths:
           name: prio
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -189,8 +181,6 @@ paths:
   /domains:
     get:
       description: Shows all your domains
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -208,8 +198,6 @@ paths:
           name: domain
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -227,8 +215,6 @@ paths:
           name: domain
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -251,8 +237,6 @@ paths:
           name: password
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -275,8 +259,6 @@ paths:
           name: password
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -288,8 +270,6 @@ paths:
   /pods:
     get:
       description: Shows all your pods
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -307,8 +287,6 @@ paths:
           name: podId
           required: true
           type: number
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -326,8 +304,6 @@ paths:
           name: podId
           required: true
           type: number
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -350,8 +326,6 @@ paths:
           name: action
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -363,8 +337,6 @@ paths:
   /solarray:
     get:
       description: Shows all your monitors
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -376,8 +348,6 @@ paths:
   /solarray/critical:
     get:
       description: Shows all your critical notifications
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -389,8 +359,6 @@ paths:
   /tickets:
     get:
       description: Shows all your tickets
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -418,8 +386,6 @@ paths:
           name: contents
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -437,8 +403,6 @@ paths:
           name: ticketId
           required: true
           type: number
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -460,8 +424,6 @@ paths:
           name: contents
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified

@@ -15,6 +15,9 @@ info:
     url: 'http://io.labs64.com/NetLicensing-API/v2.x/netlicensing.json'
     version: '2.0'
   x-providerName: netlicensing.io
+produces:
+  - application/xml
+  - application/json
 securityDefinitions:
   api_key:
     in: header
@@ -74,9 +77,6 @@ paths:
     get:
       description: Return a list of all licenses for the current vendor
       operationId: listLicenses
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -156,9 +156,6 @@ paths:
           name: hidden
           required: false
           type: boolean
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -187,9 +184,6 @@ paths:
           name: licenseNumber
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -217,9 +211,6 @@ paths:
           name: licenseNumber
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -293,9 +284,6 @@ paths:
           name: hidden
           required: false
           type: boolean
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -318,9 +306,6 @@ paths:
     get:
       description: Return a list of all licensees for the current vendor
       operationId: listLicensees
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -366,9 +351,6 @@ paths:
           name: active
           required: true
           type: boolean
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -402,9 +384,6 @@ paths:
           name: forceCascade
           required: false
           type: boolean
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -432,9 +411,6 @@ paths:
           name: licenseeNumber
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -478,9 +454,6 @@ paths:
           name: name
           required: false
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -519,9 +492,6 @@ paths:
           name: licenseeName
           required: false
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -544,9 +514,6 @@ paths:
     get:
       description: Return a list of all license templates for the current vendor
       operationId: listLicenseTemplates
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -642,9 +609,6 @@ paths:
           name: hideLicenses
           required: false
           type: boolean
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -680,9 +644,6 @@ paths:
           name: forceCascade
           required: false
           type: boolean
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -710,9 +671,6 @@ paths:
           name: licenseTemplateNumber
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -806,9 +764,6 @@ paths:
           name: hideLicenses
           required: false
           type: boolean
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -831,9 +786,6 @@ paths:
     get:
       description: Return a list of all payment methods for the current vendor
       operationId: listPaymentMethods
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -864,9 +816,6 @@ paths:
           name: paymentMethodNumber
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -906,9 +855,6 @@ paths:
           name: paypal.subject
           required: false
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -931,9 +877,6 @@ paths:
     get:
       description: Return a list of all configured products for the current vendor
       operationId: listProducts
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -995,9 +938,6 @@ paths:
           name: licensingInfo
           required: false
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1033,9 +973,6 @@ paths:
           name: forceCascade
           required: false
           type: boolean
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1063,9 +1000,6 @@ paths:
           name: productNumber
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1130,9 +1064,6 @@ paths:
           name: licensingInfo
           required: false
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1155,9 +1086,6 @@ paths:
     get:
       description: Return a list of all product modules for the current vendor
       operationId: listProductModules
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1247,9 +1175,6 @@ paths:
           name: licenseTemplate
           required: false
           type: array
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1283,9 +1208,6 @@ paths:
           name: forceCascade
           required: false
           type: boolean
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1313,9 +1235,6 @@ paths:
           name: productModuleNumber
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1403,9 +1322,6 @@ paths:
           name: licenseTemplate
           required: false
           type: array
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1428,9 +1344,6 @@ paths:
     get:
       description: Return a list of all tokens for the current vendor
       operationId: listTokens
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1492,9 +1405,6 @@ paths:
           name: cancelURLTitle
           required: false
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1524,9 +1434,6 @@ paths:
           name: tokenNumber
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1554,9 +1461,6 @@ paths:
           name: tokenNumber
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1579,9 +1483,6 @@ paths:
     get:
       description: Return a list of all transactions for the current vendor
       operationId: listTransactions
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1653,9 +1554,6 @@ paths:
           name: paymentMethod
           required: false
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1684,9 +1582,6 @@ paths:
           name: transactionNumber
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1757,9 +1652,6 @@ paths:
           name: paymentMethod
           required: false
           type: string
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1782,9 +1674,6 @@ paths:
     get:
       description: Return a list of all license types supported by the service
       operationId: licenseTypes
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request
@@ -1807,9 +1696,6 @@ paths:
     get:
       description: Return a list of all licensing models supported by the service
       operationId: licensingModels
-      produces:
-        - application/xml
-        - application/json
       responses:
         '200':
           description: Successful request

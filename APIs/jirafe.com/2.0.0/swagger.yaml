@@ -20,6 +20,8 @@ info:
   x-providerName: jirafe.com
 externalDocs:
   url: 'https://docs.jirafe.com/api/'
+produces:
+  - application/json
 securityDefinitions:
   oauth2_accessCode:
     authorizationUrl: 'https://account.jirafe.com/oauth2/auth_token'
@@ -63,8 +65,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Batch'
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -97,8 +97,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Cart'
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -131,8 +129,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Category'
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -165,8 +161,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Customer'
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -199,8 +193,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OrderCancelled'
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified
@@ -233,8 +225,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Product'
-      produces:
-        - application/json
       responses:
         '200':
           description: No response was specified

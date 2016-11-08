@@ -15,6 +15,11 @@ info:
     url: 'http://www.refugerestrooms.org/api/swagger_doc.json'
     version: '1.2'
   x-providerName: refugerestrooms.org
+produces:
+  - application/xml
+  - application/json
+  - application/vnd.api+json
+  - text/plain
 tags:
   - name: restrooms
 paths:
@@ -47,11 +52,6 @@ paths:
           name: unisex
           required: false
           type: boolean
-      produces:
-        - application/xml
-        - application/json
-        - application/vnd.api+json
-        - text/plain
       responses:
         '200':
           description: No response was specified
@@ -107,11 +107,6 @@ paths:
           name: year
           required: true
           type: integer
-      produces:
-        - application/xml
-        - application/json
-        - application/vnd.api+json
-        - text/plain
       responses:
         '200':
           description: No response was specified
@@ -159,11 +154,6 @@ paths:
           name: lng
           required: true
           type: number
-      produces:
-        - application/xml
-        - application/json
-        - application/vnd.api+json
-        - text/plain
       responses:
         '200':
           description: No response was specified
@@ -204,11 +194,6 @@ paths:
           name: query
           required: true
           type: string
-      produces:
-        - application/xml
-        - application/json
-        - application/vnd.api+json
-        - text/plain
       responses:
         '200':
           description: No response was specified

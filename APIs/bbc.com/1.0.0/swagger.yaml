@@ -1870,8 +1870,6 @@ paths:
         - feeds
   '/v1/brands/{pid}':
     get:
-      consumes:
-        - application/json
       description: Get raw brand
       operationId: Get_Raw_brand
       parameters:
@@ -1879,9 +1877,6 @@ paths:
           name: pid
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Nitro response
@@ -1892,8 +1887,6 @@ paths:
         - Raw
   '/v1/brands/{pid}/franchises/':
     get:
-      consumes:
-        - application/json
       description: Get raw brand franchises
       operationId: Get_Raw_brand franchises
       parameters:
@@ -1901,9 +1894,6 @@ paths:
           name: pid
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Nitro response
@@ -1914,8 +1904,6 @@ paths:
         - Raw
   '/v1/episodes/{pid}':
     get:
-      consumes:
-        - application/json
       description: Get raw episode
       operationId: Get_Raw_episode
       parameters:
@@ -1923,9 +1911,6 @@ paths:
           name: pid
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Nitro response
@@ -1936,8 +1921,6 @@ paths:
         - Raw
   '/v1/episodes/{pid}/ancestors/':
     get:
-      consumes:
-        - application/json
       description: Get raw ancestors
       operationId: Get_Raw_ancestors
       parameters:
@@ -1945,9 +1928,6 @@ paths:
           name: pid
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Nitro response
@@ -1958,8 +1938,6 @@ paths:
         - Raw
   '/v1/episodes/{pid}/formats/':
     get:
-      consumes:
-        - application/json
       description: Get raw formats
       operationId: Get_Raw_formats
       parameters:
@@ -1967,9 +1945,6 @@ paths:
           name: pid
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Nitro response
@@ -1980,8 +1955,6 @@ paths:
         - Raw
   '/v1/episodes/{pid}/genre_groups/':
     get:
-      consumes:
-        - application/json
       description: Get raw genre groups
       operationId: Get_Raw_genre_groups
       parameters:
@@ -1989,9 +1962,6 @@ paths:
           name: pid
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Nitro response
@@ -2002,8 +1972,6 @@ paths:
         - Raw
   '/v1/images/{pid}':
     get:
-      consumes:
-        - application/json
       description: Get raw image
       operationId: Get_Raw_image
       parameters:
@@ -2011,9 +1979,6 @@ paths:
           name: pid
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Nitro response
@@ -2024,8 +1989,6 @@ paths:
         - Raw
   '/v1/master_brands/{mbid}':
     get:
-      consumes:
-        - application/json
       description: Get raw masterbrand
       operationId: Get_Raw_masterbrand
       parameters:
@@ -2033,9 +1996,6 @@ paths:
           name: mbid
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Nitro response
@@ -2046,8 +2006,6 @@ paths:
         - Raw
   '/v1/promotions/{pid}':
     get:
-      consumes:
-        - application/json
       description: Get raw promotion
       operationId: Get_Raw_promotion
       parameters:
@@ -2055,9 +2013,6 @@ paths:
           name: pid
           required: true
           type: string
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: Nitro response

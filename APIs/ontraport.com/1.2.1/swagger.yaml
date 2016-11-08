@@ -21,6 +21,8 @@ info:
   x-providerName: ontraport.com
 externalDocs:
   url: 'https://ontraport.com/ontraport-api'
+produces:
+  - application/json
 parameters:
   addListParamFormData:
     description: Array of Tag IDs as comma-delimited list.
@@ -304,8 +306,6 @@ paths:
       operationId: getForm
       parameters:
         - $ref: '#/parameters/idParam'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful object query
@@ -323,8 +323,6 @@ paths:
       operationId: getHostedURL
       parameters:
         - $ref: '#/parameters/idParam'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully got URL
@@ -342,8 +340,6 @@ paths:
       operationId: getMessage
       parameters:
         - $ref: '#/parameters/idParam'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful object query
@@ -454,8 +450,6 @@ paths:
           in: formData
           name: task_form
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Message successfully created
@@ -556,8 +550,6 @@ paths:
           in: formData
           name: task_form
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Message successfully updated
@@ -574,8 +566,6 @@ paths:
       parameters:
         - $ref: '#/parameters/objectIdParam'
         - $ref: '#/parameters/idParam'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful object query
@@ -595,8 +585,6 @@ paths:
       parameters:
         - $ref: '#/parameters/objectIdParam'
         - $ref: '#/parameters/idParam'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful object query
@@ -628,8 +616,6 @@ paths:
         - $ref: '#/parameters/group_idsParam'
         - $ref: '#/parameters/externsParam'
         - $ref: '#/parameters/listFieldsParam'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful object query
@@ -658,8 +644,6 @@ paths:
         - $ref: '#/parameters/group_idsParam'
         - $ref: '#/parameters/externsParam'
         - $ref: '#/parameters/listFieldsParam'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful object query
@@ -688,8 +672,6 @@ paths:
           in: formData
           name: email
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful object query
@@ -719,8 +701,6 @@ paths:
           in: formData
           name: email
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully updated object
@@ -743,8 +723,6 @@ paths:
         - $ref: '#/parameters/searchNotesParam'
         - $ref: '#/parameters/date_rangeParam'
         - $ref: '#/parameters/group_idsParam'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful object query
@@ -775,8 +753,6 @@ paths:
           in: query
           name: objectID
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful object query
@@ -804,8 +780,6 @@ paths:
           in: formData
           name: email
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful object query
@@ -836,8 +810,6 @@ paths:
         - $ref: '#/parameters/group_idsParamFormData'
         - $ref: '#/parameters/externsParamFormData'
         - $ref: '#/parameters/listFieldsParamFormData'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully removed Tag(s)
@@ -865,8 +837,6 @@ paths:
         - $ref: '#/parameters/group_idsParamFormData'
         - $ref: '#/parameters/externsParamFormData'
         - $ref: '#/parameters/listFieldsParamFormData'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully added Tag(s)
@@ -887,8 +857,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Criteria'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully canceled tasks
@@ -909,8 +877,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TaskCompleteParams'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully canceled tasks
@@ -926,8 +892,6 @@ paths:
       operationId: convertToCollections
       parameters:
         - $ref: '#/parameters/idParamFormData'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully converted transaction
@@ -947,8 +911,6 @@ paths:
       operationId: convertToDecline
       parameters:
         - $ref: '#/parameters/idParamFormData'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully converted transaction
@@ -968,8 +930,6 @@ paths:
       operationId: markPaid
       parameters:
         - $ref: '#/parameters/idParamFormData'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully marked as paid
@@ -993,8 +953,6 @@ paths:
           name: id
           required: true
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Success fetching Order
@@ -1018,8 +976,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Order'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully updated Order information
@@ -1042,8 +998,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Transaction'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully created transaction
@@ -1066,8 +1020,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Criteria'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully refunded transaction
@@ -1090,8 +1042,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Criteria'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully reran transaction
@@ -1114,8 +1064,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Criteria'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully reran commission
@@ -1138,8 +1086,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Criteria'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully created transaction
@@ -1162,8 +1108,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Criteria'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully voided transaction
@@ -1181,8 +1125,6 @@ paths:
       operationId: voidPurchase
       parameters:
         - $ref: '#/parameters/idParamFormData'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully voided purchase
@@ -1202,8 +1144,6 @@ paths:
       operationId: writeOff
       parameters:
         - $ref: '#/parameters/idParamFormData'
-      produces:
-        - application/json
       responses:
         '200':
           description: Successfully wrote off transaction

@@ -20,6 +20,9 @@ info:
     url: 'http://cybertaxonomy.eu/eubon-utis/api-docs'
     version: '1.2'
   x-providerName: cybertaxonomy.eu
+produces:
+  - application/json
+  - application/xml
 tags:
   - description: Utis Controller
     name: utis-controller
@@ -29,9 +32,6 @@ paths:
       deprecated: false
       description: capabilities
       operationId: capabilities
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
@@ -90,9 +90,6 @@ paths:
           name: timeout
           required: false
           type: integer
-      produces:
-        - application/json
-        - application/xml
       responses:
         '200':
           description: OK
