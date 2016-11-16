@@ -26,6 +26,15 @@ consumes:
 produces:
   - application/json
   - application/xml
+securityDefinitions:
+  email:
+    in: header
+    name: email
+    type: apiKey
+  token:
+    in: header
+    name: token
+    type: apiKey
 tags:
   - description: Core information related to your account
     name: account

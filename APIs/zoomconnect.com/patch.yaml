@@ -9,3 +9,12 @@ info:
     - bulk SMS
   x-logo:
     url: 'http://zoomconnect.com/assets/logo.png'
+securityDefinitions:
+  email:
+    type: apiKey
+    in: header
+    name: email
+  token:
+    type: apiKey
+    in: header
+    name: token
