@@ -35,13 +35,13 @@ security:
       - user_impersonation
 parameters:
   ApiVersionParameter:
-    description: Client Api Version.
+    description: Client API version.
     in: query
     name: api-version
     required: true
     type: string
   tenantIDInPath:
-    description: the tenant Id.
+    description: The tenant ID.
     in: path
     name: tenantID
     required: true
@@ -49,10 +49,10 @@ parameters:
 paths:
   '/{tenantID}/applications':
     get:
-      description: 'Lists applications by filter parameters. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
+      description: Lists applications by filter parameters.
       operationId: Applications_List
       parameters:
-        - description: The filters to apply on the operation
+        - description: The filters to apply to the operation.
           in: query
           name: $filter
           required: false
@@ -61,11 +61,11 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/ApplicationListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -75,10 +75,10 @@ paths:
         nextLinkName: odata.nextLink
         operationName: Applications_ListNext
     post:
-      description: 'Create a new application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
+      description: Create a new application.
       operationId: Applications_Create
       parameters:
-        - description: Parameters to create an application.
+        - description: The parameters for creating an application.
           in: body
           name: parameters
           required: true
@@ -88,21 +88,21 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '201':
-          description: Created
+          description: The application was created successfully.
           schema:
             $ref: '#/definitions/Application'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - Application
   '/{tenantID}/applications/{applicationObjectId}':
     delete:
-      description: 'Delete an application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
+      description: Delete an application.
       operationId: Applications_Delete
       parameters:
-        - description: Application object id
+        - description: Application object ID.
           in: path
           name: applicationObjectId
           required: true
@@ -114,16 +114,16 @@ paths:
         '204':
           description: No Content
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - Application
     get:
-      description: 'Get an application by object Id. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
+      description: Get an application by object ID.
       operationId: Applications_Get
       parameters:
-        - description: Application object id
+        - description: Application object ID.
           in: path
           name: applicationObjectId
           required: true
@@ -133,20 +133,20 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/Application'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - Application
     patch:
-      description: 'Update existing application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
+      description: Update an existing application.
       operationId: Applications_Patch
       parameters:
-        - description: Application object id
+        - description: Application object ID.
           in: path
           name: applicationObjectId
           required: true
@@ -164,17 +164,17 @@ paths:
         '204':
           description: No Content
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - Application
   '/{tenantID}/applications/{applicationObjectId}/keyCredentials':
     get:
-      description: 'Get keyCredentials associated with the application by object Id. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type'
+      description: Get the keyCredentials associated with an application.
       operationId: Applications_ListKeyCredentials
       parameters:
-        - description: Application object id
+        - description: Application object ID.
           in: path
           name: applicationObjectId
           required: true
@@ -184,27 +184,27 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/KeyCredentialListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - ApplicationKeyCredentials
       x-ms-pageable: {}
     patch:
-      description: 'Update keyCredentials associated with an existing application. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type'
+      description: Update the keyCredentials associated with an application.
       operationId: Applications_UpdateKeyCredentials
       parameters:
-        - description: Application object id
+        - description: Application object ID.
           in: path
           name: applicationObjectId
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: Parameters to update keyCredentials of an existing application.
+        - description: Parameters to update the keyCredentials of an existing application.
           in: body
           name: parameters
           required: true
@@ -216,17 +216,17 @@ paths:
         '204':
           description: No Content
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - ApplicationKeyCredentials
   '/{tenantID}/applications/{applicationObjectId}/passwordCredentials':
     get:
-      description: 'Gets passwordCredentials associated with an existing application. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type'
+      description: Get the passwordCredentials associated with an application.
       operationId: Applications_ListPasswordCredentials
       parameters:
-        - description: Application object id
+        - description: Application object ID.
           in: path
           name: applicationObjectId
           required: true
@@ -236,21 +236,21 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/PasswordCredentialListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - ApplicationPasswordCredentials
       x-ms-pageable: {}
     patch:
-      description: 'Updates passwordCredentials associated with an existing application. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type'
+      description: Update passwordCredentials associated with an application.
       operationId: Applications_UpdatePasswordCredentials
       parameters:
-        - description: Application object id
+        - description: Application object ID.
           in: path
           name: applicationObjectId
           required: true
@@ -268,7 +268,7 @@ paths:
         '204':
           description: No Content
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -278,7 +278,7 @@ paths:
       description: Gets list of groups for the current tenant.
       operationId: Groups_List
       parameters:
-        - description: The filter to apply on the operation.
+        - description: The filter to apply to the operation.
           in: query
           name: $filter
           required: false
@@ -287,11 +287,11 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/GroupListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -301,10 +301,10 @@ paths:
         nextLinkName: odata.nextLink
         operationName: Groups_ListNext
     post:
-      description: 'Create a group in the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx'
+      description: Create a group in the directory.
       operationId: Groups_Create
       parameters:
-        - description: Parameters to create a group
+        - description: The parameters for the group to create.
           in: body
           name: parameters
           required: true
@@ -318,17 +318,17 @@ paths:
           schema:
             $ref: '#/definitions/ADGroup'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - Group
   '/{tenantID}/groups/{groupObjectId}':
     delete:
-      description: 'Delete a group in the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx'
+      description: Delete a group from the directory.
       operationId: Groups_Delete
       parameters:
-        - description: Object id
+        - description: The object ID of the group to delete.
           in: path
           name: groupObjectId
           required: true
@@ -340,23 +340,23 @@ paths:
         '204':
           description: No Content
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - Group
   '/{tenantID}/groups/{groupObjectId}/$links/members':
     post:
-      description: 'Add a memeber to a group. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/groups-operations#AddGroupMembers'
+      description: Add a member to a group.
       operationId: Groups_AddMember
       parameters:
-        - description: Group object id
+        - description: The object ID of the group to which to add the member.
           in: path
           name: groupObjectId
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: 'Member Object Url as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd'
+        - description: 'The URL of the member object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd.'
           in: body
           name: parameters
           required: true
@@ -368,23 +368,23 @@ paths:
         '204':
           description: No Content. Indicates success. No response body is returned.
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - Group
   '/{tenantID}/groups/{groupObjectId}/$links/members/{memberObjectId}':
     delete:
-      description: 'Remove a memeber from a group. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/groups-operations#DeleteGroupMember'
+      description: Remove a member from a group.
       operationId: Groups_RemoveMember
       parameters:
-        - description: Group object id
+        - description: The object ID of the group from which to remove the member.
           in: path
           name: groupObjectId
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: Member Object id
+        - description: Member object id
           in: path
           name: memberObjectId
           required: true
@@ -396,7 +396,7 @@ paths:
         '204':
           description: No Content. Indicates success. No response body is returned.
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -406,7 +406,7 @@ paths:
       description: Gets group information from the directory.
       operationId: Groups_Get
       parameters:
-        - description: User objectId to get group information.
+        - description: The object ID of the user for which to get group information.
           in: path
           name: objectId
           required: true
@@ -416,21 +416,21 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/ADGroup'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - Group
   '/{tenantID}/groups/{objectId}/getMemberGroups':
     post:
-      description: Gets a collection that contains the Object IDs of the groups of which the group is a member.
+      description: Gets a collection of object IDs of groups of which the specified group is a member.
       operationId: Groups_GetMemberGroups
       parameters:
-        - description: Group filtering parameters.
+        - description: The object ID of the group for which to get group membership.
           in: path
           name: objectId
           required: true
@@ -446,11 +446,11 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/GroupGetMemberGroupsResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -461,7 +461,7 @@ paths:
       description: Gets the members of a group.
       operationId: Groups_GetGroupMembers
       parameters:
-        - description: Group object Id who's members should be retrieved.
+        - description: The object ID of the group whose members should be retrieved.
           in: path
           name: objectId
           required: true
@@ -471,11 +471,11 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/GetObjectsResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -485,10 +485,10 @@ paths:
         operationName: Groups_GetGroupMembersNext
   '/{tenantID}/isMemberOf':
     post:
-      description: 'Checks whether the specified user, group, contact, or service principal is a direct or a transitive member of the specified group.'
+      description: 'Checks whether the specified user, group, contact, or service principal is a direct or transitive member of the specified group.'
       operationId: Groups_IsMemberOf
       parameters:
-        - description: Check group membership parameters.
+        - description: The check group membership parameters.
           in: body
           name: parameters
           required: true
@@ -502,35 +502,35 @@ paths:
           schema:
             $ref: '#/definitions/CheckGroupMembershipResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - Group
   '/{tenantID}/me':
     get:
-      description: Gets the details for current logged in user
+      description: Gets the details for the currently logged-in user.
       operationId: Objects_GetCurrentUser
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/AADObject'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - Objects
   '/{tenantID}/servicePrincipals':
     get:
-      description: Gets list of service principals from the current tenant.
+      description: Gets a list of service principals from the current tenant.
       operationId: ServicePrincipals_List
       parameters:
-        - description: The filter to apply on the operation.
+        - description: The filter to apply to the operation.
           in: query
           name: $filter
           required: false
@@ -539,11 +539,11 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/ServicePrincipalListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -553,7 +553,7 @@ paths:
         nextLinkName: odata.nextLink
         operationName: ServicePrincipals_ListNext
     post:
-      description: Creates a service principal in the  directory.
+      description: Creates a service principal in the directory.
       operationId: ServicePrincipals_Create
       parameters:
         - description: Parameters to create a service principal.
@@ -566,21 +566,21 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '201':
-          description: Created
+          description: The service principal was created successfully.
           schema:
             $ref: '#/definitions/ServicePrincipal'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - ServicePrincipal
   '/{tenantID}/servicePrincipals/{objectId}':
     delete:
-      description: Deletes service principal from the directory.
+      description: Deletes a service principal from the directory.
       operationId: ServicePrincipals_Delete
       parameters:
-        - description: Object id to delete service principal information.
+        - description: The object ID of the service principal to delete.
           in: path
           name: objectId
           required: true
@@ -592,7 +592,7 @@ paths:
         '204':
           description: No Content
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -601,7 +601,7 @@ paths:
       description: Gets service principal information from the directory.
       operationId: ServicePrincipals_Get
       parameters:
-        - description: Object id to get service principal information.
+        - description: The object ID of the service principal to get.
           in: path
           name: objectId
           required: true
@@ -611,21 +611,21 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/ServicePrincipal'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - ServicePrincipal
   '/{tenantID}/servicePrincipals/{objectId}/keyCredentials':
     get:
-      description: 'Get keyCredentials associated with the service principal by object Id. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type'
+      description: Get the keyCredentials associated with the specified service principal.
       operationId: ServicePrincipals_ListKeyCredentials
       parameters:
-        - description: Object id to get service principal information.
+        - description: The object ID of the service principal for which to get keyCredentials.
           in: path
           name: objectId
           required: true
@@ -635,27 +635,27 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/KeyCredentialListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - ServicePrincipalKeyCredentials
       x-ms-pageable: {}
     patch:
-      description: 'Update keyCredentials associated with an existing service principal. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type'
+      description: Update the keyCredentials associated with a service principal.
       operationId: ServicePrincipals_UpdateKeyCredentials
       parameters:
-        - description: Object id to get service principal information.
+        - description: The object ID for which to get service principal information.
           in: path
           name: objectId
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: Parameters to update keyCredentials of an existing service principal.
+        - description: Parameters to update the keyCredentials of an existing service principal.
           in: body
           name: parameters
           required: true
@@ -667,17 +667,17 @@ paths:
         '204':
           description: No Content
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - ServicePrincipalKeyCredentials
   '/{tenantID}/servicePrincipals/{objectId}/passwordCredentials':
     get:
-      description: 'Gets passwordCredentials associated with an existing service principal. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type'
+      description: Gets the passwordCredentials associated with a service principal.
       operationId: ServicePrincipals_ListPasswordCredentials
       parameters:
-        - description: Object id to get service principal information.
+        - description: The object ID of the service principal.
           in: path
           name: objectId
           required: true
@@ -687,27 +687,27 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/PasswordCredentialListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - ServicePrincipalPasswordCredentials
       x-ms-pageable: {}
     patch:
-      description: 'Updates passwordCredentials associated with an existing service principal. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type'
+      description: Updates the passwordCredentials associated with a service principal.
       operationId: ServicePrincipals_UpdatePasswordCredentials
       parameters:
-        - description: Object id to get service principal information.
+        - description: The object ID of the service principal.
           in: path
           name: objectId
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: Parameters to update passwordCredentials of an existing service principal.
+        - description: Parameters to update the passwordCredentials of an existing service principal.
           in: body
           name: parameters
           required: true
@@ -719,17 +719,17 @@ paths:
         '204':
           description: No Content
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - ServicePrincipalPasswordCredentials
   '/{tenantID}/users':
     get:
-      description: 'Gets list of users for the current tenant. Reference https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#GetUsers'
+      description: Gets list of users for the current tenant.
       operationId: Users_List
       parameters:
-        - description: The filter to apply on the operation.
+        - description: The filter to apply to the operation.
           in: query
           name: $filter
           required: false
@@ -738,11 +738,11 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/UserListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -752,7 +752,7 @@ paths:
         nextLinkName: odata.nextLink
         operationName: Users_ListNext
     post:
-      description: 'Create a new user. Reference: https://msdn.microsoft.com/library/azure/ad/graph/api/users-operations#CreateUser'
+      description: Create a new user.
       operationId: Users_Create
       parameters:
         - description: Parameters to create a user.
@@ -769,17 +769,17 @@ paths:
           schema:
             $ref: '#/definitions/User'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - User
   '/{tenantID}/users/{objectId}/getMemberGroups':
     post:
-      description: Gets a collection that contains the Object IDs of the groups of which the user is a member.
+      description: Gets a collection that contains the object IDs of the groups of which the user is a member.
       operationId: Users_GetMemberGroups
       parameters:
-        - description: User filtering parameters.
+        - description: The object ID of the user for which to get group membership.
           in: path
           name: objectId
           required: true
@@ -795,11 +795,11 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/UserGetMemberGroupsResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -807,10 +807,10 @@ paths:
       x-ms-pageable: {}
   '/{tenantID}/users/{upnOrObjectId}':
     delete:
-      description: 'Delete a user. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#DeleteUser'
+      description: Delete a user.
       operationId: Users_Delete
       parameters:
-        - description: user object id or user principal name (upn)
+        - description: The object ID or principal name of the user to delete.
           in: path
           name: upnOrObjectId
           required: true
@@ -822,16 +822,16 @@ paths:
         '204':
           description: No Content
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - User
     get:
-      description: 'Gets user information from the directory. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#GetAUser'
+      description: Gets user information from the directory.
       operationId: Users_Get
       parameters:
-        - description: User object Id or user principal name to get user information.
+        - description: The object ID or principal name of the user for which to get information.
           in: path
           name: upnOrObjectId
           required: true
@@ -841,26 +841,26 @@ paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/User'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - User
     patch:
-      description: 'Updates an exisitng user. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#UpdateUser'
+      description: Updates a user.
       operationId: Users_Update
       parameters:
-        - description: User object Id or user principal name to get user information.
+        - description: The object ID or principal name of the user to update.
           in: path
           name: upnOrObjectId
           required: true
           type: string
           x-ms-skip-url-encoding: true
-        - description: Parameters to update an exisitng user.
+        - description: Parameters to update an existing user.
           in: body
           name: parameters
           required: true
@@ -872,130 +872,130 @@ paths:
         '204':
           description: No Content.
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
         - User
 definitions:
   AADObject:
-    description: Active Directory object information
+    description: The properties of an Active Directory object.
     properties:
       displayName:
-        description: object display name
+        description: The display name of the object.
         type: string
       mail:
-        description: mail
+        description: The primary email address of the object.
         type: string
       mailEnabled:
-        description: MailEnabled field
+        description: Whether the AAD object is mail-enabled.
         type: boolean
       objectId:
-        description: object Id
+        description: The ID of the object.
         type: string
       objectType:
-        description: object type
+        description: The type of AAD object.
         type: string
       securityEnabled:
-        description: SecurityEnabled field
+        description: Whether the AAD object is security-enabled.
         type: boolean
       servicePrincipalNames:
-        description: the list of service principal names.
+        description: A collection of service principal names associated with the object.
         items:
           type: string
         type: array
       signInName:
-        description: signIn name
+        description: The sign-in name of the object.
         type: string
       userPrincipalName:
-        description: principal name
+        description: The principal name of the object.
         type: string
       userType:
-        description: the user type
+        description: The user type of the object.
         type: string
   ADGroup:
-    description: Active Directory group information
+    description: Active Directory group information.
     properties:
       displayName:
-        description: group display name
+        description: The display name of the group.
         type: string
       mail:
-        description: mail field
+        description: The primary email address of the group.
         type: string
       objectId:
-        description: object Id
+        description: The object ID.
         type: string
       objectType:
-        description: object type
+        description: The object type.
         type: string
       securityEnabled:
-        description: security enabled field
+        description: Whether the group is security-enable.
         type: boolean
   Application:
-    description: Active Directory user information
+    description: Active Directory application information.
     properties:
       appId:
-        description: application Id
+        description: The application ID.
         type: string
       appPermissions:
-        description: application permissions
+        description: The application permissions.
         items:
           type: string
         type: array
       availableToOtherTenants:
-        description: Indicates if the application will be available to other tenants
+        description: Whether the application is be available to other tenants.
         type: boolean
       displayName:
-        description: the displayName
+        description: The display name of the application.
         type: string
       homepage:
-        description: Application homepage
+        description: The home page of the application.
         type: string
       identifierUris:
-        description: the application identifier Uris
+        description: A collection of URIs for the application.
         items:
           type: string
         type: array
       objectId:
-        description: object Id
+        description: The object ID.
         type: string
       objectType:
-        description: object type
+        description: The object type.
         type: string
       replyUrls:
-        description: the application reply Urls
+        description: A collection of reply URLs for the application.
         items:
           type: string
         type: array
   ApplicationCreateParameters:
-    description: Request parameters for create a new application
+    description: Request parameters for creating a new application.
     properties:
       availableToOtherTenants:
-        description: Indicates if the application will be available to other tenants
+        description: Whether the application is available to other tenants.
         type: boolean
       displayName:
-        description: Application display name
+        description: The display name of the application.
         type: string
       homepage:
-        description: Application homepage
+        description: The home page of the application.
         type: string
       identifierUris:
-        description: Application Uris
+        description: A collection of URIs for the application.
         items:
           type: string
         type: array
       keyCredentials:
-        description: the list of KeyCredential objects
+        description: The list of KeyCredential objects.
         items:
           $ref: '#/definitions/KeyCredential'
         type: array
       passwordCredentials:
-        description: the list of PasswordCredential objects
+        description: The list of PasswordCredential objects.
         items:
           $ref: '#/definitions/PasswordCredential'
         type: array
       replyUrls:
-        description: Application reply Urls
+        description: A collection of reply URLs for the application.
         items:
           type: string
         type: array
@@ -1004,50 +1004,50 @@ definitions:
       - displayName
       - identifierUris
   ApplicationListResult:
-    description: Role assignment list operation result.
+    description: Application list operation result.
     properties:
       odata.nextLink:
-        description: the URL to get the next set of results.
+        description: The URL to get the next set of results.
         type: string
       value:
-        description: Application list.
+        description: A collection of applications.
         items:
           $ref: '#/definitions/Application'
         type: array
   ApplicationUpdateParameters:
-    description: Request parameters for updating an existing application
+    description: Request parameters for updating an existing application.
     properties:
       availableToOtherTenants:
-        description: Indicates if the application will be available to other tenants
+        description: Whether the application is available to other tenants
         type: boolean
       displayName:
-        description: Application display name
+        description: The display name of the application.
         type: string
       homepage:
-        description: Application homepage
+        description: The home page of the application.
         type: string
       identifierUris:
-        description: Application Uris
+        description: A collection of URIs for the application.
         items:
           type: string
         type: array
       keyCredentials:
-        description: the list of KeyCredential objects
+        description: The list of KeyCredential objects.
         items:
           $ref: '#/definitions/KeyCredential'
         type: array
       passwordCredentials:
-        description: the list of PasswordCredential objects
+        description: The list of PasswordCredential objects.
         items:
           $ref: '#/definitions/PasswordCredential'
         type: array
       replyUrls:
-        description: Application reply Urls
+        description: A collection of reply URLs for the application.
         items:
           type: string
         type: array
   CheckGroupMembershipParameters:
-    description: Request parameters for IsMemberOf API call
+    description: Request parameters for IsMemberOf API call.
     properties:
       groupId:
         description: The object ID of the group to check.
@@ -1062,58 +1062,58 @@ definitions:
     description: Server response for IsMemberOf API call
     properties:
       value:
-        description: 'true if the specified user, group, contact, or service principal has either direct or transitive membership in the specified group; otherwise, false.'
+        description: 'True if the specified user, group, contact, or service principal has either direct or transitive membership in the specified group; otherwise, false.'
         type: boolean
   ErrorMessage:
-    description: Active Directory error message
+    description: Active Directory error message.
     properties:
       value:
         description: Error message value.
         type: string
         x-ms-client-name: message
   GetObjectsResult:
-    description: Server response for Active Directory objects inquiry API calls
+    description: The response to an Active Directory object inquiry API request.
     properties:
       odata.nextLink:
-        description: the URL to get the next set of results.
+        description: The URL to get the next set of results.
         type: string
       value:
-        description: Collection of Active Directory object
+        description: A collection of Active Directory objects.
         items:
           $ref: '#/definitions/AADObject'
         type: array
   GraphError:
-    description: Active Directory error information
+    description: Active Directory error information.
     properties:
       odata.error:
         $ref: '#/definitions/OdataError'
-        description: Graph error.
+        description: A Graph API error.
         type: object
         x-ms-client-flatten: true
   GroupAddMemberParameters:
-    description: Request parameters for adding a member to a group
+    description: Request parameters for adding a member to a group.
     properties:
       url:
-        description: 'Member Object Url as "https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd", where "0b1f9851-1bf0-433f-aec3-cb9272f093dc" is the tenantId and "f260bbc4-c254-447b-94cf-293b5ec434dd" is the objectId of the member (user, application, servicePrincipal, group) to be added.'
+        description: 'A member object URL, such as "https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd", where "0b1f9851-1bf0-433f-aec3-cb9272f093dc" is the tenantId and "f260bbc4-c254-447b-94cf-293b5ec434dd" is the objectId of the member (user, application, servicePrincipal, group) to be added.'
         type: string
     required:
       - url
   GroupCreateParameters:
-    description: Request parameters for create a new group
+    description: Request parameters for creating a new group.
     properties:
       displayName:
         description: Group display name
         type: string
       mailEnabled:
-        description: Specifies whether the group is mail-enabled. Must be false. This is because only pure security groups can be created using the Graph API.
+        description: Whether the group is mail-enabled. Must be false. This is because only pure security groups can be created using the Graph API.
         enum:
           - false
         type: boolean
       mailNickname:
-        description: Mail nick name
+        description: Mail nickname
         type: string
       securityEnabled:
-        description: Specifies whether the group is a security group. Must be true. This is because only pure security groups can be created using the Graph API.
+        description: Whether the group is a security group. Must be true. This is because only pure security groups can be created using the Graph API.
         enum:
           - true
         type: boolean
@@ -1123,18 +1123,18 @@ definitions:
       - mailNickname
       - securityEnabled
   GroupGetMemberGroupsParameters:
-    description: Request parameters for GetMemberGroups API call
+    description: Request parameters for GetMemberGroups API call.
     properties:
       securityEnabledOnly:
-        description: 'If true only membership in security enabled groups should be checked. Otherwise membership in all groups should be checked '
+        description: 'If true, only membership in security-enabled groups should be checked. Otherwise, membership in all groups should be checked.'
         type: boolean
     required:
       - securityEnabledOnly
   GroupGetMemberGroupsResult:
-    description: Server response for GetMemberGroups API call
+    description: Server response for GetMemberGroups API call.
     properties:
       value:
-        description: Group Ids of which the group is a member
+        description: A collection of group IDs of which the group is a member.
         items:
           type: string
         type: array
@@ -1142,56 +1142,56 @@ definitions:
     description: Server response for Get tenant groups API call
     properties:
       odata.nextLink:
-        description: the URL to get the next set of results.
+        description: The URL to get the next set of results.
         type: string
       value:
-        description: the list of groups.
+        description: A collection of Active Directory groups.
         items:
           $ref: '#/definitions/ADGroup'
         type: array
   KeyCredential:
-    description: Active Directory Key Credential information
+    description: Active Directory Key Credential information.
     properties:
       endDate:
-        description: end date
+        description: End date.
         format: date-time
         type: string
       keyId:
-        description: key Id
+        description: Key ID.
         type: string
       startDate:
-        description: start date
+        description: Start date.
         format: date-time
         type: string
       type:
-        description: type. Acceptable values are 'AsymmetricX509Cert' and 'Symmetric'.
+        description: Type. Acceptable values are 'AsymmetricX509Cert' and 'Symmetric'.
         type: string
       usage:
-        description: usage. Acceptable values are 'Verify' and 'Sign'.
+        description: Usage. Acceptable values are 'Verify' and 'Sign'.
         type: string
       value:
-        description: value
+        description: Key value.
         type: string
   KeyCredentialListResult:
     description: KeyCredential list operation result.
     properties:
       value:
-        description: KeyCredential list.
+        description: A collection of KeyCredentials.
         items:
           $ref: '#/definitions/KeyCredential'
         type: array
   KeyCredentialsUpdateParameters:
-    description: Request parameters for  KeyCredentials update operation
+    description: Request parameters for a KeyCredentials update operation
     properties:
       value:
-        description: KeyCredential list.
+        description: A collection of KeyCredentials.
         items:
           $ref: '#/definitions/KeyCredential'
         type: array
     required:
       - value
   OdataError:
-    description: Active Directory odata error information
+    description: Active Directory OData error information.
     properties:
       code:
         description: Error code.
@@ -1202,45 +1202,45 @@ definitions:
         type: object
         x-ms-client-flatten: true
   PasswordCredential:
-    description: Active Directory PasswordCredential information
+    description: Active Directory Password Credential information.
     properties:
       endDate:
-        description: end date
+        description: End date.
         format: date-time
         type: string
       keyId:
-        description: key Id
+        description: Key ID.
         type: string
       startDate:
-        description: start date
+        description: Start date.
         format: date-time
         type: string
       value:
-        description: value
+        description: Key value.
         type: string
   PasswordCredentialListResult:
     description: PasswordCredential list operation result.
     properties:
       value:
-        description: PasswordCredential list.
+        description: A collection of PasswordCredentials.
         items:
           $ref: '#/definitions/PasswordCredential'
         type: array
   PasswordCredentialsUpdateParameters:
-    description: Request paramters for PasswordCredentials update operation
+    description: Request parameters for a PasswordCredentials update operation.
     properties:
       value:
-        description: PasswordCredential list.
+        description: A collection of PasswordCredentials.
         items:
           $ref: '#/definitions/PasswordCredential'
         type: array
     required:
       - value
   PasswordProfile:
-    description: Contains the password profile associated with a user.
+    description: The password profile associated with a user.
     properties:
       forceChangePasswordNextLogin:
-        description: Force change password on next login
+        description: Whether to force a password change on next login.
         type: boolean
       password:
         description: Password
@@ -1248,41 +1248,41 @@ definitions:
     required:
       - password
   ServicePrincipal:
-    description: Active Directory service principal information
+    description: Active Directory service principal information.
     properties:
       appId:
-        description: app id
+        description: The application ID.
         type: string
       displayName:
-        description: service principal display name
+        description: The display name of the service principal.
         type: string
       objectId:
-        description: object Id
+        description: The object ID.
         type: string
       objectType:
-        description: object type
+        description: The object type.
         type: string
       servicePrincipalNames:
-        description: the list of names.
+        description: A collection of service principal names.
         items:
           type: string
         type: array
   ServicePrincipalCreateParameters:
-    description: Request parameters for create a new service principal
+    description: Request parameters for creating a new service principal.
     properties:
       accountEnabled:
-        description: Specifies if the account is enabled
+        description: Whether the account is enabled
         type: boolean
       appId:
         description: application Id
         type: string
       keyCredentials:
-        description: the list of KeyCredential objects
+        description: A collection of KeyCredential objects.
         items:
           $ref: '#/definitions/KeyCredential'
         type: array
       passwordCredentials:
-        description: the list of PasswordCredential objects
+        description: A collection of PasswordCredential objects
         items:
           $ref: '#/definitions/PasswordCredential'
         type: array
@@ -1290,7 +1290,7 @@ definitions:
       - appId
       - accountEnabled
   ServicePrincipalListResult:
-    description: Server response for get tenant service principals API call
+    description: Server response for get tenant service principals API call.
     properties:
       odata.nextLink:
         description: the URL to get the next set of results.
@@ -1301,43 +1301,43 @@ definitions:
           $ref: '#/definitions/ServicePrincipal'
         type: array
   User:
-    description: Active Directory user information
+    description: Active Directory user information.
     properties:
       displayName:
-        description: user display name
+        description: The display name of the user.
         type: string
       mail:
-        description: user mail
+        description: The primary email address of the user.
         type: string
       mailNickname:
-        description: The mail alias for the user
+        description: The mail alias for the user.
         type: string
       objectId:
-        description: object Id
+        description: The object ID.
         type: string
       objectType:
-        description: object type
+        description: The object type.
         type: string
       signInName:
-        description: user signIn name
+        description: The sign-in name of the user.
         type: string
       userPrincipalName:
-        description: user principal name
+        description: The principal name of the user.
         type: string
   UserCreateParameters:
-    description: Request parameters for create a new work or school account user
+    description: Request parameters for creating a new work or school account user.
     properties:
       accountEnabled:
-        description: Enable the account. If it is enabled then true else false.
+        description: Whether the account is enabled.
         type: boolean
       displayName:
-        description: User display name
+        description: The display name of the user.
         type: string
       immutableId:
-        description: Needs to be specified if you are using a federated domain for the user's userPrincipalName (UPN) property while creating a new user account. It is used to associate an on-premises Active Directory user account to their Azure AD user object.
+        description: This must be specified if you are using a federated domain for the user's userPrincipalName (UPN) property when creating a new user account. It is used to associate an on-premises Active Directory user account with their Azure AD user object.
         type: string
       mailNickname:
-        description: The mail alias for the user
+        description: The mail alias for the user.
         type: string
       passwordProfile:
         $ref: '#/definitions/PasswordProfile'
@@ -1352,26 +1352,26 @@ definitions:
       - userPrincipalName
       - mailNickname
   UserGetMemberGroupsParameters:
-    description: Request parameters for GetMemberGroups API call
+    description: Request parameters for GetMemberGroups API call.
     properties:
       securityEnabledOnly:
-        description: 'If true only membership in security enabled groups should be checked. Otherwise membership in all groups should be checked '
+        description: 'If true, only membership in security-enabled groups should be checked. Otherwise, membership in all groups should be checked.'
         type: boolean
     required:
       - securityEnabledOnly
   UserGetMemberGroupsResult:
-    description: Server response for GetMemberGroups API call
+    description: Server response for GetMemberGroups API call.
     properties:
       value:
-        description: Group Ids of which the user is a member
+        description: A collection of group IDs of which the user is a member.
         items:
           type: string
         type: array
   UserListResult:
-    description: Server response for Get tenant users API call
+    description: Server response for Get tenant users API call.
     properties:
       odata.nextLink:
-        description: the URL to get the next set of results.
+        description: The URL to get the next set of results.
         type: string
       value:
         description: the list of users.
@@ -1379,27 +1379,27 @@ definitions:
           $ref: '#/definitions/User'
         type: array
   UserUpdateParameters:
-    description: Request parameters for updating an existing work or school account user
+    description: Request parameters for updating an existing work or school account user.
     properties:
       accountEnabled:
-        description: Enable the account. If it is enabled then true else false.
+        description: Whether the account is enabled.
         type: boolean
       displayName:
-        description: User display name
+        description: The display name of the user.
         type: string
       mailNickname:
-        description: The mail alias for the user
+        description: The mail alias for the user.
         type: string
       passwordProfile:
         $ref: '#/definitions/PasswordProfile'
-        description: Password Profile
+        description: The password profile of the user.
 x-ms-paths:
   '/{tenantID}/{nextLink}?Applications_ListNext':
     get:
-      description: Gets list of applications from the current tenant.
+      description: Gets a list of applications from the current tenant.
       operationId: Applications_ListNext
       parameters:
-        - description: Next link for list operation.
+        - description: Next link for the list operation.
           in: path
           name: nextLink
           required: true
@@ -1409,11 +1409,11 @@ x-ms-paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/ApplicationListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -1426,7 +1426,7 @@ x-ms-paths:
       description: Gets the members of a group.
       operationId: Groups_GetGroupMembersNext
       parameters:
-        - description: Next link for list operation.
+        - description: Next link for the list operation.
           in: path
           name: nextLink
           required: true
@@ -1436,11 +1436,11 @@ x-ms-paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/GetObjectsResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -1450,10 +1450,10 @@ x-ms-paths:
         operationName: Groups_GetGroupMembersNext
   '/{tenantID}/{nextLink}?Groups_ListNext':
     get:
-      description: Gets list of groups for the current tenant.
+      description: Gets a list of groups for the current tenant.
       operationId: Groups_ListNext
       parameters:
-        - description: Next link for list operation.
+        - description: Next link for the list operation.
           in: path
           name: nextLink
           required: true
@@ -1463,11 +1463,11 @@ x-ms-paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/GroupListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -1477,10 +1477,10 @@ x-ms-paths:
         operationName: Groups_ListNext
   '/{tenantID}/{nextLink}?ServicePrincipals_ListNext':
     get:
-      description: Gets list of service principals from the current tenant.
+      description: Gets a list of service principals from the current tenant.
       operationId: ServicePrincipals_ListNext
       parameters:
-        - description: Next link for list operation.
+        - description: Next link for the list operation.
           in: path
           name: nextLink
           required: true
@@ -1490,11 +1490,11 @@ x-ms-paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/ServicePrincipalListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:
@@ -1504,10 +1504,10 @@ x-ms-paths:
         operationName: ServicePrincipals_ListNext
   '/{tenantID}/{nextLink}?Users_ListNext':
     get:
-      description: Gets list of users for the current tenant.
+      description: Gets a list of users for the current tenant.
       operationId: Users_ListNext
       parameters:
-        - description: Next link for list operation.
+        - description: Next link for the list operation.
           in: path
           name: nextLink
           required: true
@@ -1517,11 +1517,11 @@ x-ms-paths:
         - $ref: '#/parameters/tenantIDInPath'
       responses:
         '200':
-          description: OK
+          description: OK. The operation was successful.
           schema:
             $ref: '#/definitions/UserListResult'
         default:
-          description: Error response
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/GraphError'
       tags:

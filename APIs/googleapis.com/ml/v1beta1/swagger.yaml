@@ -1366,6 +1366,10 @@ definitions:
         description: The number of hyperparameter tuning trials that completed successfully.
         format: int64
         type: string
+      consumedMlUnits:
+        description: The amount of ML units consumed by the job.
+        format: double
+        type: number
       trials:
         description: Results for individual Hyperparameter trials.
         items:

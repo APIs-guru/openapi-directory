@@ -806,6 +806,7 @@ definitions:
           Optional. A filter that chooses which log entries to return.  See [Advanced
           Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
           match the filter are returned.  An empty filter matches all log entries.
+          The maximum length of the filter is 20000 characters.
         type: string
       orderBy:
         description: |-
@@ -1060,6 +1061,7 @@ definitions:
         description: |-
           Required. An [advanced logs filter](/logging/docs/view/advanced_filters).
           Example: `"resource.type=gae_app AND severity>=ERROR"`.
+          The maximum length of the filter is 20000 characters.
         type: string
       name:
         description: |-
@@ -1117,6 +1119,7 @@ definitions:
           Example filter (V2 format):
 
               logName=projects/my-projectid/logs/syslog AND severity>=ERROR
+          The maximum length of the filter is 20000 characters.
         type: string
       name:
         description: |-
@@ -1256,9 +1259,9 @@ definitions:
         type: boolean
       first:
         description: |-
-          Whether this is the first RequestLog entry for this request.  If an active
-          request has several RequestLog entries written to Cloud Logging, this field
-          will be set for one of them.
+          Whether this is the first `RequestLog` entry for this request.  If an
+          active request has several `RequestLog` entries written to Stackdriver
+          Logging, then this field will be set for one of them.
         type: boolean
       host:
         description: Internet host and port number of the resource being requested.
@@ -1356,7 +1359,7 @@ definitions:
         description: 'Queue name of the request, in the case of an offline request.'
         type: string
       traceId:
-        description: Cloud Trace identifier for this request.
+        description: Stackdriver Trace identifier for this request.
         type: string
       urlMapEntry:
         description: File or class that handled the request.

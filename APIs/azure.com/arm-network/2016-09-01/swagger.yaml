@@ -3019,9 +3019,6 @@ definitions:
   ApplicationGatewayHttpListenerPropertiesFormat:
     description: Properties of HTTP listener of an application gateway.
     properties:
-      SSLCertificate:
-        $ref: '#/definitions/SubResource'
-        description: SSL certificate resource of an application gateway.
       frontendIPConfiguration:
         $ref: '#/definitions/SubResource'
         description: Frontend IP configuration resource of an application gateway.
@@ -3046,6 +3043,9 @@ definitions:
       requireServerNameIndication:
         description: Applicable only if protocol is https. Enables SNI for multi-hosting.
         type: boolean
+      sslCertificate:
+        $ref: '#/definitions/SubResource'
+        description: SSL certificate resource of an application gateway.
   ApplicationGatewayIPConfiguration:
     allOf:
       - $ref: '#/definitions/SubResource'
@@ -3161,14 +3161,6 @@ definitions:
   ApplicationGatewayPropertiesFormat:
     description: Properties of the application gateway.
     properties:
-      SSLCertificates:
-        description: SSL certificates of the application gateway resource.
-        items:
-          $ref: '#/definitions/ApplicationGatewaySslCertificate'
-        type: array
-      SSLPolicy:
-        $ref: '#/definitions/ApplicationGatewaySslPolicy'
-        description: SSL policy of the application gateway resource.
       authenticationCertificates:
         description: Authentication certificates of the application gateway resource.
         items:
@@ -3235,6 +3227,14 @@ definitions:
       sku:
         $ref: '#/definitions/ApplicationGatewaySku'
         description: SKU of the application gateway resource.
+      sslCertificates:
+        description: SSL certificates of the application gateway resource.
+        items:
+          $ref: '#/definitions/ApplicationGatewaySslCertificate'
+        type: array
+      sslPolicy:
+        $ref: '#/definitions/ApplicationGatewaySslPolicy'
+        description: SSL policy of the application gateway resource.
       urlPathMaps:
         description: URL path map of the application gateway resource.
         items:
@@ -5517,11 +5517,6 @@ definitions:
         type: boolean
   VirtualNetworkPropertiesFormat:
     properties:
-      VirtualNetworkPeerings:
-        description: A list of peerings in a Virtual Network.
-        items:
-          $ref: '#/definitions/VirtualNetworkPeering'
-        type: array
       addressSpace:
         $ref: '#/definitions/AddressSpace'
         description: The AddressSpace that contains an array of IP address ranges that can be used by subnets.
@@ -5538,6 +5533,11 @@ definitions:
         description: A list of subnets in a Virtual Network.
         items:
           $ref: '#/definitions/Subnet'
+        type: array
+      virtualNetworkPeerings:
+        description: A list of peerings in a Virtual Network.
+        items:
+          $ref: '#/definitions/VirtualNetworkPeering'
         type: array
   VpnClientConfiguration:
     description: VpnClientConfiguration for P2S client.

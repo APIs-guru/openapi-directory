@@ -12,7 +12,7 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
   termsOfService: 'http://swagger.io/terms/'
   title: Swagger Generator
-  version: 2.2.1
+  version: 2.2.2-SNAPSHOT
   x-logo:
     backgroundColor: '#98C600'
     url: 'http://swagger.io/wp-content/themes/kevinlearynet/assets/img/swagger-logo.png'
@@ -67,6 +67,7 @@ paths:
             - java
             - javascript
             - javascript-closure-angular
+            - jaxrs-cxf-client
             - jmeter
             - objc
             - perl
@@ -78,6 +79,7 @@ paths:
             - swagger
             - swagger-yaml
             - swift
+            - swift3
             - tizen
             - typescript-angular
             - typescript-angular2
@@ -123,6 +125,7 @@ paths:
             - java
             - javascript
             - javascript-closure-angular
+            - jaxrs-cxf-client
             - jmeter
             - objc
             - perl
@@ -134,6 +137,7 @@ paths:
             - swagger
             - swagger-yaml
             - swift
+            - swift3
             - tizen
             - typescript-angular
             - typescript-angular2
@@ -200,14 +204,18 @@ paths:
         - description: The target language for the server framework
           enum:
             - aspnet5
+            - aspnetcore
+            - erlang-server
             - go-server
             - haskell
             - inflector
             - jaxrs
             - jaxrs-cxf
+            - jaxrs-cxf-cdi
             - jaxrs-resteasy
             - jaxrs-spec
             - lumen
+            - msf4j
             - nancyfx
             - nodejs-server
             - python-flask
@@ -217,6 +225,7 @@ paths:
             - sinatra
             - slim
             - spring
+            - undertow
           in: path
           name: framework
           required: true
@@ -240,14 +249,18 @@ paths:
         - description: framework
           enum:
             - aspnet5
+            - aspnetcore
+            - erlang-server
             - go-server
             - haskell
             - inflector
             - jaxrs
             - jaxrs-cxf
+            - jaxrs-cxf-cdi
             - jaxrs-resteasy
             - jaxrs-spec
             - lumen
+            - msf4j
             - nancyfx
             - nodejs-server
             - python-flask
@@ -257,6 +270,7 @@ paths:
             - sinatra
             - slim
             - spring
+            - undertow
           in: path
           name: framework
           required: true

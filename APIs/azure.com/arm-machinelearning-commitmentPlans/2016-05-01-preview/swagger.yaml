@@ -133,7 +133,7 @@ paths:
       description: Patch an existing Azure ML commitment plan resource.
       operationId: CommitmentPlans_Patch
       parameters:
-        - description: The payload to patch the Azure ML commitment plan with. Only tags and SKU may be modified on an existing commitment plan.
+        - description: The payload to use to patch the Azure ML commitment plan. Only tags and SKU may be modified on an existing commitment plan.
           in: body
           name: patchPayload
           required: true
@@ -147,7 +147,7 @@ paths:
       tags:
         - CommitmentPlans
     put:
-      description: Creates a new Azure ML commitment plan resource or updates an existing one.
+      description: Create a new Azure ML commitment plan resource or updates an existing one.
       operationId: CommitmentPlans_CreateOrUpdate
       parameters:
         - description: The payload to create or update the Azure ML commitment plan.
@@ -188,7 +188,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/commitmentAssociations/{commitmentAssociationName}':
     get:
-      description: Gets a commitment association.
+      description: Get a commitment association.
       operationId: CommitmentAssociations_Get
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -205,7 +205,7 @@ paths:
         - CommitmentAssociations
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/commitmentAssociations/{commitmentAssociationName}/move':
     post:
-      description: Re-parents a commitment association from one commitment plan to another.
+      description: Re-parent a commitment association from one commitment plan to another.
       operationId: CommitmentAssociations_Move
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -228,7 +228,7 @@ paths:
         - CommitmentAssociations
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/usageHistory':
     get:
-      description: Retrieves the usage history for an Azure ML commitment plan.
+      description: Retrieve the usage history for an Azure ML commitment plan.
       operationId: UsageHistory_List
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -372,7 +372,7 @@ definitions:
         readOnly: true
         type: integer
       suspendPlanOnOverage:
-        description: Indicates whether this commitment plan will be moved into a suspended state if usage beyond the commitment plan's included quantities is incurred.
+        description: Indicates whether this commitment plan will be moved into a suspended state if usage goes beyond the commitment plan's included quantities.
         readOnly: true
         type: boolean
     type: object

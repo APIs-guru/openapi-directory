@@ -177,10 +177,10 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     patch:
-      description: Updates application fields.
+      description: 'Updates the specified Application resource. You can update the following fields: * [`auth_domain`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta4/apps#Application.FIELDS.auth_domain) * [`default_cookie_expiration`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta4/apps#Application.FIELDS.default_cookie_expiration)'
       operationId: appengine.apps.patch
       parameters:
-        - description: 'Part of `name`. Name of the application to update. For example: "apps/myapp".'
+        - description: 'Part of `name`. Name of the Application resource to update. Example: `apps/myapp`.'
           in: path
           name: appsId
           required: true
@@ -1540,6 +1540,11 @@ definitions:
         description: Memory (GB) needed.
         format: double
         type: number
+      volumes:
+        description: User specified volumes.
+        items:
+          $ref: '#/definitions/Volume'
+        type: array
     type: object
   ScriptHandler:
     description: Executes a script to handle the request that matches the URL pattern.
@@ -1816,4 +1821,18 @@ definitions:
       vm:
         description: Whether to deploy this version in a container on a virtual machine.
         type: boolean
+    type: object
+  Volume:
+    description: Volumes mounted within the app container. Only applicable for VM runtimes.
+    properties:
+      name:
+        description: Unique name for the volume.
+        type: string
+      sizeGb:
+        description: Volume size in GB.
+        format: double
+        type: number
+      volumeType:
+        description: 'Underlying volume type, e.g. ''tmpfs''.'
+        type: string
     type: object

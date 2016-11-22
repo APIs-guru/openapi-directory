@@ -113,11 +113,12 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: projects
+  - name: folders
+  - name: billingAccounts
   - name: organizations
+  - name: projects
   - name: entries
   - name: monitoredResourceDescriptors
-  - name: billingAccounts
 paths:
   '/v2/entries:list':
     parameters:
@@ -255,7 +256,7 @@ paths:
       description: |-
         Deletes a log and all its log entries.
         The log will reappear if it receives new entries.
-      operationId: logging.billingAccounts.logs.delete
+      operationId: logging.projects.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete.  Example:
@@ -276,7 +277,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - projects
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/prettyPrint'
@@ -487,7 +488,7 @@ paths:
   '/v2/{parent}/sinks':
     get:
       description: Lists sinks.
-      operationId: logging.billingAccounts.sinks.list
+      operationId: logging.projects.sinks.list
       parameters:
         - description: |-
             Required. The resource name where this sink was created.
@@ -527,7 +528,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - projects
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/prettyPrint'
@@ -544,7 +545,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a sink.
-      operationId: logging.billingAccounts.sinks.create
+      operationId: logging.projects.sinks.create
       parameters:
         - description: |-
             Required. The resource in which to create the sink.
@@ -579,11 +580,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - projects
   '/v2/{sinkName}':
     delete:
       description: Deletes a sink.
-      operationId: logging.billingAccounts.sinks.delete
+      operationId: logging.projects.sinks.delete
       parameters:
         - description: |-
             Required. The resource name of the sink to delete, including the parent
@@ -606,10 +607,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - projects
     get:
       description: Gets a sink.
-      operationId: logging.billingAccounts.sinks.get
+      operationId: logging.projects.sinks.get
       parameters:
         - description: |-
             Required. The resource name of the sink to return.
@@ -634,7 +635,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - projects
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/prettyPrint'
@@ -651,7 +652,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates or creates a sink.
-      operationId: logging.billingAccounts.sinks.update
+      operationId: logging.projects.sinks.update
       parameters:
         - description: |-
             Required. The resource name of the sink to update, including the parent
@@ -686,7 +687,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - projects
 definitions:
   Empty:
     description: |-
@@ -806,6 +807,7 @@ definitions:
           Optional. A filter that chooses which log entries to return.  See [Advanced
           Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
           match the filter are returned.  An empty filter matches all log entries.
+          The maximum length of the filter is 20000 characters.
         type: string
       orderBy:
         description: |-
@@ -1060,6 +1062,7 @@ definitions:
         description: |-
           Required. An [advanced logs filter](/logging/docs/view/advanced_filters).
           Example: `"resource.type=gae_app AND severity>=ERROR"`.
+          The maximum length of the filter is 20000 characters.
         type: string
       name:
         description: |-
@@ -1117,6 +1120,7 @@ definitions:
           Example filter (V2 format):
 
               logName=projects/my-projectid/logs/syslog AND severity>=ERROR
+          The maximum length of the filter is 20000 characters.
         type: string
       name:
         description: |-
@@ -1256,9 +1260,9 @@ definitions:
         type: boolean
       first:
         description: |-
-          Whether this is the first RequestLog entry for this request.  If an active
-          request has several RequestLog entries written to Cloud Logging, this field
-          will be set for one of them.
+          Whether this is the first `RequestLog` entry for this request.  If an
+          active request has several `RequestLog` entries written to Stackdriver
+          Logging, then this field will be set for one of them.
         type: boolean
       host:
         description: Internet host and port number of the resource being requested.
@@ -1356,7 +1360,7 @@ definitions:
         description: 'Queue name of the request, in the case of an offline request.'
         type: string
       traceId:
-        description: Cloud Trace identifier for this request.
+        description: Stackdriver Trace identifier for this request.
         type: string
       urlMapEntry:
         description: File or class that handled the request.

@@ -2022,6 +2022,32 @@ paths:
           name: mediaTypeExtension
           required: true
           type: string
+        - description: |
+            The destination phone number. Format with a '+' and country code e.g., +16175551212 (E.164 format).
+          in: formData
+          name: To
+          required: true
+          type: string
+        - description: |
+            A Twilio phone number (in E.164 format) or alphanumeric sender ID enabled for the type of message you wish to send. Phone numbers or short codes purchased from Twilio work here. You cannot (for example) spoof messages from your own cell phone number.
+          in: formData
+          name: From
+          type: string
+        - description: |
+            The 34 character unique id of the Messaging Service you want to associate with this Message. Set this parameter to use the Messaging Service Settings and Copilot Features you have configured. When only this parameter is set, Twilio will use your enabled Copilot Features to select the From phone number for delivery.
+          in: formData
+          name: MessagingServiceSid
+          type: string
+        - description: |
+            The text of the message you want to send, limited to 1600 characters.
+          in: formData
+          name: Body
+          type: string
+        - description: |
+            The URL of the media you wish to send out with the message. gif , png and jpeg content is currently supported and will be formatted correctly on the recipient's device. Other types are also accepted by the API. The media size limit is 5MB. If you wish to send more than one image in the message body, please provide multiple MediaUrls values in the POST request. You may include up to 10 MediaUrls per message.
+          in: formData
+          name: MediaUrl
+          type: string
       produces:
         - application/xml
       responses:

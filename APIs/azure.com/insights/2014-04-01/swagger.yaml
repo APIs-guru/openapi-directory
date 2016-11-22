@@ -11,7 +11,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2014-04-01/swagger/insightsClient.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2014-04-01/swagger/insightsClient_UsageMetrics.json'
     version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -45,7 +45,7 @@ paths:
       operationId: UsageMetrics_List
       parameters:
         - $ref: '#/parameters/ResourceUriParameter'
-        - description: Client Api Version.
+        - description: 'Client Api Version. NOTE: This is not a client property, it must be explicit in the call and there is no default value.'
           in: query
           name: api-version
           required: true
@@ -74,6 +74,8 @@ definitions:
       value:
         description: the invariant value.
         type: string
+    required:
+      - value
   UsageMetric:
     description: Usage Metric data.
     properties:

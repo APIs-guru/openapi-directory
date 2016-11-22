@@ -3,6 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
+  description: REST API for Azure Logic Apps.
   title: LogicManagementClient
   version: 2015-02-01-preview
   x-apisguru-categories:
@@ -32,7 +33,7 @@ produces:
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow
+    description: Azure Active Directory OAuth2 Flow.
     flow: implicit
     scopes:
       user_impersonation: impersonate your user account

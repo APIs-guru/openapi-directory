@@ -11,7 +11,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2016-09-01/swagger/insightsClient.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2016-09-01/swagger/insightsClient_Metrics.json'
     version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -31,7 +31,7 @@ parameters:
     required: true
     type: string
   FilterParameter:
-    description: 'The filter to apply on the operation. For more information please see https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx'
+    description: Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.
     in: query
     name: $filter
     required: false
@@ -54,7 +54,7 @@ parameters:
 paths:
   '/{resourceUri}/providers/microsoft.insights/metrics':
     get:
-      description: Lists the metric values for a resource.
+      description: 'Lists the metric values for a resource. The $filter is used to reduce the set of metric data returned. Some common properties for this expression will be: name.value, aggregationType, startTime, endTime, timeGrain. The filter expression uses these properties with comparison operators (eg. eq, gt, lt) and multiple expressions can be combined with parentheses and ''and/or'' operators. Some example filter expressions are: - $filter=(name.value eq ''RunsSucceeded'') and aggregationType eq ''Total'' and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration''PT1M'', - $filter=(name.value eq ''RunsSucceeded'') and (aggregationType eq ''Total'' or aggregationType eq ''Average'') and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration''PT1H'', - $filter=(name.value eq ''ActionsCompleted'' or name.value eq ''RunsSucceeded'') and (aggregationType eq ''Total'' or aggregationType eq ''Average'') and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration''PT1M''.'
       operationId: Metrics_List
       parameters:
         - $ref: '#/parameters/ResourceUriParameter'
@@ -63,6 +63,22 @@ paths:
       responses:
         '200':
           description: Successful request to get the list of metric values
+          examples:
+            application/json:
+              value:
+                - data:
+                    - timeStamp: '2016-09-21T19:59:00Z'
+                      total: 4
+                    - average: 3.8
+                      timeStamp: '2016-09-21T20:00:00Z'
+                    - minimum: 0
+                      timeStamp: '2016-09-21T20:01:00Z'
+                    - maximum: 5
+                      timeStamp: '2016-09-21T20:02:00Z'
+                  name:
+                    localizedValue: Runs Started
+                    value: RunsStarted
+                  unit: Count
           schema:
             $ref: '#/definitions/MetricCollection'
       tags:
@@ -79,6 +95,8 @@ definitions:
       value:
         description: the invariant value.
         type: string
+    required:
+      - value
   Metric:
     description: A set of metric values in a time range.
     properties:
@@ -89,7 +107,7 @@ definitions:
         type: array
       name:
         $ref: '#/definitions/LocalizableString'
-        description: the name and the display name of the metric.
+        description: 'the name and the display name of the metric, i.e. it is localizable string.'
       unit:
         $ref: '#/definitions/Unit'
         description: the unit of the metric.
@@ -126,7 +144,7 @@ definitions:
         description: the least value in the time range.
         format: double
         type: number
-      timestamp:
+      timeStamp:
         description: the timestamp for the metric value in ISO 8601 format.
         format: date-time
         type: string
@@ -135,7 +153,7 @@ definitions:
         format: double
         type: number
     required:
-      - timestamp
+      - timeStamp
   Unit:
     description: the unit of the metric.
     enum:

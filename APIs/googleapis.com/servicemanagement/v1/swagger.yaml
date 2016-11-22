@@ -137,6 +137,15 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: |-
+            Include services consumed by the specified consumer.
+
+            The Google Service Management implementation accepts the following
+            forms:
+            - project:<project_id>
+          in: query
+          name: consumerId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -194,7 +203,7 @@ paths:
   '/v1/services/{serviceName}':
     delete:
       description: |-
-        Deletes a managed service. This method will change the serivce in the
+        Deletes a managed service. This method will change the service to the
         `Soft-Delete` state for 30 days. Within this period, service producers may
         call UndeleteService to restore the service.
         After 30 days, the service will be permanently deleted.

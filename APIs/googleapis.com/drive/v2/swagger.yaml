@@ -2112,8 +2112,10 @@ paths:
           name: fileId
           required: true
           type: string
-        - description: Maximum number of revisions to return.
+        - default: 200
+          description: Maximum number of revisions to return.
           in: query
+          maximum: 1000
           minimum: 1
           name: maxResults
           type: integer

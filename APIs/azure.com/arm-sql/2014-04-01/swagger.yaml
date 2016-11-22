@@ -1,0 +1,2045 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: 'Provides create, read, update and delete functionality for Azure SQL resources including servers, databases, elastic pools, recommendations, operations, and usage metrics.'
+  title: Azure SQL Database API spec
+  version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-sql/2014-04-01/swagger/sql.core.json'
+    version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: arm-sql
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  ApiVersionParameter:
+    description: The API version to use for the request.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ResourceGroupParameter:
+    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ServerNameParameter:
+    description: The name of the Azure SQL server.
+    in: path
+    name: serverName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The subscription ID that identifies an Azure subscription.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Sql/servers':
+    get:
+      description: Returns information about an Azure SQL server.
+      operationId: Servers_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerListResult'
+      tags:
+        - Servers
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers':
+    get:
+      description: Returns information about an Azure SQL server.
+      operationId: Servers_ListByResourceGroup
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerListResult'
+      tags:
+        - Servers
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}':
+    delete:
+      description: Deletes a SQL server.
+      operationId: Servers_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: Accepted
+      tags:
+        - Servers
+    get:
+      description: Gets information about an Azure SQL server.
+      operationId: Servers_GetByResourceGroup
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Server'
+      tags:
+        - Servers
+    put:
+      description: Creates a new Azure SQL server.
+      operationId: Servers_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The required parameters for creating or updating a server.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Server'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Server'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Server'
+      tags:
+        - Servers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases':
+    get:
+      description: Returns information about an Azure SQL database.
+      operationId: Databases_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DatabaseListResult'
+      tags:
+        - Databases
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}':
+    delete:
+      description: Deletes an Azure SQL database.
+      operationId: Databases_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL database to be deleted.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: NoContent
+      tags:
+        - Databases
+    get:
+      description: Gets information about an Azure SQL database.
+      operationId: Databases_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL database to be retrieved.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - description: 'The comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption.'
+          in: query
+          name: $expand
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Database'
+      tags:
+        - Databases
+    put:
+      description: 'Creates a new Azure SQL database or updates an existing Azure SQL database. Location is a required property in the request body, and it must be the same as the location of the SQL server.'
+      operationId: Databases_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL database to be operated on (updated or created).
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - description: The required parameters for creating or updating a database.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Database'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Database'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Database'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/Database'
+      tags:
+        - Databases
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause':
+    post:
+      description: Pause an Azure SQL Data Warehouse database.
+      operationId: Databases_PauseDataWarehouse
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Data Warehouse database to pause.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+      tags:
+        - DatabaseActivation
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints':
+    get:
+      description: Returns a list of Azure SQL database restore points.
+      operationId: Databases_ListRestorePoints
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL database from which to retrieve available restore points.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestorePointListResult'
+      tags:
+        - DatabaseBackup
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume':
+    post:
+      description: Resume an Azure SQL Data Warehouse database.
+      operationId: Databases_ResumeDataWarehouse
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Data Warehouse database to resume.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+      tags:
+        - DatabaseActivation
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/serviceTierAdvisors':
+    get:
+      description: Returns information about service tier advisors for specified database.
+      operationId: Databases_ListServiceTierAdvisors
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of database.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServiceTierAdvisorListResult'
+      tags:
+        - ServiceTierAdvisors
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/serviceTierAdvisors/{serviceTierAdvisorName}':
+    get:
+      description: Gets information about a service tier advisor.
+      operationId: Databases_GetServiceTierAdvisor
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of database.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - description: The name of service tier advisor.
+          in: path
+          name: serviceTierAdvisorName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServiceTierAdvisor'
+      tags:
+        - ServiceTierAdvisors
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/current':
+    get:
+      description: Gets an Azure SQL Database Transparent Data Encryption Response.
+      operationId: Databases_GetTransparentDataEncryptionConfiguration
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL database for which the Transparent Data Encryption applies.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TransparentDataEncryption'
+      tags:
+        - TransparentDataEncryption
+    put:
+      description: Creates or updates an Azure SQL Database Transparent Data Encryption Operation.
+      operationId: Databases_CreateOrUpdateTransparentDataEncryptionConfiguration
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL database for which setting the Transparent Data Encryption applies.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - description: The required parameters for creating or updating transparent data encryption.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/TransparentDataEncryption'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TransparentDataEncryption'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/TransparentDataEncryption'
+      tags:
+        - TransparentDataEncryption
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/current/operationResults':
+    get:
+      description: Returns an Azure SQL Database Transparent Data Encryption Activity Response.
+      operationId: Databases_ListTransparentDataEncryptionActivity
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL database for which the Transparent Data Encryption applies.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TransparentDataEncryptionActivityListResult'
+      tags:
+        - TransparentDataEncryption
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages':
+    get:
+      description: Returns information about Azure SQL database usages.
+      operationId: Databases_ListUsages
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL database.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DatabaseMetricListResult'
+      tags:
+        - Databases
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools':
+    get:
+      description: Returns information about Azure SQL elastic pools.
+      operationId: ElasticPools_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPoolListResult'
+      tags:
+        - ElasticPools
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}':
+    delete:
+      description: Deletes the Azure SQL elastic pool.
+      operationId: ElasticPools_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Elastic Pool to be deleted.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: Accepted
+      tags:
+        - ElasticPools
+    get:
+      description: Gets information about an Azure SQL elastic pool.
+      operationId: ElasticPools_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Elastic Pool to be retrieved.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPool'
+      tags:
+        - ElasticPools
+    put:
+      description: Creates a new Azure SQL elastic pool or updates an existing Azure SQL elastic pool.
+      operationId: ElasticPools_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Elastic Pool to be operated on (Updated or created).
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+        - description: The required parameters for creating or updating an Elastic Pool.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ElasticPool'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPool'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/ElasticPool'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/ElasticPool'
+      tags:
+        - ElasticPools
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases':
+    get:
+      description: Returns information about an Azure SQL database inside of an Azure SQL elastic pool.
+      operationId: ElasticPools_ListDatabases
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Elastic Pool to be retrieved.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DatabaseListResult'
+      tags:
+        - ElasticPools
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases/{databaseName}':
+    get:
+      description: Gets information about an Azure SQL database inside of an Azure SQL elastic pool.
+      operationId: ElasticPools_GetDatabase
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Elastic Pool to be retrieved.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+        - description: The name of the Azure SQL database to be retrieved.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Database'
+      tags:
+        - ElasticPools
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolActivity':
+    get:
+      description: Returns information about Azure SQL elastic pool activities.
+      operationId: ElasticPools_ListActivity
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Elastic Pool for which to get the current activity.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPoolActivityListResult'
+      tags:
+        - ElasticPools
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolDatabaseActivity':
+    get:
+      description: Returns information about activity on Azure SQL databases inside of an Azure SQL elastic pool.
+      operationId: ElasticPools_ListDatabaseActivity
+      parameters:
+        - description: The name of the Azure SQL Elastic Pool.
+          in: path
+          name: elasticPoolName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ElasticPoolDatabaseActivityListResult'
+      tags:
+        - ElasticPools
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools':
+    get:
+      description: Returns information about Azure SQL Recommended Elastic Pools.
+      operationId: RecommendedElasticPools_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendedElasticPoolListResult'
+      tags:
+        - RecommendedElasticPools
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}':
+    get:
+      description: Gets information about an Azure SQL Recommended Elastic Pool.
+      operationId: RecommendedElasticPools_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Recommended Elastic Pool to be retrieved.
+          in: path
+          name: recommendedElasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendedElasticPool'
+      tags:
+        - RecommendedElasticPools
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases':
+    get:
+      description: Returns information about an Azure SQL database inside of an Azure SQL Recommended Elastic Pool.
+      operationId: RecommendedElasticPools_ListDatabases
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Recommended Elastic Pool to be retrieved.
+          in: path
+          name: recommendedElasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DatabaseListResult'
+      tags:
+        - RecommendedElasticPools
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases/{databaseName}':
+    get:
+      description: Gets information about an Azure SQL database inside of an Azure SQL Recommended Elastic Pool.
+      operationId: RecommendedElasticPools_GetDatabases
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Elastic Pool to be retrieved.
+          in: path
+          name: recommendedElasticPoolName
+          required: true
+          type: string
+        - description: The name of the Azure SQL database to be retrieved.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Database'
+      tags:
+        - RecommendedElasticPools
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/metrics':
+    get:
+      description: Returns information about an recommended elastic pool metrics.
+      operationId: RecommendedElasticPools_ListMetrics
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the Azure SQL Recommended Elastic Pool to be retrieved.
+          in: path
+          name: recommendedElasticPoolName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendedElasticPoolListMetricsResult'
+      tags:
+        - RecommendedElasticPools
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives':
+    get:
+      description: Returns information about Azure SQL database Service Objectives.
+      operationId: Servers_ListServiceObjectives
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServiceObjectiveListResult'
+      tags:
+        - ServiceObjectives
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives/{serviceObjectiveName}':
+    get:
+      description: Gets information about an Azure SQL database Service Objective.
+      operationId: Servers_GetServiceObjective
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the service objective to retrieve.
+          in: path
+          name: serviceObjectiveName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServiceObjective'
+      tags:
+        - ServiceObjectives
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages':
+    get:
+      description: Returns information about Azure SQL server usage.
+      operationId: Servers_ListUsages
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerMetricListResult'
+      tags:
+        - Servers
+      x-ms-pageable: {}
+definitions:
+  Column:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an Azure SQL Database table column.
+    properties:
+      properties:
+        $ref: '#/definitions/ColumnProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+  ColumnProperties:
+    description: Represents the properties of an Azure SQL Database table column.
+    properties:
+      columnType:
+        description: The type of Azure SQL Database table column.
+        readOnly: true
+        type: string
+  Database:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an Azure SQL Database.
+    properties:
+      properties:
+        $ref: '#/definitions/DatabaseProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+  DatabaseListResult:
+    description: Represents the response to a List Azure SQL Database request.
+    properties:
+      value:
+        description: The list of Azure SQL Databases housed in the server.
+        items:
+          $ref: '#/definitions/Database'
+        type: array
+    required:
+      - value
+  DatabaseMetric:
+    description: Represents Azure SQL Database metrics.
+    properties:
+      currentValue:
+        description: The current value of the metric.
+        format: double
+        readOnly: true
+        type: number
+      displayName:
+        description: The metric display name.
+        readOnly: true
+        type: string
+      limit:
+        description: The current limit of the metric.
+        format: double
+        readOnly: true
+        type: number
+      nextResetTime:
+        description: The next reset time for the metric (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      resourceName:
+        description: The name of the resource.
+        readOnly: true
+        type: string
+      unit:
+        description: The units of the metric.
+        readOnly: true
+        type: string
+  DatabaseMetricListResult:
+    description: Represents the response to a List Azure SQL Database metrics request.
+    properties:
+      value:
+        description: The list of Azure SQL Database metrics for the database.
+        items:
+          $ref: '#/definitions/DatabaseMetric'
+        type: array
+    required:
+      - value
+  DatabaseProperties:
+    description: Represents the properties of an Azure SQL Database.
+    properties:
+      collation:
+        description: The collation of the Azure SQL database.
+        type: string
+      containmentState:
+        description: The containment state of the Azure SQL database.
+        format: int64
+        readOnly: true
+        type: integer
+      createMode:
+        description: Specifies the type of database to create.
+        enum:
+          - Copy
+          - Default
+          - NonReadableSecondary
+          - OnlineSecondary
+          - PointInTimeRestore
+          - Recovery
+          - Restore
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: createMode
+      creationDate:
+        description: The creation date of the Azure SQL database (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      currentServiceObjectiveId:
+        description: The current Service Level Objective ID of the Azure SQL database. This is the ID of the Service Level Objective that is currently active.
+        enum:
+          - dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
+          - f1173c43-91bd-4aaa-973c-54e79e15235b
+          - 1b1ebd4d-d903-4baa-97f9-4ea675f5e928
+          - 455330e1-00cd-488b-b5fa-177c226f28b7
+          - 789681b8-ca10-4eb0-bdf2-e0b050601b40
+          - 7203483a-c4fb-4304-9e9f-17c71c904f5d
+          - a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0
+          - a7c4c615-cfb1-464b-b252-925be0a19446
+        format: uuid
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ServiceObjectiveId
+      databaseId:
+        description: The ID of the Azure SQL database.
+        readOnly: true
+        type: string
+      defaultSecondaryLocation:
+        description: The default secondary region for this database.
+        readOnly: true
+        type: string
+      earliestRestoreDate:
+        description: The recovery period start date of the Azure SQL database. This records the start date and time when recovery is available for this Azure SQL Database (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      edition:
+        description: The edition of the Azure SQL database. The DatabaseEditions enumeration contains all the valid editions.
+        enum:
+          - Web
+          - Business
+          - Basic
+          - Standard
+          - Premium
+          - Free
+          - Stretch
+          - DataWarehouse
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DatabaseEditions
+      elasticPoolName:
+        description: The name of the Azure SQL Elastic Pool the database is in.
+        type: string
+      maxSizeBytes:
+        description: 'The max size of the Azure SQL database expressed in bytes. Note: Only the following sizes are supported (in addition to limitations being placed on each edition): { 100 MB | 500 MB |1 GB | 5 GB | 10 GB | 20 GB | 30 GB … 150 GB | 200 GB … 500 GB }'
+        type: string
+      recommendedIndex:
+        description: The recommended indices for this database.
+        items:
+          $ref: '#/definitions/RecommendedIndex'
+        readOnly: true
+        type: array
+      requestedServiceObjectiveId:
+        description: 'The configured Service Level Objective ID of the Azure SQL database. This is the Service Level Objective that is in the process of being applied to the Azure SQL database. Once successfully updated, it will match the value of currentServiceObjectiveId property.'
+        enum:
+          - dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
+          - f1173c43-91bd-4aaa-973c-54e79e15235b
+          - 1b1ebd4d-d903-4baa-97f9-4ea675f5e928
+          - 455330e1-00cd-488b-b5fa-177c226f28b7
+          - 789681b8-ca10-4eb0-bdf2-e0b050601b40
+          - 7203483a-c4fb-4304-9e9f-17c71c904f5d
+          - a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0
+          - a7c4c615-cfb1-464b-b252-925be0a19446
+        format: uuid
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ServiceObjectiveId
+      requestedServiceObjectiveName:
+        description: 'The name of the configured Service Level Objective of the Azure SQL database. This is the Service Level Objective that is in the process of being applied to the Azure SQL database. Once successfully updated, it will match the value of serviceLevelObjective property.'
+        enum:
+          - Basic
+          - S0
+          - S1
+          - S2
+          - S3
+          - P1
+          - P2
+          - P3
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ServiceObjectiveName
+      schemas:
+        description: The schemas from this database.
+        items:
+          $ref: '#/definitions/Schema'
+        readOnly: true
+        type: array
+      serviceLevelObjective:
+        description: The current Service Level Objective of the Azure SQL database.
+        enum:
+          - Basic
+          - S0
+          - S1
+          - S2
+          - S3
+          - P1
+          - P2
+          - P3
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ServiceObjectiveName
+      serviceTierAdvisors:
+        description: The list of service tier advisors for this database. Expanded property
+        items:
+          $ref: '#/definitions/ServiceTierAdvisor'
+        readOnly: true
+        type: array
+      sourceDatabaseId:
+        description: 'Conditional. Specifies the resource ID of the source database. If createMode is not set to Default, then this value must be specified. The name of the source database must be the same. NOTE: Collation, Edition, and MaxSizeBytes must remain the same while the link is active. Values specified for these parameters will be ignored.'
+        type: string
+      status:
+        description: The status of the Azure SQL database.
+        readOnly: true
+        type: string
+      transparentDataEncryption:
+        description: The transparent data encryption info for this database.
+        items:
+          $ref: '#/definitions/TransparentDataEncryption'
+        readOnly: true
+        type: array
+      upgradeHint:
+        $ref: '#/definitions/UpgradeHint'
+        description: The upgrade hint for this database.
+        readOnly: true
+  ElasticPool:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an Azure SQL Database elastic pool.
+    properties:
+      properties:
+        $ref: '#/definitions/ElasticPoolProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+  ElasticPoolActivity:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents the activity on an Azure SQL Elastic Pool.
+    properties:
+      properties:
+        $ref: '#/definitions/ElasticPoolActivityProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+  ElasticPoolActivityListResult:
+    description: Represents the response to a List Azure SQL Elastic Pool Activity request.
+    properties:
+      value:
+        description: The list of Azure SQL Elastic Pool Activities.
+        items:
+          $ref: '#/definitions/ElasticPoolActivity'
+        type: array
+    required:
+      - value
+  ElasticPoolActivityProperties:
+    description: Represents the properties of an Azure SQL Elastic Pool.
+    properties:
+      elasticPoolName:
+        description: The name of the Elastic Pool.
+        readOnly: true
+        type: string
+      endTime:
+        description: The time the operation finished (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code if available.
+        format: int32
+        readOnly: true
+        type: integer
+      errorMessage:
+        description: The error message if available.
+        readOnly: true
+        type: string
+      errorSeverity:
+        description: The error severity if available.
+        format: int32
+        readOnly: true
+        type: integer
+      operation:
+        description: The operation name.
+        readOnly: true
+        type: string
+      operationId:
+        description: The unique operation ID.
+        readOnly: true
+        type: string
+      percentComplete:
+        description: The percentage complete if available.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedDatabaseDtuMax:
+        description: The requested max DTU per database if available.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedDatabaseDtuMin:
+        description: The requested min DTU per database if available.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedDtu:
+        description: The requested DTU for the pool if available.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedElasticPoolName:
+        description: The requested name for the Elastic Pool if available.
+        readOnly: true
+        type: string
+      requestedStorageLimitInGB:
+        description: The requested storage limit for the pool in GB if available.
+        format: int64
+        readOnly: true
+        type: integer
+      serverName:
+        description: The name of the Azure SQL server the Elastic Pool is in.
+        readOnly: true
+        type: string
+      startTime:
+        description: The time the operation started (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: The current state of the operation.
+        readOnly: true
+        type: string
+  ElasticPoolDatabaseActivity:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents the activity on an Azure SQL Elastic Pool.
+    properties:
+      properties:
+        $ref: '#/definitions/ElasticPoolDatabaseActivityProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+  ElasticPoolDatabaseActivityListResult:
+    description: Represents the response to a List Azure SQL Elastic Pool Database Activity request.
+    properties:
+      value:
+        description: The list of Azure SQL Elastic Pool Database Activities.
+        items:
+          $ref: '#/definitions/ElasticPoolDatabaseActivity'
+        type: array
+    required:
+      - value
+  ElasticPoolDatabaseActivityProperties:
+    description: Represents the properties of an Azure SQL Elastic Pool Database Activity.
+    properties:
+      currentElasticPoolName:
+        description: The name of the current Elastic Pool the database is in if available.
+        readOnly: true
+        type: string
+      currentServiceObjective:
+        description: The name of the current service objective if available.
+        readOnly: true
+        type: string
+      databaseName:
+        description: The database name.
+        readOnly: true
+        type: string
+      endTime:
+        description: The time the operation finished (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      errorCode:
+        description: The error code if available.
+        format: int32
+        readOnly: true
+        type: integer
+      errorMessage:
+        description: The error message if available.
+        readOnly: true
+        type: string
+      errorSeverity:
+        description: The error severity if available.
+        format: int32
+        readOnly: true
+        type: integer
+      operation:
+        description: The operation name.
+        readOnly: true
+        type: string
+      operationId:
+        description: The unique operation ID.
+        readOnly: true
+        type: string
+      percentComplete:
+        description: The percentage complete if available.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedElasticPoolName:
+        description: The name for the Elastic Pool the database is moving into if available.
+        readOnly: true
+        type: string
+      requestedServiceObjective:
+        description: The name of the requested service objective if available.
+        readOnly: true
+        type: string
+      serverName:
+        description: The name of the Azure SQL server the Elastic Pool is in.
+        readOnly: true
+        type: string
+      startTime:
+        description: The time the operation started (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: The current state of the operation.
+        readOnly: true
+        type: string
+  ElasticPoolListResult:
+    description: Represents the response to a List Azure SQL Elastic Pool request.
+    properties:
+      value:
+        description: The list of Azure SQL Elastic Pools hosted in the server.
+        items:
+          $ref: '#/definitions/ElasticPool'
+        type: array
+    required:
+      - value
+  ElasticPoolProperties:
+    description: Represents the properties of an Azure SQL Elastic Pool.
+    properties:
+      creationDate:
+        description: The creation date of the Azure SQL Elastic Pool (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      databaseDtuMax:
+        description: The maximum DTU any one SQL Azure Database can consume.
+        format: int32
+        type: integer
+      databaseDtuMin:
+        description: The minimum DTU all SQL Azure Databases are guaranteed.
+        format: int32
+        type: integer
+      dtu:
+        description: The total shared DTU for the SQL Azure Database Elastic Pool.
+        format: int32
+        type: integer
+      edition:
+        description: The edition of the Azure SQL Elastic Pool.
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ElasticPoolEditions
+      state:
+        description: The state of the Azure SQL Elastic Pool.
+        enum:
+          - Creating
+          - Ready
+          - Disabled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ElasticPoolState
+      storageMB:
+        description: Gets storage limit for the SQL Azure Database Elastic Pool in MB.
+        format: int32
+        type: integer
+  OperationImpact:
+    description: 'Represents impact of an operation, both in absolute and relative terms.'
+    properties:
+      changeValueAbsolute:
+        description: The absolute impact to dimension.
+        format: double
+        readOnly: true
+        type: number
+      changeValueRelative:
+        description: The relative impact to dimension (null if not applicable)
+        format: double
+        readOnly: true
+        type: number
+      name:
+        description: The name of the impact dimension.
+        readOnly: true
+        type: string
+      unit:
+        description: The unit in which estimated impact to dimension is measured.
+        readOnly: true
+        type: string
+  RecommendedDatabaseProperties:
+    description: Represents the properties of a recommended Azure SQL Database being upgraded.
+    properties:
+      Name:
+        description: The name of the Azure SQL database being upgraded.
+        type: string
+      TargetEdition:
+        description: The target edition for the Azure SQL database being upgraded.
+        enum:
+          - Basic
+          - Standard
+          - Premium
+          - Free
+          - Stretch
+          - DataWarehouse
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: TargetDatabaseEditions
+      TargetServiceLevelObjective:
+        description: The target Service Level Objective for the Azure SQL database being upgraded.
+        type: string
+  RecommendedElasticPool:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an Azure SQL Recommended Elastic Pool.
+    properties:
+      properties:
+        $ref: '#/definitions/RecommendedElasticPoolProperties'
+        description: The properites representing the resource.
+        x-ms-client-flatten: true
+  RecommendedElasticPoolListMetricsResult:
+    description: Represents the response to a List Azure SQL Recommended Elastic Pool metrics request.
+    properties:
+      value:
+        description: The list of Azure SQL Recommended Elastic Pools metrics.
+        items:
+          $ref: '#/definitions/RecommendedElasticPoolMetric'
+        type: array
+    required:
+      - value
+  RecommendedElasticPoolListResult:
+    description: Represents the response to a List Azure SQL Recommended Elastic Pool request.
+    properties:
+      value:
+        description: The list of Azure SQL Recommended Elastic Pools hosted in the server.
+        items:
+          $ref: '#/definitions/RecommendedElasticPool'
+        type: array
+    required:
+      - value
+  RecommendedElasticPoolMetric:
+    description: Represents Azure SQL recommended elastic pool metric.
+    properties:
+      dateTime:
+        description: The time of metric (ISO8601 format).
+        format: date-time
+        type: string
+      dtu:
+        description: 'Gets or sets the DTUs (Database Transaction Units). See https://azure.microsoft.com/documentation/articles/sql-database-what-is-a-dtu/'
+        format: double
+        type: number
+      sizeGB:
+        description: Gets or sets size in gigabytes.
+        format: double
+        type: number
+  RecommendedElasticPoolProperties:
+    description: Represents the properties of an Azure SQL Recommended Elastic Pool.
+    properties:
+      databaseDtuMax:
+        description: The maximum DTU for the database.
+        format: double
+        type: number
+      databaseDtuMin:
+        description: The minimum DTU for the database.
+        format: double
+        type: number
+      databaseEdition:
+        description: The edition of the Azure SQL Recommended Elastic Pool. The ElasticPoolEditions enumeration contains all the valid editions.
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ElasticPoolEditions
+      databases:
+        description: The list of Azure SQL Databases in this pool. Expanded property
+        items:
+          $ref: '#/definitions/Database'
+        readOnly: true
+        type: array
+      dtu:
+        description: The DTU for the SQL Azure Recommended Elastic Pool.
+        format: double
+        type: number
+      maxObservedDtu:
+        description: Gets maximum observed DTU.
+        format: double
+        readOnly: true
+        type: number
+      maxObservedStorageMB:
+        description: Gets maximum observed storage in megabytes.
+        format: double
+        readOnly: true
+        type: number
+      metrics:
+        description: The list of Azure SQL Databases housed in the server. Expanded property
+        items:
+          $ref: '#/definitions/RecommendedElasticPoolMetric'
+        readOnly: true
+        type: array
+      observationPeriodEnd:
+        description: The observation period start (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      observationPeriodStart:
+        description: The observation period start (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      storageMB:
+        description: Gets storage size in megabytes.
+        format: double
+        type: number
+  RecommendedIndex:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an Azure SQL Database recommended index.
+    properties:
+      properties:
+        $ref: '#/definitions/RecommendedIndexProperties'
+        description: The properties representing the resource.
+        readOnly: true
+        x-ms-client-flatten: true
+  RecommendedIndexProperties:
+    description: Represents the properties of an Azure SQL Database recommended index.
+    properties:
+      action:
+        description: 'The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance. Possible values are ''Create'', ''Drop'', ''Rebuild''.'
+        enum:
+          - Create
+          - Drop
+          - Rebuild
+        readOnly: true
+        type: string
+        x-ms-enum:
+          name: RecommendedIndexActions
+      columns:
+        description: Columns over which to build index
+        items:
+          type: string
+        readOnly: true
+        type: array
+      created:
+        description: The UTC datetime showing when this resource was created (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      estimatedImpact:
+        description: The estimated impact of doing recommended index action.
+        items:
+          $ref: '#/definitions/OperationImpact'
+        readOnly: true
+        type: array
+      includedColumns:
+        description: The list of column names to be included in the index
+        items:
+          type: string
+        readOnly: true
+        type: array
+      indexScript:
+        description: The full build index script
+        readOnly: true
+        type: string
+      indexType:
+        description: 'The type of index (CLUSTERED, NONCLUSTERED, COLUMNSTORE, CLUSTERED COLUMNSTORE)'
+        enum:
+          - CLUSTERED
+          - NONCLUSTERED
+          - COLUMNSTORE
+          - CLUSTERED COLUMNSTORE
+        readOnly: true
+        type: string
+        x-ms-enum:
+          name: RecommendedIndexTypes
+      lastModified:
+        description: The UTC datetime of when was this resource last changed (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      reportedImpact:
+        description: The values reported after index action is complete.
+        items:
+          $ref: '#/definitions/OperationImpact'
+        readOnly: true
+        type: array
+      schema:
+        description: The schema where table to build index over resides
+        readOnly: true
+        type: string
+      state:
+        description: 'The current recommendation state. Current options are: ''Active'', ''Pending'', ''Executing'', ''Verifying'', ''Pending Revert'', ''Reverting'', ''Reverted'', ''Ignored'', ''Expired'', ''Blocked'', ''Success''.'
+        enum:
+          - Active
+          - Pending
+          - Executing
+          - Verifying
+          - Pending Revert
+          - Reverting
+          - Reverted
+          - Ignored
+          - Expired
+          - Blocked
+          - Success
+        readOnly: true
+        type: string
+        x-ms-enum:
+          name: RecommendedIndexStates
+      table:
+        description: The table on which to build index.
+        readOnly: true
+        type: string
+  Resource:
+    description: Resource properties
+    properties:
+      id:
+        description: Resource ID
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+    required:
+      - location
+    x-ms-azure-resource: true
+  RestorePoint:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an Azure SQL Database restore point.
+    properties:
+      properties:
+        $ref: '#/definitions/RestorePointProperties'
+        description: The properties representing the restore point.
+        x-ms-client-flatten: true
+  RestorePointListResult:
+    description: Represents the response to a List Azure SQL Database restore points request.
+    properties:
+      value:
+        description: The list of a given Azure SQL Database restore points.
+        items:
+          $ref: '#/definitions/RestorePoint'
+        type: array
+    required:
+      - value
+  RestorePointProperties:
+    description: Represents the properties of an Azure SQL Database restore point.
+    properties:
+      earliestRestoreDate:
+        description: Earliest restore time (ISO8601 format). Populated when restorePointType = DISCRETE. Null otherwise.
+        format: date-time
+        readOnly: true
+        type: string
+      restorePointCreationDate:
+        description: Restore point creation time (ISO8601 format). Populated when restorePointType = CONTINUOUS. Null otherwise.
+        format: date-time
+        readOnly: true
+        type: string
+      restorePointType:
+        description: The restore point type of the Azure SQL database restore point.
+        enum:
+          - DISCRETE
+          - CONTINUOUS
+        readOnly: true
+        type: string
+        x-ms-enum:
+          name: RestorePointTypes
+  Schema:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an Azure SQL Database schema.
+    properties:
+      properties:
+        $ref: '#/definitions/SchemaProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+  SchemaProperties:
+    description: Represents the properties of an Azure SQL Database schema.
+    properties:
+      tables:
+        description: The tables from this database.
+        items:
+          $ref: '#/definitions/Table'
+        readOnly: true
+        type: array
+  Server:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an Azure SQL server.
+    properties:
+      properties:
+        $ref: '#/definitions/ServerProperties'
+        description: Represents the properties of the resource.
+        x-ms-client-flatten: true
+  ServerListResult:
+    description: Represents the response to a Get Azure SQL server request.
+    properties:
+      value:
+        description: The list of Azure SQL servers.
+        items:
+          $ref: '#/definitions/Server'
+        type: array
+    required:
+      - value
+  ServerMetric:
+    description: Represents Azure SQL server metrics.
+    properties:
+      currentValue:
+        description: The current value of the metric.
+        format: double
+        readOnly: true
+        type: number
+      displayName:
+        description: The metric display name.
+        readOnly: true
+        type: string
+      limit:
+        description: The current limit of the metric.
+        format: double
+        readOnly: true
+        type: number
+      nextResetTime:
+        description: The next reset time for the metric (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      resourceName:
+        description: The name of the resource.
+        readOnly: true
+        type: string
+      unit:
+        description: The units of the metric.
+        readOnly: true
+        type: string
+  ServerMetricListResult:
+    description: Represents the response to a List Azure SQL server metrics request.
+    properties:
+      value:
+        description: The list of Azure SQL server metrics for the server.
+        items:
+          $ref: '#/definitions/ServerMetric'
+        type: array
+    required:
+      - value
+  ServerProperties:
+    description: Represents the properties of an Azure SQL server.
+    properties:
+      administratorLogin:
+        description: Administrator username for the server. Can only be specified when the server is being created (and is required for creation).
+        type: string
+      administratorLoginPassword:
+        description: The administrator login password (required for server creation).
+        type: string
+      fullyQualifiedDomainName:
+        description: The fully qualified domain name of the server.
+        readOnly: true
+        type: string
+      version:
+        description: The version of the server.
+        enum:
+          - '2.0'
+          - '12.0'
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ServerVersion
+  ServiceObjective:
+    allOf:
+      - $ref: '#/definitions/SqlSubResource'
+    description: Represents an Azure SQL Database Service Objective.
+    properties:
+      properties:
+        $ref: '#/definitions/ServiceObjectiveProperties'
+        description: Represents the properties of the resource.
+        x-ms-client-flatten: true
+  ServiceObjectiveListResult:
+    description: Represents the response to a Get Azure SQL Database Service Objectives request.
+    properties:
+      value:
+        description: The list of Azure SQL Database Service Objectives.
+        items:
+          $ref: '#/definitions/ServiceObjective'
+        type: array
+    required:
+      - value
+  ServiceObjectiveProperties:
+    description: Represents the properties of an Azure SQL Database Service Objective.
+    properties:
+      description:
+        description: The description for the service level objective.
+        readOnly: true
+        type: string
+      enabled:
+        description: Gets whether the service level objective is enabled.
+        readOnly: true
+        type: boolean
+      isDefault:
+        description: Gets whether the service level objective is the default service objective.
+        readOnly: true
+        type: boolean
+      isSystem:
+        description: Gets whether the service level objective is a system service objective.
+        readOnly: true
+        type: boolean
+      serviceObjectiveName:
+        description: The name for the service objective.
+        readOnly: true
+        type: string
+  ServiceTierAdvisor:
+    allOf:
+      - $ref: '#/definitions/SqlSubResource'
+    description: Represents a Service Tier Advisor.
+    properties:
+      properties:
+        $ref: '#/definitions/ServiceTierAdvisorProperties'
+        description: The properites representing the resource.
+        readOnly: true
+        x-ms-client-flatten: true
+  ServiceTierAdvisorListResult:
+    description: Represents the response to a list service tier advisor request.
+    properties:
+      value:
+        description: The list of service tier advisors for specified database.
+        items:
+          $ref: '#/definitions/ServiceTierAdvisor'
+        type: array
+    required:
+      - value
+  ServiceTierAdvisorProperties:
+    description: Represents the properties of a Service Tier Advisor.
+    properties:
+      activeTimeRatio:
+        description: The activeTimeRatio for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      avgDtu:
+        description: Gets or sets avgDtu for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      confidence:
+        description: Gets or sets confidence for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      currentServiceLevelObjective:
+        description: Gets or sets currentServiceLevelObjective for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+      currentServiceLevelObjectiveId:
+        description: Gets or sets currentServiceLevelObjectiveId for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+      databaseSizeBasedRecommendationServiceLevelObjective:
+        description: Gets or sets databaseSizeBasedRecommendationServiceLevelObjective for service tier advisor.
+        readOnly: true
+        type: string
+      databaseSizeBasedRecommendationServiceLevelObjectiveId:
+        description: Gets or sets databaseSizeBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+      disasterPlanBasedRecommendationServiceLevelObjective:
+        description: Gets or sets disasterPlanBasedRecommendationServiceLevelObjective for service tier advisor.
+        readOnly: true
+        type: string
+      disasterPlanBasedRecommendationServiceLevelObjectiveId:
+        description: Gets or sets disasterPlanBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+      maxDtu:
+        description: Gets or sets maxDtu for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      maxSizeInGB:
+        description: Gets or sets maxSizeInGB for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      minDtu:
+        description: Gets or sets minDtu for service tier advisor.
+        format: double
+        readOnly: true
+        type: number
+      observationPeriodEnd:
+        description: The observation period start (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      observationPeriodStart:
+        description: The observation period start (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      overallRecommendationServiceLevelObjective:
+        description: Gets or sets overallRecommendationServiceLevelObjective for service tier advisor.
+        readOnly: true
+        type: string
+      overallRecommendationServiceLevelObjectiveId:
+        description: Gets or sets overallRecommendationServiceLevelObjectiveId for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+      serviceLevelObjectiveUsageMetrics:
+        description: Gets or sets serviceLevelObjectiveUsageMetrics for the service tier advisor.
+        items:
+          $ref: '#/definitions/SloUsageMetric'
+        readOnly: true
+        type: array
+      usageBasedRecommendationServiceLevelObjective:
+        description: Gets or sets usageBasedRecommendationServiceLevelObjective for service tier advisor.
+        readOnly: true
+        type: string
+      usageBasedRecommendationServiceLevelObjectiveId:
+        description: Gets or sets usageBasedRecommendationServiceLevelObjectiveId for service tier advisor.
+        format: uuid
+        readOnly: true
+        type: string
+  SloUsageMetric:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents a Slo Usage Metric.
+    properties:
+      inRangeTimeRatio:
+        description: Gets or sets inRangeTimeRatio for SLO usage metric.
+        format: double
+        type: number
+      serviceLevelObjective:
+        description: The serviceLevelObjective for SLO usage metric.
+        enum:
+          - Basic
+          - S0
+          - S1
+          - S2
+          - S3
+          - P1
+          - P2
+          - P3
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ServiceObjectiveName
+      serviceLevelObjectiveId:
+        description: The serviceLevelObjectiveId for SLO usage metric.
+        enum:
+          - dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
+          - f1173c43-91bd-4aaa-973c-54e79e15235b
+          - 1b1ebd4d-d903-4baa-97f9-4ea675f5e928
+          - 455330e1-00cd-488b-b5fa-177c226f28b7
+          - 789681b8-ca10-4eb0-bdf2-e0b050601b40
+          - 7203483a-c4fb-4304-9e9f-17c71c904f5d
+          - a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0
+          - a7c4c615-cfb1-464b-b252-925be0a19446
+        format: uuid
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ServiceObjectiveId
+  SqlSubResource:
+    description: Subresource properties
+    properties:
+      id:
+        description: The resource ID.
+        readOnly: true
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+  Table:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents an Azure SQL Database table.
+    properties:
+      properties:
+        $ref: '#/definitions/TableProperties'
+        description: The properties representing the resource.
+        x-ms-client-flatten: true
+  TableProperties:
+    description: Represents the properties of an Azure SQL Database table.
+    properties:
+      columns:
+        description: The columns from this table.
+        items:
+          $ref: '#/definitions/Column'
+        readOnly: true
+        type: array
+      recommendedIndexes:
+        description: The recommended indices for this table.
+        items:
+          $ref: '#/definitions/RecommendedIndex'
+        readOnly: true
+        type: array
+      tableType:
+        description: The type of Azure SQL Database table.
+        enum:
+          - BaseTable
+          - View
+        readOnly: true
+        type: string
+        x-ms-enum:
+          name: TableType
+  TransparentDataEncryption:
+    allOf:
+      - $ref: '#/definitions/SqlSubResource'
+    description: Represents an Azure SQL Database Transparent Data Encryption .
+    properties:
+      properties:
+        $ref: '#/definitions/TransparentDataEncryptionProperties'
+        description: Represents the properties of the resource.
+        x-ms-client-flatten: true
+  TransparentDataEncryptionActivity:
+    allOf:
+      - $ref: '#/definitions/SqlSubResource'
+    description: Represents an Azure SQL Database Transparent Data Encryption Scan.
+    properties:
+      properties:
+        $ref: '#/definitions/TransparentDataEncryptionActivityProperties'
+        description: Represents the properties of the resource.
+        x-ms-client-flatten: true
+  TransparentDataEncryptionActivityListResult:
+    description: Represents the response to a List Azure SQL Database Transparent Data Encryption Activity request.
+    properties:
+      value:
+        description: The list of Azure SQL Database Transparent Data Encryption Activities.
+        items:
+          $ref: '#/definitions/TransparentDataEncryptionActivity'
+        type: array
+    required:
+      - value
+  TransparentDataEncryptionActivityProperties:
+    description: Represents the properties of an Azure SQL Database Transparent Data Encryption Scan.
+    properties:
+      percentComplete:
+        description: The percent complete of the transparent data encryption scan for a Azure SQL Database.
+        format: float
+        readOnly: true
+        type: number
+      status:
+        description: The status of the Azure SQL database.
+        enum:
+          - Encrypting
+          - Decrypting
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: TransparentDataEncryptionActivityStates
+  TransparentDataEncryptionProperties:
+    description: Represents the properties of an Azure SQL Database Transparent Data Encryption.
+    properties:
+      status:
+        description: The status of the Azure SQL Database Transparent Data Encryption.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          name: TransparentDataEncryptionStates
+  UpgradeHint:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents a Upgrade Hint.
+    properties:
+      targetServiceLevelObjective:
+        description: TargetServiceLevelObjective for upgrade hint.
+        type: string
+      targetServiceLevelObjectiveId:
+        description: TargetServiceLevelObjectiveId for upgrade hint.
+        format: uuid
+        type: string
+  UpgradeRecommendedElasticPoolProperties:
+    description: Represents the properties of a Azure SQL Recommended Elastic Pool being upgraded.
+    properties:
+      DatabaseCollection:
+        description: The list of database names to be put in the Azure SQL Recommended Elastic Pool being upgraded.
+        items:
+          type: string
+        type: array
+      DatabaseDtuMax:
+        description: The DTU cap for database for the Azure SQL Recommended Elastic Pool being upgraded.
+        format: int32
+        type: integer
+      DatabaseDtuMin:
+        description: The DTU guarantee for database for the Azure SQL Recommended Elastic Pool being upgraded.
+        format: int32
+        type: integer
+      Dtu:
+        description: The DTU guarantee for the Azure SQL Recommended Elastic Pool being upgraded.
+        format: int32
+        type: integer
+      Edition:
+        description: The target edition for the Azure SQL Recommended Elastic Pool being upgraded.
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          name: TargetElasticPoolEditions
+      IncludeAllDatabases:
+        description: Gets or sets whether all databases to be put in the Azure SQL Recommended Elastic Pool being upgraded.
+        type: boolean
+      Name:
+        description: The name of the Azure SQL Recommended Elastic Pool being upgraded.
+        type: string
+      StorageMb:
+        description: The storage limit in MB for the Azure SQL Recommended Elastic Pool being upgraded.
+        format: int32
+        type: integer
+    required:
+      - Name
+      - Edition

@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: REST API for Azure Server Management Service
+  description: REST API for Azure Server Management Service.
   title: ServerManagement
   version: 2016-07-01-preview
   x-apisguru-categories:
@@ -29,7 +29,7 @@ produces:
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow
+    description: Azure Active Directory OAuth2 Flow.
     flow: implicit
     scopes:
       user_impersonation: impersonate your user account
@@ -39,7 +39,7 @@ security:
       - user_impersonation
 parameters:
   ApiVersionParameter:
-    description: Client Api Version.
+    description: Client API Version.
     in: query
     name: api-version
     required: true
@@ -53,18 +53,18 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.ServerManagement/gateways':
     get:
-      description: Returns gateways in a subscription
+      description: Returns gateways in a subscription.
       operationId: Gateway_List
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
-          description: the operation completed successfully.
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/GatewayResources'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -73,18 +73,18 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.ServerManagement/nodes':
     get:
-      description: Returns nodes in a subscription
+      description: Lists nodes in a subscription.
       operationId: Node_List
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
-          description: the operation completed successfully.
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/NodeResources'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -93,7 +93,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways':
     get:
-      description: Returns gateways in a resource group
+      description: Returns gateways in a resource group.
       operationId: Gateway_ListForResourceGroup
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -107,11 +107,11 @@ paths:
           type: string
       responses:
         '200':
-          description: the operation completed successfully.
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/GatewayResources'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -142,17 +142,17 @@ paths:
           type: string
       responses:
         '200':
-          description: the object exists and was deleted successfully.
+          description: The object exists and was deleted successfully.
         '204':
-          description: the resource does not exist and the request is well formed
+          description: The request is well formed but the resource does not exist.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
         - Gateways
     get:
-      description: Returns a gateway
+      description: Gets a gateway.
       operationId: Gateway_Get
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -185,11 +185,11 @@ paths:
             name: GatewayExpandOption
       responses:
         '200':
-          description: the operation completed successfully.
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/GatewayResource'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -228,9 +228,9 @@ paths:
           schema:
             $ref: '#/definitions/GatewayResource'
         '202':
-          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+          description: 'Accepted: The location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       x-ms-long-running-operation: true
@@ -264,15 +264,15 @@ paths:
           x-ms-client-flatten: true
       responses:
         '200':
-          description: the operation completed successfully
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/GatewayResource'
         '201':
-          description: the operation completed successfully
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/GatewayResource'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -280,7 +280,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways/{gatewayName}/profile':
     post:
-      description: Gets a gateway profile
+      description: Gets a gateway profile.
       operationId: Gateway_GetProfile
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -302,13 +302,13 @@ paths:
           type: string
       responses:
         '200':
-          description: the operation completed successfully.
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/GatewayProfile'
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -338,11 +338,11 @@ paths:
           type: string
       responses:
         '200':
-          description: the operation completed successfully.
+          description: The operation completed successfully.
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -350,7 +350,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways/{gatewayName}/upgradetolatest':
     post:
-      description: Upgrade a gateway
+      description: Upgrades a gateway.
       operationId: Gateway_Upgrade
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -372,11 +372,11 @@ paths:
           type: string
       responses:
         '200':
-          description: the operation completed successfully.
+          description: The operation completed successfully.
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -384,7 +384,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes':
     get:
-      description: Returns nodes in a resource group
+      description: Lists nodes in a resource group.
       operationId: Node_ListForResourceGroup
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -398,11 +398,11 @@ paths:
           type: string
       responses:
         '200':
-          description: the operation completed successfully.
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/NodeResources'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -433,17 +433,17 @@ paths:
           type: string
       responses:
         '200':
-          description: the object exists and was deleted successfully.
+          description: The object exists and was deleted successfully.
         '204':
-          description: the resource does not exist and the request is well formed
+          description: The request is well formed but the resource does not exist.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
         - Nodes
     get:
-      description: gets a management node
+      description: Gets a management node.
       operationId: Node_Get
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -465,17 +465,17 @@ paths:
           type: string
       responses:
         '200':
-          description: the object exists and was deleted successfully.
+          description: The object exists and was deleted successfully.
           schema:
             $ref: '#/definitions/NodeResource'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
         - Nodes
     patch:
-      description: Updates a management node
+      description: Updates a management node.
       operationId: Node_Update
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -510,14 +510,14 @@ paths:
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
         - Nodes
       x-ms-long-running-operation: true
     put:
-      description: Creates or updates a management node
+      description: Creates or updates a management node.
       operationId: Node_Create
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -546,17 +546,17 @@ paths:
           x-ms-client-flatten: true
       responses:
         '200':
-          description: The operation completed successfully
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/NodeResource'
         '201':
-          description: The operation completed successfully
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/NodeResource'
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -564,7 +564,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}':
     delete:
-      description: Deletes a session for a node
+      description: Deletes a session for a node.
       operationId: Session_Delete
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -584,7 +584,7 @@ paths:
           pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
           required: true
           type: string
-        - description: The sessionId from the user
+        - description: The sessionId from the user.
           in: path
           name: session
           required: true
@@ -593,15 +593,15 @@ paths:
         '200':
           description: The operation completed successfully.
         '204':
-          description: the resource does not exist and the request is well formed
+          description: The request is well formed but the resource does not exist.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
         - Sessions
     get:
-      description: Gets a session for a node
+      description: Gets a session for a node.
       operationId: Session_Get
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -621,7 +621,7 @@ paths:
           pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
           required: true
           type: string
-        - description: The sessionId from the user
+        - description: The sessionId from the user.
           in: path
           name: session
           required: true
@@ -632,13 +632,13 @@ paths:
           schema:
             $ref: '#/definitions/SessionResource'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
         - Sessions
     put:
-      description: Creates a session for a node
+      description: Creates a session for a node.
       operationId: Session_Create
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -658,7 +658,7 @@ paths:
           pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
           required: true
           type: string
-        - description: The sessionId from the user
+        - description: The sessionId from the user.
           in: path
           name: session
           required: true
@@ -672,17 +672,17 @@ paths:
           x-ms-client-flatten: true
       responses:
         '200':
-          description: The operation completed successfully
+          description: The operation completed successfully.
           schema:
             $ref: '#/definitions/SessionResource'
         '201':
-          description: 'Created: the session has been created'
+          description: 'Created: the session was created.'
           schema:
             $ref: '#/definitions/SessionResource'
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -710,7 +710,7 @@ paths:
           pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
           required: true
           type: string
-        - description: The sessionId from the user
+        - description: The sessionId from the user.
           in: path
           name: session
           required: true
@@ -721,7 +721,7 @@ paths:
           schema:
             $ref: '#/definitions/PowerShellSessionResources'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -748,12 +748,12 @@ paths:
           pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
           required: true
           type: string
-        - description: The sessionId from the user
+        - description: The sessionId from the user.
           in: path
           name: session
           required: true
           type: string
-        - description: The PowerShell sessionId from the user
+        - description: The PowerShell sessionId from the user.
           in: path
           name: pssession
           required: true
@@ -774,13 +774,13 @@ paths:
           schema:
             $ref: '#/definitions/PowerShellCommandStatus'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
         - PowerShell
     patch:
-      description: updates a running PowerShell command with more data.
+      description: Updates a running PowerShell command with more data.
       operationId: PowerShell_UpdateCommand
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -800,12 +800,12 @@ paths:
           pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
           required: true
           type: string
-        - description: The sessionId from the user
+        - description: The sessionId from the user.
           in: path
           name: session
           required: true
           type: string
-        - description: The PowerShell sessionId from the user
+        - description: The PowerShell sessionId from the user.
           in: path
           name: pssession
           required: true
@@ -818,14 +818,14 @@ paths:
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
         - PowerShell
       x-ms-long-running-operation: true
     put:
-      description: Creates a PowerShell session
+      description: Creates a PowerShell session.
       operationId: PowerShell_CreateSession
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -845,12 +845,12 @@ paths:
           pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
           required: true
           type: string
-        - description: The sessionId from the user
+        - description: The sessionId from the user.
           in: path
           name: session
           required: true
           type: string
-        - description: The PowerShell sessionId from the user
+        - description: The PowerShell sessionId from the user.
           in: path
           name: pssession
           required: true
@@ -863,7 +863,7 @@ paths:
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -891,12 +891,12 @@ paths:
           pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
           required: true
           type: string
-        - description: The sessionId from the user
+        - description: The sessionId from the user.
           in: path
           name: session
           required: true
           type: string
-        - description: The PowerShell sessionId from the user
+        - description: The PowerShell sessionId from the user.
           in: path
           name: pssession
           required: true
@@ -909,7 +909,7 @@ paths:
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -937,12 +937,12 @@ paths:
           pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
           required: true
           type: string
-        - description: The sessionId from the user
+        - description: The sessionId from the user.
           in: path
           name: session
           required: true
           type: string
-        - description: The PowerShell sessionId from the user
+        - description: The PowerShell sessionId from the user.
           in: path
           name: pssession
           required: true
@@ -962,7 +962,7 @@ paths:
         '202':
           description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -970,7 +970,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions/{pssession}/tab':
     post:
-      description: gets tab completion values for a command.
+      description: Gets tab completion values for a command.
       operationId: PowerShell_TabCompletion
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -990,12 +990,12 @@ paths:
           pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
           required: true
           type: string
-        - description: The sessionId from the user
+        - description: The sessionId from the user.
           in: path
           name: session
           required: true
           type: string
-        - description: The PowerShell sessionId from the user
+        - description: The PowerShell sessionId from the user.
           in: path
           name: pssession
           required: true
@@ -1013,14 +1013,14 @@ paths:
           schema:
             $ref: '#/definitions/PowerShellTabCompletionResults'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
           schema:
             $ref: '#/definitions/Error'
       tags:
         - PowerShell
 definitions:
   EncryptionJwkResource:
-    description: the public key of the gateway
+    description: The public key of the gateway.
     properties:
       alg:
         type: string
@@ -1032,7 +1032,7 @@ definitions:
         type: string
     type: object
   Error:
-    description: Error message
+    description: Error message.
     properties:
       code:
         format: int32
@@ -1042,13 +1042,13 @@ definitions:
       message:
         type: string
   GatewayParameters:
-    description: collection of parameters for operations on a gateway resource
+    description: Collection of parameters for operations on a gateway resource.
     properties:
       location:
-        description: location of the resource
+        description: Location of the resource.
         type: string
       properties:
-        description: collection of properties
+        description: Collection of properties.
         properties:
           upgradeMode:
             description: 'The upgradeMode property gives the flexibility to gateway to auto upgrade itself. If properties value not specified, then we assume upgradeMode = Automatic.'
@@ -1062,81 +1062,81 @@ definitions:
         type: object
         x-ms-client-flatten: true
       tags:
-        description: resource tags
+        description: Resource tags.
         type: object
   GatewayProfile:
     description: JSON properties that the gateway service uses know how to communicate with the resource.
     properties:
       dataPlaneServiceBaseAddress:
-        description: the Dataplane connection URL
+        description: The Dataplane connection URL.
         type: string
       environment:
-        description: 'the environment for the gateway (DEV, DogFood, or Production)'
+        description: 'The environment for the gateway (DEV, DogFood, or Production).'
         type: string
       gatewayId:
-        description: the ID of the gateway
+        description: The ID of the gateway.
         type: string
       messagingAccount:
-        description: Messaging Account
+        description: Messaging Account.
         type: string
       messagingKey:
-        description: Messaging Key
+        description: Messaging Key.
         type: string
       messagingNamespace:
-        description: Messaging namespace
+        description: Messaging namespace.
         type: string
       requestQueue:
-        description: Request queue name
+        description: Request queue name.
         type: string
       responseTopic:
-        description: Response topic name
+        description: Response topic name.
         type: string
       statusBlobSignature:
-        description: The gateway status blob SAS url
+        description: The gateway status blob SAS URL.
         type: string
       upgradeManifestUrl:
-        description: Gateway upgrade manifest URL
+        description: Gateway upgrade manifest URL.
         type: string
   GatewayResource:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: data model for an arm gateway resource
+    description: Data model for an arm gateway resource.
     properties:
       properties:
-        description: collection of properties
+        description: Collection of properties.
         properties:
           activeMessageCount:
-            description: number of active messages
+            description: Number of active messages.
             type: integer
           created:
-            description: UTC date and time when gateway was first added to management service
+            description: UTC date and time when gateway was first added to management service.
             format: date-time
             type: string
           desiredVersion:
-            description: latest available msi version
+            description: Latest available MSI version.
             type: string
           installerDownload:
-            description: installer download uri
+            description: Installer download uri.
             readOnly: true
             type: string
           instances:
-            description: names of the nodes in the gateway
+            description: Names of the nodes in the gateway.
             items:
               $ref: '#/definitions/GatewayStatus'
             type: array
           latestPublishedMsiVersion:
-            description: last published msi version
+            description: Last published MSI version.
             type: string
           minimumVersion:
-            description: minimum gateway version
+            description: Minimum gateway version.
             readOnly: true
             type: string
           publishedTimeUtc:
-            description: the date/time of the last published gateway
+            description: The date/time of the last published gateway.
             format: date-time
             type: string
           updated:
-            description: UTC date and time when node was last updated
+            description: UTC date and time when node was last updated.
             format: date-time
             type: string
           upgradeMode:
@@ -1151,35 +1151,35 @@ definitions:
         type: object
         x-ms-client-flatten: true
   GatewayResources:
-    description: collection of Gateway Resources
+    description: Collection of Gateway Resources.
     properties:
       nextLink:
-        description: the URL to the next set of resources
+        description: The URL to the next set of resources.
         type: string
       value:
-        description: collection of Gateway Resources
+        description: Collection of Gateway Resources.
         items:
           $ref: '#/definitions/GatewayResource'
         type: array
     type: object
   GatewayStatus:
-    description: Expanded gateway status information
+    description: Expanded gateway status information.
     properties:
       activeMessageCount:
-        description: active message count
+        description: Active message count.
         type: integer
       allowGatewayGroupPolicyStatus:
-        description: Status of the allowGatewayGroupPolicy setting
+        description: Status of the allowGatewayGroupPolicy setting.
         type: boolean
       availableMemoryMByte:
         description: The available memory on the gateway host machine in megabytes.
         type: number
       encryptionCertificateThumbprint:
-        description: Thumbprint of the encryption certificate
+        description: Thumbprint of the encryption certificate.
         type: string
       encryptionJwk:
         $ref: '#/definitions/EncryptionJwkResource'
-        description: The encryption cerfiticate key
+        description: The encryption certificate key.
       friendlyOsName:
         description: The Plaintext description of the OS on the gateway.
         type: string
@@ -1190,7 +1190,7 @@ definitions:
         minimum: 0
         type: number
       gatewayId:
-        description: The gateway resource id.
+        description: The gateway resource ID.
         type: string
       gatewayVersion:
         description: The version of the gateway that is installed on the system.
@@ -1199,14 +1199,14 @@ definitions:
         description: The working set size of the gateway process in megabytes.
         type: number
       groupPolicyError:
-        description: The group policy error
+        description: The group policy error.
         type: string
       installedDate:
-        description: The date the gateway was installed
+        description: The date the gateway was installed.
         format: date-time
         type: string
       latestPublishedMsiVersion:
-        description: latest published version of the gateway install msi
+        description: Latest published version of the gateway install MSI.
         type: string
       logicalProcessorCount:
         description: Number of logical processors in the gateway system.
@@ -1215,69 +1215,69 @@ definitions:
         description: The computer name of the gateway system.
         type: string
       publishedTimeUtc:
-        description: gateway install msi published time
+        description: Gateway install MSI published time.
         format: date-time
         type: string
       requireMfaGroupPolicyStatus:
-        description: Status of the requireMfaGroupPolicy setting
+        description: Status of the requireMfaGroupPolicy setting.
         type: boolean
       secondaryEncryptionCertificateThumbprint:
-        description: Secondary thumbprint of the encryption certificate
+        description: Secondary thumbprint of the encryption certificate.
         type: string
       secondaryEncryptionJwk:
         $ref: '#/definitions/EncryptionJwkResource'
-        description: The secondary encryption cerfiticate key
+        description: The secondary encryption certificate key.
       statusUpdated:
-        description: UTC date and time when gateway status was last updated
+        description: UTC date and time when gateway status was last updated.
         format: date-time
         type: string
       totalCpuUtilizationPercent:
         description: CPU Utilization of the whole system.
         type: number
   NodeParameters:
-    description: parameter collection for operations on arm node resource
+    description: Parameter collection for operations on arm node resource.
     properties:
       location:
-        description: location of the resource?
+        description: Location of the resource.
         type: string
       properties:
-        description: collection of properties
+        description: Collection of properties.
         properties:
           connectionName:
             description: myhost.domain.com
             type: string
           gatewayId:
-            description: Gateway id which will manage this node
+            description: Gateway ID which will manage this node.
             type: string
           password:
-            description: Password associated with user name
+            description: Password associated with user name.
             format: password
             type: string
           userName:
-            description: User name to be used to connect to node
+            description: User name to be used to connect to node.
             type: string
         type: object
         x-ms-client-flatten: true
       tags:
-        description: resource tags
+        description: Resource tags.
         type: object
   NodeResource:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: A Node Resource
+    description: A Node Resource.
     properties:
       properties:
-        description: collection of properties
+        description: Collection of properties.
         properties:
           connectionName:
             description: myhost.domain.com
             type: string
           created:
-            description: UTC date and time when node was first added to management service
+            description: UTC date and time when node was first added to management service.
             format: date-time
             type: string
           gatewayId:
-            description: Id of the gateway
+            description: ID of the gateway.
             type: string
           updated:
             description: UTC date and time when node was last updated.
@@ -1286,65 +1286,65 @@ definitions:
         type: object
         x-ms-client-flatten: true
   NodeResources:
-    description: a collection of node resource objects
+    description: A collection of node resource objects.
     properties:
       nextLink:
-        description: the URL to the next set of resources
+        description: The URL to the next set of resources.
         type: string
       value:
-        description: Collection of Node Resources
+        description: Collection of Node Resources.
         items:
           $ref: '#/definitions/NodeResource'
         type: array
     type: object
   PowerShellCommandParameters:
-    description: the parameters to a powershell script execution command
+    description: The parameters to a PowerShell script execution command.
     properties:
       properties:
-        description: collection of properties
+        description: Collection of properties.
         properties:
           command:
-            description: Script to execute
+            description: Script to execute.
             type: string
         type: object
         x-ms-client-flatten: true
   PowerShellCommandResult:
-    description: results from invoking a powershell command
+    description: Results from invoking a PowerShell command.
     properties:
       backgroundColor:
-        description: the HTML color string representing the background color.
+        description: The HTML color string representing the background color.
         type: string
       caption:
-        description: text that precedes the prompt.
+        description: Text that precedes the prompt.
         type: string
       descriptions:
-        description: collection of PromptFieldDescription objects that contains the user input
+        description: Collection of PromptFieldDescription objects that contains the user input.
         items:
           $ref: '#/definitions/PromptFieldDescription'
         type: array
       exitCode:
-        description: the exit code from a executable that was called from powershell.
+        description: The exit code from a executable that was called from PowerShell.
         type: integer
       foregroundColor:
-        description: the HTML color string representing the foreground color.
+        description: The HTML color string representing the foreground color.
         type: string
       id:
-        description: ID of the prompt message
+        description: ID of the prompt message.
         type: integer
       message:
-        description: text of the prompt.
+        description: Text of the prompt.
         type: string
       messageType:
-        description: the type of message
+        description: The type of message.
         type: integer
       prompt:
-        description: The interactive prompt message
+        description: The interactive prompt message.
         type: string
       value:
-        description: actual result text from the PowerShell Command
+        description: Actual result text from the PowerShell Command.
         type: string
   PowerShellCommandResults:
-    description: a collection of results from a powershell command
+    description: A collection of results from a PowerShell command.
     properties:
       command:
         type: string
@@ -1360,7 +1360,7 @@ definitions:
   PowerShellCommandStatus:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: result status from invoking a powershell command
+    description: Result status from invoking a PowerShell command.
     properties:
       properties:
         $ref: '#/definitions/PowerShellCommandResults'
@@ -1368,10 +1368,10 @@ definitions:
   PowerShellSessionResource:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: A powershell session resource (practically equivalent to a runspace instance)
+    description: A PowerShell session resource (practically equivalent to a runspace instance).
     properties:
       properties:
-        description: collection of properties
+        description: Collection of properties.
         properties:
           disconnectedOn:
             description: Timestamp of last time the service disconnected from the runspace.
@@ -1382,13 +1382,13 @@ definitions:
             format: date-time
             type: string
           name:
-            description: Name of the runspace
+            description: Name of the runspace.
             type: string
           runspaceAvailability:
             description: The availability of the runspace.
             type: string
           sessionId:
-            description: the PowerShell Session Id.
+            description: The PowerShell Session ID.
             type: string
           state:
             description: The runspace state.
@@ -1398,25 +1398,25 @@ definitions:
         type: object
         x-ms-client-flatten: true
   PowerShellSessionResources:
-    description: a collaction of powershell session resources
+    description: A collection of PowerShell session resources
     properties:
       nextLink:
-        description: the URL to the next set of resources
+        description: The URL to the next set of resources.
         type: string
       value:
-        description: Colleciton of powershell session resources
+        description: Collection of PowerShell session resources.
         items:
           $ref: '#/definitions/PowerShellSessionResource'
         type: array
     type: object
   PowerShellTabCompletionParameters:
-    description: collection of parameters for powershell tab completion
+    description: Collection of parameters for PowerShell tab completion.
     properties:
       command:
         description: Command to get tab completion for.
         type: string
   PowerShellTabCompletionResults:
-    description: an array of strings representing the different values that can be tabbed thru
+    description: An array of strings representing the different values that can be selected through.
     properties:
       results:
         items:
@@ -1426,13 +1426,13 @@ definitions:
     description: Field description for the implementation of PSHostUserInterface.Prompt
     properties:
       helpMessage:
-        description: the help message of the prompt
+        description: The help message of the prompt.
         type: string
       label:
-        description: the label text of the prompt
+        description: The label text of the prompt.
         type: string
       name:
-        description: the name of the prompt
+        description: The name of the prompt.
         type: string
       promptFieldType:
         enum:
@@ -1444,54 +1444,54 @@ definitions:
           modelAsString: false
           name: PromptFieldType
       promptFieldTypeIsList:
-        description: when set to 'true' the prompt field type is a list of values
+        description: When set to 'true' the prompt field type is a list of values.
         type: boolean
   PromptMessageResponse:
-    description: the response to a prompt message
+    description: The response to a prompt message.
     properties:
       response:
-        description: the list of responses a cmdlet expects
+        description: The list of responses a cmdlet expects.
         items:
           type: string
         type: array
   Resource:
-    description: ARM Resource Information
+    description: Resource Manager Resource Information.
     properties:
       etag:
         type: string
       id:
-        description: ARM Resource ID
+        description: Resource Manager Resource ID.
         readOnly: true
         type: string
       location:
-        description: ARM Resource Location
+        description: Resource Manager Resource Location.
         readOnly: true
         type: string
       name:
-        description: ARM Resource Name
+        description: Resource Manager Resource Name.
         readOnly: true
         type: string
       tags:
         additionalProperties:
           type: string
-        description: ARM Resource Tags
+        description: Resource Manager Resource Tags.
         type: object
       type:
-        description: ARM Resource Type
+        description: Resource Manager Resource Type.
         readOnly: true
         type: string
     x-ms-azure-resource: true
   SessionParameters:
-    description: parameter collection for creation and other operations on sessions
+    description: Parameter collection for creation and other operations on sessions.
     properties:
       properties:
-        description: collection of properties
+        description: Collection of properties
         properties:
           EncryptionCertificateThumbprint:
-            description: encryption certificate thumbprint
+            description: Encryption certificate thumbprint.
             type: string
           credentialDataFormat:
-            description: credential data format
+            description: Credential data format.
             enum:
               - RsaEncrypted
             type: string
@@ -1499,10 +1499,10 @@ definitions:
               modelAsString: false
               name: credentialDataFormat
           password:
-            description: encrypted Password associated with user name
+            description: Encrypted Password associated with user name.
             type: string
           retentionPeriod:
-            description: session retention period
+            description: Session retention period.
             enum:
               - Session
               - Persistent
@@ -1511,20 +1511,20 @@ definitions:
               modelAsString: false
               name: retentionPeriod
           userName:
-            description: encrypted User name to be used to connect to node
+            description: Encrypted User name to be used to connect to node.
             type: string
         type: object
         x-ms-client-flatten: true
   SessionResource:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: the session object
+    description: The session object.
     properties:
       properties:
-        description: collection of properties
+        description: Collection of properties.
         properties:
           created:
-            description: UTC date and time when node was first added to management service
+            description: UTC date and time when node was first added to management service.
             format: date-time
             type: string
           updated:
@@ -1532,28 +1532,28 @@ definitions:
             format: date-time
             type: string
           userName:
-            description: the username connecting to the session
+            description: The username connecting to the session.
             type: string
         type: object
         x-ms-client-flatten: true
   Version:
-    description: A multipart-numeric version number
+    description: A multipart-numeric version number.
     properties:
       build:
-        description: the third number of the version
+        description: The third number of the version.
         type: integer
       major:
-        description: the leftmost number of the version
+        description: The leftmost number of the version.
         type: integer
       majorRevision:
-        description: the MSW of the fourth part
+        description: The MSW of the fourth part.
         type: integer
       minor:
-        description: the second leftmost number of the version
+        description: The second leftmost number of the version.
         type: integer
       minorRevision:
-        description: the LSW of the fourth part
+        description: The LSW of the fourth part.
         type: integer
       revision:
-        description: the fourth number of the version
+        description: The fourth number of the version.
         type: integer

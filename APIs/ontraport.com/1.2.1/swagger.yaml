@@ -762,6 +762,32 @@ paths:
       summary: This will get a list of existing Object types
       tags:
         - objects
+  /objects/pause:
+    post:
+      description: This will pause a Sequence. Either <b>ids</b> or <b>group_ids</b> must be given.
+      operationId: pause
+      parameters:
+        - $ref: '#/parameters/objectIdParamFormData'
+        - $ref: '#/parameters/idsParamFormData'
+        - $ref: '#/parameters/startParamFormData'
+        - $ref: '#/parameters/rangeParamFormData'
+        - $ref: '#/parameters/sortParamFormData'
+        - $ref: '#/parameters/sortDirParamFormData'
+        - $ref: '#/parameters/conditionParamFormData'
+        - $ref: '#/parameters/searchParamFormData'
+        - $ref: '#/parameters/date_rangeParamFormData'
+        - $ref: '#/parameters/group_idsParamFormData'
+        - $ref: '#/parameters/externsParamFormData'
+        - $ref: '#/parameters/listFieldsParamFormData'
+      responses:
+        '200':
+          description: Successfully pause Sequence(s)
+          schema:
+            $ref: '#/definitions/Response'
+            type: object
+      summary: This will pause a Sequence
+      tags:
+        - objects
   /objects/saveorupdate:
     post:
       description: 'This will create an Object with the given data or will merge with an Object in the database if the unique field matches another Object’s. Object type is a required parameter, but other parameters are optional and depend on the Object type. We have provided optional parameters as examples for updating a Contact. When using this in your application, all invalid parameters will be ignored.'
@@ -844,6 +870,32 @@ paths:
             $ref: '#/definitions/Response'
             type: object
       summary: This will add an Object Tag
+      tags:
+        - objects
+  /objects/unpause:
+    post:
+      description: This will upause a Sequence. Either <b>ids</b> or <b>group_ids</b> must be given.
+      operationId: unpause
+      parameters:
+        - $ref: '#/parameters/objectIdParamFormData'
+        - $ref: '#/parameters/idsParamFormData'
+        - $ref: '#/parameters/startParamFormData'
+        - $ref: '#/parameters/rangeParamFormData'
+        - $ref: '#/parameters/sortParamFormData'
+        - $ref: '#/parameters/sortDirParamFormData'
+        - $ref: '#/parameters/conditionParamFormData'
+        - $ref: '#/parameters/searchParamFormData'
+        - $ref: '#/parameters/date_rangeParamFormData'
+        - $ref: '#/parameters/group_idsParamFormData'
+        - $ref: '#/parameters/externsParamFormData'
+        - $ref: '#/parameters/listFieldsParamFormData'
+      responses:
+        '200':
+          description: Successfully unpaused Sequence(s)
+          schema:
+            $ref: '#/definitions/Response'
+            type: object
+      summary: This will unpause a Sequence
       tags:
         - objects
   /task/cancel:

@@ -1258,8 +1258,10 @@ paths:
           name: fileId
           required: true
           type: string
-        - description: The maximum number of revisions to return per page.
+        - default: 200
+          description: The maximum number of revisions to return per page.
           in: query
+          maximum: 1000
           minimum: 1
           name: pageSize
           type: integer

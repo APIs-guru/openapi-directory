@@ -1329,6 +1329,9 @@ definitions:
       gcsPath:
         description: A path to the serialized JSON representation of the job.
         type: string
+      jobName:
+        description: The job name to use for the created job..
+        type: string
       parameters:
         additionalProperties:
           type: string
@@ -2038,6 +2041,9 @@ definitions:
       trackingSubscription:
         description: 'If set, specifies the pubsub subscription that will be used for tracking custom time timestamps for watermark estimation.'
         type: string
+      withAttributes:
+        description: 'If true, then the client has requested to get pubsub attributes.'
+        type: boolean
     type: object
   ReadInstruction:
     description: 'An instruction that reads records. Takes no inputs, produces one output.'

@@ -469,7 +469,83 @@ paths:
       summary: Get Observations of a Certain Type For a User
       tags:
         - observation-controller
+  '/user/{userId}/observations/{code}/patiententered':
+    get:
+      deprecated: false
+      description: 'Given a User ID and observation code, retrieve patient entered observations.'
+      operationId: getPatientEnteredObservationsByCode
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+        - description: code
+          in: path
+          name: code
+          required: true
+          type: string
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/FhirObservation'
+            type: array
+            uniqueItems: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get patient entered Observations of a Certain Type For a User
+      tags:
+        - observation-controller
+  '/user/{userId}/patiententeredobservationheadings':
+    get:
+      deprecated: false
+      description: Given a User ID retrieve a list of available observation types for that user (where they have patient entered observation data).
+      operationId: getPatientEnteredObservationHeadings
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ObservationHeading'
+            type: array
+            uniqueItems: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get Available Patient Entered Observations Types For a User
+      tags:
+        - observation-heading-controller
 definitions:
+  ApiKey:
+    properties:
+      expired:
+        type: boolean
+      expiryDate:
+        format: date-time
+        type: string
+      key:
+        type: string
   BaseGroup:
     properties:
       code:
@@ -1239,6 +1315,8 @@ definitions:
   UUID: {}
   User:
     properties:
+      apiKey:
+        $ref: '#/definitions/ApiKey'
       canSwitchUser:
         type: boolean
       changePassword:

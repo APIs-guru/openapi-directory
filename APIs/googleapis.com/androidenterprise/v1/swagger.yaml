@@ -3683,7 +3683,7 @@ definitions:
           type: string
         type: array
       productSetBehavior:
-        description: 'The interpretation of this product set. "unknown" should never be sent and ignored if received. "whitelist" means that this product set constitutes a whitelist. "includeAll" means that all products are accessible (the value of the productId field is therefore ignored). If a value is not supplied, it is interpreted to be "whitelist" for backwards compatibility.'
+        description: 'The interpretation of this product set. "unknown" should never be sent and ignored if received. "whitelist" means that this product set constitutes a whitelist. "includeAll" means that all products are accessible, including products that are approved, not approved, and even products where approval has been revoked. If the value is "includeAll", the value of the productId field is therefore ignored. If a value is not supplied, it is interpreted to be "whitelist" for backwards compatibility.'
         type: string
     type: object
   ProductsApproveRequest:
@@ -3813,7 +3813,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#storeLayout".'
         type: string
       storeLayoutType:
-        description: 'Sets a store layout type. By default, this value is set to "basic". If set to "custom", "homepageId" must be specified. If set to "basic", the layout will consist of all approved apps accessible by the user, split in pages of 100 each; in this case, "homepageId" must not be specified. The "basic" setting takes precedence over any existing collections setup for this enterprise (if any). Should the enterprise use collectionViewers for controlling access rights, these will still be respected.'
+        description: 'The store layout type. By default, this value is set to "basic". If set to "custom", "homepageId" must be specified. If set to "basic", the layout will consist of all approved apps accessible by the user, split in pages of 100 each; in this case, "homepageId" must not be specified. The "basic" setting takes precedence over any existing collections setup for this enterprise (if any). Should the enterprise use collectionViewers for controlling access rights, these will still be respected.'
         type: string
     type: object
   StoreLayoutClustersListResponse:

@@ -11,7 +11,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2016-03-01/swagger/insightsClient.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2016-03-01/swagger/insightsClient_MetricDefinitions.json'
     version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -31,7 +31,7 @@ parameters:
     required: true
     type: string
   FilterParameter:
-    description: 'The filter to apply on the operation. For more information please see https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx'
+    description: Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.
     in: query
     name: $filter
     required: false
@@ -54,7 +54,7 @@ parameters:
 paths:
   '/{resourceUri}/providers/microsoft.insights/metricDefinitions':
     get:
-      description: Lists the metric definitions for the resource.
+      description: 'Lists the metric definitions for the resource. The **$filter** parameter is optional, and can be used to only retrieve certain metric definitions. For example, get just the definition for the CPU percentage counter: $filter=name.value eq ''\Processor(_Total)\% Processor Time''. This $filter is very restricted and allows only these ''name eq <value>'' clauses separated by or operators. No other syntax is allowed.'
       operationId: MetricDefinitions_List
       parameters:
         - $ref: '#/parameters/ResourceUriParameter'
@@ -63,6 +63,33 @@ paths:
       responses:
         '200':
           description: Successful request to get the list of metric definitions
+          examples:
+            application/json:
+              value:
+                - id: /subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp/providers/microsoft.insights/metricdefinitions/RunsStarted
+                  metricAvailabilities:
+                    - retention: P30D
+                      timeGrain: PT1M
+                    - retention: P30D
+                      timeGrain: PT1H
+                  name:
+                    localizedValue: Runs Started
+                    value: RunsStarted
+                  primaryAggregationType: Total
+                  resourceId: /subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp
+                  unit: Count
+                - id: /subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp/providers/microsoft.insights/metricdefinitions/RunsCompleted
+                  metricAvailabilities:
+                    - retention: P30D
+                      timeGrain: PT1M
+                    - retention: P30D
+                      timeGrain: PT1H
+                  name:
+                    localizedValue: Runs Completed
+                    value: RunsCompleted
+                  primaryAggregationType: Total
+                  resourceId: /subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp
+                  unit: Count
           schema:
             $ref: '#/definitions/MetricDefinitionCollection'
       tags:
@@ -79,15 +106,17 @@ definitions:
       value:
         description: the invariant value.
         type: string
+    required:
+      - value
   MetricAvailability:
     description: Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain.
     properties:
       retention:
-        description: 'the retention period for the metric at the specified timegrain.  Expressed as a duration ''PT1M'', ''P1D'' etc.'
+        description: 'the retention period for the metric at the specified timegrain.  Expressed as a duration ''PT1M'', ''P1D'', etc.'
         format: duration
         type: string
       timeGrain:
-        description: 'the time grain specifies the aggregation interval for the metric. Expressed as a duration ''PT1M'', ''P1D'' etc.'
+        description: 'the time grain specifies the aggregation interval for the metric. Expressed as a duration ''PT1M'', ''P1D'', etc.'
         format: duration
         type: string
   MetricDefinition:
@@ -103,7 +132,7 @@ definitions:
         type: array
       name:
         $ref: '#/definitions/LocalizableString'
-        description: the name and the display name of the metric.
+        description: 'the name and the display name of the metric, i.e. it is a localizable string.'
       primaryAggregationType:
         description: the primary aggregation type value defining how to use the values for display.
         enum:
@@ -118,7 +147,7 @@ definitions:
           modelAsString: false
           name: AggregationType
       resourceId:
-        description: the resource identifier of the resource that has emitted the metric.
+        description: the resource identifier of the resource that emitted the metric.
         type: string
       unit:
         $ref: '#/definitions/Unit'

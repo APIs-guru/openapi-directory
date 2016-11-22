@@ -1259,6 +1259,38 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/getXpnHost':
+    get:
+      description: Get the XPN host project that this project links to. May be empty if no link exists.
+      operationId: compute.projects.getXpnHost
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Project'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/global/addresses':
     get:
       description: Retrieves a list of global addresses.
@@ -5743,6 +5775,42 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - urlMaps
+  '/{project}/listXpnHosts':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: List all XPN host projects visible to the user in an organization.
+      operationId: compute.projects.listXpnHosts
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProjectsListXpnHostsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/XpnHostList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - projects
   '/{project}/moveDisk':
     parameters:
       - $ref: '#/parameters/alt'
@@ -7375,21 +7443,6 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
-          type: string
-        - in: query
-          name: filter
-          type: string
-        - default: 500
-          in: query
-          maximum: 500
-          minimum: 0
-          name: maxResults
-          type: integer
-        - in: query
-          name: order_by
-          type: string
-        - in: query
-          name: pageToken
           type: string
       responses:
         '200':
@@ -11090,21 +11143,6 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
-        - in: query
-          name: filter
-          type: string
-        - default: 500
-          in: query
-          maximum: 500
-          minimum: 0
-          name: maxResults
-          type: integer
-        - in: query
-          name: order_by
-          type: string
-        - in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -12543,6 +12581,50 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/setServiceAccount':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the service account on the instance.
+      operationId: compute.instances.setServiceAccount
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the instance resource to start.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesSetServiceAccountRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
   '/{project}/zones/{zone}/instances/{instance}/setTags':
     parameters:
       - $ref: '#/parameters/alt'
@@ -13934,6 +14016,8 @@ definitions:
         items:
           type: string
         type: array
+      iap:
+        $ref: '#/definitions/BackendServiceIAP'
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         format: uint64
@@ -14038,6 +14122,18 @@ definitions:
       kind:
         default: 'compute#backendServiceGroupHealth'
         description: '[Output Only] Type of resource. Always compute#backendServiceGroupHealth for the health of backend services.'
+        type: string
+    type: object
+  BackendServiceIAP:
+    description: Identity-Aware Proxy (Cloud Gatekeeper)
+    properties:
+      enabled:
+        type: boolean
+      oauth2ClientId:
+        type: string
+      oauth2ClientSecret:
+        type: string
+      oauth2ClientSecretSha256:
         type: string
     type: object
   BackendServiceList:
@@ -14922,33 +15018,11 @@ definitions:
     description: Guest OS features.
     properties:
       type:
-        description: The type of supported feature. Currenty only VIRTIO_SCSI_MULTIQUEUE is supported.
+        description: 'The type of supported feature. Currenty only VIRTIO_SCSI_MULTIQUEUE is supported. For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image. This value is purely informational and does not enable or disable any features.'
         enum:
           - FEATURE_TYPE_UNSPECIFIED
           - VIRTIO_SCSI_MULTIQUEUE
           - WINDOWS
-        type: string
-    type: object
-  HTTP2HealthCheck:
-    properties:
-      host:
-        description: 'The value of the host header in the HTTP/2 health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
-        type: string
-      port:
-        description: The TCP port number for the health check request. The default value is 443.
-        format: int32
-        type: integer
-      portName:
-        description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
-        type: string
-      proxyHeader:
-        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
-        enum:
-          - NONE
-          - PROXY_V1
-        type: string
-      requestPath:
-        description: The request path of the HTTP/2 health check request. The default value is /.
         type: string
     type: object
   HTTPHealthCheck:
@@ -15012,8 +15086,6 @@ definitions:
         description: A so-far unhealthy instance will be marked healthy after this many consecutive successes. The default value is 2.
         format: int32
         type: integer
-      http2HealthCheck:
-        $ref: '#/definitions/HTTP2HealthCheck'
       httpHealthCheck:
         $ref: '#/definitions/HTTPHealthCheck'
       httpsHealthCheck:
@@ -15045,12 +15117,14 @@ definitions:
         description: 'Specifies the type of the healthCheck, either TCP, UDP, SSL, HTTP, HTTPS or HTTP2. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.'
         enum:
           - HTTP
-          - HTTP2
           - HTTPS
           - INVALID
           - SSL
           - TCP
+          - UDP
         type: string
+      udpHealthCheck:
+        $ref: '#/definitions/UDPHealthCheck'
       unhealthyThreshold:
         description: A so-far healthy instance will be marked unhealthy after this many consecutive failures. The default value is 2.
         format: int32
@@ -15292,7 +15366,10 @@ definitions:
         description: The name of the image family to which this image belongs. You can create disks by specifying an image family instead of a specific image name. The image family always returns its latest image that is not deprecated. The name of the image family must comply with RFC1035.
         type: string
       guestOsFeatures:
-        description: 'A list of features to enable on the guest OS. Applicable for bootable images only. Currently, only one feature is supported, VIRTIO_SCSCI_MULTIQUEUE, which allows each virtual CPU to have its own queue. For Windows images, you can only enable VIRTIO_SCSCI_MULTIQUEUE on images with driver version 1.2.0.1621 or higher. Linux images with kernel versions 3.17 and higher will support VIRTIO_SCSCI_MULTIQUEUE.'
+        description: |-
+          A list of features to enable on the guest OS. Applicable for bootable images only. Currently, only one feature can be enabled, VIRTIO_SCSCI_MULTIQUEUE, which allows each virtual CPU to have its own queue. For Windows images, you can only enable VIRTIO_SCSCI_MULTIQUEUE on images with driver version 1.2.0.1621 or higher. Linux images with kernel versions 3.17 and higher will support VIRTIO_SCSCI_MULTIQUEUE.
+
+          For new Windows images, the server might also populate this field with the value WINDOWS, to indicate that this is a Windows image. This value is purely informational and does not enable or disable any features.
         items:
           $ref: '#/definitions/GuestOsFeature'
         type: array
@@ -15356,7 +15433,7 @@ definitions:
         type: string
       sourceDisk:
         description: |-
-          URL of the The source disk used to create this image. This can be a full or valid partial URL. You must provide either this property or the rawDisk.source property but not both to create an image. For example, the following are valid values:  
+          URL of the source disk used to create this image. This can be a full or valid partial URL. You must provide either this property or the rawDisk.source property but not both to create an image. For example, the following are valid values:  
           - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk 
           - projects/project/zones/zone/disks/disk 
           - zones/zone/disks/disk
@@ -15681,6 +15758,9 @@ definitions:
       selfLink:
         description: '[Output Only] The URL for this managed instance group. The server defines this URL.'
         type: string
+      serviceAccount:
+        description: 'Service account will be used as credentials for all operations performed by managed instance group on instances. The service accounts needs all permissions required to create and delete instances. When not specified, the service account {projectNumber}@cloudservices.gserviceaccount.com will be used.'
+        type: string
       targetPools:
         description: The URLs for all TargetPool resources to which instances in the instanceGroup field are added. The target pools automatically apply to all of the instances in the managed instance group.
         items:
@@ -15757,7 +15837,7 @@ definitions:
   InstanceGroupManagerAutoHealingPolicy:
     properties:
       healthCheck:
-        description: The URL for the HealthCheck that signals autohealing.
+        description: The URL for the HttpHealthCheck or HttpsHealthCheck that signals autohealing.
         type: string
       initialDelaySec:
         description: 'The number of seconds that the managed instance group waits before it applies autohealing policies to new instances or recently recreated instances. This initial delay allows instances to initialize and run their startup scripts before the instance group determines that they are UNHEALTHY. This prevents the managed instance group from recreating its instances prematurely. This value must be from range [0, 3600].'
@@ -16245,6 +16325,17 @@ definitions:
       machineType:
         description: 'Full or partial URL of the machine type resource. See Machine Types for a full list of machine types. For example: zones/us-central1-f/machineTypes/n1-standard-1'
         type: string
+    type: object
+  InstancesSetServiceAccountRequest:
+    properties:
+      email:
+        description: Email address of the service account.
+        type: string
+      scopes:
+        description: The list of scopes to be made available for this service account.
+        items:
+          type: string
+        type: array
     type: object
   InstancesStartWithEncryptionKeyRequest:
     properties:
@@ -16998,6 +17089,12 @@ definitions:
         enum:
           - HOST
           - UNSPECIFIED_XPN_PROJECT_STATUS
+        type: string
+    type: object
+  ProjectsListXpnHostsRequest:
+    properties:
+      organization:
+        description: 'Optional organization ID managed by Cloud Resource Manager, for which to list XPN host projects. If not specified, the organization will be inferred from the project.'
         type: string
     type: object
   Quota:
@@ -18836,6 +18933,22 @@ definitions:
           type: string
         type: array
     type: object
+  UDPHealthCheck:
+    properties:
+      port:
+        description: The UDP port number for the health check request.
+        format: int32
+        type: integer
+      portName:
+        description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
+        type: string
+      request:
+        description: Raw data of request to send in payload of UDP packet. It is an error if this is empty. The request data can only be ASCII.
+        type: string
+      response:
+        description: The bytes to match against the beginning of the response data. It is an error if this is empty. The response data can only be ASCII.
+        type: string
+    type: object
   UrlMap:
     description: 'A UrlMap resource. This resource defines the mapping from URL to the BackendService resource, based on the "longest-match" of the URL''s host and path.'
     properties:
@@ -19132,6 +19245,27 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  XpnHostList:
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: '[Output Only] A list of XPN host project URLs.'
+        items:
+          $ref: '#/definitions/Project'
+        type: array
+      kind:
+        default: 'compute#xpnHostList'
+        description: '[Output Only] Type of resource. Always compute#xpnHostList for lists of XPN hosts.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
     type: object
   Zone:
     description: A Zone resource.

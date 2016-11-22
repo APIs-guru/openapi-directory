@@ -4,7 +4,7 @@ schemes:
   - http
 host: management.azure.com
 info:
-  description: Client to manage your Power BI embedded workspace collections and retrieve workspaces.
+  description: Client to manage your Power BI Embedded workspace collections and retrieve workspaces.
   title: Power BI Embedded Management Client
   version: '2016-01-29'
   x-apisguru-categories:
@@ -33,7 +33,7 @@ parameters:
     required: true
     type: string
   SubscriptionIdParameter:
-    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: Gets subscription credentials which uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
@@ -58,7 +58,7 @@ paths:
         - Operations
   '/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/locations/{location}/checkNameAvailability':
     post:
-      description: Check that the specified Power BI Workspace Collection name is valid and not in use.
+      description: Verify the specified Power BI Workspace Collection name is valid and not already in use.
       operationId: WorkspaceCollections_checkNameAvailability
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -87,7 +87,7 @@ paths:
         - WorkspaceCollections
   '/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/workspaceCollections':
     get:
-      description: Retrieves all existing Power BI Workspace Collections in the specified subscription.
+      description: Retrieves all existing Power BI workspace collections in the specified subscription.
       operationId: WorkspaceCollections_listBySubscription
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -133,7 +133,7 @@ paths:
         - WorkspaceCollections
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections':
     get:
-      description: Retrieves all existing Power BI Workspace Collections in the specified resource group.
+      description: Retrieves all existing Power BI workspace collections in the specified resource group.
       operationId: WorkspaceCollections_listByResourceGroup
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -166,7 +166,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: Power BI Embedded workspace collection name
+        - description: Power BI Embedded Workspace Collection name
           in: path
           name: workspaceCollectionName
           required: true
@@ -192,7 +192,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: Power BI Embedded workspace collection name
+        - description: Power BI Embedded Workspace Collection name
           in: path
           name: workspaceCollectionName
           required: true
@@ -219,7 +219,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: Power BI Embedded workspace collection name
+        - description: Power BI Embedded Workspace Collection name
           in: path
           name: workspaceCollectionName
           required: true
@@ -243,7 +243,7 @@ paths:
       tags:
         - WorkspaceCollections
     put:
-      description: Creates a new Power BI Workspace Collection with the specified properties. A Power BI Workspace Collection contains one or more Power BI Workspaces and can be used to provision keys that provide API access to those Power BI Workspaces.
+      description: 'Creates a new Power BI Workspace Collection with the specified properties. A Power BI Workspace Collection contains one or more workspaces, and can be used to provision keys that provide API access to those workspaces.'
       operationId: WorkspaceCollections_create
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -252,7 +252,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: Power BI Embedded workspace collection name
+        - description: Power BI Embedded Workspace Collection name
           in: path
           name: workspaceCollectionName
           required: true
@@ -286,7 +286,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: Power BI Embedded workspace collection name
+        - description: Power BI Embedded Workspace Collection name
           in: path
           name: workspaceCollectionName
           required: true
@@ -314,7 +314,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: Power BI Embedded workspace collection name
+        - description: Power BI Embedded Workspace Collection name
           in: path
           name: workspaceCollectionName
           required: true
@@ -339,7 +339,7 @@ paths:
         - WorkspaceCollections
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/workspaces':
     get:
-      description: Retrieves all existing Power BI Workspaces in the specified Workspace Collection.
+      description: Retrieves all existing Power BI workspaces in the specified workspace collection.
       operationId: Workspaces_List
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -348,7 +348,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: Power BI Embedded workspace collection name
+        - description: Power BI Embedded Workspace Collection name
           in: path
           name: workspaceCollectionName
           required: true
@@ -402,7 +402,7 @@ definitions:
   CheckNameResponse:
     properties:
       message:
-        description: Message indicating an unavailable name due to a conflict or a description of the naming rules that are violated.
+        description: 'Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated.'
         type: string
       nameAvailable:
         description: Specifies a Boolean value that indicates whether the specified Power BI Workspace Collection name is available to use.
@@ -432,19 +432,19 @@ definitions:
   Display:
     properties:
       description:
-        description: 'The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise – it will be used in tool tips and detailed views.'
+        description: 'The localized friendly description for the operation as shown to the user. This description should be thorough, yet concise. It will be used in tool-tips and detailed views.'
         type: string
       operation:
-        description: 'The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting). It should use Title Casing and include the entity/resource to which it applies.'
+        description: 'The localized friendly name for the operation as shown to the user. This name should be concise (to fit in drop downs), but clear (self-documenting). Use Title Casing and include the entity/resource to which it applies.'
         type: string
       origin:
         description: 'The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is ''user,system'''
         type: string
       provider:
-        description: The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with “Microsoft” for 1st party services.
+        description: The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with “Microsoft” for 1st party services.
         type: string
       resource:
-        description: 'The localized friendly form of the resource type related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing – for examples, please refer to the “name” section.'
+        description: 'The localized friendly form of the resource type related to this action/operation. This form should match the public documentation for the resource provider. Use Title Casing. For examples, refer to the “name” section.'
         type: string
     type: object
   Error:
@@ -476,7 +476,7 @@ definitions:
           type: string
         type: array
       targetResourceGroup:
-        description: Name of the resource group that the Power BI Workspace Collections will be migrated to.
+        description: Name of the resource group the Power BI workspace collections will be migrated to.
         type: string
     type: object
   Operation:
@@ -484,7 +484,7 @@ definitions:
       display:
         $ref: '#/definitions/Display'
       name:
-        description: The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service.
+        description: The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service.
         type: string
     type: object
   OperationList:

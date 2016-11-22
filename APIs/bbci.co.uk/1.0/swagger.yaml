@@ -23,7 +23,7 @@ info:
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
     version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '424'
+  x-release: '426'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -1094,6 +1094,8 @@ definitions:
         type: string
       release_date_time:
         type: string
+      requires_sign_in:
+        type: boolean
       requires_tv_licence:
         type: boolean
       signed:
@@ -1314,6 +1316,7 @@ definitions:
       - categories
       - master_brand
       - lexical_sort_letter
+      - requires_sign_in
     type: object
   group:
     additionalProperties: false

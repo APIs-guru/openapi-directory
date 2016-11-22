@@ -28,21 +28,35 @@ produces:
   - text/json
 parameters:
   APIVersionParameter:
-    description: The version of the Microsoft.MachineLearning resource provider API to be used.
+    description: The version of the Microsoft.MachineLearning resource provider API to use.
     in: query
     name: api-version
     required: true
     type: string
+  ResourceGroupNameParameter:
+    description: Name of the resource group in which the web service is located.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
-    description: Azure subscription id.
+    description: The Azure subscription ID.
     in: path
     name: subscriptionId
     required: true
     type: string
+  WebServiceNameParameter:
+    description: The name of the web service.
+    in: path
+    name: webServiceName
+    required: true
+    type: string
+    x-ms-parameter-location: method
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/webServices':
     get:
-      description: Retrieve all Azure ML web services in the current Azure subscription.
+      description: Gets the web services in the specified subscription.
       operationId: WebServices_List
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -54,22 +68,18 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: 'Success. The response includes a paginated array of web service objects and a URI to the next set of results, if any. Note that the web service objects are sparsely populated to conserve space in the response content. To get the full web service object, call the GET operation on the web service.'
           schema:
             $ref: '#/definitions/PaginatedWebServicesList'
       tags:
         - WebServices
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices':
     get:
-      description: Retrieve all Azure ML web services in a given resource group.
+      description: Gets the web services in the specified resource group.
       operationId: WebServices_ListInResourceGroup
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - description: Name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
+        - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/APIVersionParameter'
         - description: Continuation token for pagination.
           in: query
@@ -78,51 +88,50 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: 'Success. The response includes a paginated array of web service objects and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/. Note that the web service objects are sparsely populated to conserve space in the response content. To get the full web service object, call the GET operation on the web service.'
           schema:
             $ref: '#/definitions/PaginatedWebServicesList'
       tags:
         - WebServices
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}':
     delete:
-      description: Remove an existing Azure ML web service.
+      description: Deletes the specified web service.
       operationId: WebServices_Remove
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WebServiceNameParameter'
+        - $ref: '#/parameters/APIVersionParameter'
       responses:
         '202':
-          description: Async delete operation was accepted.
-        '204':
-          description: No Content
+          description: Accepted. Note that a 202 status is returned even if the service did not exist.
       tags:
         - WebServices
       x-ms-long-running-operation: true
     get:
-      description: 'Retrieve an Azure ML web service definition by its subscription, resource group and name.'
+      description: 'Gets the Web Service Definiton as specified by a subscription, resource group, and name. Note that the storage credentials and web service keys are not returned by this call. To get the web service access keys, call List Keys.'
       operationId: WebServices_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WebServiceNameParameter'
+        - $ref: '#/parameters/APIVersionParameter'
       responses:
         '200':
-          description: OK
+          description: 'Success.  The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more informationFor more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.'
           schema:
             $ref: '#/definitions/WebService'
       tags:
         - WebServices
-    parameters:
-      - $ref: '#/parameters/SubscriptionIdParameter'
-      - description: Name of the resource group.
-        in: path
-        name: resourceGroupName
-        required: true
-        type: string
-      - description: The Azure ML web service name which you want to reach.
-        in: path
-        name: webServiceName
-        required: true
-        type: string
-      - $ref: '#/parameters/APIVersionParameter'
     patch:
-      description: Patch an existing Azure ML web service resource.
+      description: 'Modifies an existing web service resource. The PATCH API call is an asynchronous operation. To determine whether it has completed successfully, you must perform a Get operation.'
       operationId: WebServices_Patch
       parameters:
-        - description: The payload to patch the Azure ML web service with.
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WebServiceNameParameter'
+        - $ref: '#/parameters/APIVersionParameter'
+        - description: The payload to use to patch the web service.
           in: body
           name: patchPayload
           required: true
@@ -130,17 +139,21 @@ paths:
             $ref: '#/definitions/WebService'
       responses:
         '200':
-          description: OK
+          description: 'Success. The response payload is identical to the response payload that is returned by the GET operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.'
           schema:
             $ref: '#/definitions/WebService'
       tags:
         - WebServices
       x-ms-long-running-operation: true
     put:
-      description: Creates or updates a new Azure ML web service or update an existing one.
+      description: 'Create or update a web service. This call will overwrite an existing web service. Note that there is no warning or confirmation. This is a nonrecoverable operation. If your intent is to create a new web service, call the Get operation first to verify that it does not exist.'
       operationId: WebServices_CreateOrUpdate
       parameters:
-        - description: The payload to create or update the Azure ML web service.
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WebServiceNameParameter'
+        - $ref: '#/parameters/APIVersionParameter'
+        - description: The payload that is used to create or update the web service.
           in: body
           name: createOrUpdatePayload
           required: true
@@ -148,11 +161,11 @@ paths:
             $ref: '#/definitions/WebService'
       responses:
         '200':
-          description: OK
+          description: 'Success. This response is returned for an update web service operation. The response payload is identical to the response payload that is returned by the GET operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.'
           schema:
             $ref: '#/definitions/WebService'
         '201':
-          description: Created
+          description: 'Created. This response is returned for a create web service operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.'
           schema:
             $ref: '#/definitions/WebService'
       tags:
@@ -160,24 +173,16 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/listKeys':
     get:
-      description: Get the access keys of a particular Azure ML web service
+      description: Gets the access keys for the specified web service.
       operationId: WebServices_ListKeys
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - description: Name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The Azure ML web service name which you want to reach.
-          in: path
-          name: webServiceName
-          required: true
-          type: string
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WebServiceNameParameter'
         - $ref: '#/parameters/APIVersionParameter'
       responses:
         '200':
-          description: OK
+          description: Success.
           schema:
             $ref: '#/definitions/WebServiceKeys'
       tags:
@@ -255,7 +260,10 @@ definitions:
         enum:
           - Byte
           - Char
-          - Datetime
+          - Complex64
+          - Complex128
+          - Date-time
+          - Date-timeOffset
           - Double
           - Duration
           - Float
@@ -295,7 +303,7 @@ definitions:
     description: Information about the machine learning commitment plan associated with the web service.
     properties:
       id:
-        description: The commitment plan ARM resource  id.
+        description: Specifies the Azure Resource Manager ID of the commitment plan associated with the web service.
         type: string
     required:
       - id
@@ -304,11 +312,11 @@ definitions:
     description: Diagnostics settings for an Azure ML web service.
     properties:
       expiry:
-        description: 'Moment of time after which diagnostics are no longer collected. If null, diagnostic collection is not time limited.'
+        description: 'Specifies the date and time when the logging will cease. If null, diagnostic collection is not time limited.'
         format: date-time
         type: string
       level:
-        description: 'Level of tracing to be used: None - disables tracing; Error - collects only error (stderr) traces; All - collects all traces (stdout and stderr).'
+        description: 'Specifies the verbosity of the diagnostic output. Valid values are: None - disables tracing; Error - collects only error (stderr) traces; All - collects all traces (stdout and stderr).'
         enum:
           - None
           - Error
@@ -455,7 +463,7 @@ definitions:
     description: Information about the machine learning workspace containing the experiment that is source for the web service.
     properties:
       id:
-        description: The workspace ARM resource id.
+        description: Specifies the workspace ID of the machine learning workspace associated with the web service
         type: string
     required:
       - id
@@ -504,10 +512,10 @@ definitions:
     description: Paginated list of web services.
     properties:
       nextLink:
-        description: Continuation link to be used to potentially retrieve the next page of results in the list.
+        description: A continuation link (absolute URI) to the next page of results in the list.
         type: string
       value:
-        description: List of web services objects.
+        description: An array of web service objects.
         items:
           $ref: '#/definitions/WebService'
         type: array
@@ -516,7 +524,7 @@ definitions:
     description: Holds the available configuration options for an Azure ML web service endpoint.
     properties:
       maxConcurrentCalls:
-        description: Maximum number of concurrent calls allowed on the realtime endpoint.
+        description: 'Specifies the maximum concurrent calls that can be made to the web service. Minimum value: 4, Maximum value: 200.'
         maximum: 200
         minimum: 4
         type: integer
@@ -524,22 +532,22 @@ definitions:
   Resource:
     properties:
       id:
-        description: Resource Id
+        description: Specifies the resource ID.
         readOnly: true
         type: string
       location:
-        description: Resource Location
+        description: Specifies the location of the resource.
         type: string
       name:
-        description: Resource Name
+        description: Specifies the name of the resource.
         type: string
       tags:
         additionalProperties:
           type: string
-        description: Resource tags
+        description: Contains resource tags defined as key/value pairs.
         type: object
       type:
-        description: Resource type
+        description: Specifies the type of the resource.
         readOnly: true
         type: string
     required:
@@ -549,15 +557,15 @@ definitions:
     description: 'The swagger 2.0 schema describing the service''s inputs or outputs. See Swagger specification: http://swagger.io/specification/'
     properties:
       description:
-        description: Swagger schema description.
+        description: The description of the Swagger schema.
         type: string
       properties:
         additionalProperties:
           $ref: '#/definitions/TableSpecification'
-        description: Map of name to swagger schema for each input or output of the web service.
+        description: 'Specifies a collection that contains the column schema for each input or output of the web service. For more information, see the Swagger specification.'
         type: object
       title:
-        description: Swagger schema title.
+        description: The title of your Swagger schema.
         type: string
       type:
         default: object
@@ -571,10 +579,10 @@ definitions:
     description: Access information for a storage account.
     properties:
       key:
-        description: The storage account's active key.
+        description: Specifies the key used to access the storage account.
         type: string
       name:
-        description: The storage account's name.
+        description: Specifies the name of the storage account.
         type: string
     type: object
   TableSpecification:
@@ -608,7 +616,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/WebServiceProperties'
-        description: Web service resource properties.
+        description: Contains the property payload that describes the web service.
     required:
       - properties
     type: object
@@ -629,47 +637,47 @@ definitions:
       assets:
         additionalProperties:
           $ref: '#/definitions/AssetItem'
-        description: Set of assets associated with the web service.
+        description: Contains user defined properties describing web service assets. Properties are expressed as Key/Value pairs.
         type: object
       commitmentPlan:
         $ref: '#/definitions/CommitmentPlan'
-        description: The commitment plan associated with this web service. This is required to be specified at creation time (PUT) and is not updateable afterwards.
+        description: 'Contains the commitment plan associated with this web service. Set at creation time. Once set, this value cannot be changed. Note: The commitment plan is not returned from calls to GET operations.'
       createdOn:
-        description: The moment of time the Azure ML web service was created.
+        description: 'Read Only: The date and time when the web service was created.'
         format: date-time
         readOnly: true
         type: string
       description:
-        description: The description of the Azure ML web service.
+        description: The description of the web service.
         type: string
       diagnostics:
         $ref: '#/definitions/DiagnosticsConfiguration'
         description: Settings controlling the diagnostics traces collection for the web service.
       exampleRequest:
         $ref: '#/definitions/ExampleRequest'
-        description: 'Sample request data for each of the service''s inputs, as applicable.'
+        description: Defines sample input data for one or more of the service's inputs.
       exposeSampleData:
-        description: Flag that controls whether to expose sample data or not in the web service's swagger definition.
+        description: 'When set to true, sample data is included in the web service''s swagger definition. The default value is true.'
         type: boolean
       input:
         $ref: '#/definitions/ServiceInputOutputSpecification'
-        description: 'Swagger schema for the service''s input(s), as applicable.'
+        description: 'Contains the Swagger 2.0 schema describing one or more of the web service''s inputs. For more information, see the Swagger specification.'
       keys:
         $ref: '#/definitions/WebServiceKeys'
-        description: 'The set of access keys for the web service. If not specified at creation time (PUT), they will be generated automatically by the resource provider.'
+        description: 'Contains the web service provisioning keys. If you do not specify provisioning keys, the Azure Machine Learning system generates them for you. Note: The keys are not returned from calls to GET operations.'
       machineLearningWorkspace:
         $ref: '#/definitions/MachineLearningWorkspace'
-        description: This is only populated at creation time (PUT) for web services originating from an AzureML Studio experiment.
+        description: Specifies the Machine Learning workspace containing the experiment that is source for the web service.
       modifiedOn:
-        description: The moment of time the web service was last modified.
+        description: 'Read Only: The date and time when the web service was last modified.'
         format: date-time
         readOnly: true
         type: string
       output:
         $ref: '#/definitions/ServiceInputOutputSpecification'
-        description: 'Swagger schema for the service''s output(s), as applicable.'
+        description: 'Contains the Swagger 2.0 schema describing one or more of the web service''s outputs. For more information, see the Swagger specification.'
       packageType:
-        description: The type of package deployed with this web service. Only Graph based services are supported at this time.
+        description: 'Specifies the package type. Valid values are Graph (Specifies a web service published through the Machine Learning Studio) and Code (Specifies a web service published using code such as Python). Note: Code is not supported at this time.'
         enum:
           - Graph
         type: string
@@ -679,33 +687,32 @@ definitions:
         description: 'The set of global parameters values defined for the web service, given as a global parameter name to default value map. If no default value is specified, the parameter is considered to be required.'
         type: object
       provisioningState:
-        description: The web service resource's provisioning state.
+        description: 'Read Only: The provision state of the web service. Valid values are Unknown, Provisioning, Succeeded, and Failed.'
         enum:
           - Unknown
           - Provisioning
           - Succeeded
           - Failed
-          - Canceled
         readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
           name: ProvisioningState
       readOnly:
-        description: 'If true, the web service can no longer be updated / patched, only removed. Otherwise, the service resource supports changes.'
+        description: 'When set to true, indicates that the web service is read-only and can no longer be updated or patched, only removed. Default, is false. Note: Once set to true, you cannot change its value.'
         type: boolean
       realtimeConfiguration:
         $ref: '#/definitions/RealtimeConfiguration'
-        description: Configuration for the service's realtime endpoint.
+        description: Contains the configuration settings for the web service endpoint.
       storageAccount:
         $ref: '#/definitions/StorageAccount'
-        description: The storage account associated with the service. This is used to store both datasets and diagnostic traces. This information is required at creation time (PUT) and only the key is updateable after that. The account credentials are hidden on a GET web service call.
+        description: 'Specifies the storage account that Azure Machine Learning uses to store information about the web service. Only the name of the storage account is returned from calls to GET operations. When updating the storage account information, you must ensure that all necessary assets are available in the new storage account or calls to your web service will fail.'
       swaggerLocation:
-        description: The uri for the swagger spec associated with this web service.
+        description: 'Read Only: Contains the URI of the swagger spec associated with this web service.'
         readOnly: true
         type: string
       title:
-        description: The title of the Azure ML web service.
+        description: The title of the web service.
         type: string
     required:
       - packageType

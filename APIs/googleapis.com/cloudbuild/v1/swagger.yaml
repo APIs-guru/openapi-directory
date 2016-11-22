@@ -518,13 +518,16 @@ definitions:
         type: string
       createTime:
         description: |-
-          Time at which the build was created.
+          Time at which the request to create the build was received.
           @OutputOnly
         format: google-datetime
         type: string
       finishTime:
         description: |-
           Time at which execution of the build was finished.
+
+          The difference between finish_time and start_time is the duration of the
+          build's execution.
           @OutputOnly
         format: google-datetime
         type: string
@@ -582,9 +585,7 @@ definitions:
           A permanent fixed identifier for source.
           @OutputOnly
       startTime:
-        description: |-
-          Time at which execution of the build was started.
-          @OutputOnly
+        description: Time at which execution of the build was started.
         format: google-datetime
         type: string
       status:

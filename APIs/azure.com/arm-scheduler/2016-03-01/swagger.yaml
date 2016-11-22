@@ -97,7 +97,7 @@ paths:
         '200':
           description: The job collection has been successfully deleted.
         '202':
-          description: Accepted and the delete job collection operation will complete asynchronously.
+          description: The delete operation for the job collection has been accepted and will complete asynchronously.
       tags:
         - JobCollections
       x-ms-long-running-operation: true
@@ -253,7 +253,7 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/apiVersion'
-        - description: 'The number of jobs to request, in the of range [1..100].'
+        - description: 'The number of jobs to request, in the of range of [1..100].'
           in: query
           maximum: 100
           minimum: 1
@@ -429,7 +429,7 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/apiVersion'
-        - description: 'the number of job history to request, in the of range [1..100].'
+        - description: 'the number of job history to request, in the of range of [1..100].'
           in: query
           maximum: 100
           minimum: 1
@@ -489,7 +489,7 @@ definitions:
       - $ref: '#/definitions/HttpAuthentication'
     properties:
       password:
-        description: Gets or sets the password.
+        description: 'Gets or sets the password, return value will always be empty.'
         type: string
       username:
         description: Gets or sets the username.
@@ -509,15 +509,15 @@ definitions:
         description: Gets or sets the certificate thumbprint.
         type: string
       password:
-        description: Gets or sets the password.
+        description: 'Gets or sets the certificate password, return value will always be empty.'
         type: string
       pfx:
-        description: Gets or sets the pfx.
+        description: 'Gets or sets the pfx certificate. Accepts certification in base64 encoding, return value will always be empty.'
         type: string
   HttpAuthentication:
     properties:
       type:
-        description: Gets or sets the http authentication type.
+        description: Gets or sets the HTTP authentication type.
         enum:
           - NotSpecified
           - ClientCertificate
@@ -531,7 +531,7 @@ definitions:
     properties:
       authentication:
         $ref: '#/definitions/HttpAuthentication'
-        description: Gets or sets the http authentication.
+        description: Gets or sets the authentication method of the request.
       body:
         description: Gets or sets the request body.
         type: string
@@ -544,7 +544,7 @@ definitions:
         description: Gets or sets the method of the request.
         type: string
       uri:
-        description: Gets or sets the Uri.
+        description: Gets or sets the URI of the request.
         type: string
   JobAction:
     properties:
@@ -957,7 +957,7 @@ definitions:
         description: Gets or sets the client identifier.
         type: string
       secret:
-        description: Gets or sets the secret.
+        description: 'Gets or sets the secret, return value will always be empty.'
         type: string
       tenant:
         description: Gets or sets the tenant.
@@ -980,7 +980,7 @@ definitions:
         description: Gets or sets the number of times a retry should be attempted.
         type: integer
       retryInterval:
-        description: Gets or sets the retry interval between retries.
+        description: 'Gets or sets the retry interval between retries, specify duration in ISO 8601 format.'
         format: duration
         type: string
       retryType:
@@ -1015,7 +1015,7 @@ definitions:
         description: Gets or sets the content type.
         type: string
       correlationId:
-        description: Gets or sets the correlation id.
+        description: Gets or sets the correlation ID.
         type: string
       forcePersistence:
         description: Gets or sets the force persistence.
@@ -1024,7 +1024,7 @@ definitions:
         description: Gets or sets the label.
         type: string
       messageId:
-        description: Gets or sets the message id.
+        description: Gets or sets the message ID.
         type: string
       partitionKey:
         description: Gets or sets the partition key.
@@ -1033,14 +1033,14 @@ definitions:
         description: Gets or sets the reply to.
         type: string
       replyToSessionId:
-        description: Gets or sets the reply to session id.
+        description: Gets or sets the reply to session ID.
         type: string
       scheduledEnqueueTimeUtc:
         description: Gets or sets the scheduled enqueue time UTC.
         format: date-time
         type: string
       sessionId:
-        description: Gets or sets the session id.
+        description: Gets or sets the session ID.
         type: string
       timeToLive:
         description: Gets or sets the time to live.
@@ -1056,7 +1056,7 @@ definitions:
     properties:
       authentication:
         $ref: '#/definitions/ServiceBusAuthentication'
-        description: Gets or sets the authentication.
+        description: Gets or sets the Service Bus authentication.
       brokeredMessageProperties:
         $ref: '#/definitions/ServiceBusBrokeredMessageProperties'
         description: Gets or sets the brokered message properties.

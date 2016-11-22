@@ -55,10 +55,11 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers':
     get:
-      description: Gets a list of virtual machine image publishers.
+      description: Gets a list of virtual machine image publishers for the specified Azure location.
       operationId: VirtualMachineImages_ListPublishers
       parameters:
-        - in: path
+        - description: The name of a supported Azure region.
+          in: path
           name: location
           required: true
           type: string
@@ -172,14 +173,16 @@ paths:
         - VirtualMachineExtensionImages
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers':
     get:
-      description: Gets a list of virtual machine image offers.
+      description: Gets a list of virtual machine image offers for the specified location and publisher.
       operationId: VirtualMachineImages_ListOffers
       parameters:
-        - in: path
+        - description: The name of a supported Azure region.
+          in: path
           name: location
           required: true
           type: string
-        - in: path
+        - description: A valid image publisher.
+          in: path
           name: publisherName
           required: true
           type: string
@@ -196,18 +199,21 @@ paths:
         - VirtualMachineImages
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus':
     get:
-      description: Gets a list of virtual machine image skus.
+      description: 'Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.'
       operationId: VirtualMachineImages_ListSkus
       parameters:
-        - in: path
+        - description: The name of a supported Azure region.
+          in: path
           name: location
           required: true
           type: string
-        - in: path
+        - description: A valid image publisher.
+          in: path
           name: publisherName
           required: true
           type: string
-        - in: path
+        - description: A valid image publisher offer.
+          in: path
           name: offer
           required: true
           type: string
@@ -224,22 +230,26 @@ paths:
         - VirtualMachineImages
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions':
     get:
-      description: Gets a list of virtual machine images.
+      description: 'Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.'
       operationId: VirtualMachineImages_List
       parameters:
-        - in: path
+        - description: The name of a supported Azure region.
+          in: path
           name: location
           required: true
           type: string
-        - in: path
+        - description: A valid image publisher.
+          in: path
           name: publisherName
           required: true
           type: string
-        - in: path
+        - description: A valid image publisher offer.
+          in: path
           name: offer
           required: true
           type: string
-        - in: path
+        - description: A valid image SKU.
+          in: path
           name: skus
           required: true
           type: string
@@ -274,23 +284,28 @@ paths:
       description: Gets a virtual machine image.
       operationId: VirtualMachineImages_Get
       parameters:
-        - in: path
+        - description: The name of a supported Azure region.
+          in: path
           name: location
           required: true
           type: string
-        - in: path
+        - description: A valid image publisher.
+          in: path
           name: publisherName
           required: true
           type: string
-        - in: path
+        - description: A valid image publisher offer.
+          in: path
           name: offer
           required: true
           type: string
-        - in: path
+        - description: A valid image SKU.
+          in: path
           name: skus
           required: true
           type: string
-        - in: path
+        - description: A valid image SKU version.
+          in: path
           name: version
           required: true
           type: string
@@ -305,10 +320,10 @@ paths:
         - VirtualMachineImages
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages':
     get:
-      description: Lists compute usages for a subscription.
+      description: 'Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.'
       operationId: Usage_List
       parameters:
-        - description: The location upon which resource usage is queried.
+        - description: The location for which resource usage is queried.
           in: path
           name: location
           pattern: '^[-\w\._]+$'
@@ -348,7 +363,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets':
     get:
-      description: Lists all Virtual Machine Scale Sets in the subscription. Use nextLink property in the response to get the next page of Virtual Machine Scale Sets. Do this till nextLink is not null to fetch all the Virtual Machine Scale Sets.
+      description: 'Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is not null to fetch all the VM Scale Sets.'
       operationId: VirtualMachineScaleSets_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -364,7 +379,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines':
     get:
-      description: Gets the list of Virtual Machines in the subscription. Use nextLink property in the response to get the next page of Virtual Machines. Do this till nextLink is not null to fetch all the Virtual Machines.
+      description: Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
       operationId: VirtualMachines_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -380,7 +395,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets':
     get:
-      description: The operation to list the availability sets.
+      description: Lists all availability sets in a resource group.
       operationId: AvailabilitySets_List
       parameters:
         - description: The name of the resource group.
@@ -400,7 +415,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}':
     delete:
-      description: The operation to delete the availability set.
+      description: Delete an availability set.
       operationId: AvailabilitySets_Delete
       parameters:
         - description: The name of the resource group.
@@ -423,7 +438,7 @@ paths:
       tags:
         - AvailabilitySets
     get:
-      description: The operation to get the availability set.
+      description: Retrieves information about an availability set.
       operationId: AvailabilitySets_Get
       parameters:
         - description: The name of the resource group.
@@ -472,7 +487,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}':
     put:
-      description: The operation to create or update the availability set.
+      description: Create or update an availability set.
       operationId: AvailabilitySets_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -480,7 +495,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: Parameters supplied to the Create Availability Set operation.
+        - description: The name of the availability set.
           in: path
           name: name
           required: true
@@ -502,7 +517,7 @@ paths:
         - AvailabilitySets
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets':
     get:
-      description: Lists all virtual machine scale sets under a resource group.
+      description: Gets a list of all VM scale sets under a resource group.
       operationId: VirtualMachineScaleSets_List
       parameters:
         - description: The name of the resource group.
@@ -523,7 +538,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{name}':
     put:
-      description: Allows you to create or update a virtual machine scale set by providing parameters or a path to pre-configured parameter file.
+      description: Create or update a VM scale set.
       operationId: VirtualMachineScaleSets_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -531,12 +546,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: Parameters supplied to the Create Virtual Machine Scale Set operation.
+        - description: The name of the VM scale set to create or update.
           in: path
           name: name
           required: true
           type: string
-        - description: Parameters supplied to the Create Virtual Machine Scale Set operation.
+        - description: The scale set object.
           in: body
           name: parameters
           required: true
@@ -558,7 +573,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines':
     get:
-      description: Lists all virtual machines in a VM scale sets.
+      description: Gets a list of all virtual machines in a VM scale sets.
       operationId: VirtualMachineScaleSetVMs_List
       parameters:
         - description: The name of the resource group.
@@ -566,12 +581,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: virtualMachineScaleSetName
           required: true
           type: string
-        - description: The filter to apply on the operation.
+        - description: The filter to apply to the operation.
           in: query
           name: $filter
           required: false
@@ -581,7 +596,7 @@ paths:
           name: $select
           required: false
           type: string
-        - description: The expand expression to apply on the operation.
+        - description: The expand expression to apply to the operation.
           in: query
           name: $expand
           required: false
@@ -600,7 +615,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}':
     delete:
-      description: Allows you to delete a virtual machine scale set.
+      description: Deletes a VM scale set.
       operationId: VirtualMachineScaleSets_Delete
       parameters:
         - description: The name of the resource group.
@@ -608,7 +623,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
@@ -634,7 +649,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
@@ -650,7 +665,7 @@ paths:
         - VirtualMachineScaleSets
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate':
     post:
-      description: Allows you to deallocate virtual machines in a virtual machine scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set uses.
+      description: Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.
       operationId: VirtualMachineScaleSets_Deallocate
       parameters:
         - description: The name of the resource group.
@@ -658,12 +673,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The list of virtual machine scale set instance IDs.
+        - description: A list of virtual machine instance IDs from the VM scale set.
           in: body
           name: vmInstanceIDs
           required: false
@@ -679,7 +694,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete':
     post:
-      description: Allows you to delete virtual machines in a virtual machine scale set.
+      description: Deletes virtual machines in a VM scale set.
       operationId: VirtualMachineScaleSets_DeleteInstances
       parameters:
         - description: The name of the resource group.
@@ -687,12 +702,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The list of virtual machine scale set instance IDs.
+        - description: A list of virtual machine instance IDs from the VM scale set.
           in: body
           name: vmInstanceIDs
           required: true
@@ -708,7 +723,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView':
     get:
-      description: Displays status of a virtual machine scale set instance.
+      description: Gets the status of a VM scale set instance.
       operationId: VirtualMachineScaleSets_GetInstanceView
       parameters:
         - description: The name of the resource group.
@@ -716,7 +731,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
@@ -732,7 +747,7 @@ paths:
         - VirtualMachineScaleSets
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade':
     post:
-      description: Allows you to manually upgrade virtual machines in a virtual machine scale set.
+      description: Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.
       operationId: VirtualMachineScaleSets_UpdateInstances
       parameters:
         - description: The name of the resource group.
@@ -740,12 +755,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The list of virtual machine scale set instance IDs.
+        - description: A list of virtual machine instance IDs from the VM scale set.
           in: body
           name: vmInstanceIDs
           required: true
@@ -761,7 +776,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff':
     post:
-      description: Allows you to power off (stop) virtual machines in a virtual machine scale set. Note that resources are still attached and you are getting charged for the resources. Use deallocate to release resources.
+      description: 'Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.'
       operationId: VirtualMachineScaleSets_PowerOff
       parameters:
         - description: The name of the resource group.
@@ -769,12 +784,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The list of virtual machine scale set instance IDs.
+        - description: A list of virtual machine instance IDs from the VM scale set.
           in: body
           name: vmInstanceIDs
           required: false
@@ -790,7 +805,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage':
     post:
-      description: Allows you to re-image(update the version of the installed operating system) virtual machines in a virtual machine scale set.
+      description: Reimages (upgrade the operating system) one or more virtual machines in a VM scale set.
       operationId: VirtualMachineScaleSets_Reimage
       parameters:
         - description: The name of the resource group.
@@ -798,7 +813,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
@@ -813,7 +828,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart':
     post:
-      description: Allows you to restart virtual machines in a virtual machine scale set.
+      description: Restarts one or more virtual machines in a VM scale set.
       operationId: VirtualMachineScaleSets_Restart
       parameters:
         - description: The name of the resource group.
@@ -821,12 +836,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The list of virtual machine scale set instance IDs.
+        - description: A list of virtual machine instance IDs from the VM scale set.
           in: body
           name: vmInstanceIDs
           required: false
@@ -842,7 +857,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus':
     get:
-      description: Displays available skus for your virtual machine scale set including the minimum and maximum vm instances allowed for a particular sku.
+      description: 'Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.'
       operationId: VirtualMachineScaleSets_ListSkus
       parameters:
         - description: The name of the resource group.
@@ -850,7 +865,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
@@ -868,7 +883,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start':
     post:
-      description: Allows you to start virtual machines in a virtual machine scale set.
+      description: Starts one or more virtual machines in a VM scale set.
       operationId: VirtualMachineScaleSets_Start
       parameters:
         - description: The name of the resource group.
@@ -876,12 +891,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The list of virtual machine scale set instance IDs.
+        - description: A list of virtual machine instance IDs from the VM scale set.
           in: body
           name: vmInstanceIDs
           required: false
@@ -897,7 +912,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}':
     delete:
-      description: Allows you to delete a virtual machine scale set.
+      description: Deletes a virtual machine from a VM scale set.
       operationId: VirtualMachineScaleSetVMs_Delete
       parameters:
         - description: The name of the resource group.
@@ -905,12 +920,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The instance id of the virtual machine.
+        - description: The instance ID of the virtual machine.
           in: path
           name: instanceId
           required: true
@@ -928,7 +943,7 @@ paths:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
     get:
-      description: Displays information about a virtual machine scale set virtual machine.
+      description: Gets a virtual machine from a VM scale set.
       operationId: VirtualMachineScaleSetVMs_Get
       parameters:
         - description: The name of the resource group.
@@ -936,12 +951,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The instance id of the virtual machine.
+        - description: The instance ID of the virtual machine.
           in: path
           name: instanceId
           required: true
@@ -957,7 +972,7 @@ paths:
         - VirtualMachineScaleSetVMs
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate':
     post:
-      description: Allows you to deallocate a virtual machine scale set virtual machine. Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.
+      description: Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.
       operationId: VirtualMachineScaleSetVMs_Deallocate
       parameters:
         - description: The name of the resource group.
@@ -965,12 +980,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The instance id of the virtual machine.
+        - description: The instance ID of the virtual machine.
           in: path
           name: instanceId
           required: true
@@ -985,7 +1000,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/instanceView':
     get:
-      description: Displays the status of a virtual machine scale set virtual machine.
+      description: Gets the status of a virtual machine from a VM scale set.
       operationId: VirtualMachineScaleSetVMs_GetInstanceView
       parameters:
         - description: The name of the resource group.
@@ -993,12 +1008,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The instance id of the virtual machine.
+        - description: The instance ID of the virtual machine.
           in: path
           name: instanceId
           required: true
@@ -1014,7 +1029,7 @@ paths:
         - VirtualMachineScaleSetVMs
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/poweroff':
     post:
-      description: Allows you to power off (stop) a virtual machine in a VM scale set.
+      description: 'Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.'
       operationId: VirtualMachineScaleSetVMs_PowerOff
       parameters:
         - description: The name of the resource group.
@@ -1022,12 +1037,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The instance id of the virtual machine.
+        - description: The instance ID of the virtual machine.
           in: path
           name: instanceId
           required: true
@@ -1042,7 +1057,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage':
     post:
-      description: Allows you to re-image(update the version of the installed operating system) a virtual machine scale set instance.
+      description: Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.
       operationId: VirtualMachineScaleSetVMs_Reimage
       parameters:
         - description: The name of the resource group.
@@ -1050,12 +1065,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The instance id of the virtual machine.
+        - description: The instance ID of the virtual machine.
           in: path
           name: instanceId
           required: true
@@ -1070,7 +1085,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart':
     post:
-      description: Allows you to restart a virtual machine in a VM scale set.
+      description: Restarts a virtual machine in a VM scale set.
       operationId: VirtualMachineScaleSetVMs_Restart
       parameters:
         - description: The name of the resource group.
@@ -1078,12 +1093,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The instance id of the virtual machine.
+        - description: The instance ID of the virtual machine.
           in: path
           name: instanceId
           required: true
@@ -1098,7 +1113,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start':
     post:
-      description: Allows you to start a virtual machine in a VM scale set.
+      description: Starts a virtual machine in a VM scale set.
       operationId: VirtualMachineScaleSetVMs_Start
       parameters:
         - description: The name of the resource group.
@@ -1106,12 +1121,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual machine scale set.
+        - description: The name of the VM scale set.
           in: path
           name: vmScaleSetName
           required: true
           type: string
-        - description: The instance id of the virtual machine.
+        - description: The instance ID of the virtual machine.
           in: path
           name: instanceId
           required: true
@@ -1126,7 +1141,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines':
     get:
-      description: The operation to list virtual machines under a resource group.
+      description: Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.
       operationId: VirtualMachines_List
       parameters:
         - description: The name of the resource group.
@@ -1171,7 +1186,7 @@ paths:
         - VirtualMachines
       x-ms-long-running-operation: true
     get:
-      description: The operation to get a virtual machine.
+      description: Retrieves information about the model view or the instance view of a virtual machine.
       operationId: VirtualMachines_Get
       parameters:
         - description: The name of the resource group.
@@ -1272,7 +1287,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate':
     post:
-      description: Shuts down the Virtual Machine and releases the compute resources. You are not billed for the compute resources that this Virtual Machine uses.
+      description: Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.
       operationId: VirtualMachines_Deallocate
       parameters:
         - description: The name of the resource group.
@@ -1397,7 +1412,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/generalize':
     post:
-      description: Sets the state of the VM as Generalized.
+      description: Sets the state of the virtual machine to generalized.
       operationId: VirtualMachines_Generalize
       parameters:
         - description: The name of the resource group.
@@ -1419,7 +1434,7 @@ paths:
         - VirtualMachines
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/powerOff':
     post:
-      description: The operation to power off (stop) a virtual machine.
+      description: The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.
       operationId: VirtualMachines_PowerOff
       parameters:
         - description: The name of the resource group.
@@ -1511,7 +1526,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes':
     get:
-      description: Lists all available virtual machine sizes it can be resized to for a virtual machine.
+      description: Lists all available virtual machine sizes to which the specified virtual machine can be resized.
       operationId: VirtualMachines_ListAvailableSizes
       parameters:
         - description: The name of the resource group.
@@ -1536,10 +1551,10 @@ paths:
       x-ms-pageable: {}
 definitions:
   AdditionalUnattendContent:
-    description: 'additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied.'
+    description: 'Additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied.'
     properties:
       componentName:
-        description: 'the component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.'
+        description: 'The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.'
         enum:
           - Microsoft-Windows-Shell-Setup
         type: string
@@ -1550,7 +1565,7 @@ definitions:
         description: XML formatted content that is added to the unattend.xml file in the specified pass and component. The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted.
         type: string
       passName:
-        description: 'the pass name. Currently, the only allowable value is oobeSystem.'
+        description: 'The pass name. Currently, the only allowable value is oobeSystem.'
         enum:
           - oobeSystem
         type: string
@@ -1607,7 +1622,7 @@ definitions:
   AvailabilitySet:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Create or update Availability Set parameters.
+    description: Create or update availability set parameters.
     properties:
       properties:
         $ref: '#/definitions/AvailabilitySetProperties'
@@ -1616,7 +1631,7 @@ definitions:
     description: The List Availability Set operation response.
     properties:
       value:
-        description: the list of availability sets
+        description: The list of availability sets
         items:
           $ref: '#/definitions/AvailabilitySet'
         type: array
@@ -1632,13 +1647,13 @@ definitions:
         format: int32
         type: integer
       statuses:
-        description: the resource status information.
+        description: The resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         readOnly: true
         type: array
       virtualMachines:
-        description: a list containing reference to all Virtual Machines created under this Availability Set.
+        description: A list of references to all virtual machines in the availability set.
         items:
           $ref: '#/definitions/SubResource'
         type: array
@@ -1646,22 +1661,22 @@ definitions:
     description: Describes Boot Diagnostics.
     properties:
       enabled:
-        description: whether boot diagnostics should be enabled on the Virtual Machine.
+        description: Whether boot diagnostics should be enabled on the Virtual Machine.
         type: boolean
       storageUri:
-        description: the boot diagnostics storage Uri. It should be a valid Uri
+        description: URI of the storage account to use for placing the console output and screenshot.
         type: string
   BootDiagnosticsInstanceView:
     description: The instance view of a virtual machine boot diagnostics.
     properties:
       consoleScreenshotBlobUri:
-        description: the console screenshot blob Uri.
+        description: The console screenshot blob URI.
         type: string
       serialConsoleLogBlobUri:
-        description: the Linux serial console log blob Uri.
+        description: The Linux serial console log blob Uri.
         type: string
   Caching:
-    description: the caching type.
+    description: The caching type.
     enum:
       - None
       - ReadOnly
@@ -1691,27 +1706,27 @@ definitions:
     properties:
       caching:
         $ref: '#/definitions/Caching'
-        description: the caching type.
+        description: The caching type.
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: the create option.
+        description: The create option.
       diskSizeGB:
-        description: 'the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks.'
+        description: 'The initial disk size in GB for blank data disks, and the new desired size for resizing existing OS and data disks.'
         format: int32
         type: integer
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.'
+        description: 'The source user image virtual hard disk. This virtual hard disk will be copied before using it to attach to the virtual machine. If SourceImage is provided, the destination virtual hard disk must not exist.'
       lun:
-        description: the logical unit number.
+        description: The logical unit number.
         format: int32
         type: integer
       name:
-        description: the disk name.
+        description: The disk name.
         type: string
       vhd:
         $ref: '#/definitions/VirtualHardDisk'
-        description: the Virtual Hard Disk.
+        description: The virtual hard disk.
     required:
       - lun
       - name
@@ -1721,7 +1736,7 @@ definitions:
     description: Contains the data disk images information.
     properties:
       lun:
-        description: the LUN number for a data disk. This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk. The allowed character for the value is digit.
+        description: The LUN number for a data disk. This value is used to identify data disk image inside the VMImage and therefore it must be unique for each data disk.
         format: int32
         readOnly: true
         type: integer
@@ -1730,27 +1745,27 @@ definitions:
     properties:
       bootDiagnostics:
         $ref: '#/definitions/BootDiagnostics'
-        description: the boot diagnostics.
+        description: Boot Diagnostics is a debugging feature which allows the user to view console output and/or a screenshot of the virtual machine from the hypervisor.
   DiskEncryptionSettings:
     description: Describes a Encryption Settings for a Disk
     properties:
       diskEncryptionKey:
         $ref: '#/definitions/KeyVaultSecretReference'
-        description: the disk encryption key which is a KeyVault Secret.
+        description: The disk encryption key which is a Key Vault Secret.
       enabled:
-        description: whether disk encryption should be enabled on the Virtual Machine.
+        description: Specifies whether disk encryption should be enabled on the virtual machine.
         type: boolean
       keyEncryptionKey:
         $ref: '#/definitions/KeyVaultKeyReference'
-        description: the key encryption key which is KeyVault Key.
+        description: The key encryption key which is Key Vault Key.
   DiskInstanceView:
     description: The instance view of the disk.
     properties:
       name:
-        description: the disk name.
+        description: The disk name.
         type: string
       statuses:
-        description: the resource status information.
+        description: The resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
@@ -1831,16 +1846,16 @@ definitions:
     description: The image reference.
     properties:
       offer:
-        description: the image offer.
+        description: The image offer.
         type: string
       publisher:
-        description: the image publisher.
+        description: The image publisher.
         type: string
       sku:
-        description: the image sku.
+        description: The image SKU.
         type: string
       version:
-        description: 'the image version. The allowed formats are Major.Minor.Build or ''latest''. Major, Minor and Build being decimal numbers. Specify ''latest'' to use the latest version of image.'
+        description: 'The image version. The allowed formats are Major.Minor.Build or ''latest''. Major, Minor and Build are decimal numbers. Specify ''latest'' to use the latest version of the image.'
         type: string
   InnerError:
     description: Inner error details.
@@ -1855,13 +1870,13 @@ definitions:
     description: Instance view status.
     properties:
       code:
-        description: the status Code.
+        description: The status code.
         type: string
       displayStatus:
-        description: the short localizable label for the status.
+        description: The short localizable label for the status.
         type: string
       level:
-        description: the level Code.
+        description: The level code.
         enum:
           - Info
           - Warning
@@ -1871,21 +1886,21 @@ definitions:
           modelAsString: false
           name: StatusLevelTypes
       message:
-        description: 'the detailed Message, including for alerts and error messages.'
+        description: 'The detailed status message, including for alerts and error messages.'
         type: string
       time:
-        description: the time of the status.
+        description: The time of the status.
         format: date-time
         type: string
   KeyVaultKeyReference:
     description: Describes a reference to Key Vault Key
     properties:
       keyUrl:
-        description: the URL referencing a key in a Key Vault.
+        description: The URL referencing a key in a Key Vault.
         type: string
       sourceVault:
         $ref: '#/definitions/SubResource'
-        description: the Relative URL of the Key Vault containing the key
+        description: The relative URL of the Key Vault containing the key.
     required:
       - keyUrl
       - sourceVault
@@ -1893,31 +1908,31 @@ definitions:
     description: Describes a reference to Key Vault Secret
     properties:
       secretUrl:
-        description: the URL referencing a secret in a Key Vault.
+        description: The URL referencing a secret in a Key Vault.
         type: string
       sourceVault:
         $ref: '#/definitions/SubResource'
-        description: the Relative URL of the Key Vault containing the secret.
+        description: The relative URL of the Key Vault containing the secret.
     required:
       - secretUrl
       - sourceVault
   LinuxConfiguration:
-    description: Describes Windows Configuration of the OS Profile.
+    description: Describes Windows configuration of the OS Profile.
     properties:
       disablePasswordAuthentication:
-        description: whether Authentication using user name and password is allowed or not
+        description: Specifies whether password authentication should be disabled.
         type: boolean
       ssh:
         $ref: '#/definitions/SshConfiguration'
-        description: the SSH configuration for linux VMs
+        description: The SSH configuration for linux VMs.
   ListUsagesResult:
     description: The List Usages operation response.
     properties:
       nextLink:
-        description: the uri to fetch the next page of Compute Resource Usages. Call ListNext() with this to fetch the next page of Compute Resource Usages.
+        description: The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information.
         type: string
       value:
-        description: the list Compute Resource Usages.
+        description: The list of compute resource usages.
         items:
           $ref: '#/definitions/Usage'
         type: array
@@ -1935,13 +1950,13 @@ definitions:
     description: Describes a network interface reference properties.
     properties:
       primary:
-        description: whether this is a primary NIC on a virtual machine
+        description: Specifies the primary network interface in case the virtual machine has more than 1 network interface.
         type: boolean
   NetworkProfile:
     description: Describes a network profile.
     properties:
       networkInterfaces:
-        description: the network interfaces.
+        description: Specifies the list of resource IDs for the network interfaces associated with the virtual machine.
         items:
           $ref: '#/definitions/NetworkInterfaceReference'
         type: array
@@ -1950,12 +1965,12 @@ definitions:
     properties:
       caching:
         $ref: '#/definitions/Caching'
-        description: the caching type.
+        description: The caching type.
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: the create option.
+        description: The create option.
       diskSizeGB:
-        description: 'the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks.'
+        description: 'The initial disk size, in GB, for blank data disks, and the new desired size for resizing existing OS and data disks.'
         format: int32
         type: integer
       encryptionSettings:
@@ -1963,12 +1978,12 @@ definitions:
         description: the disk encryption settings.
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.'
+        description: 'The source user image virtual hard disk. The virtual hard disk will be copied before using it to attach to the virtual machine. If SourceImage is provided, the destination virtual hard disk must not exist.'
       name:
-        description: the disk name.
+        description: The disk name.
         type: string
       osType:
-        description: the Operating System type.
+        description: The Operating System type.
         enum:
           - Windows
           - Linux
@@ -1978,7 +1993,7 @@ definitions:
           name: OperatingSystemTypes
       vhd:
         $ref: '#/definitions/VirtualHardDisk'
-        description: the Virtual Hard Disk.
+        description: The virtual hard disk.
     required:
       - name
       - vhd
@@ -1987,7 +2002,7 @@ definitions:
     description: Contains the os disk image information.
     properties:
       operatingSystem:
-        description: the operating system of the osDiskImage.
+        description: The operating system of the osDiskImage.
         enum:
           - Windows
           - Linux
@@ -2001,54 +2016,54 @@ definitions:
     description: Describes an OS profile.
     properties:
       adminPassword:
-        description: the admin user password.
+        description: Specifies the password of the administrator account.
         type: string
       adminUsername:
-        description: the admin user name.
+        description: Specifies the name of the administrator account.
         type: string
       computerName:
-        description: the computer name.
+        description: Specifies the host OS name of the virtual machine.
         type: string
       customData:
-        description: a base-64 encoded string of custom data.
+        description: Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes
         type: string
       linuxConfiguration:
         $ref: '#/definitions/LinuxConfiguration'
-        description: the Linux Configuration of the OS profile.
+        description: the Linux configuration of the OS profile.
       secrets:
-        description: the List of certificates for addition to the VM.
+        description: The list of certificates for addition to the VM.
         items:
           $ref: '#/definitions/VaultSecretGroup'
         type: array
       windowsConfiguration:
         $ref: '#/definitions/WindowsConfiguration'
-        description: the Windows Configuration of the OS profile.
+        description: the Windows configuration of the OS profile.
   Plan:
     description: Plan for the resource.
     properties:
       name:
-        description: the plan ID.
+        description: The plan ID.
         type: string
       product:
-        description: the offer ID.
+        description: The offer ID.
         type: string
       promotionCode:
-        description: the promotion code.
+        description: The promotion code.
         type: string
       publisher:
-        description: the publisher ID.
+        description: The publisher ID.
         type: string
   PurchasePlan:
     description: Used for establishing the purchase context of any 3rd Party artifact through MarketPlace.
     properties:
       name:
-        description: the plan ID.
+        description: The plan ID.
         type: string
       product:
-        description: the product ID.
+        description: The product ID.
         type: string
       publisher:
-        description: the publisher ID.
+        description: The publisher ID.
         type: string
     required:
       - publisher
@@ -2084,20 +2099,20 @@ definitions:
     description: Describes a virtual machine scale set sku.
     properties:
       capacity:
-        description: the sku capacity.
+        description: The sku capacity.
         format: int64
         type: integer
       name:
-        description: the sku name.
+        description: The sku name.
         type: string
       tier:
-        description: the sku tier.
+        description: The sku tier.
         type: string
   SshConfiguration:
     description: SSH configuration for Linux based VMs running on Azure
     properties:
       publicKeys:
-        description: the list of SSH public keys used to authenticate with linux based VMs
+        description: The list of SSH public keys used to authenticate with linux based VMs.
         items:
           $ref: '#/definitions/SshPublicKey'
         type: array
@@ -2105,25 +2120,25 @@ definitions:
     description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
     properties:
       keyData:
-        description: Certificate public key used to authenticate with VM through SSH. The certificate must be in Pem format with or without headers.
+        description: Certificate public key used to authenticate to the VM through SSH. The certificate must be in Pem format with or without headers.
         type: string
       path:
-        description: 'the full path on the created VM where SSH public key is stored. If the file already exists, the specified key is appended to the file.'
+        description: 'Specifies the full path on the created VM where SSH public key is stored. If the file already exists, the specified key is appended to the file.'
         type: string
   StorageProfile:
     description: Describes a storage profile.
     properties:
       dataDisks:
-        description: the data disks.
+        description: The data disks.
         items:
           $ref: '#/definitions/DataDisk'
         type: array
       imageReference:
         $ref: '#/definitions/ImageReference'
-        description: the image reference.
+        description: The image reference.
       osDisk:
         $ref: '#/definitions/OSDisk'
-        description: the OS disk.
+        description: The OS disk.
   SubResource:
     properties:
       id:
@@ -2146,18 +2161,18 @@ definitions:
     description: Describes Compute Resource Usage.
     properties:
       currentValue:
-        description: the current value of the usage.
+        description: The current usage of the resource.
         format: int32
         type: integer
       limit:
-        description: the limit of usage.
+        description: The maximum permitted usage of the resource.
         format: int64
         type: integer
       name:
         $ref: '#/definitions/UsageName'
-        description: the name of the type of usage.
+        description: The name of the type of usage.
       unit:
-        description: an enum describing the unit of measurement.
+        description: An enum describing the unit of usage measurement.
         enum:
           - Count
         type: string
@@ -2173,28 +2188,28 @@ definitions:
     description: The Usage Names.
     properties:
       localizedValue:
-        description: a localized string describing the resource name.
+        description: The localized name of the resource.
         type: string
       value:
-        description: a string describing the resource name.
+        description: The name of the resource.
         type: string
   VaultCertificate:
     description: 'Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM.'
     properties:
       certificateStore:
-        description: 'the Certificate store in LocalMachine to add the certificate to on Windows, leave empty on Linux.'
+        description: 'The Certificate store in LocalMachine to add the certificate to on Windows, leave empty on Linux.'
         type: string
       certificateUrl:
-        description: the URL referencing a secret in a Key Vault which contains a properly formatted certificate.
+        description: The URL referencing a secret in a Key Vault which contains a properly formatted certificate.
         type: string
   VaultSecretGroup:
     description: Describes a set of certificates which are all in the same Key Vault.
     properties:
       sourceVault:
         $ref: '#/definitions/SubResource'
-        description: the Relative URL of the Key Vault containing all of the certificates in VaultCertificates.
+        description: The Relative URL of the Key Vault containing all of the certificates in VaultCertificates.
       vaultCertificates:
-        description: the list of key vault references in SourceVault which contain certificates
+        description: The list of key vault references in SourceVault which contain certificates.
         items:
           $ref: '#/definitions/VaultCertificate'
         type: array
@@ -2202,7 +2217,7 @@ definitions:
     description: Describes the uri of a disk.
     properties:
       uri:
-        description: the virtual hard disk's uri. It should be a valid Uri to a virtual hard disk.
+        description: The virtual hard disk's URI. Must be a valid URI to a virtual hard disk.
         type: string
   VirtualMachine:
     allOf:
@@ -2211,7 +2226,7 @@ definitions:
     properties:
       plan:
         $ref: '#/definitions/Plan'
-        description: the purchase plan when deploying virtual machine from VM Marketplace images.
+        description: The purchase plan when deploying virtual machine from VM Marketplace images.
       properties:
         $ref: '#/definitions/VirtualMachineProperties'
         x-ms-client-flatten: true
@@ -2225,29 +2240,29 @@ definitions:
     description: The instance view of the VM Agent running on the virtual machine.
     properties:
       extensionHandlers:
-        description: the virtual machine extension handler instance view.
+        description: The virtual machine extension handler instance view.
         items:
           $ref: '#/definitions/VirtualMachineExtensionHandlerInstanceView'
         type: array
       statuses:
-        description: the resource status information.
+        description: The resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       vmAgentVersion:
-        description: the VM Agent full version.
+        description: The VM Agent full version.
         type: string
   VirtualMachineCaptureParameters:
     description: Capture Virtual Machine parameters.
     properties:
       destinationContainerName:
-        description: the destination container name.
+        description: The destination container name.
         type: string
       overwriteVhds:
-        description: 'whether it overwrites destination VirtualHardDisk if true, in case of conflict.'
+        description: 'Specifies whether to overwrite the destination virtual hard disk, in case of conflict.'
         type: boolean
       vhdPrefix:
-        description: the captured VirtualHardDisk's name prefix.
+        description: The captured virtual hard disk's name prefix.
         type: string
     required:
       - vhdPrefix
@@ -2401,15 +2416,15 @@ definitions:
     description: Virtual machine image resource information.
     properties:
       location:
-        description: the location of the resource.
+        description: The supported Azure location of the resource.
         type: string
       name:
-        description: the name of the resource.
+        description: The name of the resource.
         type: string
       tags:
         additionalProperties:
           type: string
-        description: the tags attached to the resource.
+        description: The tags attached to the resource.
         type: object
     required:
       - name
@@ -2421,7 +2436,7 @@ definitions:
         $ref: '#/definitions/BootDiagnosticsInstanceView'
         description: the boot diagnostics.
       disks:
-        description: the disks information.
+        description: The virtual machine disk information.
         items:
           $ref: '#/definitions/DiskInstanceView'
         type: array
@@ -2431,32 +2446,32 @@ definitions:
           $ref: '#/definitions/VirtualMachineExtensionInstanceView'
         type: array
       platformFaultDomain:
-        description: the Fault Domain count.
+        description: Specifies the fault domain of the virtual machine.
         format: int32
         type: integer
       platformUpdateDomain:
-        description: the Update Domain count.
+        description: Specifies the update domain of the virtual machine.
         format: int32
         type: integer
       rdpThumbPrint:
-        description: the Remote desktop certificate thumbprint.
+        description: The Remote desktop certificate thumbprint.
         type: string
       statuses:
-        description: the resource status information.
+        description: The resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       vmAgent:
         $ref: '#/definitions/VirtualMachineAgentInstanceView'
-        description: the VM Agent running on the virtual machine.
+        description: The VM Agent running on the virtual machine.
   VirtualMachineListResult:
     description: The List Virtual Machine operation response.
     properties:
       nextLink:
-        description: the uri to fetch the next page of VMs. Call ListNext() with this to fetch the next page of Virtual Machines.
+        description: The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
         type: string
       value:
-        description: the list of virtual machines.
+        description: The list of virtual machines.
         items:
           $ref: '#/definitions/VirtualMachine'
         type: array
@@ -2467,35 +2482,35 @@ definitions:
     properties:
       availabilitySet:
         $ref: '#/definitions/SubResource'
-        description: the reference Id of the availability set to which this virtual machine belongs.
+        description: The reference Id of the availability set to which the virtual machine belongs.
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
-        description: the diagnostics profile.
+        description: The diagnostics profile.
       hardwareProfile:
         $ref: '#/definitions/HardwareProfile'
-        description: the hardware profile.
+        description: The hardware profile.
       instanceView:
         $ref: '#/definitions/VirtualMachineInstanceView'
-        description: the virtual machine instance view.
+        description: The virtual machine instance view.
         readOnly: true
       licenseType:
-        description: 'the license type, which is for bring your own license scenario.'
+        description: Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system.
         type: string
       networkProfile:
         $ref: '#/definitions/NetworkProfile'
-        description: the network profile.
+        description: The network profile.
       osProfile:
         $ref: '#/definitions/OSProfile'
-        description: the OS profile.
+        description: The OS profile.
       provisioningState:
-        description: 'the provisioning state, which only appears in the response.'
+        description: 'The provisioning state, which only appears in the response.'
         readOnly: true
         type: string
       storageProfile:
         $ref: '#/definitions/StorageProfile'
-        description: the storage profile.
+        description: The storage profile.
       vmId:
-        description: the virtual machine unique id.
+        description: Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
         readOnly: true
         type: string
   VirtualMachineScaleSet:
@@ -2821,12 +2836,12 @@ definitions:
     description: Describes a virtual machine scale set virtual machine.
     properties:
       instanceId:
-        description: the virtual machine instance id.
+        description: The virtual machine instance ID.
         readOnly: true
         type: string
       plan:
         $ref: '#/definitions/Plan'
-        description: the purchase plan when deploying virtual machine from VM Marketplace images.
+        description: The purchase plan when deploying virtual machine from VM Marketplace images.
       properties:
         $ref: '#/definitions/VirtualMachineScaleSetVMProperties'
         x-ms-client-flatten: true
@@ -2838,7 +2853,7 @@ definitions:
         type: array
       sku:
         $ref: '#/definitions/Sku'
-        description: the virtual machine sku.
+        description: The virtual machine SKU.
         readOnly: true
   VirtualMachineScaleSetVMExtensionsSummary:
     description: Extensions summary for virtual machines of a virtual machine scale set.
@@ -2854,7 +2869,7 @@ definitions:
         readOnly: true
         type: array
   VirtualMachineScaleSetVMInstanceIDs:
-    description: Specifies the list of virtual machine scale set instance IDs.
+    description: Specifies a list of virtual machine instance IDs from the VM scale set.
     properties:
       instanceIds:
         description: the virtual machine scale set instance ids.
@@ -2862,7 +2877,7 @@ definitions:
           type: string
         type: array
   VirtualMachineScaleSetVMInstanceRequiredIDs:
-    description: Specifies the list of virtual machine scale set instance IDs.
+    description: Specifies a list of virtual machine instance IDs from the VM scale set.
     properties:
       instanceIds:
         description: the virtual machine scale set instance ids.
@@ -2974,33 +2989,33 @@ definitions:
     description: Describes the properties of a VM size.
     properties:
       maxDataDiskCount:
-        description: the Maximum number of data disks allowed by a VM size.
+        description: The maximum number of data disks that can be attached to the virtual machine size.
         format: int32
         type: integer
       memoryInMB:
-        description: the Memory size supported by a VM size.
+        description: 'The amount of memory, in MB, supported by the virtual machine size.'
         format: int32
         type: integer
       name:
-        description: the VM size name.
+        description: The name of the virtual machine size.
         type: string
       numberOfCores:
-        description: the Number of cores supported by a VM size.
+        description: The number of cores supported by the virtual machine size.
         format: int32
         type: integer
       osDiskSizeInMB:
-        description: the OS disk size allowed by a VM size.
+        description: 'The OS disk size, in MB, allowed by the virtual machine size.'
         format: int32
         type: integer
       resourceDiskSizeInMB:
-        description: the Resource disk size allowed by a VM size.
+        description: 'The resource disk size, in MB, allowed by the virtual machine size.'
         format: int32
         type: integer
   VirtualMachineSizeListResult:
     description: The List Virtual Machine operation response.
     properties:
       value:
-        description: the list of virtual machine sizes.
+        description: The list of virtual machine sizes.
         items:
           $ref: '#/definitions/VirtualMachineSize'
         type: array
@@ -3020,7 +3035,7 @@ definitions:
     description: Describes Windows Remote Management configuration of the VM
     properties:
       listeners:
-        description: the list of Windows Remote Management listeners
+        description: The list of Windows Remote Management listeners
         items:
           $ref: '#/definitions/WinRMListener'
         type: array
@@ -3028,10 +3043,10 @@ definitions:
     description: Describes Protocol and thumbprint of Windows Remote Management listener
     properties:
       certificateUrl:
-        description: the Certificate URL in KMS for Https listeners. Should be null for Http listeners.
+        description: The Certificate URL in KMS for Https listeners. Should be null for Http listeners.
         type: string
       protocol:
-        description: the Protocol used by WinRM listener. Currently only Http and Https are supported.
+        description: The Protocol used by the WinRM listener. Http and Https are supported.
         enum:
           - Http
           - Https
@@ -3043,19 +3058,19 @@ definitions:
     description: Describes Windows Configuration of the OS Profile.
     properties:
       additionalUnattendContent:
-        description: the additional base-64 encoded XML formatted information that can be included in the Unattend.xml file.
+        description: Additional base-64 encoded XML formatted information that can be included in the Unattend.xml file.
         items:
           $ref: '#/definitions/AdditionalUnattendContent'
         type: array
       enableAutomaticUpdates:
-        description: whether Windows updates are automatically installed on the VM
+        description: Indicates whether Windows updates are automatically installed on the VM.
         type: boolean
       provisionVMAgent:
-        description: whether VM Agent should be provisioned on the Virtual Machine.
+        description: 'Indicates whether the virtual machine agent should be provisioned on the Virtual Machine. If not specified, then the default behavior is to set it to true.'
         type: boolean
       timeZone:
-        description: the Time Zone of the VM
+        description: The time zone of the VM
         type: string
       winRM:
         $ref: '#/definitions/WinRMConfiguration'
-        description: the Windows Remote Management configuration of the VM
+        description: The Windows Remote Management configuration of the VM

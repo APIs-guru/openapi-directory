@@ -601,7 +601,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: 'Only return messages matching the specified query. Supports the same query format as the Gmail search box. For example, "from:someuser@example.com rfc822msgid: is:unread".'
+        - description: 'Only return messages matching the specified query. Supports the same query format as the Gmail search box. For example, "from:someuser@example.com rfc822msgid: is:unread". Parameter cannot be used when accessing the api using the gmail.metadata scope.'
           in: query
           name: q
           type: string
@@ -1839,7 +1839,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: 'Only return threads matching the specified query. Supports the same query format as the Gmail search box. For example, "from:someuser@example.com rfc822msgid: is:unread".'
+        - description: 'Only return threads matching the specified query. Supports the same query format as the Gmail search box. For example, "from:someuser@example.com rfc822msgid: is:unread". Parameter cannot be used when accessing the api using the gmail.metadata scope.'
           in: query
           name: q
           type: string
@@ -2518,7 +2518,7 @@ definitions:
         format: byte
         type: string
       size:
-        description: Total number of bytes in the body of the message part.
+        description: Number of bytes for the message part data (encoding notwithstanding).
         format: int32
         type: integer
     type: object

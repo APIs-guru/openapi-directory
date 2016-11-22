@@ -1,0 +1,3087 @@
+swagger: '2.0'
+schemes:
+  - https
+host: slides.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: An API for creating and editing Google Slides presentations.
+  title: Google Slides
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://slides.googleapis.com/$discovery/rest?version=v1'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: slides
+externalDocs:
+  url: 'https://developers.google.com/slides/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
+      'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
+      'https://www.googleapis.com/auth/presentations': View and manage your Google Slides presentations
+      'https://www.googleapis.com/auth/presentations.readonly': View your Google Slides presentations
+      'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
+      'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: presentations
+paths:
+  /v1/presentations:
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a new presentation using the title given in the request. Other
+        fields in the request are ignored.
+        Returns the created presentation.
+      operationId: slides.presentations.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Presentation'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Presentation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations'
+      tags:
+        - presentations
+  '/v1/presentations/{presentationId}':
+    get:
+      description: Gets the latest version of the specified presentation.
+      operationId: slides.presentations.get
+      parameters:
+        - description: The ID of the presentation to retrieve.
+          in: path
+          name: presentationId
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Presentation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations.readonly'
+      tags:
+        - presentations
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/presentations/{presentationId}/pages/{pageObjectId}':
+    get:
+      description: Gets the latest version of the specified page in the presentation.
+      operationId: slides.presentations.pages.get
+      parameters:
+        - description: The ID of the presentation to retrieve.
+          in: path
+          name: presentationId
+          required: true
+          type: string
+        - description: The object ID of the page to retrieve.
+          in: path
+          name: pageObjectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Page'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations.readonly'
+      tags:
+        - presentations
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/presentations/{presentationId}:batchUpdate':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Applies one or more updates to the presentation.
+
+        Each request is validated before
+        being applied. If any request is not valid then the entire request will
+        fail and nothing will be applied.
+
+        Some requests have replies to
+        give you some information about how they are applied. Other requests do
+        not need to return information; these each return an empty reply.
+        The order of replies matches that of the requests.
+
+        For example, suppose you call batchUpdate with four updates, and only the
+        third one returns information. The response would have two empty replies,
+        the reply to the third request, and another empty reply, in that order.
+
+        Because other users may be editing the presentation, it is not guaranteed
+        that the presentation will exactly reflect your changes: your changes may
+        be altered with respect to collaborator changes. If there are no
+        collaborators, the presentation should reflect your changes. In any case,
+        it is guaranteed that the updates in your request will be applied together
+        atomically.
+      operationId: slides.presentations.batchUpdate
+      parameters:
+        - description: The presentation to apply the updates to.
+          in: path
+          name: presentationId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchUpdatePresentationRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchUpdatePresentationResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
+      tags:
+        - presentations
+definitions:
+  AffineTransform:
+    description: |-
+      AffineTransform uses a 3x3 matrix with an implied last row of [ 0 0 1 ]
+      to transform source coordinates (x,y) into destination coordinates (x', y')
+      according to:
+
+            x'  x  =   shear_y  scale_y  translate_y  
+            1  [ 1 ]
+
+      After transformation,
+
+           x' = scale_x * x + shear_x * y + translate_x;
+           y' = scale_y * y + shear_y * x + translate_y;
+
+      This message is therefore composed of these six matrix elements.
+    properties:
+      scaleX:
+        description: The X coordinate scaling element.
+        format: double
+        type: number
+      scaleY:
+        description: The Y coordinate scaling element.
+        format: double
+        type: number
+      shearX:
+        description: The X coordinate shearing element.
+        format: double
+        type: number
+      shearY:
+        description: The Y coordinate shearing element.
+        format: double
+        type: number
+      translateX:
+        description: The X coordinate translation element.
+        format: double
+        type: number
+      translateY:
+        description: The Y coordinate translation element.
+        format: double
+        type: number
+      unit:
+        description: The units for translate elements.
+        enum:
+          - UNIT_UNSPECIFIED
+          - EMU
+          - PT
+        type: string
+    type: object
+  AutoText:
+    description: A TextElement kind that represents auto text.
+    properties:
+      content:
+        description: 'The rendered content of this auto text, if available.'
+        type: string
+      style:
+        $ref: '#/definitions/TextStyle'
+        description: The styling applied to this auto text.
+      type:
+        description: The type of this auto text.
+        enum:
+          - TYPE_UNSPECIFIED
+          - SLIDE_NUMBER
+        type: string
+    type: object
+  BatchUpdatePresentationRequest:
+    description: Request message for PresentationsService.BatchUpdatePresentation.
+    properties:
+      requests:
+        description: A list of updates to apply to the presentation.
+        items:
+          $ref: '#/definitions/Request'
+        type: array
+    type: object
+  BatchUpdatePresentationResponse:
+    description: Response message from a batch update.
+    properties:
+      presentationId:
+        description: The presentation the updates were applied to.
+        type: string
+      replies:
+        description: |-
+          The reply of the updates.  This maps 1:1 with the updates, although
+          replies to some requests may be empty.
+        items:
+          $ref: '#/definitions/Response'
+        type: array
+    type: object
+  Bullet:
+    description: Describes the bullet of a paragraph.
+    properties:
+      bulletStyle:
+        $ref: '#/definitions/TextStyle'
+        description: The paragraph specific text style applied to this bullet.
+      glyph:
+        description: The rendered bullet glyph for this paragraph.
+        type: string
+      listId:
+        description: The ID of the list this paragraph belongs to.
+        type: string
+      nestingLevel:
+        description: The nesting level of this paragraph in the list.
+        format: int32
+        type: integer
+    type: object
+  ColorScheme:
+    description: The palette of predefined colors for a page.
+    properties:
+      colors:
+        description: The ThemeColorType and corresponding concrete color pairs.
+        items:
+          $ref: '#/definitions/ThemeColorPair'
+        type: array
+    type: object
+  ColorStop:
+    description: A color and position in a gradient band.
+    properties:
+      alpha:
+        description: |-
+          The alpha value of this color in the gradient band. Defaults to 1.0,
+          fully opaque.
+        format: float
+        type: number
+      color:
+        $ref: '#/definitions/OpaqueColor'
+        description: The color of the gradient stop.
+      position:
+        description: |-
+          The relative position of the color stop in the gradient band measured
+          in percentage. The value should be in the interval [0.0, 1.0].
+        format: float
+        type: number
+    type: object
+  CreateImageRequest:
+    description: Creates an image.
+    properties:
+      elementProperties:
+        $ref: '#/definitions/PageElementProperties'
+        description: |-
+          The element properties for the image.
+
+          When the aspect ratio of the provided size does not match the image aspect
+          ratio, the image is scaled and centered with respect to the size in order
+          to maintain aspect ratio. The provided transform is applied after this
+          operation.
+      objectId:
+        description: |-
+          A user-supplied object ID.
+
+          If you specify an ID, it must be unique among all pages and page elements
+          in the presentation. The ID must start with an alphanumeric character or an
+          underscore (matches regex `[a-zA-Z0-9_]`); remaining characters
+          may include those as well as a hyphen or colon (matches regex
+          `[a-zA-Z0-9_-:]`).
+          The length of the ID must not be less than 5 or greater than 50.
+
+          If you don't specify an ID, a unique one is generated.
+        type: string
+      url:
+        description: |-
+          The image URL.
+
+          The image is fetched once at insertion time and a copy is stored for
+          display inside the presentation. Images must be less than 50MB in size,
+          cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
+          format.
+        type: string
+    type: object
+  CreateImageResponse:
+    description: The result of creating an image.
+    properties:
+      objectId:
+        description: The object ID of the created image.
+        type: string
+    type: object
+  CreateLineRequest:
+    description: Creates a line.
+    properties:
+      elementProperties:
+        $ref: '#/definitions/PageElementProperties'
+        description: The element properties for the line.
+      lineCategory:
+        description: The category of line to be created.
+        enum:
+          - STRAIGHT
+          - BENT
+          - CURVED
+        type: string
+      objectId:
+        description: |-
+          A user-supplied object ID.
+
+          If you specify an ID, it must be unique among all pages and page elements
+          in the presentation. The ID must start with an alphanumeric character or an
+          underscore (matches regex `[a-zA-Z0-9_]`); remaining characters
+          may include those as well as a hyphen or colon (matches regex
+          `[a-zA-Z0-9_-:]`).
+          The length of the ID must not be less than 5 or greater than 50.
+
+          If you don't specify an ID, a unique one is generated.
+        type: string
+    type: object
+  CreateLineResponse:
+    description: The result of creating a line.
+    properties:
+      objectId:
+        description: The object ID of the created line.
+        type: string
+    type: object
+  CreateParagraphBulletsRequest:
+    description: |-
+      Creates bullets for all of the paragraphs that overlap with the given
+      text index range.
+
+      The nesting level of each paragraph will be determined by counting leading
+      tabs in front of each paragraph. To avoid excess space between the bullet and
+      the corresponding paragraph, these leading tabs are removed by this request.
+      This may change the indices of parts of the text.
+
+      If the paragraph immediately before paragraphs being updated is in a list
+      with a matching preset, the paragraphs being updated are added to that
+      preceding list.
+    properties:
+      bulletPreset:
+        description: |-
+          The kinds of bullet glyphs to be used. Defaults to the
+          `BULLET_DISC_CIRCLE_SQUARE` preset.
+        enum:
+          - BULLET_DISC_CIRCLE_SQUARE
+          - BULLET_DIAMONDX_ARROW3D_SQUARE
+          - BULLET_CHECKBOX
+          - BULLET_ARROW_DIAMOND_DISC
+          - BULLET_STAR_CIRCLE_SQUARE
+          - BULLET_ARROW3D_CIRCLE_SQUARE
+          - BULLET_LEFTTRIANGLE_DIAMOND_DISC
+          - BULLET_DIAMONDX_HOLLOWDIAMOND_SQUARE
+          - BULLET_DIAMOND_CIRCLE_SQUARE
+          - NUMBERED_DIGIT_ALPHA_ROMAN
+          - NUMBERED_DIGIT_ALPHA_ROMAN_PARENS
+          - NUMBERED_DIGIT_NESTED
+          - NUMBERED_UPPERALPHA_ALPHA_ROMAN
+          - NUMBERED_UPPERROMAN_UPPERALPHA_DIGIT
+          - NUMBERED_ZERODIGIT_ALPHA_ROMAN
+        type: string
+      cellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The optional table cell location if the text to be modified is in a table
+          cell. If present the object_id must refer to a table.
+      objectId:
+        description: The object ID of the shape or table containing the text to add bullets to.
+        type: string
+      textRange:
+        $ref: '#/definitions/Range'
+        description: 'The range of text to apply the bullet presets to, based on TextElement indexes.'
+    type: object
+  CreateShapeRequest:
+    description: Creates a new shape.
+    properties:
+      elementProperties:
+        $ref: '#/definitions/PageElementProperties'
+        description: The element properties for the shape.
+      objectId:
+        description: |-
+          A user-supplied object ID.
+
+          If you specify an ID, it must be unique among all pages and page elements
+          in the presentation. The ID must start with an alphanumeric character or an
+          underscore (matches regex `[a-zA-Z0-9_]`); remaining characters
+          may include those as well as a hyphen or colon (matches regex
+          `[a-zA-Z0-9_-:]`).
+          The length of the ID must not be less than 5 or greater than 50.
+          If empty, a unique identifier will be generated.
+        type: string
+      shapeType:
+        description: The shape type.
+        enum:
+          - TYPE_UNSPECIFIED
+          - TEXT_BOX
+          - RECTANGLE
+          - ROUND_RECTANGLE
+          - ELLIPSE
+          - ARC
+          - BENT_ARROW
+          - BENT_UP_ARROW
+          - BEVEL
+          - BLOCK_ARC
+          - BRACE_PAIR
+          - BRACKET_PAIR
+          - CAN
+          - CHEVRON
+          - CHORD
+          - CLOUD
+          - CORNER
+          - CUBE
+          - CURVED_DOWN_ARROW
+          - CURVED_LEFT_ARROW
+          - CURVED_RIGHT_ARROW
+          - CURVED_UP_ARROW
+          - DECAGON
+          - DIAGONAL_STRIPE
+          - DIAMOND
+          - DODECAGON
+          - DONUT
+          - DOUBLE_WAVE
+          - DOWN_ARROW
+          - DOWN_ARROW_CALLOUT
+          - FOLDED_CORNER
+          - FRAME
+          - HALF_FRAME
+          - HEART
+          - HEPTAGON
+          - HEXAGON
+          - HOME_PLATE
+          - HORIZONTAL_SCROLL
+          - IRREGULAR_SEAL_1
+          - IRREGULAR_SEAL_2
+          - LEFT_ARROW
+          - LEFT_ARROW_CALLOUT
+          - LEFT_BRACE
+          - LEFT_BRACKET
+          - LEFT_RIGHT_ARROW
+          - LEFT_RIGHT_ARROW_CALLOUT
+          - LEFT_RIGHT_UP_ARROW
+          - LEFT_UP_ARROW
+          - LIGHTNING_BOLT
+          - MATH_DIVIDE
+          - MATH_EQUAL
+          - MATH_MINUS
+          - MATH_MULTIPLY
+          - MATH_NOT_EQUAL
+          - MATH_PLUS
+          - MOON
+          - NO_SMOKING
+          - NOTCHED_RIGHT_ARROW
+          - OCTAGON
+          - PARALLELOGRAM
+          - PENTAGON
+          - PIE
+          - PLAQUE
+          - PLUS
+          - QUAD_ARROW
+          - QUAD_ARROW_CALLOUT
+          - RIBBON
+          - RIBBON_2
+          - RIGHT_ARROW
+          - RIGHT_ARROW_CALLOUT
+          - RIGHT_BRACE
+          - RIGHT_BRACKET
+          - ROUND_1_RECTANGLE
+          - ROUND_2_DIAGONAL_RECTANGLE
+          - ROUND_2_SAME_RECTANGLE
+          - RIGHT_TRIANGLE
+          - SMILEY_FACE
+          - SNIP_1_RECTANGLE
+          - SNIP_2_DIAGONAL_RECTANGLE
+          - SNIP_2_SAME_RECTANGLE
+          - SNIP_ROUND_RECTANGLE
+          - STAR_10
+          - STAR_12
+          - STAR_16
+          - STAR_24
+          - STAR_32
+          - STAR_4
+          - STAR_5
+          - STAR_6
+          - STAR_7
+          - STAR_8
+          - STRIPED_RIGHT_ARROW
+          - SUN
+          - TRAPEZOID
+          - TRIANGLE
+          - UP_ARROW
+          - UP_ARROW_CALLOUT
+          - UP_DOWN_ARROW
+          - UTURN_ARROW
+          - VERTICAL_SCROLL
+          - WAVE
+          - WEDGE_ELLIPSE_CALLOUT
+          - WEDGE_RECTANGLE_CALLOUT
+          - WEDGE_ROUND_RECTANGLE_CALLOUT
+          - FLOW_CHART_ALTERNATE_PROCESS
+          - FLOW_CHART_COLLATE
+          - FLOW_CHART_CONNECTOR
+          - FLOW_CHART_DECISION
+          - FLOW_CHART_DELAY
+          - FLOW_CHART_DISPLAY
+          - FLOW_CHART_DOCUMENT
+          - FLOW_CHART_EXTRACT
+          - FLOW_CHART_INPUT_OUTPUT
+          - FLOW_CHART_INTERNAL_STORAGE
+          - FLOW_CHART_MAGNETIC_DISK
+          - FLOW_CHART_MAGNETIC_DRUM
+          - FLOW_CHART_MAGNETIC_TAPE
+          - FLOW_CHART_MANUAL_INPUT
+          - FLOW_CHART_MANUAL_OPERATION
+          - FLOW_CHART_MERGE
+          - FLOW_CHART_MULTIDOCUMENT
+          - FLOW_CHART_OFFLINE_STORAGE
+          - FLOW_CHART_OFFPAGE_CONNECTOR
+          - FLOW_CHART_ONLINE_STORAGE
+          - FLOW_CHART_OR
+          - FLOW_CHART_PREDEFINED_PROCESS
+          - FLOW_CHART_PREPARATION
+          - FLOW_CHART_PROCESS
+          - FLOW_CHART_PUNCHED_CARD
+          - FLOW_CHART_PUNCHED_TAPE
+          - FLOW_CHART_SORT
+          - FLOW_CHART_SUMMING_JUNCTION
+          - FLOW_CHART_TERMINATOR
+          - ARROW_EAST
+          - ARROW_NORTH_EAST
+          - ARROW_NORTH
+          - SPEECH
+          - STARBURST
+          - TEARDROP
+          - ELLIPSE_RIBBON
+          - ELLIPSE_RIBBON_2
+          - CLOUD_CALLOUT
+          - CUSTOM
+        type: string
+    type: object
+  CreateShapeResponse:
+    description: The result of creating a shape.
+    properties:
+      objectId:
+        description: The object ID of the created shape.
+        type: string
+    type: object
+  CreateSheetsChartRequest:
+    description: |-
+      Creates an embedded Google Sheets chart.
+
+      NOTE: Chart creation requires  at least one of the spreadsheets.readonly,
+      spreadsheets, drive.readonly, or drive OAuth scopes.
+    properties:
+      chartId:
+        description: The ID of the specific chart in the Google Sheets spreadsheet.
+        format: int32
+        type: integer
+      elementProperties:
+        $ref: '#/definitions/PageElementProperties'
+        description: |-
+          The element properties for the chart.
+
+          When the aspect ratio of the provided size does not match the chart aspect
+          ratio, the chart is scaled and centered with respect to the size in order
+          to maintain aspect ratio. The provided transform is applied after this
+          operation.
+      linkingMode:
+        description: |-
+          The mode with which the chart is linked to the source spreadsheet. When
+          not specified, the chart will be an image that is not linked.
+        enum:
+          - NOT_LINKED_IMAGE
+          - LINKED
+        type: string
+      objectId:
+        description: |-
+          A user-supplied object ID.
+
+          If specified, the ID must be unique among all pages and page elements in
+          the presentation. The ID should start with a word character [a-zA-Z0-9_]
+          and then followed by any number of the following characters [a-zA-Z0-9_-:].
+          The length of the ID should not be less than 5 or greater than 50.
+          If empty, a unique identifier will be generated.
+        type: string
+      spreadsheetId:
+        description: The ID of the Google Sheets spreadsheet that contains the chart.
+        type: string
+    type: object
+  CreateSheetsChartResponse:
+    description: The result of creating an embedded Google Sheets chart.
+    properties:
+      objectId:
+        description: The object ID of the created chart.
+        type: string
+    type: object
+  CreateSlideRequest:
+    description: Creates a new slide.
+    properties:
+      insertionIndex:
+        description: |-
+          The optional zero-based index indicating where to insert the slides.
+
+          If you don't specify an index, the new slide is created at the end.
+        format: int32
+        type: integer
+      objectId:
+        description: |-
+          A user-supplied object ID.
+
+          If you specify an ID, it must be unique among all pages and page elements
+          in the presentation. The ID must start with an alphanumeric character or an
+          underscore (matches regex `[a-zA-Z0-9_]`); remaining characters
+          may include those as well as a hyphen or colon (matches regex
+          `[a-zA-Z0-9_-:]`).
+          The length of the ID must not be less than 5 or greater than 50.
+
+          If you don't specify an ID, a unique one is generated.
+        type: string
+      slideLayoutReference:
+        $ref: '#/definitions/LayoutReference'
+        description: |-
+          Layout reference of the slide to be inserted, based on the *current
+          master*, which is one of the following:
+
+          - The master of the previous slide index.
+          - The master of the first slide, if the insertion_index is zero.
+          - The first master in the presentation, if there are no slides.
+
+          If the LayoutReference is not found in the current master, a 400 bad
+          request error is returned.
+
+          If you don't specify a layout reference, then the new slide will use the
+          predefined layout `BLANK`.
+    type: object
+  CreateSlideResponse:
+    description: The result of creating a slide.
+    properties:
+      objectId:
+        description: The object ID of the created slide.
+        type: string
+    type: object
+  CreateTableRequest:
+    description: Creates a new table.
+    properties:
+      columns:
+        description: Number of columns in the table.
+        format: int32
+        type: integer
+      elementProperties:
+        $ref: '#/definitions/PageElementProperties'
+        description: |-
+          The element properties for the table.
+
+          The table will be created at the provided size, subject to a minimum size.
+          If no size is provided, the table will be automatically sized.
+
+          Table transforms must have a scale of 1 and no shear components. If no
+          transform is provided, the table will be centered on the page.
+      objectId:
+        description: |-
+          A user-supplied object ID.
+
+          If you specify an ID, it must be unique among all pages and page elements
+          in the presentation. The ID must start with an alphanumeric character or an
+          underscore (matches regex `[a-zA-Z0-9_]`); remaining characters
+          may include those as well as a hyphen or colon (matches regex
+          `[a-zA-Z0-9_-:]`).
+          The length of the ID must not be less than 5 or greater than 50.
+
+          If you don't specify an ID, a unique one is generated.
+        type: string
+      rows:
+        description: Number of rows in the table.
+        format: int32
+        type: integer
+    type: object
+  CreateTableResponse:
+    description: The result of creating a table.
+    properties:
+      objectId:
+        description: The object ID of the created table.
+        type: string
+    type: object
+  CreateVideoRequest:
+    description: Creates a video.
+    properties:
+      elementProperties:
+        $ref: '#/definitions/PageElementProperties'
+        description: The element properties for the video.
+      id:
+        description: |-
+          The video source's unique identifier for this video.
+
+          e.g. For YouTube video https://www.youtube.com/watch?v=7U3axjORYZ0,
+          the ID is 7U3axjORYZ0.
+        type: string
+      objectId:
+        description: |-
+          A user-supplied object ID.
+
+          If you specify an ID, it must be unique among all pages and page elements
+          in the presentation. The ID must start with an alphanumeric character or an
+          underscore (matches regex `[a-zA-Z0-9_]`); remaining characters
+          may include those as well as a hyphen or colon (matches regex
+          `[a-zA-Z0-9_-:]`).
+          The length of the ID must not be less than 5 or greater than 50.
+
+          If you don't specify an ID, a unique one is generated.
+        type: string
+      source:
+        description: The video source.
+        enum:
+          - SOURCE_UNSPECIFIED
+          - YOUTUBE
+        type: string
+    type: object
+  CreateVideoResponse:
+    description: The result of creating a video.
+    properties:
+      objectId:
+        description: The object ID of the created video.
+        type: string
+    type: object
+  CropProperties:
+    description: |-
+      The crop properties of an object enclosed in a container. For example, an
+      Image.
+
+      The crop properties is represented by the offsets of four edges which define
+      a crop rectangle. The offsets are measured in percentage from the
+      corresponding edges of the object's original bounding rectangle towards
+      inside, relative to the object's original dimensions.
+
+      - If the offset is in the interval (0, 1), the corresponding edge of crop
+      rectangle is positioned inside of the object's original bounding rectangle.
+      - If the offset is negative or greater than 1, the corresponding edge of crop
+      rectangle is positioned outside of the object's original bounding rectangle.
+      - If the left edge of the crop rectangle is on the right side of its right
+      edge, the object will be flipped horizontally.
+      - If the top edge of the crop rectangle is below its bottom edge, the object
+      will be flipped vertically.
+      - If all offsets and rotation angle is 0, the object is not cropped.
+
+      After cropping, the content in the crop rectangle will be stretched to fit
+      its container.
+    properties:
+      angle:
+        description: |-
+          The rotation angle of the crop window around its center, in radians.
+          Rotation angle is applied after the offset.
+        format: float
+        type: number
+      bottomOffset:
+        description: |-
+          The offset specifies the bottom edge of the crop rectangle that is located
+          above the original bounding rectangle bottom edge, relative to the object's
+          original height.
+        format: float
+        type: number
+      leftOffset:
+        description: |-
+          The offset specifies the left edge of the crop rectangle that is located to
+          the right of the original bounding rectangle left edge, relative to the
+          object's original width.
+        format: float
+        type: number
+      rightOffset:
+        description: |-
+          The offset specifies the right edge of the crop rectangle that is located
+          to the left of the original bounding rectangle right edge, relative to the
+          object's original width.
+        format: float
+        type: number
+      topOffset:
+        description: |-
+          The offset specifies the top edge of the crop rectangle that is located
+          below the original bounding rectangle top edge, relative to the object's
+          original height.
+        format: float
+        type: number
+    type: object
+  DeleteObjectRequest:
+    description: |-
+      Deletes an object, either pages or
+      page elements, from the
+      presentation.
+    properties:
+      objectId:
+        description: |-
+          The object ID of the page or page element to delete.
+
+          If after a delete operation a group contains
+          only 1 or no page elements, the group is also deleted.
+
+          If a placeholder is deleted on a layout, any empty inheriting shapes are
+          also deleted.
+        type: string
+    type: object
+  DeleteTableColumnRequest:
+    description: Deletes a column from a table.
+    properties:
+      cellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The reference table cell location from which a column will be deleted.
+
+          The column this cell spans will be deleted. If this is a merged cell,
+          multiple columns will be deleted. If no columns remain in the table after
+          this deletion, the whole table is deleted.
+      tableObjectId:
+        description: The table to delete columns from.
+        type: string
+    type: object
+  DeleteTableRowRequest:
+    description: Deletes a row from a table.
+    properties:
+      cellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The reference table cell location from which a row will be deleted.
+
+          The row this cell spans will be deleted. If this is a merged cell, multiple
+          rows will be deleted. If no rows remain in the table after this deletion,
+          the whole table is deleted.
+      tableObjectId:
+        description: The table to delete rows from.
+        type: string
+    type: object
+  DeleteTextRequest:
+    description: Deletes text from a shape or a table cell.
+    properties:
+      cellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The optional table cell location if the text is to be deleted from a table
+          cell. If present the object_id must refer to a table.
+      objectId:
+        description: The object ID of the shape or table from which the text will be deleted.
+        type: string
+      textRange:
+        $ref: '#/definitions/Range'
+        description: |-
+          The range of text to delete, based on TextElement indexes.
+
+          There is always an implicit newline character at the end of a shape's or
+          table cell's text that cannot be deleted. `Range.Type.ALL` will use the
+          correct bounds, but care must be taken when specifying explicit bounds for
+          range types `FROM_START_INDEX` and `FIXED_RANGE`. For example, if the text
+          is "ABC", followed by an implicit newline, then the maximum value is 2 for
+          `text_range.start_index` and 3 for `text_range.end_index`.
+
+          Deleting text that crosses a paragraph boundary may result in changes
+          to paragraph styles and lists as the two paragraphs are merged.
+
+          Ranges that include only one code unit of a surrogate pair are expanded to
+          include both code units.
+    type: object
+  Dimension:
+    description: A magnitude in a single direction in the specified units.
+    properties:
+      magnitude:
+        description: The magnitude.
+        format: double
+        type: number
+      unit:
+        description: The units for magnitude.
+        enum:
+          - UNIT_UNSPECIFIED
+          - EMU
+          - PT
+        type: string
+    type: object
+  DuplicateObjectRequest:
+    description: |-
+      Duplicates a slide or page element.
+
+      When duplicating a slide, the duplicate slide will be created immediately
+      following the specified slide. When duplicating a page element, the duplicate
+      will be placed on the same page at the same position as the original.
+    properties:
+      objectId:
+        description: The ID of the object to duplicate.
+        type: string
+      objectIds:
+        additionalProperties:
+          type: string
+        description: |-
+          The object being duplicated may contain other objects, for example when
+          duplicating a slide or a group page element. This map defines how the IDs
+          of duplicated objects are generated: the keys are the IDs of the original
+          objects and its values are the IDs that will be assigned to the
+          corresponding duplicate object. The ID of the source object's duplicate
+          may be specified in this map as well, using the same value of the
+          `object_id` field as a key and the newly desired ID as the value.
+
+          All keys must correspond to existing IDs in the presentation. All values
+          must be unique in the presentation and must start with an alphanumeric
+          character or an underscore (matches regex `[a-zA-Z0-9_]`); remaining
+          characters may include those as well as a hyphen or colon (matches regex
+          `[a-zA-Z0-9_-:]`). The length of the new ID must not be less than 5 or
+          greater than 50.
+
+          If any IDs of source objects are omitted from the map, a new random ID will
+          be assigned. If the map is empty or unset, all duplicate objects will
+          receive a new random ID.
+        type: object
+    type: object
+  DuplicateObjectResponse:
+    description: The response of duplicating an object.
+    properties:
+      objectId:
+        description: The ID of the new duplicate object.
+        type: string
+    type: object
+  Group:
+    description: |-
+      A PageElement kind representing a
+      joined collection of PageElements.
+    properties:
+      children:
+        description: The collection of elements in the group. The minimum size of a group is 2.
+        items:
+          $ref: '#/definitions/PageElement'
+        type: array
+    type: object
+  Image:
+    description: |-
+      A PageElement kind representing an
+      image.
+    properties:
+      contentUrl:
+        description: |-
+          An URL to an image with a default lifetime of 30 minutes.
+          This URL is tagged with the account of the requester. Anyone with the URL
+          effectively accesses the image as the original requester. Access to the
+          image may be lost if the presentation's sharing settings change.
+        type: string
+      imageProperties:
+        $ref: '#/definitions/ImageProperties'
+        description: The properties of the image.
+    type: object
+  ImageProperties:
+    description: The properties of the Image.
+    properties:
+      brightness:
+        description: |-
+          The brightness effect of the image. The value should be in the interval
+          [-1.0, 1.0], where 0 means no effect. This property is read-only.
+        format: float
+        type: number
+      contrast:
+        description: |-
+          The contrast effect of the image. The value should be in the interval
+          [-1.0, 1.0], where 0 means no effect. This property is read-only.
+        format: float
+        type: number
+      cropProperties:
+        $ref: '#/definitions/CropProperties'
+        description: |-
+          The crop properties of the image. If not set, the image is not cropped.
+          This property is read-only.
+      outline:
+        $ref: '#/definitions/Outline'
+        description: 'The outline of the image. If not set, the the image has no outline.'
+      recolor:
+        $ref: '#/definitions/Recolor'
+        description: |-
+          The recolor effect of the image. If not set, the image is not recolored.
+          This property is read-only.
+      shadow:
+        $ref: '#/definitions/Shadow'
+        description: |-
+          The shadow of the image. If not set, the image has no shadow. This property
+          is read-only.
+      transparency:
+        description: |-
+          The transparency effect of the image. The value should be in the interval
+          [0.0, 1.0], where 0 means no effect and 1 means completely transparent.
+          This property is read-only.
+        format: float
+        type: number
+    type: object
+  InsertTableColumnsRequest:
+    description: |-
+      Inserts columns into a table.
+
+      Other columns in the table will be resized to fit the new column.
+    properties:
+      cellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The reference table cell location from which columns will be inserted.
+
+          A new column will be inserted to the left (or right) of the column where
+          the reference cell is. If the reference cell is a merged cell, a new
+          column will be inserted to the left (or right) of the merged cell.
+      insertRight:
+        description: |-
+          Whether to insert new columns to the right of the reference cell location.
+
+          - `True`: insert to the right.
+          - `False`: insert to the left.
+        type: boolean
+      number:
+        description: The number of columns to be inserted. Maximum 20 per request.
+        format: int32
+        type: integer
+      tableObjectId:
+        description: The table to insert columns into.
+        type: string
+    type: object
+  InsertTableRowsRequest:
+    description: Inserts rows into a table.
+    properties:
+      cellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The reference table cell location from which rows will be inserted.
+
+          A new row will be inserted above (or below) the row where the reference
+          cell is. If the reference cell is a merged cell, a new row will be
+          inserted above (or below) the merged cell.
+      insertBelow:
+        description: |-
+          Whether to insert new rows below the reference cell location.
+
+          - `True`: insert below the cell.
+          - `False`: insert above the cell.
+        type: boolean
+      number:
+        description: The number of rows to be inserted. Maximum 20 per request.
+        format: int32
+        type: integer
+      tableObjectId:
+        description: The table to insert rows into.
+        type: string
+    type: object
+  InsertTextRequest:
+    description: Inserts text into a shape or a table cell.
+    properties:
+      cellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The optional table cell location if the text is to be inserted into a table
+          cell. If present the object_id must refer to a table.
+      insertionIndex:
+        description: |-
+          The index where the text will be inserted, in Unicode code units, based
+          on TextElement indexes.
+
+          The index is zero-based and is computed from the start of the string.
+          The index may be adjusted to prevent insertions inside Unicode grapheme
+          clusters. In these cases, the text will be inserted immediately after the
+          grapheme cluster.
+        format: int32
+        type: integer
+      objectId:
+        description: The object ID of the shape or table where the text will be inserted.
+        type: string
+      text:
+        description: |-
+          The text to be inserted.
+
+          Inserting a newline character will implicitly create a new
+          ParagraphMarker at that index.
+          The paragraph style of the new paragraph will be copied from the paragraph
+          at the current insertion index, including lists and bullets.
+
+          Text styles for inserted text will be determined automatically, generally
+          preserving the styling of neighboring text. In most cases, the text will be
+          added to the TextRun that exists at the
+          insertion index.
+
+          Some control characters (U+0000-U+0008, U+000C-U+001F) and characters
+          from the Unicode Basic Multilingual Plane Private Use Area (U+E000-U+F8FF)
+          will be stripped out of the inserted text.
+        type: string
+    type: object
+  LayoutProperties:
+    description: |-
+      The properties of Page are only
+      relevant for pages with page_type LAYOUT.
+    properties:
+      displayName:
+        description: The human readable name of the layout in the presentation's locale.
+        type: string
+      masterObjectId:
+        description: The object ID of the master that this layout is based on.
+        type: string
+      name:
+        description: The name of the layout.
+        type: string
+    type: object
+  LayoutReference:
+    description: |-
+      Slide layout reference. This may reference either:
+
+      - A predefined layout, or
+      - One of the layouts in the presentation.
+    properties:
+      layoutId:
+        description: 'Layout ID: the object ID of one of the layouts in the presentation.'
+        type: string
+      predefinedLayout:
+        description: Predefined layout.
+        enum:
+          - PREDEFINED_LAYOUT_UNSPECIFIED
+          - BLANK
+          - CAPTION_ONLY
+          - TITLE
+          - TITLE_AND_BODY
+          - TITLE_AND_TWO_COLUMNS
+          - TITLE_ONLY
+        type: string
+    type: object
+  Line:
+    description: |-
+      A PageElement kind representing a
+      line, curved connector, or bent connector.
+    properties:
+      lineProperties:
+        $ref: '#/definitions/LineProperties'
+        description: The properties of the line.
+      lineType:
+        description: The type of the line.
+        enum:
+          - TYPE_UNSPECIFIED
+          - STRAIGHT_CONNECTOR_1
+          - BENT_CONNECTOR_2
+          - BENT_CONNECTOR_3
+          - BENT_CONNECTOR_4
+          - BENT_CONNECTOR_5
+          - CURVED_CONNECTOR_2
+          - CURVED_CONNECTOR_3
+          - CURVED_CONNECTOR_4
+          - CURVED_CONNECTOR_5
+        type: string
+    type: object
+  LineFill:
+    description: The fill of the line.
+    properties:
+      solidFill:
+        $ref: '#/definitions/SolidFill'
+        description: Solid color fill.
+    type: object
+  LineProperties:
+    description: |-
+      The properties of the Line.
+
+      When unset, these fields default to values that match the appearance of
+      new lines created in the Slides editor.
+    properties:
+      dashStyle:
+        description: The dash style of the line.
+        enum:
+          - DASH_STYLE_UNSPECIFIED
+          - SOLID
+          - DOT
+          - DASH
+          - DASH_DOT
+          - LONG_DASH
+          - LONG_DASH_DOT
+        type: string
+      endArrow:
+        description: The style of the arrow at the end of the line.
+        enum:
+          - ARROW_STYLE_UNSPECIFIED
+          - NONE
+          - STEALTH_ARROW
+          - FILL_ARROW
+          - FILL_CIRCLE
+          - FILL_SQUARE
+          - FILL_DIAMOND
+          - OPEN_ARROW
+          - OPEN_CIRCLE
+          - OPEN_SQUARE
+          - OPEN_DIAMOND
+        type: string
+      lineFill:
+        $ref: '#/definitions/LineFill'
+        description: |-
+          The fill of the line. The default line fill matches the defaults for new
+          lines created in the Slides editor.
+      startArrow:
+        description: The style of the arrow at the beginning of the line.
+        enum:
+          - ARROW_STYLE_UNSPECIFIED
+          - NONE
+          - STEALTH_ARROW
+          - FILL_ARROW
+          - FILL_CIRCLE
+          - FILL_SQUARE
+          - FILL_DIAMOND
+          - OPEN_ARROW
+          - OPEN_CIRCLE
+          - OPEN_SQUARE
+          - OPEN_DIAMOND
+        type: string
+      weight:
+        $ref: '#/definitions/Dimension'
+        description: The thickness of the line.
+    type: object
+  Link:
+    description: A hypertext link.
+    properties:
+      pageObjectId:
+        description: |-
+          If set, indicates this is a link to the specific page in this
+          presentation with this ID. A page with this ID may not exist.
+        type: string
+      relativeLink:
+        description: |-
+          If set, indicates this is a link to a slide in this presentation,
+          addressed by its position.
+        enum:
+          - RELATIVE_SLIDE_LINK_UNSPECIFIED
+          - NEXT_SLIDE
+          - PREVIOUS_SLIDE
+          - FIRST_SLIDE
+          - LAST_SLIDE
+        type: string
+      slideIndex:
+        description: |-
+          If set, indicates this is a link to the slide at this zero-based index
+          in the presentation. There may not be a slide at this index.
+        format: int32
+        type: integer
+      url:
+        description: 'If set, indicates this is a link to the external web page at this URL.'
+        type: string
+    type: object
+  List:
+    description: |-
+      A List describes the look and feel of bullets belonging to paragraphs
+      associated with a list. A paragraph that is part of a list has an implicit
+      reference to that list's ID.
+    properties:
+      listId:
+        description: The ID of the list.
+        type: string
+      nestingLevel:
+        additionalProperties:
+          $ref: '#/definitions/NestingLevel'
+        description: |-
+          A map of nesting levels to the properties of bullets at the associated
+          level. A list has at most nine levels of nesting, so the possible values
+          for the keys of this map are 0 through 8, inclusive.
+        type: object
+    type: object
+  NestingLevel:
+    description: |-
+      Contains properties describing the look and feel of a list bullet at a given
+      level of nesting.
+    properties:
+      bulletStyle:
+        $ref: '#/definitions/TextStyle'
+        description: The style of a bullet at this level of nesting.
+    type: object
+  OpaqueColor:
+    description: A themeable solid color value.
+    properties:
+      rgbColor:
+        $ref: '#/definitions/RgbColor'
+        description: An opaque RGB color.
+      themeColor:
+        description: An opaque theme color.
+        enum:
+          - THEME_COLOR_TYPE_UNSPECIFIED
+          - DARK1
+          - LIGHT1
+          - DARK2
+          - LIGHT2
+          - ACCENT1
+          - ACCENT2
+          - ACCENT3
+          - ACCENT4
+          - ACCENT5
+          - ACCENT6
+          - HYPERLINK
+          - FOLLOWED_HYPERLINK
+          - TEXT1
+          - BACKGROUND1
+          - TEXT2
+          - BACKGROUND2
+        type: string
+    type: object
+  OptionalColor:
+    description: A color that can either be fully opaque or fully transparent.
+    properties:
+      opaqueColor:
+        $ref: '#/definitions/OpaqueColor'
+        description: |-
+          If set, this will be used as an opaque color. If unset, this represents
+          a transparent color.
+    type: object
+  Outline:
+    description: |-
+      The outline of a PageElement.
+
+      If these fields are unset, they may be inherited from a parent placeholder
+      if it exists. If there is no parent, the fields will default to the value
+      used for new page elements created in the Slides editor, which may depend on
+      the page element kind.
+    properties:
+      dashStyle:
+        description: The dash style of the outline.
+        enum:
+          - DASH_STYLE_UNSPECIFIED
+          - SOLID
+          - DOT
+          - DASH
+          - DASH_DOT
+          - LONG_DASH
+          - LONG_DASH_DOT
+        type: string
+      outlineFill:
+        $ref: '#/definitions/OutlineFill'
+        description: The fill of the outline.
+      propertyState:
+        description: |-
+          The outline property state.
+
+          Updating the the outline on a page element will implicitly update this
+          field to`RENDERED`, unless another value is specified in the same request.
+          To have no outline on a page element, set this field to `NOT_RENDERED`. In
+          this case, any other outline fields set in the same request will be
+          ignored.
+        enum:
+          - RENDERED
+          - NOT_RENDERED
+          - INHERIT
+        type: string
+      weight:
+        $ref: '#/definitions/Dimension'
+        description: The thickness of the outline.
+    type: object
+  OutlineFill:
+    description: The fill of the outline.
+    properties:
+      solidFill:
+        $ref: '#/definitions/SolidFill'
+        description: Solid color fill.
+    type: object
+  Page:
+    description: A page in a presentation.
+    properties:
+      layoutProperties:
+        $ref: '#/definitions/LayoutProperties'
+        description: Layout specific properties. Only set if page_type = LAYOUT.
+      objectId:
+        description: |-
+          The object ID for this page. Object IDs used by
+          Page and
+          PageElement share the same namespace.
+        type: string
+      pageElements:
+        description: The page elements rendered on the page.
+        items:
+          $ref: '#/definitions/PageElement'
+        type: array
+      pageProperties:
+        $ref: '#/definitions/PageProperties'
+        description: The properties of the page.
+      pageType:
+        description: The type of the page.
+        enum:
+          - SLIDE
+          - MASTER
+          - LAYOUT
+        type: string
+      slideProperties:
+        $ref: '#/definitions/SlideProperties'
+        description: Slide specific properties. Only set if page_type = SLIDE.
+    type: object
+  PageBackgroundFill:
+    description: The page background fill.
+    properties:
+      propertyState:
+        description: |-
+          The background fill property state.
+
+          Updating the the fill on a page will implicitly update this field to
+          `RENDERED`, unless another value is specified in the same request. To
+          have no fill on a page, set this field to `NOT_RENDERED`. In this case,
+          any other fill fields set in the same request will be ignored.
+        enum:
+          - RENDERED
+          - NOT_RENDERED
+          - INHERIT
+        type: string
+      solidFill:
+        $ref: '#/definitions/SolidFill'
+        description: Solid color fill.
+      stretchedPictureFill:
+        $ref: '#/definitions/StretchedPictureFill'
+        description: Stretched picture fill.
+    type: object
+  PageElement:
+    description: A visual element rendered on a page.
+    properties:
+      description:
+        description: |-
+          The description of the page element. Combined with title to display alt
+          text.
+        type: string
+      elementGroup:
+        $ref: '#/definitions/Group'
+        description: A collection of page elements joined as a single unit.
+      image:
+        $ref: '#/definitions/Image'
+        description: An image page element.
+      line:
+        $ref: '#/definitions/Line'
+        description: A line page element.
+      objectId:
+        description: |-
+          The object ID for this page element. Object IDs used by
+          google.apps.slides.v1.Page and
+          google.apps.slides.v1.PageElement share the same namespace.
+        type: string
+      shape:
+        $ref: '#/definitions/Shape'
+        description: A generic shape.
+      sheetsChart:
+        $ref: '#/definitions/SheetsChart'
+        description: |-
+          A linked chart embedded from Google Sheets. Unlinked charts are
+          represented as images.
+      size:
+        $ref: '#/definitions/Size'
+        description: The size of the page element.
+      table:
+        $ref: '#/definitions/Table'
+        description: A table page element.
+      title:
+        description: |-
+          The title of the page element. Combined with description to display alt
+          text.
+        type: string
+      transform:
+        $ref: '#/definitions/AffineTransform'
+        description: The transform of the page element.
+      video:
+        $ref: '#/definitions/Video'
+        description: A video page element.
+      wordArt:
+        $ref: '#/definitions/WordArt'
+        description: A word art page element.
+    type: object
+  PageElementProperties:
+    description: |-
+      Common properties for a page element.
+
+      Note: When you initially create a
+      PageElement, the API may modify
+      the values of both `size` and `transform`, but the
+      visual size will be unchanged.
+    properties:
+      pageObjectId:
+        description: The object ID of the page where the element is located.
+        type: string
+      size:
+        $ref: '#/definitions/Size'
+        description: The size of the element.
+      transform:
+        $ref: '#/definitions/AffineTransform'
+        description: The transform for the element.
+    type: object
+  PageProperties:
+    description: |-
+      The properties of the Page.
+
+      The page will inherit properties from the parent page. Depending on the page
+      type the hierarchy is defined in either
+      SlideProperties or
+      LayoutProperties.
+    properties:
+      colorScheme:
+        $ref: '#/definitions/ColorScheme'
+        description: |-
+          The color scheme of the page. If unset, the color scheme is inherited from
+          a parent page. If the page has no parent, the color scheme uses a default
+          Slides color scheme. This field is read-only.
+      pageBackgroundFill:
+        $ref: '#/definitions/PageBackgroundFill'
+        description: |-
+          The background fill of the page. If unset, the background fill is inherited
+          from a parent page if it exists. If the page has no parent, then the
+          background fill defaults to the corresponding fill in the Slides editor.
+    type: object
+  ParagraphMarker:
+    description: A TextElement kind that represents the beginning of a new paragraph.
+    properties:
+      bullet:
+        $ref: '#/definitions/Bullet'
+        description: |-
+          The bullet for this paragraph. If not present, the paragraph does not
+          belong to a list.
+      style:
+        $ref: '#/definitions/ParagraphStyle'
+        description: The paragraph's style
+    type: object
+  ParagraphStyle:
+    description: |-
+      Styles that apply to a whole paragraph.
+
+      If this text is contained in a shape with a parent placeholder, then these paragraph styles may be
+      inherited from the parent. Which paragraph styles are inherited depend on the
+      nesting level of lists:
+
+      * A paragraph not in a list will inherit its paragraph style from the
+        paragraph at the 0 nesting level of the list inside the parent placeholder.
+      * A paragraph in a list will inherit its paragraph style from the paragraph
+        at its corresponding nesting level of the list inside the parent
+        placeholder.
+
+      Inherited paragraph styles are represented as unset fields in this message.
+    properties:
+      alignment:
+        description: The text alignment for this paragraph. This property is read-only.
+        enum:
+          - ALIGNMENT_UNSPECIFIED
+          - START
+          - CENTER
+          - END
+          - JUSTIFIED
+        type: string
+      direction:
+        description: The text direction of this paragraph. This property is read-only.
+        enum:
+          - TEXT_DIRECTION_UNSPECIFIED
+          - LEFT_TO_RIGHT
+          - RIGHT_TO_LEFT
+        type: string
+      indentEnd:
+        $ref: '#/definitions/Dimension'
+        description: |-
+          The amount indentation for the paragraph on the side that corresponds to
+          the end of the text, based on the current text direction. If unset, the
+          value is inherited from the parent. This property is read-only.
+      indentFirstLine:
+        $ref: '#/definitions/Dimension'
+        description: |-
+          The amount of indentation for the start of the first line of the paragraph.
+          If unset, the value is inherited from the parent. This property is
+          read-only.
+      indentStart:
+        $ref: '#/definitions/Dimension'
+        description: |-
+          The amount indentation for the paragraph on the side that corresponds to
+          the start of the text, based on the current text direction. If unset, the
+          value is inherited from the parent. This property is read-only.
+      lineSpacing:
+        description: |-
+          The amount of space between lines, as a percentage of normal, where normal
+          is represented as 100.0. If unset, the value is inherited from the parent.
+          This property is read-only.
+        format: float
+        type: number
+      spaceAbove:
+        $ref: '#/definitions/Dimension'
+        description: |-
+          The amount of extra space above the paragraph. If unset, the value is
+          inherited from the parent. This property is read-only.
+      spaceBelow:
+        $ref: '#/definitions/Dimension'
+        description: |-
+          The amount of extra space above the paragraph. If unset, the value is
+          inherited from the parent. This property is read-only.
+      spacingMode:
+        description: The spacing mode for the paragraph. This property is read-only.
+        enum:
+          - SPACING_MODE_UNSPECIFIED
+          - NEVER_COLLAPSE
+          - COLLAPSE_LISTS
+        type: string
+    type: object
+  Placeholder:
+    description: The placeholder information that uniquely identifies a placeholder shape.
+    properties:
+      index:
+        description: |-
+          The index of the placeholder. If the same placeholder types are the present
+          in the same page, they would have different index values.
+        format: int32
+        type: integer
+      parentObjectId:
+        description: |-
+          The object ID of this shape's parent placeholder.
+          If unset, the parent placeholder shape does not exist, so the shape does
+          not inherit properties from any other shape.
+        type: string
+      type:
+        description: The type of the placeholder.
+        enum:
+          - NONE
+          - BODY
+          - CHART
+          - CLIP_ART
+          - CENTERED_TITLE
+          - DIAGRAM
+          - DATE_AND_TIME
+          - FOOTER
+          - HEADER
+          - MEDIA
+          - OBJECT
+          - PICTURE
+          - SLIDE_NUMBER
+          - SUBTITLE
+          - TABLE
+          - TITLE
+          - SLIDE_IMAGE
+        type: string
+    type: object
+  Presentation:
+    description: A Google Slides presentation.
+    properties:
+      layouts:
+        description: |-
+          The layouts in the presentation.  A layout is a template that determines
+          how content is arranged and styled on the slides that inherit from that
+          layout.
+        items:
+          $ref: '#/definitions/Page'
+        type: array
+      locale:
+        description: 'The locale of the presentation, as an IETF BCP 47 language tag.'
+        type: string
+      masters:
+        description: |-
+          The slide masters in the presentation. A slide master contains all common
+          page elements and the common properties for a set of layouts. They serve
+          three purposes:
+
+          - Placeholder shapes on a master contain the default text styles and shape
+            properties of all placeholder shapes on pages that use that master.
+          - The master page properties define the common page properties inherited by
+            its layouts.
+          - Any other shapes on the master slide will appear on all slides using that
+            master, regardless of their layout.
+        items:
+          $ref: '#/definitions/Page'
+        type: array
+      pageSize:
+        $ref: '#/definitions/Size'
+        description: The size of pages in the presentation.
+      presentationId:
+        description: The ID of the presentation.
+        type: string
+      slides:
+        description: |-
+          The slides in the presentation.
+          A slide inherits properties from a slide layout.
+        items:
+          $ref: '#/definitions/Page'
+        type: array
+      title:
+        description: The title of the presentation.
+        type: string
+    type: object
+  Range:
+    description: |-
+      Specifies a contiguous range of an indexed collection, such as characters in
+      text.
+    properties:
+      endIndex:
+        description: |-
+          The optional zero-based index of the end of the collection.
+          Required for `SPECIFIC_RANGE` delete mode.
+        format: int32
+        type: integer
+      startIndex:
+        description: |-
+          The optional zero-based index of the beginning of the collection.
+          Required for `SPECIFIC_RANGE` and `FROM_START_INDEX` ranges.
+        format: int32
+        type: integer
+      type:
+        description: The type of range.
+        enum:
+          - RANGE_TYPE_UNSPECIFIED
+          - FIXED_RANGE
+          - FROM_START_INDEX
+          - ALL
+        type: string
+    type: object
+  Recolor:
+    description: A recolor effect applied on an image.
+    properties:
+      recolorStops:
+        description: |-
+          The recolor effect is represented by a gradient, which is a list of color
+          stops. This property is read-only.
+        items:
+          $ref: '#/definitions/ColorStop'
+        type: array
+    type: object
+  RefreshSheetsChartRequest:
+    description: |-
+      Refreshes an embedded Google Sheets chart by replacing it with the latest
+      version of the chart from Google Sheets.
+
+      NOTE: Refreshing charts requires  at least one of the spreadsheets.readonly,
+      spreadsheets, drive.readonly, or drive OAuth scopes.
+    properties:
+      objectId:
+        description: The object ID of the chart to refresh.
+        type: string
+    type: object
+  ReplaceAllShapesWithImageRequest:
+    description: Replaces all shapes that match the given criteria with the provided image.
+    properties:
+      containsText:
+        $ref: '#/definitions/SubstringMatchCriteria'
+        description: |-
+          If set, this request will replace all of the shapes that contain the
+          given text.
+      imageUrl:
+        description: |-
+          The image URL.
+
+          The image is fetched once at insertion time and a copy is stored for
+          display inside the presentation. Images must be less than 50MB in size,
+          cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
+          format.
+        type: string
+      replaceMethod:
+        description: The replace method.
+        enum:
+          - CENTER_INSIDE
+          - CENTER_CROP
+        type: string
+    type: object
+  ReplaceAllShapesWithImageResponse:
+    description: The result of replacing shapes with an image.
+    properties:
+      occurrencesChanged:
+        description: The number of shapes replaced with images.
+        format: int32
+        type: integer
+    type: object
+  ReplaceAllTextRequest:
+    description: Replaces all instances of text matching a criteria with replace text.
+    properties:
+      containsText:
+        $ref: '#/definitions/SubstringMatchCriteria'
+        description: Finds text in a shape matching this substring.
+      replaceText:
+        description: The text that will replace the matched text.
+        type: string
+    type: object
+  ReplaceAllTextResponse:
+    description: The result of replacing text.
+    properties:
+      occurrencesChanged:
+        description: The number of occurrences changed by replacing all text.
+        format: int32
+        type: integer
+    type: object
+  Request:
+    description: A single kind of update to apply to a presentation.
+    properties:
+      createImage:
+        $ref: '#/definitions/CreateImageRequest'
+        description: Creates an image.
+      createLine:
+        $ref: '#/definitions/CreateLineRequest'
+        description: Creates a line.
+      createParagraphBullets:
+        $ref: '#/definitions/CreateParagraphBulletsRequest'
+        description: Creates bullets for paragraphs.
+      createShape:
+        $ref: '#/definitions/CreateShapeRequest'
+        description: Creates a new shape.
+      createSheetsChart:
+        $ref: '#/definitions/CreateSheetsChartRequest'
+        description: Creates an embedded Google Sheets chart.
+      createSlide:
+        $ref: '#/definitions/CreateSlideRequest'
+        description: Creates a new slide.
+      createTable:
+        $ref: '#/definitions/CreateTableRequest'
+        description: Creates a new table.
+      createVideo:
+        $ref: '#/definitions/CreateVideoRequest'
+        description: Creates a video.
+      deleteObject:
+        $ref: '#/definitions/DeleteObjectRequest'
+        description: Deletes a page or page element from the presentation.
+      deleteTableColumn:
+        $ref: '#/definitions/DeleteTableColumnRequest'
+        description: Deletes a column from a table.
+      deleteTableRow:
+        $ref: '#/definitions/DeleteTableRowRequest'
+        description: Deletes a row from a table.
+      deleteText:
+        $ref: '#/definitions/DeleteTextRequest'
+        description: Deletes text from a shape or a table cell.
+      duplicateObject:
+        $ref: '#/definitions/DuplicateObjectRequest'
+        description: Duplicates a slide or page element.
+      insertTableColumns:
+        $ref: '#/definitions/InsertTableColumnsRequest'
+        description: Inserts columns into a table.
+      insertTableRows:
+        $ref: '#/definitions/InsertTableRowsRequest'
+        description: Inserts rows into a table.
+      insertText:
+        $ref: '#/definitions/InsertTextRequest'
+        description: Inserts text into a shape or table cell.
+      refreshSheetsChart:
+        $ref: '#/definitions/RefreshSheetsChartRequest'
+        description: Refreshes a Google Sheets chart.
+      replaceAllShapesWithImage:
+        $ref: '#/definitions/ReplaceAllShapesWithImageRequest'
+        description: Replaces all shapes matching some criteria with an image.
+      replaceAllText:
+        $ref: '#/definitions/ReplaceAllTextRequest'
+        description: Replaces all instances of specified text.
+      updateImageProperties:
+        $ref: '#/definitions/UpdateImagePropertiesRequest'
+        description: Updates the properties of an Image.
+      updatePageElementTransform:
+        $ref: '#/definitions/UpdatePageElementTransformRequest'
+        description: Updates the transform of a page element.
+      updatePageProperties:
+        $ref: '#/definitions/UpdatePagePropertiesRequest'
+        description: Updates the properties of a Page.
+      updateShapeProperties:
+        $ref: '#/definitions/UpdateShapePropertiesRequest'
+        description: Updates the properties of a Shape.
+      updateSlidesPosition:
+        $ref: '#/definitions/UpdateSlidesPositionRequest'
+        description: Updates the position of a set of slides in the presentation.
+      updateTableCellProperties:
+        $ref: '#/definitions/UpdateTableCellPropertiesRequest'
+        description: Updates the properties of a TableCell.
+      updateTextStyle:
+        $ref: '#/definitions/UpdateTextStyleRequest'
+        description: Updates the styling of text within a Shape or Table.
+      updateVideoProperties:
+        $ref: '#/definitions/UpdateVideoPropertiesRequest'
+        description: Updates the properties of a Video.
+    type: object
+  Response:
+    description: A single response from an update.
+    properties:
+      createImage:
+        $ref: '#/definitions/CreateImageResponse'
+        description: The result of creating an image.
+      createLine:
+        $ref: '#/definitions/CreateLineResponse'
+        description: The result of creating a line.
+      createShape:
+        $ref: '#/definitions/CreateShapeResponse'
+        description: The result of creating a shape.
+      createSheetsChart:
+        $ref: '#/definitions/CreateSheetsChartResponse'
+        description: The result of creating a Google Sheets chart.
+      createSlide:
+        $ref: '#/definitions/CreateSlideResponse'
+        description: The result of creating a slide.
+      createTable:
+        $ref: '#/definitions/CreateTableResponse'
+        description: The result of creating a table.
+      createVideo:
+        $ref: '#/definitions/CreateVideoResponse'
+        description: The result of creating a video.
+      duplicateObject:
+        $ref: '#/definitions/DuplicateObjectResponse'
+        description: The result of duplicating an object.
+      replaceAllShapesWithImage:
+        $ref: '#/definitions/ReplaceAllShapesWithImageResponse'
+        description: |-
+          The result of replacing all shapes containing the specified text with
+          an image.
+      replaceAllText:
+        $ref: '#/definitions/ReplaceAllTextResponse'
+        description: The result of replacing text.
+    type: object
+  RgbColor:
+    description: An RGB color.
+    properties:
+      blue:
+        description: 'The blue component of the color, from 0.0 to 1.0.'
+        format: float
+        type: number
+      green:
+        description: 'The green component of the color, from 0.0 to 1.0.'
+        format: float
+        type: number
+      red:
+        description: 'The red component of the color, from 0.0 to 1.0.'
+        format: float
+        type: number
+    type: object
+  Shadow:
+    description: |-
+      The shadow properties of a page element.
+
+      If these fields are unset, they may be inherited from a parent placeholder
+      if it exists. If there is no parent, the fields will default to the value
+      used for new page elements created in the Slides editor, which may depend on
+      the page element kind.
+    properties:
+      alignment:
+        description: |-
+          The alignment point of the shadow, that sets the origin for translate,
+          scale and skew of the shadow.
+        enum:
+          - RECTANGLE_POSITION_UNSPECIFIED
+          - TOP_LEFT
+          - TOP_CENTER
+          - TOP_RIGHT
+          - LEFT_CENTER
+          - CENTER
+          - RIGHT_CENTER
+          - BOTTOM_LEFT
+          - BOTTOM_CENTER
+          - BOTTOM_RIGHT
+        type: string
+      alpha:
+        description: 'The alpha of the shadow''s color, from 0.0 to 1.0.'
+        format: float
+        type: number
+      blurRadius:
+        $ref: '#/definitions/Dimension'
+        description: |-
+          The radius of the shadow blur. The larger the radius, the more diffuse the
+          shadow becomes.
+      color:
+        $ref: '#/definitions/OpaqueColor'
+        description: The shadow color value.
+      propertyState:
+        description: |-
+          The shadow property state.
+
+          Updating the the shadow on a page element will implicitly update this field
+          to `RENDERED`, unless another value is specified in the same request. To
+          have no shadow on a page element, set this field to `NOT_RENDERED`. In this
+          case, any other shadow fields set in the same request will be ignored.
+        enum:
+          - RENDERED
+          - NOT_RENDERED
+          - INHERIT
+        type: string
+      rotateWithShape:
+        description: Whether the shadow should rotate with the shape.
+        type: boolean
+      transform:
+        $ref: '#/definitions/AffineTransform'
+        description: |-
+          Transform that encodes the translate, scale, and skew of the shadow,
+          relative to the alignment position.
+      type:
+        description: The type of the shadow.
+        enum:
+          - SHADOW_TYPE_UNSPECIFIED
+          - OUTER
+        type: string
+    type: object
+  Shape:
+    description: |-
+      A PageElement kind representing a
+      generic shape that does not have a more specific classification.
+    properties:
+      placeholder:
+        $ref: '#/definitions/Placeholder'
+        description: |-
+          Placeholders are shapes that are inherit from correponding placeholders on
+          layouts and masters.
+
+          If set, the shape is a placeholder shape and any inherited properties
+          can be resolved by looking at the parent placeholder identified by the
+          Placeholder.parent_object_id field.
+      shapeProperties:
+        $ref: '#/definitions/ShapeProperties'
+        description: The properties of the shape.
+      shapeType:
+        description: The type of the shape.
+        enum:
+          - TYPE_UNSPECIFIED
+          - TEXT_BOX
+          - RECTANGLE
+          - ROUND_RECTANGLE
+          - ELLIPSE
+          - ARC
+          - BENT_ARROW
+          - BENT_UP_ARROW
+          - BEVEL
+          - BLOCK_ARC
+          - BRACE_PAIR
+          - BRACKET_PAIR
+          - CAN
+          - CHEVRON
+          - CHORD
+          - CLOUD
+          - CORNER
+          - CUBE
+          - CURVED_DOWN_ARROW
+          - CURVED_LEFT_ARROW
+          - CURVED_RIGHT_ARROW
+          - CURVED_UP_ARROW
+          - DECAGON
+          - DIAGONAL_STRIPE
+          - DIAMOND
+          - DODECAGON
+          - DONUT
+          - DOUBLE_WAVE
+          - DOWN_ARROW
+          - DOWN_ARROW_CALLOUT
+          - FOLDED_CORNER
+          - FRAME
+          - HALF_FRAME
+          - HEART
+          - HEPTAGON
+          - HEXAGON
+          - HOME_PLATE
+          - HORIZONTAL_SCROLL
+          - IRREGULAR_SEAL_1
+          - IRREGULAR_SEAL_2
+          - LEFT_ARROW
+          - LEFT_ARROW_CALLOUT
+          - LEFT_BRACE
+          - LEFT_BRACKET
+          - LEFT_RIGHT_ARROW
+          - LEFT_RIGHT_ARROW_CALLOUT
+          - LEFT_RIGHT_UP_ARROW
+          - LEFT_UP_ARROW
+          - LIGHTNING_BOLT
+          - MATH_DIVIDE
+          - MATH_EQUAL
+          - MATH_MINUS
+          - MATH_MULTIPLY
+          - MATH_NOT_EQUAL
+          - MATH_PLUS
+          - MOON
+          - NO_SMOKING
+          - NOTCHED_RIGHT_ARROW
+          - OCTAGON
+          - PARALLELOGRAM
+          - PENTAGON
+          - PIE
+          - PLAQUE
+          - PLUS
+          - QUAD_ARROW
+          - QUAD_ARROW_CALLOUT
+          - RIBBON
+          - RIBBON_2
+          - RIGHT_ARROW
+          - RIGHT_ARROW_CALLOUT
+          - RIGHT_BRACE
+          - RIGHT_BRACKET
+          - ROUND_1_RECTANGLE
+          - ROUND_2_DIAGONAL_RECTANGLE
+          - ROUND_2_SAME_RECTANGLE
+          - RIGHT_TRIANGLE
+          - SMILEY_FACE
+          - SNIP_1_RECTANGLE
+          - SNIP_2_DIAGONAL_RECTANGLE
+          - SNIP_2_SAME_RECTANGLE
+          - SNIP_ROUND_RECTANGLE
+          - STAR_10
+          - STAR_12
+          - STAR_16
+          - STAR_24
+          - STAR_32
+          - STAR_4
+          - STAR_5
+          - STAR_6
+          - STAR_7
+          - STAR_8
+          - STRIPED_RIGHT_ARROW
+          - SUN
+          - TRAPEZOID
+          - TRIANGLE
+          - UP_ARROW
+          - UP_ARROW_CALLOUT
+          - UP_DOWN_ARROW
+          - UTURN_ARROW
+          - VERTICAL_SCROLL
+          - WAVE
+          - WEDGE_ELLIPSE_CALLOUT
+          - WEDGE_RECTANGLE_CALLOUT
+          - WEDGE_ROUND_RECTANGLE_CALLOUT
+          - FLOW_CHART_ALTERNATE_PROCESS
+          - FLOW_CHART_COLLATE
+          - FLOW_CHART_CONNECTOR
+          - FLOW_CHART_DECISION
+          - FLOW_CHART_DELAY
+          - FLOW_CHART_DISPLAY
+          - FLOW_CHART_DOCUMENT
+          - FLOW_CHART_EXTRACT
+          - FLOW_CHART_INPUT_OUTPUT
+          - FLOW_CHART_INTERNAL_STORAGE
+          - FLOW_CHART_MAGNETIC_DISK
+          - FLOW_CHART_MAGNETIC_DRUM
+          - FLOW_CHART_MAGNETIC_TAPE
+          - FLOW_CHART_MANUAL_INPUT
+          - FLOW_CHART_MANUAL_OPERATION
+          - FLOW_CHART_MERGE
+          - FLOW_CHART_MULTIDOCUMENT
+          - FLOW_CHART_OFFLINE_STORAGE
+          - FLOW_CHART_OFFPAGE_CONNECTOR
+          - FLOW_CHART_ONLINE_STORAGE
+          - FLOW_CHART_OR
+          - FLOW_CHART_PREDEFINED_PROCESS
+          - FLOW_CHART_PREPARATION
+          - FLOW_CHART_PROCESS
+          - FLOW_CHART_PUNCHED_CARD
+          - FLOW_CHART_PUNCHED_TAPE
+          - FLOW_CHART_SORT
+          - FLOW_CHART_SUMMING_JUNCTION
+          - FLOW_CHART_TERMINATOR
+          - ARROW_EAST
+          - ARROW_NORTH_EAST
+          - ARROW_NORTH
+          - SPEECH
+          - STARBURST
+          - TEARDROP
+          - ELLIPSE_RIBBON
+          - ELLIPSE_RIBBON_2
+          - CLOUD_CALLOUT
+          - CUSTOM
+        type: string
+      text:
+        $ref: '#/definitions/TextContent'
+        description: The text content of the shape.
+    type: object
+  ShapeBackgroundFill:
+    description: The shape background fill.
+    properties:
+      propertyState:
+        description: |-
+          The background fill property state.
+
+          Updating the the fill on a shape will implicitly update this field to
+          `RENDERED`, unless another value is specified in the same request. To
+          have no fill on a shape, set this field to `NOT_RENDERED`. In this case,
+          any other fill fields set in the same request will be ignored.
+        enum:
+          - RENDERED
+          - NOT_RENDERED
+          - INHERIT
+        type: string
+      solidFill:
+        $ref: '#/definitions/SolidFill'
+        description: Solid color fill.
+    type: object
+  ShapeProperties:
+    description: |-
+      The properties of a Shape.
+
+      If the shape is a placeholder shape as determined by the
+      placeholder field, then these
+      properties may be inherited from a parent placeholder shape.
+      Determining the rendered value of the property depends on the corresponding
+      property_state field value.
+    properties:
+      outline:
+        $ref: '#/definitions/Outline'
+        description: |-
+          The outline of the shape. If unset, the outline is inherited from a
+          parent placeholder if it exists. If the shape has no parent, then the
+          default outline depends on the shape type, matching the defaults for
+          new shapes created in the Slides editor.
+      shadow:
+        $ref: '#/definitions/Shadow'
+        description: |-
+          The shadow properties of the shape. If unset, the shadow is inherited from
+          a parent placeholder if it exists. If the shape has no parent, then the
+          default shadow matches the defaults for new shapes created in the Slides
+          editor. This property is read-only.
+      shapeBackgroundFill:
+        $ref: '#/definitions/ShapeBackgroundFill'
+        description: |-
+          The background fill of the shape. If unset, the background fill is
+          inherited from a parent placeholder if it exists. If the shape has no
+          parent, then the default background fill depends on the shape type,
+          matching the defaults for new shapes created in the Slides editor.
+    type: object
+  SheetsChart:
+    description: |-
+      A PageElement kind representing
+      a linked chart embedded from Google Sheets.
+    properties:
+      chartId:
+        description: |-
+          The ID of the specific chart in the Google Sheets spreadsheet that is
+          embedded.
+        format: int32
+        type: integer
+      contentUrl:
+        description: |-
+          The URL of an image of the embedded chart, with a default lifetime of 30
+          minutes. This URL is tagged with the account of the requester. Anyone with
+          the URL effectively accesses the image as the original requester. Access to
+          the image may be lost if the presentation's sharing settings change.
+        type: string
+      sheetsChartProperties:
+        $ref: '#/definitions/SheetsChartProperties'
+        description: The properties of the Sheets chart.
+      spreadsheetId:
+        description: The ID of the Google Sheets spreadsheet that contains the source chart.
+        type: string
+    type: object
+  SheetsChartProperties:
+    description: The properties of the SheetsChart.
+    properties:
+      chartImageProperties:
+        $ref: '#/definitions/ImageProperties'
+        description: The properties of the embedded chart image.
+    type: object
+  Size:
+    description: A width and height.
+    properties:
+      height:
+        $ref: '#/definitions/Dimension'
+        description: The height of the object.
+      width:
+        $ref: '#/definitions/Dimension'
+        description: The width of the object.
+    type: object
+  SlideProperties:
+    description: |-
+      The properties of Page that are only
+      relevant for pages with page_type SLIDE.
+    properties:
+      layoutObjectId:
+        description: The object ID of the layout that this slide is based on.
+        type: string
+      masterObjectId:
+        description: The object ID of the master that this slide is based on.
+        type: string
+    type: object
+  SolidFill:
+    description: |-
+      A solid color fill. The page or page element is filled entirely with the
+      specified color value.
+
+      If any field is unset, its value may be inherited from a parent placeholder
+      if it exists.
+    properties:
+      alpha:
+        description: |-
+          The fraction of this `color` that should be applied to the pixel.
+          That is, the final pixel color is defined by the equation:
+
+            pixel color = alpha * (color) + (1.0 - alpha) * (background color)
+
+          This means that a value of 1.0 corresponds to a solid color, whereas
+          a value of 0.0 corresponds to a completely transparent color.
+        format: float
+        type: number
+      color:
+        $ref: '#/definitions/OpaqueColor'
+        description: The color value of the solid fill.
+    type: object
+  StretchedPictureFill:
+    description: |-
+      The stretched picture fill. The page or page element is filled entirely with
+      the specified picture. The picture is stretched to fit its container.
+    properties:
+      contentUrl:
+        description: |-
+          Reading the content_url:
+
+          An URL to a picture with a default lifetime of 30 minutes.
+          This URL is tagged with the account of the requester. Anyone with the URL
+          effectively accesses the picture as the original requester. Access to the
+          picture may be lost if the presentation's sharing settings change.
+
+          Writing the content_url:
+
+          The picture is fetched once at insertion time and a copy is stored for
+          display inside the presentation. Pictures must be less than 50MB in size,
+          cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
+          format.
+        type: string
+      size:
+        $ref: '#/definitions/Size'
+        description: The original size of the picture fill. This field is read-only.
+    type: object
+  SubstringMatchCriteria:
+    description: A criteria that matches a specific string of text in a shape or table.
+    properties:
+      matchCase:
+        description: |-
+          Indicates whether the search should respect case:
+
+          - `True`: the search is case sensitive.
+          - `False`: the search is case insensitive.
+        type: boolean
+      text:
+        description: The text to search for in the shape or table.
+        type: string
+    type: object
+  Table:
+    description: |-
+      A PageElement kind representing a
+      table.
+    properties:
+      columns:
+        description: Number of columns in the table.
+        format: int32
+        type: integer
+      rows:
+        description: Number of rows in the table.
+        format: int32
+        type: integer
+      tableColumns:
+        description: Properties of each column.
+        items:
+          $ref: '#/definitions/TableColumnProperties'
+        type: array
+      tableRows:
+        description: |-
+          Properties and contents of each row.
+
+          Cells that span multiple rows are contained in only one of these rows and
+          have a row_span greater
+          than 1.
+        items:
+          $ref: '#/definitions/TableRow'
+        type: array
+    type: object
+  TableCell:
+    description: Properties and contents of each table cell.
+    properties:
+      columnSpan:
+        description: Column span of the cell.
+        format: int32
+        type: integer
+      location:
+        $ref: '#/definitions/TableCellLocation'
+        description: The location of the cell within the table.
+      rowSpan:
+        description: Row span of the cell.
+        format: int32
+        type: integer
+      tableCellProperties:
+        $ref: '#/definitions/TableCellProperties'
+        description: The properties of the table cell.
+      text:
+        $ref: '#/definitions/TextContent'
+        description: The text content of the cell.
+    type: object
+  TableCellBackgroundFill:
+    description: The table cell background fill.
+    properties:
+      propertyState:
+        description: |-
+          The background fill property state.
+
+          Updating the the fill on a table cell will implicitly update this field
+          to `RENDERED`, unless another value is specified in the same request. To
+          have no fill on a table cell, set this field to `NOT_RENDERED`. In this
+          case, any other fill fields set in the same request will be ignored.
+        enum:
+          - RENDERED
+          - NOT_RENDERED
+          - INHERIT
+        type: string
+      solidFill:
+        $ref: '#/definitions/SolidFill'
+        description: Solid color fill.
+    type: object
+  TableCellLocation:
+    description: A location of a single table cell within a table.
+    properties:
+      columnIndex:
+        description: The 0-based column index.
+        format: int32
+        type: integer
+      rowIndex:
+        description: The 0-based row index.
+        format: int32
+        type: integer
+    type: object
+  TableCellProperties:
+    description: The properties of the TableCell.
+    properties:
+      tableCellBackgroundFill:
+        $ref: '#/definitions/TableCellBackgroundFill'
+        description: |-
+          The background fill of the table cell. The default fill matches the fill
+          for newly created table cells in the Slides editor.
+    type: object
+  TableColumnProperties:
+    description: Properties of each column in a table.
+    properties:
+      columnWidth:
+        $ref: '#/definitions/Dimension'
+        description: Width of a column.
+    type: object
+  TableRange:
+    description: |-
+      A table range represents a reference to a subset of a table.
+
+      It's important to note that the cells specified by a table range do not
+      necessarily form a rectangle. For example, let's say we have a 3 x 3 table
+      where all the cells of the last row are merged together. The table looks
+      like this:
+
+                 
+        [             ]
+
+      A table range with location = (0, 0), row span = 3 and column span = 2
+      specifies the following cells:
+
+         x     x 
+        [      x      ]
+    properties:
+      columnSpan:
+        description: The column span of the table range.
+        format: int32
+        type: integer
+      location:
+        $ref: '#/definitions/TableCellLocation'
+        description: The starting location of the table range.
+      rowSpan:
+        description: The row span of the table range.
+        format: int32
+        type: integer
+    type: object
+  TableRow:
+    description: Properties and contents of each row in a table.
+    properties:
+      rowHeight:
+        $ref: '#/definitions/Dimension'
+        description: Height of a row.
+      tableCells:
+        description: |-
+          Properties and contents of each cell.
+
+          Cells that span multiple columns are represented only once with a
+          column_span greater
+          than 1. As a result, the length of this collection does not always match
+          the number of columns of the entire table.
+        items:
+          $ref: '#/definitions/TableCell'
+        type: array
+    type: object
+  TextContent:
+    description: |-
+      The general text content. The text must reside in a compatible shape (e.g.
+      text box or rectangle) or a table cell in a page.
+    properties:
+      lists:
+        additionalProperties:
+          $ref: '#/definitions/List'
+        description: 'The bulleted lists contained in this text, keyed by list ID.'
+        type: object
+      textElements:
+        description: |-
+          The text contents broken down into its component parts, including styling
+          information. This property is read-only.
+        items:
+          $ref: '#/definitions/TextElement'
+        type: array
+    type: object
+  TextElement:
+    description: |-
+      A TextElement describes the content of a range of indices in the text content
+      of a Shape or TableCell.
+    properties:
+      autoText:
+        $ref: '#/definitions/AutoText'
+        description: |-
+          A TextElement representing a spot in the text that is dynamically
+          replaced with content that can change over time.
+      endIndex:
+        description: |-
+          The zero-based end index of this text element, exclusive, in Unicode code
+          units.
+        format: int32
+        type: integer
+      paragraphMarker:
+        $ref: '#/definitions/ParagraphMarker'
+        description: |-
+          A marker representing the beginning of a new paragraph.
+
+          The `start_index` and `end_index` of this TextElement represent the
+          range of the paragraph. Other TextElements with an index range contained
+          inside this paragraph's range are considered to be part of this
+          paragraph. The range of indices of two separate paragraphs will never
+          overlap.
+      startIndex:
+        description: 'The zero-based start index of this text element, in Unicode code units.'
+        format: int32
+        type: integer
+      textRun:
+        $ref: '#/definitions/TextRun'
+        description: |-
+          A TextElement representing a run of text where all of the characters
+          in the run have the same TextStyle.
+
+          The `start_index` and `end_index` of TextRuns will always be fully
+          contained in the index range of a single `paragraph_marker` TextElement.
+          In other words, a TextRun will never span multiple paragraphs.
+    type: object
+  TextRun:
+    description: |-
+      A TextElement kind that represents a run of text that all has the same
+      styling.
+    properties:
+      content:
+        description: The text of this run.
+        type: string
+      style:
+        $ref: '#/definitions/TextStyle'
+        description: The styling applied to this run.
+    type: object
+  TextStyle:
+    description: |-
+      Represents the styling that can be applied to a TextRun.
+
+      If this text is contained in a shape with a parent placeholder, then these text styles may be
+      inherited from the parent. Which text styles are inherited depend on the
+      nesting level of lists:
+
+      * A text run in a paragraph that is not in a list will inherit its text style
+        from the the newline character in the paragraph at the 0 nesting level of
+        the list inside the parent placeholder.
+      * A text run in a paragraph that is in a list will inherit its text style
+        from the newline character in the paragraph at its corresponding nesting
+        level of the list inside the parent placeholder.
+
+      Inherited text styles are represented as unset fields in this message. If
+      text is contained in a shape without a parent placeholder, unsetting these
+      fields will revert the style to a value matching the defaults in the Slides
+      editor.
+    properties:
+      backgroundColor:
+        $ref: '#/definitions/OptionalColor'
+        description: |-
+          The background color of the text. If set, the color is either opaque or
+          transparent, depending on if the `opaque_color` field in it is set.
+      baselineOffset:
+        description: |-
+          The text's vertical offset from its normal position.
+
+          Text with `SUPERSCRIPT` or `SUBSCRIPT` baseline offsets is automatically
+          rendered in a smaller font size, computed based on the `font_size` field.
+          The `font_size` itself is not affected by changes in this field.
+        enum:
+          - BASELINE_OFFSET_UNSPECIFIED
+          - NONE
+          - SUPERSCRIPT
+          - SUBSCRIPT
+        type: string
+      bold:
+        description: Whether or not the text is bold.
+        type: boolean
+      fontFamily:
+        description: |-
+          The font family of the text.
+
+          The font family can be any font from the Font menu in Slides or from
+          [Google Fonts] (https://fonts.google.com/). If the font name is
+          unrecognized, the text is rendered in `Arial`.
+
+          Some fonts can affect the weight of the text. If an update request
+          specifies values for both `font_family` and `bold`, the explicitly-set
+          `bold` value is used.
+        type: string
+      fontSize:
+        $ref: '#/definitions/Dimension'
+        description: |-
+          The size of the text's font. When read, the `font_size` will specified in
+          points.
+      foregroundColor:
+        $ref: '#/definitions/OptionalColor'
+        description: |-
+          The color of the text itself. If set, the color is either opaque or
+          transparent, depending on if the `opaque_color` field in it is set.
+      italic:
+        description: Whether or not the text is italicized.
+        type: boolean
+      link:
+        $ref: '#/definitions/Link'
+        description: |-
+          The hyperlink destination of the text. If unset, there is no link. Links
+          are not inherited from parent text.
+
+          Changing the link in an update request causes some other changes to the
+          text style of the range:
+
+          * When setting a link, the text foreground color will be set to
+            ThemeColorType.HYPERLINK and the text will
+            be underlined. If these fields are modified in the same
+            request, those values will be used instead of the link defaults.
+          * Setting a link on a text range that overlaps with an existing link will
+            also update the existing link to point to the new URL.
+          * Links are not settable on newline characters. As a result, setting a link
+            on a text range that crosses a paragraph boundary, such as `"ABC\n123"`,
+            will separate the newline character(s) into their own text runs. The
+            link will be applied separately to the runs before and after the newline.
+          * Removing a link will update the text style of the range to match the
+            style of the preceding text (or the default text styles if the preceding
+            text is another link) unless different styles are being set in the same
+            request.
+      smallCaps:
+        description: Whether or not the text is in small capital letters.
+        type: boolean
+      strikethrough:
+        description: Whether or not the text is struck through.
+        type: boolean
+      underline:
+        description: Whether or not the text is underlined.
+        type: boolean
+    type: object
+  ThemeColorPair:
+    description: A pair mapping a theme color type to the concrete color it represents.
+    properties:
+      color:
+        $ref: '#/definitions/RgbColor'
+        description: The concrete color corresponding to the theme color type above.
+      type:
+        description: The type of the theme color.
+        enum:
+          - THEME_COLOR_TYPE_UNSPECIFIED
+          - DARK1
+          - LIGHT1
+          - DARK2
+          - LIGHT2
+          - ACCENT1
+          - ACCENT2
+          - ACCENT3
+          - ACCENT4
+          - ACCENT5
+          - ACCENT6
+          - HYPERLINK
+          - FOLLOWED_HYPERLINK
+          - TEXT1
+          - BACKGROUND1
+          - TEXT2
+          - BACKGROUND2
+        type: string
+    type: object
+  UpdateImagePropertiesRequest:
+    description: Update the properties of an Image.
+    properties:
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `imageProperties` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the image outline color, set `fields` to
+          `"outline.outlineFill.solidFill.color"`.
+
+          To reset a property to its default value, include its field name in the
+          field mask but leave the field itself unset.
+        format: google-fieldmask
+        type: string
+      imageProperties:
+        $ref: '#/definitions/ImageProperties'
+        description: The image properties to update.
+      objectId:
+        description: The object ID of the image the updates are applied to.
+        type: string
+    type: object
+  UpdatePageElementTransformRequest:
+    description: Updates the transform of a page element.
+    properties:
+      applyMode:
+        description: The apply mode of the transform update.
+        enum:
+          - APPLY_MODE_UNSPECIFIED
+          - RELATIVE
+          - ABSOLUTE
+        type: string
+      objectId:
+        description: The object ID of the page element to update.
+        type: string
+      transform:
+        $ref: '#/definitions/AffineTransform'
+        description: The input transform matrix used to update the page element.
+    type: object
+  UpdatePagePropertiesRequest:
+    description: Updates the properties of a Page.
+    properties:
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `pageProperties` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the page background solid fill color, set `fields`
+          to `"pageBackgroundFill.solidFill.color"`.
+
+          To reset a property to its default value, include its field name in the
+          field mask but leave the field itself unset.
+        format: google-fieldmask
+        type: string
+      objectId:
+        description: The object ID of the page the update is applied to.
+        type: string
+      pageProperties:
+        $ref: '#/definitions/PageProperties'
+        description: The page properties to update.
+    type: object
+  UpdateShapePropertiesRequest:
+    description: Update the properties of a Shape.
+    properties:
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `shapeProperties` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the shape background solid fill color, set `fields`
+          to `"shapeBackgroundFill.solidFill.color"`.
+
+          To reset a property to its default value, include its field name in the
+          field mask but leave the field itself unset.
+        format: google-fieldmask
+        type: string
+      objectId:
+        description: The object ID of the shape the updates are applied to.
+        type: string
+      shapeProperties:
+        $ref: '#/definitions/ShapeProperties'
+        description: The shape properties to update.
+    type: object
+  UpdateSlidesPositionRequest:
+    description: Updates the position of slides in the presentation.
+    properties:
+      insertionIndex:
+        description: |-
+          The index where the slides should be inserted, based on the slide
+          arrangement before the move takes place. Must be between zero and the
+          number of slides in the presentation, inclusive.
+        format: int32
+        type: integer
+      slideObjectIds:
+        description: |-
+          The IDs of the slides in the presentation that should be moved.
+          The slides in this list must be in existing presentation order, without
+          duplicates.
+        items:
+          type: string
+        type: array
+    type: object
+  UpdateTableCellPropertiesRequest:
+    description: Update the properties of a TableCell.
+    properties:
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `tableCellProperties` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the table cell background solid fill color, set
+          `fields` to `"tableCellBackgroundFill.solidFill.color"`.
+
+          To reset a property to its default value, include its field name in the
+          field mask but leave the field itself unset.
+        format: google-fieldmask
+        type: string
+      objectId:
+        description: The object ID of the table.
+        type: string
+      tableCellProperties:
+        $ref: '#/definitions/TableCellProperties'
+        description: The table cell properties to update.
+      tableRange:
+        $ref: '#/definitions/TableRange'
+        description: |-
+          The table range representing the subset of the table to which the updates
+          are applied. If a table range is not specified, the updates will apply to
+          the entire table.
+    type: object
+  UpdateTextStyleRequest:
+    description: |-
+      Update the styling of text in a Shape or
+      Table.
+    properties:
+      cellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The optional table cell location if the text to be styled is in a table
+          cell. If present, the object_id must refer to a table.
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `style` is implied and
+          should not be specified. A single `"*"` can be used as short-hand for
+          listing every field.
+
+          For example to update the text style to bold, set `fields` to `"bold"`.
+
+          To reset a property to its default value,
+          include its field name in the field mask but leave the field itself unset.
+        format: google-fieldmask
+        type: string
+      objectId:
+        description: The object ID of the shape or table with the text to be styled.
+        type: string
+      style:
+        $ref: '#/definitions/TextStyle'
+        description: |-
+          The style(s) to set on the text.
+
+          If the value for a particular style matches that of the parent, that style
+          will be set to inherit.
+
+          Certain text style changes may cause other changes meant to mirror the
+          behavior of the Slides editor. See the documentation of
+          TextStyle for more information.
+      textRange:
+        $ref: '#/definitions/Range'
+        description: |-
+          The range of text to style.
+
+          The range may be extended to include adjacent newlines.
+
+          If the range fully contains a paragraph belonging to a list, the
+          paragraph's bullet is also updated with the matching text style.
+    type: object
+  UpdateVideoPropertiesRequest:
+    description: Update the properties of a Video.
+    properties:
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `videoProperties` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the video outline color, set `fields` to
+          `"outline.outlineFill.solidFill.color"`.
+
+          To reset a property to its default value, include its field name in the
+          field mask but leave the field itself unset.
+        format: google-fieldmask
+        type: string
+      objectId:
+        description: The object ID of the video the updates are applied to.
+        type: string
+      videoProperties:
+        $ref: '#/definitions/VideoProperties'
+        description: The video properties to update.
+    type: object
+  Video:
+    description: |-
+      A PageElement kind representing a
+      video.
+    properties:
+      id:
+        description: The video source's unique identifier for this video.
+        type: string
+      source:
+        description: The video source.
+        enum:
+          - SOURCE_UNSPECIFIED
+          - YOUTUBE
+        type: string
+      url:
+        description: |-
+          An URL to a video. The URL is valid as long as the source video
+          exists and sharing settings do not change.
+        type: string
+      videoProperties:
+        $ref: '#/definitions/VideoProperties'
+        description: The properties of the video.
+    type: object
+  VideoProperties:
+    description: The properties of the Video.
+    properties:
+      outline:
+        $ref: '#/definitions/Outline'
+        description: |-
+          The outline of the video. The default outline matches the defaults for new
+          videos created in the Slides editor.
+    type: object
+  WordArt:
+    description: |-
+      A PageElement kind representing
+      word art.
+    properties:
+      renderedText:
+        description: The text rendered as word art.
+        type: string
+    type: object

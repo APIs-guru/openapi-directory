@@ -168,7 +168,7 @@ definitions:
         $ref: '#/definitions/Status'
         description: |-
           If set, represents the error message for the operation.
-          Note that filled-in mage annotations are guaranteed to be
+          Note that filled-in image annotations are guaranteed to be
           correct, even when <code>error</code> is non-empty.
       faceAnnotations:
         description: 'If present, face detection completed successfully.'
@@ -647,7 +647,7 @@ definitions:
           significant hindrance if the hint is wrong). Text detection returns an
           error if one or more of the specified languages is not one of the
           [supported
-          languages](/translate/v2/translate-reference#supported_languages).
+          languages](/vision/docs/languages).
         items:
           type: string
         type: array

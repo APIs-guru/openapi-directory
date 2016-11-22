@@ -894,13 +894,13 @@ definitions:
   CheckNameAvailabilityOutput:
     description: Output of check name availability API.
     properties:
-      Message:
+      message:
         description: The detailed error message describing why the name is not available.
         type: string
-      NameAvailable:
+      nameAvailable:
         description: Indicates whether the name is available.
         type: boolean
-      Reason:
+      reason:
         description: The reason why the name is not available.
         type: string
     type: object

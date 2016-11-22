@@ -335,13 +335,16 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            An optional unique request_id. If server receives two Create requests with
-            the same request_id then second request will be ignored and the resource
-            stored in the backend will be returned. Empty request_id fields are
-            ignored.
-            It is responsibility of the client to ensure uniqueness of the request_id
-            strings.
-            The strings are limited to 64 characters.
+            An optional but recommended unique <code>request_id</code>. If the server
+            receives two <code>create()</code> requests  with the same
+            <code>request_id</code>, then the second request will be ignored and the
+            first resource created and stored in the backend is returned.
+            Empty <code>request_id</code> fields are ignored.
+
+            It is responsibility of the client to ensure uniqueness of the
+            <code>request_id</code> strings.
+
+            <code>request_id</code> strings are limited to 64 characters.
           in: query
           name: requestId
           type: string
@@ -445,13 +448,16 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            An optional unique request_id. If server receives two Create requests with
-            the same request_id then second request will be ignored and the resource
-            stored in the backend will be returned. Empty request_id fields are
-            ignored.
-            It is responsibility of the client to ensure uniqueness of the request_id
-            strings.
-            The strings are limited to 64 characters.
+            An optional but recommended unique <code>request_id</code>. If the server
+            receives two <code>create()</code> requests  with the same
+            <code>request_id</code>, then the second request will be ignored and the
+            first resource created and stored in the backend is returned.
+            Empty <code>request_id</code> fields are ignored.
+
+            It is responsibility of the client to ensure uniqueness of the
+            <code>request_id</code> strings.
+
+            <code>request_id</code> strings are limited to 64 characters.
           in: query
           name: requestId
           type: string
@@ -544,13 +550,16 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            An optional unique request_id. If server receives two Create requests with
-            the same request_id then second request will be ignored and information
-            stored in the backend will be returned. Empty request_id fields are
-            ignored.
-            It is responsibility of the client to ensure uniqueness of the request_id
-            strings.
-            The strings are limited to 64 characters.
+            An optional but recommended unique <code>request_id</code>. If the server
+            receives two <code>create()</code> requests  with the same
+            <code>request_id</code>, then the second request will be ignored and the
+            first resource created and stored in the backend is returned.
+            Empty <code>request_id</code> fields are ignored.
+
+            It is responsibility of the client to ensure uniqueness of the
+            <code>request_id</code> strings.
+
+            <code>request_id</code> strings are limited to 64 characters.
           in: query
           name: requestId
           type: string
@@ -727,9 +736,7 @@ definitions:
       variables.
     properties:
       description:
-        description: |-
-          An optional description of the RuntimeConfig object.
-          The length of the description must be less than 256 bytes.
+        description: An optional description of the RuntimeConfig object.
         type: string
       name:
         description: |-
@@ -860,9 +867,9 @@ definitions:
         type: string
       text:
         description: |-
-          The textual value of the variable. The length of the value must be less
-          than 4096 bytes. Empty values are also accepted.
-          NB: Only one of value and string_value can be set at the same time.
+          The string value of the variable. The length of the value must be less
+          than 4096 bytes. Empty values are also accepted. For example,
+          <code>text: "my text value"</code>.
         type: string
       updateTime:
         description: '[Output Only] The time of the last variable update.'
@@ -872,8 +879,7 @@ definitions:
         description: |-
           The binary value of the variable. The length of the value must be less
           than 4096 bytes. Empty values are also accepted. The value must be
-          Base64 encoded.
-          NB: Only one of value and string_value can be set at the same time.
+          base64 encoded. Only one of `value` or `text` can be set.
         format: byte
         type: string
     type: object
