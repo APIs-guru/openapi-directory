@@ -1,0 +1,2439 @@
+swagger: '2.0'
+schemes:
+  - https
+host: connect.squareup.com
+info:
+  title: Square Connect
+  version: '2.0'
+  x-logo:
+    url: 'http://square.github.io/images/logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/square/connect-api-specification/master/api.json'
+    version: '2.0'
+  x-providerName: squareup.com
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v2/customers:
+    get:
+      description: Lists a business's customers.
+      operationId: ListCustomers
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: ''
+          in: query
+          name: cursor
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListCustomersResponse'
+      summary: ListCustomers
+      tags:
+        - Customer
+    post:
+      description: 'Creates a new customer for the business, which can have associated cards on file.'
+      operationId: CreateCustomer
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: |-
+            An object containing the fields to POST for the request.
+
+            See the corresponding object definition for field details.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCustomerRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCustomerResponse'
+      summary: CreateCustomer
+      tags:
+        - Customer
+  '/v2/customers/{customer_id}':
+    delete:
+      description: Deletes a customer from a business.
+      operationId: DeleteCustomer
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: customer_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteCustomerResponse'
+      summary: DeleteCustomer
+      tags:
+        - Customer
+    get:
+      description: Returns details for a single customer.
+      operationId: RetrieveCustomer
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: customer_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RetrieveCustomerResponse'
+      summary: RetrieveCustomer
+      tags:
+        - Customer
+    put:
+      description: Updates the details of an existing customer.
+      operationId: UpdateCustomer
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The customer to update.
+          in: path
+          name: customer_id
+          required: true
+          type: string
+        - description: |-
+            An object containing the fields to POST for the request.
+
+            See the corresponding object definition for field details.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateCustomerRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateCustomerResponse'
+      summary: UpdateCustomer
+      tags:
+        - Customer
+  '/v2/customers/{customer_id}/cards':
+    post:
+      description: Adds a card on file to an existing customer.
+      operationId: CreateCustomerCard
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: customer_id
+          required: true
+          type: string
+        - description: |-
+            An object containing the fields to POST for the request.
+
+            See the corresponding object definition for field details.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCustomerCardRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCustomerCardResponse'
+      summary: CreateCustomerCard
+      tags:
+        - Customer.Card
+  '/v2/customers/{customer_id}/cards/{card_id}':
+    delete:
+      description: Removes a card on file from a customer.
+      operationId: DeleteCustomerCard
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: customer_id
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: card_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteCustomerCardResponse'
+      summary: DeleteCustomerCard
+      tags:
+        - Customer.Card
+  /v2/locations:
+    get:
+      description: Provides summary information for all of a business's locations.
+      operationId: ListLocations
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListLocationsResponse'
+      summary: ListLocations
+      tags:
+        - Location
+  '/v2/locations/{location_id}/refunds':
+    get:
+      description: Lists refunds for one of a business's locations.
+      operationId: ListRefunds
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The ID of the location to list refunds for.
+          in: path
+          name: location_id
+          required: true
+          type: string
+        - description: 'The beginning of the requested reporting period, in RFC 3339 format.'
+          in: query
+          name: begin_time
+          required: false
+          type: string
+        - description: 'The end of the requested reporting period, in RFC 3339 format.'
+          in: query
+          name: end_time
+          required: false
+          type: string
+        - description: The order in which results are listed in the response.
+          enum:
+            - DESC
+            - ASC
+          in: query
+          name: sort_order
+          required: false
+          type: string
+        - description: |-
+            A pagination cursor to retrieve the next set of results for your
+            original query to the endpoint.
+          in: query
+          name: cursor
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListRefundsResponse'
+      summary: ListRefunds
+      tags:
+        - Refund
+  '/v2/locations/{location_id}/transactions':
+    get:
+      description: |-
+        Lists transactions for a particular location.
+
+        When making a request to this endpoint, your request body **must** include either the `cursor` parameter, or it must
+        include both `begin_time` and `end_time` with an optional `sort_order`.
+      operationId: ListTransactions
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The ID of the location to list transactions for.
+          in: path
+          name: location_id
+          required: true
+          type: string
+        - description: 'The beginning of the requested reporting period, in RFC 3339 format.'
+          in: query
+          name: begin_time
+          required: false
+          type: string
+        - description: 'The end of the requested reporting period, in RFC 3339 format.'
+          in: query
+          name: end_time
+          required: false
+          type: string
+        - description: |-
+            The order in which results are listed in the response (`ASC` for
+            chronological, `DESC` for reverse-chronological).
+          enum:
+            - DESC
+            - ASC
+          in: query
+          name: sort_order
+          required: false
+          type: string
+        - description: |-
+            A pagination cursor to retrieve the next set of results for your
+            original query to the endpoint.
+          in: query
+          name: cursor
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTransactionsResponse'
+      summary: ListTransactions
+      tags:
+        - Transaction
+    post:
+      description: Charges a card represented by a token.
+      operationId: Charge
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The ID of the location to associate the transaction with.
+          in: path
+          name: location_id
+          required: true
+          type: string
+        - description: |-
+            An object containing the fields to POST for the request.
+
+            See the corresponding object definition for field details.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ChargeRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ChargeResponse'
+      summary: Charge
+      tags:
+        - Transaction
+  '/v2/locations/{location_id}/transactions/{transaction_id}':
+    get:
+      description: Retrieves details for a single transaction.
+      operationId: RetrieveTransaction
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: location_id
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: transaction_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RetrieveTransactionResponse'
+      summary: RetrieveTransaction
+      tags:
+        - Transaction
+  '/v2/locations/{location_id}/transactions/{transaction_id}/capture':
+    post:
+      description: |-
+        Captures a transaction that was created with the **Charge**
+        endpoint with a `delay_capture` value of `true`.
+      operationId: CaptureTransaction
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: location_id
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: transaction_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CaptureTransactionResponse'
+      summary: CaptureTransaction
+      tags:
+        - Transaction
+  '/v2/locations/{location_id}/transactions/{transaction_id}/refund':
+    post:
+      description: Initiates a refund for a previously charged tender.
+      operationId: CreateRefund
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The ID of the original transaction's associated location.
+          in: path
+          name: location_id
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: transaction_id
+          required: true
+          type: string
+        - description: |-
+            An object containing the fields to POST for the request.
+
+            See the corresponding object definition for field details.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRefundRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRefundResponse'
+      summary: CreateRefund
+      tags:
+        - Refund
+  '/v2/locations/{location_id}/transactions/{transaction_id}/void':
+    post:
+      description: |-
+        Cancels a transaction that was created with the **Charge**
+        endpoint with a `delay_capture` value of `true`.
+      operationId: VoidTransaction
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: location_id
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: transaction_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/VoidTransactionResponse'
+      summary: VoidTransaction
+      tags:
+        - Transaction
+definitions:
+  Address:
+    description: ''
+    properties:
+      address_line_1:
+        description: ''
+        type: string
+      address_line_2:
+        description: ''
+        type: string
+      address_line_3:
+        description: ''
+        type: string
+      administrative_district_level_1:
+        description: ''
+        type: string
+      administrative_district_level_2:
+        description: ''
+        type: string
+      administrative_district_level_3:
+        description: ''
+        type: string
+      country:
+        description: ''
+        enum:
+          - ZZ
+          - AD
+          - AE
+          - AF
+          - AG
+          - AI
+          - AL
+          - AM
+          - AO
+          - AQ
+          - AR
+          - AS
+          - AT
+          - AU
+          - AW
+          - AX
+          - AZ
+          - BA
+          - BB
+          - BD
+          - BE
+          - BF
+          - BG
+          - BH
+          - BI
+          - BJ
+          - BL
+          - BM
+          - BN
+          - BO
+          - BQ
+          - BR
+          - BS
+          - BT
+          - BV
+          - BW
+          - BY
+          - BZ
+          - CA
+          - CC
+          - CD
+          - CF
+          - CG
+          - CH
+          - CI
+          - CK
+          - CL
+          - CM
+          - CN
+          - CO
+          - CR
+          - CU
+          - CV
+          - CW
+          - CX
+          - CY
+          - CZ
+          - DE
+          - DJ
+          - DK
+          - DM
+          - DO
+          - DZ
+          - EC
+          - EE
+          - EG
+          - EH
+          - ER
+          - ES
+          - ET
+          - FI
+          - FJ
+          - FK
+          - FM
+          - FO
+          - FR
+          - GA
+          - GB
+          - GD
+          - GE
+          - GF
+          - GG
+          - GH
+          - GI
+          - GL
+          - GM
+          - GN
+          - GP
+          - GQ
+          - GR
+          - GS
+          - GT
+          - GU
+          - GW
+          - GY
+          - HK
+          - HM
+          - HN
+          - HR
+          - HT
+          - HU
+          - ID
+          - IE
+          - IL
+          - IM
+          - IN
+          - IO
+          - IQ
+          - IR
+          - IS
+          - IT
+          - JE
+          - JM
+          - JO
+          - JP
+          - KE
+          - KG
+          - KH
+          - KI
+          - KM
+          - KN
+          - KP
+          - KR
+          - KW
+          - KY
+          - KZ
+          - LA
+          - LB
+          - LC
+          - LI
+          - LK
+          - LR
+          - LS
+          - LT
+          - LU
+          - LV
+          - LY
+          - MA
+          - MC
+          - MD
+          - ME
+          - MF
+          - MG
+          - MH
+          - MK
+          - ML
+          - MM
+          - MN
+          - MO
+          - MP
+          - MQ
+          - MR
+          - MS
+          - MT
+          - MU
+          - MV
+          - MW
+          - MX
+          - MY
+          - MZ
+          - NA
+          - NC
+          - NE
+          - NF
+          - NG
+          - NI
+          - NL
+          - 'NO'
+          - NP
+          - NR
+          - NU
+          - NZ
+          - OM
+          - PA
+          - PE
+          - PF
+          - PG
+          - PH
+          - PK
+          - PL
+          - PM
+          - PN
+          - PR
+          - PS
+          - PT
+          - PW
+          - PY
+          - QA
+          - RE
+          - RO
+          - RS
+          - RU
+          - RW
+          - SA
+          - SB
+          - SC
+          - SD
+          - SE
+          - SG
+          - SH
+          - SI
+          - SJ
+          - SK
+          - SL
+          - SM
+          - SN
+          - SO
+          - SR
+          - SS
+          - ST
+          - SV
+          - SX
+          - SY
+          - SZ
+          - TC
+          - TD
+          - TF
+          - TG
+          - TH
+          - TJ
+          - TK
+          - TL
+          - TM
+          - TN
+          - TO
+          - TR
+          - TT
+          - TV
+          - TW
+          - TZ
+          - UA
+          - UG
+          - UM
+          - US
+          - UY
+          - UZ
+          - VA
+          - VC
+          - VE
+          - VG
+          - VI
+          - VN
+          - VU
+          - WF
+          - WS
+          - YE
+          - YT
+          - ZA
+          - ZM
+          - ZW
+        type: string
+      locality:
+        description: ''
+        type: string
+      postal_code:
+        description: ''
+        type: string
+      sublocality:
+        description: ''
+        type: string
+      sublocality_2:
+        description: ''
+        type: string
+      sublocality_3:
+        description: ''
+        type: string
+    type: object
+  CaptureTransactionResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **CaptureTransaction** endpoint.
+    properties:
+      errors:
+        description: Any errors that occurred during the request.
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
+  Card:
+    description: Represents a credit card.
+    properties:
+      billing_address:
+        $ref: '#/definitions/Address'
+        description: The billing address for the card on file.
+      card_brand:
+        description: The card's brand (such as `VISA`).
+        enum:
+          - OTHER_BRAND
+          - VISA
+          - MASTERCARD
+          - AMERICAN_EXPRESS
+          - DISCOVER
+          - DISCOVER_DINERS
+          - JCB
+          - CHINA_UNIONPAY
+          - SQUARE_GIFT_CARD
+        type: string
+      cardholder_name:
+        description: The cardholder name for the card on file.
+        type: string
+      exp_month:
+        description: 'The month of the card''s expiration date, which must be between 1-12.'
+        type: integer
+      exp_year:
+        description: 'The year of the card''s expiration date, which must be a 4-digit year.'
+        type: integer
+      id:
+        description: 'The card''s unique ID, if any.'
+        type: string
+      last_4:
+        description: The last 4 digits of the card's number.
+        type: string
+    type: object
+  CardBrand:
+    description: ''
+    enum:
+      - OTHER_BRAND
+      - VISA
+      - MASTERCARD
+      - AMERICAN_EXPRESS
+      - DISCOVER
+      - DISCOVER_DINERS
+      - JCB
+      - CHINA_UNIONPAY
+      - SQUARE_GIFT_CARD
+    type: string
+  ChargeRequest:
+    description: |-
+      Defines the parameters that can be included in the body of
+      a request to the **Charge** endpoint.
+    example:
+      amount_money:
+        amount: 5000
+        currency: USD
+      billing_address:
+        address_line_1: 500 Electric Ave
+        address_line_2: Suite 600
+        administrative_district_level_1: NY
+        country: US
+        locality: New York
+        postal_code: '10003'
+      card_nonce: card_nonce_from_square_123
+      delay_capture: false
+      idempotency_key: 74ae1696-b1e3-4328-af6d-f1e04d947a13
+      note: some optional note
+      reference_id: some optional reference id
+      shipping_address:
+        address_line_1: 123 Main St
+        administrative_district_level_1: CA
+        country: US
+        locality: San Francisco
+        postal_code: '94114'
+    properties:
+      amount_money:
+        $ref: '#/definitions/Money'
+        description: The amount of money to collect in the transaction.
+      billing_address:
+        $ref: '#/definitions/Address'
+        description: 'If available, Postal code in the billing address for US and Canada payments may reduce decline rate.'
+      card_nonce:
+        description: |-
+          A nonce representing the credit card to charge for this transaction.
+          Do not provide a value for this field if you provide a value for
+          `customer_card_id`.
+        type: string
+      customer_card_id:
+        description: |-
+          The ID of the customer card on file to charge for this transaction. Do
+          not provide a value for this field if you provide a value for `card_nonce`.
+        type: string
+      customer_id:
+        description: |-
+          The ID of the customer to associate this transaction with. This field
+          is required if you provide a value for `customer_card_id`, and optional
+          otherwise.
+        type: string
+      delay_capture:
+        description: |-
+          If `true`, the request will only perform an Auth on the provided
+          card. You can then later perform either a Capture (with the
+          *CaptureTransaction** endpoint) or a Void (with the **VoidTransation**
+          endpoint.
+        type: boolean
+      idempotency_key:
+        description: |-
+          A value you specify that uniquely identifies this
+          transaction among transactions you've created.
+
+          If you're unsure whether a particular transaction succeeded,
+          you can reattempt it with the same idempotency key without
+          worrying about double-charging the buyer. Note that *all other fields*
+          must also remain identical in your followup request, or an error will occur.
+        type: string
+      note:
+        description: An optional note to associate with the transaction.
+        type: string
+      reference_id:
+        description: |-
+          An optional ID you can associate with the transaction for your own
+          purposes (such as to associate the transaction with an entity ID in your
+          own database).
+        type: string
+      shipping_address:
+        $ref: '#/definitions/Address'
+        description: ''
+    required:
+      - idempotency_key
+      - amount_money
+    type: object
+  ChargeResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **Charge** endpoint.
+
+      One of `errors` or `transaction` is present in a given response (never both).
+    properties:
+      errors:
+        description: Any errors that occurred during the request.
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+      transaction:
+        $ref: '#/definitions/Transaction'
+        description: The details of the created transaction.
+    type: object
+  Country:
+    description: ''
+    enum:
+      - ZZ
+      - AD
+      - AE
+      - AF
+      - AG
+      - AI
+      - AL
+      - AM
+      - AO
+      - AQ
+      - AR
+      - AS
+      - AT
+      - AU
+      - AW
+      - AX
+      - AZ
+      - BA
+      - BB
+      - BD
+      - BE
+      - BF
+      - BG
+      - BH
+      - BI
+      - BJ
+      - BL
+      - BM
+      - BN
+      - BO
+      - BQ
+      - BR
+      - BS
+      - BT
+      - BV
+      - BW
+      - BY
+      - BZ
+      - CA
+      - CC
+      - CD
+      - CF
+      - CG
+      - CH
+      - CI
+      - CK
+      - CL
+      - CM
+      - CN
+      - CO
+      - CR
+      - CU
+      - CV
+      - CW
+      - CX
+      - CY
+      - CZ
+      - DE
+      - DJ
+      - DK
+      - DM
+      - DO
+      - DZ
+      - EC
+      - EE
+      - EG
+      - EH
+      - ER
+      - ES
+      - ET
+      - FI
+      - FJ
+      - FK
+      - FM
+      - FO
+      - FR
+      - GA
+      - GB
+      - GD
+      - GE
+      - GF
+      - GG
+      - GH
+      - GI
+      - GL
+      - GM
+      - GN
+      - GP
+      - GQ
+      - GR
+      - GS
+      - GT
+      - GU
+      - GW
+      - GY
+      - HK
+      - HM
+      - HN
+      - HR
+      - HT
+      - HU
+      - ID
+      - IE
+      - IL
+      - IM
+      - IN
+      - IO
+      - IQ
+      - IR
+      - IS
+      - IT
+      - JE
+      - JM
+      - JO
+      - JP
+      - KE
+      - KG
+      - KH
+      - KI
+      - KM
+      - KN
+      - KP
+      - KR
+      - KW
+      - KY
+      - KZ
+      - LA
+      - LB
+      - LC
+      - LI
+      - LK
+      - LR
+      - LS
+      - LT
+      - LU
+      - LV
+      - LY
+      - MA
+      - MC
+      - MD
+      - ME
+      - MF
+      - MG
+      - MH
+      - MK
+      - ML
+      - MM
+      - MN
+      - MO
+      - MP
+      - MQ
+      - MR
+      - MS
+      - MT
+      - MU
+      - MV
+      - MW
+      - MX
+      - MY
+      - MZ
+      - NA
+      - NC
+      - NE
+      - NF
+      - NG
+      - NI
+      - NL
+      - 'NO'
+      - NP
+      - NR
+      - NU
+      - NZ
+      - OM
+      - PA
+      - PE
+      - PF
+      - PG
+      - PH
+      - PK
+      - PL
+      - PM
+      - PN
+      - PR
+      - PS
+      - PT
+      - PW
+      - PY
+      - QA
+      - RE
+      - RO
+      - RS
+      - RU
+      - RW
+      - SA
+      - SB
+      - SC
+      - SD
+      - SE
+      - SG
+      - SH
+      - SI
+      - SJ
+      - SK
+      - SL
+      - SM
+      - SN
+      - SO
+      - SR
+      - SS
+      - ST
+      - SV
+      - SX
+      - SY
+      - SZ
+      - TC
+      - TD
+      - TF
+      - TG
+      - TH
+      - TJ
+      - TK
+      - TL
+      - TM
+      - TN
+      - TO
+      - TR
+      - TT
+      - TV
+      - TW
+      - TZ
+      - UA
+      - UG
+      - UM
+      - US
+      - UY
+      - UZ
+      - VA
+      - VC
+      - VE
+      - VG
+      - VI
+      - VN
+      - VU
+      - WF
+      - WS
+      - YE
+      - YT
+      - ZA
+      - ZM
+      - ZW
+    type: string
+  CreateCustomerCardRequest:
+    description: ''
+    properties:
+      billing_address:
+        $ref: '#/definitions/Address'
+        description: Postal code in the address is required for US and Canada payments.
+      card_nonce:
+        description: A card nonce representing the card data to link to the customer.
+        type: string
+      cardholder_name:
+        description: The cardholder name.
+        type: string
+    required:
+      - card_nonce
+    type: object
+  CreateCustomerCardResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **CreateCustomerCard** endpoint.
+
+      One of `errors` or `card` is present in a given response (never both).
+    properties:
+      card:
+        $ref: '#/definitions/Card'
+        description: ''
+      errors:
+        description: ''
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
+  CreateCustomerRequest:
+    description: ''
+    properties:
+      address:
+        $ref: '#/definitions/Address'
+        description: ''
+      company_name:
+        description: ''
+        type: string
+      email_address:
+        description: ''
+        type: string
+      family_name:
+        description: ''
+        type: string
+      given_name:
+        description: ''
+        type: string
+      nickname:
+        description: ''
+        type: string
+      note:
+        description: ''
+        type: string
+      phone_number:
+        description: ''
+        type: string
+      reference_id:
+        description: ''
+        type: string
+    type: object
+  CreateCustomerResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **CreateCustomer** endpoint.
+
+      One of `errors` or `customer` is present in a given response (never both).
+    properties:
+      customer:
+        $ref: '#/definitions/Customer'
+        description: ''
+      errors:
+        description: ''
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
+  CreateRefundRequest:
+    description: |-
+      Defines the body parameters that can be included in
+      a request to the **CreateRefund** endpoint.
+    properties:
+      amount_money:
+        $ref: '#/definitions/Money'
+        description: The amount of money to refund.
+      idempotency_key:
+        description: |-
+          A value you specify that uniquely identifies this
+          refund among refunds you've created for the tender.
+
+          If you're unsure whether a particular refund succeeded,
+          you can reattempt it with the same idempotency key without
+          worrying about duplicating the refund.
+        type: string
+      reason:
+        description: A description of the reason for the refund.
+        type: string
+      tender_id:
+        description: The ID of the tender to refund.
+        type: string
+    required:
+      - idempotency_key
+      - tender_id
+      - amount_money
+    type: object
+  CreateRefundResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **CreateRefund** endpoint.
+
+      One of `errors` or `refund` is present in a given response (never both).
+    properties:
+      errors:
+        description: Any errors that occurred during the request.
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+      refund:
+        $ref: '#/definitions/Refund'
+        description: The details of the created refund.
+    type: object
+  Currency:
+    description: ''
+    enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LVL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - USS
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XTS
+      - XXX
+      - YER
+      - ZAR
+      - ZMK
+      - ZMW
+      - BTC
+    type: string
+  Customer:
+    description: ''
+    properties:
+      address:
+        $ref: '#/definitions/Address'
+        description: ''
+      cards:
+        description: Cards on file for the customer.
+        items:
+          $ref: '#/definitions/Card'
+        type: array
+      company_name:
+        description: ''
+        type: string
+      created_at:
+        description: 'The time when the customer was created, in RFC 3339 format.'
+        type: string
+      email_address:
+        description: ''
+        type: string
+      family_name:
+        description: ''
+        type: string
+      given_name:
+        description: ''
+        type: string
+      id:
+        description: The customer's unique ID.
+        type: string
+      nickname:
+        description: ''
+        type: string
+      note:
+        description: ''
+        type: string
+      phone_number:
+        description: ''
+        type: string
+      reference_id:
+        description: ''
+        type: string
+      updated_at:
+        description: 'The time when the customer was updated, in RFC 3339 format.'
+        type: string
+    type: object
+  DeleteCustomerCardResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **DeleteCustomerCard** endpoint.
+    properties:
+      errors:
+        description: ''
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
+  DeleteCustomerResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **DeleteCustomer** endpoint.
+    properties:
+      errors:
+        description: ''
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
+  Error:
+    description: ''
+    properties:
+      category:
+        description: ''
+        enum:
+          - API_ERROR
+          - AUTHENTICATION_ERROR
+          - INVALID_REQUEST_ERROR
+          - RATE_LIMIT_ERROR
+          - PAYMENT_METHOD_ERROR
+          - REFUND_ERROR
+        type: string
+      code:
+        description: ''
+        enum:
+          - INTERNAL_SERVER_ERROR
+          - UNAUTHORIZED
+          - ACCESS_TOKEN_EXPIRED
+          - ACCESS_TOKEN_REVOKED
+          - FORBIDDEN
+          - INSUFFICIENT_SCOPES
+          - APPLICATION_DISABLED
+          - V1_APPLICATION
+          - V1_ACCESS_TOKEN
+          - CARD_PROCESSING_NOT_ENABLED
+          - BAD_REQUEST
+          - MISSING_REQUIRED_PARAMETER
+          - INCORRECT_TYPE
+          - INVALID_TIME
+          - INVALID_TIME_RANGE
+          - INVALID_VALUE
+          - INVALID_CURSOR
+          - UNKNOWN_QUERY_PARAMETER
+          - CONFLICTING_PARAMETERS
+          - EXPECTED_JSON_BODY
+          - INVALID_SORT_ORDER
+          - VALUE_TOO_LONG
+          - VALUE_TOO_LOW
+          - EXPECTED_BOOLEAN
+          - EXPECTED_INTEGER
+          - EXPECTED_FLOAT
+          - EXPECTED_STRING
+          - EXPECTED_OBJECT
+          - EXPECTED_ARRAY
+          - INVALID_ARRAY_VALUE
+          - INVALID_ENUM_VALUE
+          - INVALID_CONTENT_TYPE
+          - INVALID_FORM_VALUE
+          - ONE_INSTRUMENT_EXPECTED
+          - NO_FIELDS_SET
+          - CARD_DECLINED
+          - CARD_EXPIRED
+          - VERIFY_CVV_FAILURE
+          - VERIFY_AVS_FAILURE
+          - INVALID_EXPIRATION
+          - INVALID_EXPIRATION_YEAR
+          - INVALID_EXPIRATION_DATE
+          - INVALID_CARD
+          - DELAYED_TRANSACTION_EXPIRED
+          - DELAYED_TRANSACTION_CANCELED
+          - DELAYED_TRANSACTION_CAPTURED
+          - DELAYED_TRANSACTION_FAILED
+          - CARD_TOKEN_EXPIRED
+          - CARD_TOKEN_USED
+          - AMOUNT_TOO_HIGH
+          - UNSUPPORTED_INSTRUMENT_TYPE
+          - REFUND_AMOUNT_INVALID
+          - REFUND_ALREADY_PENDING
+          - PAYMENT_NOT_REFUNDABLE
+          - INVALID_CARD_DATA
+          - NOT_FOUND
+          - REQUEST_TIMEOUT
+          - REQUEST_ENTITY_TOO_LARGE
+          - UNSUPPORTED_MEDIA_TYPE
+          - RATE_LIMITED
+          - NOT_IMPLEMENTED
+          - SERVICE_UNAVAILABLE
+        type: string
+      detail:
+        description: ''
+        type: string
+      field:
+        description: ''
+        type: string
+    required:
+      - category
+      - code
+    type: object
+  ErrorCategory:
+    description: ''
+    enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - INVALID_REQUEST_ERROR
+      - RATE_LIMIT_ERROR
+      - PAYMENT_METHOD_ERROR
+      - REFUND_ERROR
+    type: string
+  ErrorCode:
+    description: ''
+    enum:
+      - INTERNAL_SERVER_ERROR
+      - UNAUTHORIZED
+      - ACCESS_TOKEN_EXPIRED
+      - ACCESS_TOKEN_REVOKED
+      - FORBIDDEN
+      - INSUFFICIENT_SCOPES
+      - APPLICATION_DISABLED
+      - V1_APPLICATION
+      - V1_ACCESS_TOKEN
+      - CARD_PROCESSING_NOT_ENABLED
+      - BAD_REQUEST
+      - MISSING_REQUIRED_PARAMETER
+      - INCORRECT_TYPE
+      - INVALID_TIME
+      - INVALID_TIME_RANGE
+      - INVALID_VALUE
+      - INVALID_CURSOR
+      - UNKNOWN_QUERY_PARAMETER
+      - CONFLICTING_PARAMETERS
+      - EXPECTED_JSON_BODY
+      - INVALID_SORT_ORDER
+      - VALUE_TOO_LONG
+      - VALUE_TOO_LOW
+      - EXPECTED_BOOLEAN
+      - EXPECTED_INTEGER
+      - EXPECTED_FLOAT
+      - EXPECTED_STRING
+      - EXPECTED_OBJECT
+      - EXPECTED_ARRAY
+      - INVALID_ARRAY_VALUE
+      - INVALID_ENUM_VALUE
+      - INVALID_CONTENT_TYPE
+      - INVALID_FORM_VALUE
+      - ONE_INSTRUMENT_EXPECTED
+      - NO_FIELDS_SET
+      - CARD_DECLINED
+      - CARD_EXPIRED
+      - VERIFY_CVV_FAILURE
+      - VERIFY_AVS_FAILURE
+      - INVALID_EXPIRATION
+      - INVALID_EXPIRATION_YEAR
+      - INVALID_EXPIRATION_DATE
+      - INVALID_CARD
+      - DELAYED_TRANSACTION_EXPIRED
+      - DELAYED_TRANSACTION_CANCELED
+      - DELAYED_TRANSACTION_CAPTURED
+      - DELAYED_TRANSACTION_FAILED
+      - CARD_TOKEN_EXPIRED
+      - CARD_TOKEN_USED
+      - AMOUNT_TOO_HIGH
+      - UNSUPPORTED_INSTRUMENT_TYPE
+      - REFUND_AMOUNT_INVALID
+      - REFUND_ALREADY_PENDING
+      - PAYMENT_NOT_REFUNDABLE
+      - INVALID_CARD_DATA
+      - NOT_FOUND
+      - REQUEST_TIMEOUT
+      - REQUEST_ENTITY_TOO_LARGE
+      - UNSUPPORTED_MEDIA_TYPE
+      - RATE_LIMITED
+      - NOT_IMPLEMENTED
+      - SERVICE_UNAVAILABLE
+    type: string
+  ListCustomersRequest:
+    description: ''
+    properties:
+      cursor:
+        description: ''
+        type: string
+    type: object
+  ListCustomersResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **ListCustomers** endpoint.
+
+      One of `errors` or `customers` is present in a given response (never both).
+    properties:
+      cursor:
+        description: ''
+        type: string
+      customers:
+        description: ''
+        items:
+          $ref: '#/definitions/Customer'
+        type: array
+      errors:
+        description: ''
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
+  ListLocationsResponse:
+    description: |-
+      Defines the fields that are included in the response body of 
+      a request to the **ListLocations** endpoint.
+
+      One of `errors` or `locations` is present in a given response (never both).
+    properties:
+      errors:
+        description: Any errors that occurred during the request.
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+      locations:
+        description: An array of the business's locations.
+        items:
+          $ref: '#/definitions/Location'
+        type: array
+    type: object
+  ListRefundsRequest:
+    description: |-
+      Defines the query parameters that can be included in
+      a request to the **ListRefunds** endpoint.
+    properties:
+      begin_time:
+        description: 'The beginning of the requested reporting period, in RFC 3339 format.'
+        type: string
+      cursor:
+        description: |-
+          A pagination cursor to retrieve the next set of results for your
+          original query to the endpoint.
+        type: string
+      end_time:
+        description: 'The end of the requested reporting period, in RFC 3339 format.'
+        type: string
+      sort_order:
+        description: The order in which results are listed in the response.
+        enum:
+          - DESC
+          - ASC
+        type: string
+    type: object
+  ListRefundsResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **ListTenderRefunds** endpoint.
+
+      One of `errors` or `refunds` is present in a given response (never both).
+    properties:
+      cursor:
+        description: |-
+          A pagination cursor for retrieving the next set of results,
+          if any remain.
+
+          Provide this value as the `cursor` parameter in a subsequent request
+          to the **ListTenderRefunds** endpoint.
+        type: string
+      errors:
+        description: Any errors that occurred during the request.
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+      refunds:
+        description: An array of refunds that match your query.
+        items:
+          $ref: '#/definitions/Refund'
+        type: array
+    type: object
+  ListTransactionsRequest:
+    description: |-
+      Defines the query parameters that can be included in
+      a request to the **ListTransactions** endpoint.
+    properties:
+      begin_time:
+        description: 'The beginning of the requested reporting period, in RFC 3339 format.'
+        type: string
+      cursor:
+        description: |-
+          A pagination cursor to retrieve the next set of results for your
+          original query to the endpoint.
+        type: string
+      end_time:
+        description: 'The end of the requested reporting period, in RFC 3339 format.'
+        type: string
+      sort_order:
+        description: |-
+          The order in which results are listed in the response (`ASC` for
+          chronological, `DESC` for reverse-chronological).
+        enum:
+          - DESC
+          - ASC
+        type: string
+    type: object
+  ListTransactionsResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **ListTransactions** endpoint.
+
+      One of `errors` or `transactions` is present in a given response (never both).
+    properties:
+      cursor:
+        description: |-
+          A pagination cursor for retrieving the next set of results,
+          if any remain.
+
+          Provide this value as the `cursor` parameter in a subsequent request
+          to the **ListTransactions** endpoint.
+        type: string
+      errors:
+        description: Any errors that occurred during the request.
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+      transactions:
+        description: An array of transactions that match your query.
+        items:
+          $ref: '#/definitions/Transaction'
+        type: array
+    type: object
+  Location:
+    description: Represents one of a business's locations.
+    properties:
+      address:
+        $ref: '#/definitions/Address'
+        description: The address of this location.
+      capabilities:
+        description: |-
+          Indicates which Square features are enabled for the location.
+
+          Currently, there is only one value that might be present in this array:
+          `CREDIT_CARD_PROCESSING`.
+        items:
+          enum:
+            - CREDIT_CARD_PROCESSING
+          type: string
+        type: array
+      id:
+        description: The location's unique ID.
+        type: string
+      name:
+        description: The name given to the location.
+        type: string
+      timezone:
+        description: The IANA Timezone Database identifier for the location's timezone.
+        type: string
+    type: object
+  LocationCapability:
+    description: ''
+    enum:
+      - CREDIT_CARD_PROCESSING
+    type: string
+  Money:
+    description: ''
+    properties:
+      amount:
+        description: |-
+          Amount in the lowest denominated value of this Currency. E.g. in USD
+          these are cents, in JPY they are Yen (which do not have a 'cent' concept).
+        type: integer
+      currency:
+        description: ''
+        enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYR
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LTL
+          - LVL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRO
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STD
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - USS
+          - UYI
+          - UYU
+          - UZS
+          - VEF
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XTS
+          - XXX
+          - YER
+          - ZAR
+          - ZMK
+          - ZMW
+          - BTC
+        type: string
+    type: object
+  Refund:
+    description: ''
+    properties:
+      amount_money:
+        $ref: '#/definitions/Money'
+        description: The amount of money refunded.
+      created_at:
+        description: 'The time when the refund was created, in RFC 3339 format.'
+        type: string
+      id:
+        description: The unique ID of the refund.
+        type: string
+      location_id:
+        description: The ID of the refund's associated location.
+        type: string
+      processing_fee_money:
+        $ref: '#/definitions/Money'
+        description: The amount of processing fee refunded.
+      reason:
+        description: The reason for the refund being issued.
+        type: string
+      status:
+        description: ''
+        enum:
+          - PENDING
+          - APPROVED
+          - REJECTED
+          - FAILED
+        type: string
+      tender_id:
+        description: The ID of the tender refunded.
+        type: string
+      transaction_id:
+        description: The ID of the transaction refunded.
+        type: string
+    required:
+      - id
+      - location_id
+      - transaction_id
+      - tender_id
+      - reason
+      - amount_money
+      - status
+    type: object
+  RefundStatus:
+    description: ''
+    enum:
+      - PENDING
+      - APPROVED
+      - REJECTED
+      - FAILED
+    type: string
+  RetrieveCustomerResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **RetrieveCustomer** endpoint.
+
+      One of `errors` or `customer` is present in a given response (never both).
+    properties:
+      customer:
+        $ref: '#/definitions/Customer'
+        description: ''
+      errors:
+        description: ''
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
+  RetrieveTransactionResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **RetrieveTransaction** endpoint.
+
+      One of `errors` or `transaction` is present in a given response (never both).
+    properties:
+      errors:
+        description: Any errors that occurred during the request.
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+      transaction:
+        $ref: '#/definitions/Transaction'
+        description: The details of the requested transaction.
+    type: object
+  SortOrder:
+    description: ''
+    enum:
+      - DESC
+      - ASC
+    type: string
+  Tender:
+    description: Represents a form of tender used to pay in a transaction.
+    properties:
+      amount_money:
+        $ref: '#/definitions/Money'
+        description: The amount of the tender.
+      card_details:
+        $ref: '#/definitions/TenderCardDetails'
+        description: |-
+          The details of the card tender.
+          This value is present only if the value of `type` is `CARD`.
+      cash_details:
+        $ref: '#/definitions/TenderCashDetails'
+        description: |-
+          The details of the cash tender.
+          This value is present only if the value of `type` is `CASH`.
+      created_at:
+        description: 'The time when the tender was created, in RFC 3339 format.'
+        type: string
+      customer_id:
+        description: |-
+          If the tender represents a customer's card on file, this is
+          the ID of the associated customer.
+        type: string
+      id:
+        description: The tender's unique ID.
+        type: string
+      location_id:
+        description: The ID of the tender's associated location.
+        type: string
+      note:
+        description: An optional note associated with the tender at the time of payment.
+        type: string
+      processing_fee_money:
+        $ref: '#/definitions/Money'
+        description: The amount of any Square processing fees applied to the tender.
+      transaction_id:
+        description: The ID of the tender's associated transaction.
+        type: string
+      type:
+        description: The type of tender.
+        enum:
+          - OTHER
+          - CARD
+          - CASH
+          - THIRD_PARTY_CARD
+          - SQUARE_GIFT_CARD
+          - NO_SALE
+        type: string
+    required:
+      - type
+    type: object
+  TenderCardDetails:
+    description: Represents the details of a credit card tender.
+    properties:
+      card:
+        $ref: '#/definitions/Card'
+        description: The credit card's non-confidential details.
+      entry_method:
+        description: The method used to read the card.
+        enum:
+          - SWIPED
+          - KEYED
+          - EMV
+          - ON_FILE
+          - CONTACTLESS
+        type: string
+      status:
+        description: The credit card payment's current state (such as `CAPTURED`)
+        enum:
+          - AUTHORIZED
+          - CAPTURED
+          - VOIDED
+          - FAILED
+        type: string
+    type: object
+  TenderCardDetailsEntryMethod:
+    description: The method used to read the card
+    enum:
+      - SWIPED
+      - KEYED
+      - EMV
+      - ON_FILE
+      - CONTACTLESS
+    type: string
+  TenderCardDetailsStatus:
+    description: ''
+    enum:
+      - AUTHORIZED
+      - CAPTURED
+      - VOIDED
+      - FAILED
+    type: string
+  TenderCashDetails:
+    description: Represents the details of a cash tender.
+    properties:
+      buyer_tendered_money:
+        $ref: '#/definitions/Money'
+        description: 'The total amount provided by the buyer for this tender, before change is given.'
+      change_back_money:
+        $ref: '#/definitions/Money'
+        description: The change returned to the buyer for this tender. This amount should be >= 0.
+    type: object
+  TenderType:
+    description: ''
+    enum:
+      - OTHER
+      - CARD
+      - CASH
+      - THIRD_PARTY_CARD
+      - SQUARE_GIFT_CARD
+      - NO_SALE
+    type: string
+  Transaction:
+    description: |-
+      Represents a transaction processed with Square, either with the
+      Connect API or with Square Register.
+    properties:
+      created_at:
+        description: 'The time when the transaction was created, in RFC 3339 format.'
+        type: string
+      id:
+        description: The transaction's unique ID.
+        type: string
+      location_id:
+        description: The ID of the transaction's associated location.
+        type: string
+      product:
+        description: The product that processed the transaction.
+        enum:
+          - REGISTER
+          - EXTERNAL_API
+          - BILLING
+          - APPOINTMENTS
+          - INVOICES
+          - ONLINE_STORE
+          - PAYROLL
+          - OTHER
+        type: string
+      reference_id:
+        description: |-
+          If the transaction was created with the **Charge** endpoint, this
+          value is the same as the value provided as the `reference_id` parameter
+          in the request to that endpoint.
+        type: string
+      refunds:
+        description: An array of any refunds associated with the transaction.
+        items:
+          $ref: '#/definitions/Refund'
+        type: array
+      tenders:
+        description: Descriptions of the tenders used to pay for the transaction.
+        items:
+          $ref: '#/definitions/Tender'
+        type: array
+    type: object
+  TransactionProduct:
+    description: The name of the product used to accept payment for this transaction
+    enum:
+      - REGISTER
+      - EXTERNAL_API
+      - BILLING
+      - APPOINTMENTS
+      - INVOICES
+      - ONLINE_STORE
+      - PAYROLL
+      - OTHER
+    type: string
+  UpdateCustomerRequest:
+    description: ''
+    properties:
+      address:
+        $ref: '#/definitions/Address'
+        description: ''
+      company_name:
+        description: ''
+        type: string
+      email_address:
+        description: ''
+        type: string
+      family_name:
+        description: ''
+        type: string
+      given_name:
+        description: ''
+        type: string
+      nickname:
+        description: ''
+        type: string
+      note:
+        description: ''
+        type: string
+      phone_number:
+        description: ''
+        type: string
+      reference_id:
+        description: ''
+        type: string
+    type: object
+  UpdateCustomerResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **UpdateCustomer** endpoint.
+
+      One of `errors` or `customer` is present in a given response (never both).
+    properties:
+      customer:
+        $ref: '#/definitions/Customer'
+        description: ''
+      errors:
+        description: ''
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
+  VoidTransactionResponse:
+    description: |-
+      Defines the fields that are included in the response body of
+      a request to the **CaptureTransaction** endpoint.
+    properties:
+      errors:
+        description: Any errors that occurred during the request.
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
