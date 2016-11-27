@@ -180,6 +180,7 @@ function validatePrefered(specs) {
 
     var seenTrue = false;
     _.each(versions, function (value) {
+      assert(!_.isUndefined(value), 'Missing value for "x-preferred" in "' + id + '"');
       assert(_.isBoolean(value), 'Non boolean value for "x-preferred" in "' + id + '"');
       assert(value !== true || !seenTrue, 'Multiply preferred versions in "' + id + '"');
       seenTrue = value || seenTrue;
