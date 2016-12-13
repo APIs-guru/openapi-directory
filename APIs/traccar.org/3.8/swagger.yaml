@@ -1,0 +1,1165 @@
+swagger: '2.0'
+schemes:
+  - http
+host: traccar.org
+basePath: /api
+info:
+  description: Open Source GPS Tracking Platform
+  title: traccar
+  version: '3.8'
+  x-logo:
+    url: 'https://www.traccar.org/wp-content/uploads/2015/04/logo2x.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/tananaev/traccar/master/swagger.json'
+    version: '2.0'
+  x-providerName: traccar.org
+produces:
+  - application/json
+paths:
+  /attributes/aliases:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: deviceId
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/AttributeAlias'
+            type: array
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttributeAlias'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/AttributeAlias'
+  '/attributes/aliases/{id}':
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    put:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttributeAlias'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/AttributeAlias'
+  /commands:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Command'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Command'
+  /commandtypes:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: deviceId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/CommandType'
+            type: array
+  /devices:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: all
+          required: true
+          type: boolean
+        - in: query
+          name: userId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/Device'
+            type: array
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Device'
+  /devices/geofences:
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceGeofence'
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceGeofence'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/DeviceGeofence'
+  '/devices/{id}':
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    put:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Device'
+  '/devices/{id}/distance':
+    put:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceTotalDistance'
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+  '/events/{id}':
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Event'
+  /geofences:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: all
+          required: true
+          type: boolean
+        - in: query
+          name: userId
+          required: true
+          type: integer
+        - in: query
+          name: groupId
+          required: true
+          type: integer
+        - in: query
+          name: deviceId
+          required: true
+          type: integer
+        - in: query
+          name: refresh
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/Geofence'
+            type: array
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Geofence'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Geofence'
+  '/geofences/{id}':
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    put:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Geofence'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Geofence'
+  /groups:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: all
+          required: true
+          type: boolean
+        - in: query
+          name: userId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/Group'
+            type: array
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Group'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Group'
+  /groups/geofences:
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GroupGeofence'
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GroupGeofence'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/GroupGeofence'
+  '/groups/{id}':
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    put:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Group'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Group'
+  /permissions/devices:
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DevicePermission'
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DevicePermission'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/DevicePermission'
+  /permissions/geofences:
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GeofencePermission'
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GeofencePermission'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/GeofencePermission'
+  /permissions/groups:
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GroupPermission'
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GroupPermission'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/GroupPermission'
+  /positions:
+    get:
+      consumes:
+        - application/json
+      description: 'Without any params, it returns a list of last known positions for all the user''s devices'
+      parameters:
+        - description: '_deviceId_ is optional, but requires the _from_ and _to_ parameters when used'
+          in: query
+          name: deviceId
+          required: false
+          type: integer
+        - description: Not required with _id_
+          in: query
+          name: from
+          required: false
+          type: string
+        - description: Not required with _id_
+          in: query
+          name: to
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: To fetch one or more positions. Multiple params can be passed like `id=31&id=42`
+          in: query
+          name: id
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Position'
+            type: array
+      summary: Fetches a list of Positions
+  /reports/events:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - description: at least one deviceId or one groupId must be passed
+          in: query
+          items:
+            type: integer
+          name: deviceId
+          required: true
+          type: array
+        - description: at least one deviceId or one groupId must be passed
+          in: query
+          items:
+            type: integer
+          name: groupId
+          required: true
+          type: array
+        - description: '% can be used to return events of all types'
+          in: query
+          items:
+            type: string
+          name: type
+          required: true
+          type: array
+        - in: query
+          name: from
+          required: true
+          type: string
+        - in: query
+          name: to
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/Event'
+            type: array
+  /reports/route:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - description: at least one deviceId or one groupId must be passed
+          in: query
+          items:
+            type: integer
+          name: deviceId
+          required: true
+          type: array
+        - description: at least one deviceId or one groupId must be passed
+          in: query
+          items:
+            type: integer
+          name: groupId
+          required: true
+          type: array
+        - in: query
+          name: from
+          required: true
+          type: string
+        - in: query
+          name: to
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/Position'
+            type: array
+  /reports/summary:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - description: at least one deviceId or one groupId must be passed
+          in: query
+          items:
+            type: integer
+          name: deviceId
+          required: true
+          type: array
+        - description: at least one deviceId or one groupId must be passed
+          in: query
+          items:
+            type: integer
+          name: groupId
+          required: true
+          type: array
+        - in: query
+          name: from
+          required: true
+          type: string
+        - in: query
+          name: to
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/ReportSummary'
+            type: array
+  /reports/trips:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - description: at least one deviceId or one groupId must be passed
+          in: query
+          items:
+            type: integer
+          name: deviceId
+          required: true
+          type: array
+        - description: at least one deviceId or one groupId must be passed
+          in: query
+          items:
+            type: integer
+          name: groupId
+          required: true
+          type: array
+        - in: query
+          name: from
+          required: true
+          type: string
+        - in: query
+          name: to
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/ReportTrips'
+            type: array
+  /server:
+    get:
+      consumes:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Server'
+    put:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Server'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Server'
+  /session:
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters: []
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: Not Found
+          headers: {}
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - in: formData
+          name: email
+          required: true
+          type: string
+        - in: formData
+          name: password
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/User'
+        '401':
+          description: Unauthorized
+          headers: {}
+  /statistics:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: from
+          required: true
+          type: string
+        - in: query
+          name: to
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/Statistics'
+            type: array
+  /users:
+    get:
+      consumes:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/User'
+            type: array
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/User'
+  /users/notifications:
+    get:
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: all
+          required: true
+          type: boolean
+        - in: query
+          name: userId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            items:
+              $ref: '#/definitions/Notification'
+            type: array
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Notification'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/Notification'
+  '/users/{id}':
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No Content
+          headers: {}
+    put:
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          schema:
+            $ref: '#/definitions/User'
+definitions:
+  AttributeAlias:
+    properties:
+      alias:
+        type: string
+      attribute:
+        type: string
+      deviceId:
+        type: integer
+      id:
+        type: integer
+  Command:
+    properties:
+      attributes: {}
+      deviceId:
+        type: integer
+      type:
+        type: string
+  CommandType:
+    properties:
+      type:
+        type: string
+  Device:
+    properties:
+      attributes: {}
+      category:
+        type: string
+      contact:
+        type: string
+      geofenceIds: {}
+      groupId:
+        type: integer
+      id:
+        type: integer
+      lastUpdate:
+        type: string
+      model:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      positionId:
+        type: integer
+      status:
+        type: string
+      uniqueId:
+        type: string
+  DeviceGeofence:
+    properties:
+      deviceId:
+        type: integer
+      geofenceId:
+        type: integer
+  DevicePermission:
+    properties:
+      deviceId:
+        type: integer
+      userId:
+        type: integer
+  DeviceTotalDistance:
+    properties:
+      deviceId:
+        type: integer
+      totalDistance:
+        type: number
+  Event:
+    properties:
+      attributes: {}
+      deviceId:
+        type: integer
+      geofenceId:
+        type: integer
+      id:
+        type: integer
+      positionId:
+        type: integer
+      serverTime:
+        type: string
+      type:
+        type: string
+  Geofence:
+    properties:
+      area:
+        type: string
+      attributes: {}
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+  GeofencePermission:
+    properties:
+      geofenceId:
+        type: integer
+      userId:
+        type: integer
+  Group:
+    properties:
+      attributes: {}
+      groupId:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+  GroupGeofence:
+    properties:
+      geofenceId:
+        type: integer
+      groupId:
+        type: integer
+  GroupPermission:
+    properties:
+      groupId:
+        type: integer
+      userId:
+        type: integer
+  Notification:
+    properties:
+      attributes: {}
+      id:
+        type: integer
+      type:
+        type: string
+      userId:
+        type: integer
+  Position:
+    properties:
+      address:
+        type: string
+      altitude:
+        type: number
+      attributes: {}
+      course:
+        type: number
+      deviceId:
+        type: integer
+      deviceTime:
+        type: string
+      fixTime:
+        type: string
+      id:
+        type: integer
+      latitude:
+        type: number
+      longitude:
+        type: number
+      outdated:
+        type: boolean
+      protocol:
+        type: string
+      speed:
+        type: number
+      valid:
+        type: boolean
+  ReportSummary:
+    properties:
+      averageSpeed:
+        type: number
+      deviceId:
+        type: integer
+      deviceName:
+        type: string
+      distance:
+        type: number
+      engineHours:
+        type: integer
+      maxSpeed:
+        type: number
+  ReportTrips:
+    properties:
+      averageSpeed:
+        type: number
+      deviceId:
+        type: integer
+      deviceName:
+        type: string
+      distance:
+        type: number
+      duration:
+        type: integer
+      endAddress:
+        type: string
+      endLat:
+        type: number
+      endLon:
+        type: number
+      endTime:
+        type: string
+      maxSpeed:
+        type: number
+      startAddress:
+        type: string
+      startLat:
+        type: number
+      startLon:
+        type: number
+      startTime:
+        type: string
+  Server:
+    properties:
+      attributes: {}
+      bingKey:
+        type: string
+      coordinateFormat:
+        type: string
+      distanceUnit:
+        type: string
+      forceSettings:
+        type: boolean
+      id:
+        type: integer
+      latitude:
+        type: number
+      longitude:
+        type: number
+      map:
+        type: string
+      mapUrl:
+        type: string
+      readonly:
+        type: boolean
+      registration:
+        type: boolean
+      speedUnit:
+        type: string
+      twelveHourFormat:
+        type: boolean
+      version:
+        type: string
+      zoom:
+        type: integer
+  Statistics:
+    properties:
+      activeDevices:
+        type: integer
+      activeUsers:
+        type: integer
+      captureTime:
+        type: string
+      messagesReceived:
+        type: integer
+      messagesStored:
+        type: integer
+      requests:
+        type: integer
+  User:
+    properties:
+      admin:
+        type: boolean
+      attributes: {}
+      coordinateFormat:
+        type: string
+      deviceLimit:
+        type: integer
+      disabled:
+        type: boolean
+      distanceUnit:
+        type: string
+      email:
+        type: string
+      expirationTime:
+        type: string
+      id:
+        type: integer
+      latitude:
+        type: number
+      longitude:
+        type: number
+      map:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      readonly:
+        type: boolean
+      speedUnit:
+        type: string
+      token:
+        type: string
+      twelveHourFormat:
+        type: boolean
+      zoom:
+        type: integer
