@@ -12614,7 +12614,7 @@ definitions:
         format: int32
         type: integer
       type:
-        description: 'Specifies the type of the healthCheck, either TCP, UDP, SSL, HTTP, HTTPS or HTTP2. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.'
+        description: 'Specifies the type of the healthCheck, either TCP, SSL, HTTP or HTTPS. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.'
         enum:
           - HTTP
           - HTTPS
@@ -14470,6 +14470,7 @@ definitions:
           - TARGET_POOLS
           - TARGET_SSL_PROXIES
           - TARGET_VPN_GATEWAYS
+          - TOTAL_CPUS
           - URL_MAPS
           - VPN_TUNNELS
         type: string
@@ -15281,7 +15282,7 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       privateKey:
-        description: A write-only private key in PEM format. Only insert RPCs will include this field.
+        description: A write-only private key in PEM format. Only insert requests will include this field.
         type: string
       selfLink:
         description: '[Output only] Server-defined URL for the resource.'

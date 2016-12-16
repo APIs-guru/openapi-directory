@@ -29,6 +29,7 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
     type: oauth2
 parameters:
@@ -96,6 +97,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/CreateAuthUriResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /deleteAccount:
@@ -120,6 +124,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/DeleteAccountResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /downloadAccount:
@@ -146,6 +153,8 @@ paths:
             $ref: '#/definitions/DownloadAccountResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - relyingparty
@@ -171,6 +180,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/GetAccountInfoResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getOobConfirmationCode:
@@ -195,6 +207,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/GetOobConfirmationCodeResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getProjectConfig:
@@ -215,6 +230,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/IdentitytoolkitRelyingpartyGetProjectConfigResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
     parameters:
@@ -234,6 +252,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/GetRecaptchaParamResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
     parameters:
@@ -253,6 +274,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/IdentitytoolkitRelyingpartyGetPublicKeysResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
     parameters:
@@ -285,6 +309,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ResetPasswordResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /setAccountInfo:
@@ -309,6 +336,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/SetAccountInfoResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /setProjectConfig:
@@ -333,6 +363,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/IdentitytoolkitRelyingpartySetProjectConfigResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /signOutUser:
@@ -357,6 +390,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/IdentitytoolkitRelyingpartySignOutUserResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /signupNewUser:
@@ -381,6 +417,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/SignupNewUserResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /uploadAccount:
@@ -407,6 +446,8 @@ paths:
             $ref: '#/definitions/UploadAccountResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - relyingparty
@@ -432,6 +473,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/VerifyAssertionResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /verifyCustomToken:
@@ -456,6 +500,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/VerifyCustomTokenResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /verifyPassword:
@@ -480,6 +527,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/VerifyPasswordResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
 definitions:
@@ -677,6 +727,9 @@ definitions:
         type: integer
       nextPageToken:
         description: The token for the next page. This should be taken from the previous response.
+        type: string
+      targetProjectId:
+        description: Specify which project (field value is actually project id) to operate. Only used when provided credential.
         type: string
     type: object
   IdentitytoolkitRelyingpartyGetAccountInfoRequest:

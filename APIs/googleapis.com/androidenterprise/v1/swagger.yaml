@@ -3744,6 +3744,9 @@ definitions:
         default: 'androidenterprise#serviceAccountKey'
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#serviceAccountKey".'
         type: string
+      publicData:
+        description: 'Public key data for the credentials file. This is an X.509 cert. If you are using the googleCredentials key type, this is identical to the cert that can be retrieved by using the X.509 cert url inside of the credentials file.'
+        type: string
       type:
         description: The file format of the generated key data.
         type: string

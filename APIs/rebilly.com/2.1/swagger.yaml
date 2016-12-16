@@ -41,7 +41,19 @@ info:
 
     Never share your secret keys. Keep them guarded and secure.
     The client-side authentication scheme uses one HTTP header named REB-AUTH.
+
     <!-- ReDoc-Inject: <security-definitions> -->
+        
+    # PHP SDK
+    For all PHP SDK examples provided in this spec you will need to configure `$client`.
+    You may do it like this:
+
+    ```php
+    $client = new Rebilly\Client([
+        'apiKey' => 'YourApiKeyHere',
+        'baseUrl' => 'https://api.rebilly.com',
+    ]);
+    ```
   license:
     name: Rebilly
     url: 'https://www.rebilly.com/api/license/'
@@ -2678,6 +2690,12 @@ paths:
       summary: Retrieve a list of customers
       tags:
         - Customers
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customers = $client->customers()->search([
+                'filter' => 'firstName:John',
+            ]);
     post:
       description: |
         Create a customer
@@ -2712,6 +2730,19 @@ paths:
       summary: Create a customer
       tags:
         - Customers
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customerForm = new Rebilly\Entities\Customer();
+            $customerForm->setFirstName('Sherlock');
+            $customerForm->setLastName('Holmes');
+            $customerForm->setEmail('sherlock.holmes@gmail.com');
+
+            try {
+                $customer = $client->customers()->create($customerForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/customers/{id}':
     get:
       description: |
@@ -2740,6 +2771,10 @@ paths:
       summary: Retrieve a customer
       tags:
         - Customers
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customers = $client->customers()->load('myCustomerId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -2792,6 +2827,19 @@ paths:
       summary: Create a customer with predefined ID
       tags:
         - Customers
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customerForm = new Rebilly\Entities\Customer();
+            $customerForm->setFirstName('Sherlock');
+            $customerForm->setLastName('Holmes');
+            $customerForm->setEmail('sherlock.holmes@gmail.com');
+
+            try {
+                $customer = $client->customers()->update('myCustomerId', $customerForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/customers/{id}/lead-source':
     get:
       description: |

@@ -84,7 +84,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Retrieves or modifies multiple orders in a single request.
+      description: Retrieves or modifies multiple orders in a single request. This method can only be called for non-multi-client accounts.
       operationId: content.orders.custombatch
       parameters:
         - in: body
@@ -103,7 +103,7 @@ paths:
         - orders
   '/{merchantId}/orders':
     get:
-      description: Lists the orders in your Merchant Center account.
+      description: Lists the orders in your Merchant Center account. This method can only be called for non-multi-client accounts.
       operationId: content.orders.list
       parameters:
         - description: The ID of the managing account.
@@ -181,7 +181,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/orders/{orderId}':
     get:
-      description: Retrieves an order from your Merchant Center account.
+      description: Retrieves an order from your Merchant Center account. This method can only be called for non-multi-client accounts.
       operationId: content.orders.get
       parameters:
         - description: The ID of the managing account.
@@ -222,7 +222,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Marks an order as acknowledged.
+      description: Marks an order as acknowledged. This method can only be called for non-multi-client accounts.
       operationId: content.orders.acknowledge
       parameters:
         - description: The ID of the managing account.
@@ -259,7 +259,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Cancels all line items in an order.
+      description: Cancels all line items in an order. This method can only be called for non-multi-client accounts.
       operationId: content.orders.cancel
       parameters:
         - description: The ID of the managing account.
@@ -296,7 +296,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Cancels a line item.
+      description: Cancels a line item. This method can only be called for non-multi-client accounts.
       operationId: content.orders.cancellineitem
       parameters:
         - description: The ID of the managing account.
@@ -333,7 +333,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Refund a portion of the order, up to the full amount paid.'
+      description: 'Refund a portion of the order, up to the full amount paid. This method can only be called for non-multi-client accounts.'
       operationId: content.orders.refund
       parameters:
         - description: The ID of the managing account.
@@ -370,7 +370,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Returns a line item.
+      description: Returns a line item. This method can only be called for non-multi-client accounts.
       operationId: content.orders.returnlineitem
       parameters:
         - description: The ID of the managing account.
@@ -407,7 +407,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Marks line item(s) as shipped.
+      description: Marks line item(s) as shipped. This method can only be called for non-multi-client accounts.
       operationId: content.orders.shiplineitems
       parameters:
         - description: The ID of the managing account.
@@ -444,7 +444,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Updates the merchant order ID for a given order.
+      description: Updates the merchant order ID for a given order. This method can only be called for non-multi-client accounts.
       operationId: content.orders.updatemerchantorderid
       parameters:
         - description: The ID of the managing account.
@@ -481,7 +481,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Updates a shipment''s status, carrier, and/or tracking ID.'
+      description: 'Updates a shipment''s status, carrier, and/or tracking ID. This method can only be called for non-multi-client accounts.'
       operationId: content.orders.updateshipment
       parameters:
         - description: The ID of the managing account.
@@ -510,7 +510,7 @@ paths:
         - orders
   '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
     get:
-      description: Retrieves an order using merchant order id.
+      description: Retrieves an order using merchant order id. This method can only be called for non-multi-client accounts.
       operationId: content.orders.getbymerchantorderid
       parameters:
         - description: The ID of the managing account.
@@ -551,7 +551,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sandbox only. Creates a test order.
+      description: Sandbox only. Creates a test order. This method can only be called for non-multi-client accounts.
       operationId: content.orders.createtestorder
       parameters:
         - description: The ID of the managing account.
@@ -583,7 +583,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".
+      description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment". This method can only be called for non-multi-client accounts.
       operationId: content.orders.advancetestorder
       parameters:
         - description: The ID of the managing account.
@@ -608,7 +608,7 @@ paths:
         - orders
   '/{merchantId}/testordertemplates/{templateName}':
     get:
-      description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
+      description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox. This method can only be called for non-multi-client accounts.
       operationId: content.orders.gettestordertemplate
       parameters:
         - description: The ID of the managing account.
@@ -807,7 +807,7 @@ definitions:
         description: Email address of the customer.
         type: string
       explicitMarketingPreference:
-        description: 'If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow.'
+        description: 'If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the checkout flow.'
         type: boolean
       fullName:
         description: Full name of the customer.
@@ -1601,7 +1601,7 @@ definitions:
         description: Email address of the customer.
         type: string
       explicitMarketingPreference:
-        description: 'If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow. Optional.'
+        description: 'If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the checkout flow. Optional.'
         type: boolean
       fullName:
         description: Full name of the customer.

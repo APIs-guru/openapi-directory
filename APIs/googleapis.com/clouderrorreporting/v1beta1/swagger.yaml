@@ -250,6 +250,12 @@ paths:
           type: string
         - description: |-
             [Optional] The exact value to match against
+            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
+          in: query
+          name: serviceFilter.resourceType
+          type: string
+        - description: |-
+            [Optional] The exact value to match against
             [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
           in: query
           name: serviceFilter.service
@@ -384,6 +390,12 @@ paths:
             - PERIOD_30_DAYS
           in: query
           name: timeRange.period
+          type: string
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
+          in: query
+          name: serviceFilter.resourceType
           type: string
         - description: |-
             [Optional] The sort order in which the results are returned.
@@ -728,6 +740,14 @@ definitions:
       Describes a running service that sends errors.
       Its version changes over time and multiple versions can run in parallel.
     properties:
+      resourceType:
+        description: |-
+          Type of the MonitoredResource. List of possible values:
+          https://cloud.google.com/monitoring/api/resources
+
+          Value is set automatically for incoming errors and must not be set when
+          reporting errors.
+        type: string
       service:
         description: |-
           An identifier of the service, such as the name of the

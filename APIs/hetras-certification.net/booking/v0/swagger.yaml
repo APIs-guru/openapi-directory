@@ -878,6 +878,60 @@ paths:
       summary: Get total count of bookings matchung the given filter criteria.
       tags:
         - Bookings
+  /api/booking/v0/bookings/force:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: "Force the creation of a booking even if there is no availability for this room type and rateplan anymore. With\r\n            this call you can also override the daily rates for the room and the addon services. Prerequisites are that the\r\n            rateplan and room type with the specified codes exist, the room type is sold with this rateplan and the rateplan\r\n            is active and bookable through the specified channel. If you specify addon services and there is no\r\n            service set up in the system that matches the code, then the booking is still accepted, but the charges for the\r\n            addon service will not be posted to the reservation folio, so the invoice on checkout might be less. You can get\r\n            more information about the payload if you check out the documentation for the reservation request model.<br />\r\n            Please also have a look at the <a href=\"https://developer.hetras.com/docs/tutorials\" onfocus=\"this.blur()\">Tutorials</a>.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
+      operationId: Bookings_CreateForcedBooking
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the details of the booking to be created.
+          in: body
+          name: reservation
+          required: true
+          schema:
+            $ref: '#/definitions/ReservationDetails'
+        - description: Whether to send a confirmation email to the primary guest
+          in: query
+          name: sendConfirmation
+          required: false
+          type: boolean
+      responses:
+        '201':
+          description: "The creation of the booking was successful. You will get back the confirmation id and maybe warnings, if\r\n            e.g. the prepayment could not be captured."
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        '400':
+          description: Bad request. Request body erroneous.
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: The request failed to validate.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Create a new booking defining the prices and allowing to overbook
+      tags:
+        - Bookings
   '/api/booking/v0/bookings/{confirmationId}':
     get:
       consumes: []
@@ -989,7 +1043,7 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: "The hetras API is using this <a href=\"https://developer.hetras.com/docs/patch\" onfocus=\"this.blur()\" target=\"_blank\">Patch Specification</a>\r\n            to partially update an existing resource. Currently this call allows to update the following fields:\r\n            external_id, market_code, channel_code, subchannel_code, comment, addon_services, labels, guests.\r\n            <br /><br />\r\n            A request example:<br /><pre>\r\n            [\r\n              {\r\n                \"op\": \"replace\", \"path\": \"/addon_services\", \"value\": [\"BREAKFAST\", \"PARKING\"]\r\n              },\r\n              {\r\n                \"op\": \"add\", \"path\": \"/labels/-\", \"value\": \"MOBILE\"\r\n              },\r\n              {\r\n                \"op\": \"replace\", \"path\": \"/guests/SHOW-1234\", \"value\": { \"customer_id\": \"SHOW-1234\", \"primary\": false }\r\n              },\r\n              {\r\n                \"op\": \"add\", \"path\": \"/guests/-\", \"value\": { \"customer_id\": \"SHOW-5678\", \"primary\": true }\r\n              }\r\n            ]\r\n            </pre><br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
+      description: "The hetras API is using this <a href=\"https://developer.hetras.com/docs/patch\" onfocus=\"this.blur()\" target=\"_blank\">Patch Specification</a>\r\n            to partially update an existing resource. Currently this call allows to update the following fields:\r\n            external_id, market_code, channel_code, subchannel_code, guarantee_type, comment, addon_services, labels, guests, contact and company.\r\n            <br /><br />\r\n            A request example:<br /><pre>\r\n            [\r\n              {\r\n                \"op\": \"replace\", \"path\": \"/addon_services\", \"value\": [\"BREAKFAST\", \"PARKING\"]\r\n              },\r\n              {\r\n                \"op\": \"add\", \"path\": \"/labels/-\", \"value\": \"MOBILE\"\r\n              },\r\n              {\r\n                \"op\": \"replace\", \"path\": \"/guests/SHOW-1234\", \"value\": { \"customer_id\": \"SHOW-1234\", \"primary\": false }\r\n              },\r\n              {\r\n                \"op\": \"add\", \"path\": \"/guests/-\", \"value\": { \"customer_id\": \"SHOW-5678\", \"primary\": true }\r\n              }\r\n            ]\r\n            </pre><br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       operationId: Bookings_Patch
       parameters:
         - description: Application identifier
@@ -1351,6 +1405,20 @@ definitions:
         format: double
         type: number
     type: object
+  AddonRate:
+    properties:
+      business_day:
+        description: The business day the addon service should be charged
+        format: date-time
+        type: string
+      code:
+        description: The code of the addon service to be booked
+        type: string
+      rate:
+        description: Total gross amount for the service
+        format: double
+        type: number
+    type: object
   Addons:
     properties:
       addon_services:
@@ -1524,6 +1592,10 @@ definitions:
         description: Total number of room nights blocked across all room types and days
         format: int32
         type: integer
+      created:
+        description: Timestamp the block was created
+        format: date-time
+        type: string
       first_arrival:
         description: (Earliest) arrival date for reservations split from this block
         format: date-time
@@ -1557,6 +1629,10 @@ definitions:
           - Cancelled
           - Tentative
           - Definite
+        type: string
+      updated:
+        description: Timestamp of when the block was changed the last time
+        format: date-time
         type: string
     type: object
   BlockInfo:
@@ -1636,6 +1712,10 @@ definitions:
         description: Total number of room nights blocked across all room types and days
         format: int32
         type: integer
+      created:
+        description: Timestamp the block was created
+        format: date-time
+        type: string
       first_arrival:
         description: (Earliest) arrival date for reservations split from this block
         format: date-time
@@ -1674,6 +1754,10 @@ definitions:
           - Cancelled
           - Tentative
           - Definite
+        type: string
+      updated:
+        description: Timestamp of when the block was changed the last time
+        format: date-time
         type: string
     type: object
   BlockRoomType:
@@ -1732,11 +1816,19 @@ definitions:
       confirmation_id:
         description: "The confirmation id for the booking which the guest can use to check in on the kiosk, add the\r\n            booking to the mobile app etc. It is used as identifier for all reservations done with the same\r\n            booking request."
         type: string
+      created:
+        description: Timestamp the booking was created
+        format: date-time
+        type: string
       reservations:
         description: Collection of reservations made with on booking request.
         items:
           $ref: '#/definitions/BookingListReservationItem'
         type: array
+      updated:
+        description: Timestamp of when the booking was changed the last time
+        format: date-time
+        type: string
     type: object
   BookingListRequest:
     properties:
@@ -1883,6 +1975,10 @@ definitions:
       companies:
         $ref: '#/definitions/CompaniesInfo'
         description: Information about related companies
+      created:
+        description: Timestamp the reservation was created
+        format: date-time
+        type: string
       customers:
         $ref: '#/definitions/CustomersInfo'
         description: Information about customers
@@ -1944,6 +2040,10 @@ definitions:
         type: array
       subchannel_code:
         description: "The code of the subchannel that was used when the booking has been created. Possible values can be \r\n            BOOKING, EXPEDIA or WALKIN, but it is configurable per hotel"
+        type: string
+      updated:
+        description: Timestamp of when the reservation was changed the last time
+        format: date-time
         type: string
     type: object
   BookingListResponse:
@@ -2042,6 +2142,54 @@ definitions:
       sendConfirmation:
         description: Whether to send a confirmation email to the primary guest
         type: boolean
+    type: object
+  CreditCard:
+    properties:
+      card_holder_name:
+        description: name of the card holder
+        type: string
+      card_number:
+        description: Credit card number
+        type: string
+      card_type:
+        description: One of the allowed values for a credit card type. If omitted it will be set to Others
+        type: string
+      cvv_code:
+        description: credit card verification value
+        type: string
+      expiration_month:
+        description: month of expiration
+        format: int32
+        type: integer
+      expiration_year:
+        description: year of expiration
+        format: int32
+        type: integer
+    type: object
+  CreditCardGuarantee:
+    properties:
+      credit_card:
+        $ref: '#/definitions/CreditCard'
+        description: The credit card to be used for capturing the reservations amount or to guarantee for the reservation
+      guarantee_type:
+        description: One of the accepted guarantee types from the offer you selected out of the rates response
+        enum:
+          - PM4Hold
+          - PM6Hold
+          - GuaranteeToCreditCard
+          - GuaranteeToGuestAccount
+          - GuaranteeByTravelAgent
+          - GuaranteeByCompany
+          - Deposit
+          - Voucher
+          - Prepayment
+          - NonGuaranteed
+          - Tentative
+          - Waitlist
+        type: string
+      token:
+        $ref: '#/definitions/Token'
+        description: The token to be used for capturing the reservations amount or to guarantee for the reservation
     type: object
   Customer:
     properties:
@@ -2805,6 +2953,86 @@ definitions:
     required:
       - hotel_id
     type: object
+  ReservationDetails:
+    properties:
+      addon_rates:
+        description: A breakdown of addon services with their prices for every stay day
+        items:
+          $ref: '#/definitions/AddonRate'
+        type: array
+      adults:
+        description: The number of adults per room
+        format: int32
+        type: integer
+      arrival_date:
+        description: The arrival date of the guests
+        format: date-time
+        type: string
+      channel_code:
+        description: The channel code for this reservation. You can find available channels in the codes for the hotel.
+        type: string
+      comment:
+        description: The comment you want to add for this reservation
+        type: string
+      company:
+        $ref: '#/definitions/Company'
+        description: The company that will be linked to this reservation
+      contact:
+        $ref: '#/definitions/Contact'
+        description: The contact that will be linked to this reservation
+      departure_date:
+        description: The departure date of the guests
+        format: date-time
+        type: string
+      external_id:
+        description: "The external id for this reservation. You can put here your own id used by you or the external system\r\n            you integrate hetras with"
+        type: string
+      group_code:
+        description: The group code based on which the reservation will be created.
+        type: string
+      guarantee:
+        $ref: '#/definitions/CreditCardGuarantee'
+        description: "The guarantee for this reservation. See https://developer.hetras.com/docs/tutorials#payment for information about\r\n            how to fill out the guarantee object"
+      guests:
+        description: A list of guests with some basic guest details
+        items:
+          $ref: '#/definitions/Customer'
+        type: array
+      hotel_id:
+        description: The id of the hotel this reservation is valid for
+        format: int32
+        type: integer
+      payment_method:
+        description: The payment method for this reservation
+        enum:
+          - None
+          - Cash
+          - CreditCard
+          - WireTransfer
+          - ChargeToCompany
+          - Check
+          - Voucher
+          - DebitCard
+          - Token
+          - Miscellaneous
+          - DigitalPayment
+        type: string
+      prepay_discount:
+        description: "If you create a booking for a rateplan requiring prepayment this amount will be deducted from the booking value before\r\n            the prepayment will be taken. This feature is useful when the booker redeems a gift voucher and you want to \r\n            only capture the remaining amount from the guest´s credit card"
+        format: double
+        type: number
+      room_rates:
+        description: A breakdown of room rates specified for every stay day
+        items:
+          $ref: '#/definitions/RoomRate'
+        type: array
+      rooms:
+        description: "The number of rooms this reservation is for. After a multi-room booking is done there will be \r\n            one reservation in hetras for all rooms. The hotel staff then will split this reservation into\r\n            one reservation per room to be able to check in the guests"
+        format: int32
+        type: integer
+    required:
+      - hotel_id
+    type: object
   ReservationResponse:
     properties:
       _warnings:
@@ -2863,6 +3091,10 @@ definitions:
       contact:
         $ref: '#/definitions/ContactResponse'
         description: The contact linked to this reservation
+      created:
+        description: Timestamp the reservation was created
+        format: date-time
+        type: string
       currency:
         description: The currency all amounts of this reservation will be shown in
         type: string
@@ -2965,6 +3197,10 @@ definitions:
       total_stay:
         $ref: '#/definitions/Rate'
         description: The total stay amounts for this reservation
+      updated:
+        description: Timestamp of when the reservation was changed the last time
+        format: date-time
+        type: string
     type: object
   ReservationRoom:
     properties:
@@ -3092,6 +3328,23 @@ definitions:
         description: "The gross rate for this day for the room and all included services. The prize is calculated for all rooms and all \r\n            persons per room"
         format: double
         type: number
+    type: object
+  RoomRate:
+    properties:
+      business_day:
+        description: The business day the room rate will be charged
+        format: date-time
+        type: string
+      rate:
+        description: "Total gross amount to be charged for the rate including all services of a package. Only extra taxes might\r\n            be added to the booking on top"
+        format: double
+        type: number
+      rate_plan:
+        description: The rate plan code for the specified business day
+        type: string
+      room_type:
+        description: The room type code for the specified business day
+        type: string
     type: object
   RoomTypeCount:
     properties:

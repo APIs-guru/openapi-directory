@@ -259,7 +259,7 @@ paths:
         Applies one or more updates to the presentation.
 
         Each request is validated before
-        being applied. If any request is not valid then the entire request will
+        being applied. If any request is not valid, then the entire request will
         fail and nothing will be applied.
 
         Some requests have replies to
@@ -268,14 +268,14 @@ paths:
         The order of replies matches that of the requests.
 
         For example, suppose you call batchUpdate with four updates, and only the
-        third one returns information. The response would have two empty replies,
+        third one returns information. The response would have two empty replies:
         the reply to the third request, and another empty reply, in that order.
 
-        Because other users may be editing the presentation, it is not guaranteed
-        that the presentation will exactly reflect your changes: your changes may
+        Because other users may be editing the presentation, the presentation
+        might not exactly reflect your changes: your changes may
         be altered with respect to collaborator changes. If there are no
         collaborators, the presentation should reflect your changes. In any case,
-        it is guaranteed that the updates in your request will be applied together
+        the updates in your request are guaranteed to be applied together
         atomically.
       operationId: slides.presentations.batchUpdate
       parameters:
@@ -554,7 +554,7 @@ definitions:
         $ref: '#/definitions/TableCellLocation'
         description: |-
           The optional table cell location if the text to be modified is in a table
-          cell. If present the object_id must refer to a table.
+          cell. If present, the object_id must refer to a table.
       objectId:
         description: The object ID of the shape or table containing the text to add bullets to.
         type: string
@@ -1024,7 +1024,7 @@ definitions:
         $ref: '#/definitions/TableCellLocation'
         description: |-
           The optional table cell location if the text is to be deleted from a table
-          cell. If present the object_id must refer to a table.
+          cell. If present, the object_id must refer to a table.
       objectId:
         description: The object ID of the shape or table from which the text will be deleted.
         type: string
@@ -1150,6 +1150,9 @@ definitions:
         description: |-
           The crop properties of the image. If not set, the image is not cropped.
           This property is read-only.
+      link:
+        $ref: '#/definitions/Link'
+        description: 'The hyperlink destination of the image. If unset, there is no link.'
       outline:
         $ref: '#/definitions/Outline'
         description: 'The outline of the image. If not set, the the image has no outline.'
@@ -1233,7 +1236,7 @@ definitions:
         $ref: '#/definitions/TableCellLocation'
         description: |-
           The optional table cell location if the text is to be inserted into a table
-          cell. If present the object_id must refer to a table.
+          cell. If present, the object_id must refer to a table.
       insertionIndex:
         description: |-
           The index where the text will be inserted, in Unicode code units, based
@@ -1286,7 +1289,7 @@ definitions:
     description: |-
       Slide layout reference. This may reference either:
 
-      - A predefined layout, or
+      - A predefined layout
       - One of the layouts in the presentation.
     properties:
       layoutId:
@@ -1302,6 +1305,11 @@ definitions:
           - TITLE_AND_BODY
           - TITLE_AND_TWO_COLUMNS
           - TITLE_ONLY
+          - SECTION_HEADER
+          - SECTION_TITLE_AND_DESCRIPTION
+          - ONE_COLUMN_TEXT
+          - MAIN_POINT
+          - BIG_NUMBER
         type: string
     type: object
   Line:
@@ -1372,6 +1380,9 @@ definitions:
         description: |-
           The fill of the line. The default line fill matches the defaults for new
           lines created in the Slides editor.
+      link:
+        $ref: '#/definitions/Link'
+        description: 'The hyperlink destination of the line. If unset, there is no link.'
       startArrow:
         description: The style of the arrow at the beginning of the line.
         enum:
@@ -1808,7 +1819,7 @@ definitions:
     properties:
       layouts:
         description: |-
-          The layouts in the presentation.  A layout is a template that determines
+          The layouts in the presentation. A layout is a template that determines
           how content is arranged and styled on the slides that inherit from that
           layout.
         items:
@@ -2011,6 +2022,9 @@ definitions:
       updateImageProperties:
         $ref: '#/definitions/UpdateImagePropertiesRequest'
         description: Updates the properties of an Image.
+      updateLineProperties:
+        $ref: '#/definitions/UpdateLinePropertiesRequest'
+        description: Updates the properties of a Line.
       updatePageElementTransform:
         $ref: '#/definitions/UpdatePageElementTransformRequest'
         description: Updates the transform of a page element.
@@ -2158,7 +2172,7 @@ definitions:
       placeholder:
         $ref: '#/definitions/Placeholder'
         description: |-
-          Placeholders are shapes that are inherit from correponding placeholders on
+          Placeholders are shapes that are inherit from corresponding placeholders on
           layouts and masters.
 
           If set, the shape is a placeholder shape and any inherited properties
@@ -2348,6 +2362,11 @@ definitions:
       Determining the rendered value of the property depends on the corresponding
       property_state field value.
     properties:
+      link:
+        $ref: '#/definitions/Link'
+        description: |-
+          The hyperlink destination of the shape. If unset, there is no link. Links
+          are not inherited from parent placeholders.
       outline:
         $ref: '#/definitions/Outline'
         description: |-
@@ -2852,6 +2871,31 @@ definitions:
         description: The image properties to update.
       objectId:
         description: The object ID of the image the updates are applied to.
+        type: string
+    type: object
+  UpdateLinePropertiesRequest:
+    description: Updates the properties of a Line.
+    properties:
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `lineProperties` is
+          implied and should not be specified. A single `"*"` can be used as
+          short-hand for listing every field.
+
+          For example to update the line solid fill color, set `fields` to
+          `"lineFill.solidFill.color"`.
+
+          To reset a property to its default value, include its field name in the
+          field mask but leave the field itself unset.
+        format: google-fieldmask
+        type: string
+      lineProperties:
+        $ref: '#/definitions/LineProperties'
+        description: The line properties to update.
+      objectId:
+        description: The object ID of the line the update is applied to.
         type: string
     type: object
   UpdatePageElementTransformRequest:

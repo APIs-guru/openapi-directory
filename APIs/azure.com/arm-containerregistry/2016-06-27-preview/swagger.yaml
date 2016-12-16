@@ -115,6 +115,8 @@ paths:
       responses:
         '200':
           description: The request was successful; the request was well-formed and received properly.
+        '204':
+          description: The container registry does not exist in the subscription.
       tags:
         - Registries
     get:
@@ -172,6 +174,8 @@ paths:
           description: The request was successful; the request was well-formed and received properly.
           schema:
             $ref: '#/definitions/Registry'
+        '202':
+          description: The request was successful; the operation will complete asynchronously.
       tags:
         - Registries
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/getCredentials':

@@ -518,14 +518,14 @@ definitions:
   RedisProperties:
     description: Properties supplied to Create or Update Redis operation.
     properties:
-      RedisConfiguration:
+      enableNonSslPort:
+        description: Specifies whether the non-ssl Redis server port (6379) is enabled.
+        type: boolean
+      redisConfiguration:
         additionalProperties:
           type: string
         description: 'All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc.'
         type: object
-      enableNonSslPort:
-        description: Specifies whether the non-ssl Redis server port (6379) is enabled.
-        type: boolean
       shardCount:
         description: The number of shards to be created on a Premium Cluster Cache.
         format: int32
@@ -587,12 +587,10 @@ definitions:
         description: Redis cache properties.
         x-ms-client-flatten: true
   RedisResourceProperties:
+    allOf:
+      - $ref: '#/definitions/RedisProperties'
     description: Parameters describing a Redis instance.
     properties:
-      RedisVersion:
-        description: Redis version.
-        readOnly: true
-        type: string
       hostName:
         description: Redis host name.
         readOnly: true
@@ -602,13 +600,17 @@ definitions:
         format: int32
         readOnly: true
         type: integer
-      properties:
-        $ref: '#/definitions/RedisCreateProperties'
-        x-ms-client-flatten: true
       provisioningState:
         description: Redis instance provisioning status.
         readOnly: true
         type: string
+      redisVersion:
+        description: Redis version.
+        readOnly: true
+        type: string
+      sku:
+        $ref: '#/definitions/Sku'
+        description: The SKU of the Redis cache to deploy.
       sslPort:
         description: Redis SSL port.
         format: int32

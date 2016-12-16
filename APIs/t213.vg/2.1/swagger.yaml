@@ -1,12 +1,12 @@
 swagger: '2.0'
 schemes:
   - http
-host: m2010.vg
+host: t213.vg
 basePath: /rest/default
 x-hasEquivalentPaths: true
 info:
   description: Magento Commerce is the leading provider of open omnichannel innovation.
-  title: Magento Community
+  title: Magento Enterprise
   version: '2.1'
   x-apisguru-categories:
     - ecommerce
@@ -16,7 +16,7 @@ info:
     format: swagger
     url: 'http://devdocs.magento.com/swagger/schemas/latest-2.1.schema.json'
     version: '2.0'
-  x-providerName: m2010.vg
+  x-providerName: t213.vg
 tags:
   - description: Store repository interface
     name: storeStoreRepositoryV1
@@ -30,8 +30,6 @@ tags:
     name: directoryCurrencyInformationAcquirerV1
   - description: Country information acquirer interface
     name: directoryCountryInformationAcquirerV1
-  - description: Interface for module service.
-    name: backendModuleServiceV1
   - description: Interface AttributeSetRepositoryInterface
     name: eavAttributeSetRepositoryV1
   - description: Interface AttributeSetManagementInterface
@@ -50,6 +48,8 @@ tags:
     name: customerAccountManagementV1
   - description: Customer address CRUD interface.
     name: customerAddressRepositoryV1
+  - description: Interface for module service.
+    name: backendModuleServiceV1
   - description: CMS page CRUD interface.
     name: cmsPageRepositoryV1
   - description: CMS block CRUD interface.
@@ -102,8 +102,8 @@ tags:
     name: catalogCategoryLinkRepositoryV1
   - description: Interface ProductWebsiteLinkRepositoryInterface
     name: catalogProductWebsiteLinkRepositoryV1
-  - description: Search API for all requests
-    name: searchV1
+  - description: Interface StockRegistryInterface
+    name: catalogInventoryStockRegistryV1
   - description: Interface for Management of ProductLink
     name: bundleProductLinkManagementV1
   - description: Interface ProductOptionRepositoryInterface
@@ -112,6 +112,8 @@ tags:
     name: bundleProductOptionTypeListV1
   - description: Option manager for bundle products
     name: bundleProductOptionManagementV1
+  - description: Search API for all requests
+    name: searchV1
   - description: Interface CartRepositoryInterface
     name: quoteCartRepositoryV1
   - description: Interface CartManagementInterface
@@ -152,14 +154,6 @@ tags:
     name: quoteGuestCartTotalRepositoryV1
   - description: Bundled API to collect totals for cart based on shipping/payment methods and additional data.
     name: quoteCartTotalManagementV1
-  - description: Interface CheckoutAgreementsRepositoryInterface
-    name: checkoutAgreementsCheckoutAgreementsRepositoryV1
-  - description: Interface LinkRepositoryInterface
-    name: downloadableLinkRepositoryV1
-  - description: Interface SampleRepositoryInterface
-    name: downloadableSampleRepositoryV1
-  - description: Interface StockRegistryInterface
-    name: catalogInventoryStockRegistryV1
   - description: 'Order repository interface. An order is a document that a web store issues to a customer. Magento generates a sales order that lists the product items, billing and shipping addresses, and shipping and payment methods. A corresponding external document, known as a purchase order, is emailed to the customer.'
     name: salesOrderRepositoryV1
   - description: 'Order management interface. An order is a document that a web store issues to a customer. Magento generates a sales order that lists the product items, billing and shipping addresses, and shipping and payment methods. A corresponding external document, known as a purchase order, is emailed to the customer.'
@@ -174,12 +168,16 @@ tags:
     name: salesInvoiceManagementV1
   - description: Invoice comment repository interface. An invoice is a record of the receipt of payment for an order. An invoice can include comments that detail the invoice history.
     name: salesInvoiceCommentRepositoryV1
+  - description: Interface RefundInvoiceInterface
+    name: salesRefundInvoiceV1
   - description: 'Credit memo add comment interface. After a customer places and pays for an order and an invoice has been issued, the merchant can create a credit memo to refund all or part of the amount paid for any returned or undelivered items. The memo restores funds to the customer account so that the customer can make future purchases.'
     name: salesCreditmemoManagementV1
   - description: 'Credit memo repository interface. After a customer places and pays for an order and an invoice has been issued, the merchant can create a credit memo to refund all or part of the amount paid for any returned or undelivered items. The memo restores funds to the customer account so that the customer can make future purchases.'
     name: salesCreditmemoRepositoryV1
   - description: 'Credit memo comment repository interface. After a customer places and pays for an order and an invoice has been issued, the merchant can create a credit memo to refund all or part of the amount paid for any returned or undelivered items. The memo restores funds to the customer account so that the customer can make future purchases. A credit memo usually includes comments that detail why the credit memo amount was credited to the customer.'
     name: salesCreditmemoCommentRepositoryV1
+  - description: Interface RefundOrderInterface
+    name: salesRefundOrderV1
   - description: Shipment repository interface. A shipment is a delivery package that contains products. A shipment document accompanies the shipment. This document lists the products and their quantities in the delivery package.
     name: salesShipmentRepositoryV1
   - description: Shipment management interface. A shipment is a delivery package that contains products. A shipment document accompanies the shipment. This document lists the products and their quantities in the delivery package.
@@ -194,14 +192,12 @@ tags:
     name: salesTransactionRepositoryV1
   - description: Class InvoiceOrderInterface
     name: salesInvoiceOrderV1
-  - description: Interface CartRepositoryInterface
-    name: giftMessageCartRepositoryV1
-  - description: Interface ItemRepositoryInterface
-    name: giftMessageItemRepositoryV1
-  - description: Interface GuestCartRepositoryInterface
-    name: giftMessageGuestCartRepositoryV1
-  - description: Interface GuestItemRepositoryInterface
-    name: giftMessageGuestItemRepositoryV1
+  - description: Sales rule CRUD interface
+    name: salesRuleRuleRepositoryV1
+  - description: Coupon CRUD interface
+    name: salesRuleCouponRepositoryV1
+  - description: Coupon management interface
+    name: salesRuleCouponManagementV1
   - description: Interface for managing guest shipping address information
     name: checkoutGuestShippingInformationManagementV1
   - description: Interface for managing customer shipping address information
@@ -214,28 +210,62 @@ tags:
     name: checkoutGuestPaymentInformationManagementV1
   - description: Interface for managing quote payment information
     name: checkoutPaymentInformationManagementV1
-  - description: Tax rate CRUD interface.
-    name: taxTaxRateRepositoryV1
-  - description: Tax rule CRUD interface.
-    name: taxTaxRuleRepositoryV1
-  - description: Tax class CRUD interface.
-    name: taxTaxClassRepositoryV1
+  - description: Interface LinkRepositoryInterface
+    name: downloadableLinkRepositoryV1
+  - description: Interface SampleRepositoryInterface
+    name: downloadableSampleRepositoryV1
+  - description: Interface CheckoutAgreementsRepositoryInterface
+    name: checkoutAgreementsCheckoutAgreementsRepositoryV1
   - description: Manage children products of configurable product
     name: configurableProductLinkManagementV1
   - description: Interface ConfigurableProductManagementInterface
     name: configurableProductConfigurableProductManagementV1
   - description: Manage options of configurable product
     name: configurableProductOptionRepositoryV1
-  - description: Sales rule CRUD interface
-    name: salesRuleRuleRepositoryV1
-  - description: Coupon CRUD interface
-    name: salesRuleCouponRepositoryV1
-  - description: Coupon management interface
-    name: salesRuleCouponManagementV1
+  - description: Tax rate CRUD interface.
+    name: taxTaxRateRepositoryV1
+  - description: Tax rule CRUD interface.
+    name: taxTaxRuleRepositoryV1
+  - description: Tax class CRUD interface.
+    name: taxTaxClassRepositoryV1
+  - description: Customer balance(store credit) operations
+    name: customerBalanceBalanceManagementV1
+  - description: Interface GiftCardAccountManagementInterface
+    name: giftCardAccountGiftCardAccountManagementV1
+  - description: Interface GuestGiftCardAccountManagementInterface
+    name: giftCardAccountGuestGiftCardAccountManagementV1
+  - description: Interface ShippingMethodManagementInterface
+    name: giftRegistryShippingMethodManagementV1
+  - description: Interface ShippingMethodManagementInterface
+    name: giftRegistryGuestCartShippingMethodManagementV1
+  - description: Interface CartRepositoryInterface
+    name: giftMessageCartRepositoryV1
+  - description: Interface ItemRepositoryInterface
+    name: giftMessageItemRepositoryV1
+  - description: Interface GuestCartRepositoryInterface
+    name: giftMessageGuestCartRepositoryV1
+  - description: Interface GuestItemRepositoryInterface
+    name: giftMessageGuestItemRepositoryV1
+  - description: Interface WrappingRepositoryInterface
+    name: giftWrappingWrappingRepositoryV1
+  - description: Interface RewardManagementInterface
+    name: rewardRewardManagementV1
+  - description: Interface TrackManagementInterface
+    name: rmaTrackManagementV1
+  - description: Interface RmaRepositoryInterface
+    name: rmaRmaRepositoryV1
+  - description: Interface CommentRepositoryInterface
+    name: rmaCommentManagementV1
+  - description: Interface RmaManagementInterface
+    name: rmaRmaManagementV1
+  - description: Interface RmaAttributesManagementInterface
+    name: rmaRmaAttributesManagementV1
   - description: Interface providing token generation for Admins
     name: integrationAdminTokenServiceV1
   - description: Interface providing token generation for Customers
     name: integrationCustomerTokenServiceV1
+  - description: Interface GuestPaymentInformationManagementProxyInterface
+    name: worldpayGuestPaymentInformationManagementProxyV1
 paths:
   '/V1/addresses/{addressId}':
     delete:
@@ -844,6 +874,84 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - quoteCartManagementV1
+  '/V1/carts/guest-carts/{cartId}/checkGiftCard/{giftCardCode}':
+    get:
+      description: ''
+      parameters:
+        - in: path
+          name: cartId
+          required: true
+          type: string
+        - in: path
+          name: giftCardCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: number
+        '400':
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftCardAccountGuestGiftCardAccountManagementV1
+  '/V1/carts/guest-carts/{cartId}/giftCards':
+    post:
+      description: ''
+      parameters:
+        - in: path
+          name: cartId
+          required: true
+          type: string
+        - in: body
+          name: $body
+          schema:
+            properties:
+              giftCardAccountData:
+                $ref: '#/definitions/gift-card-account-data-gift-card-account-interface'
+            required:
+              - giftCardAccountData
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftCardAccountGuestGiftCardAccountManagementV1
+  '/V1/carts/guest-carts/{cartId}/giftCards/{giftCardCode}':
+    delete:
+      description: Remove GiftCard Account entity
+      parameters:
+        - in: path
+          name: cartId
+          required: true
+          type: string
+        - in: path
+          name: giftCardCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftCardAccountGuestGiftCardAccountManagementV1
   /V1/carts/licence:
     get:
       description: Lists active checkout agreements.
@@ -931,6 +1039,24 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - quoteCartRepositoryV1
+  /V1/carts/mine/balance/apply:
+    post:
+      description: Apply store credit
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - customerBalanceBalanceManagementV1
   /V1/carts/mine/billing-address:
     get:
       description: Returns the billing address for a specified quote.
@@ -987,6 +1113,33 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - quoteBillingAddressManagementV1
+  '/V1/carts/mine/checkGiftCard/{giftCardCode}':
+    get:
+      description: ''
+      parameters:
+        - in: path
+          name: giftCardCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: number
+        '400':
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error-response'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftCardAccountGiftCardAccountManagementV1
   /V1/carts/mine/collect-totals:
     put:
       description: Set shipping/billing methods and additional data for cart and collect totals.
@@ -1271,6 +1424,57 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - giftMessageItemRepositoryV1
+  /V1/carts/mine/giftCards:
+    post:
+      description: ''
+      parameters:
+        - in: body
+          name: $body
+          schema:
+            properties:
+              giftCardAccountData:
+                $ref: '#/definitions/gift-card-account-data-gift-card-account-interface'
+            required:
+              - giftCardAccountData
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftCardAccountGiftCardAccountManagementV1
+  '/V1/carts/mine/giftCards/{giftCardCode}':
+    delete:
+      description: Remove GiftCard Account entity
+      parameters:
+        - in: path
+          name: giftCardCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftCardAccountGiftCardAccountManagementV1
   /V1/carts/mine/items:
     get:
       description: Lists items that are assigned to a specified cart.
@@ -2162,6 +2366,65 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - giftMessageItemRepositoryV1
+  '/V1/carts/{cartId}/giftCards':
+    put:
+      description: ''
+      parameters:
+        - in: path
+          name: cartId
+          required: true
+          type: integer
+        - in: body
+          name: $body
+          schema:
+            properties:
+              giftCardAccountData:
+                $ref: '#/definitions/gift-card-account-data-gift-card-account-interface'
+            required:
+              - giftCardAccountData
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftCardAccountGiftCardAccountManagementV1
+  '/V1/carts/{cartId}/giftCards/{giftCardCode}':
+    delete:
+      description: Remove GiftCard Account entity
+      parameters:
+        - in: path
+          name: cartId
+          required: true
+          type: integer
+        - in: path
+          name: giftCardCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftCardAccountGiftCardAccountManagementV1
   '/V1/carts/{cartId}/items':
     get:
       description: Lists items that are assigned to a specified cart.
@@ -2520,6 +2783,29 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - checkoutTotalsInformationManagementV1
+  '/V1/carts/{quoteId}/giftCards':
+    get:
+      description: Return GiftCard Account cards
+      parameters:
+        - in: path
+          name: quoteId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/gift-card-account-data-gift-card-account-interface'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftCardAccountGiftCardAccountManagementV1
   '/V1/carts/{quoteId}/items':
     post:
       description: Add/update the specified cart item.
@@ -5429,6 +5715,213 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - eavAttributeSetRepositoryV1
+  /V1/gift-wrappings:
+    get:
+      description: Return list of gift wrapping data objects based on search criteria
+      parameters:
+        - description: Field
+          in: query
+          name: 'searchCriteria[filterGroups][][filters][][field]'
+          type: string
+        - description: Value
+          in: query
+          name: 'searchCriteria[filterGroups][][filters][][value]'
+          type: string
+        - description: Condition type
+          in: query
+          name: 'searchCriteria[filterGroups][][filters][][conditionType]'
+          type: string
+        - description: Sorting field.
+          in: query
+          name: 'searchCriteria[sortOrders][][field]'
+          type: string
+        - description: Sorting direction.
+          in: query
+          name: 'searchCriteria[sortOrders][][direction]'
+          type: string
+        - description: Page size.
+          in: query
+          name: 'searchCriteria[pageSize]'
+          type: integer
+        - description: Current page.
+          in: query
+          name: 'searchCriteria[currentPage]'
+          type: integer
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/gift-wrapping-data-wrapping-search-results-interface'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftWrappingWrappingRepositoryV1
+    post:
+      description: Create/Update new gift wrapping with data object values
+      parameters:
+        - in: body
+          name: $body
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/gift-wrapping-data-wrapping-interface'
+              storeId:
+                type: integer
+            required:
+              - data
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/gift-wrapping-data-wrapping-interface'
+        '400':
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error-response'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftWrappingWrappingRepositoryV1
+  '/V1/gift-wrappings/{id}':
+    delete:
+      description: Delete gift wrapping
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '400':
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error-response'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftWrappingWrappingRepositoryV1
+    get:
+      description: Return data object for specified wrapping ID and store.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - in: query
+          name: storeId
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/gift-wrapping-data-wrapping-interface'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftWrappingWrappingRepositoryV1
+  '/V1/gift-wrappings/{wrappingId}':
+    put:
+      description: Create/Update new gift wrapping with data object values
+      parameters:
+        - in: path
+          name: wrappingId
+          required: true
+          type: string
+        - in: body
+          name: $body
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/gift-wrapping-data-wrapping-interface'
+              storeId:
+                type: integer
+            required:
+              - data
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/gift-wrapping-data-wrapping-interface'
+        '400':
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error-response'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftWrappingWrappingRepositoryV1
+  /V1/giftregistry/mine/estimate-shipping-methods:
+    post:
+      description: Estimate shipping
+      parameters:
+        - in: body
+          name: $body
+          schema:
+            properties:
+              registryId:
+                description: The estimate registry id
+                type: integer
+            required:
+              - registryId
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            description: An array of shipping methods.
+            items:
+              $ref: '#/definitions/quote-data-shipping-method-interface'
+            type: array
+        '400':
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error-response'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftRegistryShippingMethodManagementV1
   /V1/guest-carts:
     post:
       description: Enable an customer or guest user to create an empty cart and quote for an anonymous customer.
@@ -6266,6 +6759,43 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - checkoutGuestTotalsInformationManagementV1
+  '/V1/guest-giftregistry/{cartId}/estimate-shipping-methods':
+    post:
+      description: Estimate shipping
+      parameters:
+        - description: The shopping cart ID.
+          in: path
+          name: cartId
+          required: true
+          type: string
+        - in: body
+          name: $body
+          schema:
+            properties:
+              registryId:
+                description: The estimate registry id
+                type: integer
+            required:
+              - registryId
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            description: An array of shipping methods.
+            items:
+              $ref: '#/definitions/quote-data-shipping-method-interface'
+            type: array
+        '400':
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - giftRegistryGuestCartShippingMethodManagementV1
   /V1/integration/admin/token:
     post:
       description: Create access token for admin given the admin credentials.
@@ -6334,6 +6864,48 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - integrationCustomerTokenServiceV1
+  '/V1/invoice/{invoiceId}/refund':
+    post:
+      description: Create refund for invoice
+      parameters:
+        - in: path
+          name: invoiceId
+          required: true
+          type: integer
+        - in: body
+          name: $body
+          schema:
+            properties:
+              appendComment:
+                type: boolean
+              arguments:
+                $ref: '#/definitions/sales-data-creditmemo-creation-arguments-interface'
+              comment:
+                $ref: '#/definitions/sales-data-creditmemo-comment-creation-interface'
+              isOnline:
+                type: boolean
+              items:
+                items:
+                  $ref: '#/definitions/sales-data-creditmemo-item-creation-interface'
+                type: array
+              notify:
+                type: boolean
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: integer
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - salesRefundInvoiceV1
   /V1/invoices:
     get:
       description: 'Lists invoices that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#InvoiceRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
@@ -6618,6 +7190,46 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - salesInvoiceOrderV1
+  '/V1/order/{orderId}/refund':
+    post:
+      description: Create offline refund for order
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          type: integer
+        - in: body
+          name: $body
+          schema:
+            properties:
+              appendComment:
+                type: boolean
+              arguments:
+                $ref: '#/definitions/sales-data-creditmemo-creation-arguments-interface'
+              comment:
+                $ref: '#/definitions/sales-data-creditmemo-comment-creation-interface'
+              items:
+                items:
+                  $ref: '#/definitions/sales-data-creditmemo-item-creation-interface'
+                type: array
+              notify:
+                type: boolean
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: integer
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - salesRefundOrderV1
   '/V1/order/{orderId}/ship':
     post:
       description: Creates new Shipment for given Order.
@@ -8987,6 +9599,439 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - catalogProductWebsiteLinkRepositoryV1
+  /V1/returns:
+    get:
+      description: Return list of rma data objects based on search criteria
+      parameters:
+        - description: Field
+          in: query
+          name: 'searchCriteria[filterGroups][][filters][][field]'
+          type: string
+        - description: Value
+          in: query
+          name: 'searchCriteria[filterGroups][][filters][][value]'
+          type: string
+        - description: Condition type
+          in: query
+          name: 'searchCriteria[filterGroups][][filters][][conditionType]'
+          type: string
+        - description: Sorting field.
+          in: query
+          name: 'searchCriteria[sortOrders][][field]'
+          type: string
+        - description: Sorting direction.
+          in: query
+          name: 'searchCriteria[sortOrders][][direction]'
+          type: string
+        - description: Page size.
+          in: query
+          name: 'searchCriteria[pageSize]'
+          type: integer
+        - description: Current page.
+          in: query
+          name: 'searchCriteria[currentPage]'
+          type: integer
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/rma-data-rma-search-result-interface'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaRmaManagementV1
+    post:
+      description: Save RMA
+      parameters:
+        - in: body
+          name: $body
+          schema:
+            properties:
+              rmaDataObject:
+                $ref: '#/definitions/rma-data-rma-interface'
+            required:
+              - rmaDataObject
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/rma-data-rma-interface'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaRmaManagementV1
+  '/V1/returns/{id}':
+    delete:
+      description: Delete RMA
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: $body
+          schema:
+            properties:
+              rmaDataObject:
+                $ref: '#/definitions/rma-data-rma-interface'
+            required:
+              - rmaDataObject
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaRmaRepositoryV1
+    get:
+      description: Return data object for specified RMA id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/rma-data-rma-interface'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaRmaRepositoryV1
+    put:
+      description: Save RMA
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: $body
+          schema:
+            properties:
+              rmaDataObject:
+                $ref: '#/definitions/rma-data-rma-interface'
+            required:
+              - rmaDataObject
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/rma-data-rma-interface'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaRmaManagementV1
+  '/V1/returns/{id}/comments':
+    get:
+      description: Comments list
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/rma-data-comment-search-result-interface'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaCommentManagementV1
+    post:
+      description: Add comment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: $body
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/rma-data-comment-interface'
+            required:
+              - data
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        '500':
+          description: Internal Server error
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaCommentManagementV1
+  '/V1/returns/{id}/labels':
+    get:
+      description: Get shipping label int the PDF format
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: string
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaTrackManagementV1
+  '/V1/returns/{id}/tracking-numbers':
+    get:
+      description: Get track list
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/rma-data-track-search-result-interface'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaTrackManagementV1
+    post:
+      description: Add track
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: $body
+          schema:
+            properties:
+              track:
+                $ref: '#/definitions/rma-data-track-interface'
+            required:
+              - track
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaTrackManagementV1
+  '/V1/returns/{id}/tracking-numbers/{trackId}':
+    delete:
+      description: Remove track by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+        - in: path
+          name: trackId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaTrackManagementV1
+  /V1/returnsAttributeMetadata:
+    get:
+      description: Get all attribute metadata.
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            items:
+              $ref: '#/definitions/customer-data-attribute-metadata-interface'
+            type: array
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaRmaAttributesManagementV1
+  /V1/returnsAttributeMetadata/custom:
+    get:
+      description: Get custom attribute metadata for the given Data object's attribute set
+      parameters:
+        - description: Data object class name
+          in: query
+          name: dataObjectClassName
+          required: false
+          type: string
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            items:
+              $ref: '#/definitions/framework-metadata-object-interface'
+            type: array
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaRmaAttributesManagementV1
+  '/V1/returnsAttributeMetadata/form/{formCode}':
+    get:
+      description: Retrieve all attributes filtered by form code
+      parameters:
+        - in: path
+          name: formCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            items:
+              $ref: '#/definitions/customer-data-attribute-metadata-interface'
+            type: array
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaRmaAttributesManagementV1
+  '/V1/returnsAttributeMetadata/{attributeCode}':
+    get:
+      description: Retrieve attribute metadata.
+      parameters:
+        - in: path
+          name: attributeCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            $ref: '#/definitions/customer-data-attribute-metadata-interface'
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rmaRmaAttributesManagementV1
+  /V1/reward/mine/use-reward:
+    post:
+      description: Set reward points to quote
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            type: boolean
+        '401':
+          description: 401 Unauthorized
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - rewardRewardManagementV1
   /V1/salesRules:
     post:
       description: Save sales rule.
@@ -10268,6 +11313,44 @@ paths:
             $ref: '#/definitions/error-response'
       tags:
         - salesTransactionRepositoryV1
+  '/V1/worldpay-guest-carts/{cartId}/payment-information':
+    post:
+      description: Proxy handler for guest place order
+      parameters:
+        - in: path
+          name: cartId
+          required: true
+          type: string
+        - in: body
+          name: $body
+          schema:
+            properties:
+              billingAddress:
+                $ref: '#/definitions/quote-data-address-interface'
+              email:
+                type: string
+              paymentMethod:
+                $ref: '#/definitions/quote-data-payment-interface'
+            required:
+              - email
+              - paymentMethod
+            type: object
+      responses:
+        '200':
+          description: 200 Success.
+          schema:
+            description: Order ID.
+            type: integer
+        '400':
+          description: 400 Bad Request
+          schema:
+            $ref: '#/definitions/error-response'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error-response'
+      tags:
+        - worldpayGuestPaymentInformationManagementProxyV1
 definitions:
   bundle-data-bundle-option-extension-interface:
     description: ExtensionInterface class for @see \Magento\Bundle\Api\Data\BundleOptionInterface
@@ -10989,6 +12072,10 @@ definitions:
         items:
           $ref: '#/definitions/downloadable-data-sample-interface'
         type: array
+      giftcard_amounts:
+        items:
+          $ref: '#/definitions/gift-card-data-giftcard-amount-interface'
+        type: array
       stock_item:
         $ref: '#/definitions/catalog-inventory-data-stock-item-interface'
     type: object
@@ -11144,6 +12231,8 @@ definitions:
         type: array
       downloadable_option:
         $ref: '#/definitions/downloadable-data-downloadable-option-interface'
+      giftcard_item_option:
+        $ref: '#/definitions/gift-card-data-gift-card-option-interface'
     type: object
   catalog-data-product-option-interface:
     description: Product option interface
@@ -12581,6 +13670,15 @@ definitions:
       - field
       - value
     type: object
+  framework-metadata-object-interface:
+    description: Provides metadata about an attribute.
+    properties:
+      attribute_code:
+        description: Code of the attribute.
+        type: string
+    required:
+      - attribute_code
+    type: object
   framework-search-aggregation-interface:
     description: Faceted data
     properties:
@@ -12730,6 +13828,96 @@ definitions:
       - field
       - direction
     type: object
+  gift-card-account-data-gift-card-account-extension-interface:
+    description: ExtensionInterface class for @see \Magento\GiftCardAccount\Api\Data\GiftCardAccountInterface
+    type: object
+  gift-card-account-data-gift-card-account-interface:
+    description: Gift Card Account data
+    properties:
+      base_gift_cards_amount:
+        description: Cards amount in base currency
+        type: number
+      base_gift_cards_amount_used:
+        description: Cards amount used in base currency
+        type: number
+      extension_attributes:
+        $ref: '#/definitions/gift-card-account-data-gift-card-account-extension-interface'
+      gift_cards:
+        description: Cards codes
+        items:
+          type: string
+        type: array
+      gift_cards_amount:
+        description: Cards amount in quote currency
+        type: number
+      gift_cards_amount_used:
+        description: Cards amount used in quote currency
+        type: number
+    required:
+      - gift_cards
+      - gift_cards_amount
+      - base_gift_cards_amount
+      - gift_cards_amount_used
+      - base_gift_cards_amount_used
+    type: object
+  gift-card-data-gift-card-option-extension-interface:
+    description: ExtensionInterface class for @see \Magento\GiftCard\Api\Data\GiftCardOptionInterface
+    type: object
+  gift-card-data-gift-card-option-interface:
+    description: Interface GiftCardOptionInterface
+    properties:
+      custom_giftcard_amount:
+        description: Gift card open amount value.
+        type: number
+      extension_attributes:
+        $ref: '#/definitions/gift-card-data-gift-card-option-extension-interface'
+      giftcard_amount:
+        description: Gift card amount.
+        type: string
+      giftcard_message:
+        description: Giftcard message.
+        type: string
+      giftcard_recipient_email:
+        description: Gift card recipient email.
+        type: string
+      giftcard_recipient_name:
+        description: Gift card recipient name.
+        type: string
+      giftcard_sender_email:
+        description: Gift card sender email.
+        type: string
+      giftcard_sender_name:
+        description: Gift card sender name.
+        type: string
+    required:
+      - giftcard_amount
+      - giftcard_sender_name
+      - giftcard_recipient_name
+      - giftcard_sender_email
+      - giftcard_recipient_email
+    type: object
+  gift-card-data-giftcard-amount-extension-interface:
+    description: ExtensionInterface class for @see \Magento\GiftCard\Api\Data\GiftcardAmountInterface
+    type: object
+  gift-card-data-giftcard-amount-interface:
+    description: 'Interface GiftcardAmountInterface: this interface is used to serialize and deserialize EAV attribute giftcard_amounts'
+    properties:
+      attribute_id:
+        type: integer
+      extension_attributes:
+        $ref: '#/definitions/gift-card-data-giftcard-amount-extension-interface'
+      value:
+        type: number
+      website_id:
+        type: integer
+      website_value:
+        type: number
+    required:
+      - attribute_id
+      - website_id
+      - value
+      - website_value
+    type: object
   gift-message-data-message-extension-interface:
     description: ExtensionInterface class for @see \Magento\GiftMessage\Api\Data\MessageInterface
     properties:
@@ -12737,6 +13925,12 @@ definitions:
         type: string
       entity_type:
         type: string
+      wrapping_add_printed_card:
+        type: boolean
+      wrapping_allow_gift_receipt:
+        type: boolean
+      wrapping_id:
+        type: integer
     type: object
   gift-message-data-message-interface:
     description: Interface MessageInterface
@@ -12763,8 +13957,63 @@ definitions:
       - recipient
       - message
     type: object
+  gift-wrapping-data-wrapping-extension-interface:
+    description: ExtensionInterface class for @see \Magento\GiftWrapping\Api\Data\WrappingInterface
+    type: object
+  gift-wrapping-data-wrapping-interface:
+    description: Interface WrappingInterface
+    properties:
+      base_currency_code:
+        type: string
+      base_price:
+        type: number
+      design:
+        type: string
+      extension_attributes:
+        $ref: '#/definitions/gift-wrapping-data-wrapping-extension-interface'
+      image_base64_content:
+        type: string
+      image_name:
+        type: string
+      image_url:
+        description: Wrapping image URL.
+        type: string
+      status:
+        type: integer
+      website_ids:
+        items:
+          type: integer
+        type: array
+      wrapping_id:
+        type: integer
+    required:
+      - design
+      - status
+      - base_price
+    type: object
+  gift-wrapping-data-wrapping-search-results-interface:
+    description: Interface WrappingSearchResultsInterface
+    properties:
+      items:
+        description: Items
+        items:
+          $ref: '#/definitions/gift-wrapping-data-wrapping-interface'
+        type: array
+      search_criteria:
+        $ref: '#/definitions/framework-search-criteria-interface'
+      total_count:
+        description: Total count.
+        type: integer
+    required:
+      - items
+      - search_criteria
+      - total_count
+    type: object
   quote-data-address-extension-interface:
     description: ExtensionInterface class for @see \Magento\Quote\Api\Data\AddressInterface
+    properties:
+      gift_registry_id:
+        type: integer
     type: object
   quote-data-address-interface:
     description: Interface AddressInterface
@@ -13074,6 +14323,8 @@ definitions:
         type: array
       downloadable_option:
         $ref: '#/definitions/downloadable-data-downloadable-option-interface'
+      giftcard_item_option:
+        $ref: '#/definitions/gift-card-data-gift-card-option-interface'
     type: object
   quote-data-product-option-interface:
     description: Product option interface
@@ -13167,6 +14418,54 @@ definitions:
   quote-data-total-segment-extension-interface:
     description: ExtensionInterface class for @see \Magento\Quote\Api\Data\TotalSegmentInterface
     properties:
+      gift_cards:
+        type: string
+      gw_add_card:
+        type: string
+      gw_allow_gift_receipt:
+        type: string
+      gw_base_price:
+        type: string
+      gw_base_price_incl_tax:
+        type: string
+      gw_base_tax_amount:
+        type: string
+      gw_card_base_price:
+        type: string
+      gw_card_base_price_incl_tax:
+        type: string
+      gw_card_base_tax_amount:
+        type: string
+      gw_card_price:
+        type: string
+      gw_card_price_incl_tax:
+        type: string
+      gw_card_tax_amount:
+        type: string
+      gw_item_ids:
+        items:
+          type: string
+        type: array
+      gw_items_base_price:
+        type: string
+      gw_items_base_price_incl_tax:
+        type: string
+      gw_items_base_tax_amount:
+        type: string
+      gw_items_price:
+        type: string
+      gw_items_price_incl_tax:
+        type: string
+      gw_items_tax_amount:
+        type: string
+      gw_order_id:
+        type: string
+      gw_price:
+        type: string
+      gw_price_incl_tax:
+        type: string
+      gw_tax_amount:
+        type: string
       tax_grandtotal_details:
         items:
           $ref: '#/definitions/tax-data-grand-total-details-interface'
@@ -13214,6 +14513,17 @@ definitions:
     type: object
   quote-data-totals-extension-interface:
     description: ExtensionInterface class for @see \Magento\Quote\Api\Data\TotalsInterface
+    properties:
+      base_customer_balance_amount:
+        type: number
+      base_reward_currency_amount:
+        type: number
+      customer_balance_amount:
+        type: number
+      reward_currency_amount:
+        type: number
+      reward_points_balance:
+        type: number
     type: object
   quote-data-totals-interface:
     description: Interface TotalsInterface
@@ -13391,6 +14701,278 @@ definitions:
       - weee_tax_applied_amount
       - weee_tax_applied
     type: object
+  rma-data-comment-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Rma\Api\Data\CommentInterface
+    type: object
+  rma-data-comment-interface:
+    description: Interface CommentInterface
+    properties:
+      admin:
+        description: Is_admin
+        type: boolean
+      comment:
+        description: Comment
+        type: string
+      created_at:
+        description: Created_at
+        type: string
+      custom_attributes:
+        description: Custom attributes values.
+        items:
+          $ref: '#/definitions/framework-attribute-interface'
+        type: array
+      customer_notified:
+        description: Is_customer_notified
+        type: boolean
+      entity_id:
+        description: Entity_id
+        type: integer
+      extension_attributes:
+        $ref: '#/definitions/rma-data-comment-extension-interface'
+      rma_entity_id:
+        description: Rma Id
+        type: integer
+      status:
+        description: Status
+        type: string
+      visible_on_front:
+        description: Is_visible_on_front
+        type: boolean
+    required:
+      - comment
+      - rma_entity_id
+      - created_at
+      - entity_id
+      - customer_notified
+      - visible_on_front
+      - status
+      - admin
+    type: object
+  rma-data-comment-search-result-interface:
+    description: Interface CommentSearchResultInterface
+    properties:
+      items:
+        description: Rma Status History list
+        items:
+          $ref: '#/definitions/rma-data-comment-interface'
+        type: array
+      search_criteria:
+        $ref: '#/definitions/framework-search-criteria-interface'
+      total_count:
+        description: Total count.
+        type: integer
+    required:
+      - items
+      - search_criteria
+      - total_count
+    type: object
+  rma-data-item-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Rma\Api\Data\ItemInterface
+    type: object
+  rma-data-item-interface:
+    description: Interface CategoryInterface
+    properties:
+      condition:
+        description: Condition
+        type: string
+      entity_id:
+        description: Id
+        type: integer
+      extension_attributes:
+        $ref: '#/definitions/rma-data-item-extension-interface'
+      order_item_id:
+        description: Order_item_id
+        type: integer
+      qty_approved:
+        description: Qty_approved
+        type: integer
+      qty_authorized:
+        description: Qty_authorized
+        type: integer
+      qty_requested:
+        description: Qty_requested
+        type: integer
+      qty_returned:
+        description: Qty_returned
+        type: integer
+      reason:
+        description: Reason
+        type: string
+      resolution:
+        description: Resolution
+        type: string
+      rma_entity_id:
+        description: RMA id
+        type: integer
+      status:
+        description: Status
+        type: string
+    required:
+      - entity_id
+      - rma_entity_id
+      - order_item_id
+      - qty_requested
+      - qty_authorized
+      - qty_approved
+      - qty_returned
+      - reason
+      - condition
+      - resolution
+      - status
+    type: object
+  rma-data-rma-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Rma\Api\Data\RmaInterface
+    type: object
+  rma-data-rma-interface:
+    description: Interface RmaInterface
+    properties:
+      comments:
+        description: Comments list
+        items:
+          $ref: '#/definitions/rma-data-comment-interface'
+        type: array
+      custom_attributes:
+        description: Custom attributes values.
+        items:
+          $ref: '#/definitions/framework-attribute-interface'
+        type: array
+      customer_custom_email:
+        description: Customer_custom_email
+        type: string
+      customer_id:
+        description: Customer_id
+        type: integer
+      date_requested:
+        description: Date_requested
+        type: string
+      entity_id:
+        description: Entity_id
+        type: integer
+      extension_attributes:
+        $ref: '#/definitions/rma-data-rma-extension-interface'
+      increment_id:
+        description: Entity_id
+        type: string
+      items:
+        description: Items
+        items:
+          $ref: '#/definitions/rma-data-item-interface'
+        type: array
+      order_id:
+        description: Order_id
+        type: integer
+      order_increment_id:
+        description: Order_increment_id
+        type: string
+      status:
+        description: Status
+        type: string
+      store_id:
+        description: Store_id
+        type: integer
+      tracks:
+        description: Tracks list
+        items:
+          $ref: '#/definitions/rma-data-track-interface'
+        type: array
+    required:
+      - increment_id
+      - entity_id
+      - order_id
+      - order_increment_id
+      - store_id
+      - customer_id
+      - date_requested
+      - customer_custom_email
+      - items
+      - status
+      - comments
+      - tracks
+    type: object
+  rma-data-rma-search-result-interface:
+    description: Interface RmaSearchResultInterface
+    properties:
+      items:
+        description: Rma list
+        items:
+          $ref: '#/definitions/rma-data-rma-interface'
+        type: array
+      search_criteria:
+        $ref: '#/definitions/framework-search-criteria-interface'
+      total_count:
+        description: Total count.
+        type: integer
+    required:
+      - items
+      - search_criteria
+      - total_count
+    type: object
+  rma-data-track-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Rma\Api\Data\TrackInterface
+    type: object
+  rma-data-track-interface:
+    description: Interface TrackInterface
+    properties:
+      carrier_code:
+        description: Carrier code
+        type: string
+      carrier_title:
+        description: Carrier title
+        type: string
+      entity_id:
+        description: Entity id
+        type: integer
+      extension_attributes:
+        $ref: '#/definitions/rma-data-track-extension-interface'
+      rma_entity_id:
+        description: Rma entity id
+        type: integer
+      track_number:
+        description: Track number
+        type: string
+    required:
+      - entity_id
+      - rma_entity_id
+      - track_number
+      - carrier_title
+      - carrier_code
+    type: object
+  rma-data-track-search-result-interface:
+    description: Interface TrackSearchResultInterface
+    properties:
+      items:
+        description: Rma list
+        items:
+          $ref: '#/definitions/rma-data-track-interface'
+        type: array
+      search_criteria:
+        $ref: '#/definitions/framework-search-criteria-interface'
+      total_count:
+        description: Total count.
+        type: integer
+    required:
+      - items
+      - search_criteria
+      - total_count
+    type: object
+  sales-data-creditmemo-comment-creation-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\CreditmemoCommentCreationInterface
+    type: object
+  sales-data-creditmemo-comment-creation-interface:
+    description: Interface CreditmemoCommentCreationInterface
+    properties:
+      comment:
+        description: Comment.
+        type: string
+      extension_attributes:
+        $ref: '#/definitions/sales-data-creditmemo-comment-creation-extension-interface'
+      is_visible_on_front:
+        description: Is-visible-on-storefront flag value.
+        type: integer
+    required:
+      - comment
+      - is_visible_on_front
+    type: object
   sales-data-creditmemo-comment-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\CreditmemoCommentInterface
     type: object
@@ -13440,6 +15022,29 @@ definitions:
       - items
       - search_criteria
       - total_count
+    type: object
+  sales-data-creditmemo-creation-arguments-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\CreditmemoCreationArgumentsInterface
+    properties:
+      return_to_stock_items:
+        items:
+          type: integer
+        type: array
+    type: object
+  sales-data-creditmemo-creation-arguments-interface:
+    description: Interface CreditmemoCreationArgumentsInterface
+    properties:
+      adjustment_negative:
+        description: Credit memo negative adjustment.
+        type: number
+      adjustment_positive:
+        description: Credit memo positive adjustment.
+        type: number
+      extension_attributes:
+        $ref: '#/definitions/sales-data-creditmemo-creation-arguments-extension-interface'
+      shipping_amount:
+        description: Credit memo shipping amount.
+        type: number
     type: object
   sales-data-creditmemo-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\CreditmemoInterface
@@ -13606,6 +15211,24 @@ definitions:
     required:
       - order_id
       - items
+    type: object
+  sales-data-creditmemo-item-creation-extension-interface:
+    description: ExtensionInterface class for @see \Magento\Sales\Api\Data\CreditmemoItemCreationInterface
+    type: object
+  sales-data-creditmemo-item-creation-interface:
+    description: Interface CreditmemoItemCreationInterface
+    properties:
+      extension_attributes:
+        $ref: '#/definitions/sales-data-creditmemo-item-creation-extension-interface'
+      order_item_id:
+        description: Order item ID.
+        type: integer
+      qty:
+        description: Quantity.
+        type: number
+    required:
+      - order_item_id
+      - qty
     type: object
   sales-data-creditmemo-item-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\CreditmemoItemInterface
@@ -13818,6 +15441,15 @@ definitions:
     type: object
   sales-data-invoice-extension-interface:
     description: ExtensionInterface class for @see \Magento\Sales\Api\Data\InvoiceInterface
+    properties:
+      base_customer_balance_amount:
+        type: number
+      base_gift_cards_amount:
+        type: number
+      customer_balance_amount:
+        type: number
+      gift_cards_amount:
+        type: number
     type: object
   sales-data-invoice-interface:
     description: Invoice interface. An invoice is a record of the receipt of payment for an order.
@@ -14196,10 +15828,56 @@ definitions:
         items:
           $ref: '#/definitions/tax-data-order-tax-details-applied-tax-interface'
         type: array
+      base_customer_balance_amount:
+        type: number
       converting_from_quote:
         type: boolean
+      customer_balance_amount:
+        type: number
       gift_message:
         $ref: '#/definitions/gift-message-data-message-interface'
+      gw_add_card:
+        type: string
+      gw_allow_gift_receipt:
+        type: string
+      gw_base_price:
+        type: string
+      gw_base_price_incl_tax:
+        type: string
+      gw_base_tax_amount:
+        type: string
+      gw_card_base_price:
+        type: string
+      gw_card_base_price_incl_tax:
+        type: string
+      gw_card_base_tax_amount:
+        type: string
+      gw_card_price:
+        type: string
+      gw_card_price_incl_tax:
+        type: string
+      gw_card_tax_amount:
+        type: string
+      gw_id:
+        type: string
+      gw_items_base_price:
+        type: string
+      gw_items_base_price_incl_tax:
+        type: string
+      gw_items_base_tax_amount:
+        type: string
+      gw_items_price:
+        type: string
+      gw_items_price_incl_tax:
+        type: string
+      gw_items_tax_amount:
+        type: string
+      gw_price:
+        type: string
+      gw_price_incl_tax:
+        type: string
+      gw_tax_amount:
+        type: string
       item_applied_taxes:
         items:
           $ref: '#/definitions/tax-data-order-tax-details-item-interface'
@@ -15851,6 +17529,9 @@ definitions:
     type: object
   sales-rule-data-rule-extension-interface:
     description: ExtensionInterface class for @see \Magento\SalesRule\Api\Data\RuleInterface
+    properties:
+      reward_points_delta:
+        type: integer
     type: object
   sales-rule-data-rule-interface:
     description: Interface RuleInterface

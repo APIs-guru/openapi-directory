@@ -1696,6 +1696,10 @@ definitions:
           $ref: '#/definitions/LinkObject'
         description: Collection of links to related resources
         type: object
+      created:
+        description: Timestamp the room was created
+        format: date-time
+        type: string
       description:
         description: Description of the room
         type: string
@@ -1711,6 +1715,10 @@ definitions:
       status:
         $ref: '#/definitions/RoomStatus'
         description: Contains information about room status.
+      updated:
+        description: Timestamp of when the room was changed the last time
+        format: date-time
+        type: string
     type: object
   ExtendedRateplanEntry:
     properties:
@@ -1743,6 +1751,10 @@ definitions:
       commissionable:
         description: Defines if this rateplan is setup with a commission
         type: boolean
+      created:
+        description: Timestamp the rateplan was created
+        format: date-time
+        type: string
       day_use:
         description: Defines if this rateplan is used for day use reservations
         type: boolean
@@ -1791,6 +1803,10 @@ definitions:
       taxes_included:
         description: Defines if the daily rates include VAT or not
         type: boolean
+      updated:
+        description: Timestamp of when the rateplan was changed the last time
+        format: date-time
+        type: string
       visibility:
         description: Defines if this rateplan is visible to the public or only for specific customers
         enum:
@@ -1918,6 +1934,10 @@ definitions:
       country:
         description: "The country the hotel is located. The country code is in ISO 3166-1 alpha-2 format\r\n            (see: <a href=\"http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm\" onfocus=\"this.blur()\" target=\"_blank\">http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm</a>)"
         type: string
+      created:
+        description: Timestamp the hotel was created
+        format: date-time
+        type: string
       current_business_day:
         description: Return the current business day of the hotel in the ISO-8601 format "YYYY-MM-DD"
         format: date-time
@@ -1957,6 +1977,10 @@ definitions:
         type: string
       street:
         description: The street address of the hotel
+        type: string
+      updated:
+        description: Timestamp of when the hotel was changed the last time
+        format: date-time
         type: string
       url:
         description: The homepage URL of the hotel
@@ -2045,6 +2069,10 @@ definitions:
       commissionable:
         description: Defines if this rateplan is setup with a commission
         type: boolean
+      created:
+        description: Timestamp the rateplan was created
+        format: date-time
+        type: string
       day_use:
         description: Defines if this rateplan is used for day use reservations
         type: boolean
@@ -2078,6 +2106,10 @@ definitions:
       suspended:
         description: "Defines if a rateplan is suspended and no new reservations can be created for this\r\n            rateplan at the moment"
         type: boolean
+      updated:
+        description: Timestamp of when the rateplan was changed the last time
+        format: date-time
+        type: string
       visibility:
         description: Defines if this rateplan is visible to the public or only for specific customers
         enum:
@@ -2331,6 +2363,10 @@ definitions:
         items:
           $ref: '#/definitions/RoomBedding'
         type: array
+      created:
+        description: Timestamp the room was created
+        format: date-time
+        type: string
       description:
         description: Description of the room
         type: string
@@ -2375,6 +2411,10 @@ definitions:
       status:
         $ref: '#/definitions/RoomStatus'
         description: Contains information about room status
+      updated:
+        description: Timestamp of when the room was changed the last time
+        format: date-time
+        type: string
       views:
         description: List of views for the room
         items:
@@ -2500,6 +2540,10 @@ definitions:
       code:
         description: Code of the room type
         type: string
+      created:
+        description: Timestamp the room type was created
+        format: date-time
+        type: string
       default:
         description: Specifies if the room type is the default room type of the hotel
         type: boolean
@@ -2525,6 +2569,10 @@ definitions:
         type: integer
       name:
         description: Name of the room type
+        type: string
+      updated:
+        description: Timestamp of when the room type was changed the last time
+        format: date-time
         type: string
       views:
         description: List of views for the room type

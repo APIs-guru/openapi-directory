@@ -246,6 +246,52 @@ paths:
       summary: Calculate EU VIES report
       tags:
         - reporting
+  /api/v1/settlement/detailed_refunds:
+    get:
+      operationId: getDetailedRefunds
+      parameters:
+        - description: Output format. 'json' or 'csv'. Default value is 'json'
+          in: query
+          name: format
+          required: false
+          type: string
+        - description: Comma separated list of 2-letter country codes
+          in: query
+          name: country_codes
+          required: false
+          type: string
+        - description: 'Take only refunds issued at or after the date. Format: yyyy-MM-dd'
+          in: query
+          name: date_from
+          required: false
+          type: string
+        - description: 'Take only refunds issued at or before the date. Format: yyyy-MM-dd'
+          in: query
+          name: date_to
+          required: false
+          type: string
+        - description: 'Limit (no more than 1000, defaults to 100).'
+          in: query
+          name: limit
+          required: false
+          type: number
+        - description: Offset. Defaults to 0
+          in: query
+          name: offset
+          required: false
+          type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getDetailedRefundsOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Detailed refunds
+      tags:
+        - settlement
   /api/v1/settlement/refunds:
     get:
       operationId: getRefunds
@@ -1792,6 +1838,35 @@ definitions:
           $ref: '#/definitions/settlement_daily_stats_schema'
         type: array
     type: object
+  getDetailedRefundsIn:
+    properties:
+      country_codes:
+        description: Comma separated list of 2-letter country codes
+        type: string
+      date_from:
+        description: 'Take only refunds issued at or after the date. Format: yyyy-MM-dd'
+        type: string
+      date_to:
+        description: 'Take only refunds issued at or before the date. Format: yyyy-MM-dd'
+        type: string
+      format:
+        description: Output format. 'json' or 'csv'. Default value is 'json'
+        type: string
+      limit:
+        description: 'Limit (no more than 1000, defaults to 100).'
+        type: number
+      offset:
+        description: Offset. Defaults to 0
+        type: number
+    type: object
+  getDetailedRefundsOut:
+    properties:
+      report:
+        description: Detailed refunds report
+        items:
+          $ref: '#/definitions/report'
+        type: array
+    type: object
   getDomesticSummaryReportIn:
     properties:
       country_code:
@@ -2225,6 +2300,9 @@ definitions:
       custom_id:
         description: 'Custom id, provided by ecommerce software.'
         type: string
+      deducted_tax_rate:
+        description: 'Deducted tax rate, calculated by taxamo.'
+        type: number
       description:
         description: Line contents description.
         type: string
@@ -2842,6 +2920,9 @@ definitions:
         type: string
       deducted_tax_amount:
         description: 'Deducted tax amount, calculated by taxmo.'
+        type: number
+      deducted_tax_rate:
+        description: 'Deducted tax rate, calculated by taxamo.'
         type: number
       description:
         description: Line contents description.

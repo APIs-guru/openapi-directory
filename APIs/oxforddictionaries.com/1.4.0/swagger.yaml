@@ -919,7 +919,7 @@ paths:
           <div id="wordlist_advanced"></div>
       parameters:
         - $ref: '#/parameters/monolingual-source_lang'
-        - default: registers=Rare;domains=Art
+        - default: lexicalCategory=Noun;domains=sport
           description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport'
           in: path
           name: filters_advanced
@@ -930,12 +930,13 @@ paths:
           name: exclude
           required: false
           type: string
-        - description: 'Parameter to speficy the minimum (>), exact or maximum (<) length of the words required. E.g., >5 - more than 5 chars; <4 - less than 4 chars; >5<10 - from 5 to 10 chars; 3 - exactly 3 chars.'
+        - default: '>5,<10'
+          description: 'Parameter to speficy the minimum (>), exact or maximum (<) length of the words required. E.g., >5 - more than 5 chars; <4 - less than 4 chars; >5<10 - from 5 to 10 chars; 3 - exactly 3 chars.'
           in: query
           name: word_length
           required: false
           type: string
-        - default: eye
+        - default: goal
           description: Filter words that start with prefix parameter
           in: query
           name: prefix

@@ -31,12 +31,22 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/fitness.activity.read': View your activity information in Google Fit
       'https://www.googleapis.com/auth/fitness.activity.write': View and store your activity information in Google Fit
+      'https://www.googleapis.com/auth/fitness.blood_glucose.read': View blood glucose data in Google Fit
+      'https://www.googleapis.com/auth/fitness.blood_glucose.write': View and store blood glucose data in Google Fit
+      'https://www.googleapis.com/auth/fitness.blood_pressure.read': View blood pressure data in Google Fit
+      'https://www.googleapis.com/auth/fitness.blood_pressure.write': View and store blood pressure data in Google Fit
       'https://www.googleapis.com/auth/fitness.body.read': View body sensor information in Google Fit
       'https://www.googleapis.com/auth/fitness.body.write': View and store body sensor data in Google Fit
+      'https://www.googleapis.com/auth/fitness.body_temperature.read': View body temperature data in Google Fit
+      'https://www.googleapis.com/auth/fitness.body_temperature.write': View and store body temperature data in Google Fit
       'https://www.googleapis.com/auth/fitness.location.read': View your stored location data in Google Fit
       'https://www.googleapis.com/auth/fitness.location.write': View and store your location data in Google Fit
       'https://www.googleapis.com/auth/fitness.nutrition.read': View nutrition information in Google Fit
       'https://www.googleapis.com/auth/fitness.nutrition.write': View and store nutrition information in Google Fit
+      'https://www.googleapis.com/auth/fitness.oxygen_saturation.read': View oxygen saturation data in Google Fit
+      'https://www.googleapis.com/auth/fitness.oxygen_saturation.write': View and store oxygen saturation data in Google Fit
+      'https://www.googleapis.com/auth/fitness.reproductive_health.read': View reproductive health data in Google Fit
+      'https://www.googleapis.com/auth/fitness.reproductive_health.write': View and store reproductive health data in Google Fit
     type: oauth2
 parameters:
   alt:
@@ -109,9 +119,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
@@ -120,6 +142,14 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
     parameters:
@@ -152,11 +182,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
   '/{userId}/dataSources/{dataSourceId}':
@@ -183,11 +223,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
     get:
@@ -215,9 +265,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
@@ -226,6 +288,14 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
     parameters:
@@ -266,11 +336,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
     put:
@@ -303,11 +383,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
   '/{userId}/dataSources/{dataSourceId}/datasets/{datasetId}':
@@ -345,11 +435,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
     get:
@@ -390,9 +490,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
@@ -401,6 +513,14 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
     parameters:
@@ -447,11 +567,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
   '/{userId}/dataset:aggregate':
@@ -487,9 +617,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
@@ -498,6 +640,14 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
   '/{userId}/sessions':
@@ -537,9 +687,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
@@ -548,6 +710,14 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
     parameters:
@@ -1055,7 +1225,7 @@ definitions:
     description: |-
       Holder object for the value of a single field in a data point.
 
-      A field value has a particular format and is only ever set to one of an integer or a floating point value.
+      A field value has a particular format and is only ever set to one of an integer or a floating point value. LINT.IfChange
     properties:
       fpVal:
         description: 'Floating point value. When this is set, other values must not be set.'

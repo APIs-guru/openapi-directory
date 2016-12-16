@@ -613,15 +613,15 @@ paths:
       description: Returns information about activity on Azure SQL databases inside of an Azure SQL elastic pool.
       operationId: ElasticPools_ListDatabaseActivity
       parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the Azure SQL Elastic Pool.
           in: path
           name: elasticPoolName
           required: true
           type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
-        - $ref: '#/parameters/ServerNameParameter'
       responses:
         '200':
           description: OK
@@ -1773,7 +1773,6 @@ definitions:
         type: number
       currentServiceLevelObjective:
         description: Gets or sets currentServiceLevelObjective for service tier advisor.
-        format: uuid
         readOnly: true
         type: string
       currentServiceLevelObjectiveId:
@@ -1849,8 +1848,6 @@ definitions:
         readOnly: true
         type: string
   SloUsageMetric:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Represents a Slo Usage Metric.
     properties:
       inRangeTimeRatio:
@@ -1990,8 +1987,6 @@ definitions:
         x-ms-enum:
           name: TransparentDataEncryptionStates
   UpgradeHint:
-    allOf:
-      - $ref: '#/definitions/Resource'
     description: Represents a Upgrade Hint.
     properties:
       targetServiceLevelObjective:

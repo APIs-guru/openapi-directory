@@ -30,12 +30,12 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/tagmanager.delete.containers': Delete your Google Tag Manager containers
-      'https://www.googleapis.com/auth/tagmanager.edit.containers': Manage your Google Tag Manager containers
+      'https://www.googleapis.com/auth/tagmanager.edit.containers': 'Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing'
       'https://www.googleapis.com/auth/tagmanager.edit.containerversions': Manage your Google Tag Manager container versions
-      'https://www.googleapis.com/auth/tagmanager.manage.accounts': Manage your Google Tag Manager accounts
-      'https://www.googleapis.com/auth/tagmanager.manage.users': Manage user permissions of your Google Tag Manager data
-      'https://www.googleapis.com/auth/tagmanager.publish': Publish your Google Tag Manager containers
-      'https://www.googleapis.com/auth/tagmanager.readonly': View your Google Tag Manager containers
+      'https://www.googleapis.com/auth/tagmanager.manage.accounts': View and manage your Google Tag Manager accounts
+      'https://www.googleapis.com/auth/tagmanager.manage.users': Manage user permissions of your Google Tag Manager account and container
+      'https://www.googleapis.com/auth/tagmanager.publish': Publish your Google Tag Manager container versions
+      'https://www.googleapis.com/auth/tagmanager.readonly': View your Google Tag Manager container and its subcomponents
     type: oauth2
 parameters:
   alt:

@@ -192,6 +192,14 @@ paths:
           name: deployment
           required: true
           type: string
+        - default: DELETE
+          description: Sets the policy to use for deleting resources.
+          enum:
+            - ABANDON
+            - DELETE
+          in: query
+          name: deletePolicy
+          type: string
       responses:
         '200':
           description: Successful response
@@ -942,15 +950,32 @@ paths:
       - $ref: '#/parameters/userIp'
 definitions:
   AuditConfig:
-    description: Enables "data access" audit logging for a service and specifies a list of members that are log-exempted.
+    description: Provides the configuration for non-admin_activity logging for a service. Controls exemptions and specific log sub-types.
     properties:
+      auditLogConfigs:
+        description: The configuration for each type of logging
+        items:
+          $ref: '#/definitions/AuditLogConfig'
+        type: array
       exemptedMembers:
         description: Specifies the identities that are exempted from "data access" audit logging for the `service` specified above. Follows the same format of Binding.members.
         items:
           type: string
         type: array
       service:
-        description: 'Specifies a service that will be enabled for "data access" audit logging. For example, `resourcemanager`, `storage`, `compute`. `allServices` is a special value that covers all services.'
+        description: 'Specifies a service that will be enabled for audit logging. For example, `resourcemanager`, `storage`, `compute`. `allServices` is a special value that covers all services.'
+        type: string
+    type: object
+  AuditLogConfig:
+    description: Provides the configuration for a sub-type of logging.
+    properties:
+      exemptedMembers:
+        description: Specifies the identities that are exempted from this type of logging Follows the same format of Binding.members.
+        items:
+          type: string
+        type: array
+      logType:
+        description: The log type that this config enables.
         type: string
     type: object
   Binding:

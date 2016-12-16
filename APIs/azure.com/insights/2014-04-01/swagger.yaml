@@ -32,12 +32,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
     x-ms-skip-url-encoding: true
-  SubscriptionIdParameter:
-    description: The Azure subscription Id.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/{resourceUri}/usages':
     get:

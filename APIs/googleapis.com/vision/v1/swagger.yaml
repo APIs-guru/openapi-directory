@@ -169,9 +169,9 @@ definitions:
         description: |-
           If set, represents the error message for the operation.
           Note that filled-in image annotations are guaranteed to be
-          correct, even when <code>error</code> is non-empty.
+          correct, even when `error` is set.
       faceAnnotations:
-        description: 'If present, face detection completed successfully.'
+        description: 'If present, face detection has completed successfully.'
         items:
           $ref: '#/definitions/FaceAnnotation'
         type: array
@@ -179,25 +179,25 @@ definitions:
         $ref: '#/definitions/ImageProperties'
         description: 'If present, image properties were extracted successfully.'
       labelAnnotations:
-        description: 'If present, label detection completed successfully.'
+        description: 'If present, label detection has completed successfully.'
         items:
           $ref: '#/definitions/EntityAnnotation'
         type: array
       landmarkAnnotations:
-        description: 'If present, landmark detection completed successfully.'
+        description: 'If present, landmark detection has completed successfully.'
         items:
           $ref: '#/definitions/EntityAnnotation'
         type: array
       logoAnnotations:
-        description: 'If present, logo detection completed successfully.'
+        description: 'If present, logo detection has completed successfully.'
         items:
           $ref: '#/definitions/EntityAnnotation'
         type: array
       safeSearchAnnotation:
         $ref: '#/definitions/SafeSearchAnnotation'
-        description: 'If present, safe-search annotation completed successfully.'
+        description: 'If present, safe-search annotation has completed successfully.'
       textAnnotations:
-        description: 'If present, text (OCR) detection completed successfully.'
+        description: 'If present, text (OCR) detection has completed successfully.'
         items:
           $ref: '#/definitions/EntityAnnotation'
         type: array
@@ -376,15 +376,15 @@ definitions:
     type: object
   ColorInfo:
     description: |-
-      Color information consists of RGB channels, score and fraction of
-      image the color occupies in the image.
+      Color information consists of RGB channels, score, and the fraction of
+      the image that the color occupies in the image.
     properties:
       color:
         $ref: '#/definitions/Color'
         description: RGB components of the color.
       pixelFraction:
         description: |-
-          Stores the fraction of pixels the color occupies in the image.
+          The fraction of pixels the color occupies in the image.
           Value in range [0, 1].
         format: float
         type: number
@@ -397,7 +397,7 @@ definitions:
     description: Set of dominant colors and their corresponding scores.
     properties:
       colors:
-        description: 'RGB color values, with their score and pixel fraction.'
+        description: RGB color values with their score and pixel fraction.
         items:
           $ref: '#/definitions/ColorInfo'
         type: array
@@ -408,45 +408,45 @@ definitions:
       boundingPoly:
         $ref: '#/definitions/BoundingPoly'
         description: |-
-          Image region to which this entity belongs. Not filled currently
+          Image region to which this entity belongs. Currently not produced
           for `LABEL_DETECTION` features. For `TEXT_DETECTION` (OCR), `boundingPoly`s
           are produced for the entire text detected in an image region, followed by
           `boundingPoly`s for each word within the detected text.
       confidence:
         description: |-
           The accuracy of the entity detection in an image.
-          For example, for an image containing 'Eiffel Tower,' this field represents
-          the confidence that there is a tower in the query image. Range [0, 1].
+          For example, for an image in which the "Eiffel Tower" entity is detected,
+          this field represents the confidence that there is a tower in the query
+          image. Range [0, 1].
         format: float
         type: number
       description:
-        description: 'Entity textual description, expressed in its <code>locale</code> language.'
+        description: 'Entity textual description, expressed in its `locale` language.'
         type: string
       locale:
         description: |-
           The language code for the locale in which the entity textual
-          <code>description</code> (next field) is expressed.
+          `description` is expressed.
         type: string
       locations:
         description: |-
           The location information for the detected entity. Multiple
-          <code>LocationInfo</code> elements can be present since one location may
-          indicate the location of the scene in the query image, and another the
-          location of the place where the query image was taken. Location information
-          is usually present for landmarks.
+          `LocationInfo` elements can be present because one location may
+          indicate the location of the scene in the image, and another location
+          may indicate the location of the place where the image was taken.
+          Location information is usually present for landmarks.
         items:
           $ref: '#/definitions/LocationInfo'
         type: array
       mid:
         description: |-
-          Opaque entity ID. Some IDs might be available in Knowledge Graph(KG).
-          For more details on KG please see:
-          https://developers.google.com/knowledge-graph/
+          Opaque entity ID. Some IDs may be available in
+          [Google Knowledge Graph Search API](https://developers.google.com/knowledge-graph/).
         type: string
       properties:
         description: |-
-          Some entities can have additional optional <code>Property</code> fields.
-          For example a different kind of score or string that qualifies the entity.
+          Some entities may have optional user-supplied `Property` (name/value)
+          fields, such a score or string that qualifies the entity.
         items:
           $ref: '#/definitions/Property'
         type: array
@@ -457,10 +457,10 @@ definitions:
       topicality:
         description: |-
           The relevancy of the ICA (Image Content Annotation) label to the
-          image. For example, the relevancy of 'tower' to an image containing
-          'Eiffel Tower' is likely higher than an image containing a distant towering
-          building, though the confidence that there is a tower may be the same.
-          Range [0, 1].
+          image. For example, the relevancy of "tower" is likely higher to an image
+          containing the detected "Eiffel Tower" than to an image containing a
+          detected distant towering building, even though the confidence that
+          there is a tower in each image may be the same. Range [0, 1].
         format: float
         type: number
     type: object
@@ -491,12 +491,12 @@ definitions:
         $ref: '#/definitions/BoundingPoly'
         description: |-
           The bounding polygon around the face. The coordinates of the bounding box
-          are in the original image's scale, as returned in ImageParams.
+          are in the original image's scale, as returned in `ImageParams`.
           The bounding box is computed to "frame" the face in accordance with human
           expectations. It is based on the landmarker results.
           Note that one or more x and/or y coordinates may not be generated in the
-          BoundingPoly (the polygon will be unbounded) if only a partial face appears in
-          the image to be annotated.
+          `BoundingPoly` (the polygon will be unbounded) if only a partial face
+          appears in the image to be annotated.
       detectionConfidence:
         description: 'Detection confidence. Range [0, 1].'
         format: float
@@ -504,10 +504,9 @@ definitions:
       fdBoundingPoly:
         $ref: '#/definitions/BoundingPoly'
         description: |-
-          This bounding polygon is tighter than the previous
-          <code>boundingPoly</code>, and
-          encloses only the skin part of the face. Typically, it is used to
-          eliminate the face from any image analysis that detects the
+          The `fd_bounding_poly` bounding polygon is tighter than the
+          `boundingPoly`, and encloses only the skin part of the face. Typically, it
+          is used to eliminate the face from any image analysis that detects the
           "amount of skin" visible in an image. It is not based on the
           landmarker results, only on the initial face detection, hence
           the <code>fd</code> (face detection) prefix.
@@ -542,17 +541,16 @@ definitions:
         type: array
       panAngle:
         description: |-
-          Yaw angle. Indicates the leftward/rightward angle that the face is
-          pointing, relative to the vertical plane perpendicular to the image. Range
+          Yaw angle, which indicates the leftward/rightward angle that the face is
+          pointing relative to the vertical plane perpendicular to the image. Range
           [-180,180].
         format: float
         type: number
       rollAngle:
         description: |-
-          Roll angle. Indicates the amount of clockwise/anti-clockwise rotation of
-          the
-          face relative to the image vertical, about the axis perpendicular to the
-          face. Range [-180,180].
+          Roll angle, which indicates the amount of clockwise/anti-clockwise rotation
+          of the face relative to the image vertical about the axis perpendicular to
+          the face. Range [-180,180].
         format: float
         type: number
       sorrowLikelihood:
@@ -577,9 +575,8 @@ definitions:
         type: string
       tiltAngle:
         description: |-
-          Pitch angle. Indicates the upwards/downwards angle that the face is
-          pointing
-          relative to the image's horizontal plane. Range [-180,180].
+          Pitch angle, which indicates the upwards/downwards angle that the face is
+          pointing relative to the image's horizontal plane. Range [-180,180].
         format: float
         type: number
       underExposedLikelihood:
@@ -595,9 +592,9 @@ definitions:
     type: object
   Feature:
     description: |-
-      The <em>Feature</em> indicates what type of image detection task to perform.
       Users describe the type of Google Cloud Vision API tasks to perform over
-      images by using <em>Feature</em>s. Features encode the Cloud Vision API
+      images by using *Feature*s. Each Feature indicates a type of image
+      detection task to perform. Features encode the Cloud Vision API
       vertical to operate on and the number of top-scoring results to return.
     properties:
       maxResults:
@@ -630,9 +627,9 @@ definitions:
       source:
         $ref: '#/definitions/ImageSource'
         description: |-
-          Google Cloud Storage image location. If both 'content' and 'source'
-          are filled for an image, 'content' takes precedence and it will be
-          used for performing the image annotation request.
+          Google Cloud Storage image location. If both `content` and `source`
+          are provided for an image, `content` takes precedence and is
+          used to perform the image annotation request.
     type: object
   ImageContext:
     description: Image context and/or feature-specific parameters.
@@ -646,17 +643,16 @@ definitions:
           setting a hint will help get better results (although it will be a
           significant hindrance if the hint is wrong). Text detection returns an
           error if one or more of the specified languages is not one of the
-          [supported
-          languages](/vision/docs/languages).
+          [supported languages](/vision/docs/languages).
         items:
           type: string
         type: array
       latLongRect:
         $ref: '#/definitions/LatLongRect'
-        description: Lat/long rectangle that specifies the location of the image.
+        description: lat/long rectangle that specifies the location of the image.
     type: object
   ImageProperties:
-    description: Stores image properties (e.g. dominant colors).
+    description: 'Stores image properties, such as dominant colors.'
     properties:
       dominantColors:
         $ref: '#/definitions/DominantColorsAnnotation'
@@ -667,18 +663,19 @@ definitions:
     properties:
       gcsImageUri:
         description: |-
-          Google Cloud Storage image URI. It must be in the following form:
-          `gs://bucket_name/object_name`. For more
-          details, please see: https://cloud.google.com/storage/docs/reference-uris.
-          NOTE: Cloud Storage object versioning is not supported!
+          Google Cloud Storage image URI, which must be in the following form:
+          `gs://bucket_name/object_name` (for details, see
+          [Google Cloud Storage Request URIs](https://cloud.google.com/storage/docs/reference-uris)).
+          NOTE: Cloud Storage object versioning is not supported.
         type: string
     type: object
   Landmark:
     description: |-
       A face-specific landmark (for example, a face feature).
       Landmark positions may fall outside the bounds of the image
-      when the face is near one or more edges of the image.
-      Therefore it is NOT guaranteed that 0 <= x < width or 0 <= y < height.
+      if the face is near one or more edges of the image.
+      Therefore it is NOT guaranteed that `0 <= x < width` or
+      `0 <= y < height`.
     properties:
       position:
         $ref: '#/definitions/Position'
@@ -775,7 +772,7 @@ definitions:
         type: number
     type: object
   LatLongRect:
-    description: Rectangle determined by min and max LatLng pairs.
+    description: Rectangle determined by min and max `LatLng` pairs.
     properties:
       maxLatLng:
         $ref: '#/definitions/LatLng'
@@ -789,7 +786,7 @@ definitions:
     properties:
       latLng:
         $ref: '#/definitions/LatLng'
-        description: Lat - long location coordinates.
+        description: lat/long location coordinates.
     type: object
   Position:
     description: |-
@@ -811,7 +808,7 @@ definitions:
         type: number
     type: object
   Property:
-    description: Arbitrary name/value pair.
+    description: A `Property` consists of a user-supplied name/value pair.
     properties:
       name:
         description: Name of the property.
@@ -821,13 +818,9 @@ definitions:
         type: string
     type: object
   SafeSearchAnnotation:
-    description: |-
-      Set of features pertaining to the image, computed by various computer vision
-      methods over safe-search verticals (for example, adult, spoof, medical,
-      violence).
     properties:
       adult:
-        description: Represents the adult contents likelihood for the image.
+        description: Represents the adult content likelihood for the image.
         enum:
           - UNKNOWN
           - VERY_UNLIKELY
@@ -837,7 +830,7 @@ definitions:
           - VERY_LIKELY
         type: string
       medical:
-        description: Likelihood this is a medical image.
+        description: Likelihood that this is a medical image.
         enum:
           - UNKNOWN
           - VERY_UNLIKELY
@@ -848,7 +841,7 @@ definitions:
         type: string
       spoof:
         description: |-
-          Spoof likelihood. The likelihood that an obvious modification
+          Spoof likelihood. The likelihood that an modification
           was made to the image's canonical version to make it appear
           funny or offensive.
         enum:

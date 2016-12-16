@@ -369,6 +369,102 @@ paths:
       summary: <b>***BETA***</b> Update a board
       tags:
         - Boards
+  '/v3/boards/{board_id}/assets':
+    delete:
+      consumes: []
+      parameters:
+        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: Specify the Id of the board from which assets are to be removed.
+          in: path
+          name: board_id
+          required: true
+          type: string
+        - description: Asset IDs.
+          in: query
+          items:
+            type: string
+          name: asset_ids
+          required: true
+          type: array
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            type: string
+        '204':
+          description: AssetRemovedFromBoard
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: InsufficientAccess
+        '404':
+          description: BoardNotFound
+      summary: <b>***BETA***</b> Remove assets from a board
+      tags:
+        - Boards
+    put:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - description: Specifies one or more asset ids and other information to add to the board.
+          in: body
+          name: board_assets
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/BoardAsset'
+            type: array
+        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: A board ID.
+          in: path
+          name: board_id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            type: string
+        '201':
+          description: Created
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: AssetNotFound
+        '404':
+          description: BoardNotFound
+      summary: <b>***BETA***</b> Add assets to a board
+      tags:
+        - Boards
   '/v3/boards/{board_id}/assets/{asset_id}':
     delete:
       consumes: []
@@ -406,14 +502,12 @@ paths:
         '403':
           description: InsufficientAccess
         '404':
-          description: BoardNotFound
+          description: AssetNotFound
       summary: <b>***BETA***</b> Remove an asset from a board
       tags:
         - Boards
     put:
-      consumes:
-        - application/json
-        - text/json
+      consumes: []
       parameters:
         - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
           in: header
@@ -502,6 +596,51 @@ paths:
         '404':
           description: BoardNotFound
       summary: <b>***BETA***</b> Add a comment to a board
+      tags:
+        - Boards
+  '/v3/boards/{board_id}/comments/{comment_id}':
+    delete:
+      consumes: []
+      parameters:
+        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: A board ID.
+          in: path
+          name: board_id
+          required: true
+          type: string
+        - description: A comment ID.
+          in: path
+          name: comment_id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            type: string
+        '204':
+          description: CommentDeleted
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: InsufficientAccess
+        '404':
+          description: CommentNotFound
+      summary: <b>***BETA***</b> Delete a comment from a board
       tags:
         - Boards
   /v3/collections:
@@ -4124,9 +4263,9 @@ definitions:
           $ref: '#/definitions/ChangedAssetDetail'
         type: array
     type: object
-  AssetToAdd:
+  BoardAsset:
     properties:
-      note:
+      asset_id:
         type: string
     type: object
   ChangedAssetDetail:
@@ -4363,6 +4502,8 @@ definitions:
         items:
           $ref: '#/definitions/asset'
         type: array
+      can_add_comment:
+        type: boolean
       comments:
         items:
           $ref: '#/definitions/comment'

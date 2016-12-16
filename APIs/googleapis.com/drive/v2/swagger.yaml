@@ -3289,6 +3289,9 @@ definitions:
       fullFileExtension:
         description: 'The full file extension; extracted from the title. May contain multiple concatenated extensions, such as "tar.gz". Removing an extension from the title does not clear this field; however, changing the extension on the title does update this field. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.'
         type: string
+      hasThumbnail:
+        description: Whether this file has a thumbnail.
+        type: boolean
       headRevisionId:
         description: The ID of the file's head revision. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.
         type: string
@@ -3516,7 +3519,7 @@ definitions:
           type: string
         type: array
       thumbnail:
-        description: Thumbnail for the file. Only accepted on upload and for files that are not already thumbnailed by Google.
+        description: A thumbnail for the file. This will only be used if Drive cannot generate a standard thumbnail.
         properties:
           image:
             description: The URL-safe Base64 encoded bytes of the thumbnail image. It should conform to RFC 4648 section 5.
@@ -3527,7 +3530,11 @@ definitions:
             type: string
         type: object
       thumbnailLink:
-        description: A short-lived link to the file's thumbnail. Typically lasts on the order of hours.
+        description: A short-lived link to the file's thumbnail. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content.
+        type: string
+      thumbnailVersion:
+        description: The thumbnail version for use in client-contructable thumbnail URLs or thumbnail cache invalidation.
+        format: int64
         type: string
       title:
         description: The title of this file.
@@ -3670,7 +3677,7 @@ definitions:
         format: date-time
         type: string
       id:
-        description: 'The ID of the user this permission refers to, and identical to the permissionId in the About and Files resources. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified unless the permission type anyone, in which case both id and value are ignored.'
+        description: 'The ID of the user this permission refers to, and identical to the permissionId in the About and Files resources. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified unless the permission type is anyone, in which case both id and value are ignored.'
         type: string
       kind:
         default: 'drive#permission'
@@ -3701,7 +3708,7 @@ definitions:
           - anyone
         type: string
       value:
-        description: 'The email address or domain name for the entity. This is used during inserts and is not populated in responses. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified unless the permission type anyone, in which case both id and value are ignored.'
+        description: 'The email address or domain name for the entity. This is used during inserts and is not populated in responses. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified unless the permission type is anyone, in which case both id and value are ignored.'
         type: string
       withLink:
         description: Whether the link is required for this permission.

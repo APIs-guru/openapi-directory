@@ -12,10 +12,10 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-apimanagement/2016-07-07/swagger/apimmanagement.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-apimanagement/2016-07-07/swagger/apimanagement.json'
     version: '2.0'
   x-providerName: azure.com
-  x-serviceName: arm-apimanagement-apimmanagement
+  x-serviceName: arm-apimanagement
   x-tags:
     - Azure
     - Microsoft
@@ -51,6 +51,16 @@ parameters:
     name: api-version
     required: true
     type: string
+  BackendIdParameter:
+    description: User identifier. Must be unique in the current API Management service instance.
+    in: path
+    maxLength: 255
+    minLength: 1
+    name: backendid
+    pattern: '^[^*#&+:<>?]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
   GroupIdParameter:
     description: Group identifier. Must be unique in the current API Management service instance.
     in: path
@@ -60,6 +70,22 @@ parameters:
     pattern: '^[^*#&+:<>?]+$'
     required: true
     type: string
+    x-ms-parameter-location: method
+  IdentityProviderNameParameter:
+    description: Identity Provider Type identifier.
+    enum:
+      - facebook
+      - google
+      - microsoft
+      - twitter
+      - aad
+    in: path
+    name: identityProviderName
+    required: true
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: IdentityProviderNameType
     x-ms-parameter-location: method
   OperationIdParameter:
     description: Operation identifier within an API. Must be unique in the current API Management service instance.
@@ -81,6 +107,20 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  QuotaCounterKeyParameter:
+    description: Quota counter key identifier.
+    in: path
+    name: quotaCounterKey
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  QuotaPeriodKeyParameter:
+    description: Quota period key identifier.
+    in: path
+    name: quotaPeriodKey
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ResourceGroupNameParameter:
     description: The name of the resource group.
     in: path
@@ -98,12 +138,30 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  SkipQueryParameter:
+    description: Number of records to skip.
+    format: int32
+    in: query
+    minimum: 0
+    name: $skip
+    required: false
+    type: integer
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
     type: string
+  TopQueryParameter:
+    description: Number of records to return.
+    format: int32
+    in: query
+    minimum: 1
+    name: $top
+    required: false
+    type: integer
+    x-ms-parameter-location: method
   UserIdParameter:
     description: User identifier. Must be unique in the current API Management service instance.
     in: path
@@ -136,25 +194,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Paged Result reponse of Apis.
           schema:
-            $ref: '#/definitions/ApiPaged'
+            $ref: '#/definitions/ApiCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -296,25 +344,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: A collection of operation summary entities at the API level.
           schema:
-            $ref: '#/definitions/OperationPaged'
+            $ref: '#/definitions/OperationCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -447,25 +485,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: The operation returns a collection of products which have the Api entity.
           schema:
-            $ref: '#/definitions/ProductPaged'
+            $ref: '#/definitions/ProductCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -493,25 +521,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: A Collection of the Authorization Server entities for the specified API Management service instance.
           schema:
-            $ref: '#/definitions/AuthorizationServerPaged'
+            $ref: '#/definitions/AuthorizationServerCollection'
       tags:
         - AuthorizationServers
       x-ms-odata: '#/definitions/OAuth2AuthorizationServerContract'
@@ -640,6 +658,145 @@ paths:
             $ref: '#/definitions/ErrorBodyContract'
       tags:
         - AuthorizationServers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends':
+    get:
+      description: Lists a collection of backends in the specified service instance.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/dn935030.aspx'
+      operationId: Backends_ListByService
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - description: |-
+            | Field | Supported operators    | Supported functions                         |
+            |-------|------------------------|---------------------------------------------|
+            | id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | host  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Lists a collection of Backend entities.
+          schema:
+            $ref: '#/definitions/BackendCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - Backends
+      x-ms-odata: '#/definitions/BackendResponse'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}':
+    delete:
+      description: Deletes the specified backend.
+      operationId: Backends_Delete
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/BackendIdParameter'
+        - description: The entity state (Etag) version of the backend to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
+          in: header
+          name: If-Match
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '204':
+          description: The backend was successfully deleted.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - Backends
+    get:
+      description: Gets the details of the backend specified by its identifier.
+      operationId: Backends_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/BackendIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: The response body contains the specified Backend entity.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+          schema:
+            $ref: '#/definitions/BackendResponse'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - Backends
+    patch:
+      description: Updates an existing backend.
+      operationId: Backends_Update
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/BackendIdParameter'
+        - description: Update parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/BackendUpdateParameters'
+        - description: The entity state (Etag) version of the backend to update. A value of "*" can be used for If-Match to unconditionally apply the operation.
+          in: header
+          name: If-Match
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '204':
+          description: The existing backend was successfully updated.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - Backends
+    put:
+      description: Creates or Updates a backend.
+      operationId: Backends_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/BackendIdParameter'
+        - description: Create parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/BackendContract'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '201':
+          description: Backend was successfully created.
+        '204':
+          description: The existing backend was successfully updated.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - Backends
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates':
     get:
       description: Lists a collection of all certificates in the specified service instance.
@@ -660,25 +817,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Returns a collection of Certificate entity.
           schema:
-            $ref: '#/definitions/CertificatePaged'
+            $ref: '#/definitions/CertificateCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -805,25 +952,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Lists a collection of Group entities.
           schema:
-            $ref: '#/definitions/GroupPaged'
+            $ref: '#/definitions/GroupCollection'
       tags:
         - Groups
       x-ms-odata: '#/definitions/GroupContract'
@@ -962,25 +1099,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Lists a collection of user entities associated with the group.
           schema:
-            $ref: '#/definitions/UserPaged'
+            $ref: '#/definitions/UserCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1039,6 +1166,129 @@ paths:
             $ref: '#/definitions/ErrorBodyContract'
       tags:
         - GroupUsers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders':
+    get:
+      description: Lists a collection of Identity Provider configured in the specified service instance.
+      operationId: IdentityProviders_ListByService
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Lists a collection of Identity Providers.
+          schema:
+            $ref: '#/definitions/IdentityProviderList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - IdentityProvider
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders/{identityProviderName}':
+    delete:
+      description: Deletes the specified identity provider configuration.
+      operationId: IdentityProviders_Delete
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/IdentityProviderNameParameter'
+        - description: The entity state (Etag) version of the backend to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
+          in: header
+          name: If-Match
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '204':
+          description: The identity provider configuration was successfully deleted.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - IdentityProvider
+    get:
+      description: Gets the configuration details of the identity Provider configured in specified service instance.
+      operationId: IdentityProviders_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/IdentityProviderNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The response body contains the specified IdentityProvider entity configuration details.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+          schema:
+            $ref: '#/definitions/IdentityProviderContract'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - IdentityProvider
+    patch:
+      description: Updates an existing IdentityProvider configuration.
+      operationId: IdentityProviders_Update
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/IdentityProviderNameParameter'
+        - description: Update parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/IdentityProviderUpdateParameters'
+        - description: The entity state (Etag) version of the identity provider configuration to update. A value of "*" can be used for If-Match to unconditionally apply the operation.
+          in: header
+          name: If-Match
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '204':
+          description: The existing identity provider configuration was successfully updated.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - IdentityProviders
+    put:
+      description: Creates or Updates the IdentityProvider configuration.
+      operationId: IdentityProviders_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/IdentityProviderNameParameter'
+        - description: Create parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/IdentityProviderContract'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '201':
+          description: IdentityProvider configuration were successfully created.
+        '204':
+          description: The existing Identity Provider was successfully updated.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - IdentityProvider
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers':
     get:
       description: Lists a collection of loggers in the specified service instance.
@@ -1057,32 +1307,22 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Lists a collection of Logger entities.
           schema:
-            $ref: '#/definitions/LoggerPaged'
+            $ref: '#/definitions/LoggerCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/ErrorBodyContract'
       tags:
         - Loggers
-      x-ms-odata: '#/definitions/LoggerGetContract'
+      x-ms-odata: '#/definitions/LoggerResponse'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerid}':
@@ -1134,7 +1374,7 @@ paths:
               description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
               type: string
           schema:
-            $ref: '#/definitions/LoggerGetContract'
+            $ref: '#/definitions/LoggerResponse'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1222,25 +1462,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Lists of all the OpenId Connect Providers.
           schema:
-            $ref: '#/definitions/OpenIdConnectProviderPaged'
+            $ref: '#/definitions/OpenIdConnectProviderCollection'
       tags:
         - OpenIdConnectProviders
       x-ms-odata: '#/definitions/OpenidConnectProviderContract'
@@ -1424,18 +1654,8 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - description: 'When set to true, the response contains an array of groups that have visibility to the product. The default is false.'
           in: query
           name: expandGroups
@@ -1447,7 +1667,7 @@ paths:
         '200':
           description: A Collection of the Product entities for the specified API Management service instance.
           schema:
-            $ref: '#/definitions/ProductPaged'
+            $ref: '#/definitions/ProductCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1585,25 +1805,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: The response body contains a collection of Api entities in the product.
           schema:
-            $ref: '#/definitions/ApiPaged'
+            $ref: '#/definitions/ApiCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1673,25 +1883,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Lists a collection of Group entities.
           schema:
-            $ref: '#/definitions/GroupPaged'
+            $ref: '#/definitions/GroupCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1767,25 +1967,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Lists a collection of subscription entities.
           schema:
-            $ref: '#/definitions/SubscriptionPaged'
+            $ref: '#/definitions/SubscriptionCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1813,25 +2003,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: A Collection of the Property entities for the specified API Management service instance.
           schema:
-            $ref: '#/definitions/PropertyPaged'
+            $ref: '#/definitions/PropertyCollection'
       tags:
         - Property
       x-ms-odata: '#/definitions/PropertyContract'
@@ -1962,6 +2142,104 @@ paths:
             $ref: '#/definitions/ErrorBodyContract'
       tags:
         - Property
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}':
+    get:
+      description: Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.
+      externalDocs:
+        description: Document describing how to configure the quota policies.
+        url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies'
+      operationId: QuotaByCounterKeys_ListByService
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/QuotaCounterKeyParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Lists a collection of the quota counter values.
+          schema:
+            $ref: '#/definitions/QuotaCounterCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - QuotaByCounterKeys
+    patch:
+      description: Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.
+      operationId: QuotaByCounterKeys_Update
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/QuotaCounterKeyParameter'
+        - description: The value of the quota counter to be applied to all quota counter periods.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/QuotaCounterValueContract'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '204':
+          description: All the quota counter periods were successfully updated.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - QuotaByCounterKeys
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/{quotaPeriodKey}':
+    get:
+      description: Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.
+      externalDocs:
+        description: Document describing how to configure the quota policies.
+        url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies'
+      operationId: QuotaByPeriodKeys_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/QuotaCounterKeyParameter'
+        - $ref: '#/parameters/QuotaPeriodKeyParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The response body contains the Quota counter details for the specified period.
+          schema:
+            $ref: '#/definitions/QuotaCounterContract'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - QuotaByPeriodKeys
+    patch:
+      description: Updates an existing quota counter value in the specified service instance.
+      operationId: QuotaByPeriodKeys_Update
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ServiceNameParameter'
+        - $ref: '#/parameters/QuotaCounterKeyParameter'
+        - $ref: '#/parameters/QuotaPeriodKeyParameter'
+        - description: The value of the Quota counter to be applied on the specified period.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/QuotaCounterValueContract'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '204':
+          description: The quota counter value was successfully updated.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorBodyContract'
+      tags:
+        - QuotaByPeriodKeys
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/regions':
     get:
       description: Lists all azure regions in which the service exists.
@@ -2007,18 +2285,8 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - description: 'By time interval. This value is only applicable to ByTime aggregation. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, secconds))'
           in: query
           name: interval
@@ -2030,7 +2298,7 @@ paths:
         '200':
           description: Lists a collection of Report record.
           schema:
-            $ref: '#/definitions/ReportPaged'
+            $ref: '#/definitions/ReportCollection'
       tags:
         - Reports
       x-ms-odata: '#/definitions/ReportRecordContract'
@@ -2058,25 +2326,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: A collection of the Subscription entities for the specified API Management service instance.
           schema:
-            $ref: '#/definitions/SubscriptionPaged'
+            $ref: '#/definitions/SubscriptionCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -2524,25 +2782,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Lists a collection of User entities.
           schema:
-            $ref: '#/definitions/UserPaged'
+            $ref: '#/definitions/UserCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -2708,25 +2956,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Lists a collection of Group entities.
           schema:
-            $ref: '#/definitions/GroupPaged'
+            $ref: '#/definitions/GroupCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -2780,25 +3018,15 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Number of records to return.
-          format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - description: Number of records to skip.
-          format: int32
-          in: query
-          name: $skip
-          required: false
-          type: integer
+        - $ref: '#/parameters/TopQueryParameter'
+        - $ref: '#/parameters/SkipQueryParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Lists a collection of Subscription entities.
           schema:
-            $ref: '#/definitions/SubscriptionPaged'
+            $ref: '#/definitions/SubscriptionCollection'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -2832,6 +3060,21 @@ definitions:
         type: boolean
     required:
       - enabled
+  ApiCollection:
+    description: Paged Api list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/ApiContract'
+        type: array
   ApiContract:
     description: API details.
     properties:
@@ -2909,27 +3152,12 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: HttpStatusCode
-  ApiPaged:
-    description: Paged Api list representation.
-    properties:
-      count:
-        description: Total records count number.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/ApiContract'
-        type: array
   AuthenticationSettingsContract:
     description: API Authentication Settings.
     properties:
       oAuth2:
         $ref: '#/definitions/OAuth2AuthenticationSettingsContract'
-  AuthorizationServerPaged:
+  AuthorizationServerCollection:
     description: Paged OAuth2 Authorization Servers list representation.
     properties:
       count:
@@ -2943,6 +3171,71 @@ definitions:
         description: Page values.
         items:
           $ref: '#/definitions/OAuth2AuthorizationServerContract'
+        type: array
+  BackendCollection:
+    description: Paged Backend list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Backend values.
+        items:
+          $ref: '#/definitions/BackendResponse'
+        type: array
+  BackendContract:
+    description: Parameters supplied to the Create Backend operation.
+    properties:
+      host:
+        description: 'Host attribute of the backend. Host is a pure hostname without a port or suffix, for example backend.contoso.com. Must not be empty.'
+        maxLength: 255
+        minLength: 1
+        type: string
+      skipCertificateChainValidation:
+        default: false
+        description: Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.
+        type: boolean
+    required:
+      - host
+  BackendResponse:
+    allOf:
+      - $ref: '#/definitions/BackendContract'
+    description: The Backend entity in API Management represents a backend service that is configured to skip certification chain validation when using a self-signed certificate to test mutual certificate authentication.
+    properties:
+      id:
+        description: 'Uniquely identifies the backend within the current API Management service instance. The value is a valid relative URL in the format of /backends/{backendId} where {backendId} is a backend identifier.'
+        readOnly: true
+        type: string
+  BackendUpdateParameters:
+    description: Parameters supplied to the Update Backend operation.
+    properties:
+      host:
+        description: 'Host attribute of the backend. Host is a pure hostname without a port or suffix, for example backend.contoso.com. Must not be empty.'
+        maxLength: 255
+        minLength: 1
+        type: string
+      skipCertificateChainValidation:
+        default: false
+        description: Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.
+        type: boolean
+  CertificateCollection:
+    description: Paged Certificates list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/CertificateContract'
         type: array
   CertificateContract:
     description: Certificate details.
@@ -2978,21 +3271,6 @@ definitions:
     required:
       - data
       - password
-  CertificatePaged:
-    description: Paged Certificates list representation.
-    properties:
-      count:
-        description: Total records count number.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/CertificateContract'
-        type: array
   DeployConfigurationParameters:
     description: Parameters supplied to the Deploy Configuration operation.
     properties:
@@ -3036,6 +3314,21 @@ definitions:
       value:
         description: Redirect Url containing the SSO URL value.
         type: string
+  GroupCollection:
+    description: Paged Group list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/GroupContract'
+        type: array
   GroupContract:
     description: Developer group.
     properties:
@@ -3099,21 +3392,6 @@ definitions:
           name: GroupTypeContract
     required:
       - name
-  GroupPaged:
-    description: Paged Group list representation.
-    properties:
-      count:
-        description: Total records count number.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/GroupContract'
-        type: array
   GroupUpdateParameters:
     description: Parameters supplied to the Update Group operation.
     properties:
@@ -3138,6 +3416,80 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: GroupTypeContract
+  IdentityProviderContract:
+    description: 'The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.'
+    externalDocs:
+      url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-aad#how-to-authorize-developer-accounts-using-azure-active-directory'
+    properties:
+      allowedTenants:
+        description: List of Allowed Tenants when configuring Azure Active Directory login.
+        items:
+          type: string
+        maxItems: 32
+        type: array
+      clientId:
+        description: 'Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.'
+        minLength: 1
+        type: string
+      clientSecret:
+        description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
+        minLength: 1
+        type: string
+      type:
+        description: Identity Provider Type identifier.
+        enum:
+          - facebook
+          - google
+          - microsoft
+          - twitter
+          - aad
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IdentityProviderNameType
+    required:
+      - clientId
+      - clientSecret
+  IdentityProviderList:
+    description: List of all the Identity Providers configured on the service instance.
+    properties:
+      value:
+        description: Identity Provider configuration values.
+        items:
+          $ref: '#/definitions/IdentityProviderContract'
+        type: array
+  IdentityProviderUpdateParameters:
+    description: Parameters supplied to the Update Identity Provider operation.
+    properties:
+      allowedTenants:
+        description: List of Allowed Tenants when configuring Azure Active Directory login.
+        items:
+          type: string
+        maxItems: 32
+        type: array
+      clientId:
+        description: 'Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.'
+        minLength: 1
+        type: string
+      clientSecret:
+        description: 'Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.'
+        minLength: 1
+        type: string
+  LoggerCollection:
+    description: Paged Logger list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Logger values.
+        items:
+          $ref: '#/definitions/LoggerResponse'
+        type: array
   LoggerCreateParameters:
     description: Parameters supplied to the Create Logger operation.
     properties:
@@ -3166,16 +3518,16 @@ definitions:
     required:
       - type
       - credentials
-  LoggerGetContract:
-    description: Logger.
+  LoggerResponse:
+    description: The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
     properties:
       credentials:
         additionalProperties:
           type: string
         description: The name and SendRule connection string of the event hub.
         example:
-          connectionString: Endpoint=endpoint and key from Azure classic portal
-          name: Event hub name
+          connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
+          name: apim
         type: object
       description:
         description: Logger description.
@@ -3200,21 +3552,6 @@ definitions:
     required:
       - type
       - credentials
-  LoggerPaged:
-    description: Paged Logger list representation.
-    properties:
-      count:
-        description: Total records count number.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Logger values.
-        items:
-          $ref: '#/definitions/LoggerGetContract'
-        type: array
   LoggerUpdateParameters:
     description: Parameters supplied to the Update Logger operation.
     properties:
@@ -3486,7 +3823,7 @@ definitions:
         externalDocs:
           url: 'http://tools.ietf.org/html/rfc6749#section-3.1'
         type: string
-  OpenIdConnectProviderPaged:
+  OpenIdConnectProviderCollection:
     description: Paged OpenIdProviders list representation.
     properties:
       count:
@@ -3569,6 +3906,21 @@ definitions:
         description: User-friendly OpenID Connect Provider name.
         maxLength: 50
         type: string
+  OperationCollection:
+    description: Paged Operation list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/OperationContract'
+        type: array
   OperationContract:
     description: Api Operation details.
     properties:
@@ -3613,21 +3965,6 @@ definitions:
       - name
       - method
       - urlTemplate
-  OperationPaged:
-    description: Paged Operation list representation.
-    properties:
-      count:
-        description: Total records count number.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/OperationContract'
-        type: array
   OperationResultContract:
     description: Operation Result.
     properties:
@@ -3722,6 +4059,21 @@ definitions:
         description: Snippet toolTip.
         readOnly: true
         type: string
+  ProductCollection:
+    description: Paged Products list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/ProductContract'
+        type: array
   ProductContract:
     description: Product profile.
     properties:
@@ -3765,21 +4117,6 @@ definitions:
         type: string
     required:
       - name
-  ProductPaged:
-    description: Paged Products list representation.
-    properties:
-      count:
-        description: Total records count number.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/ProductContract'
-        type: array
   ProductUpdateParameters:
     description: Parameters supplied to the CreateOrUpdate Product operation.
     properties:
@@ -3815,6 +4152,21 @@ definitions:
       terms:
         description: Product terms and conditions. Developer will have to accept these terms before he's allowed to call product API.
         type: string
+  PropertyCollection:
+    description: Paged Property list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/PropertyContract'
+        type: array
   PropertyContract:
     description: Property details.
     properties:
@@ -3871,21 +4223,6 @@ definitions:
     required:
       - name
       - value
-  PropertyPaged:
-    description: Paged Property list representation.
-    properties:
-      count:
-        description: Total records count number.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/PropertyContract'
-        type: array
   PropertyUpdateParameters:
     description: Parameters supplied to the Update Property operation.
     properties:
@@ -3909,6 +4246,60 @@ definitions:
         maxLength: 4096
         minLength: 1
         type: string
+  QuotaCounterCollection:
+    description: Paged Quota Counter list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Quota counter values.
+        items:
+          $ref: '#/definitions/QuotaCounterContract'
+        type: array
+  QuotaCounterContract:
+    allOf:
+      - $ref: '#/definitions/QuotaCounterValueContract'
+    description: Quota counter details.
+    properties:
+      counterKey:
+        description: The Key value of the Counter. Must not be empty.
+        minLength: 1
+        type: string
+      periodEndTime:
+        description: |
+          The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+        format: date-time
+        type: string
+      periodKey:
+        description: Identifier of the Period for which the counter was collected. Must not be empty.
+        minLength: 1
+        type: string
+      periodStartTime:
+        description: |
+          The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+        format: date-time
+        type: string
+    required:
+      - counterKey
+      - periodKey
+      - periodStartTime
+      - periodEndTime
+  QuotaCounterValueContract:
+    description: Quota counter value details.
+    properties:
+      callsCount:
+        description: Number of times Counter was called.
+        format: int32
+        type: integer
+      kbTransferred:
+        description: Data Transferred in KiloBytes.
+        format: double
+        type: number
   RegionContract:
     description: Region profile.
     properties:
@@ -3929,7 +4320,7 @@ definitions:
         items:
           $ref: '#/definitions/RegionContract'
         type: array
-  ReportPaged:
+  ReportCollection:
     description: Paged Report records list representation.
     properties:
       count:
@@ -4106,6 +4497,21 @@ definitions:
         type: boolean
     required:
       - branch
+  SubscriptionCollection:
+    description: Paged Subsctions list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/SubscriptionContract'
+        type: array
   SubscriptionContract:
     description: Subscription details.
     properties:
@@ -4230,21 +4636,6 @@ definitions:
       query:
         description: Subscription key query string parameter name.
         type: string
-  SubscriptionPaged:
-    description: Paged Subsctions list representation.
-    properties:
-      count:
-        description: Total records count number.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/SubscriptionContract'
-        type: array
   SubscriptionUpdateParameters:
     description: Parameters supplied to the Update subscription operation.
     properties:
@@ -4361,6 +4752,21 @@ definitions:
     required:
       - name
       - value
+  UserCollection:
+    description: Paged Users list representation.
+    properties:
+      count:
+        description: Total records count number.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/UserContract'
+        type: array
   UserContract:
     description: User profile.
     properties:
@@ -4447,21 +4853,6 @@ definitions:
       provider:
         description: Identity provider name.
         type: string
-  UserPaged:
-    description: Paged Users list representation.
-    properties:
-      count:
-        description: Total records count number.
-        format: int64
-        type: integer
-      nextLink:
-        description: Next page link if any.
-        type: string
-      value:
-        description: Page values.
-        items:
-          $ref: '#/definitions/UserContract'
-        type: array
   UserUpdateParameters:
     description: Parameters supplied to the Update User operation.
     properties:

@@ -1001,6 +1001,57 @@ paths:
       summary: Look inside pips entities
       tags:
         - feeds
+  /programme_details:
+    get:
+      description: Feed for programme details without the need for mixins
+      operationId: listProgramme Details
+      parameters:
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for programmes by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes having given PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: pid
+          required: false
+          type: array
+      responses:
+        '200':
+          description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Feed for programme details without the need for mixins
+      tags:
+        - feeds
   /programmes:
     get:
       description: 'Fetch metadata about Programmes (brands, series, episodes, clips). By applying different filter restrictions this feed can be used in many ways, for example to retrieve all series belonging to a brand, all the episodes and/or clips for a specific series, or any TLEO objects for a masterbrand. Other filters permit restricting to specific formats and/or genres, and you can request specific versions (for example Signed or Audio-Described). Parameters may be combined in any way suitable for your application.'
@@ -2771,28 +2822,44 @@ definitions:
                 actual_start:
                   format: date-time
                   type: string
-                media_sets:
-                  additionalProperties: false
-                  properties:
-                    media_set:
-                      items:
-                        additionalProperties: false
-                        properties:
-                          actual_start:
-                            format: date-time
-                            type: string
-                          name:
-                            type: string
-                        required:
-                          - name
-                        type: object
-                      minItems: 1
-                      type: array
-                  required:
-                    - media_set
-                  type: object
                 name:
                   type: string
+                territories:
+                  additionalProperties: false
+                  properties:
+                    media_sets:
+                      additionalProperties: false
+                      properties:
+                        media_set:
+                          items:
+                            additionalProperties: false
+                            properties:
+                              actual_start:
+                                format: date-time
+                                type: string
+                              name:
+                                type: string
+                              territories:
+                                additionalProperties: false
+                                properties:
+                                  territory:
+                                    items:
+                                      type: string
+                                    type: array
+                                type: object
+                            required:
+                              - name
+                            type: object
+                          minItems: 1
+                          type: array
+                      required:
+                        - media_set
+                      type: object
+                    territory:
+                      items:
+                        type: string
+                      type: array
+                  type: object
               required:
                 - name
               type: object

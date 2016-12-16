@@ -1737,6 +1737,9 @@ definitions:
           The full file extension extracted from the name field. May contain multiple concatenated extensions, such as "tar.gz". This is only available for files with binary content in Drive.
           This is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension.
         type: string
+      hasThumbnail:
+        description: Whether this file has a thumbnail.
+        type: boolean
       headRevisionId:
         description: The ID of the file's head revision. This is currently only available for files with binary content in Drive.
         type: string
@@ -1928,7 +1931,11 @@ definitions:
         description: Whether the user has starred the file.
         type: boolean
       thumbnailLink:
-        description: 'A short-lived link to the file''s thumbnail, if available. Typically lasts on the order of hours.'
+        description: 'A short-lived link to the file''s thumbnail, if available. Typically lasts on the order of hours. Only populated when the requesting app can access the file''s content.'
+        type: string
+      thumbnailVersion:
+        description: The thumbnail version for use in client-contructable thumbnail URLs or thumbnail cache invalidation.
+        format: int64
         type: string
       trashed:
         description: 'Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner''s trash.'

@@ -3019,6 +3019,8 @@ definitions:
         default: 'books#notification'
         description: Resource type.
         type: string
+      notificationGroup:
+        type: string
       notification_type:
         type: string
       pcampaign_id:
@@ -3162,7 +3164,6 @@ definitions:
         description: Resource type.
         type: string
       series:
-        description: 'Series info list. The client always expects this element in the JSON output, hence declared here as OutputAlways.'
         items:
           properties:
             bannerImageUrl:

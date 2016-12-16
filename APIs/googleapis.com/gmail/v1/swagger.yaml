@@ -703,6 +703,39 @@ paths:
             - 'https://mail.google.com/'
       tags:
         - users
+  '/{userId}/messages/batchModify':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Modifies the labels on the specified messages.
+      operationId: gmail.users.messages.batchModify
+      parameters:
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchModifyMessagesRequest'
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://mail.google.com/'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.modify'
+      tags:
+        - users
   '/{userId}/messages/import':
     parameters:
       - $ref: '#/parameters/alt'
@@ -2121,6 +2154,24 @@ definitions:
     properties:
       ids:
         description: The IDs of the messages to delete.
+        items:
+          type: string
+        type: array
+    type: object
+  BatchModifyMessagesRequest:
+    properties:
+      addLabelIds:
+        description: A list of label IDs to add to messages.
+        items:
+          type: string
+        type: array
+      ids:
+        description: The IDs of the messages to modify. There is a limit of 1000 ids per request.
+        items:
+          type: string
+        type: array
+      removeLabelIds:
+        description: A list of label IDs to remove from messages.
         items:
           type: string
         type: array

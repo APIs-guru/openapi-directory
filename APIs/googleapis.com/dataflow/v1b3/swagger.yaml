@@ -1326,6 +1326,9 @@ definitions:
   CreateJobFromTemplateRequest:
     description: Request to create a Dataflow job.
     properties:
+      environment:
+        $ref: '#/definitions/RuntimeEnvironment'
+        description: Runtime environment for the job.
       gcsPath:
         description: A path to the serialized JSON representation of the job.
         type: string
@@ -2089,6 +2092,20 @@ definitions:
         description: Specifies the level of parallelism in case it is finite.
         format: double
         type: number
+    type: object
+  RuntimeEnvironment:
+    description: Environment values to set at runtime.
+    properties:
+      maxWorkers:
+        description: The maximum number of workers to start for the job.
+        format: int32
+        type: integer
+      serviceAccountEmail:
+        description: The service account to run the job as.
+        type: string
+      zone:
+        description: The zone to start the workers in.
+        type: string
     type: object
   SendDebugCaptureRequest:
     description: Request to send encoded debug information.

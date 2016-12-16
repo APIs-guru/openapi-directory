@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: API for using the IoT Hub Features.
+  description: Use this API to manage the IoT hubs in your subscription.
   title: iotHubClient
   version: '2016-02-03'
   x-apisguru-categories:
@@ -31,8 +31,7 @@ produces:
 security: []
 parameters:
   api-version:
-    default: '2016-02-03'
-    description: Version of the Api.
+    description: The version of the API.
     in: query
     name: api-version
     required: true
@@ -48,21 +47,21 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: Get all IotHubs in a subscription.
+      description: Get all the IoT hubs in a subscription.
       operationId: IotHubResource_ListBySubscription
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the IoT hubs in the subscription.
           schema:
             $ref: '#/definitions/IotHubDescriptionListResult'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get all IotHubs in a subscription.
+      summary: Get all the IoT hubs in a subscription.
       tags:
         - GET
       x-ms-pageable:
@@ -73,12 +72,12 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: Check if an IotHub name is available.
+      description: Check if an IoT hub name is available.
       operationId: IotHubResource_CheckNameAvailability
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The operation inputs. Set the name parameter in the operationInputs structure to the desired iothub name.
+        - description: Set the name parameter in the OperationInputs structure to the name of the IoT hub to check.
           in: body
           name: operationInputs
           required: true
@@ -86,40 +85,40 @@ paths:
             $ref: '#/definitions/OperationInputs'
       responses:
         '200':
-          description: OK
+          description: 'This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the IoT hub name is available. If the name is not available, the body contains the reason.'
           schema:
             $ref: '#/definitions/IotHubNameAvailabilityInfo'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Check if an IotHub name is available.
+      summary: Check if an IoT hub name is available.
       tags:
         - POST
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs':
     get:
       consumes: []
       deprecated: false
-      description: Get all IotHubs in a Resource group.
+      description: Get all the IoT hubs in a resource group.
       operationId: IotHubResource_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hubs.
           in: path
           name: resourceGroupName
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the IoT hubs in the resource group.
           schema:
             $ref: '#/definitions/IotHubDescriptionListResult'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get all IotHubs in a Resourcegroup.
+      summary: Get all the IoT hubs in a resource group.
       tags:
         - GET
       x-ms-pageable:
@@ -128,62 +127,72 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      description: Delete an IotHub.
+      description: Delete an IoT hub.
       operationId: IotHubResource_Delete
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
-          in: path
-          name: resourceName
-          required: true
-          type: string
-      responses:
-        '202':
-          description: Accepted
-          schema:
-            $ref: '#/definitions/IotHubDescription'
-        default:
-          description: DefaultErrorResponse
-          schema:
-            $ref: '#/definitions/ErrorDetails'
-      summary: Delete an IotHub.
-      tags:
-        - DELETE
-      x-ms-long-running-operation: true
-    get:
-      consumes: []
-      deprecated: false
-      description: Get an IotHub.
-      operationId: IotHubResource_Get
-      parameters:
-        - $ref: '#/parameters/api-version'
-        - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub to delete.
           in: path
           name: resourceName
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state.
+          schema:
+            $ref: '#/definitions/IotHubDescription'
+        '202':
+          description: 'The Iot Hub resource provider always returns a 202 Accepted status code with valid Location and Retry-After headers. The resource provider also sets the Azure-AsyncOperation header with a URL that points to the operation resource for this operation. Subsequent GET attempts on the resource after a DELETE operation return a resource representation that indicates a transitional provisioning state (such as Terminating). To retrieve the status of the operation, a client can either poll the URL returned in the Location header after the Retry-After interval, get the IoT Hub service status directly, or query the operation resource.'
+          schema:
+            $ref: '#/definitions/IotHubDescription'
+        '204':
+          description: 'Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the Iot hub metadata in the service and the status of the delete operation is set to a completed state.'
+        '404':
+          description: 'After the long running delete operation completes successfully, a 404 Not Found is returned when the status polling request no longer finds the Iot hub metadata in the service.'
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        default:
+          description: DefaultErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+      summary: Delete an IoT hub.
+      tags:
+        - DELETE
+      x-ms-long-running-operation: true
+    get:
+      consumes: []
+      deprecated: false
+      description: Get the non-security related metadata of an IoT hub.
+      operationId: IotHubResource_Get
+      parameters:
+        - $ref: '#/parameters/api-version'
+        - $ref: '#/parameters/subscriptionId'
+        - description: The name of the resource group that contains the IoT hub.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the IoT hub.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The body contains all the non-security properties of the IoT hub. Security-related properties are set to null.
           schema:
             $ref: '#/definitions/IotHubDescription'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get an IotHub.
+      summary: Get the non-security related metadata of an IoT hub.
       tags:
         - GET
     put:
@@ -191,37 +200,41 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: Create or update an IotHub.
+      description: 'Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub.'
       operationId: IotHubResource_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub to create or update.
           in: path
           name: resourceName
           required: true
           type: string
-        - description: The Iot hub description.
+        - description: The IoT hub metadata and security metadata.
           in: body
           name: iotHubDescription
           required: true
           schema:
             $ref: '#/definitions/IotHubDescription'
       responses:
+        '200':
+          description: This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.
+          schema:
+            $ref: '#/definitions/IotHubDescription'
         '201':
-          description: Created
+          description: 'This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation. If successful, the operation returns HTTP status code of 201 (OK).'
           schema:
             $ref: '#/definitions/IotHubDescription'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Create or update an IotHub.
+      summary: Create or update the metadata of an IoT hub.
       tags:
         - PUT
       x-ms-long-running-operation: true
@@ -229,103 +242,103 @@ paths:
     post:
       consumes: []
       deprecated: false
-      description: Get the Key given a specific KeyName for an IotHub.
+      description: 'Get a shared access policy by name from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.'
       operationId: IotHubResource_GetKeysForKeyName
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
-        - description: The name of the key.
+        - description: The name of the shared access policy.
           in: path
           name: keyName
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: 'This is a synchronous operation. The body contains a JSON-serialized shared access policy, including keys, that you can use to access one or more IoT hub endpoints.'
           schema:
             $ref: '#/definitions/SharedAccessSignatureAuthorizationRule'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get the Key given a specific KeyName for an IotHub.
+      summary: 'Get a shared access policy by name from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.'
       tags:
         - POST
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubStats':
     get:
       consumes: []
       deprecated: false
-      description: Get IotHub Stats.
+      description: Get the statistics from an IoT hub.
       operationId: IotHubResource_GetStats
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation. The body contains JSON-serialized statistics from the identity registry in the IoT hub.
           schema:
             $ref: '#/definitions/RegistryStatistics'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get IotHub Stats.
+      summary: Get the statistics from an IoT hub.
       tags:
         - GET
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups':
     get:
       consumes: []
       deprecated: false
-      description: Get EventHub Consumer Groups for an IotHub.
+      description: Get a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.
       operationId: IotHubResource_ListEventHubConsumerGroups
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
-        - description: The name of the event hub endpoint.
+        - description: The name of the Event Hub-compatible endpoint.
           in: path
           name: eventHubEndpointName
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation. The body contains a JSON-serialized list of the consumer groups in the the Event Hub-compatible endpoint in this IoT hub
           schema:
             $ref: '#/definitions/EventHubConsumerGroupsListResult'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get EventHub Consumer Groups for an IotHub.
+      summary: Get a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.
       tags:
         - GET
       x-ms-pageable:
@@ -334,119 +347,119 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      description: Delete EventHub Consumer Group for an IotHub.
+      description: Delete a consumer group from an Event Hub-compatible endpoint in an IoT hub.
       operationId: IotHubResource_DeleteEventHubConsumerGroup
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
-        - description: The name of the event hub endpoint.
+        - description: The name of the Event Hub-compatible endpoint in the IoT hub.
           in: path
           name: eventHubEndpointName
           required: true
           type: string
-        - description: The name of the consumer group.
+        - description: The name of the consumer group to delete.
           in: path
           name: name
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation.
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Delete EventHub Consumer Group for an IotHub.
+      summary: Delete a consumer group from an Event Hub-compatible endpoint in an IoT hub.
       tags:
         - DELETE
     get:
       consumes: []
       deprecated: false
-      description: Get EventHub Consumer Group for an IotHub.
+      description: Get a consumer group from the Event Hub-compatible device-to-cloud endpoint for an IoT hub.
       operationId: IotHubResource_GetEventHubConsumerGroup
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
-        - description: The name of the event hub endpoint.
+        - description: The name of the Event Hub-compatible endpoint in the IoT hub.
           in: path
           name: eventHubEndpointName
           required: true
           type: string
-        - description: The name of the consumer group.
+        - description: The name of the consumer group to retrieve.
           in: path
           name: name
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation. The body contains a JSON-serialized consumer group.
           schema:
             $ref: '#/definitions/EventHubConsumerGroupInfo'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get EventHub Consumer Group for an IotHub.
+      summary: Get a consumer group from the Event Hub-compatible device-to-cloud endpoint for an IoT hub.
       tags:
         - GET
     put:
       consumes: []
       deprecated: false
-      description: Add an EventHub Consumer Group to an IotHub.
+      description: Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.
       operationId: IotHubResource_CreateEventHubConsumerGroup
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
-        - description: The name of the event hub endpoint.
+        - description: The name of the Event Hub-compatible endpoint in the IoT hub.
           in: path
           name: eventHubEndpointName
           required: true
           type: string
-        - description: The name of the consumer group.
+        - description: The name of the consumer group to add.
           in: path
           name: name
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation.
           schema:
             $ref: '#/definitions/EventHubConsumerGroupInfo'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Add an EventHub Consumer Group to an IotHub.
+      summary: Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.
       tags:
         - PUT
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/exportDevices':
@@ -455,22 +468,22 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: Export all the devices in an IotHub.
+      description: 'Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.'
       operationId: IotHubResource_ExportDevices
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
-        - description: The export devices parameters.
+        - description: The parameters that specify the export devices operation.
           in: body
           name: exportDevicesParameters
           required: true
@@ -485,7 +498,7 @@ paths:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Export all the devices in an IotHub.
+      summary: 'Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.'
       tags:
         - POST
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/importDevices':
@@ -494,22 +507,22 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: Import all the devices in an IotHub.
+      description: 'Import, update, or delete device identities in the IoT hub identity registry from a blob. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.'
       operationId: IotHubResource_ImportDevices
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
-        - description: The import devices parameters.
+        - description: The parameters that specify the import devices operation.
           in: body
           name: importDevicesParameters
           required: true
@@ -524,38 +537,38 @@ paths:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Import all the devices in an IotHub.
+      summary: 'Import, update, or delete device identities in the IoT hub identity registry from a blob. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.'
       tags:
         - POST
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs':
     get:
       consumes: []
       deprecated: false
-      description: Get all the jobs in an IotHub.
+      description: 'Get a list of all the jobs in an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.'
       operationId: IotHubResource_ListJobs
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation. The response contains a JSON-serialized array of all the jobs in the IoT hub.
           schema:
             $ref: '#/definitions/JobResponseListResult'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get all the jobs in an IotHub.
+      summary: 'Get a list of all the jobs in an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.'
       tags:
         - GET
       x-ms-pageable:
@@ -564,17 +577,17 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: Get a job in an IotHub.
+      description: 'Get the details of a job from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.'
       operationId: IotHubResource_GetJob
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
@@ -586,45 +599,45 @@ paths:
           type: string
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation. The response contains a JSON-serialized description of the job in the IoT hub.
           schema:
             $ref: '#/definitions/JobResponse'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get a job in an IotHub.
+      summary: 'Get the details of a job from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.'
       tags:
         - GET
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/listkeys':
     post:
       consumes: []
       deprecated: false
-      description: Get all keys for an IotHub.
+      description: 'Get the security metadata for an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.'
       operationId: IotHubResource_ListKeys
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: 'This is a synchronous operation. The body contains a JSON-serialized array of shared access policies, including keys, that you can use to access the IoT hub endpoints.'
           schema:
             $ref: '#/definitions/SharedAccessSignatureAuthorizationRuleListResult'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get all keys for an IotHub.
+      summary: 'Get the security metadata for an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.'
       tags:
         - POST
       x-ms-pageable:
@@ -633,31 +646,31 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: Get quota metrics for an IotHub.
+      description: Get the quota metrics for an IoT hub.
       operationId: IotHubResource_GetQuotaMetrics
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation. The response contains a JSON-serialized array of the quota metrics for the IoT hub.
           schema:
             $ref: '#/definitions/IotHubQuotaMetricInfoListResult'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get quota metrics for an IotHub.
+      summary: Get the quota metrics for an IoT hub.
       tags:
         - GET
       x-ms-pageable:
@@ -666,77 +679,80 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: Get Valid Skus.
+      description: Get the list of valid SKUs for an IoT hub.
       operationId: IotHubResource_GetValidSkus
       parameters:
         - $ref: '#/parameters/api-version'
         - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
+        - description: The name of the resource group that contains the IoT hub.
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the resource.
+        - description: The name of the IoT hub.
           in: path
           name: resourceName
           required: true
           type: string
       responses:
         '200':
-          description: OK
+          description: This is a synchronous operation. The body contains a JSON-serialized array of the valid SKUs for this IoT hub.
           schema:
             $ref: '#/definitions/IotHubSkuDescriptionListResult'
         default:
           description: DefaultErrorResponse
           schema:
             $ref: '#/definitions/ErrorDetails'
-      summary: Get Valid Skus.
+      summary: Get the list of valid SKUs for an IoT hub.
       tags:
         - GET
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:
   CloudToDeviceProperties:
-    description: The Iot Hub Cloud-To-Device messaging properties.
+    description: The IoT hub cloud-to-device messaging properties.
     properties:
       defaultTtlAsIso8601:
-        description: 'The default time to live for the device queue. Range : 1 Min (PT1M) - 2 Days (P2D).'
+        description: 'The default time to live for cloud-to-device messages in the device queue. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.'
         format: duration
         type: string
       feedback:
         $ref: '#/definitions/FeedbackProperties'
       maxDeliveryCount:
-        description: 'The max delivery count for the device queue. Range : 1-100.'
+        description: 'The max delivery count for cloud-to-device messages in the device queue. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.'
         format: int32
         maximum: 100
         minimum: 1
         type: integer
     type: object
   ErrorDetails:
-    description: The properties related to the details of an error.
+    description: Error details.
     properties:
       Code:
         description: The error code.
+        readOnly: true
         type: string
       Details:
         description: The error details.
+        readOnly: true
         type: string
       HttpStatusCode:
-        description: The http status code.
+        description: The HTTP status code.
         readOnly: true
         type: string
       Message:
         description: The error message.
+        readOnly: true
         type: string
     type: object
   EventHubConsumerGroupInfo:
-    description: The properties indicating the EventHubConsumerGroupInfo.
+    description: The properties of the EventHubConsumerGroupInfo object.
     properties:
       id:
-        description: The event hub consumer group identifier.
+        description: The Event Hub-compatible consumer group identifier.
         type: string
       name:
-        description: The event hub consumer group name.
+        description: The Event Hub-compatible consumer group name.
         type: string
       tags:
         additionalProperties:
@@ -745,118 +761,115 @@ definitions:
         type: object
     type: object
   EventHubConsumerGroupsListResult:
-    description: The list of eventhub consumer group names with a next link.
+    description: The JSON-serialized array of Event Hub-compatible consumer group names with a next link.
     properties:
       nextLink:
         description: The next link.
         readOnly: true
         type: string
       value:
-        description: The list of eventhub consumer group names.
+        description: The array of Event Hub-compatible consumer group names.
         items:
           type: string
         type: array
     type: object
   EventHubProperties:
-    description: The properties of the provisioned event hub used by the Iot Hub.
+    description: The properties of the provisioned Event Hub-compatible endpoint used by the IoT hub.
     properties:
-      authorizationPolicies:
-        description: The authorization rules.
-        items:
-          $ref: '#/definitions/SharedAccessAuthorizationRule'
-        type: array
       endpoint:
-        description: The endpoint.
+        description: The Event Hub-compatible endpoint.
+        readOnly: true
         type: string
-      internalAuthorizationPolicies:
-        description: The internal authorization rules.
-        items:
-          $ref: '#/definitions/SharedAccessAuthorizationRule'
-        type: array
       partitionCount:
-        description: 'The partition count. Range of values [For F1: 2-2, S1: 2-128, S2: 2-128, S3: 2-128].'
+        description: 'The number of paritions for receiving device-to-cloud messages in the Event Hub-compatible endpoint. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#device-to-cloud-messages.'
         format: int32
         type: integer
       partitionIds:
-        description: The partition ids.
+        description: The partition ids in the Event Hub-compatible endpoint.
         items:
           type: string
+        readOnly: true
         type: array
       path:
-        description: The eventhub path.
+        description: The Event Hub-compatible name.
+        readOnly: true
         type: string
       retentionTimeInDays:
-        description: 'The retention time in days. Range of values [For F1: 1-1, S1: 1-7, S2: 1-7, S3: 1-7].'
+        description: 'The retention time for device-to-cloud messages in days. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#device-to-cloud-messages'
         format: int64
         type: integer
     type: object
   ExportDevicesRequest:
-    description: Used to provide parameters when requesting an export of all devices in the hub.
+    description: Use to provide parameters when requesting an export of all devices in the IoT hub.
     properties:
       ExcludeKeys:
         description: The value indicating whether keys should be excluded during export.
         type: boolean
       ExportBlobContainerUri:
-        description: The export BLOB container URI.
+        description: The export blob container URI.
         type: string
     required:
       - ExportBlobContainerUri
       - ExcludeKeys
     type: object
   FeedbackProperties:
-    description: The Feedback Queue properties.
+    description: The properties of the feedback queue for cloud-to-device messages.
     properties:
       lockDurationAsIso8601:
-        description: 'The lock duration for the feedback queue. Range: 5 Sec (PT5S) - 5 Min (PT5M).'
+        description: 'The lock duration for the feedback queue. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.'
         format: duration
         type: string
       maxDeliveryCount:
-        description: 'The max delivery count. Range : 1-100.'
+        description: 'The number of times the IoT hub attempts to deliver a message on the feedback queue. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.'
         format: int32
         maximum: 100
         minimum: 1
         type: integer
       ttlAsIso8601:
-        description: 'The time to live for the feedback queue. Range: 1 Min (PT1M) - 2 Days (P2D).'
+        description: 'The period of time for which a message is available to consume before it is expired by the IoT hub. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.'
         format: duration
         type: string
     type: object
   ImportDevicesRequest:
-    description: Used to provide parameters when requesting an import of all devices in the hub.
+    description: Use to provide parameters when requesting an import of all devices in the hub.
     properties:
       InputBlobContainerUri:
-        description: The input BLOB container URI.
+        description: The input blob container URI.
         type: string
       OutputBlobContainerUri:
-        description: The output BLOB container URI.
+        description: The output blob container URI.
         type: string
     required:
       - InputBlobContainerUri
       - OutputBlobContainerUri
     type: object
   IotHubCapacity:
-    description: The properties related to the capacity information.
+    description: IoT Hub capacity information.
     properties:
       default:
         description: The default number of units.
         format: int64
+        readOnly: true
         type: integer
       maximum:
         description: The maximum number of units.
         format: int64
+        readOnly: true
         type: integer
       minimum:
         description: The minimum number of units.
         format: int64
         maximum: 1
         minimum: 1
+        readOnly: true
         type: integer
       scaleType:
-        description: The type of the scale.
+        description: The type of the scaling enabled.
         enum:
           - Automatic
           - Manual
           - None
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
@@ -865,7 +878,7 @@ definitions:
   IotHubDescription:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: The description of the IotHub.
+    description: The description of the IoT hub.
     properties:
       etag:
         description: 'The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.'
@@ -873,69 +886,75 @@ definitions:
       properties:
         $ref: '#/definitions/IotHubProperties'
       resourcegroup:
-        description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+        description: The name of the resource group that contains the IoT hub. A resource group name uniquely identifies the resource group within the subscription.
         type: string
       sku:
         $ref: '#/definitions/IotHubSkuInfo'
       subscriptionid:
         description: The subscription identifier.
         type: string
+    required:
+      - subscriptionid
+      - resourcegroup
+      - sku
     type: object
   IotHubDescriptionListResult:
-    description: The list of IotHubDescription objects with a next link.
+    description: The JSON-serialized array of IotHubDescription objects with a next link.
     properties:
       nextLink:
         description: The next link.
         readOnly: true
         type: string
       value:
-        description: The list of IotHubDescription.
+        description: The array of IotHubDescription objects.
         items:
           $ref: '#/definitions/IotHubDescription'
         type: array
     type: object
   IotHubNameAvailabilityInfo:
-    description: The properties indicating whether a given iothub name is available.
+    description: The properties indicating whether a given IoT hub name is available.
     properties:
       message:
-        description: The message describing the detailed reason.
+        description: The detailed reason message.
         type: string
       nameAvailable:
         description: The value which indicates whether the provided name is available.
+        readOnly: true
         type: boolean
       reason:
         description: The reason for unavailability.
         enum:
           - Invalid
           - AlreadyExists
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
           name: IotHubNameUnavailabilityReason
     type: object
   IotHubProperties:
-    description: The Iot Hub properties.
+    description: The properties of an IoT hub.
     properties:
       authorizationPolicies:
-        description: The authorization rules.
+        description: The shared access policies you can use to secure a connection to the IoT hub.
         items:
           $ref: '#/definitions/SharedAccessSignatureAuthorizationRule'
         type: array
       cloudToDevice:
         $ref: '#/definitions/CloudToDeviceProperties'
       comments:
-        description: The comments.
+        description: Comments.
         type: string
       enableFileUploadNotifications:
-        description: The flag which indicates whether file upload notification should be enabled. This is optional at iot hub level. When enabled upload notifications will be available.
+        description: 'If True, file upload notifications are enabled.'
         type: boolean
       eventHubEndpoints:
         additionalProperties:
           $ref: '#/definitions/EventHubProperties'
-        description: The event hub endpoint properties.
+        description: The Event Hub-compatible endpoint properties. The possible keys to this dictionary are events and operationsMonitoringEvents. Both of these keys have to be present in the dictionary while making create or update calls for the IoT hub.
         type: object
       features:
-        description: The Capabilities/Features that need to be enabled for the Hub.
+        description: The capabilities and features enabled for the IoT hub.
         enum:
           - None
           - DeviceManagement
@@ -945,6 +964,7 @@ definitions:
           name: Capabilities
       hostName:
         description: The name of the host.
+        readOnly: true
         type: string
       ipFilterRules:
         description: The IP filter rules.
@@ -954,46 +974,53 @@ definitions:
       messagingEndpoints:
         additionalProperties:
           $ref: '#/definitions/MessagingEndpointProperties'
-        description: The list of messaging end points configured.
+        description: The messaging endpoint properties for the file upload notification queue.
         type: object
       operationsMonitoringProperties:
         $ref: '#/definitions/OperationsMonitoringProperties'
+      provisioningState:
+        description: The provisioning state.
+        readOnly: true
+        type: string
       storageEndpoints:
         additionalProperties:
           $ref: '#/definitions/StorageEndpointProperties'
-        description: The list of storage end points where files can be uploaded. Currently only one storage account can be configured.
+        description: 'The list of Azure Storage endpoints where you can upload files. Currently you can configure only one Azure Storage account and that MUST have its key as $default. Specifying more than one storage account causes an error to be thrown. Not specifying a value for this property when the enableFileUploadNotifications property is set to True, causes an error to be thrown.'
         type: object
     type: object
   IotHubQuotaMetricInfo:
-    description: The properties related to quota metrics.
+    description: Quota metrics properties.
     properties:
       CurrentValue:
         description: The current value for the quota metric.
         format: int64
+        readOnly: true
         type: integer
       MaxValue:
         description: The maximum value of the quota metric.
         format: int64
+        readOnly: true
         type: integer
       Name:
         description: The name of the quota metric.
+        readOnly: true
         type: string
     type: object
   IotHubQuotaMetricInfoListResult:
-    description: The list of IotHubQuotaMetricInfo objects with a next link.
+    description: The JSON-serialized array of IotHubQuotaMetricInfo objects with a next link.
     properties:
       nextLink:
         description: The next link.
         readOnly: true
         type: string
       value:
-        description: The list of IotHubQuotaMetricInfo.
+        description: The array of quota metrics objects.
         items:
           $ref: '#/definitions/IotHubQuotaMetricInfo'
         type: array
     type: object
   IotHubSkuDescription:
-    description: The properties related to the Sku.
+    description: SKU properties.
     properties:
       capacity:
         $ref: '#/definitions/IotHubCapacity'
@@ -1003,29 +1030,32 @@ definitions:
         type: string
       sku:
         $ref: '#/definitions/IotHubSkuInfo'
+    required:
+      - sku
+      - capacity
     type: object
   IotHubSkuDescriptionListResult:
-    description: The list of IotHubSkuDescription objects with a next link.
+    description: The JSON-serialized array of IotHubSkuDescription objects with a next link.
     properties:
       nextLink:
         description: The next link.
         readOnly: true
         type: string
       value:
-        description: The list of IotHubSkuDescription.
+        description: The array of IotHubSkuDescription.
         items:
           $ref: '#/definitions/IotHubSkuDescription'
         type: array
     type: object
   IotHubSkuInfo:
-    description: The Sku related information for the hub.
+    description: Information about the SKU of the IoT hub.
     properties:
       capacity:
-        description: 'The number of units being provisioned. Range of values [For F1: 1-1, S1: 1-200, S2: 1-200, S3: 1-10]. To go above this range, call support.'
+        description: 'The number of provisioned IoT Hub units. See: https://docs.microsoft.com/azure/azure-subscription-service-limits#iot-hub-limits.'
         format: int64
         type: integer
       name:
-        description: The name of the Sku.
+        description: The name of the SKU.
         enum:
           - F1
           - S1
@@ -1036,7 +1066,7 @@ definitions:
           modelAsString: true
           name: IotHubSku
       tier:
-        description: The tier.
+        description: The billing tier for the IoT hub.
         enum:
           - Free
           - Standard
@@ -1045,12 +1075,15 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: IotHubSkuTier
+    required:
+      - name
+      - capacity
     type: object
   IpFilterRule:
-    description: IP filter Rule
+    description: The IP filter rules for the IoT hub.
     properties:
       action:
-        description: The action desired - accept or reject.
+        description: The desired action for requests captured by this rule.
         enum:
           - Accept
           - Reject
@@ -1062,7 +1095,7 @@ definitions:
         description: The name of the IP filter rule.
         type: string
       ipMask:
-        description: A string containing the IPAddress/range in CIDR notation.
+        description: A string that contains the IP address range in CIDR notation for the rule.
         type: string
     required:
       - filterName
@@ -1070,30 +1103,32 @@ definitions:
       - ipMask
     type: object
   JobResponse:
-    description: The properties describing a Job Response.
+    description: The properties of the Job Response object.
     properties:
-      deviceId:
-        description: The deviceId related to this response.
-        type: string
       endTimeUtc:
-        description: Represents the time the job stopped processing.
-        format: date-time
+        description: The time the job stopped processing.
+        format: date-time-rfc1123
+        readOnly: true
         type: string
       failureReason:
-        description: 'If status == failure, this represents a string containing the reason.'
+        description: 'If status == failed, this string containing the reason for the failure.'
+        readOnly: true
         type: string
       jobId:
         description: The job identifier.
+        readOnly: true
         type: string
       parentJobId:
-        description: 'The jobId of the parent job, if any.'
+        description: 'The job identifier of the parent job, if any.'
+        readOnly: true
         type: string
       startTimeUtc:
-        description: Start time of the Job.
-        format: date-time
+        description: The start time of the Job.
+        format: date-time-rfc1123
+        readOnly: true
         type: string
       status:
-        description: Status of the Job.
+        description: The status of the job.
         enum:
           - unknown
           - enqueued
@@ -1101,15 +1136,17 @@ definitions:
           - completed
           - failed
           - cancelled
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
           name: JobStatus
       statusMessage:
         description: The status message for the job.
+        readOnly: true
         type: string
       type:
-        description: The type of job to execute.
+        description: The type of the job.
         enum:
           - unknown
           - export
@@ -1121,61 +1158,63 @@ definitions:
           - rebootDevice
           - factoryResetDevice
           - firmwareUpdate
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
           name: JobType
     type: object
   JobResponseListResult:
-    description: The list of JobResponse objects with a next link.
+    description: The JSON-serialized array of JobResponse objects with a next link.
     properties:
       nextLink:
         description: The next link.
         readOnly: true
         type: string
       value:
-        description: The list of JobResponse.
+        description: The array of JobResponse objects.
         items:
           $ref: '#/definitions/JobResponse'
         type: array
     type: object
   MessagingEndpointProperties:
-    description: The properties of the Messaging Endpoints used by this IoT Hub.
+    description: The properties of the messaging endpoints used by this IoT hub.
     properties:
       lockDurationAsIso8601:
-        description: 'The lock duration. Range: 5 Sec (PT5S) - 5 Min (PT5M).'
+        description: 'The lock duration. See: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-file-upload.'
         format: duration
         type: string
       maxDeliveryCount:
-        description: 'The max delivery count. Range: 1-100.'
+        description: 'The number of times the IoT hub attempts to deliver a message. See: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-file-upload.'
         format: int32
         maximum: 100
         minimum: 1
         type: integer
       ttlAsIso8601:
-        description: 'The time to live. Range: 1 Min (PT1M) - 2 Days (P2D).'
+        description: 'The period of time for which a message is available to consume before it is expired by the IoT hub. See: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-file-upload.'
         format: duration
         type: string
     type: object
   OperationInputs:
-    description: OperationInputs.
+    description: Input values.
     properties:
       Name:
-        description: The name of the iot hub.
+        description: The name of the IoT hub to check.
         type: string
     required:
       - Name
     type: object
   OperationsMonitoringProperties:
-    description: The Operation Monitoring properties.
+    description: 'The operations monitoring properties for the IoT hub. The possible keys to the dictionary are Connections, DeviceTelemetry, C2DCommands, DeviceIdentityOperations, FileUploadOperations.'
     properties:
       events:
         additionalProperties:
-          description: The Operation Monitoring Level.
+          description: The operations monitoring level.
           enum:
             - None
             - Error
             - Information
+            - 'Error, Information'
           type: string
           x-ms-enum:
             modelAsString: true
@@ -1183,102 +1222,61 @@ definitions:
         type: object
     type: object
   RegistryStatistics:
-    description: The properties related to the registry statistics.
+    description: Identity registry statistics.
     properties:
       disabledDeviceCount:
-        description: The disabled device count.
+        description: The count of disabled devices in the identity registry.
         format: int64
+        readOnly: true
         type: integer
       enabledDeviceCount:
-        description: The enabled device count.
+        description: The count of enabled devices in the identity registry.
         format: int64
+        readOnly: true
         type: integer
       totalDeviceCount:
-        description: The total device count.
+        description: The total count of devices in the identity registry.
         format: int64
+        readOnly: true
         type: integer
     type: object
   Resource:
     properties:
       id:
-        description: The Resource Id.
+        description: The resource identifier.
         readOnly: true
         type: string
       location:
-        description: The Resource location.
+        description: The resource location.
         type: string
       name:
-        description: The Resource name.
+        description: The resource name.
         pattern: '^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$'
         readOnly: true
         type: string
       tags:
         additionalProperties:
           type: string
-        description: The Resource tags.
+        description: The resource tags.
         type: object
       type:
-        description: The Resource type.
+        description: The resource type.
         readOnly: true
         type: string
+    required:
+      - location
     x-ms-azure-resource: true
-  SharedAccessAuthorizationRule:
-    properties:
-      ClaimType:
-        description: The claim type.
-        type: string
-      ClaimValue:
-        description: The claim value.
-        type: string
-      CreatedTime:
-        description: The created time.
-        format: date-time
-        type: string
-      IssuerName:
-        description: The issuer name.
-        type: string
-      KeyName:
-        description: The key name.
-        type: string
-      ModifiedTime:
-        description: The modified time.
-        format: date-time
-        type: string
-      PrimaryKey:
-        description: The primary key.
-        type: string
-      Revision:
-        description: The revision.
-        format: int64
-        type: integer
-      Rights:
-        description: The rights.
-        items:
-          enum:
-            - Manage
-            - Send
-            - Listen
-            - ManageNotificationHub
-          type: string
-          x-ms-enum:
-            modelAsString: false
-            name: SBAccessRights
-        type: array
-      SecondaryKey:
-        description: The secondary key.
-        type: string
-    type: object
   SharedAccessSignatureAuthorizationRule:
-    description: The properties that describe the keys to access the IotHub artifacts.
+    description: The properties of an IoT hub shared access policy.
     properties:
       keyName:
-        description: The name of the key.
+        description: The name of the shared access policy.
         type: string
       primaryKey:
         description: The primary key.
         type: string
       rights:
-        description: The access rights.
+        description: The permissions assigned to the shared access policy.
         enum:
           - RegistryRead
           - RegistryWrite
@@ -1302,31 +1300,37 @@ definitions:
       secondaryKey:
         description: The secondary key.
         type: string
+    required:
+      - keyName
+      - rights
     type: object
   SharedAccessSignatureAuthorizationRuleListResult:
-    description: The list of authorization rules with a next link.
+    description: The list of shared access policies with a next link.
     properties:
       nextLink:
         description: The next link.
         readOnly: true
         type: string
       value:
-        description: The list of authorization rules.
+        description: The list of shared access policies.
         items:
           $ref: '#/definitions/SharedAccessSignatureAuthorizationRule'
         type: array
     type: object
   StorageEndpointProperties:
-    description: The properties of the Storage Endpoint for file upload.
+    description: The properties of the Azure Storage endpoint for file upload.
     properties:
       connectionString:
-        description: The account key credentials for storage account selected by customer for uploading files.
+        description: The connection string for the Azure Storage account to which files are uploaded.
         type: string
       containerName:
-        description: The root container name where all files will be uploaded.
+        description: The name of the root container where you upload files. The container need not exist but should be creatable using the connectionString specified.
         type: string
       sasTtlAsIso8601:
-        description: 'SAS time to live. Range: 1 Min (PT1M) - 1 Day (P1D).'
+        description: 'The period of time for which the the SAS URI generated by IoT Hub for file upload is valid. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-file-upload#file-upload-notification-configuration-options.'
         format: duration
         type: string
+    required:
+      - connectionString
+      - containerName
     type: object

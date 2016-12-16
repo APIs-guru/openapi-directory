@@ -4399,6 +4399,84 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/networks/{network}/addPeering':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds a peering to the specified network.
+      operationId: compute.networks.addPeering
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the network resource to add peering to.
+          in: path
+          name: network
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NetworksAddPeeringRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - networks
+  '/{project}/global/networks/{network}/removePeering':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Removes a peering from the specified network.
+      operationId: compute.networks.removePeering
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the network resource to remove peering from.
+          in: path
+          name: network
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NetworksRemovePeeringRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - networks
   '/{project}/global/networks/{network}/switchToCustomMode':
     parameters:
       - $ref: '#/parameters/alt'
@@ -16074,6 +16152,9 @@ definitions:
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
+      failover:
+        description: This field designates whether this is a failover backend. More than one failover backend can be configured for a given BackendService.
+        type: boolean
       group:
         description: |-
           The fully-qualified URL of a zonal Instance Group resource. This instance group defines the list of instances that serve traffic. Member virtual machine instances from each instance group must live in the same zone as the instance group itself. No two backends in a backend service are allowed to use same Instance Group resource.
@@ -17469,6 +17550,7 @@ definitions:
         description: 'The type of supported feature. Currenty only VIRTIO_SCSI_MULTIQUEUE is supported. For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image. This value is purely informational and does not enable or disable any features.'
         enum:
           - FEATURE_TYPE_UNSPECIFIED
+          - MULTI_IP_SUBNET
           - VIRTIO_SCSI_MULTIQUEUE
           - WINDOWS
         type: string
@@ -17595,7 +17677,7 @@ definitions:
         format: int32
         type: integer
       type:
-        description: 'Specifies the type of the healthCheck, either TCP, UDP, SSL, HTTP, HTTPS or HTTP2. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.'
+        description: 'Specifies the type of the healthCheck, either TCP, SSL, HTTP or HTTPS. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.'
         enum:
           - HTTP
           - HTTP2
@@ -19516,6 +19598,24 @@ definitions:
         description: '[Output Only] Details about the current state of the peering.'
         type: string
     type: object
+  NetworksAddPeeringRequest:
+    properties:
+      autoCreateRoutes:
+        description: Whether Google Compute Engine manages the routes automatically.
+        type: boolean
+      name:
+        description: 'Name of the peering, which should conform to RFC1035.'
+        type: string
+      peerNetwork:
+        description: 'URL of the peer network. It can be either full URL or partial URL. The peer network may belong to a different project. If the partial URL does not contain project, it is assumed that the peer network is in the same project as the current network.'
+        type: string
+    type: object
+  NetworksRemovePeeringRequest:
+    properties:
+      name:
+        description: 'Name of the peering, which should conform to RFC1035.'
+        type: string
+    type: object
   Operation:
     description: 'An Operation resource, used to manage asynchronous API requests.'
     properties:
@@ -19957,6 +20057,7 @@ definitions:
           - TARGET_SSL_PROXIES
           - TARGET_TCP_PROXIES
           - TARGET_VPN_GATEWAYS
+          - TOTAL_CPUS
           - URL_MAPS
           - VPN_TUNNELS
         type: string
@@ -20888,7 +20989,7 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       privateKey:
-        description: A write-only private key in PEM format. Only insert RPCs will include this field.
+        description: A write-only private key in PEM format. Only insert requests will include this field.
         type: string
       selfLink:
         description: '[Output only] Server-defined URL for the resource.'

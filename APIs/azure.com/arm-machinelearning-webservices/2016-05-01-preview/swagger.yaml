@@ -59,13 +59,13 @@ paths:
       description: Gets the web services in the specified subscription.
       operationId: WebServices_List
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/APIVersionParameter'
         - description: Continuation token for pagination.
           in: query
           name: $skiptoken
           required: false
           type: string
+        - $ref: '#/parameters/APIVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: 'Success. The response includes a paginated array of web service objects and a URI to the next set of results, if any. Note that the web service objects are sparsely populated to conserve space in the response content. To get the full web service object, call the GET operation on the web service.'
@@ -73,19 +73,21 @@ paths:
             $ref: '#/definitions/PaginatedWebServicesList'
       tags:
         - WebServices
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices':
     get:
       description: Gets the web services in the specified resource group.
-      operationId: WebServices_ListInResourceGroup
+      operationId: WebServices_ListByResourceGroup
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/APIVersionParameter'
         - description: Continuation token for pagination.
           in: query
           name: $skiptoken
           required: false
           type: string
+        - $ref: '#/parameters/APIVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: 'Success. The response includes a paginated array of web service objects and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/. Note that the web service objects are sparsely populated to conserve space in the response content. To get the full web service object, call the GET operation on the web service.'
@@ -93,18 +95,22 @@ paths:
             $ref: '#/definitions/PaginatedWebServicesList'
       tags:
         - WebServices
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}':
     delete:
       description: Deletes the specified web service.
       operationId: WebServices_Remove
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/WebServiceNameParameter'
         - $ref: '#/parameters/APIVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '202':
           description: Accepted. Note that a 202 status is returned even if the service did not exist.
+        '204':
+          description: No Content.
       tags:
         - WebServices
       x-ms-long-running-operation: true
@@ -112,10 +118,10 @@ paths:
       description: 'Gets the Web Service Definiton as specified by a subscription, resource group, and name. Note that the storage credentials and web service keys are not returned by this call. To get the web service access keys, call List Keys.'
       operationId: WebServices_Get
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/WebServiceNameParameter'
         - $ref: '#/parameters/APIVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: 'Success.  The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more informationFor more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.'
@@ -127,16 +133,16 @@ paths:
       description: 'Modifies an existing web service resource. The PATCH API call is an asynchronous operation. To determine whether it has completed successfully, you must perform a Get operation.'
       operationId: WebServices_Patch
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/WebServiceNameParameter'
-        - $ref: '#/parameters/APIVersionParameter'
         - description: The payload to use to patch the web service.
           in: body
           name: patchPayload
           required: true
           schema:
             $ref: '#/definitions/WebService'
+        - $ref: '#/parameters/APIVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: 'Success. The response payload is identical to the response payload that is returned by the GET operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.'
@@ -149,16 +155,16 @@ paths:
       description: 'Create or update a web service. This call will overwrite an existing web service. Note that there is no warning or confirmation. This is a nonrecoverable operation. If your intent is to create a new web service, call the Get operation first to verify that it does not exist.'
       operationId: WebServices_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/WebServiceNameParameter'
-        - $ref: '#/parameters/APIVersionParameter'
         - description: The payload that is used to create or update the web service.
           in: body
           name: createOrUpdatePayload
           required: true
           schema:
             $ref: '#/definitions/WebService'
+        - $ref: '#/parameters/APIVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: 'Success. This response is returned for an update web service operation. The response payload is identical to the response payload that is returned by the GET operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.'
@@ -176,10 +182,10 @@ paths:
       description: Gets the access keys for the specified web service.
       operationId: WebServices_ListKeys
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/WebServiceNameParameter'
         - $ref: '#/parameters/APIVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Success.

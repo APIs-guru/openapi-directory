@@ -528,9 +528,7 @@ definitions:
           accepted.<br>
           **Current Language Restrictions:**
 
-           * Only English, Spanish, and Japanese textual content
-             are supported, with the following additional restriction:
-             * `analyzeSentiment` only supports English text.
+           * Only English, Spanish, and Japanese textual content are supported.
           If the language (either specified by the caller or automatically detected)
           is not supported by the called API method, an `INVALID_ARGUMENT` error
           is returned.
@@ -789,7 +787,7 @@ definitions:
       score:
         description: |-
           Sentiment score between -1.0 (negative sentiment) and 1.0
-          (positive sentiment.)
+          (positive sentiment).
         format: float
         type: number
     type: object
@@ -888,9 +886,7 @@ definitions:
         $ref: '#/definitions/DependencyEdge'
         description: Dependency tree parse for this token.
       lemma:
-        description: |-
-          <a href="https://en.wikipedia.org/wiki/Lemma_(morphology)">
-          Lemma</a> of the token.
+        description: '[Lemma](https://en.wikipedia.org/wiki/Lemma_%28morphology%29) of the token.'
         type: string
       partOfSpeech:
         $ref: '#/definitions/PartOfSpeech'

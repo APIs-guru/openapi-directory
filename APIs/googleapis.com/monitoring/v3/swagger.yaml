@@ -115,10 +115,10 @@ tags:
 paths:
   '/v3/{name}':
     delete:
-      description: Deletes a metric descriptor. Only user-created custom metrics (/monitoring/custom-metrics) can be deleted.
+      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
       operationId: monitoring.projects.metricDescriptors.delete
       parameters:
-        - description: 'The metric descriptor on which to execute the request. The format is &quot;projects/{project_id_or_number}/metricDescriptors/{metric_id}&quot;. An example of {metric_id} is: &quot;custom.googleapis.com/my_test_metric&quot;.'
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
           in: path
           name: name
           required: true
@@ -140,7 +140,7 @@ paths:
       description: Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
       operationId: monitoring.projects.monitoredResourceDescriptors.get
       parameters:
-        - description: 'The monitored resource descriptor to get. The format is &quot;projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}&quot;. The {resource_type} is a predefined type, such as cloudsql_database.'
+        - description: 'The monitored resource descriptor to get. The format is "projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}". The {resource_type} is a predefined type, such as cloudsql_database.'
           in: path
           name: name
           required: true
@@ -180,7 +180,7 @@ paths:
       description: Updates an existing group. You can change any group attributes except name.
       operationId: monitoring.projects.groups.update
       parameters:
-        - description: 'Output only. The name of this group. The format is &quot;projects/{project_id_or_number}/groups/{group_id}&quot;. When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.'
+        - description: 'Output only. The name of this group. The format is "projects/{project_id_or_number}/groups/{group_id}". When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.'
           in: path
           name: name
           required: true
@@ -225,7 +225,7 @@ paths:
       description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside class="caution">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>'
       operationId: monitoring.projects.collectdTimeSeries.create
       parameters:
-        - description: The project in which to create the time series. The format is &quot;projects/PROJECT_ID_OR_NUMBER&quot;.
+        - description: The project in which to create the time series. The format is "projects/PROJECT_ID_OR_NUMBER".
           in: path
           name: name
           required: true
@@ -254,13 +254,13 @@ paths:
       description: Lists the existing groups.
       operationId: monitoring.projects.groups.list
       parameters:
-        - description: 'The project whose groups are to be listed. The format is &quot;projects/{project_id_or_number}&quot;.'
+        - description: 'The project whose groups are to be listed. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'A group name: &quot;projects/{project_id_or_number}/groups/{group_id}&quot;. Returns the descendants of the specified group. This is a superset of the results returned by the childrenOfGroup filter, and includes children-of-children, and so forth.'
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns the descendants of the specified group. This is a superset of the results returned by the childrenOfGroup filter, and includes children-of-children, and so forth.'
           in: query
           name: descendantsOfGroup
           type: string
@@ -268,11 +268,11 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: 'A group name: &quot;projects/{project_id_or_number}/groups/{group_id}&quot;. Returns groups whose parentName field contains the group name. If no groups have this parent, the results are empty.'
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups whose parentName field contains the group name. If no groups have this parent, the results are empty.'
           in: query
           name: childrenOfGroup
           type: string
-        - description: 'A group name: &quot;projects/{project_id_or_number}/groups/{group_id}&quot;. Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.'
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.'
           in: query
           name: ancestorsOfGroup
           type: string
@@ -312,7 +312,7 @@ paths:
       description: Creates a new group.
       operationId: monitoring.projects.groups.create
       parameters:
-        - description: 'The project in which to create the group. The format is &quot;projects/{project_id_or_number}&quot;.'
+        - description: 'The project in which to create the group. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
@@ -343,15 +343,15 @@ paths:
       description: Lists the monitored resources that are members of a group.
       operationId: monitoring.projects.groups.members.list
       parameters:
-        - description: 'The group whose members are listed. The format is &quot;projects/{project_id_or_number}/groups/{group_id}&quot;.'
+        - description: 'The group whose members are listed. The format is "projects/{project_id_or_number}/groups/{group_id}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
         - description: |
-            An optional list filter (/monitoring/api/learn_more#filtering) describing the members to be returned. The filter may reference the type, labels, and metadata of monitored resources that comprise the group. For example, to return only resources representing Compute Engine VM instances, use this filter:
-            resource.type = &quot;gce_instance&quot;
+            An optional list filter describing the members to be returned. The filter may reference the type, labels, and metadata of monitored resources that comprise the group. For example, to return only resources representing Compute Engine VM instances, use this filter:
+            resource.type = "gce_instance"
           in: query
           name: filter
           type: string
@@ -404,7 +404,7 @@ paths:
       description: Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.metricDescriptors.list
       parameters:
-        - description: 'The project on which to execute the request. The format is &quot;projects/{project_id_or_number}&quot;.'
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
@@ -415,8 +415,8 @@ paths:
           name: pageSize
           type: integer
         - description: |
-            If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter (/monitoring/api/v3/filters) specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics (/monitoring/custom-metrics):
-            metric.type = starts_with(&quot;custom.googleapis.com/&quot;)
+            If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics:
+            metric.type = starts_with("custom.googleapis.com/")
           in: query
           name: filter
           type: string
@@ -455,10 +455,10 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Creates a new metric descriptor. User-created metric descriptors define custom metrics (/monitoring/custom-metrics).
+      description: Creates a new metric descriptor. User-created metric descriptors define custom metrics.
       operationId: monitoring.projects.metricDescriptors.create
       parameters:
-        - description: 'The project on which to execute the request. The format is &quot;projects/{project_id_or_number}&quot;.'
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
@@ -487,7 +487,7 @@ paths:
       description: Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.monitoredResourceDescriptors.list
       parameters:
-        - description: 'The project on which to execute the request. The format is &quot;projects/{project_id_or_number}&quot;.'
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
@@ -498,8 +498,8 @@ paths:
           name: pageSize
           type: integer
         - description: |
-            An optional filter (/monitoring/api/v3/filters) describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
-            resource.type = starts_with(&quot;gce_&quot;) AND resource.label:id
+            An optional filter describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
+            resource.type = starts_with("gce_") AND resource.label:id
           in: query
           name: filter
           type: string
@@ -549,14 +549,14 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |
-            A monitoring filter (/monitoring/api/v3/filters) that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example:
-            metric.type = &quot;compute.googleapis.com/instance/cpu/usage_time&quot; AND
-                metric.label.instance_name = &quot;my-instance-name&quot;
+            A monitoring filter that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example:
+            metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
+                metric.label.instance_name = "my-instance-name"
           in: query
           name: filter
           type: string
         - collectionFormat: multi
-          description: 'The set of fields to preserve when crossSeriesReducer is specified. The groupByFields determine how the time series are partitioned into subsets prior to applying the aggregation function. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The crossSeriesReducer is applied to each subset of time series. Fields not specified in groupByFields are aggregated away. If groupByFields is not specified, the time series are aggregated into a single output time series. If crossSeriesReducer is not defined, this field is ignored.'
+          description: 'The set of fields to preserve when crossSeriesReducer is specified. The groupByFields determine how the time series are partitioned into subsets prior to applying the aggregation function. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The crossSeriesReducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in groupByFields are aggregated away. If groupByFields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If crossSeriesReducer is not defined, this field is ignored.'
           in: query
           items:
             type: string
@@ -665,7 +665,7 @@ paths:
       description: 'Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.'
       operationId: monitoring.projects.timeSeries.create
       parameters:
-        - description: 'The project on which to execute the request. The format is &quot;projects/{project_id_or_number}&quot;.'
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
@@ -691,7 +691,7 @@ paths:
         - projects
 definitions:
   BucketOptions:
-    description: 'A Distribution may optionally contain a histogram of the values in the population. The histogram is given in bucket_counts as counts of values that fall into one of a sequence of non-overlapping buckets. The sequence of buckets is described by bucket_options.A bucket specifies an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket is strictly greater than the lower bound.The sequence of N buckets for a Distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.BucketOptions describes bucket boundaries in one of three ways. Two describe the boundaries by giving parameters for a formula to generate boundaries and one gives the bucket boundaries explicitly.If bucket_options is not given, then no bucket_counts may be given.'
+    description: 'A Distribution may optionally contain a histogram of the values in the population. The histogram is given in bucket_counts as counts of values that fall into one of a sequence of non-overlapping buckets. The sequence of buckets is described by bucket_options.A bucket specifies an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket is strictly greater than the lower bound.The sequence of N buckets for a Distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.BucketOptions describes bucket boundaries in one of three ways. Two describe the boundaries by giving parameters for a formula to generate boundaries and one gives the bucket boundaries explicitly.If bucket_options is not given, then no bucket_counts may be given.'
     properties:
       explicitBuckets:
         $ref: '#/definitions/Explicit'
@@ -713,23 +713,23 @@ definitions:
       metadata:
         additionalProperties:
           $ref: '#/definitions/TypedValue'
-        description: 'The measurement metadata. Example: &quot;process_id&quot; -&gt; 12345'
+        description: 'The measurement metadata. Example: "process_id" -> 12345'
         type: object
       plugin:
-        description: 'The name of the plugin. Example: &quot;disk&quot;.'
+        description: 'The name of the plugin. Example: "disk".'
         type: string
       pluginInstance:
-        description: 'The instance name of the plugin Example: &quot;hdcl&quot;.'
+        description: 'The instance name of the plugin Example: "hdcl".'
         type: string
       startTime:
         description: The start time of the interval.
         format: google-datetime
         type: string
       type:
-        description: 'The measurement type. Example: &quot;memory&quot;.'
+        description: 'The measurement type. Example: "memory".'
         type: string
       typeInstance:
-        description: 'The measurement type instance. Example: &quot;used&quot;.'
+        description: 'The measurement type instance. Example: "used".'
         type: string
       values:
         description: The measured values during this time interval. Each value must have a different dataSourceName.
@@ -741,7 +741,7 @@ definitions:
     description: A single data point from a collectd-based plugin.
     properties:
       dataSourceName:
-        description: 'The data source for the collectd value. For example there are two data sources for network measurements: &quot;rx&quot; and &quot;tx&quot;.'
+        description: 'The data source for the collectd value. For example there are two data sources for network measurements: "rx" and "tx".'
         type: string
       dataSourceType:
         description: The type of measurement.
@@ -765,7 +765,7 @@ definitions:
           $ref: '#/definitions/CollectdPayload'
         type: array
       collectdVersion:
-        description: 'The version of collectd that collected the data. Example: &quot;5.3.0-192.el6&quot;.'
+        description: 'The version of collectd that collected the data. Example: "5.3.0-192.el6".'
         type: string
       resource:
         $ref: '#/definitions/MonitoredResource'
@@ -821,7 +821,7 @@ definitions:
     properties: {}
     type: object
   Explicit:
-    description: 'A set of buckets with arbitrary widths.Defines size(bounds) + 1 (= N) buckets with these boundaries for bucket i:Upper bound (0 &lt;= i &lt; N-1): boundsi  Lower bound (1 &lt;= i &lt; N); boundsi - 1There must be at least one element in bounds. If bounds has only one element, there are no finite buckets, and that single element is the common boundary of the overflow and underflow buckets.'
+    description: 'A set of buckets with arbitrary widths.Defines size(bounds) + 1 (= N) buckets with these boundaries for bucket i:Upper bound (0 <= i < N-1): boundsi  Lower bound (1 <= i < N); boundsi - 1There must be at least one element in bounds. If bounds has only one element, there are no finite buckets, and that single element is the common boundary of the overflow and underflow buckets.'
     properties:
       bounds:
         description: The values must be monotonically increasing.
@@ -831,7 +831,7 @@ definitions:
         type: array
     type: object
   Exponential:
-    description: 'Specify a sequence of buckets that have a width that is proportional to the value of the lower bound. Each bucket represents a constant relative uncertainty on a specific value in the bucket.Defines num_finite_buckets + 2 (= N) buckets with these boundaries for bucket i:Upper bound (0 &lt;= i &lt; N-1): scale * (growth_factor ^ i).  Lower bound (1 &lt;= i &lt; N): scale * (growth_factor ^ (i - 1)).'
+    description: 'Specify a sequence of buckets that have a width that is proportional to the value of the lower bound. Each bucket represents a constant relative uncertainty on a specific value in the bucket.Defines num_finite_buckets + 2 (= N) buckets with these boundaries for bucket i:Upper bound (0 <= i < N-1): scale * (growth_factor ^ i).  Lower bound (1 <= i < N): scale * (growth_factor ^ (i - 1)).'
     properties:
       growthFactor:
         description: Must be greater than 1.
@@ -906,11 +906,11 @@ definitions:
         description: Whether to use alternative packed wire representation.
         type: boolean
       typeUrl:
-        description: 'The field type URL, without the scheme, for message or enumeration types. Example: &quot;type.googleapis.com/google.protobuf.Timestamp&quot;.'
+        description: 'The field type URL, without the scheme, for message or enumeration types. Example: "type.googleapis.com/google.protobuf.Timestamp".'
         type: string
     type: object
   Group:
-    description: 'The description of a dynamic collection of monitored resources. Each group has a filter that is matched against monitored resources and their associated metadata. If a group''s filter matches an available monitored resource, then that resource is a member of that group. Groups can contain any number of monitored resources, and each monitored resource can be a member of any number of groups.Groups can be nested in parent-child hierarchies. The parentName field identifies an optional parent for each group. If a group has a parent, then the only monitored resources available to be matched by the group''s filter are the resources contained in the parent group. In other words, a group contains the monitored resources that match its filter and the filters of all the group''s ancestors. A group without a parent can contain any monitored resource.For example, consider an infrastructure running a set of instances with two user-defined tags: &quot;environment&quot; and &quot;role&quot;. A parent group has a filter, environment=&quot;production&quot;. A child of that parent group has a filter, role=&quot;transcoder&quot;. The parent group contains all instances in the production environment, regardless of their roles. The child group contains instances that have the transcoder role and are in the production environment.The monitored resources contained in a group can change at any moment, depending on what resources exist and what filters are associated with the group and its ancestors.'
+    description: 'The description of a dynamic collection of monitored resources. Each group has a filter that is matched against monitored resources and their associated metadata. If a group''s filter matches an available monitored resource, then that resource is a member of that group. Groups can contain any number of monitored resources, and each monitored resource can be a member of any number of groups.Groups can be nested in parent-child hierarchies. The parentName field identifies an optional parent for each group. If a group has a parent, then the only monitored resources available to be matched by the group''s filter are the resources contained in the parent group. In other words, a group contains the monitored resources that match its filter and the filters of all the group''s ancestors. A group without a parent can contain any monitored resource.For example, consider an infrastructure running a set of instances with two user-defined tags: "environment" and "role". A parent group has a filter, environment="production". A child of that parent group has a filter, role="transcoder". The parent group contains all instances in the production environment, regardless of their roles. The child group contains instances that have the transcoder role and are in the production environment.The monitored resources contained in a group can change at any moment, depending on what resources exist and what filters are associated with the group and its ancestors.'
     properties:
       displayName:
         description: 'A user-assigned name for this group, used only for display purposes.'
@@ -922,10 +922,10 @@ definitions:
         description: 'If true, the members of this group are considered to be a cluster. The system can perform additional analysis on groups that are clusters.'
         type: boolean
       name:
-        description: 'Output only. The name of this group. The format is &quot;projects/{project_id_or_number}/groups/{group_id}&quot;. When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.'
+        description: 'Output only. The name of this group. The format is "projects/{project_id_or_number}/groups/{group_id}". When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.'
         type: string
       parentName:
-        description: 'The name of the group''s parent, if it has one. The format is &quot;projects/{project_id_or_number}/groups/{group_id}&quot;. For groups with no parent, parentName is the empty string, &quot;&quot;.'
+        description: 'The name of the group''s parent, if it has one. The format is "projects/{project_id_or_number}/groups/{group_id}". For groups with no parent, parentName is the empty string, "".'
         type: string
     type: object
   LabelDescriptor:
@@ -946,7 +946,7 @@ definitions:
         type: string
     type: object
   Linear:
-    description: 'Specify a sequence of buckets that all have the same width (except overflow and underflow). Each bucket represents a constant absolute uncertainty on the specific value in the bucket.Defines num_finite_buckets + 2 (= N) buckets with these boundaries for bucket i:Upper bound (0 &lt;= i &lt; N-1): offset + (width * i).  Lower bound (1 &lt;= i &lt; N): offset + (width * (i - 1)).'
+    description: 'Specify a sequence of buckets that all have the same width (except overflow and underflow). Each bucket represents a constant absolute uncertainty on the specific value in the bucket.Defines num_finite_buckets + 2 (= N) buckets with these boundaries for bucket i:Upper bound (0 <= i < N-1): offset + (width * i).  Lower bound (1 <= i < N): offset + (width * (i - 1)).'
     properties:
       numFiniteBuckets:
         description: Must be greater than 0.
@@ -1062,13 +1062,13 @@ definitions:
       name:
         description: |
           The resource name of the metric descriptor. Depending on the implementation, the name typically includes: (1) the parent resource name that defines the scope of the metric type or of its data; and (2) the metric's URL-encoded type, which also appears in the type field of this descriptor. For example, following is the resource name of a custom metric within the GCP project 123456789:
-          &quot;projects/123456789/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount&quot;
+          "projects/123456789/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
         type: string
       type:
         description: |
           The metric type, including its DNS name prefix. The type is not URL-encoded. All user-defined metric types have the DNS name custom.googleapis.com. Metric types should use a natural hierarchical grouping. For example:
-          &quot;custom.googleapis.com/invoice/paid/amount&quot;
-          &quot;appengine.googleapis.com/http/server/response_latencies&quot;
+          "custom.googleapis.com/invoice/paid/amount"
+          "appengine.googleapis.com/http/server/response_latencies"
         type: string
       unit:
         description: |-
@@ -1101,14 +1101,14 @@ definitions:
           Ti tebi (2**40)GrammarThe grammar includes the dimensionless unit 1, such as 1/s.The grammar also includes these connectors:
           / division (as an infix operator, e.g. 1/s).
           . multiplication (as an infix operator, e.g. GBy.d)The grammar for a unit is as follows:
-          Expression = Component { &quot;.&quot; Component } { &quot;/&quot; Component } ;
+          Expression = Component { "." Component } { "/" Component } ;
 
           Component = [ PREFIX ] UNIT [ Annotation ]
                     | Annotation
-                    | &quot;1&quot;
+                    | "1"
                     ;
 
-          Annotation = &quot;{&quot; NAME &quot;}&quot; ;
+          Annotation = "{" NAME "}" ;
           Notes:
           Annotation is just a comment if it follows a UNIT and is  equivalent to 1 if it is used alone. For examples,  {requests}/s == 1/s, By{transmitted}/s == By/s.
           NAME is a sequence of non-blank printable ASCII characters not  containing '{' or '}'.
@@ -1127,51 +1127,51 @@ definitions:
     type: object
   MonitoredResource:
     description: |
-      An object representing a resource that can be used for monitoring, logging, billing, or other purposes. Examples include virtual machine instances, databases, and storage devices such as disks. The type field identifies a MonitoredResourceDescriptor object that describes the resource's schema. Information in the labels field identifies the actual resource and its attributes according to the schema. For example, a particular Compute Engine VM instance could be represented by the following object, because the MonitoredResourceDescriptor for &quot;gce_instance&quot; has labels &quot;instance_id&quot; and &quot;zone&quot;:
-      { &quot;type&quot;: &quot;gce_instance&quot;,
-        &quot;labels&quot;: { &quot;instance_id&quot;: &quot;12345678901234&quot;,
-                    &quot;zone&quot;: &quot;us-central1-a&quot; }}
+      An object representing a resource that can be used for monitoring, logging, billing, or other purposes. Examples include virtual machine instances, databases, and storage devices such as disks. The type field identifies a MonitoredResourceDescriptor object that describes the resource's schema. Information in the labels field identifies the actual resource and its attributes according to the schema. For example, a particular Compute Engine VM instance could be represented by the following object, because the MonitoredResourceDescriptor for "gce_instance" has labels "instance_id" and "zone":
+      { "type": "gce_instance",
+        "labels": { "instance_id": "12345678901234",
+                    "zone": "us-central1-a" }}
     properties:
       labels:
         additionalProperties:
           type: string
-        description: 'Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Cloud SQL databases use the labels &quot;database_id&quot; and &quot;zone&quot;.'
+        description: 'Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Cloud SQL databases use the labels "database_id" and "zone".'
         type: object
       type:
-        description: 'Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Cloud SQL database is &quot;cloudsql_database&quot;.'
+        description: 'Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Cloud SQL database is "cloudsql_database".'
         type: string
     type: object
   MonitoredResourceDescriptor:
-    description: 'An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of &quot;gce_instance&quot; and specifies the use of the labels &quot;instance_id&quot; and &quot;zone&quot; to identify particular VM instances.Different APIs can support different monitored resource types. APIs generally provide a list method that returns the monitored resource descriptors used by the API.'
+    description: 'An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of "gce_instance" and specifies the use of the labels "instance_id" and "zone" to identify particular VM instances.Different APIs can support different monitored resource types. APIs generally provide a list method that returns the monitored resource descriptors used by the API.'
     properties:
       description:
         description: Optional. A detailed description of the monitored resource type that might be used in documentation.
         type: string
       displayName:
-        description: 'Optional. A concise name for the monitored resource type that might be displayed in user interfaces. It should be a Title Cased Noun Phrase, without any article or other determiners. For example, &quot;Google Cloud SQL Database&quot;.'
+        description: 'Optional. A concise name for the monitored resource type that might be displayed in user interfaces. It should be a Title Cased Noun Phrase, without any article or other determiners. For example, "Google Cloud SQL Database".'
         type: string
       labels:
-        description: 'Required. A set of labels used to describe instances of this monitored resource type. For example, an individual Google Cloud SQL database is identified by values for the labels &quot;database_id&quot; and &quot;zone&quot;.'
+        description: 'Required. A set of labels used to describe instances of this monitored resource type. For example, an individual Google Cloud SQL database is identified by values for the labels "database_id" and "zone".'
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
       name:
-        description: 'Optional. The resource name of the monitored resource descriptor: &quot;projects/{project_id}/monitoredResourceDescriptors/{type}&quot; where {type} is the value of the type field in this object and {project_id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format &quot;monitoredResourceDescriptors/{type}&quot;.'
+        description: 'Optional. The resource name of the monitored resource descriptor: "projects/{project_id}/monitoredResourceDescriptors/{type}" where {type} is the value of the type field in this object and {project_id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format "monitoredResourceDescriptors/{type}".'
         type: string
       type:
-        description: 'Required. The monitored resource type. For example, the type &quot;cloudsql_database&quot; represents databases in Google Cloud SQL. The maximum length of this value is 256 characters.'
+        description: 'Required. The monitored resource type. For example, the type "cloudsql_database" represents databases in Google Cloud SQL. The maximum length of this value is 256 characters.'
         type: string
     type: object
   Option:
     description: 'A protocol buffer option, which can be attached to a message, field, enumeration, etc.'
     properties:
       name:
-        description: 'The option''s name. For example, &quot;java_package&quot;.'
+        description: 'The option''s name. For protobuf built-in options (options defined in descriptor.proto), this is the short name. For example, "map_entry". For custom options, it should be the fully-qualified name. For example, "google.api.http".'
         type: string
       value:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.
-        description: 'The option''s value. For example, &quot;com.google.protobuf&quot;.'
+        description: 'The option''s value packed in an Any message. If the value is a primitive, the corresponding wrapper type defined in google/protobuf/wrappers.proto should be used. If the value is an enum, it should be stored as an int32 value using the google.protobuf.Int32Value type.'
         type: object
     type: object
   Point:
@@ -1200,7 +1200,7 @@ definitions:
     description: 'SourceContext represents information about the source of a protobuf element, like the file in which it is defined.'
     properties:
       fileName:
-        description: 'The path-qualified name of the .proto file that contained the associated protobuf element. For example: &quot;google/protobuf/source_context.proto&quot;.'
+        description: 'The path-qualified name of the .proto file that contained the associated protobuf element. For example: "google/protobuf/source_context.proto".'
         type: string
     type: object
   TimeInterval:

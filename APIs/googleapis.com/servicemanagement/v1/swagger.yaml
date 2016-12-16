@@ -111,8 +111,8 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: services
   - name: operations
+  - name: services
 paths:
   /v1/services:
     get:
@@ -968,7 +968,10 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Returns permissions that a caller has on the specified resource.
+      description: |-
+        Returns permissions that a caller has on the specified resource.
+        If the resource does not exist, this will return an empty set of
+        permissions, not a NOT_FOUND error.
       operationId: servicemanagement.services.testIamPermissions
       parameters:
         - description: |-
@@ -1068,9 +1071,16 @@ definitions:
     type: object
   AuditConfig:
     description: |-
-      Enables "data access" audit logging for a service and specifies a list
-      of members that are log-exempted.
+      Provides the configuration for non-admin_activity logging for a service.
+      Controls exemptions and specific log sub-types.
     properties:
+      auditLogConfigs:
+        description: |-
+          The configuration for each type of logging
+          Next ID: 4
+        items:
+          $ref: '#/definitions/AuditLogConfig'
+        type: array
       exemptedMembers:
         description: |-
           Specifies the identities that are exempted from "data access" audit
@@ -1081,10 +1091,28 @@ definitions:
         type: array
       service:
         description: |-
-          Specifies a service that will be enabled for "data access" audit
-          logging.
+          Specifies a service that will be enabled for audit logging.
           For example, `resourcemanager`, `storage`, `compute`.
           `allServices` is a special value that covers all services.
+        type: string
+    type: object
+  AuditLogConfig:
+    description: Provides the configuration for a sub-type of logging.
+    properties:
+      exemptedMembers:
+        description: |-
+          Specifies the identities that are exempted from this type of logging
+          Follows the same format of Binding.members.
+        items:
+          type: string
+        type: array
+      logType:
+        description: The log type that this config enables.
+        enum:
+          - LOG_TYPE_UNSPECIFIED
+          - ADMIN_READ
+          - DATA_WRITE
+          - DATA_READ
         type: string
     type: object
   AuthProvider:
@@ -1178,14 +1206,14 @@ definitions:
 
           name: calendar.googleapis.com
           authentication:
+            providers:
+            - id: google_calendar_auth
+              jwks_uri: https://www.googleapis.com/oauth2/v1/certs
+              issuer: https://securetoken.google.com
             rules:
             - selector: "*"
-              oauth:
-                canonical_scopes: https://www.googleapis.com/auth/calendar
-
-            - selector: google.calendar.Delegate
-              oauth:
-                canonical_scopes: https://www.googleapis.com/auth/calendar.read
+              requirements:
+                provider_id: google_calendar_auth
     properties:
       providers:
         description: Defines a set of authentication providers that a service supports.
@@ -1785,29 +1813,7 @@ definitions:
             # it to decide whether the subsequent cross-origin request is
             # allowed to proceed.
           - name: library-example.googleapis.com
-            apis: google.example.library.v1.Library
             allow_cors: true
-            # Below entry makes 'google.example.library.v1.Library'
-            # API be served from endpoint address
-            # google.example.library-example.v1.LibraryManager.
-          - name: library-manager.googleapis.com
-            apis: google.example.library.v1.LibraryManager
-            # BNS address for a borg job. Can specify a task by appending
-            # "/taskId" (e.g. "/0") to the job spec.
-
-      Example OpenAPI extension for endpoint with allow_cors set to true:
-
-          {
-            "swagger": "2.0",
-            "info": {
-              "description": "A simple..."
-            },
-            "host": "MY_PROJECT_ID.appspot.com",
-            "x-google-endpoints": [{
-              "name": "MY_PROJECT_ID.appspot.com",
-              "allow_cors": "true"
-            }]
-          }
     properties:
       aliases:
         description: |-
@@ -2033,23 +2039,30 @@ definitions:
       message, as in the example below which describes a REST GET
       operation on a resource collection of messages:
 
-      ```proto
-      service Messaging {
-        rpc GetMessage(GetMessageRequest) returns (Message) {
-          option (google.api.http).get = "/v1/messages/{message_id}/{sub.subfield}";
-        }
-      }
-      message GetMessageRequest {
-        message SubMessage {
-          string subfield = 1;
-        }
-        string message_id = 1; // mapped to the URL
-        SubMessage sub = 2;    // `sub.subfield` is url-mapped
-      }
-      message Message {
-        string text = 1; // content of the resource
-      }
-      ```
+
+          service Messaging {
+            rpc GetMessage(GetMessageRequest) returns (Message) {
+              option (google.api.http).get = "/v1/messages/{message_id}/{sub.subfield}";
+            }
+          }
+          message GetMessageRequest {
+            message SubMessage {
+              string subfield = 1;
+            }
+            string message_id = 1; // mapped to the URL
+            SubMessage sub = 2;    // `sub.subfield` is url-mapped
+          }
+          message Message {
+            string text = 1; // content of the resource
+          }
+
+      The same http annotation can alternatively be expressed inside the
+      `GRPC API Configuration` YAML file.
+
+          http:
+            rules:
+              - selector: <proto_package_name>.Messaging.GetMessage
+                get: /v1/messages/{message_id}/{sub.subfield}
 
       This definition enables an automatic, bidrectional mapping of HTTP
       JSON to RPC. Example:
@@ -2066,16 +2079,16 @@ definitions:
       pattern automatically become (optional) HTTP query
       parameters. Assume the following definition of the request message:
 
-      ```proto
-      message GetMessageRequest {
-        message SubMessage {
-          string subfield = 1;
-        }
-        string message_id = 1; // mapped to the URL
-        int64 revision = 2;    // becomes a parameter
-        SubMessage sub = 3;    // `sub.subfield` becomes a parameter
-      }
-      ```
+
+          message GetMessageRequest {
+            message SubMessage {
+              string subfield = 1;
+            }
+            string message_id = 1; // mapped to the URL
+            int64 revision = 2;    // becomes a parameter
+            SubMessage sub = 3;    // `sub.subfield` becomes a parameter
+          }
+
 
       This enables a HTTP JSON to RPC mapping as below:
 
@@ -2092,20 +2105,20 @@ definitions:
       specifies the mapping. Consider a REST update method on the
       message resource collection:
 
-      ```proto
-      service Messaging {
-        rpc UpdateMessage(UpdateMessageRequest) returns (Message) {
-          option (google.api.http) = {
-            put: "/v1/messages/{message_id}"
-            body: "message"
-          };
-        }
-      }
-      message UpdateMessageRequest {
-        string message_id = 1; // mapped to the URL
-        Message message = 2;   // mapped to the body
-      }
-      ```
+
+          service Messaging {
+            rpc UpdateMessage(UpdateMessageRequest) returns (Message) {
+              option (google.api.http) = {
+                put: "/v1/messages/{message_id}"
+                body: "message"
+              };
+            }
+          }
+          message UpdateMessageRequest {
+            string message_id = 1; // mapped to the URL
+            Message message = 2;   // mapped to the body
+          }
+
 
       The following HTTP JSON to RPC mapping is enabled, where the
       representation of the JSON in the request body is determined by
@@ -2120,20 +2133,19 @@ definitions:
       request body.  This enables the following alternative definition of
       the update method:
 
-      ```proto
-      service Messaging {
-        rpc UpdateMessage(Message) returns (Message) {
-          option (google.api.http) = {
-            put: "/v1/messages/{message_id}"
-            body: "*"
-          };
-        }
-      }
-      message Message {
-        string message_id = 1;
-        string text = 2;
-      }
-      ```
+          service Messaging {
+            rpc UpdateMessage(Message) returns (Message) {
+              option (google.api.http) = {
+                put: "/v1/messages/{message_id}"
+                body: "*"
+              };
+            }
+          }
+          message Message {
+            string message_id = 1;
+            string text = 2;
+          }
+
 
       The following HTTP JSON to RPC mapping is enabled:
 
@@ -2150,22 +2162,21 @@ definitions:
       It is possible to define multiple HTTP methods for one RPC by using
       the `additional_bindings` option. Example:
 
-      ```proto
-      service Messaging {
-        rpc GetMessage(GetMessageRequest) returns (Message) {
-          option (google.api.http) = {
-            get: "/v1/messages/{message_id}"
-            additional_bindings {
-              get: "/v1/users/{user_id}/messages/{message_id}"
+          service Messaging {
+            rpc GetMessage(GetMessageRequest) returns (Message) {
+              option (google.api.http) = {
+                get: "/v1/messages/{message_id}"
+                additional_bindings {
+                  get: "/v1/users/{user_id}/messages/{message_id}"
+                }
+              };
             }
-          };
-        }
-      }
-      message GetMessageRequest {
-        string message_id = 1;
-        string user_id = 2;
-      }
-      ```
+          }
+          message GetMessageRequest {
+            string message_id = 1;
+            string user_id = 2;
+          }
+
 
       This enables the following two alternative HTTP JSON to RPC
       mappings:
@@ -2236,7 +2247,7 @@ definitions:
           The name of the request field whose value is mapped to the HTTP body, or
           `*` for mapping all fields not captured by the path pattern to the HTTP
           body. NOTE: the referred field must not be a repeated field and must be
-          present at the top-level of response message type.
+          present at the top-level of request message type.
         type: string
       custom:
         $ref: '#/definitions/CustomHttpPattern'
@@ -3000,12 +3011,20 @@ definitions:
       enumeration, etc.
     properties:
       name:
-        description: 'The option''s name. For example, `"java_package"`.'
+        description: |-
+          The option's name. For protobuf built-in options (options defined in
+          descriptor.proto), this is the short name. For example, `"map_entry"`.
+          For custom options, it should be the fully-qualified name. For example,
+          `"google.api.http"`.
         type: string
       value:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.
-        description: 'The option''s value. For example, `"com.google.protobuf"`.'
+        description: |-
+          The option's value packed in an Any message. If the value is a primitive,
+          the corresponding wrapper type defined in google/protobuf/wrappers.proto
+          should be used. If the value is an enum, it should be stored as an int32
+          value using the google.protobuf.Int32Value type.
         type: object
     type: object
   Page:
@@ -3251,10 +3270,15 @@ definitions:
           title: Google Calendar API
           apis:
           - name: google.calendar.v3.Calendar
-          backend:
+          authentication:
+            providers:
+            - id: google_calendar_auth
+              jwks_uri: https://www.googleapis.com/oauth2/v1/certs
+              issuer: https://securetoken.google.com
             rules:
-            - selector: "google.calendar.v3.*"
-              address: calendar.example.com
+            - selector: "*"
+              requirements:
+                provider_id: google_calendar_auth
     properties:
       apis:
         description: |-
@@ -3537,9 +3561,7 @@ definitions:
           insensitive.
         type: string
       name:
-        description: |-
-          Define the name of the parameter, such as "api_key", "alt", "callback",
-          and etc. It is case sensitive.
+        description: 'Define the name of the parameter, such as "api_key" . It is case sensitive.'
         type: string
       urlQueryParameter:
         description: |-
@@ -3588,27 +3610,26 @@ definitions:
           config, default system parameters will be used. Default system parameters
           and names is implementation-dependent.
 
-          Example: define api key and alt name for all methods
+          Example: define api key for all methods
 
-          system_parameters
-            rules:
-              - selector: "*"
-                parameters:
-                  - name: api_key
-                    url_query_parameter: api_key
-                  - name: alt
-                    http_header: Response-Content-Type
+              system_parameters
+                rules:
+                  - selector: "*"
+                    parameters:
+                      - name: api_key
+                        url_query_parameter: api_key
+
 
           Example: define 2 api key names for a specific method.
 
-          system_parameters
-            rules:
-              - selector: "/ListShelves"
-                parameters:
-                  - name: api_key
-                    http_header: Api-Key1
-                  - name: api_key
-                    http_header: Api-Key2
+              system_parameters
+                rules:
+                  - selector: "/ListShelves"
+                    parameters:
+                      - name: api_key
+                        http_header: Api-Key1
+                      - name: api_key
+                        http_header: Api-Key2
 
           **NOTE:** All service configuration rules follow "last one wins" order.
         items:
@@ -3722,6 +3743,17 @@ definitions:
   Usage:
     description: Configuration controlling usage of a service.
     properties:
+      producerNotificationChannel:
+        description: |-
+          The full resource name of a channel used for sending notifications to the
+          service producer.
+
+          Google Service Management currently only supports
+          [Google Cloud Pub/Sub](https://cloud.google.com/pubsub) as a notification
+          channel. To use Google Cloud Pub/Sub as the channel, this must be the name
+          of a Cloud Pub/Sub topic that uses the Cloud Pub/Sub topic name format
+          documented in https://cloud.google.com/pubsub/docs/overview.
+        type: string
       requirements:
         description: |-
           Requirements that must be satisfied before a consumer project can use the

@@ -699,6 +699,12 @@ definitions:
   ReportData:
     description: The data part of the report.
     properties:
+      dataLastRefreshed:
+        description: |-
+          The last time the data in the report was refreshed. All the hits received
+          before this timestamp are included in the calculation of the report.
+        format: google-datetime
+        type: string
       isDataGolden:
         description: |-
           Indicates if response to this request is golden or not. Data is

@@ -23,7 +23,7 @@ info:
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
     version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '426'
+  x-release: '429'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -322,6 +322,12 @@ paths:
         - $ref: '#/parameters/rights'
         - $ref: '#/parameters/availability'
         - $ref: '#/parameters/mixin'
+        - $ref: '#/parameters/per_page'
+        - description: 'Time to return results from, e.g. -3h'
+          in: query
+          name: from
+          required: false
+          type: string
       responses:
         '200':
           description: Default response
@@ -431,6 +437,23 @@ paths:
             $ref: '#/definitions/ibl'
       security: []
       summary: Episode for a given pid.
+      tags:
+        - Episodes
+  '/episodes/{pid}/next':
+    get:
+      description: Get Onward Journey (next programme)
+      operationId: Get_Onward_Journey
+      parameters:
+        - $ref: '#/parameters/pid'
+        - $ref: '#/parameters/rights'
+        - $ref: '#/parameters/availability'
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      summary: Get Onward Journey
       tags:
         - Episodes
   '/episodes/{pid}/prerolls':

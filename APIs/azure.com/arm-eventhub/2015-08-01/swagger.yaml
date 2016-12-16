@@ -908,6 +908,7 @@ definitions:
         type: string
       properties:
         $ref: '#/definitions/EventHubProperties'
+        x-ms-client-flatten: true
       type:
         description: ARM type of the namespace.
         type: string

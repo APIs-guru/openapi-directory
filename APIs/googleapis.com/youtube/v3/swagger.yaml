@@ -3097,7 +3097,7 @@ paths:
           description: |-
             The maxResults parameter specifies the maximum number of items that should be returned in the result set.
 
-            Note: This parameter is supported for use in conjunction with the myRating parameter, but it is not supported for use in conjunction with the id parameter.
+            Note: This parameter is supported for use in conjunction with the myRating and chart parameters, but it is not supported for use in conjunction with the id parameter.
           in: query
           maximum: 50
           minimum: 1
@@ -3126,7 +3126,7 @@ paths:
         - description: |-
             The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
 
-            Note: This parameter is supported for use in conjunction with the myRating parameter, but it is not supported for use in conjunction with the id parameter.
+            Note: This parameter is supported for use in conjunction with the myRating and chart parameters, but it is not supported for use in conjunction with the id parameter.
           in: query
           name: pageToken
           type: string
@@ -3969,6 +3969,7 @@ definitions:
         enum:
           - 1080p
           - 1440p
+          - 2160p
           - 240p
           - 360p
           - 480p
@@ -4639,7 +4640,7 @@ definitions:
         type: string
     type: object
   ContentRating:
-    description: 'Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 68'
+    description: 'Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 69'
     properties:
       acbRating:
         description: The video's Australian Classification Board (ACB) or Australian Communications and Media Authority (ACMA) rating. ACMA ratings are used to classify children's television programming.
@@ -5112,6 +5113,18 @@ definitions:
           - mccyp7
           - mccypA
           - mccypUnrated
+        type: string
+      mcstRating:
+        description: The video's rating system for Vietnam - MCST
+        enum:
+          - mcst0
+          - mcst16plus
+          - mcstC13
+          - mcstC16
+          - mcstC18
+          - mcstGPg
+          - mcstP
+          - mcstUnrated
         type: string
       mdaRating:
         description: 'The video''s rating from Singapore''s Media Development Authority (MDA) and, specifically, it''s Board of Film Censors (BFC).'
@@ -6664,6 +6677,10 @@ definitions:
       videoId:
         description: 'The ID that YouTube uses to uniquely identify a video. To retrieve the video resource, set the id query parameter to this value in your API request.'
         type: string
+      videoPublishedAt:
+        description: 'The date and time that the video was published to YouTube. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
+        format: date-time
+        type: string
     type: object
   PlaylistItemListResponse:
     properties:
@@ -7951,6 +7968,8 @@ definitions:
         items:
           enum:
             - nonStreamableMov
+            - procsesingHintSpatialAudio
+            - procsesingHintSphericalVideo
             - sendBestQualityVideo
           type: string
         type: array

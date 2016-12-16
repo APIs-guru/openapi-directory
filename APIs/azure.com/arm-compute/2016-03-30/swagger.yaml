@@ -1573,7 +1573,7 @@ definitions:
           modelAsString: false
           name: PassNames
       settingName:
-        description: 'setting name (e.g. FirstLogonCommands, AutoLogon )'
+        description: 'Setting name (e.g. FirstLogonCommands, AutoLogon )'
         enum:
           - AutoLogon
           - FirstLogonCommands
@@ -1585,39 +1585,39 @@ definitions:
     description: The API entity reference.
     properties:
       id:
-        description: 'the ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...'
+        description: 'The ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...'
         type: string
   ApiError:
     description: Api error.
     properties:
       code:
-        description: the error code.
+        description: The error code.
         type: string
       details:
-        description: the Api error details
+        description: The Api error details
         items:
           $ref: '#/definitions/ApiErrorBase'
         type: array
       innererror:
         $ref: '#/definitions/InnerError'
-        description: the Api inner error
+        description: The Api inner error
       message:
-        description: the error message.
+        description: The error message.
         type: string
       target:
-        description: the target of the particular error.
+        description: The target of the particular error.
         type: string
   ApiErrorBase:
     description: Api error base.
     properties:
       code:
-        description: the error code.
+        description: The error code.
         type: string
       message:
-        description: the error message.
+        description: The error message.
         type: string
       target:
-        description: the target of the particular error.
+        description: The target of the particular error.
         type: string
   AvailabilitySet:
     allOf:
@@ -1692,7 +1692,7 @@ definitions:
         description: Operation output data (raw JSON)
         type: object
   CreateOption:
-    description: the create option.
+    description: The create option.
     enum:
       - fromImage
       - empty
@@ -1861,10 +1861,10 @@ definitions:
     description: Inner error details.
     properties:
       errordetail:
-        description: the internal error message or exception dump.
+        description: The internal error message or exception dump.
         type: string
       exceptiontype:
-        description: the exception type.
+        description: The exception type.
         type: string
   InstanceViewStatus:
     description: Instance view status.
@@ -1975,7 +1975,7 @@ definitions:
         type: integer
       encryptionSettings:
         $ref: '#/definitions/DiskEncryptionSettings'
-        description: the disk encryption settings.
+        description: The disk encryption settings.
       image:
         $ref: '#/definitions/VirtualHardDisk'
         description: 'The source user image virtual hard disk. The virtual hard disk will be copied before using it to attach to the virtual machine. If SourceImage is provided, the destination virtual hard disk must not exist.'
@@ -2029,7 +2029,7 @@ definitions:
         type: string
       linuxConfiguration:
         $ref: '#/definitions/LinuxConfiguration'
-        description: the Linux configuration of the OS profile.
+        description: The Linux configuration of the OS profile.
       secrets:
         description: The list of certificates for addition to the VM.
         items:
@@ -2037,7 +2037,7 @@ definitions:
         type: array
       windowsConfiguration:
         $ref: '#/definitions/WindowsConfiguration'
-        description: the Windows configuration of the OS profile.
+        description: The Windows configuration of the OS profile.
   Plan:
     description: Plan for the resource.
     properties:
@@ -2149,7 +2149,7 @@ definitions:
     description: Describes an upgrade policy - automatic or manual.
     properties:
       mode:
-        description: the upgrade mode.
+        description: The upgrade mode.
         enum:
           - Automatic
           - Manual
@@ -2231,7 +2231,7 @@ definitions:
         $ref: '#/definitions/VirtualMachineProperties'
         x-ms-client-flatten: true
       resources:
-        description: the virtual machine child extension resources.
+        description: The virtual machine child extension resources.
         items:
           $ref: '#/definitions/VirtualMachineExtension'
         readOnly: true
@@ -2295,12 +2295,12 @@ definitions:
     properties:
       status:
         $ref: '#/definitions/InstanceViewStatus'
-        description: the extension handler status.
+        description: The extension handler status.
       type:
-        description: full type of the extension handler which includes both publisher and type.
+        description: Full type of the extension handler which includes both publisher and type.
         type: string
       typeHandlerVersion:
-        description: the type version of the extension handler.
+        description: The type version of the extension handler.
         type: string
   VirtualMachineExtensionImage:
     allOf:
@@ -2317,19 +2317,19 @@ definitions:
     description: Describes the properties of a Virtual Machine Extension Image.
     properties:
       computeRole:
-        description: the type of role (IaaS or PaaS) this extension supports.
+        description: The type of role (IaaS or PaaS) this extension supports.
         type: string
       handlerSchema:
-        description: 'the schema defined by publisher, where extension consumers should provide settings in a matching schema.'
+        description: 'The schema defined by publisher, where extension consumers should provide settings in a matching schema.'
         type: string
       operatingSystem:
-        description: the operating system this extension supports.
+        description: The operating system this extension supports.
         type: string
       supportsMultipleExtensions:
-        description: whether the handler can support multiple extensions.
+        description: Whether the handler can support multiple extensions.
         type: boolean
       vmScaleSetEnabled:
-        description: 'whether the extension can be used on xRP VMScaleSets. By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS.'
+        description: 'Whether the extension can be used on xRP VMScaleSets. By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS.'
         type: boolean
     required:
       - operatingSystem
@@ -2339,54 +2339,54 @@ definitions:
     description: The instance view of a virtual machine extension.
     properties:
       name:
-        description: the virtual machine extension name.
+        description: The virtual machine extension name.
         type: string
       statuses:
-        description: the resource status information.
+        description: The resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       substatuses:
-        description: the resource status information.
+        description: The resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       type:
-        description: the full type of the extension handler which includes both publisher and type.
+        description: The full type of the extension handler which includes both publisher and type.
         type: string
       typeHandlerVersion:
-        description: the type version of the extension handler.
+        description: The type version of the extension handler.
         type: string
   VirtualMachineExtensionProperties:
     description: Describes the properties of a Virtual Machine Extension.
     properties:
       autoUpgradeMinorVersion:
-        description: whether the extension handler should be automatically upgraded across minor versions.
+        description: Whether the extension handler should be automatically upgraded across minor versions.
         type: boolean
       forceUpdateTag:
-        description: how the extension handler should be forced to update even if the extension configuration has not changed.
+        description: How the extension handler should be forced to update even if the extension configuration has not changed.
         type: string
       instanceView:
         $ref: '#/definitions/VirtualMachineExtensionInstanceView'
-        description: the virtual machine extension instance view.
+        description: The virtual machine extension instance view.
       protectedSettings:
         description: Json formatted protected settings for the extension.
         type: object
       provisioningState:
-        description: 'the provisioning state, which only appears in the response.'
+        description: 'The provisioning state, which only appears in the response.'
         readOnly: true
         type: string
       publisher:
-        description: the name of the extension handler publisher.
+        description: The name of the extension handler publisher.
         type: string
       settings:
         description: Json formatted public settings for the extension.
         type: object
       type:
-        description: the type of the extension handler.
+        description: The type of the extension handler.
         type: string
       typeHandlerVersion:
-        description: the type version of the extension handler.
+        description: The type version of the extension handler.
         type: string
   VirtualMachineImage:
     allOf:
@@ -2434,14 +2434,14 @@ definitions:
     properties:
       bootDiagnostics:
         $ref: '#/definitions/BootDiagnosticsInstanceView'
-        description: the boot diagnostics.
+        description: The boot diagnostics.
       disks:
         description: The virtual machine disk information.
         items:
           $ref: '#/definitions/DiskInstanceView'
         type: array
       extensions:
-        description: the extensions information.
+        description: The extensions information.
         items:
           $ref: '#/definitions/VirtualMachineExtensionInstanceView'
         type: array
@@ -2523,14 +2523,14 @@ definitions:
         x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/Sku'
-        description: the virtual machine scale set sku.
+        description: The virtual machine scale set sku.
   VirtualMachineScaleSetExtension:
     allOf:
       - $ref: '#/definitions/SubResource'
     description: Describes a Virtual Machine Scale Set Extension.
     properties:
       name:
-        description: the name of the extension.
+        description: The name of the extension.
         type: string
       properties:
         $ref: '#/definitions/VirtualMachineScaleSetExtensionProperties'
@@ -2539,7 +2539,7 @@ definitions:
     description: Describes a virtual machine scale set extension profile.
     properties:
       extensions:
-        description: the virtual machine scale set child extension resources.
+        description: The virtual machine scale set child extension resources.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetExtension'
         type: array
@@ -2547,26 +2547,26 @@ definitions:
     description: Describes the properties of a Virtual Machine Scale Set Extension.
     properties:
       autoUpgradeMinorVersion:
-        description: whether the extension handler should be automatically upgraded across minor versions.
+        description: Whether the extension handler should be automatically upgraded across minor versions.
         type: boolean
       protectedSettings:
         description: Json formatted protected settings for the extension.
         type: object
       provisioningState:
-        description: 'the provisioning state, which only appears in the response.'
+        description: 'The provisioning state, which only appears in the response.'
         readOnly: true
         type: string
       publisher:
-        description: the name of the extension handler publisher.
+        description: The name of the extension handler publisher.
         type: string
       settings:
         description: Json formatted public settings for the extension.
         type: object
       type:
-        description: the type of the extension handler.
+        description: The type of the extension handler.
         type: string
       typeHandlerVersion:
-        description: the type version of the extension handler.
+        description: The type version of the extension handler.
         type: string
   VirtualMachineScaleSetIPConfiguration:
     allOf:
@@ -2574,7 +2574,7 @@ definitions:
     description: Describes a virtual machine scale set network profile's IP configuration.
     properties:
       name:
-        description: the IP configuration name.
+        description: The IP configuration name.
         type: string
       properties:
         $ref: '#/definitions/VirtualMachineScaleSetIPConfigurationProperties'
@@ -2585,48 +2585,48 @@ definitions:
     description: Describes a virtual machine scale set network profile's IP configuration properties.
     properties:
       applicationGatewayBackendAddressPools:
-        description: the application gateway backend address pools.
+        description: The application gateway backend address pools.
         items:
           $ref: '#/definitions/SubResource'
         type: array
       loadBalancerBackendAddressPools:
-        description: the load balancer backend address pools.
+        description: The load balancer backend address pools.
         items:
           $ref: '#/definitions/SubResource'
         type: array
       loadBalancerInboundNatPools:
-        description: the load balancer inbound nat pools.
+        description: The load balancer inbound nat pools.
         items:
           $ref: '#/definitions/SubResource'
         type: array
       subnet:
         $ref: '#/definitions/ApiEntityReference'
-        description: the subnet.
+        description: The subnet.
     required:
       - subnet
   VirtualMachineScaleSetInstanceView:
     description: The instance view of a virtual machine scale set.
     properties:
       extensions:
-        description: the extensions information.
+        description: The extensions information.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetVMExtensionsSummary'
         readOnly: true
         type: array
       statuses:
-        description: the resource status information.
+        description: The resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       virtualMachine:
         $ref: '#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary'
-        description: the instance view status summary for the virtual machine scale set.
+        description: The instance view status summary for the virtual machine scale set.
         readOnly: true
   VirtualMachineScaleSetInstanceViewStatusesSummary:
     description: Instance view statuses summary for virtual machines of a virtual machine scale set.
     properties:
       statusesSummary:
-        description: the extensions information.
+        description: The extensions information.
         items:
           $ref: '#/definitions/VirtualMachineStatusCodeCount'
         readOnly: true
@@ -2635,10 +2635,10 @@ definitions:
     description: The List Virtual Machine operation response.
     properties:
       nextLink:
-        description: the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS.
+        description: The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS.
         type: string
       value:
-        description: the list of virtual machine scale sets.
+        description: The list of virtual machine scale sets.
         items:
           $ref: '#/definitions/VirtualMachineScaleSet'
         type: array
@@ -2648,10 +2648,10 @@ definitions:
     description: The Virtual Machine Scale Set List Skus operation response.
     properties:
       nextLink:
-        description: the uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus.
+        description: The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus.
         type: string
       value:
-        description: the list of skus available for the virtual machine scale set.
+        description: The list of skus available for the virtual machine scale set.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetSku'
         type: array
@@ -2661,10 +2661,10 @@ definitions:
     description: The List Virtual Machine operation response.
     properties:
       nextLink:
-        description: the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets.
+        description: The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets.
         type: string
       value:
-        description: the list of virtual machine scale sets.
+        description: The list of virtual machine scale sets.
         items:
           $ref: '#/definitions/VirtualMachineScaleSet'
         type: array
@@ -2676,7 +2676,7 @@ definitions:
     description: Describes a virtual machine scale set network profile's network configurations.
     properties:
       name:
-        description: the network configuration name.
+        description: The network configuration name.
         type: string
       properties:
         $ref: '#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties'
@@ -2687,12 +2687,12 @@ definitions:
     description: Describes a virtual machine scale set network profile's IP configuration.
     properties:
       ipConfigurations:
-        description: the virtual machine scale set IP Configuration.
+        description: The virtual machine scale set IP Configuration.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetIPConfiguration'
         type: array
       primary:
-        description: whether this is a primary NIC on a virtual machine.
+        description: Whether this is a primary NIC on a virtual machine.
         type: boolean
     required:
       - ipConfigurations
@@ -2700,7 +2700,7 @@ definitions:
     description: Describes a virtual machine scale set network profile.
     properties:
       networkInterfaceConfigurations:
-        description: the list of network configurations.
+        description: The list of network configurations.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetNetworkConfiguration'
         type: array
@@ -2709,18 +2709,18 @@ definitions:
     properties:
       caching:
         $ref: '#/definitions/Caching'
-        description: the caching type.
+        description: The caching type.
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: the create option.
+        description: The create option.
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.'
+        description: 'The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.'
       name:
-        description: the disk name.
+        description: The disk name.
         type: string
       osType:
-        description: the Operating System type.
+        description: The Operating System type.
         enum:
           - Windows
           - Linux
@@ -2729,7 +2729,7 @@ definitions:
           modelAsString: false
           name: OperatingSystemTypes
       vhdContainers:
-        description: the list of virtual hard disk container uris.
+        description: The list of virtual hard disk container uris.
         items:
           type: string
         type: array
@@ -2740,28 +2740,28 @@ definitions:
     description: Describes a virtual machine scale set OS profile.
     properties:
       adminPassword:
-        description: the admin user password.
+        description: The admin user password.
         type: string
       adminUsername:
-        description: the admin user name.
+        description: The admin user name.
         type: string
       computerNamePrefix:
-        description: the computer name prefix.
+        description: The computer name prefix.
         type: string
       customData:
-        description: a base-64 encoded string of custom data.
+        description: A base-64 encoded string of custom data.
         type: string
       linuxConfiguration:
         $ref: '#/definitions/LinuxConfiguration'
-        description: the Linux Configuration of the OS profile.
+        description: The Linux Configuration of the OS profile.
       secrets:
-        description: the List of certificates for addition to the VM.
+        description: The List of certificates for addition to the VM.
         items:
           $ref: '#/definitions/VaultSecretGroup'
         type: array
       windowsConfiguration:
         $ref: '#/definitions/WindowsConfiguration'
-        description: the Windows Configuration of the OS profile.
+        description: The Windows Configuration of the OS profile.
   VirtualMachineScaleSetProperties:
     description: Describes the properties of a Virtual Machine Scale Set.
     properties:
@@ -2769,50 +2769,50 @@ definitions:
         description: Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         type: boolean
       provisioningState:
-        description: 'the provisioning state, which only appears in the response.'
+        description: 'The provisioning state, which only appears in the response.'
         readOnly: true
         type: string
       upgradePolicy:
         $ref: '#/definitions/UpgradePolicy'
-        description: the upgrade policy.
+        description: The upgrade policy.
       virtualMachineProfile:
         $ref: '#/definitions/VirtualMachineScaleSetVMProfile'
-        description: the virtual machine profile.
+        description: The virtual machine profile.
   VirtualMachineScaleSetSku:
     description: Describes an available virtual machine scale set sku.
     properties:
       capacity:
         $ref: '#/definitions/VirtualMachineScaleSetSkuCapacity'
-        description: available scaling information.
+        description: Available scaling information.
         readOnly: true
       resourceType:
-        description: the type of resource the sku applies to.
+        description: The type of resource the sku applies to.
         readOnly: true
         type: string
       sku:
         $ref: '#/definitions/Sku'
-        description: the Sku.
+        description: The Sku.
         readOnly: true
   VirtualMachineScaleSetSkuCapacity:
     description: Describes scaling information of a sku.
     properties:
       defaultCapacity:
-        description: the default capacity.
+        description: The default capacity.
         format: int64
         readOnly: true
         type: integer
       maximum:
-        description: the maximum capacity that can be set.
+        description: The maximum capacity that can be set.
         format: int64
         readOnly: true
         type: integer
       minimum:
-        description: the minimum capacity.
+        description: The minimum capacity.
         format: int64
         readOnly: true
         type: integer
       scaleType:
-        description: the scale type applicable to the sku.
+        description: The scale type applicable to the sku.
         enum:
           - Automatic
           - None
@@ -2826,10 +2826,10 @@ definitions:
     properties:
       imageReference:
         $ref: '#/definitions/ImageReference'
-        description: the image reference.
+        description: The image reference.
       osDisk:
         $ref: '#/definitions/VirtualMachineScaleSetOSDisk'
-        description: the OS disk.
+        description: The OS disk.
   VirtualMachineScaleSetVM:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -2846,7 +2846,7 @@ definitions:
         $ref: '#/definitions/VirtualMachineScaleSetVMProperties'
         x-ms-client-flatten: true
       resources:
-        description: the virtual machine child extension resources.
+        description: The virtual machine child extension resources.
         items:
           $ref: '#/definitions/VirtualMachineExtension'
         readOnly: true
@@ -2859,11 +2859,11 @@ definitions:
     description: Extensions summary for virtual machines of a virtual machine scale set.
     properties:
       name:
-        description: the extension name.
+        description: The extension name.
         readOnly: true
         type: string
       statusesSummary:
-        description: the extensions information.
+        description: The extensions information.
         items:
           $ref: '#/definitions/VirtualMachineStatusCodeCount'
         readOnly: true
@@ -2872,7 +2872,7 @@ definitions:
     description: Specifies a list of virtual machine instance IDs from the VM scale set.
     properties:
       instanceIds:
-        description: the virtual machine scale set instance ids.
+        description: The virtual machine scale set instance ids.
         items:
           type: string
         type: array
@@ -2880,7 +2880,7 @@ definitions:
     description: Specifies a list of virtual machine instance IDs from the VM scale set.
     properties:
       instanceIds:
-        description: the virtual machine scale set instance ids.
+        description: The virtual machine scale set instance ids.
         items:
           type: string
         type: array
@@ -2891,44 +2891,44 @@ definitions:
     properties:
       bootDiagnostics:
         $ref: '#/definitions/BootDiagnosticsInstanceView'
-        description: the boot diagnostics.
+        description: The boot diagnostics.
       disks:
-        description: the disks information.
+        description: The disks information.
         items:
           $ref: '#/definitions/DiskInstanceView'
         type: array
       extensions:
-        description: the extensions information.
+        description: The extensions information.
         items:
           $ref: '#/definitions/VirtualMachineExtensionInstanceView'
         type: array
       platformFaultDomain:
-        description: the Fault Domain count.
+        description: The Fault Domain count.
         format: int32
         type: integer
       platformUpdateDomain:
-        description: the Update Domain count.
+        description: The Update Domain count.
         format: int32
         type: integer
       rdpThumbPrint:
-        description: the Remote desktop certificate thumbprint.
+        description: The Remote desktop certificate thumbprint.
         type: string
       statuses:
-        description: the resource status information.
+        description: The resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       vmAgent:
         $ref: '#/definitions/VirtualMachineAgentInstanceView'
-        description: the VM Agent running on the virtual machine.
+        description: The VM Agent running on the virtual machine.
   VirtualMachineScaleSetVMListResult:
     description: The List Virtual Machine Scale Set VMs operation response.
     properties:
       nextLink:
-        description: the uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs
+        description: The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs
         type: string
       value:
-        description: the list of virtual machine scale sets VMs.
+        description: The list of virtual machine scale sets VMs.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetVM'
         type: array
@@ -2939,52 +2939,52 @@ definitions:
     properties:
       extensionProfile:
         $ref: '#/definitions/VirtualMachineScaleSetExtensionProfile'
-        description: the virtual machine scale set extension profile.
+        description: The virtual machine scale set extension profile.
       networkProfile:
         $ref: '#/definitions/VirtualMachineScaleSetNetworkProfile'
-        description: the virtual machine scale set network profile.
+        description: The virtual machine scale set network profile.
       osProfile:
         $ref: '#/definitions/VirtualMachineScaleSetOSProfile'
-        description: the virtual machine scale set OS profile.
+        description: The virtual machine scale set OS profile.
       storageProfile:
         $ref: '#/definitions/VirtualMachineScaleSetStorageProfile'
-        description: the virtual machine scale set storage profile.
+        description: The virtual machine scale set storage profile.
   VirtualMachineScaleSetVMProperties:
     description: Describes the properties of a virtual machine scale set virtual machine.
     properties:
       availabilitySet:
         $ref: '#/definitions/SubResource'
-        description: the reference Id of the availability set to which this virtual machine belongs.
+        description: The reference Id of the availability set to which this virtual machine belongs.
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
-        description: the diagnostics profile.
+        description: The diagnostics profile.
       hardwareProfile:
         $ref: '#/definitions/HardwareProfile'
-        description: the hardware profile.
+        description: The hardware profile.
       instanceView:
         $ref: '#/definitions/VirtualMachineInstanceView'
-        description: the virtual machine instance view.
+        description: The virtual machine instance view.
         readOnly: true
       latestModelApplied:
         description: Specifies whether the latest model has been applied to the virtual machine.
         readOnly: true
         type: boolean
       licenseType:
-        description: 'the license type, which is for bring your own license scenario.'
+        description: 'The license type, which is for bring your own license scenario.'
         type: string
       networkProfile:
         $ref: '#/definitions/NetworkProfile'
-        description: the network profile.
+        description: The network profile.
       osProfile:
         $ref: '#/definitions/OSProfile'
-        description: the OS profile.
+        description: The OS profile.
       provisioningState:
-        description: 'the provisioning state, which only appears in the response.'
+        description: 'The provisioning state, which only appears in the response.'
         readOnly: true
         type: string
       storageProfile:
         $ref: '#/definitions/StorageProfile'
-        description: the storage profile.
+        description: The storage profile.
   VirtualMachineSize:
     description: Describes the properties of a VM size.
     properties:
@@ -3023,11 +3023,11 @@ definitions:
     description: The status code and count of the virtual machine scale set instance view status summary.
     properties:
       code:
-        description: the instance view status code.
+        description: The instance view status code.
         readOnly: true
         type: string
       count:
-        description: the number of instances having a particular status code.
+        description: The number of instances having a particular status code.
         format: int32
         readOnly: true
         type: integer

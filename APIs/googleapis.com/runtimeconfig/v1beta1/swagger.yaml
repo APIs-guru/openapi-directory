@@ -579,7 +579,219 @@ paths:
             - 'https://www.googleapis.com/auth/cloudruntimeconfig'
       tags:
         - projects
+  '/v1beta1/{resource}:getIamPolicy':
+    get:
+      description: |-
+        Gets the access control policy for a resource.
+        Returns an empty policy if the resource exists and does not have a policy
+        set.
+      operationId: runtimeconfig.projects.configs.getIamPolicy
+      parameters:
+        - description: |-
+            REQUIRED: The resource for which the policy is being requested.
+            `resource` is usually specified as a path. For example, a Project
+            resource is specified as `projects/{project}`.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1beta1/{resource}:setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Sets the access control policy on the specified resource. Replaces any
+        existing policy.
+      operationId: runtimeconfig.projects.configs.setIamPolicy
+      parameters:
+        - description: |-
+            REQUIRED: The resource for which the policy is being specified.
+            `resource` is usually specified as a path. For example, a Project
+            resource is specified as `projects/{project}`.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetIamPolicyRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+  '/v1beta1/{resource}:testIamPermissions':
+    get:
+      description: |-
+        Returns permissions that a caller has on the specified resource.
+        If the resource does not exist, this will return an empty set of
+        permissions, not a NOT_FOUND error.
+      operationId: runtimeconfig.projects.configs.operations.testIamPermissions
+      parameters:
+        - description: |-
+            REQUIRED: The resource for which the policy detail is being requested.
+            `resource` is usually specified as a path. For example, a Project
+            resource is specified as `projects/{project}`.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - collectionFormat: multi
+          description: |-
+            The set of permissions to check for the `resource`. Permissions with
+            wildcards (such as '*' or 'storage.*') are not allowed. For more
+            information see
+            [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+          in: query
+          items:
+            type: string
+          name: permissions
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestIamPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns permissions that a caller has on the specified resource.
+        If the resource does not exist, this will return an empty set of
+        permissions, not a NOT_FOUND error.
+      operationId: runtimeconfig.projects.configs.testIamPermissions
+      parameters:
+        - description: |-
+            REQUIRED: The resource for which the policy detail is being requested.
+            `resource` is usually specified as a path. For example, a Project
+            resource is specified as `projects/{project}`.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestIamPermissionsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestIamPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
 definitions:
+  Binding:
+    description: Associates `members` with a `role`.
+    properties:
+      members:
+        description: |+
+          Specifies the identities requesting access for a Cloud Platform resource.
+          `members` can have the following values:
+
+          * `allUsers`: A special identifier that represents anyone who is
+             on the internet; with or without a Google account.
+
+          * `allAuthenticatedUsers`: A special identifier that represents anyone
+             who is authenticated with a Google account or a service account.
+
+          * `user:{emailid}`: An email address that represents a specific Google
+             account. For example, `alice@gmail.com` or `joe@example.com`.
+
+
+          * `serviceAccount:{emailid}`: An email address that represents a service
+             account. For example, `my-other-app@appspot.gserviceaccount.com`.
+
+          * `group:{emailid}`: An email address that represents a Google group.
+             For example, `admins@example.com`.
+
+          * `domain:{domain}`: A Google Apps domain name that represents all the
+             users of that domain. For example, `google.com` or `example.com`.
+
+        items:
+          type: string
+        type: array
+      role:
+        description: |-
+          Role that is assigned to `members`.
+          For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          Required
+        type: string
+    type: object
   Cardinality:
     description: |-
       A Cardinality condition for the Waiter resource. A cardinality condition is
@@ -729,6 +941,67 @@ definitions:
           `TakeSnapshotResponse`.
         type: object
     type: object
+  Policy:
+    description: |-
+      Defines an Identity and Access Management (IAM) policy. It is used to
+      specify access control policies for Cloud Platform resources.
+
+
+      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
+      `members` to a `role`, where the members can be user accounts, Google groups,
+      Google domains, and service accounts. A `role` is a named list of permissions
+      defined by IAM.
+
+      **Example**
+
+          {
+            "bindings": [
+              {
+                "role": "roles/owner",
+                "members": [
+                  "user:mike@example.com",
+                  "group:admins@example.com",
+                  "domain:google.com",
+                  "serviceAccount:my-other-app@appspot.gserviceaccount.com",
+                ]
+              },
+              {
+                "role": "roles/viewer",
+                "members": ["user:sean@example.com"]
+              }
+            ]
+          }
+
+      For a description of IAM and its features, see the
+      [IAM developer's guide](https://cloud.google.com/iam).
+    properties:
+      bindings:
+        description: |-
+          Associates a list of `members` to a `role`.
+          Multiple `bindings` must not be specified for the same `role`.
+          `bindings` with no members will result in an error.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help
+          prevent simultaneous updates of a policy from overwriting each other.
+          It is strongly suggested that systems make use of the `etag` in the
+          read-modify-write cycle to perform policy updates in order to avoid race
+          conditions: An `etag` is returned in the response to `getIamPolicy`, and
+          systems are expected to put that etag in the request to `setIamPolicy` to
+          ensure that their change will be applied to the same version of the policy.
+
+          If no `etag` is provided in the call to `setIamPolicy`, then the existing
+          policy is overwritten blindly.
+        format: byte
+        type: string
+      version:
+        description: Version of the `Policy`. The default version is 0.
+        format: int32
+        type: integer
+    type: object
   RuntimeConfig:
     description: |-
       A RuntimeConfig resource is the primary resource in the Cloud RuntimeConfig
@@ -752,6 +1025,17 @@ definitions:
           the name adheres to this format. After you create the resource, you cannot
           change the resource's name.
         type: string
+    type: object
+  SetIamPolicyRequest:
+    description: Request message for `SetIamPolicy` method.
+    properties:
+      policy:
+        $ref: '#/definitions/Policy'
+        description: |-
+          REQUIRED: The complete policy to be applied to the `resource`. The size of
+          the policy is limited to a few 10s of KB. An empty policy is a
+          valid policy but certain Cloud Platform services (such as Projects)
+          might reject them.
     type: object
   Status:
     description: |-
@@ -827,6 +1111,30 @@ definitions:
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
         type: string
+    type: object
+  TestIamPermissionsRequest:
+    description: Request message for `TestIamPermissions` method.
+    properties:
+      permissions:
+        description: |-
+          The set of permissions to check for the `resource`. Permissions with
+          wildcards (such as '*' or 'storage.*') are not allowed. For more
+          information see
+          [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+        items:
+          type: string
+        type: array
+    type: object
+  TestIamPermissionsResponse:
+    description: Response message for `TestIamPermissions` method.
+    properties:
+      permissions:
+        description: |-
+          A subset of `TestPermissionsRequest.permissions` that the caller is
+          allowed.
+        items:
+          type: string
+        type: array
     type: object
   Variable:
     description: |-
