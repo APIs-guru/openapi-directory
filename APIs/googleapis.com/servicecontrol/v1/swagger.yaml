@@ -136,7 +136,7 @@ paths:
         60 seconds. In case of server errors, the client can rely on the cached
         results for longer time.
 
-        NOTE: the `CheckRequest` has the size limit of 1MB.
+        NOTE: the `CheckRequest` has the size limit of 64KB.
 
         This method requires the `servicemanagement.services.check` permission
         on the specified service. For more information, see
@@ -246,6 +246,7 @@ definitions:
           - IP_ADDRESS_BLOCKED
           - REFERER_BLOCKED
           - CLIENT_APP_BLOCKED
+          - API_TARGET_BLOCKED
           - API_KEY_INVALID
           - API_KEY_EXPIRED
           - API_KEY_NOT_FOUND

@@ -1545,7 +1545,7 @@ definitions:
     description: A list of changes for a user.
     properties:
       changes:
-        description: The page of changes.
+        description: 'The list of changes. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/Change'
         type: array
@@ -1557,7 +1557,7 @@ definitions:
         description: The starting page token for future changes. This will be present only if the end of the current changes list has been reached.
         type: string
       nextPageToken:
-        description: The page token for the next page of changes. This will be absent if the end of the current changes list has been reached.
+        description: 'The page token for the next page of changes. This will be absent if the end of the changes list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
     type: object
   Channel:
@@ -1655,7 +1655,7 @@ definitions:
     description: A list of comments on a file.
     properties:
       comments:
-        description: The page of comments.
+        description: 'The list of comments. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/Comment'
         type: array
@@ -1664,7 +1664,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "drive#commentList".'
         type: string
       nextPageToken:
-        description: The page token for the next page of comments. This will be absent if the end of the comments list has been reached.
+        description: 'The page token for the next page of comments. This will be absent if the end of the comments list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
     type: object
   File:
@@ -1934,7 +1934,7 @@ definitions:
         description: 'A short-lived link to the file''s thumbnail, if available. Typically lasts on the order of hours. Only populated when the requesting app can access the file''s content.'
         type: string
       thumbnailVersion:
-        description: The thumbnail version for use in client-contructable thumbnail URLs or thumbnail cache invalidation.
+        description: The thumbnail version for use in thumbnail cache invalidation.
         format: int64
         type: string
       trashed:
@@ -1984,7 +1984,7 @@ definitions:
     description: A list of files.
     properties:
       files:
-        description: The page of files.
+        description: 'The list of files. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/File'
         type: array
@@ -1993,7 +1993,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "drive#fileList".'
         type: string
       nextPageToken:
-        description: The page token for the next page of files. This will be absent if the end of the files list has been reached.
+        description: 'The page token for the next page of files. This will be absent if the end of the files list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
     type: object
   GeneratedIds:
@@ -2066,7 +2066,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "drive#permissionList".'
         type: string
       permissions:
-        description: The full list of permissions.
+        description: The list of permissions.
         items:
           $ref: '#/definitions/Permission'
         type: array
@@ -2116,10 +2116,10 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "drive#replyList".'
         type: string
       nextPageToken:
-        description: The page token for the next page of replies. This will be absent if the end of the replies list has been reached.
+        description: 'The page token for the next page of replies. This will be absent if the end of the replies list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
       replies:
-        description: The page of replies.
+        description: 'The list of replies. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/Reply'
         type: array
@@ -2177,10 +2177,10 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "drive#revisionList".'
         type: string
       nextPageToken:
-        description: The page token for the next page of revisions. This will be absent if the end of the revisions list has been reached.
+        description: 'The page token for the next page of revisions. This will be absent if the end of the revisions list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
       revisions:
-        description: The full list of revisions.
+        description: 'The list of revisions. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/Revision'
         type: array

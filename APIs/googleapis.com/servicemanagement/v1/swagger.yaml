@@ -117,10 +117,15 @@ paths:
   /v1/services:
     get:
       description: |-
-        Lists all managed services. The result is limited to services that the
-        caller has "servicemanagement.services.get" permission for. If the request
-        is made without authentication, it returns only public services that are
-        available to everyone.
+        Lists managed services.
+
+        If called without any authentication, it returns only the public services.
+        If called with authentication, it returns all services that the caller has
+        "servicemanagement.services.get" permission for.
+
+        **BETA:** If the caller specifies the `consumer_id`, it returns only the
+        services enabled on the consumer. The `consumer_id` must have the format
+        of "project:{PROJECT-ID}".
       operationId: servicemanagement.services.list
       parameters:
         - description: Requested size of the next page of data.
@@ -2597,14 +2602,14 @@ definitions:
           that defines the scope of the metric type or of its data; and (2) the
           metric's URL-encoded type, which also appears in the `type` field of this
           descriptor. For example, following is the resource name of a custom
-          metric within the GCP project 123456789:
+          metric within the GCP project `my-project-id`:
 
-              "projects/123456789/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
+              "projects/my-project-id/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
         type: string
       type:
         description: |-
           The metric type, including its DNS name prefix. The type is not
-          URL-encoded.  All user-defined metric types have the DNS name
+          URL-encoded.  All user-defined custom metric types have the DNS name
           `custom.googleapis.com`.  Metric types should use a natural hierarchical
           grouping. For example:
 
@@ -3425,6 +3430,15 @@ definitions:
           the policy is limited to a few 10s of KB. An empty policy is a
           valid policy but certain Cloud Platform services (such as Projects)
           might reject them.
+      updateMask:
+        description: |-
+          OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+          the fields in the mask will be modified. If no mask is provided, a default
+          mask is used:
+          paths: "bindings, etag"
+          This field is only used by Cloud IAM.
+        format: google-fieldmask
+        type: string
     type: object
   SourceContext:
     description: |-

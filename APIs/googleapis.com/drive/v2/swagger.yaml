@@ -2933,7 +2933,7 @@ definitions:
         description: The ETag of the list.
         type: string
       items:
-        description: The actual list of apps.
+        description: The list of apps.
         items:
           $ref: '#/definitions/App'
         type: array
@@ -2980,7 +2980,7 @@ definitions:
         description: The ETag of the list.
         type: string
       items:
-        description: The actual list of changes.
+        description: 'The list of changes. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/Change'
         type: array
@@ -2996,7 +2996,7 @@ definitions:
         description: A link to the next page of changes.
         type: string
       nextPageToken:
-        description: The page token for the next page of changes.
+        description: 'The page token for the next page of changes. This will be absent if the end of the changes list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
       selfLink:
         description: A link back to this list.
@@ -3048,7 +3048,7 @@ definitions:
         description: The ETag of the list.
         type: string
       items:
-        description: The actual list of children.
+        description: 'The list of children. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/ChildReference'
         type: array
@@ -3060,7 +3060,7 @@ definitions:
         description: A link to the next page of children.
         type: string
       nextPageToken:
-        description: The page token for the next page of children.
+        description: 'The page token for the next page of children. This will be absent if the end of the children list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
       selfLink:
         description: A link back to this list.
@@ -3151,7 +3151,7 @@ definitions:
     description: A list of comments on a file in Google Drive.
     properties:
       items:
-        description: List of comments.
+        description: 'The list of comments. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/Comment'
         type: array
@@ -3163,7 +3163,7 @@ definitions:
         description: A link to the next page of comments.
         type: string
       nextPageToken:
-        description: The token to use to request the next page of results.
+        description: 'The page token for the next page of comments. This will be absent if the end of the comments list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
       selfLink:
         description: A link back to this list.
@@ -3210,7 +3210,7 @@ definitions:
     description: A list of replies to a comment on a file in Google Drive.
     properties:
       items:
-        description: List of reply.
+        description: 'The list of replies. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/CommentReply'
         type: array
@@ -3222,7 +3222,7 @@ definitions:
         description: A link to the next page of replies.
         type: string
       nextPageToken:
-        description: The token to use to request the next page of results.
+        description: 'The page token for the next page of replies. This will be absent if the end of the replies list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
       selfLink:
         description: A link back to this list.
@@ -3533,7 +3533,7 @@ definitions:
         description: A short-lived link to the file's thumbnail. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content.
         type: string
       thumbnailVersion:
-        description: The thumbnail version for use in client-contructable thumbnail URLs or thumbnail cache invalidation.
+        description: The thumbnail version for use in thumbnail cache invalidation.
         format: int64
         type: string
       title:
@@ -3579,7 +3579,7 @@ definitions:
         description: The ETag of the list.
         type: string
       items:
-        description: The actual list of files.
+        description: 'The list of files. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/File'
         type: array
@@ -3591,7 +3591,7 @@ definitions:
         description: A link to the next page of files.
         type: string
       nextPageToken:
-        description: The page token for the next page of files.
+        description: 'The page token for the next page of files. This will be absent if the end of the files list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
       selfLink:
         description: A link back to this list.
@@ -3620,7 +3620,7 @@ definitions:
         description: The ETag of the list.
         type: string
       items:
-        description: The actual list of parents.
+        description: The list of parents.
         items:
           $ref: '#/definitions/ParentReference'
         type: array
@@ -3732,7 +3732,7 @@ definitions:
         description: The ETag of the list.
         type: string
       items:
-        description: The actual list of permissions.
+        description: The list of permissions.
         items:
           $ref: '#/definitions/Permission'
         type: array
@@ -3863,7 +3863,7 @@ definitions:
         description: The ETag of the list.
         type: string
       items:
-        description: The actual list of revisions.
+        description: 'The list of revisions. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
           $ref: '#/definitions/Revision'
         type: array

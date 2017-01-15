@@ -4326,6 +4326,14 @@ definitions:
         description: Boolean indicating if the user is delegated admin (Read-only)
         readOnly: true
         type: boolean
+      isEnforcedIn2Sv:
+        description: Is 2-step verification enforced (Read-only)
+        readOnly: true
+        type: boolean
+      isEnrolledIn2Sv:
+        description: Is enrolled in 2-step verification (Read-only)
+        readOnly: true
+        type: boolean
       isMailboxSetup:
         description: Is mailbox setup (Read-only)
         readOnly: true

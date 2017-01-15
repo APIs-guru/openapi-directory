@@ -1,12 +1,12 @@
 swagger: '2.0'
 schemes:
   - http
-host: traccar.org
+host: demo.traccar.org
 basePath: /api
 info:
   description: Open Source GPS Tracking Platform
   title: traccar
-  version: '3.8'
+  version: '3.9'
   x-logo:
     url: 'https://www.traccar.org/wp-content/uploads/2015/04/logo2x.png'
   x-origin:
@@ -14,77 +14,168 @@ info:
     url: 'https://raw.githubusercontent.com/tananaev/traccar/master/swagger.json'
     version: '2.0'
   x-providerName: traccar.org
+consumes:
+  - application/json
 produces:
   - application/json
+securityDefinitions:
+  basicAuth:
+    description: Basic HTTP authorization with _email_ and _password_
+    type: basic
+security:
+  - basicAuth: []
+parameters:
+  AttributeAlias:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/AttributeAlias'
+  Device:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/Device'
+  DeviceGeofence:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/DeviceGeofence'
+  DevicePermission:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/DevicePermission'
+  Geofence:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/Geofence'
+  GeofencePermission:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/GeofencePermission'
+  Group:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/Group'
+  GroupGeofence:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/GroupGeofence'
+  GroupPermission:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/GroupPermission'
+  User:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/User'
+  all:
+    description: Can only be used by admin users to fetch all entities
+    in: query
+    name: all
+    type: boolean
+  deviceId:
+    description: 'Standard users can use this only with _userId_s, they have access to'
+    in: query
+    name: deviceId
+    type: integer
+  deviceIdArray:
+    collectionFormat: multi
+    in: query
+    items:
+      type: integer
+    name: deviceId
+    type: array
+  entityId:
+    in: path
+    name: id
+    required: true
+    type: integer
+  fromTime:
+    description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+    format: date-time
+    in: query
+    name: from
+    required: true
+    type: string
+  groupIdArray:
+    collectionFormat: multi
+    in: query
+    items:
+      type: integer
+    name: groupId
+    type: array
+  toTime:
+    description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+    format: date-time
+    in: query
+    name: to
+    required: true
+    type: string
+  userId:
+    description: Standard users can use this only with their own _userId_
+    in: query
+    name: userId
+    type: integer
 paths:
   /attributes/aliases:
     get:
-      consumes:
-        - application/json
+      description: 'Without params, it returns a list of AttributeAlias from all the user''s Devices'
       parameters:
-        - in: query
-          name: deviceId
-          required: false
-          type: integer
+        - $ref: '#/parameters/deviceId'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/AttributeAlias'
             type: array
+      summary: Fetch a list of AttributeAlias
     post:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/AttributeAlias'
+        - $ref: '#/parameters/AttributeAlias'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/AttributeAlias'
+      summary: Set an AttributeAlias
   '/attributes/aliases/{id}':
     delete:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
+        - $ref: '#/parameters/entityId'
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Delete an AttributeAlias
     put:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/AttributeAlias'
+        - $ref: '#/parameters/entityId'
+        - $ref: '#/parameters/AttributeAlias'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/AttributeAlias'
+      summary: Update an AttributeAlias
   /commands:
     post:
-      consumes:
-        - application/json
       parameters:
         - in: body
           name: body
@@ -94,13 +185,13 @@ paths:
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Command'
+        '400':
+          description: 'Could happen when dispatching to a device that is offline, the user doesn''t have permission or an incorrect command _type_ for the device'
+      summary: Dispatch commands to device
   /commandtypes:
     get:
-      consumes:
-        - application/json
       parameters:
         - in: query
           name: deviceId
@@ -109,117 +200,77 @@ paths:
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/CommandType'
             type: array
+        '400':
+          description: Could happen when trying to fetch from an offline device or the user does not have permission
+      summary: Fetch a list of available Commands for the Device
   /devices:
     get:
-      consumes:
-        - application/json
+      description: 'Without any params, returns a list of the user''s devices'
       parameters:
-        - in: query
-          name: all
-          required: true
-          type: boolean
-        - in: query
-          name: userId
-          required: true
-          type: integer
+        - $ref: '#/parameters/all'
+        - $ref: '#/parameters/userId'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/Device'
             type: array
+        '400':
+          description: No permission
+      summary: Fetch a list of Devices
     post:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Device'
+        - $ref: '#/parameters/Device'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Device'
+      summary: Create a Device
   /devices/geofences:
     delete:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeviceGeofence'
+        - $ref: '#/parameters/DeviceGeofence'
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Remove a Geofence from a Device
     post:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeviceGeofence'
+        - $ref: '#/parameters/DeviceGeofence'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/DeviceGeofence'
+      summary: Link a Geofence to a Device
   '/devices/{id}':
     delete:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
+        - $ref: '#/parameters/entityId'
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Update a Device
     put:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Device'
+        - $ref: '#/parameters/entityId'
+        - $ref: '#/parameters/Device'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Device'
+      summary: Update a Device
   '/devices/{id}/distance':
     put:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
+        - $ref: '#/parameters/entityId'
         - in: body
           name: body
           required: true
@@ -228,43 +279,26 @@ paths:
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Update the distance counter of the Device
   '/events/{id}':
     get:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
+        - $ref: '#/parameters/entityId'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Event'
   /geofences:
     get:
-      consumes:
-        - application/json
+      description: 'Without params, it returns a list of Geofences the user has access to'
       parameters:
-        - in: query
-          name: all
-          required: true
-          type: boolean
-        - in: query
-          name: userId
-          required: true
-          type: integer
+        - $ref: '#/parameters/all'
+        - $ref: '#/parameters/userId'
         - in: query
           name: groupId
-          required: true
           type: integer
-        - in: query
-          name: deviceId
-          required: true
-          type: integer
+        - $ref: '#/parameters/deviceId'
         - in: query
           name: refresh
           required: false
@@ -272,259 +306,168 @@ paths:
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/Geofence'
             type: array
+      summary: Fetch a list of Geofences
     post:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Geofence'
+        - $ref: '#/parameters/Geofence'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Geofence'
+      summary: Create a Geofence
   '/geofences/{id}':
     delete:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
+        - $ref: '#/parameters/entityId'
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Delete a Geofence
     put:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Geofence'
+        - $ref: '#/parameters/entityId'
+        - $ref: '#/parameters/Geofence'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Geofence'
+      summary: Update a Geofence
   /groups:
     get:
-      consumes:
-        - application/json
+      description: 'Without any params, returns a list of the Groups the user belongs to'
       parameters:
-        - in: query
-          name: all
-          required: true
-          type: boolean
-        - in: query
-          name: userId
-          required: true
-          type: integer
+        - $ref: '#/parameters/all'
+        - $ref: '#/parameters/userId'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/Group'
             type: array
+      summary: Fetch a list of Groups
     post:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Group'
+        - $ref: '#/parameters/Group'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Group'
+        '400':
+          description: No permission
+      summary: Create a Group
   /groups/geofences:
     delete:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GroupGeofence'
+        - $ref: '#/parameters/GroupGeofence'
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Remove a Geofence from a Group
     post:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GroupGeofence'
+        - $ref: '#/parameters/GroupGeofence'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/GroupGeofence'
+      summary: Link a Geofence to a Group
   '/groups/{id}':
     delete:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
+        - $ref: '#/parameters/entityId'
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Delete a Group
     put:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Group'
+        - $ref: '#/parameters/entityId'
+        - $ref: '#/parameters/Group'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Group'
+      summary: Update a Group
   /permissions/devices:
     delete:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DevicePermission'
+        - $ref: '#/parameters/DevicePermission'
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Remove a Device from a User
     post:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DevicePermission'
+        - $ref: '#/parameters/DevicePermission'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/DevicePermission'
+        '400':
+          description: No permission
+      summary: Link a Device to a User
   /permissions/geofences:
     delete:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GeofencePermission'
+        - $ref: '#/parameters/GeofencePermission'
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Remove a Geofence from a User
     post:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GeofencePermission'
+        - $ref: '#/parameters/GeofencePermission'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/GeofencePermission'
+      summary: Link a Geofence to a User
   /permissions/groups:
     delete:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GroupPermission'
+        - $ref: '#/parameters/GroupPermission'
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Remove a Group from a User
     post:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/GroupPermission'
+        - $ref: '#/parameters/GroupPermission'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/GroupPermission'
+      summary: Link a Group to a User
   /positions:
     get:
-      consumes:
-        - application/json
-      description: 'Without any params, it returns a list of last known positions for all the user''s devices'
+      description: 'Without any params, it returns a list of last known positions for all the user''s Devices. _from_ and _to_ fields are not required with _id_'
       parameters:
         - description: '_deviceId_ is optional, but requires the _from_ and _to_ parameters when used'
           in: query
           name: deviceId
           required: false
           type: integer
-        - description: Not required with _id_
+        - description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
           in: query
           name: from
           required: false
           type: string
-        - description: Not required with _id_
+        - description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
           in: query
           name: to
           required: false
@@ -545,165 +488,83 @@ paths:
       summary: Fetches a list of Positions
   /reports/events:
     get:
-      consumes:
-        - application/json
+      description: At least one _deviceId_ or one _groupId_ must be passed
       parameters:
-        - description: at least one deviceId or one groupId must be passed
-          in: query
-          items:
-            type: integer
-          name: deviceId
-          required: true
-          type: array
-        - description: at least one deviceId or one groupId must be passed
-          in: query
-          items:
-            type: integer
-          name: groupId
-          required: true
-          type: array
+        - $ref: '#/parameters/deviceIdArray'
+        - $ref: '#/parameters/groupIdArray'
         - description: '% can be used to return events of all types'
           in: query
           items:
             type: string
           name: type
-          required: true
           type: array
-        - in: query
-          name: from
-          required: true
-          type: string
-        - in: query
-          name: to
-          required: true
-          type: string
+        - $ref: '#/parameters/fromTime'
+        - $ref: '#/parameters/toTime'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/Event'
             type: array
+      summary: Fetch a list of Events within the time period for the Devices or Groups
   /reports/route:
     get:
-      consumes:
-        - application/json
+      description: At least one _deviceId_ or one _groupId_ must be passed
       parameters:
-        - description: at least one deviceId or one groupId must be passed
-          in: query
-          items:
-            type: integer
-          name: deviceId
-          required: true
-          type: array
-        - description: at least one deviceId or one groupId must be passed
-          in: query
-          items:
-            type: integer
-          name: groupId
-          required: true
-          type: array
-        - in: query
-          name: from
-          required: true
-          type: string
-        - in: query
-          name: to
-          required: true
-          type: string
+        - $ref: '#/parameters/deviceIdArray'
+        - $ref: '#/parameters/groupIdArray'
+        - $ref: '#/parameters/fromTime'
+        - $ref: '#/parameters/toTime'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/Position'
             type: array
+      summary: Fetch a list of Positions within the time period for the Devices or Groups
   /reports/summary:
     get:
-      consumes:
-        - application/json
+      description: At least one _deviceId_ or one _groupId_ must be passed
       parameters:
-        - description: at least one deviceId or one groupId must be passed
-          in: query
-          items:
-            type: integer
-          name: deviceId
-          required: true
-          type: array
-        - description: at least one deviceId or one groupId must be passed
-          in: query
-          items:
-            type: integer
-          name: groupId
-          required: true
-          type: array
-        - in: query
-          name: from
-          required: true
-          type: string
-        - in: query
-          name: to
-          required: true
-          type: string
+        - $ref: '#/parameters/deviceIdArray'
+        - $ref: '#/parameters/groupIdArray'
+        - $ref: '#/parameters/fromTime'
+        - $ref: '#/parameters/toTime'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/ReportSummary'
             type: array
+      summary: Fetch a list of ReportSummary within the time period for the Devices or Groups
   /reports/trips:
     get:
-      consumes:
-        - application/json
+      description: At least one _deviceId_ or one _groupId_ must be passed
       parameters:
-        - description: at least one deviceId or one groupId must be passed
-          in: query
-          items:
-            type: integer
-          name: deviceId
-          required: true
-          type: array
-        - description: at least one deviceId or one groupId must be passed
-          in: query
-          items:
-            type: integer
-          name: groupId
-          required: true
-          type: array
-        - in: query
-          name: from
-          required: true
-          type: string
-        - in: query
-          name: to
-          required: true
-          type: string
+        - $ref: '#/parameters/deviceIdArray'
+        - $ref: '#/parameters/groupIdArray'
+        - $ref: '#/parameters/fromTime'
+        - $ref: '#/parameters/toTime'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/ReportTrips'
             type: array
+      summary: Fetch a list of ReportTrips within the time period for the Devices or Groups
   /server:
     get:
-      consumes:
-        - application/json
-      parameters: []
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Server'
+      summary: Fetch Server information
     put:
-      consumes:
-        - application/json
       parameters:
         - in: body
           name: body
@@ -713,9 +574,9 @@ paths:
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Server'
+      summary: Update Server information
   /session:
     delete:
       consumes:
@@ -724,20 +585,18 @@ paths:
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Close the Session
     get:
       consumes:
         - application/x-www-form-urlencoded
-      parameters: []
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/User'
         '404':
           description: Not Found
-          headers: {}
+      summary: Fetch Session information
     post:
       consumes:
         - application/x-www-form-urlencoded
@@ -746,92 +605,71 @@ paths:
           name: email
           required: true
           type: string
-        - in: formData
+        - format: password
+          in: formData
           name: password
           required: true
           type: string
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/User'
         '401':
           description: Unauthorized
-          headers: {}
+      summary: Create a new Session
   /statistics:
     get:
-      consumes:
-        - application/json
       parameters:
-        - in: query
-          name: from
-          required: true
-          type: string
-        - in: query
-          name: to
-          required: true
-          type: string
+        - $ref: '#/parameters/fromTime'
+        - $ref: '#/parameters/toTime'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/Statistics'
             type: array
+      summary: Fetch server Statistics
   /users:
     get:
-      consumes:
-        - application/json
-      parameters: []
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/User'
             type: array
+        '400':
+          description: No Permission
+      summary: Fetch a list of Users
     post:
-      consumes:
-        - application/json
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/User'
+        - $ref: '#/parameters/User'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/User'
+      summary: Create a User
   /users/notifications:
     get:
-      consumes:
-        - application/json
+      description: 'Without params, it returns a list of the user''s enabled Notifications'
       parameters:
-        - in: query
+        - description: To fetch a list of all available Notifications
+          in: query
           name: all
-          required: true
           type: boolean
-        - in: query
-          name: userId
-          required: true
-          type: integer
+        - $ref: '#/parameters/userId'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             items:
               $ref: '#/definitions/Notification'
             type: array
+      summary: Fetch a list of Notification types
     post:
-      consumes:
-        - application/json
       parameters:
         - in: body
           name: body
@@ -841,41 +679,27 @@ paths:
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/Notification'
+      summary: Set or unset a Notification
   '/users/{id}':
     delete:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
+        - $ref: '#/parameters/entityId'
       responses:
         '204':
           description: No Content
-          headers: {}
+      summary: Delete a User
     put:
-      consumes:
-        - application/json
       parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/User'
+        - $ref: '#/parameters/entityId'
+        - $ref: '#/parameters/User'
       responses:
         '200':
           description: OK
-          headers: {}
           schema:
             $ref: '#/definitions/User'
+      summary: Update a User
 definitions:
   AttributeAlias:
     properties:
@@ -905,12 +729,17 @@ definitions:
         type: string
       contact:
         type: string
-      geofenceIds: {}
+      geofenceIds:
+        items:
+          type: integer
+        type: array
       groupId:
         type: integer
       id:
         type: integer
       lastUpdate:
+        description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+        format: date-time
         type: string
       model:
         type: string
@@ -941,6 +770,7 @@ definitions:
       deviceId:
         type: integer
       totalDistance:
+        description: in meters
         type: number
   Event:
     properties:
@@ -954,6 +784,8 @@ definitions:
       positionId:
         type: integer
       serverTime:
+        description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+        format: date-time
         type: string
       type:
         type: string
@@ -1016,8 +848,12 @@ definitions:
       deviceId:
         type: integer
       deviceTime:
+        description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+        format: date-time
         type: string
       fixTime:
+        description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+        format: date-time
         type: string
       id:
         type: integer
@@ -1029,33 +865,43 @@ definitions:
         type: boolean
       protocol:
         type: string
+      serverTime:
+        description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+        format: date-time
+        type: string
       speed:
+        description: in knots
         type: number
       valid:
         type: boolean
   ReportSummary:
     properties:
       averageSpeed:
+        description: in knots
         type: number
       deviceId:
         type: integer
       deviceName:
         type: string
       distance:
+        description: in meters
         type: number
       engineHours:
         type: integer
       maxSpeed:
+        description: in knots
         type: number
   ReportTrips:
     properties:
       averageSpeed:
+        description: in knots
         type: number
       deviceId:
         type: integer
       deviceName:
         type: string
       distance:
+        description: in meters
         type: number
       duration:
         type: integer
@@ -1066,8 +912,11 @@ definitions:
       endLon:
         type: number
       endTime:
+        description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+        format: date-time
         type: string
       maxSpeed:
+        description: in knots
         type: number
       startAddress:
         type: string
@@ -1076,6 +925,8 @@ definitions:
       startLon:
         type: number
       startTime:
+        description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+        format: date-time
         type: string
   Server:
     properties:
@@ -1117,6 +968,8 @@ definitions:
       activeUsers:
         type: integer
       captureTime:
+        description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+        format: date-time
         type: string
       messagesReceived:
         type: integer
@@ -1140,6 +993,8 @@ definitions:
       email:
         type: string
       expirationTime:
+        description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+        format: date-time
         type: string
       id:
         type: integer

@@ -1097,20 +1097,24 @@ definitions:
     type: object
     x-ms-azure-resource: true
   EdgeNode:
+    allOf:
+      - $ref: '#/definitions/Resource'
     description: Edge node of CDN service.
+    properties:
+      properties:
+        $ref: '#/definitions/EdgeNodeProperties'
+        x-ms-client-flatten: true
+    type: object
+  EdgeNodeProperties:
+    description: The JSON object that contains the properties required to create an edgenode.
     properties:
       ipAddressGroups:
         description: List of ip address groups.
         items:
           $ref: '#/definitions/IpAddressGroup'
         type: array
-      name:
-        description: Ip adress group that contains Ipv4 and Ipv6 addresses
-        type: string
-      resourceGroup:
-        description: The resource group of the edge node.
-        type: string
-    type: object
+    required:
+      - ipAddressGroups
   EdgenodeResult:
     description: Result of the request to list CDN edgenodes. It contains a list of ip address group and a URL link to get the next set of results.
     properties:
@@ -1118,7 +1122,7 @@ definitions:
         description: Edge node of CDN service.
         items:
           $ref: '#/definitions/EdgeNode'
-        type: object
+        type: array
   Endpoint:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -1590,5 +1594,5 @@ definitions:
         type: string
       prefixLength:
         description: The length of the prefix of the ip address.
-        type: string
+        type: integer
     type: object

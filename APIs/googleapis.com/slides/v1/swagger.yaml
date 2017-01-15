@@ -739,7 +739,7 @@ definitions:
     description: |-
       Creates an embedded Google Sheets chart.
 
-      NOTE: Chart creation requires  at least one of the spreadsheets.readonly,
+      NOTE: Chart creation requires at least one of the spreadsheets.readonly,
       spreadsheets, drive.readonly, or drive OAuth scopes.
     properties:
       chartId:
@@ -2077,8 +2077,8 @@ definitions:
       replaceAllShapesWithImage:
         $ref: '#/definitions/ReplaceAllShapesWithImageResponse'
         description: |-
-          The result of replacing all shapes containing the specified text with
-          an image.
+          The result of replacing all shapes matching some criteria with an
+          image.
       replaceAllText:
         $ref: '#/definitions/ReplaceAllTextResponse'
         description: The result of replacing text.

@@ -1181,6 +1181,45 @@ paths:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - instances
+  '/projects/{project}/instances/{instance}/truncateLog':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Truncate MySQL general and slow query log tables
+      operationId: sql.instances.truncateLog
+      parameters:
+        - description: Project ID of the Cloud SQL project.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesTruncateLogRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+      tags:
+        - instances
   '/projects/{project}/instances/{instance}/users':
     delete:
       description: Deletes a user from a Cloud SQL instance.
@@ -1899,6 +1938,13 @@ definitions:
         $ref: '#/definitions/RestoreBackupContext'
         description: Parameters required to perform the restore backup operation.
     type: object
+  InstancesTruncateLogRequest:
+    description: Instance truncate log request.
+    properties:
+      truncateLogContext:
+        $ref: '#/definitions/TruncateLogContext'
+        description: Contains details about the truncate log operation.
+    type: object
   IpConfiguration:
     description: IP Management configuration.
     properties:
@@ -2327,6 +2373,17 @@ definitions:
       kind:
         default: 'sql#tiersList'
         description: 'This is always sql#tiersList.'
+        type: string
+    type: object
+  TruncateLogContext:
+    description: Database Instance truncate log context.
+    properties:
+      kind:
+        default: 'sql#truncateLogContext'
+        description: 'This is always sql#truncateLogContext.'
+        type: string
+      logType:
+        description: The type of log to truncate. Valid values are MYSQL_GENERAL_TABLE and MYSQL_SLOW_TABLE.
         type: string
     type: object
   User:

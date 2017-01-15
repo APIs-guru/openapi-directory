@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: od-api.oxforddictionaries.com
+host: 'od-api-demo.oxforddictionaries.com:443'
 basePath: /api/v1
 x-hasEquivalentPaths: true
 info:
@@ -10,7 +10,7 @@ info:
     url: 'https://developer.oxforddictionaries.com/api-terms-and-conditions'
   termsOfService: 'http://helloreverb.com/terms/'
   title: Oxford Dictionaries
-  version: 1.4.0
+  version: 1.5.0
   x-logo:
     url: 'https://developer.oxforddictionaries.com/images/logo.png'
   x-origin:
@@ -40,12 +40,18 @@ parameters:
   bilingual-language:
     description: IANA language code
     enum:
-      - en
       - es
+      - en
       - lv
       - nso
-      - ro
       - zu
+      - ms
+      - id
+      - tn
+      - ur
+      - hi
+      - sw
+      - ro
     in: path
     name: language
     required: true
@@ -53,16 +59,18 @@ parameters:
   bilingual-sourceLanguage:
     description: IANA language code. If provided output will be filtered by sourceLanguage.
     enum:
-      - en
       - es
+      - en
       - lv
       - nso
-      - ro
       - zu
       - ms
       - id
       - tn
       - ur
+      - hi
+      - sw
+      - ro
     in: query
     name: sourceLanguage
     required: false
@@ -79,6 +87,9 @@ parameters:
       - id
       - tn
       - ur
+      - hi
+      - sw
+      - ro
     in: path
     name: source_lang
     required: true
@@ -86,12 +97,18 @@ parameters:
   bilingual-source_language:
     description: IANA language code. Source Language.
     enum:
-      - en
       - es
+      - en
       - lv
       - nso
-      - ro
       - zu
+      - ms
+      - id
+      - tn
+      - ur
+      - hi
+      - sw
+      - ro
     in: path
     name: source_language
     required: true
@@ -103,11 +120,14 @@ parameters:
       - en
       - lv
       - nso
-      - ro
       - zu
       - ms
       - id
       - tn
+      - ur
+      - hi
+      - sw
+      - ro
     in: query
     name: targetLanguage
     required: false
@@ -119,11 +139,14 @@ parameters:
       - en
       - lv
       - nso
-      - ro
       - zu
       - ms
       - id
       - tn
+      - ur
+      - hi
+      - sw
+      - ro
     in: path
     name: target_lang
     required: true
@@ -135,8 +158,14 @@ parameters:
       - en
       - lv
       - nso
-      - ro
       - zu
+      - ms
+      - id
+      - tn
+      - ur
+      - hi
+      - sw
+      - ro
     in: path
     name: target_language
     required: true
@@ -148,10 +177,27 @@ parameters:
     name: word_id
     required: true
     type: string
+  grammaticalFeatures-sourceLanguage:
+    description: IANA language code
+    enum:
+      - es
+      - en
+      - lv
+      - nso
+      - zu
+      - ms
+      - id
+      - tn
+      - ur
+      - hi
+      - sw
+      - ro
+    in: path
+    name: source_language
+    required: true
+    type: string
   keyValFilters:
     collectionFormat: csv
-    default:
-      - 'grammaticalFeatures=singular,past;lexicalCategory=noun'
     description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
     in: path
     items:
@@ -167,6 +213,7 @@ parameters:
       - es
       - lv
       - hi
+      - sw
     in: path
     name: source_lang
     required: true
@@ -351,7 +398,7 @@ paths:
             and/or that entry has no senses with translations in the target language. 
         '500':
           description: |
-            Internal Error. An error occourred while processing the data.
+            Internal Error. An error occurred while processing the data.
       summary: Retrieve only definitions in entry search.
       tags:
         - Dictionary entries
@@ -379,7 +426,7 @@ paths:
             and/or that entry has no senses with translations in the target language. 
         '500':
           description: |
-            Internal Error. An error occourred while processing the data.
+            Internal Error. An error occurred while processing the data.
       summary: Retrieve only example sentences in entry search.
       tags:
         - Dictionary entries
@@ -407,7 +454,7 @@ paths:
             and/or that entry has no senses with translations in the target language. 
         '500':
           description: |
-            Internal Error. An error occourred while processing the data.
+            Internal Error. An error occurred while processing the data.
       summary: Retrieve only pronunciations in entry search.
       tags:
         - Dictionary entries
@@ -452,7 +499,7 @@ paths:
             and/or that entry has no senses with translations in the target language. 
         '500':
           description: |
-            Internal Error. An error occourred while processing the data.
+            Internal Error. An error occurred while processing the data.
       summary: Specify GB or US dictionary for English entry search.
       tags:
         - Dictionary entries
@@ -548,7 +595,7 @@ paths:
             and/or that entry has no senses with translations in the target language(s). 
         '500':
           description: |
-            Internal Error. An error occourred while processing the data.
+            Internal Error. An error occurred while processing the data.
       summary: Find translation for a given word.
       tags:
         - Translation
@@ -577,7 +624,7 @@ paths:
             and/or that entry has no senses with translations in the target language. 
         '500':
           description: |
-            Internal Error. An error occourred while processing the data.
+            Internal Error. An error occurred while processing the data.
       summary: Apply filters to entry search.
       tags:
         - Dictionary entries
@@ -595,7 +642,7 @@ paths:
             $ref: '#/definitions/Filters'
             title: FiltersResults
         '500':
-          description: Internal Error. An error occourred while processing the data.
+          description: Internal Error. An error occurred while processing the data.
       summary: Lists available filters.
       tags:
         - Utility
@@ -624,8 +671,27 @@ paths:
         '404':
           description: Unknown endpoint.
         '500':
-          description: Internal Error. An error occourred while processing the data.
+          description: Internal Error. An error occurred while processing the data.
       summary: Lists available filters for specific endpoint.
+      tags:
+        - Utility
+  '/grammaticalFeatures/{source_language}':
+    get:
+      description: |
+        Returns a list of the available grammatical features for a given language dataset.
+      parameters:
+        - $ref: '#/parameters/grammaticalFeatures-sourceLanguage'
+        - $ref: '#/parameters/appId'
+        - $ref: '#/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/Regions'
+            title: GrammaticalFeaturesResults
+        '404':
+          description: Unknown source_language.
+      summary: Lists available grammatical features in a given language dataset.
       tags:
         - Utility
   '/inflections/{source_lang}/{word_id}':
@@ -653,7 +719,7 @@ paths:
             title: InflectionsResults
         '500':
           description: |
-            Internal Error. An error occourred while processing the data.
+            Internal Error. An error occurred while processing the data.
       summary: Retrieve lemmas for a given inflected wordform.
       tags:
         - Lemmatron
@@ -683,7 +749,7 @@ paths:
             title: InflectionsResults
         '500':
           description: |
-            Internal Error. An error occourred while processing the data.
+            Internal Error. An error occurred while processing the data.
       summary: Apply filters to Lemmatron response
       tags:
         - Lemmatron
@@ -705,7 +771,7 @@ paths:
         '404':
           description: Unknown sourceLanguage and/or targetLanguage.
         '500':
-          description: Internal Error. An error occourred while processing the data.
+          description: Internal Error. An error occurred while processing the data.
       summary: Lists available monolingual and bilingual language datasets in the API.
       tags:
         - Utility
@@ -726,7 +792,7 @@ paths:
         '404':
           description: Unknown language.
         '500':
-          description: Internal Error. An error occourred while processing the data.
+          description: Internal Error. An error occurred while processing the data.
       summary: Lists available lexical categories in a given language dataset.
       tags:
         - Utility
@@ -766,7 +832,7 @@ paths:
         '404':
           description: Unknown source_language.
         '500':
-          description: Internal Error. An error occourred while processing the data.
+          description: Internal Error. An error occurred while processing the data.
       summary: Lists available registers in a given monolingual language dataset.
       tags:
         - Utility
@@ -790,7 +856,7 @@ paths:
         '404':
           description: Unknown source_language and/or target_language.
         '500':
-          description: Internal Error. An error occourred while processing the data.
+          description: Internal Error. An error occurred while processing the data.
       summary: Lists available registers in a given bilingual language dataset.
       tags:
         - Utility
@@ -920,14 +986,24 @@ paths:
       parameters:
         - $ref: '#/parameters/monolingual-source_lang'
         - default: lexicalCategory=Noun;domains=sport
-          description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport'
+          description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5.'
           in: path
           name: filters_advanced
           required: true
           type: string
-        - description: 'Semicolon separated list of wordlist parameters to be excluded from response, presented as value pairs: LexicalCategory, domains, regions, registers, grammaticalFeatures. Parameters can take comma separated list of values.'
+        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes headwords that have any senses in specified exclusion attributes (lexical categories, domains, etc.) from results.'
           in: query
           name: exclude
+          required: false
+          type: string
+        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes those senses of a particular headword that match specified exclusion attributes (lexical categories, domains, etc.) from results but includes the headword if it has other permitted senses.'
+          in: query
+          name: exclude_senses
+          required: false
+          type: string
+        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes a headword only if the primary sense matches the specified exclusion attributes (registers, domains only).'
+          in: query
+          name: exclude_prime_senses
           required: false
           type: string
         - default: '>5,<10'
@@ -975,7 +1051,7 @@ paths:
             No entries is found matching supplied filters or lang or filters is not recognized.
         '500':
           description: |
-            Internal Error. An error occourred while processing the data.
+            Internal Error. An error occurred while processing the data.
       summary: Retrieve list of words for category with advanced options.
       tags:
         - Wordlist
@@ -988,7 +1064,7 @@ paths:
       parameters:
         - $ref: '#/parameters/monolingual-source_lang'
         - default: registers=Rare;domains=Art
-          description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport.'
+          description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5.'
           in: path
           name: filters_basic
           required: true
@@ -1018,7 +1094,7 @@ paths:
             No entries is found matching supplied filters or lang or filters is not recognized.
         '500':
           description: |
-            Internal Error. An error occourred while processing the data.
+            Internal Error. An error occurred while processing the data.
       summary: Retrieve list of words for category.
       tags:
         - Wordlist

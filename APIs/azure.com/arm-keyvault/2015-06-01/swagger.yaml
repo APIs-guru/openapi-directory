@@ -176,7 +176,7 @@ paths:
         '200':
           description: Get information about all key vaults in the subscription.
           schema:
-            $ref: '#/definitions/VaultListResult'
+            $ref: '#/definitions/ResourceListResult'
       tags:
         - Vaults
       x-ms-pageable:
@@ -191,7 +191,6 @@ definitions:
         type: string
       objectId:
         description: 'The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies.'
-        format: uuid
         type: string
       permissions:
         $ref: '#/definitions/Permissions'
@@ -293,6 +292,17 @@ definitions:
       - location
       - name
     x-ms-azure-resource: true
+  ResourceListResult:
+    description: List of vault resources.
+    properties:
+      nextLink:
+        description: Gets the URL to get the next set of vault resources.
+        type: string
+      value:
+        description: Gets the list of vault resources.
+        items:
+          $ref: '#/definitions/Resource'
+        type: array
   Sku:
     description: SKU details
     properties:

@@ -984,6 +984,14 @@ definitions:
 
           The model name must be unique within the project it is created in.
         type: string
+      regions:
+        description: |-
+          Optional. The list of regions where the model is going to be deployed.
+          Currently only one region per model is supported.
+          Defaults to 'us-central1' if nothing is set.
+        items:
+          type: string
+        type: array
     type: object
   GoogleCloudMlV1beta1__OperationMetadata:
     description: Represents the metadata of the long-running operation.
@@ -1216,6 +1224,11 @@ definitions:
       region:
         description: Required. The Google Compute Engine region to run the prediction job in.
         type: string
+      runtimeVersion:
+        description: |-
+          Optional. The Google Cloud ML runtime version to use for this batch
+          prediction. If not set, Google Cloud ML will choose a version.
+        type: string
       versionName:
         description: |-
           Use this field if you want to specify a version of the model to use. The
@@ -1232,6 +1245,10 @@ definitions:
         description: The number of data instances which resulted in errors.
         format: int64
         type: string
+      nodeHours:
+        description: Node hours used by the batch prediction job.
+        format: double
+        type: number
       outputPath:
         description: The output Google Cloud Storage location provided at the job creation time.
         type: string
@@ -1328,6 +1345,11 @@ definitions:
       region:
         description: Required. The Google Compute Engine region to run the training job in.
         type: string
+      runtimeVersion:
+        description: |-
+          Optional. The Google Cloud ML runtime version to use for training.  If not
+          set, Google Cloud ML will choose the latest stable version.
+        type: string
       scaleTier:
         description: |-
           Required. Specifies the machine types, the number of replicas for workers
@@ -1360,18 +1382,25 @@ definitions:
         type: string
     type: object
   GoogleCloudMlV1beta1__TrainingOutput:
-    description: Represents results of a training job.
+    description: Represents results of a training job. Output only.
     properties:
       completedTrialCount:
-        description: The number of hyperparameter tuning trials that completed successfully.
+        description: |-
+          The number of hyperparameter tuning trials that completed successfully.
+          Only set for hyperparameter tuning jobs.
         format: int64
         type: string
-      consumedMlUnits:
+      consumedMLUnits:
         description: The amount of ML units consumed by the job.
         format: double
         type: number
+      isHyperparameterTuningJob:
+        description: Whether this job is a hyperparameter tuning job.
+        type: boolean
       trials:
-        description: Results for individual Hyperparameter trials.
+        description: |-
+          Results for individual Hyperparameter trials.
+          Only set for hyperparameter tuning jobs.
         items:
           $ref: '#/definitions/GoogleCloudMlV1beta1__HyperparameterOutput'
         type: array
@@ -1422,6 +1451,16 @@ definitions:
           Required.The name specified for the version when it was created.
 
           The version name must be unique within the model it is created in.
+        type: string
+      onlinePredictionLogging:
+        description: |-
+          Optional. If true, enables StackDriver Logging for online prediction.
+          Default is false.
+        type: boolean
+      runtimeVersion:
+        description: |-
+          Optional. The Google Cloud ML runtime version to use for this deployment.
+          If not set, Google Cloud ML will choose a version.
         type: string
     type: object
   GoogleLongrunning__ListOperationsResponse:

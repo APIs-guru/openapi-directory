@@ -361,7 +361,10 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Returns permissions that a caller has on the specified resource.
+      description: |-
+        Returns permissions that a caller has on the specified resource.
+        If the resource does not exist, this will return an empty set of
+        permissions, not a NOT_FOUND error.
       operationId: pubsub.projects.topics.testIamPermissions
       parameters:
         - description: |-

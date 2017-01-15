@@ -54,18 +54,21 @@ parameters:
     name: appCollection
     required: true
     type: string
+    x-ms-parameter-location: method
   AppNameParameter:
     description: Application resource name.
     in: path
     name: appName
     required: true
     type: string
+    x-ms-parameter-location: method
   ResourceGroupNameParameter:
     description: The name of the resource group.
     in: path
     name: resourceGroupName
     required: true
     type: string
+    x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path

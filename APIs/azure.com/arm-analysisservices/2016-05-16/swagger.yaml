@@ -272,13 +272,49 @@ definitions:
     description: Properties of Analysis Services resource.
     properties:
       provisioningState:
-        description: The current deployment state of Analysis Services resource.
+        description: The current deployment state of Analysis Services resource. The provisioningState is to indicate states for resource provisioning.
+        enum:
+          - Deleting
+          - Succeeded
+          - Failed
+          - Paused
+          - Suspended
+          - Provisioning
+          - Updating
+          - Suspending
+          - Pausing
+          - Resuming
+          - Preparing
+          - Scaling
         readOnly: true
         type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       serverFullName:
         description: The full name of the Analysis Services resource.
         readOnly: true
         type: string
+      state:
+        description: The current state of Analysis Services resource. The state is to indicate more states outside of resource provisioning.
+        enum:
+          - Deleting
+          - Succeeded
+          - Failed
+          - Paused
+          - Suspended
+          - Provisioning
+          - Updating
+          - Suspending
+          - Pausing
+          - Resuming
+          - Preparing
+          - Scaling
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: State
     type: object
   AnalysisServicesServerUpdateParameters:
     description: Provision request specification

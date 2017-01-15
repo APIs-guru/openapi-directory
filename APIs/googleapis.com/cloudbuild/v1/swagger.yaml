@@ -716,6 +716,11 @@ definitions:
           Working directory (relative to project source root) to use when running
           this operation's container.
         type: string
+      entrypoint:
+        description: |-
+          Optional entrypoint to be used instead of the build step image's default
+          If unset, the image's default will be used.
+        type: string
       env:
         description: |-
           A list of environment variable definitions to be used when running a step.

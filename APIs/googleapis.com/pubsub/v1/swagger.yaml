@@ -365,7 +365,10 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Returns permissions that a caller has on the specified resource.
+      description: |-
+        Returns permissions that a caller has on the specified resource.
+        If the resource does not exist, this will return an empty set of
+        permissions, not a NOT_FOUND error.
       operationId: pubsub.projects.snapshots.testIamPermissions
       parameters:
         - description: |-
@@ -931,10 +934,12 @@ definitions:
       ackDeadlineSeconds:
         description: |-
           The new ack deadline with respect to the time this request was sent to
-          the Pub/Sub system. Must be >= 0. For example, if the value is 10, the new
+          the Pub/Sub system. For example, if the value is 10, the new
           ack deadline will expire 10 seconds after the `ModifyAckDeadline` call
           was made. Specifying zero may immediately make the message available for
           another pull request.
+          The minimum deadline you can specify is 0 seconds.
+          The maximum deadline you can specify is 600 seconds (10 minutes).
         format: int32
         type: integer
       ackIds:
@@ -1078,11 +1083,12 @@ definitions:
         type: integer
       returnImmediately:
         description: |-
-          If this is specified as true the system will respond immediately even if
-          it is not able to return a message in the `Pull` response. Otherwise the
-          system is allowed to wait until at least one message is available rather
-          than returning no messages. The client may cancel the request if it does
-          not wish to wait any longer for the response.
+          If this field set to true, the system will respond immediately even if
+          it there are no messages available to return in the `Pull` response.
+          Otherwise, the system may wait (for a bounded amount of time) until at
+          least one message is available, rather than returning no messages. The
+          client may cancel the request if it does not wish to wait any longer for
+          the response.
         type: boolean
     type: object
   PullResponse:

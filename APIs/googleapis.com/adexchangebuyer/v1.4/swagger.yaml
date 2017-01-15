@@ -1173,7 +1173,7 @@ paths:
             - propose
             - proposeAndAccept
             - unknownAction
-            - updateFinalized
+            - updateNonTerms
           in: path
           name: updateAction
           required: true
@@ -1213,7 +1213,7 @@ paths:
             - propose
             - proposeAndAccept
             - unknownAction
-            - updateFinalized
+            - updateNonTerms
           in: path
           name: updateAction
           required: true
@@ -2107,7 +2107,7 @@ definitions:
         format: int64
         type: string
       inventoryDescription:
-        description: Description for the deal terms. (updatable)
+        description: Description for the deal terms. (buyer-readonly)
         type: string
       isRfpTemplate:
         description: Indicates whether the current deal is a RFP template. RFP template is created by buyer and not based on seller created products.
@@ -2400,6 +2400,10 @@ definitions:
         items:
           type: string
         type: array
+      minimumViewabilityDecile:
+        description: 'Requests where the predicted viewability is below the specified decile will not match. E.g. if the buyer sets this value to 5, requests from slots where the predicted viewability is below 50% will not match. If the predicted viewability is unknown this field will be ignored.'
+        format: int32
+        type: integer
       mobileCarriers:
         description: Requests containing any of these mobile carrier ids will match. Values are from mobile-carriers.csv in the downloadable files section.
         items:
@@ -2579,6 +2583,9 @@ definitions:
         type: string
       legacyOfferId:
         description: Optional legacy offer id if this offer is a preferred deal offer.
+        type: string
+      marketplacePublisherProfileId:
+        description: 'Marketplace publisher profile Id. This Id differs from the regular publisher_profile_id in that 1. This is a new id, the old Id will be deprecated in 2017. 2. This id uniquely identifies a publisher profile by itself.'
         type: string
       name:
         description: The name for this product as set by the seller. (buyer-readonly)

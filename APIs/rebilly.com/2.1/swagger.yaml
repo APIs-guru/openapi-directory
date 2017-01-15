@@ -43,7 +43,7 @@ info:
     The client-side authentication scheme uses one HTTP header named REB-AUTH.
 
     <!-- ReDoc-Inject: <security-definitions> -->
-        
+
     # PHP SDK
     For all PHP SDK examples provided in this spec you will need to configure `$client`.
     You may do it like this:
@@ -153,15 +153,26 @@ parameters:
     name: q
     type: string
   collectionSort:
+    collectionFormat: csv
     description: The collection items sort field and order (prefix with "-" for descending sort).
     in: query
+    items:
+      type: string
     name: sort
-    type: string
+    type: array
   hash:
     description: The token identifier string
     in: path
     name: hash
     required: true
+    type: string
+  mediaType:
+    default: application/json
+    description: The response media type
+    enum:
+      - application/json
+    in: header
+    name: Accept
     type: string
   resourceId:
     description: The resource identifier string
@@ -271,6 +282,16 @@ tags:
       Send automated emails through our system by connecting to your third party
       SMTP server (or your third party email service provider's SMTP server).
     name: Email Credentials
+  - description: |
+      A File is an entity that can store a phyiscal file and some metadata. It also provides an easy access to
+      its size, mime-type, user-defined tags and description thus allowing easy sorting and searching among stored
+      files.
+      There are several methods of file uploading available: multipart/form-data encoded form, RAW POST (by sending
+      file contents as POST body), fetching from URL (by providing the file URL via 'url' param)
+      Attachment is an entity that is used to link a File to one or multiple objects like Customer, Dispute, Payment,
+      Transaction, Subscription, Plan, Product, Invoice, Note. That allows to quickly find and use files related to
+      those specific entities.
+    name: Files
   - description: |
       Gateway accounts connect payment request to third party networks and platforms.
     name: Gateway Accounts
@@ -491,6 +512,48 @@ paths:
         - 3D Secure
     parameters:
       - $ref: '#/parameters/resourceId'
+  '/activation/{token}':
+    parameters:
+      - description: The token string
+        in: path
+        name: token
+        required: true
+        type: string
+    post:
+      description: |
+        Sends a token to activate user account
+      responses:
+        '204':
+          description: User account was activated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '422':
+          description: Invalid token was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      security:
+        - RebAuth: []
+      summary: Sends a token to activate user account
+      tags:
+        - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            try {
+                $client->users()->activate('token');
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /api-keys:
     get:
       description: |
@@ -531,6 +594,12 @@ paths:
       summary: Retrieve a list of api keys
       tags:
         - API Keys
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $apiKeys = $client->apiKeys()->search([
+                'filter' => 'description:Test',
+            ]);
     post:
       description: |
         Create an api key
@@ -567,6 +636,18 @@ paths:
       summary: Create an api key
       tags:
         - API Keys
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $apiKeyForm = new Rebilly\Entities\ApiKey();
+            $apiKeyForm->setDescription('Test');
+            $apiKeyForm->setDatetimeFormat($apiKeyForm::DATETIME_FORMAT_MYSQL);
+
+            try {
+                $apiKey = $client->apiKeys()->create($apiKeyForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/api-keys/{id}':
     delete:
       description: |
@@ -596,6 +677,10 @@ paths:
       summary: Delete api key
       tags:
         - API Keys
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->apiKeys()->delete('apiKeyID');
     get:
       description: |
         Retrieve api key with specified identifier string
@@ -623,6 +708,10 @@ paths:
       summary: Retrieve api key
       tags:
         - API Keys
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $apiKeys = $client->apiKeys()->load('apiKeyID');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -678,6 +767,267 @@ paths:
       summary: Create or update api key with predefined ID
       tags:
         - API Keys
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $apiKeyForm = new Rebilly\Entities\ApiKey();
+            $apiKeyForm->setDescription('TestPut');
+            $apiKeyForm->setDatetimeFormat($apiKeyForm::DATETIME_FORMAT_MYSQL);
+
+            try {
+                $apiKey = $client->apiKeys()->update('apiKeyID', $apiKeyForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
+  /attachments:
+    get:
+      description: |
+        Retrieve a list of Attachments
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+        - $ref: '#/parameters/collectionFilter'
+        - $ref: '#/parameters/collectionQuery'
+        - $ref: '#/parameters/collectionExpand'
+        - $ref: '#/parameters/collectionFields'
+        - collectionFormat: csv
+          description: The collection items sort field and order (prefix with "-" for descending sort).
+          in: query
+          items:
+            enum:
+              - id
+              - '-id'
+              - name
+              - '-name'
+              - relatedId
+              - '-relatedId'
+              - relatedType
+              - '-relatedType'
+              - fileId
+              - '-fileId'
+              - createdTime
+              - '-createdTime'
+              - updatedTime
+              - '-updatedTime'
+            type: string
+          name: sort
+          type: array
+      responses:
+        '200':
+          description: A list of Attachments was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/Attachment'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of Attachments
+      tags:
+        - Files
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $attachments = $client->attachments()->search([
+                'filter' => 'relatedType:customer',
+            ]);
+    post:
+      description: |
+        Create an Attachment
+      parameters:
+        - description: Attachment resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Attachment'
+      responses:
+        '201':
+          description: Attachment was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Attachment'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Create an Attachment
+      tags:
+        - Files
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $attachmentForm = new Rebilly\Entities\Attachment();
+            $attachmentForm->setFileId('fileId');
+            $attachmentForm->setRelatedType($attachmentForm::TYPE_CUSTOMER);
+            $attachmentForm->setRelatedId('customerId');
+
+            try {
+                $attachment = $client->attachments()->create($attachmentForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
+  '/attachments/{id}':
+    delete:
+      description: |
+        Delete the Attachment with predefined identifier string
+      responses:
+        '204':
+          description: Attachment was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Delete an Attachment
+      tags:
+        - Files
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->attachments()->delete('attachmentId');
+    get:
+      description: |
+        Retrieve a Attachment with specified identifier string
+      responses:
+        '200':
+          description: Attachment was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Attachment'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve an Attachment
+      tags:
+        - Files
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $attachment = $client->attachments()->load('attachmentId');
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      description: |
+        Update the Attachment with predefined ID
+      parameters:
+        - description: Attachment resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Attachment'
+      responses:
+        '200':
+          description: Attachment was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Attachment'
+        '201':
+          description: Attachment was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Attachment'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Update the Attachment with predefined ID
+      tags:
+        - Files
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $attachmentForm = new Rebilly\Entities\Attachment();
+            $attachmentForm->setFileId('fileId');
+            $attachmentForm->setRelatedType($attachmentForm::TYPE_CUSTOMER);
+            $attachmentForm->setRelatedId('customerId');
+
+            try {
+                $attachment = $client->attachments()->update('attachmentId', $attachmentForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /authentication-options:
     get:
       description: |
@@ -706,6 +1056,10 @@ paths:
       summary: Read current authentication options
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $authenticationOptions = $client->authenticationOptions()->load();
     put:
       description: |
         Change options
@@ -742,6 +1096,18 @@ paths:
       summary: Change authentication options
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $authenticationOptionsForm = new Rebilly\Entities\AuthenticationOptions();
+            // Regular expression below matches any password with 6+ length that contains alphabet symbols and/or numbers.
+            $authenticationOptionsForm->setPasswordPattern('/^[a-zA-Z0-9]{6,}$/');
+
+            try {
+                $authenticationOptions = $client->authenticationOptions()->update($authenticationOptionsForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /authentication-tokens:
     get:
       description: |
@@ -782,6 +1148,12 @@ paths:
       summary: Retrieve a list of auth tokens
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $authenticationTokens = $client->authenticationTokens()->search([
+                'filter' => 'customerId:testCustomer',
+            ]);
     post:
       description: |
         Login a user (customer)
@@ -818,6 +1190,18 @@ paths:
       summary: Login
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $authenticationForm = new Rebilly\Entities\AuthenticationToken();
+            $authenticationForm->setUsername('username');
+            $authenticationForm->setPassword('test123');
+
+            try {
+                $authenticationToken = $client->authenticationTokens()->login($authenticationForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/authentication-tokens/{token}':
     delete:
       description: |
@@ -844,6 +1228,10 @@ paths:
       summary: Logout a user
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->authenticationTokens()->logout('token');
     get:
       description: |
         Verify an authentication token
@@ -871,6 +1259,10 @@ paths:
       summary: Verify
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $isVerified = $client->authenticationTokens()->verify('token');
     parameters:
       - description: The token identifier string
         in: path
@@ -917,6 +1309,12 @@ paths:
       summary: Retrieve a list of bank accounts
       tags:
         - Bank Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $bankAccounts = $client->bankAccounts()->search([
+                'filter' => 'customerId:testId',
+            ]);
     post:
       description: |
         Create a Bank Account
@@ -953,6 +1351,21 @@ paths:
       summary: Create a Bank Account
       tags:
         - Bank Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $bankAccountForm = new Rebilly\Entities\BankAccount();
+            $bankAccountForm->setCustomerId('customerId');
+            $bankAccountForm->setContactId('contactId');
+            $bankAccountForm->setRoutingNumber('0123456');
+            $bankAccountForm->setAccountNumber('0123456');
+            $bankAccountForm->setAccountType('checking');
+
+            try {
+                $bankAccount = $client->bankAccounts()->create($bankAccountForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/bank-accounts/{id}':
     get:
       description: |
@@ -981,6 +1394,10 @@ paths:
       summary: Retrieve a Bank Account
       tags:
         - Bank Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $bankAccount = $client->bankAccounts()->load('bankAccountId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -1037,6 +1454,21 @@ paths:
       summary: Create a BankAccount with predefined ID
       tags:
         - Bank Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $bankAccountForm = new Rebilly\Entities\BankAccount();
+            $bankAccountForm->setCustomerId('customerId');
+            $bankAccountForm->setContactId('contactId');
+            $bankAccountForm->setRoutingNumber('0123456');
+            $bankAccountForm->setAccountNumber('0123456');
+            $bankAccountForm->setAccountType('checking');
+
+            try {
+                $bankAccount = $client->customers()->update('bankAccountId', $bankAccountForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/bank-accounts/{id}/deactivation':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -1069,6 +1501,10 @@ paths:
       summary: Deactivate a Bank Account
       tags:
         - Bank Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $bankAccount = $client->bankAccounts()->deactivate('bankAccountId');
   /blacklists:
     get:
       description: |
@@ -1109,6 +1545,12 @@ paths:
       summary: Retrieve a list of blacklists
       tags:
         - Blacklists
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $blacklists = $client->blacklists()->search([
+                'filter' => 'value:testValue',
+            ]);
     post:
       description: |
         Create a blacklist
@@ -1143,6 +1585,19 @@ paths:
       summary: Create a blacklist
       tags:
         - Blacklists
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $blacklistForm = new Rebilly\Entities\Blacklist();
+            $blacklistForm->setType($blacklistForm::TYPE_EMAIL);
+            $blacklistForm->setValue('test@test.com');
+            $blacklistForm->setExpiredTime('2025-01-01 05:00:00');
+
+            try {
+                $blacklist = $client->blacklists()->create($blacklistForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/blacklists/{id}':
     delete:
       description: |
@@ -1169,6 +1624,10 @@ paths:
       summary: Delete a blacklist
       tags:
         - Blacklists
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->blacklists()->delete('blacklistId');
     get:
       description: |
         Retrieve a blacklist with specified identifier string
@@ -1196,6 +1655,10 @@ paths:
       summary: Retrieve a blacklist
       tags:
         - Blacklists
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $blacklist = $client->blacklists()->load('blacklistId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -1236,6 +1699,19 @@ paths:
       summary: Create a blacklist with predefined ID
       tags:
         - Blacklists
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $blacklistForm = new Rebilly\Entities\Blacklist();
+            $blacklistForm->setType($blacklistForm::TYPE_EMAIL);
+            $blacklistForm->setValue('test@test.com');
+            $blacklistForm->setExpiredTime('2025-01-01 05:00:00');
+
+            try {
+                $blacklist = $client->blacklists()->update('blacklistId', $blacklistForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /checkout-pages:
     get:
       description: |
@@ -1276,6 +1752,12 @@ paths:
       summary: Retrieve a list of checkout pages
       tags:
         - Checkout Pages
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $checkoutPages = $client->checkoutPages()->search([
+                'filter' => 'name:testCheckoutPage',
+            ]);
     post:
       description: |
         Create a Checkout Page
@@ -1312,6 +1794,20 @@ paths:
       summary: Create a Checkout Page
       tags:
         - Checkout Pages
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $checkoutPageForm = new Rebilly\Entities\CheckoutPage();
+            $checkoutPageForm->setPlanId('planId');
+            $checkoutPageForm->setWebsiteId('websiteId');
+            $checkoutPageForm->setName('TestCheckoutPage');
+            $checkoutPageForm->setUriPath('test-checkout-page');
+
+            try {
+                $checkoutPage = $client->checkoutPages()->create($checkoutPageForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/checkout-pages/{id}':
     delete:
       description: |
@@ -1340,6 +1836,10 @@ paths:
       summary: Delete a Checkout Page
       tags:
         - Checkout Pages
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->checkoutPages()->delete('checkoutPageId');
     get:
       description: |
         Retrieve a Checkout Page with specified identifier string
@@ -1355,6 +1855,10 @@ paths:
       summary: Retrieve a Checkout Page
       tags:
         - Checkout Pages
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $checkoutPage = $client->checkoutPages()->load('checkoutPageId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -1411,6 +1915,20 @@ paths:
       summary: Create or update a Checkout Page with predefined ID
       tags:
         - Checkout Pages
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $checkoutPageForm = new Rebilly\Entities\CheckoutPage();
+            $checkoutPageForm->setPlanId('planId');
+            $checkoutPageForm->setWebsiteId('websiteId');
+            $checkoutPageForm->setName('TestCheckoutPage');
+            $checkoutPageForm->setUriPath('test-checkout-page');
+
+            try {
+                $checkoutPage = $client->checkoutPages()->update('checkoutPageId', $checkoutPageForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /contacts:
     get:
       description: |
@@ -1451,6 +1969,12 @@ paths:
       summary: Retrieve a list of contacts
       tags:
         - Contacts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $contacts = $client->contacts()->search([
+                'filter' => 'firstName:John',
+            ]);
     post:
       description: |
         Create a contact
@@ -1485,6 +2009,19 @@ paths:
       summary: Create a contact
       tags:
         - Contacts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $contactForm = new Rebilly\Entities\Contact();
+            $contactForm->setFirstName('Sherlock');
+            $contactForm->setLastName('Holmes');
+            $contactForm->setOrganization('TestOrganization');
+
+            try {
+                $contact = $client->contacts()->create($contactForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/contacts/{id}':
     get:
       description: |
@@ -1513,6 +2050,10 @@ paths:
       summary: Retrieve a contact
       tags:
         - Contacts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $contact = $client->contacts()->load('contactId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -1553,6 +2094,19 @@ paths:
       summary: Create or update a contact with predefined ID
       tags:
         - Contacts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $contactForm = new Rebilly\Entities\Contact();
+            $contactForm->setFirstName('Sherlock');
+            $contactForm->setLastName('Holmes');
+            $contactForm->setOrganization('TestOrganization');
+
+            try {
+                $contact = $client->contacts()->update('contactId', $contactForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /coupons:
     get:
       description: |
@@ -1597,6 +2151,12 @@ paths:
       summary: Retrieve a list of coupons
       tags:
         - Coupons
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $coupons = $client->coupons()->search([
+                'filter' => 'status:issued',
+            ]);
     post:
       description: |
         Create a coupon
@@ -1633,6 +2193,36 @@ paths:
       summary: Create a coupon
       tags:
         - Coupons
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $couponForm = new Rebilly\Entities\Coupons\Coupon();
+
+            $discountArray = [
+                'type' => Rebilly\Entities\Coupons\Discount::TYPE_FIXED,
+                'currency' => 'USD',
+                'amount' => 1.99,
+            ];
+
+            $discountForm = new Rebilly\Entities\Coupons\Discount($discountArray);
+            $couponForm->setDiscount($discountForm);
+
+            $restrictionArray = [
+                'type' => Rebilly\Entities\Coupons\Restriction::TYPE_DISCOUNTS_PER_REDEMPTION,
+                'quantity' => 2,
+            ];
+
+            $restrictionForm = new Rebilly\Entities\Coupons\Restriction([
+                $restrictionArray,
+            ]);
+
+            $couponForm->setRestrictions($restrictionForm);
+
+            try {
+                $coupon = $client->coupons()->create($couponForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /coupons-redemptions:
     get:
       parameters:
@@ -1675,6 +2265,12 @@ paths:
       summary: Retrieve a list of coupon redemptions
       tags:
         - Coupons
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $couponRedemptions = $client->couponsRedemptions()->search([
+                'filter' => 'customerId:testCustomer',
+            ]);
     post:
       description: |
         Redeem a coupon
@@ -1711,6 +2307,29 @@ paths:
       summary: Redeem a coupon
       tags:
         - Coupons
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $redemptionForm = new Rebilly\Entities\Coupons\Redemption();
+            $redemptionForm->setCustomerId('customerId');
+            $redemptionForm->setRedemptionCode('redemptionCode');
+
+            $restrictionArray = [
+                'type' => Rebilly\Entities\Coupons\Restriction::TYPE_DISCOUNTS_PER_REDEMPTION,
+                'quantity' => 2,
+            ];
+
+            $restrictionForm = new Rebilly\Entities\Coupons\Restriction([
+                $restrictionArray,
+            ]);
+
+            $redemptionForm->setAdditionalRestrictions($restrictionForm);
+
+            try {
+                $couponRedemption = $client->couponsRedemptions()->redeem($redemptionForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/coupons-redemptions/{id}':
     get:
       responses:
@@ -1725,6 +2344,10 @@ paths:
       summary: Retrieve a coupon redemption with specified identifier string
       tags:
         - Coupons
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $couponRedemption = $client->couponsRedemptions()->load('redemptionCode');
     parameters:
       - $ref: '#/parameters/resourceId'
   '/coupons-redemptions/{id}/cancel':
@@ -1741,6 +2364,10 @@ paths:
       summary: Cancel a coupon redemption
       tags:
         - Coupons
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->couponsRedemptions()->cancel('id');
   '/coupons/{redemptionCode}':
     get:
       description: |
@@ -1769,6 +2396,10 @@ paths:
       summary: Retrieve a coupon
       tags:
         - Coupons
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $coupon = $client->coupons()->load('redemptionCode');
     parameters:
       - description: The Coupon's redemption code
         in: path
@@ -1831,6 +2462,36 @@ paths:
       summary: Create or update a coupon with predefined redemption code
       tags:
         - Coupons
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $couponForm = new Rebilly\Entities\Coupons\Coupon();
+
+            $discountArray = [
+                'type' => Rebilly\Entities\Coupons\Discount::TYPE_FIXED,
+                'currency' => 'USD',
+                'amount' => 1.99,
+            ];
+
+            $discountForm = new Rebilly\Entities\Coupons\Discount($discountArray);
+            $couponForm->setDiscount($discountForm);
+
+            $restrictionArray = [
+                'type' => Rebilly\Entities\Coupons\Restriction::TYPE_DISCOUNTS_PER_REDEMPTION,
+                'quantity' => 2,
+            ];
+
+            $restrictionForm = new Rebilly\Entities\Coupons\Restriction([
+                $restrictionArray,
+            ]);
+
+            $couponForm->setRestrictions($restrictionForm);
+
+            try {
+                $coupon = $client->coupons()->create($couponForm, 'redemptionCode');
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /credential-hashes/emails:
     post:
       description: |
@@ -2005,6 +2666,12 @@ paths:
       summary: Retrieve a list of credentials
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customerCredentials = $client->customerCredentials()->search([
+                'filter' => 'customerId:testCustomer',
+            ]);
     post:
       description: |
         Create a credential
@@ -2041,6 +2708,19 @@ paths:
       summary: Create a credential
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customerCredentialForm = new Rebilly\Entities\CustomerCredential();
+            $customerCredentialForm->setCustomerId('customerId');
+            $customerCredentialForm->setUsername('test');
+            $customerCredentialForm->setPassword('1234');
+
+            try {
+                $customerCredential = $client->customerCredentials()->create($customerCredentialForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/credentials/{id}':
     delete:
       description: |
@@ -2067,6 +2747,10 @@ paths:
       summary: Delete a credential
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->customerCredentials()->delete('credentialId');
     get:
       description: |
         Retrieve a credential with specified identifier string
@@ -2094,6 +2778,10 @@ paths:
       summary: Retrieve a credential
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customerCredential = $client->customerCredentials()->load('credentialId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -2150,6 +2838,19 @@ paths:
       summary: Create or update a credential with predefined ID
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customerCredentialForm = new Rebilly\Entities\CustomerCredential();
+            $customerCredentialForm->setCustomerId('customerId');
+            $customerCredentialForm->setUsername('test');
+            $customerCredentialForm->setPassword('1234');
+
+            try {
+                $customerCredential = $client->customerCredentials()->update('credentialId', $customerCredentialForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /custom-events:
     get:
       description: |
@@ -2388,8 +3089,8 @@ paths:
   '/custom-events/{id}/rules/history':
     get:
       description: |
-        Retrieve the history versions of the selected set of rules.
-        Versions are created each time you change the rules.
+        Retrieve the change history of the set of rules for the selected custom event.
+        The history is updated each time you change the rules.
       parameters:
         - $ref: '#/parameters/collectionLimit'
         - $ref: '#/parameters/collectionOffset'
@@ -2424,13 +3125,13 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/RuleSetVersion'
+              $ref: '#/definitions/RuleSetHistoryItem'
             type: array
         '401':
           $ref: '#/responses/AccessForbidden'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieve the history of the set of rules for custom event
+      summary: Retrieve the change history of the set of rules for a custom event
       tags:
         - Custom Events
         - Rules
@@ -2439,8 +3140,44 @@ paths:
   '/custom-events/{id}/rules/history/{version}':
     get:
       description: |
-        Retrieve the version of the selected set of rules.
-        Versions are created each time you change the rules.
+        Retrieve the record from the change history of the set of rules for the selected custom event.
+        A history record is created each time you change the rules.
+      parameters:
+        - $ref: '#/parameters/collectionFields'
+        - $ref: '#/parameters/collectionExpand'
+      responses:
+        '200':
+          description: Rules version was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/RuleSetHistoryItem'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve the record from the change history of the set of rules for a custom event
+      tags:
+        - Custom Events
+        - Rules
+    parameters:
+      - $ref: '#/parameters/resourceId'
+      - $ref: '#/parameters/rulesVersion'
+  '/custom-events/{id}/rules/versions/{version}':
+    get:
+      description: |
+        Retrieve the version of the selected set of rules for the selected custom event.
+        The versions are created each time you change the rules.
       parameters:
         - $ref: '#/parameters/collectionFields'
         - $ref: '#/parameters/collectionExpand'
@@ -2465,7 +3202,7 @@ paths:
           $ref: '#/responses/AccessForbidden'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieve the version of the set of rules for custom event
+      summary: Retrieve the version of the set of rules for a custom event
       tags:
         - Custom Events
         - Rules
@@ -2501,6 +3238,12 @@ paths:
       summary: Retrieve Custom Fields
       tags:
         - Custom Fields
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customFields = $client->customFields()->search([
+                'filter' => 'type:boolean',
+            ]);
     parameters:
       - description: The resource type string
         enum:
@@ -2544,6 +3287,10 @@ paths:
       summary: Delete a custom field
       tags:
         - Custom Fields
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->customFields()->delete('customers', 'testFieldName');
     get:
       description: |
         Retrieve a schema of the given Custom Field for the given resource type
@@ -2571,6 +3318,10 @@ paths:
       summary: Retrieve a Custom Field
       tags:
         - Custom Fields
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customField = $client->customFields()->load('customers', 'customerId');
     parameters:
       - description: The resource type string
         enum:
@@ -2645,6 +3396,17 @@ paths:
       summary: Create or alter a Custom Field
       tags:
         - Custom Fields
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customFieldForm = new Rebilly\Entities\CustomField();
+            $customFieldForm->setType($customFieldForm::TYPE_BOOLEAN);
+
+            try {
+                $customField = $client->customFields()->update('customers', 'testFieldName', $customFieldForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /customers:
     get:
       description: |
@@ -2654,9 +3416,35 @@ paths:
         - $ref: '#/parameters/collectionOffset'
         - $ref: '#/parameters/collectionFilter'
         - $ref: '#/parameters/collectionQuery'
-        - $ref: '#/parameters/collectionSort'
-        - $ref: '#/parameters/collectionFields'
         - $ref: '#/parameters/collectionExpand'
+        - $ref: '#/parameters/collectionFields'
+        - collectionFormat: csv
+          description: The collection items sort field and order (prefix with "-" for descending sort).
+          in: query
+          items:
+            enum:
+              - id
+              - '-id'
+              - email
+              - '-email'
+              - createdTime
+              - '-createdTime'
+              - updatedTime
+              - '-updatedTime'
+            type: string
+          name: sort
+          type: array
+        - default: application/json
+          description: The response media type
+          enum:
+            - application/json
+            - text/csv
+          in: header
+          name: Accept
+          type: string
+      produces:
+        - application/json
+        - text/csv
       responses:
         '200':
           description: A list of Customers was retrieved successfully
@@ -2841,6 +3629,37 @@ paths:
                 echo $e->getMessage();
             }
   '/customers/{id}/lead-source':
+    delete:
+      description: |
+        Delete a Lead Source that belongs to a certain customer
+      responses:
+        '204':
+          description: Lead Source was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          description: Lead Source cannot be deleted
+      summary: Delete a Lead Source for a customer
+      tags:
+        - Customers
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customer = $client->customers()->deleteLeadSource('myCustomerId');
     get:
       description: |
         Retrieve a Lead Source of given customer
@@ -2868,43 +3687,16 @@ paths:
       summary: Retrieve a customer's Lead Source
       tags:
         - Customers
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $customer = $client->customers()->load('myCustomerId');
+            $leadSource = $customer->getLeadSource();
     parameters:
       - $ref: '#/parameters/resourceId'
-    post:
-      description: |
-        Create a Lead Source for a customer
-      parameters:
-        - description: Lead Source resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LeadSource'
-      responses:
-        '201':
-          description: Lead Source was created
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a Lead Source for a customer
-      tags:
-        - Customers
-  '/customers/{id}/lead-source/{leadSourceId}':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-      - description: Lead Source ID
-        in: path
-        name: leadSourceId
-        required: true
-        type: string
     put:
       description: |
-        Create or update a customer's Lead Source with predefined identifier string
+        Create a Lead Source for a customer
       parameters:
         - description: Lead Source resource
           in: body
@@ -2947,15 +3739,25 @@ paths:
             $ref: '#/definitions/LeadSource'
         '401':
           $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
         '422':
           description: Invalid data was sent
           schema:
             $ref: '#/definitions/InvalidError'
-      summary: Create or update a customer's Lead Source with predefined ID
+      summary: Create a Lead Source for a customer
       tags:
         - Customers
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $leadSourceForm = new Rebilly\Entities\LeadSource();
+            $leadSourceForm->setSource('TestSource');
+            $leadSourceForm->setCampaign('TestCampaign');
+
+            try {
+                $customer = $client->customers()->updateLeadSource('myCustomerId', $leadSourceForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /disputes:
     get:
       description: |
@@ -2996,6 +3798,12 @@ paths:
       summary: Retrieve a list of disputes
       tags:
         - Disputes
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $disputes = $client->disputes()->search([
+                'filter' => 'transactionId:testId',
+            ]);
     post:
       description: |
         Create a dispute
@@ -3032,6 +3840,23 @@ paths:
       summary: Create a dispute
       tags:
         - Disputes
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $disputeForm = new Rebilly\Entities\Dispute();
+            $disputeForm->setTransactionId('transactionId');
+            $disputeForm->setCurrency('USD');
+            $disputeForm->setAmount(10);
+            $disputeForm->setReasonCode(1000);
+            $disputeForm->setType($disputeForm::TYPE_1CB);
+            $disputeForm->setStatus($disputeForm::STATUS_RESPONSE_NEEDED);
+            $disputeForm->setPostedTime('2025-01-01 05:00:00');
+
+            try {
+                $dispute = $client->disputes()->create($disputeForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/disputes/{id}':
     get:
       description: |
@@ -3060,6 +3885,10 @@ paths:
       summary: Retrieve a dispute
       tags:
         - Disputes
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $dispute = $client->disputes()->load('disputeId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -3114,6 +3943,23 @@ paths:
       summary: Create or update a Dispute with predefined ID
       tags:
         - Disputes
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $disputeForm = new Rebilly\Entities\Dispute();
+            $disputeForm->setTransactionId('transactionId');
+            $disputeForm->setCurrency('USD');
+            $disputeForm->setAmount(10);
+            $disputeForm->setReasonCode(1000);
+            $disputeForm->setType($disputeForm::TYPE_1CB);
+            $disputeForm->setStatus($disputeForm::STATUS_RESPONSE_NEEDED);
+            $disputeForm->setPostedTime('2025-01-01 05:00:00');
+
+            try {
+                $dispute = $client->disputes()->update('disputeId', $dispute);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /email-credentials:
     get:
       description: |
@@ -3154,6 +4000,12 @@ paths:
       summary: Retrieve a list of email credentials
       tags:
         - Email Credentials
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $emailCredentials = $client->emailCredentials()->search([
+                'filter' => 'senderName:testSender',
+            ]);
     post:
       description: Create email credential
       parameters:
@@ -3189,6 +4041,22 @@ paths:
       summary: Create email credential
       tags:
         - Email Credentials
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $emailCredentialsForm = new Rebilly\Entities\EmailCredentials();
+            $emailCredentialsForm->setSenderName('John Doe');
+            $emailCredentialsForm->setSenderEmail('jdoe@test.com');
+            $emailCredentialsForm->setUsername('test');
+            $emailCredentialsForm->setPassword('1234');
+            $emailCredentialsForm->setHost('testmail.com');
+            $emailCredentialsForm->setPort('25');
+
+            try {
+                $emailCredentials = $client->emailCredentials()->create($emailCredentialsForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/email-credentials/{id}':
     delete:
       description: |
@@ -3215,6 +4083,10 @@ paths:
       summary: Delete an email credential
       tags:
         - Email Credentials
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->emailCredentials()->delete('emailCredentialsId');
     get:
       description: |
         Retrieve email credential with specified identifier string
@@ -3242,6 +4114,10 @@ paths:
       summary: Retrieve email credential
       tags:
         - Email Credentials
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $emailCredentials = $client->emailCredentials()->load('emailCredentialsId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -3298,6 +4174,22 @@ paths:
       summary: Create or update email credential with predefined ID
       tags:
         - Email Credentials
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $emailCredentialsForm = new Rebilly\Entities\EmailCredentials();
+            $emailCredentialsForm->setSenderName('John Doe');
+            $emailCredentialsForm->setSenderEmail('jdoe@test.com');
+            $emailCredentialsForm->setUsername('test');
+            $emailCredentialsForm->setPassword('1234');
+            $emailCredentialsForm->setHost('testmail.com');
+            $emailCredentialsForm->setPort('25');
+
+            try {
+                $emailCredentials = $client->emailCredentials()->update('emailCredentialsId', $emailCredentialsForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /events:
     get:
       responses:
@@ -3432,8 +4324,8 @@ paths:
   '/events/{eventType}/rules/history':
     get:
       description: |
-        Retrieve the history versions of the selected set of rules.
-        Versions are created each time you change the rules.
+        Retrieve the change history of the selected set of rules.
+        The history is updated each time you change the rules.
       parameters:
         - $ref: '#/parameters/collectionLimit'
         - $ref: '#/parameters/collectionOffset'
@@ -3468,13 +4360,13 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/RuleSetVersion'
+              $ref: '#/definitions/RuleSetHistoryItem'
             type: array
         '401':
           $ref: '#/responses/AccessForbidden'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieve the history of the set of rules
+      summary: Retrieve the change history of the set of rules
       tags:
         - Events
         - Rules
@@ -3483,8 +4375,44 @@ paths:
   '/events/{eventType}/rules/history/{version}':
     get:
       description: |
+        Retrieve the record from the change history of the selected set of rules.
+        A history record is created each time you change the rules.
+      parameters:
+        - $ref: '#/parameters/collectionFields'
+        - $ref: '#/parameters/collectionExpand'
+      responses:
+        '200':
+          description: History record was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/RuleSetHistoryItem'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve the record from the change history of the set of rules
+      tags:
+        - Events
+        - Rules
+    parameters:
+      - $ref: '#/parameters/systemEventType'
+      - $ref: '#/parameters/rulesVersion'
+  '/events/{eventType}/rules/versions/{version}':
+    get:
+      description: |
         Retrieve the version of the selected set of rules.
-        Versions are created each time you change the rules.
+        The versions are created each time you change the rules.
       parameters:
         - $ref: '#/parameters/collectionFields'
         - $ref: '#/parameters/collectionExpand'
@@ -3516,6 +4444,303 @@ paths:
     parameters:
       - $ref: '#/parameters/systemEventType'
       - $ref: '#/parameters/rulesVersion'
+  /files:
+    get:
+      description: |
+        Retrieve a list of files
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+        - $ref: '#/parameters/collectionFilter'
+        - $ref: '#/parameters/collectionQuery'
+        - $ref: '#/parameters/collectionExpand'
+        - $ref: '#/parameters/collectionFields'
+        - collectionFormat: csv
+          description: The collection items sort field and order (prefix with "-" for descending sort).
+          in: query
+          items:
+            enum:
+              - id
+              - '-id'
+              - name
+              - '-name'
+              - extension
+              - '-extension'
+              - size
+              - '-size'
+              - width
+              - '-width'
+              - height
+              - '-height'
+              - createdTime
+              - '-createdTime'
+              - updatedTime
+              - '-updatedTime'
+            type: string
+          name: sort
+          type: array
+      responses:
+        '200':
+          description: A list of Files was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/File'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of files
+      tags:
+        - Files
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $files = $client->files()->search([
+                'filter' => 'name:TestFile',
+            ]);
+    post:
+      description: |
+        Create a file
+      parameters:
+        - description: 'Additionally, a file can be sent with a multipart/form-data POST request or the file''s raw body can be sent as a request body'
+          in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              url:
+                description: The file URL
+                type: string
+            type: object
+      responses:
+        '201':
+          description: File was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/File'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Create a file
+      tags:
+        - Files
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $fileForm = new Rebilly\Entities\File();
+            $fileForm->setUrl('http://test.com/somefile.jpg');
+
+            try {
+                $file = $client->files()->create($fileForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
+  '/files/{id}':
+    delete:
+      description: |
+        Delete the File with predefined identifier string
+      responses:
+        '204':
+          description: File was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Delete a File
+      tags:
+        - Files
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->files()->delete('fileId');
+    get:
+      description: |
+        Retrieve a File with specified identifier string
+      responses:
+        '200':
+          description: File was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/File'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a File
+      tags:
+        - Files
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $file = $client->files()->load('fileId');
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      description: |
+        Update the File with predefined ID
+      parameters:
+        - description: File resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/File'
+      responses:
+        '200':
+          description: File was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/File'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Update the File with predefined ID. Note that file can be uploaded with POST only.
+      tags:
+        - Files
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $fileForm = new Rebilly\Entities\File();
+            $fileForm->setDescription('This is a test file');
+
+            try {
+                $file = $client->files()->update('fileId', $fileForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
+  '/files/{id}/download':
+    get:
+      description: |
+        Retrieve a file
+      responses:
+        '200':
+          description: The file was retrieved successfully
+          headers:
+            Content-Length:
+              description: The number of bytes in the file
+              type: integer
+            Content-Type:
+              description: The MIME type of the file
+              type: string
+          schema:
+            readOnly: true
+            type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a file
+      tags:
+        - Files
+    parameters:
+      - $ref: '#/parameters/resourceId'
+  '/files/{id}/download{extension}':
+    get:
+      description: |
+        Used for converting images server-side
+      responses:
+        '200':
+          description: The file was retrieved successfully
+          headers:
+            Content-Length:
+              description: The number of bytes in the file
+              type: integer
+            Content-Type:
+              description: The MIME type of the file
+              type: string
+          schema:
+            readOnly: true
+            type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Used for converting images server-side
+      tags:
+        - Files
+    parameters:
+      - $ref: '#/parameters/resourceId'
+      - description: File extension which also indicates the desired file format
+        enum:
+          - .png
+          - .jpg
+        in: path
+        name: extension
+        required: true
+        type: string
   /forgot-password:
     post:
       description: |
@@ -3549,6 +4774,17 @@ paths:
       summary: Sends an email with a link containing a token to reset user password
       tags:
         - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $forgotPasswordForm = new Rebilly\Entities\Email();
+            $forgotPasswordForm->setEmail('johndoe@test.com');
+
+            try {
+                $client->users()->forgotPassword($forgotPasswordForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /gateway-accounts:
     get:
       description: |
@@ -3589,6 +4825,12 @@ paths:
       summary: Retrieve a list of gateway accounts
       tags:
         - Gateway Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $gatewayAccounts = $client->$gatewayAccounts()->search([
+                'filter' => 'currency:USD',
+            ]);
     post:
       description: |
         Create a Gateway Account
@@ -3625,6 +4867,37 @@ paths:
       summary: Create a Gateway Account
       tags:
         - Gateway Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $gatewayAccountForm = new Rebilly\Entities\GatewayAccount();
+
+            $gatewayAccountForm->setGatewayName('A1Gateway');
+            $gatewayAccountForm->setAcquirerName('Bank of Rebilly');
+            $gatewayAccountForm->setOrganizationId('organizationId');
+            $gatewayAccountForm->setMerchantCategoryCode(5734);
+            $gatewayAccountForm->setWebsites([
+                'websiteId1',
+                'websiteId2',
+            ]);
+            $gatewayAccountForm->setPaymentCardSchemes([
+                Rebilly\Entities\PaymentCardScheme::SCHEME_VISA,
+                Rebilly\Entities\PaymentCardScheme::SCHEME_MASTERCARD,
+            ]);
+            $gatewayAccountForm->setMethod(Rebilly\Entities\PaymentMethod::METHOD_CASH);
+
+            $gatewayConfig = [
+                'accountId' => 'test',
+                'password' => '123',
+            ];
+
+            $gatewayAccountForm->setGatewayConfig($gatewayConfig);
+
+            try {
+                $gatewayAccount = $client->gatewayAccounts()->create($gatewayAccountForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/gateway-accounts/{id}':
     delete:
       description: |
@@ -3648,9 +4921,19 @@ paths:
           $ref: '#/responses/AccessForbidden'
         '404':
           $ref: '#/responses/NotFound'
+        '409':
+          $ref: '#/responses/Conflict'
       summary: Delete a Gateway Account
       tags:
         - Gateway Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            try {
+                $client->gatewayAccounts()->delete('gatewayAccountId');
+            } catch (ServerException $e) {
+                echo $e->getMessage();
+            }
     get:
       description: |
         Retrieve a Gateway Account with specified identifier string
@@ -3678,6 +4961,10 @@ paths:
       summary: Retrieve a Gateway Account
       tags:
         - Gateway Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $gatewayAccount = $client->gatewayAccounts()->load('gatewayAccountId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -3734,6 +5021,37 @@ paths:
       summary: Create or update a Gateway Account with predefined ID
       tags:
         - Gateway Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $gatewayAccountForm = new Rebilly\Entities\GatewayAccount();
+
+            $gatewayAccountForm->setGatewayName('A1Gateway');
+            $gatewayAccountForm->setAcquirerName('Bank of Rebilly');
+            $gatewayAccountForm->setOrganizationId('organizationId');
+            $gatewayAccountForm->setMerchantCategoryCode(5734);
+            $gatewayAccountForm->setWebsites([
+                'websiteId1',
+                'websiteId2',
+            ]);
+            $gatewayAccountForm->setPaymentCardSchemes([
+                Rebilly\Entities\PaymentCardScheme::SCHEME_VISA,
+                Rebilly\Entities\PaymentCardScheme::SCHEME_MASTERCARD,
+            ]);
+            $gatewayAccountForm->setMethod(Rebilly\Entities\PaymentMethod::METHOD_CASH);
+
+            $gatewayConfig = [
+                'accountId' => 'test',
+                'password' => '123',
+            ];
+
+            $gatewayAccountForm->setGatewayConfig($gatewayConfig);
+
+            try {
+                $gatewayAccount = $client->gatewayAccounts()->update('gatewayAccountId', $gatewayAccountForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /histograms/transactions:
     get:
       description: |
@@ -3821,6 +5139,17 @@ paths:
       parameters:
         - $ref: '#/parameters/collectionLimit'
         - $ref: '#/parameters/collectionOffset'
+        - default: application/json
+          description: The response media type
+          enum:
+            - application/json
+            - text/csv
+          in: header
+          name: Accept
+          type: string
+      produces:
+        - application/json
+        - text/csv
       responses:
         '200':
           description: A list of invoices was retrieved successfully
@@ -3854,6 +5183,12 @@ paths:
       summary: Retrieve a list of invoices
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoices = $client->invoices()->search([
+                'filter' => 'customerId:testCustomerId',
+            ]);
     post:
       description: |
         Create an invoice
@@ -3890,10 +5225,35 @@ paths:
       summary: Create an invoice
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoiceForm = new Rebilly\Entities\Invoice();
+            $invoiceForm->setCustomerId('customerId');
+            $invoiceForm->setWebsiteId('websiteId');
+            $invoiceForm->setCurrency('USD');
+
+            try {
+                $invoice = $client->invoices()->create($invoiceForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/invoices/{id}':
     get:
       description: |
         Retrieve an invoice with specified identifier string
+      parameters:
+        - default: application/json
+          description: The response media type
+          enum:
+            - application/json
+            - application/pdf
+          in: header
+          name: Accept
+          type: string
+      produces:
+        - application/json
+        - application/pdf
       responses:
         '200':
           description: Invoice was retrieved successfully
@@ -3918,6 +5278,10 @@ paths:
       summary: Retrieve an invoice
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoice = $client->invoices()->load('invoiceId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -3974,6 +5338,19 @@ paths:
       summary: Create or update an invoice with predefined ID
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoiceForm = new Rebilly\Entities\Invoice();
+            $invoiceForm->setCustomerId('customerId');
+            $invoiceForm->setWebsiteId('websiteId');
+            $invoiceForm->setCurrency('USD');
+
+            try {
+                $invoice = $client->invoices()->update('invoiceId', $invoiceForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/invoices/{id}/abandon':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -4004,6 +5381,10 @@ paths:
       summary: Abandon an invoice
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoice = $client->invoices()->abandon('invoiceId');
   '/invoices/{id}/issue':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -4041,6 +5422,10 @@ paths:
       summary: Issue an invoice
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoice = $client->invoices()->issue('invoiceId', '2025-01-01 05:00:00');
   '/invoices/{id}/items':
     get:
       description: |
@@ -4074,6 +5459,12 @@ paths:
       summary: Retrieve invoice items
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoiceItems = $client->invoiceItems()->search('invoiceId', [
+                'filter' => 'quantity:5',
+            ]);
     parameters:
       - $ref: '#/parameters/resourceId'
     post:
@@ -4112,7 +5503,51 @@ paths:
       summary: Create an invoice item
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoiceItemForm = new Rebilly\Entities\InvoiceItem();
+            $invoiceItemForm->setType($invoiceItemForm::TYPE_DEBIT);
+            $invoiceItemForm->setUnitPrice(0.99);
+            $invoiceItemForm->setQuantity(5);
+
+            try {
+                $invoiceItem = $client->invoiceItems()->create('invoiceId', $invoiceItemForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/invoices/{id}/lead-source':
+    delete:
+      description: |
+        Delete a Lead Source that belongs to a certain invoice
+      responses:
+        '204':
+          description: Lead Source was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          description: Lead Source cannot be deleted
+      summary: Delete a Lead Source for an invoice
+      tags:
+        - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoice = $client->invoices()->deleteLeadSource('invoiceId');
     get:
       description: |
         Retrieve a Lead Source of given invoice
@@ -4140,43 +5575,16 @@ paths:
       summary: Retrieve an invoice's Lead Source
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoice = $client->invoices()->load('invoiceId');
+            $leadSource = $invoice->getLeadSource();
     parameters:
       - $ref: '#/parameters/resourceId'
-    post:
-      description: |
-        Create a Lead Source for an invoice
-      parameters:
-        - description: Lead Source resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LeadSource'
-      responses:
-        '201':
-          description: Lead Source was created
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a Lead Source for an invoice
-      tags:
-        - Invoices
-  '/invoices/{id}/lead-source/{leadSourceId}':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-      - description: Lead Source ID
-        in: path
-        name: leadSourceId
-        required: true
-        type: string
     put:
       description: |
-        Create or update an invoice's Lead Source with predefined identifier string
+        Create a Lead Source for an invoice
       parameters:
         - description: Lead Source resource
           in: body
@@ -4219,15 +5627,25 @@ paths:
             $ref: '#/definitions/LeadSource'
         '401':
           $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
         '422':
           description: Invalid data was sent
           schema:
             $ref: '#/definitions/InvalidError'
-      summary: Create or update an invoice's Lead Source with predefined ID
+      summary: Create a Lead Source for an invoice
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $leadSourceForm = new Rebilly\Entities\LeadSource();
+            $leadSourceForm->setSource('TestSource');
+            $leadSourceForm->setCampaign('TestCampaign');
+
+            try {
+                $invoice = $client->invoices()->updateLeadSource('invoiceId', $leadSourceForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/invoices/{id}/void':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -4258,6 +5676,10 @@ paths:
       summary: Void an invoice
       tags:
         - Invoices
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $invoice = $client->invoices()->void('invoiceId');
   /layouts:
     get:
       description: |
@@ -4298,6 +5720,12 @@ paths:
       summary: Retrieve a layout list
       tags:
         - Layouts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $layouts = $client->layouts()->search([
+                'filter' => 'name:TestLayout',
+            ]);
     post:
       description: |
         Create a layout
@@ -4332,6 +5760,25 @@ paths:
       summary: Create a layout
       tags:
         - Layouts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $layoutForm = new Rebilly\Entities\Layout();
+            $layoutItemForm = new Rebilly\Entities\LayoutItem();
+
+            $layoutItemForm->setPlanId('planId');
+            $layoutItemForm->setStarred(false);
+
+            $layoutForm->setName('TestLayout');
+            $layoutForm->setLayoutItems([
+                $layoutItemForm,
+            ]);
+
+            try {
+                $layout = $client->layouts()->create($layoutForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/layouts/{id}':
     delete:
       description: |
@@ -4358,6 +5805,10 @@ paths:
       summary: Delete a layout
       tags:
         - Layouts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->layouts()->delete('layoutId');
     get:
       description: |
         Retrieve a layout with specified identifier string
@@ -4385,6 +5836,10 @@ paths:
       summary: Retrieve a layout
       tags:
         - Layouts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $layout = $client->layouts()->load('layoutId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -4439,6 +5894,25 @@ paths:
       summary: Create or update a layout with predefined ID
       tags:
         - Layouts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $layoutForm = new Rebilly\Entities\Layout();
+            $layoutItemForm = new Rebilly\Entities\LayoutItem();
+
+            $layoutItemForm->setPlanId('planId');
+            $layoutItemForm->setStarred(false);
+
+            $layoutForm->setName('TestLayout');
+            $layoutForm->setLayoutItems([
+                $layoutItemForm,
+            ]);
+
+            try {
+                $layout = $client->layouts()->update('layoutId', $layoutForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /notes:
     get:
       description: |
@@ -4479,6 +5953,12 @@ paths:
       summary: Retrieve a list of notes
       tags:
         - Notes
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $notes = $client->notes()->search([
+                'filter' => 'relatedType:customer',
+            ]);
     post:
       description: |
         Create a note
@@ -4515,6 +5995,19 @@ paths:
       summary: Create a note
       tags:
         - Notes
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $noteForm = new Rebilly\Entities\Note();
+            $noteForm->setRelatedId('customerId');
+            $noteForm->setRelatedType(Rebilly\Entities\ResourceType::TYPE_CUSTOMER);
+            $noteForm->setContent('Test Note');
+
+            try {
+                $note = $client->notes()->create($noteForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/notes/{id}':
     get:
       description: |
@@ -4543,6 +6036,10 @@ paths:
       summary: Retrieve a note
       tags:
         - Notes
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $note = $client->notes()->load('noteId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -4599,6 +6096,19 @@ paths:
       summary: Create or update a note with predefined ID
       tags:
         - Notes
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $noteForm = new Rebilly\Entities\Note();
+            $noteForm->setRelatedId('customerId');
+            $noteForm->setRelatedType(Rebilly\Entities\ResourceType::TYPE_CUSTOMER);
+            $noteForm->setContent('Test Note');
+
+            try {
+                $note = $client->notes()->update('noteId', $noteForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /organizations:
     get:
       description: |
@@ -4639,6 +6149,12 @@ paths:
       summary: Retrieve a list of organizations
       tags:
         - Organizations
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $organizations = $client->organizations()->search([
+                'filter' => 'city:Test',
+            ]);
     post:
       description: |
         Create a organization
@@ -4673,6 +6189,18 @@ paths:
       summary: Create a organization
       tags:
         - Organizations
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $organizationForm = new Rebilly\Entities\Organization();
+            $organizationForm->setName('Test Organization');
+            $organizationForm->setCountry('US');
+
+            try {
+                $organization = $client->organizations()->create($organizationForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/organizations/{id}':
     delete:
       description: |
@@ -4730,6 +6258,10 @@ paths:
       summary: Retrieve a organization
       tags:
         - Organizations
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $organization = $client->organizations()->load('organizationId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -4782,6 +6314,18 @@ paths:
       summary: Create or update a organization with predefined ID
       tags:
         - Organizations
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $organizationForm = new Rebilly\Entities\Organization();
+            $organizationForm->setName('Test Organization');
+            $organizationForm->setCountry('US');
+
+            try {
+                $organization = $client->organizations()->update('organizationId', $organizationForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /password-tokens:
     get:
       description: |
@@ -4822,6 +6366,12 @@ paths:
       summary: Retrieve a list of tokens
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $resetPasswordTokens = $client->resetPasswordTokens()->search([
+                'filter' => 'token:string',
+            ]);
     post:
       description: |
         Create a Reset Password Token
@@ -4858,6 +6408,18 @@ paths:
       summary: Create a Reset Password Token
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $resetPasswordTokenForm = new Rebilly\Entities\ResetPasswordToken();
+            $resetPasswordTokenForm->setUserName('test');
+            $resetPasswordTokenForm->setPassword('1234');
+
+            try {
+                $$resetPasswordToken = $client->resetPasswordTokens()->create($resetPasswordTokenForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/password-tokens/{id}':
     delete:
       description: |
@@ -4886,6 +6448,14 @@ paths:
       summary: Delete a Reset Password Token
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            try {
+                $client->websites()->delete('websiteId');
+            } catch (ServerException $e) {
+                echo $e->getMessage();
+            }
     get:
       description: |
         Retrieve a Reset Password Token with specified identifier string
@@ -4913,6 +6483,10 @@ paths:
       summary: Retrieve a Reset Password Token
       tags:
         - Customer Authentication
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $resetPasswordToken = $client->resetPasswordTokens()->load('tokenId');
     parameters:
       - $ref: '#/parameters/resourceId'
   /payment-cards:
@@ -4955,6 +6529,12 @@ paths:
       summary: Retrieve a list of Payment Cards
       tags:
         - Payment Cards
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentCards = $client->paymentCards()->search([
+                'filter' => 'status:active',
+            ]);
     post:
       description: |
         Create a Payment Card
@@ -4991,6 +6571,21 @@ paths:
       summary: Create a Payment Card
       tags:
         - Payment Cards
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentCardForm = new Rebilly\Entities\PaymentCard();
+            $paymentCardForm->setCustmerId('customerId');
+            $paymentCardForm->setPan('4111111111111111');
+            $paymentCardForm->setExpYear(2025);
+            $paymentCardForm->setExpMonth(8);
+            $paymentCardForm->setBillingContactId('contactId');
+
+            try {
+                $paymentCard = $client->paymentCards()->create($paymentCardForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /payment-cards-migrations:
     get:
       description: |
@@ -5031,6 +6626,12 @@ paths:
       summary: Retrieve a list of payment cards ready for migration
       tags:
         - Migrate payment cards
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentCardMigrations = $client->paymentCardMigrations()->search([
+                'filter' => 'status:active',
+            ]);
   /payment-cards-migrations/migrate:
     post:
       description: |
@@ -5056,6 +6657,25 @@ paths:
       summary: Migrate payment cards to another gateway account
       tags:
         - Migrate payment cards
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentCardMigrationForm = new Rebilly\Entities\PaymentCardMigrationsRequest();
+            $paymentCardMigrationForm->setFromGatewayAccountId('gatewayAccountId');
+            $paymentCardMigrationForm->setToGatewayAccountId('newGatewayAccountId');
+
+            $paymentCardIds = [
+                'testPaymentCardId',
+                'testPaymentCardId2',
+            ];
+
+            $paymentCardMigrationForm->setPaymentCardIds($paymentCardIds)
+
+            try {
+                $paymentCardMigrationResponse = $client->paymentCardMigrations()->migrate($paymentCardMigrationForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/payment-cards/{id}':
     get:
       description: |
@@ -5084,6 +6704,10 @@ paths:
       summary: Retrieve a Payment Card
       tags:
         - Payment Cards
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentCard = $client->paymentCards()->load('paymentCardId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -5122,6 +6746,21 @@ paths:
       summary: Create a payment card with predefined ID
       tags:
         - Payment Cards
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentCardForm = new Rebilly\Entities\PaymentCard();
+            $paymentCardForm->setCustmerId('customerId');
+            $paymentCardForm->setPan('4111111111111111');
+            $paymentCardForm->setExpYear(2025);
+            $paymentCardForm->setExpMonth(8);
+            $paymentCardForm->setBillingContactId('contactId');
+
+            try {
+                $paymentCard = $client->paymentCards()->update('paymentCardId', $paymentCardForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/payment-cards/{id}/authorization':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -5178,6 +6817,19 @@ paths:
       summary: Authorize a Payment Card
       tags:
         - Payment Cards
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentCardAuthorizationForm = new Rebilly\Entities\PaymentCardAuthorization();
+            $paymentCardAuthorizationForm->setWebsiteId('websiteId');
+            $paymentCardAuthorizationForm->setCurrency('USD');
+            $paymentCardAuthorizationForm->setGatewayAccountId('gatewayAccountId');
+
+            try {
+                $paymentCard = $client->paymentCards()->authorize('paymentCardId', $paymentCardAuthorizationForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/payment-cards/{id}/deactivation':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -5210,6 +6862,10 @@ paths:
       summary: Deactivate a Payment Card
       tags:
         - Payment Cards
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->paymentCards()->deactivate('paymentCardId');
   /payments:
     get:
       description: |
@@ -5217,6 +6873,17 @@ paths:
       parameters:
         - $ref: '#/parameters/collectionLimit'
         - $ref: '#/parameters/collectionOffset'
+        - default: application/json
+          description: The response media type
+          enum:
+            - application/json
+            - text/csv
+          in: header
+          name: Accept
+          type: string
+      produces:
+        - application/json
+        - text/csv
       responses:
         '200':
           description: Payment list was retrieved successfully
@@ -5252,6 +6919,12 @@ paths:
       summary: Retrieve a payment list
       tags:
         - Payments
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payments = $client->payments()->search([
+                'filter' => 'currency:USD',
+            ]);
     post:
       description: |
         Create a payment
@@ -5284,6 +6957,29 @@ paths:
       summary: Create a payment
       tags:
         - Payments
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentForm = new Rebilly\Entities\Payment();
+
+            $paymentForm->setWebsiteId('websiteId');
+            $paymentForm->setCustomerId('customerId');
+            $paymentForm->setCurrency('USD');
+            $paymentForm->setAmount(1.99);
+
+            $data = [
+                'method' => Rebilly\Entities\PaymentMethod::METHOD_CASH,
+            ];
+
+            $paymentInstrumentForm = new Rebilly\Entities\PaymentMethodInstrument($data);
+
+            $paymentForm->setPaymentInstrument($paymentInstrumentForm);
+
+            try {
+                $payment = $client->payments()->create($paymentForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/payments/{id}':
     get:
       description: |
@@ -5312,6 +7008,10 @@ paths:
       summary: Retrieve a payment
       tags:
         - Payments
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payment = $client->payments()->load('paymentId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -5368,7 +7068,61 @@ paths:
       summary: Create a payment with predefined ID
       tags:
         - Payments
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentForm = new Rebilly\Entities\Payment();
+
+            $paymentForm->setWebsiteId('websiteId');
+            $paymentForm->setCustomerId('customerId');
+            $paymentForm->setCurrency('USD');
+            $paymentForm->setAmount(1.99);
+
+            $data = [
+                'method' => Rebilly\Entities\PaymentMethod::METHOD_CASH,
+            ];
+
+            $paymentInstrumentForm = new Rebilly\Entities\PaymentMethodInstrument($data);
+
+            $paymentForm->setPaymentInstrument($paymentInstrumentForm);
+
+            try {
+                $payment = $client->payments()->update('paymentId', $paymentForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/payments/{id}/lead-source':
+    delete:
+      description: |
+        Delete a Lead Source that belongs to a certain payment
+      responses:
+        '204':
+          description: Lead Source was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          description: Lead Source cannot be deleted
+      summary: Delete a Lead Source for a payment
+      tags:
+        - Payments
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payment = $client->payments()->deleteLeadSource('paymentId');
     get:
       description: |
         Retrieve a Lead Source of given payment
@@ -5396,43 +7150,16 @@ paths:
       summary: Retrieve a payment's Lead Source
       tags:
         - Payments
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payment = $client->payments()->load('paymentId');
+            $leadSource = $payment->getLeadSource();
     parameters:
       - $ref: '#/parameters/resourceId'
-    post:
-      description: |
-        Create a Lead Source for a payment
-      parameters:
-        - description: Lead Source resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LeadSource'
-      responses:
-        '201':
-          description: Lead Source was created
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a Lead Source for a payment
-      tags:
-        - Payments
-  '/payments/{id}/lead-source/{leadSourceId}':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-      - description: Lead Source ID
-        in: path
-        name: leadSourceId
-        required: true
-        type: string
     put:
       description: |
-        Create or update an payment's Lead Source with predefined identifier string
+        Create a Lead Source for a payment
       parameters:
         - description: Lead Source resource
           in: body
@@ -5475,15 +7202,25 @@ paths:
             $ref: '#/definitions/LeadSource'
         '401':
           $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
         '422':
           description: Invalid data was sent
           schema:
             $ref: '#/definitions/InvalidError'
-      summary: Create or update a payment's Lead Source with predefined ID
+      summary: Create a Lead Source for a payment
       tags:
         - Payments
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $leadSourceForm = new Rebilly\Entities\LeadSource();
+            $leadSourceForm->setSource('TestSource');
+            $leadSourceForm->setCampaign('TestCampaign');
+
+            try {
+                $payment = $client->payments()->updateLeadSource('paymentId', $leadSourceForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /plans:
     get:
       description: |
@@ -5524,6 +7261,12 @@ paths:
       summary: Retrieve a list of plans
       tags:
         - Plans
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $plans = $client->plans()->search([
+                'filter' => 'name:TestPlan',
+            ]);
     post:
       description: |
         Create a plan
@@ -5548,6 +7291,21 @@ paths:
       summary: Create a plan
       tags:
         - Plans
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $planForm = new Rebilly\Entities\Plan();
+            $planForm->setName('TestPlan');
+            $planForm->setCurrency('USD');
+            $planForm->setTrialAmount(1);
+            $planForm->setTrialPeriodUnit('day');
+            $planForm->setTrialPeriodLength(1);
+
+            try {
+                $plan = $client->plans()->create($planForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/plans/{id}':
     delete:
       description: |
@@ -5574,6 +7332,10 @@ paths:
       summary: Delete a Plan
       tags:
         - Plans
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->plans()->delete('planId');
     get:
       description: |
         Retrieve a plan with specified identifier string
@@ -5601,6 +7363,10 @@ paths:
       summary: Retrieve a plan
       tags:
         - Plans
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $plan = $client->plans()->load('planId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -5657,6 +7423,21 @@ paths:
       summary: Create or update a Plan with predefined ID
       tags:
         - Plans
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $planForm = new Rebilly\Entities\Plan();
+            $planForm->setName('TestPlan');
+            $planForm->setCurrency('USD');
+            $planForm->setTrialAmount(1);
+            $planForm->setTrialPeriodUnit('day');
+            $planForm->setTrialPeriodLength(1);
+
+            try {
+                $plan = $client->plans()->update('planId', $planForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /previews/rule-actions/send-email:
     post:
       description: |
@@ -5723,7 +7504,7 @@ paths:
                 when the current period will reset
               type: string
           schema:
-            $ref: '#/definitions/SendTestEmail'
+            $ref: '#/definitions/SendPreviewWebhook'
         '401':
           $ref: '#/responses/AccessForbidden'
         '422':
@@ -6040,6 +7821,12 @@ paths:
       summary: Retrieve a scheduled payment list
       tags:
         - Payments
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payments = $client->payments()->searchInQueue([
+                'filter' => 'currency:USD',
+            ]);
   '/queue/payments/{id}':
     delete:
       responses:
@@ -6109,6 +7896,10 @@ paths:
       summary: Retrieve a scheduled payment
       tags:
         - Payments
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payment = $client->payments()->loadFromQueue('paymentId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -6177,6 +7968,14 @@ paths:
       summary: Cancel a scheduled payment
       tags:
         - Payments
+      x-code-samples:
+        - lang: PHP
+          source: |
+            try {
+                $payment = $client->payments()->cancel('paymentId');
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /sessions:
     get:
       description: |
@@ -6217,6 +8016,12 @@ paths:
       summary: Retrieve a list of sessions
       tags:
         - Sessions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $sessions = $client->sessions()->search([
+                'filter' => 'userId:testUserId',
+            ]);
     post:
       description: |
         Create a session
@@ -6253,6 +8058,46 @@ paths:
       summary: Create a session
       tags:
         - Sessions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $sessionForm = new Rebilly\Entities\Session();
+
+            $permissions = [
+                // Example permission to use GET and POST methods only for certain Customers
+                [
+                    'resourceName' => Rebilly\Entities\ResourceType::TYPE_CUSTOMERS,
+                    'methods' => [
+                        $sessionForm::METHOD_GET,
+                        $sessionForm::METHOD_POST,
+                    ],
+                    'resourceIds' => [
+                        'testCustomerId',
+                        'testCustomerId2',
+                    ],
+                ],
+                // Example permission to use all methods for Websites resource
+                [
+                    'resourceName' => Rebilly\Entities\ResourceType::TYPE_WEBSITES,
+                    'methods' => [
+                        $sessionForm::METHOD_GET,
+                        $sessionForm::METHOD_POST,
+                        $sessionForm::METHOD_PUT,
+                        $sessionForm::METHOD_HEAD,
+                        $sessionForm::METHOD_DELETE,
+                    ],
+                ],
+                // Example permission to use all methods for all resources
+                [],
+            ];
+
+            $sessionForm->setPermissions($permissions);
+
+            try {
+                $session = $client->sessions()->create($sessionForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/sessions/{id}':
     delete:
       description: |
@@ -6281,6 +8126,14 @@ paths:
       summary: Delete a Session
       tags:
         - Sessions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            try {
+                $client->sessions()->delete('sessionId');
+            } catch (ServerException $e) {
+                echo $e->getMessage();
+            }
     get:
       description: |
         Retrieve a Session with specified identifier string
@@ -6308,6 +8161,10 @@ paths:
       summary: Retrieve a Session
       tags:
         - Sessions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $session = $client->sessions()->load('sessionId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -6364,6 +8221,43 @@ paths:
       summary: Create or update a Session with predefined ID
       tags:
         - Sessions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $sessionForm = new Rebilly\Entities\Session();
+
+            $permissions = [
+                [
+                    'resourceName' => Rebilly\Entities\ResourceType::TYPE_CUSTOMERS,
+                    'methods' => [
+                        $sessionForm::METHOD_GET,
+                        $sessionForm::METHOD_POST,
+                    ],
+                    'resourceIds' => [
+                        'testCustomerId',
+                        'testCustomerId2',
+                    ],
+                ],
+                [
+                    'resourceName' => Rebilly\Entities\ResourceType::TYPE_WEBSITES,
+                    'methods' => [
+                        $sessionForm::METHOD_GET,
+                        $sessionForm::METHOD_POST,
+                    ],
+                    'resourceIds' => [
+                        'testWebsiteId',
+                        'testWebsiteId2',
+                    ],
+                ],
+            ];
+
+            $sessionForm->setPermissions($permissions);
+
+            try {
+                $session = $client->sessions()->update('sessionId', $sessionForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /signin:
     post:
       description: |
@@ -6403,6 +8297,18 @@ paths:
       tags:
         - Users
         - Sessions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $loginForm = new Rebilly\Entities\Login();
+            $loginForm->setEmail('test@test.com');
+            $loginForm->setPassword('1234');
+
+            try {
+                $user = $client->users()->signin($loginForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /signup:
     post:
       description: |
@@ -6438,6 +8344,21 @@ paths:
       summary: Creates a new user and sends an email confirmation
       tags:
         - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $signupForm = new Rebilly\Entities\Signup();
+            $signupForm->setFirstName('John');
+            $signupForm->setLastName('Doe');
+            $signupForm->setEmail('johndoe@test.com');
+            $signupForm->setBusinessPhone('+123456789');
+            $signupForm->setPassword('1234');
+
+            try {
+                $client->users()->signup($signupForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /status:
     get:
       description: |
@@ -6470,6 +8391,17 @@ paths:
       parameters:
         - $ref: '#/parameters/collectionLimit'
         - $ref: '#/parameters/collectionOffset'
+        - default: application/json
+          description: The response media type
+          enum:
+            - application/json
+            - text/csv
+          in: header
+          name: Accept
+          type: string
+      produces:
+        - application/json
+        - text/csv
       responses:
         '200':
           description: A list of subscriptions was retrieved successfully
@@ -6503,6 +8435,12 @@ paths:
       summary: Retrieve a list of subscriptions
       tags:
         - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $subscriptions = $client->subscriptions()->search([
+                'filter' => 'customerId:testCustomerId',
+            ]);
     post:
       description: |
         Create a subscription
@@ -6539,6 +8477,19 @@ paths:
       summary: Create a subscription
       tags:
         - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $subscriptionForm = new Rebilly\Entities\Subscription();
+            $subscriptionForm->setCustomerId('customerId');
+            $subscriptionForm->setWebsiteId('websiteId');
+            $subscriptionForm->setPlanId('planId');
+
+            try {
+                $subscription = $client->subscriptions()->create($subscriptionForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/subscriptions/{id}':
     get:
       description: |
@@ -6567,6 +8518,10 @@ paths:
       summary: Retrieve a subscription
       tags:
         - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $subscription = $client->subscriptions()->load('subscriptionId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -6623,6 +8578,19 @@ paths:
       summary: Create or update a subscription with predefined ID
       tags:
         - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $subscriptionForm = new Rebilly\Entities\Subscription();
+            $subscriptionForm->setCustomerId('customerId');
+            $subscriptionForm->setWebsiteId('websiteId');
+            $subscriptionForm->setPlanId('planId');
+
+            try {
+                $subscription = $client->subscriptions()->update('subscriptionId', $subscriptionForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/subscriptions/{id}/cancel':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -6662,7 +8630,49 @@ paths:
       summary: Cancel a subscription
       tags:
         - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $subscriptionCancelForm = new Rebilly\Entities\SubscriptionCancel();
+            $subscriptionCancelForm->setPolicy($subscriptionCancelForm::NOW);
+
+            try {
+                $subscription = $client->subscriptions()->cancel('subscriptionId', $subscriptionCancelForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/subscriptions/{id}/lead-source':
+    delete:
+      description: |
+        Delete a Lead Source that belongs to a certain Subscription
+      responses:
+        '204':
+          description: Lead Source was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          description: Lead Source cannot be deleted
+      summary: Delete a Lead Source for a Subscription
+      tags:
+        - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $subscription = $client->subscriptions()->deleteLeadSource('subscriptionId');
     get:
       description: |
         Retrieve a Lead Source of given subscription
@@ -6690,43 +8700,16 @@ paths:
       summary: Retrieve a subscription's Lead Source
       tags:
         - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $subscription = $client->subscriptions()->load('subscriptionId');
+            $leadSource = $subscription->getLeadSource();
     parameters:
       - $ref: '#/parameters/resourceId'
-    post:
-      description: |
-        Create a Lead Source for a Subscription
-      parameters:
-        - description: Lead Source resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LeadSource'
-      responses:
-        '201':
-          description: Lead Source was created
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a Lead Source for a Subscription
-      tags:
-        - Subscriptions
-  '/subscriptions/{id}/lead-source/{leadSourceId}':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-      - description: Lead Source ID
-        in: path
-        name: leadSourceId
-        required: true
-        type: string
     put:
       description: |
-        Create or update an subscription's Lead Source with predefined identifier string
+        Create a Lead Source for a Subscription
       parameters:
         - description: Lead Source resource
           in: body
@@ -6769,15 +8752,25 @@ paths:
             $ref: '#/definitions/LeadSource'
         '401':
           $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
         '422':
           description: Invalid data was sent
           schema:
             $ref: '#/definitions/InvalidError'
-      summary: Create or update a subscription's Lead Source with predefined ID
+      summary: Create a Lead Source for a Subscription
       tags:
         - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $leadSourceForm = new Rebilly\Entities\LeadSource();
+            $leadSourceForm->setSource('TestSource');
+            $leadSourceForm->setCampaign('TestCampaign');
+
+            try {
+                $subscription = $client->subscriptions()->updateLeadSource('subscriptionId', $leadSourceForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/subscriptions/{id}/switch':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -6817,6 +8810,18 @@ paths:
       summary: Switch a subscription
       tags:
         - Subscriptions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $subscriptionSwitchForm = new Rebilly\Entities\SubscriptionSwitch();
+            $subscriptionSwitchForm->setPlanId('newPlanId');
+            $subscriptionSwitchForm->setPolicy($subscriptionSwitchForm::NOW);
+
+            try {
+                $subscription = $client->subscriptions()->switchTo('subscriptionId', $subscriptionSwitchForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /tax-categories:
     get:
       description: |
@@ -6894,6 +8899,12 @@ paths:
       summary: Retrieve a list of tokens
       tags:
         - Payment Tokens
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentCardTokens = $client->paymentCardTokens()->search([
+                'filter' => 'token:string',
+            ]);
     post:
       description: |
         Create a token
@@ -6932,6 +8943,27 @@ paths:
       summary: Create a payment token
       tags:
         - Payment Tokens
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentCardTokenForm = new Rebilly\Entities\PaymentCardToken();
+            $paymentCardTokenForm->setFirstName('John');
+            $paymentCardTokenForm->setLastName('Doe');
+            $paymentCardTokenForm->setMethod(Rebilly\Entities\PaymentMethod::METHOD_PAYMENT_CARD);
+
+            $paymentInstrumentForm = new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
+            $paymentInstrumentForm->setPan('4111111111111111');
+            $paymentInstrumentForm->setExpYear(2025);
+            $paymentInstrumentForm->setExpMonth(8);
+            $paymentInstrumentForm->setCvv(123);
+
+            $paymentCardTokenForm->setPaymentInstrument($paymentInstrumentForm);
+
+            try {
+                $paymentCardToken = $client->paymentCardTokens()->create($paymentCardTokenForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/tokens/{token}':
     get:
       description: |
@@ -6962,6 +8994,10 @@ paths:
       summary: Retrieve a token
       tags:
         - Payment Tokens
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $paymentCardToken = $client->paymentCardTokens()->load('tokenId');
     parameters:
       - description: The token identifier string
         in: path
@@ -7011,6 +9047,14 @@ paths:
       summary: Expire a token
       tags:
         - Payment Tokens
+      x-code-samples:
+        - lang: PHP
+          source: |
+            try {
+                $paymentCardToken = $client->paymentCardTokens()->expire('tokenId');
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   /tracking/api:
     get:
       parameters:
@@ -7049,6 +9093,12 @@ paths:
       summary: Retrieve a list of tracking API logs
       tags:
         - Tracking
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $apiTrackingLog = $client->apiTracking()->search([
+                'filter' => 'status:200',
+            ]);
   '/tracking/api/{id}':
     get:
       responses:
@@ -7075,6 +9125,10 @@ paths:
       summary: Retrieve a tracking API log with specified identifier string
       tags:
         - Tracking
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $apiTrackingLog = $client->apiTracking()->load('apiLogId');
     parameters:
       - $ref: '#/parameters/resourceId'
   /tracking/subscriptions:
@@ -7194,6 +9248,17 @@ paths:
         - $ref: '#/parameters/collectionOffset'
         - $ref: '#/parameters/collectionFilter'
         - $ref: '#/parameters/collectionSort'
+        - default: application/json
+          description: The response media type
+          enum:
+            - application/json
+            - text/csv
+          in: header
+          name: Accept
+          type: string
+      produces:
+        - application/json
+        - text/csv
       responses:
         '200':
           description: A list of transactions was retrieved successfully
@@ -7227,6 +9292,12 @@ paths:
       summary: Retrieve a list of transactions
       tags:
         - Transactions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $transactions = $client->transactions()->search([
+                'filter' => 'result:approved',
+            ]);
   '/transactions/{id}':
     get:
       description: |
@@ -7255,6 +9326,10 @@ paths:
       summary: Retrieve a Transaction
       tags:
         - Transactions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $transaction = $client->transactions()->load('transactionId');
     parameters:
       - $ref: '#/parameters/resourceId'
   '/transactions/{id}/gateway-logs':
@@ -7312,6 +9387,10 @@ paths:
       summary: Refund a Transaction
       tags:
         - Transactions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $transaction = $client->transactions()->refund('transactionId', 1.99);
   /users:
     get:
       description: |
@@ -7352,6 +9431,12 @@ paths:
       summary: Retrieve a list of users
       tags:
         - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $users = $client->users()->search([
+                'filter' => 'firstName:John',
+            ]);
     post:
       description: |
         Create an user
@@ -7388,6 +9473,19 @@ paths:
       summary: Create an user
       tags:
         - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $userForm = new Rebilly\Entities\User();
+            $userForm->setFirstName('John');
+            $userForm->setLastName('Doe');
+            $userForm->setEmail('johndoe@test.com');
+
+            try {
+                $user = $client->users()->create($userForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/users/{id}':
     delete:
       description: |
@@ -7417,6 +9515,14 @@ paths:
       summary: Delete user
       tags:
         - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            try {
+                $client->users()->delete('userId');
+            } catch (ServerException $e) {
+                echo $e->getMessage();
+            }
     get:
       description: |
         Retrieve user with specified identifier string
@@ -7444,6 +9550,10 @@ paths:
       summary: Retrieve user
       tags:
         - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $user = $client->users()->load('userId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -7499,6 +9609,19 @@ paths:
       summary: Create or update user with predefined ID
       tags:
         - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $userForm = new Rebilly\Entities\User();
+            $userForm->setFirstName('John');
+            $userForm->setLastName('Doe');
+            $userForm->setEmail('johndoe@test.com');
+
+            try {
+                $user = $client->users()->update('userId', $userForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/users/{id}/password':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -7539,6 +9662,18 @@ paths:
       summary: Updates user's password with the specified newPassword
       tags:
         - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $updatePasswordForm = new Rebilly\Entities\UpdatePassword();
+            $updatePasswordForm->setCurrentPassword('1234');
+            $updatePasswordForm->setNewPassword('5678');
+
+            try {
+                $user = $client->users()->updatePassword('userId', $updatePasswordForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/users/{id}/reset-password/{token}':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -7581,6 +9716,17 @@ paths:
       summary: Reset user password
       tags:
         - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $resetPasswordForm = new Rebilly\Entities\ResetPassword();
+            $resetPasswordForm->setNewPassword('1234');
+
+            try {
+                $user = $client->users()->resetPassword('userId', 'token', $resetPasswordForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/users/{id}/totp-reset':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -7609,6 +9755,10 @@ paths:
       summary: Reset (renew) totpSecret
       tags:
         - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $user = $client->users()->resetTotp('userId');
   /websites:
     get:
       description: |
@@ -7616,6 +9766,17 @@ paths:
       parameters:
         - $ref: '#/parameters/collectionLimit'
         - $ref: '#/parameters/collectionOffset'
+        - default: application/json
+          description: The response media type
+          enum:
+            - application/json
+            - text/csv
+          in: header
+          name: Accept
+          type: string
+      produces:
+        - application/json
+        - text/csv
       responses:
         '200':
           description: A list of Websites was retrieved successfully
@@ -7649,6 +9810,12 @@ paths:
       summary: Retrieve a list of websites
       tags:
         - Websites
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $websites = $client->websites()->search([
+                'filter' => 'name:TestWebsite',
+            ]);
     post:
       description: |
         Create a website
@@ -7685,6 +9852,20 @@ paths:
       summary: Create a website
       tags:
         - Websites
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $websiteForm = new Rebilly\Entities\Website();
+            $websiteForm->setName('TestWebsite');
+            $websiteForm->setUrl('http://testwebsite.com');
+            $websiteForm->setServicePhone('+0123456789');
+            $websiteForm->setServiceEmail('test@testwebsite.com');
+
+            try {
+                $website = $client->websites()->create($websiteForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/websites/{id}':
     delete:
       description: |
@@ -7713,6 +9894,14 @@ paths:
       summary: Delete a website
       tags:
         - Websites
+      x-code-samples:
+        - lang: PHP
+          source: |
+            try {
+                $client->websites()->delete('websiteId');
+            } catch (ServerException $e) {
+                echo $e->getMessage();
+            }
     get:
       description: |
         Retrieve a website with specified identifier string
@@ -7740,6 +9929,10 @@ paths:
       summary: Retrieve a website
       tags:
         - Websites
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $website = $client->websites()->load('websiteId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -7796,6 +9989,20 @@ paths:
       summary: Create or update a website with predefined ID
       tags:
         - Websites
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $websiteForm = new Rebilly\Entities\Website();
+            $websiteForm->setName('TestWebsite');
+            $websiteForm->setUrl('http://testwebsite.com');
+            $websiteForm->setServicePhone('+0123456789');
+            $websiteForm->setServiceEmail('test@testwebsite.com');
+
+            try {
+                $website = $client->websites()->update('websiteId', $websiteForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/websites/{id}/webhook':
     delete:
       description: |
@@ -7822,6 +10029,10 @@ paths:
       summary: Delete a webhook
       tags:
         - Websites
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->websiteWebhook()->delete('websiteId');
     get:
       description: |
         Retrieve a webhook for website with specified identifier string
@@ -7837,6 +10048,10 @@ paths:
       summary: Retrieve a webhook for website
       tags:
         - Websites
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $websiteWebhook = $client->websiteWebhook()->load('websiteId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -7865,19 +10080,32 @@ paths:
       summary: Create or update a webhook for website with predefined ID
       tags:
         - Websites
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $websiteWebhookForm = new Rebilly\Entities\WebsiteWebhook();
+            $websiteWebhookForm->setWebHookUrl('http://testwebsite.com/webhook');
+            $websiteWebhookForm->setWebHookUsername('test');
+            $websiteWebhookForm->setWebHookPassword('1234');
+
+            try {
+                $website = $client->websiteWebhook()->update('websiteId', $websiteWebhookForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
 definitions:
-  A1_Gateway:
+  A1Gateway:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
       - properties:
           gatewayConfig:
-            description: A1 Gateway credentials object
+            description: A1Gateway credentials object
             properties:
               accountId:
-                description: A1 Gateway account ID
+                description: A1Gateway account ID
                 type: string
               password:
-                description: A1 Gateway password
+                description: A1Gateway password
                 format: password
                 type: string
             required:
@@ -7887,10 +10115,11 @@ definitions:
         required:
           - gatewayConfig
         type: object
-    description: A1 Gateway config
+    description: A1Gateway config
   AcquirerName:
     description: Acquirer name
     enum:
+      - Alipay
       - AIB
       - B+S
       - Bank of America
@@ -7942,13 +10171,50 @@ definitions:
       - TBI
       - TrustPay
       - TSYS
+      - UPayCard
       - Vantiv
       - VoicePay
+      - WeChat Pay
       - Wells Fargo
       - Wing Hang Bank
       - Wirecard
       - WorldPay
     type: string
+  AmexVPC:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            description: AmexVPC credentials object
+            properties:
+              accessCode:
+                description: Access Code
+                format: password
+                type: string
+              merchantId:
+                description: Merchant ID
+                type: string
+              password:
+                description: 'Password (used for refund, void and capture)'
+                format: password
+                type: string
+              url:
+                description: Virtual Payment Client URL
+                type: string
+              user:
+                description: 'User (used for refund, void and capture)'
+                type: string
+            required:
+              - url
+              - merchantId
+              - accessCode
+              - user
+              - password
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: AmexVPC config
   AmountAdjustment:
     discriminator: method
     properties:
@@ -8085,6 +10351,80 @@ definitions:
         description: The link type
         enum:
           - approval_url
+        type: string
+    required:
+      - rel
+    type: object
+  Attachment:
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/FileLink'
+          - $ref: '#/definitions/AttachmentResourceLink'
+        maxItems: 3
+        minItems: 3
+        readOnly: true
+        type: array
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Creation date/time
+      description:
+        description: The Attachment description
+        type: string
+      fileId:
+        description: Linked File object id
+        type: string
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        readOnly: true
+      name:
+        description: The Original Attachment name
+        type: string
+      relatedId:
+        description: Linked object Id
+        type: string
+      relatedType:
+        description: Linked object type
+        enum:
+          - customer
+          - dispute
+          - invoice
+          - note
+          - payment
+          - plan
+          - product
+          - subscription
+          - transaction
+        type: string
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Latest update date/time
+    required:
+      - fileId
+      - relatedId
+      - relatedType
+    type: object
+  AttachmentResourceLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - customer
+          - dispute
+          - invoice
+          - note
+          - payment
+          - plan
+          - product
+          - subscription
+          - transaction
         type: string
     required:
       - rel
@@ -8342,6 +10682,26 @@ definitions:
           - gatewayConfig
         type: object
     description: BraintreePayments Gateway config
+  CardinalCommerce:
+    allOf:
+      - $ref: '#/definitions/Mpi'
+      - properties:
+          merchantId:
+            description: Cardinal MerchantId
+            type: string
+          processorId:
+            description: Cardinal ProcessorId
+            type: string
+          transactionPwd:
+            description: Cardinal TransactionPwd
+            format: password
+            type: string
+        required:
+          - merchantId
+          - processorId
+          - transactionPwd
+        type: object
+    description: CardinalCommerce Mpi Credentials
   Cashflows:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -8672,7 +11032,7 @@ definitions:
       additionalRestrictions:
         description: Additional restrictions for coupon's redemptions
         items:
-          - $ref: '#/definitions/CouponRestriction'
+          - $ref: '#/definitions/RedemptionRestriction'
         type: array
       canceledTime:
         allOf:
@@ -8698,18 +11058,22 @@ definitions:
         description: Coupon's redemption code
     type: object
   CouponRestriction:
+    allOf:
+      - $ref: '#/definitions/GenericRestriction'
+      - properties:
+          type:
+            description: Coupon's restriction type
+            enum:
+              - discounts-per-redemption
+              - redemptions-per-customer
+              - restrict-to-invoices
+              - restrict-to-plans
+              - restrict-to-subscriptions
+              - minimum-order-amount
+              - total-redemptions
+            type: string
+        type: object
     description: Coupon restrictions
-    discriminator: type
-    properties:
-      type:
-        description: Coupon's restriction type
-        enum:
-          - discounts-per-redemption
-          - redemptions-per-customer
-          - restrict-to-invoices
-          - restrict-to-plans
-          - restrict-to-subscriptions
-        type: string
     type: object
   Credential:
     properties:
@@ -8921,13 +11285,26 @@ definitions:
               client:
                 description: Datacash Gateway client
                 type: string
+              delay:
+                default: 0
+                description: Auto Capture delay (in hours)
+                minimum: 0
+                type: integer
               password:
                 description: Datacash Gateway password
                 format: password
                 type: string
+              policy:
+                default: 2
+                description: Policy
+                maximum: 7
+                minimum: 0
+                type: integer
             required:
               - client
               - password
+              - policy
+              - delay
             type: object
         required:
           - gatewayConfig
@@ -9210,6 +11587,13 @@ definitions:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: Dispute updated time
+    required:
+      - currency
+      - transactionId
+      - postedTime
+      - type
+      - status
+      - reasonCode
     type: object
   DisputeEvidence:
     properties:
@@ -9398,6 +11782,84 @@ definitions:
       - payment-card-expired
     readOnly: true
     type: string
+  File:
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: The upload date/time
+      description:
+        description: The File description
+        type: string
+      extension:
+        description: The File extension
+        type: string
+      height:
+        description: 'Image height, applicable to images only'
+        readOnly: true
+        type: integer
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        readOnly: true
+      mime:
+        description: The mime type
+        enum:
+          - image/png
+          - image/jpeg
+          - image/gif
+          - application/pdf
+          - audio/mpeg
+        readOnly: true
+        type: string
+      name:
+        description: Original File name
+        type: string
+      sha1:
+        description: Hash sum of the file
+        readOnly: true
+        type: string
+      size:
+        description: The File size in bytes
+        readOnly: true
+        type: integer
+      tags:
+        description: The tags list
+        items:
+          type: string
+        type: array
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: The latest update date/time
+      url:
+        description: 'Write-only. If defined on POST, this would be used as a file source.'
+        type: string
+      width:
+        description: 'Image width, applicable to images only'
+        readOnly: true
+        type: integer
+    type: object
+  FileLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - file
+        type: string
+    required:
+      - rel
+    type: object
   Forte:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -9468,8 +11930,8 @@ definitions:
         type: array
       acquirerName:
         $ref: '#/definitions/AcquirerName'
-      city:
-        description: The gateway's city field
+      cityField:
+        description: The gateway account's city field (also known as line 2 descriptor)
         type: string
       createdTime:
         allOf:
@@ -9481,14 +11943,14 @@ definitions:
         minimum: 1
         type: integer
       descriptor:
-        description: The gateway's desciptor
+        description: The gateway account's descriptor
         type: string
       downtimeEnd:
-        description: Gateway downtime end
+        description: Gateway account downtime end
         format: date-time
         type: string
       downtimeStart:
-        description: Gateway downtime start
+        description: Gateway account downtime start
         format: date-time
         type: string
       dynamicDescriptor:
@@ -9507,7 +11969,7 @@ definitions:
         description: The gateway identifier string
         readOnly: true
       merchantCategoryCode:
-        description: The gateway's merchant category code
+        description: The gateway account's merchant category code
         maximum: 9950
         minimum: 742
         type: integer
@@ -9543,7 +12005,7 @@ definitions:
           type: string
         type: array
       status:
-        description: The gateway's status
+        description: The gateway account's status
         enum:
           - active
           - inactive
@@ -9578,6 +12040,18 @@ definitions:
       - acceptedCurrencies
       - organizationId
     type: object
+  GatewayAccountLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - gatewayAccount
+        type: string
+    required:
+      - rel
+    type: object
   GatewayAccountPickInstruction:
     discriminator: method
     properties:
@@ -9592,7 +12066,8 @@ definitions:
   GatewayName:
     description: The gateway name
     enum:
-      - A1 Gateway
+      - A1Gateway
+      - AmexVPC
       - AuthorizeNet
       - Beanstream
       - BraintreePayments
@@ -9615,6 +12090,7 @@ definitions:
       - OchaPay
       - Optimal
       - PandaGateway
+      - Payeezy
       - PayPal
       - PayR
       - Payvision
@@ -9623,8 +12099,10 @@ definitions:
       - RealTime
       - RebillyProcessor
       - Redsys
+      - RPN
       - Sagepay
       - Stripe
+      - UPayCard
       - USAePay
       - VantivLitle
       - vegaaH
@@ -9632,6 +12110,14 @@ definitions:
       - Wirecard
       - Worldpay
     type: string
+  GenericRestriction:
+    description: All restriction
+    discriminator: type
+    properties:
+      type:
+        description: Restriction type
+        type: string
+    type: object
   GlobalCollect:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -9648,6 +12134,9 @@ definitions:
               merchantId:
                 description: GlobalCollect Gateway merchant ID
                 type: string
+              skipFraudService:
+                description: GlobalCollect skip fraud service
+                type: boolean
             required:
               - merchantId
               - apiKeyId
@@ -9795,6 +12284,9 @@ definitions:
           type: string
         readOnly: true
         type: array
+      notes:
+        description: Notes for the customer which will display on the invoice
+        type: string
       organizationId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -9886,10 +12378,6 @@ definitions:
         minItems: 2
         readOnly: true
         type: array
-      createdBy:
-        description: The process that created this layout
-        readOnly: true
-        type: string
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -9909,14 +12397,6 @@ definitions:
       name:
         description: The name of the layout string
         type: string
-      updatedBy:
-        description: The process that updated this layout
-        readOnly: true
-        type: string
-      updatedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Layout updated time
     required:
       - name
     type: object
@@ -9990,20 +12470,6 @@ definitions:
       path:
         description: Lead Source's path uri (eg www.example.com/some/landing/path)
         type: string
-      relatedId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The lead source's related resource ID
-        readOnly: true
-      relatedType:
-        description: The lead source's related resource type
-        enum:
-          - customer
-          - invoice
-          - subscription
-          - payment
-        readOnly: true
-        type: string
       salesAgent:
         description: Lead Source's sales agent (eg James Bond)
         type: string
@@ -10037,10 +12503,14 @@ definitions:
     description: The payment method
     enum:
       - ach
+      - Alipay
       - cash
       - china-unionpay
       - payment-card
       - paypal
+      - OchaPay
+      - UPayCard
+      - WeChat Pay
     type: string
   Moneris:
     allOf:
@@ -10063,6 +12533,26 @@ definitions:
           - gatewayConfig
         type: object
     description: Moneris Gateway config
+  Mpi:
+    discriminator: name
+    properties:
+      name:
+        $ref: '#/definitions/MpiName'
+    required:
+      - name
+    type: object
+  MpiName:
+    description: The Merchant plug-in Name
+    enum:
+      - PayvisionMpi
+      - WirecardMpi
+      - IlixiumMpi
+      - DataCashMpi
+      - OptimalMpi
+      - GlobalCollectMpi
+      - CardinalCommerce
+      - Other
+    type: string
   NMI:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -10166,14 +12656,14 @@ definitions:
           gatewayConfig:
             properties:
               apiPassword:
-                description: Ochapay Gateway api password
+                description: OchaPay Gateway api password
                 format: password
                 type: string
               apiUsername:
-                description: Ochapay Gateway username
+                description: OchaPay Gateway username
                 type: string
               secretWord:
-                description: Ochapay Gateway secret word
+                description: OchaPay Gateway secret word
                 format: password
                 type: string
             required:
@@ -10184,7 +12674,7 @@ definitions:
         required:
           - gatewayConfig
         type: object
-    description: Ochapay Gateway config
+    description: OchaPay Gateway config
   OnBoardingUrlLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -10280,6 +12770,7 @@ definitions:
         description: The organization updated time
     required:
       - name
+      - country
     type: object
   OrganizationLink:
     allOf:
@@ -10293,6 +12784,10 @@ definitions:
     required:
       - rel
     type: object
+  Other:
+    allOf:
+      - $ref: '#/definitions/Mpi'
+    description: Other
   PandaGateway:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -10318,6 +12813,18 @@ definitions:
           - gatewayConfig
         type: object
     description: Panda Gateway config
+  ParentTransactionLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - parentTransaction
+        type: string
+    required:
+      - rel
+    type: object
   PayPal:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -10360,6 +12867,36 @@ definitions:
           - gatewayConfig
         type: object
     description: PayR Gateway config
+  Payeezy:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiKey:
+                description: API Key
+                type: string
+              apiSecret:
+                description: API Secret
+                format: password
+                type: string
+              merchantId:
+                description: Payeezy Merchant ID
+                type: string
+              merchantToken:
+                description: Merchant Token
+                format: password
+                type: string
+            required:
+              - merchantId
+              - merchantToken
+              - apiKey
+              - apiSecret
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Payeezy Gateway config
   Payment:
     properties:
       _links:
@@ -10601,13 +13138,7 @@ definitions:
     discriminator: method
     properties:
       method:
-        description: The payment method
-        enum:
-          - ach
-          - cash
-          - payment-card
-          - paypal
-        type: string
+        $ref: '#/definitions/Method'
     required:
       - method
     type: object
@@ -10747,7 +13278,7 @@ definitions:
             properties:
               avs:
                 description: Payvision Gateway avs
-                type: string
+                type: boolean
               delay:
                 description: Payvision Gateway delay
                 type: integer
@@ -10764,10 +13295,16 @@ definitions:
               - delay
               - memberGuid
             type: object
+          mpi:
+            $ref: '#/definitions/Mpi'
         required:
           - gatewayConfig
         type: object
     description: Payvision Gateway config
+  PayvisionMpi:
+    allOf:
+      - $ref: '#/definitions/Mpi'
+    description: Payvision Integrated
   Plan:
     properties:
       _links:
@@ -10904,18 +13441,6 @@ definitions:
           - gatewayConfig
         type: object
     description: Plugnpay Gateway config
-  ProcessorAccountLink:
-    allOf:
-      - $ref: '#/definitions/NewLink'
-    properties:
-      rel:
-        description: The link type
-        enum:
-          - processorAccount
-        type: string
-    required:
-      - rel
-    type: object
   Product:
     description: |
       Your product includes digital goods, services, and physical goods.
@@ -10982,6 +13507,27 @@ definitions:
           - $ref: '#/definitions/ServerTimestamp'
         description: The product updated time
     type: object
+  RPN:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              key:
+                description: RPN Key
+                format: password
+                type: string
+              mid:
+                description: RPN MID
+                type: string
+            required:
+              - mid
+              - key
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: RPN Gateway config
   RealTime:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -11037,6 +13583,22 @@ definitions:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
     description: RebillyProcessor Gateway config
+  RedemptionRestriction:
+    allOf:
+      - $ref: '#/definitions/GenericRestriction'
+      - properties:
+          type:
+            description: Redemption's additional restriction type
+            enum:
+              - discounts-per-redemption
+              - restrict-to-invoices
+              - restrict-to-plans
+              - restrict-to-subscriptions
+              - minimum-order-amount
+            type: string
+        type: object
+    description: Redemption restrictions
+    type: object
   Redsys:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -11176,6 +13738,24 @@ definitions:
     required:
       - rules
     type: object
+  RuleSetHistoryItem:
+    description: Version of rules
+    properties:
+      _links:
+        description: The links related to a resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/RuleSetVersionLink'
+        maxItems: 2
+        minItems: 2
+        readOnly: true
+        type: array
+      createdTime:
+        $ref: '#/definitions/ServerTimestamp'
+      version:
+        type: integer
+    readOnly: true
+    type: object
   RuleSetVersion:
     description: Version of rules
     properties:
@@ -11196,6 +13776,18 @@ definitions:
       version:
         type: integer
     readOnly: true
+    type: object
+  RuleSetVersionLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - rules
+        type: string
+    required:
+      - rel
     type: object
   Sagepay:
     allOf:
@@ -11502,6 +14094,10 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The Subscription identifier string
         readOnly: true
+      inTrial:
+        description: True if the subscription is currently in a trial period
+        readOnly: true
+        type: boolean
       initialInvoiceId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -11512,6 +14108,10 @@ definitions:
         description: Unique id for each plan
       quantity:
         description: Quantity for each subscription. Default value to 1
+        type: integer
+      rebillNumber:
+        description: The current period number
+        readOnly: true
         type: integer
       renewalTime:
         description: Subscription renewal time
@@ -11785,11 +14385,12 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-          - $ref: '#/definitions/ProcessorAccountLink'
+          - $ref: '#/definitions/GatewayAccountLink'
           - $ref: '#/definitions/CustomerLink'
           - $ref: '#/definitions/WebsiteLink'
           - $ref: '#/definitions/PaymentCardLink'
           - $ref: '#/definitions/PaymentLink'
+          - $ref: '#/definitions/ParentTransactionLink'
         maxItems: 6
         minItems: 1
         readOnly: true
@@ -11803,8 +14404,8 @@ definitions:
         format: double
         readOnly: true
         type: number
-      childrenTransactions:
-        description: The children transactions IDs
+      childTransactions:
+        description: The child transaction IDs
         items:
           - $ref: '#/definitions/ResourceId'
         readOnly: true
@@ -11924,7 +14525,7 @@ definitions:
         description: The transaction identifier string
         readOnly: true
       invoiceIds:
-        description: The invoice ids related to transaction
+        description: The invoice IDs related to transaction
         items:
           - $ref: '#/definitions/ResourceId'
         readOnly: true
@@ -11972,7 +14573,7 @@ definitions:
         readOnly: true
         type: string
       subscriptionIds:
-        description: The subscription ids related to transaction
+        description: The subscription IDs related to transaction
         items:
           - $ref: '#/definitions/ResourceId'
         readOnly: true
@@ -12055,6 +14656,28 @@ definitions:
     required:
       - amount
     type: object
+  UPayCard:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              key:
+                description: merchant key
+                format: password
+                type: string
+              secret:
+                description: merchant secret
+                format: password
+                type: string
+            required:
+              - key
+              - secret
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: UPayCard Gateway config
   USAePay:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -12317,9 +14940,10 @@ definitions:
     description: Walpay Gateway config
   Webhook:
     properties:
-      auth:
-        $ref: '#/definitions/WebhookAuthorization'
       body:
+        type: string
+      credentialHash:
+        description: Webhook Credential identifier string.
         type: string
       headers:
         items:
@@ -12341,12 +14965,12 @@ definitions:
           type: string
         description: The URI parameters
         type: object
-      uri:
+      url:
         format: uri
         type: string
     required:
       - method
-      - uri
+      - url
     type: object
   WebhookAuthorization:
     discriminator: type
@@ -12751,7 +15375,7 @@ definitions:
         type: object
   discounts-per-redemption:
     allOf:
-      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/GenericRestriction'
       - properties:
           quantity:
             description: Restriction quantity
@@ -12931,6 +15555,21 @@ definitions:
       - $ref: '#/definitions/compare'
     description: Less than or equals condition
     type: object
+  minimum-order-amount:
+    allOf:
+      - $ref: '#/definitions/GenericRestriction'
+      - properties:
+          amount:
+            description: Minimum order quantity
+            type: integer
+          currency:
+            description: Minimum order currency
+            type: string
+        required:
+          - amount
+          - currency
+        type: object
+    description: minimum-order-amount restrictions
   none:
     allOf:
       - $ref: '#/definitions/AmountAdjustment'
@@ -13044,7 +15683,7 @@ definitions:
       - $ref: '#/definitions/UserPasswordAuthorization'
   redemptions-per-customer:
     allOf:
-      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/GenericRestriction'
       - properties:
           quantity:
             description: Restriction value
@@ -13055,7 +15694,7 @@ definitions:
     description: Quantity per Customer restrictions
   restrict-to-invoices:
     allOf:
-      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/GenericRestriction'
       - properties:
           invoiceIds:
             description: Invoice IDs coupon can be applied to
@@ -13068,7 +15707,7 @@ definitions:
     description: restrict-to-invoices restrictions
   restrict-to-plans:
     allOf:
-      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/GenericRestriction'
       - properties:
           planIds:
             description: Plan IDs coupon can be applied to
@@ -13081,7 +15720,7 @@ definitions:
     description: restrict-to-plans restrictions
   restrict-to-subscriptions:
     allOf:
-      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/GenericRestriction'
       - properties:
           subscriptionIds:
             description: Subscription IDs coupon can be applied to
@@ -13123,6 +15762,17 @@ definitions:
     allOf:
       - $ref: '#/definitions/RuleAction'
     description: Stop active subscriptions
+  total-redemptions:
+    allOf:
+      - $ref: '#/definitions/GenericRestriction'
+      - properties:
+          quantity:
+            description: Total redemptions quantity
+            type: integer
+        required:
+          - quantity
+        type: object
+    description: total-redemptions restrictions
   trigger-webhook:
     allOf:
       - $ref: '#/definitions/RuleAction'

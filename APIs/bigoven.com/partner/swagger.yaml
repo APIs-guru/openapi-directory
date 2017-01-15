@@ -397,6 +397,157 @@ paths:
       summary: Get a list of recipe categories (the ID field can be used for include_cat in search parameters)
       tags:
         - Recipe
+  '/recipe/review/replies/{replyId}':
+    delete:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: ''
+          in: path
+          name: replyId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/System.Object'
+      summary: DELETE a reply to a given review. Authenticated user must be the one who originally posted the reply.
+      tags:
+        - Review
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      parameters:
+        - description: ''
+          in: path
+          name: replyId
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Controllers.ReviewController.PostReplyReq'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BigOven.Model.API.Reply'
+      summary: Update (PUT) a reply to a given review. Authenticated user must be the original one that posted the reply.
+      tags:
+        - Review
+  '/recipe/review/{reviewId}':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - in: path
+          name: reviewId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BigOven.Model.API.Review'
+      summary: "Get a given review by string-style ID. This will return a payload with FeaturedReply, ReplyCount.\r\n            Recommended display is to list top-level reviews with one featured reply underneath. \r\n            Currently, the FeaturedReply is the most recent one for that rating."
+      tags:
+        - Review
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      parameters:
+        - description: ''
+          in: path
+          name: reviewId
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: review
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Controllers.ReviewController.ReviewRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BigOven.Model.API.Review'
+      summary: Update a given top-level review.
+      tags:
+        - Review
+  '/recipe/review/{reviewId}/replies':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: ''
+          in: path
+          name: reviewId
+          required: true
+          type: string
+        - description: 'the page (int), starting with 1'
+          format: int32
+          in: query
+          name: pg
+          required: false
+          type: integer
+        - description: results per page (int)
+          format: int32
+          in: query
+          name: rpp
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/BigOven.Model.API.Reply'
+            type: array
+      summary: Get a paged list of replies for a given review.
+      tags:
+        - Review
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      parameters:
+        - description: ''
+          in: path
+          name: reviewId
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Controllers.ReviewController.PostReplyReq'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BigOven.Model.API.Reply'
+      summary: 'POST a reply to a given review. The date will be set by server. Note that replies no longer have star ratings, only top-level reviews do.'
+      tags:
+        - Review
   /recipe/scan:
     post:
       consumes: []
@@ -778,7 +929,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/BigOven.Model.API.Review'
-      summary: 'Get *my* review for this recipe, where "me" is passed in via authentication headers'
+      summary: 'Get *my* review for the recipe {recipeId}, where "me" is determined by standard authentication headers'
       tags:
         - Review
     post:
@@ -807,7 +958,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/System.Object'
-      summary: "Add a new review or rating.\r\n            You need to provide EITHER a StarRating or a Comment or both.\r\n            Just providing a StarRating is a \"rating\"; just providing a Comment is a \"comment\". You can also provide a comment AND a rating (preferred)"
+      summary: 'Add a new review. Only one review can be provided per {userId, recipeId} pair. Otherwise your review will be updated.'
       tags:
         - Review
   '/recipe/{recipeId}/review/{reviewId}':
@@ -816,23 +967,20 @@ paths:
       deprecated: false
       parameters:
         - description: ''
-          format: int32
-          in: path
-          name: recipeId
-          required: true
-          type: integer
-        - description: ''
-          format: int64
           in: path
           name: reviewId
           required: true
-          type: integer
+          type: string
+        - in: path
+          name: recipeId
+          required: true
+          type: string
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/System.Object'
-      summary: Delete a review
+      summary: "Delete a review by recipeId and reviewId. DEPRECATED. Please see recipe/review/{reviewId} for the preferred method.\r\n            (We are moving from an integer-based ID system to a GUID-style string-based ID system for reviews and replies.)"
       tags:
         - Review
     get:
@@ -856,7 +1004,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/BigOven.Model.API.Review'
-      summary: Get a given review
+      summary: "Get a given review - DEPRECATED. See recipe/review/{reviewId} for the current usage.\r\n            Beginning in January 2017, BigOven moded from an integer-based ID system to a GUID-style string-based ID system for reviews and replies.\r\n            We are also supporting more of a \"Google Play\" style model for Reviews and Replies. That is, there are top-level Reviews and then\r\n            an unlimited list of replies (which do not carry star ratings) underneath existing reviews. Also, a given user can only have one review \r\n            per recipe. Existing legacy endpoints will continue to work, but we strongly recommend you migrate to using the newer endpoints listed\r\n            which do NOT carry the \"DEPRECATED\" flag."
       tags:
         - Review
     put:
@@ -879,7 +1027,7 @@ paths:
           name: review
           required: true
           schema:
-            $ref: '#/definitions/API2.Controllers.ReviewController.ReviewRequest'
+            $ref: '#/definitions/API2.Controllers.ReviewController.ReviewRequestLegacy'
         - description: recipeId (int)
           format: int32
           in: path
@@ -891,7 +1039,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/BigOven.Model.API.Review'
-      summary: HTTP PUT (update) a Recipe review (UserComment).
+      summary: "HTTP PUT (update) a recipe review. DEPRECATED. Please see recipe/review/{reviewId} PUT for the new endpoint.\r\n            We are moving to a string-based primary key system, no longer integers, for reviews and replies."
       tags:
         - Review
   '/recipe/{recipeId}/reviews':
@@ -924,7 +1072,7 @@ paths:
             items:
               $ref: '#/definitions/BigOven.Model.API.Review'
             type: array
-      summary: Get reviews for a recipe
+      summary: 'Get paged list of reviews for a recipe. Each review will have at most one FeaturedReply, as well as a ReplyCount.'
       tags:
         - Review
   '/recipe/{recipeId}/scans':
@@ -1292,11 +1440,43 @@ definitions:
         type: string
     type: object
   API2.Controllers.RecipeController.FeedbackDTO:
+    description: ''
     properties:
       feedback:
+        description: ''
+        type: string
+    type: object
+  API2.Controllers.ReviewController.PostReplyReq:
+    description: Reply request parameters
+    properties:
+      Comment:
+        description: 'The comment. If mentioning any user(s) (optional), include them as @username in the text body. Do not use @ symbol for anything but mentioning @usernames.'
         type: string
     type: object
   API2.Controllers.ReviewController.ReviewRequest:
+    description: Payload for reviews
+    properties:
+      ActiveMinutes:
+        description: "How many minutes of ACTIVE time (i.e., actively working on the recipe, not waiting for rising, baking, etc.) did it \r\n            demand of the cook? Optional."
+        format: int32
+        type: integer
+      Comment:
+        description: The notes
+        type: string
+      MakeAgain:
+        description: '"yes" or "no"'
+        type: string
+      StarRating:
+        description: '1, 2, 3, 4, or 5'
+        format: int32
+        type: integer
+      TotalMinutes:
+        description: 'How long, start to finish, in minutes (integer) did it take? Optional.'
+        format: int32
+        type: integer
+    type: object
+  API2.Controllers.ReviewController.ReviewRequestLegacy:
+    description: Legacy -- This object here is deprecated. Please use the new "ReviewRequest" structure for all future development
     properties:
       ActiveMinutes:
         format: int32
@@ -1753,6 +1933,23 @@ definitions:
           $ref: '#/definitions/BigOven.Model.API.RecipeNote'
         type: array
     type: object
+  BigOven.Model.API.Reply:
+    properties:
+      Comment:
+        type: string
+      CreationDate:
+        format: date-time
+        type: string
+      ID:
+        type: string
+      LastModified:
+        format: date-time
+        type: string
+      Poster:
+        $ref: '#/definitions/BigOven.Model.API.UserInfoTiny'
+      ReviewID:
+        type: string
+    type: object
   BigOven.Model.API.Review:
     properties:
       ActiveMinutes:
@@ -1763,7 +1960,14 @@ definitions:
       CreationDate:
         format: date-time
         type: string
+      FeaturedReply:
+        $ref: '#/definitions/BigOven.Model.API.Reply'
       GUID:
+        type: string
+      ID:
+        type: string
+      LastModified:
+        format: date-time
         type: string
       ParentID:
         format: int64
@@ -1774,6 +1978,9 @@ definitions:
         items:
           $ref: '#/definitions/BigOven.Model.API.Review'
         type: array
+      ReplyCount:
+        format: int32
+        type: integer
       ReviewID:
         format: int64
         type: integer
@@ -1805,6 +2012,20 @@ definitions:
         type: string
       PremiumExpiryDate:
         format: date-time
+        type: string
+      UserID:
+        format: int32
+        type: integer
+      UserName:
+        type: string
+    type: object
+  BigOven.Model.API.UserInfoTiny:
+    properties:
+      FirstName:
+        type: string
+      LastName:
+        type: string
+      PhotoUrl:
         type: string
       UserID:
         format: int32

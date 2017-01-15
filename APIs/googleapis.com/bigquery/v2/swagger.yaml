@@ -1376,6 +1376,9 @@ definitions:
         description: '[Optional] The maximum number of bad records that BigQuery can ignore when running the job. If the number of bad records exceeds this value, an invalid error is returned in the job result. The default value is 0, which requires that all records are valid.'
         format: int32
         type: integer
+      nullMarker:
+        description: '[Optional] This string will be interpreted as a null value when it appears in a CSV file. The default value is the empty string. Please refer to the documentation for further information.'
+        type: string
       projectionFields:
         description: '[Experimental] If sourceFormat is set to "DATASTORE_BACKUP", indicates which entity properties to load into BigQuery from a Cloud Datastore backup. Property names are case sensitive and must be top-level properties. If no properties are specified, BigQuery loads all properties. If any named property isn''t found in the Cloud Datastore backup, an invalid error is returned in the job result.'
         items:
@@ -1616,6 +1619,9 @@ definitions:
       schema:
         $ref: '#/definitions/TableSchema'
         description: '[Output-only, Experimental] The schema of the results. Present only for successful dry run of non-legacy SQL queries.'
+      statementType:
+        description: '[Output-only, Experimental] The type of query statement, if valid.'
+        type: string
       totalBytesBilled:
         description: '[Output-only] Total bytes billed for the job.'
         format: int64
@@ -1907,6 +1913,11 @@ definitions:
         default: 'bigquery#table'
         description: '[Output-only] The type of the resource.'
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: '[Experimental] The labels associated with this table. You can use these to organize and group your tables. Label keys and values can be no longer than 63 characters, can only contain letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and must be unique within a dataset. Both keys and values are additionally constrained to be <= 128 bytes in size.'
+        type: object
       lastModifiedTime:
         description: '[Output-only] The time when this table was last modified, in milliseconds since the epoch.'
         format: uint64
@@ -2041,7 +2052,7 @@ definitions:
         description: '[Required] The field name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_), and must start with a letter or underscore. The maximum length is 128 characters.'
         type: string
       type:
-        description: '[Required] The field data type. Possible values include STRING, BYTES, INTEGER, FLOAT, BOOLEAN, TIMESTAMP, DATE, TIME, DATETIME, or RECORD (where RECORD indicates that the field contains a nested schema).'
+        description: '[Required] The field data type. Possible values include STRING, BYTES, INTEGER, INT64 (same as INTEGER), FLOAT, FLOAT64 (same as FLOAT), BOOLEAN, BOOL (same as BOOLEAN), TIMESTAMP, DATE, TIME, DATETIME, RECORD (where RECORD indicates that the field contains a nested schema) or STRUCT (same as RECORD).'
         type: string
     type: object
   TableList:
@@ -2070,6 +2081,11 @@ definitions:
               default: 'bigquery#table'
               description: The resource type.
               type: string
+            labels:
+              additionalProperties:
+                type: string
+              description: '[Experimental] The labels associated with this table. You can use these to organize and group your tables.'
+              type: object
             tableReference:
               $ref: '#/definitions/TableReference'
               description: A reference uniquely identifying the table.

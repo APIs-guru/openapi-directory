@@ -2985,6 +2985,10 @@ definitions:
       storageProfile:
         $ref: '#/definitions/StorageProfile'
         description: The storage profile.
+      vmId:
+        description: Azure VM unique ID.
+        readOnly: true
+        type: string
   VirtualMachineSize:
     description: Describes the properties of a VM size.
     properties:

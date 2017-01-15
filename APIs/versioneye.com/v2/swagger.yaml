@@ -15,6 +15,7 @@ info:
     version: '1.1'
   x-providerName: versioneye.com
 tags:
+  - name: facebook
   - name: github
   - name: me
   - name: organisations
@@ -25,6 +26,23 @@ tags:
   - name: sessions
   - name: users
 paths:
+  /v2/facebook/ping:
+    get:
+      operationId: GET--version-facebook-ping---format-
+      responses:
+        '200':
+          description: No response was specified
+      summary: ping pong
+      tags:
+        - facebook
+    post:
+      operationId: POST--version-facebook-ping---format-
+      responses:
+        '200':
+          description: No response was specified
+      summary: ping pong
+      tags:
+        - facebook
   /v2/github:
     get:
       description: |+
@@ -255,6 +273,12 @@ paths:
         each new version is a new <strong>notification</strong> for your account.</p>
 
       operationId: GET--version-me-notifications---format-
+      parameters:
+        - description: Specify page for paging
+          in: query
+          name: page
+          required: false
+          type: integer
       responses:
         '200':
           description: No response was specified
@@ -547,6 +571,50 @@ paths:
         '200':
           description: No response was specified
       summary: list versions of a package
+      tags:
+        - products
+  '/v2/products/{lang}/{prod_key}/{prod_version}/license':
+    post:
+      description: |+
+
+        <p>With this endpoint users can suggest a license for an artifact.</p>
+
+      operationId: POST--version-products--lang--prod_key--prod_version-license---format-
+      parameters:
+        - description: ' programming language '
+          in: path
+          name: lang
+          required: true
+          type: string
+        - description: ' product key '
+          in: path
+          name: prod_key
+          required: true
+          type: string
+        - description: ' product version '
+          in: path
+          name: prod_version
+          required: true
+          type: string
+        - description: ' name of the license '
+          in: formData
+          name: license_name
+          required: true
+          type: string
+        - description: ' source of the license. Where did you find it? '
+          in: formData
+          name: license_source
+          required: true
+          type: string
+        - description: ' you wanna say anyting important to this license? '
+          in: formData
+          name: comments
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: suggest a license for an artifact
       tags:
         - products
   '/v2/products/{lang}/{prod_key}/{prod_version}/scm_changes':

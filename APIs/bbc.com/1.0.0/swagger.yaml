@@ -100,7 +100,7 @@ paths:
             - available
           in: query
           items:
-            format: string
+            type: string
           name: availability
           required: false
           type: array
@@ -144,7 +144,7 @@ paths:
             - world
           in: query
           items:
-            format: string
+            type: string
           name: territory
           required: false
           type: array
@@ -195,7 +195,7 @@ paths:
             - titles
           in: query
           items:
-            format: string
+            type: string
           name: mixin
           required: false
           type: array
@@ -400,7 +400,7 @@ paths:
             - related_links
           in: query
           items:
-            format: string
+            type: string
           name: mixin
           required: false
           type: array
@@ -434,7 +434,7 @@ paths:
             - season
           in: query
           items:
-            format: string
+            type: string
           name: group_type
           required: false
           type: array
@@ -547,7 +547,7 @@ paths:
             - letterbox
           in: query
           items:
-            format: string
+            type: string
           name: image_type
           required: false
           type: array
@@ -659,7 +659,7 @@ paths:
             - play_event
           in: query
           items:
-            format: string
+            type: string
           name: mixin
           required: false
           type: array
@@ -691,7 +691,7 @@ paths:
             - other
           in: query
           items:
-            format: string
+            type: string
           name: item_type
           required: false
           type: array
@@ -802,7 +802,7 @@ paths:
             - images
           in: query
           items:
-            format: string
+            type: string
           name: mixin
           required: false
           type: array
@@ -882,7 +882,7 @@ paths:
             - 'false'
           in: query
           items:
-            format: string
+            type: string
           name: has_external_id
           required: false
           type: array
@@ -1069,7 +1069,6 @@ paths:
             * sort alphabetically by title, ascending
             * sort by title librarian style (ignoring leading 'The', 'A', etc), ascending
             * sort by root pid and then preorder tree sort. Requires entities to have release date.
-            * sort numerically by number of views (most popular first)
           enum:
             - group_position
             - pid
@@ -1081,7 +1080,6 @@ paths:
             - strict_title
             - title
             - tree
-            - views
           in: query
           name: sort
           required: false
@@ -1126,7 +1124,7 @@ paths:
             - related_links
           in: query
           items:
-            format: string
+            type: string
           name: mixin
           required: false
           type: array
@@ -1137,7 +1135,7 @@ paths:
             - 'false'
           in: query
           items:
-            format: string
+            type: string
           name: audio_described
           required: false
           type: array
@@ -1148,7 +1146,7 @@ paths:
             - pending
           in: query
           items:
-            format: string
+            type: string
           name: availability
           required: false
           type: array
@@ -1159,7 +1157,7 @@ paths:
             - clip
           in: query
           items:
-            format: string
+            type: string
           name: availability_entity_type
           required: false
           type: array
@@ -1171,7 +1169,7 @@ paths:
             - simulcast
           in: query
           items:
-            format: string
+            type: string
           name: availability_type
           required: false
           type: array
@@ -1203,7 +1201,7 @@ paths:
             - long
           in: query
           items:
-            format: string
+            type: string
           name: duration
           required: false
           type: array
@@ -1216,7 +1214,7 @@ paths:
             - clip
           in: query
           items:
-            format: string
+            type: string
           name: entity_type
           required: false
           type: array
@@ -1304,7 +1302,7 @@ paths:
             - audio_video
           in: query
           items:
-            format: string
+            type: string
           name: media_type
           required: false
           type: array
@@ -1350,7 +1348,7 @@ paths:
             - uscansvod
           in: query
           items:
-            format: string
+            type: string
           name: payment_type
           required: false
           type: array
@@ -1389,7 +1387,7 @@ paths:
             - exclude
           in: query
           items:
-            format: string
+            type: string
           name: signed
           required: false
           type: array
@@ -1410,7 +1408,7 @@ paths:
             - 'false'
           in: query
           items:
-            format: string
+            type: string
           name: tleo
           required: false
           type: array
@@ -1449,7 +1447,7 @@ paths:
             - related_links
           in: query
           items:
-            format: string
+            type: string
           name: mixin
           required: false
           type: array
@@ -1531,7 +1529,7 @@ paths:
             - current
           in: query
           items:
-            format: string
+            type: string
           name: status
           required: false
           type: array
@@ -1579,7 +1577,7 @@ paths:
             - images
           in: query
           items:
-            format: string
+            type: string
           name: mixin
           required: false
           type: array
@@ -1883,7 +1881,7 @@ paths:
             - Webcast
           in: query
           items:
-            format: string
+            type: string
           name: service_type
           required: false
           type: array
@@ -2083,7 +2081,7 @@ paths:
             - available
           in: query
           items:
-            format: string
+            type: string
           name: availability
           required: false
           type: array
@@ -2147,7 +2145,7 @@ paths:
             - uscansvod
           in: query
           items:
-            format: string
+            type: string
           name: payment_type
           required: false
           type: array

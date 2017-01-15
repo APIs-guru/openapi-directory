@@ -1195,7 +1195,12 @@ paths:
       description: ''
       operationId: writeOff
       parameters:
-        - $ref: '#/parameters/idParamFormData'
+        - description: Criteria of Transactions to write off.
+          in: body
+          name: criteria
+          required: true
+          schema:
+            $ref: '#/definitions/Criteria'
       responses:
         '200':
           description: Successfully wrote off transaction

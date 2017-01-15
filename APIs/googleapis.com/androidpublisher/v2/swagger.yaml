@@ -2034,6 +2034,51 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - purchases
+  '/{packageName}/purchases/voidedpurchases':
+    get:
+      description: 'Lists the purchases that were cancelled, refunded or charged-back.'
+      operationId: androidpublisher.purchases.voidedpurchases.list
+      parameters:
+        - description: 'The package name of the application for which voided purchases need to be returned (for example, ''com.some.thing'').'
+          in: path
+          name: packageName
+          required: true
+          type: string
+        - description: 'The time, in milliseconds since the Epoch, of the newest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time.'
+          in: query
+          name: endTime
+          type: string
+        - in: query
+          name: maxResults
+          type: integer
+        - in: query
+          name: startIndex
+          type: integer
+        - description: 'The time, in milliseconds since the Epoch, of the oldest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be older than 30 days and is ignored if a pagination token is set. Default value is current time minus 30 days.'
+          in: query
+          name: startTime
+          type: string
+        - in: query
+          name: token
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VoidedPurchasesListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - purchases
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{packageName}/reviews':
     get:
       description: Returns a list of reviews.
@@ -2052,6 +2097,9 @@ paths:
           type: integer
         - in: query
           name: token
+          type: string
+        - in: query
+          name: translationLanguage
           type: string
       responses:
         '200':
@@ -2084,6 +2132,9 @@ paths:
         - in: path
           name: reviewId
           required: true
+          type: string
+        - in: query
+          name: translationLanguage
           type: string
       responses:
         '200':
@@ -2254,6 +2305,47 @@ definitions:
       text:
         description: 'The content of the comment, i.e. reply body.'
         type: string
+    type: object
+  DeviceMetadata:
+    properties:
+      cpuMake:
+        description: Device CPU make e.g. "Qualcomm"
+        type: string
+      cpuModel:
+        description: Device CPU model e.g. "MSM8974"
+        type: string
+      deviceClass:
+        description: Device class (e.g. tablet)
+        type: string
+      glEsVersion:
+        description: OpenGL version
+        format: int32
+        type: integer
+      manufacturer:
+        description: Device manufacturer (e.g. Motorola)
+        type: string
+      nativePlatform:
+        description: 'Comma separated list of native platforms (e.g. "arm", "arm7")'
+        type: string
+      productName:
+        description: Device model name (e.g. Droid)
+        type: string
+      ramMb:
+        description: Device RAM in Megabytes e.g. "2048"
+        format: int32
+        type: integer
+      screenDensityDpi:
+        description: Screen density in DPI
+        format: int32
+        type: integer
+      screenHeightPx:
+        description: Screen height in pixels
+        format: int32
+        type: integer
+      screenWidthPx:
+        description: Screen width in pixels
+        format: int32
+        type: integer
     type: object
   Entitlement:
     description: An Entitlement resource indicates a user's current entitlement to an inapp item or subscription.
@@ -2824,9 +2916,15 @@ definitions:
       device:
         description: 'Codename for the reviewer''s device, e.g. klte, flounder. May be absent.'
         type: string
+      deviceMetadata:
+        $ref: '#/definitions/DeviceMetadata'
+        description: Some information about the characteristics of the user's device
       lastModified:
         $ref: '#/definitions/Timestamp'
         description: The last time at which this comment was updated.
+      originalText:
+        description: 'Untranslated text of the review, in the case where the review has been translated. If the review has not been translated this is left blank.'
+        type: string
       reviewerLanguage:
         description: Language code for the reviewer. This is taken from the device settings so is not guaranteed to match the language the review is written in. May be absent.
         type: string
@@ -2837,4 +2935,42 @@ definitions:
       text:
         description: 'The content of the comment, i.e. review body. In some cases users have been able to write a review with separate title and body; in those cases the title and body are concatenated and separated by a tab character.'
         type: string
+      thumbsDownCount:
+        description: Number of users who have given this review a thumbs down
+        format: int32
+        type: integer
+      thumbsUpCount:
+        description: Number of users who have given this review a thumbs up
+        format: int32
+        type: integer
+    type: object
+  VoidedPurchase:
+    description: A VoidedPurchase resource indicates a purchase that was either cancelled/refunded/charged-back.
+    properties:
+      kind:
+        default: 'androidpublisher#voidedPurchase'
+        description: This kind represents a voided purchase object in the androidpublisher service.
+        type: string
+      purchaseTimeMillis:
+        description: 'The time at which the purchase was made, in milliseconds since the epoch (Jan 1, 1970).'
+        format: int64
+        type: string
+      purchaseToken:
+        description: The token that was generated when a purchase was made. This uniquely identifies a purchase.
+        type: string
+      voidedTimeMillis:
+        description: 'The time at which the purchase was cancelled/refunded/charged-back, in milliseconds since the epoch (Jan 1, 1970).'
+        format: int64
+        type: string
+    type: object
+  VoidedPurchasesListResponse:
+    properties:
+      pageInfo:
+        $ref: '#/definitions/PageInfo'
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+      voidedPurchases:
+        items:
+          $ref: '#/definitions/VoidedPurchase'
+        type: array
     type: object

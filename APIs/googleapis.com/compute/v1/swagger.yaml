@@ -6133,6 +6133,21 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - in: query
+          name: filter
+          type: string
+        - default: 500
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - in: query
+          name: order_by
+          type: string
+        - in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -9239,6 +9254,21 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - in: query
+          name: filter
+          type: string
+        - default: 500
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - in: query
+          name: order_by
+          type: string
+        - in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -11821,6 +11851,9 @@ definitions:
     type: object
   CacheInvalidationRule:
     properties:
+      host:
+        description: 'If set, this invalidation rule will only apply to requests with a Host header matching host.'
+        type: string
       path:
         type: string
     type: object

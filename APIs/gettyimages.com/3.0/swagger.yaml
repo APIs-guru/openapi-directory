@@ -180,14 +180,22 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
+          required: false
+          type: string
+        - description: Search for boards the user owns or has been invited to as an editor.
+          enum:
+            - owned
+            - invited
+          in: query
+          name: board_relationship
           required: false
           type: string
         - description: Request results starting at a page number (default is 1).
@@ -196,7 +204,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Request number of boards to return in each page. (default is 30)
+        - description: Request number of boards to return in each page. (default is 30).
           format: int32
           in: query
           name: page_size
@@ -214,6 +222,8 @@ paths:
           description: InvalidPageSize
         '401':
           description: Unauthorized
+        '403':
+          description: SecureTokenRequired
       summary: <b>***BETA***</b> Get all boards that the user participates in
       tags:
         - Boards
@@ -222,18 +232,18 @@ paths:
         - application/json
         - text/json
       parameters:
-        - description: Name and description of board to create (name is required)
+        - description: Specify a name and description of the board to create (name is required).
           in: body
           name: new_board
           required: true
           schema:
             $ref: '#/definitions/board_info'
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
           required: false
@@ -245,13 +255,15 @@ paths:
         '200':
           description: No response was specified
           schema:
-            type: string
+            $ref: '#/definitions/board_created'
         '201':
           description: Created
         '400':
           description: BoardNameRequired
         '401':
           description: Unauthorized
+        '403':
+          description: SecureTokenRequired
       summary: <b>***BETA***</b> Create a new board
       tags:
         - Boards
@@ -259,17 +271,17 @@ paths:
     delete:
       consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
           required: false
           type: string
-        - description: A board ID.
+        - description: Specify the board to delete.
           in: path
           name: board_id
           required: true
@@ -294,17 +306,17 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
           required: false
           type: string
-        - description: A board ID.
+        - description: Retrieve details for a specific board.
           in: path
           name: board_id
           required: true
@@ -321,6 +333,8 @@ paths:
           description: InvalidParameterValue
         '401':
           description: Unauthorized
+        '403':
+          description: SecureTokenRequired
         '404':
           description: BoardNotFound
       summary: <b>***BETA***</b> Get assets and metadata for a specific board
@@ -331,23 +345,23 @@ paths:
         - application/json
         - text/json
       parameters:
-        - description: Specify the new name and description for the board (name is required).
+        - description: Specify a new name and description for the board (name is required).
           in: body
           name: board_info
           required: true
           schema:
             $ref: '#/definitions/board_info'
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
           required: false
           type: string
-        - description: A board ID.
+        - description: Specify the board to update.
           in: path
           name: board_id
           required: true
@@ -373,22 +387,22 @@ paths:
     delete:
       consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
           required: false
           type: string
-        - description: Specify the Id of the board from which assets are to be removed.
+        - description: Specify the board to remove assets from.
           in: path
           name: board_id
           required: true
           type: string
-        - description: Asset IDs.
+        - description: List the assets to be removed from the board.
           in: query
           items:
             type: string
@@ -404,7 +418,7 @@ paths:
           schema:
             type: string
         '204':
-          description: AssetRemovedFromBoard
+          description: AssetsRemovedFromBoard
         '400':
           description: InvalidParameterValue
         '401':
@@ -421,7 +435,7 @@ paths:
         - application/json
         - text/json
       parameters:
-        - description: Specifies one or more asset ids and other information to add to the board.
+        - description: List assets to add to the board.
           in: body
           name: board_assets
           required: true
@@ -429,17 +443,17 @@ paths:
             items:
               $ref: '#/definitions/BoardAsset'
             type: array
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
           required: false
           type: string
-        - description: A board ID.
+        - description: Specify the board to add assets to.
           in: path
           name: board_id
           required: true
@@ -451,7 +465,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            type: string
+            $ref: '#/definitions/AddBoardAssetsResult'
         '201':
           description: Created
         '400':
@@ -469,22 +483,22 @@ paths:
     delete:
       consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
           required: false
           type: string
-        - description: An asset ID.
+        - description: Specify the asset to remove from the board.
           in: path
           name: asset_id
           required: true
           type: string
-        - description: A board ID.
+        - description: Specify the board to remove an asset from.
           in: path
           name: board_id
           required: true
@@ -509,22 +523,22 @@ paths:
     put:
       consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
           required: false
           type: string
-        - description: 'An asset ID. If it is already in the board''s asset collection, no action is taken.'
+        - description: 'Specify the asset to add to the board. If it is already in the board''s asset collection, no action is taken.'
           in: path
           name: asset_id
           required: true
           type: string
-        - description: A board ID.
+        - description: Specify the board to add an asset to.
           in: path
           name: board_id
           required: true
@@ -551,28 +565,65 @@ paths:
       tags:
         - Boards
   '/v3/boards/{board_id}/comments':
+    get:
+      consumes: []
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: Specify the board to retrieve comments from.
+          in: path
+          name: board_id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/comment_list'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: SecureTokenRequired
+        '404':
+          description: BoardNotFound
+      summary: <b>***BETA***</b> Get comments from a board
+      tags:
+        - Boards
     post:
       consumes:
         - application/json
         - text/json
       parameters:
-        - description: Specifies the comment to be added to the board
+        - description: Comment to be added to the board.
           in: body
           name: comment
           required: true
           schema:
             $ref: '#/definitions/comment_request'
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
           required: false
           type: string
-        - description: Specifies the Id of the board to add the comment to.
+        - description: Specify the board to add a comment to.
           in: path
           name: board_id
           required: true
@@ -584,7 +635,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            type: string
+            $ref: '#/definitions/comment_created'
         '201':
           description: Created
         '400':
@@ -602,22 +653,22 @@ paths:
     delete:
       consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
           name: Authorization
           required: true
           type: string
-        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+        - description: Provide a header to specify the language of result values.
           in: header
           name: Accept-Language
           required: false
           type: string
-        - description: A board ID.
+        - description: Specify the board containing the comment to delete.
           in: path
           name: board_id
           required: true
           type: string
-        - description: A comment ID.
+        - description: Specify the comment to delete.
           in: path
           name: comment_id
           required: true
@@ -829,7 +880,7 @@ paths:
         '303':
           description: See Other
         '400':
-          description: ProductIdNotSpecified
+          description: ProductTypeNotSpecified
         '401':
           description: ProductIdNotAvailableForUser
         '404':
@@ -957,7 +1008,7 @@ paths:
         '303':
           description: See Other
         '400':
-          description: ProductIdNotSpecified
+          description: ProductTypeNotSpecified
         '401':
           description: ProductIdNotAvailableForUser
         '404':
@@ -1587,6 +1638,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PreviousAssetPurchases'
+        '400':
+          description: PageNumberGreaterThanMaxPages
         '401':
           description: Unauthorized
       summary: Get Previously Purchased Images and Video
@@ -1633,6 +1686,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PreviousPurchases'
+        '400':
+          description: PageNumberGreaterThanMaxPages
         '401':
           description: Unauthorized
       summary: Get Previously Purchased Images
@@ -2028,16 +2083,12 @@ paths:
         - description: Return only images having a specific file type.
           enum:
             - eps
-            - gif
             - jpg
-            - png
           in: query
           items:
             enum:
               - eps
-              - gif
               - jpg
-              - png
             type: string
           name: file_types
           required: false
@@ -2480,16 +2531,12 @@ paths:
         - description: Return only images having a specific file type.
           enum:
             - eps
-            - gif
             - jpg
-            - png
           in: query
           items:
             enum:
               - eps
-              - gif
               - jpg
-              - png
             type: string
           name: file_types
           required: false
@@ -2979,16 +3026,12 @@ paths:
         - description: Return only images having a specific file type.
           enum:
             - eps
-            - gif
             - jpg
-            - png
           in: query
           items:
             enum:
               - eps
-              - gif
               - jpg
-              - png
             type: string
           name: file_types
           required: false
@@ -4254,6 +4297,19 @@ paths:
       tags:
         - Videos
 definitions:
+  AddBoardAssetsResult:
+    properties:
+      assets_added:
+        description: Lists the assets that were added to the board.
+        items:
+          $ref: '#/definitions/BoardAsset'
+        type: array
+      assets_not_added:
+        description: Lists the assets that were not added to the board.
+        items:
+          type: string
+        type: array
+    type: object
   AssetChanges:
     properties:
       ChangeSetId:
@@ -4266,6 +4322,7 @@ definitions:
   BoardAsset:
     properties:
       asset_id:
+        description: Specifies a unique identifier for the asset.
         type: string
     type: object
   ChangedAssetDetail:
@@ -4444,18 +4501,19 @@ definitions:
   asset:
     properties:
       asset_type:
-        enum:
-          - image
-          - video
+        description: 'Indicates the asset type. Possible values are: image, video.'
         type: string
       date_added:
+        description: Specifies the date that the asset was added to the board.
         format: date-time
         type: string
       display_sizes:
+        description: Lists the display sizes available for the asset.
         items:
           $ref: '#/definitions/display_size'
         type: array
       id:
+        description: Specifies a unique identifier for the asset.
         type: string
     type: object
   asset_usage:
@@ -4476,50 +4534,83 @@ definitions:
   board:
     properties:
       asset_count:
+        description: Specifies the total count of assets associated with the board.
         format: int32
         type: integer
+      board_relationship:
+        description: 'Indicates whether the user owns the board or has been invited to it as an editor. Possible values are: owned, invited.'
+        type: string
       date_created:
+        description: Specifies the date that the board was created.
         format: date-time
         type: string
       date_last_updated:
+        description: Specifies the date that the board was last updated.
         format: date-time
         type: string
       description:
+        description: Specifies the description of the board.
         type: string
       hero_asset:
         $ref: '#/definitions/asset'
+        description: Specifies the asset on a board that is used to represent the overall board.
       id:
+        description: Specifies a unique identifier for the board.
         type: string
       name:
+        description: Specifies the name of the board.
+        type: string
+    type: object
+  board_comment_permissions:
+    properties:
+      can_add_comment:
+        description: Specifies whether the collaborator is allowed to add a comment to the comments list.
+        type: boolean
+    type: object
+  board_created:
+    properties:
+      id:
+        description: Specifies a unique identifier for the board.
         type: string
     type: object
   board_detail:
     properties:
       asset_count:
+        description: Specifies the total count of assets associated with the board.
         format: int32
         type: integer
       assets:
+        description: Lists the assets associated with the board.
         items:
           $ref: '#/definitions/asset'
         type: array
-      can_add_comment:
-        type: boolean
-      comments:
-        items:
-          $ref: '#/definitions/comment'
-        type: array
+      comment_count:
+        description: Specifies the total count of comments on the board.
+        format: int32
+        type: integer
       date_created:
+        description: Specifies the date that the board was created.
         format: date-time
         type: string
       date_last_updated:
+        description: Specifies the date that the board was last updated.
         format: date-time
         type: string
       description:
+        description: Specifies the description of the board.
         type: string
       id:
+        description: Specifies a unique identifier for the board.
         type: string
+      links:
+        $ref: '#/definitions/links'
+        description: Specifies URIs that can be used to share or invite other collaborators to a board.
       name:
+        description: Specifies the name of the board.
         type: string
+      permissions:
+        $ref: '#/definitions/board_permissions'
+        description: Specifies the allowed actions for the collaborator at the board level.
     type: object
   board_info:
     properties:
@@ -4531,20 +4622,43 @@ definitions:
   board_list:
     properties:
       board_count:
+        description: Specifies the total count of boards that the collaborator participates in
         format: int32
         type: integer
       boards:
+        description: Lists boards that the collaborator participates in
         items:
           $ref: '#/definitions/board'
         type: array
     type: object
+  board_permissions:
+    properties:
+      can_add_assets:
+        description: Specifies whether the collaborator is allowed to add assets to the board.
+        type: boolean
+      can_delete_board:
+        description: Specifies whether the collaborator is allowed to delete the board.
+        type: boolean
+      can_invite_to_board:
+        description: Specifies whether the collaborator is allowed to invite a user to the board.
+        type: boolean
+      can_remove_assets:
+        description: Specifies whether the collaborator is allowed to remove assets from the board.
+        type: boolean
+      can_update_description:
+        description: Specifies whether the collaborator is allowed to update the board description.
+        type: boolean
+      can_update_name:
+        description: Specifies whether the collaborator is allowed to update the board name.
+        type: boolean
+    type: object
   collaborator:
     properties:
       first_name:
-        type: string
-      id:
+        description: Specifies the first name of a collaborator.
         type: string
       last_name:
+        description: Specifies the last name of a collaborator.
         type: string
     type: object
   collection:
@@ -4581,17 +4695,45 @@ definitions:
     type: object
   comment:
     properties:
-      can_remove:
-        type: boolean
       created_by:
         $ref: '#/definitions/collaborator'
+        description: Specifies the collaborator who created the comment.
       date_created:
+        description: Specifies the date that the comment was created.
         format: date-time
         type: string
       id:
+        description: Specifies a unique identifier for the comment.
         type: string
+      permissions:
+        $ref: '#/definitions/comment_permissions'
+        description: Specifies the allowed actions for the collaborator for a comment.
       text:
+        description: Specifies the text of the comment.
         type: string
+    type: object
+  comment_created:
+    properties:
+      id:
+        description: Specifies a unique identifier of the comment.
+        type: string
+    type: object
+  comment_list:
+    properties:
+      comments:
+        description: Lists comments on the board.
+        items:
+          $ref: '#/definitions/comment'
+        type: array
+      permissions:
+        $ref: '#/definitions/board_comment_permissions'
+        description: Specifies the allowed actions for the collaborator at the comment list level.
+    type: object
+  comment_permissions:
+    properties:
+      can_delete_comment:
+        description: Specifies whether the collaborator is allowed to delete the comment.
+        type: boolean
     type: object
   comment_request:
     properties:
@@ -4745,8 +4887,10 @@ definitions:
   display_size:
     properties:
       name:
+        description: Specifies the name of the display size.
         type: string
       uri:
+        description: GET this URI to retrieve the display size image.
         type: string
     type: object
   download:
@@ -5368,6 +5512,15 @@ definitions:
         description: GET this URI to retrieve image details regarding the related resource.
         type: string
     type: object
+  links:
+    properties:
+      invitation:
+        description: GET this URI to accept an invitation to a board.
+        type: string
+      share:
+        description: GET this URI to share a read-only board.
+        type: string
+    type: object
   location:
     properties:
       city:
@@ -5450,6 +5603,9 @@ definitions:
         description: Specifies the unique identifier for the product.
         format: int32
         type: integer
+      imagepack_resolution:
+        description: 'Indicates the resolution for the image pack. Possible values are: high, medium, low.'
+        type: string
       name:
         description: Specifies the name of Getty Images product.
         type: string
@@ -5687,12 +5843,12 @@ definitions:
     type: object
   videos_detail:
     properties:
-      Videos:
+      videos:
         description: List of video identifiers found.
         items:
           $ref: '#/definitions/video_detail'
         type: array
-      images_not_found:
+      videos_not_found:
         description: List of video identifiers not found.
         items:
           type: string

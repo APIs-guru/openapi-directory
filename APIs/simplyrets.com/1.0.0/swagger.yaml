@@ -157,6 +157,8 @@ paths:
             Filter the openhouses returned by a list of valid cities. A
             list of valid cities can be found by making an OPTIONS
             request to the `/openhouses` endpoint.
+
+            The `cities` query parameter is case-insensitive.
           in: query
           items:
             type: string
@@ -618,7 +620,10 @@ paths:
         - collectionFormat: multi
           description: |
             Filter the listings returned by specific neighborhoods and
-            subdivisions. You can specify multiple.
+            subdivisions. You can specify multiple `neighborhoods` by
+            using the query parameter multiple times.
+
+            The `neighborhoods` query parameter is case-insensitive.
           in: query
           items:
             type: string
@@ -628,7 +633,9 @@ paths:
         - collectionFormat: multi
           description: |
             Filter the listings returned by specific cities. You can
-            specify multiple.
+            specify multiple `cities` query parameters.
+
+            The `cities` query parameter is case-insensitive.
           in: query
           items:
             type: string
@@ -638,7 +645,9 @@ paths:
         - collectionFormat: multi
           description: |
             Filter the listings returned by specific counties. You can
-            specify multiple.
+            specify multiple `counties` parameters.
+
+            The `counties` query parameter is case-insensitive.
           in: query
           items:
             type: string
