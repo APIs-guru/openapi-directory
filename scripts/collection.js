@@ -593,6 +593,23 @@ function fixSpec(swagger, errors) {
         }
         break;
       case 'INVALID_TYPE':
+        if (_.nth(path, -1) === 'required' && _.nth(path, -3) === 'properties'
+          && error.message === 'Expected type array but found type boolean')
+        {
+          var objectSchema = jp.get(swagger, _.dropRight(path, 3));
+
+          if (value) {
+            objectSchema.required = objectSchema.required || [];
+            var propertyName = _.nth(path, -2);
+            if (objectSchema.required.indexOf(propertyName) === -1)
+              objectSchema.required.push(propertyName);
+          }
+
+          delete parentValue.required;
+          fixed = true;
+          break;
+        }
+
         var match = error.message.match(/^Expected type (\w+) but found type (\w+)$/);
         if (match && match[2] === 'string') {
           try {
