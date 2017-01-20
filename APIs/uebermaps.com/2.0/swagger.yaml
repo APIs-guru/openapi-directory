@@ -1,0 +1,1451 @@
+swagger: '2.0'
+schemes:
+  - https
+host: uebermaps.com
+basePath: /api/v2
+info:
+  contact:
+    name: uebermaps API Team
+  description: Look here for API updates Docs are in beta. Expect updates soon.
+  termsOfService: 'https://uebermaps.com/terms/'
+  title: uebermaps API endpoints
+  version: '2.0'
+  x-logo:
+    url: 'https://pbs.twimg.com/profile_images/738299914506113024/oUd7NREW_400x400.jpg'
+  x-origin:
+    format: swagger
+    url: 'https://uebermaps.com/api/v2/apidocs'
+    version: '2.0'
+  x-providerName: uebermaps.com
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /account:
+    patch:
+      description: 'Update account. Wrap map parameters in [user].'
+      parameters:
+        - description: user attributes
+          in: body
+          name: user
+          required: false
+          schema:
+            $ref: '#/definitions/UserEditable'
+      responses:
+        '200':
+          description: Contains user data.
+          schema:
+            $ref: '#/definitions/User'
+      summary: Update account
+      tags:
+        - Account
+  '/attachments/{id}':
+    delete:
+      description: Delete attachment.
+      parameters:
+        - description: Attachment id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains deleted attachment.
+          schema:
+            $ref: '#/definitions/Attachment'
+      summary: Delete attachment
+      tags:
+        - Attachments
+  /authentication:
+    post:
+      description: 'Sign in user. Wrap authentication parameters in [user].'
+      parameters:
+        - description: user authentication attributes
+          in: body
+          name: user
+          required: true
+          schema:
+            $ref: '#/definitions/UserAuthentication'
+      responses:
+        '200':
+          description: Contains user data including authentication token for subsequent requests
+          schema:
+            $ref: '#/definitions/UserFullProfile'
+      summary: Sign in user
+      tags:
+        - Authentication
+  /collaborator_invitations:
+    get:
+      description: List your collaborator invitations.
+      responses:
+        '200':
+          description: Contains list of collaborator invitations.
+          schema:
+            items:
+              $ref: '#/definitions/CollaboratorInvitation'
+            type: array
+      summary: List your collaborator invitations
+      tags:
+        - CollaboratorInvitations
+    post:
+      description: Invite user to collaborate on map.
+      parameters:
+        - description: Supply map_id and either a comma separated list of user_ids or emails
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CollaboratorInvitationCreate'
+      responses:
+        '200':
+          description: Contains collaborator invitation data.
+          schema:
+            $ref: '#/definitions/CollaboratorInvitation'
+      summary: Invite user to collaborate on map
+      tags:
+        - CollaboratorInvitations
+  '/collaborator_invitations/{id}':
+    delete:
+      description: Delete collaborator invitation.
+      parameters:
+        - description: Collaborator invitation id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains deleted collaborator invitation.
+          schema:
+            $ref: '#/definitions/CollaboratorInvitation'
+      summary: Delete collaborator invitation
+      tags:
+        - CollaboratorInvitations
+    get:
+      description: Show collaborator invitation
+      parameters:
+        - description: Collaborator invitation id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains collaborator invitation data.
+          schema:
+            $ref: '#/definitions/CollaboratorInvitation'
+      summary: Show collaborator invitation
+      tags:
+        - CollaboratorInvitations
+    patch:
+      description: Accept collaborator invitation.
+      parameters:
+        - description: Collaborator invitation id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains collaborator invitation data.
+          schema:
+            $ref: '#/definitions/CollaboratorInvitation'
+      summary: Accept collaborator invitation.
+      tags:
+        - CollaboratorInvitations
+  '/comments/{id}':
+    delete:
+      description: Delete comment.
+      parameters:
+        - description: Comment id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains deleted comment.
+          schema:
+            $ref: '#/definitions/Comment'
+      summary: Delete comment
+      tags:
+        - Comments
+    patch:
+      description: 'Update comment. Wrap comment parameters in [comment].'
+      parameters:
+        - description: Comment id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Comment attributes
+          in: body
+          name: comment
+          required: false
+          schema:
+            $ref: '#/definitions/CommentEditable'
+      responses:
+        '200':
+          description: Contains comment data
+          schema:
+            $ref: '#/definitions/Comment'
+      summary: Update comment
+      tags:
+        - Comments
+  /events:
+    get:
+      description: List your own events.
+      parameters:
+        - description: Begin of time range of event (ISO 8601 date format).
+          in: query
+          name: timeframe_start
+          required: false
+          type: string
+        - description: End of time range of event (ISO 8601 date format).
+          in: query
+          name: timeframe_end
+          required: false
+          type: string
+        - description: 'To refine your event index request to contain only events within                                                             a geographical box pass the followng bounds parameters.                                                             F. e. to get events within ''Hamburg, St. Pauli'':                                                             bounds[sw_lat]=53.54831449741324                                                             bounds[sw_lon]=9.943227767944336                                                             bounds[ne_lat]=53.5571103674878                                                             bounds[ne_lon]=9.9776029586792'
+          in: query
+          name: bounds
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Contains list of events.
+          schema:
+            items:
+              $ref: '#/definitions/Event'
+            type: array
+      summary: List your own events
+      tags:
+        - Events
+  '/events/{id}':
+    delete:
+      description: Delete event.
+      parameters:
+        - description: Event id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains deleted event.
+          schema:
+            $ref: '#/definitions/Event'
+      summary: Delete event
+      tags:
+        - Events
+    get:
+      description: Get basic information about an event
+      parameters:
+        - description: Id of event
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains event data.
+          schema:
+            $ref: '#/definitions/Event'
+      summary: Get event
+      tags:
+        - Events
+    patch:
+      description: 'Update event. Wrap event parameters in [event].'
+      parameters:
+        - description: Event id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Event attributes
+          in: body
+          name: event
+          required: false
+          schema:
+            $ref: '#/definitions/EventEditable'
+      responses:
+        '200':
+          description: 'Contains map data, map settings and your relation to this map'
+          schema:
+            $ref: '#/definitions/Map'
+      summary: Update event
+      tags:
+        - Events
+  /maps:
+    get:
+      description: List your own maps.
+      responses:
+        '200':
+          description: Contains list of maps.
+          schema:
+            items:
+              $ref: '#/definitions/Map'
+            type: array
+      summary: List your own maps
+      tags:
+        - Maps
+    post:
+      description: 'Create map. Wrap map parameters in [map] and map settings parameters in [map_settings]'
+      parameters:
+        - description: map attributes
+          in: body
+          name: map
+          required: false
+          schema:
+            $ref: '#/definitions/MapEditable'
+      responses:
+        '200':
+          description: 'Contains map data, map settings and your relation to this map'
+          schema:
+            $ref: '#/definitions/Map'
+      summary: Create map
+      tags:
+        - Maps
+  /maps/search:
+    get:
+      description: Search maps
+      parameters:
+        - description: Query
+          in: query
+          name: q
+          type: string
+        - description: 'Distance. Diameter of search radius in meter (default: 2000 meter)'
+          in: query
+          name: d
+          type: integer
+        - description: 'Latitude for search radius (default distance: 2000 meter)'
+          in: query
+          name: lat
+          type: number
+        - description: 'Longitude for search radius (default distance: 2000 meter)'
+          in: query
+          name: lon
+          type: number
+      responses:
+        '200':
+          description: Contains map data.
+          schema:
+            $ref: '#/definitions/Map'
+      summary: Search maps
+      tags:
+        - Search
+  '/maps/{id}':
+    delete:
+      description: Delete map.
+      parameters:
+        - description: map id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains deleted map.
+          schema:
+            $ref: '#/definitions/Map'
+      summary: Delete map
+      tags:
+        - Maps
+    get:
+      description: Get basic information about a map
+      parameters:
+        - description: Id of map
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 'Contains map data, map settings and your relation to this map'
+          schema:
+            $ref: '#/definitions/Map'
+      summary: Get map
+      tags:
+        - Maps
+    patch:
+      description: 'Update map. Wrap map parameters in [map] and map settings parameters in [map_settings]'
+      parameters:
+        - description: map id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: map settings attributes
+          in: body
+          name: map
+          required: false
+          schema:
+            $ref: '#/definitions/MapEditable'
+      responses:
+        '200':
+          description: 'Contains map data, map settings and your relation to this map'
+          schema:
+            $ref: '#/definitions/Map'
+      summary: Update map
+      tags:
+        - Maps
+  '/maps/{id}/attachments':
+    get:
+      description: List attachments for a given map.
+      parameters:
+        - description: Map id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains list of attachments.
+          schema:
+            items:
+              $ref: '#/definitions/Attachment'
+            type: array
+      summary: List attachments for a given map
+      tags:
+        - Attachments
+    post:
+      description: 'Upload map attachment. Wrap attachment parameters in [attachment]'
+      parameters:
+        - description: Map id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Base64 encoded image
+          in: body
+          name: image
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Contains attachment data
+          schema:
+            $ref: '#/definitions/Attachment'
+      summary: Upload map attachment
+      tags:
+        - Attachments
+  '/maps/{id}/collaborators/':
+    get:
+      description: List collaborators of a map.
+      parameters:
+        - description: Map id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains list of collaborators.
+          schema:
+            items:
+              $ref: '#/definitions/Collaborator'
+            type: array
+      summary: List collaborators of a map
+      tags:
+        - Collaborators
+  '/maps/{id}/collaborators/{user_id}':
+    delete:
+      description: Delete collaboration.
+      parameters:
+        - description: map id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: user id
+          in: path
+          name: user_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains deleted collaborator.
+          schema:
+            $ref: '#/definitions/Collaborator'
+      summary: Delete collaboration
+      tags:
+        - Collaborators
+    patch:
+      description: 'Update collaborator. Wrap collaborator parameters in [collaborator]'
+      parameters:
+        - description: map id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: user id
+          in: path
+          name: user_id
+          required: true
+          type: integer
+        - description: collaborator attributes
+          in: body
+          name: collaborator
+          required: false
+          schema:
+            $ref: '#/definitions/CollaboratorEditable'
+      responses:
+        '200':
+          description: Contains collaborator data
+          schema:
+            $ref: '#/definitions/Collaborator'
+      summary: Update collaborator
+      tags:
+        - Collaborators
+  '/maps/{id}/comments':
+    get:
+      description: List comments for a given map.
+      parameters:
+        - description: Id of map
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains list of comments.
+          schema:
+            items:
+              $ref: '#/definitions/Comment'
+            type: array
+      summary: List comments for a given map
+      tags:
+        - Comments
+    post:
+      description: 'Create map comment. Wrap comment parameters in [comment].'
+      parameters:
+        - description: map id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: comment attributes
+          in: body
+          name: comment
+          required: false
+          schema:
+            $ref: '#/definitions/CommentEditable'
+      responses:
+        '200':
+          description: Contains comment data
+          schema:
+            $ref: '#/definitions/Comment'
+      summary: Create map comment
+      tags:
+        - Comments
+  '/maps/{id}/respots':
+    get:
+      description: List respots of a map.
+      parameters:
+        - description: Map Id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains list of respots.
+          schema:
+            items:
+              $ref: '#/definitions/Respot'
+            type: array
+      summary: List respots of a map
+      tags:
+        - Respots
+  '/maps/{id}/spots':
+    get:
+      description: List spots for a given map.
+      parameters:
+        - description: Id of map
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Order of spots
+          enum:
+            - created_at_asc
+            - created_at_desc
+            - updated_at_asc
+            - updated_at_desc
+            - title_asc
+            - title_desc
+          in: query
+          name: order
+          type: string
+      responses:
+        '200':
+          description: Contains list of spots.
+          schema:
+            items:
+              $ref: '#/definitions/Spot'
+            type: array
+      summary: List spots for a given map
+      tags:
+        - Spots
+    post:
+      description: 'Create spot. Wrap parameters in [spot]'
+      parameters:
+        - description: Id of map
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: spot attributes
+          in: body
+          name: spot
+          required: true
+          schema:
+            $ref: '#/definitions/SpotEditable'
+      responses:
+        '200':
+          description: Contains spot data
+          schema:
+            $ref: '#/definitions/Spot'
+      summary: Create spot
+      tags:
+        - Spots
+  '/maps/{id}/subscriptions':
+    delete:
+      description: Unsubscribe from map.
+      parameters:
+        - description: map id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains deleted subscription.
+          schema:
+            $ref: '#/definitions/Subscription'
+      summary: Unsubscribe from map
+      tags:
+        - Subscriptions
+    get:
+      description: List subscriptions for a given map.
+      parameters:
+        - description: Id of map
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains list of subscriptions.
+          schema:
+            items:
+              $ref: '#/definitions/Subscription'
+            type: array
+      summary: List subscriptions for a given map
+      tags:
+        - Subscriptions
+  '/maps/{map_id}/spots/{id}':
+    get:
+      description: Get basic information about a spot
+      parameters:
+        - description: Id of spot
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Id of map
+          in: path
+          name: map_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains spot data
+          schema:
+            $ref: '#/definitions/Spot'
+      summary: Get spot
+      tags:
+        - Spots
+  '/maps/{map_id}/spots/{spot_id}/respot':
+    delete:
+      description: Delete respot from map by spot id.
+      parameters:
+        - description: Map Id
+          in: path
+          name: map_id
+          required: true
+          type: integer
+        - description: Spot Id
+          in: path
+          name: spot_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains deleted respot.
+          schema:
+            $ref: '#/definitions/Respot'
+      summary: Delete respot from map by spot id
+      tags:
+        - Respots
+  /respot_maps:
+    get:
+      description: List maps that user can respot to.
+      responses:
+        '200':
+          description: Contains list of maps.
+          schema:
+            items:
+              $ref: '#/definitions/Map'
+            type: array
+      summary: List maps that user can respot to
+      tags:
+        - Respots
+  '/respots/{id}':
+    delete:
+      description: Delete respot.
+      parameters:
+        - description: Respot Id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains deleted respot.
+          schema:
+            $ref: '#/definitions/Respot'
+      summary: Delete respot
+      tags:
+        - Respots
+    get:
+      description: Get basic information about a respot
+      parameters:
+        - description: Id of respot
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains respot data.
+          schema:
+            $ref: '#/definitions/Respot'
+      summary: Get respot
+      tags:
+        - Respots
+  /spots/search:
+    get:
+      description: Search spots
+      parameters:
+        - description: Query
+          in: query
+          name: q
+          type: string
+        - description: 'Distance. Diameter of search radius in meter (default: 2000 meter)'
+          in: query
+          name: d
+          type: integer
+        - description: Latitude for search radius (2 km)
+          in: query
+          name: lat
+          type: number
+        - description: Longitude for search radius (2 km)
+          in: query
+          name: lon
+          type: number
+      responses:
+        '200':
+          description: Contains spot data.
+          schema:
+            $ref: '#/definitions/Spot'
+      summary: Search spots
+      tags:
+        - Search
+  '/spots/{id}':
+    delete:
+      description: Delete spot.
+      parameters:
+        - description: spot id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains deleted spot.
+          schema:
+            $ref: '#/definitions/Spot'
+      summary: Delete spot
+      tags:
+        - Spots
+    patch:
+      description: 'Update spot. Wrap parameters in [spot]'
+      parameters:
+        - description: spot id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: spot attributes
+          in: body
+          name: spot
+          required: false
+          schema:
+            $ref: '#/definitions/SpotEditable'
+      responses:
+        '200':
+          description: Contains spot data
+          schema:
+            $ref: '#/definitions/Spot'
+      summary: Update spot
+      tags:
+        - Spots
+  '/spots/{id}/attachments':
+    get:
+      description: List attachments for a given spot.
+      parameters:
+        - description: Spot id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains list of attachments.
+          schema:
+            items:
+              $ref: '#/definitions/Attachment'
+            type: array
+      summary: List attachments for a given spot
+      tags:
+        - Attachments
+    post:
+      description: 'Upload spot attachment. Wrap attachment parameters in [attachment]'
+      parameters:
+        - description: Spot id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Base64 encoded image
+          in: body
+          name: image
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Contains attachment data
+          schema:
+            $ref: '#/definitions/Attachment'
+      summary: Upload spot attachment
+      tags:
+        - Attachments
+  '/spots/{id}/comments':
+    get:
+      description: List comments for a given spot.
+      parameters:
+        - description: Id of spot
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains list of comments.
+          schema:
+            items:
+              $ref: '#/definitions/Comment'
+            type: array
+      summary: List comments for a given spot
+      tags:
+        - Comments
+    post:
+      description: 'Create spot comment. Wrap comment parameters in [comment].'
+      parameters:
+        - description: spot id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: comment attributes
+          in: body
+          name: comment
+          required: false
+          schema:
+            $ref: '#/definitions/CommentEditable'
+      responses:
+        '200':
+          description: Contains comment data
+          schema:
+            $ref: '#/definitions/Comment'
+      summary: Create spot comment
+      tags:
+        - Comments
+  '/spots/{id}/events':
+    get:
+      description: List maps for a given spot.
+      parameters:
+        - description: Id of spot
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Begin of time range of event (ISO 8601 date format).
+          in: query
+          name: timeframe_start
+          required: false
+          type: string
+        - description: End of time range of event (ISO 8601 date format).
+          in: query
+          name: timeframe_end
+          required: false
+          type: string
+        - description: 'To refine your event index request to contain only events within                                                             a geographical box pass the followng bounds parameters.                                                             F. e. to get events within ''Hamburg, St. Pauli'':                                                             bounds[sw_lat]=53.54831449741324                                                             bounds[sw_lon]=9.943227767944336                                                             bounds[ne_lat]=53.5571103674878                                                             bounds[ne_lon]=9.9776029586792'
+          in: query
+          name: bounds
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Contains list of events.
+          schema:
+            items:
+              $ref: '#/definitions/Event'
+            type: array
+      summary: List events for a given spot
+      tags:
+        - Events
+    post:
+      description: 'Create event. Wrap map parameters in [event].'
+      parameters:
+        - description: Spot id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Event attributes
+          in: body
+          name: event
+          required: false
+          schema:
+            $ref: '#/definitions/EventEditable'
+      responses:
+        '200':
+          description: Contains event data
+          schema:
+            $ref: '#/definitions/Event'
+      summary: Create event
+      tags:
+        - Events
+  '/spots/{id}/respots':
+    post:
+      description: Respot a spot onto a map.
+      parameters:
+        - description: Spot Id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Map Id
+          in: body
+          name: map_id
+          required: true
+          schema:
+            format: integer
+            type: number
+      responses:
+        '200':
+          description: Contains respot data.
+          schema:
+            $ref: '#/definitions/Respot'
+      summary: Respot a spot onto a map
+      tags:
+        - Respots
+  /subscriptions:
+    get:
+      description: List subscriptions.
+      parameters:
+        - description: Id of user
+          in: query
+          name: user_id
+          type: integer
+        - description: Id of map
+          in: query
+          name: map_id
+          type: integer
+      responses:
+        '200':
+          description: Contains list of subscriptions.
+          schema:
+            items:
+              $ref: '#/definitions/Subscription'
+            type: array
+      summary: List subscriptions. Pass no parameters to get own subscriptions
+      tags:
+        - Subscriptions
+    post:
+      description: Create map subscription.
+      parameters:
+        - description: map id
+          in: body
+          name: map_id
+          required: true
+          schema:
+            format: integer
+            type: number
+      responses:
+        '200':
+          description: Contains subscription data.
+          schema:
+            $ref: '#/definitions/Subscription'
+      summary: Create map subscription
+      tags:
+        - Subscriptions
+  /trends/latest:
+    get:
+      description: List latest maps.
+      responses:
+        '200':
+          description: Contains list of maps.
+          schema:
+            items:
+              $ref: '#/definitions/Map'
+            type: array
+      summary: List latest maps
+      tags:
+        - Trends
+  /trends/recommended:
+    get:
+      description: List recommended maps.
+      responses:
+        '200':
+          description: Contains list of maps.
+          schema:
+            items:
+              $ref: '#/definitions/Map'
+            type: array
+      summary: List recommended maps
+      tags:
+        - Trends
+  /users/search:
+    get:
+      description: Search users
+      parameters:
+        - description: Query
+          in: query
+          name: q
+          type: string
+      responses:
+        '200':
+          description: Contains users data.
+          schema:
+            $ref: '#/definitions/User'
+      summary: Search users
+      tags:
+        - Search
+  '/users/{user_id}/maps':
+    get:
+      description: List maps for a given user.
+      parameters:
+        - description: Id of user
+          in: path
+          name: user_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains list of maps.
+          schema:
+            items:
+              $ref: '#/definitions/Map'
+            type: array
+      summary: List maps for a given user
+      tags:
+        - Maps
+definitions:
+  Attachment:
+    properties:
+      attachable_id:
+        type: integer
+      attachable_type:
+        type: string
+      created_at:
+        format: date-time
+        type: string
+      description:
+        type: string
+      file_url:
+        type: string
+      id:
+        type: integer
+      map_id:
+        type: integer
+      sizes:
+        type: object
+      spot:
+        $ref: '#/definitions/Spot'
+      user:
+        $ref: '#/definitions/User'
+  Collaborator:
+    properties:
+      created_at:
+        format: date-time
+        type: string
+      group:
+        enum:
+          - admin
+          - editor
+        type: string
+      id:
+        type: integer
+      map:
+        $ref: '#/definitions/Map'
+      map_id:
+        type: string
+      updated_at:
+        format: date-time
+        type: string
+      user:
+        $ref: '#/definitions/User'
+      user_id:
+        type: integer
+  CollaboratorEditable:
+    properties:
+      group:
+        enum:
+          - admin
+          - editor
+        type: string
+  CollaboratorInvitation:
+    properties:
+      accepted:
+        type: boolean
+      created_at:
+        format: date-time
+        type: string
+      email:
+        type: string
+      group:
+        type: string
+      id:
+        type: integer
+      invited_by_user:
+        $ref: '#/definitions/User'
+      invited_by_user_id:
+        type: integer
+      map:
+        $ref: '#/definitions/Map'
+      sent:
+        type: boolean
+      updated_at:
+        format: date-time
+        type: string
+  CollaboratorInvitationCreate:
+    properties:
+      emails:
+        type: string
+      map_id:
+        type: integer
+      user_ids:
+        type: string
+  Comment:
+    properties:
+      body:
+        type: string
+      created_at:
+        format: date-time
+        type: string
+      id:
+        type: integer
+      updated_at:
+        format: date-time
+        type: string
+      user:
+        $ref: '#/definitions/User'
+  CommentEditable:
+    properties:
+      body:
+        type: string
+  Event:
+    properties:
+      counts:
+        $ref: '#/definitions/EventCounts'
+      created_at:
+        format: date-time
+        type: string
+      description:
+        type: string
+      ends_at:
+        format: date-time
+        type: string
+      id:
+        type: integer
+      lat:
+        type: number
+      lon:
+        type: number
+      owner_id:
+        type: integer
+      picture_url:
+        type: string
+      spot:
+        $ref: '#/definitions/Spot'
+      starts_at:
+        format: date-time
+        type: string
+      time_zone:
+        type: string
+      title:
+        type: string
+      updated_at:
+        format: date-time
+        type: string
+      user:
+        $ref: '#/definitions/User'
+  EventCounts:
+    properties:
+      attachments:
+        type: integer
+      comments:
+        type: integer
+  EventEditable:
+    properties:
+      description:
+        type: string
+      ends_at:
+        format: date-time
+        type: string
+      lat:
+        type: number
+      lon:
+        type: number
+      picture:
+        type: string
+      picture_url:
+        type: string
+      starts_at:
+        format: date-time
+        type: string
+      time_zone:
+        type: string
+      title:
+        type: string
+      user_id:
+        type: integer
+  Map:
+    properties:
+      counts:
+        $ref: '#/definitions/MapCounts'
+      created_at:
+        format: date-time
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      map_settings:
+        $ref: '#/definitions/MapSettings'
+      owner_id:
+        type: integer
+      picture_url:
+        type: string
+      settings:
+        $ref: '#/definitions/MapSettings'
+      title:
+        type: string
+      updated_at:
+        format: date-time
+        type: string
+      visibility:
+        enum:
+          - public
+          - link
+          - private
+        type: string
+  MapCounts:
+    properties:
+      attachments:
+        type: integer
+      comments:
+        type: integer
+      impressions:
+        type: integer
+      respots:
+        type: integer
+      spots:
+        type: integer
+      subscriptions:
+        type: integer
+  MapEditable:
+    properties:
+      description:
+        type: string
+      picture:
+        type: string
+      settings:
+        $ref: '#/definitions/MapSettings'
+      title:
+        type: string
+      visibility:
+        enum:
+          - public
+          - link
+          - private
+        type: string
+  MapSettings:
+    properties:
+      editor_access:
+        type: string
+      respotting_to_this_map:
+        type: boolean
+      visitor_access:
+        type: string
+  Respot:
+    properties:
+      created_at:
+        format: date-time
+        type: string
+      id:
+        type: integer
+      map:
+        $ref: '#/definitions/Map'
+      map_id:
+        type: integer
+      spot:
+        $ref: '#/definitions/Spot'
+      updated_at:
+        format: date-time
+        type: string
+      user:
+        $ref: '#/definitions/User'
+  Spot:
+    properties:
+      counts:
+        $ref: '#/definitions/SpotCounts'
+      created_at:
+        format: date-time
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      lat:
+        type: number
+      lon:
+        type: number
+      map:
+        $ref: '#/definitions/Map'
+      map_id:
+        type: integer
+      picture:
+        type: string
+      status:
+        type: string
+      time_zone:
+        type: string
+      title:
+        type: string
+      updated_at:
+        format: date-time
+        type: string
+      user:
+        $ref: '#/definitions/User'
+  SpotCounts:
+    properties:
+      attachments:
+        type: integer
+      comments:
+        type: integer
+      respot:
+        type: integer
+  SpotEditable:
+    properties:
+      description:
+        type: string
+      lat:
+        type: number
+      lon:
+        type: number
+      picture:
+        type: string
+      time_zone:
+        type: string
+      title:
+        type: string
+  Subscription:
+    properties:
+      created_at:
+        format: date-time
+        type: string
+      id:
+        type: integer
+      map:
+        $ref: '#/definitions/Map'
+      updated_at:
+        format: date-time
+        type: string
+      user:
+        $ref: '#/definitions/User'
+      user_id:
+        type: integer
+  User:
+    properties:
+      about:
+        type: string
+      counts:
+        properties:
+          maps:
+            type: integer
+      header_picture:
+        type: string
+      id:
+        type: integer
+      location:
+        type: string
+      name:
+        type: string
+      picture_url:
+        type: string
+      screen_name:
+        type: string
+      url:
+        type: string
+  UserAuthentication:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  UserEditable:
+    properties:
+      about:
+        type: string
+      header:
+        type: string
+      language:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+      picture:
+        type: string
+      screen_name:
+        type: string
+      time_zone:
+        type: string
+      url:
+        type: string
+  UserFullProfile:
+    allOf:
+      - $ref: '#/definitions/User'
+    properties:
+      auth_token:
+        type: string
+      language:
+        type: string
+      time_zone:
+        type: string
