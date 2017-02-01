@@ -5052,86 +5052,6 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
-  /histograms/transactions:
-    get:
-      description: |
-        Get Transaction histogram report data.
-      parameters:
-        - description: Report start day
-          format: date-time
-          in: query
-          name: periodStart
-          required: true
-          type: string
-        - description: Report end day
-          format: date-time
-          in: query
-          name: periodEnd
-          required: true
-          type: string
-        - description: Report aggregation field
-          enum:
-            - website
-            - currency
-            - bin
-            - rebillNumber
-            - transactionResult
-            - transactionType
-            - gatewayAccount
-            - leadsAffiliate
-            - leadsCampaign
-            - leadsContent
-            - leadsMedium
-            - leadsSalesAgent
-            - leadsSource
-            - leadsSubAffiliate
-            - leadsTerm
-          in: query
-          name: aggregationField
-          required: true
-          type: string
-        - description: Report aggregation period
-          enum:
-            - hour
-            - day
-            - month
-          in: query
-          name: aggregationPeriod
-          required: true
-          type: string
-        - description: Report metric
-          enum:
-            - ApprovalThroughput
-            - AuthApprovalThroughput
-            - AvgSalesPrice
-            - Refunds
-            - RefundCount
-            - Sales
-            - SalesCount
-          in: query
-          name: metric
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Transaction report was retrieved successfully.
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/HistogramData'
-      summary: Get Transaction histogram report data
-      tags:
-        - Histograms
   /invoices:
     get:
       description: |
@@ -9060,6 +8980,14 @@ paths:
       parameters:
         - $ref: '#/parameters/collectionLimit'
         - $ref: '#/parameters/collectionOffset'
+        - default: application/json
+          description: The response media type
+          enum:
+            - application/json
+            - text/csv
+          in: header
+          name: Accept
+          type: string
       responses:
         '200':
           description: Tracking API logs was retrieved successfully
@@ -12167,22 +12095,6 @@ definitions:
           - gatewayConfig
         type: object
     description: GlobalOne Gateway config
-  HistogramData:
-    properties:
-      data:
-        items:
-          description: Contains date-time and value
-          properties:
-            date:
-              description: Entry date-time
-              type: string
-            value:
-              description: Entry value
-              type: number
-          readOnly: true
-          type: object
-        type: array
-    type: object
   Ilixium:
     allOf:
       - $ref: '#/definitions/GatewayAccount'

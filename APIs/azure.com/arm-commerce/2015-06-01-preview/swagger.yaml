@@ -47,7 +47,7 @@ paths:
     get:
       description: 'Enables you to query for the resource/meter metadata and related prices used in a given subscription by Offer ID, Currency, Locale and Region. The metadata associated with the billing meters, including but not limited to service names, types, resources, units of measure, and regions, is subject to change at any time and without notice. If you intend to use this billing data in an automated fashion, please use the billing meter GUID to uniquely identify each billable item. If the billing meter GUID is scheduled to change due to a new billing model, you will be notified in advance of the change. '
       externalDocs:
-        url: 'https://msdn.microsoft.com/en-us/library/azure/mt219004.aspx'
+        url: 'https://docs.microsoft.com/rest/api/commerce/ratecard'
       operationId: RateCard_Get
       parameters:
         - description: 'The filter to apply on the operation. It ONLY supports the ''eq'' and ''and'' logical operators at this time. All the 4 query parameters ''OfferDurableId'',  ''Currency'', ''Locale'', ''Region'' are required to be a part of the $filter.'
@@ -63,7 +63,7 @@ paths:
           schema:
             $ref: '#/definitions/ResourceRateCardInfo'
         default:
-          description: CDN error response describing why the operation failed.
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/ErrorResponse'
       tags:
@@ -73,13 +73,13 @@ paths:
     get:
       description: Query aggregated Azure subscription consumption data for a date range.
       externalDocs:
-        url: 'https://msdn.microsoft.com/library/azure/1ea5b323-54bb-423d-916f-190de96c6a3c'
+        url: 'https://docs.microsoft.com/rest/api/commerce/usageaggregates'
       operationId: UsageAggregates_List
       parameters:
         - description: The start of the time range to retrieve data for.
           format: date-time
           in: query
-          name: reportedstartTime
+          name: reportedStartTime
           required: true
           type: string
         - description: The end of the time range to retrieve data for.
@@ -88,13 +88,13 @@ paths:
           name: reportedEndTime
           required: true
           type: string
-        - description: 'When set to true (default), the aggregates are broken down into the instance metadata which is more granular.'
+        - description: '`True` returns usage data in instance-level detail, `false` causes server-side aggregation with fewer details. For example, if you have 3 website instances, by default you will get 3 line items for website consumption. If you specify showDetails = false, the data will be aggregated as a single line item for website consumption within the time period (for the given subscriptionId, meterId, usageStartTime and usageEndTime).'
           in: query
           name: showDetails
           required: false
           type: boolean
         - default: Daily
-          description: Value is either daily (default) or hourly to tell the API how to return the results grouped by day or hour.
+          description: '`Daily` (default) returns the data in daily granularity, `Hourly` returns the data in hourly granularity.'
           enum:
             - Daily
             - Hourly
@@ -105,7 +105,7 @@ paths:
           x-ms-enum:
             modelAsString: false
             name: AggregationGranularity
-        - description: 'Retrieved from previous calls, this is the bookmark used for progress when the responses are paged.'
+        - description: 'Used when a continuation token string is provided in the response body of the previous call, enabling paging through a large result set. If not present, the data is retrieved from the beginning of the day/hour (based on the granularity) passed in. '
           in: query
           name: continuationToken
           required: false
@@ -118,7 +118,7 @@ paths:
           schema:
             $ref: '#/definitions/UsageAggregationListResult'
         default:
-          description: CDN error response describing why the operation failed.
+          description: Error response describing why the operation failed.
           schema:
             $ref: '#/definitions/ErrorResponse'
       tags:
@@ -127,7 +127,7 @@ paths:
         nextLinkName: nextLink
 definitions:
   ErrorResponse:
-    description: Describes ehe format of Error response.
+    description: Describes the format of Error response.
     properties:
       code:
         description: Error code

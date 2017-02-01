@@ -373,19 +373,9 @@ paths:
     get:
       operationId: getSettlement
       parameters:
-        - description: Output format. 'csv' value is accepted as well
+        - description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used. Deprecated, please use tax-id.'
           in: query
-          name: format
-          required: false
-          type: string
-        - description: 'MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code.'
-          in: query
-          name: moss_country_code
-          required: false
-          type: string
-        - description: 'Tax entity country code, used to determine currency/region. '
-          in: query
-          name: tax_country_code
+          name: moss_tax_id
           required: false
           type: string
         - description: 'ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region''s currency code.'
@@ -393,9 +383,9 @@ paths:
           name: currency_code
           required: false
           type: string
-        - description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used. Deprecated, please use tax-id.'
+        - description: Period end month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
           in: query
-          name: moss_tax_id
+          name: end_month
           required: false
           type: string
         - description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used. Deprecated, please use tax-id.'
@@ -403,14 +393,29 @@ paths:
           name: tax_id
           required: false
           type: string
+        - description: Set to 'order_date' to show only refunds for the transactions in the selected reporting period. Set to 'refund_timestamp' to show refunds that were created in the selected reporting period. Do not set to use the default region's setting.
+          in: query
+          name: refund_date_kind_override
+          required: false
+          type: string
         - description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
           in: query
           name: start_month
           required: false
           type: string
-        - description: Period end month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+        - description: 'MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code.'
           in: query
-          name: end_month
+          name: moss_country_code
+          required: false
+          type: string
+        - description: Output format. 'csv' value is accepted as well
+          in: query
+          name: format
+          required: false
+          type: string
+        - description: 'Tax entity country code, used to determine currency/region. '
+          in: query
+          name: tax_country_code
           required: false
           type: string
         - description: 'Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to ''range''.'
@@ -2038,6 +2043,9 @@ definitions:
       moss_tax_id:
         description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used. Deprecated, please use tax-id.'
         type: string
+      refund_date_kind_override:
+        description: Set to 'order_date' to show only refunds for the transactions in the selected reporting period. Set to 'refund_timestamp' to show refunds that were created in the selected reporting period. Do not set to use the default region's setting.
+        type: string
       start_month:
         description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
         type: string
@@ -2263,6 +2271,9 @@ definitions:
       status:
         description: 'Transaction status: ''N'' - new, ''C'' - confirmed. Can use ''C'' in store-transaction! with private-token to create confirmed transaction, otherwise ''N'' is default status. Not applicable for update-transaction!.'
         type: string
+      sub_account_id:
+        description: Sub account identifier.
+        type: string
       supply_date:
         description: Supply date in yyyy-MM-dd format.
         type: string
@@ -2420,6 +2431,9 @@ definitions:
         type: string
       status:
         description: 'Transaction status: ''N'' - new, ''C'' - confirmed. Can use ''C'' in store-transaction! with private-token to create confirmed transaction, otherwise ''N'' is default status. Not applicable for update-transaction!.'
+        type: string
+      sub_account_id:
+        description: Sub account identifier.
         type: string
       supply_date:
         description: Supply date in yyyy-MM-dd format.
@@ -2857,6 +2871,9 @@ definitions:
       status:
         description: 'Transaction status: ''N'' - new, ''C'' - confirmed. Can use ''C'' in store-transaction! with private-token to create confirmed transaction, otherwise ''N'' is default status. Not applicable for update-transaction!.'
         type: string
+      sub_account_id:
+        description: Sub account identifier.
+        type: string
       supply_date:
         description: Supply date in yyyy-MM-dd format.
         type: string
@@ -3098,6 +3115,9 @@ definitions:
         type: string
       status:
         description: 'Transaction status: ''N'' - new, ''C'' - confirmed. Can use ''C'' in store-transaction! with private-token to create confirmed transaction, otherwise ''N'' is default status. Not applicable for update-transaction!.'
+        type: string
+      sub_account_id:
+        description: Sub account identifier.
         type: string
       supply_date:
         description: Supply date in yyyy-MM-dd format.

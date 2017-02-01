@@ -227,6 +227,117 @@ paths:
       tags:
         - services
 definitions:
+  AuditLog:
+    description: |+
+      Common audit log format for Google Cloud Platform API operations.
+
+    properties:
+      authenticationInfo:
+        $ref: '#/definitions/AuthenticationInfo'
+        description: Authentication information.
+      authorizationInfo:
+        description: |-
+          Authorization information. If there are multiple
+          resources or permissions involved, then there is
+          one AuthorizationInfo element for each {resource, permission} tuple.
+        items:
+          $ref: '#/definitions/AuthorizationInfo'
+        type: array
+      methodName:
+        description: |-
+          The name of the service method or operation.
+          For API calls, this should be the name of the API method.
+          For example,
+
+              "google.datastore.v1.Datastore.RunQuery"
+              "google.logging.v1.LoggingService.DeleteLog"
+        type: string
+      numResponseItems:
+        description: |-
+          The number of items returned from a List or Query API method,
+          if applicable.
+        format: int64
+        type: string
+      request:
+        additionalProperties:
+          description: Properties of the object.
+        description: |-
+          The operation request. This may not include all request parameters,
+          such as those that are too large, privacy-sensitive, or duplicated
+          elsewhere in the log record.
+          It should never include user-generated data, such as file contents.
+          When the JSON object represented here has a proto equivalent, the proto
+          name will be indicated in the `@type` property.
+        type: object
+      requestMetadata:
+        $ref: '#/definitions/RequestMetadata'
+        description: Metadata about the operation.
+      resourceName:
+        description: |-
+          The resource or collection that is the target of the operation.
+          The name is a scheme-less URI, not including the API service name.
+          For example:
+
+              "shelves/SHELF_ID/books"
+              "shelves/SHELF_ID/books/BOOK_ID"
+        type: string
+      response:
+        additionalProperties:
+          description: Properties of the object.
+        description: |-
+          The operation response. This may not include all response elements,
+          such as those that are too large, privacy-sensitive, or duplicated
+          elsewhere in the log record.
+          It should never include user-generated data, such as file contents.
+          When the JSON object represented here has a proto equivalent, the proto
+          name will be indicated in the `@type` property.
+        type: object
+      serviceData:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          Other service-specific data about the request, response, and other
+          activities.
+        type: object
+      serviceName:
+        description: |-
+          The name of the API service performing the operation. For example,
+          `"datastore.googleapis.com"`.
+        type: string
+      status:
+        $ref: '#/definitions/Status'
+        description: The status of the overall operation.
+    type: object
+  AuthenticationInfo:
+    description: Authentication information for the operation.
+    properties:
+      authoritySelector:
+        description: |-
+          The authority selector specified by the requestor, if any.
+          It is not guaranteed that the principal was allowed to use this authority.
+        type: string
+      principalEmail:
+        description: The email address of the authenticated user making the request.
+        type: string
+    type: object
+  AuthorizationInfo:
+    description: Authorization information for the operation.
+    properties:
+      granted:
+        description: |-
+          Whether or not authorization for `resource` and `permission`
+          was granted.
+        type: boolean
+      permission:
+        description: The required IAM permission.
+        type: string
+      resource:
+        description: |-
+          The resource being accessed, as a REST-style string. For example:
+
+              bigquery.googlapis.com/projects/PROJECTID/datasets/DATASETID
+        type: string
+    type: object
   CheckError:
     description: |-
       Defines the errors to be returned in
@@ -704,6 +815,26 @@ definitions:
         type: array
       serviceConfigId:
         description: The actual config id used to process the request.
+        type: string
+    type: object
+  RequestMetadata:
+    description: Metadata about the request.
+    properties:
+      callerIp:
+        description: The IP address of the caller.
+        type: string
+      callerSuppliedUserAgent:
+        description: |-
+          The user agent of the caller.
+          This information is not authenticated and should be treated accordingly.
+          For example:
+
+          +   `google-api-python-client/1.4.0`:
+              The request was made by the Google API client for Python.
+          +   `Cloud SDK Command Line Tool apitools-client/1.0 gcloud/0.9.62`:
+              The request was made by the Google Cloud SDK CLI (gcloud).
+          +   `AppEngine-Google; (+http://code.google.com/appengine; appid: s~my-project`:
+              The request was made from the `my-project` App Engine app.
         type: string
     type: object
   Status:

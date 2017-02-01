@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Knowledge Graph Search API allows developers to search the Google Knowledge Graph for entities.
+  description: Searches the Google Knowledge Graph for entities.
   title: Knowledge Graph Search
   version: v1
   x-apiClientRegistration:
@@ -16,7 +16,7 @@ info:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/kgsearch/v1/rest'
+    url: 'https://kgsearch.googleapis.com/$discovery/rest?version=v1'
     version: v1
   x-preferred: true
   x-providerName: googleapis.com
@@ -26,6 +26,9 @@ externalDocs:
 parameters:
   $.xgafv:
     description: V1 error format.
+    enum:
+      - '1'
+      - '2'
     in: query
     name: $.xgafv
     type: string
@@ -37,6 +40,10 @@ parameters:
   alt:
     default: json
     description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
     in: query
     name: alt
     type: string
@@ -97,29 +104,39 @@ tags:
 paths:
   '/v1/entities:search':
     get:
-      description: 'Searches Knowledge Graph for entities that match the constraints. A list of matched entities will be returned in response, which will be in JSON-LD format and compatible with http://schema.org'
+      description: |-
+        Searches Knowledge Graph for entities that match the constraints.
+        A list of matched entities will be returned in response, which will be in
+        JSON-LD format and compatible with http://schema.org
       operationId: kgsearch.entities.search
       parameters:
-        - description: The literal query string for search.
-          in: query
-          name: query
-          type: string
         - collectionFormat: multi
-          description: The list of entity id to be used for search instead of query string.
+          description: |-
+            The list of entity id to be used for search instead of query string.
+            To specify multiple ids in the HTTP request, repeat the parameter in the
+            URL as in ...?ids=A&ids=B
           in: query
           items:
             type: string
           name: ids
           type: array
-        - collectionFormat: multi
-          description: 'The list of language codes (defined in ISO 693) to run the query with, e.g. ''en''.'
+        - description: Limits the number of entities to be returned.
           in: query
-          items:
-            type: string
-          name: languages
-          type: array
+          name: limit
+          type: integer
+        - description: Enables prefix match against names and aliases of entities
+          in: query
+          name: prefix
+          type: boolean
+        - description: The literal query string for search.
+          in: query
+          name: query
+          type: string
         - collectionFormat: multi
-          description: 'Restricts returned entities with these types, e.g. Person (as defined in http://schema.org/Person).'
+          description: |-
+            Restricts returned entities with these types, e.g. Person
+            (as defined in http://schema.org/Person). If multiple types are specified,
+            returned entities will contain one or more of these types.
           in: query
           items:
             type: string
@@ -129,14 +146,15 @@ paths:
           in: query
           name: indent
           type: boolean
-        - description: Enables prefix match against names and aliases of entities
+        - collectionFormat: multi
+          description: |-
+            The list of language codes (defined in ISO 693) to run the query with,
+            e.g. 'en'.
           in: query
-          name: prefix
-          type: boolean
-        - description: Limits the number of entities to be returned.
-          in: query
-          name: limit
-          type: integer
+          items:
+            type: string
+          name: languages
+          type: array
       responses:
         '200':
           description: Successful response
@@ -145,29 +163,33 @@ paths:
       tags:
         - entities
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
 definitions:
   SearchResponse:
-    description: Response message includes the context and a list of matching results which contain the detail of associated entities.
+    description: |-
+      Response message includes the context and a list of matching results
+      which contain the detail of associated entities.
     properties:
-      context:
-        description: 'The local context applicable for the response. See more details at http://www.w3.org/TR/json-ld/#context-definitions.'
+      '@context':
+        description: |-
+          The local context applicable for the response. See more details at
+          http://www.w3.org/TR/json-ld/#context-definitions.
+      '@type':
+        description: 'The schema type of top-level JSON-LD object, e.g. ItemList.'
       itemListElement:
         description: The item list of search results.
         items: {}
         type: array
-      type:
-        description: 'The schema type of top-level JSON-LD object, e.g. ItemList.'
     type: object

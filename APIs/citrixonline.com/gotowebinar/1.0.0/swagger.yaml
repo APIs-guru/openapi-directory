@@ -8,7 +8,7 @@ info:
     email: developer-support@citrixonline.com
     name: Developer Support
     url: 'https://developer.citrixonline.com'
-  description: 'The Citrix GoToWebinar API provides seamless integration of webinar registrant and attendee data into your existing infrastructure or third-party applications. The ability to register participants, as well as pull lists of registrants and attendees for a webinar, allows organizers to manage the flow of information between their primary applications without manual intervention.'
+  description: 'The GoToWebinar API provides seamless integration of webinar registrant and attendee data into your existing infrastructure or third-party applications. The ability to register participants, as well as pull lists of registrants and attendees for a webinar, allows organizers to manage the flow of information between their primary applications without manual intervention.'
   termsOfService: 'https://developer.citrixonline.com/terms-use'
   title: GoToWebinar
   version: 1.0.0
@@ -142,11 +142,6 @@ paths:
           name: toTime
           required: true
           type: string
-        - description: 'Optional comma-delimited list to request additional information for each webinar session in the response. The supported values are: audio, attendees, attendeepolls, attendeesurveys, attendeequestions, attendeeinterestrating, panelists, webinar. The format is &include=audio,attendees,panelists'
-          in: query
-          name: includes
-          required: false
-          type: string
       responses:
         '200':
           description: OK
@@ -204,7 +199,7 @@ paths:
       tags:
         - Webinars
     post:
-      description: 'Creates a single session webinar, a sequence of webinars or a series of webinars depending on the type field in the body: "single_session" creates a single webinar session, "sequence" creates a webinar with multiple meeting times where attendees are expected to be the same for all sessions, and "series" creates a webinar with multiple meetings times where attendees choose only one to attend. The default, if no type is declared, is single_session. A sequence webinar requires a "recurrenceStart" array consisting of a "startTime" and "endTime" for the first of the sequence, a "recurrencePattern" of "daily", "weekly", "monthly", and a "recurrenceEnd" which is the last date of the sequence (for example, 2016-12-01). A series webinar requires a "times" array with a discreet "startTime" and "endTime" for each webinar in the series. The call requires a webinar subject and description. The "isPasswordProtected" sets whether the webinar requires a password for attendees to join. If set to True, the organizer must go to Registration Settings at My Webinars (https://global.gotowebinar.com/webinars.tmpl) and add the password to the webinar, and send the password to the registrants. The response provides a numeric webinarKey in string format for the new webinar. Once a webinar has been created with this method, you can accept registrations.'
+      description: 'Creates a single session webinar, a sequence of webinars or a series of webinars depending on the type field in the body: "single_session" creates a single webinar session, "sequence" creates a webinar with multiple meeting times where attendees are expected to be the same for all sessions, and "series" creates a webinar with multiple meetings times where attendees choose only one to attend. The default, if no type is declared, is single_session. A sequence webinar requires a "recurrenceStart" object consisting of a "startTime" and "endTime" key for the first webinar of the sequence, a "recurrencePattern" of "daily", "weekly", "monthly", and a "recurrenceEnd" which is the last date of the sequence (for example, 2016-12-01). A series webinar requires a "times" array with a discrete "startTime" and "endTime" for each webinar in the series. The call requires a webinar subject and description. The "isPasswordProtected" sets whether the webinar requires a password for attendees to join. If set to True, the organizer must go to Registration Settings at My Webinars (https://global.gotowebinar.com/webinars.tmpl) and add the password to the webinar, and send the password to the registrants. The response provides a numeric webinarKey in string format for the new webinar. Once a webinar has been created with this method, you can accept registrations.'
       operationId: createWebinar
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -404,7 +399,7 @@ paths:
       tags:
         - Co-organizers
     post:
-      description: Creates co-organizers for the specified webinar. This call requires the admin role. For co-organizers that have a GoToWebinar account you have to set the parameter 'external' to 'false'. In this case you have to pass the parameter 'organizerKey' only. For co-organizers that have no GoToWebinar account you have to set the parameter 'external' to 'true'. In this case you have to pass the parameters 'givenName' and 'email'. Since there is no parameter for 'surname' you should pass first and last name to the parameter 'givenName'.
+      description: Creates co-organizers for the specified webinar. For co-organizers that have a GoToWebinar account you have to set the parameter 'external' to 'false'. In this case you have to pass the parameter 'organizerKey' only. For co-organizers that have no GoToWebinar account you have to set the parameter 'external' to 'true'. In this case you have to pass the parameters 'givenName' and 'email'. Since there is no parameter for 'surname' you should pass first and last name to the parameter 'givenName'.
       operationId: createCoorganizers
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -2061,7 +2056,7 @@ definitions:
         description: Indicates whether there is a webinar session currently in progress
         type: boolean
       numberOfOpenedInvitations:
-        description: The number of recipients who opened the invitation email to register for the webinar
+        description: This field is obsolete. It is always set to 0
         format: int32
         type: integer
       numberOfRegistrants:
@@ -2069,7 +2064,7 @@ definitions:
         format: int32
         type: integer
       numberOfRegistrationLinkClicks:
-        description: The number of recipients who clicked on the link to register for the webinar
+        description: This field is obsolete. It is always set to 0
         format: int32
         type: integer
       organizerKey:
@@ -2124,7 +2119,7 @@ definitions:
         description: The name/subject of the webinar (128 characters maximum)
         type: string
       timeZone:
-        description: 'The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones). If this parameter is not passed, the timezone of the organizer''s profile will be used'
+        description: 'The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/time-zones). If this parameter is not passed, the timezone of the organizer''s profile will be used'
         type: string
       times:
         description: 'Array with startTime and endTime for webinar. Since this call creates single session webinars, the array can only contain a single pair of startTime and endTime'
@@ -2133,7 +2128,7 @@ definitions:
         type: array
       type:
         default: single_session
-        description: 'Specifies the webinar type. The default type value is "single_session", which is used to create a single webinar session. The possible values are "single_session", "series", "sequence". If type is set to "single_session", a single webinar session is created. If type is set to "series", a webinar series is created. In this case 2 or severals timeframes must be specified in the body. Example: "times": [{"startTime": "...", "endTime": "..."},{"startTime": "...", "endTime": "..."},{"startTime": "...", "endTime": "..."}. If type is set to "sequence" a sequence of webinars is created. The times object in the body must be replaced by the "recurrenceStart" object. Example: "recurrenceStart": {"startTime":"2012-06-12T16:00:00Z", "endTime": "2012-06-12T17:00:00Z" }.  The "recurrenceEnd" and "recurrencePattern" body parameter must be specified. Example: , "recurrenceEnd": "2012-07-10", "recurrencePattern": "daily".'
+        description: 'Specifies the webinar type. The default type value is "single_session", which is used to create a single webinar session. The possible values are "single_session", "series", "sequence". If type is set to "single_session", a single webinar session is created. If type is set to "series", a webinar series is created. In this case 2 or more timeframes must be specified for each webinar. Example: "times": [{"startTime": "...", "endTime": "..."},{"startTime": "...", "endTime": "..."},{"startTime": "...", "endTime": "..."}. If type is set to "sequence" a sequence of webinars is created. The times object in the body must be replaced by the "recurrenceStart" object. Example: "recurrenceStart": {"startTime":"2012-06-12T16:00:00Z", "endTime": "2012-06-12T17:00:00Z" }.  The "recurrenceEnd" and "recurrencePattern" body parameter must be specified. Example: , "recurrenceEnd": "2012-07-10", "recurrencePattern": "daily".'
         type: string
     required:
       - subject
@@ -2158,7 +2153,7 @@ definitions:
         description: The name/subject of the webinar (128 characters maximum)
         type: string
       timeZone:
-        description: 'The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones). If this parameter is not passed, the timezone of the organizer''s profile will be used'
+        description: 'The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/time-zones). If this parameter is not passed, the timezone of the organizer''s profile will be used'
         type: string
       times:
         description: Array with start and end time(s) for webinar

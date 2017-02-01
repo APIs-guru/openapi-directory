@@ -1217,6 +1217,7 @@ definitions:
           - OR
           - AND
           - SET
+          - DISTRIBUTION
         type: string
       otherUnits:
         description: A string referring to the unit type.
@@ -1288,6 +1289,9 @@ definitions:
       cumulative:
         description: 'True if this counter is reported as the total cumulative aggregate value accumulated since the worker started working on this WorkItem. By default this is false, indicating that this counter is reported as a delta.'
         type: boolean
+      distribution:
+        $ref: '#/definitions/DistributionUpdate'
+        description: Distribution data
       floatingPoint:
         description: 'Floating point value for Sum, Max, Min.'
         format: double
@@ -1388,6 +1392,26 @@ definitions:
         description: 'Size of disk in GB. If zero or unspecified, the service will attempt to choose a reasonable default.'
         format: int32
         type: integer
+    type: object
+  DistributionUpdate:
+    description: A metric value representing a distribution.
+    properties:
+      count:
+        $ref: '#/definitions/SplitInt64'
+        description: The count of the number of elements present in the distribution.
+      max:
+        $ref: '#/definitions/SplitInt64'
+        description: The maximum value present in the distribution.
+      min:
+        $ref: '#/definitions/SplitInt64'
+        description: The minimum value present in the distribution.
+      sum:
+        $ref: '#/definitions/SplitInt64'
+        description: Use an int64 since we'd prefer the added precision. If overflow is a common problem we can detect it and use an additional int64 or a double.
+      sumOfSquares:
+        description: Use a double since the sum of squares is likely to overflow int64.
+        format: double
+        type: number
     type: object
   DynamicSourceSplit:
     description: 'When a task splits using WorkItemStatus.dynamic_source_split, this message describes the two parts of the split relative to the description of the current task''s input.'
@@ -1891,6 +1915,7 @@ definitions:
           - OR
           - AND
           - SET
+          - DISTRIBUTION
         type: string
       name:
         description: Name of the counter.

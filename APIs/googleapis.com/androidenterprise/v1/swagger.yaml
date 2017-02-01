@@ -72,8 +72,6 @@ parameters:
     name: userIp
     type: string
 tags:
-  - name: collections
-  - name: collectionviewers
   - name: devices
   - name: enterprises
   - name: entitlements
@@ -373,332 +371,6 @@ paths:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
-  '/enterprises/{enterpriseId}/collections':
-    get:
-      description: Retrieves the IDs of all the collections for an enterprise.
-      operationId: androidenterprise.collections.list
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CollectionsListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collections
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Creates a new collection.
-      operationId: androidenterprise.collections.insert
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Collection'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Collection'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collections
-  '/enterprises/{enterpriseId}/collections/{collectionId}':
-    delete:
-      description: Deletes a collection.
-      operationId: androidenterprise.collections.delete
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the collection.
-          in: path
-          name: collectionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collections
-    get:
-      description: Retrieves the details of a collection.
-      operationId: androidenterprise.collections.get
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the collection.
-          in: path
-          name: collectionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Collection'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collections
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates a collection. This method supports patch semantics.
-      operationId: androidenterprise.collections.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the collection.
-          in: path
-          name: collectionId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Collection'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Collection'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collections
-    put:
-      description: Updates a collection.
-      operationId: androidenterprise.collections.update
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the collection.
-          in: path
-          name: collectionId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Collection'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Collection'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collections
-  '/enterprises/{enterpriseId}/collections/{collectionId}/users':
-    get:
-      description: Retrieves the IDs of the users who have been specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only these users will see the collection.
-      operationId: androidenterprise.collectionviewers.list
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the collection.
-          in: path
-          name: collectionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CollectionViewersListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collectionviewers
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/enterprises/{enterpriseId}/collections/{collectionId}/users/{userId}':
-    delete:
-      description: Removes the user from the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection.
-      operationId: androidenterprise.collectionviewers.delete
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the collection.
-          in: path
-          name: collectionId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collectionviewers
-    get:
-      description: Retrieves the ID of the user if they have been specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only these users will see the collection.
-      operationId: androidenterprise.collectionviewers.get
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the collection.
-          in: path
-          name: collectionId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/User'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collectionviewers
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Adds the user to the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection. This method supports patch semantics.
-      operationId: androidenterprise.collectionviewers.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the collection.
-          in: path
-          name: collectionId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/User'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/User'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collectionviewers
-    put:
-      description: Adds the user to the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection.
-      operationId: androidenterprise.collectionviewers.update
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the collection.
-          in: path
-          name: collectionId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/User'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/User'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - collectionviewers
   '/enterprises/{enterpriseId}/createWebToken':
     parameters:
       - $ref: '#/parameters/alt'
@@ -1058,37 +730,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    put:
-      description: |-
-        This method has been deprecated. To programmatically approve applications, you must use the iframe mechanism via the  generateApprovalUrl and  approve methods of the Products resource. For more information, see the  Play EMM API usage requirements.
-
-        The updatePermissions method (deprecated) updates the set of Android app permissions for this app that have been accepted by the enterprise.
-      operationId: androidenterprise.products.updatePermissions
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the product.
-          in: path
-          name: productId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ProductPermissions'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ProductPermissions'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - products
   '/enterprises/{enterpriseId}/products/{productId}/unapprove':
     parameters:
       - $ref: '#/parameters/alt'
@@ -3077,60 +2718,6 @@ definitions:
         description: The authentication token to be passed to the device policy client on the device where it can be used to provision the account for which this token was generated.
         type: string
     type: object
-  Collection:
-    description: |-
-      A collection resource defines a named set of apps that is visible to a set of users in the Google Play store app running on those users' managed devices. Those users can then install any of those apps if they wish (which will trigger creation of install and entitlement resources). A user cannot install an app on a managed device unless the app is listed in at least one collection that is visible to that user.
-
-      Note that the API can be used to directly install an app regardless of whether it is in any collection - so an enterprise has a choice of either directly pushing apps to users, or allowing users to install apps if they want. Which is appropriate will depend on the enterprise's policies and the purpose of the apps concerned.
-    properties:
-      collectionId:
-        description: 'Arbitrary unique ID, allocated by the API on creation.'
-        type: string
-      kind:
-        default: 'androidenterprise#collection'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#collection".'
-        type: string
-      name:
-        description: 'A user-friendly name for the collection (should be unique), e.g. "Accounting apps".'
-        type: string
-      productId:
-        description: 'The IDs of the products in the collection, in the order in which they should be displayed.'
-        items:
-          type: string
-        type: array
-      visibility:
-        description: |-
-          Whether this collection is visible to all users, or only to the users that have been granted access through the "Collectionviewers" API. With the launch of the "setAvailableProductSet" API, this property should always be set to "viewersOnly", as the "allUsers" option will bypass the "availableProductSet" for all users within a domain.
-
-          The "allUsers" setting is deprecated, and will be removed.
-        type: string
-    type: object
-  CollectionViewersListResponse:
-    description: The user resources for the collection.
-    properties:
-      kind:
-        default: 'androidenterprise#collectionViewersListResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#collectionViewersListResponse".'
-        type: string
-      user:
-        description: A user of an enterprise.
-        items:
-          $ref: '#/definitions/User'
-        type: array
-    type: object
-  CollectionsListResponse:
-    description: The collection resources for the enterprise.
-    properties:
-      collection:
-        description: An ordered collection of products which can be made visible on the Google Play store to a selected group of users.
-        items:
-          $ref: '#/definitions/Collection'
-        type: array
-      kind:
-        default: 'androidenterprise#collectionsListResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#collectionsListResponse".'
-        type: string
-    type: object
   Device:
     description: |-
       A device resource represents a mobile device managed by the EMM and belonging to a specific enterprise user.
@@ -3481,6 +3068,24 @@ definitions:
           $ref: '#/definitions/ManagedProperty'
         type: array
     type: object
+  NewDeviceEvent:
+    description: An event generated when a new device is ready to be managed.
+    properties:
+      deviceId:
+        description: The Android ID of the device. This field will always be present.
+        type: string
+      managementType:
+        description: |-
+          Identifies the extent to which the device is controlled by an Android for Work EMM in various deployment configurations.
+
+          Possible values include: 
+          - "managedDevice", a device that has the EMM's device policy controller (DPC) as the device owner, 
+          - "managedProfile", a device that has a work profile managed by the DPC (DPC is profile owner) in addition to a separate, personal profile that is unavailable to the DPC,
+        type: string
+      userId:
+        description: The ID of the user. This field will always be present.
+        type: string
+    type: object
   NewPermissionsEvent:
     description: An event generated when new permissions are added to an app.
     properties:
@@ -3513,6 +3118,9 @@ definitions:
       installFailureEvent:
         $ref: '#/definitions/InstallFailureEvent'
         description: Notifications about an app installation failure.
+      newDeviceEvent:
+        $ref: '#/definitions/NewDeviceEvent'
+        description: Notifications about new devices.
       newPermissionsEvent:
         $ref: '#/definitions/NewPermissionsEvent'
         description: Notifications about new app permissions.

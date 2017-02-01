@@ -2199,6 +2199,12 @@ definitions:
         items:
           type: string
         type: array
+      availabilityType:
+        description: |-
+          The availability type. This can be one of the following.
+          ZONAL: A Cloud SQL instance that is zonally available. The instance is bound to a single GCE zone and may be inaccessible during an outage for that GCE zone.
+          REGIONAL: A Cloud SQL instance that is regionally available. The instance is provisioned in multiple zones within a region and is able to provide higher availability than an instance with a zonal availability type.
+        type: string
       backupConfiguration:
         $ref: '#/definitions/BackupConfiguration'
         description: The daily backup configuration for the instance.
@@ -2246,6 +2252,10 @@ definitions:
       storageAutoResize:
         description: Configuration to increase storage size automatically. The default value is false. Applies only to Second Generation instances.
         type: boolean
+      storageAutoResizeLimit:
+        description: 'The maximum size to which storage capacity can be automatically increased. The default value is 0, which specifies that there is no limit. Applies only to Second Generation instances.'
+        format: int64
+        type: string
       tier:
         description: 'The tier of service for this instance, for example D1, D2. For more information, see pricing.'
         type: string

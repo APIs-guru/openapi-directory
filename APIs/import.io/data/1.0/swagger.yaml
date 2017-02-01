@@ -217,3 +217,19 @@ definitions:
         format: int64
         type: integer
     type: object
+  ScheduleRequest:
+    properties:
+      extractorId:
+        example: 00000000-0000-0000-0000-000000000000
+        type: string
+      interval:
+        example: 15 * * * *
+        type: string
+      startTimestamp:
+        example: 1485448509727
+        format: int64
+        type: integer
+    required:
+      - extractorId
+      - interval
+    type: object

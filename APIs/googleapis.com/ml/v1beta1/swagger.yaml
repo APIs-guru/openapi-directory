@@ -113,36 +113,21 @@ paths:
   '/v1beta1/{name}':
     delete:
       description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: ml.projects.operations.delete
+        Deletes a model version.
+
+        Each model can have multiple versions deployed and in use at any given
+        time. Use this method to remove a single version.
+
+        Note: You cannot delete the version that is set as the default version
+        of the model unless it is the only remaining version.
+      operationId: ml.projects.models.versions.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GoogleProtobuf__Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: ml.projects.operations.get
-      parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            Required. The name of the version. You can get the names of all the
+            versions of a model by calling
+            [projects.models.versions.list](/ml/reference/rest/v1beta1/projects.models.versions/list).
+
+            Authorization: requires `Editor` role on the parent project.
           in: path
           name: name
           required: true
@@ -158,20 +143,43 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+    get:
+      description: Describes a job.
+      operationId: ml.projects.jobs.get
+      parameters:
+        - description: |-
+            Required. The name of the job to get the description of.
+
+            Authorization: requires `Viewer` role on the parent project.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudMlV1beta1__Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
     parameters:
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v1beta1/{name}/operations':
     get:
       description: |-
@@ -211,49 +219,42 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v1beta1/{name}:cancel':
     parameters:
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
-      description: |-
-        Starts asynchronous cancellation on a long-running operation.  The server
-        makes a best effort to cancel the operation, but success is not
-        guaranteed.  If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-        Operations.GetOperation or
-        other methods to check whether the cancellation succeeded or whether the
-        operation completed despite cancellation. On successful cancellation,
-        the operation is not deleted; instead, it becomes an operation with
-        an Operation.error value with a google.rpc.Status.code of 1,
-        corresponding to `Code.CANCELLED`.
-      operationId: ml.projects.operations.cancel
+      description: Cancels a running job.
+      operationId: ml.projects.jobs.cancel
       parameters:
-        - description: The name of the operation resource to be cancelled.
+        - description: |-
+            Required. The name of the job to cancel.
+
+            Authorization: requires `Editor` role on the parent project.
           in: path
           name: name
           required: true
@@ -302,83 +303,39 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v1beta1/{name}:predict':
     parameters:
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Performs prediction on the data in the request.
 
-        Responses are very similar to requests. There are two top-level fields,
-        each of which are JSON lists:
-
-        <dl>
-          <dt>predictions</dt>
-          <dd>The list of predictions, one per instance in the request.</dd>
-          <dt>error</dt>
-          <dd>An error message returned instead of a prediction list if any
-              instance produced an error.</dd>
-        </dl>
-
-        If the call is successful, the response body will contain one prediction
-        entry per instance in the request body. If prediction fails for any
-        instance, the response body will contain no predictions and will contian
-        a single error entry instead.
-
-        Even though there is one prediction per instance, the format of a
-        prediction is not directly related to the format of an instance.
-        Predictions take whatever format is specified in the outputs collection
-        defined in the model. The collection of predictions is returned in a JSON
-        list. Each member of the list can be a simple value, a list, or a JSON
-        object of any complexity. If your model has more than one output tensor,
-        each prediction will be a JSON object containing a name/value pair for each
-        output. The names identify the output aliases in the graph.
-
-        The following examples show some possible responses:
-
-        A simple set of predictions for three input instances, where each
-        prediction is an integer value:
-        <pre>
-        {"predictions": [5, 4, 3]}
-        </pre>
-        A more complex set of predictions, each containing two named values that
-        correspond to output tensors, named **label** and **scores** respectively.
-        The value of **label** is the predicted category ("car" or "beach") and
-        **scores** contains a list of probabilities for that instance across the
-        possible categories.
-        <pre>
-        {"predictions": [{"label": "beach", "scores": [0.1, 0.9]},
-                         {"label": "car", "scores": [0.75, 0.25]}]}
-        </pre>
-        A response when there is an error processing an input instance:
-        <pre>
-        {"error": "Divide by zero"}
-        </pre>
+        **** REMOVE FROM GENERATED DOCUMENTATION
       operationId: ml.projects.predict
       parameters:
         - description: |-
@@ -406,19 +363,19 @@ paths:
         - projects
   '/v1beta1/{name}:setDefault':
     parameters:
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Designates a version to be the default for the model.
@@ -470,15 +427,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            Optional. The number of jobs to retrieve per "page" of results. If there
-            are more remaining results than this number, the response message will
-            contain a valid value in the `next_page_token` field.
-
-            The default value is 20, and the maximum page size is 100.
-          in: query
-          name: pageSize
-          type: integer
         - description: Optional. Specifies the subset of jobs to retrieve.
           in: query
           name: filter
@@ -491,6 +439,15 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: |-
+            Optional. The number of jobs to retrieve per "page" of results. If there
+            are more remaining results than this number, the response message will
+            contain a valid value in the `next_page_token` field.
+
+            The default value is 20, and the maximum page size is 100.
+          in: query
+          name: pageSize
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -502,19 +459,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: Creates a training or a batch prediction job.
       operationId: ml.projects.jobs.create
@@ -588,19 +545,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Creates a model which will later contain one or more versions.
@@ -653,6 +610,14 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
+            Optional. A page token to request the next page of results.
+
+            You get the token from the `next_page_token` field of the response from
+            the previous call.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
             Optional. The number of versions to retrieve per "page" of results. If
             there are more remaining results than this number, the response message
             will contain a valid value in the `next_page_token` field.
@@ -661,14 +626,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: |-
-            Optional. A page token to request the next page of results.
-
-            You get the token from the `next_page_token` field of the response from
-            the previous call.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -680,19 +637,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Creates a new version of a model from a trained TensorFlow model.
@@ -843,6 +800,14 @@ definitions:
           - MAXIMIZE
           - MINIMIZE
         type: string
+      hyperparameterMetricTag:
+        description: |-
+          Optional. The Tensorflow summary tag name to use for optimizing trials. For
+          current versions of Tensorflow, this tag name should exactly match what is
+          shown in Tensorboard, including all scopes.  For versions of Tensorflow
+          prior to 0.12, this should be only the tag passed to tf.Summary.
+          By default, "training/hptuning/metric" will be used.
+        type: string
       maxParallelTrials:
         description: |-
           Optional. The number of training trials to run concurrently.
@@ -984,6 +949,11 @@ definitions:
 
           The model name must be unique within the project it is created in.
         type: string
+      onlinePredictionLogging:
+        description: |-
+          Optional. If true, enables StackDriver Logging for online prediction.
+          Default is false.
+        type: boolean
       regions:
         description: |-
           Optional. The list of regions where the model is going to be deployed.
@@ -1103,7 +1073,7 @@ definitions:
       model's input definition. Instances can include named inputs or can contain
       only unlabeled values.
 
-      Most data does not include named inputs. Some instances will be simple
+      Not all data includes named inputs. Some instances will be simple
       JSON values (boolean, number, or string). However, instances are often lists
       of simple values, or complex nested lists. Here are some examples of request
       bodies:
@@ -1118,7 +1088,13 @@ definitions:
       </pre>
       Sentences encoded as lists of words (vectors of strings):
       <pre>
-      {"instances": [["the","quick","brown"], ["la","bruja","le"]]}
+      {
+        "instances": [
+          ["the","quick","brown"],
+          ["la","bruja","le"],
+          ...
+        ]
+      }
       </pre>
       Floating point scalar values:
       <pre>
@@ -1126,22 +1102,53 @@ definitions:
       </pre>
       Vectors of integers:
       <pre>
-      {"instances": [[0, 1, 2], [3, 4, 5],...]}
+      {
+        "instances": [
+          [0, 1, 2],
+          [3, 4, 5],
+          ...
+        ]
+      }
       </pre>
       Tensors (in this case, two-dimensional tensors):
       <pre>
-      {"instances": [[[0, 1, 2], [3, 4, 5]], ...]}
+      {
+        "instances": [
+          [
+            [0, 1, 2],
+            [3, 4, 5]
+          ],
+          ...
+        ]
+      }
       </pre>
-      Images represented as a three-dimensional list. In this encoding scheme the
-      first two dimensions represent the rows and columns of the image, and the
-      third contains the R, G, and B values for each pixel.
+      Images can be represented different ways. In this encoding scheme the first
+      two dimensions represent the rows and columns of the image, and the third
+      contains lists (vectors) of the R, G, and B values for each pixel.
       <pre>
-      {"instances": [[[[138, 30, 66], [130, 20, 56], ...]]]]}
+      {
+        "instances": [
+          [
+            [
+              [138, 30, 66],
+              [130, 20, 56],
+              ...
+            ],
+            [
+              [126, 38, 61],
+              [122, 24, 57],
+              ...
+            ],
+            ...
+          ],
+          ...
+        ]
+      }
       </pre>
-      Data must be encoded as UTF-8. If your data uses another character encoding,
-      you must base64 encode the data and mark it as binary. To mark a JSON string
-      as binary, replace it with an object with a single attribute named `b`:
-      <pre>{"b": "..."} </pre>
+      JSON strings must be encoded as UTF-8. To send binary data, you must
+      base64-encode the data and mark it as binary. To mark a JSON string
+      as binary, replace it with a JSON object with a single attribute named `b64`:
+      <pre>{"b64": "..."} </pre>
       For example:
 
       Two Serialized tf.Examples (fake data, for illustrative purposes only):
@@ -1157,8 +1164,20 @@ definitions:
 
       JSON input data to be preprocessed:
       <pre>
-      {"instances": [{"a": 1.0,  "b": true,  "c": "x"},
-                     {"a": -2.0, "b": false, "c": "y"}]}
+      {
+        "instances": [
+          {
+            "a": 1.0,
+            "b": true,
+            "c": "x"
+          },
+          {
+            "a": -2.0,
+            "b": false,
+            "c": "y"
+          }
+        ]
+      }
       </pre>
       Some models have an underlying TensorFlow graph that accepts multiple input
       tensors. In this case, you should use the names of JSON name/value pairs to
@@ -1167,14 +1186,59 @@ definitions:
       For a graph with input tensor aliases "tag" (string) and "image"
       (base64-encoded string):
       <pre>
-      {"instances": [{"tag": "beach", "image": {"b64": "ASa8asdf"}},
-                     {"tag": "car", "image": {"b64": "JLK7ljk3"}}]}
+      {
+        "instances": [
+          {
+            "tag": "beach",
+            "image": {"b64": "ASa8asdf"}
+          },
+          {
+            "tag": "car",
+            "image": {"b64": "JLK7ljk3"}
+          }
+        ]
+      }
       </pre>
       For a graph with input tensor aliases "tag" (string) and "image"
       (3-dimensional array of 8-bit ints):
       <pre>
-      {"instances": [{"tag": "beach", "image": [[[263, 1, 10], [262, 2, 11], ...]]},
-                     {"tag": "car", "image": [[[10, 11, 24], [23, 10, 15], ...]]}]}
+      {
+        "instances": [
+          {
+            "tag": "beach",
+            "image": [
+              [
+                [138, 30, 66],
+                [130, 20, 56],
+                ...
+              ],
+              [
+                [126, 38, 61],
+                [122, 24, 57],
+                ...
+              ],
+              ...
+            ]
+          },
+          {
+            "tag": "car",
+            "image": [
+              [
+                [255, 0, 102],
+                [255, 0, 97],
+                ...
+              ],
+              [
+                [254, 1, 101],
+                [254, 2, 93],
+                ...
+              ],
+              ...
+            ]
+          },
+          ...
+        ]
+      }
       </pre>
       If the call is successful, the response body will contain one prediction
       entry per instance in the request body. If prediction fails for any
@@ -1227,7 +1291,13 @@ definitions:
       runtimeVersion:
         description: |-
           Optional. The Google Cloud ML runtime version to use for this batch
-          prediction. If not set, Google Cloud ML will choose a version.
+          prediction. If not set, Google Cloud ML will pick the runtime version used
+          during the CreateVersion request for this model version, or choose the
+          latest stable version when model version information is not available
+          such as when the model is specified by uri.
+        type: string
+      uri:
+        description: Use this field if you want to specify a GCS path to the model to use.
         type: string
       versionName:
         description: |-
@@ -1272,6 +1342,13 @@ definitions:
       hyperparameters:
         $ref: '#/definitions/GoogleCloudMlV1beta1__HyperparameterSpec'
         description: Optional. The set of Hyperparameters to tune.
+      jobDir:
+        description: |-
+          Optional. A GCS path in which to store training outputs and other data
+          needed for training. This path will be passed to your TensorFlow program as
+          the 'job_dir' command-line arg. The benefit of specifying this field is that
+          Cloud ML will validate the path for use in training.
+        type: string
       masterType:
         description: |-
           Optional. Specifies the type of virtual machine to use for your training
@@ -1358,6 +1435,7 @@ definitions:
           - BASIC
           - STANDARD_1
           - PREMIUM_1
+          - BASIC_GPU
           - CUSTOM
         type: string
       workerCount:
@@ -1452,11 +1530,6 @@ definitions:
 
           The version name must be unique within the model it is created in.
         type: string
-      onlinePredictionLogging:
-        description: |-
-          Optional. If true, enables StackDriver Logging for online prediction.
-          Default is false.
-        type: boolean
       runtimeVersion:
         description: |-
           Optional. The Google Cloud ML runtime version to use for this deployment.

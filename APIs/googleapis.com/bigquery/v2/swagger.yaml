@@ -1132,6 +1132,9 @@ definitions:
         description: Number of records written by the stage.
         format: int64
         type: string
+      status:
+        description: Current status for the stage.
+        type: string
       steps:
         description: List of operations within the stage in dependency order (approximately chronological).
         items:
@@ -1377,7 +1380,7 @@ definitions:
         format: int32
         type: integer
       nullMarker:
-        description: '[Optional] This string will be interpreted as a null value when it appears in a CSV file. The default value is the empty string. Please refer to the documentation for further information.'
+        description: '[Optional] Specifies a string that represents a null value in a CSV file. For example, if you specify "\N", BigQuery interprets "\N" as a null value when loading a CSV file. The default value is the empty string. If you set this property to a custom value, BigQuery still interprets the empty string as a null value for all data types except for STRING and BYTE. For STRING and BYTE columns, BigQuery interprets the empty string as an empty value.'
         type: string
       projectionFields:
         description: '[Experimental] If sourceFormat is set to "DATASTORE_BACKUP", indicates which entity properties to load into BigQuery from a Cloud Datastore backup. Property names are case sensitive and must be top-level properties. If no properties are specified, BigQuery loads all properties. If any named property isn''t found in the Cloud Datastore backup, an invalid error is returned in the job result.'
@@ -1447,7 +1450,7 @@ definitions:
         format: int64
         type: string
       parameterMode:
-        description: '[Experimental] Standard SQL only. Whether to use positional (?) or named (@myparam) query parameters in this query.'
+        description: '[Experimental] Standard SQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (@myparam) query parameters in this query.'
         type: string
       preserveNulls:
         description: '[Deprecated] This property is deprecated.'
@@ -1799,7 +1802,7 @@ definitions:
         format: uint32
         type: integer
       parameterMode:
-        description: '[Experimental] Standard SQL only. Whether to use positional (?) or named (@myparam) query parameters in this query.'
+        description: '[Experimental] Standard SQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (@myparam) query parameters in this query.'
         type: string
       preserveNulls:
         description: '[Deprecated] This property is deprecated.'

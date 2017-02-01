@@ -121,12 +121,6 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer clients than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
             A token identifying a page of results the server should return.
             Typically, this is the value of
             ListClientsResponse.nextPageToken
@@ -135,6 +129,12 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: |-
+            Requested page size. The server may return fewer clients than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -146,19 +146,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
     post:
       description: Creates a new client buyer.
       operationId: adexchangebuyer2.accounts.clients.create
@@ -210,19 +210,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
     put:
       description: Updates an existing client buyer.
       operationId: adexchangebuyer2.accounts.clients.update
@@ -303,19 +303,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Creates and sends out an email invitation to access
@@ -381,19 +381,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
   '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/users':
     get:
       description: |-
@@ -419,12 +419,6 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer clients than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
             A token identifying a page of results the server should return.
             Typically, this is the value of
             ListClientUsersResponse.nextPageToken
@@ -433,6 +427,12 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: |-
+            Requested page size. The server may return fewer clients than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -444,19 +444,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
   '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/users/{userId}':
     get:
       description: Retrieves an existing client user.
@@ -490,19 +490,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
     put:
       description: |-
         Updates an existing client user.

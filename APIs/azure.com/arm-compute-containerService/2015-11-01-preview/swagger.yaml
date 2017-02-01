@@ -47,7 +47,7 @@ parameters:
     required: true
     type: string
   SubscriptionIdParameter:
-    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
@@ -372,6 +372,7 @@ definitions:
       - adminUsername
       - adminPassword
   Resource:
+    description: The Resource model definition.
     properties:
       id:
         description: Resource Id

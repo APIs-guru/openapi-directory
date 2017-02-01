@@ -1787,7 +1787,7 @@ definitions:
         description: HTTP 1.1 Entity tag for the bucket.
         type: string
       id:
-        description: The ID of the bucket.
+        description: 'The ID of the bucket. For buckets, the id and name properities are the same.'
         type: string
       kind:
         default: 'storage#bucket'
@@ -2111,7 +2111,7 @@ definitions:
         format: int64
         type: string
       id:
-        description: The ID of the object.
+        description: 'The ID of the object, including the bucket name, object name, and generation number.'
         type: string
       kind:
         default: 'storage#object'
@@ -2134,7 +2134,7 @@ definitions:
         format: int64
         type: string
       name:
-        description: The name of this object. Required if not specified by URL parameter.
+        description: The name of the object. Required if not specified by URL parameter.
         type: string
       owner:
         description: The owner of the object. This will always be the uploader of the object.

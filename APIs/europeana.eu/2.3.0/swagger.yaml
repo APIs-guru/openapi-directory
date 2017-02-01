@@ -6,7 +6,7 @@ basePath: /api
 info:
   contact:
     name: 'http://labs.europeana.eu/api'
-  description: 'This Swagger API console provides an overview of and interface to the Europeana REST API. You can build and test anything from the simplest search to a complex query using facetList such as dates, geotags and permissions. For more help and information, head to our comprehensive <a href="http://labs.europeana.api/api/">online documentation</a>.'
+  description: 'This Swagger API console provides an overview of an interface to the Europeana REST API. You can build and test anything from the simplest search to a complex query using facetList such as dates, geotags and permissions. For more help and information, head to our comprehensive <a href="http://labs.europeana.eu/api/">online documentation</a>.'
   license:
     name: API terms of use
     url: 'http://www.europeana.eu/portal/en/rights/api.html'
@@ -122,7 +122,7 @@ paths:
         - Providers and Datasets
   /v2/opensearch.rss:
     get:
-      operationId: suggestions
+      operationId: openSearch
       parameters:
         - description: searchTerms
           in: query
@@ -143,7 +143,8 @@ paths:
           type: integer
       produces:
         - application/xml
-        - '*/*'
+        - application/rss+xml
+        - application/xhtml+xml
       responses:
         '200':
           description: OK
@@ -562,7 +563,7 @@ paths:
         - Search
   /v2/suggestions.json:
     get:
-      operationId: suggestions_1
+      operationId: suggestions
       parameters:
         - description: query
           in: query

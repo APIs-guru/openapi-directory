@@ -285,6 +285,19 @@ paths:
       summary: shows unread notifications of authorized user
       tags:
         - me
+  /v2/organisations:
+    get:
+      description: |+
+
+        <p>This endpoint requires the API key from a user. The result is a set of organisations and their API keys.</p>
+
+      operationId: GET--version-organisations---format-
+      responses:
+        '200':
+          description: No response was specified
+      summary: Returns the list of organisations you have access to
+      tags:
+        - organisations
   '/v2/organisations/{orga_name}/inventory':
     get:
       description: |+
@@ -971,6 +984,28 @@ paths:
         - description: your personal token for API.
           in: formData
           name: api_key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: creates new sessions
+      tags:
+        - sessions
+  /v2/sessions/login:
+    post:
+      description: |
+        <p>You need to append your api_key to request.</p>
+      operationId: POST--version-sessions-login---format-
+      parameters:
+        - description: email or username
+          in: formData
+          name: username
+          required: true
+          type: string
+        - description: password
+          in: formData
+          name: password
           required: true
           type: string
       responses:

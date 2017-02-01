@@ -674,6 +674,356 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfMetricsSummary':
+    get:
+      description: |-
+        Retrieves a PerfMetricsSummary.
+
+        May return any of the following error code(s): - NOT_FOUND - The specified PerfMetricsSummary does not exist
+      operationId: toolresults.projects.histories.executions.steps.getPerfMetricsSummary
+      parameters:
+        - description: The cloud project
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: A tool results history ID.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: A tool results execution ID.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PerfMetricsSummary'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: |-
+        Creates a PerfMetricsSummary resource.
+
+        May return any of the following error code(s): - ALREADY_EXISTS - A PerfMetricSummary already exists for the given Step - NOT_FOUND - The containing Step does not exist
+      operationId: toolresults.projects.histories.executions.steps.perfMetricsSummary.create
+      parameters:
+        - description: The cloud project
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: A tool results history ID.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: A tool results execution ID.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PerfMetricsSummary'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PerfMetricsSummary'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries':
+    get:
+      description: |-
+        Lists PerfSampleSeries for a given Step.
+
+        The request provides an optional filter which specifies one or more PerfMetricsType to include in the result; if none returns all. The resulting PerfSampleSeries are sorted by ids.
+
+        May return any of the following canonical error codes: - NOT_FOUND - The containing Step does not exist
+      operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.list
+      parameters:
+        - description: The cloud project
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: A tool results history ID.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: A tool results execution ID.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: Specify one or more PerfMetricType values such as CPU to filter the result
+          in: query
+          items:
+            enum:
+              - cpu
+              - memory
+              - network
+              - perfMetricTypeUnspecified
+            type: string
+          name: filter
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListPerfSampleSeriesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: |-
+        Creates a PerfSampleSeries.
+
+        May return any of the following error code(s): - ALREADY_EXISTS - PerfMetricSummary already exists for the given Step - NOT_FOUND - The containing Step does not exist
+      operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.create
+      parameters:
+        - description: The cloud project
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: A tool results history ID.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: A tool results execution ID.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PerfSampleSeries'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PerfSampleSeries'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}':
+    get:
+      description: |-
+        Gets a PerfSampleSeries.
+
+        May return any of the following error code(s): - NOT_FOUND - The specified PerfSampleSeries does not exist
+      operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.get
+      parameters:
+        - description: The cloud project
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: A tool results history ID.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: A tool results execution ID.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
+          type: string
+        - description: A sample series id
+          in: path
+          name: sampleSeriesId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PerfSampleSeries'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}/samples':
+    get:
+      description: |-
+        Lists the Performance Samples of a given Sample Series - The list results are sorted by timestamps ascending - The default page size is 500 samples; and maximum size allowed 5000 - The response token indicates the last returned PerfSample timestamp - When the results size exceeds the page size, submit a subsequent request including the page token to return the rest of the samples up to the page limit
+
+        May return any of the following canonical error codes: - OUT_OF_RANGE - The specified request page_token is out of valid range - NOT_FOUND - The containing PerfSampleSeries does not exist
+      operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.samples.list
+      parameters:
+        - description: The cloud project
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: A tool results history ID.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: A tool results execution ID.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
+          type: string
+        - description: A sample series id
+          in: path
+          name: sampleSeriesId
+          required: true
+          type: string
+        - description: 'The default page size is 500 samples, and the maximum size is 5000. If the page_size is greater than 5000, the effective page size will be 5000'
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional, the next_page_token returned in the previous response'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListPerfSamplesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}/samples:batchCreate':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: |-
+        Creates a batch of PerfSamples - a client can submit multiple batches of Perf Samples through repeated calls to this method in order to split up a large request payload - duplicates and existing timestamp entries will be ignored. - the batch operation may partially succeed - the set of elements successfully inserted is returned in the response (omits items which already existed in the database).
+
+        May return any of the following canonical error codes: - NOT_FOUND - The containing PerfSampleSeries does not exist
+      operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.samples.batchCreate
+      parameters:
+        - description: The cloud project
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: A tool results history ID.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: A tool results execution ID.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
+          type: string
+        - description: A sample series id
+          in: path
+          name: sampleSeriesId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchCreatePerfSamplesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchCreatePerfSamplesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/thumbnails':
     get:
       description: |-
@@ -938,6 +1288,65 @@ definitions:
         format: byte
         type: string
     type: object
+  BasicPerfSampleSeries:
+    description: Encapsulates the metadata for basic sample series represented by a line chart
+    properties:
+      perfMetricType:
+        enum:
+          - cpu
+          - memory
+          - network
+          - perfMetricTypeUnspecified
+        type: string
+      perfUnit:
+        enum:
+          - kibibyte
+          - percent
+          - perfUnitUnspecified
+        type: string
+      sampleSeriesLabel:
+        enum:
+          - cpuKernel
+          - cpuTotal
+          - cpuUser
+          - memoryRssPrivate
+          - memoryRssShared
+          - memoryRssTotal
+          - ntBytesReceived
+          - ntBytesTransferred
+          - sampleSeriesTypeUnspecified
+        type: string
+    type: object
+  BatchCreatePerfSamplesRequest:
+    description: The request must provide up to a maximum of 5000 samples to be created; a larger sample size will cause an INVALID_ARGUMENT error
+    properties:
+      perfSamples:
+        description: The set of PerfSamples to create should not include existing timestamps
+        items:
+          $ref: '#/definitions/PerfSample'
+        type: array
+    type: object
+  BatchCreatePerfSamplesResponse:
+    properties:
+      perfSamples:
+        items:
+          $ref: '#/definitions/PerfSample'
+        type: array
+    type: object
+  CPUInfo:
+    properties:
+      cpuProcessor:
+        description: description of the device processor ie '1.8 GHz hexa core 64-bit ARMv8-A'
+        type: string
+      cpuSpeedInGhz:
+        description: the CPU clock speed in GHz
+        format: float
+        type: number
+      numberOfCores:
+        description: the number of CPU cores
+        format: int32
+        type: integer
+    type: object
   Duration:
     description: |-
       A Duration represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like "day" or "month". It is related to Timestamp in that the difference between two Timestamp values is a Duration and it can be added or subtracted from a Timestamp. Range is approximately +-10,000 years.
@@ -1170,6 +1579,24 @@ definitions:
           Tokens are valid for up to one hour from the time of the first list request. For instance, if you make a list request at 1PM and use the token from this first request 10 minutes later, the token from this second response will only be valid for 50 minutes.
         type: string
     type: object
+  ListPerfSampleSeriesResponse:
+    properties:
+      perfSampleSeries:
+        description: The resulting PerfSampleSeries sorted by id
+        items:
+          $ref: '#/definitions/PerfSampleSeries'
+        type: array
+    type: object
+  ListPerfSamplesResponse:
+    properties:
+      nextPageToken:
+        description: 'Optional, returned if result size exceeds the page size specified in the request (or the default page size, 500, if unspecified). It indicates the last sample timestamp to be used as page_token in subsequent request'
+        type: string
+      perfSamples:
+        items:
+          $ref: '#/definitions/PerfSample'
+        type: array
+    type: object
   ListStepThumbnailsResponse:
     description: A response containing the thumbnails in a step.
     properties:
@@ -1202,6 +1629,17 @@ definitions:
         items:
           $ref: '#/definitions/Step'
         type: array
+    type: object
+  MemoryInfo:
+    properties:
+      memoryCapInKibibyte:
+        description: Maximum memory that can be allocated to the process in KiB
+        format: int64
+        type: string
+      memoryTotalInKibibyte:
+        description: Total memory available on the device in KiB
+        format: int64
+        type: string
     type: object
   Outcome:
     description: Interprets a result so that humans and machines can act on it.
@@ -1249,6 +1687,78 @@ definitions:
           - skipped
           - success
           - unset
+        type: string
+    type: object
+  PerfEnvironment:
+    description: Encapsulates performance environment info
+    properties:
+      cpuInfo:
+        $ref: '#/definitions/CPUInfo'
+        description: CPU related environment info
+      memoryInfo:
+        $ref: '#/definitions/MemoryInfo'
+        description: Memory related environment info
+    type: object
+  PerfMetricsSummary:
+    description: A summary of perf metrics collected and performance environment info
+    properties:
+      executionId:
+        description: A tool results execution ID.
+        type: string
+      historyId:
+        description: A tool results history ID.
+        type: string
+      perfEnvironment:
+        $ref: '#/definitions/PerfEnvironment'
+        description: Describes the environment in which the performance metrics were collected
+      perfMetrics:
+        description: Set of resource collected
+        items:
+          enum:
+            - cpu
+            - memory
+            - network
+            - perfMetricTypeUnspecified
+          type: string
+        type: array
+      projectId:
+        description: The cloud project
+        type: string
+      stepId:
+        description: A tool results step ID.
+        type: string
+    type: object
+  PerfSample:
+    description: Resource representing a single performance measure or data point
+    properties:
+      sampleTime:
+        $ref: '#/definitions/Timestamp'
+        description: Timestamp of collection
+      value:
+        description: Value observed
+        format: double
+        type: number
+    type: object
+  PerfSampleSeries:
+    description: Resource representing a collection of performance samples (or data points)
+    properties:
+      basicPerfSampleSeries:
+        $ref: '#/definitions/BasicPerfSampleSeries'
+        description: Basic series represented by a line chart
+      executionId:
+        description: A tool results execution ID.
+        type: string
+      historyId:
+        description: A tool results history ID.
+        type: string
+      projectId:
+        description: The cloud project
+        type: string
+      sampleSeriesId:
+        description: A sample series id
+        type: string
+      stepId:
+        description: A tool results step ID.
         type: string
     type: object
   ProjectSettings:
@@ -1677,6 +2187,8 @@ definitions:
     description: |-
       A Timestamp represents a point in time independent of any time zone or calendar, represented as seconds and fractions of seconds at nanosecond resolution in UTC Epoch time. It is encoded using the Proleptic Gregorian Calendar which extends the Gregorian calendar backwards to year one. It is encoded assuming all minutes are 60 seconds long, i.e. leap seconds are "smeared" so that no leap second table is needed for interpretation. Range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure that we can convert to and from RFC 3339 date strings. See [https://www.ietf.org/rfc/rfc3339.txt](https://www.ietf.org/rfc/rfc3339.txt).
 
+      # Examples
+
       Example 1: Compute Timestamp from POSIX `time()`.
 
       Timestamp timestamp; timestamp.set_seconds(time(NULL)); timestamp.set_nanos(0);
@@ -1704,6 +2216,14 @@ definitions:
       Example 5: Compute Timestamp from current time in Python.
 
       timestamp = Timestamp() timestamp.GetCurrentTime()
+
+      # JSON Mapping
+
+      In JSON format, the Timestamp type is encoded as a string in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z" where {year} is always expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution), are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone is required, though only UTC (as indicated by "Z") is presently supported.
+
+      For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past 01:30 UTC on January 15, 2017.
+
+      In JavaScript, one can convert a Date object to this format using the standard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString] method. In Python, a standard `datetime.datetime` object can be converted to this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use the Joda Time's [`ISODateTimeFormat.dateTime()`]( http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()) to obtain a formatter capable of generating timestamps in this format.
     properties:
       nanos:
         description: 'Non-negative fractions of a second at nanosecond resolution. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be from 0 to 999,999,999 inclusive.'

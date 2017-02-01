@@ -8,7 +8,7 @@ info:
     email: developer-support@citrixonline.com
     name: Developer Support
     url: 'https://developer.citrixonline.com'
-  description: 'The Citrix GoToTraining API enables developers to use the stable and robust GoToTraining functionality as the basis for online trainings in a proprietary learning management system. The GoToTraining APIs provide the ability to access the scheduling, registration, management, and reporting functions of GoToTraining from external applications. With the ability to tightly integrate GoToTraining into your learning infrastructure, you can offer your learners a seamless user experience and provide them with a market leading virtual classroom environment.'
+  description: 'The GoToTraining API enables developers to use the stable and robust GoToTraining functionality as the basis for online trainings in a proprietary learning management system. The GoToTraining APIs provide the ability to access the scheduling, registration, management, and reporting functions of GoToTraining from external applications. With the ability to tightly integrate GoToTraining into your learning infrastructure, you can offer your learners a seamless user experience and provide them with a market leading virtual classroom environment.'
   termsOfService: 'https://developer.citrixonline.com/terms-use'
   title: GoToTraining
   version: 1.0.0
@@ -332,7 +332,7 @@ paths:
         - Registrations
   '/organizers/{organizerKey}/trainings/{trainingKey}/registrants/{registrantKey}':
     delete:
-      description: 'This call cancels a registration in a scheduled training for a specific registrant. If the registrant has paid for the training, a cancellation cannot be completed with this method; it must be completed on the Citrix external admin site. No notification is sent to the registrant or the organizer by default. The registrant can re-register if needed.'
+      description: 'This call cancels a registration in a scheduled training for a specific registrant. If the registrant has paid for the training, a cancellation cannot be completed with this method; it must be completed on the external admin site. No notification is sent to the registrant or the organizer by default. The registrant can re-register if needed.'
       operationId: cancelRegistration
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -953,7 +953,7 @@ definitions:
         $ref: '#/definitions/RegistrationSettings'
         description: 'Training settings, namely web registration and confirmation emails to the training registrants'
       timeZone:
-        description: 'Time zone of the training. (Must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones)'
+        description: 'Time zone of the training. (Must be a valid time zone ID, see https://developer.citrixonline.com/time-zones)'
         type: string
       times:
         description: Array with startDate and endDate for the training sessions
@@ -974,7 +974,7 @@ definitions:
         description: Notify trainers via email of change to training. Default is true
         type: boolean
       timeZone:
-        description: 'Time zone of the training. Must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones'
+        description: 'Time zone of the training. Must be a valid time zone ID, see https://developer.citrixonline.com/time-zones'
         type: string
       times:
         description: Start and end times for the training sessions

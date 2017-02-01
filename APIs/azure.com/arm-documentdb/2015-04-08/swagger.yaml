@@ -299,6 +299,17 @@ definitions:
       - $ref: '#/definitions/Resource'
     description: Parameters to create and update DocumentDB database accounts.
     properties:
+      kind:
+        default: GlobalDocumentDB
+        description: Indicates the type of database account. This can only be set at database account creation.
+        enum:
+          - GlobalDocumentDB
+          - MongoDB
+          - Parse
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DatabaseAccountKind
       properties:
         $ref: '#/definitions/DatabaseAccountCreateUpdateProperties'
         x-ms-client-flatten: true

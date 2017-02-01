@@ -8,7 +8,7 @@ info:
     email: developer-support@citrixonline.com
     name: Developer Support
     url: 'https://developer.citrixonline.com'
-  description: '<br>The Citrix GoToMeeting API provides seamless integration of GoToMeeting provisioning and meeting management into your existing infrastructure or third party applications.<br><br>For customers, the ability to add, suspend or delete an organizer in your GoToMeeting Corporate account from within your primary management systems simplifies and streamlines the entire process of account management. The ability to monitor meeting schedules, history and active meeting status allows managers to leverage GoToMeeting activities through your primary applications.<br><br>For third parties, the ability to create, update or delete a meeting from within your application makes real-time collaboration possible for your customers. The ability to update meeting schedules, view history and scheduled meetings, and view attendees from past meetings allows you to enhance your users'' experience and the value of your applications.'
+  description: '<br>The GoToMeeting API provides seamless integration of GoToMeeting provisioning and meeting management into your existing infrastructure or third party applications.<br><br>For customers, the ability to add, suspend or delete an organizer in your GoToMeeting Corporate account from within your primary management systems simplifies and streamlines the entire process of account management. The ability to monitor meeting schedules, history and active meeting status allows managers to leverage GoToMeeting activities through your primary applications.<br><br>For third parties, the ability to create, update or delete a meeting from within your application makes real-time collaboration possible for your customers. The ability to update meeting schedules, view history and scheduled meetings, and view attendees from past meetings allows you to enhance your users'' experience and the value of your applications.'
   termsOfService: 'https://developer.citrixonline.com/terms-use'
   title: GoToMeeting
   version: 1.0.0
@@ -110,7 +110,7 @@ paths:
         - Groups
   '/groups/{groupKey}/historicalMeetings':
     get:
-      description: Get historical meetings for a specified group within a specified date range. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.
+      description: 'Get historical meetings for the specified group that started within the specified date/time range. This API call is only available to users with the admin role. This API call is restricted to groups with a maximum of 50 organizers. Remark: Meetings which are still ongoing at the time of the request are NOT contained in the result array.'
       parameters:
         - $ref: '#/parameters/Authorization'
         - $ref: '#/parameters/groupKey'
@@ -249,7 +249,7 @@ paths:
         - Groups
   /historicalMeetings:
     get:
-      description: Gets historical meetings for the current authenticated organizer. Requires date range for filtering results to only meetings within specified dates.
+      description: 'Get historical meetings for the currently authenticated organizer that started within the specified date/time range. Remark: Meetings which are still ongoing at the time of the request are NOT contained in the result array.'
       parameters:
         - $ref: '#/parameters/Authorization'
         - description: 'Required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
@@ -580,7 +580,7 @@ paths:
         - Organizers
   '/organizers/{organizerKey}/historicalMeetings':
     get:
-      description: Get historical meetings for a specified organizer within a specified date range. This API call is only available to users with the admin role.
+      description: 'Get historical meetings for the specified organizer that started within the specified date/time range. Remark: Meetings which are still ongoing at the time of the request are NOT contained in the result array.'
       parameters:
         - $ref: '#/parameters/Authorization'
         - $ref: '#/parameters/organizerKey'

@@ -247,7 +247,7 @@ paths:
   '/domains/{source_language}':
     get:
       description: |
-        Returns a list of the available domains for a given monolingual language dataset.
+        Returns a list of the available [domains](/glossary?tag=#domains&expand) for a given monolingual language dataset.
       parameters:
         - $ref: '#/parameters/bilingual-source_language'
         - $ref: '#/parameters/appId'
@@ -256,7 +256,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/Labels'
+            $ref: '#/definitions/UtilityLabels'
             title: DomainsResults
         '404':
           description: Unknown source_language.
@@ -266,7 +266,7 @@ paths:
   '/domains/{source_language}/{target_language}':
     get:
       description: |
-        Returns a list of the available domains for a given bilingual language dataset.
+        Returns a list of the available [domains](/glossary?tag=#domains&expand) for a given bilingual language dataset.
       parameters:
         - $ref: '#/parameters/bilingual-source_language'
         - $ref: '#/parameters/bilingual-target_language'
@@ -276,7 +276,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/Labels'
+            $ref: '#/definitions/UtilityLabels'
             title: DomainsResults
         '400':
           description: source_language and target_language are same.
@@ -289,7 +289,7 @@ paths:
     get:
       description: |
 
-        Retrieve list of sentences and list of senses (English language only).
+        Retrieve list of sentences and list of [senses](/glossary?tag=#sense&expand) (English language only).
           <div id="sentences"></div>
       externalDocs:
         description: find more info here
@@ -303,7 +303,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/Sentences'
+            $ref: '#/definitions/SentencesResults'
             title: SentencesResults
         '404':
           description: |
@@ -348,7 +348,7 @@ paths:
     get:
       description: |
 
-        Retrieve available antonyms for a given word and language. 
+        Retrieve available [antonyms](/glossary?tag=#thesaurus&expand) for a given word and language. 
 
           <div id="antonyms"></div>
       externalDocs:
@@ -363,8 +363,8 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/RetrieveEntry'
-            title: RetrieveEntryResults
+            $ref: '#/definitions/Thesaurus'
+            title: ThesaurusResults
         '404':
           description: |
             No entry is found matching supplied id and source_lang or filters are not recognized
@@ -507,7 +507,7 @@ paths:
     get:
       description: |
 
-        Retrieve available synonyms for a given word and language. 
+        Retrieve available [synonyms](/glossary?tag=#thesaurus&expand) for a given word and language. 
 
           <div id="synonyms"></div>
       externalDocs:
@@ -522,8 +522,8 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/RetrieveEntry'
-            title: RetrieveEntryResults
+            $ref: '#/definitions/Thesaurus'
+            title: ThesaurusResults
         '404':
           description: |
             No entry is found matching supplied id and source_lang or filters are not recognized
@@ -537,7 +537,7 @@ paths:
     get:
       description: |
 
-        Retrieve available synonyms and antonyms for a given word and language. 
+        Retrieve available [synonyms and antonyms](/glossary?tag=#thesaurus&expand) for a given word and language. 
 
           <div id="synonyms_and_antonyms"></div>
       externalDocs:
@@ -552,8 +552,8 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/RetrieveEntry'
-            title: RetrieveEntryResults
+            $ref: '#/definitions/Thesaurus'
+            title: ThesaurusResults
         '404':
           description: |
             No entry is found matching supplied id and source_lang or filters are not recognized
@@ -567,7 +567,7 @@ paths:
     get:
       description: |
         Returns target language translations for a given word ID and source language. 
-        In the event that a word in the dataset does not have a direct translation, the response will be a definition in the target language.
+        In the event that a word in the dataset does not have a direct translation, the response will be a [definition](/glossary?tag=#entry&expand) in the target language.
 
           <div id="translation"></div>
       parameters:
@@ -586,7 +586,7 @@ paths:
           description: Successful response. In case word doesn't have a direct translation a response would be definitions.
           schema:
             $ref: '#/definitions/RetrieveEntry'
-            title: TranslationsResults
+            title: InflectionsResults
         '400':
           description: any of target languages is unknown
         '404':
@@ -678,7 +678,7 @@ paths:
   '/grammaticalFeatures/{source_language}':
     get:
       description: |
-        Returns a list of the available grammatical features for a given language dataset.
+        Returns a list of the available [grammatical features](/glossary?tag=#grammaticalfeatures&expand) for a given language dataset.
       parameters:
         - $ref: '#/parameters/grammaticalFeatures-sourceLanguage'
         - $ref: '#/parameters/appId'
@@ -687,8 +687,8 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/Regions'
-            title: GrammaticalFeaturesResults
+            $ref: '#/definitions/UtilityLabels'
+            title: RegistersResults
         '404':
           description: Unknown source_language.
       summary: Lists available grammatical features in a given language dataset.
@@ -778,7 +778,7 @@ paths:
   '/lexicalcategories/{language}':
     get:
       description: |
-        Returns a list of available lexical categories for a given language dataset.
+        Returns a list of available [lexical categories](/glossary?tag=#lexicalcategory&expand) for a given language dataset.
       parameters:
         - $ref: '#/parameters/bilingual-language'
         - $ref: '#/parameters/appId'
@@ -787,7 +787,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/Labels'
+            $ref: '#/definitions/UtilityLabels'
             title: LexicalCategoriesResults
         '404':
           description: Unknown language.
@@ -799,7 +799,7 @@ paths:
   '/regions/{source_language}':
     get:
       description: |
-        Returns a list of the available regions for a given monolingual language dataset.
+        Returns a list of the available [regions](/glossary?tag=#regions&expand) for a given monolingual language dataset.
       parameters:
         - $ref: '#/parameters/regions-source_lang'
         - $ref: '#/parameters/appId'
@@ -818,7 +818,7 @@ paths:
   '/registers/{source_language}':
     get:
       description: |
-        Returns a list of the available registers for a given monolingual language dataset.
+        Returns a list of the available [registers](/glossary?tag=#registers&expand) for a given monolingual language dataset.
       parameters:
         - $ref: '#/parameters/bilingual-source_language'
         - $ref: '#/parameters/appId'
@@ -827,7 +827,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/Labels'
+            $ref: '#/definitions/UtilityLabels'
             title: RegistersResults
         '404':
           description: Unknown source_language.
@@ -839,7 +839,7 @@ paths:
   '/registers/{source_language}/{target_language}':
     get:
       description: |
-        Returns a list of the available registers for a given bilingual language dataset.
+        Returns a list of the available [registers](/glossary?tag=#registers&expand) for a given bilingual language dataset.
       parameters:
         - $ref: '#/parameters/bilingual-source_language'
         - $ref: '#/parameters/bilingual-target_language'
@@ -849,7 +849,7 @@ paths:
         '200':
           description: Successful response.
           schema:
-            $ref: '#/definitions/Labels'
+            $ref: '#/definitions/UtilityLabels'
             title: RegistersResults
         '400':
           description: source_language and target_language are same.
@@ -980,7 +980,7 @@ paths:
   '/wordlist/{source_lang}/{filters_advanced}':
     get:
       description: |
-        Advanced options for retrieving wordlist - exclude filter, filter by word length or match by substring (prefix). 
+        Advanced options for retrieving [wordlist](/glossary?tag=#wordlist&expand) - exclude filter, filter by word length or match by substring (prefix). 
 
           <div id="wordlist_advanced"></div>
       parameters:
@@ -1058,7 +1058,7 @@ paths:
   '/wordlist/{source_lang}/{filters_basic}':
     get:
       description: |
-        Retrieve list of words for particular domain, lexical category register and/or region.  
+        Retrieve list of words for particular [domain](/glossary?tag=#domain&expand), [lexical category](/glossary?tag=#lexicalcategory&expand), [register](/glossary?tag=#register&expand) and/or [region](/glossary?tag=#region&expand).  
 
           <div id="wordlist"></div>
       parameters:
@@ -1099,57 +1099,81 @@ paths:
       tags:
         - Wordlist
 definitions:
-  CrossReference:
-    description: cross references of a sense
-    properties:
-      id:
-        description: The word id of cooccurrence
-        type: string
-      sense_id:
-        description: The id of the sense that co-occurs
-        type: string
-      text:
-        description: The word of cooccurrence
-        type: string
-      type:
-        description: 'The type of relation between the two words. Possible values are ''close match'', ''related'', ''see also'', ''variant spelling'', and ''abbreviation'' in case of crossreferences, or ''pre'', ''post'' in case of collocates.'
-        type: string
-    type: object
+  CrossReferencesList:
+    description: 'A reference to another word that is closely related, might provide additional information about the subject, has a variant spelling or is an abbreviated form of it.'
+    items:
+      additionalProperties: false
+      description: cross references of a sense
+      properties:
+        id:
+          description: The word id of cooccurrence
+          type: string
+        text:
+          description: The word of cooccurrence
+          type: string
+        type:
+          description: 'The type of relation between the two words. Possible values are ''close match'', ''related'', ''see also'', ''variant spelling'', and ''abbreviation'' in case of crossreferences, or ''pre'', ''post'' in case of collocates.'
+          type: string
+      required:
+        - id
+        - text
+        - type
+      type: object
+    minItems: 1
+    type: array
   Entry:
+    additionalProperties: false
+    minProperties: 1
     properties:
-      editorialNotes:
-        $ref: '#/definitions/arrayofstrings'
-        description: Editorial information intended to help a human reader understand the sense
       etymologies:
         $ref: '#/definitions/arrayofstrings'
         description: The origin of the word and the way in which its meaning has changed throughout history
       grammaticalFeatures:
-        description: The different forms are correlated with meanings or functions which we text as 'features'
-        items:
-          properties:
-            text:
-              type: string
-            type:
-              type: string
-          type: object
-        type: array
+        $ref: '#/definitions/GrammaticalFeaturesList'
       homographNumber:
         description: Identifies the homograph grouping. The last two digits identify different entries of the same homograph. The first one/two digits identify the homograph number.
         type: string
       pronunciations:
-        description: A grouping of pronunciation information
-        items:
-          $ref: '#/definitions/Pronunciation'
-        type: array
+        $ref: '#/definitions/PronunciationsList'
       senses:
         description: Complete list of senses
         items:
           $ref: '#/definitions/Sense'
+        minItems: 1
         type: array
       variantForms:
-        $ref: '#/definitions/VariantForms'
+        $ref: '#/definitions/VariantFormsList'
         description: 'Various words that are used interchangeably depending on the context, e.g ''a'' and ''an'''
     type: object
+  ExamplesList:
+    description: A list of written or spoken rendering of examples of use of a word or text
+    items:
+      additionalProperties: false
+      properties:
+        definitions:
+          $ref: '#/definitions/arrayofstrings'
+          description: A list of statements of the exact meaning of a word
+        domains:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A subject, discipline, or branch of knowledge particular to the Sense'
+        regions:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A particular area in which the pronunciation occurs, e.g. ''Great Britain'''
+        registers:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+        senseIds:
+          $ref: '#/definitions/arrayofstrings'
+          description: The list of sense identifiers related to the example. Provided in the sentences endpoint only.
+        text:
+          type: string
+        translations:
+          $ref: '#/definitions/TranslationsList'
+      required:
+        - text
+      type: object
+    minItems: 1
+    type: array
   Filters:
     description: Schema for the Filters endpoint.
     properties:
@@ -1157,37 +1181,140 @@ definitions:
         description: Additional Information provided by OUP
         type: object
       results:
+        additionalProperties: false
         description: A mapping of filters available per endpoints.
+        minProperties: 1
         properties:
           entries:
             $ref: '#/definitions/arrayofstrings'
-            description: A list of filters available for Dictionary Entry endpoint
+            description: A list of filters available for Retrieve Entry endpoint
           inflections:
             $ref: '#/definitions/arrayofstrings'
-            description: A list of filters available for Lemmatron endpoint
+            description: A list of filters available for LEMMATRON endpoint
           translations:
             $ref: '#/definitions/arrayofstrings'
-            description: A list of filters available for Translation endpoint
+            description: A list of filters available for Translations endpoint
+          wordlist:
+            $ref: '#/definitions/arrayofstrings'
+            description: A list of filters available for Translations endpoint
         type: object
-  Inflection:
-    description: A grouping of the modifications of a word to express different grammatical categories
+  GrammaticalFeaturesList:
+    description: The different forms are correlated with meanings or functions which we text as 'features'
+    items:
+      additionalProperties: false
+      properties:
+        text:
+          type: string
+        type:
+          type: string
+      required:
+        - text
+        - type
+      type: object
+    minItems: 1
+    type: array
+  HeadwordEntry:
+    additionalProperties: false
+    description: Description of a word
     properties:
       id:
-        description: Inflected word ID
+        description: The identifier of a word
         type: string
-      text:
+      language:
+        description: IANA language code
         type: string
+      lexicalEntries:
+        description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+        items:
+          $ref: '#/definitions/lexicalEntry'
+        minItems: 1
+        type: array
+      pronunciations:
+        $ref: '#/definitions/PronunciationsList'
+      type:
+        description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+        type: string
+      word:
+        description: 'A given written or spoken realisation of a an entry, lowercased.'
+        type: string
+    required:
+      - id
+      - language
+      - lexicalEntries
+      - word
     type: object
-  Labels:
-    description: 'Schema for lexicalcategories, registers utility endpoints.'
+  HeadwordLemmatron:
+    additionalProperties: false
+    description: Description of an inflected form of a word
     properties:
-      metadata:
-        description: Additional Information provided by OUP
-        type: object
-      results:
-        $ref: '#/definitions/patternProperties'
-        description: Mapping of labels available.
-        type: object
+      id:
+        description: The identifier of a word
+        type: string
+      language:
+        description: IANA language code
+        type: string
+      lexicalEntries:
+        description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+        items:
+          $ref: '#/definitions/LemmatronLexicalEntry'
+        minItems: 1
+        type: array
+      type:
+        description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+        type: string
+      word:
+        description: 'A given written or spoken realisation of a an entry, lowercased.'
+        type: string
+    required:
+      - id
+      - language
+      - lexicalEntries
+      - word
+    type: object
+  HeadwordThesaurus:
+    additionalProperties: false
+    description: description of thesaurus information of a word
+    properties:
+      id:
+        description: The identifier of a word
+        type: string
+      language:
+        description: IANA language code
+        type: string
+      lexicalEntries:
+        description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+        items:
+          $ref: '#/definitions/ThesaurusLexicalEntry'
+        minItems: 1
+        type: array
+      type:
+        description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+        type: string
+      word:
+        description: 'A given written or spoken realisation of a an entry, lowercased.'
+        type: string
+    required:
+      - word
+      - id
+      - language
+      - lexicalEntries
+    type: object
+  InflectionsList:
+    description: A grouping of the modifications of a word to express different grammatical categories
+    items:
+      additionalProperties: false
+      properties:
+        id:
+          description: The identifier of the word
+          type: string
+        text:
+          type: string
+      required:
+        - text
+        - id
+      type: object
+    minItems: 1
+    type: array
   Languages:
     description: Schema for the languages endpoint.
     properties:
@@ -1197,6 +1324,8 @@ definitions:
       results:
         description: A list of languages available.
         items:
+          additionalProperties: false
+          minProperties: 1
           properties:
             region:
               description: Name of region.
@@ -1205,6 +1334,7 @@ definitions:
               description: Name of source dictionary.
               type: string
             sourceLanguage:
+              description: Source language of the results
               properties:
                 id:
                   description: IANA language code
@@ -1214,6 +1344,7 @@ definitions:
                   type: string
               type: object
             targetLanguage:
+              description: Translation language of the results
               properties:
                 id:
                   description: IANA language code
@@ -1228,6 +1359,8 @@ definitions:
                 - monolingual
                 - bilingual
               type: string
+          type: object
+        minItems: 1
         type: array
     type: object
   Lemmatron:
@@ -1237,59 +1370,73 @@ definitions:
         description: Additional Information provided by OUP
         type: object
       results:
-        description: A list of inflections matching given word
+        description: A list of inflections matching a given word
         items:
-          description: Description of an inflection word
-          properties:
-            id:
-              description: The identifier of a word
-              type: string
-            language:
-              description: IANA language code
-              type: string
-            lexicalEntries:
-              description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
-              items:
-                $ref: '#/definitions/lexicalEntry'
-              type: array
-            word:
-              description: 'A given written or spoken realisation of a an entry, lowercased.'
-              type: string
-          type: object
+          $ref: '#/definitions/HeadwordLemmatron'
         minItems: 1
         type: array
     type: object
-  Pronunciation:
-    description: A grouping of pronunciation information
+  LemmatronLexicalEntry:
+    additionalProperties: false
+    description: Description of an entry for a particular part of speech and grammatical features
     properties:
-      audioFile:
-        description: The URL of the sound file
+      grammaticalFeatures:
+        $ref: '#/definitions/GrammaticalFeaturesList'
+      inflectionOf:
+        $ref: '#/definitions/InflectionsList'
+        description: The canonical form of words for which the entry is an inflection
+      language:
+        description: IANA language code
         type: string
-      phoneticsNotation:
-        description: The alphabetic system used to display the phonetic spelling
+      lexicalCategory:
+        description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
         type: string
-      phoneticsSpelling:
-        description: Phonetic spelling is the representation of vocal sounds which express pronunciations of words. It is a system of spelling in which each letter represents invariably the same spoken sound
+      text:
+        description: A given written or spoken realisation of a an entry.
         type: string
-      regions:
-        $ref: '#/definitions/arrayofstrings'
-        description: 'A particular area in which the pronunciation occurs, e.g. ''Great Britain'''
+    required:
+      - inflectionOf
+      - language
+      - lexicalCategory
+      - text
     type: object
+  PronunciationsList:
+    description: A list of possible pronunciations of a word
+    items:
+      additionalProperties: false
+      description: A grouping of pronunciation information
+      minProperties: 1
+      properties:
+        audioFile:
+          description: The URL of the sound file
+          type: string
+        dialects:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A local or regional variation where the pronunciation occurs, e.g. ''British English'''
+        phoneticNotation:
+          description: The alphabetic system used to display the phonetic spelling
+          type: string
+        phoneticSpelling:
+          description: Phonetic spelling is the representation of vocal sounds which express pronunciations of words. It is a system of spelling in which each letter represents invariably the same spoken sound
+          type: string
+        regions:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A particular area in which the pronunciation occurs, e.g. ''Great Britain'''
+      type: object
+    minItems: 1
+    type: array
   Regions:
-    description: Schema for regions endpoint.
+    description: Schema for region endpoint.
     properties:
       metadata:
         description: Additional Information provided by OUP
         type: object
       results:
-        description: The list of labels for an object. Every object is region name.
-        items:
-          properties:
-            text:
-              type: string
-          type: object
-        type: array
-    type: object
+        additionalProperties:
+          $ref: '#/definitions/arrayofstrings'
+          description: A list of lables for region.
+        description: A mapping of regions available.
+        type: object
   RetrieveEntry:
     description: Schema for the 'entries' endpoints
     properties:
@@ -1299,42 +1446,20 @@ definitions:
       results:
         description: A list of entries and all the data related to them
         items:
-          description: Description of a word
-          properties:
-            id:
-              description: The identifier of a word
-              type: string
-            language:
-              description: IANA language code
-              type: string
-            lexicalEntries:
-              description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
-              items:
-                $ref: '#/definitions/lexicalEntry'
-              type: array
-            pronunciations:
-              description: A grouping of pronunciation information
-              items:
-                $ref: '#/definitions/Pronunciation'
-              type: array
-            word:
-              description: 'A given written or spoken realisation of a an entry, lowercased.'
-              type: string
-          type: object
+          $ref: '#/definitions/HeadwordEntry'
         minItems: 1
         type: array
     type: object
   Sense:
+    additionalProperties: false
     description: A lexical sense represents the lexical meaning of a lexical entry when interpreted as referring to the corresponding ontology element
+    minProperties: 1
     properties:
-      closeMatches:
+      crossReferenceMarkers:
         $ref: '#/definitions/arrayofstrings'
-        description: A reference to another word that is closely related
+        description: A grouping of crossreference notes.
       crossReferences:
-        description: 'A reference to another word that is closely related, might provide additional information about the subject, has a variant spelling or is an abbreviated form of it.'
-        items:
-          $ref: '#/definitions/CrossReference'
-        type: array
+        $ref: '#/definitions/CrossReferencesList'
       definitions:
         $ref: '#/definitions/arrayofstrings'
         description: A list of statements of the exact meaning of a word
@@ -1342,97 +1467,263 @@ definitions:
         $ref: '#/definitions/arrayofstrings'
         description: 'A subject, discipline, or branch of knowledge particular to the Sense'
       examples:
-        description: A list of written or spoken rendering of examples of use of a word or text
-        items:
-          properties:
-            text:
-              type: string
-          type: object
-        type: array
-      grammaticalNotes:
-        $ref: '#/definitions/arrayofstrings'
-        description: Show transitivity statements or usage notes.
+        $ref: '#/definitions/ExamplesList'
       id:
         description: The id of the sense that is required for the delete procedure
         type: string
-      markers:
-        $ref: '#/definitions/arrayofstrings'
-        description: Editorial information intended to help a reader understand the Sense
-      parentSense:
-        description: This sense has a super sense.
-        type: string
       pronunciations:
-        description: A grouping of pronunciation information
-        items:
-          $ref: '#/definitions/Pronunciation'
-        type: array
+        $ref: '#/definitions/PronunciationsList'
       regions:
         $ref: '#/definitions/arrayofstrings'
         description: 'A particular area in which the Sense occurs, e.g. ''Great Britain'''
       registers:
         $ref: '#/definitions/arrayofstrings'
         description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
-      relatedTo:
-        $ref: '#/definitions/arrayofstrings'
-        description: A reference to a related word
-      seeAlso:
-        $ref: '#/definitions/arrayofstrings'
-        description: A reference to a resource that might provide additional information about the subject
+      subsenses:
+        description: Ordered list of subsenses of a sense
+        items:
+          $ref: '#/definitions/Sense'
+        minItems: 1
+        type: array
+      translations:
+        $ref: '#/definitions/TranslationsList'
       variantForms:
-        $ref: '#/definitions/VariantForms'
+        $ref: '#/definitions/VariantFormsList'
         description: 'Various words that are used interchangeably depending on the context, e.g ''duck'' and ''duck boat'''
     type: object
-  Sentences:
-    description: Schema for sentences endpoint.
+  SentencesEntry:
+    additionalProperties: false
+    description: Description of a word
+    properties:
+      id:
+        description: The identifier of a word
+        type: string
+      language:
+        description: IANA language code
+        type: string
+      lexicalEntries:
+        description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+        items:
+          $ref: '#/definitions/SentencesLexicalEntry'
+        minItems: 1
+        type: array
+      type:
+        description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+        type: string
+      word:
+        description: 'A given written or spoken realisation of a an entry, lowercased.'
+        type: string
+    required:
+      - id
+      - language
+      - lexicalEntries
+      - word
+    type: object
+  SentencesLexicalEntry:
+    additionalProperties: false
+    description: Description of an entry for a particular part of speech
+    properties:
+      grammaticalFeatures:
+        $ref: '#/definitions/GrammaticalFeaturesList'
+      language:
+        description: IANA language code
+        type: string
+      lexicalCategory:
+        description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
+        type: string
+      sentences:
+        $ref: '#/definitions/ExamplesList'
+        description: A list of examples of use sentences
+      text:
+        description: A given written or spoken realisation of a an entry.
+        type: string
+    required:
+      - language
+      - sentences
+      - text
+    type: object
+  SentencesResults:
+    description: Schema for the 'sentences' endpoint
     properties:
       metadata:
         description: Additional Information provided by OUP
         type: object
       results:
-        description: A list of found words
+        description: A list of entries and all the data related to them
         items:
-          description: Description of found word
-          properties:
-            id:
-              description: The identifier of a word
-              type: string
-            language:
-              description: IANA code.
-              type: string
-            lexicalEntries:
-              description: 'Grammatical features, Lexical category and Sentences.'
-              items:
-                description: List of found sentences.
-                properties:
-                  grammaticalFeatures:
-                    description: ''
-                    type: string
-                  language:
-                    description: ''
-                    type: string
-                  lexicalCategory:
-                    description: ''
-                    type: string
-                  sentences:
-                    description: ''
-                    items: {}
-                    type: array
-                type: object
-              type: array
-          type: object
-        minItems: 0
+          $ref: '#/definitions/SentencesEntry'
+        minItems: 1
         type: array
     type: object
-  VariantForms:
+  SynonymsAntonyms:
+    items:
+      additionalProperties: false
+      properties:
+        domains:
+          $ref: '#/definitions/arrayofstrings'
+        id:
+          type: string
+        language:
+          type: string
+        regions:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A particular area in which the Sense occurs, e.g. ''Great Britain'''
+        registers:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+        text:
+          type: string
+      required:
+        - id
+        - text
+      type: object
+    minItems: 1
+    type: array
+  Thesaurus:
+    description: Schema for thesaurus endpoint
+    properties:
+      metadata:
+        description: Additional Information provided by OUP
+        type: object
+      results:
+        description: A list of found synonyms or antonyms
+        items:
+          $ref: '#/definitions/HeadwordThesaurus'
+        minItems: 1
+        type: array
+    type: object
+  ThesaurusEntry:
+    additionalProperties: false
+    minProperties: 1
+    properties:
+      homographNumber:
+        description: Identifies the homograph grouping. The last two digits identify different entries of the same homograph. The first one/two digits identify the homograph number.
+        type: string
+      senses:
+        description: Complete list of senses
+        items:
+          $ref: '#/definitions/ThesaurusSense'
+        minItems: 1
+        type: array
+      variantForms:
+        $ref: '#/definitions/VariantFormsList'
+        description: 'Various words that are used interchangeably depending on the context, e.g ''a'' and ''an'''
+    type: object
+  ThesaurusLexicalEntry:
+    additionalProperties: false
+    description: Description of an entry for a particular part of speech
+    properties:
+      entries:
+        items:
+          $ref: '#/definitions/ThesaurusEntry'
+        minItems: 1
+        type: array
+      language:
+        description: IANA language code
+        type: string
+      lexicalCategory:
+        description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
+        type: string
+      text:
+        description: A given written or spoken realisation of a an entry.
+        type: string
+      variantForms:
+        $ref: '#/definitions/VariantFormsList'
+        description: 'Various words that are used interchangeably depending on the context, e.g ''a'' and ''an'''
+    required:
+      - language
+      - lexicalCategory
+      - text
+    type: object
+  ThesaurusSense:
+    additionalProperties: false
+    description: A lexical sense represents the lexical meaning of a lexical entry when interpreted as referring to the corresponding ontology element
+    minProperties: 1
+    properties:
+      antonyms:
+        $ref: '#/definitions/SynonymsAntonyms'
+        description: antonym of word
+      domains:
+        $ref: '#/definitions/arrayofstrings'
+        description: 'A subject, discipline, or branch of knowledge particular to the Sense'
+      examples:
+        $ref: '#/definitions/ExamplesList'
+      id:
+        description: The id of the sense that is required for the delete procedure
+        type: string
+      regions:
+        $ref: '#/definitions/arrayofstrings'
+        description: 'A particular area in which the Sense occurs, e.g. ''Great Britain'''
+      registers:
+        $ref: '#/definitions/arrayofstrings'
+        description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+      subsenses:
+        description: subsenses of word
+        items:
+          $ref: '#/definitions/ThesaurusSense'
+        minItems: 1
+        type: array
+      synonyms:
+        $ref: '#/definitions/SynonymsAntonyms'
+        description: synonym of word
+    type: object
+  TranslationsList:
+    description: A list of written or spoken rendering of the meaning of a word or text in another language(s)
+    items:
+      additionalProperties: false
+      properties:
+        domains:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A subject, discipline, or branch of knowledge particular to the translation'
+        grammaticalFeatures:
+          $ref: '#/definitions/GrammaticalFeaturesList'
+        language:
+          description: IANA language code specifying the language of the translation
+          type: string
+        regions:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A particular area in which the translation occurs, e.g. ''Great Britain'''
+        registers:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+        text:
+          type: string
+      required:
+        - text
+        - language
+      type: object
+    minItems: 1
+    type: array
+  UtilityLabels:
+    description: 'Schema for lexicalcategories, registers utility endpoints.'
+    properties:
+      metadata:
+        description: Additional Information provided by OUP
+        type: object
+      results:
+        additionalProperties:
+          description: 'the list of labels for an object. Every object can be a lexical category, or a register, or a domain.'
+          properties:
+            en:
+              description: Label in English
+              type: string
+          type: object
+        description: Mapping of labels available.
+        type: object
+  VariantFormsList:
     description: 'Various words that are used interchangeably depending on the context, e.g ''aluminium'' and ''aluminum'''
     items:
+      additionalProperties: false
       properties:
         regions:
           $ref: '#/definitions/arrayofstrings'
           description: 'A particular area in which the variant form occurs, e.g. ''Great Britain'''
         text:
           type: string
+      required:
+        - text
       type: object
+    minItems: 1
     type: array
   Wordlist:
     description: Schema for wordlist endpoint.
@@ -1443,59 +1734,46 @@ definitions:
       results:
         description: A list of found words
         items:
+          additionalProperties: true
           description: Description of found word
           properties:
             id:
               description: The identifier of a word
               type: string
+            matchString:
+              type:
+                - string
+                - 'null'
+            matchType:
+              type: string
+            region:
+              description: Name of region.
+              type: string
             word:
               description: 'A given written or spoken realisation of a an entry, lowercased.'
               type: string
+          required:
+            - id
+            - word
           type: object
         minItems: 0
         type: array
-    type: object
-  '^[a-zA-Z]+$':
-    description: 'The list of labels for an object. Every object can be a lexical category, or a register, or a domain.'
-    properties:
-      en:
-        description: Label in English
-        type: string
     type: object
   arrayofstrings:
     items:
       type: string
     type: array
   lexicalEntry:
+    additionalProperties: false
     description: Description of an entry for a particular part of speech
     properties:
       entries:
         items:
           $ref: '#/definitions/Entry'
+        minItems: 1
         type: array
       grammaticalFeatures:
-        description: The different forms are correlated with meanings or functions which we text as 'features'
-        items:
-          properties:
-            text:
-              type: string
-            type:
-              type: string
-          type: object
-        type: array
-      grammaticalNotes:
-        $ref: '#/definitions/arrayofstrings'
-        description: Show transitivity statements or usage notes.
-      inflectionOf:
-        description: The canonical form of words for which the entry is an inflection
-        items:
-          $ref: '#/definitions/Inflection'
-        type: array
-      inflections:
-        description: The modification of a word to express different grammatical categories
-        items:
-          $ref: '#/definitions/Inflection'
-        type: array
+        $ref: '#/definitions/GrammaticalFeaturesList'
       language:
         description: IANA language code
         type: string
@@ -1503,16 +1781,15 @@ definitions:
         description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
         type: string
       pronunciations:
-        description: A grouping of pronunciation information
-        items:
-          $ref: '#/definitions/Pronunciation'
-        type: array
+        $ref: '#/definitions/PronunciationsList'
       text:
         description: A given written or spoken realisation of a an entry.
         type: string
       variantForms:
-        $ref: '#/definitions/VariantForms'
+        $ref: '#/definitions/VariantFormsList'
         description: 'Various words that are used interchangeably depending on the context, e.g ''a'' and ''an'''
+    required:
+      - language
+      - lexicalCategory
+      - text
     type: object
-  patternProperties:
-    $ref: '#/definitions/^[a-zA-Z]+$'

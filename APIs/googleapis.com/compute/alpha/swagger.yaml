@@ -1565,6 +1565,21 @@ paths:
           name: project
           required: true
           type: string
+        - in: query
+          name: filter
+          type: string
+        - default: 500
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - in: query
+          name: order_by
+          type: string
+        - in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -14822,7 +14837,7 @@ paths:
           name: instance
           required: true
           type: string
-        - description: 'If true, discard the contents of any attached localSSD partitions. Default value is false.'
+        - description: 'If true, discard the contents of any attached localSSD partitions. Default value is false (== preserve localSSD data).'
           in: query
           name: discardLocalSsd
           type: boolean
@@ -14866,7 +14881,7 @@ paths:
           name: instance
           required: true
           type: string
-        - description: 'If true, discard the contents of any attached localSSD partitions. Default value is false.'
+        - description: 'If true, discard the contents of any attached localSSD partitions. Default value is false (== preserve localSSD data).'
           in: query
           name: discardLocalSsd
           type: boolean
@@ -15538,12 +15553,20 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
 definitions:
+  AcceleratorConfig:
+    description: A specification of the type and number of accelerator cards attached to the instance.
+    properties:
+      acceleratorCount:
+        description: The number of the guest accelerator cards exposed to this instance.
+        format: int32
+        type: integer
+      acceleratorType:
+        description: Full or partial URL of the accelerator type resource to expose to this instance.
+        type: string
+    type: object
   AccessConfig:
     description: An access configuration attached to an instance's network interface. Only one access config per instance is supported.
     properties:
-      dnsName:
-        description: '[Output Only] The public DNS domain name for the instance.'
-        type: string
       kind:
         default: 'compute#accessConfig'
         description: '[Output Only] Type of the resource. Always compute#accessConfig for access configs.'
@@ -15555,19 +15578,22 @@ definitions:
         description: 'An external IP address associated with this instance. Specify an unused static external IP address available to the project or leave this field undefined to use an IP from a shared ephemeral IP address pool. If you specify a static external IP address, it must live in the same region as the zone of the instance.'
         type: string
       networkTier:
-        description: 'This signifies the networking tier used for configuring this access configuration and can only take the following values: CLOUD_NETWORK_PREMIUM , CLOUD_NETWORK_STANDARD. If this field is not specified, it is assumed to be CLOUD_NETWORK_PREMIUM.'
+        description: 'This signifies the networking tier used for configuring this access configuration and can only take the following values: CLOUD_NETWORK_PREMIUM , CLOUD_NETWORK_SELECT. If this field is not specified, it is assumed to be CLOUD_NETWORK_PREMIUM.'
         enum:
           - CLOUD_NETWORK_PREMIUM
-          - CLOUD_NETWORK_STANDARD
+          - CLOUD_NETWORK_SELECT
         type: string
-      ptrDomainName:
-        description: The DNS domain name for the public PTR record. This field can only be set when the set_ptr field is enabled.
+      publicDnsName:
+        description: '[Output Only] The public DNS domain name for the instance.'
         type: string
-      setPtr:
-        description: Specifies whether a public DNS ?PTR? record should be created to map the external IP address of the instance to a DNS domain name.
-        type: boolean
+      publicPtrDomainName:
+        description: The DNS domain name for the public PTR record. This field can only be set when the set_public_ptr field is enabled.
+        type: string
       setPublicDns:
         description: Specifies whether a public DNS ?A? record should be created for the external IP address of this access configuration.
+        type: boolean
+      setPublicPtr:
+        description: Specifies whether a public DNS ?PTR? record should be created to map the external IP address of the instance to a DNS domain name.
         type: boolean
       type:
         default: ONE_TO_ONE_NAT
@@ -15580,7 +15606,7 @@ definitions:
     description: A reserved address resource.
     properties:
       address:
-        description: The static external IP address represented by this resource.
+        description: The static external IP address represented by this resource. Only IPv4 is supported.
         type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -15613,10 +15639,10 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       networkTier:
-        description: 'This signifies the networking tier used for configuring this Address and can only take the following values: CLOUD_NETWORK_PREMIUM , CLOUD_NETWORK_STANDARD. If this field is not specified, it is assumed to be CLOUD_NETWORK_PREMIUM.'
+        description: 'This signifies the networking tier used for configuring this Address and can only take the following values: CLOUD_NETWORK_PREMIUM , CLOUD_NETWORK_SELECT. If this field is not specified, it is assumed to be CLOUD_NETWORK_PREMIUM.'
         enum:
           - CLOUD_NETWORK_PREMIUM
-          - CLOUD_NETWORK_STANDARD
+          - CLOUD_NETWORK_SELECT
         type: string
       region:
         description: '[Output Only] URL of the region where the regional address resides. This field is not applicable to global addresses.'
@@ -17305,7 +17331,7 @@ definitions:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
       destinationRanges:
-        description: 'If destination ranges are specified, the firewall will apply only to traffic that has destination IP address in these ranges. These ranges must be expressed in CIDR format.'
+        description: 'If destination ranges are specified, the firewall will apply only to traffic that has destination IP address in these ranges. These ranges must be expressed in CIDR format. Only IPv4 is supported.'
         items:
           type: string
         type: array
@@ -17344,12 +17370,17 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       sourceRanges:
-        description: 'If source ranges are specified, the firewall will apply only to traffic that has source IP address in these ranges. These ranges must be expressed in CIDR format. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
+        description: 'If source ranges are specified, the firewall will apply only to traffic that has source IP address in these ranges. These ranges must be expressed in CIDR format. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply. Only IPv4 is supported.'
         items:
           type: string
         type: array
       sourceTags:
         description: 'If source tags are specified, the firewall will apply only to traffic with source IP that belongs to a tag listed in source tags. Source tags cannot be used to control traffic to an instance''s external IP address. Because tags are associated with an instance, not an IP address. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
+        items:
+          type: string
+        type: array
+      targetServiceAccounts:
+        description: 'A list of service accounts indicating sets of instances located in the network that may make network connections as specified in allowed[]. targetServiceAccounts cannot be used at the same time as targetTags or sourceTags. If neither targetServiceAccounts nor targetTags are specified, the firewall rule applies to all instances on the specified network.'
         items:
           type: string
         type: array
@@ -17406,7 +17437,7 @@ definitions:
 
           For global forwarding rules, the address must be a global IP; for regional forwarding rules, the address must live in the same region as the forwarding rule. By default, this field is empty and an ephemeral IP from the same scope (global or regional) will be assigned.
 
-          When the load balancing scheme is INTERNAL, this can only be an RFC 1918 IP address belonging to the network/subnetwork configured for the forwarding rule. A reserved address cannot be used. If the field is empty, the IP address will be automatically allocated from the internal IP range of the subnetwork or network configured for this forwarding rule.
+          When the load balancing scheme is INTERNAL, this can only be an RFC 1918 IP address belonging to the network/subnetwork configured for the forwarding rule. A reserved address cannot be used. If the field is empty, the IP address will be automatically allocated from the internal IP range of the subnetwork or network configured for this forwarding rule. Only IPv4 is supported.
         type: string
       IPProtocol:
         description: |-
@@ -17471,10 +17502,10 @@ definitions:
           For internal load balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used.
         type: string
       networkTier:
-        description: 'This signifies the networking tier used for configuring this load balancer and can only take the following values: CLOUD_NETWORK_PREMIUM , CLOUD_NETWORK_STANDARD. If this field is not specified, it is assumed to be CLOUD_NETWORK_PREMIUM.'
+        description: 'This signifies the networking tier used for configuring this load balancer and can only take the following values: CLOUD_NETWORK_PREMIUM , CLOUD_NETWORK_SELECT. If this field is not specified, it is assumed to be CLOUD_NETWORK_PREMIUM.'
         enum:
           - CLOUD_NETWORK_PREMIUM
-          - CLOUD_NETWORK_STANDARD
+          - CLOUD_NETWORK_SELECT
         type: string
       portRange:
         description: |-
@@ -18296,6 +18327,10 @@ definitions:
         items:
           $ref: '#/definitions/AttachedDisk'
         type: array
+      guestAccelerators:
+        items:
+          $ref: '#/definitions/AcceleratorConfig'
+        type: array
       host:
         description: |-
           Full or partial URL of the host resource that the instance should be placed on, in the format: zones/zone/hosts/host.
@@ -18580,6 +18615,9 @@ definitions:
       serviceAccount:
         description: 'Service account will be used as credentials for all operations performed by managed instance group on instances. The service accounts needs all permissions required to create and delete instances. When not specified, the service account {projectNumber}@cloudservices.gserviceaccount.com will be used.'
         type: string
+      spreadingPolicy:
+        $ref: '#/definitions/SpreadingPolicy'
+        description: Policy valid only for regional managed instance groups.
       targetPools:
         description: The URLs for all TargetPool resources to which instances in the instanceGroup field are added. The target pools automatically apply to all of the instances in the managed instance group.
         items:
@@ -18639,7 +18677,7 @@ definitions:
         format: int32
         type: integer
       verifying:
-        description: '[Output Only] The number of instances in the managed instance group that are being verified.'
+        description: '[Output Only] The number of instances in the managed instance group that are being verified. More details regarding verification process are covered in the documentation of ManagedInstance.InstanceAction.VERIFYING enum field.'
         format: int32
         type: integer
     type: object
@@ -18676,7 +18714,7 @@ definitions:
         type: integer
       maxUnavailable:
         $ref: '#/definitions/FixedOrPercent'
-        description: 'Maximum number of instances that can be unavailable when auto-healing. The instance is considered available if all of the following conditions are satisfied: 1. instance''s status is RUNNING 2. instance''s liveness health check result was observed to be HEALTHY at least once By default, a percent value of 100% is used.'
+        description: 'Maximum number of instances that can be unavailable when autohealing. The instance is considered available if all of the following conditions are satisfied: 1. Instance''s status is RUNNING. 2. Instance''s liveness health check result was observed to be HEALTHY at least once. By default, a percent value of 100% is used.'
     type: object
   InstanceGroupManagerList:
     description: '[Output Only] A list of managed instance groups.'
@@ -18726,7 +18764,7 @@ definitions:
         description: 'Maximum number of instances that can be created above the InstanceGroupManager.targetSize during the update process. By default, a fixed value of 1 is used. Using maxSurge > 0 will cause instance names to change during the update process. At least one of { maxSurge, maxUnavailable } must be greater than 0.'
       maxUnavailable:
         $ref: '#/definitions/FixedOrPercent'
-        description: 'Maximum number of instances that can be unavailable during the update process. The instance is considered available if all of the following conditions are satisfied: 1. instance''s status is RUNNING 2. instance''s liveness health check result was observed to be HEALTHY at least once By default, a fixed value of 1 is used. At least one of { maxSurge, maxUnavailable } must be greater than 0.'
+        description: 'Maximum number of instances that can be unavailable during the update process. The instance is considered available if all of the following conditions are satisfied: 1. Instance''s status is RUNNING. 2. Instance''s liveness health check result was observed to be HEALTHY at least once. By default, a fixed value of 1 is used. At least one of { maxSurge, maxUnavailable } must be greater than 0.'
       minReadySec:
         description: 'Minimum number of seconds to wait for after a newly created instance becomes available. This value must be from range [0, 3600].'
         format: int32
@@ -19625,6 +19663,10 @@ definitions:
         items:
           $ref: '#/definitions/AliasIpRange'
         type: array
+      kind:
+        default: 'compute#networkInterface'
+        description: '[Output Only] Type of the resource. Always compute#networkInterface for network interfaces.'
+        type: string
       name:
         description: '[Output Only] The name of the network interface, generated by the server. For network devices, these are eth0, eth1, etc.'
         type: string
@@ -20090,6 +20132,9 @@ definitions:
         default: 'compute#projectsGetXpnResources'
         description: '[Output Only] Type of resource. Always compute#projectsGetXpnResources for lists of XPN resources.'
         type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
       resources:
         description: XPN resources attached to this project as their XPN host.
         items:
@@ -20472,7 +20517,7 @@ definitions:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
       destRange:
-        description: The destination range of outgoing packets that this route applies to.
+        description: The destination range of outgoing packets that this route applies to. Only IPv4 is supported.
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -20498,7 +20543,7 @@ definitions:
           https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/
         type: string
       nextHopIp:
-        description: The network IP address of an instance that should handle matching packets.
+        description: The network IP address of an instance that should handle matching packets. Only IPv4 is supported.
         type: string
       nextHopNetwork:
         description: The URL of the local network if it should handle matching packets.
@@ -20671,7 +20716,7 @@ definitions:
         description: Name of the interface the BGP peer is associated with.
         type: string
       ipAddress:
-        description: IP address of the interface inside Google Cloud Platform.
+        description: IP address of the interface inside Google Cloud Platform. Only IPv4 is supported.
         type: string
       name:
         description: Name of this BGP peer. The name must be 1-63 characters long and comply with RFC1035.
@@ -20682,7 +20727,7 @@ definitions:
         format: uint32
         type: integer
       peerIpAddress:
-        description: IP address of the BGP interface outside Google cloud.
+        description: IP address of the BGP interface outside Google cloud. Only IPv4 is supported.
         type: string
     type: object
   RouterInterface:
@@ -21059,6 +21104,19 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
+  SpreadingPolicy:
+    properties:
+      zones:
+        items:
+          $ref: '#/definitions/SpreadingPolicyZoneConfiguration'
+        type: array
+    type: object
+  SpreadingPolicyZoneConfiguration:
+    properties:
+      zone:
+        description: URL of the zone where managed instance group is spawning instances (for regional resources). Zone has to belong to the region where managed instance group is located.
+        type: string
+    type: object
   SslCertificate:
     description: An SslCertificate resource. This resource provides a mechanism to upload an SSL key and certificate to the load balancer to serve secure connections from the user.
     properties:
@@ -21129,7 +21187,7 @@ definitions:
         format: uint64
         type: string
       ipCidrRange:
-        description: 'The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 192.168.0.0/16. Ranges must be unique and non-overlapping within a network.'
+        description: 'The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 192.168.0.0/16. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported.'
         type: string
       kind:
         default: 'compute#subnetwork'
@@ -21205,7 +21263,7 @@ definitions:
     description: Represents a secondary IP range of a subnetwork.
     properties:
       ipCidrRange:
-        description: The range of IP addresses belonging to this subnetwork secondary range. Provide this property when you create the subnetwork. Ranges must be unique and non-overlapping with all primary and secondary IP ranges within a network.
+        description: The range of IP addresses belonging to this subnetwork secondary range. Provide this property when you create the subnetwork. Ranges must be unique and non-overlapping with all primary and secondary IP ranges within a network. Only IPv4 is supported.
         type: string
       rangeName:
         description: 'The name associated with this subnetwork secondary range, used when adding an alias IP range to a VM instance. The name must be 1-63 characters long, and comply with RFC1035. The name must be unique within the subnetwork.'
@@ -22287,7 +22345,7 @@ definitions:
         description: Labels to apply to this VpnTunnel. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         type: object
       localTrafficSelector:
-        description: 'Local traffic selector to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint.'
+        description: 'Local traffic selector to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.'
         items:
           type: string
         type: array
@@ -22296,13 +22354,13 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       peerIp:
-        description: IP address of the peer VPN gateway.
+        description: IP address of the peer VPN gateway. Only IPv4 is supported.
         type: string
       region:
         description: '[Output Only] URL of the region where the VPN tunnel resides.'
         type: string
       remoteTrafficSelector:
-        description: 'Remote traffic selectors to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint.'
+        description: 'Remote traffic selectors to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.'
         items:
           type: string
         type: array

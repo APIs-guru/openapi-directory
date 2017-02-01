@@ -6,7 +6,7 @@ basePath: /
 info:
   description: The API to Search and Understand Audio & Video Data.
   title: Clarify
-  version: 1.1.3
+  version: 1.2.3
   x-logo:
     backgroundColor: '#65A8B5'
     url: 'http://clarify.io/wp-content/themes/clarify/images/clarify-logo.png'
@@ -17,6 +17,7 @@ info:
   x-providerName: clarify.io
 tags:
   - name: bundles
+  - name: reports
   - name: search
 paths:
   /v1/bundles:
@@ -53,7 +54,7 @@ paths:
       tags:
         - bundles
     post:
-      description: 'Create a new bundle with the specified name, media url, and optional JSON metadata.<br/><br/><b>name</b> can be any string you wish to associate with the bundle.<br/><br/><b>media_url</b> must be a publicly accessible url to a media file. It will be fetched asynchronously after the REST call returns. The audio can be mono or stereo.<br/><br/><b>audio_channel</b> is used to specify audio channels if the media is a stereo file. A value of <i>left</i> or <i>right</i> signifies that only the specified channel will be used. If no value or an empty string is specified for <b>audio_channel</b>, all channels will be used in a single track. If your stereo channels were recorded separately with each channel containing distinct content (for example if 2 legs of a phone call were recorded separately and combined into a single stereo file), for best speech recognition, create two tracks, with <b>audio_channel</b> set to <i>left</i> and <i>right</i> in each track respectively. If your stereo file is simply a recording made with a stereo microphone, <b>audio_channel</b> should be set to an empty string (or not be specified.) If you have audio channels as separate media files, after creating the bundle with one <b>media_url</b>, POST another <b>media_url</b> to /bundles/{bundle_id}/tracks.<br/><br/><b>audio_language</b> can be used to specify the language of the audio media. This is an optional parameter and if not specified or an empty string, the language of the track will be automatically detected. If specified, it must be a language code as described in RFC5646 (see <a href="http://tools.ietf.org/html/rfc5646" target="_blank">http://tools.ietf.org/html/rfc5646</a>). Supported languages: en-US, en-UK, es, fr.<br/><br/><b>label</b> is a short name for the track.<br/><br/><b>metadata</b> is a single-level JSON object of your own definition, containing key-values that can be searched and filtered on. Metadata can be used to hold text such as names, titles, descriptions and values for segregating bundles, for example by user, topic, folder name etc. The keys (property names) can be up to 64 characters and must contain only alphanumeric characters and underscore (but not start with underscore) and must not be a reserved name. Reserved names are &quot;true&quot;, &quot;false&quot;, and &quot;null&quot;. Values can be strings, numbers, boolean true/false, date-times represented as a string in ISO 8601 format (ex. &quot;2014-02-25T14:23:45.000Z&quot;), or an array of these primitive types. Strings can be up to 2000 characters and strings in arrays can be up to 128 characters each. Nested objects are not allowed. Metadata can contain up to 50 key-value pairs up to a total JSON size of 4000 characters.<br/><br/><b>external_id</b> is an optional parameter that can be used to logically link a bundle to an item in an external system. The <b>external_id</b> can be whatever you use to identify items in your own database.<br/><br/><b>notify_url</b> is a webhook. It must be a publicly accessible url (http or https) on your server to which notifications for the bundle will be POSTed. There are three types of notifications: Track Notifications, Insight Notifications and Bundle Notifications. For more information on the content of notifications and when they are sent, see the <a href="http://docs.clarify.io/overview/#notifications" target="clarify">notification docs page</a>.'
+      description: 'Create a new bundle with the specified name, media url, and optional JSON metadata.<br/><br/><b>name</b> can be any string you wish to associate with the bundle.<br/><br/><b>media_url</b> must be a publicly accessible url to a media file. It will be fetched asynchronously after the REST call returns. The audio can be mono or stereo.<br/><br/><b>audio_channel</b> is used to specify audio channels if the media is a stereo file. A value of <i>left</i> or <i>right</i> signifies that only the specified channel will be used. If no value or an empty string is specified for <b>audio_channel</b>, all channels will be used in a single track. If your stereo channels were recorded separately with each channel containing distinct content (for example if 2 legs of a phone call were recorded separately and combined into a single stereo file), for best speech recognition, create two tracks, with <b>audio_channel</b> set to <i>left</i> and <i>right</i> in each track respectively. If your stereo file is simply a recording made with a stereo microphone, <b>audio_channel</b> should be set to an empty string (or not be specified.) If you have audio channels as separate media files, after creating the bundle with one <b>media_url</b>, POST another <b>media_url</b> to /bundles/{bundle_id}/tracks.<br/><br/><b>audio_language</b> can be used to specify the language of the audio media. This is an optional parameter and if not specified or an empty string, the language of the track will be automatically detected. If specified, it must be a language code as described in RFC5646 (see <a href="http://tools.ietf.org/html/rfc5646" target="_blank">http://tools.ietf.org/html/rfc5646</a>). Supported languages: en-US, en-UK, es, fr.<br/><br/><b>label</b> is a short name for the track.<br/><br/><b>metadata</b> is a single-level JSON object of your own definition, containing key-values that can be searched and filtered on. Metadata can be used to hold text such as names, titles, descriptions and values for segregating bundles, for example by user, topic, folder name etc. The keys (property names) can be up to 64 characters and must contain only alphanumeric characters and underscore (but not start with underscore) and must not be a reserved name. Reserved names are &quot;true&quot;, &quot;false&quot;, and &quot;null&quot;. Values can be strings, numbers, boolean true/false, date-times represented as a string in ISO 8601 format (ex. &quot;2014-02-25T14:23:45.000Z&quot;), or an array of these primitive types. Strings can be up to 2000 characters and strings in arrays can be up to 128 characters each. Nested objects are not allowed. Metadata can contain up to 50 key-value pairs up to a total JSON size of 4000 characters.<br/><br/><b>start_time</b> a time in seconds that the media starts, relative to start time of the bundle. This allows you to specify sequential parts of media. If not specified, the default is 0.<br/><br/><b>parts_pending</b> a boolean flag specifying if more media parts will subsequently be added to the track. If true, a subsequent API call must be made to signify that the track is complete. If not specified, the default is false.<br/><br/><b>external_id</b> is an optional parameter that can be used to logically link a bundle to an item in an external system. The <b>external_id</b> can be whatever you use to identify items in your own database.<br/><br/><b>notify_url</b> is a webhook. It must be a publicly accessible url (http or https) on your server to which notifications for the bundle will be POSTed. There are three types of notifications: Track Notifications, Insight Notifications and Bundle Notifications. For more information on the content of notifications and when they are sent, see the <a href="http://docs.clarify.io/overview/#notifications" target="clarify">notification docs page</a>.<br/><br/>If a track was created along with the budle, the link relation <b>clarify:track</b> will be included with a link to the new track.'
       parameters:
         - description: Name of the bundle. Up to 128 characters.
           in: formData
@@ -83,6 +84,16 @@ paths:
           name: audio_language
           required: false
           type: string
+        - description: Time offset in seconds that the media starts relative to the bundle. Default is 0.
+          in: formData
+          name: start_time
+          required: false
+          type: number
+        - description: Set to true if more media parts will be added to the track. Default is false.
+          in: formData
+          name: parts_pending
+          required: false
+          type: boolean
         - description: Label for the track (if media_url is specified.) Up to 128 characters.
           in: formData
           name: label
@@ -421,7 +432,7 @@ paths:
       tags:
         - bundles
     post:
-      description: 'Add a new track to a bundle. This will insert or append a new track in the tracks array or return an error if the maximum number of tracks (4) has been reached or the track number specifies an invalid index.<br/><br/>A track is immutable, meaning that once it has been added, it cannot be modified. If you wish to modify a track, simply add a new one and delete the existing one.<br/><br/><b>label</b> is a short name for the track.<br/><br/><b>media_url</b> must be a publicly accessible url to a media file. It will be fetched asynchronously after the REST call returns. The audio can be mono or stereo.<br/><br/><b>audio_channel</b> is used to specify audio channels if the media is a stereo file. A value of <i>left</i> or <i>right</i> signifies that only the specified channel will be used. If no value or an empty string is specified for <b>audio_channel</b>, all channels will be used in a single track. If your stereo channels were recorded separately with each channel containing distinct content (for example if 2 legs of a phone call were recorded separately and combined into a single stereo file), for best speech recognition, create two tracks with <b>audio_channel</b> to be <i>left</i> and <i>right</i>. If your stereo file is simply a recording made with a stereo microphone, <b>audio_channel</b> should be set to an empty string (or not be specified.)<br/><br/><b>audio_language</b> can be used to specify the language of the audio media. This is an optional parameter and if not specified or an empty string, the language of the track will be automatically detected. If specified, it must be a language code as described in RFC5646 (see <a href="http://tools.ietf.org/html/rfc5646" target="_blank">http://tools.ietf.org/html/rfc5646</a>). Supported languages: en-US, en-UK, es, fr.<br/><br/><b>track</b> is the index in the tracks array where the new track will be added. Track numbers start at 0. If this parameter is not specified the new track will always be appended to the end of the array. If the track specified is greater than the last index of the array + 1, an error will be returned.<br/><br/>If <b>version</b> specified, the track will only be added if the current version matches this parameter value. If the version doesn''t match, a 409 Conflict error will be returned. If version not specified, the track will always be updated.'
+      description: 'Add a new track to a bundle. This will insert or append a new track in the tracks array or return an error if the maximum number of tracks (4) has been reached or the track number specifies an invalid index.<br/><br/>Once all media parts have been added to a track it is immutable, meaning it cannot be modified. If you wish to modify a track, simply add a new one and delete the existing one.<br/><br/><b>label</b> is a short name for the track.<br/><br/><b>media_url</b> must be a publicly accessible url to a media file. It will be fetched asynchronously after the REST call returns. The audio can be mono or stereo.<br/><br/><b>audio_channel</b> is used to specify audio channels if the media is a stereo file. A value of <i>left</i> or <i>right</i> signifies that only the specified channel will be used. If no value or an empty string is specified for <b>audio_channel</b>, all channels will be used in a single track. If your stereo channels were recorded separately with each channel containing distinct content (for example if 2 legs of a phone call were recorded separately and combined into a single stereo file), for best speech recognition, create two tracks with <b>audio_channel</b> to be <i>left</i> and <i>right</i>. If your stereo file is simply a recording made with a stereo microphone, <b>audio_channel</b> should be set to an empty string (or not be specified.)<br/><br/><b>audio_language</b> can be used to specify the language of the audio media. This is an optional parameter and if not specified or an empty string, the language of the track will be automatically detected. If specified, it must be a language code as described in RFC5646 (see <a href="http://tools.ietf.org/html/rfc5646" target="_blank">http://tools.ietf.org/html/rfc5646</a>). Supported languages: en-US, en-UK, es, fr.<br/><br/><b>start_time</b> a time in seconds that the media starts, relative to start time of the bundle. This allows you to specify sequential parts of media. If not specified, the default is 0.<br/><br/><b>parts_pending</b> a boolean flag specifying if more media parts will subsequently be added to the track. If true, a subsequent API call must be made to signify that the track is complete. If not specified, the default is false.<br/><br/><b>track</b> is the index in the tracks array where the new track will be added. Track numbers start at 0. If this parameter is not specified the new track will always be appended to the end of the array. If the track specified is greater than the last index of the array + 1, an error will be returned.<br/><br/>If <b>version</b> specified, the track will only be added if the current version matches this parameter value. If the version doesn''t match, a 409 Conflict error will be returned. If version not specified, the track will always be updated.'
       parameters:
         - description: id of a bundle
           in: path
@@ -456,6 +467,16 @@ paths:
           name: audio_language
           required: false
           type: string
+        - description: Time offset in seconds that the media starts relative to the bundle. Default is 0.
+          in: formData
+          name: start_time
+          required: false
+          type: number
+        - description: Set to true if more media parts will be added to the track. Default is false.
+          in: formData
+          name: parts_pending
+          required: false
+          type: boolean
         - description: 'Track number specifies the index of the new track in the tracks array. An integer from 0 to 3. If not specified, the new track is appended to the array.'
           in: formData
           maximum: 3
@@ -483,6 +504,40 @@ paths:
         '409':
           description: Conflict
       summary: Add a track for a bundle
+      tags:
+        - bundles
+    put:
+      description: 'Update tracks for a bundle.<br/><br/><b>parts_complete</b> a boolean <code>true</code> or <cade>false</code>. If true, any tracks in the PENDING state will be queued for processing and no more media parts may be added to the tracks. Default is false.<br/><br/>If <b>version</b> specified, the track will only be updated if the current version matches this parameter value. If the version doesn''t match, a 409 Conflict error will be returned. If version not specified, the track will always be updated.'
+      parameters:
+        - description: id of a bundle
+          in: path
+          name: bundle_id
+          required: true
+          type: string
+        - description: Set to true if media parts in all tracks are complete. Default is false.
+          in: formData
+          name: parts_complete
+          required: true
+          type: boolean
+        - description: Object version.
+          in: formData
+          name: version
+          required: false
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Ref'
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+      summary: Update a tracks for a bundle
       tags:
         - bundles
   '/v1/bundles/{bundle_id}/tracks/{track_id}':
@@ -538,6 +593,124 @@ paths:
       summary: Get bundle track
       tags:
         - bundles
+    put:
+      description: 'Add media to an existing track of a bundle. This can only be called on a track that currently has no media set or has parts pending.<br/><br/>Once all media parts have been added to a track it is immutable, meaning it cannot be modified. If you wish to modify a track, simply add a new one and delete the existing one.<br/><br/><b>media_url</b> must be a publicly accessible url to a media file. It will be fetched asynchronously after the REST call returns. The audio can be mono or stereo.<br/><br/><b>audio_channel</b> is used to specify audio channels if the media is a stereo file. A value of <i>left</i> or <i>right</i> signifies that only the specified channel will be used. If no value or an empty string is specified for <b>audio_channel</b>, all channels will be used in a single track. If your stereo channels were recorded separately with each channel containing distinct content (for example if 2 legs of a phone call were recorded separately and combined into a single stereo file), for best speech recognition, create two tracks with <b>audio_channel</b> to be <i>left</i> and <i>right</i>. If your stereo file is simply a recording made with a stereo microphone, <b>audio_channel</b> should be set to an empty string (or not be specified.)<br/><br/><b>audio_language</b> can be used to specify the language of the audio media. This is an optional parameter and if not specified or an empty string, the language of the track will be automatically detected. If specified, it must be a language code as described in RFC5646 (see <a href="http://tools.ietf.org/html/rfc5646" target="_blank">http://tools.ietf.org/html/rfc5646</a>). Supported languages: en-US, en-UK, es, fr.<br/><br/><b>start_time</b> a time in seconds that the media starts, relative to start time of the bundle. This allows you to specify sequential parts of media. If not specified, the default is 0.<br/><br/><b>parts_pending</b> a boolean flag specifying if more media parts will subsequently be added to the track. If true, a subsequent API call must be made to signify that the track is complete. If not specified, the default is false.<br/><br/>If <b>version</b> specified, the track will only be added if the current version matches this parameter value. If the version doesn''t match, a 409 Conflict error will be returned. If version not specified, the track will always be updated.'
+      parameters:
+        - description: id of a bundle
+          in: path
+          name: bundle_id
+          required: true
+          type: string
+        - description: id of a track
+          in: path
+          name: track_id
+          required: true
+          type: string
+        - description: URL of a media file for this bundle. Up to 2083 characters.
+          in: formData
+          name: media_url
+          required: true
+          type: string
+        - description: The audio channel to use for the track ( "" | left | right ). Default is empty string which means all channels of audio in the media file are used for the track.
+          enum:
+            - left
+            - right
+          in: formData
+          name: audio_channel
+          required: false
+          type: string
+        - description: 'Language of the audio in the track, specified with an RFC5646 code.'
+          enum:
+            - en-US
+            - en-UK
+            - es
+            - fr
+          in: formData
+          name: audio_language
+          required: false
+          type: string
+        - description: Time offset in seconds that the media starts relative to the bundle. Default is 0.
+          in: formData
+          name: start_time
+          required: false
+          type: number
+        - description: Set to true if more media parts will be added to the track. Default is false.
+          in: formData
+          name: parts_pending
+          required: false
+          type: boolean
+        - description: Object version.
+          in: formData
+          name: version
+          required: false
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Ref'
+        '202':
+          description: Accepted
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+      summary: Add media to a track
+      tags:
+        - bundles
+  /v1/reports/trends:
+    get:
+      description: 'Analyzes bundle content over a series of time periods and generates a trend report.<br/><br/><b>interval</b> specifies the duration of each time period in the report. For example, you can generate a report that gives monthly statistics. If there are no bundles for a given period, that period will not be present in the report.<br/><br/><b>content</b> specifies the content type to analyze and include in the report. These can include tracks and insights. Multiple values can be specified to generate a rich report. If <b>content</b> is not specified, only bundle counts are included in the report.<br/><br/><b>filter</b> is used to limit the bundles in the report according to specific criteria based on metadata and bundle values.  A report filter behaves in the same way as a search filter. It uses an expression syntax similar to Javascript boolean expressions. An expression is made up of zero or more terms joined by logical operators with each term having a field, a comparison operator, and a literal value. Parentheses can be used to logically group terms.<br/><br/><div class="notes-indent">A filter term is of the form: <b><i><code>field-name comparison-operator literal-value</code></b></i> where:<br/><br/><b><i><code>field-name</code></i></b> is a metadata field or <code>bundle.name</code>, <code>bundle.id</code>, <code>bundle.external_id</code>, <code>bundle.created</code>, or <code>bundle.updated</code>.<br/><br/><b><i><code>comparison-operator</code></i></b> is <code>==</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt=</code>, or <code>!=</code><br/><br/><b><i><code>literal-value</code></i></b> is a number (integer or decimal), boolean <code><i>true</i></code> or <code><i>false</i></code>, or a string with either double quotes (<code>"</code>) or single quotes (<code>''</code>).<br/><br/>Logical operators between terms (and groups of terms) can be <code>&&</code> (logical AND), <code>||</code> (logical OR). A logical NOT is <code>!</code> and can be placed before a term (or group of terms.)</div><br/><br/>An example filter expression (assuming you have used metadata fields category and tag): </p><br><div class="notes-indent"><code>category=="music" && (tag == "soft" || tag == "smooth") && tag != "jazz" && bundle.created > "2014-03-15T00:00:00.0Z"</code></div><br/><br/><p><b>language</b> parameter specifies the language to use for analyzing the report. This value is only relevant for language-related insight data. Supported languages: en, en-UK, en-US, es, fr.'
+      parameters:
+        - description: Duration of report periods. Default is month.
+          enum:
+            - year
+            - quarter
+            - month
+            - week
+            - day
+            - hour
+          in: query
+          name: interval
+          required: true
+          type: string
+        - description: 'Content reported in each period. Zero or more of tracks, spoken_words, spoken_keywords. List is space or comma separated single string or an array of strings.'
+          in: query
+          name: content
+          required: false
+          type: string
+        - description: 'filter expression, typically programmatically generated based on input controls and data segregation rules etc. Up to 500 characters.'
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: 'Language to search in, specified with an RFC5646 code. Default is "en"'
+          enum:
+            - en
+            - en-UK
+            - en-US
+            - es
+            - fr
+          in: query
+          name: language
+          required: false
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BundleReport'
+        '400':
+          description: Bad request
+      summary: Generate Trends Report <span class="label">beta</span>
+      tags:
+        - reports
   /v1/search:
     get:
       description: 'Searches the bundles and returns a list of matching bundles, along with what matched and where for each bundle.<br/><br/><b>query</b> is used to search for text in the audio and metadata. It uses a simple query language similar to Google. At its simplest, it can be a space separated list of words (ex. <code>open voice</code>) which will find all bundles matching all the words. To search for a phrase, put it in quotes (ex. <code>"open source"</code>) You can exclude bundles that contain a word by putting a minus (hyphen) in front of the word (ex. <code>-opaque</code>) To search for one word or another, use <code>OR</code> (in uppercase) between the words (ex. <code>pizza OR pasta</code>). As an alternative to <code>OR</code>, you can use <code><b>|</b></code> (pipe character). A full query could look something like: <code>restaurant "little italy" pizza OR pasta -mushrooms</code><br/><br/><b>query_fields</b> is used to specify what data in a bundle the query will search. It can contain one or more of <i>insights.spoken_words</i>, metadata fields, and/or bundle fields. Multiple values can be either an array of strings or a comma or space separated single string. By default (if the <b>query_fields</b> param is not included in a request or is a single empty string) all data will be searched.<br/><br/><table><tr><td><b>query_fields</b></td><td><b>Bundle&nbsp;data&nbsp;searched</b></td><td></td></tr><tr><td>*</td><td>all data</td><td>This is the default value.</td></tr><tr><td>insights.spoken_words</td><td><i>[spoken words]</i></td><td>All audio tracks are searched.</td></tr><tr><td><i>fieldname</i></td><td>metadata.<i>fieldname</i></td><td>Your custom metadata field. Wildcard metadata.* searches all metadata fields.</td></tr><tr><td>bundle.<i>fieldname</i></td><td>bundle.<i>fieldname</i></td><td>The searchable bundle fieldnames are name, id, external_id, created and updated. Wildcard bundle.* searches all bundle fields</td></tr></table><br>As an example, suppose you have metadata fields <b>name</b> and <b>description</b> that you would like to search and other metadata fields you don&apos;t want to search. You also want to search the audio words, so you could specify <b>query_fields</b> = &quot;insights.spoken_words, name, description&quot;.<br/><br/><b>filter</b> is used to limit the search results according to specific criteria based on metadata and bundle values. It uses an expression syntax similar to Javascript boolean expressions. An expression is made up of zero or more terms joined by logical operators with each term having a field, a comparison operator, and a literal value. Parentheses can be used to logically group terms.<br/><br/><div class="notes-indent">A filter term is of the form: <b><i><code>field-name comparison-operator literal-value</code></b></i> where:<br/><br/><b><i><code>field-name</code></i></b> is a metadata field or <code>bundle.name</code>, <code>bundle.id</code>, <code>bundle.external_id</code>, <code>bundle.created</code>, or <code>bundle.updated</code>.<br/><br/><b><i><code>comparison-operator</code></i></b> is <code>==</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt=</code>, or <code>!=</code><br/><br/><b><i><code>literal-value</code></i></b> is a number (integer or decimal), boolean <code><i>true</i></code> or <code><i>false</i></code>, or a string with either double quotes (<code>"</code>) or single quotes (<code>''</code>).<br/><br/>Logical operators between terms (and groups of terms) can be <code>&&</code> (logical AND), <code>||</code> (logical OR). A logical NOT is <code>!</code> and can be placed before a term (or group of terms.)</div><br/><br/>An example filter expression (assuming you have used metadata fields category and tag): </p><br><div class="notes-indent"><code>category=="music" && (tag == "soft" || tag == "smooth") && tag != "jazz" && bundle.created > "2014-03-15T00:00:00.0Z"</code></div><br/><br/><p><b>language</b> parameter specifies the language of the words in the search query. This value is used for word-stemming etc. while searching text. Regardless of what you set for this parameter, all your bundles will be searched, no matter what language content they contain. Supported languages: en, en-UK, en-US, es, fr.<br/><br/>After getting the initial list, use the <b>first</b>, <b>next</b>, <b>prev</b> link relations to get more bundles in the list. Note that <b>next</b> will not be available at the end of the list and <b>prev</b> will not be available at the start of the list. A maximum of <b>limit</b> items will be returned. If the results are exactly one page neither <b>prev</b> nor <b>next</b> will be available.<br/><br/>The <b>embed</b> parameter specifies link relations to embed in the results. For link relations that are curies (ex. "clarify:metadata"), you may simply use the base name (ex. "metadata").</p>'
@@ -599,16 +772,17 @@ paths:
         - search
 definitions:
   Bundle:
+    $ref: '#/definitions/object'
     properties:
       _class:
         description: Bundle
         type: string
       _embedded:
+        $ref: '#/definitions/object'
         description: 'Embedded objects, keyed by link relation'
-        type: object
       _links:
+        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks)'
-        type: object
       created:
         description: 'Date the bundle was created, ex. "2014-02-25T14:23:45Z"'
         type: string
@@ -637,18 +811,53 @@ definitions:
       - id
       - updated
       - version
-    type: object
+  BundleReport:
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: BundleRport
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self)'
+      bundle_count:
+        description: Total number of bundles in report
+        type: integer
+      filter:
+        description: Filter expression used to limit bundles in report
+        type: string
+      generated:
+        description: 'Date the report was created, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      interval:
+        description: Interval of periods Up to 128 characters.
+        type: string
+      periods:
+        description: Data for interval period
+        items:
+          $ref: '#/definitions/ReportPeriod'
+        type: array
+      type:
+        description: Type of report Up to 128 characters.
+        type: string
+    required:
+      - _class
+      - _links
+      - bundle_count
+      - generated
+      - periods
   Collection:
+    $ref: '#/definitions/object'
     properties:
       _class:
         description: Collection
         type: string
       _embedded:
+        $ref: '#/definitions/object'
         description: 'Embedded objects, keyed by link relation'
-        type: object
       _links:
+        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (items, first, last, next, prev)'
-        type: object
       limit:
         description: Maximum number of items requested
         type: integer
@@ -660,15 +869,15 @@ definitions:
       - _links
       - limit
       - total
-    type: object
   Insight:
+    $ref: '#/definitions/object'
     properties:
       _class:
         description: Class name of Insight
         type: string
       _links:
+        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent, clarify:bundle)'
-        type: object
       bundle_id:
         description: id of the bundle
         type: string
@@ -676,8 +885,8 @@ definitions:
         description: 'Date the insight was created, ex. "2014-02-25T14:23:45Z"'
         type: string
       data:
+        $ref: '#/definitions/object'
         description: Bundle insight data values (only present for some insights)
-        type: object
       id:
         description: id of the insight
         type: string
@@ -685,7 +894,7 @@ definitions:
         description: Name of the insight
         type: string
       status:
-        description: 'Status of insight: ready, queued, processing, error'
+        description: 'Status of insight: ready, pending, queued, processing, error'
         type: string
       track_data:
         description: 'Array of objects containing insight data values per track, with array indexes matching the tracks array'
@@ -703,15 +912,15 @@ definitions:
       - name
       - status
       - updated
-    type: object
   Insights:
+    $ref: '#/definitions/object'
     properties:
       _class:
         description: Insights
         type: string
       _links:
+        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent, [insight:*])'
-        type: object
       bundle_id:
         description: id of the bundle
         type: string
@@ -727,8 +936,8 @@ definitions:
       - bundle_id
       - created
       - updated
-    type: object
   ItemResult:
+    $ref: '#/definitions/object'
     properties:
       score:
         description: Relevance of the item according to the search criteria. A value between 0 and 1
@@ -741,8 +950,8 @@ definitions:
     required:
       - score
       - term_results
-    type: object
   MatchHit:
+    $ref: '#/definitions/object'
     properties:
       end:
         description: 'For "text" matches, the index of the character in the string immediately after the matched term (exclusive.) For "audio" matches, the end time in seconds where the word was spoken'
@@ -752,15 +961,15 @@ definitions:
         type: number
     required:
       - start
-    type: object
   Metadata:
+    $ref: '#/definitions/object'
     properties:
       _class:
         description: Metadata
         type: string
       _links:
+        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent)'
-        type: object
       bundle_id:
         description: id of the bundle
         type: string
@@ -768,8 +977,8 @@ definitions:
         description: 'Date the metadata was created, ex. "2014-02-25T14:23:45Z"'
         type: string
       data:
+        $ref: '#/definitions/object'
         description: User-defined JSON metadata for the bundle
-        type: object
       updated:
         description: 'Date the metadata was updated, ex. "2014-02-25T14:23:45Z"'
         type: string
@@ -784,27 +993,27 @@ definitions:
       - data
       - updated
       - version
-    type: object
   Ref:
+    $ref: '#/definitions/object'
     properties:
       _class:
         description: Ref
         type: string
       _links:
+        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent)'
-        type: object
     required:
       - _class
       - _links
-    type: object
   Ref_(of_Bundle):
+    $ref: '#/definitions/object'
     properties:
       _class:
         description: Ref
         type: string
       _links:
+        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks)'
-        type: object
       id:
         description: id of the bundle
         type: string
@@ -812,18 +1021,36 @@ definitions:
       - _class
       - _links
       - id
-    type: object
+  ReportPeriod:
+    $ref: '#/definitions/object'
+    properties:
+      bundle:
+        $ref: '#/definitions/ReportPeriodBundle'
+      start:
+        description: 'Start date and time of the period ex. "2018-01-01T00:00:00Z"'
+        type: string
+    required:
+      - start
+  ReportPeriodBundle:
+    $ref: '#/definitions/object'
+    properties:
+      count:
+        description: Number of bundles in the period
+        type: integer
+    required:
+      - count
   SearchCollection:
+    $ref: '#/definitions/object'
     properties:
       _class:
         description: SearchCollection
         type: string
       _embedded:
+        $ref: '#/definitions/object'
         description: 'Embedded objects, keyed by link relation'
-        type: object
       _links:
+        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (items, first, next, prev)'
-        type: object
       item_results:
         description: Search results per item. Indexes match the items array.
         items:
@@ -847,16 +1074,16 @@ definitions:
       - limit
       - search_terms
       - total
-    type: object
   SearchTerm:
+    $ref: '#/definitions/object'
     properties:
       term:
         description: A term from the query
         type: string
     required:
       - term
-    type: object
   TermMatch:
+    $ref: '#/definitions/object'
     properties:
       field:
         description: 'For "text" or "array" match types, specifies the metadata field that contains the match'
@@ -872,8 +1099,8 @@ definitions:
     required:
       - hits
       - type
-    type: object
   TermResult:
+    $ref: '#/definitions/object'
     properties:
       matches:
         description: Array of locations where the search term was found in the bundle
@@ -886,15 +1113,15 @@ definitions:
     required:
       - matches
       - score
-    type: object
   Track:
+    $ref: '#/definitions/object'
     properties:
       _class:
         description: Track
         type: string
       _links:
+        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent, bundle)'
-        type: object
       audio_channel:
         description: The audio channel used for the track ( "" | left | right). Empty string means all channels of audio in the media file are used for the track
         enum:
@@ -936,8 +1163,11 @@ definitions:
       mime_type:
         description: Mime type. This is automatically determined from the media
         type: string
+      start_time:
+        description: 'Start time of media, an offset in seconds from the start time of the bundle'
+        type: number
       status:
-        description: 'Status of track: ready, queued, processing, error'
+        description: 'Status of track: ready, pending, queued, processing, error'
         type: string
       track:
         description: Track index in the Tracks array
@@ -957,11 +1187,12 @@ definitions:
       - media_code
       - media_size
       - media_url
+      - start_time
       - status
       - track
       - updated
-    type: object
   Track_(array_item):
+    $ref: '#/definitions/object'
     properties:
       audio_channel:
         description: The audio channel used for the track ( "" | left | right). Empty string means all channels of audio in the media file are used for the track
@@ -1004,8 +1235,11 @@ definitions:
       mime_type:
         description: Mime type. This is automatically determined from the media
         type: string
+      start_time:
+        description: 'Start time of media, an offset in seconds from the start time of the bundle'
+        type: number
       status:
-        description: 'Status of track: ready, queued, processing, error'
+        description: 'Status of track: ready, pending, queued, processing, error'
         type: string
       track:
         description: Track index in the Tracks array
@@ -1023,18 +1257,19 @@ definitions:
       - media_code
       - media_size
       - media_url
+      - start_time
       - status
       - track
       - updated
-    type: object
   Tracks:
+    $ref: '#/definitions/object'
     properties:
       _class:
         description: Tracks
         type: string
       _links:
+        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent)'
-        type: object
       bundle_id:
         description: id of the bundle
         type: string
@@ -1042,12 +1277,12 @@ definitions:
         description: 'Date the tracks was created, ex. "2014-02-25T14:23:45Z"'
         type: string
       status:
-        description: 'Summary status of tracks: ready, queued, processing, error'
+        description: 'Summary status of tracks: ready, pending, queued, processing, error'
         type: string
       tracks:
         description: Array of tracks
         items:
-          $ref: '#/definitions/Track_(array_item)'
+          $ref: '#/definitions/Track (array item)'
         type: array
       updated:
         description: 'Date the tracks was updated, ex. "2014-02-25T14:23:45Z"'
@@ -1064,4 +1299,5 @@ definitions:
       - tracks
       - updated
       - version
-    type: object
+  object:
+    $ref: '#/definitions/object'

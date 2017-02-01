@@ -109,8 +109,8 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: projects
   - name: organizations
+  - name: projects
 paths:
   /v1beta1/organizations:
     get:
@@ -163,19 +163,19 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
   /v1beta1/projects:
     get:
       description: |-
@@ -238,19 +238,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a Project resource.
@@ -357,19 +357,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Updates the attributes of the Project identified by the specified
@@ -402,19 +402,19 @@ paths:
         - projects
   '/v1beta1/projects/{projectId}:getAncestry':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Gets a list of ancestors in the resource hierarchy for the Project
@@ -449,19 +449,19 @@ paths:
         - projects
   '/v1beta1/projects/{projectId}:undelete':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Restores the Project identified by the specified
@@ -497,19 +497,19 @@ paths:
         - projects
   '/v1beta1/projects/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Returns the IAM access control policy for the specified Project.
@@ -542,19 +542,19 @@ paths:
         - projects
   '/v1beta1/projects/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets the IAM access control policy for the specified Project. Replaces
@@ -619,19 +619,19 @@ paths:
         - projects
   '/v1beta1/projects/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: Returns permissions that a caller has on the specified Project.
       operationId: cloudresourcemanager.projects.testIamPermissions
@@ -690,19 +690,19 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates an Organization resource identified by the specified resource name.
       operationId: cloudresourcemanager.organizations.update
@@ -732,19 +732,19 @@ paths:
         - organizations
   '/v1beta1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Gets the access control policy for an Organization resource. May be empty
@@ -779,19 +779,19 @@ paths:
         - organizations
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets the access control policy on an Organization resource. Replaces any
@@ -824,19 +824,19 @@ paths:
         - organizations
   '/v1beta1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Returns permissions that a caller has on the specified Organization.
@@ -1190,7 +1190,6 @@ definitions:
           depend on specific characters being disallowed.
 
           Example: <code>"environment" : "dev"</code>
-
           Read-write.
         type: object
       lifecycleState:
@@ -1212,7 +1211,6 @@ definitions:
           hyphen, single-quote, double-quote, space, and exclamation point.
 
           Example: <code>My Project</code>
-
           Read-write.
         type: string
       parent:
@@ -1234,7 +1232,6 @@ definitions:
           Trailing hyphens are prohibited.
 
           Example: <code>tokyo-rain-123</code>
-
           Read-only after creation.
         type: string
       projectNumber:
@@ -1242,7 +1239,6 @@ definitions:
           The number uniquely identifying the project.
 
           Example: <code>415104041262</code>
-
           Read-only.
         format: int64
         type: string

@@ -117,19 +117,19 @@ tags:
 paths:
   /v1/presentations:
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Creates a new presentation using the title given in the request. Other
@@ -181,19 +181,19 @@ paths:
       tags:
         - presentations
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
   '/v1/presentations/{presentationId}/pages/{pageObjectId}':
     get:
       description: Gets the latest version of the specified page in the presentation.
@@ -226,34 +226,34 @@ paths:
       tags:
         - presentations
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
   '/v1/presentations/{presentationId}:batchUpdate':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Applies one or more updates to the presentation.

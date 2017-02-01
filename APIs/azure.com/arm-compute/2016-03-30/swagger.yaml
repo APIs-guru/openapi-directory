@@ -41,13 +41,13 @@ security:
       - user_impersonation
 parameters:
   ApiVersionParameter:
-    description: Client API Version.
+    description: Client Api Version.
     in: query
     name: api-version
     required: true
     type: string
   SubscriptionIdParameter:
-    description: Subscription credentials that uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
@@ -67,7 +67,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             items:
               $ref: '#/definitions/VirtualMachineImageResource'
@@ -91,7 +91,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             items:
               $ref: '#/definitions/VirtualMachineExtensionImage'
@@ -133,7 +133,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             items:
               $ref: '#/definitions/VirtualMachineExtensionImage'
@@ -166,7 +166,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineExtensionImage'
       tags:
@@ -190,7 +190,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             items:
               $ref: '#/definitions/VirtualMachineImageResource'
@@ -221,7 +221,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             items:
               $ref: '#/definitions/VirtualMachineImageResource'
@@ -271,7 +271,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             items:
               $ref: '#/definitions/VirtualMachineImageResource'
@@ -313,7 +313,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineImage'
       tags:
@@ -333,7 +333,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/ListUsagesResult'
       tags:
@@ -355,7 +355,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
@@ -370,7 +370,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineScaleSetListWithLinkResult'
       tags:
@@ -386,7 +386,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineListResult'
       tags:
@@ -407,7 +407,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/AvailabilitySetListResult'
       tags:
@@ -432,9 +432,11 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '204':
-          description: ''
+          description: No Content
       tags:
         - AvailabilitySets
     get:
@@ -455,7 +457,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/AvailabilitySet'
       tags:
@@ -479,7 +481,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
@@ -510,7 +512,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/AvailabilitySet'
       tags:
@@ -529,7 +531,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineScaleSetListResult'
       tags:
@@ -561,11 +563,11 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineScaleSet'
         '201':
-          description: ''
+          description: Created
           schema:
             $ref: '#/definitions/VirtualMachineScaleSet'
       tags:
@@ -605,7 +607,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineScaleSetVMListResult'
       tags:
@@ -632,11 +634,13 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
         '204':
-          description: ''
+          description: No Content
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
@@ -658,7 +662,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineScaleSet'
       tags:
@@ -687,8 +691,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
@@ -716,8 +724,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
@@ -740,7 +752,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineScaleSetInstanceView'
       tags:
@@ -769,8 +781,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
@@ -798,8 +814,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
@@ -821,8 +841,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
@@ -850,8 +874,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
@@ -874,7 +902,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineScaleSetListSkusResult'
       tags:
@@ -905,8 +933,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
@@ -934,11 +966,13 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
         '204':
-          description: ''
+          description: No Content
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
@@ -965,7 +999,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineScaleSetVM'
       tags:
@@ -993,8 +1027,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
@@ -1022,7 +1060,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineScaleSetVMInstanceView'
       tags:
@@ -1050,8 +1088,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
@@ -1078,8 +1120,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
@@ -1106,8 +1152,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
@@ -1134,8 +1184,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
@@ -1153,7 +1207,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineListResult'
       tags:
@@ -1178,10 +1232,14 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
         '204':
-          description: ''
+          description: No Content
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
@@ -1213,7 +1271,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachine'
       tags:
@@ -1242,11 +1300,11 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachine'
         '201':
-          description: ''
+          description: Created
           schema:
             $ref: '#/definitions/VirtualMachine'
       tags:
@@ -1277,11 +1335,11 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineCaptureResult'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
@@ -1303,8 +1361,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
@@ -1331,10 +1393,14 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
         '204':
-          description: ''
+          description: No Content
       tags:
         - VirtualMachineExtensions
       x-ms-long-running-operation: true
@@ -1366,7 +1432,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineExtension'
       tags:
@@ -1400,11 +1466,11 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineExtension'
         '201':
-          description: ''
+          description: Created
           schema:
             $ref: '#/definitions/VirtualMachineExtension'
       tags:
@@ -1429,7 +1495,9 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
       tags:
         - VirtualMachines
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/powerOff':
@@ -1450,8 +1518,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
@@ -1473,8 +1545,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
@@ -1496,8 +1572,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
@@ -1519,8 +1599,12 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OperationStatusResponse'
         '202':
-          description: ''
+          description: Accepted
       tags:
         - VirtualMachines
       x-ms-long-running-operation: true
@@ -1543,7 +1627,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: OK
           schema:
             $ref: '#/definitions/VirtualMachineSizeListResult'
       tags:
@@ -2038,6 +2122,31 @@ definitions:
       windowsConfiguration:
         $ref: '#/definitions/WindowsConfiguration'
         description: The Windows configuration of the OS profile.
+  OperationStatusResponse:
+    description: Operation status response
+    properties:
+      endTime:
+        description: End time of the operation
+        format: date-time
+        readOnly: true
+        type: string
+      error:
+        $ref: '#/definitions/ApiError'
+        description: Api error
+        readOnly: true
+      name:
+        description: Operation ID
+        readOnly: true
+        type: string
+      startTime:
+        description: Start time of the operation
+        format: date-time
+        readOnly: true
+        type: string
+      status:
+        description: Operation status
+        readOnly: true
+        type: string
   Plan:
     description: Plan for the resource.
     properties:
@@ -2070,26 +2179,26 @@ definitions:
       - name
       - product
   Resource:
-    description: The resource model definition.
+    description: The Resource model definition.
     properties:
       id:
-        description: Resource ID.
+        description: Resource Id
         readOnly: true
         type: string
       location:
-        description: Resource location.
+        description: Resource location
         type: string
       name:
-        description: Resource name.
+        description: Resource name
         readOnly: true
         type: string
       tags:
         additionalProperties:
           type: string
-        description: Resource tags.
+        description: Resource tags
         type: object
       type:
-        description: Resource type.
+        description: Resource type
         readOnly: true
         type: string
     required:

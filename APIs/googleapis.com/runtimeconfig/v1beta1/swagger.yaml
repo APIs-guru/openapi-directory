@@ -145,13 +145,14 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: runtimeconfig.projects.configs.operations.get
+      description: Gets information about a single waiter.
+      operationId: runtimeconfig.projects.configs.waiters.get
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            The fully-qualified name of the Waiter resource object to retrieve, in the
+            format:
+
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/waiters/[WAITER_NAME]`
           in: path
           name: name
           required: true
@@ -161,7 +162,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Waiter'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -170,19 +171,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates an existing variable with a new value.
       operationId: runtimeconfig.projects.configs.variables.update
@@ -214,19 +215,19 @@ paths:
         - projects
   '/v1beta1/{name}:watch':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Watches a specific variable and waits for a change in the variable's value.
@@ -283,17 +284,17 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            Specifies the number of results to return per page. If there are fewer
-            elements than the specified number, returns all elements.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
             Specifies a page token to use. Set `pageToken` to a `nextPageToken`
             returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
           type: string
+        - description: |-
+            Specifies the number of results to return per page. If there are fewer
+            elements than the specified number, returns all elements.
+          in: query
+          name: pageSize
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -307,19 +308,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a new RuntimeConfig resource. The configuration name must be
@@ -382,6 +383,12 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
+            Specifies a page token to use. Set `pageToken` to a `nextPageToken`
+            returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
             Specifies the number of results to return per page. If there are fewer
             elements than the specified number, returns all elements.
           in: query
@@ -393,12 +400,6 @@ paths:
             `projects/example-project/config/[CONFIG_NAME]/variables/example-variable`.
           in: query
           name: filter
-          type: string
-        - description: |-
-            Specifies a page token to use. Set `pageToken` to a `nextPageToken`
-            returned by a previous list request to get the next page of results.
-          in: query
-          name: pageToken
           type: string
       responses:
         '200':
@@ -413,19 +414,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a variable within the given configuration. You cannot create
@@ -493,17 +494,17 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            Specifies the number of results to return per page. If there are fewer
-            elements than the specified number, returns all elements.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
             Specifies a page token to use. Set `pageToken` to a `nextPageToken`
             returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
           type: string
+        - description: |-
+            Specifies the number of results to return per page. If there are fewer
+            elements than the specified number, returns all elements.
+          in: query
+          name: pageSize
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -517,19 +518,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Creates a Waiter resource. This operation returns a long-running Operation
@@ -609,34 +610,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -674,7 +675,7 @@ paths:
         Returns permissions that a caller has on the specified resource.
         If the resource does not exist, this will return an empty set of
         permissions, not a NOT_FOUND error.
-      operationId: runtimeconfig.projects.configs.operations.testIamPermissions
+      operationId: runtimeconfig.projects.configs.waiters.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
@@ -709,19 +710,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.

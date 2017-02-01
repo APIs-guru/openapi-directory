@@ -1162,6 +1162,107 @@ paths:
       summary: send-url-parameters
       tags:
         - sms
+  '/api/rest/v1/sms/send-url/{token}':
+    get:
+      deprecated: false
+      description: Send a single message using your unique URL.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
+      parameters:
+        - description: token
+          in: path
+          name: token
+          required: true
+          type: string
+        - description: the phone number of the recipient to send to
+          in: query
+          name: recipientNumber
+          required: true
+          type: string
+        - description: the message to send
+          in: query
+          name: message
+          required: true
+          type: string
+        - description: 'date format: yyyyMMddHHmm'
+          format: date-time
+          in: query
+          name: dateToSend
+          required: false
+          type: string
+        - description: optional campaign name
+          in: query
+          name: campaign
+          required: false
+          type: string
+        - description: optional extra data
+          in: query
+          name: dataField
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: send-url
+      tags:
+        - sms
+    post:
+      deprecated: false
+      description: Send a single message using your unique URL.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
+      parameters:
+        - description: token
+          in: path
+          name: token
+          required: true
+          type: string
+        - description: the phone number of the recipient to send to
+          in: query
+          name: recipientNumber
+          required: true
+          type: string
+        - description: the message to send
+          in: query
+          name: message
+          required: true
+          type: string
+        - description: 'date format: yyyyMMddHHmm'
+          format: date-time
+          in: query
+          name: dateToSend
+          required: false
+          type: string
+        - description: optional campaign name
+          in: query
+          name: campaign
+          required: false
+          type: string
+        - description: optional extra data
+          in: query
+          name: dataField
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: send-url
+      tags:
+        - sms
   /api/rest/v1/templates/all:
     get:
       deprecated: false

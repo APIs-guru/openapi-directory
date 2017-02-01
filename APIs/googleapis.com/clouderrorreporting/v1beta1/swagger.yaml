@@ -142,34 +142,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{name}':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Replace the data for the specified group.
@@ -250,11 +250,13 @@ paths:
           in: query
           name: timeRange.period
           type: string
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
+        - description: '[Required] The group for which events shall be returned.'
           in: query
-          name: serviceFilter.resourceType
+          name: groupId
+          type: string
+        - description: '[Optional] A `next_page_token` provided by a previous response.'
+          in: query
+          name: pageToken
           type: string
         - description: |-
             [Optional] The exact value to match against
@@ -262,23 +264,21 @@ paths:
           in: query
           name: serviceFilter.service
           type: string
-        - description: '[Required] The group for which events shall be returned.'
+        - description: '[Optional] The maximum number of results to return per response.'
           in: query
-          name: groupId
-          type: string
+          name: pageSize
+          type: integer
         - description: |-
             [Optional] The exact value to match against
             [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
           in: query
           name: serviceFilter.version
           type: string
-        - description: '[Optional] The maximum number of results to return per response.'
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
           in: query
-          name: pageSize
-          type: integer
-        - description: '[Optional] A `next_page_token` provided by a previous response.'
-          in: query
-          name: pageToken
+          name: serviceFilter.resourceType
           type: string
       responses:
         '200':
@@ -291,34 +291,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{projectName}/events:report':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Report an individual error event.
@@ -373,14 +373,29 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            [Optional] The alignment of the timed counts to be returned.
-            Default is `ALIGNMENT_EQUAL_AT_END`.
-          enum:
-            - ERROR_COUNT_ALIGNMENT_UNSPECIFIED
-            - ALIGNMENT_EQUAL_ROUNDED
-            - ALIGNMENT_EQUAL_AT_END
+            [Optional] Time where the timed counts shall be aligned if rounded
+            alignment is chosen. Default is 00:00 UTC.
           in: query
-          name: alignment
+          name: alignmentTime
+          type: string
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
+          in: query
+          name: serviceFilter.resourceType
+          type: string
+        - description: |-
+            [Optional] The preferred duration for a single returned `TimedCount`.
+            If not set, no timed counts are returned.
+          in: query
+          name: timedCountDuration
+          type: string
+        - description: |-
+            [Optional] A `next_page_token` provided by a previous response. To view
+            additional results, pass this token along with the identical query
+            parameters as the first request.
+          in: query
+          name: pageToken
           type: string
         - description: Restricts the query to the specified time range.
           enum:
@@ -394,22 +409,14 @@ paths:
           name: timeRange.period
           type: string
         - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
-          in: query
-          name: serviceFilter.resourceType
-          type: string
-        - description: |-
-            [Optional] The sort order in which the results are returned.
-            Default is `COUNT_DESC`.
+            [Optional] The alignment of the timed counts to be returned.
+            Default is `ALIGNMENT_EQUAL_AT_END`.
           enum:
-            - GROUP_ORDER_UNSPECIFIED
-            - COUNT_DESC
-            - LAST_SEEN_DESC
-            - CREATED_DESC
-            - AFFECTED_USERS_DESC
+            - ERROR_COUNT_ALIGNMENT_UNSPECIFIED
+            - ALIGNMENT_EQUAL_ROUNDED
+            - ALIGNMENT_EQUAL_AT_END
           in: query
-          name: order
+          name: alignment
           type: string
         - collectionFormat: multi
           description: '[Optional] List all <code>ErrorGroupStats</code> with these IDs.'
@@ -425,35 +432,28 @@ paths:
           name: serviceFilter.service
           type: string
         - description: |-
-            [Optional] Time where the timed counts shall be aligned if rounded
-            alignment is chosen. Default is 00:00 UTC.
-          in: query
-          name: alignmentTime
-          type: string
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
-          in: query
-          name: serviceFilter.version
-          type: string
-        - description: |-
             [Optional] The maximum number of results to return per response.
             Default is 20.
           in: query
           name: pageSize
           type: integer
         - description: |-
-            [Optional] The preferred duration for a single returned `TimedCount`.
-            If not set, no timed counts are returned.
+            [Optional] The sort order in which the results are returned.
+            Default is `COUNT_DESC`.
+          enum:
+            - GROUP_ORDER_UNSPECIFIED
+            - COUNT_DESC
+            - LAST_SEEN_DESC
+            - CREATED_DESC
+            - AFFECTED_USERS_DESC
           in: query
-          name: timedCountDuration
+          name: order
           type: string
         - description: |-
-            [Optional] A `next_page_token` provided by a previous response. To view
-            additional results, pass this token along with the identical query
-            parameters as the first request.
+            [Optional] The exact value to match against
+            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
           in: query
-          name: pageToken
+          name: serviceFilter.version
           type: string
       responses:
         '200':
@@ -466,19 +466,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
 definitions:
   DeleteEventsResponse:
     description: Response message for deleting error events.

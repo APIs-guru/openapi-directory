@@ -124,16 +124,16 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             Maximum number of product statuses to return in the response, used for
             paging.
           in: query
           name: pageSize
           type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -145,19 +145,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v1/{parent}/products/{name}':
     get:
       description: |-
@@ -201,19 +201,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
 definitions:
   Attributes:
     description: |-

@@ -49,12 +49,12 @@ paths:
   /extractor:
     post:
       parameters:
-        - description: crawlRunId
+        - description: Request body with the schema defined on the left. Interval is a cron string.
           in: body
-          name: crawlRunId
+          name: Schedule Request Body
           required: true
           schema:
-            $ref: '#/definitions/Schedule'
+            $ref: '#/definitions/ScheduleRequest'
       responses:
         '200':
           description: crawl run schedule
@@ -187,4 +187,20 @@ definitions:
       startTimestamp:
         format: int64
         type: integer
+    type: object
+  ScheduleRequest:
+    properties:
+      extractorId:
+        example: 00000000-0000-0000-0000-000000000000
+        type: string
+      interval:
+        example: 15 * * * *
+        type: string
+      startTimestamp:
+        example: 1485448509727
+        format: int64
+        type: integer
+    required:
+      - extractorId
+      - interval
     type: object

@@ -115,19 +115,19 @@ tags:
 paths:
   /v4/spreadsheets:
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Creates a spreadsheet, returning the newly created spreadsheet.'
       operationId: sheets.spreadsheets.create
@@ -209,34 +209,34 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
   '/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Copies a single sheet from a spreadsheet to another spreadsheet.
@@ -339,19 +339,19 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Sets values in a range of a spreadsheet.
@@ -426,19 +426,19 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values/{range}:append':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Appends values to a spreadsheet. The input range is used to search for
@@ -479,6 +479,13 @@ paths:
           in: query
           name: responseValueRenderOption
           type: string
+        - description: How the input data should be inserted.
+          enum:
+            - OVERWRITE
+            - INSERT_ROWS
+          in: query
+          name: insertDataOption
+          type: string
         - description: How the input data should be interpreted.
           enum:
             - INPUT_VALUE_OPTION_UNSPECIFIED
@@ -505,13 +512,6 @@ paths:
           in: query
           name: includeValuesInResponse
           type: boolean
-        - description: How the input data should be inserted.
-          enum:
-            - OVERWRITE
-            - INSERT_ROWS
-          in: query
-          name: insertDataOption
-          type: string
         - in: body
           name: body
           schema:
@@ -530,19 +530,19 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values/{range}:clear':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Clears values from a spreadsheet.
@@ -579,19 +579,19 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchClear':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Clears one or more ranges of values from a spreadsheet.
@@ -633,13 +633,6 @@ paths:
           name: spreadsheetId
           required: true
           type: string
-        - collectionFormat: multi
-          description: The A1 notation of the values to retrieve.
-          in: query
-          items:
-            type: string
-          name: ranges
-          type: array
         - description: |-
             How values should be represented in the output.
             The default render option is ValueRenderOption.FORMATTED_VALUE.
@@ -661,6 +654,13 @@ paths:
           in: query
           name: dateTimeRenderOption
           type: string
+        - collectionFormat: multi
+          description: The A1 notation of the values to retrieve.
+          in: query
+          items:
+            type: string
+          name: ranges
+          type: array
         - description: |-
             The major dimension that results should use.
 
@@ -693,34 +693,34 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
   '/v4/spreadsheets/{spreadsheetId}/values:batchUpdate':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets values in one or more ranges of a spreadsheet.
@@ -752,19 +752,19 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}:batchUpdate':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Applies one or more updates to the spreadsheet.
@@ -2069,6 +2069,24 @@ definitions:
         format: int32
         type: integer
     type: object
+  DeleteRangeRequest:
+    description: 'Deletes a range of cells, shifting other cells into the deleted area.'
+    properties:
+      range:
+        $ref: '#/definitions/GridRange'
+        description: The range of cells to delete.
+      shiftDimension:
+        description: |-
+          The dimension from which deleted cells will be replaced with.
+          If ROWS, existing cells will be shifted upward to
+          replace the deleted cells. If COLUMNS, existing cells
+          will be shifted left to replace the deleted cells.
+        enum:
+          - DIMENSION_UNSPECIFIED
+          - ROWS
+          - COLUMNS
+        type: string
+    type: object
   DeleteSheetRequest:
     description: Deletes the requested sheet.
     properties:
@@ -2561,6 +2579,23 @@ definitions:
       range:
         $ref: '#/definitions/DimensionRange'
         description: The dimensions to insert.  Both the start and end indexes must be bounded.
+    type: object
+  InsertRangeRequest:
+    description: 'Inserts cells into a range, shifting the existing cells over or down.'
+    properties:
+      range:
+        $ref: '#/definitions/GridRange'
+        description: The range to insert new cells into.
+      shiftDimension:
+        description: |-
+          The dimension which will be shifted when inserting cells.
+          If ROWS, existing cells will be shifted down.
+          If COLUMNS, existing cells will be shifted right.
+        enum:
+          - DIMENSION_UNSPECIFIED
+          - ROWS
+          - COLUMNS
+        type: string
     type: object
   InterpolationPoint:
     description: |-
@@ -3097,6 +3132,9 @@ definitions:
       deleteProtectedRange:
         $ref: '#/definitions/DeleteProtectedRangeRequest'
         description: Deletes a protected range.
+      deleteRange:
+        $ref: '#/definitions/DeleteRangeRequest'
+        description: 'Deletes a range of cells from a sheet, shifting the remaining cells.'
       deleteSheet:
         $ref: '#/definitions/DeleteSheetRequest'
         description: Deletes a sheet.
@@ -3112,6 +3150,9 @@ definitions:
       insertDimension:
         $ref: '#/definitions/InsertDimensionRequest'
         description: Inserts new rows or columns in a sheet.
+      insertRange:
+        $ref: '#/definitions/InsertRangeRequest'
+        description: 'Inserts new cells in a sheet, shifting the existing cells.'
       mergeCells:
         $ref: '#/definitions/MergeCellsRequest'
         description: Merges cells together.

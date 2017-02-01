@@ -551,7 +551,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a Merchant Center account. This method can only be called for multi-client accounts. This method supports patch semantics.
+      description: 'Updates a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account. This method supports patch semantics.'
       operationId: content.accounts.patch
       parameters:
         - description: The ID of the managing account.
@@ -583,7 +583,7 @@ paths:
       tags:
         - accounts
     put:
-      description: Updates a Merchant Center account. This method can only be called for multi-client accounts.
+      description: 'Updates a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account.'
       operationId: content.accounts.update
       parameters:
         - description: The ID of the managing account.
@@ -2150,7 +2150,7 @@ definitions:
         description: Indicates whether the merchant sells adult content.
         type: boolean
       adwordsLinks:
-        description: 'List of linked AdWords accounts, active or pending approval. To create a new link request, add a new link with status active to the list. It will remain is state pending until approved or rejected in the AdWords interface. To delete an active link or to cancel a link request, remove it from the list.'
+        description: 'List of linked AdWords accounts that are active or pending approval. To create a new link request, add a new link with status active to the list. It will remain in a pending state until approved or rejected either in the AdWords interface or through the  AdWords API. To delete an active link, or to cancel a link request, remove it from the list.'
         items:
           $ref: '#/definitions/AccountAdwordsLink'
         type: array

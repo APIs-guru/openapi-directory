@@ -108,8 +108,8 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: projects
   - name: operations
+  - name: projects
 paths:
   '/v1/projects/{projectId}/builds':
     get:
@@ -125,6 +125,10 @@ paths:
           name: projectId
           required: true
           type: string
+        - description: Token to provide to skip to a particular spot in the list.
+          in: query
+          name: pageToken
+          type: string
         - description: Number of results to return in the list.
           in: query
           name: pageSize
@@ -132,10 +136,6 @@ paths:
         - description: The raw filter text to constrain the results.
           in: query
           name: filter
-          type: string
-        - description: Token to provide to skip to a particular spot in the list.
-          in: query
-          name: pageToken
           type: string
       responses:
         '200':
@@ -148,19 +148,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Starts a build with the specified configuration.
@@ -219,34 +219,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v1/projects/{projectId}/builds/{id}:cancel':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: Cancels a requested build in progress.
       operationId: cloudbuild.projects.builds.cancel
@@ -299,19 +299,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Creates a new BuildTrigger.
@@ -394,19 +394,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     patch:
       description: |-
         Updates an BuildTrigger by its project ID and trigger ID.
@@ -441,70 +441,56 @@ paths:
   '/v1/{name}':
     get:
       description: |-
-        Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding below allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`.
-      operationId: cloudbuild.operations.list
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: cloudbuild.operations.get
       parameters:
-        - description: The name of the operation collection.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListOperationsResponse'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -662,6 +648,11 @@ definitions:
         items:
           $ref: '#/definitions/BuildStep'
         type: array
+      substitutions:
+        additionalProperties:
+          type: string
+        description: Substitutions data for Build resource.
+        type: object
       timeout:
         description: |-
           Amount of time that this build should be allowed to run, to second
@@ -797,6 +788,11 @@ definitions:
 
           @OutputOnly
         type: string
+      substitutions:
+        additionalProperties:
+          type: string
+        description: Substitutions data for Build resource.
+        type: object
       triggerTemplate:
         $ref: '#/definitions/RepoSource'
         description: |-

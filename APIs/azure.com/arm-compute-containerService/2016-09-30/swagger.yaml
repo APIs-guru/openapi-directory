@@ -28,13 +28,13 @@ produces:
   - application/json
 parameters:
   ApiVersionParameter:
-    description: Client API Version.
+    description: Client Api Version.
     in: query
     name: api-version
     required: true
     type: string
   SubscriptionIdParameter:
-    description: Subscription credentials that uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
@@ -181,6 +181,7 @@ definitions:
     description: Profile for the container service agent pool.
     properties:
       count:
+        default: 1
         description: 'Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1. '
         format: int32
         maximum: 100
@@ -274,7 +275,7 @@ definitions:
     description: Profile for Linux VMs in the container service cluster.
     properties:
       adminUsername:
-        description: The administrator user name to use for Linux VMs.
+        description: The administrator username to use for Linux VMs.
         pattern: '^[a-z][a-z0-9_-]*$'
         type: string
       ssh:
@@ -290,7 +291,7 @@ definitions:
         description: The URL to get the next set of container service results.
         type: string
       value:
-        description: The list of container services.
+        description: the list of container services.
         items:
           $ref: '#/definitions/ContainerService'
         type: array
@@ -355,7 +356,7 @@ definitions:
         $ref: '#/definitions/ContainerServiceOrchestratorProfile'
         description: Properties of the orchestrator.
       provisioningState:
-        description: 'The current deployment or provisioning state, which only appears in the response.'
+        description: 'the current deployment or provisioning state, which only appears in the response.'
         readOnly: true
         type: string
       servicePrincipalProfile:
@@ -384,7 +385,7 @@ definitions:
     description: SSH configuration for Linux-based VMs running on Azure.
     properties:
       publicKeys:
-        description: The list of SSH public keys used to authenticate with Linux-based VMs.
+        description: the list of SSH public keys used to authenticate with Linux-based VMs.
         items:
           $ref: '#/definitions/ContainerServiceSshPublicKey'
         type: array
@@ -418,33 +419,33 @@ definitions:
         pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%\^&\*\(\)])[a-zA-Z\d!@#$%\^&\*\(\)]{12,123}$'
         type: string
       adminUsername:
-        description: The administrator user name to use for Windows VMs.
+        description: The administrator username to use for Windows VMs.
         pattern: '^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$'
         type: string
     required:
       - adminUsername
       - adminPassword
   Resource:
-    description: The resource model definition.
+    description: The Resource model definition.
     properties:
       id:
-        description: Resource ID.
+        description: Resource Id
         readOnly: true
         type: string
       location:
-        description: Resource location.
+        description: Resource location
         type: string
       name:
-        description: Resource name.
+        description: Resource name
         readOnly: true
         type: string
       tags:
         additionalProperties:
           type: string
-        description: Resource tags.
+        description: Resource tags
         type: object
       type:
-        description: Resource type.
+        description: Resource type
         readOnly: true
         type: string
     required:
