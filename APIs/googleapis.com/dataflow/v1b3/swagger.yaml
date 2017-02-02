@@ -1247,11 +1247,17 @@ definitions:
       name:
         description: 'Counter name. Not necessarily globally-unique, but unique within the context of the other fields. Required.'
         type: string
+      origin:
+        description: One of the standard Origins defined above.
+        enum:
+          - SYSTEM
+          - USER
+        type: string
+      originNamespace:
+        description: A string containing a more specific namespace of the counter's origin.
+        type: string
       originalStepName:
         description: 'System generated name of the original step in the user''s graph, before optimization.'
-        type: string
-      otherOrigin:
-        description: A string containing the origin of the counter.
         type: string
       portion:
         description: 'Portion of this counter, either key or value.'
@@ -1259,12 +1265,6 @@ definitions:
           - ALL
           - KEY
           - VALUE
-        type: string
-      standardOrigin:
-        description: One of the standard Origins defined above.
-        enum:
-          - DATAFLOW
-          - USER
         type: string
       workerId:
         description: ID of a particular worker.
@@ -2117,13 +2117,13 @@ definitions:
         type: number
     type: object
   ResourceUtilizationReport:
-    description: 'Worker metrics exported from workers. This contains resource utilization metrics accumulated from a variety of sources. For more information, see go/df-resource-signals. Note that this proto closely follows the structure of its DFE siblings in its contents.'
+    description: 'Worker metrics exported from workers. This contains resource utilization metrics accumulated from a variety of sources. For more information, see go/df-resource-signals.'
     properties:
-      metrics:
-        description: 'Each Struct must parallel DFE worker metrics protos (eg., cpu_time metric will have nested values “timestamp_ms, total_ms, rate”).'
+      metric:
+        description: '''Any'' is used to provide extensibility of reported metrics without requiring changes to the public API.'
         items:
           additionalProperties:
-            description: Properties of the object.
+            description: Properties of the object. Contains field @type with type URL.
           type: object
         type: array
     type: object

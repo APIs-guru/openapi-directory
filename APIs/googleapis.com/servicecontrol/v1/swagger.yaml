@@ -111,6 +111,56 @@ parameters:
 tags:
   - name: services
 paths:
+  '/v1/services/{serviceName}:allocateQuota':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Attempts to allocate quota for the specified consumer. It should be called
+        before the operation is executed.
+
+        This method requires the `servicemanagement.services.quota`
+        permission on the specified service. For more information, see
+        [Google Cloud IAM](https://cloud.google.com/iam).
+      operationId: servicecontrol.services.allocateQuota
+      parameters:
+        - description: |-
+            Name of the service as specified in the service configuration. For example,
+            `"pubsub.googleapis.com"`.
+
+            See google.api.Service for the definition of a service name.
+          in: path
+          name: serviceName
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AllocateQuotaRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AllocateQuotaResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/servicecontrol'
+      tags:
+        - services
   '/v1/services/{serviceName}:check':
     parameters:
       - $ref: '#/parameters/access_token'
@@ -161,6 +211,105 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/CheckResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/servicecontrol'
+      tags:
+        - services
+  '/v1/services/{serviceName}:endReconciliation':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Signals the quota controller that service ends the ongoing usage
+        reconciliation.
+
+        This method requires the `servicemanagement.services.quota`
+        permission on the specified service. For more information, see
+        [Google Cloud IAM](https://cloud.google.com/iam).
+      operationId: servicecontrol.services.endReconciliation
+      parameters:
+        - description: |-
+            Name of the service as specified in the service configuration. For example,
+            `"pubsub.googleapis.com"`.
+
+            See google.api.Service for the definition of a service name.
+          in: path
+          name: serviceName
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EndReconciliationRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/EndReconciliationResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/servicecontrol'
+      tags:
+        - services
+  '/v1/services/{serviceName}:releaseQuota':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Releases previously allocated quota done through AllocateQuota method.
+
+        This method requires the `servicemanagement.services.quota`
+        permission on the specified service. For more information, see
+        [Google Cloud IAM](https://cloud.google.com/iam).
+      operationId: servicecontrol.services.releaseQuota
+      parameters:
+        - description: |-
+            Name of the service as specified in the service configuration. For example,
+            `"pubsub.googleapis.com"`.
+
+            See google.api.Service for the definition of a service name.
+          in: path
+          name: serviceName
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReleaseQuotaRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ReleaseQuotaResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -226,7 +375,135 @@ paths:
             - 'https://www.googleapis.com/auth/servicecontrol'
       tags:
         - services
+  '/v1/services/{serviceName}:startReconciliation':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Unlike rate quota, allocation quota does not get refilled periodically.
+        So, it is possible that the quota usage as seen by the service differs from
+        what the One Platform considers the usage is. This is expected to happen
+        only rarely, but over time this can accumulate. Services can invoke
+        StartReconciliation and EndReconciliation to correct this usage drift, as
+        described below:
+        1. Service sends StartReconciliation with a timestamp in future for each
+           metric that needs to be reconciled. The timestamp being in future allows
+           to account for in-flight AllocateQuota and ReleaseQuota requests for the
+           same metric.
+        2. One Platform records this timestamp and starts tracking subsequent
+           AllocateQuota and ReleaseQuota requests until EndReconciliation is
+           called.
+        3. At or after the time specified in the StartReconciliation, service
+           sends EndReconciliation with the usage that needs to be reconciled to.
+        4. One Platform adjusts its own record of usage for that metric to the
+           value specified in EndReconciliation by taking in to account any
+           allocation or release between StartReconciliation and EndReconciliation.
+
+        Signals the quota controller that the service wants to perform a usage
+        reconciliation as specified in the request.
+
+        This method requires the `servicemanagement.services.quota`
+        permission on the specified service. For more information, see
+        [Google Cloud IAM](https://cloud.google.com/iam).
+      operationId: servicecontrol.services.startReconciliation
+      parameters:
+        - description: |-
+            Name of the service as specified in the service configuration. For example,
+            `"pubsub.googleapis.com"`.
+
+            See google.api.Service for the definition of a service name.
+          in: path
+          name: serviceName
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StartReconciliationRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StartReconciliationResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/servicecontrol'
+      tags:
+        - services
 definitions:
+  AllocateQuotaRequest:
+    description: Request message for the AllocateQuota method.
+    properties:
+      allocateOperation:
+        $ref: '#/definitions/QuotaOperation'
+        description: Operation that describes the quota allocation.
+      allocationMode:
+        description: |-
+          Allocation mode for this operation.
+          Deprecated: use QuotaMode inside the QuotaOperation.
+        enum:
+          - UNSPECIFIED
+          - NORMAL
+          - BEST_EFFORT
+          - CHECK_ONLY
+        type: string
+      serviceConfigId:
+        description: |-
+          Specifies which version of service configuration should be used to process
+          the request. If unspecified or no matching version can be found, the latest
+          one will be used.
+        type: string
+    type: object
+  AllocateQuotaResponse:
+    description: Response message for the AllocateQuota method.
+    properties:
+      allocateErrors:
+        description: Indicates the decision of the allocate.
+        items:
+          $ref: '#/definitions/QuotaError'
+        type: array
+      operationId:
+        description: |-
+          The same operation_id value used in the AllocateQuotaRequest. Used for
+          logging and diagnostics purposes.
+        type: string
+      quotaMetrics:
+        description: |-
+          Quota metrics to indicate the result of allocation. Depending on the
+          request, one or more of the following metrics will be included:
+
+          1. For rate quota, per quota group or per quota metric incremental usage
+          will be specified using the following delta metric:
+            "serviceruntime.googleapis.com/api/consumer/quota_used_count"
+
+          2. For allocation quota, per quota metric total usage will be specified
+          using the following gauge metric:
+            "serviceruntime.googleapis.com/allocation/consumer/quota_used_count"
+
+          3. For both rate quota and allocation quota, the quota limit reached
+          condition will be specified using the following boolean metric:
+            "serviceruntime.googleapis.com/quota/exceeded"
+        items:
+          $ref: '#/definitions/MetricValueSet'
+        type: array
+      serviceConfigId:
+        description: ID of the actual config used to process the request.
+        type: string
+    type: object
   AuditLog:
     description: |+
       Common audit log format for Google Cloud Platform API operations.
@@ -350,7 +627,12 @@ definitions:
           - NOT_FOUND
           - PERMISSION_DENIED
           - RESOURCE_EXHAUSTED
+          - BUDGET_EXCEEDED
+          - DENIAL_OF_SERVICE_DETECTED
+          - LOAD_SHEDDING
+          - ABUSER_DETECTED
           - SERVICE_NOT_ACTIVATED
+          - VISIBILITY_DENIED
           - BILLING_DISABLED
           - PROJECT_DELETED
           - PROJECT_INVALID
@@ -361,13 +643,33 @@ definitions:
           - API_KEY_INVALID
           - API_KEY_EXPIRED
           - API_KEY_NOT_FOUND
+          - SPATULA_HEADER_INVALID
+          - LOAS_ROLE_INVALID
+          - NO_LOAS_PROJECT
+          - LOAS_PROJECT_DISABLED
+          - SECURITY_POLICY_VIOLATED
           - NAMESPACE_LOOKUP_UNAVAILABLE
           - SERVICE_STATUS_UNAVAILABLE
           - BILLING_STATUS_UNAVAILABLE
+          - QUOTA_CHECK_UNAVAILABLE
+          - LOAS_PROJECT_LOOKUP_UNAVAILABLE
+          - CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE
+          - SECURITY_POLICY_BACKEND_UNAVAILABLE
         type: string
       detail:
         description: Free-form text providing details on the error cause of the error.
         type: string
+    type: object
+  CheckInfo:
+    properties:
+      unusedArguments:
+        description: |-
+          A list of fields and label keys that are ignored by the server.
+          The client doesn't need to send them for following requests to improve
+          performance and allow better aggregation.
+        items:
+          type: string
+        type: array
     type: object
   CheckRequest:
     description: Request message for the Check method.
@@ -375,6 +677,9 @@ definitions:
       operation:
         $ref: '#/definitions/Operation'
         description: The operation to be checked.
+      requestProjectSettings:
+        description: Requests the project settings to be returned as part of the check response.
+        type: boolean
       serviceConfigId:
         description: |-
           Specifies which version of service configuration should be used to process
@@ -383,6 +688,11 @@ definitions:
           If unspecified or no matching version can be found, the
           latest one will be used.
         type: string
+      skipActivationCheck:
+        description: |-
+          Indicates if service activation check should be skipped for this request.
+          Default behavior is to perform the check and apply relevant quota.
+        type: boolean
     type: object
   CheckResponse:
     description: Response message for the Check method.
@@ -397,11 +707,18 @@ definitions:
         items:
           $ref: '#/definitions/CheckError'
         type: array
+      checkInfo:
+        $ref: '#/definitions/CheckInfo'
+        description: Feedback data returned from the server during processing a Check request.
       operationId:
         description: |-
           The same operation_id value used in the CheckRequest.
           Used for logging and diagnostics purposes.
         type: string
+      quotaInfo:
+        $ref: '#/definitions/QuotaInfo'
+        description: |
+          Quota information for the check request associated with this response.
       serviceConfigId:
         description: The actual config id used to process the request.
         type: string
@@ -469,6 +786,39 @@ definitions:
           must be zero, otherwise validation of the request fails.
         format: double
         type: number
+    type: object
+  EndReconciliationRequest:
+    properties:
+      reconciliationOperation:
+        $ref: '#/definitions/QuotaOperation'
+        description: Operation that describes the quota reconciliation.
+      serviceConfigId:
+        description: |-
+          Specifies which version of service configuration should be used to process
+          the request. If unspecified or no matching version can be found, the latest
+          one will be used.
+        type: string
+    type: object
+  EndReconciliationResponse:
+    properties:
+      operationId:
+        description: |-
+          The same operation_id value used in the EndReconciliationRequest. Used for
+          logging and diagnostics purposes.
+        type: string
+      quotaMetrics:
+        description: Metric values as tracked by One Platform before the adjustment was made.
+        items:
+          $ref: '#/definitions/MetricValueSet'
+        type: array
+      reconciliationErrors:
+        description: Indicates the decision of the reconciliation end.
+        items:
+          $ref: '#/definitions/QuotaError'
+        type: array
+      serviceConfigId:
+        description: ID of the actual config used to process the request.
+        type: string
     type: object
   ExplicitBuckets:
     description: Describing buckets with arbitrary user-provided width.
@@ -639,6 +989,9 @@ definitions:
           See comments on google.api.servicecontrol.v1.Operation.labels for
           the overriding relationship.
         type: object
+      moneyValue:
+        $ref: '#/definitions/Money'
+        description: A money value.
       startTime:
         description: |-
           The start of the time period over which this metric value's measurement
@@ -665,6 +1018,29 @@ definitions:
         items:
           $ref: '#/definitions/MetricValue'
         type: array
+    type: object
+  Money:
+    description: Represents an amount of money with its currency type.
+    properties:
+      currencyCode:
+        description: The 3-letter currency code defined in ISO 4217.
+        type: string
+      nanos:
+        description: |-
+          Number of nano (10^-9) units of the amount.
+          The value must be between -999,999,999 and +999,999,999 inclusive.
+          If `units` is positive, `nanos` must be positive or zero.
+          If `units` is zero, `nanos` can be positive, zero, or negative.
+          If `units` is negative, `nanos` must be negative or zero.
+          For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+        format: int32
+        type: integer
+      units:
+        description: |-
+          The whole units of the amount.
+          For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+        format: int64
+        type: string
     type: object
   Operation:
     description: Represents information regarding an operation.
@@ -693,6 +1069,7 @@ definitions:
         enum:
           - LOW
           - HIGH
+          - DEBUG
         type: string
       labels:
         additionalProperties:
@@ -749,9 +1126,251 @@ definitions:
       operationName:
         description: Fully qualified name of the operation. Reserved for future use.
         type: string
+      quotaProperties:
+        $ref: '#/definitions/QuotaProperties'
+        description: |-
+          Represents the properties needed for quota check. Applicable only if this
+          operation is for a quota check request.
+      resourceContainer:
+        description: |-
+          The resource name of the parent of a resource in the resource hierarchy.
+
+          This can be in one of the following formats:
+              - “projects/<project-id or project-number>”
+              - “folders/<folder-id>”
+              - “organizations/<organization-id>”
+        type: string
       startTime:
         description: Required. Start time of the operation.
         format: google-datetime
+        type: string
+      userLabels:
+        additionalProperties:
+          type: string
+        description: |-
+          User defined labels for the resource that this operation is associated
+          with.
+        type: object
+    type: object
+  QuotaError:
+    properties:
+      code:
+        description: Error code.
+        enum:
+          - UNSPECIFIED
+          - RESOURCE_EXHAUSTED
+          - PROJECT_SUSPENDED
+          - SERVICE_NOT_ENABLED
+          - BILLING_NOT_ACTIVE
+          - PROJECT_DELETED
+          - PROJECT_INVALID
+          - IP_ADDRESS_BLOCKED
+          - REFERER_BLOCKED
+          - CLIENT_APP_BLOCKED
+          - API_KEY_INVALID
+          - API_KEY_EXPIRED
+          - SPATULA_HEADER_INVALID
+          - LOAS_ROLE_INVALID
+          - NO_LOAS_PROJECT
+          - PROJECT_STATUS_UNVAILABLE
+          - SERVICE_STATUS_UNAVAILABLE
+          - BILLING_STATUS_UNAVAILABLE
+          - QUOTA_SYSTEM_UNAVAILABLE
+        type: string
+      description:
+        description: Free-form text that provides details on the cause of the error.
+        type: string
+      subject:
+        description: |-
+          Subject to whom this error applies. See the specific enum for more details
+          on this field. For example, "clientip:<ip address of client>" or
+          "project:<Google developer project id>".
+        type: string
+    type: object
+  QuotaInfo:
+    description: Contains the quota information for a quota check response.
+    properties:
+      limitExceeded:
+        description: |-
+          Quota Metrics that have exceeded quota limits.
+          For QuotaGroup-based quota, this is QuotaGroup.name
+          For QuotaLimit-based quota, this is QuotaLimit.name
+          See: google.api.Quota
+          Deprecated: Use quota_metrics to get per quota group limit exceeded status.
+        items:
+          type: string
+        type: array
+      quotaConsumed:
+        additionalProperties:
+          format: int32
+          type: integer
+        description: |-
+          Map of quota group name to the actual number of tokens consumed. If the
+          quota check was not successful, then this will not be populated due to no
+          quota consumption.
+          Deprecated: Use quota_metrics to get per quota group usage.
+        type: object
+      quotaMetrics:
+        description: |-
+          Quota metrics to indicate the usage. Depending on the check request, one or
+          more of the following metrics will be included:
+
+          1. For rate quota, per quota group or per quota metric incremental usage
+          will be specified using the following delta metric:
+            "serviceruntime.googleapis.com/api/consumer/quota_used_count"
+
+          2. For allocation quota, per quota metric total usage will be specified
+          using the following gauge metric:
+            "serviceruntime.googleapis.com/allocation/consumer/quota_used_count"
+
+          3. For both rate quota and allocation quota, the quota limit reached
+          condition will be specified using the following boolean metric:
+            "serviceruntime.googleapis.com/quota/exceeded"
+        items:
+          $ref: '#/definitions/MetricValueSet'
+        type: array
+    type: object
+  QuotaOperation:
+    description: Represents information regarding a quota operation.
+    properties:
+      consumerId:
+        description: |-
+          Identity of the consumer for whom this quota operation is being performed.
+
+          This can be in one of the following formats:
+            project:<project_id>,
+            project_number:<project_number>,
+            api_key:<api_key>.
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels describing the operation.
+        type: object
+      methodName:
+        description: |-
+          Fully qualified name of the API method for which this quota operation is
+          requested. This name is used for matching quota rules or metric rules and
+          billing status rules defined in service configuration. This field is not
+          required if the quota operation is performed on non-API resources.
+
+          Example of an RPC method name:
+              google.example.library.v1.LibraryService.CreateShelf
+        type: string
+      operationId:
+        description: |-
+          Identity of the operation. This must be unique within the scope of the
+          service that generated the operation. If the service calls AllocateQuota
+          and ReleaseQuota on the same operation, the two calls should carry the
+          same ID.
+
+          UUID version 4 is recommended, though not required. In scenarios where an
+          operation is computed from existing information and an idempotent id is
+          desirable for deduplication purpose, UUID version 5 is recommended. See
+          RFC 4122 for details.
+        type: string
+      quotaMetrics:
+        description: |-
+          Represents information about this operation. Each MetricValueSet
+          corresponds to a metric defined in the service configuration.
+          The data type used in the MetricValueSet must agree with
+          the data type specified in the metric definition.
+
+          Within a single operation, it is not allowed to have more than one
+          MetricValue instances that have the same metric names and identical
+          label value combinations. If a request has such duplicated MetricValue
+          instances, the entire request is rejected with
+          an invalid argument error.
+        items:
+          $ref: '#/definitions/MetricValueSet'
+        type: array
+      quotaMode:
+        description: Quota mode for this operation.
+        enum:
+          - UNSPECIFIED
+          - NORMAL
+          - BEST_EFFORT
+          - CHECK_ONLY
+        type: string
+    type: object
+  QuotaProperties:
+    description: |-
+      Represents the properties needed for quota operations.
+
+      Use the metric_value_sets field in Operation message to provide cost
+      override with metric_name in <service_name>/quota/<quota_group_name>/cost
+      format. Overrides for unmatched quota groups will be ignored.
+      Costs are expected to be >= 0. Cost 0 will cause no quota check,
+      but still traffic restrictions will be enforced.
+    properties:
+      limitByIds:
+        additionalProperties:
+          type: string
+        description: |-
+          LimitType IDs that should be used for checking quota. Key in this map
+          should be a valid LimitType string, and the value is the ID to be used. For
+          example, an entry <USER, 123> will cause all user quota limits to use 123
+          as the user ID. See google/api/quota.proto for the definition of LimitType.
+          CLIENT_PROJECT: Not supported.
+          USER: Value of this entry will be used for enforcing user-level quota
+                limits. If none specified, caller IP passed in the
+                servicecontrol.googleapis.com/caller_ip label will be used instead.
+                If the server cannot resolve a value for this LimitType, an error
+                will be thrown. No validation will be performed on this ID.
+          Deprecated: use servicecontrol.googleapis.com/user label to send user ID.
+        type: object
+      quotaMode:
+        description: Quota mode for this operation.
+        enum:
+          - ACQUIRE
+          - ACQUIRE_BEST_EFFORT
+          - CHECK
+          - RELEASE
+        type: string
+    type: object
+  ReleaseQuotaRequest:
+    description: Request message for the ReleaseQuota method.
+    properties:
+      releaseOperation:
+        $ref: '#/definitions/QuotaOperation'
+        description: Operation that describes the quota release.
+      serviceConfigId:
+        description: |-
+          Specifies which version of service configuration should be used to process
+          the request. If unspecified or no matching version can be found, the latest
+          one will be used.
+        type: string
+    type: object
+  ReleaseQuotaResponse:
+    description: Response message for the ReleaseQuota method.
+    properties:
+      operationId:
+        description: |-
+          The same operation_id value used in the ReleaseQuotaRequest. Used for
+          logging and diagnostics purposes.
+        type: string
+      quotaMetrics:
+        description: |-
+          Quota metrics to indicate the result of release. Depending on the
+          request, one or more of the following metrics will be included:
+
+          1. For rate quota, per quota group or per quota metric released amount
+          will be specified using the following delta metric:
+            "serviceruntime.googleapis.com/api/consumer/quota_refund_count"
+
+          2. For allocation quota, per quota metric total usage will be specified
+          using the following gauge metric:
+            "serviceruntime.googleapis.com/allocation/consumer/quota_used_count"
+        items:
+          $ref: '#/definitions/MetricValueSet'
+        type: array
+      releaseErrors:
+        description: Indicates the decision of the release.
+        items:
+          $ref: '#/definitions/QuotaError'
+        type: array
+      serviceConfigId:
+        description: ID of the actual config used to process the request.
         type: string
     type: object
   ReportError:
@@ -763,6 +1382,15 @@ definitions:
       status:
         $ref: '#/definitions/Status'
         description: Details of the error when processing the `Operation`.
+    type: object
+  ReportInfo:
+    properties:
+      operationId:
+        description: The Operation.operation_id value from the request.
+        type: string
+      quotaInfo:
+        $ref: '#/definitions/QuotaInfo'
+        description: Quota usage info when processing the `Operation`.
     type: object
   ReportRequest:
     description: Request message for the Report method.
@@ -813,6 +1441,19 @@ definitions:
         items:
           $ref: '#/definitions/ReportError'
         type: array
+      reportInfos:
+        description: |
+          Quota usage for each quota release `Operation` request.
+
+          Fully or partially failed quota release request may or may not be present
+          in `report_quota_info`. For example, a failed quota release request will
+          have the current quota usage info when precise quota library returns the
+          info. A deadline exceeded quota request will not have quota usage info.
+
+          If there is no quota release request, report_quota_info will be empty.
+        items:
+          $ref: '#/definitions/ReportInfo'
+        type: array
       serviceConfigId:
         description: The actual config id used to process the request.
         type: string
@@ -835,6 +1476,41 @@ definitions:
               The request was made by the Google Cloud SDK CLI (gcloud).
           +   `AppEngine-Google; (+http://code.google.com/appengine; appid: s~my-project`:
               The request was made from the `my-project` App Engine app.
+        type: string
+    type: object
+  StartReconciliationRequest:
+    properties:
+      reconciliationOperation:
+        $ref: '#/definitions/QuotaOperation'
+        description: Operation that describes the quota reconciliation.
+      serviceConfigId:
+        description: |-
+          Specifies which version of service configuration should be used to process
+          the request. If unspecified or no matching version can be found, the latest
+          one will be used.
+        type: string
+    type: object
+  StartReconciliationResponse:
+    properties:
+      operationId:
+        description: |-
+          The same operation_id value used in the StartReconciliationRequest. Used
+          for logging and diagnostics purposes.
+        type: string
+      quotaMetrics:
+        description: |-
+          Metric values as tracked by One Platform before the start of
+          reconciliation.
+        items:
+          $ref: '#/definitions/MetricValueSet'
+        type: array
+      reconciliationErrors:
+        description: Indicates the decision of the reconciliation start.
+        items:
+          $ref: '#/definitions/QuotaError'
+        type: array
+      serviceConfigId:
+        description: ID of the actual config used to process the request.
         type: string
     type: object
   Status:

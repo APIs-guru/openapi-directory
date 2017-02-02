@@ -128,6 +128,10 @@ paths:
         of "project:{PROJECT-ID}".
       operationId: servicemanagement.services.list
       parameters:
+        - description: Include services produced by the specified project.
+          in: query
+          name: producerProjectId
+          type: string
         - description: |-
             Include services consumed by the specified consumer.
 
@@ -147,10 +151,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: Include services produced by the specified project.
-          in: query
-          name: producerProjectId
-          type: string
       responses:
         '200':
           description: Successful response
@@ -168,7 +168,6 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -181,6 +180,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Creates a new managed service.
@@ -265,7 +265,6 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -278,6 +277,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
   '/v1/services/{serviceName}/config':
     get:
       description: Gets a service configuration (version) for a managed service.
@@ -311,7 +311,6 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -324,6 +323,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
   '/v1/services/{serviceName}/configs':
     get:
       description: |-
@@ -363,7 +363,6 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -376,6 +375,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Creates a new service configuration (version) for a managed service.
@@ -441,7 +441,6 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -454,9 +453,9 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
   '/v1/services/{serviceName}/configs:submit':
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -469,6 +468,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Creates a new service configuration (version) for a managed service based
@@ -544,7 +544,6 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -557,6 +556,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Creates a new service configuration rollout. Based on rollout, the
@@ -628,7 +628,6 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -641,9 +640,9 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
   '/v1/services/{serviceName}:disable':
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -656,6 +655,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Disable a managed service for a project.
@@ -688,7 +688,6 @@ paths:
         - services
   '/v1/services/{serviceName}:enable':
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -701,6 +700,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Enable a managed service for a project with default setting.
@@ -736,7 +736,6 @@ paths:
         - services
   '/v1/services/{serviceName}:undelete':
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -749,6 +748,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Revives a previously deleted managed service. The method restores the
@@ -780,7 +780,6 @@ paths:
         - services
   '/v1/services:generateConfigReport':
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -793,6 +792,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Generates and returns a report (errors, warnings and changes from
@@ -851,7 +851,6 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -864,9 +863,9 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
   '/v1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -879,6 +878,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Gets the access control policy for a resource.
@@ -913,7 +913,6 @@ paths:
         - services
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -926,6 +925,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -959,7 +959,6 @@ paths:
         - services
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
@@ -972,6 +971,7 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.

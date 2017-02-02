@@ -2436,6 +2436,9 @@ definitions:
       country:
         description: Country for which this issue is reported.
         type: string
+      detail:
+        description: A more detailed description of the issue.
+        type: string
       displayedValue:
         description: Actual value displayed on the landing page.
         type: string
@@ -2449,6 +2452,9 @@ definitions:
         type: string
       lastChecked:
         description: Last time the account was checked for this issue.
+        type: string
+      location:
+        description: The attribute name that is relevant for the issue.
         type: string
       numItems:
         description: Number of items in the account found to have the said issue.

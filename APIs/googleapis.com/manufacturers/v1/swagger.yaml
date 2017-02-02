@@ -145,6 +145,8 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
@@ -156,8 +158,6 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
   '/v1/{parent}/products/{name}':
     get:
       description: |-
@@ -201,6 +201,8 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
@@ -212,8 +214,6 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
 definitions:
   Attributes:
     description: |-

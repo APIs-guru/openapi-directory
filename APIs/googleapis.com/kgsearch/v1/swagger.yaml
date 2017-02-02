@@ -110,24 +110,6 @@ paths:
         JSON-LD format and compatible with http://schema.org
       operationId: kgsearch.entities.search
       parameters:
-        - collectionFormat: multi
-          description: |-
-            The list of entity id to be used for search instead of query string.
-            To specify multiple ids in the HTTP request, repeat the parameter in the
-            URL as in ...?ids=A&ids=B
-          in: query
-          items:
-            type: string
-          name: ids
-          type: array
-        - description: Limits the number of entities to be returned.
-          in: query
-          name: limit
-          type: integer
-        - description: Enables prefix match against names and aliases of entities
-          in: query
-          name: prefix
-          type: boolean
         - description: The literal query string for search.
           in: query
           name: query
@@ -155,6 +137,24 @@ paths:
             type: string
           name: languages
           type: array
+        - collectionFormat: multi
+          description: |-
+            The list of entity id to be used for search instead of query string.
+            To specify multiple ids in the HTTP request, repeat the parameter in the
+            URL as in ...?ids=A&ids=B
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+        - description: Limits the number of entities to be returned.
+          in: query
+          name: limit
+          type: integer
+        - description: Enables prefix match against names and aliases of entities
+          in: query
+          name: prefix
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -163,19 +163,19 @@ paths:
       tags:
         - entities
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
 definitions:
   SearchResponse:
     description: |-

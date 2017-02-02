@@ -98,6 +98,7 @@ tags:
   - name: search
   - name: sponsors
   - name: subscriptions
+  - name: superChatEvents
   - name: thumbnails
   - name: videoAbuseReportReasons
   - name: videoCategories
@@ -2896,6 +2897,56 @@ paths:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - subscriptions
+  /superChatEvents:
+    get:
+      description: Lists Super Chat events for a channel.
+      operationId: youtube.superChatEvents.list
+      parameters:
+        - description: The part parameter specifies the superChatEvent resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+        - description: |-
+            The hl parameter instructs the API to retrieve localized resource metadata for a specific application language that the YouTube website supports. The parameter value must be a language code included in the list returned by the i18nLanguages.list method.
+
+            If localized resource details are available in that language, the resource's snippet.localized object will contain the localized values. However, if localized details are not available, the snippet.localized object will contain resource details in the resource's default language.
+          in: query
+          name: hl
+          type: string
+        - default: 5
+          description: The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+          in: query
+          maximum: 50
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SuperChatEventListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+      tags:
+        - superChatEvents
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   /thumbnails/set:
     parameters:
       - $ref: '#/parameters/alt'
@@ -4447,6 +4498,11 @@ definitions:
   ChannelTopicDetails:
     description: Freebase topic information related to the channel.
     properties:
+      topicCategories:
+        description: A list of Wikipedia URLs that describe the channel's content.
+        items:
+          type: string
+        type: array
       topicIds:
         description: A list of Freebase topic IDs associated with the channel. You can retrieve information about each topic using the Freebase Topic API.
         items:
@@ -6174,7 +6230,7 @@ definitions:
   LiveChatMessageSnippet:
     properties:
       authorChannelId:
-        description: 'The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action'
+        description: 'The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action superChatEvent - the user that made the purchase'
         type: string
       displayMessage:
         description: 'Contains a string that can be displayed to the user. If this field is not present the message is silent, at the moment only messages of type TOMBSTONE and CHAT_ENDED_EVENT are silent.'
@@ -6203,6 +6259,9 @@ definitions:
         description: 'The date and time when the message was orignally published. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
         format: date-time
         type: string
+      superChatDetails:
+        $ref: '#/definitions/LiveChatSuperChatDetails'
+        description: 'Details about the Super Chat event, this is only set if the type is ''superChatEvent''.'
       textMessageDetails:
         $ref: '#/definitions/LiveChatTextMessageDetails'
         description: 'Details about the text message, this is only set if the type is ''textMessageEvent''.'
@@ -6220,6 +6279,7 @@ definitions:
           - pollVotedEvent
           - sponsorOnlyModeEndedEvent
           - sponsorOnlyModeStartedEvent
+          - superChatEvent
           - textMessageEvent
           - tombstone
           - userBannedEvent
@@ -6327,6 +6387,26 @@ definitions:
         type: string
       pollId:
         description: The poll the user voted on.
+        type: string
+    type: object
+  LiveChatSuperChatDetails:
+    properties:
+      amountDisplayString:
+        description: A rendered string that displays the fund amount and currency to the user.
+        type: string
+      amountMicros:
+        description: 'The amount purchased by the user, in micros (1,750,000 micros = 1.75).'
+        format: uint64
+        type: string
+      currency:
+        description: The currency in which the purchase was made.
+        type: string
+      tier:
+        description: The tier in which the amount belongs to. Lower amounts belong to lower tiers. Starts at 1.
+        format: uint32
+        type: integer
+      userComment:
+        description: The comment added by the user to this Super Chat event.
         type: string
     type: object
   LiveChatTextMessageDetails:
@@ -7162,6 +7242,81 @@ definitions:
         description: The title of the subscriber.
         type: string
     type: object
+  SuperChatEvent:
+    description: A superChatEvent resource represents a Super Chat purchase on a YouTube channel.
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      id:
+        description: The ID that YouTube assigns to uniquely identify the Super Chat event.
+        type: string
+      kind:
+        default: 'youtube#superChatEvent'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#superChatEvent".'
+        type: string
+      snippet:
+        $ref: '#/definitions/SuperChatEventSnippet'
+        description: The snippet object contains basic details about the Super Chat event.
+    type: object
+  SuperChatEventListResponse:
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      eventId:
+        description: Serialized EventId of the request which produced this response.
+        type: string
+      items:
+        description: A list of Super Chat purchases that match the request criteria.
+        items:
+          $ref: '#/definitions/SuperChatEvent'
+        type: array
+      kind:
+        default: 'youtube#superChatEventListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#superChatEventListResponse".'
+        type: string
+      nextPageToken:
+        description: The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
+        type: string
+      pageInfo:
+        $ref: '#/definitions/PageInfo'
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+      visitorId:
+        description: The visitorId identifies the visitor.
+        type: string
+    type: object
+  SuperChatEventSnippet:
+    properties:
+      amountMicros:
+        description: 'The purchase amount, in micros of the purchase currency. e.g., 1 is represented as 1000000.'
+        format: uint64
+        type: string
+      channelId:
+        description: Channel id where the event occurred.
+        type: string
+      commentText:
+        description: The text contents of the comment left by the user.
+        type: string
+      createdAt:
+        description: 'The date and time when the event occurred. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
+        format: date-time
+        type: string
+      currency:
+        description: The currency in which the purchase was made. ISO 4217.
+        type: string
+      displayString:
+        description: 'A rendered string that displays the purchase amount and currency (e.g., "$1.00"). The string is rendered for the given language.'
+        type: string
+      messageType:
+        description: 'The tier for the paid message, which is based on the amount of money spent to purchase the message.'
+        format: uint32
+        type: integer
+      supporterDetails:
+        $ref: '#/definitions/ChannelProfileDetails'
+        description: Details about the supporter.
+    type: object
   Thumbnail:
     description: A thumbnail is an image representing a YouTube resource.
     properties:
@@ -7961,6 +8116,7 @@ definitions:
             - imageFile
             - notAVideoFile
             - projectFile
+            - unsupportedSpatialAudioLayout
           type: string
         type: array
       processingHints:
@@ -7968,9 +8124,10 @@ definitions:
         items:
           enum:
             - nonStreamableMov
-            - procsesingHintSpatialAudio
-            - procsesingHintSphericalVideo
             - sendBestQualityVideo
+            - spatialAudio
+            - sphericalVideo
+            - vrVideo
           type: string
         type: array
       processingWarnings:
@@ -7984,6 +8141,8 @@ definitions:
             - unknownAudioCodec
             - unknownContainer
             - unknownVideoCodec
+            - unsupportedSphericalProjectionType
+            - unsupportedVrStereoMode
           type: string
         type: array
       tagSuggestions:
@@ -8009,6 +8168,11 @@ definitions:
     properties:
       relevantTopicIds:
         description: 'Similar to topic_id, except that these topics are merely relevant to the video. These are topics that may be mentioned in, or appear in the video. You can retrieve information about each topic using Freebase Topic API.'
+        items:
+          type: string
+        type: array
+      topicCategories:
+        description: A list of Wikipedia URLs that provide a high-level description of the video's content.
         items:
           type: string
         type: array

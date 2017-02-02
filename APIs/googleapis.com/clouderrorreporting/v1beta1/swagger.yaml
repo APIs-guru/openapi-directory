@@ -146,30 +146,30 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1beta1/{name}':
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     put:
       description: |-
         Replace the data for the specified group.
@@ -239,17 +239,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Restricts the query to the specified time range.
-          enum:
-            - PERIOD_UNSPECIFIED
-            - PERIOD_1_HOUR
-            - PERIOD_6_HOURS
-            - PERIOD_1_DAY
-            - PERIOD_1_WEEK
-            - PERIOD_30_DAYS
-          in: query
-          name: timeRange.period
-          type: string
         - description: '[Required] The group for which events shall be returned.'
           in: query
           name: groupId
@@ -280,6 +269,17 @@ paths:
           in: query
           name: serviceFilter.resourceType
           type: string
+        - description: Restricts the query to the specified time range.
+          enum:
+            - PERIOD_UNSPECIFIED
+            - PERIOD_1_HOUR
+            - PERIOD_6_HOURS
+            - PERIOD_1_DAY
+            - PERIOD_1_WEEK
+            - PERIOD_30_DAYS
+          in: query
+          name: timeRange.period
+          type: string
       responses:
         '200':
           description: Successful response
@@ -295,30 +295,30 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1beta1/{projectName}/events:report':
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Report an individual error event.
@@ -373,18 +373,6 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            [Optional] Time where the timed counts shall be aligned if rounded
-            alignment is chosen. Default is 00:00 UTC.
-          in: query
-          name: alignmentTime
-          type: string
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
-          in: query
-          name: serviceFilter.resourceType
-          type: string
-        - description: |-
             [Optional] The preferred duration for a single returned `TimedCount`.
             If not set, no timed counts are returned.
           in: query
@@ -438,6 +426,12 @@ paths:
           name: pageSize
           type: integer
         - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+          in: query
+          name: serviceFilter.version
+          type: string
+        - description: |-
             [Optional] The sort order in which the results are returned.
             Default is `COUNT_DESC`.
           enum:
@@ -451,9 +445,15 @@ paths:
           type: string
         - description: |-
             [Optional] The exact value to match against
-            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
           in: query
-          name: serviceFilter.version
+          name: serviceFilter.resourceType
+          type: string
+        - description: |-
+            [Optional] Time where the timed counts shall be aligned if rounded
+            alignment is chosen. Default is 00:00 UTC.
+          in: query
+          name: alignmentTime
           type: string
       responses:
         '200':
@@ -470,15 +470,15 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
 definitions:
   DeleteEventsResponse:
     description: Response message for deleting error events.
@@ -728,10 +728,23 @@ definitions:
         type: string
       message:
         description: |-
-          [Required] A message describing the error. The message can contain an
-          exception stack in one of the supported programming languages and formats.
-          In that case, the message is parsed and detailed exception information
-          is returned when retrieving the error event again.
+          [Required] The error message.
+          If no `context.reportLocation` is provided, the message must contain a
+          header (typically consisting of the exception type name and an error
+          message) and an exception stack trace in one of the supported programming
+          languages and formats.
+          Supported languages are Java, Python, JavaScript, Ruby, C#, PHP, and Go.
+          Supported stack trace formats are:
+
+          * **Java**: Must be the return value of [`Throwable.printStackTrace()`](https://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html#printStackTrace%28%29).
+          * **Python**: Must be the return value of [`traceback.format_exc()`](https://docs.python.org/2/library/traceback.html#traceback.format_exc).
+          * **JavaScript**: Must be the value of [`error.stack`](https://github.com/v8/v8/wiki/Stack-Trace-API)
+          as returned by V8.
+          * **Ruby**: Must contain frames returned by [`Exception.backtrace`](https://ruby-doc.org/core-2.2.0/Exception.html#method-i-backtrace).
+          * **C#**: Must be the return value of [`Exception.ToString()`](https://msdn.microsoft.com/en-us/library/system.exception.tostring.aspx).
+          * **PHP**: Must start with `PHP (Notice|Parse error|Fatal error|Warning)`
+          and contain the result of [`(string)$exception`](http://php.net/manual/en/exception.tostring.php).
+          * **Go**: Must be the return value of [`runtime.Stack()`](https://golang.org/pkg/runtime/debug/#Stack).
         type: string
       serviceContext:
         $ref: '#/definitions/ServiceContext'

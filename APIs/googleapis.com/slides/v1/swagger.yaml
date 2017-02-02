@@ -117,19 +117,19 @@ tags:
 paths:
   /v1/presentations:
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Creates a new presentation using the title given in the request. Other
@@ -181,19 +181,19 @@ paths:
       tags:
         - presentations
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
   '/v1/presentations/{presentationId}/pages/{pageObjectId}':
     get:
       description: Gets the latest version of the specified page in the presentation.
@@ -226,34 +226,34 @@ paths:
       tags:
         - presentations
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
   '/v1/presentations/{presentationId}:batchUpdate':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Applies one or more updates to the presentation.
@@ -807,6 +807,14 @@ definitions:
 
           If you don't specify an ID, a unique one is generated.
         type: string
+      placeholderIdMappings:
+        description: |-
+          An optional list of object ID mappings from the placeholder(s) on the layout to the placeholder(s)
+          that will be created on the new slide from that specified layout. Can only
+          be used when `slide_layout_reference` is specified.
+        items:
+          $ref: '#/definitions/LayoutPlaceholderIdMapping'
+        type: array
       slideLayoutReference:
         $ref: '#/definitions/LayoutReference'
         description: |-
@@ -1270,6 +1278,37 @@ definitions:
           will be stripped out of the inserted text.
         type: string
     type: object
+  LayoutPlaceholderIdMapping:
+    description: |-
+      The user-specified ID mapping for a placeholder that will be created on a
+      slide from a specified layout.
+    properties:
+      layoutPlaceholder:
+        $ref: '#/definitions/Placeholder'
+        description: |-
+          The placeholder on a layout that will be applied to a slide. Only type and index are needed. For example, a
+          predefined `TITLE_AND_BODY` layout may usually have a TITLE placeholder
+          with index 0 and a BODY placeholder with index 0.
+      layoutPlaceholderObjectId:
+        description: |-
+          The object ID of the placeholder on a layout that will be applied
+          to a slide.
+        type: string
+      objectId:
+        description: |-
+          A user-supplied object ID for the placeholder identified above that to be
+          created onto a slide.
+
+          If you specify an ID, it must be unique among all pages and page elements
+          in the presentation. The ID must start with an alphanumeric character or an
+          underscore (matches regex `[a-zA-Z0-9_]`); remaining characters
+          may include those as well as a hyphen or colon (matches regex
+          `[a-zA-Z0-9_-:]`).
+          The length of the ID must not be less than 5 or greater than 50.
+
+          If you don't specify an ID, a unique one is generated.
+        type: string
+    type: object
   LayoutProperties:
     description: |-
       The properties of Page are only
@@ -1458,6 +1497,21 @@ definitions:
         $ref: '#/definitions/TextStyle'
         description: The style of a bullet at this level of nesting.
     type: object
+  NotesProperties:
+    description: |-
+      The properties of Page that are only
+      relevant for pages with page_type NOTES.
+    properties:
+      speakerNotesObjectId:
+        description: |-
+          The object ID of the shape on this notes page that contains the speaker
+          notes for the corresponding slide.
+          The actual shape may not always exist on the notes page. Inserting text
+          using this object ID will automatically create the shape. In this case, the
+          actual shape may have different object ID. The `GetPresentation` or
+          `GetPage` action will always return the latest object ID.
+        type: string
+    type: object
   OpaqueColor:
     description: A themeable solid color value.
     properties:
@@ -1549,6 +1603,9 @@ definitions:
       layoutProperties:
         $ref: '#/definitions/LayoutProperties'
         description: Layout specific properties. Only set if page_type = LAYOUT.
+      notesProperties:
+        $ref: '#/definitions/NotesProperties'
+        description: Notes specific properties. Only set if page_type = NOTES.
       objectId:
         description: |-
           The object ID for this page. Object IDs used by
@@ -1569,6 +1626,8 @@ definitions:
           - SLIDE
           - MASTER
           - LAYOUT
+          - NOTES
+          - NOTES_MASTER
         type: string
       slideProperties:
         $ref: '#/definitions/SlideProperties'
@@ -1843,6 +1902,21 @@ definitions:
         items:
           $ref: '#/definitions/Page'
         type: array
+      notesMaster:
+        $ref: '#/definitions/Page'
+        description: |-
+          The notes master in the presentation. It serves three purposes:
+
+          - Placeholder shapes on a notes master contain the default text styles and
+            shape properties of all placeholder shapes on notes pages. Specifically,
+            a SLIDE_IMAGE placeholder shape is defined to contain the slide
+            thumbnail, and a BODY placeholder shape is defined to contain the speaker
+            notes.
+          - The notes master page properties define the common page properties
+            inherited by all notes pages.
+          - Any other shapes on the notes master will appear on all notes pages.
+
+          The notes master is read-only.
       pageSize:
         $ref: '#/definitions/Size'
         description: The size of pages in the presentation.
@@ -1941,6 +2015,44 @@ definitions:
         format: int32
         type: integer
     type: object
+  ReplaceAllShapesWithSheetsChartRequest:
+    description: |-
+      Replaces all shapes that match the given criteria with the provided Google
+      Sheets chart. The chart will be scaled and centered to fit within the bounds
+      of the original shape.
+
+      NOTE: Replacing shapes with a chart requires at least one of the
+      spreadsheets.readonly, spreadsheets, drive.readonly, or drive OAuth scopes.
+    properties:
+      chartId:
+        description: The ID of the specific chart in the Google Sheets spreadsheet.
+        format: int32
+        type: integer
+      containsText:
+        $ref: '#/definitions/SubstringMatchCriteria'
+        description: |-
+          The criteria that the shapes must match in order to be replaced. The
+          request will replace all of the shapes that contain the given text.
+      linkingMode:
+        description: |-
+          The mode with which the chart is linked to the source spreadsheet. When
+          not specified, the chart will be an image that is not linked.
+        enum:
+          - NOT_LINKED_IMAGE
+          - LINKED
+        type: string
+      spreadsheetId:
+        description: The ID of the Google Sheets spreadsheet that contains the chart.
+        type: string
+    type: object
+  ReplaceAllShapesWithSheetsChartResponse:
+    description: The result of replacing shapes with a Google Sheets chart.
+    properties:
+      occurrencesChanged:
+        description: The number of shapes replaced with charts.
+        format: int32
+        type: integer
+    type: object
   ReplaceAllTextRequest:
     description: Replaces all instances of text matching a criteria with replace text.
     properties:
@@ -2016,6 +2128,9 @@ definitions:
       replaceAllShapesWithImage:
         $ref: '#/definitions/ReplaceAllShapesWithImageRequest'
         description: Replaces all shapes matching some criteria with an image.
+      replaceAllShapesWithSheetsChart:
+        $ref: '#/definitions/ReplaceAllShapesWithSheetsChartRequest'
+        description: Replaces all shapes matching some criteria with a Google Sheets chart.
       replaceAllText:
         $ref: '#/definitions/ReplaceAllTextRequest'
         description: Replaces all instances of specified text.
@@ -2079,6 +2194,11 @@ definitions:
         description: |-
           The result of replacing all shapes matching some criteria with an
           image.
+      replaceAllShapesWithSheetsChart:
+        $ref: '#/definitions/ReplaceAllShapesWithSheetsChartResponse'
+        description: |-
+          The result of replacing all shapes matching some criteria with a Google
+          Sheets chart.
       replaceAllText:
         $ref: '#/definitions/ReplaceAllTextResponse'
         description: The result of replacing text.
@@ -2442,6 +2562,18 @@ definitions:
       masterObjectId:
         description: The object ID of the master that this slide is based on.
         type: string
+      notesPage:
+        $ref: '#/definitions/Page'
+        description: |-
+          The notes page that this slide is associated with. It defines the visual
+          appearance of a notes page when printing or exporting slides with speaker
+          notes. A notes page inherits properties from the
+          notes mater.
+          The placeholder shape with type BODY on the notes page contains the speaker
+          notes for this slide. The ID of this shape is identified by the
+          speaker notes object id field.
+          The notes page is read-only except for the text content and styles of the
+          speaker notes shape.
     type: object
   SolidFill:
     description: |-

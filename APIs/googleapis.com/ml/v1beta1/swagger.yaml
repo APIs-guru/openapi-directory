@@ -144,11 +144,17 @@ paths:
       tags:
         - projects
     get:
-      description: Describes a job.
-      operationId: ml.projects.jobs.get
+      description: |-
+        Gets information about a model version.
+
+        Models can have multiple versions. You can call
+        [projects.models.versions.list](/ml/reference/rest/v1beta1/projects.models.versions/list)
+        to get the same information that this method returns for all of the
+        versions of a model.
+      operationId: ml.projects.models.versions.get
       parameters:
         - description: |-
-            Required. The name of the job to get the description of.
+            Required. The name of the version.
 
             Authorization: requires `Viewer` role on the parent project.
           in: path
@@ -160,17 +166,13 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleCloudMlV1beta1__Job'
+            $ref: '#/definitions/GoogleCloudMlV1beta1__Version'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -180,6 +182,10 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
   '/v1beta1/{name}/operations':
     get:
       description: |-
@@ -196,6 +202,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
         - description: The standard list page size.
           in: query
           name: pageSize
@@ -203,10 +213,6 @@ paths:
         - description: The standard list filter.
           in: query
           name: filter
-          type: string
-        - description: The standard list page token.
-          in: query
-          name: pageToken
           type: string
       responses:
         '200':
@@ -219,10 +225,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -232,12 +234,12 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
   '/v1beta1/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -247,14 +249,25 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
-      description: Cancels a running job.
-      operationId: ml.projects.jobs.cancel
+      description: |-
+        Starts asynchronous cancellation on a long-running operation.  The server
+        makes a best effort to cancel the operation, but success is not
+        guaranteed.  If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+        Operations.GetOperation or
+        other methods to check whether the cancellation succeeded or whether the
+        operation completed despite cancellation. On successful cancellation,
+        the operation is not deleted; instead, it becomes an operation with
+        an Operation.error value with a google.rpc.Status.code of 1,
+        corresponding to `Code.CANCELLED`.
+      operationId: ml.projects.operations.cancel
       parameters:
-        - description: |-
-            Required. The name of the job to cancel.
-
-            Authorization: requires `Editor` role on the parent project.
+        - description: The name of the operation resource to be cancelled.
           in: path
           name: name
           required: true
@@ -303,10 +316,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -316,12 +325,12 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
   '/v1beta1/{name}:predict':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -331,6 +340,10 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: |-
         Performs prediction on the data in the request.
@@ -363,10 +376,6 @@ paths:
         - projects
   '/v1beta1/{name}:setDefault':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -376,6 +385,10 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: |-
         Designates a version to be the default for the model.
@@ -459,10 +472,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -472,6 +481,10 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: Creates a training or a batch prediction job.
       operationId: ml.projects.jobs.create
@@ -518,6 +531,14 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
+            Optional. A page token to request the next page of results.
+
+            You get the token from the `next_page_token` field of the response from
+            the previous call.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
             Optional. The number of models to retrieve per "page" of results. If there
             are more remaining results than this number, the response message will
             contain a valid value in the `next_page_token` field.
@@ -526,14 +547,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: |-
-            Optional. A page token to request the next page of results.
-
-            You get the token from the `next_page_token` field of the response from
-            the previous call.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -545,10 +558,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -558,6 +567,10 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: |-
         Creates a model which will later contain one or more versions.
@@ -637,10 +650,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -650,6 +659,10 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: |-
         Creates a new version of a model from a trained TensorFlow model.
