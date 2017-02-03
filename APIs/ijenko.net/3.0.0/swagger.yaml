@@ -3,10 +3,15 @@ schemes:
   - https
 host: ioe2api.ijenko.net
 info:
+  contact:
+    email: contact@ijenko.com
+    name: IJENKO
+    url: 'http://developers.ijenko.com/'
   title: IoE² IoT API - to create end-user applications
   version: 3.0.0
   x-logo:
-    url: 'http://developers.ijenko.com/img/design/favicon.ico'
+    backgroundColor: '#383D41'
+    url: 'http://developers.ijenko.com/favicon.ico'
   x-origin:
     format: swagger
     url: 'http://developers.ijenko.com/swagger.json'
@@ -127,6 +132,61 @@ paths:
       summary: Create a Place
       tags:
         - Account
+  /account/tokens:
+    get:
+      description: |
+        List the active *Tokens* on the account.
+
+        **Note:** requires full access to the *Account*.
+      operationId: Account.tokens
+      responses:
+        '200':
+          description: Successful.
+          schema:
+            items:
+              $ref: '#/definitions/UserTokenItem'
+            type: array
+            uniqueItems: true
+        '403':
+          description: |
+            The authentication token doesn't allow to modify the *Account*.
+          schema:
+            $ref: '#/definitions/ErrorEntity'
+        default:
+          description: Other error.
+          schema:
+            $ref: '#/definitions/DefaultError'
+      summary: List active Tokens of the Account
+      tags:
+        - Account
+  '/account/tokens/{tokenId}':
+    delete:
+      description: |
+        Revoke the given *Token*.
+
+        **Note:** requires full access to the *Account*.
+      operationId: Account.revokeToken
+      parameters:
+        - description: Identifier of the token
+          in: path
+          name: tokenId
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Resource successfully deleted.
+        '403':
+          description: |
+            The authentication token doesn't allow to modify the *Account*.
+          schema:
+            $ref: '#/definitions/ErrorEntity'
+        default:
+          description: Other error.
+          schema:
+            $ref: '#/definitions/DefaultError'
+      summary: Revoke a Token
+      tags:
+        - Account
   /account/users:
     get:
       description: Get the list of *Users* of this *Account*.
@@ -189,7 +249,7 @@ paths:
   '/account/users/{userId}':
     delete:
       description: |
-        Delete a *User* from this *Account*, and revoke all his/her Tokens.
+        Delete a *User* from this *Account*, and revoke all his/her *Tokens*.
 
         **Note**: requires full access to the *Account*.
       operationId: Account.deleteUser
@@ -508,6 +568,59 @@ paths:
       summary: Update a Device
       tags:
         - Device
+  '/devices/{deviceId}/functionalities':
+    post:
+      description: |
+        Add a *Functionality* to the device.
+
+        Required parameters are :
+        - functionality class
+        - endpoint
+
+        Each device class has its own restrictions on which Functionality classes can be added and on which endpoints.
+        Only a few devices allow to add Functionalities.
+
+        |Device class|Functionality class|Endpoints|
+        |------------|-------------------|---------|
+        |MINT        |CurrentPeriod      |1,2,3    |
+        |MINT        |ElectricityRates   |1,2,3    |
+        |MINT        |GenericRate        |1,2,3    |
+
+        **Note**: requires full access to the *Account*.
+      operationId: Device.addFunctionality
+      parameters:
+        - description: Unique identifier of a *Device*.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+        - in: body
+          name: functionalityInfo
+          required: true
+          schema:
+            $ref: '#/definitions/FunctionalityNew'
+      responses:
+        '201':
+          description: '*Functionality* successfully created.'
+          headers:
+            Location:
+              description: Path of the Functionality created
+              type: string
+          schema:
+            $ref: '#/definitions/FunctionalityCreated'
+        '403':
+          description: |
+            *Device* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+          schema:
+            $ref: '#/definitions/ErrorEntity'
+        default:
+          description: Other error.
+          schema:
+            $ref: '#/definitions/DefaultError'
+      summary: Add dynamically a functionality
+      tags:
+        - Device
+        - Functionality
   '/devices/{deviceId}/metadata':
     get:
       description: Get the metadata.
@@ -587,7 +700,7 @@ paths:
             Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
           in: query
           name: functionalities
-          pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]*(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]*(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
+          pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
           required: true
           type: string
         - in: body
@@ -1593,7 +1706,7 @@ paths:
             Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
           in: query
           name: functionalities
-          pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]*(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]*(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
+          pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
           required: false
           type: string
         - collectionFormat: csv
@@ -1732,6 +1845,12 @@ paths:
       responses:
         '201':
           description: '*Notification* successfully created.'
+          headers:
+            Location:
+              description: 'Path of the Notification created (`/notifications/{id}`)'
+              type: string
+          schema:
+            $ref: '#/definitions/NotificationCreated'
         '403':
           description: |
             *Place* doesn't exist or the requester doesn't have access.
@@ -1782,6 +1901,7 @@ paths:
     post:
       description: |
         Create a new *Program*.
+
         **Note**: requires full access to the *Account*.
       operationId: Place.newProgram
       parameters:
@@ -1798,6 +1918,12 @@ paths:
       responses:
         '201':
           description: '*Program* successfully created.'
+          headers:
+            Location:
+              description: 'Path of the Program created (`/programs/{id}`)'
+              type: string
+          schema:
+            $ref: '#/definitions/ProgramCreated'
         '403':
           description: |
             *Place* doesn't exist or the requester doesn't have access.
@@ -1840,7 +1966,7 @@ paths:
             Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
           in: query
           name: functionalities
-          pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]*(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]*(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
+          pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
           required: true
           type: string
         - in: body
@@ -1925,7 +2051,6 @@ paths:
         - name
         - status (enabled/disabled)
         - code
-        - metadata
 
         **Note**: requires full access to the *Account*.
       operationId: Program.patch
@@ -2359,10 +2484,13 @@ definitions:
       - href: '/places/{place}'
         rel: place
   DeviceAddress:
+    minLength: 1
     pattern: '^[A-Z0-9]{1,32}$'
     readOnly: true
     type: string
   DeviceClass:
+    maxLength: 4
+    minLength: 4
     pattern: '^[A-Z][A-Z0-9]{3}$'
     readOnly: true
     type: string
@@ -2388,7 +2516,7 @@ definitions:
         $ref: '#/definitions/MetadataSelected'
       name:
         description: Name of the *Device* as defined by the user. Can be used for user interfaces.
-        minLength: 1
+        minLength: 2
         type: string
       place:
         $ref: '#/definitions/PlaceId'
@@ -2810,8 +2938,36 @@ definitions:
       - href: '/devices/{id}'
         rel: device
   FunctionalityClass:
+    minLength: 2
+    pattern: '^[A-Z][A-Za-z0-9]+$'
     readOnly: true
     type: string
+  FunctionalityCreated:
+    description: A resource has been created. The `resource` property gives its reference.
+    example:
+      code: 201
+      message: Functionality created
+      resource:
+        entity: Functionality
+        href: /functionalities/RnVuY3Rpb25hbGl0eTAwMA
+        id: RnVuY3Rpb25hbGl0eTAwMA
+    properties:
+      code:
+        enum:
+          - 201
+        example: 201
+        type: integer
+      message:
+        enum:
+          - Functionality created
+        type: string
+      resource:
+        $ref: '#/definitions/FunctionalityResource'
+    required:
+      - code
+      - message
+      - resource
+    type: object
   FunctionalityEndpoint:
     maximum: 255
     minimum: 0
@@ -2859,10 +3015,49 @@ definitions:
   FunctionalityName:
     description: Free functionality name
     type: string
+  FunctionalityNew:
+    properties:
+      class:
+        $ref: '#/definitions/FunctionalityClass'
+      endpoint:
+        $ref: '#/definitions/FunctionalityEndpoint'
+      metadata:
+        $ref: '#/definitions/Metadata'
+      name:
+        $ref: '#/definitions/FunctionalityName'
+      tags:
+        items:
+          $ref: '#/definitions/FunctionalityTag'
+        type: array
+        uniqueItems: true
+    required:
+      - class
+      - endpoint
+    type: object
   FunctionalityPatch:
     properties:
       name:
         $ref: '#/definitions/FunctionalityName'
+    type: object
+  FunctionalityResource:
+    example:
+      entity: Functionality
+      href: /functionalities/RnVuY3Rpb25hbGl0eTAwMA
+      id: RnVuY3Rpb25hbGl0eTAwMA
+    properties:
+      entity:
+        enum:
+          - Functionality
+        type: string
+      href:
+        minLength: 1
+        type: string
+      id:
+        $ref: '#/definitions/FunctionalityId'
+    required:
+      - id
+      - entity
+      - href
     type: object
   FunctionalityTag:
     maxLength: 21
@@ -2926,6 +3121,32 @@ definitions:
     x-links:
       - href: '/places/{place}'
         rel: place
+  NotificationCreated:
+    description: A resource has been created. The `resource` property gives its reference.
+    example:
+      code: 201
+      message: Notification created
+      resource:
+        entity: Notification
+        href: /notifications/InovwcCIGM5X7KvKrJ7vJw
+        id: InovwcCIGM5X7KvKrJ7vJw
+    properties:
+      code:
+        enum:
+          - 201
+        example: 201
+        type: integer
+      message:
+        enum:
+          - Notification created
+        type: string
+      resource:
+        $ref: '#/definitions/NotificationResource'
+    required:
+      - code
+      - message
+      - resource
+    type: object
   NotificationId:
     description: Unique identifier of the *Notification*
     example: InovwcCIGM5X7KvKrJ7vJw
@@ -2976,6 +3197,26 @@ definitions:
       routing:
         format: uri
         type: string
+    type: object
+  NotificationResource:
+    example:
+      entity: Notification
+      href: /notifications/InovwcCIGM5X7KvKrJ7vJw
+      id: InovwcCIGM5X7KvKrJ7vJw
+    properties:
+      entity:
+        enum:
+          - Notification
+        type: string
+      href:
+        minLength: 1
+        type: string
+      id:
+        $ref: '#/definitions/NotificationId'
+    required:
+      - id
+      - entity
+      - href
     type: object
   Password:
     format: password
@@ -3131,6 +3372,32 @@ definitions:
     x-links:
       - href: '/places/{place}'
         rel: place
+  ProgramCreated:
+    description: A resource has been created. The `resource` property gives its reference.
+    example:
+      code: 201
+      message: Program created
+      resource:
+        entity: Program
+        href: /programs/3_J_6ZWICc5X_KverorNvw
+        id: 3_J_6ZWICc5X_KverorNvw
+    properties:
+      code:
+        enum:
+          - 201
+        example: 201
+        type: integer
+      message:
+        enum:
+          - Program created
+        type: string
+      resource:
+        $ref: '#/definitions/ProgramResource'
+    required:
+      - code
+      - message
+      - resource
+    type: object
   ProgramId:
     description: Unique identifier of the *Program*
     example: 3_J_6ZWICc5X_KverorNvw
@@ -3180,6 +3447,10 @@ definitions:
       - when
     type: object
   ProgramNew:
+    example:
+      code: []
+      enabled: false
+      name: NOOP
     properties:
       code:
         $ref: '#/definitions/AnyJSON'
@@ -3204,6 +3475,26 @@ definitions:
       name:
         minLength: 1
         type: string
+    type: object
+  ProgramResource:
+    example:
+      entity: Program
+      href: /programs/3_J_6ZWICc5X_KverorNvw
+      id: 3_J_6ZWICc5X_KverorNvw
+    properties:
+      entity:
+        enum:
+          - Program
+        type: string
+      href:
+        minLength: 1
+        type: string
+      id:
+        $ref: '#/definitions/ProgramId'
+    required:
+      - id
+      - entity
+      - href
     type: object
   ResourceRef:
     properties:
@@ -3259,6 +3550,10 @@ definitions:
     example: Europe/Paris
     minLength: 2
     pattern: '^[A-Z][A-Za-z0-9-_+]+(?:/[A-Z][A-Za-z0-9-_+]+)*$'
+    type: string
+  TokenId:
+    example: dfSDdRcsd
+    minLength: 1
     type: string
   User:
     properties:
@@ -3435,6 +3730,39 @@ definitions:
       - id
       - entity
       - href
+    type: object
+  UserTokenItem:
+    description: Token for User API access
+    properties:
+      appName:
+        description: Application name
+        example: Home Eopath
+        type: string
+      id:
+        $ref: '#/definitions/TokenId'
+      lastUse:
+        description: 'Time of last use of the token to access the API. Updated at most every 15 minutes. If absent, the token has never been used.'
+        format: date-time
+        type: string
+      places:
+        description: 'List of Places to which the User has access. If absent, it means any Place of the account are allowed.'
+        items:
+          $ref: '#/definitions/PlaceItem'
+        type: array
+        uniqueItems: true
+      refreshTokenExpires:
+        description: 'If absent, infinite validity.'
+        format: date-time
+        type: string
+      self:
+        description: True if this token is the one used for this API request
+        type: boolean
+      user:
+        $ref: '#/definitions/UserItem'
+    required:
+      - id
+      - appName
+      - user
     type: object
   ZipCode:
     description: Postal code
