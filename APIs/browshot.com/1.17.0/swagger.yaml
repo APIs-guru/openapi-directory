@@ -11,7 +11,7 @@ info:
   description: Take screenshots of any website in real time
   termsOfService: 'https://browshot.com/terms'
   title: Browshot
-  version: 1.16.0
+  version: 1.17.0
   x-logo:
     url: 'https://cdn.browshot.com/static/images/logo.png'
   x-origin:
@@ -32,6 +32,7 @@ paths:
   /account/info:
     get:
       description: Get information about your account.
+      operationId: GetAccountInfo
       parameters:
         - default: 1
           description: level of information returned
@@ -49,15 +50,17 @@ paths:
           description: Account not found
           schema:
             $ref: '#/definitions/AccountError'
-      summary: Get information about your account.
+      summary: Get information about your account
       tags:
         - Account
+      x-ms-trigger: single
   /batch/ceate:
     post:
       consumes:
         - multipart/form-data
       description: |
         Get hundreds or thousands of screenshots from a text file. You can use this API call or the dashboard. Unlike the other API calls, you must issue a POST request with the Content-Type "multipart/form-data" in order to upload the text file. The text file must contain the list of URLs to request, 1 URL per line. Failed screenshots will be tried up to 3 times before giving up.
+      operationId: CreateBatch
       parameters:
         - description: instance ID to use
           in: formData
@@ -176,20 +179,42 @@ paths:
           in: formData
           name: format
           type: string
+        - description: hosting option - s3 or browshot
+          enum:
+            - s3
+          in: query
+          name: hosting
+          type: string
+        - description: maximum height of the thumbnail to host
+          in: query
+          maximum: 15000
+          minimum: 1
+          name: hosting_height
+          type: integer
+        - description: maximum height of the thumbnail to host
+          in: query
+          maximum: 2000
+          minimum: 1
+          name: hosting_width
+          type: integer
         - default: 1
-          description: take multiple screenshots of the same page. This costs 1 additional credit for every 2 additional screenshots.
-          in: formData
-          maximum: 10
-          minimum: 1
-          name: shots
-          type: integer
-        - default: 5
-          description: number of seconds between 2 screenshots
-          in: formData
-          maximum: 10
-          minimum: 1
-          name: shot_interval
-          type: integer
+          description: scale of the thumbnail to host
+          format: float
+          in: query
+          name: hosting_scale
+          type: number
+        - description: S3 bucket to upload the screenshot or thumbnail (required for S3)
+          in: query
+          name: hosting_bucket
+          type: string
+        - description: file name to use (for S3 only)
+          in: query
+          name: hosting_file
+          type: string
+        - description: list of headers to add to the S3 object (for S3 only)
+          in: query
+          name: hosting_headers
+          type: string
       responses:
         '200':
           description: batch information
@@ -204,10 +229,12 @@ paths:
       summary: Requests thousands of screenshtos at once
       tags:
         - Batch
+      x-ms-trigger: none
   /batch/info:
     get:
       description: |
         Get the status of a batch requested through the API or through the dashboard.
+      operationId: GetBatchInfo
       parameters:
         - description: batch ID
           in: query
@@ -229,6 +256,7 @@ paths:
   /browser/info:
     get:
       description: Get information about a browser.
+      operationId: GetBrowserInfo
       parameters:
         - description: browser ID
           in: query
@@ -247,9 +275,11 @@ paths:
       summary: Get information about a browser
       tags:
         - Browser
+      x-ms-visibility: none
   /browser/list:
     get:
       description: Get all browsers.
+      operationId: GetBrowsersInfo
       responses:
         '200':
           description: Instance information
@@ -262,9 +292,11 @@ paths:
       summary: Get all browsers
       tags:
         - Browser
+      x-ms-visibility: none
   /instance/info:
     get:
       description: Get information about an instance.
+      operationId: GetInstanceInfo
       parameters:
         - description: instance ID
           in: query
@@ -283,9 +315,11 @@ paths:
       summary: Get information about an instance
       tags:
         - Instance
+      x-ms-visibility: none
   /instance/list:
     get:
       description: Get all instances.
+      operationId: GetInstancesInfo
       responses:
         '200':
           description: Instance information
@@ -298,12 +332,14 @@ paths:
       summary: Get all instances
       tags:
         - Instance
+      x-ms-visibility: none
   /screenshot/create:
     get:
       description: |
         Screenshots requests to private and shared instances require a positive balance.
 
         *IMPORTANT*: Remember that you can only do 100 free screenshots per month. To used a premium instance, use instance_id=65 for example.
+      operationId: CreateScreenshot
       parameters:
         - description: URL of the page to get a screenshot for
           in: query
@@ -466,10 +502,12 @@ paths:
       summary: Request a screenshot
       tags:
         - Screenshot
+      x-ms-trigger: none
   /screenshot/delete:
     get:
       description: |
         You can delete details of your screenshots to remove any confidential information.
+      operationId: DeleteScreenshot
       parameters:
         - description: screenshot ID
           in: query
@@ -496,9 +534,11 @@ paths:
       summary: Delete screenshot data
       tags:
         - Screenshot
+      x-ms-trigger: none
   /screenshot/host:
     get:
       description: You can host screenshots and thumbnails on your own S3 account or on Browshot.
+      operationId: HostScreenshot
       parameters:
         - description: screenshot ID
           in: query
@@ -557,10 +597,12 @@ paths:
       summary: Host thumbnails on your own S3 account or on Browshot.
       tags:
         - Screenshot
+      x-ms-trigger: none
   /screenshot/html:
     get:
       description: |
         Retrieve the HTML code of the rendered page. This API call should be used when html=1 was specified in the screenshot request.
+      operationId: GetHTML
       parameters:
         - description: screenshot ID
           in: query
@@ -578,6 +620,7 @@ paths:
   /screenshot/info:
     get:
       description: 'Once a screenshot has been requested, its status must be checked until it is either "error" or "finished".'
+      operationId: GetScreenshotInfo
       parameters:
         - description: screenshot ID received from /api/v1/screenshot/create
           in: query
@@ -608,6 +651,7 @@ paths:
   /screenshot/list:
     get:
       description: Get information about the last 100 screenshots requested.
+      operationId: GetMultipleScreenshotsInfo
       parameters:
         - default: 100
           description: maximum number of screenshots' information to return
@@ -635,14 +679,16 @@ paths:
           description: Screenshot not found
           schema:
             $ref: '#/definitions/ScreenshotError'
-      summary: Get information about the last 100 screenshots requested.
+      summary: Get information about screenshots
       tags:
         - Screenshot
+      x-ms-visibility: none
   /screenshot/multiple:
     get:
       description: |
         Request multiple screenshots in one API call. The API call accepts all the parameters supported by screenshot/create.
         You can specify up to 10 URLs and 10 instances for a total of 100 screenshots in one API call.
+      operationId: CreateMultipleScreenshots
       parameters:
         - description: URL of the page to get a screenshot for. You can specify multiple url parameters (up to 10).
           in: query
@@ -791,9 +837,11 @@ paths:
       summary: Request multiple screenshots
       tags:
         - Screenshot
+      x-ms-trigger: none
   /screenshot/search:
     get:
       description: Search for screenshots of a specific URL.
+      operationId: SearchScreenshot
       parameters:
         - description: look for a string matching the URL requested
           in: query
@@ -826,13 +874,15 @@ paths:
           description: Screenshot not found
           schema:
             $ref: '#/definitions/ScreenshotError'
-      summary: Search for screenshots of a specific URL.
+      summary: Search for screenshots
       tags:
         - Screenshot
+      x-ms-visibility: none
   /screenshot/share:
     get:
       description: |
         You can make your screenshots public, add notes, and share it with your friends and colleagues. Only screenshots which are successfully completed can be shared.n the thumbnail. You can take a 1024x768 screenshot, crop it to 768x768, and get it scaled down to 300x300.
+      operationId: ShareScreenshot
       parameters:
         - description: screenshot ID
           in: query
@@ -857,12 +907,14 @@ paths:
       summary: Share a screenshot
       tags:
         - Screenshot
+      x-ms-trigger: none
   /screenshot/thumbnail:
     get:
       description: |
         Unlike the other API calls, this API sends back the thumbnail as a PNG file, not JSON. The HTTP response code indicates whether the screenshot was successful (200), or incomplete (404) or failed (404). If the screenshot failed or is not finished, a default image "Not found" is sent.
 
         You can crop your screenshots. The crop is done first, then the thumbnail. You can take a 1024x768 screenshot, crop it to 768x768, and get it scaled down to 300x300.
+      operationId: GetThumbnail
       parameters:
         - description: screenshot ID
           in: query
@@ -957,6 +1009,7 @@ paths:
       summary: Retrieve a thumbnail image
       tags:
         - Screenshot
+      x-ms-trigger: none
 definitions:
   Account:
     properties:

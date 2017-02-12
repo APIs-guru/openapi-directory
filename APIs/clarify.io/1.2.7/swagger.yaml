@@ -6,7 +6,7 @@ basePath: /
 info:
   description: The API to Search and Understand Audio & Video Data.
   title: Clarify
-  version: 1.2.3
+  version: 1.2.7
   x-logo:
     backgroundColor: '#65A8B5'
     url: 'http://clarify.io/wp-content/themes/clarify/images/clarify-logo.png'
@@ -224,7 +224,7 @@ paths:
         - bundles
   '/v1/bundles/{bundle_id}/insights':
     get:
-      description: 'Gets the insights for a bundle.<br/><br/>URLs of the available insights for the bundle are in the _links object, with the link relations (keys) of the format <b>insight:insight_name</b>.'
+      description: 'Gets the insights for a bundle.<br/><br/>URLs of the available insights for the bundle are in the _links object, with the link relations (keys) of the format <b>insight:insight_name</b>.<br/><br/>Documentation on the insights available and the data returned can be found at <a target="clarify" href="http://docs.clarify.io/insights/">http://docs.clarify.io/insights/</a>'
       parameters:
         - description: id of a bundle
           in: path
@@ -283,7 +283,7 @@ paths:
         - bundles
   '/v1/bundles/{bundle_id}/insights/{insight_id}':
     get:
-      description: 'Gets a particular insight for a bundle. Typically, you will hit this endpoint from a link contained in a response to <b>/v1/bundles/{bundle_id}/insights</b><br/><br/>The insight response contains an array of objects called <b>track_data</b>, where the array indexes correspond to the tracks in the bundle. Each object in the array contains insight-specific data related to that insight. For example, in the <b>spoken_words</b> insight, the <b>track_data</b> objects contain the field <b>word_count</b> which is the number of spoken words found in the track.<br/><br/>Insights that contain data in different file formats will have one or more link relations in the _links array for the corresponding data. Note that the href URLs in these links have a limited lifespan and should not be stored locally.'
+      description: 'Gets a particular insight for a bundle. Typically, you will hit this endpoint from a link contained in a response to <b>/v1/bundles/{bundle_id}/insights</b><br/><br/>The insight response may contain a <b>data</b> object containing insight-specific data and/or an array of objects called <b>track_data</b>, where the array indexes correspond to the tracks in the bundle. Each object in the array contains the <b>track_id</b>, <b>track_label</b> and insight-specific data related to that insight. For example, in the <b>spoken_words</b> insight, the <b>track_data</b> objects contain the field <b>word_count</b> which is the number of spoken words found in the track.<br/><br/>Documentation on the insights available and the data returned can be found at <a target="clarify" href="http://docs.clarify.io/insights/">http://docs.clarify.io/insights/</a><br/><br/>Insights that contain data in different file formats (such as for video captions) will have one or more link relations in the _links array for the corresponding data. Note that the href URLs in these links have a limited lifespan and should not be stored locally.'
       parameters:
         - description: id of a bundle
           in: path
@@ -432,7 +432,7 @@ paths:
       tags:
         - bundles
     post:
-      description: 'Add a new track to a bundle. This will insert or append a new track in the tracks array or return an error if the maximum number of tracks (4) has been reached or the track number specifies an invalid index.<br/><br/>Once all media parts have been added to a track it is immutable, meaning it cannot be modified. If you wish to modify a track, simply add a new one and delete the existing one.<br/><br/><b>label</b> is a short name for the track.<br/><br/><b>media_url</b> must be a publicly accessible url to a media file. It will be fetched asynchronously after the REST call returns. The audio can be mono or stereo.<br/><br/><b>audio_channel</b> is used to specify audio channels if the media is a stereo file. A value of <i>left</i> or <i>right</i> signifies that only the specified channel will be used. If no value or an empty string is specified for <b>audio_channel</b>, all channels will be used in a single track. If your stereo channels were recorded separately with each channel containing distinct content (for example if 2 legs of a phone call were recorded separately and combined into a single stereo file), for best speech recognition, create two tracks with <b>audio_channel</b> to be <i>left</i> and <i>right</i>. If your stereo file is simply a recording made with a stereo microphone, <b>audio_channel</b> should be set to an empty string (or not be specified.)<br/><br/><b>audio_language</b> can be used to specify the language of the audio media. This is an optional parameter and if not specified or an empty string, the language of the track will be automatically detected. If specified, it must be a language code as described in RFC5646 (see <a href="http://tools.ietf.org/html/rfc5646" target="_blank">http://tools.ietf.org/html/rfc5646</a>). Supported languages: en-US, en-UK, es, fr.<br/><br/><b>start_time</b> a time in seconds that the media starts, relative to start time of the bundle. This allows you to specify sequential parts of media. If not specified, the default is 0.<br/><br/><b>parts_pending</b> a boolean flag specifying if more media parts will subsequently be added to the track. If true, a subsequent API call must be made to signify that the track is complete. If not specified, the default is false.<br/><br/><b>track</b> is the index in the tracks array where the new track will be added. Track numbers start at 0. If this parameter is not specified the new track will always be appended to the end of the array. If the track specified is greater than the last index of the array + 1, an error will be returned.<br/><br/>If <b>version</b> specified, the track will only be added if the current version matches this parameter value. If the version doesn''t match, a 409 Conflict error will be returned. If version not specified, the track will always be updated.'
+      description: 'Add a new track to a bundle. This will insert or append a new track in the tracks array or return an error if the maximum number of tracks (12) has been reached or the track number specifies an invalid index.<br/><br/>Once all media parts have been added to a track it is immutable, meaning it cannot be modified. If you wish to modify a track, simply add a new one and delete the existing one.<br/><br/><b>label</b> is a short name for the track.<br/><br/><b>media_url</b> must be a publicly accessible url to a media file. It will be fetched asynchronously after the REST call returns. The audio can be mono or stereo.<br/><br/><b>audio_channel</b> is used to specify audio channels if the media is a stereo file. A value of <i>left</i> or <i>right</i> signifies that only the specified channel will be used. If no value or an empty string is specified for <b>audio_channel</b>, all channels will be used in a single track. If your stereo channels were recorded separately with each channel containing distinct content (for example if 2 legs of a phone call were recorded separately and combined into a single stereo file), for best speech recognition, create two tracks with <b>audio_channel</b> to be <i>left</i> and <i>right</i>. If your stereo file is simply a recording made with a stereo microphone, <b>audio_channel</b> should be set to an empty string (or not be specified.)<br/><br/><b>audio_language</b> can be used to specify the language of the audio media. This is an optional parameter and if not specified or an empty string, the language of the track will be automatically detected. If specified, it must be a language code as described in RFC5646 (see <a href="http://tools.ietf.org/html/rfc5646" target="_blank">http://tools.ietf.org/html/rfc5646</a>). Supported languages: en-US, en-UK, es, fr.<br/><br/><b>start_time</b> a time in seconds that the media starts, relative to start time of the bundle. This allows you to specify sequential parts of media. If not specified, the default is 0.<br/><br/><b>parts_pending</b> a boolean flag specifying if more media parts will subsequently be added to the track. If true, a subsequent API call must be made to signify that the track is complete. If not specified, the default is false.<br/><br/><b>track</b> is the index in the tracks array where the new track will be added. Track numbers start at 0. If this parameter is not specified the new track will always be appended to the end of the array. If the track specified is greater than the last index of the array + 1, an error will be returned.<br/><br/>If <b>version</b> specified, the track will only be added if the current version matches this parameter value. If the version doesn''t match, a 409 Conflict error will be returned. If version not specified, the track will always be updated.'
       parameters:
         - description: id of a bundle
           in: path
@@ -477,9 +477,9 @@ paths:
           name: parts_pending
           required: false
           type: boolean
-        - description: 'Track number specifies the index of the new track in the tracks array. An integer from 0 to 3. If not specified, the new track is appended to the array.'
+        - description: 'Track number specifies the index of the new track in the tracks array. An integer from 0 to 11. If not specified, the new track is appended to the array.'
           in: formData
-          maximum: 3
+          maximum: 11
           name: track
           required: false
           type: integer
@@ -494,7 +494,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/Ref'
+            $ref: '#/definitions/Ref_(of_Track)'
         '201':
           description: Created
         '400':
@@ -650,7 +650,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/Ref'
+            $ref: '#/definitions/Ref_(of_Track)'
         '202':
           description: Accepted
         '400':
@@ -1013,9 +1013,28 @@ definitions:
         type: string
       _links:
         $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks)'
+        description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks, clarify:tracks (if track created))'
       id:
         description: id of the bundle
+        type: string
+      track_id:
+        description: id of created track (if a track was created)
+        type: string
+    required:
+      - _class
+      - _links
+      - id
+  Ref_(of_Track):
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Ref
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, parent, clarify:bundle)'
+      id:
+        description: id of the track
         type: string
     required:
       - _class

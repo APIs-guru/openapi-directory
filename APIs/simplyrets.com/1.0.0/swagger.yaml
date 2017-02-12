@@ -1094,10 +1094,12 @@ definitions:
         type: string
       status:
         description: |
-          MLS Status Code. Compliant with data dictionary v1.3 ListingStatus
-          Listing statuses depend on your MLS's availability. Below is
-          a brief description of each status with possible synonyms which
-          may map to your MLS-specific statuses
+          Normalized MLS Status Code. Compliant with data dictionary
+          v1.3 ListingStatus Listing statuses depend on your MLS's
+          availability. Below is a brief description of each status
+          with possible synonyms which may map to your MLS-specific
+          statuses
+
           - Active: Active Listing which is still on the market
           - ActiveUnderContract: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent
           - Pending: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract
@@ -1123,6 +1125,11 @@ definitions:
           - Delete
           - Incomplete
           - ComingSoon
+        type: string
+      statusText:
+        description: |
+          Raw MLS status text. This `field` comes directly from your RETS data
+          field and is not normalized.
         type: string
     type: object
   Office:
@@ -1203,7 +1210,9 @@ definitions:
       accessibility:
         type: string
       additionalRooms:
-        description: Additional room information
+        description: |
+          Additional room information. This is a textual description
+          of additional rooms for the listing.
         type: string
       area:
         description: Square footage of the building associated with a listing
@@ -1313,7 +1322,7 @@ definitions:
         type: string
       subType:
         description: |
-          The property's sub-type, i.e. SingleFamilyResidential,
+          The sub-type of the listing, i.e. SingleFamilyResidential,
           Condo, etc. Or a list of Sub Types for Mobile, such as
           Expando, Manufactured, Modular, etc.
         type: string
@@ -1338,7 +1347,12 @@ definitions:
         description: View details and description
         type: string
       water:
-        description: Water description and details
+        description: |
+          The name, if known, of the body of water on which the
+          property is located. (E.g., lake name, river name, ocean
+          name, sea name, canal name). Otherwise, this field will
+          contain features of the waterfront on which the property is
+          located.
         type: string
       yearBuilt:
         description: Year the property was built

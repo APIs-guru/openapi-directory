@@ -328,6 +328,18 @@ paths:
           name: userId
           required: true
           type: string
+        - collectionFormat: multi
+          description: History types to be returned by the function
+          in: query
+          items:
+            enum:
+              - labelAdded
+              - labelRemoved
+              - messageAdded
+              - messageDeleted
+            type: string
+          name: historyTypes
+          type: array
         - description: Only return messages with a label matching the ID.
           in: query
           name: labelId
@@ -642,7 +654,7 @@ paths:
           required: true
           type: string
         - default: false
-          description: Mark the email as permanently deleted (not TRASH) and only visible in Google Apps Vault to a Vault administrator. Only used for Google Apps for Work accounts.
+          description: Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.
           in: query
           name: deleted
           type: boolean
@@ -758,7 +770,7 @@ paths:
           required: true
           type: string
         - default: false
-          description: Mark the email as permanently deleted (not TRASH) and only visible in Google Apps Vault to a Vault administrator. Only used for Google Apps for Work accounts.
+          description: Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.
           in: query
           name: deleted
           type: boolean
@@ -1716,6 +1728,195 @@ paths:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
+  '/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo':
+    get:
+      description: Lists S/MIME configs for the specified send-as alias.
+      operationId: gmail.users.settings.sendAs.smimeInfo.list
+      parameters:
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListSmimeInfoResponse'
+      security:
+        - Oauth2:
+            - 'https://mail.google.com/'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.modify'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.settings.basic'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
+      tags:
+        - users
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key.
+      operationId: gmail.users.settings.sendAs.smimeInfo.insert
+      parameters:
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SmimeInfo'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SmimeInfo'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.settings.basic'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
+      tags:
+        - users
+  '/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}':
+    delete:
+      description: Deletes the specified S/MIME config for the specified send-as alias.
+      operationId: gmail.users.settings.sendAs.smimeInfo.delete
+      parameters:
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
+        - description: The immutable ID for the SmimeInfo.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.settings.basic'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
+      tags:
+        - users
+    get:
+      description: Gets the specified S/MIME config for the specified send-as alias.
+      operationId: gmail.users.settings.sendAs.smimeInfo.get
+      parameters:
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
+        - description: The immutable ID for the SmimeInfo.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SmimeInfo'
+      security:
+        - Oauth2:
+            - 'https://mail.google.com/'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.modify'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.settings.basic'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
+      tags:
+        - users
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}/setDefault':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the default S/MIME config for the specified send-as alias.
+      operationId: gmail.users.settings.sendAs.smimeInfo.setDefault
+      parameters:
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: 'The email address that appears in the "From:" header for mail sent using this alias.'
+          in: path
+          name: sendAsEmail
+          required: true
+          type: string
+        - description: The immutable ID for the SmimeInfo.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.settings.basic'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
+      tags:
+        - users
   '/{userId}/settings/sendAs/{sendAsEmail}/verify':
     parameters:
       - $ref: '#/parameters/alt'
@@ -2476,6 +2677,14 @@ definitions:
           $ref: '#/definitions/SendAs'
         type: array
     type: object
+  ListSmimeInfoResponse:
+    properties:
+      smimeInfo:
+        description: List of SmimeInfo.
+        items:
+          $ref: '#/definitions/SmimeInfo'
+        type: array
+    type: object
   ListThreadsResponse:
     properties:
       nextPageToken:
@@ -2683,6 +2892,33 @@ definitions:
           - verificationStatusUnspecified
         type: string
     type: object
+  SmimeInfo:
+    description: An S/MIME email config.
+    properties:
+      encryptedKeyPassword:
+        description: 'Encrypted key password, when key is encrypted.'
+        type: string
+      expiration:
+        description: When the certificate expires (in milliseconds since epoch).
+        format: int64
+        type: string
+      id:
+        description: The immutable ID for the SmimeInfo.
+        type: string
+      isDefault:
+        description: Whether this SmimeInfo is the default one for this user's send-as address.
+        type: boolean
+      issuerCn:
+        description: The S/MIME certificate issuer's common name.
+        type: string
+      pem:
+        description: 'PEM formatted X509 concatenated certificate string (standard base64 encoding). Format used for returning key, which includes public key as well as certificate chain (not private key).'
+        type: string
+      pkcs12:
+        description: 'PKCS#12 format containing a single private/public key pair and certificate chain. This format is only accepted from client for creating a new SmimeInfo and is never returned, because the private key is not intended to be exported. PKCS#12 may be encrypted, in which case encryptedKeyPassword should be set appropriately.'
+        format: byte
+        type: string
+    type: object
   SmtpMsa:
     description: Configuration for communication with an SMTP service.
     properties:
@@ -2750,7 +2986,7 @@ definitions:
         description: Flag that determines whether responses are sent to recipients who are not in the user's list of contacts.
         type: boolean
       restrictToDomain:
-        description: Flag that determines whether responses are sent to recipients who are outside of the user's domain. This feature is only available for Google Apps users.
+        description: Flag that determines whether responses are sent to recipients who are outside of the user's domain. This feature is only available for G Suite users.
         type: boolean
       startTime:
         description: 'An optional start time for sending auto-replies (epoch ms). When this is specified, Gmail will automatically reply only to messages that it receives after the start time. If both startTime and endTime are specified, startTime must precede endTime.'

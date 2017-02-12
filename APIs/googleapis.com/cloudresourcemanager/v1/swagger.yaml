@@ -109,9 +109,9 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: projects
   - name: organizations
   - name: operations
-  - name: projects
 paths:
   '/v1/organizations:search':
     parameters:
@@ -161,6 +161,14 @@ paths:
       operationId: cloudresourcemanager.projects.list
       parameters:
         - description: |-
+            A pagination token returned from a previous call to ListProjects
+            that indicates from where listing should continue.
+
+            Optional.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
             The maximum number of Projects to return in the response.
             The server can return fewer Projects than requested.
             If unspecified, server picks an appropriate default.
@@ -193,14 +201,6 @@ paths:
             Optional.
           in: query
           name: filter
-          type: string
-        - description: |-
-            A pagination token returned from a previous call to ListProjects
-            that indicates from where listing should continue.
-
-            Optional.
-          in: query
-          name: pageToken
           type: string
       responses:
         '200':

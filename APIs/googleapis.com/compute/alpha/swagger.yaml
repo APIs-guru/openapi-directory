@@ -77,6 +77,7 @@ parameters:
     name: userIp
     type: string
 tags:
+  - name: acceleratorTypes
   - name: addresses
   - name: autoscalers
   - name: backendBuckets
@@ -91,6 +92,7 @@ tags:
   - name: globalForwardingRules
   - name: globalOperations
   - name: healthChecks
+  - name: hostTypes
   - name: hosts
   - name: httpHealthChecks
   - name: httpsHealthChecks
@@ -160,6 +162,70 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/acceleratorTypes':
+    get:
+      description: Retrieves an aggregated list of accelerator types.
+      operationId: compute.acceleratorTypes.aggregatedList
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AcceleratorTypeAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - acceleratorTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/aggregated/addresses':
     get:
       description: Retrieves an aggregated list of addresses.
@@ -186,7 +252,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -251,7 +316,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -316,7 +380,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -381,7 +444,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -446,7 +508,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -511,7 +572,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -576,7 +636,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -615,6 +674,70 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/hostTypes':
+    get:
+      description: Retrieves an aggregated list of host types.
+      operationId: compute.hostTypes.aggregatedList
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HostTypeAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - hostTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/aggregated/hosts':
     get:
       description: Retrieves an aggregated list of hosts.
@@ -641,7 +764,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -706,7 +828,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -771,7 +892,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -836,7 +956,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -901,7 +1020,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -966,7 +1084,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -1031,7 +1148,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -1096,7 +1212,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -1161,7 +1276,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -1226,7 +1340,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -1291,7 +1404,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -1356,7 +1468,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -1570,7 +1681,6 @@ paths:
           type: string
         - default: 500
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -1628,7 +1738,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -1755,6 +1864,45 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/addresses/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on a GlobalAddress. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      operationId: compute.globalAddresses.setLabels
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GlobalSetLabelsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - globalAddresses
   '/{project}/global/addresses/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -1822,7 +1970,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -2154,7 +2301,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -2489,7 +2635,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -2743,7 +2888,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -2909,6 +3053,45 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - globalForwardingRules
+  '/{project}/global/forwardingRules/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on the specified resource. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      operationId: compute.globalForwardingRules.setLabels
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GlobalSetLabelsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - globalForwardingRules
   '/{project}/global/forwardingRules/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -2976,7 +3159,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -3230,7 +3412,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -3366,7 +3547,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the HttpHealthCheck resource to update.
+        - description: Name of the HttpHealthCheck resource to patch.
           in: path
           name: httpHealthCheck
           required: true
@@ -3385,6 +3566,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpHealthChecks
     put:
@@ -3484,7 +3667,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -3738,7 +3920,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -3786,6 +3967,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: Force image creation if true.
+          in: query
+          name: forceCreation
+          type: boolean
         - in: body
           name: body
           schema:
@@ -4056,7 +4241,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -4287,7 +4471,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -4594,7 +4777,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -4720,7 +4902,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -4914,7 +5095,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -5125,7 +5305,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -5319,7 +5498,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -5513,7 +5691,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -5707,7 +5884,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -6018,7 +6194,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -6290,7 +6465,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -6614,6 +6788,20 @@ paths:
           name: project
           required: true
           type: string
+        - in: query
+          name: filter
+          type: string
+        - default: 500
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - in: query
+          name: order_by
+          type: string
+        - in: query
+          name: pageToken
+          type: string
         - in: body
           name: body
           schema:
@@ -6726,7 +6914,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -6833,7 +7020,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -6975,6 +7161,50 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/addresses/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on an Address. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      operationId: compute.addresses.setLabels
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetLabelsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - addresses
   '/{project}/regions/{region}/addresses/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -7052,7 +7282,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -7340,7 +7569,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -7674,7 +7902,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -7786,7 +8013,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -8144,7 +8370,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -8330,6 +8555,50 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - forwardingRules
+  '/{project}/regions/{region}/forwardingRules/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on the specified resource. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      operationId: compute.forwardingRules.setLabels
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetLabelsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - forwardingRules
   '/{project}/regions/{region}/forwardingRules/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -8407,7 +8676,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -8740,7 +9008,6 @@ paths:
           type: string
         - default: 500
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -9063,7 +9330,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -9188,7 +9454,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -9344,7 +9609,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -9485,7 +9749,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -9862,7 +10125,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -10257,7 +10519,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -10746,7 +11007,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -10965,7 +11225,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -11022,6 +11281,50 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/VpnTunnel'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - vpnTunnels
+  '/{project}/regions/{region}/vpnTunnels/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on a VpnTunnel. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      operationId: compute.vpnTunnels.setLabels
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetLabelsRequest'
       responses:
         '200':
           description: Successful response
@@ -11404,7 +11707,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -11480,6 +11782,117 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/acceleratorTypes':
+    get:
+      description: Retrieves a list of accelerator types available to the specified project.
+      operationId: compute.acceleratorTypes.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AcceleratorTypeList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - acceleratorTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/acceleratorTypes/{acceleratorType}':
+    get:
+      description: Returns the specified accelerator type. Get a list of available accelerator types by making a list() request.
+      operationId: compute.acceleratorTypes.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the accelerator type to return.
+          in: path
+          name: acceleratorType
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AcceleratorType'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - acceleratorTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/autoscalers':
     get:
       description: Retrieves a list of autoscalers contained within the specified zone.
@@ -11511,7 +11924,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -11799,7 +12211,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -12075,7 +12486,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -12187,7 +12597,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -12514,6 +12923,117 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - disks
+  '/{project}/zones/{zone}/hostTypes':
+    get:
+      description: Retrieves a list of host types available to the specified project.
+      operationId: compute.hostTypes.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HostTypeList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - hostTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/hostTypes/{hostType}':
+    get:
+      description: Returns the specified host type. Get a list of available host types by making a list() request.
+      operationId: compute.hostTypes.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the host type to return.
+          in: path
+          name: hostType
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HostType'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - hostTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/hosts':
     get:
       description: Retrieves a list of hosts available to the specified project.
@@ -12545,7 +13065,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -12852,7 +13371,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -12995,7 +13513,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
+      description: Updates a managed instance group using the information that you specify in the request. The field statefulPolicy is updated using PATCH semantics. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
       operationId: compute.instanceGroupManagers.patch
       parameters:
         - description: Project ID for this request.
@@ -13030,7 +13548,7 @@ paths:
       tags:
         - instanceGroupManagers
     put:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method.
+      description: Updates a managed instance group using the information that you specify in the request. The field statefulPolicy is updated using PATCH semantics. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method.
       operationId: compute.instanceGroupManagers.update
       parameters:
         - description: Project ID for this request.
@@ -13185,7 +13703,6 @@ paths:
           type: string
         - default: 500
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -13554,7 +14071,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -13784,7 +14300,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -13984,7 +14499,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -14493,6 +15007,50 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/InstancesSetLabelsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
+  '/{project}/zones/{zone}/instances/{instance}/setMachineResources':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Changes the number and/or type of accelerator for a stopped instance to the values specified in the request.
+      operationId: compute.instances.setMachineResources
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the instance scoping this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesSetMachineResourcesRequest'
       responses:
         '200':
           description: Successful response
@@ -15111,7 +15669,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -15223,7 +15780,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -15364,7 +15920,6 @@ paths:
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
-          maximum: 500
           minimum: 0
           name: maxResults
           type: integer
@@ -15564,6 +16119,135 @@ definitions:
         description: Full or partial URL of the accelerator type resource to expose to this instance.
         type: string
     type: object
+  AcceleratorType:
+    description: An Accelerator Type resource.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      deprecated:
+        $ref: '#/definitions/DeprecationStatus'
+        description: '[Output Only] The deprecation status associated with this accelerator type.'
+      description:
+        description: '[Output Only] An optional textual description of the resource.'
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#acceleratorType'
+        description: '[Output Only] The type of the resource. Always compute#acceleratorType for accelerator types.'
+        type: string
+      maximumCardsPerInstance:
+        description: '[Output Only] Maximum accelerator cards allowed per instance.'
+        format: int32
+        type: integer
+      name:
+        description: '[Output Only] Name of the resource.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined fully-qualified URL for this resource.'
+        type: string
+      zone:
+        description: '[Output Only] The name of the zone where the accelerator type resides, such as us-central1-a.'
+        type: string
+    type: object
+  AcceleratorTypeAggregatedList:
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/AcceleratorTypesScopedList'
+          description: '[Output Only] Name of the scope containing this set of accelerator types.'
+        description: '[Output Only] A map of scoped accelerator type lists.'
+        type: object
+      kind:
+        default: 'compute#acceleratorTypeAggregatedList'
+        description: '[Output Only] Type of resource. Always compute#acceleratorTypeAggregatedList for aggregated lists of accelerator types.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
+  AcceleratorTypeList:
+    description: Contains a list of accelerator types.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of AcceleratorType resources.
+        items:
+          $ref: '#/definitions/AcceleratorType'
+        type: array
+      kind:
+        default: 'compute#acceleratorTypeList'
+        description: '[Output Only] Type of resource. Always compute#acceleratorTypeList for lists of accelerator types.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] A token used to continue a truncated list request.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
+  AcceleratorTypesScopedList:
+    properties:
+      acceleratorTypes:
+        description: '[Output Only] List of accelerator types contained in this scope.'
+        items:
+          $ref: '#/definitions/AcceleratorType'
+        type: array
+      warning:
+        description: '[Output Only] An informational warning that appears when the accelerator types list is empty.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
   AccessConfig:
     description: An access configuration attached to an instance's network interface. Only one access config per instance is supported.
     properties:
@@ -15578,10 +16262,10 @@ definitions:
         description: 'An external IP address associated with this instance. Specify an unused static external IP address available to the project or leave this field undefined to use an IP from a shared ephemeral IP address pool. If you specify a static external IP address, it must live in the same region as the zone of the instance.'
         type: string
       networkTier:
-        description: 'This signifies the networking tier used for configuring this access configuration and can only take the following values: CLOUD_NETWORK_PREMIUM , CLOUD_NETWORK_SELECT. If this field is not specified, it is assumed to be CLOUD_NETWORK_PREMIUM.'
+        description: 'This signifies the networking tier used for configuring this access configuration and can only take the following values: PREMIUM , SELECT. If this field is not specified, it is assumed to be PREMIUM.'
         enum:
-          - CLOUD_NETWORK_PREMIUM
-          - CLOUD_NETWORK_SELECT
+          - PREMIUM
+          - SELECT
         type: string
       publicDnsName:
         description: '[Output Only] The public DNS domain name for the instance.'
@@ -15618,6 +16302,13 @@ definitions:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         format: uint64
         type: string
+      ipVersion:
+        description: The IP Version that will be used by this address. Valid options are IPV4 or IPV6. This can only be specified for a global address.
+        enum:
+          - IPV4
+          - IPV6
+          - UNSPECIFIED_VERSION
+        type: string
       kind:
         default: 'compute#address'
         description: '[Output Only] Type of the resource. Always compute#address for addresses.'
@@ -15639,10 +16330,10 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       networkTier:
-        description: 'This signifies the networking tier used for configuring this Address and can only take the following values: CLOUD_NETWORK_PREMIUM , CLOUD_NETWORK_SELECT. If this field is not specified, it is assumed to be CLOUD_NETWORK_PREMIUM.'
+        description: 'This signifies the networking tier used for configuring this Address and can only take the following values: PREMIUM , SELECT. If this field is not specified, it is assumed to be PREMIUM.'
         enum:
-          - CLOUD_NETWORK_PREMIUM
-          - CLOUD_NETWORK_SELECT
+          - PREMIUM
+          - SELECT
         type: string
       region:
         description: '[Output Only] URL of the region where the regional address resides. This field is not applicable to global addresses.'
@@ -15732,6 +16423,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -15902,15 +16594,15 @@ definitions:
           Instance templates do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys.
     type: object
   AuditConfig:
-    description: Provides the configuration for non-admin_activity logging for a service. Controls exemptions and specific log sub-types.
+    description: 'Specifies the audit configuration for a service. It consists of which permission types are logged, and what identities, if any, are exempted from logging. An AuditConifg must have one or more AuditLogConfigs.'
     properties:
       auditLogConfigs:
-        description: The configuration for each type of logging
+        description: The configuration for logging of each type of permission.
         items:
           $ref: '#/definitions/AuditLogConfig'
         type: array
       exemptedMembers:
-        description: Specifies the identities that are exempted from "data access" audit logging for the `service` specified above. Follows the same format of Binding.members.
+        description: Specifies the identities that are exempted from "data access" audit logging for the `service` specified above. Follows the same format of Binding.members. This field is deprecated in favor of per-permission-type exemptions.
         items:
           type: string
         type: array
@@ -15919,10 +16611,15 @@ definitions:
         type: string
     type: object
   AuditLogConfig:
-    description: Provides the configuration for a sub-type of logging.
+    description: |-
+      Provides the configuration for logging a type of permissions. Example:
+
+      { "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", } ] }
+
+      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting foo@gmail.com from DATA_READ logging.
     properties:
       exemptedMembers:
-        description: Specifies the identities that are exempted from this type of logging Follows the same format of Binding.members.
+        description: 'Specifies the identities that do not cause logging for this type of permission. Follows the same format of [Binding.members][].'
         items:
           type: string
         type: array
@@ -16081,6 +16778,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -16330,15 +17028,6 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
-  BackendSSLPolicy:
-    description: Message containing backend SSL policies.
-    properties:
-      pinnedPeerCertificates:
-        description: 'List of PEM-encoded peer certificates, from which the public keys are extracted for authenticating the backend service.'
-        items:
-          type: string
-        type: array
-    type: object
   BackendService:
     description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity.
     properties:
@@ -16349,9 +17038,6 @@ definitions:
           When the load balancing scheme is INTERNAL, this field is not used.
         format: int32
         type: integer
-      backendSslPolicy:
-        $ref: '#/definitions/BackendSSLPolicy'
-        description: Backend SSL policies to enforce.
       backends:
         description: The list of backends that serve this BackendService.
         items:
@@ -16567,6 +17253,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -16775,6 +17462,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -17065,10 +17753,10 @@ definitions:
     description: A list of Disk resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of persistent disks.'
+        description: A list of Disk resources.
         items:
           $ref: '#/definitions/Disk'
         type: array
@@ -17077,7 +17765,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#diskList for lists of disks.'
         type: string
       nextPageToken:
-        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        description: '[Output Only] A token used to continue a truncated list request.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -17208,6 +17896,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -17264,6 +17953,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -17374,6 +18064,11 @@ definitions:
         items:
           type: string
         type: array
+      sourceServiceAccounts:
+        description: 'If source service accounts are specified, the firewall will apply only to traffic originating from an instance with a service account in this list. Source service accounts cannot be used to control traffic to an instance''s external IP address because service accounts are associated with an instance, not an IP address. sourceRanges can be set at the same time as sourceServiceAccounts. If both are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP belongs to an instance with service account listed in sourceServiceAccount. The connection does not need to match both properties for the firewall to apply. sourceServiceAccounts cannot be used at the same time as sourceTags or targetTags.'
+        items:
+          type: string
+        type: array
       sourceTags:
         description: 'If source tags are specified, the firewall will apply only to traffic with source IP that belongs to a tag listed in source tags. Source tags cannot be used to control traffic to an instance''s external IP address. Because tags are associated with an instance, not an IP address. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
         items:
@@ -17435,7 +18130,7 @@ definitions:
         description: |-
           The IP address that this forwarding rule is serving on behalf of.
 
-          For global forwarding rules, the address must be a global IP; for regional forwarding rules, the address must live in the same region as the forwarding rule. By default, this field is empty and an ephemeral IP from the same scope (global or regional) will be assigned.
+          For global forwarding rules, the address must be a global IP. For regional forwarding rules, the address must live in the same region as the forwarding rule. By default, this field is empty and an ephemeral IP from the same scope (global or regional) will be assigned.
 
           When the load balancing scheme is INTERNAL, this can only be an RFC 1918 IP address belonging to the network/subnetwork configured for the forwarding rule. A reserved address cannot be used. If the field is empty, the IP address will be automatically allocated from the internal IP range of the subnetwork or network configured for this forwarding rule. Only IPv4 is supported.
         type: string
@@ -17443,7 +18138,7 @@ definitions:
         description: |-
           The IP protocol to which this rule applies. Valid options are TCP, UDP, ESP, AH, SCTP or ICMP.
 
-          When the load balancing scheme is INTERNAL</code, only TCP and UDP are valid.
+          When the load balancing scheme is INTERNAL, only TCP and UDP are valid.
         enum:
           - AH
           - ESP
@@ -17468,6 +18163,13 @@ definitions:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         format: uint64
         type: string
+      ipVersion:
+        description: The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6. This can only be specified for a global forwarding rule.
+        enum:
+          - IPV4
+          - IPV6
+          - UNSPECIFIED_VERSION
+        type: string
       kind:
         default: 'compute#forwardingRule'
         description: '[Output Only] Type of the resource. Always compute#forwardingRule for Forwarding Rule resources.'
@@ -17485,7 +18187,7 @@ definitions:
         description: Labels to apply to this resource. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         type: object
       loadBalancingScheme:
-        description: 'This signifies what the ForwardingRule will be used for and can only take the following values: INTERNAL EXTERNAL The value of INTERNAL means that this will be used for Internal Network Load Balancing (TCP, UDP). The value of EXTERNAL means that this will be used for External Load Balancing (HTTP(S) LB, External TCP/UDP LB, SSL Proxy)'
+        description: 'This signifies what the ForwardingRule will be used for and can only take the following values: INTERNAL, EXTERNAL The value of INTERNAL means that this will be used for Internal Network Load Balancing (TCP, UDP). The value of EXTERNAL means that this will be used for External Load Balancing (HTTP(S) LB, External TCP/UDP LB, SSL Proxy)'
         enum:
           - EXTERNAL
           - INTERNAL
@@ -17502,10 +18204,10 @@ definitions:
           For internal load balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used.
         type: string
       networkTier:
-        description: 'This signifies the networking tier used for configuring this load balancer and can only take the following values: CLOUD_NETWORK_PREMIUM , CLOUD_NETWORK_SELECT. If this field is not specified, it is assumed to be CLOUD_NETWORK_PREMIUM.'
+        description: 'This signifies the networking tier used for configuring this load balancer and can only take the following values: PREMIUM , SELECT. If this field is not specified, it is assumed to be PREMIUM.'
         enum:
-          - CLOUD_NETWORK_PREMIUM
-          - CLOUD_NETWORK_SELECT
+          - PREMIUM
+          - SELECT
         type: string
       portRange:
         description: |-
@@ -17629,6 +18331,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -17878,7 +18581,7 @@ definitions:
         description: |-
           Full or partial URL of the host type resource to use for this host, in the format: zones/zone/hostTypes/host-type. This is provided by the client when the host is created. For example, the following is a valid partial url to a predefined host type:
 
-          zones/us-central1-f/hostTypes/n1-host-64-416
+          zones/us-central1-b/hostTypes/n1-host-64-416
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -17974,6 +18677,146 @@ definitions:
         description: The name of the PathMatcher to use to match the path portion of the URL if the hostRule matches the URL's host portion.
         type: string
     type: object
+  HostType:
+    description: A Host Type resource.
+    properties:
+      cpuPlatform:
+        description: '[Output Only] The CPU platform used by this host type.'
+        type: string
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      deprecated:
+        $ref: '#/definitions/DeprecationStatus'
+        description: '[Output Only] The deprecation status associated with this host type.'
+      description:
+        description: '[Output Only] An optional textual description of the resource.'
+        type: string
+      guestCpus:
+        description: '[Output Only] The number of virtual CPUs that are available to the host type.'
+        format: int32
+        type: integer
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#hostType'
+        description: '[Output Only] The type of the resource. Always compute#hostType for host types.'
+        type: string
+      localSsdGb:
+        description: '[Output Only] Local SSD available to the host type, defined in GB.'
+        format: int32
+        type: integer
+      memoryMb:
+        description: '[Output Only] The amount of physical memory available to the host type, defined in MB.'
+        format: int32
+        type: integer
+      name:
+        description: '[Output Only] Name of the resource.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      zone:
+        description: '[Output Only] The name of the zone where the host type resides, such as us-central1-a.'
+        type: string
+    type: object
+  HostTypeAggregatedList:
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/HostTypesScopedList'
+          description: '[Output Only] Name of the scope containing this set of host types.'
+        description: '[Output Only] A map of scoped host type lists.'
+        type: object
+      kind:
+        default: 'compute#hostTypeAggregatedList'
+        description: '[Output Only] Type of resource.Always compute#hostTypeAggregatedList for aggregated lists of host types.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  HostTypeList:
+    description: Contains a list of host types.
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: '[Output Only] A list of Host Type resources.'
+        items:
+          $ref: '#/definitions/HostType'
+        type: array
+      kind:
+        default: 'compute#hostTypeList'
+        description: '[Output Only] Type of resource.Always compute#hostTypeList for lists of host types.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  HostTypesScopedList:
+    properties:
+      hostTypes:
+        description: '[Output Only] List of host types contained in this scope.'
+        items:
+          $ref: '#/definitions/HostType'
+        type: array
+      warning:
+        description: '[Output Only] An informational warning that appears when the host types list is empty.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
   HostsScopedList:
     properties:
       hosts:
@@ -18000,6 +18843,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -18388,6 +19232,9 @@ definitions:
       metadata:
         $ref: '#/definitions/Metadata'
         description: The metadata key/value pairs assigned to this instance. This includes custom metadata and predefined keys.
+      minCpuPlatform:
+        description: Minimum cpu/platform to be used by this instance. We may schedule on the specified or later cpu/platform.
+        type: string
       name:
         description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         type: string
@@ -18785,8 +19632,11 @@ definitions:
     properties:
       instanceTemplate:
         type: string
+      name:
+        description: Name of the version. Unique among all versions in the scope of this managed instance group.
+        type: string
       tag:
-        description: Tag describing the version. Used to trigger rollout of a target version even if instance_template remains unchanged.
+        description: Tag describing the version. Used to trigger rollout of a target version even if instance_template remains unchanged. Deprecated in favor of 'name'.
         type: string
       targetSize:
         $ref: '#/definitions/FixedOrPercent'
@@ -18815,6 +19665,9 @@ definitions:
         items:
           $ref: '#/definitions/ManagedInstance'
         type: array
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
     type: object
   InstanceGroupManagersRecreateInstancesRequest:
     properties:
@@ -18867,6 +19720,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -18987,6 +19841,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -19214,6 +20069,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -19251,6 +20107,13 @@ definitions:
 
           Each label key & value must comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. For example, "webserver-frontend": "images". A label value can also be empty (e.g. "my-label": "").
         type: object
+    type: object
+  InstancesSetMachineResourcesRequest:
+    properties:
+      guestAccelerators:
+        items:
+          $ref: '#/definitions/AcceleratorConfig'
+        type: array
     type: object
   InstancesSetMachineTypeRequest:
     properties:
@@ -19450,6 +20313,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -19530,6 +20394,9 @@ definitions:
       tag:
         description: '[Output Only] Tag describing the version.'
         type: string
+      version:
+        $ref: '#/definitions/ManagedInstanceVersion'
+        description: '[Output Only] Intended version of this instance.'
     type: object
   ManagedInstanceLastAttempt:
     properties:
@@ -19552,6 +20419,15 @@ definitions:
               type: object
             type: array
         type: object
+    type: object
+  ManagedInstanceVersion:
+    properties:
+      instanceTemplate:
+        description: '[Output Only] The intended template of the instance. This field is empty when current_action is one of { DELETING, ABANDONING }.'
+        type: string
+      name:
+        description: '[Output Only] Name of the version.'
+        type: string
     type: object
   Metadata:
     description: A metadata key/value entry.
@@ -19672,9 +20548,9 @@ definitions:
         type: string
       network:
         description: |-
-          URL of the network resource for this instance. This is required for creating an instance but optional when creating a firewall rule. If not specified when creating a firewall rule, the default network is used:
+          URL of the network resource for this instance. When creating an instance, if neither the network nor the subnetwork is specified, the default network global/networks/default is used; if the network is not specified but the subnetwork is specified, the network is inferred.
 
-          global/networks/default 
+          This field is optional when creating a firewall rule. If not specified when creating a firewall rule, the default network global/networks/default is used.
 
           If you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs:  
           - https://www.googleapis.com/compute/v1/projects/project/global/networks/network 
@@ -19864,6 +20740,7 @@ definitions:
                 - NOT_CRITICAL_ERROR
                 - NO_RESULTS_ON_PAGE
                 - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
                 - RESOURCE_NOT_DELETED
                 - SINGLE_INSTANCE_PROPERTY_TEMPLATE
                 - UNREACHABLE
@@ -19961,6 +20838,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -20033,10 +20911,7 @@ definitions:
       For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam).
     properties:
       auditConfigs:
-        description: |-
-          Specifies audit logging configs for "data access". "data access": generally refers to data reads/writes and admin reads. "admin activity": generally refers to admin writes.
-
-          Note: `AuditConfig` doesn't apply to "admin activity", which always enables audit logging.
+        description: Specifies cloud audit logging configuration for this policy.
         items:
           $ref: '#/definitions/AuditConfig'
         type: array
@@ -20167,6 +21042,7 @@ definitions:
           - BACKEND_BUCKETS
           - BACKEND_SERVICES
           - CPUS
+          - CPUS_ALL_REGIONS
           - DISKS_TOTAL_GB
           - FIREWALLS
           - FORWARDING_RULES
@@ -20197,7 +21073,6 @@ definitions:
           - TARGET_SSL_PROXIES
           - TARGET_TCP_PROXIES
           - TARGET_VPN_GATEWAYS
-          - TOTAL_CPUS
           - URL_MAPS
           - VPN_TUNNELS
         type: string
@@ -20366,6 +21241,9 @@ definitions:
         items:
           $ref: '#/definitions/ManagedInstance'
         type: array
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
     type: object
   RegionInstanceGroupManagersRecreateRequest:
     properties:
@@ -20506,7 +21384,7 @@ definitions:
     description: |-
       Represents a Route resource. A route specifies how certain packets should be handled by the network. Routes are associated with instances by tags and the set of routes for a particular instance is called its routing table.
 
-      For each packet leaving a instance, the system searches that instance's routing table for a single best matching route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching routes. The packet is then forwarded as specified by the nextHop field of the winning route - either to another instance destination, a instance gateway or a Google Compute Engine-operated gateway.
+      For each packet leaving a instance, the system searches that instance's routing table for a single best matching route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching routes. The packet is then forwarded as specified by the nextHop field of the winning route - either to another instance destination, an instance gateway, or a Google Compute Engine-operated gateway.
 
       Packets that do not match any route in the sending instance's routing table are dropped.
     properties:
@@ -20586,6 +21464,7 @@ definitions:
                 - NOT_CRITICAL_ERROR
                 - NO_RESULTS_ON_PAGE
                 - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
                 - RESOURCE_NOT_DELETED
                 - SINGLE_INSTANCE_PROPERTY_TEMPLATE
                 - UNREACHABLE
@@ -20772,6 +21651,11 @@ definitions:
         items:
           $ref: '#/definitions/Route'
         type: array
+      bestRoutesForRouter:
+        description: Best routes learned by this router.
+        items:
+          $ref: '#/definitions/Route'
+        type: array
       bgpPeerStatus:
         items:
           $ref: '#/definitions/RouterStatusBgpPeerStatus'
@@ -20861,6 +21745,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -21301,6 +22186,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -21597,6 +22483,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -21809,6 +22696,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -22114,6 +23002,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -22466,6 +23355,7 @@ definitions:
               - NOT_CRITICAL_ERROR
               - NO_RESULTS_ON_PAGE
               - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
               - UNREACHABLE
@@ -22526,6 +23416,11 @@ definitions:
   Zone:
     description: A Zone resource.
     properties:
+      availableCpuPlatforms:
+        description: '[Output Only] Available cpu/platform selections for the zone.'
+        items:
+          type: string
+        type: array
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string

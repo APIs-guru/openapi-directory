@@ -114,19 +114,13 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: |-
-        Deletes a variable or multiple variables.
-
-        If you specify a variable name, then that variable is deleted. If you
-        specify a prefix and `recursive` is true, then all variables with that
-        prefix are deleted. You must set a `recursive` to true if you delete
-        variables by prefix.
-      operationId: runtimeconfig.projects.configs.variables.delete
+      description: Deletes the waiter with the specified name.
+      operationId: runtimeconfig.projects.configs.waiters.delete
       parameters:
         - description: |-
-            The name of the variable to delete, in the format:
+            The Waiter resource to delete, in the format:
 
-            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIABLE_NAME]`
+             `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/waiters/[WAITER_NAME]`
           in: path
           name: name
           required: true
@@ -151,13 +145,14 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a single variable.
-      operationId: runtimeconfig.projects.configs.variables.get
+      description: Gets information about a single waiter.
+      operationId: runtimeconfig.projects.configs.waiters.get
       parameters:
         - description: |-
-            The name of the variable to return, in the format:
+            The fully-qualified name of the Waiter resource object to retrieve, in the
+            format:
 
-            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIBLE_NAME]`
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/waiters/[WAITER_NAME]`
           in: path
           name: name
           required: true
@@ -167,7 +162,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Variable'
+            $ref: '#/definitions/Waiter'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -176,19 +171,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     put:
       description: Updates an existing variable with a new value.
       operationId: runtimeconfig.projects.configs.variables.update
@@ -220,19 +215,19 @@ paths:
         - projects
   '/v1beta1/{name}:watch':
     parameters:
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Watches a specific variable and waits for a change in the variable's value.
@@ -313,19 +308,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Creates a new RuntimeConfig resource. The configuration name must be
@@ -419,19 +414,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Creates a variable within the given configuration. You cannot create
@@ -523,19 +518,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Creates a Waiter resource. This operation returns a long-running Operation
@@ -615,34 +610,34 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -680,7 +675,7 @@ paths:
         Returns permissions that a caller has on the specified resource.
         If the resource does not exist, this will return an empty set of
         permissions, not a NOT_FOUND error.
-      operationId: runtimeconfig.projects.configs.variables.testIamPermissions
+      operationId: runtimeconfig.projects.configs.waiters.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
@@ -715,19 +710,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.

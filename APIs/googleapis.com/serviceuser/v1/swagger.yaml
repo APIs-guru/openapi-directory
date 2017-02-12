@@ -1,14 +1,14 @@
 swagger: '2.0'
 schemes:
   - https
-host: servicemanagement.googleapis.com
+host: serviceuser.googleapis.com
 basePath: /
 info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
-  title: Google Service Management
+  description: The Service User API allows service consumers to enable services they want to use on Google Cloud Platform or disable services they no longer use. Consumers can also list the set of services they have already enabled.
+  title: Google Service User
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -16,13 +16,13 @@ info:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://servicemanagement.googleapis.com/$discovery/rest?version=v1'
+    url: 'https://serviceuser.googleapis.com/$discovery/rest?version=v1'
     version: v1
   x-preferred: true
   x-providerName: googleapis.com
-  x-serviceName: servicemanagement
+  x-serviceName: serviceuser
 externalDocs:
-  url: 'https://cloud.google.com/service-management/'
+  url: 'https://cloud.google.com/service-user/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -32,7 +32,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
-      'https://www.googleapis.com/auth/service.management.readonly': View your Google API service configuration
     type: oauth2
 parameters:
   $.xgafv:
@@ -111,565 +110,43 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: services
-  - name: operations
+  - name: projects
 paths:
-  /v1/services:
-    get:
-      description: |-
-        Lists managed services.
-
-        If called without any authentication, it returns only the public services.
-        If called with authentication, it returns all services that the caller has
-        "servicemanagement.services.get" permission for.
-
-        **BETA:** If the caller specifies the `consumer_id`, it returns only the
-        services enabled on the consumer. The `consumer_id` must have the format
-        of "project:{PROJECT-ID}".
-      operationId: servicemanagement.services.list
-      parameters:
-        - description: |-
-            Include services consumed by the specified consumer.
-
-            The Google Service Management implementation accepts the following
-            forms:
-            - project:<project_id>
-          in: query
-          name: consumerId
-          type: string
-        - description: |-
-            Token identifying which result to start with; returned by a previous list
-            call.
-          in: query
-          name: pageToken
-          type: string
-        - description: Requested size of the next page of data.
-          in: query
-          name: pageSize
-          type: integer
-        - description: Include services produced by the specified project.
-          in: query
-          name: producerProjectId
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListServicesResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management.readonly'
-      tags:
-        - services
+  '/v1/{name}:disable':
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: |-
-        Creates a new managed service.
-        Please note one producer project can own no more than 20 services.
-
-        Operation<response: ManagedService>
-      operationId: servicemanagement.services.create
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ManagedService'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-      tags:
-        - services
-  '/v1/services/{serviceName}':
-    delete:
-      description: |-
-        Deletes a managed service. This method will change the service to the
-        `Soft-Delete` state for 30 days. Within this period, service producers may
-        call UndeleteService to restore the service.
-        After 30 days, the service will be permanently deleted.
+        Disable a managed service for a consumer.
 
         Operation<response: google.protobuf.Empty>
-      operationId: servicemanagement.services.delete
+      operationId: serviceuser.projects.services.disable
       parameters:
         - description: |-
-            The name of the service.  See the [overview](/service-management/overview)
-            for naming requirements.  For example: `example.googleapis.com`.
-          in: path
-          name: serviceName
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-      tags:
-        - services
-    get:
-      description: |-
-        Gets a managed service. Authentication is required unless the service is
-        public.
-      operationId: servicemanagement.services.get
-      parameters:
-        - description: |-
-            The name of the service.  See the `ServiceManager` overview for naming
-            requirements.  For example: `example.googleapis.com`.
-          in: path
-          name: serviceName
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ManagedService'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management.readonly'
-      tags:
-        - services
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-  '/v1/services/{serviceName}/config':
-    get:
-      description: Gets a service configuration (version) for a managed service.
-      operationId: servicemanagement.services.getConfig
-      parameters:
-        - description: |-
-            The name of the service.  See the [overview](/service-management/overview)
-            for naming requirements.  For example: `example.googleapis.com`.
-          in: path
-          name: serviceName
-          required: true
-          type: string
-        - description: The id of the service configuration resource.
-          in: query
-          name: configId
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Service'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management.readonly'
-      tags:
-        - services
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-  '/v1/services/{serviceName}/configs':
-    get:
-      description: |-
-        Lists the history of the service configuration for a managed service,
-        from the newest to the oldest.
-      operationId: servicemanagement.services.configs.list
-      parameters:
-        - description: |-
-            The name of the service.  See the [overview](/service-management/overview)
-            for naming requirements.  For example: `example.googleapis.com`.
-          in: path
-          name: serviceName
-          required: true
-          type: string
-        - description: The token of the page to retrieve.
-          in: query
-          name: pageToken
-          type: string
-        - description: The max number of items to include in the response list.
-          in: query
-          name: pageSize
-          type: integer
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListServiceConfigsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management.readonly'
-      tags:
-        - services
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-    post:
-      description: |-
-        Creates a new service configuration (version) for a managed service.
-        This method only stores the service configuration. To roll out the service
-        configuration to backend systems please call
-        CreateServiceRollout.
-      operationId: servicemanagement.services.configs.create
-      parameters:
-        - description: |-
-            The name of the service.  See the [overview](/service-management/overview)
-            for naming requirements.  For example: `example.googleapis.com`.
-          in: path
-          name: serviceName
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Service'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Service'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-      tags:
-        - services
-  '/v1/services/{serviceName}/configs/{configId}':
-    get:
-      description: Gets a service configuration (version) for a managed service.
-      operationId: servicemanagement.services.configs.get
-      parameters:
-        - description: |-
-            The name of the service.  See the [overview](/service-management/overview)
-            for naming requirements.  For example: `example.googleapis.com`.
-          in: path
-          name: serviceName
-          required: true
-          type: string
-        - description: The id of the service configuration resource.
-          in: path
-          name: configId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Service'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management.readonly'
-      tags:
-        - services
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-  '/v1/services/{serviceName}/configs:submit':
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-    post:
-      description: |-
-        Creates a new service configuration (version) for a managed service based
-        on
-        user-supplied configuration source files (for example: OpenAPI
-        Specification). This method stores the source configurations as well as the
-        generated service configuration. To rollout the service configuration to
-        other services,
-        please call CreateServiceRollout.
+            Name of the consumer and the service to disable for that consumer.
 
-        Operation<response: SubmitConfigSourceResponse>
-      operationId: servicemanagement.services.configs.submit
-      parameters:
-        - description: |-
-            The name of the service.  See the [overview](/service-management/overview)
-            for naming requirements.  For example: `example.googleapis.com`.
-          in: path
-          name: serviceName
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SubmitConfigSourceRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-      tags:
-        - services
-  '/v1/services/{serviceName}/rollouts':
-    get:
-      description: |-
-        Lists the history of the service configuration rollouts for a managed
-        service, from the newest to the oldest.
-      operationId: servicemanagement.services.rollouts.list
-      parameters:
-        - description: |-
-            The name of the service.  See the [overview](/service-management/overview)
-            for naming requirements.  For example: `example.googleapis.com`.
-          in: path
-          name: serviceName
-          required: true
-          type: string
-        - description: The token of the page to retrieve.
-          in: query
-          name: pageToken
-          type: string
-        - description: The max number of items to include in the response list.
-          in: query
-          name: pageSize
-          type: integer
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListServiceRolloutsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management.readonly'
-      tags:
-        - services
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-    post:
-      description: |-
-        Creates a new service configuration rollout. Based on rollout, the
-        Google Service Management will roll out the service configurations to
-        different backend services. For example, the logging configuration will be
-        pushed to Google Cloud Logging.
+            The Service User implementation accepts the following forms for consumer:
+            - "project:<project_id>"
 
-        Please note that any previous pending and running Rollouts and associated
-        Operations will be automatically cancelled so that the latest Rollout will
-        not be blocked by previous Rollouts.
-
-        Operation<response: Rollout>
-      operationId: servicemanagement.services.rollouts.create
-      parameters:
-        - description: |-
-            The name of the service.  See the [overview](/service-management/overview)
-            for naming requirements.  For example: `example.googleapis.com`.
+            A valid path would be:
+            - /v1/projects/my-project/services/servicemanagement.googleapis.com:disable
           in: path
-          name: serviceName
+          name: name
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Rollout'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-      tags:
-        - services
-  '/v1/services/{serviceName}/rollouts/{rolloutId}':
-    get:
-      description: Gets a service configuration rollout.
-      operationId: servicemanagement.services.rollouts.get
-      parameters:
-        - description: |-
-            The name of the service.  See the [overview](/service-management/overview)
-            for naming requirements.  For example: `example.googleapis.com`.
-          in: path
-          name: serviceName
-          required: true
-          type: string
-        - description: The id of the rollout resource.
-          in: path
-          name: rolloutId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Rollout'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management.readonly'
-      tags:
-        - services
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-  '/v1/services/{serviceName}:disable':
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-    post:
-      description: |-
-        Disable a managed service for a project.
-
-        Operation<response: DisableServiceResponse>
-      operationId: servicemanagement.services.disable
-      parameters:
-        - description: |-
-            Name of the service to disable. Specifying an unknown service name
-            will cause the request to fail.
-          in: path
-          name: serviceName
-          required: true
-          type: string
+          x-reservedExpansion: true
         - in: body
           name: body
           schema:
@@ -685,39 +162,42 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - services
-  '/v1/services/{serviceName}:enable':
+        - projects
+  '/v1/{name}:enable':
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: |-
-        Enable a managed service for a project with default setting.
+        Enable a managed service for a consumer with the default settings.
 
-        Operation<response: EnableServiceResponse>
+        Operation<response: google.protobuf.Empty>
 
         google.rpc.Status errors may contain a
         google.rpc.PreconditionFailure error detail.
-      operationId: servicemanagement.services.enable
+      operationId: serviceuser.projects.services.enable
       parameters:
         - description: |-
-            Name of the service to enable. Specifying an unknown service name will
-            cause the request to fail.
+            Name of the consumer and the service to enable for that consumer.
+
+            A valid path would be:
+            - /v1/projects/my-project/services/servicemanagement.googleapis.com:enable
           in: path
-          name: serviceName
+          name: name
           required: true
           type: string
+          x-reservedExpansion: true
         - in: body
           name: body
           schema:
@@ -733,289 +213,59 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - services
-  '/v1/services/{serviceName}:undelete':
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-    post:
-      description: |-
-        Revives a previously deleted managed service. The method restores the
-        service using the configuration at the time the service was deleted.
-        The target service must exist and must have been deleted within the
-        last 30 days.
-
-        Operation<response: UndeleteServiceResponse>
-      operationId: servicemanagement.services.undelete
-      parameters:
-        - description: |-
-            The name of the service. See the [overview](/service-management/overview)
-            for naming requirements. For example: `example.googleapis.com`.
-          in: path
-          name: serviceName
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-      tags:
-        - services
-  '/v1/services:generateConfigReport':
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-    post:
-      description: |-
-        Generates and returns a report (errors, warnings and changes from
-        existing configurations) associated with
-        GenerateConfigReportRequest.new_value
-
-        If GenerateConfigReportRequest.old_value is specified,
-        GenerateConfigReportRequest will contain a single ChangeReport based on the
-        comparison between GenerateConfigReportRequest.new_value and
-        GenerateConfigReportRequest.old_value.
-        If GenerateConfigReportRequest.old_value is not specified, this method
-        will compare GenerateConfigReportRequest.new_value with the last pushed
-        service configuration.
-      operationId: servicemanagement.services.generateConfigReport
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GenerateConfigReportRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GenerateConfigReportResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-      tags:
-        - services
-  '/v1/{name}':
+        - projects
+  '/v1/{parent}/services':
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: servicemanagement.operations.get
-      parameters:
-        - description: The name of the operation resource.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-      tags:
-        - operations
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-  '/v1/{resource}:getIamPolicy':
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-    post:
-      description: |-
-        Gets the access control policy for a resource.
-        Returns an empty policy if the resource exists and does not have a policy
-        set.
-      operationId: servicemanagement.services.getIamPolicy
+      description: List enabled services for the specified consumer.
+      operationId: serviceuser.projects.services.list
       parameters:
         - description: |-
-            REQUIRED: The resource for which the policy is being requested.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
+            List enabled services for the specified parent.
+
+            An example valid parent would be:
+            - projects/my-project
           in: path
-          name: resource
+          name: parent
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GetIamPolicyRequest'
+        - description: Requested size of the next page of data.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Token identifying which result to start with; returned by a previous list
+            call.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/ListEnabledServicesResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - services
-  '/v1/{resource}:setIamPolicy':
+        - projects
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-    post:
-      description: |-
-        Sets the access control policy on the specified resource. Replaces any
-        existing policy.
-      operationId: servicemanagement.services.setIamPolicy
-      parameters:
-        - description: |-
-            REQUIRED: The resource for which the policy is being specified.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
-          in: path
-          name: resource
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SetIamPolicyRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Policy'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-      tags:
-        - services
-  '/v1/{resource}:testIamPermissions':
-    parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-    post:
-      description: |-
-        Returns permissions that a caller has on the specified resource.
-        If the resource does not exist, this will return an empty set of
-        permissions, not a NOT_FOUND error.
-      operationId: servicemanagement.services.testIamPermissions
-      parameters:
-        - description: |-
-            REQUIRED: The resource for which the policy detail is being requested.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
-          in: path
-          name: resource
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestIamPermissionsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TestIamPermissionsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
-      tags:
-        - services
 definitions:
-  Advice:
-    description: |-
-      Generated advice about this change, used for providing more
-      information about how a change will affect the existing service.
-    properties:
-      description:
-        description: |-
-          Useful description for why this advice was applied and what actions should
-          be taken to mitigate any implied risks.
-        type: string
-    type: object
   Api:
     description: Api is a light-weight descriptor for a protocol buffer service.
     properties:
@@ -1072,75 +322,6 @@ definitions:
           `google.feature.v1`. For major versions 0 and 1, the suffix can
           be omitted. Zero major versions must only be used for
           experimental, none-GA apis.
-        type: string
-    type: object
-  AuditConfig:
-    description: |-
-      Specifies the audit configuration for a service.
-      It consists of which permission types are logged, and what identities, if
-      any, are exempted from logging.
-      An AuditConifg must have one or more AuditLogConfigs.
-    properties:
-      auditLogConfigs:
-        description: |-
-          The configuration for logging of each type of permission.
-          Next ID: 4
-        items:
-          $ref: '#/definitions/AuditLogConfig'
-        type: array
-      exemptedMembers:
-        description: |-
-          Specifies the identities that are exempted from "data access" audit
-          logging for the `service` specified above.
-          Follows the same format of Binding.members.
-          This field is deprecated in favor of per-permission-type exemptions.
-        items:
-          type: string
-        type: array
-      service:
-        description: |-
-          Specifies a service that will be enabled for audit logging.
-          For example, `resourcemanager`, `storage`, `compute`.
-          `allServices` is a special value that covers all services.
-        type: string
-    type: object
-  AuditLogConfig:
-    description: |-
-      Provides the configuration for logging a type of permissions.
-      Example:
-
-          {
-            "audit_log_configs": [
-              {
-                "log_type": "DATA_READ",
-                "exempted_members": [
-                  "user:foo@gmail.com"
-                ]
-              },
-              {
-                "log_type": "DATA_WRITE",
-              }
-            ]
-          }
-
-      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
-      foo@gmail.com from DATA_READ logging.
-    properties:
-      exemptedMembers:
-        description: |-
-          Specifies the identities that do not cause logging for this type of
-          permission.
-          Follows the same format of Binding.members.
-        items:
-          type: string
-        type: array
-      logType:
-        description: The log type that this config enables.
-        enum:
-          - LOG_TYPE_UNSPECIFIED
-          - ADMIN_READ
-          - DATA_WRITE
-          - DATA_READ
         type: string
     type: object
   AuthProvider:
@@ -1325,203 +506,6 @@ definitions:
           Refer to selector for syntax details.
         type: string
     type: object
-  Binding:
-    description: Associates `members` with a `role`.
-    properties:
-      members:
-        description: |+
-          Specifies the identities requesting access for a Cloud Platform resource.
-          `members` can have the following values:
-
-          * `allUsers`: A special identifier that represents anyone who is
-             on the internet; with or without a Google account.
-
-          * `allAuthenticatedUsers`: A special identifier that represents anyone
-             who is authenticated with a Google account or a service account.
-
-          * `user:{emailid}`: An email address that represents a specific Google
-             account. For example, `alice@gmail.com` or `joe@example.com`.
-
-
-          * `serviceAccount:{emailid}`: An email address that represents a service
-             account. For example, `my-other-app@appspot.gserviceaccount.com`.
-
-          * `group:{emailid}`: An email address that represents a Google group.
-             For example, `admins@example.com`.
-
-          * `domain:{domain}`: A Google Apps domain name that represents all the
-             users of that domain. For example, `google.com` or `example.com`.
-
-        items:
-          type: string
-        type: array
-      role:
-        description: |-
-          Role that is assigned to `members`.
-          For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
-          Required
-        type: string
-    type: object
-  ChangeReport:
-    description: |-
-      Change report associated with a particular service configuration.
-
-      It contains a list of ConfigChanges based on the comparison between
-      two service configurations.
-    properties:
-      configChanges:
-        description: |-
-          List of changes between two service configurations.
-          The changes will be alphabetically sorted based on the identifier
-          of each change.
-          A ConfigChange identifier is a dot separated path to the configuration.
-          Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
-        items:
-          $ref: '#/definitions/ConfigChange'
-        type: array
-    type: object
-  CloudAuditOptions:
-    description: Write a Cloud Audit log
-    properties: {}
-    type: object
-  Condition:
-    description: A condition to be met.
-    properties:
-      iam:
-        description: Trusted attributes supplied by the IAM system.
-        enum:
-          - NO_ATTR
-          - AUTHORITY
-          - ATTRIBUTION
-        type: string
-      op:
-        description: An operator to apply the subject with.
-        enum:
-          - NO_OP
-          - EQUALS
-          - NOT_EQUALS
-          - IN
-          - NOT_IN
-          - DISCHARGED
-        type: string
-      svc:
-        description: Trusted attributes discharged by the service.
-        type: string
-      sys:
-        description: |-
-          Trusted attributes supplied by any service that owns resources and uses
-          the IAM system for access control.
-        enum:
-          - NO_ATTR
-          - REGION
-          - SERVICE
-          - NAME
-          - IP
-        type: string
-      value:
-        description: DEPRECATED. Use 'values' instead.
-        type: string
-      values:
-        description: The objects of the condition. This is mutually exclusive with 'value'.
-        items:
-          type: string
-        type: array
-    type: object
-  ConfigChange:
-    description: |-
-      Output generated from semantically comparing two versions of a service
-      configuration.
-
-      Includes detailed information about a field that have changed with
-      applicable advice about potential consequences for the change, such as
-      backwards-incompatibility.
-    properties:
-      advices:
-        description: |-
-          Collection of advice provided for this change, useful for determining the
-          possible impact of this change.
-        items:
-          $ref: '#/definitions/Advice'
-        type: array
-      changeType:
-        description: 'The type for this change, either ADDED, REMOVED, or MODIFIED.'
-        enum:
-          - CHANGE_TYPE_UNSPECIFIED
-          - ADDED
-          - REMOVED
-          - MODIFIED
-        type: string
-      element:
-        description: |-
-          Object hierarchy path to the change, with levels separated by a '.'
-          character. For repeated fields, an applicable unique identifier field is
-          used for the index (usually selector, name, or id). For maps, the term
-          'key' is used. If the field has no unique identifier, the numeric index
-          is used.
-          Examples:
-          - visibility.rules[selector=="google.LibraryService.CreateBook"].restriction
-          - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
-          - logging.producer_destinations[0]
-        type: string
-      newValue:
-        description: |-
-          Value of the changed object in the new Service configuration,
-          in JSON format. This field will not be populated if ChangeType == REMOVED.
-        type: string
-      oldValue:
-        description: |-
-          Value of the changed object in the old Service configuration,
-          in JSON format. This field will not be populated if ChangeType == ADDED.
-        type: string
-    type: object
-  ConfigFile:
-    description: Generic specification of a source configuration file
-    properties:
-      fileContents:
-        description: The bytes that constitute the file.
-        format: byte
-        type: string
-      filePath:
-        description: The file name of the configuration file (full or relative path).
-        type: string
-      fileType:
-        description: The type of configuration file this represents.
-        enum:
-          - FILE_TYPE_UNSPECIFIED
-          - SERVICE_CONFIG_YAML
-          - OPEN_API_JSON
-          - OPEN_API_YAML
-          - FILE_DESCRIPTOR_SET_PROTO
-        type: string
-    type: object
-  ConfigRef:
-    description: Represents a service configuration with its name and id.
-    properties:
-      name:
-        description: |-
-          Resource name of a service config. It must have the following
-          format: "services/{service name}/configs/{config id}".
-        type: string
-    type: object
-  ConfigSource:
-    description: |-
-      Represents a source file which is used to generate the service configuration
-      defined by `google.api.Service`.
-    properties:
-      files:
-        description: |-
-          Set of source configuration files that are used to generate a service
-          configuration (`google.api.Service`).
-        items:
-          $ref: '#/definitions/ConfigFile'
-        type: array
-      id:
-        description: |-
-          A unique ID for a specific instance of this message, typically assigned
-          by the client for tracking purpose. If empty, the server may choose to
-          generate one instead.
-        type: string
-    type: object
   Context:
     description: |-
       `Context` defines which contexts an API requests.
@@ -1585,16 +569,6 @@ definitions:
           feature (like quota and billing) will be enabled.
         type: string
     type: object
-  CounterOptions:
-    description: Options for counters
-    properties:
-      field:
-        description: The field value to attribute.
-        type: string
-      metric:
-        description: The metric to update.
-        type: string
-    type: object
   CustomError:
     description: |-
       Customize service error responses.  For example, list any service
@@ -1647,47 +621,9 @@ definitions:
         description: The path matched by this custom verb.
         type: string
     type: object
-  DataAccessOptions:
-    description: Write a Data Access (Gin) log
-    properties: {}
-    type: object
-  DeleteServiceStrategy:
-    description: |-
-      Strategy used to delete a service. This strategy is a placeholder only
-      used by the system generated rollout to delete a service.
-    properties: {}
-    type: object
-  Diagnostic:
-    description: Represents a diagnostic message (error or warning)
-    properties:
-      kind:
-        description: The kind of diagnostic information provided.
-        enum:
-          - WARNING
-          - ERROR
-        type: string
-      location:
-        description: File name and line number of the error or warning.
-        type: string
-      message:
-        description: Message describing the error or warning.
-        type: string
-    type: object
   DisableServiceRequest:
     description: Request message for DisableService method.
-    properties:
-      consumerId:
-        description: |-
-          The identity of consumer resource which service disablement will be
-          applied to.
-
-          The Google Service Management implementation accepts the following
-          forms:
-          - "project:<project_id>"
-
-          Note: this is made compatible with
-          google.api.servicecontrol.v1.Operation.consumer_id.
-        type: string
+    properties: {}
     type: object
   Documentation:
     description: |-
@@ -1810,19 +746,18 @@ definitions:
     type: object
   EnableServiceRequest:
     description: Request message for EnableService method.
+    properties: {}
+    type: object
+  EnabledService:
+    description: |-
+      An EnabledService message contains the details about a service that has been
+      enabled for use.
     properties:
-      consumerId:
+      service:
+        $ref: '#/definitions/Service'
         description: |-
-          The identity of consumer resource which service enablement will be
-          applied to.
-
-          The Google Service Management implementation accepts the following
-          forms:
-          - "project:<project_id>"
-
-          Note: this is made compatible with
-          google.api.servicecontrol.v1.Operation.consumer_id.
-        type: string
+          The Service definition for the enabled service
+          Only the name and title fields will be populated.
     type: object
   Endpoint:
     description: |-
@@ -1984,59 +919,6 @@ definitions:
           The field type URL, without the scheme, for message or enumeration
           types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
         type: string
-    type: object
-  GenerateConfigReportRequest:
-    description: Request message for GenerateConfigReport method.
-    properties:
-      newConfig:
-        additionalProperties:
-          description: Properties of the object. Contains field @type with type URL.
-        description: |-
-          Service configuration for which we want to generate the report.
-          For this version of API, the supported types are
-          google.api.servicemanagement.v1.ConfigRef,
-          google.api.servicemanagement.v1.ConfigSource,
-          and google.api.Service
-        type: object
-      oldConfig:
-        additionalProperties:
-          description: Properties of the object. Contains field @type with type URL.
-        description: |-
-          Service configuration against which the comparison will be done.
-          For this version of API, the supported types are
-          google.api.servicemanagement.v1.ConfigRef,
-          google.api.servicemanagement.v1.ConfigSource,
-          and google.api.Service
-        type: object
-    type: object
-  GenerateConfigReportResponse:
-    description: Response message for GenerateConfigReport method.
-    properties:
-      changeReports:
-        description: |-
-          list of ChangeReport, each corresponding to comparison between two
-          service configurations.
-        items:
-          $ref: '#/definitions/ChangeReport'
-        type: array
-      diagnostics:
-        description: |-
-          Errors / Linter warnings associated with the service definition this
-          report
-          belongs to.
-        items:
-          $ref: '#/definitions/Diagnostic'
-        type: array
-      id:
-        description: ID of the service configuration this report belongs to.
-        type: string
-      serviceName:
-        description: Name of the service this report belongs to.
-        type: string
-    type: object
-  GetIamPolicyRequest:
-    description: Request message for `GetIamPolicy` method.
-    properties: {}
     type: object
   Http:
     description: |-
@@ -2339,77 +1221,19 @@ definitions:
           - INT64
         type: string
     type: object
-  ListServiceConfigsResponse:
-    description: Response message for ListServiceConfigs method.
+  ListEnabledServicesResponse:
+    description: Response message for `ListEnabledServices` method.
     properties:
       nextPageToken:
-        description: The token of the next page of results.
-        type: string
-      serviceConfigs:
-        description: The list of service configuration resources.
-        items:
-          $ref: '#/definitions/Service'
-        type: array
-    type: object
-  ListServiceRolloutsResponse:
-    description: Response message for ListServiceRollouts method.
-    properties:
-      nextPageToken:
-        description: The token of the next page of results.
-        type: string
-      rollouts:
-        description: The list of rollout resources.
-        items:
-          $ref: '#/definitions/Rollout'
-        type: array
-    type: object
-  ListServicesResponse:
-    description: Response message for `ListServices` method.
-    properties:
-      nextPageToken:
-        description: Token that can be passed to `ListServices` to resume a paginated query.
+        description: |-
+          Token that can be passed to `ListEnabledServices` to resume a paginated
+          query.
         type: string
       services:
-        description: The returned services will only have the name field set.
+        description: Services enabled for the specified parent.
         items:
-          $ref: '#/definitions/ManagedService'
+          $ref: '#/definitions/EnabledService'
         type: array
-    type: object
-  LogConfig:
-    description: |-
-      Specifies what kind of log the caller must write
-      Increment a streamz counter with the specified metric and field names.
-
-      Metric names should start with a '/', generally be lowercase-only,
-      and end in "_count". Field names should not contain an initial slash.
-      The actual exported metric names will have "/iam/policy" prepended.
-
-      Field names correspond to IAM request parameters and field values are
-      their respective values.
-
-      At present the only supported field names are
-         - "iam_principal", corresponding to IAMContext.principal;
-         - "" (empty string), resulting in one aggretated counter with no field.
-
-      Examples:
-        counter { metric: "/debug_access_count"  field: "iam_principal" }
-        ==> increment counter /iam/policy/backend_debug_access_count
-                              {iam_principal=[value of IAMContext.principal]}
-
-      At this time we do not support:
-      * multiple field names (though this may be supported in the future)
-      * decrementing the counter
-      * incrementing it by anything other than 1
-    properties:
-      cloudAudit:
-        $ref: '#/definitions/CloudAuditOptions'
-        description: Cloud audit options.
-      counter:
-        $ref: '#/definitions/CounterOptions'
-        description: Counter options.
-      dataAccess:
-        $ref: '#/definitions/DataAccessOptions'
-        description: Data access options.
     type: object
   LogDescriptor:
     description: |-
@@ -2517,20 +1341,6 @@ definitions:
         description: |-
           The monitored resource type. The type must be defined in the
           Service.monitored_resources section.
-        type: string
-    type: object
-  ManagedService:
-    description: |-
-      The full representation of a Service that is managed by
-      Google Service Management.
-    properties:
-      producerProjectId:
-        description: ID of the project that produces and owns this service.
-        type: string
-      serviceName:
-        description: |-
-          The name of the service. See the [overview](/service-management/overview)
-          for naming requirements.
         type: string
     type: object
   MediaDownload:
@@ -3009,30 +1819,6 @@ definitions:
           `TakeSnapshotResponse`.
         type: object
     type: object
-  OperationMetadata:
-    description: The metadata associated with a long running operation resource.
-    properties:
-      progressPercentage:
-        description: 'Percentage of completion of this operation, ranging from 0 to 100.'
-        format: int32
-        type: integer
-      resourceNames:
-        description: |-
-          The full name of the resources that this operation is directly
-          associated with.
-        items:
-          type: string
-        type: array
-      startTime:
-        description: The start time of the operation.
-        format: google-datetime
-        type: string
-      steps:
-        description: Detailed status information for each step. The order is undetermined.
-        items:
-          $ref: '#/definitions/Step'
-        type: array
-    type: object
   Option:
     description: |-
       A protocol buffer option, which can be attached to a message, field,
@@ -3088,192 +1874,6 @@ definitions:
           honored in the generated docset.
         items:
           $ref: '#/definitions/Page'
-        type: array
-    type: object
-  Policy:
-    description: |-
-      Defines an Identity and Access Management (IAM) policy. It is used to
-      specify access control policies for Cloud Platform resources.
-
-
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
-      `members` to a `role`, where the members can be user accounts, Google groups,
-      Google domains, and service accounts. A `role` is a named list of permissions
-      defined by IAM.
-
-      **Example**
-
-          {
-            "bindings": [
-              {
-                "role": "roles/owner",
-                "members": [
-                  "user:mike@example.com",
-                  "group:admins@example.com",
-                  "domain:google.com",
-                  "serviceAccount:my-other-app@appspot.gserviceaccount.com",
-                ]
-              },
-              {
-                "role": "roles/viewer",
-                "members": ["user:sean@example.com"]
-              }
-            ]
-          }
-
-      For a description of IAM and its features, see the
-      [IAM developer's guide](https://cloud.google.com/iam).
-    properties:
-      auditConfigs:
-        description: Specifies cloud audit logging configuration for this policy.
-        items:
-          $ref: '#/definitions/AuditConfig'
-        type: array
-      bindings:
-        description: |-
-          Associates a list of `members` to a `role`.
-          Multiple `bindings` must not be specified for the same `role`.
-          `bindings` with no members will result in an error.
-        items:
-          $ref: '#/definitions/Binding'
-        type: array
-      etag:
-        description: |-
-          `etag` is used for optimistic concurrency control as a way to help
-          prevent simultaneous updates of a policy from overwriting each other.
-          It is strongly suggested that systems make use of the `etag` in the
-          read-modify-write cycle to perform policy updates in order to avoid race
-          conditions: An `etag` is returned in the response to `getIamPolicy`, and
-          systems are expected to put that etag in the request to `setIamPolicy` to
-          ensure that their change will be applied to the same version of the policy.
-
-          If no `etag` is provided in the call to `setIamPolicy`, then the existing
-          policy is overwritten blindly.
-        format: byte
-        type: string
-      iamOwned:
-        type: boolean
-      rules:
-        description: |-
-          If more than one rule is specified, the rules are applied in the following
-          manner:
-          - All matching LOG rules are always applied.
-          - If any DENY/DENY_WITH_LOG rule matches, permission is denied.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is
-            granted.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if no rule applies, permission is denied.
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
-      version:
-        description: Version of the `Policy`. The default version is 0.
-        format: int32
-        type: integer
-    type: object
-  Rollout:
-    description: |-
-      A rollout resource that defines how service configuration versions are pushed
-      to control plane systems. Typically, you create a new version of the
-      service config, and then create a Rollout to push the service config.
-    properties:
-      createTime:
-        description: Creation time of the rollout. Readonly.
-        format: google-datetime
-        type: string
-      createdBy:
-        description: The user who created the Rollout. Readonly.
-        type: string
-      deleteServiceStrategy:
-        $ref: '#/definitions/DeleteServiceStrategy'
-        description: |-
-          The strategy associated with a rollout to delete a `ManagedService`.
-          Readonly.
-      rolloutId:
-        description: |-
-          Optional unique identifier of this Rollout. Only lower case letters, digits
-           and '-' are allowed.
-
-          If not specified by client, the server will generate one. The generated id
-          will have the form of <date><revision number>, where "date" is the create
-          date in ISO 8601 format.  "revision number" is a monotonically increasing
-          positive number that is reset every day for each service.
-          An example of the generated rollout_id is '2016-02-16r1'
-        type: string
-      serviceName:
-        description: The name of the service associated with this Rollout.
-        type: string
-      status:
-        description: |-
-          The status of this rollout. Readonly. In case of a failed rollout,
-          the system will automatically rollback to the current Rollout
-          version. Readonly.
-        enum:
-          - ROLLOUT_STATUS_UNSPECIFIED
-          - IN_PROGRESS
-          - SUCCESS
-          - CANCELLED
-          - FAILED
-          - PENDING
-        type: string
-      trafficPercentStrategy:
-        $ref: '#/definitions/TrafficPercentStrategy'
-        description: |-
-          Google Service Control selects service configurations based on
-          traffic percentage.
-    type: object
-  Rule:
-    description: A rule to be applied in a Policy.
-    properties:
-      action:
-        description: Required
-        enum:
-          - NO_ACTION
-          - ALLOW
-          - ALLOW_WITH_LOG
-          - DENY
-          - DENY_WITH_LOG
-          - LOG
-        type: string
-      conditions:
-        description: Additional restrictions that must be met
-        items:
-          $ref: '#/definitions/Condition'
-        type: array
-      description:
-        description: Human-readable description of the rule.
-        type: string
-      in:
-        description: |-
-          If one or more 'in' clauses are specified, the rule matches if
-          the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
-        items:
-          type: string
-        type: array
-      logConfig:
-        description: |-
-          The config returned to callers of tech.iam.IAM.CheckPolicy for any entries
-          that match the LOG action.
-        items:
-          $ref: '#/definitions/LogConfig'
-        type: array
-      notIn:
-        description: |-
-          If one or more 'not_in' clauses are specified, the rule matches
-          if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
-          The format for in and not_in entries is the same as for members in a
-          Binding (see google/iam/v1/policy.proto).
-        items:
-          type: string
-        type: array
-      permissions:
-        description: |-
-          A permission is a string of form '<service>.<resource type>.<verb>'
-          (e.g., 'storage.buckets.list'). A value of '*' matches all permissions,
-          and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
-        items:
-          type: string
         type: array
     type: object
   Service:
@@ -3437,26 +2037,6 @@ definitions:
         $ref: '#/definitions/Visibility'
         description: API visibility configuration.
     type: object
-  SetIamPolicyRequest:
-    description: Request message for `SetIamPolicy` method.
-    properties:
-      policy:
-        $ref: '#/definitions/Policy'
-        description: |-
-          REQUIRED: The complete policy to be applied to the `resource`. The size of
-          the policy is limited to a few 10s of KB. An empty policy is a
-          valid policy but certain Cloud Platform services (such as Projects)
-          might reject them.
-      updateMask:
-        description: |-
-          OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-          the fields in the mask will be modified. If no mask is provided, a default
-          mask is used:
-          paths: "bindings, etag"
-          This field is only used by Cloud IAM.
-        format: google-fieldmask
-        type: string
-    type: object
   SourceContext:
     description: |-
       `SourceContext` represents information about the source of a
@@ -3542,43 +2122,6 @@ definitions:
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
         type: string
-    type: object
-  Step:
-    description: Represents the status of one operation step.
-    properties:
-      description:
-        description: The short description of the step.
-        type: string
-      status:
-        description: The status code.
-        enum:
-          - STATUS_UNSPECIFIED
-          - DONE
-          - NOT_STARTED
-          - IN_PROGRESS
-          - FAILED
-          - CANCELLED
-        type: string
-    type: object
-  SubmitConfigSourceRequest:
-    description: Request message for SubmitConfigSource method.
-    properties:
-      configSource:
-        $ref: '#/definitions/ConfigSource'
-        description: The source configuration for the service.
-      validateOnly:
-        description: |-
-          Optional. If set, this will result in the generation of a
-          `google.api.Service` configuration based on the `ConfigSource` provided,
-          but the generated config and the sources will NOT be persisted.
-        type: boolean
-    type: object
-  SubmitConfigSourceResponse:
-    description: Response message for SubmitConfigSource method.
-    properties:
-      serviceConfig:
-        $ref: '#/definitions/Service'
-        description: The generated service configuration.
     type: object
   SystemParameter:
     description: |-
@@ -3667,72 +2210,6 @@ definitions:
           $ref: '#/definitions/SystemParameterRule'
         type: array
     type: object
-  TestIamPermissionsRequest:
-    description: Request message for `TestIamPermissions` method.
-    properties:
-      permissions:
-        description: |-
-          The set of permissions to check for the `resource`. Permissions with
-          wildcards (such as '*' or 'storage.*') are not allowed. For more
-          information see
-          [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-        items:
-          type: string
-        type: array
-    type: object
-  TestIamPermissionsResponse:
-    description: Response message for `TestIamPermissions` method.
-    properties:
-      permissions:
-        description: |-
-          A subset of `TestPermissionsRequest.permissions` that the caller is
-          allowed.
-        items:
-          type: string
-        type: array
-    type: object
-  TrafficPercentStrategy:
-    description: |-
-      Strategy that specifies how Google Service Control should select
-      different
-      versions of service configurations based on traffic percentage.
-
-      One example of how to gradually rollout a new service configuration using
-      this
-      strategy:
-      Day 1
-
-          Rollout {
-            id: "example.googleapis.com/rollout_20160206"
-            traffic_percent_strategy {
-              percentages: {
-                "example.googleapis.com/20160201": 70.00
-                "example.googleapis.com/20160206": 30.00
-              }
-            }
-          }
-
-      Day 2
-
-          Rollout {
-            id: "example.googleapis.com/rollout_20160207"
-            traffic_percent_strategy: {
-              percentages: {
-                "example.googleapis.com/20160206": 100.00
-              }
-            }
-          }
-    properties:
-      percentages:
-        additionalProperties:
-          format: double
-          type: number
-        description: |-
-          Maps service configuration IDs to their corresponding traffic percentage.
-          Key is the service configuration ID, Value is the traffic percentage
-          which must be greater than 0.0 and the sum must equal to 100.0.
-        type: object
-    type: object
   Type:
     description: A protocol buffer message type.
     properties:
@@ -3763,13 +2240,6 @@ definitions:
           - SYNTAX_PROTO2
           - SYNTAX_PROTO3
         type: string
-    type: object
-  UndeleteServiceResponse:
-    description: Response message for UndeleteService method.
-    properties:
-      service:
-        $ref: '#/definitions/ManagedService'
-        description: Revived service resource.
     type: object
   Usage:
     description: Configuration controlling usage of a service.

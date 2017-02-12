@@ -2,61 +2,77 @@ swagger: '2.0'
 schemes:
   - https
 host: www.versioneye.com
-basePath: /api
+basePath: /api/v2
 info:
   description: VersionEye is a cross-platform search engine for free/libre/open source software libraries.
-  title: VersionEye
-  version: v2
+  title: Available API endpoints
+  version: '2.0'
   x-logo:
     url: 'https://versioneye.files.wordpress.com/2015/05/versioneyetransparent.png'
   x-origin:
     format: swagger
     url: 'https://www.versioneye.com/api/v2/swagger_doc.json'
-    version: '1.1'
+    version: '2.0'
   x-providerName: versioneye.com
+produces:
+  - application/json
 tags:
-  - name: facebook
-  - name: github
-  - name: me
-  - name: organisations
-  - name: products
-  - name: projects
-  - name: security
-  - name: services
-  - name: sessions
-  - name: users
+  - description: Operations about sessions
+    name: sessions
+  - description: Operations about services
+    name: services
+  - description: Operations about products
+    name: products
+  - description: Operations about projects
+    name: projects
+  - description: Operations about organisations
+    name: organisations
+  - description: Operations about mes
+    name: me
+  - description: Operations about users
+    name: users
+  - description: Operations about githubs
+    name: github
+  - description: Operations about facebooks
+    name: facebook
+  - description: Operations about securities
+    name: security
 paths:
-  /v2/facebook/ping:
+  /facebook/ping:
     get:
-      operationId: GET--version-facebook-ping---format-
+      description: ping pong
+      operationId: getFacebookPing
       responses:
         '200':
-          description: No response was specified
+          description: ping pong
       summary: ping pong
       tags:
         - facebook
     post:
-      operationId: POST--version-facebook-ping---format-
+      consumes:
+        - application/json
+      description: ping pong
+      operationId: postFacebookPing
       responses:
-        '200':
-          description: No response was specified
+        '201':
+          description: ping pong
       summary: ping pong
       tags:
         - facebook
-  /v2/github:
+  /github:
     get:
-      description: |+
+      description: |-
 
-        <p>This endpoint shows all imported repositories from your Github account.</p>
+        This endpoint shows all imported repositories from your Github account.
 
-        <p>This enpoint expects that you have a GitHub account connected and the token
-        is still valid. If that is not the case please visit <strong>https://www.versioneye.com/settings/connect</strong>.
-        to update your GitHub credentials.</p>
+        This enpoint expects that you have a GitHub account connected and the token
+        is still valid. If that is not the case please visit **https://www.versioneye.com/settings/connect**.
+        to update your GitHub credentials.
 
-        <p>If it shows no or old data, then you can use the <code>github/sync</code> endpoint
-        to update your account with the current meta data from GitHub.</p>
-
-      operationId: GET--version-github---format-
+        If it shows no or old data, then you can use the `github/sync` endpoint
+        to update your account with the current meta data from GitHub.
+                
+      operationId: getGithub
       parameters:
         - description: Filter by language
           in: query
@@ -78,7 +94,8 @@ paths:
           name: org_type
           required: false
           type: string
-        - description: Number of page
+        - default: '1'
+          description: Number of page
           in: query
           name: page
           required: false
@@ -90,15 +107,16 @@ paths:
           type: boolean
       responses:
         '200':
-          description: No response was specified
+          description: lists your's github repos
       summary: lists your's github repos
       tags:
         - github
-  '/v2/github/hook/{project_id}':
+  '/github/hook/{project_id}':
     post:
-      description: |
-        <p>This endpoint is registered as service hook on GitHub. It triggers a project re-parse on each git push.</p>
-      operationId: POST--version-github-hook--project_id---format-
+      consumes:
+        - application/json
+      description: 'This endpoint is registered as service hook on GitHub. It triggers a project re-parse on each git push. '
+      operationId: postGithubHookProjectId
       parameters:
         - description: Project ID
           in: path
@@ -106,73 +124,74 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: No response was specified
+        '201':
+          description: github service hook
       summary: github service hook
       tags:
         - github
-  /v2/github/sync:
+  /github/sync:
     get:
-      description: |+
+      description: |-
 
-        <p>Reimports ALL GitHub Repositories. This Endpoint fetches meta information to all
+        Reimports ALL GitHub Repositories. This Endpoint fetches meta information to all
         repositories in your GitHub account. Meta information such as repo name, branches and
-        supported project files.</p>
+        supported project files.
 
-        <p>This endpoint works asynchronously and returns a status code. The status code is either
-        <strong>running</strong> or <strong>done</strong>.</p>
-
-      operationId: GET--version-github-sync---format-
+        This endpoint works asynchronously and returns a status code. The status code is either
+        **running** or **done**.
+                
+      operationId: getGithubSync
       responses:
         '200':
-          description: No response was specified
+          description: re-load github data
       summary: re-load github data
       tags:
         - github
-  '/v2/github/{repo_key}':
+  '/github/{repo_key}':
     delete:
-      description: |+
+      description: |-
 
-        <p>This Endpoint deletes a project on VersionEye!</p>
+        This Endpoint deletes a project on VersionEye!
 
-        <p>Due the limits of our current API framework, the repo key has to be
-        encoded as url-safe string. That means all ‘/’ has to be replaced with
-        colons ‘:’ and ‘.’ has to be replaced with ‘~’.</p>
+        Due the limits of our current API framework, the repo key has to be
+        encoded as url-safe string. That means all '/' has to be replaced with
+        colons ':' and '.' has to be replaced with '~'.
 
-        <p>For example,  repository with fullname <code>versioneye/veye</code> has to transformed
-        to <code>versioneye:veye</code>.</p>
-
-      operationId: DELETE--version-github--repo_key---format-
+        For example,  repository with fullname `versioneye/veye` has to transformed
+        to `versioneye:veye`.
+                
+      operationId: deleteGithubRepoKey
       parameters:
         - description: encoded repo-key
           in: path
           name: repo_key
           required: true
           type: string
-        - description: the name of the branch
+        - default: master
+          description: the name of the branch
           in: query
           name: branch
           required: false
           type: string
       responses:
-        '200':
-          description: No response was specified
+        '204':
+          description: remove imported project
       summary: remove imported project
       tags:
         - github
     get:
-      description: |+
+      description: |-
 
-        <p>This Endpoint returns detailed information about a GitHub repository.</p>
+        This Endpoint returns detailed information about a GitHub repository.
 
-        <p>Due the limits of our current API framework, the repo key has to be
-        encoded as url-safe string. That means all ‘/’ has to be replaced with
-        colons ‘:’ and ‘.’ has to be replaced with ‘~’.</p>
+        Due the limits of our current API framework, the repo key has to be
+        encoded as url-safe string. That means all '/' has to be replaced with
+        colons ':' and '.' has to be replaced with '~'.
 
-        <p>For example,  repository with fullname <code>versioneye/veye</code> has to transformed
-        to <code>versioneye:veye</code>.</p>
-
-      operationId: GET--version-github--repo_key---format-
+        For example,  repository with fullname `versioneye/veye` has to transformed
+        to `versioneye:veye`.
+                
+      operationId: getGithubRepoKey
       parameters:
         - description: encoded repo name with optional branch info.
           in: path
@@ -181,135 +200,137 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: shows the detailed information for the repository
       summary: shows the detailed information for the repository
       tags:
         - github
     post:
-      description: |+
+      consumes:
+        - application/json
+      description: |-
 
-        <p>Use this Endpoint to import a project file from GitHub. This will create a new project on VersionEye.</p>
+        Use this Endpoint to import a project file from GitHub. This will create a new project on VersionEye.
 
-        <p>Due the limits of our current API framework, the repo key has to be
-        encoded as url-safe string. That means all ‘/’ has to be replaced with
-        colons ‘:’ and ‘.’ has to be replaced with ‘~’.</p>
+        Due the limits of our current API framework, the repo key has to be
+        encoded as url-safe string. That means all '/' has to be replaced with
+        colons ':' and '.' has to be replaced with '~'.
 
-        <p>For example,  repository with fullname <code>versioneye/veye</code> has to transformed
-        to <code>versioneye:veye</code>.</p>
-
-      operationId: POST--version-github--repo_key---format-
+        For example,  repository with fullname `versioneye/veye` has to transformed
+        to `versioneye:veye`.
+                
+      operationId: postGithubRepoKey
       parameters:
         - description: encoded repo name
           in: path
           name: repo_key
           required: true
           type: string
-        - description: the name of the branch
+        - default: master
+          description: the name of the branch
           in: formData
           name: branch
           required: false
           type: string
-        - description: the project file (default is Gemfile)
+        - default: Gemfile
+          description: the project file (default is Gemfile)
           in: formData
           name: file
           required: false
           type: string
       responses:
-        '200':
-          description: No response was specified
+        '201':
+          description: imports project file from github
       summary: imports project file from github
       tags:
         - github
-  /v2/me:
+  /me:
     get:
-      description: |+
-
-        <p>On Swagger, you can create session by adding additional parameter :api_key.</p>
-
-      operationId: GET--version-me---format-
+      description: 'On Swagger, you can create session by adding additional parameter :api_key.'
+      operationId: getMe
       responses:
         '200':
-          description: No response was specified
+          description: shows profile of authorized user
       summary: shows profile of authorized user
       tags:
         - me
-  /v2/me/comments:
+  /me/comments:
     get:
-      operationId: GET--version-me-comments---format-
+      description: shows comments of authorized user
+      operationId: getMeComments
       parameters:
         - description: page number for pagination
+          format: int32
           in: query
           name: page
           required: false
           type: integer
       responses:
         '200':
-          description: No response was specified
+          description: shows comments of authorized user
       summary: shows comments of authorized user
       tags:
         - me
-  /v2/me/favorites:
+  /me/favorites:
     get:
-      operationId: GET--version-me-favorites---format-
+      description: shows the packages you are following
+      operationId: getMeFavorites
       parameters:
         - description: page number for pagination
+          format: int32
           in: query
           name: page
           required: false
           type: integer
       responses:
         '200':
-          description: No response was specified
+          description: shows the packages you are following
       summary: shows the packages you are following
       tags:
         - me
-  /v2/me/notifications:
+  /me/notifications:
     get:
-      description: |+
+      description: |-
 
-        <p>This Endpoint returns the 30 latest notifications.</p>
+        This Endpoint returns the 30 latest notifications.
 
-        <p>If there are new versions out there for software packages you follow directly on VersionEye, then
-        each new version is a new <strong>notification</strong> for your account.</p>
-
-      operationId: GET--version-me-notifications---format-
+        If there are new versions out there for software packages you follow directly on VersionEye, then
+        each new version is a new **notification** for your account.
+                
+      operationId: getMeNotifications
       parameters:
         - description: Specify page for paging
+          format: int32
           in: query
           name: page
           required: false
           type: integer
       responses:
         '200':
-          description: No response was specified
+          description: shows unread notifications of authorized user
       summary: shows unread notifications of authorized user
       tags:
         - me
-  /v2/organisations:
+  /organisations:
     get:
-      description: |+
+      description: |-
 
-        <p>This endpoint requires the API key from a user. The result is a set of organisations and their API keys.</p>
-
-      operationId: GET--version-organisations---format-
+        This endpoint requires the API key from a user. The result is a set of organisations and their API keys.
+                      
+      operationId: getOrganisations
       responses:
         '200':
-          description: No response was specified
+          description: Returns the list of organisations you have access to
       summary: Returns the list of organisations you have access to
       tags:
         - organisations
-  '/v2/organisations/{orga_name}/inventory':
+  '/organisations/{orga_name}/inventory':
     get:
-      description: |+
+      description: |-
 
-        <p>Find a detailed description here: https://github.com/versioneye/versioneye-api/blob/master/docs/api/v2/organisation.md</p>
-
-      operationId: GET--version-organisations--orga_name-inventory---format-
+        Find a detailed description here: https://github.com/versioneye/versioneye-api/blob/master/docs/api/v2/organisation.md
+                      
+      operationId: getOrganisationsOrgaNameInventory
       parameters:
-        - in: path
-          name: orga_name
-          required: true
-          type: string
         - description: Filter by team name
           in: query
           name: team_name
@@ -330,22 +351,59 @@ paths:
           name: post_filter
           required: false
           type: string
+        - format: int32
+          in: path
+          name: orga_name
+          required: true
+          type: integer
       responses:
         '200':
-          description: No response was specified
+          description: Returns the inventory list of the organisation
       summary: Returns the inventory list of the organisation
       tags:
         - organisations
-  '/v2/products/search/{q}':
+  '/organisations/{orga_name}/projects':
     get:
-      description: |+
+      description: Returns the list of projects
+      operationId: getOrganisationsOrgaNameProjects
+      parameters:
+        - format: int32
+          in: path
+          name: orga_name
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Returns the list of projects
+      summary: Returns the list of projects
+      tags:
+        - organisations
+  '/organisations/{orga_name}/teams':
+    get:
+      description: Returns the list of teams
+      operationId: getOrganisationsOrgaNameTeams
+      parameters:
+        - format: int32
+          in: path
+          name: orga_name
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Returns the list of teams
+      summary: Returns the list of teams
+      tags:
+        - organisations
+  '/products/search/{q}':
+    get:
+      description: |-
 
-        <p>This resource returns same results as our web application. But you get it as JSON objects -
-        the result is an JSON array of product objects.</p>
+        This resource returns same results as our web application. But you get it as JSON objects -
+        the result is an JSON array of product objects.
 
-        <p>When there’s no match for the query, the result array will be empty.</p>
-
-      operationId: GET--version-products-search--q---format-
+        When there's no match for the query, the result array will be empty.
+                      
+      operationId: getProductsSearchQ
       parameters:
         - description: Query string. At least 2 characters.
           in: path
@@ -366,36 +424,51 @@ paths:
           required: false
           type: string
         - description: Specify page for paging
+          format: int32
           in: query
           name: page
           required: false
           type: integer
       responses:
         '200':
-          description: No response was specified
+          description: search packages
       summary: search packages
       tags:
         - products
-  '/v2/products/{lang}/{prod_key}':
+  '/products/sha/{sha}':
     get:
-      description: |+
+      description: |-
 
-        <p>Please replace all slashes <code>/</code> through colons <code>:</code> and all dots <code>.</code> through <code>~</code>!</p>
+        This Endpoint expects a SHA value and returns the corresponding product to it, if available.
+                      
+      operationId: getProductsShaSha
+      parameters:
+        - format: int32
+          in: path
+          name: sha
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: search by SHA value
+      summary: search by SHA value
+      tags:
+        - products
+  '/products/{lang}/{prod_key}':
+    get:
+      description: |-
 
-        <p>Example: The clojure package <code>yummy.json/json</code> has to be transformed to  <code>yummy~json:json</code>.</p>
+        Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-        <h4 id="notes-about-status-codes">Notes about status codes</h4>
+        Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
 
-        <ul>
-          <li>
-            <p>API returns 404, when the product with given product key doesnt exists.</p>
-          </li>
-          <li>
-            <p>Response 302 means that you didnt encode prod_key correctly.* (Replace all dots &amp; slashes ) *</p>
-          </li>
-        </ul>
+        #### Notes about status codes
 
-      operationId: GET--version-products--lang--prod_key---format-
+          * API returns 404, when the product with given product key doesnt exists.
+
+          * Response 302 means that you didnt encode prod_key correctly.* (Replace all dots & slashes ) *
+                      
+      operationId: getProductsLangProdKey
       parameters:
         - description: '"Name of programming language"'
           in: path
@@ -414,27 +487,25 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: detailed information for specific package
       summary: detailed information for specific package
       tags:
         - products
-  '/v2/products/{lang}/{prod_key}/follow':
+  '/products/{lang}/{prod_key}/follow':
     delete:
-      description: |+
+      description: |-
 
-        <p>Please replace all slashes <code>/</code> through colons <code>:</code> and all dots <code>.</code> through <code>~</code>!</p>
+        Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-        <p>Example: The clojure package <code>yummy.json/json</code> has to be transformed to  <code>yummy~json:json</code>.</p>
+        Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
 
-        <h4 id="response-codes">Response codes</h4>
+        #### Response codes
 
-        <ul>
-          <li>400 - bad request; you used wrong product key;</li>
-          <li>401 - unauthorized - please append api_key</li>
-          <li>403 - forbidden; you are not authorized; or just missed api_key;</li>
-        </ul>
-
-      operationId: DELETE--version-products--lang--prod_key-follow---format-
+          * 400 - bad request; you used wrong product key;
+          * 401 - unauthorized - please append api_key
+          * 403 - forbidden; you are not authorized; or just missed api_key;
+                
+      operationId: deleteProductsLangProdKeyFollow
       parameters:
         - description: Programming language
           in: path
@@ -447,24 +518,24 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: No response was specified
+        '204':
+          description: unfollow given software package
       summary: unfollow given software package
       tags:
         - products
     get:
-      description: |+
+      description: |-
 
-        <p>Please replace all slashes <code>/</code> through colons <code>:</code> and all dots <code>.</code> through <code>~</code>!</p>
+        Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-        <p>Example: The clojure package <code>yummy.json/json</code> has to be transformed to  <code>yummy~json:json</code>.</p>
+        Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
 
-        <h4 id="notes-about-status-codes">Notes about status codes</h4>
+        #### Notes about status codes
 
-        <p>This resource will returns the status code 404 if there is no product
-        for the given prod_key.</p>
-
-      operationId: GET--version-products--lang--prod_key-follow---format-
+        This resource will returns the status code 404 if there is no product
+        for the given prod_key.
+                      
+      operationId: getProductsLangProdKeyFollow
       parameters:
         - description: '"Name of programming language"'
           in: path
@@ -478,22 +549,24 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: check your following status
       summary: check your following status
       tags:
         - products
     post:
-      description: |+
+      consumes:
+        - application/json
+      description: |-
 
-        <p>Please replace all slashes <code>/</code> through colons <code>:</code> and all dots <code>.</code> through <code>~</code>!</p>
+        Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-        <p>Example: The clojure package <code>yummy.json/json</code> has to be transformed to  <code>yummy~json:json</code>.</p>
+        Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
 
-        <h4 id="notes-about-status-codes">Notes about status codes</h4>
+        #### Notes about status codes
 
-        <p>It will respond 404, when you are using wrong product key or encode it uncorrectly.</p>
-
-      operationId: POST--version-products--lang--prod_key-follow---format-
+        It will respond 404, when you are using wrong product key or encode it uncorrectly.
+                      
+      operationId: postProductsLangProdKeyFollow
       parameters:
         - description: Programming language
           in: path
@@ -506,27 +579,27 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: No response was specified
+        '201':
+          description: follow your favorite software package
       summary: follow your favorite software package
       tags:
         - products
-  '/v2/products/{lang}/{prod_key}/references':
+  '/products/{lang}/{prod_key}/references':
     get:
-      description: |+
+      description: |-
 
-        <p>It returns the references of a package.</p>
+        It returns the references of a package.
 
-        <p>Please replace all slashes <code>/</code> through colons <code>:</code> and all dots <code>.</code> through <code>~</code>!</p>
+        Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-        <p>Example: The clojure package <code>yummy.json/json</code> has to be transformed to  <code>yummy~json:json</code>.</p>
+        Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
 
-        <h4 id="notes-about-status-codes">Notes about status codes</h4>
+        #### Notes about status codes
 
-        <p>This resource will return the status code 404 if there is no product for
-        the given prod_key or the product has 0 references.</p>
-
-      operationId: GET--version-products--lang--prod_key-references---format-
+        This resource will return the status code 404 if there is no product for
+        the given prod_key or the product has 0 references.
+                      
+      operationId: getProductsLangProdKeyReferences
       parameters:
         - description: Language
           in: path
@@ -539,36 +612,32 @@ paths:
           required: true
           type: string
         - description: Page for paging
+          format: int32
           in: query
           name: page
           required: false
           type: integer
       responses:
         '200':
-          description: No response was specified
+          description: references
       summary: references
       tags:
         - products
-  '/v2/products/{lang}/{prod_key}/versions':
+  '/products/{lang}/{prod_key}/versions':
     get:
-      description: |+
+      description: |-
 
-        <p>Please replace all slashes <code>/</code> through colons <code>:</code> and all dots <code>.</code> through <code>~</code>!</p>
+        Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-        <p>Example: The clojure package <code>yummy.json/json</code> has to be transformed to  <code>yummy~json:json</code>.</p>
+        Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
 
-        <h4 id="notes-about-status-codes">Notes about status codes</h4>
+        #### Notes about status codes
 
-        <ul>
-          <li>
-            <p>API returns 404, when the product with given product key doesnt exists.</p>
-          </li>
-          <li>
-            <p>Response 302 means that you didnt encode prod_key correctly.* (Replace all dots &amp; slashes ) *</p>
-          </li>
-        </ul>
+          * API returns 404, when the product with given product key doesnt exists.
 
-      operationId: GET--version-products--lang--prod_key-versions---format-
+          * Response 302 means that you didnt encode prod_key correctly.* (Replace all dots & slashes ) *
+                      
+      operationId: getProductsLangProdKeyVersions
       parameters:
         - description: '"Name of programming language"'
           in: path
@@ -582,17 +651,16 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: list versions of a package
       summary: list versions of a package
       tags:
         - products
-  '/v2/products/{lang}/{prod_key}/{prod_version}/license':
+  '/products/{lang}/{prod_key}/{prod_version}/license':
     post:
-      description: |+
-
-        <p>With this endpoint users can suggest a license for an artifact.</p>
-
-      operationId: POST--version-products--lang--prod_key--prod_version-license---format-
+      consumes:
+        - application/json
+      description: With this endpoint users can suggest a license for an artifact.
+      operationId: postProductsLangProdKeyProdVersionLicense
       parameters:
         - description: ' programming language '
           in: path
@@ -625,27 +693,29 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          description: No response was specified
+        '201':
+          description: suggest a license for an artifact
       summary: suggest a license for an artifact
       tags:
         - products
-  '/v2/products/{lang}/{prod_key}/{prod_version}/scm_changes':
+  '/products/{lang}/{prod_key}/{prod_version}/scm_changes':
     post:
-      description: |+
+      consumes:
+        - application/json
+      description: |-
 
-        <p>This resource can parse a changelog.xml from the maven-changelog-plugin, assign
-        it to a specific artifact and display the changelog infos on the product page.</p>
+        This resource can parse a changelog.xml from the maven-changelog-plugin, assign
+        it to a specific artifact and display the changelog infos on the product page.
 
-        <p>Please replace all slashes <code>/</code> through colons <code>:</code> and all dots <code>.</code> through <code>~</code>!</p>
+        Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-        <p>Example: The clojure package <code>yummy.json/json</code> has to be transformed to  <code>yummy~json:json</code>.</p>
+        Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
 
-        <h4 id="notes-about-status-codes">Notes about status codes</h4>
+        #### Notes about status codes
 
-        <p>It will respond 404, when you are using wrong product key or encode it uncorrectly.</p>
-
-      operationId: POST--version-products--lang--prod_key--prod_version-scm_changes---format-
+        It will respond 404, when you are using wrong product key or encode it uncorrectly.
+                      
+      operationId: postProductsLangProdKeyProdVersionScmChanges
       parameters:
         - description: ' programming language '
           in: path
@@ -662,25 +732,20 @@ paths:
           name: prod_version
           required: true
           type: string
-        - description: changelog.xml
-          in: formData
-          name: scm_changes_file
-          required: true
-          type: file
       responses:
-        '200':
-          description: No response was specified
+        '201':
+          description: upload scm changelogs to an artifact
       summary: upload scm changelogs to an artifact
       tags:
         - products
-  /v2/projects:
+  /projects:
     get:
-      description: |+
+      description: |-
 
-        <p>To use this resource you need either an active session or you have to append
-        your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
-      operationId: GET--version-projects---format-
+        To use this resource you need either an active session or you have to append
+        your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
+                    
+      operationId: getProjects
       parameters:
         - description: The name of the organisation the project is assigned to.
           in: query
@@ -694,17 +759,19 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: list of projects
       summary: list of projects
       tags:
         - projects
     post:
-      description: |+
+      consumes:
+        - application/json
+      description: |-
 
-        <p>To use this resource you need either an active session or you have to append
-        your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
-      operationId: POST--version-projects---format-
+        To use this resource you need either an active session or you have to append
+        your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
+                    
+      operationId: postProjects
       parameters:
         - description: 'Project file - [maven.pom, Gemfile ...]'
           in: formData
@@ -737,21 +804,21 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          description: No response was specified
+        '201':
+          description: upload project file and create a new project
       summary: upload project file and create a new project
       tags:
         - projects
-  '/v2/projects/{group_id}/{artifact_id}/merge_ga/{child_id}':
+  '/projects/{group_id}/{artifact_id}/merge_ga/{child_id}':
     get:
-      description: |+
+      description: |-
 
-        <p>This endpoint merges a project (child_id) into another project (group_id/artifact_id).
+        This endpoint merges a project (child_id) into another project (group_id/artifact_id).
         This endpoint is specially for Maven based projects!
         To use this resource you need either an active session or you have to append
-        your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
-      operationId: GET--version-projects--group_id--artifact_id-merge_ga--child_id---format-
+        your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
+                    
+      operationId: getProjectsGroupIdArtifactIdMergeGaChildId
       parameters:
         - description: GroupId of the parent project
           in: path
@@ -770,19 +837,19 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: merge a project into another one
       summary: merge a project into another one
       tags:
         - projects
-  '/v2/projects/{parent_id}/merge/{child_id}':
+  '/projects/{parent_id}/merge/{child_id}':
     get:
-      description: |+
+      description: |-
 
-        <p>This endpoint merges a project (child_id) into another project (parent_id).
+        This endpoint merges a project (child_id) into another project (parent_id).
         To use this resource you need either an active session or you have to append
-        your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
-      operationId: GET--version-projects--parent_id-merge--child_id---format-
+        your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
+                    
+      operationId: getProjectsParentIdMergeChildId
       parameters:
         - description: Project ID of the parent
           in: path
@@ -796,20 +863,20 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: merge a project into another one
       summary: merge a project into another one
       tags:
         - projects
-  '/v2/projects/{parent_id}/unmerge/{child_id}':
+  '/projects/{parent_id}/unmerge/{child_id}':
     get:
-      description: |+
+      description: |-
 
-        <p>This endpoint unmerges a project (child_id) from another project (parent_id). It makes the
+        This endpoint unmerges a project (child_id) from another project (parent_id). It makes the
         chilld again a separate project!
         To use this resource you need either an active session or you have to append
-        your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
-      operationId: GET--version-projects--parent_id-unmerge--child_id---format-
+        your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
+                    
+      operationId: getProjectsParentIdUnmergeChildId
       parameters:
         - description: Project ID of the parent
           in: path
@@ -823,18 +890,18 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: unmerge a project
       summary: unmerge a project
       tags:
         - projects
-  '/v2/projects/{project_key}':
+  '/projects/{project_key}':
     delete:
-      description: |+
+      description: |-
 
-        <p>To use this resource you need either an active session or you have to append
-        your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
-      operationId: DELETE--version-projects--project_key---format-
+        To use this resource you need either an active session or you have to append
+        your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
+                    
+      operationId: deleteProjectsProjectKey
       parameters:
         - description: Delete project with given project ID.
           in: path
@@ -842,15 +909,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: No response was specified
+        '204':
+          description: delete given project
       summary: delete given project
       tags:
         - projects
     get:
-      description: |
-        <p>It shows detailed info of your project.</p>
-      operationId: GET--version-projects--project_key---format-
+      description: ' It shows detailed info of your project. '
+      operationId: getProjectsProjectKey
       parameters:
         - description: Project ID
           in: path
@@ -859,17 +925,19 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: shows the project's information
       summary: shows the project's information
       tags:
         - projects
     post:
-      description: |+
+      consumes:
+        - application/json
+      description: |-
 
-        <p>To use this resource you need either an active session or you have to append
-        your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
-      operationId: POST--version-projects--project_key---format-
+        To use this resource you need either an active session or you have to append
+        your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
+                    
+      operationId: postProjectsProjectKey
       parameters:
         - description: Project ID
           in: path
@@ -882,19 +950,19 @@ paths:
           required: true
           type: file
       responses:
-        '200':
-          description: No response was specified
+        '201':
+          description: update project with new file
       summary: update project with new file
       tags:
         - projects
-  '/v2/projects/{project_key}/licenses':
+  '/projects/{project_key}/licenses':
     get:
-      description: |+
+      description: |-
 
-        <p>To use this resource you need either an active session or you have to append
-        your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
-      operationId: GET--version-projects--project_key-licenses---format-
+        To use this resource you need either an active session or you have to append
+        your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
+                    
+      operationId: getProjectsProjectKeyLicenses
       parameters:
         - description: Project ID or project_key
           in: path
@@ -903,13 +971,14 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: get grouped view of licences for dependencies
       summary: get grouped view of licences for dependencies
       tags:
         - projects
-  /v2/security:
+  /security:
     get:
-      operationId: GET--version-security---format-
+      description: Security Vulnerabilities
+      operationId: getSecurity
       parameters:
         - description: Filter by programming languages
           in: query
@@ -922,6 +991,7 @@ paths:
           required: false
           type: string
         - description: Specify page for paging
+          format: int32
           in: query
           name: page
           required: false
@@ -938,48 +1008,49 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: Security Vulnerabilities
       summary: Security Vulnerabilities
       tags:
         - security
-  /v2/services/ping:
+  /services/ping:
     get:
-      operationId: GET--version-services-ping---format-
+      description: check is the service up and running
+      operationId: getServicesPing
       responses:
         '200':
-          description: No response was specified
+          description: Answers to request with basic pong.
       summary: Answers to request with basic pong.
       tags:
         - services
-  /v2/sessions:
+  /sessions:
     delete:
-      description: |
-        <p>Close current session. It’s very handy method when you re-generated
-                          your current API-key.</p>
-      operationId: DELETE--version-sessions---format-
+      description: Close current session. It's very handy method when you re-generated your current API-key.
+      operationId: deleteSessions
       responses:
-        '200':
-          description: No response was specified
+        '204':
+          description: delete current session aka log out.
       summary: delete current session aka log out.
       tags:
         - sessions
     get:
-      description: |+
-        <p>If current user has active session, then this
-                        method will return 200 with short user profile.
-                        For othercase, it will return error message with status code 401.</p>
+      description: |-
 
-      operationId: GET--version-sessions---format-
+        If current user has active session, then this
+        method will return 200 with short user profile.
+        For othercase, it will return error message with status code 401.
+                      
+      operationId: getSessions
       responses:
         '200':
-          description: No response was specified
+          description: returns session info for authorized users
       summary: returns session info for authorized users
       tags:
         - sessions
     post:
-      description: |
-        <p>You need to append your api_key to request.</p>
-      operationId: POST--version-sessions---format-
+      consumes:
+        - application/json
+      description: ' You need to append your api_key to request. '
+      operationId: postSessions
       parameters:
         - description: your personal token for API.
           in: formData
@@ -987,16 +1058,17 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: No response was specified
+        '201':
+          description: creates new sessions
       summary: creates new sessions
       tags:
         - sessions
-  /v2/sessions/login:
+  /sessions/login:
     post:
-      description: |
-        <p>You need to append your api_key to request.</p>
-      operationId: POST--version-sessions-login---format-
+      consumes:
+        - application/json
+      description: ' You need to append your api_key to request. '
+      operationId: postSessionsLogin
       parameters:
         - description: email or username
           in: formData
@@ -1009,14 +1081,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: No response was specified
+        '201':
+          description: creates new sessions
       summary: creates new sessions
       tags:
         - sessions
-  '/v2/users/{username}':
+  '/users/{username}':
     get:
-      operationId: GET--version-users--username---format-
+      description: shows profile of given user_id
+      operationId: getUsersUsername
       parameters:
         - description: username
           in: path
@@ -1025,13 +1098,14 @@ paths:
           type: string
       responses:
         '200':
-          description: No response was specified
+          description: shows profile of given user_id
       summary: shows profile of given user_id
       tags:
         - users
-  '/v2/users/{username}/comments':
+  '/users/{username}/comments':
     get:
-      operationId: GET--version-users--username-comments---format-
+      description: shows user's comments
+      operationId: getUsersUsernameComments
       parameters:
         - description: VersionEye users' nickname
           in: path
@@ -1039,19 +1113,21 @@ paths:
           required: true
           type: string
         - description: pagination number
+          format: int32
           in: query
           name: page
           required: false
           type: integer
       responses:
         '200':
-          description: No response was specified
+          description: shows user's comments
       summary: shows user's comments
       tags:
         - users
-  '/v2/users/{username}/favorites':
+  '/users/{username}/favorites':
     get:
-      operationId: GET--version-users--username-favorites---format-
+      description: shows user's favorite packages
+      operationId: getUsersUsernameFavorites
       parameters:
         - description: username
           in: path
@@ -1059,13 +1135,14 @@ paths:
           required: true
           type: string
         - description: Pagination number
+          format: int32
           in: query
           name: page
           required: false
           type: integer
       responses:
         '200':
-          description: No response was specified
+          description: shows user's favorite packages
       summary: shows user's favorite packages
       tags:
         - users

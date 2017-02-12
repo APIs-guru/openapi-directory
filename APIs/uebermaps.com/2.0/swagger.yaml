@@ -6,7 +6,7 @@ basePath: /api/v2
 info:
   contact:
     name: uebermaps API Team
-  description: Look here for API updates Docs are in beta. Expect updates soon.
+  description: Enable people to store spots on public and private maps
   termsOfService: 'https://uebermaps.com/terms/'
   title: uebermaps API endpoints
   version: '2.0'
@@ -290,7 +290,7 @@ paths:
       tags:
         - Maps
     post:
-      description: 'Create map. Wrap map parameters in [map] and map settings parameters in [map_settings]'
+      description: 'Create map. Wrap map parameters in [map]. To add a map header picture pass a base64 encoded string to [map][picture].'
       parameters:
         - description: map attributes
           in: body
@@ -368,7 +368,7 @@ paths:
       tags:
         - Maps
     patch:
-      description: 'Update map. Wrap map parameters in [map] and map settings parameters in [map_settings]'
+      description: 'Update map. Wrap map parameters in [map]. To update the map header picture pass a base64 encoded string to [map][picture].'
       parameters:
         - description: map id
           in: path
@@ -589,7 +589,7 @@ paths:
       tags:
         - Spots
     post:
-      description: 'Create spot. Wrap parameters in [spot]'
+      description: 'Create spot. Wrap parameters in [spot]. To add a spot picture pass a base64 encoded string to [spot][picture].'
       parameters:
         - description: Id of map
           in: path
@@ -781,7 +781,7 @@ paths:
       tags:
         - Spots
     patch:
-      description: 'Update spot. Wrap parameters in [spot]'
+      description: 'Update spot. Wrap parameters in [spot]. To update the spot picture pass a base64 encoded string to [spot][picture].'
       parameters:
         - description: spot id
           in: path
@@ -1046,6 +1046,23 @@ paths:
       summary: Search users
       tags:
         - Search
+  '/users/{id}':
+    get:
+      description: Get profile a user
+      parameters:
+        - description: Id of user
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains user data
+          schema:
+            $ref: '#/definitions/User'
+      summary: Get user profile
+      tags:
+        - Users
   '/users/{user_id}/maps':
     get:
       description: List maps for a given user.
@@ -1069,21 +1086,31 @@ definitions:
   Attachment:
     properties:
       attachable_id:
+        example: 7543829
         type: integer
       attachable_type:
+        example: Spot
         type: string
       created_at:
         format: date-time
         type: string
       description:
+        example: This photo was taken in front of the restaurant
         type: string
       file_url:
+        example: 'https://...'
         type: string
       id:
+        example: 34939432
         type: integer
       map_id:
+        example: 985732
         type: integer
       sizes:
+        example:
+          large:
+            h: 860
+            w: 1024
         type: object
       spot:
         $ref: '#/definitions/Spot'
@@ -1098,19 +1125,26 @@ definitions:
         enum:
           - admin
           - editor
+        example: editor
         type: string
       id:
+        example: 4829504
         type: integer
+      is_admin:
+        example: false
+        type: boolean
       map:
         $ref: '#/definitions/Map'
       map_id:
-        type: string
+        example: 324894
+        type: integer
       updated_at:
         format: date-time
         type: string
       user:
         $ref: '#/definitions/User'
       user_id:
+        example: 649302
         type: integer
   CollaboratorEditable:
     properties:
@@ -1118,27 +1152,34 @@ definitions:
         enum:
           - admin
           - editor
+        example: editor
         type: string
   CollaboratorInvitation:
     properties:
       accepted:
+        example: true
         type: boolean
       created_at:
         format: date-time
         type: string
       email:
-        type: string
-      group:
+        example: a@b.com
         type: string
       id:
+        example: 8696493
         type: integer
       invited_by_user:
         $ref: '#/definitions/User'
       invited_by_user_id:
+        example: 5258321
         type: integer
+      is_admin:
+        example: false
+        type: boolean
       map:
         $ref: '#/definitions/Map'
       sent:
+        example: true
         type: boolean
       updated_at:
         format: date-time
@@ -1146,19 +1187,24 @@ definitions:
   CollaboratorInvitationCreate:
     properties:
       emails:
+        example: 'a@b.com, c@d.com, e@f.com'
         type: string
       map_id:
+        example: 34925783
         type: integer
       user_ids:
+        example: '5839459, 389423, 89494, 686950'
         type: string
   Comment:
     properties:
       body:
+        example: Nice photo
         type: string
       created_at:
         format: date-time
         type: string
       id:
+        example: 29628358
         type: integer
       updated_at:
         format: date-time
@@ -1168,6 +1214,7 @@ definitions:
   CommentEditable:
     properties:
       body:
+        example: Nice photo
         type: string
   Event:
     properties:
@@ -1177,19 +1224,25 @@ definitions:
         format: date-time
         type: string
       description:
+        example: Very special event
         type: string
       ends_at:
         format: date-time
         type: string
       id:
+        example: 482959
         type: integer
       lat:
+        example: 53.293493
         type: number
       lon:
+        example: 12.394328
         type: number
       owner_id:
+        example: 82389429
         type: integer
       picture_url:
+        example: 'https://...'
         type: string
       spot:
         $ref: '#/definitions/Spot'
@@ -1197,8 +1250,10 @@ definitions:
         format: date-time
         type: string
       time_zone:
+        example: Berlin
         type: string
       title:
+        example: 20th anniversary event
         type: string
       updated_at:
         format: date-time
@@ -1208,32 +1263,39 @@ definitions:
   EventCounts:
     properties:
       attachments:
+        example: 27
         type: integer
       comments:
+        example: 284
         type: integer
   EventEditable:
     properties:
       description:
+        example: Very special event
         type: string
       ends_at:
         format: date-time
         type: string
       lat:
+        example: 53.293493
         type: number
       lon:
+        example: 12.394328
         type: number
       picture:
-        type: string
-      picture_url:
+        example: <BASE_64_ENCODED_STRING>
         type: string
       starts_at:
         format: date-time
         type: string
       time_zone:
+        example: Berlin
         type: string
       title:
+        example: 20th anniversary event
         type: string
       user_id:
+        example: 703943
         type: integer
   Map:
     properties:
@@ -1243,18 +1305,21 @@ definitions:
         format: date-time
         type: string
       description:
+        example: 'A collection of restaurants, cafes, clubs and random spots that I recommend in Berlin'
         type: string
       id:
+        example: 18234843
         type: integer
       map_settings:
         $ref: '#/definitions/MapSettings'
       owner_id:
+        example: 9829358
         type: integer
       picture_url:
+        example: 'https://...'
         type: string
-      settings:
-        $ref: '#/definitions/MapSettings'
       title:
+        example: My favourite places in Berlin
         type: string
       updated_at:
         format: date-time
@@ -1264,44 +1329,58 @@ definitions:
           - public
           - link
           - private
+        example: public
         type: string
   MapCounts:
     properties:
       attachments:
+        example: 31
         type: integer
       comments:
+        example: 234
         type: integer
       impressions:
+        example: 234332
         type: integer
       respots:
+        example: 24
         type: integer
       spots:
+        example: 67
         type: integer
       subscriptions:
+        example: 3892
         type: integer
   MapEditable:
     properties:
       description:
+        example: 'A collection of restaurants, cafes, clubs and random spots that I recommend in Berlin'
         type: string
-      picture:
-        type: string
-      settings:
+      map_settings:
         $ref: '#/definitions/MapSettings'
+      picture:
+        example: <BASE_64_ENCODED_STRING>
+        type: string
       title:
+        example: My favourite places in Berlin
         type: string
       visibility:
         enum:
           - public
           - link
           - private
+        example: public
         type: string
   MapSettings:
     properties:
       editor_access:
+        example: 'can_none.map,can_create.spots,can_create.events,can_create.comments,can_create.attachments,can_create.collaborators'
         type: string
       respotting_to_this_map:
+        example: true
         type: boolean
       visitor_access:
+        example: 'can_none.map,can_none.spots,can_none.events,can_create.comments,can_create.attachments,can_none.collaborators'
         type: string
   Respot:
     properties:
@@ -1309,10 +1388,12 @@ definitions:
         format: date-time
         type: string
       id:
+        example: 589032
         type: integer
       map:
         $ref: '#/definitions/Map'
       map_id:
+        example: 8393450
         type: integer
       spot:
         $ref: '#/definitions/Spot'
@@ -1329,24 +1410,31 @@ definitions:
         format: date-time
         type: string
       description:
+        example: Landed here by accident but look how wonderful this place is in the photos attached
         type: string
       id:
+        example: 5932234
         type: integer
       lat:
+        example: 53.112385
         type: number
       lon:
+        example: 10.58349
         type: number
-      map:
-        $ref: '#/definitions/Map'
       map_id:
+        example: 394805
         type: integer
-      picture:
+      picture_url:
+        example: 'https://...'
         type: string
       status:
+        example: approved
         type: string
       time_zone:
+        example: Berlin
         type: string
       title:
+        example: Beautiful place out in the country
         type: string
       updated_at:
         format: date-time
@@ -1356,31 +1444,47 @@ definitions:
   SpotCounts:
     properties:
       attachments:
+        example: 4
         type: integer
       comments:
+        example: 24
         type: integer
       respot:
+        example: 34
         type: integer
   SpotEditable:
     properties:
       description:
+        example: Landed here by accident but look how wonderful this place is in the photos attached
         type: string
       lat:
+        example: 53.112385
         type: number
       lon:
+        example: 10.58349
         type: number
       picture:
+        example: <BASE_64_ENCODED_STRING>
         type: string
       time_zone:
+        example: Berlin
         type: string
       title:
+        example: Beautiful place out in the country
         type: string
+  SpotWithMap:
+    properties:
+      map:
+        $ref: '#/definitions/Map'
+      spot:
+        $ref: '#/definitions/Spot'
   Subscription:
     properties:
       created_at:
         format: date-time
         type: string
       id:
+        example: 23950552
         type: integer
       map:
         $ref: '#/definitions/Map'
@@ -1390,62 +1494,86 @@ definitions:
       user:
         $ref: '#/definitions/User'
       user_id:
+        example: 852002
         type: integer
   User:
     properties:
       about:
+        example: The comedian
         type: string
       counts:
         properties:
           maps:
+            example: 24
             type: integer
       header_picture:
+        example: 'https://...'
         type: string
       id:
+        example: 5829035
         type: integer
       location:
+        example: 'Little Rock, Arkansas'
         type: string
       name:
+        example: Bill Hicks
         type: string
       picture_url:
+        example: 'https://...'
         type: string
       screen_name:
+        example: billhicks
         type: string
       url:
+        example: 'http://www.billhicks.com'
         type: string
   UserAuthentication:
     properties:
       email:
+        example: a@b.com
         type: string
       password:
+        example: ••••••••
         type: string
   UserEditable:
     properties:
       about:
+        example: The comedian
         type: string
       header:
+        example: <BASE_64_ENCODED_STRING>
         type: string
       language:
+        example: en
         type: string
       location:
+        example: 'Little Rock, Arkansas'
         type: string
       name:
+        example: Bill Hicks
         type: string
       picture:
+        example: <BASE_64_ENCODED_STRING>
         type: string
       screen_name:
+        example: billhicks
         type: string
       time_zone:
+        example: Pacific Time (US & Canada)
         type: string
       url:
+        example: 'http://www.billhicks.com'
         type: string
   UserFullProfile:
     allOf:
       - $ref: '#/definitions/User'
     properties:
       auth_token:
+        example: 6g8as82h3kj23h2
         type: string
       language:
+        example: en
         type: string
       time_zone:
+        example: Pacific Time (US & Canada)
         type: string

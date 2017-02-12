@@ -146,30 +146,30 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1beta1/{name}':
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     put:
       description: |-
         Replace the data for the specified group.
@@ -239,6 +239,17 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: Restricts the query to the specified time range.
+          enum:
+            - PERIOD_UNSPECIFIED
+            - PERIOD_1_HOUR
+            - PERIOD_6_HOURS
+            - PERIOD_1_DAY
+            - PERIOD_1_WEEK
+            - PERIOD_30_DAYS
+          in: query
+          name: timeRange.period
+          type: string
         - description: '[Required] The group for which events shall be returned.'
           in: query
           name: groupId
@@ -269,17 +280,6 @@ paths:
           in: query
           name: serviceFilter.resourceType
           type: string
-        - description: Restricts the query to the specified time range.
-          enum:
-            - PERIOD_UNSPECIFIED
-            - PERIOD_1_HOUR
-            - PERIOD_6_HOURS
-            - PERIOD_1_DAY
-            - PERIOD_1_WEEK
-            - PERIOD_30_DAYS
-          in: query
-          name: timeRange.period
-          type: string
       responses:
         '200':
           description: Successful response
@@ -295,30 +295,30 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1beta1/{projectName}/events:report':
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Report an individual error event.
@@ -426,12 +426,6 @@ paths:
           name: pageSize
           type: integer
         - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
-          in: query
-          name: serviceFilter.version
-          type: string
-        - description: |-
             [Optional] The sort order in which the results are returned.
             Default is `COUNT_DESC`.
           enum:
@@ -445,15 +439,21 @@ paths:
           type: string
         - description: |-
             [Optional] The exact value to match against
-            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
+            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
           in: query
-          name: serviceFilter.resourceType
+          name: serviceFilter.version
           type: string
         - description: |-
             [Optional] Time where the timed counts shall be aligned if rounded
             alignment is chosen. Default is 00:00 UTC.
           in: query
           name: alignmentTime
+          type: string
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
+          in: query
+          name: serviceFilter.resourceType
           type: string
       responses:
         '200':
@@ -470,15 +470,15 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
 definitions:
   DeleteEventsResponse:
     description: Response message for deleting error events.

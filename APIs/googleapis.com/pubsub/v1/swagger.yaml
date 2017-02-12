@@ -115,10 +115,6 @@ tags:
 paths:
   '/v1/{name}':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -126,29 +122,23 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     put:
-      description: |-
-        Creates a subscription to a given topic.
-        If the subscription already exists, returns `ALREADY_EXISTS`.
-        If the corresponding topic doesn't exist, returns `NOT_FOUND`.
-
-        If the name is not provided in the request, the server will assign a random
-        name for this subscription on the same project as the topic, conforming
-        to the
-        [resource name format](https://cloud.google.com/pubsub/docs/overview#names).
-        The generated name is populated in the returned Subscription object.
-        Note that for REST API requests, you must specify a name in the request.
-      operationId: pubsub.projects.subscriptions.create
+      description: Creates the given topic with the given name.
+      operationId: pubsub.projects.topics.create
       parameters:
         - description: |-
-            The name of the subscription. It must have the format
-            `"projects/{project}/subscriptions/{subscription}"`. `{subscription}` must
-            start with a letter, and contain only letters (`[A-Za-z]`), numbers
-            (`[0-9]`), dashes (`-`), underscores (`_`), periods (`.`), tildes (`~`),
-            plus (`+`) or percent signs (`%`). It must be between 3 and 255 characters
-            in length, and it must not start with `"goog"`.
+            The name of the topic. It must have the format
+            `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
+            and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+            underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+            signs (`%`). It must be between 3 and 255 characters in length, and it
+            must not start with `"goog"`.
           in: path
           name: name
           required: true
@@ -157,12 +147,12 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Subscription'
+            $ref: '#/definitions/Topic'
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Subscription'
+            $ref: '#/definitions/Topic'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -207,10 +197,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -218,8 +204,12 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{project}/topics':
     get:
       description: Lists matching topics.
@@ -257,10 +247,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -268,15 +254,19 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{resource}:getIamPolicy':
     get:
       description: |-
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: pubsub.projects.snapshots.getIamPolicy
+      operationId: pubsub.projects.topics.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -300,10 +290,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -311,14 +297,14 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -326,13 +312,17 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: pubsub.projects.snapshots.setIamPolicy
+      operationId: pubsub.projects.topics.setIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
@@ -361,10 +351,6 @@ paths:
         - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -372,14 +358,18 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
         If the resource does not exist, this will return an empty set of
         permissions, not a NOT_FOUND error.
-      operationId: pubsub.projects.snapshots.testIamPermissions
+      operationId: pubsub.projects.topics.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
@@ -461,10 +451,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -472,14 +458,14 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{subscription}:acknowledge':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -487,8 +473,12 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Acknowledges the messages associated with the `ack_ids` in the
@@ -526,10 +516,6 @@ paths:
         - projects
   '/v1/{subscription}:modifyAckDeadline':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -537,8 +523,12 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Modifies the ack deadline for a specific message. This method is useful
@@ -574,10 +564,6 @@ paths:
         - projects
   '/v1/{subscription}:modifyPushConfig':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -585,8 +571,12 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Modifies the `PushConfig` for a specified subscription.
@@ -623,10 +613,6 @@ paths:
         - projects
   '/v1/{subscription}:pull':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -634,8 +620,12 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Pulls messages from the server. Returns an empty list if there are no
@@ -723,10 +713,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -734,8 +720,12 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{topic}/subscriptions':
     get:
       description: Lists the name of the subscriptions for this topic.
@@ -773,10 +763,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -784,14 +770,14 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{topic}:publish':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
@@ -799,8 +785,12 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic

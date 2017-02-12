@@ -23,7 +23,7 @@ info:
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
     version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '434'
+  x-release: '439'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -454,6 +454,23 @@ paths:
             $ref: '#/definitions/ibl'
       security: []
       summary: Get Onward Journey
+      tags:
+        - Episodes
+  '/episodes/{pid}/postrolls':
+    get:
+      description: Get Follow-ups (post-rolls)
+      operationId: getPostRolls
+      parameters:
+        - $ref: '#/parameters/pid'
+        - $ref: '#/parameters/rights'
+        - $ref: '#/parameters/availability'
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      summary: Get Follow-ups (post-rolls)
       tags:
         - Episodes
   '/episodes/{pid}/prerolls':
@@ -1653,6 +1670,10 @@ definitions:
             minItems: 0
             type: array
         type: object
+      postrolls:
+        items:
+          $ref: '#/definitions/trailer'
+        type: array
       prerolls:
         items:
           $ref: '#/definitions/trailer'

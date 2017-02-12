@@ -110,20 +110,6 @@ paths:
         JSON-LD format and compatible with http://schema.org
       operationId: kgsearch.entities.search
       parameters:
-        - description: The literal query string for search.
-          in: query
-          name: query
-          type: string
-        - collectionFormat: multi
-          description: |-
-            Restricts returned entities with these types, e.g. Person
-            (as defined in http://schema.org/Person). If multiple types are specified,
-            returned entities will contain one or more of these types.
-          in: query
-          items:
-            type: string
-          name: types
-          type: array
         - description: Enables indenting of json results.
           in: query
           name: indent
@@ -155,6 +141,20 @@ paths:
           in: query
           name: prefix
           type: boolean
+        - description: The literal query string for search.
+          in: query
+          name: query
+          type: string
+        - collectionFormat: multi
+          description: |-
+            Restricts returned entities with these types, e.g. Person
+            (as defined in http://schema.org/Person). If multiple types are specified,
+            returned entities will contain one or more of these types.
+          in: query
+          items:
+            type: string
+          name: types
+          type: array
       responses:
         '200':
           description: Successful response
@@ -163,10 +163,6 @@ paths:
       tags:
         - entities
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
@@ -176,6 +172,10 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
 definitions:
   SearchResponse:
     description: |-

@@ -28,15 +28,18 @@ security:
 tags:
   - description: Provides Company information
     name: CompanyAPI
+  - description: Provides company premium information.
+    name: CompanyPremiumAPI
   - description: Provides Competitor information
     name: CompetitorAPI
+  - description: Provides Competitor Premium information
+    name: CompetitorPremiumAPI
   - description: Provides Feed information
     name: FeedAPI
 paths:
   /v1/company/basicsearch:
     get:
       description: The Company Basic Search API searches for a company based on the input and will returns results containing basic details about matching companies. By default the API returns the top 10 available results unless the limit is specified. The maximum limit is restricted to 30.
-      operationId: basicCompanySearch
       parameters:
         - description: Search term
           in: query
@@ -90,7 +93,6 @@ paths:
   '/v1/company/competitor/id/{companyId}':
     get:
       description: The Competitors API provides basic information about top 3 competitors of a company specified in the Company Id
-      operationId: getCompetitorsForId
       parameters:
         - description: Company Id
           in: path
@@ -127,7 +129,6 @@ paths:
   '/v1/company/competitor/url/{website}':
     get:
       description: The Competitors API provides basic information about top 3 competitors of a company specified in the website
-      operationId: getCompetitorsForWebsite
       parameters:
         - description: Company Id
           in: path
@@ -161,10 +162,91 @@ paths:
       summary: Get Competitor information by URL
       tags:
         - CompetitorAPI
+  '/v1/company/competitorpremium/id/{companyId}':
+    get:
+      description: The Competitors API provides basic information about all competitors of a given company Id
+      parameters:
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - description: 'Pass pagination_id as * in the first API request. The API response will return top competitors along with the next pagination_id which can be passed in the subsequent API request to get the next set of competitors. Repeat this process until needed or till the pagination_id returned is blank. Note:Every response will have maximum of 50 competitors.'
+          in: query
+          name: pagination_id
+          required: false
+          type: string
+        - default: json
+          description: 'Format of the response content - json (by default if not specified), xml'
+          enum:
+            - xml
+            - json
+          in: query
+          name: format
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Competitors Data
+          schema:
+            $ref: '#/definitions/competitors'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Competitor information by Id
+      tags:
+        - CompetitorPremiumAPI
+  '/v1/company/competitorpremium/url/{website}':
+    get:
+      description: The Competitors API provides basic information about all competitors of a given company Id
+      parameters:
+        - description: Company Id
+          in: path
+          name: website
+          required: true
+          type: string
+        - description: 'Pass pagination_id as * in the first API request. The API response will return top competitors along with the next pagination_id which can be passed in the subsequent API request to get the next set of competitors. Repeat this process until needed or till the pagination_id returned is blank. Note:Every response will have maximum of 50 competitors.'
+          in: query
+          name: pagination_id
+          required: false
+          type: string
+        - default: json
+          description: 'Format of the response content - json (by default if not specified), xml'
+          enum:
+            - xml
+            - json
+          in: query
+          name: format
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Competitors Data
+          schema:
+            $ref: '#/definitions/competitors'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Competitor information by Url
+      tags:
+        - CompetitorPremiumAPI
   '/v1/company/id/{companyId}':
     get:
       description: 'The Company Data API provides complete information about a company for the specified Company Id '
-      operationId: getCompanyById
       parameters:
         - description: Company Id
           in: path
@@ -201,7 +283,6 @@ paths:
   /v1/company/search:
     get:
       description: The Company Search API searches for a company based on the input and will returns results containing basic details about matching companies. By default the API returns the top 10 available results unless the limit is specified. The maximum limit is restricted to 30.
-      operationId: searchCompany
       parameters:
         - description: Search term
           in: query
@@ -255,7 +336,6 @@ paths:
   '/v1/company/url/{website}':
     get:
       description: 'The Company Data API provides complete information about a company for the specified URL '
-      operationId: getCompanyByWebsite
       parameters:
         - description: Company Domain
           in: path
@@ -289,10 +369,81 @@ paths:
       summary: Get Company by URL
       tags:
         - CompanyAPI
+  '/v1/companypremium/id/{companyId}':
+    get:
+      description: 'The Company Premium Data API provides complete information about a company for the specified Company Id '
+      parameters:
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - default: json
+          description: 'Format of the response content - json (by default if not specified), xml'
+          enum:
+            - xml
+            - json
+          in: query
+          name: format
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Company Data
+          schema:
+            $ref: '#/definitions/company'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Complete Company Info by Id
+      tags:
+        - CompanyPremiumAPI
+  '/v1/companypremium/url/{website}':
+    get:
+      description: 'The Company Data API provides complete information about a company for the specified URL '
+      parameters:
+        - description: Company Domain
+          in: path
+          name: website
+          required: true
+          type: string
+        - default: json
+          description: 'Format of the response content - json (by default if not specified), xml'
+          enum:
+            - xml
+            - json
+          in: query
+          name: format
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Company Data
+          schema:
+            $ref: '#/definitions/company'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Basic Company Info by Url
+      tags:
+        - CompanyPremiumAPI
   /v1/feed:
     get:
       description: The Feeds API provides a list of feeds and individual feed information for the given Company Ids and Category. By default the API returns the latest 10 feeds available unless the limit is specified. The maximum result is restricted to 100 feeds per API request.
-      operationId: getFeeds
       parameters:
         - default: json
           description: 'Format of the response content - json (by default if not specified), xml'
@@ -354,6 +505,24 @@ paths:
       tags:
         - FeedAPI
 definitions:
+  Acquisition:
+    properties:
+      acquirer_company_id:
+        type: string
+      amount:
+        type: string
+      company_id:
+        type: string
+      date:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      undisclosed:
+        type: string
+      website:
+        type: string
   Address:
     properties:
       city:
@@ -372,6 +541,8 @@ definitions:
         type: string
   Ceo:
     properties:
+      ceo_rating:
+        type: string
       first_name:
         type: string
       image_url:
@@ -460,6 +631,31 @@ definitions:
       - website
       - logo_url
       - profile_url
+  CompetitorBasicVO:
+    properties:
+      company_id:
+        format: int64
+        type: integer
+      logo_url:
+        type: string
+      name:
+        type: string
+      profile_url:
+        type: string
+      score:
+        format: int64
+        type: integer
+      short_name:
+        type: string
+      website:
+        type: string
+    required:
+      - company_id
+      - name
+      - website
+      - logo_url
+      - profile_url
+      - score
   FeedsVO:
     properties:
       category:
@@ -482,6 +678,28 @@ definitions:
         type: string
       title:
         type: string
+  Funding:
+    properties:
+      amount:
+        type: string
+      date:
+        type: string
+      investor:
+        items:
+          $ref: '#/definitions/Investor'
+        type: array
+      type:
+        type: string
+      undisclosed:
+        type: string
+  Investor:
+    properties:
+      company_id:
+        type: string
+      name:
+        type: string
+      website:
+        type: string
   Stock:
     properties:
       exchange:
@@ -496,6 +714,10 @@ definitions:
         type: array
   company:
     properties:
+      acquisition:
+        items:
+          $ref: '#/definitions/Acquisition'
+        type: array
       ceo:
         $ref: '#/definitions/Ceo'
       company_id:
@@ -514,20 +736,33 @@ definitions:
         type: string
       employee_count:
         type: string
+      facebook_link:
+        type: string
       founded_date:
         type: string
+      funding:
+        items:
+          $ref: '#/definitions/Funding'
+        type: array
       hq_address:
         $ref: '#/definitions/Address'
       industries:
         items:
           type: string
         type: array
+      linkedin_link:
+        type: string
       logo_url:
         type: string
       name:
         type: string
       perm_id:
         type: string
+      portfolio_company_ids:
+        items:
+          format: int32
+          type: integer
+        type: array
       profile_url:
         type: string
       revenue:
@@ -536,7 +771,11 @@ definitions:
         type: string
       stock:
         $ref: '#/definitions/Stock'
+      twitter_link:
+        type: string
       website:
+        type: string
+      youtube_link:
         type: string
     required:
       - company_id
@@ -544,6 +783,14 @@ definitions:
       - website
       - logo_url
       - profile_url
+  competitors:
+    properties:
+      competitor:
+        items:
+          $ref: '#/definitions/CompetitorBasicVO'
+        type: array
+      pagination_id:
+        type: string
   results:
     properties:
       feeds:

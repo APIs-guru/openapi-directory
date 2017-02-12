@@ -108,8 +108,8 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: projects
   - name: operations
+  - name: projects
 paths:
   '/v1/projects/{projectId}/builds':
     get:
@@ -148,10 +148,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -161,6 +159,8 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Starts a build with the specified configuration.
@@ -219,10 +219,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -232,12 +230,12 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v1/projects/{projectId}/builds/{id}:cancel':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -247,6 +245,8 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: Cancels a requested build in progress.
       operationId: cloudbuild.projects.builds.cancel
@@ -299,10 +299,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -312,6 +310,8 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Creates a new BuildTrigger.
@@ -394,10 +394,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -407,6 +405,8 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     patch:
       description: |-
         Updates an BuildTrigger by its project ID and trigger ID.
@@ -463,10 +463,8 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -476,12 +474,12 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -491,6 +489,8 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server

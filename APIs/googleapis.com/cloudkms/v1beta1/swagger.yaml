@@ -132,6 +132,12 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -139,12 +145,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     patch:
       description: |-
         Update a CryptoKeyVersion's metadata.
@@ -216,6 +216,12 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -223,14 +229,14 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
   '/v1beta1/{name}:decrypt':
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -238,12 +244,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: Decrypt data that was protected by Encrypt.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.decrypt
@@ -272,6 +272,12 @@ paths:
         - projects
   '/v1beta1/{name}:destroy':
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -279,12 +285,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Schedule a CryptoKeyVersion for destruction.
@@ -323,6 +323,12 @@ paths:
         - projects
   '/v1beta1/{name}:encrypt':
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -330,12 +336,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: 'Encrypt data, so that it can only be recovered by a call to Decrypt.'
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.encrypt
@@ -367,6 +367,12 @@ paths:
         - projects
   '/v1beta1/{name}:restore':
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -374,12 +380,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Restore a CryptoKeyVersion in the
@@ -413,6 +413,12 @@ paths:
         - projects
   '/v1beta1/{name}:updatePrimaryVersion':
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -420,12 +426,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: Update the version of a CryptoKey that will be used in Encrypt
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion
@@ -489,6 +489,12 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -496,12 +502,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Create a new CryptoKeyVersion in a CryptoKey.
@@ -547,12 +547,6 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            Optional pagination token, returned earlier via
-            ListCryptoKeysResponse.next_page_token.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             Optional limit on the number of CryptoKeys to include in the
             response.  Further CryptoKeys can subsequently be obtained by
             including the ListCryptoKeysResponse.next_page_token in a subsequent
@@ -560,6 +554,12 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            Optional pagination token, returned earlier via
+            ListCryptoKeysResponse.next_page_token.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -571,6 +571,12 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -578,12 +584,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Create a new CryptoKey within a KeyRing.
@@ -657,6 +657,12 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -664,12 +670,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: Create a new KeyRing in a given Project and Location.
       operationId: cloudkms.projects.locations.keyRings.create
@@ -730,6 +730,12 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -737,14 +743,14 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -752,12 +758,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -789,6 +789,12 @@ paths:
         - projects
   '/v1beta1/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
@@ -796,12 +802,6 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.

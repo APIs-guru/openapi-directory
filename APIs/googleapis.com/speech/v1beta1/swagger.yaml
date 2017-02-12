@@ -150,17 +150,17 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1beta1/operations/{name}':
     delete:
       description: |-
@@ -212,32 +212,32 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1beta1/operations/{name}:cancel':
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -258,10 +258,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CancelOperationRequest'
       responses:
         '200':
           description: Successful response
@@ -276,17 +272,17 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Performs asynchronous speech recognition: receive results via the
@@ -315,17 +311,17 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Performs synchronous speech recognition: receive results after all audio
@@ -348,22 +344,16 @@ paths:
         - speech
 definitions:
   AsyncRecognizeRequest:
-    description: |-
-      `AsyncRecognizeRequest` is the top-level message sent by the client for
-      the `AsyncRecognize` method.
+    description: The top-level message sent by the client for the `AsyncRecognize` method.
     properties:
       audio:
         $ref: '#/definitions/RecognitionAudio'
-        description: '[Required] The audio data to be recognized.'
+        description: '*Required* The audio data to be recognized.'
       config:
         $ref: '#/definitions/RecognitionConfig'
         description: |-
-          [Required] The `config` message provides information to the recognizer
-          that specifies how to process the request.
-    type: object
-  CancelOperationRequest:
-    description: The request message for Operations.CancelOperation.
-    properties: {}
+          *Required* Provides information to the recognizer that specifies how to
+          process the request.
     type: object
   Empty:
     description: |-
@@ -459,11 +449,11 @@ definitions:
     type: object
   RecognitionConfig:
     description: |-
-      The `RecognitionConfig` message provides information to the recognizer
-      that specifies how to process the request.
+      Provides information to the recognizer that specifies how to process the
+      request.
     properties:
       encoding:
-        description: '[Required] Encoding of audio data sent in all `RecognitionAudio` messages.'
+        description: '*Required* Encoding of audio data sent in all `RecognitionAudio` messages.'
         enum:
           - ENCODING_UNSPECIFIED
           - LINEAR16
@@ -474,7 +464,7 @@ definitions:
         type: string
       languageCode:
         description: |-
-          [Optional] The language of the supplied audio as a BCP-47 language tag.
+          *Optional* The language of the supplied audio as a BCP-47 language tag.
           Example: "en-GB"  https://www.rfc-editor.org/rfc/bcp/bcp47.txt
           If omitted, defaults to "en-US". See
           [Language Support](https://cloud.google.com/speech/docs/languages)
@@ -482,7 +472,7 @@ definitions:
         type: string
       maxAlternatives:
         description: |-
-          [Optional] Maximum number of recognition hypotheses to be returned.
+          *Optional* Maximum number of recognition hypotheses to be returned.
           Specifically, the maximum number of `SpeechRecognitionAlternative` messages
           within each `SpeechRecognitionResult`.
           The server may return fewer than `max_alternatives`.
@@ -492,14 +482,14 @@ definitions:
         type: integer
       profanityFilter:
         description: |-
-          [Optional] If set to `true`, the server will attempt to filter out
+          *Optional* If set to `true`, the server will attempt to filter out
           profanities, replacing all but the initial character in each filtered word
           with asterisks, e.g. "f***". If set to `false` or omitted, profanities
           won't be filtered out.
         type: boolean
       sampleRate:
         description: |-
-          [Required] Sample rate in Hertz of the audio data sent in all
+          *Required* Sample rate in Hertz of the audio data sent in all
           `RecognitionAudio` messages. Valid values are: 8000-48000.
           16000 is optimal. For best results, set the sampling rate of the audio
           source to 16000 Hz. If that's not possible, use the native sample rate of
@@ -508,7 +498,7 @@ definitions:
         type: integer
       speechContext:
         $ref: '#/definitions/SpeechContext'
-        description: '[Optional] A means to provide context to assist the speech recognition.'
+        description: '*Optional* A means to provide context to assist the speech recognition.'
     type: object
   SpeechContext:
     description: |-
@@ -517,7 +507,7 @@ definitions:
     properties:
       phrases:
         description: |-
-          [Optional] A list of strings containing words and phrases "hints" so that
+          *Optional* A list of strings containing words and phrases "hints" so that
           the speech recognition is more likely to recognize them. This can be used
           to improve the accuracy for specific words and phrases, for example, if
           specific commands are typically spoken by the user. This can also be used
@@ -532,7 +522,7 @@ definitions:
     properties:
       confidence:
         description: |-
-          [Output-only] The confidence estimate between 0.0 and 1.0. A higher number
+          *Output-only* The confidence estimate between 0.0 and 1.0. A higher number
           indicates an estimated greater likelihood that the recognized words are
           correct. This field is typically provided only for the top hypothesis, and
           only for `is_final=true` results. Clients should not rely on the
@@ -542,7 +532,7 @@ definitions:
         format: float
         type: number
       transcript:
-        description: '[Output-only] Transcript text representing the words that the user spoke.'
+        description: '*Output-only* Transcript text representing the words that the user spoke.'
         type: string
     type: object
   SpeechRecognitionResult:
@@ -550,7 +540,7 @@ definitions:
     properties:
       alternatives:
         description: |-
-          [Output-only] May contain one or more recognition hypotheses (up to the
+          *Output-only* May contain one or more recognition hypotheses (up to the
           maximum specified in `max_alternatives`).
         items:
           $ref: '#/definitions/SpeechRecognitionAlternative'
@@ -632,28 +622,26 @@ definitions:
         type: string
     type: object
   SyncRecognizeRequest:
-    description: |-
-      `SyncRecognizeRequest` is the top-level message sent by the client for
-      the `SyncRecognize` method.
+    description: The top-level message sent by the client for the `SyncRecognize` method.
     properties:
       audio:
         $ref: '#/definitions/RecognitionAudio'
-        description: '[Required] The audio data to be recognized.'
+        description: '*Required* The audio data to be recognized.'
       config:
         $ref: '#/definitions/RecognitionConfig'
         description: |-
-          [Required] The `config` message provides information to the recognizer
-          that specifies how to process the request.
+          *Required* Provides information to the recognizer that specifies how to
+          process the request.
     type: object
   SyncRecognizeResponse:
     description: |-
-      `SyncRecognizeResponse` is the only message returned to the client by
-      `SyncRecognize`. It contains the result as zero or more sequential
-      `SpeechRecognitionResult` messages.
+      The only message returned to the client by `SyncRecognize`. method. It
+      contains the result as zero or more sequential `SpeechRecognitionResult`
+      messages.
     properties:
       results:
         description: |-
-          [Output-only] Sequential list of transcription results corresponding to
+          *Output-only* Sequential list of transcription results corresponding to
           sequential portions of audio.
         items:
           $ref: '#/definitions/SpeechRecognitionResult'

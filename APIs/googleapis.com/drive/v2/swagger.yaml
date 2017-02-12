@@ -241,7 +241,7 @@ paths:
           minimum: 1
           name: maxResults
           type: integer
-        - description: Page token for changes.
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
           in: query
           name: pageToken
           type: string
@@ -258,6 +258,42 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ChangeList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.appdata'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.apps.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.metadata'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.photos.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+      tags:
+        - changes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /changes/startPageToken:
+    get:
+      description: Gets the starting pageToken for listing future changes.
+      operationId: drive.changes.getStartPageToken
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StartPageToken'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
@@ -314,7 +350,7 @@ paths:
           minimum: 1
           name: maxResults
           type: integer
-        - description: Page token for changes.
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
           in: query
           name: pageToken
           type: string
@@ -3876,6 +3912,16 @@ definitions:
         type: string
       selfLink:
         description: A link back to this list.
+        type: string
+    type: object
+  StartPageToken:
+    properties:
+      kind:
+        default: 'drive#startPageToken'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "drive#startPageToken".'
+        type: string
+      startPageToken:
+        description: The starting page token for listing changes.
         type: string
     type: object
   User:

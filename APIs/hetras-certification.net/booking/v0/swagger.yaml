@@ -2513,13 +2513,10 @@ definitions:
         type: string
     type: object
   'JsonPatchDocument[ReservationPatchableModel]':
-    properties:
-      Operations:
-        items:
-          $ref: '#/definitions/Operation[ReservationPatchableModel]'
-        readOnly: true
-        type: array
-    type: object
+    items:
+      $ref: '#/definitions/Operation[ReservationPatchableModel]'
+    properties: {}
+    type: array
   LinkObject:
     description: A Link Object represents a hyperlink from the containing resource to a URI.
     properties:

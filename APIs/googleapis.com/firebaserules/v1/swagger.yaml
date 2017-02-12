@@ -168,19 +168,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
     put:
       description: |-
         Update a `Release`.
@@ -253,14 +253,6 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            Page size to load. Maximum of 100. Defaults to 10.
-            Note: `page_size` is just a hint and the service may choose to load less
-            than `page_size` due to the size of the output. To traverse all of the
-            releases, caller should iterate until the `page_token` is empty.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
             `Release` filter. The list method supports filters with restrictions on the
             `Release` `name` and also on the `Ruleset` `ruleset_name`.
 
@@ -293,6 +285,14 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: |-
+            Page size to load. Maximum of 100. Defaults to 10.
+            Note: `page_size` is just a hint and the service may choose to load less
+            than `page_size` due to the size of the output. To traverse all of the
+            releases, caller should iterate until the `page_token` is empty.
+          in: query
+          name: pageSize
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -308,19 +308,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
     post:
       description: |-
         Create a `Release`.
@@ -392,6 +392,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: Next page token for loading the next batch of `Ruleset` instances.
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             Page size to load. Maximum of 100. Defaults to 10.
             Note: `page_size` is just a hint and the service may choose to load less
@@ -400,10 +404,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: Next page token for loading the next batch of `Ruleset` instances.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -419,19 +419,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
     post:
       description: |-
         Create a `Ruleset` from `Source`.
@@ -469,19 +469,19 @@ paths:
         - projects
   '/v1/{name}:test':
     parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
     post:
       description: |-
         Test `Source` for syntactic and semantic correctness. Issues present in the

@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Search Console URL Testing Tools API provides tools for running validation tests against single URLs.
+  description: Provides tools for running validation tests against single URLs
   title: Google Search Console URL Testing Tools
   version: v1
   x-apiClientRegistration:
@@ -104,19 +104,19 @@ tags:
 paths:
   '/v1/urlTestingTools/mobileFriendlyTest:run':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: Runs Mobile-Friendly Test for a given URL.
       operationId: searchconsole.urlTestingTools.mobileFriendlyTest.run

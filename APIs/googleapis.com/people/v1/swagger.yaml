@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: The Google People API service gives access to information about profiles and contacts.
+  description: Provides access to information about profiles and contacts.
   title: Google People
   version: v1
   x-apiClientRegistration:
@@ -16,7 +16,7 @@ info:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/people/v1/rest'
+    url: 'https://people.googleapis.com/$discovery/rest?version=v1'
     version: v1
   x-preferred: true
   x-providerName: googleapis.com
@@ -31,7 +31,7 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/contacts': Manage your contacts
       'https://www.googleapis.com/auth/contacts.readonly': View your contacts
-      'https://www.googleapis.com/auth/plus.login': Know your basic profile info and list of people in your circles.
+      'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
       'https://www.googleapis.com/auth/user.addresses.read': View your street addresses
       'https://www.googleapis.com/auth/user.birthday.read': View your complete date of birth
       'https://www.googleapis.com/auth/user.emails.read': View your email addresses
@@ -42,6 +42,9 @@ securityDefinitions:
 parameters:
   $.xgafv:
     description: V1 error format.
+    enum:
+      - '1'
+      - '2'
     in: query
     name: $.xgafv
     type: string
@@ -53,6 +56,10 @@ parameters:
   alt:
     default: json
     description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
     in: query
     name: alt
     type: string
@@ -111,22 +118,104 @@ parameters:
 tags:
   - name: people
 paths:
+  /v1/people/me/connections:
+    get:
+      description: |-
+        Provides a list of the authenticated user's contacts merged with any
+        linked profiles.
+      operationId: people.people.me.connections.list
+      parameters:
+        - description: |-
+            The order in which the connections should be sorted. Defaults to
+            `LAST_MODIFIED_ASCENDING`.
+          enum:
+            - LAST_MODIFIED_ASCENDING
+            - FIRST_NAME_ASCENDING
+            - LAST_NAME_ASCENDING
+          in: query
+          name: sortOrder
+          type: string
+        - description: |-
+            A sync token, returned by a previous call to `people.connections.list`.
+            Only resources changed since the sync token was created will be returned.
+          in: query
+          name: syncToken
+          type: string
+        - description: The token of the page to be returned.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The number of connections to include in the response. Valid values are
+            between 1 and 500, inclusive. Defaults to 100.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Comma-separated list of fields to be included in the response. Omitting
+            this field will include all fields except for connections.list requests,
+            which have a default mask that includes common fields like metadata, name,
+            photo, and profile url.
+            Each path should start with `person.`: for example, `person.names` or
+            `person.photos`.
+          in: query
+          name: requestMask.includeField
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListConnectionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1/people:batchGet':
     get:
-      description: Provides information about a list of specific people by specifying a list of requested resource names. Use `people/me` to indicate the authenticated user.
+      description: |-
+        Provides information about a list of specific people by specifying a list
+        of requested resource names. Use `people/me` to indicate the authenticated
+        user.
       operationId: people.people.getBatchGet
       parameters:
+        - description: |-
+            Comma-separated list of fields to be included in the response. Omitting
+            this field will include all fields except for connections.list requests,
+            which have a default mask that includes common fields like metadata, name,
+            photo, and profile url.
+            Each path should start with `person.`: for example, `person.names` or
+            `person.photos`.
+          in: query
+          name: requestMask.includeField
+          type: string
         - collectionFormat: multi
-          description: 'The resource name, such as one returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list), of one of the people to provide information about. You can include this parameter up to 50 times in one request.'
+          description: |-
+            The resource name, such as one returned by
+            [`people.connections.list`](/people/api/rest/v1/people.connections/list),
+            of one of the people to provide information about. You can include this
+            parameter up to 50 times in one request.
           in: query
           items:
             type: string
           name: resourceNames
           type: array
-        - description: 'Comma-separated list of fields to be included in the response. Omitting this field will include all fields. Each path should start with `person.`: for example, `person.names` or `person.photos`.'
-          in: query
-          name: requestMask.includeField
-          type: string
       responses:
         '200':
           description: Successful response
@@ -154,31 +243,45 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1/{resourceName}':
     get:
-      description: Provides information about a person resource for a resource name. Use `people/me` to indicate the authenticated user.
+      description: |-
+        Provides information about a person resource for a resource name. Use
+        `people/me` to indicate the authenticated user.
       operationId: people.people.get
       parameters:
-        - description: 'The resource name of the person to provide information about. - To get information about the authenticated user, specify `people/me`. - To get information about any user, specify the resource name that identifies the user, such as the resource names returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).'
+        - description: |-
+            The resource name of the person to provide information about.
+
+            - To get information about the authenticated user, specify `people/me`.
+            - To get information about any user, specify the resource name that
+              identifies the user, such as the resource names returned by
+              [`people.connections.list`](/people/api/rest/v1/people.connections/list).
           in: path
           name: resourceName
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Comma-separated list of fields to be included in the response. Omitting this field will include all fields. Each path should start with `person.`: for example, `person.names` or `person.photos`.'
+        - description: |-
+            Comma-separated list of fields to be included in the response. Omitting
+            this field will include all fields except for connections.list requests,
+            which have a default mask that includes common fields like metadata, name,
+            photo, and profile url.
+            Each path should start with `person.`: for example, `person.names` or
+            `person.photos`.
           in: query
           name: requestMask.includeField
           type: string
@@ -209,83 +312,24 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-  '/v1/{resourceName}/connections':
-    get:
-      description: Provides a list of the authenticated user's contacts merged with any linked profiles.
-      operationId: people.people.connections.list
-      parameters:
-        - description: The resource name to return connections for. Only `people/me` is valid.
-          in: path
-          name: resourceName
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: The token of the page to be returned.
-          in: query
-          name: pageToken
-          type: string
-        - description: 'The number of connections to include in the response. Valid values are between 1 and 500, inclusive. Defaults to 100.'
-          in: query
-          name: pageSize
-          type: integer
-        - description: The order in which the connections should be sorted. Defaults to `LAST_MODIFIED_ASCENDING`.
-          enum:
-            - LAST_MODIFIED_ASCENDING
-            - FIRST_NAME_ASCENDING
-            - LAST_NAME_ASCENDING
-          in: query
-          name: sortOrder
-          type: string
-        - description: 'A sync token, returned by a previous call to `people.connections.list`. Only resources changed since the sync token was created are returned.'
-          in: query
-          name: syncToken
-          type: string
-        - description: 'Comma-separated list of fields to be included in the response. Omitting this field will include all fields. Each path should start with `person.`: for example, `person.names` or `person.photos`.'
-          in: query
-          name: requestMask.includeField
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListConnectionsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/contacts'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/contacts.readonly'
-      tags:
-        - people
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
 definitions:
   Address:
-    description: A person's physical address. May be a P.O. box or street address. All fields are optional.
+    description: |-
+      A person's physical address. May be a P.O. box or street address. All fields
+      are optional.
     properties:
       city:
         description: The city of the address.
@@ -294,16 +338,22 @@ definitions:
         description: The country of the address.
         type: string
       countryCode:
-        description: 'The [ISO 3166-1 alpha-2](http://www.iso.org/iso/country_codes.htm) country code of the address.'
+        description: |-
+          The [ISO 3166-1 alpha-2](http://www.iso.org/iso/country_codes.htm) country
+          code of the address.
         type: string
       extendedAddress:
         description: 'The extended address of the address; for example, the apartment number.'
         type: string
       formattedType:
-        description: The read-only type of the address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+        description: |-
+          The read-only type of the address translated and formatted in the viewer's
+          account locale or the `Accept-Language` HTTP header locale.
         type: string
       formattedValue:
-        description: The read-only value of the address formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+        description: |-
+          The unstructured value of the address. If this is not set by the user it
+          will be automatically constructed from structured values.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -321,12 +371,25 @@ definitions:
         description: The street address.
         type: string
       type:
-        description: 'The type of the address. The type can be custom or predefined. Possible values include, but are not limited to, the following: * `home` * `work` * `other`'
+        description: |-
+          The type of the address. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following:
+
+          * `home`
+          * `work`
+          * `other`
         type: string
     type: object
   Biography:
     description: A person's short biography.
     properties:
+      contentType:
+        description: The content type of the biography.
+        enum:
+          - CONTENT_TYPE_UNSPECIFIED
+          - TEXT_PLAIN
+          - TEXT_HTML
+        type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the biography.
@@ -335,7 +398,10 @@ definitions:
         type: string
     type: object
   Birthday:
-    description: 'A person''s birthday. At least one of the `date` and `text` fields are specified. The `date` and `text` fields typically represent the same date, but are not guaranteed to.'
+    description: |-
+      A person's birthday. At least one of the `date` and `text` fields are
+      specified. The `date` and `text` fields typically represent the same
+      date, but are not guaranteed to.
     properties:
       date:
         $ref: '#/definitions/Date'
@@ -361,14 +427,25 @@ definitions:
     description: A Google contact group membership.
     properties:
       contactGroupId:
-        description: 'The contact group ID for the contact group membership. The contact group ID can be custom or predefined. Possible values include, but are not limited to, the following: * `myContacts` * `starred` * A numerical ID for user-created groups.'
+        description: |-
+          The contact group ID for the contact group membership. The contact group
+          ID can be custom or predefined. Possible values include, but are not
+          limited to, the following:
+
+          *  `myContacts`
+          *  `starred`
+          *  A numerical ID for user-created groups.
         type: string
     type: object
   CoverPhoto:
-    description: A person's cover photo. A large image shown on the person's profile page that represents who they are or what they care about.
+    description: |-
+      A person's read-only cover photo. A large image shown on the person's
+      profile page that represents who they are or what they care about.
     properties:
       default:
-        description: True if the cover photo is the default cover photo; false if the cover photo is a user-provided cover photo.
+        description: |-
+          True if the cover photo is the default cover photo;
+          false if the cover photo is a user-provided cover photo.
         type: boolean
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -378,10 +455,19 @@ definitions:
         type: string
     type: object
   Date:
-    description: 'Represents a whole calendar date, for example a date of birth. The time of day and time zone are either specified elsewhere or are not significant. The date is relative to the [Proleptic Gregorian Calendar](https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar). The day may be 0 to represent a year and month where the day is not significant. The year may be 0 to represent a month and day independent of year; for example, anniversary date.'
+    description: |-
+      Represents a whole calendar date, for example a date of birth. The time
+      of day and time zone are either specified elsewhere or are not
+      significant. The date is relative to the
+      [Proleptic Gregorian Calendar](https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar).
+      The day may be 0 to represent a year and month where the day is not
+      significant. The year may be 0 to represent a month and day independent
+      of year; for example, anniversary date.
     properties:
       day:
-        description: 'Day of month. Must be from 1 to 31 and valid for the year and month, or 0 if specifying a year/month where the day is not significant.'
+        description: |-
+          Day of month. Must be from 1 to 31 and valid for the year and month, or 0
+          if specifying a year/month where the day is not significant.
         format: int32
         type: integer
       month:
@@ -389,7 +475,9 @@ definitions:
         format: int32
         type: integer
       year:
-        description: 'Year of date. Must be from 1 to 9999, or 0 if specifying a date without a year.'
+        description: |-
+          Year of date. Must be from 1 to 9999, or 0 if specifying a date without
+          a year.
         format: int32
         type: integer
     type: object
@@ -403,14 +491,25 @@ definitions:
   EmailAddress:
     description: A person's email address.
     properties:
+      displayName:
+        description: The display name of the email.
+        type: string
       formattedType:
-        description: The read-only type of the email address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+        description: |-
+          The read-only type of the email address translated and formatted in the
+          viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the email address.
       type:
-        description: 'The type of the email address. The type can be custom or predefined. Possible values include, but are not limited to, the following: * `home` * `work` * `other`'
+        description: |-
+          The type of the email address. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following:
+
+          * `home`
+          * `work`
+          * `other`
         type: string
       value:
         description: The email address.
@@ -423,39 +522,61 @@ definitions:
         $ref: '#/definitions/Date'
         description: The date of the event.
       formattedType:
-        description: The read-only type of the event translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+        description: |-
+          The read-only type of the event translated and formatted in the
+          viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the event.
       type:
-        description: 'The type of the event. The type can be custom or predefined. Possible values include, but are not limited to, the following: * `anniversary` * `other`'
+        description: |-
+          The type of the event. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following:
+
+          * `anniversary`
+          * `other`
         type: string
     type: object
   FieldMetadata:
     description: Metadata about a field.
     properties:
       primary:
-        description: True if the field is the primary field; false if the field is a secondary field.
+        description: |-
+          True if the field is the primary field; false if the field is a secondary
+          field.
         type: boolean
       source:
         $ref: '#/definitions/Source'
         description: The source of the field.
       verified:
-        description: 'True if the field is verified; false if the field is unverified. A verified field is typically a name, email address, phone number, or website that has been confirmed to be owned by the person.'
+        description: |-
+          True if the field is verified; false if the field is unverified. A
+          verified field is typically a name, email address, phone number, or
+          website that has been confirmed to be owned by the person.
         type: boolean
     type: object
   Gender:
     description: A person's gender.
     properties:
       formattedValue:
-        description: The read-only value of the gender translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+        description: |-
+          The read-only value of the gender translated and formatted in the viewer's
+          account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the gender.
       value:
-        description: 'The gender for the person. The gender can be custom or predefined. Possible values include, but are not limited to, the following: * `male` * `female` * `other` * `unknown`'
+        description: |-
+          The gender for the person. The gender can be custom or predefined.
+          Possible values include, but are not limited to, the
+          following:
+
+          * `male`
+          * `female`
+          * `other`
+          * `unknown`
         type: string
     type: object
   GetPeopleResponse:
@@ -470,19 +591,41 @@ definitions:
     description: A person's instant messaging client.
     properties:
       formattedProtocol:
-        description: The read-only protocol of the IM client formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+        description: |-
+          The read-only protocol of the IM client formatted in the viewer's account
+          locale or the `Accept-Language` HTTP header locale.
         type: string
       formattedType:
-        description: The read-only type of the IM client translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+        description: |-
+          The read-only type of the IM client translated and formatted in the
+          viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the IM client.
       protocol:
-        description: 'The protocol of the IM client. The protocol can be custom or predefined. Possible values include, but are not limited to, the following: * `aim` * `msn` * `yahoo` * `skype` * `qq` * `googleTalk` * `icq` * `jabber` * `netMeeting`'
+        description: |-
+          The protocol of the IM client. The protocol can be custom or predefined.
+          Possible values include, but are not limited to, the following:
+
+          * `aim`
+          * `msn`
+          * `yahoo`
+          * `skype`
+          * `qq`
+          * `googleTalk`
+          * `icq`
+          * `jabber`
+          * `netMeeting`
         type: string
       type:
-        description: 'The type of the IM client. The type can be custom or predefined. Possible values include, but are not limited to, the following: * `home` * `work` * `other`'
+        description: |-
+          The type of the IM client. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following:
+
+          * `home`
+          * `work`
+          * `other`
         type: string
       username:
         description: The user name used in the IM client.
@@ -519,11 +662,13 @@ definitions:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the locale.
       value:
-        description: 'The well-formed [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag representing the locale.'
+        description: |-
+          The well-formed [IETF BCP 47](https://tools.ietf.org/html/bcp47)
+          language tag representing the locale.
         type: string
     type: object
   Membership:
-    description: A person's membership in a group.
+    description: A person's read-only membership in a group.
     properties:
       contactGroupMembership:
         $ref: '#/definitions/ContactGroupMembership'
@@ -539,7 +684,15 @@ definitions:
     description: 'A person''s name. If the name is a mononym, the family name is empty.'
     properties:
       displayName:
-        description: The display name formatted according to the locale specified by the viewer's account or the Accept-Language HTTP header.
+        description: |-
+          The read-only display name formatted according to the locale specified by
+          the viewer's account or the <code>Accept-Language</code> HTTP header.
+        type: string
+      displayNameLastFirst:
+        description: |-
+          The read-only display name with the last name first formatted according to
+          the locale specified by the viewer's account or the
+          <code>Accept-Language</code> HTTP header.
         type: string
       familyName:
         description: The family name.
@@ -561,6 +714,9 @@ definitions:
         type: string
       phoneticFamilyName:
         description: The family name spelled as it sounds.
+        type: string
+      phoneticFullName:
+        description: The full name spelled as it sounds.
         type: string
       phoneticGivenName:
         description: The given name spelled as it sounds.
@@ -605,10 +761,14 @@ definitions:
         type: string
     type: object
   Organization:
-    description: A person's past or current organization. Overlapping date ranges are permitted.
+    description: |-
+      A person's past or current organization. Overlapping date ranges are
+      permitted.
     properties:
       current:
-        description: True if the organization is the person's current organization; false if the organization is a past organization.
+        description: |-
+          True if the organization is the person's current organization;
+          false if the organization is a past organization.
         type: boolean
       department:
         description: The person's department at the organization.
@@ -620,7 +780,9 @@ definitions:
         $ref: '#/definitions/Date'
         description: The end date when the person left the organization.
       formattedType:
-        description: The read-only type of the organization translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+        description: |-
+          The read-only type of the organization translated and formatted in the
+          viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       jobDescription:
         description: The person's job description at the organization.
@@ -641,17 +803,31 @@ definitions:
         $ref: '#/definitions/Date'
         description: The start date when the person joined the organization.
       symbol:
-        description: 'The symbol associated with the organization; for example, a stock ticker symbol, abbreviation, or acronym.'
+        description: |-
+          The symbol associated with the organization; for example, a stock ticker
+          symbol, abbreviation, or acronym.
         type: string
       title:
         description: The person's job title at the organization.
         type: string
       type:
-        description: 'The type of the organization. The type can be custom or predefined. Possible values include, but are not limited to, the following: * `work` * `school`'
+        description: |-
+          The type of the organization. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following:
+
+          * `work`
+          * `school`
         type: string
     type: object
   Person:
-    description: 'Information about a person merged from various data sources such as the authenticated user''s contacts and profile data. Fields other than IDs, metadata, and group memberships are user-edited. Most fields can have multiple items. The items in a field have no guaranteed order, but each non-empty field is guaranteed to have exactly one field with `metadata.primary` set to true.'
+    description: |-
+      Information about a person merged from various data sources such as the
+      authenticated user's contacts and profile data. Fields other than IDs,
+      metadata, and group memberships are user-edited.
+
+      Most fields can have multiple items. The items in a field have no guaranteed
+      order, but each non-empty field is guaranteed to have exactly one field with
+      `metadata.primary` set to true.
     properties:
       addresses:
         description: The person's street addresses.
@@ -692,7 +868,9 @@ definitions:
           $ref: '#/definitions/EmailAddress'
         type: array
       etag:
-        description: 'The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the resource. Used for web cache validation.'
+        description: |-
+          The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the
+          resource. Used for web cache validation.
         type: string
       events:
         description: The person's events.
@@ -778,7 +956,9 @@ definitions:
           $ref: '#/definitions/Residence'
         type: array
       resourceName:
-        description: 'The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters. Always starts with `people/`.'
+        description: |-
+          The resource name for the person, assigned by the server. An ASCII string
+          with a max length of 27 characters. Always starts with `people/`.
         type: string
       skills:
         description: The person's skills.
@@ -797,11 +977,19 @@ definitions:
         type: array
     type: object
   PersonMetadata:
-    description: Metadata about a person.
+    description: The read-only metadata about a person.
     properties:
       deleted:
-        description: 'True if the person resource has been deleted. Populated only for [`connections.list`](/people/api/rest/v1/people.connections/list) requests that include a sync token.'
+        description: |-
+          True if the person resource has been deleted. Populated only for
+          [`connections.list`](/people/api/rest/v1/people.connections/list) requests
+          that include a sync token.
         type: boolean
+      linkedPeopleResourceNames:
+        description: Resource names of people linked to this resource.
+        items:
+          type: string
+        type: array
       objectType:
         description: The type of the person object.
         enum:
@@ -810,7 +998,14 @@ definitions:
           - PAGE
         type: string
       previousResourceNames:
-        description: 'Any former resource names this person has had. Populated only for [`connections.list`](/people/api/rest/v1/people.connections/list) requests that include a sync token. The resource name may change when adding or removing fields that link a contact and profile such as a verified email, verified phone number, or profile URL.'
+        description: |-
+          Any former resource names this person has had. Populated only for
+          [`connections.list`](/people/api/rest/v1/people.connections/list) requests
+          that include a sync token.
+
+          The resource name may change when adding or removing fields that link a
+          contact and profile such as a verified email, verified phone number, or
+          profile URL.
         items:
           type: string
         type: array
@@ -831,30 +1026,57 @@ definitions:
         $ref: '#/definitions/Person'
         description: The person.
       requestedResourceName:
-        description: 'The original requested resource name. May be different than the resource name on the returned person. The resource name can change when adding or removing fields that link a contact and profile such as a verified email, verified phone number, or a profile URL.'
+        description: |-
+          The original requested resource name. May be different than the resource
+          name on the returned person.
+
+          The resource name can change when adding or removing fields that link a
+          contact and profile such as a verified email, verified phone number, or a
+          profile URL.
         type: string
     type: object
   PhoneNumber:
     description: A person's phone number.
     properties:
       canonicalForm:
-        description: 'The read-only canonicalized [ITU-T E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf) form of the phone number.'
+        description: |-
+          The read-only canonicalized [ITU-T E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf)
+          form of the phone number.
         type: string
       formattedType:
-        description: The read-only type of the phone number translated and formatted in the viewer's account locale or the the `Accept-Language` HTTP header locale.
+        description: |-
+          The read-only type of the phone number translated and formatted in the
+          viewer's account locale or the the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the phone number.
       type:
-        description: 'The type of the phone number. The type can be custom or predefined. Possible values include, but are not limited to, the following: * `home` * `work` * `mobile` * `homeFax` * `workFax` * `otherFax` * `pager` * `workMobile` * `workPager` * `main` * `googleVoice` * `other`'
+        description: |-
+          The type of the phone number. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following:
+
+          * `home`
+          * `work`
+          * `mobile`
+          * `homeFax`
+          * `workFax`
+          * `otherFax`
+          * `pager`
+          * `workMobile`
+          * `workPager`
+          * `main`
+          * `googleVoice`
+          * `other`
         type: string
       value:
         description: The phone number.
         type: string
     type: object
   Photo:
-    description: A person's photo. A picture shown next to the person's name to help others recognize the person.
+    description: |-
+      A person's read-only photo. A picture shown next to the person's name to
+      help others recognize the person.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -867,7 +1089,9 @@ definitions:
     description: A person's relation to another person.
     properties:
       formattedType:
-        description: The type of the relation translated and formatted in the viewer's account locale or the locale specified in the Accept-Language HTTP header.
+        description: |-
+          The type of the relation translated and formatted in the viewer's account
+          locale or the locale specified in the Accept-Language HTTP header.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -876,40 +1100,84 @@ definitions:
         description: The name of the other person this relation refers to.
         type: string
       type:
-        description: 'The person''s relation to the other person. The type can be custom or predefined. Possible values include, but are not limited to, the following values: * `spouse` * `child` * `mother` * `father` * `parent` * `brother` * `sister` * `friend` * `relative` * `domesticPartner` * `manager` * `assistant` * `referredBy` * `partner`'
+        description: |-
+          The person's relation to the other person. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following values:
+
+          * `spouse`
+          * `child`
+          * `mother`
+          * `father`
+          * `parent`
+          * `brother`
+          * `sister`
+          * `friend`
+          * `relative`
+          * `domesticPartner`
+          * `manager`
+          * `assistant`
+          * `referredBy`
+          * `partner`
         type: string
     type: object
   RelationshipInterest:
-    description: The kind of relationship the person is looking for.
+    description: A person's read-only relationship interest .
     properties:
       formattedValue:
-        description: The value of the relationship interest translated and formatted in the viewer's account locale or the locale specified in the Accept-Language HTTP header.
+        description: |-
+          The value of the relationship interest translated and formatted in the
+          viewer's account locale or the locale specified in the Accept-Language
+          HTTP header.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the relationship interest.
       value:
-        description: 'The kind of relationship the person is looking for. The value can be custom or predefined. Possible values include, but are not limited to, the following values: * `friend` * `date` * `relationship` * `networking`'
+        description: |-
+          The kind of relationship the person is looking for. The value can be custom
+          or predefined. Possible values include, but are not limited to, the
+          following values:
+
+          * `friend`
+          * `date`
+          * `relationship`
+          * `networking`
         type: string
     type: object
   RelationshipStatus:
-    description: A person's relationship status.
+    description: A person's read-only relationship status.
     properties:
       formattedValue:
-        description: The read-only value of the relationship status translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+        description: |-
+          The read-only value of the relationship status translated and formatted in
+          the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the relationship status.
       value:
-        description: 'The relationship status. The value can be custom or predefined. Possible values include, but are not limited to, the following: * `single` * `inARelationship` * `engaged` * `married` * `itsComplicated` * `openRelationship` * `widowed` * `inDomesticPartnership` * `inCivilUnion`'
+        description: |-
+          The relationship status. The value can be custom or predefined.
+          Possible values include, but are not limited to, the following:
+
+          * `single`
+          * `inARelationship`
+          * `engaged`
+          * `married`
+          * `itsComplicated`
+          * `openRelationship`
+          * `widowed`
+          * `inDomesticPartnership`
+          * `inCivilUnion`
         type: string
     type: object
   Residence:
     description: A person's past or current residence.
     properties:
       current:
-        description: True if the residence is the person's current residence; false if the residence is a past residence.
+        description: |-
+          True if the residence is the person's current residence;
+          false if the residence is a past residence.
         type: boolean
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -931,13 +1199,24 @@ definitions:
   Source:
     description: The source of a field.
     properties:
+      etag:
+        description: |-
+          The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the
+          source. Used for web cache validation. Only populated in
+          person.metadata.sources.
+        type: string
       id:
-        description: A unique identifier within the source type generated by the server.
+        description: The unique identifier within the source type generated by the server.
+        type: string
+      resourceName:
+        description: |-
+          The resource name of the source. Only set if there is a separate
+          resource endpoint.
         type: string
       type:
         description: The source type.
         enum:
-          - OTHER
+          - SOURCE_TYPE_UNSPECIFIED
           - ACCOUNT
           - PROFILE
           - DOMAIN_PROFILE
@@ -945,7 +1224,7 @@ definitions:
         type: string
     type: object
   Tagline:
-    description: A brief one-line description of the person.
+    description: A read-only brief one-line description of the person.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -958,13 +1237,27 @@ definitions:
     description: A person's associated URLs.
     properties:
       formattedType:
-        description: The read-only type of the URL translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+        description: |-
+          The read-only type of the URL translated and formatted in the viewer's
+          account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the URL.
       type:
-        description: 'The type of the URL. The type can be custom or predefined. Possible values include, but are not limited to, the following: * `home` * `work` * `blog` * `profile` * `homePage` * `ftp` * `reservations` * `appInstallPage`: website for a Google+ application. * `other`'
+        description: |-
+          The type of the URL. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following:
+
+          * `home`
+          * `work`
+          * `blog`
+          * `profile`
+          * `homePage`
+          * `ftp`
+          * `reservations`
+          * `appInstallPage`: website for a Google+ application.
+          * `other`
         type: string
       value:
         description: The URL.

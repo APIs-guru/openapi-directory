@@ -6,7 +6,7 @@ basePath: /api
 info:
   description: Open Source GPS Tracking Platform
   title: traccar
-  version: '3.9'
+  version: '3.10'
   x-logo:
     url: 'https://www.traccar.org/wp-content/uploads/2015/04/logo2x.png'
   x-origin:
@@ -31,6 +31,18 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/AttributeAlias'
+  Calendar:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/Calendar'
+  CalendarPermission:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/CalendarPermission'
   Device:
     in: body
     name: body
@@ -85,8 +97,14 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/User'
+  UserPermission:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/UserPermission'
   all:
-    description: Can only be used by admin users to fetch all entities
+    description: Can only be used by admins or managers to fetch all entities
     in: query
     name: all
     type: boolean
@@ -174,6 +192,47 @@ paths:
           schema:
             $ref: '#/definitions/AttributeAlias'
       summary: Update an AttributeAlias
+  /calendars:
+    get:
+      description: 'Without params, it returns a list of Calendars the user has access to'
+      parameters:
+        - $ref: '#/parameters/all'
+        - $ref: '#/parameters/userId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Calendar'
+            type: array
+      summary: Fetch a list of Calendars
+    post:
+      parameters:
+        - $ref: '#/parameters/Calendar'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Calendar'
+      summary: Create a Calendar
+  '/calendars/{id}':
+    delete:
+      parameters:
+        - $ref: '#/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a Calendar
+    put:
+      parameters:
+        - $ref: '#/parameters/entityId'
+        - $ref: '#/parameters/Calendar'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Calendar'
+      summary: Update a Calendar
   /commands:
     post:
       parameters:
@@ -398,6 +457,23 @@ paths:
           schema:
             $ref: '#/definitions/Group'
       summary: Update a Group
+  /permissions/calendars:
+    delete:
+      parameters:
+        - $ref: '#/parameters/CalendarPermission'
+      responses:
+        '204':
+          description: No Content
+      summary: Remove a Calendar from a User
+    post:
+      parameters:
+        - $ref: '#/parameters/CalendarPermission'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CalendarPermission'
+      summary: Link a Calendar to a User
   /permissions/devices:
     delete:
       parameters:
@@ -451,8 +527,29 @@ paths:
           schema:
             $ref: '#/definitions/GroupPermission'
       summary: Link a Group to a User
+  /permissions/users:
+    delete:
+      parameters:
+        - $ref: '#/parameters/UserPermission'
+      responses:
+        '204':
+          description: No Content
+      summary: Remove a User from a manager User
+    post:
+      parameters:
+        - $ref: '#/parameters/UserPermission'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UserPermission'
+      summary: Link a User to a manager User
   /positions:
     get:
+      consumes:
+        - application/json
+        - text/csv
+        - application/gpx+xml
       description: 'Without any params, it returns a list of last known positions for all the user''s Devices. _from_ and _to_ fields are not required with _id_'
       parameters:
         - description: '_deviceId_ is optional, but requires the _from_ and _to_ parameters when used'
@@ -478,6 +575,10 @@ paths:
           name: id
           required: false
           type: integer
+      produces:
+        - application/json
+        - text/csv
+        - application/gpx+xml
       responses:
         '200':
           description: OK
@@ -488,6 +589,9 @@ paths:
       summary: Fetches a list of Positions
   /reports/events:
     get:
+      consumes:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       description: At least one _deviceId_ or one _groupId_ must be passed
       parameters:
         - $ref: '#/parameters/deviceIdArray'
@@ -500,6 +604,9 @@ paths:
           type: array
         - $ref: '#/parameters/fromTime'
         - $ref: '#/parameters/toTime'
+      produces:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       responses:
         '200':
           description: OK
@@ -510,12 +617,18 @@ paths:
       summary: Fetch a list of Events within the time period for the Devices or Groups
   /reports/route:
     get:
+      consumes:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       description: At least one _deviceId_ or one _groupId_ must be passed
       parameters:
         - $ref: '#/parameters/deviceIdArray'
         - $ref: '#/parameters/groupIdArray'
         - $ref: '#/parameters/fromTime'
         - $ref: '#/parameters/toTime'
+      produces:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       responses:
         '200':
           description: OK
@@ -526,12 +639,18 @@ paths:
       summary: Fetch a list of Positions within the time period for the Devices or Groups
   /reports/summary:
     get:
+      consumes:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       description: At least one _deviceId_ or one _groupId_ must be passed
       parameters:
         - $ref: '#/parameters/deviceIdArray'
         - $ref: '#/parameters/groupIdArray'
         - $ref: '#/parameters/fromTime'
         - $ref: '#/parameters/toTime'
+      produces:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       responses:
         '200':
           description: OK
@@ -542,12 +661,18 @@ paths:
       summary: Fetch a list of ReportSummary within the time period for the Devices or Groups
   /reports/trips:
     get:
+      consumes:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       description: At least one _deviceId_ or one _groupId_ must be passed
       parameters:
         - $ref: '#/parameters/deviceIdArray'
         - $ref: '#/parameters/groupIdArray'
         - $ref: '#/parameters/fromTime'
         - $ref: '#/parameters/toTime'
+      produces:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       responses:
         '200':
           description: OK
@@ -589,6 +714,11 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
+      parameters:
+        - in: query
+          name: token
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -633,6 +763,12 @@ paths:
       summary: Fetch server Statistics
   /users:
     get:
+      parameters:
+        - description: Can only be used by admin or manager users
+          in: query
+          name: userId
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -710,6 +846,22 @@ definitions:
       deviceId:
         type: integer
       id:
+        type: integer
+  Calendar:
+    properties:
+      atributes: {}
+      data:
+        description: base64 encoded in iCalendar format
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+  CalendarPermission:
+    properties:
+      calendarId:
+        type: integer
+      userId:
         type: integer
   Command:
     properties:
@@ -794,6 +946,8 @@ definitions:
       area:
         type: string
       attributes: {}
+      calendarId:
+        type: integer
       description:
         type: string
       id:
@@ -832,12 +986,18 @@ definitions:
       attributes: {}
       id:
         type: integer
+      mail:
+        type: boolean
       type:
         type: string
       userId:
         type: integer
+      web:
+        type: boolean
   Position:
     properties:
+      accuracy:
+        type: number
       address:
         type: string
       altitude:
@@ -861,6 +1021,8 @@ definitions:
         type: number
       longitude:
         type: number
+      network:
+        type: string
       outdated:
         type: boolean
       protocol:
@@ -986,6 +1148,8 @@ definitions:
         type: string
       deviceLimit:
         type: integer
+      deviceReadonly:
+        type: boolean
       disabled:
         type: boolean
       distanceUnit:
@@ -1016,5 +1180,13 @@ definitions:
         type: string
       twelveHourFormat:
         type: boolean
+      userLimit:
+        type: integer
       zoom:
+        type: integer
+  UserPermission:
+    properties:
+      managedUserId:
+        type: integer
+      userId:
         type: integer

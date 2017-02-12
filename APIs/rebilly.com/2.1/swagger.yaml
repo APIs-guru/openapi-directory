@@ -56,7 +56,7 @@ info:
     ```
   license:
     name: Rebilly
-    url: 'https://www.rebilly.com/api/license/'
+    url: 'https://my.rebilly.com/api/license/'
   termsOfService: 'https://www.rebilly.com/terms/'
   title: Rebilly
   version: '2.1'
@@ -303,6 +303,12 @@ tags:
       power a pricing page. You can make multiple layouts, and use rules to
       target them to different audiences.
     name: Layouts
+  - description: |
+      Lists contain sets of values and may be referenced within Rules criteria.
+
+      You may grant permissions to edit Lists to different people than those who can edit Rules.
+      It may be useful if your workflow involves frequent updates to value sets used in criteria.
+    name: Lists
   - description: |
       Leave notes on a customer record to have a handy location to share with
       others who may interface with the customer.  It's great for customer service.
@@ -3253,6 +3259,7 @@ paths:
           - payments
           - websites
           - contacts
+          - products
         in: path
         name: resource
         required: true
@@ -3331,6 +3338,7 @@ paths:
           - payments
           - websites
           - contacts
+          - products
         in: path
         name: resource
         required: true
@@ -3957,236 +3965,6 @@ paths:
 
             try {
                 $dispute = $client->disputes()->update('disputeId', $dispute);
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
-  /email-credentials:
-    get:
-      description: |
-        Retrieve a list of email credentials
-      parameters:
-        - $ref: '#/parameters/collectionLimit'
-        - $ref: '#/parameters/collectionOffset'
-      responses:
-        '200':
-          description: A list of email credentials was retrieved successfully
-          headers:
-            Pagination-Limit:
-              description: Items per page limit
-              type: integer
-            Pagination-Offset:
-              description: Pagination offset
-              type: integer
-            Pagination-Total:
-              description: Total items count
-              type: integer
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            items:
-              $ref: '#/definitions/EmailCredential'
-            type: array
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a list of email credentials
-      tags:
-        - Email Credentials
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $emailCredentials = $client->emailCredentials()->search([
-                'filter' => 'senderName:testSender',
-            ]);
-    post:
-      description: Create email credential
-      parameters:
-        - description: EmailCredential resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/EmailCredential'
-      responses:
-        '201':
-          description: Email credential was created
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/EmailCredential'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create email credential
-      tags:
-        - Email Credentials
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $emailCredentialsForm = new Rebilly\Entities\EmailCredentials();
-            $emailCredentialsForm->setSenderName('John Doe');
-            $emailCredentialsForm->setSenderEmail('jdoe@test.com');
-            $emailCredentialsForm->setUsername('test');
-            $emailCredentialsForm->setPassword('1234');
-            $emailCredentialsForm->setHost('testmail.com');
-            $emailCredentialsForm->setPort('25');
-
-            try {
-                $emailCredentials = $client->emailCredentials()->create($emailCredentialsForm);
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
-  '/email-credentials/{id}':
-    delete:
-      description: |
-        Delete an email credential with predefined identifier string
-      responses:
-        '204':
-          description: Email credential was deleted
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Delete an email credential
-      tags:
-        - Email Credentials
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $client->emailCredentials()->delete('emailCredentialsId');
-    get:
-      description: |
-        Retrieve email credential with specified identifier string
-      responses:
-        '200':
-          description: Email credential was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/EmailCredential'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieve email credential
-      tags:
-        - Email Credentials
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $emailCredentials = $client->emailCredentials()->load('emailCredentialsId');
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    put:
-      description: |
-        Create or update email credential with predefined identifier string
-      parameters:
-        - description: EmailCredential resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/EmailCredential'
-      responses:
-        '200':
-          description: Email credential was updated
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/EmailCredential'
-        '201':
-          description: Email credential was created
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/EmailCredential'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create or update email credential with predefined ID
-      tags:
-        - Email Credentials
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $emailCredentialsForm = new Rebilly\Entities\EmailCredentials();
-            $emailCredentialsForm->setSenderName('John Doe');
-            $emailCredentialsForm->setSenderEmail('jdoe@test.com');
-            $emailCredentialsForm->setUsername('test');
-            $emailCredentialsForm->setPassword('1234');
-            $emailCredentialsForm->setHost('testmail.com');
-            $emailCredentialsForm->setPort('25');
-
-            try {
-                $emailCredentials = $client->emailCredentials()->update('emailCredentialsId', $emailCredentialsForm);
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
@@ -4967,6 +4745,44 @@ paths:
             $gatewayAccount = $client->gatewayAccounts()->load('gatewayAccountId');
     parameters:
       - $ref: '#/parameters/resourceId'
+    patch:
+      description: |
+        Update a GatewayAccount with predefined identifier string
+      parameters:
+        - description: Gateway Account resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GatewayAccount'
+      responses:
+        '200':
+          description: Gateway Account was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/GatewayAccount'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Update a Gateway Account with predefined ID
+      tags:
+        - Gateway Accounts
     put:
       description: |
         Create or update a GatewayAccount with predefined identifier string
@@ -5833,6 +5649,216 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  /lists:
+    get:
+      description: |
+        Retrieve a collection of Lists
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+        - $ref: '#/parameters/collectionFilter'
+        - $ref: '#/parameters/collectionCriteria'
+        - $ref: '#/parameters/collectionSort'
+      responses:
+        '200':
+          description: A collection of Lists was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/List'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a collection of Lists (latest version of each List)
+      tags:
+        - Lists
+    post:
+      description: |
+        Create a List
+      parameters:
+        - description: List resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/List'
+      responses:
+        '201':
+          description: List was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/List'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a List
+      tags:
+        - Lists
+  '/lists/{id}':
+    delete:
+      description: |
+        Delete a list with predefined identifier string
+      responses:
+        '204':
+          description: List was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          description: List is used in Rules and cannot be deleted
+      summary: Delete a list
+      tags:
+        - Lists
+    get:
+      description: |
+        Retrieve latest version of List with specified identifier string
+      responses:
+        '200':
+          description: List was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/List'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve list's latest version
+      tags:
+        - Lists
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      description: |
+        Create or update a list with predefined identifier string
+      parameters:
+        - description: List resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/List'
+      responses:
+        '200':
+          description: List was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/List'
+        '201':
+          description: List was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/List'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Create or update a list with predefined ID
+      tags:
+        - Lists
+  '/lists/{id}/{version}':
+    get:
+      responses:
+        '200':
+          description: List's exact version was retrieved successfully
+          schema:
+            $ref: '#/definitions/List'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve List's exact version
+      tags:
+        - Lists
+    parameters:
+      - $ref: '#/parameters/resourceId'
+      - description: List version
+        in: path
+        minimum: 1
+        name: version
+        required: true
+        type: integer
   /notes:
     get:
       description: |
@@ -7511,6 +7537,31 @@ paths:
       tags:
         - Products
   '/products/{id}':
+    delete:
+      description: |
+        Delete a product with predefined identifier string
+      responses:
+        '204':
+          description: Product was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Delete a product
+      tags:
+        - Products
     get:
       description: |
         Retrieve a product with specified identifier string
@@ -9059,6 +9110,44 @@ paths:
             $apiTrackingLog = $client->apiTracking()->load('apiLogId');
     parameters:
       - $ref: '#/parameters/resourceId'
+  /tracking/lists:
+    get:
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: Lists changes history was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/List'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve Lists changes history
+      tags:
+        - Tracking
   /tracking/subscriptions:
     get:
       parameters:
@@ -9414,6 +9503,58 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  '/users/reset-password/{token}':
+    parameters:
+      - description: The token string
+        in: path
+        name: token
+        required: true
+        type: string
+    post:
+      description: |
+        Reset user password
+      parameters:
+        - description: ResetPassword resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ResetPassword'
+      responses:
+        '201':
+          description: Password was reseted successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Reset user password
+      tags:
+        - Users
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $resetPasswordForm = new Rebilly\Entities\ResetPassword();
+            $resetPasswordForm->setNewPassword('1234');
+
+            try {
+                $user = $client->users()->resetPassword('userId', 'token', $resetPasswordForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/users/{id}':
     delete:
       description: |
@@ -9599,59 +9740,6 @@ paths:
 
             try {
                 $user = $client->users()->updatePassword('userId', $updatePasswordForm);
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
-  '/users/{id}/reset-password/{token}':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-      - description: The token string
-        in: path
-        name: token
-        required: true
-        type: string
-    post:
-      description: |
-        Reset user password
-      parameters:
-        - description: ResetPassword resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/ResetPassword'
-      responses:
-        '201':
-          description: Password was reseted successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/User'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Reset user password
-      tags:
-        - Users
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $resetPasswordForm = new Rebilly\Entities\ResetPassword();
-            $resetPasswordForm->setNewPassword('1234');
-
-            try {
-                $user = $client->users()->resetPassword('userId', 'token', $resetPasswordForm);
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
@@ -10089,6 +10177,7 @@ definitions:
       - Panda Bank
       - PayPal
       - PayR
+      - People's bank
       - Privatbank
       - RBC
       - RBS WorldPay
@@ -10222,13 +10311,24 @@ definitions:
           - POST
           - PUT
           - DELETE
+          - PATCH
         type: string
       request:
         description: Request JSON-string
         type: string
+      requestHeaders:
+        description: Request headers array
+        items:
+          type: string
+        type: array
       response:
         description: Response JSON-string
         type: string
+      responseHeaders:
+        description: Response headers array
+        items:
+          type: string
+        type: array
       status:
         description: HTTP response code
         type: integer
@@ -11577,74 +11677,6 @@ definitions:
     required:
       - email
     type: object
-  EmailCredential:
-    properties:
-      _links:
-        description: The links related to resource
-        items:
-          - $ref: '#/definitions/SelfLink'
-        maxItems: 1
-        minItems: 1
-        readOnly: true
-        type: array
-      authenticationMethod:
-        description: Credential's authentication method
-        enum:
-          - none
-          - plain
-          - login
-          - cram-md5
-        type: string
-      createdTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Credential's created time
-      encryptionMethod:
-        description: Credential's encryption method
-        enum:
-          - none
-          - tls
-          - ssl
-        type: string
-      host:
-        description: Credential's host
-        type: string
-      id:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Credential's identifier string
-        readOnly: true
-      password:
-        description: Credential's password
-        format: password
-        type: string
-      port:
-        description: Credential's port
-        maximum: 65535
-        minimum: 0
-        type: integer
-      senderEmail:
-        description: Credential's sender email address
-        format: email
-        type: string
-      senderName:
-        description: Credential's sender name
-        type: string
-      updatedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Credential's updated time
-      username:
-        description: Credential's username
-        type: string
-    required:
-      - senderName
-      - senderEmail
-      - host
-      - port
-      - username
-      - password
-    type: object
   EmailNotification:
     properties:
       bcc:
@@ -12013,6 +12045,7 @@ definitions:
       - GlobalOne
       - iCheque
       - Ilixium
+      - JetPay
       - Moneris
       - NMI
       - OchaPay
@@ -12279,6 +12312,22 @@ definitions:
     required:
       - rel
     type: object
+  JetPay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              TerminalID:
+                description: JetPay Gateway terminal ID
+                type: string
+            required:
+              - TerminalID
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: JetPay Gateway config
   Layout:
     properties:
       _links:
@@ -12410,6 +12459,46 @@ definitions:
         type: string
     required:
       - rel
+    type: object
+  List:
+    properties:
+      _links:
+        description: Links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: List created time
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: List ID
+        readOnly: true
+      name:
+        description: List name
+        type: string
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: List updated time
+      values:
+        description: List values
+        items:
+          type: string
+        type: array
+      version:
+        description: List version
+        minimum: 1
+        readOnly: true
+        type: integer
+    required:
+      - name
+      - values
     type: object
   Method:
     description: The payment method
@@ -12827,6 +12916,9 @@ definitions:
         description: The payment amount
         format: double
         type: integer
+      billingContactId:
+        description: Billing Contact ID
+        type: string
       createdBy:
         description: The process that created this payment
         type: string
@@ -12933,6 +13025,7 @@ definitions:
         description: The Billing Contact ID. Required if card is creating not from Token
       bin:
         description: The card's bin (the PAN's first 6 digits)
+        format: bin
         readOnly: true
         type: string
       brand:
@@ -13072,7 +13165,7 @@ definitions:
         description: The policy on the attempt finishes
         enum:
           - none
-          - change-renewal-time
+          - change-subscription-renewal-time
         type: string
       afterRetryEndPolicy:
         description: The policy on the retry ends
@@ -13356,7 +13449,7 @@ definitions:
   Product:
     description: |
       Your product includes digital goods, services, and physical goods.
-      Products appear on invoice line items.  If you set a tax category identifier,
+      Products appear on invoice line items. If you set a tax category identifier,
       taxes will be calculated upon invoice generation.
     example: |
       {
@@ -13364,6 +13457,8 @@ definitions:
         "name": "Widget",
         "description": "Fantastic widget",
         "taxCategoryId": null,
+        "requiresShipping": true,
+        "accountingCode": "100",
         "customFields": [],
         "createdTime": "2015-08-27 13:45:12",
         "updatedTime": "2015-08-27 13:45:12",
@@ -13383,13 +13478,15 @@ definitions:
         minItems: 1
         readOnly: true
         type: array
+      accountingCode:
+        description: The product accounting code
+        type: string
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: The product created time
       customFields:
-        description: Any custom object that may be stored with product (see custom fields)
-        type: string
+        $ref: '#/definitions/ResourceCustomFields'
       description:
         description: The product description
         maxLength: 512
@@ -13403,6 +13500,9 @@ definitions:
         description: The product name
         maxLength: 255
         type: string
+      requiresShipping:
+        description: 'If the product requires shipping, shipping calculations will be applied'
+        type: boolean
       taxCategoryId:
         description: The product's tax category identifier string
         enum:
@@ -13418,6 +13518,8 @@ definitions:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: The product updated time
+    required:
+      - name
     type: object
   RPN:
     allOf:
@@ -13975,8 +14077,34 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: Unique id for each billing contact
-      cancelSource:
-        description: Source of cancellation
+      cancelCategory:
+        description: Cancel category
+        enum:
+          - billing-failure
+          - did-not-use
+          - did-not-want
+          - missing-features
+          - bugs-or-problems
+          - do-not-remember
+          - risk-warning
+          - contract-expired
+          - too-expensive
+          - never-started
+          - switched-plan
+          - other
+        readOnly: true
+        type: string
+      cancelDescription:
+        description: Cancel reason description in free form
+        maxLength: 255
+        readOnly: true
+        type: string
+      canceledBy:
+        description: Canceled by
+        enum:
+          - merchant
+          - customer
+          - rebilly
         readOnly: true
         type: string
       canceledTime:
@@ -14052,6 +14180,29 @@ definitions:
     type: object
   SubscriptionCancel:
     properties:
+      cancelCategory:
+        description: Cancel category
+        enum:
+          - did-not-use
+          - did-not-want
+          - missing-features
+          - bugs-or-problems
+          - do-not-remember
+          - risk-warning
+          - contract-expired
+          - too-expensive
+          - other
+        type: string
+      cancelDescription:
+        description: Cancel reason description in free form
+        maxLength: 255
+        type: string
+      canceledBy:
+        description: Canceled by
+        enum:
+          - merchant
+          - customer
+        type: string
       policy:
         description: Cancel policy
         enum:
@@ -14061,6 +14212,8 @@ definitions:
         type: string
     required:
       - policy
+      - canceledBy
+      - cancelCategory
     type: object
   SubscriptionLink:
     allOf:
@@ -14316,6 +14469,14 @@ definitions:
         format: double
         readOnly: true
         type: number
+      billingContactId:
+        description: Billing Contact ID
+        type: string
+      bin:
+        description: Payment Card BIN
+        format: bin
+        readOnly: true
+        type: string
       childTransactions:
         description: The child transaction IDs
         items:
@@ -14748,6 +14909,7 @@ definitions:
               - POST
               - PUT
               - DELETE
+              - PATCH
             type: string
           minItems: 1
           type: array
@@ -14773,12 +14935,12 @@ definitions:
             - custom-fields
             - customers
             - disputes
-            - email-credentials
             - events
             - gateway-accounts
             - invoices
             - layouts
             - lead-sources
+            - lists
             - notes
             - oct-batch
             - organizations

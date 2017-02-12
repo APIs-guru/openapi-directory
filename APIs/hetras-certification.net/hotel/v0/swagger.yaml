@@ -1990,21 +1990,15 @@ definitions:
         type: string
     type: object
   'JsonPatchDocument[RatePatchRequest]':
-    properties:
-      Operations:
-        items:
-          $ref: '#/definitions/Operation[RatePatchRequest]'
-        readOnly: true
-        type: array
-    type: object
+    items:
+      $ref: '#/definitions/Operation[RatePatchRequest]'
+    properties: {}
+    type: array
   'JsonPatchDocument[RoomPatchRequest]':
-    properties:
-      Operations:
-        items:
-          $ref: '#/definitions/Operation[RoomPatchRequest]'
-        readOnly: true
-        type: array
-    type: object
+    items:
+      $ref: '#/definitions/Operation[RoomPatchRequest]'
+    properties: {}
+    type: array
   LinkObject:
     description: A Link Object represents a hyperlink from the containing resource to a URI.
     properties:

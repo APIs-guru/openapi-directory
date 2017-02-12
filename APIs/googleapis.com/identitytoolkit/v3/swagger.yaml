@@ -573,7 +573,7 @@ definitions:
         type: string
     type: object
   DownloadAccountResponse:
-    description: Respone of downloading accounts in batch.
+    description: Response of downloading accounts in batch.
     properties:
       kind:
         default: 'identitytoolkit#DownloadAccountResponse'
@@ -987,6 +987,9 @@ definitions:
       instanceId:
         description: Instance id token of the app.
         type: string
+      localId:
+        description: Privileged caller can create user with specified user id.
+        type: string
       password:
         description: The new password of the user.
         type: string
@@ -1199,6 +1202,9 @@ definitions:
       email:
         description: The email of the user.
         type: string
+      emailVerified:
+        description: If email has been verified.
+        type: boolean
       expiresIn:
         description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
         format: int64
@@ -1431,6 +1437,9 @@ definitions:
       inputEmail:
         description: It's the identifier param in the createAuthUri request if the identifier is an email. It can be used to check whether the user input email is different from the asserted email.
         type: string
+      isNewUser:
+        description: 'True if it''s a new user sign-in, false if it''s a returning user.'
+        type: boolean
       kind:
         default: 'identitytoolkit#VerifyAssertionResponse'
         description: 'The fixed string "identitytoolkit#VerifyAssertionResponse".'

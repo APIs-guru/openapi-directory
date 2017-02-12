@@ -343,6 +343,10 @@ paths:
           in: query
           name: filters
           type: string
+        - description: If set to true historical data (i.e. channel data from before the linking of the channel to the content owner) will be retrieved.
+          in: query
+          name: include-historical-channel-data
+          type: boolean
         - description: The maximum number of rows to include in the response.
           in: query
           minimum: 1

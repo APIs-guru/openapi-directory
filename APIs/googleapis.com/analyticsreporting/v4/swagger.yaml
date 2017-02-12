@@ -113,19 +113,19 @@ tags:
 paths:
   '/v4/reports:batchGet':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: Returns the Analytics data.
       operationId: analyticsreporting.reports.batchGet

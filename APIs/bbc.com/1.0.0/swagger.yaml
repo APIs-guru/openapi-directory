@@ -494,6 +494,15 @@ paths:
           name: q
           required: false
           type: string
+        - description: Control return of embargoed items (undocumented)
+          enum:
+            - include
+            - exclude
+            - only
+          in: query
+          name: embargoed
+          required: false
+          type: string
       responses:
         '200':
           description: Nitro response
@@ -612,6 +621,15 @@ paths:
         - description: filter for subset of images matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
+          required: false
+          type: string
+        - description: Control return of embargoed items (undocumented)
+          enum:
+            - include
+            - exclude
+            - only
+          in: query
+          name: embargoed
           required: false
           type: string
       responses:
@@ -1003,8 +1021,8 @@ paths:
         - feeds
   /programme_details:
     get:
-      description: Feed for programme details without the need for mixins
-      operationId: listProgramme Details
+      description: Exposes programme information for a single pid
+      operationId: listProgrammeDetails
       parameters:
         - default: 1
           description: which page of results to return
@@ -1020,26 +1038,20 @@ paths:
           name: page_size
           required: false
           type: integer
-        - collectionFormat: multi
-          description: filter for programmes by partner PID
+        - description: Filter for programme information by partner PID
           in: query
-          items:
-            minLength: 8
-            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
-            type: string
+          minLength: 8
           name: partner_pid
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
           required: false
-          type: array
-        - collectionFormat: multi
-          description: filter for subset of programmes having given PID
+          type: string
+        - description: Filter for programme information for the provided PID
           in: query
-          items:
-            minLength: 8
-            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
-            type: string
+          minLength: 8
           name: pid
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
           required: false
-          type: array
+          type: string
       responses:
         '200':
           description: Nitro response
@@ -1049,7 +1061,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/ErrorModel'
-      summary: Feed for programme details without the need for mixins
+      summary: Exposes programme information for a single pid
       tags:
         - feeds
   /programmes:
@@ -1422,6 +1434,15 @@ paths:
           name: version
           required: false
           type: array
+        - description: Control return of embargoed items (undocumented)
+          enum:
+            - include
+            - exclude
+            - only
+          in: query
+          name: embargoed
+          required: false
+          type: string
       responses:
         '200':
           description: Nitro response
@@ -2159,6 +2180,15 @@ paths:
           name: pid
           required: false
           type: array
+        - description: Control return of embargoed items (undocumented)
+          enum:
+            - include
+            - exclude
+            - only
+          in: query
+          name: embargoed
+          required: false
+          type: string
       responses:
         '200':
           description: Nitro response

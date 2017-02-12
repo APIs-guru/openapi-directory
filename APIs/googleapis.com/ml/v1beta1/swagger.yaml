@@ -173,19 +173,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1beta1/{name}/operations':
     get:
       description: |-
@@ -225,34 +225,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1beta1/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -316,34 +316,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1beta1/{name}:predict':
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Performs prediction on the data in the request.
@@ -376,19 +376,19 @@ paths:
         - projects
   '/v1beta1/{name}:setDefault':
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Designates a version to be the default for the model.
@@ -440,10 +440,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Optional. Specifies the subset of jobs to retrieve.
-          in: query
-          name: filter
-          type: string
         - description: |-
             Optional. A page token to request the next page of results.
 
@@ -461,6 +457,10 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: Optional. Specifies the subset of jobs to retrieve.
+          in: query
+          name: filter
+          type: string
       responses:
         '200':
           description: Successful response
@@ -472,19 +472,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: Creates a training or a batch prediction job.
       operationId: ml.projects.jobs.create
@@ -558,19 +558,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates a model which will later contain one or more versions.
@@ -650,19 +650,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates a new version of a model from a trained TensorFlow model.
@@ -746,6 +746,92 @@ definitions:
       data:
         description: HTTP body binary data.
         format: byte
+        type: string
+    type: object
+  GoogleCloudMlV1__OperationMetadata:
+    description: Represents the metadata of the long-running operation.
+    properties:
+      createTime:
+        description: The time the operation was submitted.
+        format: google-datetime
+        type: string
+      endTime:
+        description: The time operation processing completed.
+        format: google-datetime
+        type: string
+      isCancellationRequested:
+        description: Indicates whether a request to cancel this operation has been made.
+        type: boolean
+      modelName:
+        description: Contains the name of the model associated with the operation.
+        type: string
+      operationType:
+        description: The operation type.
+        enum:
+          - OPERATION_TYPE_UNSPECIFIED
+          - CREATE_VERSION
+          - DELETE_VERSION
+          - DELETE_MODEL
+        type: string
+      startTime:
+        description: The time operation processing started.
+        format: google-datetime
+        type: string
+      version:
+        $ref: '#/definitions/GoogleCloudMlV1__Version'
+        description: Contains the version associated with the operation.
+    type: object
+  GoogleCloudMlV1__Version:
+    description: |-
+      Represents a version of the model.
+
+      Each version is a trained model deployed in the cloud, ready to handle
+      prediction requests. A model can have multiple versions. You can get
+      information about all of the versions of a given model by calling
+      [projects.models.versions.list](/ml/reference/rest/v1/projects.models.versions/list).
+    properties:
+      createTime:
+        description: Output only. The time the version was created.
+        format: google-datetime
+        type: string
+      deploymentUri:
+        description: |-
+          Required. The Google Cloud Storage location of the trained model used to
+          create the version. See the
+          [overview of model deployment](/ml/docs/concepts/deployment-overview) for
+          more informaiton.
+
+          When passing Version to
+          [projects.models.versions.create](/ml/reference/rest/v1/projects.models.versions/create)
+          the model service uses the specified location as the source of the model.
+          Once deployed, the model version is hosted by the prediction service, so
+          this location is useful only as a historical record.
+        type: string
+      description:
+        description: Optional. The description specified for the version when it was created.
+        type: string
+      isDefault:
+        description: |-
+          Output only. If true, this version will be used to handle prediction
+          requests that do not specify a version.
+
+          You can change the default version by calling
+          [projects.methods.versions.setDefault](/ml/reference/rest/v1/projects.models.versions/setDefault).
+        type: boolean
+      lastUseTime:
+        description: Output only. The time the version was last used for prediction.
+        format: google-datetime
+        type: string
+      name:
+        description: |-
+          Required.The name specified for the version when it was created.
+
+          The version name must be unique within the model it is created in.
+        type: string
+      runtimeVersion:
+        description: |-
+          Optional. The Google Cloud ML runtime version to use for this deployment.
+          If not set, Google Cloud ML will choose a version.
         type: string
     type: object
   GoogleCloudMlV1beta1_HyperparameterOutput_HyperparameterMetric:

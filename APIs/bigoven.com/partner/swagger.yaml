@@ -620,7 +620,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/BigOven.Model.API2.Recipe'
-      summary: Return full Recipe detail
+      summary: Return full Recipe detail. Returns 403 if the recipe is owned by someone else.
       tags:
         - Recipe
   '/recipe/{recipeId}/feedback':

@@ -1594,7 +1594,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: Modifies the set of products a user is entitled to access.
+      description: Modifies the set of products that a user is entitled to access (referred to as whitelisted products). Only products that are approved or products that were previously approved (products with revoked approval) can be whitelisted.
       operationId: androidenterprise.users.setAvailableProductSet
       parameters:
         - description: The ID of the enterprise.
@@ -3291,7 +3291,7 @@ definitions:
           type: string
         type: array
       productSetBehavior:
-        description: 'The interpretation of this product set. "unknown" should never be sent and ignored if received. "whitelist" means that this product set constitutes a whitelist. "includeAll" means that all products are accessible, including products that are approved, not approved, and even products where approval has been revoked. If the value is "includeAll", the value of the productId field is therefore ignored. If a value is not supplied, it is interpreted to be "whitelist" for backwards compatibility.'
+        description: 'The interpretation of this product set. "unknown" should never be sent and is ignored if received. "whitelist" means that this product set constitutes a whitelist. "includeAll" means that all products are accessible, including products that are approved, products with revoked approval, and products that have never been approved. If the value is "includeAll", the value of the productId field is therefore ignored. If a value is not supplied, it is interpreted to be "whitelist" for backwards compatibility.'
         type: string
     type: object
   ProductsApproveRequest:

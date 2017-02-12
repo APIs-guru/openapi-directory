@@ -112,23 +112,20 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: annotationsets
+  - name: variants
+  - name: references
+  - name: datasets
+  - name: annotations
+  - name: variantsets
   - name: operations
   - name: referencesets
   - name: callsets
   - name: reads
   - name: readgroupsets
-  - name: variants
-  - name: annotationsets
-  - name: references
-  - name: datasets
-  - name: annotations
-  - name: variantsets
 paths:
   /v1/annotations:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -139,6 +136,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates a new annotation. Caller must have WRITE permission
@@ -183,9 +183,6 @@ paths:
         - annotations
   /v1/annotations/search:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -196,6 +193,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Searches for annotations that match the given criteria. Results are
@@ -275,9 +275,6 @@ paths:
       tags:
         - annotations
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -288,6 +285,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     put:
       description: |-
         Updates an annotation. Caller must have
@@ -327,9 +327,6 @@ paths:
         - annotations
   '/v1/annotations:batchCreate':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -340,6 +337,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates one or more new annotations atomically. All annotations must
@@ -376,9 +376,6 @@ paths:
         - annotations
   /v1/annotationsets:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -389,6 +386,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates a new annotation set. Caller must have WRITE permission for the
@@ -421,9 +421,6 @@ paths:
         - annotationsets
   /v1/annotationsets/search:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -434,6 +431,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Searches for annotation sets that match the given criteria. Annotation sets
@@ -511,9 +511,6 @@ paths:
       tags:
         - annotationsets
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -524,6 +521,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     put:
       description: |-
         Updates an annotation set. The update must respect all mutability
@@ -563,9 +563,6 @@ paths:
         - annotationsets
   /v1/callsets:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -576,6 +573,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates a new call set.
@@ -603,9 +603,6 @@ paths:
         - callsets
   /v1/callsets/search:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -616,6 +613,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Gets a list of call sets matching the criteria.
@@ -702,9 +702,6 @@ paths:
       tags:
         - callsets
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -715,6 +712,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     patch:
       description: |-
         Updates a call set.
@@ -766,6 +766,13 @@ paths:
       operationId: genomics.datasets.list
       parameters:
         - description: |-
+            The continuation token, which is used to page through large result sets.
+            To get the next page of results, set this parameter to the value of
+            `nextPageToken` from the previous response.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
             The maximum number of results to return in a single page. If unspecified,
             defaults to 50. The maximum value is 1024.
           in: query
@@ -774,13 +781,6 @@ paths:
         - description: Required. The Google Cloud project ID to list datasets for.
           in: query
           name: projectId
-          type: string
-        - description: |-
-            The continuation token, which is used to page through large result sets.
-            To get the next page of results, set this parameter to the value of
-            `nextPageToken` from the previous response.
-          in: query
-          name: pageToken
           type: string
       responses:
         '200':
@@ -797,9 +797,6 @@ paths:
       tags:
         - datasets
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -810,6 +807,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates a new dataset.
@@ -896,9 +896,6 @@ paths:
       tags:
         - datasets
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -909,6 +906,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     patch:
       description: |-
         Updates a dataset.
@@ -951,9 +951,6 @@ paths:
         - datasets
   '/v1/datasets/{datasetId}:undelete':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -964,6 +961,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Undeletes a dataset by restoring a dataset which was deleted via this API.
@@ -998,9 +998,6 @@ paths:
         - datasets
   /v1/readgroupsets/search:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1011,6 +1008,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Searches for read group sets matching the criteria.
@@ -1099,9 +1099,6 @@ paths:
       tags:
         - readgroupsets
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1112,6 +1109,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     patch:
       description: |-
         Updates a read group set.
@@ -1181,6 +1181,23 @@ paths:
           required: true
           type: string
         - description: |-
+            The start position of the range on the reference, 0-based inclusive. If
+            specified, `referenceName` must also be specified. Defaults to 0.
+          in: query
+          name: start
+          type: string
+        - description: |-
+            The desired width of each reported coverage bucket in base pairs. This
+            will be rounded down to the nearest precomputed bucket width; the value
+            of which is returned as `bucketWidth` in the response. Defaults
+            to infinity (each bucket spans an entire reference sequence) or the length
+            of the target range, if specified. The smallest precomputed
+            `bucketWidth` is currently 2048 base pairs; this is subject to
+            change.
+          in: query
+          name: targetBucketWidth
+          type: string
+        - description: |-
             The name of the reference to query, within the reference set associated
             with this query. Optional.
           in: query
@@ -1206,23 +1223,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: |-
-            The start position of the range on the reference, 0-based inclusive. If
-            specified, `referenceName` must also be specified. Defaults to 0.
-          in: query
-          name: start
-          type: string
-        - description: |-
-            The desired width of each reported coverage bucket in base pairs. This
-            will be rounded down to the nearest precomputed bucket width; the value
-            of which is returned as `bucketWidth` in the response. Defaults
-            to infinity (each bucket spans an entire reference sequence) or the length
-            of the target range, if specified. The smallest precomputed
-            `bucketWidth` is currently 2048 base pairs; this is subject to
-            change.
-          in: query
-          name: targetBucketWidth
-          type: string
       responses:
         '200':
           description: Successful response
@@ -1238,9 +1238,6 @@ paths:
       tags:
         - readgroupsets
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1251,11 +1248,11 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1/readgroupsets/{readGroupSetId}:export':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1266,6 +1263,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Exports a read group set to a BAM file in Google Cloud Storage.
@@ -1307,9 +1307,6 @@ paths:
         - readgroupsets
   '/v1/readgroupsets:import':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1320,6 +1317,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates read group sets by asynchronously importing the provided
@@ -1362,9 +1362,6 @@ paths:
         - readgroupsets
   /v1/reads/search:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1375,6 +1372,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Gets a list of reads for one or more read group sets.
@@ -1423,9 +1423,6 @@ paths:
         - reads
   /v1/references/search:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1436,6 +1433,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Searches for references which match the given criteria.
@@ -1499,9 +1499,6 @@ paths:
       tags:
         - references
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1512,6 +1509,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1/references/{referenceId}/bases':
     get:
       description: |-
@@ -1569,9 +1569,6 @@ paths:
       tags:
         - references
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1582,11 +1579,11 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   /v1/referencesets/search:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1597,6 +1594,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Searches for reference sets which match the given criteria.
@@ -1660,9 +1660,6 @@ paths:
       tags:
         - referencesets
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1673,11 +1670,11 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   /v1/variants:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1688,6 +1685,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates a new variant.
@@ -1715,9 +1715,6 @@ paths:
         - variants
   /v1/variants/search:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1728,6 +1725,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Gets a list of variants matching the criteria.
@@ -1814,9 +1814,6 @@ paths:
       tags:
         - variants
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1827,6 +1824,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     patch:
       description: |-
         Updates a variant.
@@ -1870,9 +1870,6 @@ paths:
         - variants
   '/v1/variants:import':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1883,6 +1880,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates variant data by asynchronously importing the provided information.
@@ -1925,9 +1925,6 @@ paths:
         - variants
   '/v1/variants:merge':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -1938,6 +1935,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Merges the given variants with existing variants.
@@ -2051,9 +2051,6 @@ paths:
         - variants
   /v1/variantsets:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -2064,6 +2061,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates a new variant set.
@@ -2095,9 +2095,6 @@ paths:
         - variantsets
   /v1/variantsets/search:
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -2108,6 +2105,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Returns a list of all variant sets matching search criteria.
@@ -2195,9 +2195,6 @@ paths:
       tags:
         - variantsets
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -2208,6 +2205,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     patch:
       description: |-
         Updates a variant set using patch semantics.
@@ -2252,9 +2252,6 @@ paths:
         - variantsets
   '/v1/variantsets/{variantSetId}:export':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -2265,6 +2262,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Exports variant set data to an external destination.
@@ -2326,9 +2326,6 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -2339,11 +2336,11 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -2354,6 +2351,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients may use Operations.GetOperation or Operations.ListOperations to check whether the cancellation succeeded or the operation completed despite cancellation.'
       operationId: genomics.operations.cancel
@@ -2382,9 +2382,6 @@ paths:
         - operations
   '/v1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -2395,6 +2392,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Gets the access control policy for the dataset. This is empty if the
@@ -2434,9 +2434,6 @@ paths:
         - datasets
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -2447,6 +2444,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Sets the access control policy on the specified dataset. Replaces any
@@ -2486,9 +2486,6 @@ paths:
         - datasets
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -2499,6 +2496,9 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.

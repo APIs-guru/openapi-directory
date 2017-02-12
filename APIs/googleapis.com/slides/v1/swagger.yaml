@@ -117,19 +117,19 @@ tags:
 paths:
   /v1/presentations:
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Creates a new presentation using the title given in the request. Other
@@ -181,19 +181,19 @@ paths:
       tags:
         - presentations
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
   '/v1/presentations/{presentationId}/pages/{pageObjectId}':
     get:
       description: Gets the latest version of the specified page in the presentation.
@@ -226,34 +226,34 @@ paths:
       tags:
         - presentations
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
   '/v1/presentations/{presentationId}:batchUpdate':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Applies one or more updates to the presentation.
@@ -994,6 +994,28 @@ definitions:
           If a placeholder is deleted on a layout, any empty inheriting shapes are
           also deleted.
         type: string
+    type: object
+  DeleteParagraphBulletsRequest:
+    description: |-
+      Deletes bullets from all of the paragraphs that overlap with the given text
+      index range.
+
+      The nesting level of each paragraph will be visually preserved by adding
+      indent to the start of the corresponding paragraph.
+    properties:
+      cellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The optional table cell location if the text to be modified is in a table
+          cell. If present, the object_id must refer to a table.
+      objectId:
+        description: |-
+          The object ID of the shape or table containing the text to delete bullets
+          from.
+        type: string
+      textRange:
+        $ref: '#/definitions/Range'
+        description: 'The range of text to delete bullets from, based on TextElement indexes.'
     type: object
   DeleteTableColumnRequest:
     description: Deletes a column from a table.
@@ -1787,7 +1809,10 @@ definitions:
           - JUSTIFIED
         type: string
       direction:
-        description: The text direction of this paragraph. This property is read-only.
+        description: |-
+          The text direction of this paragraph. If unset, the value defaults to
+          LEFT_TO_RIGHT
+          since text direction is not inherited. This property is read-only.
         enum:
           - TEXT_DIRECTION_UNSPECIFIED
           - LEFT_TO_RIGHT
@@ -1963,10 +1988,48 @@ definitions:
   Recolor:
     description: A recolor effect applied on an image.
     properties:
+      name:
+        description: |-
+          The name of the recolor effect.
+
+          The name is determined from the `recolor_stops` by matching the gradient
+          against the colors in the page's current color scheme. This property is
+          read-only.
+        enum:
+          - NONE
+          - LIGHT1
+          - LIGHT2
+          - LIGHT3
+          - LIGHT4
+          - LIGHT5
+          - LIGHT6
+          - LIGHT7
+          - LIGHT8
+          - LIGHT9
+          - LIGHT10
+          - DARK1
+          - DARK2
+          - DARK3
+          - DARK4
+          - DARK5
+          - DARK6
+          - DARK7
+          - DARK8
+          - DARK9
+          - DARK10
+          - GRAYSCALE
+          - NEGATIVE
+          - SEPIA
+          - CUSTOM
+        type: string
       recolorStops:
         description: |-
           The recolor effect is represented by a gradient, which is a list of color
-          stops. This property is read-only.
+          stops.
+
+          The colors in the gradient will replace the corresponding colors at
+          the same position in the color palette and apply to the image. This
+          property is read-only.
         items:
           $ref: '#/definitions/ColorStop'
         type: array
@@ -2101,6 +2164,9 @@ definitions:
       deleteObject:
         $ref: '#/definitions/DeleteObjectRequest'
         description: Deletes a page or page element from the presentation.
+      deleteParagraphBullets:
+        $ref: '#/definitions/DeleteParagraphBulletsRequest'
+        description: Deletes bullets from paragraphs.
       deleteTableColumn:
         $ref: '#/definitions/DeleteTableColumnRequest'
         description: Deletes a column from a table.
@@ -3165,10 +3231,10 @@ definitions:
           should not be specified. A single `"*"` can be used as short-hand for
           listing every field.
 
-          For example to update the text style to bold, set `fields` to `"bold"`.
+          For example, to update the text style to bold, set `fields` to `"bold"`.
 
-          To reset a property to its default value,
-          include its field name in the field mask but leave the field itself unset.
+          To reset a property to its default value, include its field name in the
+          field mask but leave the field itself unset.
         format: google-fieldmask
         type: string
       objectId:
