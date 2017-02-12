@@ -167,22 +167,24 @@ function validatePrefered(specs) {
   var preferred = {}
   _.each(specs, function (swagger) {
     var id = util.getApiId(swagger);
-    preferred[id] = preferred[id] || [];
-    preferred[id].push(swagger.info['x-preferred']);
+    preferred[id] = preferred[id] || {};
+    preferred[id][swagger.info.version] = swagger.info['x-preferred'];
   });
 
   _.each(preferred, function (versions, id) {
+    console.log(versions);
     if (_.size(versions) === 1) {
+      versions = _.values(versions);
       assert(_.isUndefined(versions[0]) || versions[0] === true,
         'Preferred not true in "' + id + '"');
       return;
     }
 
     var seenTrue = false;
-    _.each(versions, function (value) {
-      assert(!_.isUndefined(value), 'Missing value for "x-preferred" in "' + id + '"');
-      assert(_.isBoolean(value), 'Non boolean value for "x-preferred" in "' + id + '"');
-      assert(value !== true || !seenTrue, 'Multiply preferred versions in "' + id + '"');
+    _.each(versions, function (value, version) {
+      assert(!_.isUndefined(value), `Missing value for "x-preferred" in "${id}" "${version}"`);
+      assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}"`);
+      assert(value !== true || !seenTrue, `Multiply preferred versions in "${id}" "${version}"`);
       seenTrue = value || seenTrue;
     });
     assert(seenTrue, `At least one preferred should be true in "${id}"`);

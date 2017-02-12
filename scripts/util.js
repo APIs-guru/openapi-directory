@@ -117,7 +117,6 @@ exports.getProviderName = function (swagger) {
 }
 
 exports.getServiceName = function (swagger) {
-  assert(swagger.info['x-serviceName']);
   return swagger.info['x-serviceName'];
 }
 
