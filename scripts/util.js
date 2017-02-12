@@ -112,10 +112,12 @@ exports.getYamlFiles = function (pattern, dir) {
 }
 
 exports.getProviderName = function (swagger) {
+  assert(swagger.info['x-providerName']);
   return swagger.info['x-providerName'];
 }
 
 exports.getServiceName = function (swagger) {
+  assert(swagger.info['x-serviceName']);
   return swagger.info['x-serviceName'];
 }
 
