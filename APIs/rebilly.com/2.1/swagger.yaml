@@ -310,6 +310,9 @@ tags:
       It may be useful if your workflow involves frequent updates to value sets used in criteria.
     name: Lists
   - description: |
+      Migrate payment cards from one gateway to another.
+    name: Migrate payment cards
+  - description: |
       Leave notes on a customer record to have a handy location to share with
       others who may interface with the customer.  It's great for customer service.
     name: Notes
@@ -381,6 +384,9 @@ tags:
       client to simulate a "session."
     name: Sessions
   - description: |
+      A shipping zone contains regions and countries that you ship to. Each shipping zone has its own shipping rates.
+    name: Shipping Zones
+  - description: |
       Check the status of the Rebilly API (no authentication required).
     name: Status
   - description: |
@@ -414,6 +420,11 @@ tags:
       would allow you to have gateway accounts that are related to multiple websites, or
       exclusive to particular websites.  And gives you more control over your business.
     name: Websites
+  - description: |
+      Webhooks are designed to notify your systems when certain/all registered events happen in near real-time.
+      They allow you to collect information about those events. Rebilly can send these information via
+      POST to an URL of your choice.
+    name: Webhooks
 paths:
   /3dsecure:
     get:
@@ -484,7 +495,6 @@ paths:
           $ref: '#/responses/AccessForbidden'
         '422':
           $ref: '#/responses/InvalidDataError'
-          description: Invalid data was sent
       summary: Create a ThreeDSecure entry
       tags:
         - 3D Secure
@@ -7462,6 +7472,41 @@ paths:
       summary: Trigger a test webhook
       tags:
         - Rules
+  /previews/webhooks:
+    post:
+      description: |
+        Trigger a test webhook
+      parameters:
+        - description: Webhook resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GlobalWebhook'
+      responses:
+        '204':
+          description: Test webhook was triggered
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Trigger a test webhook
+      tags:
+        - Webhooks
   /products:
     get:
       description: |
@@ -8229,6 +8274,185 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  /shipping-zones:
+    get:
+      description: |
+        Retrieve a list of shipping zones
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of shipping zones was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/ShippingZone'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of shipping zones
+      tags:
+        - Shipping Zones
+    post:
+      description: |
+        Create a Shipping Zone
+      parameters:
+        - description: Shipping Zone resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ShippingZone'
+      responses:
+        '201':
+          description: Shipping Zone was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/ShippingZone'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Create a Shipping Zone
+      tags:
+        - Shipping Zones
+  '/shipping-zones/{id}':
+    delete:
+      description: |
+        Delete a shipping zone with predefined identifier string
+      responses:
+        '204':
+          description: Shipping zone was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Delete a shipping zone
+      tags:
+        - Shipping Zones
+    get:
+      description: |
+        Retrieve a shipping zone with specified identifier string
+      responses:
+        '200':
+          description: Shipping zone was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/ShippingZone'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a shipping zone
+      tags:
+        - Shipping Zones
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      description: |
+        Create a shipping zone with predefined identifier string
+      parameters:
+        - description: Shipping zone resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ShippingZone'
+      responses:
+        '200':
+          description: Shipping zone was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/ShippingZone'
+        '201':
+          description: Shipping zone was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/ShippingZone'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Create a shipping zone with predefined ID
+      tags:
+        - Shipping Zones
   /signin:
     post:
       description: |
@@ -9775,6 +9999,164 @@ paths:
         - lang: PHP
           source: |
             $user = $client->users()->resetTotp('userId');
+  /webhooks:
+    get:
+      description: |
+        Retrieve a list of webhooks
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of Webhooks was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/GlobalWebhook'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of webhooks
+      tags:
+        - Webhooks
+    post:
+      description: |
+        Create a webhook
+      parameters:
+        - description: Webhook resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GlobalWebhook'
+      responses:
+        '201':
+          description: Webhook was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/GlobalWebhook'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a webhook
+      tags:
+        - Webhooks
+  '/webhooks/{id}':
+    get:
+      description: |
+        Retrieve a webhook with specified identifier string
+      responses:
+        '200':
+          description: Webhook was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/GlobalWebhook'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a webhook
+      tags:
+        - Webhooks
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      description: |
+        Create or update a webhook with predefined identifier string
+      parameters:
+        - description: Webhook resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GlobalWebhook'
+      responses:
+        '200':
+          description: Webhook was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/GlobalWebhook'
+        '201':
+          description: Webhook was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/GlobalWebhook'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create or update a webhook with predefined ID
+      tags:
+        - Webhooks
   /websites:
     get:
       description: |
@@ -10158,6 +10540,7 @@ definitions:
       - First Data Nashville
       - First Data North
       - First Data Omaha
+      - Flexepin
       - Forte
       - FundSend
       - GlobalCollect
@@ -10177,7 +10560,8 @@ definitions:
       - Panda Bank
       - PayPal
       - PayR
-      - People's bank
+      - Payvision
+      - Peoples Trust Company
       - Privatbank
       - RBC
       - RBS WorldPay
@@ -11006,6 +11390,11 @@ definitions:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: Coupon created time
+      description:
+        description: |
+          Your coupon description. When it is not empty this is used for invoice discount item description,
+          otherwise the item's description uses coupon's redemptionCode like 'Coupon "redemptionCode"'
+        type: string
       discount:
         $ref: '#/definitions/Discount'
       expiredTime:
@@ -11740,6 +12129,9 @@ definitions:
       - subscription-canceled
       - subscription-renewed
       - payment-card-expired
+      - payment-declined
+      - transaction-process-requested
+      - risk-score-changed
     readOnly: true
     type: string
   File:
@@ -11820,6 +12212,27 @@ definitions:
     required:
       - rel
     type: object
+  Flexepin:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiKey:
+                description: Flexepin API Key
+                type: string
+              apiSecret:
+                description: Flexepin API Secret
+                format: password
+                type: string
+            required:
+              - apiKey
+              - apiSecret
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Flexepin Gateway config
   Forte:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -11830,7 +12243,7 @@ definitions:
                 description: Forte Gateway account ID
                 type: string
               apiAccessId:
-                description: Forte Gateway api access id
+                description: Forte Gateway api access ID
                 format: password
                 type: string
               apiSecretKey:
@@ -11838,7 +12251,7 @@ definitions:
                 format: password
                 type: string
               locationId:
-                description: Forte Gateway location id
+                description: Forte Gateway location ID
                 type: string
             required:
               - accountId
@@ -11975,12 +12388,6 @@ definitions:
       threeDSecure:
         description: 'True, if Gateway Account allows 3DSecure'
         type: boolean
-      threeDSecureType:
-        description: Type of 3DSecure
-        enum:
-          - integrated
-          - external
-        type: string
       updatedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -12038,8 +12445,9 @@ definitions:
       - Credorax
       - Datacash
       - Dengi
-      - FundSend
       - EMerchantPay
+      - Flexepin
+      - FundSend
       - Forte
       - GlobalCollect
       - GlobalOne
@@ -12086,7 +12494,7 @@ definitions:
           gatewayConfig:
             properties:
               apiKeyId:
-                description: GlobalCollect Gateway api key id
+                description: GlobalCollect Gateway api key ID
                 type: string
               apiSecretKey:
                 description: GlobalCollect Gateway api secret key
@@ -12128,6 +12536,70 @@ definitions:
           - gatewayConfig
         type: object
     description: GlobalOne Gateway config
+  GlobalWebhook:
+    properties:
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: List created time
+      credentialHash:
+        description: Hash from Credentials which is used for authentication by the given URL
+        type: string
+      eventsFilter:
+        default: []
+        description: An array of System event type
+        items:
+          $ref: '#/definitions/GlobalWebhookEventType'
+        type: array
+      headers:
+        description: Map of elements with header name - header value association
+        type: object
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The webhook identifier string
+        readOnly: true
+      method:
+        enum:
+          - GET
+          - POST
+          - PUT
+          - PATCH
+          - DELETE
+        type: string
+      status:
+        $ref: '#/definitions/OnOff'
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: List updated time
+      url:
+        description: URL that will be triggered when the given event occurs.
+        format: uri
+        type: string
+    required:
+      - method
+      - url
+      - credentialHash
+    type: object
+  GlobalWebhookEventType:
+    description: Rebilly webhooks event type
+    enum:
+      - gateway-account-requested
+      - subscription-trial-ended
+      - subscription-activated
+      - subscription-canceled
+      - subscription-renewed
+      - subscription-ended
+      - transaction-processed
+      - payment-card-expired
+      - payment-declined
+      - invoice-past-due
+      - invoice-modified
+      - invoice-created
+      - dispute-created
+      - suspended-payment-completed
+    type: string
   Ilixium:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -12283,6 +12755,10 @@ definitions:
         description: Start time
         format: date-time
         type: string
+      productId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The product's ID
       quantity:
         description: Invoice item's quantity
         type: integer
@@ -12512,6 +12988,7 @@ definitions:
       - OchaPay
       - UPayCard
       - WeChat Pay
+      - Flexepin
     type: string
   Moneris:
     allOf:
@@ -13446,6 +13923,41 @@ definitions:
           - gatewayConfig
         type: object
     description: Plugnpay Gateway config
+  PriceBasedShippingRate:
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      currency:
+        description: Currency (three letter ISO 4217 code)
+        type: string
+      maxOrderSubtotal:
+        description: Maximum order subtotal for which this shipping rate is applicable (NULL if no maximum)
+        format: double
+        type: number
+      minOrderSubtotal:
+        default: 0
+        description: 'Minimum order subtotal for which this shipping rate is applicable, defaults to 0.00'
+        format: double
+        type: number
+      name:
+        description: The shipping rate name
+        maxLength: 255
+        type: string
+      price:
+        description: The shipping price - 0 is a valid value (for free)
+        format: double
+        type: number
+    required:
+      - name
+      - currency
+      - price
+    type: object
   Product:
     description: |
       Your product includes digital goods, services, and physical goods.
@@ -13723,6 +14235,7 @@ definitions:
           - send-email
           - trigger-webhook
           - stop-subscriptions
+          - add-risk-score
         type: string
       status:
         $ref: '#/definitions/OnOff'
@@ -13905,6 +14418,55 @@ definitions:
         readOnly: true
     required:
       - permissions
+    type: object
+  ShippingZone:
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      countries:
+        description: |
+          Countries covered by the shipping zone. A country can only belong to one shipping zone (no overlapping).
+          This property can be empty or null to create a default shipping zone for countries that were not specified in other zones.
+        items:
+          description: Country ISO Alpha-2 code
+          pattern: '^[A-Z]{2}$'
+          type: string
+        type: array
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: The shipping zone created time
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The shipping zone identifier string
+        readOnly: true
+      isDefault:
+        description: Is this Shipping Zone default
+        readOnly: true
+      name:
+        description: The shipping zone name
+        maxLength: 255
+        type: string
+      rates:
+        description: Price-based shipping rate instructions
+        items:
+          allOf:
+            - $ref: '#/definitions/PriceBasedShippingRate'
+          description: Price based shipping rate instruction
+        type: array
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: The shipping zone updated time
+    required:
+      - name
     type: object
   Signin:
     properties:
@@ -14303,6 +14865,9 @@ definitions:
         type: string
       eventType:
         $ref: '#/definitions/EventType'
+      rulesCount:
+        readOnly: true
+        type: integer
       title:
         type: string
     readOnly: true
@@ -14355,12 +14920,12 @@ definitions:
         format: double
         type: number
       cavv:
-        description: The ThreeDSecure entry cardholder authentication verification value
+        description: The 3D Secure entry cardholder authentication verification value
         type: string
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
-        description: The ThreeDSecure entry created time
+        description: The 3D Secure entry created time
       currency:
         description: The currency three letter code
         type: string
@@ -14369,7 +14934,7 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: Related customer ID
       eci:
-        description: The ThreeDSecure entry electronic commerce indicator
+        description: The 3D Secure entry electronic commerce indicator
         type: integer
       enrolled:
         description: Is the cardholder enrolled in 3DSecure
@@ -14379,7 +14944,7 @@ definitions:
           - U
         type: string
       enrollmentEci:
-        description: The ThreeDSecure entry enrollment eci
+        description: The 3D Secure entry enrollment eci
         type: string
       gatewayAccountId:
         allOf:
@@ -14388,10 +14953,10 @@ definitions:
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
-        description: The ThreeDSecure entry identifier string
+        description: The 3D Secure entry identifier string
         readOnly: true
       payerAuthResponseStatus:
-        description: The ThreeDSecure entry Auth Response Status
+        description: The 3D Secure entry Auth Response Status
         enum:
           - 'Y'
           - 'N'
@@ -14413,7 +14978,7 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: Related Website ID
       xid:
-        description: The ThreeDSecure entry transaction Id
+        description: The 3D Secure entry transaction Id
         type: string
     required:
       - enrolled
@@ -14424,6 +14989,36 @@ definitions:
       - websiteId
       - currency
       - amount
+    type: object
+  ThreeDSecureResult:
+    properties:
+      authenticated:
+        description: The 3D Secure entry Auth Response Status
+        enum:
+          - 'yes'
+          - 'no'
+          - not applicable
+          - attempted
+        type: string
+      enrolled:
+        description: Is the cardholder enrolled in 3D Secure
+        enum:
+          - 'yes'
+          - 'no'
+          - invalid card/timeout
+          - unavailable
+        type: string
+      liability:
+        enum:
+          - protected
+          - not protected
+          - protected (attempt)
+        type: string
+    readOnly: true
+    required:
+      - enrolled
+      - authenticated
+      - liability
     type: object
   Time:
     format: date-time
@@ -14446,6 +15041,9 @@ definitions:
     type: string
   Transaction:
     properties:
+      3ds:
+        allOf:
+          - $ref: '#/definitions/ThreeDSecureResult'
       _links:
         description: The links related to resource
         items:
@@ -14456,12 +15054,13 @@ definitions:
           - $ref: '#/definitions/PaymentCardLink'
           - $ref: '#/definitions/PaymentLink'
           - $ref: '#/definitions/ParentTransactionLink'
+          - $ref: '#/definitions/BillingContactLink'
         maxItems: 6
         minItems: 1
         readOnly: true
         type: array
       acquirerName:
-        description: 'Acquirer name, available only when method is ''payment_card'', else null'
+        description: 'Acquirer name, available only when transaction use gateway, else null'
         readOnly: true
         type: string
       amount:
@@ -14470,8 +15069,9 @@ definitions:
         readOnly: true
         type: number
       billingContactId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
         description: Billing Contact ID
-        type: string
       bin:
         description: Payment Card BIN
         format: bin
@@ -14580,7 +15180,7 @@ definitions:
         description: The transactions's Gateway Account ID
         readOnly: true
       gatewayName:
-        description: 'Payment Gateway name, available only when method is ''payment_card'', else null'
+        description: 'Payment Gateway name, available only when transaction use gateway, else null'
         readOnly: true
         type: string
       gatewayTransactionId:
@@ -14588,6 +15188,9 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The gateway's transaction ID
         readOnly: true
+      has3ds:
+        readOnly: true
+        type: boolean
       hasDcc:
         description: True if transaction has Dynamic Currency Conversion applied
         readOnly: true
@@ -14611,11 +15214,6 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The transactions's parent ID
         readOnly: true
-      paymentCardId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Payment Card's ID
-        readOnly: true
       paymentInstrument:
         $ref: '#/definitions/PaymentInstrument'
       rebillNumber:
@@ -14631,6 +15229,11 @@ definitions:
           - unknown
         readOnly: true
         type: string
+      riskScore:
+        description: The transactions's risk score
+        format: integer
+        readOnly: true
+        type: number
       status:
         description: Transaction status
         enum:
@@ -14739,11 +15342,15 @@ definitions:
                 description: merchant key
                 format: password
                 type: string
+              receiver_account:
+                description: merchant receiver account
+                type: string
               secret:
                 description: merchant secret
                 format: password
                 type: string
             required:
+              - receiver_account
               - key
               - secret
             type: object
@@ -15873,3 +16480,8 @@ definitions:
           - gatewayConfig
         type: object
     description: vegaaH Gateway config
+x-servers:
+  - description: Live Server
+    url: //api.rebilly.com/v2.1
+  - description: Sandbox Server
+    url: //api-sandbox.rebilly.com/v2.1
