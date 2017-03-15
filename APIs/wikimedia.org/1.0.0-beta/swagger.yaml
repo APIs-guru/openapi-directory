@@ -1,8 +1,8 @@
 swagger: '2.0'
 schemes:
-  - http
-host: rest.wikimedia.org
-basePath: /en.wikipedia.org/v1
+  - https
+host: wikimedia.org
+basePath: /api/rest_v1
 info:
   contact:
     name: the Wikimedia Services team
@@ -10,7 +10,7 @@ info:
   description: |
     This API aims to provide coherent and low-latency access to Wikimedia content and services. It is currently in beta testing, so things aren't completely locked down yet. Each entry point has explicit stability markers to inform you about development status and change policy, according to [our API version policy](https://www.mediawiki.org/wiki/API_versioning).
     ### High-volume access
-      - Don't perform more than 200 requests/s to this API.
+      - Don't perform more than 500 requests/s to this API.
       - Set a unique `User-Agent` header that allows us to contact you
         quickly. Email addresses or URLs of contact pages work well.
   license:
@@ -23,7 +23,7 @@ info:
     url: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1122px-Wikipedia-logo-v2.svg.png'
   x-origin:
     format: swagger
-    url: 'http://rest.wikimedia.org/en.wikipedia.org/v1/?spec'
+    url: 'https://wikimedia.org/api/rest_v1/?spec'
     version: '2.0'
   x-providerName: wikimedia.org
 securityDefinitions:
@@ -33,9 +33,10 @@ securityDefinitions:
     name: cookie
     type: apiKey
     x-internal-request-whitelist:
-      - '/https?:\/\/[a-zA-Z0-9\.]+\/w\/api\.php/'
-      - 'http://parsoid-lb.eqiad.wikimedia.org'
-      - 'http://parsoid-beta.wmflabs.org'
+      - '/http:\/\/[a-zA-Z0-9\.]+\/w\/api\.php/'
+tags:
+  - description: formula rendering
+    name: Math
 paths:
   '/media/math/check/{type}':
     post:
@@ -48,12 +49,13 @@ paths:
         formats. Just append the value of the header to `/media/math/{format}/`
         and perform a GET request against that URL.
 
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#unstable).
+        Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).
       parameters:
         - description: The input type of the given formula; can be tex or inline-tex
           enum:
             - tex
             - inline-tex
+            - chem
           in: path
           name: type
           required: true
@@ -76,6 +78,7 @@ paths:
           description: Error
           schema:
             $ref: '#/definitions/problem'
+      summary: Check and normalize a TeX formula.
       tags:
         - Math
       x-amples:
@@ -90,41 +93,43 @@ paths:
               checked: /.+/
               success: true
             headers:
-              cache-control: /s-maxage/
+              cache-control: no-cache
               content-type: /^application\/json/
               x-resource-location: /.+/
             status: 200
           title: Mathoid - check test formula
       x-monitor: true
-      x-request-handler:
-        - check_input:
-            request:
-              body:
-                q: '{{ request.body.q }}'
-                type: '{{ request.params.type }}'
-              headers:
-                content-type: application/json
-              uri: '{{ options.host }}/texvcinfo'
-        - post_store:
-            request:
-              body:
-                q: '{{ check_input.body.checked }}'
-                type: '{{ request.params.type }}'
-              headers:
-                content-type: application/json
-              method: put
-              uri: /wikimedia.org/sys/post_data/mathoid.input/
-            return:
-              body: '{{ check_input.body }}'
-              headers:
-                cache-control: '{{ options.cache-control }}'
-                content-type: application/json
-                x-resource-location: '{{ post_store.body }}'
-              status: 200
-      x-setup-handler:
-        - init:
-            method: put
-            uri: /wikimedia.org/sys/post_data/mathoid.input
+  '/media/math/formula/{hash}':
+    get:
+      description: |
+        Returns the previously-stored formula via `/media/math/check/{type}` for
+        the given hash.
+
+        Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).
+      parameters:
+        - description: The hash string of the previous POST data
+          in: path
+          minLength: 1
+          name: hash
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Information about the checked formula
+        '404':
+          description: Data for the given hash cannot be found
+          schema:
+            $ref: '#/definitions/problem'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Get a previously-stored formula
+      tags:
+        - Math
+      x-monitor: false
   '/media/math/render/{format}/{hash}':
     get:
       description: |
@@ -134,24 +139,27 @@ paths:
         `x-resource-location` header denoting the hash ID of the POST data. Once
         obtained, this endpoint has to be used to obtain the actual render.
 
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#unstable).
+        Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).
       parameters:
         - description: The output format; can be svg or mml
           enum:
             - svg
             - mml
+            - png
           in: path
           name: format
           required: true
           type: string
         - description: The hash string of the previous POST data
           in: path
+          minLength: 1
           name: hash
           required: true
           type: string
       produces:
         - image/svg+xml
         - application/mathml+xml
+        - image/png
       responses:
         '200':
           description: The rendered formula
@@ -163,70 +171,17 @@ paths:
           description: Error
           schema:
             $ref: '#/definitions/problem'
+      summary: Get rendered formula in the given format.
       tags:
         - Math
       x-monitor: false
-      x-request-handler:
-        - check_storage:
-            catch:
-              status: 404
-            request:
-              headers:
-                cache-control: '{{ cache-control }}'
-              method: get
-              uri: '/wikimedia.org/sys/key_value/mathoid.{$.request.params.format}/{$.request.params.hash}'
-            return:
-              body: '{{ check_storage.body }}'
-              headers: '{{ merge({ ''cache-control'': options.cache-control }, check_storage.headers) }}'
-              status: 200
-            return_if:
-              status: 2xx
-        - postdata:
-            request:
-              uri: '/wikimedia.org/sys/post_data/mathoid.input/{$.request.params.hash}'
-        - mathoid:
-            request:
-              body: '{{postdata.body}}'
-              headers:
-                content-type: application/json
-              method: post
-              uri: '{{options.host}}/complete'
-        - store_mml:
-            request:
-              body: '{{ mathoid.body.mml.body }}'
-              headers: '{{ merge(mathoid.body.mml.headers, { ''x-resource-location'': request.params.hash }) }}'
-              method: put
-              uri: '/wikimedia.org/sys/key_value/mathoid.mml/{$.request.params.hash}'
-          store_svg:
-            request:
-              body: '{$.mathoid.body.svg.body}'
-              headers: '{{ merge(mathoid.body.svg.headers, { ''x-resource-location'': request.params.hash }) }}'
-              method: put
-              uri: '/wikimedia.org/sys/key_value/mathoid.svg/{$.request.params.hash}'
-        - return:
-            return:
-              body: '{{ mathoid.body[request.params.format].body }}'
-              headers: '{{ merge(mathoid.body[request.params.format].headers, { ''x-resource-location'': request.params.hash, ''cache-control'': options.cache-control }) }}'
-              status: 200
-      x-setup-handler:
-        - init_svg:
-            body:
-              keyType: string
-              valueType: string
-            method: put
-            uri: /wikimedia.org/sys/key_value/mathoid.svg
-        - init_mml:
-            body:
-              keyType: string
-              valueType: string
-            method: put
-            uri: /wikimedia.org/sys/key_value/mathoid.mml
-  /page/:
+  /metrics/pageviews/:
     get:
       description: |
-        List page properties / page content sub-apis.
+        This is the root of all pageview data endpoints.  The list of paths that this returns includes ways to query by article, project, top articles, etc.  If browsing the interactive documentation, see the specifics for each endpoint below.
 
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
       produces:
         - application/json
       responses:
@@ -238,2036 +193,300 @@ paths:
           description: Error
           schema:
             $ref: '#/definitions/problem'
+      summary: List pageview-related API entry points.
       tags:
-        - Page content
+        - Pageviews data
       x-monitor: false
-  /page/data-parsoid/:
+  '/metrics/pageviews/aggregate/{project}/{access}/{agent}/{granularity}/{start}/{end}':
     get:
       description: |
-        List titles for which the data-parsoid property is available. This
-        currently only lists pages which have revisions stored in RESTBase.
+        Given a date range, returns a timeseries of pageview counts. You can filter by project, access method and/or agent type. You can choose between daily and hourly granularity as well.
 
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
       parameters:
-        - description: The next page token
-          in: query
-          name: page
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The queriable list of page titles
-          schema:
-            $ref: '#/definitions/listing'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              query:
-                page: '{page}'
-              uri: '/{domain}/sys/page_revisions/page/'
-            return: true
-  '/page/data-parsoid/{title}':
-    get:
-      description: |
-        Retrieve the latest data-parsoid (private Parsoid metadata)
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: the title of page content
+        - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''. If you are interested in all pageviews regardless of project, use all-projects.'
           in: path
-          name: title
+          name: project
+          required: true
+          type: string
+        - description: 'If you want to filter by access method, use one of desktop, mobile-app or mobile-web. If you are interested in pageviews regardless of access method, use all-access'
+          enum:
+            - all-access
+            - desktop
+            - mobile-app
+            - mobile-web
+          in: path
+          name: access
+          required: true
+          type: string
+        - description: 'If you want to filter by agent type, use one of user or spider. If you are interested in pageviews regardless of agent type, use all-agents'
+          enum:
+            - all-agents
+            - user
+            - spider
+          in: path
+          name: agent
+          required: true
+          type: string
+        - description: 'The time unit for the response data. As of today, the supported granularities for this endpoint are hourly, daily, and monthly'
+          enum:
+            - hourly
+            - daily
+            - monthly
+          in: path
+          name: granularity
+          required: true
+          type: string
+        - description: 'The timestamp of the first hour/day/month to include, in YYYYMMDDHH format'
+          in: path
+          name: start
+          required: true
+          type: string
+        - description: 'The timestamp of the last hour/day/month to include, in YYYYMMDDHH format'
+          in: path
+          name: end
           required: true
           type: string
       produces:
         - application/json
       responses:
         '200':
-          description: data-parsoid JSON blob
+          description: The list of values
           schema:
-            $ref: '#/definitions/data-parsoid'
-        '404':
-          description: Unknown page title
-          schema:
-            $ref: '#/definitions/problem'
+            $ref: '#/definitions/project'
         default:
           description: Error
           schema:
             $ref: '#/definitions/problem'
+      summary: Get pageview counts for a project.
       tags:
-        - Page content
+        - Pageviews data
       x-amples:
         - request:
             params:
-              domain: en.wikipedia.org
-              title: Foobar
-          response:
-            body:
-              counter: /\d+/
-              ids: /.*/
-              sectionOffsets: /.*/
-            headers:
-              content-type: application/json
-              etag: /.+/
-            status: 200
-          title: Get data-parsoid by title
-      x-monitor: true
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-                if-unmodified-since: '{if-unmodified-since}'
-                x-restbase-mode: '{x-restbase-mode}'
-                x-restbase-parentrevision: '{x-restbase-parentrevision}'
-              uri: '/{domain}/sys/parsoid/data-parsoid/{title}'
-            return: true
-  '/page/data-parsoid/{title}/':
-    get:
-      description: |
-        List data-parsoid revisions for a page. This currently only lists
-        revisions stored in RESTBase.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The next page token
-          in: query
-          name: page
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The list of revisions
-          schema:
-            $ref: '#/definitions/revisions'
-        '404':
-          description: Unknown page title
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            query:
-              page: '{page}'
-            request:
-              headers:
-                cache-control: '{cache-control}'
-                if-unmodified-since: '{if-unmodified-since}'
-                x-restbase-mode: '{x-restbase-mode}'
-                x-restbase-parentrevision: '{x-restbase-parentrevision}'
-              uri: '/{domain}/sys/parsoid/data-parsoid/{title}/'
-            return: true
-  '/page/data-parsoid/{title}/{revision}':
-    get:
-      description: |
-        Retrieve data-parsoid (internal Parsoid metadata) for a given page & revision
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The revision
-          in: path
-          name: revision
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The latest Parsoid data for the given page
-          schema:
-            $ref: '#/definitions/data-parsoid'
-        '400':
-          description: Invalid revision
-          schema:
-            $ref: '#/definitions/problem'
-        '403':
-          description: Access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: 'Unknown page, revision or tid'
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-                if-unmodified-since: '{if-unmodified-since}'
-                x-restbase-mode: '{x-restbase-mode}'
-                x-restbase-parentrevision: '{x-restbase-parentrevision}'
-              uri: '/{domain}/sys/parsoid/data-parsoid/{title}/{revision}{/tid}'
-            return: true
-    parameters: []
-  '/page/data-parsoid/{title}/{revision}/{tid}':
-    get:
-      description: |
-        Retrieve data-parsoid (internal Parsoid metadata) for a given page & revision
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The revision
-          in: path
-          name: revision
-          required: true
-          type: integer
-        - description: The revision's time ID
-          in: path
-          name: tid
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The latest Parsoid data for the given page
-          schema:
-            $ref: '#/definitions/data-parsoid'
-        '400':
-          description: Invalid revision
-          schema:
-            $ref: '#/definitions/problem'
-        '403':
-          description: Access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: 'Unknown page, revision or tid'
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-                if-unmodified-since: '{if-unmodified-since}'
-                x-restbase-mode: '{x-restbase-mode}'
-                x-restbase-parentrevision: '{x-restbase-parentrevision}'
-              uri: '/{domain}/sys/parsoid/data-parsoid/{title}/{revision}{/tid}'
-            return: true
-    parameters: []
-  '/page/graph/png/{title}/{revision}/{graph_id}':
-    get:
-      description: |
-        Retrieve PNG graph images embedded in specific revisions of a
-        page. See [the Graphoid
-        documentation](https://www.mediawiki.org/wiki/Extension:Graph#Graphoid_service)
-        for details.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: 'The page revision, or 0 for the latest'
-          in: path
-          name: revision
-          required: true
-          type: integer
-        - description: 'The graph ID, consisting of a hash and the suffix `.png`.'
-          in: path
-          name: graph_id
-          required: true
-          type: string
-      produces:
-        - image/png
-      responses:
-        '200':
-          description: The PNG render of the requested graph.
-        '403':
-          description: access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-amples:
-        - request:
-            params:
-              domain: en.wikipedia.org
-              graph_id: c1c5d432407bd5fd7435f5edfb6fdb73ffd4bc9e.png
-              revision: 0
-              title: 'User:Pchelolo/Graph'
-          response:
-            headers:
-              content-type: image/png
-            status: 200
-          title: Get a graph from Graphoid
-      x-monitor: true
-      x-request-handler:
-        - get_from_graphoid:
-            request:
-              uri: '{+ $$.options.host }/{domain}/v1/png/{title}/{revision}/{graph_id}'
-            return: true
-  /page/html/:
-    get:
-      description: |
-        List titles for which an HTML representation is available. Currently
-        this only lists pages that have revisions stored in RESTBase.
-
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-      parameters:
-        - description: The next page token
-          in: query
-          name: page
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The queriable list of page titles
-          schema:
-            $ref: '#/definitions/listing'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              query:
-                page: '{page}'
-              uri: '/{domain}/sys/page_revisions/page/'
-            return: true
-  '/page/html/{title}':
-    get:
-      description: |
-        Retrieve the latest html for a title.
-
-        The response provides an `ETag` header indicating the revision and
-        render timeuuid separated by a slash
-        (ex: `ETag: 701384379/154d7bca-c264-11e5-8c2f-1b51b33b59fc`). This ETag can be
-        passed to the HTML save end point (as `base_etag` POST parameter), and
-        can also be used to retrieve the exact corresponding data-parsoid
-        metadata, by requesting the specific `revision` and `tid` indicated by
-        the `ETag`.
-
-        See [the MediaWiki DOM
-        spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec) for a
-        description of the MediaWiki-specific semantic markup in this HTML.
-        Note that additional metadata is available in the HTML head.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title.
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: Comma-separated list of section IDs
-          in: query
-          name: sections
-          type: string
-      produces:
-        - text/html; profile="mediawiki.org/specs/html/1.1.0"
-      responses:
-        '200':
-          description: |
-            The html for the given page title. Conforms to
-            https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec.
-        '404':
-          description: Unknown page title
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-amples:
-        - request:
-            params:
-              domain: en.wikipedia.org
-              title: Foobar
-          response:
-            body: /^<!DOCTYPE html>.*/
-            headers:
-              content-type: /^text\/html.+/
-              etag: /.+/
-            status: 200
-          title: Get html by title from storage
-      x-monitor: true
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-                if-unmodified-since: '{if-unmodified-since}'
-                x-restbase-mode: '{x-restbase-mode}'
-                x-restbase-parentrevision: '{x-restbase-parentrevision}'
-              query:
-                sections: '{sections}'
-              uri: '/{domain}/sys/parsoid/html/{title}'
-            return: true
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Save a new revision of a page given in HTML format.
-
-        For new pages, or when editting the latest revision of a page,
-        the `base_etag` parameter should be left empty. For editing old revisions,
-        it should contain the `ETag` header of the revision the edit is derived from.
-
-        The latest page revision ETag header could be provided in the If-Match header
-        to detect edit conflicts. If the new page is created, appropriate user cookies
-        must be provided.
-
-        See [the MediaWiki DOM spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec)
-        for a description of the MediaWiki-specific semantic markup needed by this API
-        end-point.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title.
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The ETag header of the revision the edit is based on.
-          in: formData
-          name: base_etag
-          required: false
-          type: string
-        - description: The HTML of the page to save
-          in: formData
-          name: html
-          required: true
-          type: string
-        - description: The CSRF edit token provided by the MW API
-          in: formData
-          name: csrf_token
-          required: true
-          type: string
-        - description: The summary of the change
-          in: formData
-          name: comment
-          required: false
-          type: string
-        - description: Whether this represents a minor change
-          in: formData
-          name: is_minor
-          required: false
-          type: boolean
-        - description: Whether the change is being made by a bot
-          in: formData
-          name: is_bot
-          required: false
-          type: boolean
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The existing revision of the page matches the sent text
-        '201':
-          description: A new revision of the page has been created
-        '400':
-          description: 'Invalid request - lack of required parameters, bad ETags etc.'
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Edit conflict
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      security:
-        - mediawiki_auth: []
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - post_to_backend:
-            request:
-              body: '{$.request.body}'
-              headers: '{$.request.headers}'
-              uri: '/{domain}/sys/page_save/html/{title}'
-            return: true
-  '/page/html/{title}/':
-    get:
-      description: |
-        List HTML revisions for a title. This currently only lists revisions
-        that are already stored in RESTBase.
-
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The next page token
-          in: query
-          name: page
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The list of revisions
-          schema:
-            $ref: '#/definitions/revisions'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-                if-unmodified-since: '{if-unmodified-since}'
-                x-restbase-mode: '{x-restbase-mode}'
-                x-restbase-parentrevision: '{x-restbase-parentrevision}'
-              query:
-                page: '{page}'
-              uri: '/{domain}/sys/parsoid/html/{title}/'
-            return: true
-  '/page/html/{title}/{revision}':
-    get:
-      description: |
-        Retrieve the html for a given title, revision, and optionally timeuuid.
-
-        The response provides an `ETag` header indicating the revision and
-        render timeuuid separated by a slash
-        (ex: `ETag: 701384379/154d7bca-c264-11e5-8c2f-1b51b33b59fc`). This ETag can be
-        passed to the HTML save end point (as `base_etag` POST parameter), and
-        can also be used to retrieve the exact corresponding data-parsoid
-        metadata, by requesting the specific `revision` and `tid` indicated by
-        the `ETag`.
-
-        See [the MediaWiki DOM
-        spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec) for a
-        description of the MediaWiki-specific semantic markup in this HTML.
-        Note that additional metadata is available in the HTML head.
-
-        This HTML can be edited using arbitrary HTML tools. The modified HTML
-        can be converted back to wikitext using the
-        [/transform/html/to/wikitext{/title}{/revision}](#!/Transforms/transform_html_to_wikitext__title___revision__post)
-        entry point.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The revision
-          in: path
-          name: revision
-          required: true
-          type: string
-        - description: Comma-separated list of section IDs
-          in: query
-          name: sections
-          type: string
-      produces:
-        - text/html; profile="mediawiki.org/specs/html/1.1.0"
-      responses:
-        '200':
-          description: |
-            The html for the given page, revision and tid. Conforms to
-            https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec.
-        '400':
-          description: Invalid revision or tid
-          schema:
-            $ref: '#/definitions/problem'
-        '403':
-          description: Access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: 'Unknown page, revision or tid'
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-                if-unmodified-since: '{if-unmodified-since}'
-                x-restbase-mode: '{x-restbase-mode}'
-                x-restbase-parentrevision: '{x-restbase-parentrevision}'
-              query:
-                sections: '{sections}'
-              uri: '/{domain}/sys/parsoid/html/{title}/{revision}{/tid}'
-            return: true
-    parameters: []
-  '/page/html/{title}/{revision}/{tid}':
-    get:
-      description: |
-        Retrieve the html for a given title, revision, and optionally timeuuid.
-
-        The response provides an `ETag` header indicating the revision and
-        render timeuuid separated by a slash
-        (ex: `ETag: 701384379/154d7bca-c264-11e5-8c2f-1b51b33b59fc`). This ETag can be
-        passed to the HTML save end point (as `base_etag` POST parameter), and
-        can also be used to retrieve the exact corresponding data-parsoid
-        metadata, by requesting the specific `revision` and `tid` indicated by
-        the `ETag`.
-
-        See [the MediaWiki DOM
-        spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec) for a
-        description of the MediaWiki-specific semantic markup in this HTML.
-        Note that additional metadata is available in the HTML head.
-
-        This HTML can be edited using arbitrary HTML tools. The modified HTML
-        can be converted back to wikitext using the
-        [/transform/html/to/wikitext{/title}{/revision}](#!/Transforms/transform_html_to_wikitext__title___revision__post)
-        entry point.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The revision
-          in: path
-          name: revision
-          required: true
-          type: string
-        - description: The revision's time ID
-          in: path
-          name: tid
-          required: true
-          type: string
-        - description: Comma-separated list of section IDs
-          in: query
-          name: sections
-          type: string
-      produces:
-        - text/html; profile="mediawiki.org/specs/html/1.1.0"
-      responses:
-        '200':
-          description: |
-            The html for the given page, revision and tid. Conforms to
-            https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec.
-        '400':
-          description: Invalid revision or tid
-          schema:
-            $ref: '#/definitions/problem'
-        '403':
-          description: Access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: 'Unknown page, revision or tid'
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-                if-unmodified-since: '{if-unmodified-since}'
-                x-restbase-mode: '{x-restbase-mode}'
-                x-restbase-parentrevision: '{x-restbase-parentrevision}'
-              query:
-                sections: '{sections}'
-              uri: '/{domain}/sys/parsoid/html/{title}/{revision}{/tid}'
-            return: true
-    parameters: []
-  '/page/mobile-sections-lead/{title}':
-    get:
-      description: |
-        Retrieve the lead section of the latest HTML for a page title optimised
-        for viewing with native mobile applications.
-
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The HTML for the given page title.
-        '404':
-          description: Unknown page title
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Mobile
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-              method: get
-              uri: '/{domain}/sys/mobileapps/v1/handling/rev/mobile-sections-lead/{title}'
-            return: true
-  '/page/mobile-sections-remaining/{title}':
-    get:
-      description: |
-        Retrieve the remainder of the latest HTML (without the lead section) for
-        a page title optimised for viewing with native mobile applications,
-        provided as a JSON object containing the sections.
-
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The HTML for the given page title.
-        '404':
-          description: Unknown page title
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Mobile
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-              method: get
-              uri: '/{domain}/sys/mobileapps/v1/handling/rev/mobile-sections-remaining/{title}'
-            return: true
-  '/page/mobile-sections/{title}':
-    get:
-      description: |
-        Retrieve the latest HTML for a page title optimised for viewing with
-        native mobile applications. Note that the output is split by sections.
-
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The HTML for the given page title.
-        '404':
-          description: Unknown page title
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Mobile
-      x-amples:
-        - request:
-            params:
-              domain: en.wikipedia.org
-              title: Foobar
-          response:
-            body:
-              lead: /.+/
-              remaining: /.+/
-            headers:
-              content-type: /application\/json/
-            status: 200
-          title: Get MobileApps Foobar page
-      x-monitor: true
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-              method: get
-              uri: '/{domain}/sys/mobileapps/v1/handling/rev/mobile-sections/{title}'
-            return: true
-  '/page/mobile-text/{title}':
-    get:
-      description: |
-        Retrieve the *lite* version of the latest HTML for a page title optimised for viewing with
-        native mobile applications.
-
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The JSON comprising the HTML and various page attributes for the given page title.
-        '404':
-          description: Unknown page title
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Mobile
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: '{cache-control}'
-              method: get
-              uri: '{+$$.options.host}/{domain}/v1/page/mobile-text/{title}'
-            return: true
-  /page/revision/:
-    get:
-      description: |
-        List revisions. This currently only lists revisions stored in RESTBase.
-
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
-      parameters:
-        - description: The next page token
-          in: query
-          name: page
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The queriable sub-items
-          schema:
-            $ref: '#/definitions/listing'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              query:
-                page: '{page}'
-              uri: '/{domain}/sys/page_revisions/rev/'
-            return: true
-  '/page/revision/{revision}':
-    get:
-      description: |
-        Get metadata about a specific revision.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The revision id
-          in: path
-          name: revision
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The revision's properties
-          schema:
-            $ref: '#/definitions/revision'
-        '400':
-          description: Invalid revision
-          schema:
-            $ref: '#/definitions/problem'
-        '403':
-          description: Access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown revision id or domain
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
-      x-amples:
-        - request:
-            params:
-              domain: en.wikipedia.org
-              revision: 642497713
+              access: all-access
+              agent: all-agents
+              domain: wikimedia.org
+              end: 1970010100
+              granularity: hourly
+              project: en.wikipedia
+              start: 1970010100
           response:
             body:
               items:
-                - comment: /.*/
-                  rev: /\d+/
-                  tid: '/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/'
-                  title: Foobar
+                - access: all-access
+                  agent: all-agents
+                  granularity: hourly
+                  project: en.wikipedia
+                  timestamp: 1970010100
+                  views: 0
             headers:
               content-type: application/json
-              etag: /.+/
             status: 200
-          title: Get rev by ID
+          title: Get aggregate page views
       x-monitor: true
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: no-cache
-              uri: '/{domain}/sys/page_revisions/rev/{revision}'
-            return: true
-  '/page/summary/{title}':
+  '/metrics/pageviews/per-article/{project}/{access}/{agent}/{article}/{granularity}/{start}/{end}':
     get:
       description: |
-        Returns the summary of the latest page content available in storage.
-        Currently the summary includes the text for the first several sentences and
-        the thumbnail URL.
+        Given a Mediawiki article and a date range, returns a daily timeseries of its pageview counts. You can also filter by access method and/or agent type.
 
-        Provide a `Cache-Control: no-cache` header to request the latest data.
-
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
       parameters:
-        - description: The page title.
+        - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''.'
           in: path
-          name: title
+          name: project
+          required: true
+          type: string
+        - description: 'If you want to filter by access method, use one of desktop, mobile-app or mobile-web. If you are interested in pageviews regardless of access method, use all-access'
+          enum:
+            - all-access
+            - desktop
+            - mobile-app
+            - mobile-web
+          in: path
+          name: access
+          required: true
+          type: string
+        - description: 'If you want to filter by agent type, use one of user, bot or spider. If you are interested in pageviews regardless of agent type, use all-agents'
+          enum:
+            - all-agents
+            - user
+            - spider
+            - bot
+          in: path
+          name: agent
+          required: true
+          type: string
+        - description: 'The title of any article in the specified project. Any spaces should be replaced with underscores. It also should be URI-encoded, so that non-URI-safe characters like %, / or ? are accepted. Example: Are_You_the_One%3F'
+          in: path
+          name: article
+          required: true
+          type: string
+        - description: 'The time unit for the response data. As of today, the only supported granularity for this endpoint is daily and monthly.'
+          enum:
+            - daily
+            - monthly
+          in: path
+          name: granularity
+          required: true
+          type: string
+        - description: 'The date of the first day to include, in YYYYMMDD format'
+          in: path
+          name: start
+          required: true
+          type: string
+        - description: 'The date of the last day to include, in YYYYMMDD format'
+          in: path
+          name: end
           required: true
           type: string
       produces:
         - application/json
       responses:
         '200':
-          description: The summary for the given page
+          description: The list of values
           schema:
-            $ref: '#/definitions/summary'
-        '404':
-          description: Unknown page title
-          schema:
-            $ref: '#/definitions/problem'
+            $ref: '#/definitions/article'
         default:
           description: Error
           schema:
             $ref: '#/definitions/problem'
+      summary: Get pageview counts for a page.
       tags:
-        - Page content
-      x-amples:
-        - request:
-            params:
-              domain: en.wikipedia.org
-              title: Barack_Obama
-          response:
-            body:
-              dir: ltr
-              extract: /.+/
-              lang: en
-              thumbnail:
-                source: '/^https:/'
-            headers:
-              content-type: /^application\/json$/
-              etag: /.+/
-            status: 200
-          title: Get summary from storage
-      x-monitor: true
-      x-request-handler:
-        - rev_info:
-            request:
-              method: get
-              uri: '/{domain}/sys/page_revisions/page/{title}'
-            response:
-              body: '{{rev_info.body.items[0]}}'
-          storage:
-            catch:
-              status: 404
-            request:
-              headers:
-                cache-control: '{{cache-control}}'
-              method: get
-              uri: '/{domain}/sys/key_value/summary/{request.params.title}'
-            return:
-              body: '{{storage.body}}'
-              headers:
-                cache-control: '{{options.response_cache-control}}'
-                content-type: '{{storage.headers.content-type}}'
-                etag: '{{storage.headers.etag}}'
-              status: 200
-            return_if:
-              status: 2xx
-        - extract:
-            request:
-              body:
-                explaintext: true
-                exsentences: 5
-                piprop: thumbnail
-                pithumbsize: 320
-                prop: info|extracts|pageimages
-                redirects: true
-                titles: '{{rev_info.body.title}}'
-              method: post
-              uri: '/{domain}/sys/action/query'
-            response:
-              body:
-                dir: '{{extract.body.items[0].pagelanguagedir}}'
-                extract: '{{extract.body.items[0].extract}}'
-                lang: '{{extract.body.items[0].pagelanguagehtmlcode}}'
-                thumbnail: '{{httpsSource(extract.body.items[0].thumbnail)}}'
-                title: '{{extract.body.items[0].title}}'
-              headers:
-                content-type: application/json
-        - store_and_return:
-            request:
-              body: '{{extract.body}}'
-              headers: '{{extract.headers}}'
-              method: put
-              uri: '/{domain}/sys/key_value/summary/{request.params.title}'
-            return:
-              body: '{{extract.body}}'
-              headers:
-                cache-control: '{{options.response_cache-control}}'
-                content-type: '{{extract.headers.content-type}}'
-                etag: '{{store_and_return.headers.etag}}'
-              status: 200
-      x-setup-handler:
-        - init:
-            body:
-              valueType: json
-            method: put
-            uri: '/{domain}/sys/key_value/summary'
-  /page/title/:
+        - Pageviews data
+      x-monitor: false
+  '/metrics/pageviews/top/{project}/{access}/{year}/{month}/{day}':
     get:
       description: |
-        List all pages.
+        Lists the 1000 most viewed articles for a given project and timespan (month or day). You can filter by access method.
 
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
       parameters:
-        - description: The next page token
-          in: query
-          name: page
-          required: false
+        - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''.'
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'If you want to filter by access method, use one of desktop, mobile-app or mobile-web. If you are interested in pageviews regardless of access method, use all-access'
+          enum:
+            - all-access
+            - desktop
+            - mobile-app
+            - mobile-web
+          in: path
+          name: access
+          required: true
+          type: string
+        - description: 'The year of the date for which to retrieve top articles, in YYYY format.'
+          in: path
+          name: year
+          required: true
+          type: string
+        - description: 'The month of the date for which to retrieve top articles, in MM format. If you want to get the top articles of a whole month, the day parameter should be all-days.'
+          in: path
+          name: month
+          required: true
+          type: string
+        - description: 'The day of the date for which to retrieve top articles, in DD format.'
+          in: path
+          name: day
+          required: true
           type: string
       produces:
         - application/json
       responses:
         '200':
-          description: The queriable list of page titles
+          description: The list of top articles in the project
           schema:
-            $ref: '#/definitions/listing'
+            $ref: '#/definitions/tops'
         default:
           description: Error
           schema:
             $ref: '#/definitions/problem'
+      summary: Get the most viewed articles for a project.
       tags:
-        - Page content
+        - Pageviews data
       x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              query:
-                page: '{page}'
-              uri: '/{domain}/sys/page_revisions/page/'
-            return: true
-  '/page/title/{title}':
+  '/metrics/unique-devices/{project}/{access-site}/{granularity}/{start}/{end}':
     get:
       description: |
-        Returns the latest revision ID for the title present in storage.
-        Supply the Cache-Control: no-cache header to obtain the latest available revision ID
+        Given a project and a date range, returns a timeseries of unique devices counts. You need to specify a project, and can filter by accessed site (mobile or desktop). You can choose between daily and hourly granularity as well.
 
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
       parameters:
-        - description: The page title.
+        - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''.'
           in: path
-          name: title
+          name: project
+          required: true
+          type: string
+        - description: 'If you want to filter by accessed site, use one of desktop-site or mobile-site. If you are interested in unique devices regardless of accessed site, use or all-sites'
+          enum:
+            - all-sites
+            - desktop-site
+            - mobile-site
+          in: path
+          name: access-site
+          required: true
+          type: string
+        - description: 'The time unit for the response data. As of today, the supported granularities for this endpoint are daily and monthly'
+          enum:
+            - daily
+            - monthly
+          in: path
+          name: granularity
+          required: true
+          type: string
+        - description: 'The timestamp of the first day/month to include, in YYYYMMDD format'
+          in: path
+          name: start
+          required: true
+          type: string
+        - description: 'The timestamp of the last day/month to include, in YYYYMMDD format'
+          in: path
+          name: end
           required: true
           type: string
       produces:
         - application/json
       responses:
         '200':
-          description: The latest revision for the title
+          description: The list of values
           schema:
-            $ref: '#/definitions/revision'
-        '404':
-          description: Unknown page title or no revisions found
-          schema:
-            $ref: '#/definitions/problem'
+            $ref: '#/definitions/unique-devices'
         default:
           description: Error
           schema:
             $ref: '#/definitions/problem'
+      summary: Get unique devices count per project
       tags:
-        - Page content
-      x-amples:
-        - request:
-            params:
-              domain: en.wikipedia.org
-              title: Foobar
-          response:
-            body:
-              items:
-                - comment: /.*/
-                  rev: /\d+/
-                  tid: '/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/'
-                  title: Foobar
-            headers:
-              content-type: application/json
-              etag: /.+/
-            status: 200
-          title: Get rev by title from storage
-      x-monitor: true
-      x-request-handler:
-        - get_from_backend:
-            request:
-              headers:
-                cache-control: no-cache
-                if-unmodified-since: '{if-unmodified-since}'
-              uri: '/{domain}/sys/page_revisions/page/{title}'
-            return: true
-  '/page/title/{title}/':
-    get:
-      description: |
-        List revisions for a title. Currently this lists all revisions that
-        ever used this title and are stored in RESTBase, but eventually it
-        should probably return the linear history (across renames) of the page
-        currently using this title.
-
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-      parameters:
-        - description: The page title.
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The next page token
-          in: query
-          name: page
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The queriable list of page revisions.
-          schema:
-            $ref: '#/definitions/listing'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Page content
+        - Unique devices data
       x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              query:
-                page: '{page}'
-              uri: '/{domain}/sys/page_revisions/page/{title}/'
-            return: true
-  '/page/wikitext/{title}':
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Save a new revision of a page.
-
-        For new pages, or when editting the latest revision of a page,
-        the `base_etag` parameter should be left empty.
-        For editing old revisions, it should contain the ETag header
-        of the revision the edit is derived from.
-
-        The latest page revision ETag header could be provided in the If-Match header
-        to detect edit conflicts. If the new page is created, appropriate user cookies
-        must be provided.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title.
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The ETag header of the revision the edit is based on.
-          in: formData
-          name: base_etag
-          required: false
-          type: string
-        - description: The wikitext source of the page to save
-          in: formData
-          name: wikitext
-          required: true
-          type: string
-        - description: The CRSF edit token provided by the MW API
-          in: formData
-          name: csrf_token
-          required: true
-          type: string
-        - description: The summary of the change
-          in: formData
-          name: comment
-          required: false
-          type: string
-        - description: Whether this represents a minor change
-          in: formData
-          name: is_minor
-          required: false
-          type: boolean
-        - description: Whether the change is being made by a bot
-          in: formData
-          name: is_bot
-          required: false
-          type: boolean
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The existing revision of the page matches the sent text
-        '201':
-          description: A new revision of the page has been created
-        '400':
-          description: 'Invalid request - lack of required parameters, bad ETags etc.'
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Edit conflict
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      security:
-        - mediawiki_auth: []
-      tags:
-        - Page content
-      x-monitor: false
-      x-request-handler:
-        - post_to_backend:
-            request:
-              body: '{$.request.body}'
-              headers: '{$.request.headers}'
-              uri: '/{domain}/sys/page_save/wikitext/{title}'
-            return: true
-  /transform/html/to/html:
-    parameters: []
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Update / refresh / sanitize HTML
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The HTML to transform
-          in: formData
-          name: html
-          required: true
-          type: string
-          x-textarea: true
-        - description: Return only `body.innerHTML`
-          in: formData
-          name: body_only
-          required: false
-          type: boolean
-      produces:
-        - text/html; profile="mediawiki.org/specs/html/1.1.0"
-      responses:
-        '200':
-          description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
-        '403':
-          description: access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Revision was restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '410':
-          description: Page was deleted
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Transforms
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              body:
-                body_only: '{body_only}'
-                html: '{html}'
-              headers:
-                if-match: '{if-match}'
-              uri: '/{domain}/sys/parsoid/transform/html/to/html{/title}{/revision}'
-            return: true
-  '/transform/html/to/html/{title}':
-    parameters: []
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Update / refresh / sanitize HTML
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The HTML to transform
-          in: formData
-          name: html
-          required: true
-          type: string
-          x-textarea: true
-        - description: Return only `body.innerHTML`
-          in: formData
-          name: body_only
-          required: false
-          type: boolean
-      produces:
-        - text/html; profile="mediawiki.org/specs/html/1.1.0"
-      responses:
-        '200':
-          description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
-        '403':
-          description: access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Revision was restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '410':
-          description: Page was deleted
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Transforms
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              body:
-                body_only: '{body_only}'
-                html: '{html}'
-              headers:
-                if-match: '{if-match}'
-              uri: '/{domain}/sys/parsoid/transform/html/to/html{/title}{/revision}'
-            return: true
-  '/transform/html/to/html/{title}/{revision}':
-    parameters: []
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Update / refresh / sanitize HTML
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The page revision
-          in: path
-          name: revision
-          required: true
-          type: integer
-        - description: The HTML to transform
-          in: formData
-          name: html
-          required: true
-          type: string
-          x-textarea: true
-        - description: Return only `body.innerHTML`
-          in: formData
-          name: body_only
-          required: false
-          type: boolean
-      produces:
-        - text/html; profile="mediawiki.org/specs/html/1.1.0"
-      responses:
-        '200':
-          description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
-        '403':
-          description: access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Revision was restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '410':
-          description: Page was deleted
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Transforms
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              body:
-                body_only: '{body_only}'
-                html: '{html}'
-              headers:
-                if-match: '{if-match}'
-              uri: '/{domain}/sys/parsoid/transform/html/to/html{/title}{/revision}'
-            return: true
-  /transform/html/to/wikitext:
-    parameters: []
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Transform HTML to wikitext
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The HTML to transform
-          in: formData
-          name: html
-          required: true
-          type: string
-          x-textarea: true
-        - description: Normalise the DOM to yield cleaner wikitext?
-          in: formData
-          name: scrub_wikitext
-          required: false
-          type: boolean
-        - description: 'Deprecated, use `scrub_wikitext` instead.'
-          in: formData
-          name: scrubWikitext
-          required: false
-          type: boolean
-      produces:
-        - text/plain; profile="mediawiki.org/specs/wikitext/1.0.0"
-      responses:
-        '200':
-          description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
-        '403':
-          description: Access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Revision was restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '410':
-          description: Page was deleted
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Transforms
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              body:
-                html: '{html}'
-                scrubWikitext: '{scrubWikitext}'
-                scrub_wikitext: '{scrub_wikitext}'
-              headers:
-                if-match: '{if-match}'
-              uri: '/{domain}/sys/parsoid/transform/html/to/wikitext{/title}{/revision}'
-            return: true
-  '/transform/html/to/wikitext/{title}':
-    parameters: []
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Transform HTML to wikitext
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The HTML to transform
-          in: formData
-          name: html
-          required: true
-          type: string
-          x-textarea: true
-        - description: Normalise the DOM to yield cleaner wikitext?
-          in: formData
-          name: scrub_wikitext
-          required: false
-          type: boolean
-        - description: 'Deprecated, use `scrub_wikitext` instead.'
-          in: formData
-          name: scrubWikitext
-          required: false
-          type: boolean
-      produces:
-        - text/plain; profile="mediawiki.org/specs/wikitext/1.0.0"
-      responses:
-        '200':
-          description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
-        '403':
-          description: Access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Revision was restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '410':
-          description: Page was deleted
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Transforms
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              body:
-                html: '{html}'
-                scrubWikitext: '{scrubWikitext}'
-                scrub_wikitext: '{scrub_wikitext}'
-              headers:
-                if-match: '{if-match}'
-              uri: '/{domain}/sys/parsoid/transform/html/to/wikitext{/title}{/revision}'
-            return: true
-  '/transform/html/to/wikitext/{title}/{revision}':
-    parameters: []
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Transform HTML to wikitext
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The page revision
-          in: path
-          name: revision
-          required: true
-          type: integer
-        - description: The HTML to transform
-          in: formData
-          name: html
-          required: true
-          type: string
-          x-textarea: true
-        - description: Normalise the DOM to yield cleaner wikitext?
-          in: formData
-          name: scrub_wikitext
-          required: false
-          type: boolean
-        - description: 'Deprecated, use `scrub_wikitext` instead.'
-          in: formData
-          name: scrubWikitext
-          required: false
-          type: boolean
-      produces:
-        - text/plain; profile="mediawiki.org/specs/wikitext/1.0.0"
-      responses:
-        '200':
-          description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
-        '403':
-          description: Access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Revision was restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '410':
-          description: Page was deleted
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Transforms
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              body:
-                html: '{html}'
-                scrubWikitext: '{scrubWikitext}'
-                scrub_wikitext: '{scrub_wikitext}'
-              headers:
-                if-match: '{if-match}'
-              uri: '/{domain}/sys/parsoid/transform/html/to/wikitext{/title}{/revision}'
-            return: true
-  '/transform/sections/to/wikitext/{title}/{revision}':
-    post:
-      consumes:
-        - application/json
-        - multipart/form-data
-      description: |
-        Transform sections representation to wikitext
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The page revision
-          in: path
-          name: revision
-          required: true
-          type: integer
-        - description: Sections to transform
-          in: body
-          name: sections
-          required: true
-          schema:
-            properties:
-              sections:
-                example: '{"mwAg":"<h2>First Section replaced</h2><h2>Appended Section</h2>"}'
-            required:
-              - sections
-            type: object
-      produces:
-        - text/html; profile="mediawiki.org/specs/html/1.1.0"
-      responses:
-        '200':
-          description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
-        '400':
-          description: Illegal JSON provided or section id does not exist
-          schema:
-            $ref: '#/definitions/problem'
-        '403':
-          description: access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Revision was restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '410':
-          description: Page was deleted
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Transforms
-      x-monitor: false
-      x-request-handler:
-        - get_from_backend:
-            request:
-              body:
-                sections: '{sections}'
-              uri: '/{domain}/sys/parsoid/transform/sections/to/wikitext/{title}/{revision}'
-            return: true
-  /transform/wikitext/to/html:
-    parameters: []
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Transform wikitext to HTML. Note that if you set `stash: true`, you
-          also need to supply the title.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The Wikitext to transform to HTML
-          in: formData
-          name: wikitext
-          required: true
-          type: string
-          x-textarea: true
-        - description: Return only `body.innerHTML`
-          in: formData
-          name: body_only
-          required: false
-          type: boolean
-        - description: Whether to temporarily stash the result of the transformation
-          in: formData
-          name: stash
-          required: false
-          type: boolean
-      produces:
-        - text/html; profile="mediawiki.org/specs/html/1.1.0"
-      responses:
-        '200':
-          description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
-        '403':
-          description: access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Revision was restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '410':
-          description: Page was deleted
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Transforms
-      x-amples:
-        - request:
-            body:
-              body_only: true
-              wikitext: == Heading ==
-            params:
-              domain: en.wikipedia.org
-              title: Foobar
-          response:
-            body: /^<h2.*> Heading <\/h2>$/
-            headers:
-              content-type: /^text\/html.+/
-            status: 200
-          title: Transform wikitext to html
-      x-monitor: true
-      x-request-handler:
-        - get_from_backend:
-            request:
-              body:
-                body_only: '{body_only}'
-                stash: '{stash}'
-                wikitext: '{wikitext}'
-              uri: '/{domain}/sys/parsoid/transform/wikitext/to/html{/title}{/revision}'
-            return: true
-  '/transform/wikitext/to/html/{title}':
-    parameters: []
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Transform wikitext to HTML. Note that if you set `stash: true`, you
-          also need to supply the title.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The Wikitext to transform to HTML
-          in: formData
-          name: wikitext
-          required: true
-          type: string
-          x-textarea: true
-        - description: Return only `body.innerHTML`
-          in: formData
-          name: body_only
-          required: false
-          type: boolean
-        - description: Whether to temporarily stash the result of the transformation
-          in: formData
-          name: stash
-          required: false
-          type: boolean
-      produces:
-        - text/html; profile="mediawiki.org/specs/html/1.1.0"
-      responses:
-        '200':
-          description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
-        '403':
-          description: access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Revision was restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '410':
-          description: Page was deleted
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Transforms
-      x-amples:
-        - request:
-            body:
-              body_only: true
-              wikitext: == Heading ==
-            params:
-              domain: en.wikipedia.org
-              title: Foobar
-          response:
-            body: /^<h2.*> Heading <\/h2>$/
-            headers:
-              content-type: /^text\/html.+/
-            status: 200
-          title: Transform wikitext to html
-      x-monitor: true
-      x-request-handler:
-        - get_from_backend:
-            request:
-              body:
-                body_only: '{body_only}'
-                stash: '{stash}'
-                wikitext: '{wikitext}'
-              uri: '/{domain}/sys/parsoid/transform/wikitext/to/html{/title}{/revision}'
-            return: true
-  '/transform/wikitext/to/html/{title}/{revision}':
-    parameters: []
-    post:
-      consumes:
-        - multipart/form-data
-      description: |
-        Transform wikitext to HTML. Note that if you set `stash: true`, you
-          also need to supply the title.
-
-        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
-      parameters:
-        - description: The page title
-          in: path
-          name: title
-          required: true
-          type: string
-        - description: The page revision
-          in: path
-          name: revision
-          required: true
-          type: integer
-        - description: The Wikitext to transform to HTML
-          in: formData
-          name: wikitext
-          required: true
-          type: string
-          x-textarea: true
-        - description: Return only `body.innerHTML`
-          in: formData
-          name: body_only
-          required: false
-          type: boolean
-        - description: Whether to temporarily stash the result of the transformation
-          in: formData
-          name: stash
-          required: false
-          type: boolean
-      produces:
-        - text/html; profile="mediawiki.org/specs/html/1.1.0"
-      responses:
-        '200':
-          description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
-        '403':
-          description: access to the specific revision is restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '404':
-          description: Unknown page title or revision
-          schema:
-            $ref: '#/definitions/problem'
-        '409':
-          description: Revision was restricted
-          schema:
-            $ref: '#/definitions/problem'
-        '410':
-          description: Page was deleted
-          schema:
-            $ref: '#/definitions/problem'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/problem'
-      tags:
-        - Transforms
-      x-amples:
-        - request:
-            body:
-              body_only: true
-              wikitext: == Heading ==
-            params:
-              domain: en.wikipedia.org
-              title: Foobar
-          response:
-            body: /^<h2.*> Heading <\/h2>$/
-            headers:
-              content-type: /^text\/html.+/
-            status: 200
-          title: Transform wikitext to html
-      x-monitor: true
-      x-request-handler:
-        - get_from_backend:
-            request:
-              body:
-                body_only: '{body_only}'
-                stash: '{stash}'
-                wikitext: '{wikitext}'
-              uri: '/{domain}/sys/parsoid/transform/wikitext/to/html{/title}{/revision}'
-            return: true
 definitions:
-  data-parsoid:
-    description: Result format for Parsoid data queries
+  article:
     properties:
-      counter:
-        format: int32
-        type: integer
-      ids:
-        type: object
-    required:
-      - counter
-      - ids
+      items:
+        items:
+          properties:
+            access:
+              type: string
+            agent:
+              type: string
+            article:
+              type: string
+            granularity:
+              type: string
+            project:
+              type: string
+            timestamp:
+              type: string
+            views:
+              format: int64
+              type: integer
+        type: array
   listing:
     description: The result format for listings
     properties:
@@ -2277,6 +496,22 @@ definitions:
         type: array
     required:
       - items
+  originalimage:
+    properties:
+      height:
+        description: Original image height
+        type: integer
+      source:
+        description: Original image URI
+        type: string
+      width:
+        description: Original image width
+        type: integer
+    required:
+      - source
+      - width
+      - height
+    type: object
   problem:
     properties:
       detail:
@@ -2289,80 +524,44 @@ definitions:
         type: string
     required:
       - type
-  revision:
-    description: Result format for revision items
-    properties:
-      count:
-        format: int32
-        type: integer
-      items:
-        $ref: '#/definitions/revisionInfo'
-        type: array
-    required:
-      - count
-      - items
-  revisionIdentifier:
-    description: Unique revision identifier
-    properties:
-      revision:
-        format: int32
-        type: integer
-      tid:
-        type: string
-  revisionInfo:
-    description: Complete information about the revision
-    properties:
-      comment:
-        type: string
-      latest_rev:
-        format: int32
-        type: integer
-      latest_tid:
-        type: string
-      nextrev_tid:
-        type: string
-      page_id:
-        format: int32
-        type: integer
-      redirect:
-        type: boolean
-      renames:
-        items:
-          type: string
-        type: array
-      restrictions:
-        items:
-          type: string
-        type: array
-      rev:
-        format: int32
-        type: integer
-      tags:
-        items:
-          type: string
-        type: array
-      tid:
-        type: string
-      timestamp:
-        format: date-time
-        type: string
-      title:
-        type: string
-      user_id:
-        format: int32
-        type: integer
-      user_text:
-        type: string
-  revisions:
-    description: The result format for revision listing
+  project:
     properties:
       items:
-        $ref: '#/definitions/revisionIdentifier'
+        items:
+          properties:
+            access:
+              type: string
+            agent:
+              type: string
+            granularity:
+              type: string
+            project:
+              type: string
+            timestamp:
+              type: string
+            views:
+              format: int64
+              type: integer
         type: array
-    required:
-      - items
   summary:
     properties:
+      coordinates:
+        description: The coordinates of the item
+        properties:
+          lat:
+            description: The latitude
+            type: number
+          lon:
+            description: The longitude
+            type: number
+        required:
+          - lat
+          - lon
+        type: object
+      description:
+        description: Wikidata description for the page
+        example: American poet
+        type: string
       dir:
         description: The page language direction code
         example: ltr
@@ -2374,22 +573,14 @@ definitions:
         description: The page language code
         example: en
         type: string
+      originalimage:
+        $ref: '#/definitions/originalimage'
       thumbnail:
-        properties:
-          height:
-            description: Thumnail height
-            type: integer
-          source:
-            description: Thumbnail image URI
-            type: string
-          width:
-            description: Thumbnail width
-            type: integer
-        required:
-          - source
-          - width
-          - height
-        type: object
+        $ref: '#/definitions/thumbnail'
+      timestamp:
+        description: 'The time when the page was last editted in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format'
+        example: '1970-01-01T00:00:00.000Z'
+        type: string
       title:
         description: The page title
         type: string
@@ -2399,19 +590,56 @@ definitions:
       - lang
       - dir
     type: object
+  thumbnail:
+    properties:
+      height:
+        description: Thumnail height
+        type: integer
+      source:
+        description: Thumbnail image URI
+        type: string
+      width:
+        description: Thumbnail width
+        type: integer
+    required:
+      - source
+      - width
+      - height
+    type: object
+  tops:
+    properties:
+      items:
+        items:
+          properties:
+            access:
+              type: string
+            articles:
+              type: string
+            day:
+              type: string
+            month:
+              type: string
+            project:
+              type: string
+            year:
+              type: string
+        type: array
+  unique-devices:
+    properties:
+      items:
+        items:
+          properties:
+            access-site:
+              type: string
+            devices:
+              format: int64
+              type: integer
+            granularity:
+              type: string
+            project:
+              type: string
+            timestamp:
+              type: string
+        type: array
 x-default-params: {}
 x-host-basePath: /api/rest_v1
-x-modules:
-  /:
-    - path: v1/content.yaml
-  /media:
-    - options: '{{options.mathoid}}'
-      path: v1/mathoid.yaml
-  /page:
-    - options: '{{options.mobileapps}}'
-      path: v1/mobileapps.yaml
-    - options: '{{options.graphoid}}'
-      path: v1/graphoid.yaml
-    - options:
-        response_cache-control: 'max-age: 3600, s-maxage: 3600'
-      path: v1/summary.js

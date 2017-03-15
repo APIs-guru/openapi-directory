@@ -1,3 +1,15 @@
+definitions:
+  summary:
+    properties:
+      coordinates:
+        required:
+          - - lat
+            - lon
+        requiredProperties:
+          - - lat
+            - lon
+          - 0
+          - 0
 paths:
   '/media/math/check/{type}':
     post:
