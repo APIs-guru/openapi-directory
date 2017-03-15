@@ -1,15 +1,50 @@
 #blacklisted URLs
-#
+# Can not GET "https://language.googleapis.com/$discovery/rest?version=v1beta1": Unauthorized
+ - 'https://language.googleapis.com/$discovery/rest?version=v1beta1'
+# broken spec
+ - 'https://raw.githubusercontent.com/NYTimes/public_api_specs/master/archive_api/archive_api.json'
 #localhost
  - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/servicefabric/2016-01-28/swagger/servicefabric.json'
 #Missing host and incorrect location
  - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28/swagger/searchservice.json'
- - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28/swagger/searchindex.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2016-09-01/swagger/searchservice.json'
  - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28-Preview/swagger/searchservice.json'
  - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28-Preview/swagger/searchindex.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28/swagger/searchindex.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2016-09-01/swagger/searchindex.json'
  - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/keyvault/2015-06-01/swagger/keyvault.json'
  - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/keyvault/2016-10-01/swagger/keyvault.json'
 #Marked as internal APIs
  - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-graphrbac/1.42-previewInternal/swagger/graphrbac.json'
  - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-graphrbac/1.6-internal/swagger/graphrbac.json'
  - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-intune/2015-01-14-privatepreview/swagger/intune.json'
+#
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-recoveryservicesbackup/2016-06-01/swagger/registeredIdentities.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-insights/2016-03-01/swagger/insightsManagementClient_AlertRules.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-insights/2016-03-01/swagger/insightsManagementClient_AlertRulesIncidents.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-sql/2014-04-01/swagger/firewallRules.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2015-04-01/swagger/insightsClient_EventCategories.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2015-04-01/swagger/insightsClient_Events.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-sql/2014-04-01/swagger/replicationLinks.json'
+
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-redis/2016-04-01/swagger/redis.json'
+
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/applicationGateway.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/expressRouteCircuit.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/loadBalancer.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/networkInterface.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/networkSecurityGroup.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/publicIpAddress.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/routeTable.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/virtualNetwork.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/virtualNetworkGateway.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/vmssNetworkInterface.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-customer-insights/2017-01-01/swagger/customer-insights.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/usage.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/checkDnsAvailability.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-batch/2017-01-01/swagger/BatchManagement.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/networkWatcher.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-12-01/swagger/expressRouteCircuit.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-12-01/swagger/routeFilter.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-12-01/swagger/serviceCommunity.json'
