@@ -46,6 +46,10 @@ class SpecError extends Error {
   }
 }
 
+
+//Disable check of SSL certificates
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+
 var program = require('commander');
 
 var errExitCode = 255;
