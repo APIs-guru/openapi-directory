@@ -1,0 +1,525 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Azure DocumentDB Database Service Resource Provider REST API
+  title: DocumentDB
+  version: '2015-04-08'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-documentdb/2015-04-08/swagger/documentdb.json'
+    version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: arm-documentdb
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: Impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  accountNameParameter:
+    description: DocumentDB database account name.
+    in: path
+    maxLength: 50
+    minLength: 3
+    name: accountName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  apiVersionParameter:
+    description: Version of the API to be used with the client request. The current version is 2015-04-08.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  resourceGroupNameParameter:
+    description: Name of an Azure resource group.
+    in: path
+    maxLength: 90
+    minLength: 1
+    name: resourceGroupName
+    pattern: '^[-\w\._\(\)]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  subscriptionIdParameter:
+    description: Azure subscription ID.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/providers/Microsoft.DocumentDB/databaseAccountNames/{accountName}':
+    head:
+      description: 'Checks that the Azure DocumentDB account name already exists. A valid account name may contain only lowercase letters, numbers, and the ''-'' character, and must be between 3 and 50 characters.'
+      operationId: DatabaseAccounts_CheckNameExists
+      parameters:
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. The account name is valid but is already in use.
+        '404':
+          description: Not Found. The account name is available and valid.
+  '/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/databaseAccounts':
+    get:
+      description: Lists all the Azure DocumentDB database accounts available under the subscription.
+      operationId: DatabaseAccounts_List
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/DatabaseAccountsListResult'
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts':
+    get:
+      description: Lists all the Azure DocumentDB database accounts available under the given resource group.
+      operationId: DatabaseAccounts_ListByResourceGroup
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/DatabaseAccountsListResult'
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}':
+    delete:
+      description: Deletes an existing Azure DocumentDB database account.
+      operationId: DatabaseAccounts_Delete
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: The database account delete operation will complete asynchronously.
+        '204':
+          description: The specified account does not exist in the subscription.
+      x-ms-long-running-operation: true
+    get:
+      description: Retrieves the properties of an existing Azure DocumentDB database account.
+      operationId: DatabaseAccounts_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The database account properties were retrieved successfully.
+          schema:
+            $ref: '#/definitions/DatabaseAccount'
+    patch:
+      description: Patches the properties of an existing Azure DocumentDB database account.
+      operationId: DatabaseAccounts_Patch
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: The tags parameter to patch for the current database account.
+          in: body
+          name: updateParameters
+          required: true
+          schema:
+            $ref: '#/definitions/DatabaseAccountPatchParameters'
+      responses:
+        '200':
+          description: The properties of the database account were patched successfully.
+          schema:
+            $ref: '#/definitions/DatabaseAccount'
+      x-ms-long-running-operation: true
+    put:
+      description: Creates or updates an Azure DocumentDB database account.
+      operationId: DatabaseAccounts_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: The parameters to provide for the current database account.
+          in: body
+          name: createUpdateParameters
+          required: true
+          schema:
+            $ref: '#/definitions/DatabaseAccountCreateUpdateParameters'
+      responses:
+        '200':
+          description: The database account create or update operation will complete asynchronously.
+          schema:
+            $ref: '#/definitions/DatabaseAccount'
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange':
+    post:
+      description: Changes the failover priority for the Azure DocumentDB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
+      operationId: DatabaseAccounts_FailoverPriorityChange
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: The new failover policies for the database account.
+          in: body
+          name: failoverParameters
+          required: true
+          schema:
+            $ref: '#/definitions/FailoverPolicies'
+      responses:
+        '202':
+          description: Accepted. The failover policy change operation will complete asynchronously.
+        '204':
+          description: No Content
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listKeys':
+    post:
+      description: Lists the access keys for the specified Azure DocumentDB database account.
+      operationId: DatabaseAccounts_ListKeys
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/DatabaseAccountListKeysResult'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys':
+    get:
+      description: Lists the read-only access keys for the specified Azure DocumentDB database account.
+      operationId: DatabaseAccounts_ListReadOnlyKeys
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/DatabaseAccountListReadOnlyKeysResult'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/regenerateKey':
+    post:
+      description: Regenerates an access key for the specified Azure DocumentDB database account.
+      operationId: DatabaseAccounts_RegenerateKey
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: The name of the key to regenerate.
+          in: body
+          name: keyToRegenerate
+          required: true
+          schema:
+            $ref: '#/definitions/DatabaseAccountRegenerateKeyParameters'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted. The regenerate key operation will complete asynchronously.
+      x-ms-long-running-operation: true
+definitions:
+  ConsistencyPolicy:
+    description: The consistency policy for the DocumentDB database account.
+    properties:
+      defaultConsistencyLevel:
+        description: The default consistency level and configuration settings of the DocumentDB account.
+        enum:
+          - Eventual
+          - Session
+          - BoundedStaleness
+          - Strong
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: DefaultConsistencyLevel
+      maxIntervalInSeconds:
+        description: 'When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 1 - 100. Required when defaultConsistencyPolicy is set to ''BoundedStaleness''.'
+        format: int32
+        maximum: 100
+        minimum: 1
+        type: integer
+      maxStalenessPrefix:
+        description: 'When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 1 – 2,147,483,647. Required when defaultConsistencyPolicy is set to ''BoundedStaleness''.'
+        format: int64
+        maximum: 2147483647
+        minimum: 1
+        type: integer
+    required:
+      - defaultConsistencyLevel
+    type: object
+  DatabaseAccount:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: A DocumentDB database account.
+    properties:
+      kind:
+        default: GlobalDocumentDB
+        description: Indicates the type of database account. This can only be set at database account creation.
+        enum:
+          - GlobalDocumentDB
+          - MongoDB
+          - Parse
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DatabaseAccountKind
+      properties:
+        $ref: '#/definitions/DatabaseAccountProperties'
+        x-ms-client-flatten: true
+    type: object
+  DatabaseAccountCreateUpdateParameters:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Parameters to create and update DocumentDB database accounts.
+    properties:
+      kind:
+        default: GlobalDocumentDB
+        description: Indicates the type of database account. This can only be set at database account creation.
+        enum:
+          - GlobalDocumentDB
+          - MongoDB
+          - Parse
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DatabaseAccountKind
+      properties:
+        $ref: '#/definitions/DatabaseAccountCreateUpdateProperties'
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  DatabaseAccountCreateUpdateProperties:
+    description: Properties to create and update Azure DocumentDB database accounts.
+    properties:
+      consistencyPolicy:
+        $ref: '#/definitions/ConsistencyPolicy'
+        description: The consistency policy for the DocumentDB account.
+      databaseAccountOfferType:
+        $ref: '#/definitions/DatabaseAccountOfferType'
+      ipRangeFilter:
+        $ref: '#/definitions/IPRangeFilter'
+        description: 'DocumentDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.'
+      locations:
+        description: An array that contains the georeplication locations enabled for the DocumentDB account.
+        items:
+          $ref: '#/definitions/Location'
+        type: array
+    required:
+      - locations
+      - databaseAccountOfferType
+    type: object
+  DatabaseAccountListKeysResult:
+    description: The access keys for the given database account.
+    properties:
+      primaryMasterKey:
+        description: Base 64 encoded value of the primary read-write key.
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/DatabaseAccountListReadOnlyKeysResult'
+        x-ms-client-flatten: true
+      secondaryMasterKey:
+        description: Base 64 encoded value of the secondary read-write key.
+        readOnly: true
+        type: string
+  DatabaseAccountListReadOnlyKeysResult:
+    description: The read-only access keys for the given database account.
+    properties:
+      primaryReadonlyMasterKey:
+        description: Base 64 encoded value of the primary read-only key.
+        readOnly: true
+        type: string
+      secondaryReadonlyMasterKey:
+        description: Base 64 encoded value of the secondary read-only key.
+        readOnly: true
+        type: string
+  DatabaseAccountOfferType:
+    description: The offer type for the DocumentDB database account.
+    enum:
+      - Standard
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: DatabaseAccountOfferType
+  DatabaseAccountPatchParameters:
+    description: Parameters for patching Azure DocumentDB database account properties.
+    properties:
+      tags:
+        $ref: '#/definitions/Tags'
+    required:
+      - tags
+    type: object
+  DatabaseAccountProperties:
+    description: Properties for the database account.
+    properties:
+      consistencyPolicy:
+        $ref: '#/definitions/ConsistencyPolicy'
+        description: The consistency policy for the DocumentDB database account.
+      databaseAccountOfferType:
+        $ref: '#/definitions/DatabaseAccountOfferType'
+        description: 'The offer type for the DocumentDB database account. Default value: Standard.'
+        readOnly: true
+      documentEndpoint:
+        description: The connection endpoint for the DocumentDB database account.
+        readOnly: true
+        type: string
+      failoverPolicies:
+        description: An array that contains the regions ordered by their failover priorities.
+        items:
+          $ref: '#/definitions/FailoverPolicy'
+        readOnly: true
+        type: array
+      ipRangeFilter:
+        $ref: '#/definitions/IPRangeFilter'
+        description: 'DocumentDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.'
+      provisioningState:
+        $ref: '#/definitions/ProvisioningState'
+      readLocations:
+        description: An array that contains of the read locations enabled for the DocumentDB account.
+        items:
+          $ref: '#/definitions/Location'
+        readOnly: true
+        type: array
+      writeLocations:
+        description: An array that contains the write location for the DocumentDB account.
+        items:
+          $ref: '#/definitions/Location'
+        readOnly: true
+        type: array
+    type: object
+  DatabaseAccountRegenerateKeyParameters:
+    description: Parameters to regenerate the keys within the database account.
+    properties:
+      keyKind:
+        description: The access key to regenerate.
+        enum:
+          - primary
+          - secondary
+          - primaryReadonly
+          - secondaryReadonly
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: KeyKind
+    required:
+      - keyKind
+    type: object
+  DatabaseAccountsListResult:
+    description: 'The List operation response, that contains the database accounts and their properties.'
+    properties:
+      value:
+        description: List of database account and their properties.
+        items:
+          $ref: '#/definitions/DatabaseAccount'
+        readOnly: true
+        type: array
+  FailoverPolicies:
+    description: The list of new failover policies for the failover priority change.
+    properties:
+      failoverPolicies:
+        description: List of failover policies.
+        items:
+          $ref: '#/definitions/FailoverPolicy'
+        type: array
+  FailoverPolicy:
+    description: The failover policy for a given region of a database account.
+    properties:
+      failoverPriority:
+        description: The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
+        format: int32
+        minimum: 0
+        type: integer
+      id:
+        description: 'The unique identifier of the region in which the database account replicates to. Example: &lt;accountName&gt;-&lt;locationName&gt;.'
+        readOnly: true
+        type: string
+      locationName:
+        description: The name of the region in which the database account exists.
+        type: string
+    type: object
+  IPRangeFilter:
+    description: 'DocumentDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.'
+    type: string
+  Location:
+    description: A region in which the Azure DocumentDB database account is deployed.
+    properties:
+      documentEndpoint:
+        description: 'The connection endpoint for the specific region. Example: https://&lt;accountName&gt;-&lt;locationName&gt;.documents.azure.com:443/'
+        readOnly: true
+        type: string
+      failoverPriority:
+        description: The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
+        format: int32
+        minimum: 0
+        type: integer
+      id:
+        description: 'The unique identifier of the region within the database account. Example: &lt;accountName&gt;-&lt;locationName&gt;.'
+        readOnly: true
+        type: string
+      locationName:
+        description: The name of the region.
+        type: string
+      provisioningState:
+        $ref: '#/definitions/ProvisioningState'
+    type: object
+  ProvisioningState:
+    description: 'The status of the DocumentDB account at the time the operation was called. The status can be one of following. ''Creating'' – the DocumentDB account is being created. When an account is in Creating state, only properties that are specified as input for the Create DocumentDB account operation are returned. ''Succeeded'' – the DocumentDB account is active for use. ''Updating'' – the DocumentDB account is being updated. ''Deleting'' – the DocumentDB account is being deleted. ''Failed'' – the DocumentDB account failed creation.'
+    readOnly: true
+    type: string
+  Resource:
+    description: A database account resource.
+    properties:
+      id:
+        description: The unique resource identifier of the database account.
+        readOnly: true
+        type: string
+      location:
+        description: The location of the resource group to which the resource belongs.
+        type: string
+      name:
+        description: The name of the database account.
+        readOnly: true
+        type: string
+      tags:
+        $ref: '#/definitions/Tags'
+      type:
+        description: The type of Azure resource.
+        readOnly: true
+        type: string
+    required:
+      - location
+    type: object
+    x-ms-azure-resource: true
+  Tags:
+    additionalProperties:
+      type: string
+    description: Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.
+    type: object
