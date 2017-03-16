@@ -176,7 +176,6 @@ function validatePrefered(specs) {
   });
 
   _.each(preferred, function (versions, id) {
-    console.log(versions);
     if (_.size(versions) === 1) {
       versions = _.values(versions);
       assert(_.isUndefined(versions[0]) || versions[0] === true,
