@@ -112,15 +112,6 @@ paths:
       parameters:
         - collectionFormat: multi
           description: |-
-            The list of language codes (defined in ISO 693) to run the query with,
-            e.g. 'en'.
-          in: query
-          items:
-            type: string
-          name: languages
-          type: array
-        - collectionFormat: multi
-          description: |-
             The list of entity id to be used for search instead of query string.
             To specify multiple ids in the HTTP request, repeat the parameter in the
             URL as in ...?ids=A&ids=B
@@ -155,6 +146,15 @@ paths:
           in: query
           name: indent
           type: boolean
+        - collectionFormat: multi
+          description: |-
+            The list of language codes (defined in ISO 693) to run the query with,
+            e.g. 'en'.
+          in: query
+          items:
+            type: string
+          name: languages
+          type: array
       responses:
         '200':
           description: Successful response
@@ -163,19 +163,19 @@ paths:
       tags:
         - entities
     parameters:
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
 definitions:
   SearchResponse:
     description: |-

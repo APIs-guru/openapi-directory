@@ -13,6 +13,8 @@ info:
   termsOfService: 'https://wavecell.com/terms.html'
   title: Wavecell.Sms.Api
   version: v1
+  x-apisguru-categories:
+    - messaging
   x-logo:
     backgroundColor: '#050917'
     url: 'https://wavecell.com/images/logo_wavecell.png'
@@ -186,6 +188,7 @@ definitions:
         $ref: '#/definitions/SmsTemplate'
     required:
       - destinations
+      - template
     type: object
   BulkSmsResponse:
     properties:
@@ -193,6 +196,7 @@ definitions:
         format: int32
         type: integer
       batchId:
+        format: uuid
         type: string
       clientBatchId:
         type: string

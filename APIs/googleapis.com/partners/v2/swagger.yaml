@@ -100,16 +100,16 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: offers
-  - name: analytics
-  - name: userStates
-  - name: v2
   - name: companies
   - name: users
   - name: userEvents
   - name: clientMessages
   - name: exams
   - name: leads
+  - name: offers
+  - name: userStates
+  - name: analytics
+  - name: v2
 paths:
   /v2/analytics:
     get:
@@ -118,6 +118,35 @@ paths:
         Should only be called within the context of an authorized logged in user.
       operationId: partners.analytics.list
       parameters:
+        - description: |-
+            A token identifying a page of results that the server returns.
+            Typically, this is the value of `ListAnalyticsResponse.next_page_token`
+            returned from the previous call to
+            ListAnalytics.
+            Will be a date string in `YYYY-MM-DD` format representing the end date
+            of the date range of results to return.
+            If unspecified or set to "", default value is the current date.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Requested page size. Server may return fewer analytics than requested.
+            If unspecified or set to 0, default value is 30.
+            Specifies the number of days in the date range when querying analytics.
+            The `page_token` represents the end date of the date range
+            and the start date is calculated using the `page_size` as the number
+            of days BEFORE the end date.
+            Must be a non-negative integer.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Identifier to indicate where the traffic comes from.
+            An identifier has multiple letters created by a team which redirected the
+            traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSourceId
+          type: string
         - description: Locale to use for the current request.
           in: query
           name: requestMetadata.locale
@@ -148,35 +177,6 @@ paths:
           in: query
           name: requestMetadata.partnersSessionId
           type: string
-        - description: |-
-            A token identifying a page of results that the server returns.
-            Typically, this is the value of `ListAnalyticsResponse.next_page_token`
-            returned from the previous call to
-            ListAnalytics.
-            Will be a date string in `YYYY-MM-DD` format representing the end date
-            of the date range of results to return.
-            If unspecified or set to "", default value is the current date.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            Requested page size. Server may return fewer analytics than requested.
-            If unspecified or set to 0, default value is 30.
-            Specifies the number of days in the date range when querying analytics.
-            The `page_token` represents the end date of the date range
-            and the start date is calculated using the `page_size` as the number
-            of days BEFORE the end date.
-            Must be a non-negative integer.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            Identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSourceId
-          type: string
       responses:
         '200':
           description: Successful response
@@ -185,34 +185,34 @@ paths:
       tags:
         - analytics
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v2/clientMessages:log':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Logs a generic message from the client, such as
@@ -236,6 +236,25 @@ paths:
       description: Lists companies.
       operationId: partners.companies.list
       parameters:
+        - description: IP address to use instead of the user's geo-located IP address.
+          in: query
+          name: requestMetadata.userOverrides.ipAddress
+          type: string
+        - collectionFormat: multi
+          description: Experiment IDs the current request belongs to.
+          in: query
+          items:
+            type: string
+          name: requestMetadata.experimentIds
+          type: array
+        - description: |-
+            How to order addresses within the returned companies. Currently, only
+            `address` and `address desc` is supported which will sorted by closest to
+            farthest in distance from given address and farthest to closest distance
+            from given address respectively.
+          in: query
+          name: orderBy
+          type: string
         - collectionFormat: multi
           description: |-
             List of specializations that the returned agencies should provide. If this
@@ -274,15 +293,15 @@ paths:
           in: query
           name: view
           type: string
-        - description: Locale to use for the current request.
-          in: query
-          name: requestMetadata.locale
-          type: string
         - description: |-
             The address to use when searching for companies.
             If not given, the geo-located address of the request is used.
           in: query
           name: address
+          type: string
+        - description: Locale to use for the current request.
+          in: query
+          name: requestMetadata.locale
           type: string
         - description: |-
             The whole units of the amount.
@@ -352,10 +371,6 @@ paths:
           in: query
           name: requestMetadata.partnersSessionId
           type: string
-        - description: Company name to search for.
-          in: query
-          name: companyName
-          type: string
         - description: |-
             A token identifying a page of results that the server returns.
             Typically, this is the value of `ListCompaniesResponse.next_page_token`
@@ -363,6 +378,10 @@ paths:
             ListCompanies.
           in: query
           name: pageToken
+          type: string
+        - description: Company name to search for.
+          in: query
+          name: companyName
           type: string
         - collectionFormat: multi
           description: List of industries the company can help with.
@@ -418,25 +437,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: IP address to use instead of the user's geo-located IP address.
-          in: query
-          name: requestMetadata.userOverrides.ipAddress
-          type: string
-        - collectionFormat: multi
-          description: Experiment IDs the current request belongs to.
-          in: query
-          items:
-            type: string
-          name: requestMetadata.experimentIds
-          type: array
-        - description: |-
-            How to order addresses within the returned companies. Currently, only
-            `address` and `address desc` is supported which will sorted by closest to
-            farthest in distance from given address and farthest to closest distance
-            from given address respectively.
-          in: query
-          name: orderBy
-          type: string
       responses:
         '200':
           description: Successful response
@@ -445,39 +445,25 @@ paths:
       tags:
         - companies
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     patch:
       description: |-
         Update company.
         Should only be called within the context of an authorized logged in user.
       operationId: partners.updateCompanies
       parameters:
-        - collectionFormat: multi
-          description: Experiment IDs the current request belongs to.
-          in: query
-          items:
-            type: string
-          name: requestMetadata.experimentIds
-          type: array
-        - description: |-
-            Second level identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSubId
-          type: string
         - description: Google Partners session ID.
           in: query
           name: requestMetadata.partnersSessionId
@@ -507,6 +493,20 @@ paths:
           in: query
           name: updateMask
           type: string
+        - collectionFormat: multi
+          description: Experiment IDs the current request belongs to.
+          in: query
+          items:
+            type: string
+          name: requestMetadata.experimentIds
+          type: array
+        - description: |-
+            Second level identifier to indicate where the traffic comes from.
+            An identifier has multiple letters created by a team which redirected the
+            traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSubId
+          type: string
         - in: body
           name: body
           schema:
@@ -527,14 +527,6 @@ paths:
           in: path
           name: companyId
           required: true
-          type: string
-        - description: Logged-in user ID to impersonate instead of the user's ID.
-          in: query
-          name: requestMetadata.userOverrides.userId
-          type: string
-        - description: Google Partners session ID.
-          in: query
-          name: requestMetadata.partnersSessionId
           type: string
         - description: |-
             The view of `Company` resource to be returned. This must not be
@@ -567,6 +559,12 @@ paths:
           in: query
           name: requestMetadata.userOverrides.ipAddress
           type: string
+        - description: |-
+            If the company's budget is in a different currency code than this one, then
+            the converted budget is converted to this currency code.
+          in: query
+          name: currencyCode
+          type: string
         - collectionFormat: multi
           description: Experiment IDs the current request belongs to.
           in: query
@@ -575,10 +573,11 @@ paths:
           name: requestMetadata.experimentIds
           type: array
         - description: |-
-            If the company's budget is in a different currency code than this one, then
-            the converted budget is converted to this currency code.
+            Second level identifier to indicate where the traffic comes from.
+            An identifier has multiple letters created by a team which redirected the
+            traffic to us.
           in: query
-          name: currencyCode
+          name: requestMetadata.trafficSource.trafficSubId
           type: string
         - description: |-
             How to order addresses within the returned company. Currently, only
@@ -588,12 +587,13 @@ paths:
           in: query
           name: orderBy
           type: string
-        - description: |-
-            Second level identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
+        - description: Google Partners session ID.
           in: query
-          name: requestMetadata.trafficSource.trafficSubId
+          name: requestMetadata.partnersSessionId
+          type: string
+        - description: Logged-in user ID to impersonate instead of the user's ID.
+          in: query
+          name: requestMetadata.userOverrides.userId
           type: string
       responses:
         '200':
@@ -603,34 +603,34 @@ paths:
       tags:
         - companies
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v2/companies/{companyId}/leads':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: Creates an advertiser lead for the given company ID.
       operationId: partners.companies.leads.create
@@ -673,14 +673,6 @@ paths:
           name: examType
           required: true
           type: string
-        - description: Locale to use for the current request.
-          in: query
-          name: requestMetadata.locale
-          type: string
-        - description: IP address to use instead of the user's geo-located IP address.
-          in: query
-          name: requestMetadata.userOverrides.ipAddress
-          type: string
         - collectionFormat: multi
           description: Experiment IDs the current request belongs to.
           in: query
@@ -710,6 +702,14 @@ paths:
           in: query
           name: requestMetadata.trafficSource.trafficSourceId
           type: string
+        - description: Locale to use for the current request.
+          in: query
+          name: requestMetadata.locale
+          type: string
+        - description: IP address to use instead of the user's geo-located IP address.
+          in: query
+          name: requestMetadata.userOverrides.ipAddress
+          type: string
       responses:
         '200':
           description: Successful response
@@ -718,19 +718,19 @@ paths:
       tags:
         - exams
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   /v2/leads:
     get:
       description: |-
@@ -738,13 +738,33 @@ paths:
         Should only be called within the context of an authorized logged in user.
       operationId: partners.leads.list
       parameters:
-        - description: Google Partners session ID.
+        - collectionFormat: multi
+          description: Experiment IDs the current request belongs to.
           in: query
-          name: requestMetadata.partnersSessionId
+          items:
+            type: string
+          name: requestMetadata.experimentIds
+          type: array
+        - description: |-
+            Second level identifier to indicate where the traffic comes from.
+            An identifier has multiple letters created by a team which redirected the
+            traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSubId
+          type: string
+        - description: |-
+            How to order Leads. Currently, only `create_time`
+            and `create_time desc` are supported
+          in: query
+          name: orderBy
           type: string
         - description: Logged-in user ID to impersonate instead of the user's ID.
           in: query
           name: requestMetadata.userOverrides.userId
+          type: string
+        - description: Google Partners session ID.
+          in: query
+          name: requestMetadata.partnersSessionId
           type: string
         - description: |-
             A token identifying a page of results that the server returns.
@@ -775,26 +795,6 @@ paths:
           in: query
           name: requestMetadata.userOverrides.ipAddress
           type: string
-        - collectionFormat: multi
-          description: Experiment IDs the current request belongs to.
-          in: query
-          items:
-            type: string
-          name: requestMetadata.experimentIds
-          type: array
-        - description: |-
-            Second level identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSubId
-          type: string
-        - description: |-
-            How to order Leads. Currently, only `create_time`
-            and `create_time desc` are supported
-          in: query
-          name: orderBy
-          type: string
       responses:
         '200':
           description: Successful response
@@ -803,31 +803,23 @@ paths:
       tags:
         - leads
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     patch:
       description: Updates the specified lead.
       operationId: partners.updateLeads
       parameters:
-        - description: Logged-in user ID to impersonate instead of the user's ID.
-          in: query
-          name: requestMetadata.userOverrides.userId
-          type: string
-        - description: Google Partners session ID.
-          in: query
-          name: requestMetadata.partnersSessionId
-          type: string
         - description: |-
             Identifier to indicate where the traffic comes from.
             An identifier has multiple letters created by a team which redirected the
@@ -864,6 +856,14 @@ paths:
           in: query
           name: requestMetadata.trafficSource.trafficSubId
           type: string
+        - description: Google Partners session ID.
+          in: query
+          name: requestMetadata.partnersSessionId
+          type: string
+        - description: Logged-in user ID to impersonate instead of the user's ID.
+          in: query
+          name: requestMetadata.userOverrides.userId
+          type: string
         - in: body
           name: body
           schema:
@@ -880,21 +880,6 @@ paths:
       description: Lists the Offers available for the current user
       operationId: partners.offers.list
       parameters:
-        - description: Logged-in user ID to impersonate instead of the user's ID.
-          in: query
-          name: requestMetadata.userOverrides.userId
-          type: string
-        - description: Google Partners session ID.
-          in: query
-          name: requestMetadata.partnersSessionId
-          type: string
-        - description: |-
-            Identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSourceId
-          type: string
         - description: Locale to use for the current request.
           in: query
           name: requestMetadata.locale
@@ -917,6 +902,21 @@ paths:
           in: query
           name: requestMetadata.trafficSource.trafficSubId
           type: string
+        - description: Logged-in user ID to impersonate instead of the user's ID.
+          in: query
+          name: requestMetadata.userOverrides.userId
+          type: string
+        - description: Google Partners session ID.
+          in: query
+          name: requestMetadata.partnersSessionId
+          type: string
+        - description: |-
+            Identifier to indicate where the traffic comes from.
+            An identifier has multiple letters created by a team which redirected the
+            traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSourceId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -925,19 +925,19 @@ paths:
       tags:
         - offers
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   /v2/offers/history:
     get:
       description: Lists the Historical Offers for the current user (or user's entire company)
@@ -986,6 +986,13 @@ paths:
           name: entireCompany
           type: boolean
         - description: |-
+            Second level identifier to indicate where the traffic comes from.
+            An identifier has multiple letters created by a team which redirected the
+            traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSubId
+          type: string
+        - description: |-
             Comma-separated list of fields to order by, e.g.: "foo,bar,baz".
             Use "foo desc" to sort descending.
             List of valid field names is: name, offer_code, expiration_time, status,
@@ -993,13 +1000,6 @@ paths:
                 offer_type.
           in: query
           name: orderBy
-          type: string
-        - description: |-
-            Second level identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSubId
           type: string
       responses:
         '200':
@@ -1009,19 +1009,19 @@ paths:
       tags:
         - offers
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   /v2/partnersstatus:
     get:
       description: |-
@@ -1029,25 +1029,6 @@ paths:
         Should only be called if the logged in user is the admin of the agency.
       operationId: partners.getPartnersstatus
       parameters:
-        - description: Google Partners session ID.
-          in: query
-          name: requestMetadata.partnersSessionId
-          type: string
-        - description: Logged-in user ID to impersonate instead of the user's ID.
-          in: query
-          name: requestMetadata.userOverrides.userId
-          type: string
-        - description: |-
-            Identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSourceId
-          type: string
-        - description: Locale to use for the current request.
-          in: query
-          name: requestMetadata.locale
-          type: string
         - description: IP address to use instead of the user's geo-located IP address.
           in: query
           name: requestMetadata.userOverrides.ipAddress
@@ -1066,6 +1047,25 @@ paths:
           in: query
           name: requestMetadata.trafficSource.trafficSubId
           type: string
+        - description: Logged-in user ID to impersonate instead of the user's ID.
+          in: query
+          name: requestMetadata.userOverrides.userId
+          type: string
+        - description: Google Partners session ID.
+          in: query
+          name: requestMetadata.partnersSessionId
+          type: string
+        - description: |-
+            Identifier to indicate where the traffic comes from.
+            An identifier has multiple letters created by a team which redirected the
+            traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSourceId
+          type: string
+        - description: Locale to use for the current request.
+          in: query
+          name: requestMetadata.locale
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1074,34 +1074,34 @@ paths:
       tags:
         - v2
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v2/userEvents:log':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     post:
       description: Logs a user event.
       operationId: partners.userEvents.log
@@ -1136,13 +1136,13 @@ paths:
           in: query
           name: requestMetadata.trafficSource.trafficSubId
           type: string
-        - description: Logged-in user ID to impersonate instead of the user's ID.
-          in: query
-          name: requestMetadata.userOverrides.userId
-          type: string
         - description: Google Partners session ID.
           in: query
           name: requestMetadata.partnersSessionId
+          type: string
+        - description: Logged-in user ID to impersonate instead of the user's ID.
+          in: query
+          name: requestMetadata.userOverrides.userId
           type: string
         - description: |-
             Identifier to indicate where the traffic comes from.
@@ -1167,61 +1167,47 @@ paths:
       tags:
         - userStates
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   /v2/users/profile:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     patch:
       description: |-
         Updates a user's profile. A user can only update their own profile and
         should only be called within the context of a logged in user.
       operationId: partners.users.updateProfile
       parameters:
-        - collectionFormat: multi
-          description: Experiment IDs the current request belongs to.
+        - description: Logged-in user ID to impersonate instead of the user's ID.
           in: query
-          items:
-            type: string
-          name: requestMetadata.experimentIds
-          type: array
-        - description: |-
-            Second level identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSubId
+          name: requestMetadata.userOverrides.userId
           type: string
         - description: Google Partners session ID.
           in: query
           name: requestMetadata.partnersSessionId
-          type: string
-        - description: Logged-in user ID to impersonate instead of the user's ID.
-          in: query
-          name: requestMetadata.userOverrides.userId
           type: string
         - description: |-
             Identifier to indicate where the traffic comes from.
@@ -1237,6 +1223,20 @@ paths:
         - description: IP address to use instead of the user's geo-located IP address.
           in: query
           name: requestMetadata.userOverrides.ipAddress
+          type: string
+        - collectionFormat: multi
+          description: Experiment IDs the current request belongs to.
+          in: query
+          items:
+            type: string
+          name: requestMetadata.experimentIds
+          type: array
+        - description: |-
+            Second level identifier to indicate where the traffic comes from.
+            An identifier has multiple letters created by a team which redirected the
+            traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSubId
           type: string
         - in: body
           name: body
@@ -1260,20 +1260,6 @@ paths:
           in: path
           name: userId
           required: true
-          type: string
-        - collectionFormat: multi
-          description: Experiment IDs the current request belongs to.
-          in: query
-          items:
-            type: string
-          name: requestMetadata.experimentIds
-          type: array
-        - description: |-
-            Second level identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSubId
           type: string
         - description: Logged-in user ID to impersonate instead of the user's ID.
           in: query
@@ -1306,6 +1292,20 @@ paths:
           in: query
           name: requestMetadata.userOverrides.ipAddress
           type: string
+        - collectionFormat: multi
+          description: Experiment IDs the current request belongs to.
+          in: query
+          items:
+            type: string
+          name: requestMetadata.experimentIds
+          type: array
+        - description: |-
+            Second level identifier to indicate where the traffic comes from.
+            An identifier has multiple letters created by a team which redirected the
+            traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSubId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1314,19 +1314,19 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
   '/v2/users/{userId}/companyRelation':
     delete:
       description: Deletes a user's company relation. Unaffiliaites the user from a company.
@@ -1339,6 +1339,10 @@ paths:
           name: userId
           required: true
           type: string
+        - description: IP address to use instead of the user's geo-located IP address.
+          in: query
+          name: requestMetadata.userOverrides.ipAddress
+          type: string
         - collectionFormat: multi
           description: Experiment IDs the current request belongs to.
           in: query
@@ -1372,10 +1376,6 @@ paths:
           in: query
           name: requestMetadata.locale
           type: string
-        - description: IP address to use instead of the user's geo-located IP address.
-          in: query
-          name: requestMetadata.userOverrides.ipAddress
-          type: string
       responses:
         '200':
           description: Successful response
@@ -1384,19 +1384,19 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
     put:
       description: Creates a user's company relation. Affiliates the user to a company.
       operationId: partners.users.createCompanyRelation
@@ -1408,13 +1408,27 @@ paths:
           name: userId
           required: true
           type: string
-        - description: Google Partners session ID.
+        - collectionFormat: multi
+          description: Experiment IDs the current request belongs to.
           in: query
-          name: requestMetadata.partnersSessionId
+          items:
+            type: string
+          name: requestMetadata.experimentIds
+          type: array
+        - description: |-
+            Second level identifier to indicate where the traffic comes from.
+            An identifier has multiple letters created by a team which redirected the
+            traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSubId
           type: string
         - description: Logged-in user ID to impersonate instead of the user's ID.
           in: query
           name: requestMetadata.userOverrides.userId
+          type: string
+        - description: Google Partners session ID.
+          in: query
+          name: requestMetadata.partnersSessionId
           type: string
         - description: |-
             Identifier to indicate where the traffic comes from.
@@ -1430,20 +1444,6 @@ paths:
         - description: IP address to use instead of the user's geo-located IP address.
           in: query
           name: requestMetadata.userOverrides.ipAddress
-          type: string
-        - collectionFormat: multi
-          description: Experiment IDs the current request belongs to.
-          in: query
-          items:
-            type: string
-          name: requestMetadata.experimentIds
-          type: array
-        - description: |-
-            Second level identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSubId
           type: string
         - in: body
           name: body

@@ -7,6 +7,8 @@ info:
   description: Build applications using the world's most powerful imagery
   title: Getty Images
   version: '3.0'
+  x-apisguru-categories:
+    - media
   x-logo:
     url: 'http://developers.gettyimages.com/images/getty-api-logo.jpg'
   x-origin:
@@ -1221,6 +1223,7 @@ paths:
             - thumb
             - title
             - uri_oembed
+            - istock_licenses
           in: query
           items:
             enum:
@@ -1270,6 +1273,7 @@ paths:
               - thumb
               - title
               - uri_oembed
+              - istock_licenses
             type: string
           name: fields
           required: false
@@ -1360,6 +1364,7 @@ paths:
             - thumb
             - title
             - uri_oembed
+            - istock_licenses
           in: query
           items:
             enum:
@@ -1409,6 +1414,7 @@ paths:
               - thumb
               - title
               - uri_oembed
+              - istock_licenses
             type: string
           name: fields
           required: false
@@ -1491,6 +1497,7 @@ paths:
             - thumb
             - title
             - uri_oembed
+            - istock_licenses
           in: query
           items:
             enum:
@@ -1532,6 +1539,7 @@ paths:
               - thumb
               - title
               - uri_oembed
+              - istock_licenses
             type: string
           name: fields
           required: false
@@ -2064,6 +2072,7 @@ paths:
             - thumb
             - title
             - uri_oembed
+            - istock_licenses
           in: query
           items:
             enum:
@@ -2105,6 +2114,7 @@ paths:
               - thumb
               - title
               - uri_oembed
+              - istock_licenses
             type: string
           name: fields
           required: false
@@ -2530,6 +2540,7 @@ paths:
             - thumb
             - title
             - uri_oembed
+            - istock_licenses
           in: query
           items:
             enum:
@@ -2565,6 +2576,7 @@ paths:
               - thumb
               - title
               - uri_oembed
+              - istock_licenses
             type: string
           name: fields
           required: false
@@ -3397,6 +3409,7 @@ paths:
             - summary_set
             - thumb
             - title
+            - istock_licenses
           in: query
           items:
             enum:
@@ -3430,6 +3443,7 @@ paths:
               - summary_set
               - thumb
               - title
+              - istock_licenses
             type: string
           name: fields
           required: false
@@ -3987,6 +4001,7 @@ paths:
             - summary_set
             - thumb
             - title
+            - istock_licenses
           in: query
           items:
             enum:
@@ -4020,6 +4035,7 @@ paths:
               - summary_set
               - thumb
               - title
+              - istock_licenses
             type: string
           name: fields
           required: false
@@ -4211,6 +4227,7 @@ paths:
             - summary_set
             - thumb
             - title
+            - istock_licenses
           in: query
           items:
             enum:
@@ -4245,6 +4262,7 @@ paths:
               - summary_set
               - video_thumb
               - title
+              - istock_licenses
             type: string
           name: fields
           required: false
@@ -4320,6 +4338,7 @@ paths:
             - summary_set
             - thumb
             - title
+            - istock_licenses
           in: query
           items:
             enum:
@@ -4354,6 +4373,7 @@ paths:
               - summary_set
               - video_thumb
               - title
+              - istock_licenses
             type: string
           name: fields
           required: false
@@ -4820,16 +4840,6 @@ definitions:
     properties:
       text:
         type: string
-    type: object
-  cost:
-    properties:
-      units:
-        description: The type of value. Currently credits is the only supported value
-        type: string
-      value:
-        description: The number of units
-        format: int32
-        type: integer
     type: object
   countries:
     properties:
@@ -5381,6 +5391,11 @@ definitions:
       id:
         description: Specifies the unique identifier for the image.
         type: string
+      istock_licenses:
+        description: Contains the cost in iStock credits for all available license types.
+        items:
+          $ref: '#/definitions/istock_license'
+        type: array
       keywords:
         description: Lists the keywords that are associated with this image.
         items:
@@ -5505,6 +5520,11 @@ definitions:
       id:
         description: Specifies the unique identifier for the image.
         type: string
+      istock_licenses:
+        description: Contains the cost in iStock credits for all available license types.
+        items:
+          $ref: '#/definitions/istock_license'
+        type: array
       keywords:
         description: Lists the keywords that are associated with this image.
         items:
@@ -5577,6 +5597,19 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  istock_license:
+    properties:
+      credits:
+        description: Cost in iStock Credits
+        format: int32
+        type: integer
+      license_desc:
+        description: Description of the lincense type
+        type: string
+      license_type:
+        description: name of the license_type
+        type: string
     type: object
   keywords:
     properties:
@@ -5819,6 +5852,11 @@ definitions:
       id:
         description: Specifies the unique identifier for the video.
         type: string
+      istock_licenses:
+        description: Contains the cost in iStock credits for all available license types.
+        items:
+          $ref: '#/definitions/istock_license'
+        type: array
       keywords:
         description: Lists the keywords that are associated with this video.
         items:
@@ -5896,6 +5934,11 @@ definitions:
       id:
         description: Specifies the unique identifier of the asset.
         type: string
+      istock_licenses:
+        description: Contains the cost in iStock credits for all available license types.
+        items:
+          $ref: '#/definitions/istock_license'
+        type: array
       keywords:
         description: Lists the keyword entries associated with image/asset.
         items:

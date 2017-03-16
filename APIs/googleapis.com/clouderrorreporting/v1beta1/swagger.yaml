@@ -142,33 +142,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
   '/v1beta1/{name}':
     parameters:
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
     put:
       description: |-
@@ -241,6 +241,26 @@ paths:
           x-reservedExpansion: true
         - description: |-
             [Optional] The exact value to match against
+            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
+          in: query
+          name: serviceFilter.service
+          type: string
+        - description: '[Optional] A `next_page_token` provided by a previous response.'
+          in: query
+          name: pageToken
+          type: string
+        - description: '[Optional] The maximum number of results to return per response.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+          in: query
+          name: serviceFilter.version
+          type: string
+        - description: |-
+            [Optional] The exact value to match against
             [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
           in: query
           name: serviceFilter.resourceType
@@ -260,26 +280,6 @@ paths:
           in: query
           name: groupId
           type: string
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
-          in: query
-          name: serviceFilter.service
-          type: string
-        - description: '[Optional] A `next_page_token` provided by a previous response.'
-          in: query
-          name: pageToken
-          type: string
-        - description: '[Optional] The maximum number of results to return per response.'
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
-          in: query
-          name: serviceFilter.version
-          type: string
       responses:
         '200':
           description: Successful response
@@ -291,33 +291,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
   '/v1beta1/{projectName}/events:report':
     parameters:
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
     post:
       description: |-
@@ -373,34 +373,17 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            [Optional] The alignment of the timed counts to be returned.
-            Default is `ALIGNMENT_EQUAL_AT_END`.
-          enum:
-            - ERROR_COUNT_ALIGNMENT_UNSPECIFIED
-            - ALIGNMENT_EQUAL_ROUNDED
-            - ALIGNMENT_EQUAL_AT_END
-          in: query
-          name: alignment
-          type: string
-        - collectionFormat: multi
-          description: '[Optional] List all <code>ErrorGroupStats</code> with these IDs.'
-          in: query
-          items:
-            type: string
-          name: groupId
-          type: array
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
-          in: query
-          name: serviceFilter.service
-          type: string
-        - description: |-
             [Optional] The maximum number of results to return per response.
             Default is 20.
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+          in: query
+          name: serviceFilter.version
+          type: string
         - description: |-
             [Optional] The sort order in which the results are returned.
             Default is `COUNT_DESC`.
@@ -415,21 +398,15 @@ paths:
           type: string
         - description: |-
             [Optional] The exact value to match against
-            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
           in: query
-          name: serviceFilter.version
+          name: serviceFilter.resourceType
           type: string
         - description: |-
             [Optional] Time where the timed counts shall be aligned if rounded
             alignment is chosen. Default is 00:00 UTC.
           in: query
           name: alignmentTime
-          type: string
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
-          in: query
-          name: serviceFilter.resourceType
           type: string
         - description: |-
             [Optional] The preferred duration for a single returned `TimedCount`.
@@ -455,6 +432,29 @@ paths:
           in: query
           name: timeRange.period
           type: string
+        - description: |-
+            [Optional] The alignment of the timed counts to be returned.
+            Default is `ALIGNMENT_EQUAL_AT_END`.
+          enum:
+            - ERROR_COUNT_ALIGNMENT_UNSPECIFIED
+            - ALIGNMENT_EQUAL_ROUNDED
+            - ALIGNMENT_EQUAL_AT_END
+          in: query
+          name: alignment
+          type: string
+        - collectionFormat: multi
+          description: '[Optional] List all <code>ErrorGroupStats</code> with these IDs.'
+          in: query
+          items:
+            type: string
+          name: groupId
+          type: array
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
+          in: query
+          name: serviceFilter.service
+          type: string
       responses:
         '200':
           description: Successful response
@@ -466,18 +466,18 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
 definitions:
   DeleteEventsResponse:

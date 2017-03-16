@@ -12,6 +12,8 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - analytics
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
@@ -109,27 +111,15 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: reportTypes
   - name: media
   - name: jobs
+  - name: reportTypes
 paths:
   /v1/jobs:
     get:
       description: Lists jobs.
       operationId: youtubereporting.jobs.list
       parameters:
-        - description: |-
-            Requested page size. Server may return fewer jobs than requested.
-            If unspecified, server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            The content owner's external ID on which behalf the user is acting on. If
-            not set, the user is acting for himself (his own channel).
-          in: query
-          name: onBehalfOfContentOwner
-          type: string
         - description: |-
             A token identifying a page of results the server should return. Typically,
             this is the value of
@@ -145,6 +135,18 @@ paths:
           in: query
           name: includeSystemManaged
           type: boolean
+        - description: |-
+            Requested page size. Server may return fewer jobs than requested.
+            If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The content owner's external ID on which behalf the user is acting on. If
+            not set, the user is acting for himself (his own channel).
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
       responses:
         '200':
           description: Successful response
@@ -158,19 +160,19 @@ paths:
       tags:
         - jobs
     parameters:
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     post:
       description: Creates a job and returns it.
       operationId: youtubereporting.jobs.create
@@ -253,19 +255,19 @@ paths:
       tags:
         - jobs
     parameters:
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
   '/v1/jobs/{jobId}/reports':
     get:
       description: |-
@@ -283,18 +285,18 @@ paths:
           name: createdAfter
           type: string
         - description: |-
-            If set, only reports whose start time is greater than or equal the
-            specified date/time are returned.
-          in: query
-          name: startTimeAtOrAfter
-          type: string
-        - description: |-
             A token identifying a page of results the server should return. Typically,
             this is the value of
             ListReportsResponse.next_page_token
             returned in response to the previous call to the `ListReports` method.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            If set, only reports whose start time is greater than or equal the
+            specified date/time are returned.
+          in: query
+          name: startTimeAtOrAfter
           type: string
         - description: |-
             Requested page size. Server may return fewer report types than requested.
@@ -327,19 +329,19 @@ paths:
       tags:
         - jobs
     parameters:
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
   '/v1/jobs/{jobId}/reports/{reportId}':
     get:
       description: Gets the metadata of a specific report.
@@ -374,19 +376,19 @@ paths:
       tags:
         - jobs
     parameters:
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
   '/v1/media/{resourceName}':
     get:
       description: |-
@@ -415,24 +417,36 @@ paths:
       tags:
         - media
     parameters:
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
   /v1/reportTypes:
     get:
       description: Lists report types.
       operationId: youtubereporting.reportTypes.list
       parameters:
+        - description: |-
+            Requested page size. Server may return fewer report types than requested.
+            If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The content owner's external ID on which behalf the user is acting on. If
+            not set, the user is acting for himself (his own channel).
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
         - description: |-
             A token identifying a page of results the server should return. Typically,
             this is the value of
@@ -448,18 +462,6 @@ paths:
           in: query
           name: includeSystemManaged
           type: boolean
-        - description: |-
-            Requested page size. Server may return fewer report types than requested.
-            If unspecified, server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            The content owner's external ID on which behalf the user is acting on. If
-            not set, the user is acting for himself (his own channel).
-          in: query
-          name: onBehalfOfContentOwner
-          type: string
       responses:
         '200':
           description: Successful response
@@ -473,19 +475,19 @@ paths:
       tags:
         - reportTypes
     parameters:
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
 definitions:
   Empty:
     description: |-

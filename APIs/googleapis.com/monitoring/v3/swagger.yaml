@@ -115,10 +115,10 @@ tags:
 paths:
   '/v3/{name}':
     delete:
-      description: Deletes an existing group.
-      operationId: monitoring.projects.groups.delete
+      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
+      operationId: monitoring.projects.metricDescriptors.delete
       parameters:
-        - description: 'The group to delete. The format is "projects/{project_id_or_number}/groups/{group_id}".'
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
           in: path
           name: name
           required: true
@@ -137,10 +137,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single group.
-      operationId: monitoring.projects.groups.get
+      description: Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.monitoredResourceDescriptors.get
       parameters:
-        - description: 'The group to retrieve. The format is "projects/{project_id_or_number}/groups/{group_id}".'
+        - description: 'The monitored resource descriptor to get. The format is "projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}". The {resource_type} is a predefined type, such as cloudsql_database.'
           in: path
           name: name
           required: true
@@ -150,7 +150,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Group'
+            $ref: '#/definitions/MonitoredResourceDescriptor'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -260,6 +260,14 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups whose parentName field contains the group name. If no groups have this parent, the results are empty.'
+          in: query
+          name: childrenOfGroup
+          type: string
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns the descendants of the specified group. This is a superset of the results returned by the childrenOfGroup filter, and includes children-of-children, and so forth.'
+          in: query
+          name: descendantsOfGroup
+          type: string
         - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
           name: pageToken
@@ -271,14 +279,6 @@ paths:
         - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.'
           in: query
           name: ancestorsOfGroup
-          type: string
-        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups whose parentName field contains the group name. If no groups have this parent, the results are empty.'
-          in: query
-          name: childrenOfGroup
-          type: string
-        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns the descendants of the specified group. This is a superset of the results returned by the childrenOfGroup filter, and includes children-of-children, and so forth.'
-          in: query
-          name: descendantsOfGroup
           type: string
       responses:
         '200':
@@ -349,6 +349,14 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: A positive number that is the maximum number of results to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
+          in: query
+          name: interval.startTime
+          type: string
         - description: Required. The end of the time interval.
           in: query
           name: interval.endTime
@@ -363,14 +371,6 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
-          in: query
-          name: interval.startTime
-          type: string
-        - description: A positive number that is the maximum number of results to return.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response

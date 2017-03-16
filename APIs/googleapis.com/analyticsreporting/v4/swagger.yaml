@@ -113,7 +113,6 @@ tags:
 paths:
   '/v4/reports:batchGet':
     parameters:
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
@@ -126,6 +125,7 @@ paths:
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
     post:
       description: Returns the Analytics data.
       operationId: analyticsreporting.reports.batchGet

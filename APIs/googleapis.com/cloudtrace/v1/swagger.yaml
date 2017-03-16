@@ -124,24 +124,6 @@ paths:
           required: true
           type: string
         - description: |-
-            Maximum number of traces to return. If not specified or <= 0, the
-            implementation selects a reasonable value.  The implementation may
-            return fewer traces than the requested page size. Optional.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            Type of data returned for traces in the list. Optional. Default is
-            `MINIMAL`.
-          enum:
-            - VIEW_TYPE_UNSPECIFIED
-            - MINIMAL
-            - ROOTSPAN
-            - COMPLETE
-          in: query
-          name: view
-          type: string
-        - description: |-
             Field used to sort the returned traces. Optional.
             Can be one of the following:
 
@@ -180,6 +162,24 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: |-
+            Maximum number of traces to return. If not specified or <= 0, the
+            implementation selects a reasonable value.  The implementation may
+            return fewer traces than the requested page size. Optional.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Type of data returned for traces in the list. Optional. Default is
+            `MINIMAL`.
+          enum:
+            - VIEW_TYPE_UNSPECIFIED
+            - MINIMAL
+            - ROOTSPAN
+            - COMPLETE
+          in: query
+          name: view
+          type: string
       responses:
         '200':
           description: Successful response
@@ -193,19 +193,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     patch:
       description: |-
         Sends new traces to Stackdriver Trace or updates existing traces. If the ID
@@ -264,19 +264,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
 definitions:
   Empty:
     description: |-
