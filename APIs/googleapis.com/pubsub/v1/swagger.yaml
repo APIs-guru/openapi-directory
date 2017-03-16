@@ -122,8 +122,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -204,8 +204,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -254,8 +254,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -270,8 +270,7 @@ paths:
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
+            See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
@@ -297,8 +296,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -312,8 +311,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -326,8 +325,7 @@ paths:
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
+            See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
@@ -358,8 +356,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -369,12 +367,15 @@ paths:
         Returns permissions that a caller has on the specified resource.
         If the resource does not exist, this will return an empty set of
         permissions, not a NOT_FOUND error.
+
+        Note: This operation is designed to be used for building permission-aware
+        UIs and command-line tools, not for authorization checking. This operation
+        may "fail open" without warning.
       operationId: pubsub.projects.topics.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
+            See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
@@ -458,8 +459,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -473,8 +474,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -523,8 +524,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -571,8 +572,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -620,8 +621,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -720,8 +721,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -770,8 +771,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -785,8 +786,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -1117,11 +1118,10 @@ definitions:
           control different aspects of the message delivery.
 
           The currently supported attribute is `x-goog-version`, which you can
-          use to change the format of the push message. This attribute
+          use to change the format of the pushed message. This attribute
           indicates the version of the data expected by the endpoint. This
-          controls the shape of the envelope (i.e. its fields and metadata).
-          The endpoint version is based on the version of the Pub/Sub
-          API.
+          controls the shape of the pushed message (i.e., its fields and metadata).
+          The endpoint version is based on the version of the Pub/Sub API.
 
           If not present during the `CreateSubscription` call, it will default to
           the version of the API used to make such call. If not present during a

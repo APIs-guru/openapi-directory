@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Fetches reports for the administrators of Google Apps customers about the usage, collaboration, security, and risk for their users.'
+  description: 'Fetches reports for the administrators of G Suite customers about the usage, collaboration, security, and risk for their users.'
   title: Admin Reports
   version: reports_v1
   x-apiClientRegistration:
@@ -29,8 +29,8 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
-      'https://www.googleapis.com/auth/admin.reports.audit.readonly': View audit reports of Google Apps for your domain
-      'https://www.googleapis.com/auth/admin.reports.usage.readonly': View usage reports of Google Apps for your domain
+      'https://www.googleapis.com/auth/admin.reports.audit.readonly': View audit reports for your G Suite domain
+      'https://www.googleapis.com/auth/admin.reports.usage.readonly': View usage reports for your G Suite domain
     type: oauth2
 parameters:
   alt:
@@ -101,7 +101,7 @@ paths:
           in: query
           name: customerId
           type: string
-        - description: Return events which occured at or before this time.
+        - description: Return events which occurred at or before this time.
           in: query
           name: endTime
           type: string
@@ -123,7 +123,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: Return events which occured at or after this time.
+        - description: Return events which occurred at or after this time.
           in: query
           name: startTime
           type: string
@@ -176,7 +176,7 @@ paths:
           in: query
           name: customerId
           type: string
-        - description: Return events which occured at or before this time.
+        - description: Return events which occurred at or before this time.
           in: query
           name: endTime
           type: string
@@ -198,7 +198,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: Return events which occured at or after this time.
+        - description: Return events which occurred at or after this time.
           in: query
           name: startTime
           type: string

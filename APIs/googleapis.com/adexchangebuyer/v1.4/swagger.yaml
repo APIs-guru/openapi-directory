@@ -1490,7 +1490,7 @@ definitions:
           type: string
         type: array
       advertiserName:
-        description: The name of the company being advertised in the creative.
+        description: The name of the company being advertised in the creative. The value provided must exist in the advertisers.txt file.
         type: string
       agencyId:
         description: The agency id for this creative.
@@ -1501,7 +1501,7 @@ definitions:
         format: date-time
         type: string
       attribute:
-        description: All attributes for the ads that may be shown from this snippet.
+        description: List of buyer selectable attributes for the ads that may be shown from this snippet. Each attribute is represented by an integer as defined in  buyer-declarable-creative-attributes.txt.
         items:
           format: int32
           type: integer
@@ -1576,7 +1576,7 @@ definitions:
                   format: int64
                   type: string
                 filteringStatus:
-                  description: The filtering status code. Please refer to the creative-status-codes.txt file for different statuses.
+                  description: The filtering status code as defined in  creative-status-codes.txt.
                   format: int32
                   type: integer
               type: object
@@ -1679,19 +1679,19 @@ definitions:
         description: 'Top-level open auction status. Read-only. This field should not be set in requests. If disapproved, an entry for auctionType=OPEN_AUCTION (or ALL) in servingRestrictions will also exist. Note that this may be nuanced with other contextual restrictions, in which case it may be preferable to read from ServingRestrictions directly.'
         type: string
       productCategories:
-        description: 'Detected product categories, if any. Read-only. This field should not be set in requests.'
+        description: 'Detected product categories, if any. Each category is represented by an integer as defined in  ad-product-categories.txt. Read-only. This field should not be set in requests.'
         items:
           format: int32
           type: integer
         type: array
       restrictedCategories:
-        description: All restricted categories for the ads that may be shown from this snippet.
+        description: All restricted categories for the ads that may be shown from this snippet. Each category is represented by an integer as defined in the  ad-restricted-categories.txt.
         items:
           format: int32
           type: integer
         type: array
       sensitiveCategories:
-        description: 'Detected sensitive categories, if any. Read-only. This field should not be set in requests.'
+        description: 'Detected sensitive categories, if any. Each category is represented by an integer as defined in  ad-sensitive-categories.txt. Read-only. This field should not be set in requests.'
         items:
           format: int32
           type: integer
@@ -1713,7 +1713,7 @@ definitions:
                     description: 'The type of context (e.g., location, platform, auction type, SSL-ness).'
                     type: string
                   geoCriteriaId:
-                    description: Only set when contextType=LOCATION. Represents the geo criterias this restriction applies to.
+                    description: Only set when contextType=LOCATION. Represents the geo criterias this restriction applies to. Impressions are considered to match a context if either the user location or publisher location matches a given geoCriteriaId.
                     items:
                       format: int32
                       type: integer
@@ -1745,7 +1745,7 @@ definitions:
           type: object
         type: array
       vendorType:
-        description: All vendor types for the ads that may be shown from this snippet.
+        description: List of vendor types for the ads that may be shown from this snippet. Each vendor type is represented by an integer as defined in vendors.txt.
         items:
           format: int32
           type: integer
@@ -1805,6 +1805,9 @@ definitions:
     type: object
   DealServingMetadata:
     properties:
+      alcoholAdsAllowed:
+        description: True if alcohol ads are allowed for this deal (read-only). This field is only populated when querying for finalized orders using the method GetFinalizedOrderDeals
+        type: boolean
       dealPauseStatus:
         $ref: '#/definitions/DealServingMetadataDealPauseStatus'
         description: 'Tracks which parties (if any) have paused a deal. (readonly, except via PauseResumeOrderDeals action)'

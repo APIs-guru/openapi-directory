@@ -122,6 +122,10 @@ tags:
 paths:
   '/v2/entries:list':
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
@@ -131,10 +135,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: 'Lists log entries. Use this method to retrieve log entries from Stackdriver Logging. For ways to export log entries, see Exporting Logs.'
       operationId: logging.entries.list
@@ -161,6 +161,10 @@ paths:
         - entries
   '/v2/entries:write':
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
@@ -170,12 +174,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
-      description: Writes log entries to Stackdriver Logging. All log entries are written by this method.
+      description: Writes log entries to Stackdriver Logging.
       operationId: logging.entries.write
       parameters:
         - in: body
@@ -201,14 +201,14 @@ paths:
       description: Lists the descriptors for monitored resource types used by Stackdriver Logging.
       operationId: logging.monitoredResourceDescriptors.list
       parameters:
-        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
-          in: query
-          name: pageSize
-          type: integer
         - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
           in: query
           name: pageToken
           type: string
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -226,6 +226,10 @@ paths:
       tags:
         - monitoredResourceDescriptors
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
@@ -235,10 +239,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
   '/v2/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
@@ -248,6 +248,8 @@ paths:
             Required. The resource name of the log to delete:
             "projects/[PROJECT_ID]/logs/[LOG_ID]"
             "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
+            "folders/[FOLDER_ID]/logs/[LOG_ID]"
             [LOG_ID] must be URL-encoded. For example, "projects/my-project-id/logs/syslog", "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity". For more information about log names, see LogEntry.
           in: path
           name: logName
@@ -267,6 +269,10 @@ paths:
       tags:
         - billingAccounts
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
@@ -276,10 +282,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
   '/v2/{metricName}':
     delete:
       description: Deletes a logs-based metric.
@@ -336,6 +338,10 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
@@ -345,10 +351,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     put:
       description: Creates or updates a logs-based metric.
       operationId: logging.projects.metrics.update
@@ -382,13 +384,15 @@ paths:
         - projects
   '/v2/{parent}/logs':
     get:
-      description: Lists the logs in projects or organizations. Only logs that have entries are listed.
+      description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
       operationId: logging.billingAccounts.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
             "projects/[PROJECT_ID]"
             "organizations/[ORGANIZATION_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]"
+            "folders/[FOLDER_ID]"
           in: path
           name: parent
           required: true
@@ -419,6 +423,10 @@ paths:
       tags:
         - billingAccounts
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
@@ -428,10 +436,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
   '/v2/{parent}/metrics':
     get:
       description: Lists logs-based metrics.
@@ -470,6 +474,10 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
@@ -479,10 +487,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Creates a logs-based metric.
       operationId: logging.projects.metrics.create
@@ -519,20 +523,25 @@ paths:
       description: Lists sinks.
       operationId: logging.billingAccounts.sinks.list
       parameters:
-        - description: 'Required. The parent resource whose sinks are to be listed. Examples: "projects/my-logging-project", "organizations/123456789".'
+        - description: |
+            Required. The parent resource whose sinks are to be listed:
+            "projects/[PROJECT_ID]"
+            "organizations/[ORGANIZATION_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]"
+            "folders/[FOLDER_ID]"
           in: path
           name: parent
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
-          in: query
-          name: pageToken
-          type: string
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
           name: pageSize
           type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -550,6 +559,10 @@ paths:
       tags:
         - billingAccounts
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
@@ -559,10 +572,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the current time is outside the sink''s start and end times or the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
       operationId: logging.billingAccounts.sinks.create
@@ -571,13 +580,15 @@ paths:
             Required. The resource in which to create the sink:
             "projects/[PROJECT_ID]"
             "organizations/[ORGANIZATION_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]"
+            "folders/[FOLDER_ID]"
             Examples: "projects/my-logging-project", "organizations/123456789".
           in: path
           name: parent
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Optional. Determines the kind of IAM identity returned as writer_identity in the new sink. If this value is omitted or set to false, and if the sink''s parent is a project, then the value returned as writer_identity is cloud-logs@system.gserviceaccount.com, the same identity used before the addition of writer identities to this API. The sink''s destination must be in the same project as the sink itself.If this field is set to true, or if the sink is owned by a non-project resource such as an organization, then the value of writer_identity will be a unique service account used only for exports from the new sink. For more information, see writer_identity in LogSink.'
+        - description: 'Optional. Determines the kind of IAM identity returned as writer_identity in the new sink. If this value is omitted or set to false, and if the sink''s parent is a project, then the value returned as writer_identity is the same group or service account used by Stackdriver Logging before the addition of writer identities to this API. The sink''s destination must be in the same project as the sink itself.If this field is set to true, or if the sink is owned by a non-project resource such as an organization, then the value of writer_identity will be a unique service account used only for exports from the new sink. For more information, see writer_identity in LogSink.'
           in: query
           name: uniqueWriterIdentity
           type: boolean
@@ -606,7 +617,9 @@ paths:
             Required. The full resource name of the sink to delete, including the parent resource and the sink identifier:
             "projects/[PROJECT_ID]/sinks/[SINK_ID]"
             "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-            It is an error if the sink does not exist. Example: "projects/my-project-id/sinks/my-sink-id". It is an error if the sink does not exist.
+            "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+            "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+            Example: "projects/my-project-id/sinks/my-sink-id".
           in: path
           name: sinkName
           required: true
@@ -629,9 +642,11 @@ paths:
       operationId: logging.billingAccounts.sinks.get
       parameters:
         - description: |-
-            Required. The parent resource name of the sink:
+            Required. The resource name of the sink:
             "projects/[PROJECT_ID]/sinks/[SINK_ID]"
             "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+            "folders/[FOLDER_ID]/sinks/[SINK_ID]"
             Example: "projects/my-project-id/sinks/my-sink-id".
           in: path
           name: sinkName
@@ -655,6 +670,10 @@ paths:
       tags:
         - billingAccounts
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
@@ -664,10 +683,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     put:
       description: 'Updates a sink. If the named sink doesn''t exist, then this method is identical to sinks.create. If the named sink does exist, then this method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated filter might also have a new writer_identity; see the unique_writer_identity field.'
       operationId: logging.billingAccounts.sinks.update
@@ -676,6 +691,8 @@ paths:
             Required. The full resource name of the sink to update, including the parent resource and the sink identifier:
             "projects/[PROJECT_ID]/sinks/[SINK_ID]"
             "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+            "folders/[FOLDER_ID]/sinks/[SINK_ID]"
             Example: "projects/my-project-id/sinks/my-sink-id".
           in: path
           name: sinkName
@@ -685,8 +702,8 @@ paths:
         - description: |-
             Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field:
             If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity.
-            If the old value was false and the new value is true, then writer_identity is changed to a unique service account.
-            It is an error if the old value was true and the new value is false.
+            If the old value is false and the new value is true, then writer_identity is changed to a unique service account.
+            It is an error if the old value is true and the new value is false.
           in: query
           name: uniqueWriterIdentity
           type: boolean
@@ -791,14 +808,14 @@ definitions:
         description: Optional. A filter that chooses which log entries to return. See Advanced Logs Filters. Only log entries that match the filter are returned. An empty filter matches all log entries in the resources listed in resource_names. Referencing a parent resource that is not listed in resource_names will cause the filter to return no results. The maximum length of the filter is 20000 characters.
         type: string
       orderBy:
-        description: 'Optional. How the results should be sorted. Presently, the only permitted values are "timestamp asc" (default) and "timestamp desc". The first option returns entries in order of increasing values of LogEntry.timestamp (oldest first), and the second option returns entries in order of decreasing timestamps (newest first). Entries with equal timestamps are returned in order of LogEntry.insertId.'
+        description: 'Optional. How the results should be sorted. Presently, the only permitted values are "timestamp asc" (default) and "timestamp desc". The first option returns entries in order of increasing values of LogEntry.timestamp (oldest first), and the second option returns entries in order of decreasing timestamps (newest first). Entries with equal timestamps are returned in order of their insert_id values.'
         type: string
       pageSize:
-        description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+        description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of next_page_token in the response indicates that more results might be available.
         format: int32
         type: integer
       pageToken:
-        description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+        description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. page_token must be the value of next_page_token from the previous response. The values of other method parameters should be identical to those in the previous call.'
         type: string
       projectIds:
         description: 'Deprecated. Use resource_names instead. One or more project identifiers or project numbers from which to retrieve log entries. Example: "my-project-1A". If present, these project identifiers are converted to resource name format and added to the list of resources in resource_names.'
@@ -807,9 +824,11 @@ definitions:
         type: array
       resourceNames:
         description: |-
-          Required. Names of one or more resources from which to retrieve log entries:
+          Required. Names of one or more parent resources from which to retrieve log entries:
           "projects/[PROJECT_ID]"
           "organizations/[ORGANIZATION_ID]"
+          "billingAccounts/[BILLING_ACCOUNT_ID]"
+          "folders/[FOLDER_ID]"
           Projects listed in the project_ids field are added to this list.
         items:
           type: string
@@ -882,7 +901,7 @@ definitions:
         $ref: '#/definitions/HttpRequest'
         description: 'Optional. Information about the HTTP request associated with this log entry, if applicable.'
       insertId:
-        description: 'Optional. A unique ID for the log entry. If you provide this field, the logging service considers other log entries in the same project with the same ID as duplicates which can be removed. If omitted, Stackdriver Logging will generate a unique ID for this log entry.'
+        description: 'Optional. A unique identifier for the log entry. If you provide a value, then Stackdriver Logging considers other log entries in the same project, with the same timestamp, and with the same insert_id to be duplicates which can be removed. If omitted in new log entries, then Stackdriver Logging will insert its own unique identifier. The insert_id is used to order log entries that have the same timestamp value.'
         type: string
       jsonPayload:
         additionalProperties:
@@ -899,6 +918,8 @@ definitions:
           Required. The resource name of the log to which this log entry belongs:
           "projects/[PROJECT_ID]/logs/[LOG_ID]"
           "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+          "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
+          "folders/[FOLDER_ID]/logs/[LOG_ID]"
           [LOG_ID] must be URL-encoded within log_name. Example: "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity". [LOG_ID] must be less than 512 characters long and can only include the following characters: upper and lower case alphanumeric characters, forward-slash, underscore, hyphen, and period.For backward compatibility, if log_name begins with a forward-slash, such as /projects/..., then the log entry is ingested as usual but the forward-slash is removed. Listing the log entry will not show the leading slash and filtering for a log name with a leading slash will never return any results.
         type: string
       operation:
@@ -932,7 +953,7 @@ definitions:
         description: 'The log entry payload, represented as a Unicode string (UTF-8).'
         type: string
       timestamp:
-        description: 'Optional. The time the event described by the log entry occurred. If omitted, Stackdriver Logging will use the time the log entry is received.'
+        description: 'Optional. The time the event described by the log entry occurred. If omitted in a new log entry, Stackdriver Logging will insert the time the log entry is received. Stackdriver Logging might reject log entries whose time stamps are more than a couple of hours in the future. Log entries with time stamps in the past are accepted.'
         format: google-datetime
         type: string
       trace:
@@ -1019,7 +1040,7 @@ definitions:
         type: string
     type: object
   LogSink:
-    description: 'Describes a sink used to export log entries to one of the following destinations in any project: a Cloud Storage bucket, a BigQuery dataset, or a Cloud Pub/Sub topic. A logs filter controls which log entries are exported. The sink must be created within a project or organization.'
+    description: 'Describes a sink used to export log entries to one of the following destinations in any project: a Cloud Storage bucket, a BigQuery dataset, or a Cloud Pub/Sub topic. A logs filter controls which log entries are exported. The sink must be created within a project, organization, billing account, or folder.'
     properties:
       destination:
         description: |-
@@ -1234,7 +1255,7 @@ definitions:
     description: The parameters to WriteLogEntries.
     properties:
       entries:
-        description: 'Required. The log entries to write. Values supplied for the fields log_name, resource, and labels in this entries.write request are added to those log entries that do not provide their own values for the fields.To improve throughput and to avoid exceeding the quota limit for calls to entries.write, you should write multiple log entries at once rather than calling this method for each individual log entry.'
+        description: 'Required. The log entries to write. Values supplied for the fields log_name, resource, and labels in this entries.write request are inserted into those log entries in this list that do not provide their own values.Stackdriver Logging also creates and inserts values for timestamp and insert_id if the entries do not provide them. The created insert_id for the N''th entry in this list will be greater than earlier entries and less than later entries. Otherwise, the order of log entries in this list does not matter.To improve throughput and to avoid exceeding the quota limit for calls to entries.write, you should write multiple log entries at once rather than calling this method for each individual log entry.'
         items:
           $ref: '#/definitions/LogEntry'
         type: array
@@ -1248,10 +1269,12 @@ definitions:
           Optional. A default log resource name that is assigned to all log entries in entries that do not specify a value for log_name:
           "projects/[PROJECT_ID]/logs/[LOG_ID]"
           "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+          "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
+          "folders/[FOLDER_ID]/logs/[LOG_ID]"
           [LOG_ID] must be URL-encoded. For example, "projects/my-project-id/logs/syslog" or "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity". For more information about log names, see LogEntry.
         type: string
       partialSuccess:
-        description: 'Optional. Whether valid entries should be written even if some other entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any entry is not written, the response status will be the error associated with one of the failed entries and include error details in the form of WriteLogEntriesPartialErrors.'
+        description: 'Optional. Whether valid entries should be written even if some other entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any entry is not written, then the response status is the error associated with one of the failed entries and the response includes error details keyed by the entries'' zero-based index in the entries.write method.'
         type: boolean
       resource:
         $ref: '#/definitions/MonitoredResource'

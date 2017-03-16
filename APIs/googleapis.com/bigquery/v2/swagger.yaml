@@ -1313,7 +1313,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: '[Experimental] The labels associated with this job. You can use these to organize and group your jobs. Label keys and values can be no longer than 63 characters, can only contain letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and must be unique within a dataset. Both keys and values are additionally constrained to be <= 128 bytes in size.'
+        description: '[Experimental] The labels associated with this job. You can use these to organize and group your jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.'
         type: object
       load:
         $ref: '#/definitions/JobConfigurationLoad'
@@ -1919,7 +1919,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: '[Experimental] The labels associated with this table. You can use these to organize and group your tables. Label keys and values can be no longer than 63 characters, can only contain letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and must be unique within a dataset. Both keys and values are additionally constrained to be <= 128 bytes in size.'
+        description: '[Experimental] The labels associated with this table. You can use these to organize and group your tables. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.'
         type: object
       lastModifiedTime:
         description: '[Output-only] The time when this table was last modified, in milliseconds since the epoch.'
@@ -2095,6 +2095,13 @@ definitions:
             type:
               description: 'The type of table. Possible values are: TABLE, VIEW.'
               type: string
+            view:
+              description: Additional details for a view.
+              properties:
+                useLegacySql:
+                  description: 'True if view is defined in legacy SQL dialect, false if in standard SQL.'
+                  type: boolean
+              type: object
           type: object
         type: array
       totalItems:

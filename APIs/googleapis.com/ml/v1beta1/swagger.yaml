@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: An API to enable creating and using machine learning models.
-  title: Google Cloud Machine Learning
+  title: Google Cloud Machine Learning Engine
   version: v1beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -18,7 +18,7 @@ info:
     format: google
     url: 'https://ml.googleapis.com/$discovery/rest?version=v1beta1'
     version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: ml
 externalDocs:
@@ -144,17 +144,11 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets information about a model version.
-
-        Models can have multiple versions. You can call
-        [projects.models.versions.list](/ml/reference/rest/v1beta1/projects.models.versions/list)
-        to get the same information that this method returns for all of the
-        versions of a model.
-      operationId: ml.projects.models.versions.get
+      description: Describes a job.
+      operationId: ml.projects.jobs.get
       parameters:
         - description: |-
-            Required. The name of the version.
+            Required. The name of the job to get the description of.
 
             Authorization: requires `Viewer` role on the parent project.
           in: path
@@ -166,26 +160,26 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleCloudMlV1beta1__Version'
+            $ref: '#/definitions/GoogleCloudMlV1beta1__Job'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
   '/v1beta1/{name}/operations':
     get:
       description: |-
@@ -202,6 +196,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
         - description: The standard list page token.
           in: query
           name: pageToken
@@ -210,10 +208,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
       responses:
         '200':
           description: Successful response
@@ -225,49 +219,42 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
   '/v1beta1/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
     post:
-      description: |-
-        Starts asynchronous cancellation on a long-running operation.  The server
-        makes a best effort to cancel the operation, but success is not
-        guaranteed.  If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-        Operations.GetOperation or
-        other methods to check whether the cancellation succeeded or whether the
-        operation completed despite cancellation. On successful cancellation,
-        the operation is not deleted; instead, it becomes an operation with
-        an Operation.error value with a google.rpc.Status.code of 1,
-        corresponding to `Code.CANCELLED`.
-      operationId: ml.projects.operations.cancel
+      description: Cancels a running job.
+      operationId: ml.projects.jobs.cancel
       parameters:
-        - description: The name of the operation resource to be cancelled.
+        - description: |-
+            Required. The name of the job to cancel.
+
+            Authorization: requires `Editor` role on the parent project.
           in: path
           name: name
           required: true
@@ -316,34 +303,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
   '/v1beta1/{name}:predict':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
     post:
       description: |-
         Performs prediction on the data in the request.
@@ -376,19 +363,19 @@ paths:
         - projects
   '/v1beta1/{name}:setDefault':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
     post:
       description: |-
         Designates a version to be the default for the model.
@@ -472,19 +459,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
     post:
       description: Creates a training or a batch prediction job.
       operationId: ml.projects.jobs.create
@@ -558,19 +545,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
     post:
       description: |-
         Creates a model which will later contain one or more versions.
@@ -650,19 +637,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
     post:
       description: |-
         Creates a new version of a model from a trained TensorFlow model.
@@ -748,6 +735,18 @@ definitions:
         format: byte
         type: string
     type: object
+  GoogleCloudMlV1__ManualScaling:
+    description: Options for manually scaling a model.
+    properties:
+      nodes:
+        description: |-
+          The number of nodes to allocate for this model. These nodes are always up,
+          starting from the time the model is deployed, so the cost of operating
+          this model will be proportional to nodes * number of hours since
+          deployment.
+        format: int32
+        type: integer
+    type: object
   GoogleCloudMlV1__OperationMetadata:
     description: Represents the metadata of the long-running operation.
     properties:
@@ -822,6 +821,15 @@ definitions:
         description: Output only. The time the version was last used for prediction.
         format: google-datetime
         type: string
+      manualScaling:
+        $ref: '#/definitions/GoogleCloudMlV1__ManualScaling'
+        description: |-
+          Optional. Manually select the number of nodes to use for serving the
+          model. If unset (i.e., by default), the number of nodes used to serve
+          the model automatically scales with traffic. However, care should be
+          taken to ramp up traffic according to the model's ability to scale. If
+          your model needs to handle bursts of traffic beyond it's ability to
+          scale, it is recommended you set this field appropriately.
       name:
         description: |-
           Required.The name specified for the version when it was created.
@@ -1022,6 +1030,18 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudMlV1beta1__Version'
         type: array
+    type: object
+  GoogleCloudMlV1beta1__ManualScaling:
+    description: Options for manually scaling a model.
+    properties:
+      nodes:
+        description: |-
+          The number of nodes to allocate for this model. These nodes are always up,
+          starting from the time the model is deployed, so the cost of operating
+          this model will be proportional to nodes * number of hours since
+          deployment.
+        format: int32
+        type: integer
     type: object
   GoogleCloudMlV1beta1__Model:
     description: |-
@@ -1396,7 +1416,9 @@ definitions:
           such as when the model is specified by uri.
         type: string
       uri:
-        description: Use this field if you want to specify a GCS path to the model to use.
+        description: |-
+          Use this field if you want to specify a Google Cloud Storage path for
+          the model to use.
         type: string
       versionName:
         description: |-
@@ -1443,10 +1465,10 @@ definitions:
         description: Optional. The set of Hyperparameters to tune.
       jobDir:
         description: |-
-          Optional. A GCS path in which to store training outputs and other data
-          needed for training. This path will be passed to your TensorFlow program as
-          the 'job_dir' command-line arg. The benefit of specifying this field is that
-          Cloud ML will validate the path for use in training.
+          Optional. A Google Cloud Storage path in which to store training outputs
+          and other data needed for training. This path is passed to your TensorFlow
+          program as the 'job_dir' command-line argument. The benefit of specifying
+          this field is that Cloud ML validates the path for use in training.
         type: string
       masterType:
         description: |-
@@ -1482,6 +1504,19 @@ definitions:
             <dd>
             A machine with roughly twice the number of cores and roughly double the
             memory of <code suppresswarning="true">complex_model_m</code>.
+            </dd>
+            <dt>standard_gpu</dt>
+            <dd>
+            A machine equivalent to <code suppresswarning="true">standard</code> that
+            also includes a
+            <a href="ml/docs/how-tos/using-gpus">
+            GPU that you can use in your trainer</a>.
+            </dd>
+            <dt>complex_model_m_gpu</dt>
+            <dd>
+            A machine equivalent to
+            <code suppresswarning="true">coplex_model_m</code> that also includes
+            four GPUs.
             </dd>
           </dl>
 
@@ -1623,6 +1658,15 @@ definitions:
         description: Output only. The time the version was last used for prediction.
         format: google-datetime
         type: string
+      manualScaling:
+        $ref: '#/definitions/GoogleCloudMlV1beta1__ManualScaling'
+        description: |-
+          Optional. Manually select the number of nodes to use for serving the
+          model. If unset (i.e., by default), the number of nodes used to serve
+          the model automatically scales with traffic. However, care should be
+          taken to ramp up traffic according to the model's ability to scale. If
+          your model needs to handle bursts of traffic beyond it's ability to
+          scale, it is recommended you set this field appropriately.
       name:
         description: |-
           Required.The name specified for the version when it was created.

@@ -2333,6 +2333,9 @@ definitions:
       - $ref: '#/definitions/Resource'
     description: Describes a Virtual Machine.
     properties:
+      identity:
+        $ref: '#/definitions/VirtualMachineIdentity'
+        description: 'The identity of the virtual machine, if configured.'
       plan:
         $ref: '#/definitions/Plan'
         description: The purchase plan when deploying virtual machine from VM Marketplace images.
@@ -2497,6 +2500,25 @@ definitions:
       typeHandlerVersion:
         description: The type version of the extension handler.
         type: string
+  VirtualMachineIdentity:
+    description: Identity for the virtual machine.
+    properties:
+      principalId:
+        description: The principal id of virtual machine identity.
+        readOnly: true
+        type: string
+      tenantId:
+        description: The tenant id associated with the virtual machine.
+        readOnly: true
+        type: string
+      type:
+        description: 'The type of identity used for the virtual machine. Currently, the only supported type is ''SystemAssigned'', which implicitly creates an identity.'
+        enum:
+          - SystemAssigned
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ResourceIdentityType
   VirtualMachineImage:
     allOf:
       - $ref: '#/definitions/VirtualMachineImageResource'
@@ -2627,6 +2649,9 @@ definitions:
       - $ref: '#/definitions/Resource'
     description: Describes a Virtual Machine Scale Set.
     properties:
+      identity:
+        $ref: '#/definitions/VirtualMachineScaleSetIdentity'
+        description: 'The identity of the virtual machine scale set, if configured.'
       properties:
         $ref: '#/definitions/VirtualMachineScaleSetProperties'
         x-ms-client-flatten: true
@@ -2713,6 +2738,25 @@ definitions:
         description: The subnet.
     required:
       - subnet
+  VirtualMachineScaleSetIdentity:
+    description: Identity for the virtual machine scale set.
+    properties:
+      principalId:
+        description: The principal id of virtual machine scale set identity.
+        readOnly: true
+        type: string
+      tenantId:
+        description: The tenant id associated with the virtual machine scale set.
+        readOnly: true
+        type: string
+      type:
+        description: 'The type of identity used for the virtual machine scale set. Currently, the only supported type is ''SystemAssigned'', which implicitly creates an identity.'
+        enum:
+          - SystemAssigned
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ResourceIdentityType
   VirtualMachineScaleSetInstanceView:
     description: The instance view of a virtual machine scale set.
     properties:

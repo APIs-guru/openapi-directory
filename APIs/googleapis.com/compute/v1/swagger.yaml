@@ -79,6 +79,7 @@ parameters:
 tags:
   - name: addresses
   - name: autoscalers
+  - name: backendBuckets
   - name: backendServices
   - name: diskTypes
   - name: disks
@@ -177,7 +178,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -241,7 +242,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -305,7 +306,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -369,7 +370,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -433,7 +434,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -497,7 +498,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -561,7 +562,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -625,7 +626,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -689,7 +690,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -753,7 +754,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -817,7 +818,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -881,7 +882,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -945,7 +946,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1009,7 +1010,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1073,7 +1074,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1137,7 +1138,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1201,7 +1202,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1265,7 +1266,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1393,6 +1394,218 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/backendBuckets':
+    get:
+      description: Retrieves the list of BackendBucket resources available to the specified project.
+      operationId: compute.backendBuckets.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BackendBucketList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - backendBuckets
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a BackendBucket resource in the specified project using the data included in the request.
+      operationId: compute.backendBuckets.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendBucket'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
+  '/{project}/global/backendBuckets/{backendBucket}':
+    delete:
+      description: Deletes the specified BackendBucket resource.
+      operationId: compute.backendBuckets.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the BackendBucket resource to delete.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
+    get:
+      description: Returns the specified BackendBucket resource. Get a list of available backend buckets by making a list() request.
+      operationId: compute.backendBuckets.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the BackendBucket resource to return.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BackendBucket'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - backendBuckets
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the specified BackendBucket resource with the data included in the request. This method supports patch semantics.
+      operationId: compute.backendBuckets.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the BackendBucket resource to update.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendBucket'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
+    put:
+      description: Updates the specified BackendBucket resource with the data included in the request.
+      operationId: compute.backendBuckets.update
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the BackendBucket resource to update.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendBucket'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
   '/{project}/global/backendServices':
     get:
       description: Retrieves the list of BackendService resources available to the specified project.
@@ -1417,7 +1630,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1669,7 +1882,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1881,7 +2094,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -2072,7 +2285,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -2284,7 +2497,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -2496,7 +2709,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -2708,7 +2921,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -2945,7 +3158,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -3134,7 +3347,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -3321,7 +3534,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -3446,7 +3659,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -3598,7 +3811,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -3728,7 +3941,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -3880,7 +4093,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -4032,7 +4245,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -4184,7 +4397,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -4453,7 +4666,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -4811,7 +5024,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -4917,7 +5130,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -5089,7 +5302,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -5330,7 +5543,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -5617,7 +5830,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -5833,7 +6046,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -6327,7 +6540,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -6451,7 +6664,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -6560,7 +6773,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -6700,7 +6913,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -7030,7 +7243,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -7246,7 +7459,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -7688,7 +7901,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -7860,7 +8073,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -8218,7 +8431,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -8324,7 +8537,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -8565,7 +8778,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -8676,7 +8889,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -8851,6 +9064,9 @@ paths:
           name: disk
           required: true
           type: string
+        - in: query
+          name: guestFlush
+          type: boolean
         - in: body
           name: body
           schema:
@@ -8940,7 +9156,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -9433,7 +9649,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -9662,7 +9878,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -9815,7 +10031,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -10213,7 +10429,7 @@ paths:
           minimum: 1
           name: port
           type: integer
-        - description: 'For the initial request, leave this field unspecified. For subsequent calls, this field should be set to the next value that was returned in the previous call.'
+        - description: 'Returns output starting from a specific byte position. Use this to page through output when the output is too large to return in a single request. For the initial request, leave this field unspecified. For subsequent calls, this field should be set to the next value returned in the previous call.'
           in: query
           name: start
           type: string
@@ -10431,7 +10647,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sets the service account on the instance.
+      description: 'Sets the service account on the instance. For more information, read Changing the service account and access scopes for an instance.'
       operationId: compute.instances.setServiceAccount
       parameters:
         - description: Project ID for this request.
@@ -10662,7 +10878,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -10773,7 +10989,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -10913,7 +11129,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -11615,6 +11831,59 @@ definitions:
         format: float
         type: number
     type: object
+  BackendBucket:
+    description: A BackendBucket resource. This resource defines a Cloud Storage bucket.
+    properties:
+      bucketName:
+        description: Cloud Storage bucket name.
+        type: string
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+        type: string
+      enableCdn:
+        description: 'If true, enable Cloud CDN for this BackendBucket.'
+        type: boolean
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#backendBucket'
+        description: Type of the resource.
+        type: string
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  BackendBucketList:
+    description: Contains a list of BackendBucket resources.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of BackendBucket resources.
+        items:
+          $ref: '#/definitions/BackendBucket'
+        type: array
+      kind:
+        default: 'compute#backendBucketList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        description: '[Output Only] A token used to continue a truncated list request.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
   BackendService:
     description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity.
     properties:
@@ -11691,7 +11960,7 @@ definitions:
         description: |-
           The protocol this BackendService uses to communicate with backends.
 
-          Possible values are HTTP, HTTPS, HTTP2, TCP and SSL. The default is HTTP.
+          Possible values are HTTP, HTTPS, TCP, and SSL. The default is HTTP.
 
           For internal load balancing, the possible values are TCP and UDP, and the default is TCP.
         enum:
@@ -11778,7 +12047,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#backendServiceList for lists of backend services.'
         type: string
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -12022,7 +12291,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#diskAggregatedList for aggregated lists of persistent disks.'
         type: string
       nextPageToken:
-        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results. Acceptable values are 0 to 500, inclusive. (Default: 500)'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -12044,7 +12313,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#diskList for lists of disks.'
         type: string
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: 'This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -12437,7 +12706,7 @@ definitions:
         type: string
       target:
         description: |-
-          The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global TargetHttpProxy or TargetHttpsProxy resource. The forwarded traffic must be of a type appropriate to the target object. For example, TargetHttpProxy requires HTTP traffic, and TargetHttpsProxy requires HTTPS traffic.
+          The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For example, TargetHttpProxy requires HTTP traffic, and TargetHttpsProxy requires HTTPS traffic.
 
           This field is not used for internal load balancing.
         type: string
@@ -12553,7 +12822,7 @@ definitions:
         description: 'The value of the host header in the HTTP health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
         type: string
       port:
-        description: The TCP port number for the health check request. The default value is 80.
+        description: The TCP port number for the health check request. The default value is 80. Valid values are 1 through 65535.
         format: int32
         type: integer
       portName:
@@ -12575,7 +12844,7 @@ definitions:
         description: 'The value of the host header in the HTTPS health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
         type: string
       port:
-        description: The TCP port number for the health check request. The default value is 443.
+        description: The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
         format: int32
         type: integer
       portName:
@@ -13034,6 +13303,7 @@ definitions:
         description: The metadata key/value pairs assigned to this instance. This includes custom metadata and predefined keys.
       name:
         description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       networkInterfaces:
         description: 'An array of configurations for this interface. This specifies how this interface is configured to interact with other network services, such as connecting to the internet. Only one interface is supported per instance.'
@@ -13047,7 +13317,10 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
       serviceAccounts:
-        description: 'A list of service accounts, with their specified scopes, authorized for this instance. Service accounts generate access tokens that can be accessed through the metadata server and used to authenticate applications on the instance. See Service Accounts for more information.'
+        description: |-
+          A list of service accounts, with their specified scopes, authorized for this instance. Only one service account per VM instance is supported.
+
+          Service accounts generate access tokens that can be accessed through the metadata server and used to authenticate applications on the instance. See Service Accounts for more information.
         items:
           $ref: '#/definitions/ServiceAccount'
         type: array
@@ -14169,7 +14442,7 @@ definitions:
         description: '[Output Only] Reserved for future use.'
         type: string
       creationTimestamp:
-        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        description: '[Deprecated] This field is deprecated.'
         type: string
       description:
         description: '[Output Only] A textual description of the operation, which is set when the operation is created.'
@@ -14483,6 +14756,7 @@ definitions:
         description: '[Output Only] Name of the quota metric.'
         enum:
           - AUTOSCALERS
+          - BACKEND_BUCKETS
           - BACKEND_SERVICES
           - CPUS
           - CPUS_ALL_REGIONS
@@ -15139,7 +15413,7 @@ definitions:
   SSLHealthCheck:
     properties:
       port:
-        description: The TCP port number for the health check request. The default value is 443.
+        description: The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
         format: int32
         type: integer
       portName:
@@ -15192,7 +15466,7 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
       start:
-        description: '[Output Only] The starting byte position of the output that was returned. This should match the start parameter sent with the request. If the serial console output exceeds the size of the buffer, older output will be overwritten by newer content and the start values will be mismatched.'
+        description: 'The starting byte position of the output that was returned. This should match the start parameter sent with the request. If the serial console output exceeds the size of the buffer, older output will be overwritten by newer content and the start values will be mismatched.'
         format: int64
         type: string
     type: object
@@ -15495,7 +15769,7 @@ definitions:
   TCPHealthCheck:
     properties:
       port:
-        description: The TCP port number for the health check request. The default value is 80.
+        description: The TCP port number for the health check request. The default value is 80. Valid values are 1 through 65535.
         format: int32
         type: integer
       portName:
@@ -15782,7 +16056,7 @@ definitions:
         type: object
     type: object
   TargetPool:
-    description: 'A TargetPool resource. This resource defines a pool of instances, associated HttpHealthCheck resources, and the fallback target pool.'
+    description: 'A TargetPool resource. This resource defines a pool of instances, an associated HttpHealthCheck resource, and the fallback target pool.'
     properties:
       backupPool:
         description: |-
@@ -15808,7 +16082,7 @@ definitions:
         format: float
         type: number
       healthChecks:
-        description: A list of URLs to the HttpHealthCheck resource. A member instance in this pool is considered healthy if and only if all specified health checks pass. An empty list means all member instances will be considered healthy at all times.
+        description: The URL of the HttpHealthCheck resource. A member instance in this pool is considered healthy if and only if the health checks pass. An empty list means all member instances will be considered healthy at all times. Only HttpHealthChecks are supported. Only one health check may be specified.
         items:
           type: string
         type: array
@@ -15907,7 +16181,7 @@ definitions:
   TargetPoolsAddHealthCheckRequest:
     properties:
       healthChecks:
-        description: A list of HttpHealthCheck resources to add to the target pool.
+        description: The HttpHealthCheck to add to the target pool.
         items:
           $ref: '#/definitions/HealthCheckReference'
         type: array

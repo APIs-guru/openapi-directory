@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Licensing API to view and manage license for your domain.
+  description: Views and manages licenses for your domain.
   title: Enterprise License Manager
   version: v1
   x-apiClientRegistration:
@@ -29,7 +29,7 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
-      'https://www.googleapis.com/auth/apps.licensing': View and manage Google Apps licenses for your domain
+      'https://www.googleapis.com/auth/apps.licensing': View and manage G Suite licenses for your domain
     type: oauth2
 parameters:
   alt:
@@ -349,13 +349,19 @@ definitions:
         description: Identifies the resource as a LicenseAssignment.
         type: string
       productId:
-        description: Name of the product.
+        description: Id of the product.
+        type: string
+      productName:
+        description: Display Name of the product.
         type: string
       selfLink:
         description: Link to this page.
         type: string
       skuId:
-        description: Name of the sku of the product.
+        description: Id of the sku of the product.
+        type: string
+      skuName:
+        description: Display Name of the sku of the product.
         type: string
       userId:
         description: Email id of the user.

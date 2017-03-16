@@ -93,7 +93,8 @@ paths:
           name: project
           required: true
           type: string
-        - description: Maximum number of buckets to return.
+        - default: 1000
+          description: 'Maximum number of buckets to return in a single response. The service will use this parameter or 1,000 items, whichever is smaller.'
           in: query
           minimum: 0
           name: maxResults
@@ -752,6 +753,113 @@ paths:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
+  '/b/{bucket}/iam':
+    get:
+      description: Returns an IAM policy for the specified bucket.
+      operationId: storage.buckets.getIamPolicy
+      parameters:
+        - description: Name of a bucket.
+          in: path
+          name: bucket
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - buckets
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Updates an IAM policy for the specified bucket.
+      operationId: storage.buckets.setIamPolicy
+      parameters:
+        - description: Name of a bucket.
+          in: path
+          name: bucket
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - buckets
+  '/b/{bucket}/iam/testPermissions':
+    get:
+      description: 'Tests a set of permissions on the given bucket to see which, if any, are held by the caller.'
+      operationId: storage.buckets.testIamPermissions
+      parameters:
+        - description: Name of a bucket.
+          in: path
+          name: bucket
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: Permissions to test.
+          in: query
+          items:
+            type: string
+          name: permissions
+          required: true
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestIamPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - buckets
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/b/{bucket}/o':
     get:
       description: Retrieves a list of objects matching the criteria.
@@ -766,7 +874,8 @@ paths:
           in: query
           name: delimiter
           type: string
-        - description: 'Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested. The default value of this parameter is 1,000 items.'
+        - default: 1000
+          description: 'Maximum number of items plus prefixes to return in a single page of responses. As duplicate prefixes are omitted, fewer total results may be returned than requested. The service will use this parameter or 1,000 items, whichever is smaller.'
           in: query
           minimum: 0
           name: maxResults
@@ -909,7 +1018,8 @@ paths:
           in: query
           name: delimiter
           type: string
-        - description: 'Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested. The default value of this parameter is 1,000 items.'
+        - default: 1000
+          description: 'Maximum number of items plus prefixes to return in a single page of responses. As duplicate prefixes are omitted, fewer total results may be returned than requested. The service will use this parameter or 1,000 items, whichever is smaller.'
           in: query
           minimum: 0
           name: maxResults
@@ -1433,6 +1543,140 @@ paths:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
+  '/b/{bucket}/o/{object}/iam':
+    get:
+      description: Returns an IAM policy for the specified object.
+      operationId: storage.objects.getIamPolicy
+      parameters:
+        - description: Name of the bucket in which the object resides.
+          in: path
+          name: bucket
+          required: true
+          type: string
+        - description: 'Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.'
+          in: path
+          name: object
+          required: true
+          type: string
+        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+          in: query
+          name: generation
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - objects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Updates an IAM policy for the specified object.
+      operationId: storage.objects.setIamPolicy
+      parameters:
+        - description: Name of the bucket in which the object resides.
+          in: path
+          name: bucket
+          required: true
+          type: string
+        - description: 'Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.'
+          in: path
+          name: object
+          required: true
+          type: string
+        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+          in: query
+          name: generation
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - objects
+  '/b/{bucket}/o/{object}/iam/testPermissions':
+    get:
+      description: 'Tests a set of permissions on the given object to see which, if any, are held by the caller.'
+      operationId: storage.objects.testIamPermissions
+      parameters:
+        - description: Name of the bucket in which the object resides.
+          in: path
+          name: bucket
+          required: true
+          type: string
+        - description: 'Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.'
+          in: path
+          name: object
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: Permissions to test.
+          in: query
+          items:
+            type: string
+          name: permissions
+          required: true
+          type: array
+        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+          in: query
+          name: generation
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestIamPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - objects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/b/{destinationBucket}/o/{destinationObject}/compose':
     parameters:
       - $ref: '#/parameters/alt'
@@ -2271,6 +2515,56 @@ definitions:
           type: string
         type: array
     type: object
+  Policy:
+    description: A bucket/object IAM policy.
+    properties:
+      bindings:
+        description: 'An association between a role, which comes with a set of permissions, and members who may assume that role.'
+        items:
+          properties:
+            members:
+              description: |-
+                A collection of identifiers for members who may assume the provided role. Recognized identifiers are as follows:  
+                - allUsers — A special identifier that represents anyone on the internet; with or without a Google account.  
+                - allAuthenticatedUsers — A special identifier that represents anyone who is authenticated with a Google account or a service account.  
+                - user:emailid — An email address that represents a specific account. For example, user:alice@gmail.com or user:joe@example.com.  
+                - serviceAccount:emailid — An email address that represents a service account. For example,  serviceAccount:my-other-app@appspot.gserviceaccount.com .  
+                - group:emailid — An email address that represents a Google group. For example, group:admins@example.com.  
+                - domain:domain — A Google Apps domain name that represents all the users of that domain. For example, domain:google.com or domain:example.com.  
+                - projectOwner:projectid — Owners of the given project. For example, projectOwner:my-example-project  
+                - projectEditor:projectid — Editors of the given project. For example, projectEditor:my-example-project  
+                - projectViewer:projectid — Viewers of the given project. For example, projectViewer:my-example-project
+              items:
+                type: string
+              type: array
+            role:
+              description: |-
+                The role to which members belong. Two types of roles are supported: new IAM roles, which grant permissions that do not map directly to those provided by ACLs, and legacy IAM roles, which do map directly to ACL permissions. All roles are of the format roles/storage.specificRole.
+                The new IAM roles are:  
+                - roles/storage.admin — Full control of Google Cloud Storage resources.  
+                - roles/storage.objectViewer — Read-Only access to Google Cloud Storage objects.  
+                - roles/storage.objectCreator — Access to create objects in Google Cloud Storage.  
+                - roles/storage.objectAdmin — Full control of Google Cloud Storage objects.   The legacy IAM roles are:  
+                - roles/storage.legacyObjectReader — Read-only access to objects without listing. Equivalent to an ACL entry on an object with the READER role.  
+                - roles/storage.legacyObjectOwner — Read/write access to existing objects without listing. Equivalent to an ACL entry on an object with the OWNER role.  
+                - roles/storage.legacyBucketReader — Read access to buckets with object listing. Equivalent to an ACL entry on a bucket with the READER role.  
+                - roles/storage.legacyBucketWriter — Read access to buckets with object listing/creation/deletion. Equivalent to an ACL entry on a bucket with the WRITER role.  
+                - roles/storage.legacyBucketOwner — Read and write access to existing buckets with object listing/creation/deletion. Equivalent to an ACL entry on a bucket with the OWNER role.
+              type: string
+          type: object
+        type: array
+      etag:
+        description: HTTP 1.1  Entity tag for the policy.
+        format: byte
+        type: string
+      kind:
+        default: 'storage#policy'
+        description: 'The kind of item this is. For policies, this is always storage#policy. This field is ignored on input.'
+        type: string
+      resourceId:
+        description: 'The ID of the resource to which this policy belongs. Will be of the form buckets/bucket for buckets, and buckets/bucket/objects/object for objects. A specific generation may be specified by appending #generationNumber to the end of the object name, e.g. buckets/my-bucket/objects/data.txt#17. The current generation can be denoted with #0. This field is ignored on input.'
+        type: string
+    type: object
   RewriteResponse:
     description: A rewrite response.
     properties:
@@ -2295,4 +2589,32 @@ definitions:
         description: 'The total bytes written so far, which can be used to provide a waiting user with a progress indicator. This property is always present in the response.'
         format: uint64
         type: string
+    type: object
+  TestIamPermissionsResponse:
+    description: A storage.(buckets|objects).testIamPermissions response.
+    properties:
+      kind:
+        default: 'storage#testIamPermissionsResponse'
+        description: The kind of item this is.
+        type: string
+      permissions:
+        description: |-
+          The permissions held by the caller. Permissions are always of the format storage.resource.capability, where resource is one of buckets or objects. The supported permissions are as follows:  
+          - storage.buckets.delete — Delete bucket.  
+          - storage.buckets.get — Read bucket metadata.  
+          - storage.buckets.getIamPolicy — Read bucket IAM policy.  
+          - storage.buckets.create — Create bucket.  
+          - storage.buckets.list — List buckets.  
+          - storage.buckets.setIamPolicy — Update bucket IAM policy.  
+          - storage.buckets.update — Update bucket metadata.  
+          - storage.objects.delete — Delete object.  
+          - storage.objects.get — Read object data and metadata.  
+          - storage.objects.getIamPolicy — Read object IAM policy.  
+          - storage.objects.create — Create object.  
+          - storage.objects.list — List objects.  
+          - storage.objects.setIamPolicy — Update object IAM policy.  
+          - storage.objects.update — Update object metadata.
+        items:
+          type: string
+        type: array
     type: object

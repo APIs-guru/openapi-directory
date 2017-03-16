@@ -118,75 +118,6 @@ parameters:
 tags:
   - name: people
 paths:
-  /v1/people/me/connections:
-    get:
-      description: |-
-        Provides a list of the authenticated user's contacts merged with any
-        linked profiles.
-      operationId: people.people.me.connections.list
-      parameters:
-        - description: |-
-            The order in which the connections should be sorted. Defaults to
-            `LAST_MODIFIED_ASCENDING`.
-          enum:
-            - LAST_MODIFIED_ASCENDING
-            - FIRST_NAME_ASCENDING
-            - LAST_NAME_ASCENDING
-          in: query
-          name: sortOrder
-          type: string
-        - description: |-
-            A sync token, returned by a previous call to `people.connections.list`.
-            Only resources changed since the sync token was created will be returned.
-          in: query
-          name: syncToken
-          type: string
-        - description: The token of the page to be returned.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            The number of connections to include in the response. Valid values are
-            between 1 and 500, inclusive. Defaults to 100.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            Comma-separated list of fields to be included in the response. Omitting
-            this field will include all fields except for connections.list requests,
-            which have a default mask that includes common fields like metadata, name,
-            photo, and profile url.
-            Each path should start with `person.`: for example, `person.names` or
-            `person.photos`.
-          in: query
-          name: requestMask.includeField
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListConnectionsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/contacts'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/contacts.readonly'
-      tags:
-        - people
-    parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
   '/v1/people:batchGet':
     get:
       description: |-
@@ -250,8 +181,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -319,8 +250,89 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+  '/v1/{resourceName}/connections':
+    get:
+      description: |-
+        Provides a list of the authenticated user's contacts merged with any
+        linked profiles.
+      operationId: people.people.connections.list
+      parameters:
+        - description: The resource name to return connections for. Only `people/me` is valid.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Whether the response should include a sync token, which can be used to get
+            all changes since the last request.
+          in: query
+          name: requestSyncToken
+          type: boolean
+        - description: The token of the page to be returned.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Comma-separated list of fields to be included in the response. Omitting
+            this field will include all fields except for connections.list requests,
+            which have a default mask that includes common fields like metadata, name,
+            photo, and profile url.
+            Each path should start with `person.`: for example, `person.names` or
+            `person.photos`.
+          in: query
+          name: requestMask.includeField
+          type: string
+        - description: |-
+            The number of connections to include in the response. Valid values are
+            between 1 and 500, inclusive. Defaults to 100.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A sync token, returned by a previous call to `people.connections.list`.
+            Only resources changed since the sync token was created will be returned.
+          in: query
+          name: syncToken
+          type: string
+        - description: |-
+            The order in which the connections should be sorted. Defaults to
+            `LAST_MODIFIED_ASCENDING`.
+          enum:
+            - LAST_MODIFIED_ASCENDING
+            - FIRST_NAME_ASCENDING
+            - LAST_NAME_ASCENDING
+          in: query
+          name: sortOrder
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListConnectionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -379,6 +391,21 @@ definitions:
           * `work`
           * `other`
         type: string
+    type: object
+  AgeRangeType:
+    description: A person's age range.
+    properties:
+      ageRange:
+        description: The age range.
+        enum:
+          - AGE_RANGE_UNSPECIFIED
+          - LESS_THAN_EIGHTEEN
+          - EIGHTEEN_TO_TWENTY
+          - TWENTY_ONE_OR_OLDER
+        type: string
+      metadata:
+        $ref: '#/definitions/FieldMetadata'
+        description: Metadata about the age range.
     type: object
   Biography:
     description: A person's short biography.
@@ -828,6 +855,7 @@ definitions:
       Most fields can have multiple items. The items in a field have no guaranteed
       order, but each non-empty field is guaranteed to have exactly one field with
       `metadata.primary` set to true.
+      NEXT_ID: 31
     properties:
       addresses:
         description: The person's street addresses.
@@ -835,13 +863,18 @@ definitions:
           $ref: '#/definitions/Address'
         type: array
       ageRange:
-        description: The person's age range.
+        description: DEPRECATED(Please read person.age_ranges instead). The person's age range.
         enum:
           - AGE_RANGE_UNSPECIFIED
           - LESS_THAN_EIGHTEEN
           - EIGHTEEN_TO_TWENTY
           - TWENTY_ONE_OR_OLDER
         type: string
+      ageRanges:
+        description: The person's age ranges.
+        items:
+          $ref: '#/definitions/AgeRangeType'
+        type: array
       biographies:
         description: The person's biographies.
         items:
@@ -991,7 +1024,9 @@ definitions:
           type: string
         type: array
       objectType:
-        description: The type of the person object.
+        description: |-
+          DEPRECATED(Please read person.metadata.sources.profile_metadata instead).
+          The type of the person object.
         enum:
           - OBJECT_TYPE_UNSPECIFIED
           - PERSON
@@ -1083,6 +1118,17 @@ definitions:
         description: Metadata about the photo.
       url:
         description: The URL of the photo.
+        type: string
+    type: object
+  ProfileMetadata:
+    description: The read-only metadata about a profile.
+    properties:
+      objectType:
+        description: The profile object type.
+        enum:
+          - OBJECT_TYPE_UNSPECIFIED
+          - PERSON
+          - PAGE
         type: string
     type: object
   Relation:
@@ -1208,11 +1254,9 @@ definitions:
       id:
         description: The unique identifier within the source type generated by the server.
         type: string
-      resourceName:
-        description: |-
-          The resource name of the source. Only set if there is a separate
-          resource endpoint.
-        type: string
+      profileMetadata:
+        $ref: '#/definitions/ProfileMetadata'
+        description: Metadata about a source of type PROFILE.
       type:
         description: The source type.
         enum:

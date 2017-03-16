@@ -1041,6 +1041,9 @@ definitions:
   IdentitytoolkitRelyingpartyVerifyAssertionRequest:
     description: Request to verify the IDP assertion.
     properties:
+      autoCreate:
+        description: 'When it''s true, automatically creates a new account if the user doesn''t exist. When it''s false, allows existing user to sign in normally and throws exception if the user doesn''t exist.'
+        type: boolean
       delegatedProjectNumber:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
         format: int64
@@ -1150,14 +1153,35 @@ definitions:
   Relyingparty:
     description: 'Request of getting a code for user confirmation (reset password, change email etc.)'
     properties:
+      androidInstallApp:
+        description: whether or not to install the android app on the device where the link is opened
+        type: boolean
+      androidMinimumVersion:
+        description: minimum version of the app. if the version on the device is lower than this version then the user is taken to the play store to upgrade the app
+        type: string
+      androidPackageName:
+        description: android package name of the android app to handle the action code
+        type: string
+      canHandleCodeInApp:
+        description: whether or not the app can handle the oob code without first going to web
+        type: boolean
       captchaResp:
         description: The recaptcha response from the user.
         type: string
       challenge:
         description: The recaptcha challenge presented to the user.
         type: string
+      continueUrl:
+        description: The url to continue to the Gitkit app
+        type: string
       email:
         description: The email of the user.
+        type: string
+      iOSAppStoreId:
+        description: iOS app store id to download the app if it's not already installed
+        type: string
+      iOSBundleId:
+        description: the iOS bundle id of iOS app to handle the action code
         type: string
       idToken:
         description: The user's Gitkit login token for email change.

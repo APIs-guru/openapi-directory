@@ -60,7 +60,7 @@ paths:
           examples:
             application/json:
               value:
-                - id: /subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp/providers/microsoft.insights/metricdefinitions/RunsStarted
+                - id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsStarted
                   metricAvailabilities:
                     - retention: P30D
                       timeGrain: PT1M
@@ -70,9 +70,9 @@ paths:
                     localizedValue: Runs Started
                     value: RunsStarted
                   primaryAggregationType: Total
-                  resourceId: /subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp
+                  resourceId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia
                   unit: Count
-                - id: /subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp/providers/microsoft.insights/metricdefinitions/RunsCompleted
+                - id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsCompleted
                   metricAvailabilities:
                     - retention: P30D
                       timeGrain: PT1M
@@ -82,7 +82,19 @@ paths:
                     localizedValue: Runs Completed
                     value: RunsCompleted
                   primaryAggregationType: Total
-                  resourceId: /subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp
+                  resourceId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia
+                  unit: Count
+                - id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsSucceeded
+                  metricAvailabilities:
+                    - retention: P30D
+                      timeGrain: PT1M
+                    - retention: P30D
+                      timeGrain: PT1H
+                  name:
+                    localizedValue: Runs Succeeded
+                    value: RunsSucceeded
+                  primaryAggregationType: Total
+                  resourceId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia
                   unit: Count
           schema:
             $ref: '#/definitions/MetricDefinitionCollection'

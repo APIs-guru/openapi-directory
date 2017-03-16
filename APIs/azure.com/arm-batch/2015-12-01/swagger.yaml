@@ -67,7 +67,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - BatchAccount
       x-ms-pageable:
@@ -92,7 +92,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - Location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts':
@@ -116,7 +116,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - BatchAccount
       x-ms-pageable:
@@ -158,7 +158,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - BatchAccount
       x-ms-long-running-operation: true
@@ -190,7 +190,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - BatchAccount
     patch:
@@ -227,7 +227,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - BatchAccount
     put:
@@ -274,7 +274,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - BatchAccount
       x-ms-long-running-operation: true
@@ -313,7 +313,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - Application
       x-ms-pageable:
@@ -350,7 +350,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - Application
     get:
@@ -386,7 +386,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - Application
     patch:
@@ -426,7 +426,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - Application
     put:
@@ -468,7 +468,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - Application
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}':
@@ -508,7 +508,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - ApplicationPackage
     get:
@@ -549,7 +549,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - ApplicationPackage
     put:
@@ -590,7 +590,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - ApplicationPackage
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}/activate':
@@ -636,7 +636,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - ApplicationPackage
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/listKeys':
@@ -668,7 +668,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - BatchAccount
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/regenerateKeys':
@@ -706,7 +706,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - BatchAccount
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/syncAutoStorageKeys':
@@ -736,7 +736,7 @@ paths:
         default:
           description: Error response describing why the operation failed.
           schema:
-            $ref: '#/definitions/ErrorBody'
+            $ref: '#/definitions/CloudError'
       tags:
         - BatchAccount
 definitions:
@@ -955,7 +955,7 @@ definitions:
         description: The number of Batch accounts that may be created under the subscription in the specified region.
         format: int32
         type: integer
-  ErrorBody:
+  CloudError:
     description: An error response from the Batch service.
     properties:
       code:
@@ -964,7 +964,7 @@ definitions:
       details:
         description: A list of additional details about the error.
         items:
-          $ref: '#/definitions/ErrorDetail'
+          $ref: '#/definitions/CloudError'
         type: array
       message:
         description: 'A message describing the error, intended to be suitable for display in a user interface.'
@@ -972,18 +972,7 @@ definitions:
       target:
         description: 'The target of the particular error. For example, the name of the property in error.'
         type: string
-  ErrorDetail:
-    description: Specific detail about an error.
-    properties:
-      code:
-        description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
-        type: string
-      message:
-        description: 'A message describing the error, intended to be suitable for display in a user interface.'
-        type: string
-      target:
-        description: 'The target of the particular error. For example, the name of the property in error.'
-        type: string
+    x-ms-external: true
   ListApplicationsResult:
     description: Response to an ApplicationOperations.ListApplications request.
     properties:

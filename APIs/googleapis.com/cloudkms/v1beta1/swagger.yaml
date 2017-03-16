@@ -18,7 +18,7 @@ info:
     format: google
     url: 'https://cloudkms.googleapis.com/$discovery/rest?version=v1beta1'
     version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: cloudkms
 externalDocs:
@@ -132,19 +132,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     patch:
       description: |-
         Update a CryptoKeyVersion's metadata.
@@ -193,10 +193,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
         - description: The standard list page size.
           in: query
           name: pageSize
@@ -204,6 +200,10 @@ paths:
         - description: The standard list filter.
           in: query
           name: filter
+          type: string
+        - description: The standard list page token.
+          in: query
+          name: pageToken
           type: string
       responses:
         '200':
@@ -216,34 +216,34 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
   '/v1beta1/{name}:decrypt':
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: Decrypt data that was protected by Encrypt.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.decrypt
@@ -272,19 +272,19 @@ paths:
         - projects
   '/v1beta1/{name}:destroy':
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Schedule a CryptoKeyVersion for destruction.
@@ -323,19 +323,19 @@ paths:
         - projects
   '/v1beta1/{name}:encrypt':
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: 'Encrypt data, so that it can only be recovered by a call to Decrypt.'
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.encrypt
@@ -367,19 +367,19 @@ paths:
         - projects
   '/v1beta1/{name}:restore':
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Restore a CryptoKeyVersion in the
@@ -413,19 +413,19 @@ paths:
         - projects
   '/v1beta1/{name}:updatePrimaryVersion':
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: Update the version of a CryptoKey that will be used in Encrypt
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion
@@ -489,19 +489,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Create a new CryptoKeyVersion in a CryptoKey.
@@ -547,6 +547,12 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
+            Optional pagination token, returned earlier via
+            ListCryptoKeysResponse.next_page_token.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
             Optional limit on the number of CryptoKeys to include in the
             response.  Further CryptoKeys can subsequently be obtained by
             including the ListCryptoKeysResponse.next_page_token in a subsequent
@@ -554,12 +560,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: |-
-            Optional pagination token, returned earlier via
-            ListCryptoKeysResponse.next_page_token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -571,19 +571,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Create a new CryptoKey within a KeyRing.
@@ -657,19 +657,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: Create a new KeyRing in a given Project and Location.
       operationId: cloudkms.projects.locations.keyRings.create
@@ -712,8 +712,7 @@ paths:
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
+            See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
@@ -730,34 +729,34 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -766,8 +765,7 @@ paths:
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
+            See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
@@ -789,30 +787,33 @@ paths:
         - projects
   '/v1beta1/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
         If the resource does not exist, this will return an empty set of
         permissions, not a NOT_FOUND error.
+
+        Note: This operation is designed to be used for building permission-aware
+        UIs and command-line tools, not for authorization checking. This operation
+        may "fail open" without warning.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
+            See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
@@ -839,6 +840,50 @@ definitions:
       It consists of which permission types are logged, and what identities, if
       any, are exempted from logging.
       An AuditConifg must have one or more AuditLogConfigs.
+
+      If there are AuditConfigs for both `allServices` and a specific service,
+      the union of the two AuditConfigs is used for that service: the log_types
+      specified in each AuditConfig are enabled, and the exempted_members in each
+      AuditConfig are exempted.
+      Example Policy with multiple AuditConfigs:
+      {
+        "audit_configs": [
+          {
+            "service": "allServices"
+            "audit_log_configs": [
+              {
+                "log_type": "DATA_READ",
+                "exempted_members": [
+                  "user:foo@gmail.com"
+                ]
+              },
+              {
+                "log_type": "DATA_WRITE",
+              },
+              {
+                "log_type": "ADMIN_READ",
+              }
+            ]
+          },
+          {
+            "service": "fooservice@googleapis.com"
+            "audit_log_configs": [
+              {
+                "log_type": "DATA_READ",
+              },
+              {
+                "log_type": "DATA_WRITE",
+                "exempted_members": [
+                  "user:bar@gmail.com"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+      logging. It also exempts foo@gmail.com from DATA_READ logging, and
+      bar@gmail.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
         description: |-
@@ -848,11 +893,6 @@ definitions:
           $ref: '#/definitions/AuditLogConfig'
         type: array
       exemptedMembers:
-        description: |-
-          Specifies the identities that are exempted from "data access" audit
-          logging for the `service` specified above.
-          Follows the same format of Binding.members.
-          This field is deprecated in favor of per-permission-type exemptions.
         items:
           type: string
         type: array
@@ -952,6 +992,8 @@ definitions:
           - NO_ATTR
           - AUTHORITY
           - ATTRIBUTION
+          - APPROVER
+          - JUSTIFICATION_TYPE
         type: string
       op:
         description: An operator to apply the subject with.

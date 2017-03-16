@@ -117,6 +117,8 @@ tags:
 paths:
   /v1/presentations:
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -128,8 +130,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Creates a new presentation using the title given in the request. Other
@@ -181,6 +181,8 @@ paths:
       tags:
         - presentations
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -192,8 +194,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
   '/v1/presentations/{presentationId}/pages/{pageObjectId}':
     get:
       description: Gets the latest version of the specified page in the presentation.
@@ -226,6 +226,8 @@ paths:
       tags:
         - presentations
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -237,10 +239,10 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
   '/v1/presentations/{presentationId}:batchUpdate':
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -252,8 +254,6 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
     post:
       description: |-
         Applies one or more updates to the presentation.
@@ -379,6 +379,11 @@ definitions:
         items:
           $ref: '#/definitions/Request'
         type: array
+      writeControl:
+        $ref: '#/definitions/WriteControl'
+        description: |-
+          Provides control over how write requests are executed, such as
+          conditionally updating the presentation.
     type: object
   BatchUpdatePresentationResponse:
     description: Response message from a batch update.
@@ -1651,6 +1656,19 @@ definitions:
           - NOTES
           - NOTES_MASTER
         type: string
+      revisionId:
+        description: |-
+          The revision ID of the presentation containing this page. Can be used in
+          update requests to assert that the presentation revision hasn't changed
+          since the last read operation. Only populated if the user has edit access
+          to the presentation.
+
+          The format of the revision ID may change over time, so it should be treated
+          opaquely. A returned revision ID is only guaranteed to be valid for 24
+          hours after it has been returned and cannot be shared across
+          users. Callers can assume that if two revision IDs are equal then the
+          presentation has not changed.
+        type: string
       slideProperties:
         $ref: '#/definitions/SlideProperties'
         description: Slide specific properties. Only set if page_type = SLIDE.
@@ -1800,7 +1818,7 @@ definitions:
       Inherited paragraph styles are represented as unset fields in this message.
     properties:
       alignment:
-        description: The text alignment for this paragraph. This property is read-only.
+        description: The text alignment for this paragraph.
         enum:
           - ALIGNMENT_UNSPECIFIED
           - START
@@ -1812,7 +1830,7 @@ definitions:
         description: |-
           The text direction of this paragraph. If unset, the value defaults to
           LEFT_TO_RIGHT
-          since text direction is not inherited. This property is read-only.
+          since text direction is not inherited.
         enum:
           - TEXT_DIRECTION_UNSPECIFIED
           - LEFT_TO_RIGHT
@@ -1823,38 +1841,36 @@ definitions:
         description: |-
           The amount indentation for the paragraph on the side that corresponds to
           the end of the text, based on the current text direction. If unset, the
-          value is inherited from the parent. This property is read-only.
+          value is inherited from the parent.
       indentFirstLine:
         $ref: '#/definitions/Dimension'
         description: |-
           The amount of indentation for the start of the first line of the paragraph.
-          If unset, the value is inherited from the parent. This property is
-          read-only.
+          If unset, the value is inherited from the parent.
       indentStart:
         $ref: '#/definitions/Dimension'
         description: |-
           The amount indentation for the paragraph on the side that corresponds to
           the start of the text, based on the current text direction. If unset, the
-          value is inherited from the parent. This property is read-only.
+          value is inherited from the parent.
       lineSpacing:
         description: |-
           The amount of space between lines, as a percentage of normal, where normal
           is represented as 100.0. If unset, the value is inherited from the parent.
-          This property is read-only.
         format: float
         type: number
       spaceAbove:
         $ref: '#/definitions/Dimension'
         description: |-
           The amount of extra space above the paragraph. If unset, the value is
-          inherited from the parent. This property is read-only.
+          inherited from the parent.
       spaceBelow:
         $ref: '#/definitions/Dimension'
         description: |-
           The amount of extra space above the paragraph. If unset, the value is
-          inherited from the parent. This property is read-only.
+          inherited from the parent.
       spacingMode:
-        description: The spacing mode for the paragraph. This property is read-only.
+        description: The spacing mode for the paragraph.
         enum:
           - SPACING_MODE_UNSPECIFIED
           - NEVER_COLLAPSE
@@ -1934,9 +1950,8 @@ definitions:
 
           - Placeholder shapes on a notes master contain the default text styles and
             shape properties of all placeholder shapes on notes pages. Specifically,
-            a SLIDE_IMAGE placeholder shape is defined to contain the slide
-            thumbnail, and a BODY placeholder shape is defined to contain the speaker
-            notes.
+            a `SLIDE_IMAGE` placeholder shape contains the slide thumbnail, and a
+            `BODY` placeholder shape contains the speaker notes.
           - The notes master page properties define the common page properties
             inherited by all notes pages.
           - Any other shapes on the notes master will appear on all notes pages.
@@ -1947,6 +1962,19 @@ definitions:
         description: The size of pages in the presentation.
       presentationId:
         description: The ID of the presentation.
+        type: string
+      revisionId:
+        description: |-
+          The revision ID of the presentation. Can be used in update requests
+          to assert that the presentation revision hasn't changed since the last
+          read operation. Only populated if the user has edit access to the
+          presentation.
+
+          The format of the revision ID may change over time, so it should be treated
+          opaquely. A returned revision ID is only guaranteed to be valid for 24
+          hours after it has been returned and cannot be shared across users. Callers
+          can assume that if two revision IDs are equal then the presentation has not
+          changed.
         type: string
       slides:
         description: |-
@@ -2212,6 +2240,9 @@ definitions:
       updatePageProperties:
         $ref: '#/definitions/UpdatePagePropertiesRequest'
         description: Updates the properties of a Page.
+      updateParagraphStyle:
+        $ref: '#/definitions/UpdateParagraphStyleRequest'
+        description: Updates the styling of paragraphs within a Shape or Table.
       updateShapeProperties:
         $ref: '#/definitions/UpdateShapePropertiesRequest'
         description: Updates the properties of a Shape.
@@ -2634,10 +2665,10 @@ definitions:
           The notes page that this slide is associated with. It defines the visual
           appearance of a notes page when printing or exporting slides with speaker
           notes. A notes page inherits properties from the
-          notes mater.
+          notes master.
           The placeholder shape with type BODY on the notes page contains the speaker
           notes for this slide. The ID of this shape is identified by the
-          speaker notes object id field.
+          speakerNotesObjectId field.
           The notes page is read-only except for the text content and styles of the
           speaker notes shape.
     type: object
@@ -2958,7 +2989,7 @@ definitions:
           - SUBSCRIPT
         type: string
       bold:
-        description: Whether or not the text is bold.
+        description: Whether or not the text is rendered as bold.
         type: boolean
       fontFamily:
         description: |-
@@ -3017,6 +3048,16 @@ definitions:
       underline:
         description: Whether or not the text is underlined.
         type: boolean
+      weightedFontFamily:
+        $ref: '#/definitions/WeightedFontFamily'
+        description: |-
+          The font family and rendered weight of the text. This property is
+          read-only.
+
+          This field is an extension of `font_family` meant to support explicit font
+          weights without breaking backwards compatibility. As such, when reading the
+          style of a range of text, the value of `weighted_font_family.font_family`
+          will always be equal to that of `font_family`.
     type: object
   ThemeColorPair:
     description: A pair mapping a theme color type to the concrete color it represents.
@@ -3138,6 +3179,42 @@ definitions:
         $ref: '#/definitions/PageProperties'
         description: The page properties to update.
     type: object
+  UpdateParagraphStyleRequest:
+    description: |-
+      Updates the styling for all of the paragraphs within a Shape or Table that
+      overlap with the given text index range.
+    properties:
+      cellLocation:
+        $ref: '#/definitions/TableCellLocation'
+        description: |-
+          The location of the cell in the table containing the paragraph(s) to
+          style. If `object_id` refers to a table, `cell_location` must have a value.
+          Otherwise, it must not.
+      fields:
+        description: |-
+          The fields that should be updated.
+
+          At least one field must be specified. The root `style` is implied and
+          should not be specified. A single `"*"` can be used as short-hand for
+          listing every field.
+
+          For example, to update the paragraph alignment, set `fields` to
+          `"alignment"`.
+
+          To reset a property to its default value, include its field name in the
+          field mask but leave the field itself unset.
+        format: google-fieldmask
+        type: string
+      objectId:
+        description: The object ID of the shape or table with the text to be styled.
+        type: string
+      style:
+        $ref: '#/definitions/ParagraphStyle'
+        description: The paragraph's style.
+      textRange:
+        $ref: '#/definitions/Range'
+        description: The range of text containing the paragraph(s) to style.
+    type: object
   UpdateShapePropertiesRequest:
     description: Update the properties of a Shape.
     properties:
@@ -3221,8 +3298,9 @@ definitions:
       cellLocation:
         $ref: '#/definitions/TableCellLocation'
         description: |-
-          The optional table cell location if the text to be styled is in a table
-          cell. If present, the object_id must refer to a table.
+          The location of the cell in the table containing the text to style. If
+          `object_id` refers to a table, `cell_location` must have a value.
+          Otherwise, it must not.
       fields:
         description: |-
           The fields that should be updated.
@@ -3318,6 +3396,30 @@ definitions:
           The outline of the video. The default outline matches the defaults for new
           videos created in the Slides editor.
     type: object
+  WeightedFontFamily:
+    description: Represents a font family and weight used to style a TextRun.
+    properties:
+      fontFamily:
+        description: |-
+          The font family of the text.
+
+          The font family can be any font from the Font menu in Slides or from
+          [Google Fonts] (https://fonts.google.com/). If the font name is
+          unrecognized, the text is rendered in `Arial`.
+        type: string
+      weight:
+        description: |-
+          The rendered weight of the text. This field can have any value that is a
+          multiple of 100 between 100 and 900, inclusive. This range corresponds to
+          only the numerical values described in the "Cascading Style Sheets Level
+          2 Revision 1 (CSS 2.1) Specification",
+          [section 15.6](https://www.w3.org/TR/CSS21/fonts.html#font-boldness). The
+          non-numerical values in the specification are disallowed. Weights greater
+          than or equal to 700 are considered bold, and weights less than 700 are
+          not bold. The default value is `400` ("normal").
+        format: int32
+        type: integer
+    type: object
   WordArt:
     description: |-
       A PageElement kind representing
@@ -3325,5 +3427,16 @@ definitions:
     properties:
       renderedText:
         description: The text rendered as word art.
+        type: string
+    type: object
+  WriteControl:
+    description: Provides control over how write requests are executed.
+    properties:
+      requiredRevisionId:
+        description: |-
+          The revision ID of the presentation required for the write request. If
+          specified and the `required_revision_id` doesn't exactly match the
+          presentation's current `revision_id`, the request will not be processed and
+          will return a 400 bad request error.
         type: string
     type: object

@@ -37,12 +37,6 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The Azure subscription Id.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/{resourceUri}/providers/microsoft.insights/diagnosticSettings/service':
     get:
@@ -56,26 +50,26 @@ paths:
           description: Successful request to get more information about service diagnostic setting
           examples:
             application/json:
-              logs:
-                - category: NetworkSecurityGroupEvent
-                  enabled: true
-                  retentionPolicy:
-                    days: 0
-                    enabled: false
-                - category: NetworkSecurityGroupRuleCounter
-                  enabled: true
-                  retentionPolicy:
-                    days: 0
-                    enabled: false
-              metrics:
-                - enabled: true
-                  retentionPolicy:
-                    days: 0
-                    enabled: false
-                  timeGrain: PT1M
-              serviceBusRuleId: /subscriptions/s1/resourceGroups/rg1/providers/Microsoft.ServiceBus/namespaces/testNamespace/authorizationrules/RootManageSharedAccessKey
-              storageAccountId: /subscriptions/s1/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAcct
-              workspaceId: /subscriptions/s1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/myWorkspace
+              id: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service
+              location: ''
+              name: service
+              properties:
+                logs:
+                  - category: WorkflowRuntime
+                    enabled: true
+                    retentionPolicy:
+                      days: 0
+                      enabled: false
+                metrics:
+                  - enabled: true
+                    retentionPolicy:
+                      days: 0
+                      enabled: false
+                    timeGrain: PT1M
+                serviceBusRuleId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey
+                storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1
+                workspaceId: ''
+              type: ''
           schema:
             $ref: '#/definitions/ServiceDiagnosticSettingsResource'
       tags:
@@ -91,32 +85,32 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/ServiceDiagnosticSettings'
+            $ref: '#/definitions/ServiceDiagnosticSettingsResource'
       responses:
         '200':
           description: Successful request to create a service diagnostic setting
           examples:
             application/json:
-              logs:
-                - category: NetworkSecurityGroupEvent
-                  enabled: true
-                  retentionPolicy:
-                    days: 0
-                    enabled: false
-                - category: NetworkSecurityGroupRuleCounter
-                  enabled: true
-                  retentionPolicy:
-                    days: 0
-                    enabled: false
-              metrics:
-                - enabled: true
-                  retentionPolicy:
-                    days: 0
-                    enabled: false
-                  timeGrain: PT1M
-              serviceBusRuleId: /subscriptions/s1/resourceGroups/rg1/providers/Microsoft.ServiceBus/namespaces/testNamespace/authorizationrules/RootManageSharedAccessKey
-              storageAccountId: /subscriptions/s1/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAcct
-              workspaceId: /subscriptions/s1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/myWorkspace
+              id: /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service
+              location: ''
+              name: service
+              properties:
+                logs:
+                  - category: WorkflowRuntime
+                    enabled: true
+                    retentionPolicy:
+                      days: 0
+                      enabled: false
+                metrics:
+                  - enabled: true
+                    retentionPolicy:
+                      days: 0
+                      enabled: false
+                    timeGrain: PT1M
+                serviceBusRuleId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey
+                storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1
+                workspaceId: ''
+              type: ''
           schema:
             $ref: '#/definitions/ServiceDiagnosticSettingsResource'
       tags:

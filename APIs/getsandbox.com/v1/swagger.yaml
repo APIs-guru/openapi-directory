@@ -474,6 +474,8 @@ definitions:
         additionalProperties:
           type: string
         type: object
+      routeConfig:
+        $ref: '#/definitions/RouteConfig'
       transport:
         type: string
     required:
@@ -523,6 +525,31 @@ definitions:
         type: string
       message:
         description: Short message describing the error.
+        type: string
+    type: object
+  RouteConfig:
+    properties:
+      errorStrategy:
+        enum:
+          - NONE
+          - TIMEOUT
+          - SERVICE_DOWN
+        type: string
+      latencyMs:
+        format: int32
+        type: integer
+      latencyMultiplier:
+        format: int32
+        type: integer
+      latencyType:
+        enum:
+          - NONE
+          - CONSTANT
+          - LINEAR
+        type: string
+      method:
+        type: string
+      path:
         type: string
     type: object
   RuntimeRequest:
@@ -576,6 +603,7 @@ definitions:
         type: integer
       error:
         $ref: '#/definitions/Error'
+        description: Error if there is a problem during Sandbox execution.
       headers:
         additionalProperties:
           type: string

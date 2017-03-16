@@ -658,11 +658,10 @@ paths:
       consumes: []
       deprecated: false
       parameters:
-        - format: int32
-          in: path
+        - in: path
           name: recipeId
           required: true
-          type: integer
+          type: string
         - in: query
           name: caption
           required: false

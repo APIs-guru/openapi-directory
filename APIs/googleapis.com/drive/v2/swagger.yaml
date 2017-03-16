@@ -93,6 +93,7 @@ tags:
   - name: realtime
   - name: replies
   - name: revisions
+  - name: teamdrives
 paths:
   /about:
     get:
@@ -222,11 +223,16 @@ paths:
       - $ref: '#/parameters/userIp'
   /changes:
     get:
-      description: Lists the changes for a user.
+      description: Lists the changes for a user or Team Drive.
       operationId: drive.changes.list
       parameters:
+        - default: false
+          description: 'Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.'
+          in: query
+          name: includeCorpusRemovals
+          type: boolean
         - default: true
-          description: Whether to include deleted items.
+          description: 'Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.'
           in: query
           name: includeDeleted
           type: boolean
@@ -234,6 +240,11 @@ paths:
           description: 'Whether to include public files the user has opened and shared files. When set to false, the list only includes owned files plus any shared or public files the user has explicitly added to a folder they own.'
           in: query
           name: includeSubscribed
+          type: boolean
+        - default: false
+          description: Whether Team Drive files or changes should be included in results.
+          in: query
+          name: includeTeamDriveItems
           type: boolean
         - default: 100
           description: Maximum number of changes to return.
@@ -252,6 +263,15 @@ paths:
         - description: Change ID to start listing changes from.
           in: query
           name: startChangeId
+          type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
+        - description: The Team Drive from which changes will be returned. If specified the change IDs will be reflective of the Team Drive; use the combined Team Drive ID and change ID as an identifier.
+          in: query
+          name: teamDriveId
           type: string
       responses:
         '200':
@@ -289,6 +309,16 @@ paths:
     get:
       description: Gets the starting pageToken for listing future changes.
       operationId: drive.changes.getStartPageToken
+      parameters:
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
+        - description: The ID of the Team Drive for which the starting pageToken for listing future changes from that Team Drive will be returned.
+          in: query
+          name: teamDriveId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -334,8 +364,13 @@ paths:
       description: Subscribe to changes for a user.
       operationId: drive.changes.watch
       parameters:
+        - default: false
+          description: 'Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.'
+          in: query
+          name: includeCorpusRemovals
+          type: boolean
         - default: true
-          description: Whether to include deleted items.
+          description: 'Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.'
           in: query
           name: includeDeleted
           type: boolean
@@ -343,6 +378,11 @@ paths:
           description: 'Whether to include public files the user has opened and shared files. When set to false, the list only includes owned files plus any shared or public files the user has explicitly added to a folder they own.'
           in: query
           name: includeSubscribed
+          type: boolean
+        - default: false
+          description: Whether Team Drive files or changes should be included in results.
+          in: query
+          name: includeTeamDriveItems
           type: boolean
         - default: 100
           description: Maximum number of changes to return.
@@ -361,6 +401,15 @@ paths:
         - description: Change ID to start listing changes from.
           in: query
           name: startChangeId
+          type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
+        - description: The Team Drive from which changes will be returned. If specified the change IDs will be reflective of the Team Drive; use the combined Team Drive ID and change ID as an identifier.
+          in: query
+          name: teamDriveId
           type: string
         - in: body
           name: resource
@@ -399,6 +448,15 @@ paths:
           in: path
           name: changeId
           required: true
+          type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
+        - description: The Team Drive from which the change will be returned.
+          in: query
+          name: teamDriveId
           type: string
       responses:
         '200':
@@ -476,13 +534,22 @@ paths:
       description: Lists the user's files.
       operationId: drive.files.list
       parameters:
-        - description: The body of items (files/documents) to which the query applies.
+        - description: 'Comma-separated list of bodies of items (files/documents) to which the query applies. Supported bodies are ''default'', ''domain'', ''teamDrive'' and ''allTeamDrives''. ''allTeamDrives'' must be combined with ''default''; all other values must be used in isolation. Prefer ''default'' or ''teamDrive'' to ''allTeamDrives'' for efficiency.'
+          in: query
+          name: corpora
+          type: string
+        - description: 'The body of items (files/documents) to which the query applies. Deprecated: use ''corpora'' instead.'
           enum:
             - DEFAULT
             - DOMAIN
           in: query
           name: corpus
           type: string
+        - default: false
+          description: Whether Team Drive items should be included in results.
+          in: query
+          name: includeTeamDriveItems
+          type: boolean
         - default: 100
           description: Maximum number of files to return.
           in: query
@@ -511,6 +578,15 @@ paths:
         - description: 'A comma-separated list of spaces to query. Supported values are ''drive'', ''appDataFolder'' and ''photos''.'
           in: query
           name: spaces
+          type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
+        - description: ID of Team Drive to search.
+          in: query
+          name: teamDriveId
           type: string
       responses:
         '200':
@@ -568,6 +644,11 @@ paths:
           description: Whether to pin the head revision of the uploaded file. A file can have a maximum of 200 pinned revisions.
           in: query
           name: pinned
+          type: boolean
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
           type: boolean
         - description: The language of the timed text.
           in: query
@@ -671,7 +752,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/files/{fileId}':
     delete:
-      description: Permanently deletes a file by ID. Skips the trash. The currently authenticated user must own the file.
+      description: Permanently deletes a file by ID. Skips the trash. The currently authenticated user must own the file or be an organizer on the parent for Team Drive files.
       operationId: drive.files.delete
       parameters:
         - description: The ID of the file to delete.
@@ -679,6 +760,11 @@ paths:
           name: fileId
           required: true
           type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -716,6 +802,11 @@ paths:
           in: query
           name: revisionId
           type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
         - default: false
           description: 'Deprecated: Use files.update with modifiedDateBehavior=noChange, updateViewedDate=true and an empty request body.'
           in: query
@@ -807,6 +898,11 @@ paths:
           description: Whether to set the modified date with the supplied modified date.
           in: query
           name: setModifiedDate
+          type: boolean
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
           type: boolean
         - description: The language of the timed text.
           in: query
@@ -908,6 +1004,11 @@ paths:
           description: Whether to set the modified date with the supplied modified date.
           in: query
           name: setModifiedDate
+          type: boolean
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
           type: boolean
         - description: The language of the timed text.
           in: query
@@ -1420,6 +1521,11 @@ paths:
           in: query
           name: pinned
           type: boolean
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
         - description: The language of the timed text.
           in: query
           name: timedTextLanguage
@@ -1542,6 +1648,11 @@ paths:
           name: fileId
           required: true
           type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
         - in: body
           name: body
           schema:
@@ -1631,14 +1742,29 @@ paths:
       - $ref: '#/parameters/userIp'
   '/files/{fileId}/permissions':
     get:
-      description: Lists a file's permissions.
+      description: Lists a file's or Team Drive's permissions.
       operationId: drive.permissions.list
       parameters:
-        - description: The ID for the file.
+        - description: The ID for the file or Team Drive.
           in: path
           name: fileId
           required: true
           type: string
+        - description: 'The maximum number of permissions to return per page. When not set for files in a Team Drive, at most 100 results will be returned. When not set for files that are not in a Team Drive, the entire list will be returned.'
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+          in: query
+          name: pageToken
+          type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -1668,10 +1794,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Inserts a permission for a file.
+      description: Inserts a permission for a file or Team Drive.
       operationId: drive.permissions.insert
       parameters:
-        - description: The ID for the file.
+        - description: The ID for the file or Team Drive.
           in: path
           name: fileId
           required: true
@@ -1684,6 +1810,11 @@ paths:
           description: Whether to send notification emails when sharing to users or groups. This parameter is ignored and an email is sent if the role is owner.
           in: query
           name: sendNotificationEmails
+          type: boolean
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
           type: boolean
         - in: body
           name: body
@@ -1703,10 +1834,10 @@ paths:
         - permissions
   '/files/{fileId}/permissions/{permissionId}':
     delete:
-      description: Deletes a permission from a file.
+      description: Deletes a permission from a file or Team Drive.
       operationId: drive.permissions.delete
       parameters:
-        - description: The ID for the file.
+        - description: The ID for the file or Team Drive.
           in: path
           name: fileId
           required: true
@@ -1716,6 +1847,11 @@ paths:
           name: permissionId
           required: true
           type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -1730,7 +1866,7 @@ paths:
       description: Gets a permission by ID.
       operationId: drive.permissions.get
       parameters:
-        - description: The ID for the file.
+        - description: The ID for the file or Team Drive.
           in: path
           name: fileId
           required: true
@@ -1740,6 +1876,11 @@ paths:
           name: permissionId
           required: true
           type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -1772,7 +1913,7 @@ paths:
       description: Updates a permission using patch semantics.
       operationId: drive.permissions.patch
       parameters:
-        - description: The ID for the file.
+        - description: The ID for the file or Team Drive.
           in: path
           name: fileId
           required: true
@@ -1786,6 +1927,11 @@ paths:
           description: Whether to remove the expiration date.
           in: query
           name: removeExpiration
+          type: boolean
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
           type: boolean
         - default: false
           description: Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.
@@ -1812,7 +1958,7 @@ paths:
       description: Updates a permission.
       operationId: drive.permissions.update
       parameters:
-        - description: The ID for the file.
+        - description: The ID for the file or Team Drive.
           in: path
           name: fileId
           required: true
@@ -1826,6 +1972,11 @@ paths:
           description: Whether to remove the expiration date.
           in: query
           name: removeExpiration
+          type: boolean
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
           type: boolean
         - default: false
           description: Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.
@@ -2342,6 +2493,11 @@ paths:
           name: fileId
           required: true
           type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -2370,7 +2526,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Moves a file to the trash. The currently authenticated user must own the file.
+      description: Moves a file to the trash. The currently authenticated user must own the file or be an organizer on the parent for Team Drive files.
       operationId: drive.files.trash
       parameters:
         - description: The ID of the file to trash.
@@ -2378,6 +2534,11 @@ paths:
           name: fileId
           required: true
           type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -2412,6 +2573,11 @@ paths:
           name: fileId
           required: true
           type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -2462,6 +2628,11 @@ paths:
           in: query
           name: revisionId
           type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
         - default: false
           description: 'Deprecated: Use files.update with modifiedDateBehavior=noChange, updateViewedDate=true and an empty request body.'
           in: query
@@ -2560,6 +2731,11 @@ paths:
           name: folderId
           required: true
           type: string
+        - default: false
+          description: Whether the requesting application supports Team Drives.
+          in: query
+          name: supportsTeamDrives
+          type: boolean
         - in: body
           name: body
           schema:
@@ -2689,6 +2865,135 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  /teamdrives:
+    get:
+      description: Lists the user's Team Drives.
+      operationId: drive.teamdrives.list
+      parameters:
+        - default: 10
+          description: Maximum number of Team Drives to return.
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: Page token for Team Drives.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TeamDriveList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+      tags:
+        - teamdrives
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a new Team Drive.
+      operationId: drive.teamdrives.insert
+      parameters:
+        - description: 'An ID, such as a random UUID, which uniquely identifies this user''s request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.'
+          in: query
+          name: requestId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TeamDrive'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TeamDrive'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+      tags:
+        - teamdrives
+  '/teamdrives/{teamDriveId}':
+    delete:
+      description: Permanently deletes a Team Drive for which the user is an organizer. The Team Drive cannot contain any untrashed items.
+      operationId: drive.teamdrives.delete
+      parameters:
+        - description: The ID of the Team Drive
+          in: path
+          name: teamDriveId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+      tags:
+        - teamdrives
+    get:
+      description: Gets a Team Drive's metadata by ID.
+      operationId: drive.teamdrives.get
+      parameters:
+        - description: The ID of the Team Drive
+          in: path
+          name: teamDriveId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TeamDrive'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+      tags:
+        - teamdrives
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Updates a Team Drive's metadata
+      operationId: drive.teamdrives.update
+      parameters:
+        - description: The ID of the Team Drive
+          in: path
+          name: teamDriveId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TeamDrive'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TeamDrive'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+      tags:
+        - teamdrives
 definitions:
   About:
     description: An item with user information and settings.
@@ -2982,14 +3287,14 @@ definitions:
         type: string
     type: object
   Change:
-    description: Representation of a change to a file.
+    description: Representation of a change to a file or Team Drive.
     properties:
       deleted:
-        description: Whether the file has been deleted.
+        description: 'Whether the file or Team Drive has been removed from this list of changes, for example by deletion or loss of access.'
         type: boolean
       file:
         $ref: '#/definitions/File'
-        description: The updated state of the file. Present if the file has not been deleted.
+        description: The updated state of the file. Present if the type is file and the file has not been removed from this list of changes.
       fileId:
         description: The ID of the file associated with this change.
         type: string
@@ -3007,6 +3312,15 @@ definitions:
         type: string
       selfLink:
         description: A link back to this change.
+        type: string
+      teamDrive:
+        $ref: '#/definitions/TeamDrive'
+        description: 'The updated state of the Team Drive. Present if the type is teamDrive, the user is still a member of the Team Drive, and the Team Drive has not been deleted.'
+      teamDriveId:
+        description: The ID of the Team Drive associated with this change.
+        type: string
+      type:
+        description: The type of the change. Possible values are file and teamDrive.
         type: string
     type: object
   ChangeList:
@@ -3027,6 +3341,9 @@ definitions:
       largestChangeId:
         description: The current largest change ID.
         format: int64
+        type: string
+      newStartPageToken:
+        description: The starting page token for future changes. This will be present only if the end of the current changes list has been reached.
         type: string
       nextLink:
         description: A link to the next page of changes.
@@ -3274,13 +3591,65 @@ definitions:
         description: Whether this file is in the Application Data folder.
         type: boolean
       canComment:
-        description: Whether the current user can comment on the file.
+        description: 'Whether the current user can comment on the file. Deprecated: use capabilities/canComment.'
         type: boolean
       canReadRevisions:
-        description: Whether the current user has read access to the Revisions resource of the file.
+        description: 'Whether the current user has read access to the Revisions resource of the file. Deprecated: use capabilities/canReadRevisions.'
         type: boolean
+      capabilities:
+        description: Capabilities the current user has on the file. Each capability corresponds to a fine-grained action that a user may take.
+        properties:
+          canAddChildren:
+            description: Whether the current user can add children to this folder. This is always false when the item is not a folder.
+            type: boolean
+          canComment:
+            description: Whether the current user can comment on the file.
+            type: boolean
+          canCopy:
+            description: 'Whether the file can be copied by the current user. For a Team Drive item, whether non-folder descendants of this item, or this item itself if it is not a folder, can be copied.'
+            type: boolean
+          canDelete:
+            description: Whether the file can be deleted by the current user.
+            type: boolean
+          canDownload:
+            description: Whether the file can be downloaded by the current user.
+            type: boolean
+          canEdit:
+            description: Whether the file can be edited by the current user.
+            type: boolean
+          canListChildren:
+            description: Whether the current user can list the children of this folder. This is always false when the item is not a folder.
+            type: boolean
+          canMoveItemIntoTeamDrive:
+            description: 'Whether the current user can move this item into a Team Drive. If the item is in a Team Drive, this field is equivalent to canMoveTeamDriveItem.'
+            type: boolean
+          canMoveTeamDriveItem:
+            description: Whether the current user can move this Team Drive item by changing its parent. Note that a request to change the parent for this item may still fail depending on the new parent that is being added. Only populated for Team Drive files.
+            type: boolean
+          canReadRevisions:
+            description: 'Whether the current user has read access to the Revisions resource of the file. For a Team Drive item, whether revisions of non-folder descendants of this item, or this item itself if it is not a folder, can be read.'
+            type: boolean
+          canReadTeamDrive:
+            description: Whether the current user has read access to the Team Drive to which this file belongs. Only populated for Team Drive files.
+            type: boolean
+          canRemoveChildren:
+            description: Whether the current user can remove children from this folder. This is always false when the item is not a folder.
+            type: boolean
+          canRename:
+            description: Whether the file can be renamed by the current user.
+            type: boolean
+          canShare:
+            description: Whether the file's sharing settings can be modified by the current user.
+            type: boolean
+          canTrash:
+            description: Whether the file can be trashed by the current user.
+            type: boolean
+          canUntrash:
+            description: Whether the file can be restored from the trash by the current user.
+            type: boolean
+        type: object
       copyable:
-        description: Whether the file can be copied by the current user.
+        description: 'Whether the file can be copied by the current user. Deprecated: use capabilities/canCopy.'
         type: boolean
       createdDate:
         description: Create time for this file (formatted RFC 3339 timestamp).
@@ -3295,7 +3664,7 @@ definitions:
       downloadUrl:
         type: string
       editable:
-        description: Whether the file can be edited by the current user.
+        description: 'Whether the file can be edited by the current user. Deprecated: use capabilities/canEdit.'
         type: boolean
       embedLink:
         description: A link for embedding the file.
@@ -3320,11 +3689,14 @@ definitions:
         format: int64
         type: string
       folderColorRgb:
-        description: 'Folder color as an RGB hex string if the file is a folder. The list of supported colors is available in the folderColorPalette field of the About resource. If an unsupported color is specified, it will be changed to the closest color in the palette.'
+        description: 'Folder color as an RGB hex string if the file is a folder. The list of supported colors is available in the folderColorPalette field of the About resource. If an unsupported color is specified, it will be changed to the closest color in the palette. Not populated for Team Drive files.'
         type: string
       fullFileExtension:
         description: 'The full file extension; extracted from the title. May contain multiple concatenated extensions, such as "tar.gz". Removing an extension from the title does not clear this field; however, changing the extension on the title does update this field. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.'
         type: string
+      hasAugmentedPermissions:
+        description: Whether any users are granted file access directly on this file. This field is only populated for Team Drive files.
+        type: boolean
       hasThumbnail:
         description: Whether this file has a thumbnail.
         type: boolean
@@ -3500,15 +3872,15 @@ definitions:
         description: 'The original filename of the uploaded content if available, or else the original value of the title field. This is only available for files with binary content in Drive.'
         type: string
       ownedByMe:
-        description: Whether the file is owned by the current user.
+        description: Whether the file is owned by the current user. Not populated for Team Drive files.
         type: boolean
       ownerNames:
-        description: Name(s) of the owner(s) of this file.
+        description: Name(s) of the owner(s) of this file. Not populated for Team Drive files.
         items:
           type: string
         type: array
       owners:
-        description: The owner(s) of this file.
+        description: The owner(s) of this file. Not populated for Team Drive files.
         items:
           $ref: '#/definitions/User'
         type: array
@@ -3520,7 +3892,7 @@ definitions:
           $ref: '#/definitions/ParentReference'
         type: array
       permissions:
-        description: The list of permissions for users with access to this file.
+        description: The list of permissions for users with access to this file. Not populated for Team Drive files.
         items:
           $ref: '#/definitions/Permission'
         type: array
@@ -3537,10 +3909,10 @@ definitions:
         description: A link back to this file.
         type: string
       shareable:
-        description: Whether the file's sharing settings can be modified by the current user.
+        description: 'Whether the file''s sharing settings can be modified by the current user. Deprecated: use capabilities/canShare.'
         type: boolean
       shared:
-        description: Whether the file has been shared.
+        description: Whether the file has been shared. Not populated for Team Drive files.
         type: boolean
       sharedWithMeDate:
         description: Time at which this file was shared with the user (formatted RFC 3339 timestamp).
@@ -3554,6 +3926,9 @@ definitions:
         items:
           type: string
         type: array
+      teamDriveId:
+        description: ID of the Team Drive the file resides in.
+        type: string
       thumbnail:
         description: A thumbnail for the file. This will only be used if Drive cannot generate a standard thumbnail.
         properties:
@@ -3573,8 +3948,15 @@ definitions:
         format: int64
         type: string
       title:
-        description: The title of this file.
+        description: 'The title of this file. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the title is constant.'
         type: string
+      trashedDate:
+        description: The time that the item was trashed (formatted RFC 3339 timestamp). Only populated for Team Drive files.
+        format: date-time
+        type: string
+      trashingUser:
+        $ref: '#/definitions/User'
+        description: 'If the file has been explicitly trashed, the user who trashed it. Only populated for Team Drive files.'
       userPermission:
         $ref: '#/definitions/Permission'
         description: The permissions for the authenticated user on this file.
@@ -3605,7 +3987,7 @@ definitions:
         description: 'A link only available on public folders for viewing their static web assets (HTML, CSS, JS, etc) via Google Drive''s Website Hosting.'
         type: string
       writersCanShare:
-        description: Whether writers can share the document with other users.
+        description: Whether writers can share the document with other users. Not populated for Team Drive files.
         type: boolean
     type: object
   FileList:
@@ -3614,6 +3996,9 @@ definitions:
       etag:
         description: The ETag of the list.
         type: string
+      incompleteSearch:
+        description: 'Whether the search process was incomplete. If true, then some search results may be missing, since all documents were not searched. This may occur when searching multiple Team Drives with the "default,allTeamDrives" corpora, but all corpora could not be searched. When this happens, it is suggested that clients narrow their query by choosing a different corpus such as "default" or "teamDrive".'
+        type: boolean
       items:
         description: 'The list of files. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.'
         items:
@@ -3692,7 +4077,7 @@ definitions:
     description: A permission for a file.
     properties:
       additionalRoles:
-        description: Additional roles for this user. Only commenter is currently allowed.
+        description: 'Additional roles for this user. Only commenter is currently allowed, though more may be supported in the future.'
         items:
           type: string
         type: array
@@ -3709,7 +4094,12 @@ definitions:
         description: The ETag of the permission.
         type: string
       expirationDate:
-        description: The time at which this permission will expire (RFC 3339 date-time).
+        description: |-
+          The time at which this permission will expire (RFC 3339 date-time). Expiration dates have the following restrictions:  
+          - They can only be set on user and group permissions 
+          - The date must be in the future 
+          - The date cannot be more than a year in the future 
+          - The date can only be set on drive.permissions.update requests
         format: date-time
         type: string
       id:
@@ -3727,7 +4117,8 @@ definitions:
         type: string
       role:
         description: |-
-          The primary role for this user. Allowed values are:  
+          The primary role for this user. While new values may be supported in the future, the following are currently allowed:  
+          - organizer 
           - owner 
           - reader 
           - writer
@@ -3735,6 +4126,36 @@ definitions:
       selfLink:
         description: A link back to this permission.
         type: string
+      teamDrivePermissionDetails:
+        description: Details of whether the Permissions on this Team Drive item are inherited or directly on this item. This is an output-only field which is present only for Team Drive items.
+        items:
+          properties:
+            additionalRoles:
+              description: 'Additional roles for this user. Only commenter is currently possible, though more may be supported in the future.'
+              items:
+                type: string
+              type: array
+            inherited:
+              description: Whether this permission is inherited. This field is always populated. This is an output-only field.
+              type: boolean
+            inheritedFrom:
+              description: The ID of the item from which this permission is inherited. This is an output-only field and is only populated for members of the Team Drive.
+              type: string
+            role:
+              description: |-
+                The primary role for this user. While new values may be added in the future, the following are currently possible:  
+                - organizer 
+                - reader 
+                - writer
+              type: string
+            teamDrivePermissionType:
+              description: |-
+                The Team Drive permission type for this user. While new values may be added in future, the following are currently possible:  
+                - file 
+                - member
+              type: string
+          type: object
+        type: array
       type:
         description: |-
           The account type. Allowed values are:  
@@ -3775,6 +4196,9 @@ definitions:
       kind:
         default: 'drive#permissionList'
         description: 'This is always drive#permissionList.'
+        type: string
+      nextPageToken:
+        description: 'The page token for the next page of permissions. This field will be absent if the end of the permissions list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results.'
         type: string
       selfLink:
         description: A link back to this list.
@@ -3922,6 +4346,79 @@ definitions:
         type: string
       startPageToken:
         description: The starting page token for listing changes.
+        type: string
+    type: object
+  TeamDrive:
+    description: Representation of a Team Drive.
+    properties:
+      capabilities:
+        description: Capabilities the current user has on this Team Drive.
+        properties:
+          canAddChildren:
+            description: Whether the current user can add children to folders in this Team Drive.
+            type: boolean
+          canComment:
+            description: Whether the current user can comment on files in this Team Drive.
+            type: boolean
+          canCopy:
+            description: Whether files in this Team Drive can be copied by the current user.
+            type: boolean
+          canDeleteTeamDrive:
+            description: Whether this Team Drive can be deleted by the current user.
+            type: boolean
+          canDownload:
+            description: Whether files in this Team Drive can be downloaded by the current user.
+            type: boolean
+          canEdit:
+            description: Whether files in this Team Drive can be edited by the current user.
+            type: boolean
+          canListChildren:
+            description: Whether the current user can list the children of folders in this Team Drive.
+            type: boolean
+          canManageMembers:
+            description: Whether the current user can add members to this Team Drive or remove them or change their role.
+            type: boolean
+          canReadRevisions:
+            description: Whether the current user has read access to the Revisions resource of files in this Team Drive.
+            type: boolean
+          canRemoveChildren:
+            description: Whether the current user can remove children from folders in this Team Drive.
+            type: boolean
+          canRename:
+            description: Whether files or folders in this Team Drive can be renamed by the current user.
+            type: boolean
+          canRenameTeamDrive:
+            description: Whether this Team Drive can be renamed by the current user.
+            type: boolean
+          canShare:
+            description: Whether the current user can share files or folders in this Team Drive.
+            type: boolean
+        type: object
+      id:
+        description: The ID of this Team Drive which is also the ID of the top level folder for this Team Drive.
+        type: string
+      kind:
+        default: 'drive#teamDrive'
+        description: 'This is always drive#teamDrive'
+        type: string
+      name:
+        description: The name of this Team Drive.
+        type: string
+    type: object
+  TeamDriveList:
+    description: A list of Team Drives.
+    properties:
+      items:
+        description: The list of Team Drives.
+        items:
+          $ref: '#/definitions/TeamDrive'
+        type: array
+      kind:
+        default: 'drive#teamDriveList'
+        description: 'This is always drive#teamDriveList'
+        type: string
+      nextPageToken:
+        description: The page token for the next page of Team Drives.
         type: string
     type: object
   User:

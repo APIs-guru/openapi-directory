@@ -107,6 +107,7 @@ tags:
   - name: projects
   - name: regionAutoscalers
   - name: regionBackendServices
+  - name: regionCommitments
   - name: regionDiskTypes
   - name: regionDisks
   - name: regionInstanceGroupManagers
@@ -186,7 +187,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -250,7 +251,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -314,7 +315,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -378,7 +379,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -442,7 +443,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -506,7 +507,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -570,7 +571,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -634,7 +635,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -698,7 +699,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -762,7 +763,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -826,7 +827,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -890,7 +891,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -954,7 +955,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1018,7 +1019,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1082,7 +1083,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1146,7 +1147,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1210,7 +1211,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1274,7 +1275,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1338,7 +1339,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1402,7 +1403,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1466,7 +1467,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1524,6 +1525,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1553,6 +1558,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -1588,6 +1597,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1617,6 +1630,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -1736,7 +1753,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -1785,6 +1802,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -1815,6 +1836,10 @@ paths:
           in: path
           name: address
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -1968,7 +1993,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -2017,6 +2042,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -2047,6 +2076,10 @@ paths:
           in: path
           name: backendBucket
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -2105,10 +2138,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the BackendBucket resource to update.
+        - description: Name of the BackendBucket resource to patch.
           in: path
           name: backendBucket
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -2124,6 +2161,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendBuckets
     put:
@@ -2139,6 +2178,10 @@ paths:
           in: path
           name: backendBucket
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -2230,8 +2273,6 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendBuckets
   '/{project}/global/backendBuckets/{resource}/testIamPermissions':
@@ -2299,7 +2340,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -2348,6 +2389,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -2378,6 +2423,10 @@ paths:
           in: path
           name: backendService
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -2428,7 +2477,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
+      description: Patches the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
       operationId: compute.backendServices.patch
       parameters:
         - description: Project ID for this request.
@@ -2436,10 +2485,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the BackendService resource to update.
+        - description: Name of the BackendService resource to patch.
           in: path
           name: backendService
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -2455,6 +2508,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendServices
     put:
@@ -2470,6 +2525,10 @@ paths:
           in: path
           name: backendService
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -2633,7 +2692,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -2682,6 +2741,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -2712,6 +2775,10 @@ paths:
           in: path
           name: firewall
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -2770,10 +2837,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the firewall rule to update.
+        - description: Name of the firewall rule to patch.
           in: path
           name: firewall
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -2789,6 +2860,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - firewalls
     put:
@@ -2804,6 +2877,10 @@ paths:
           in: path
           name: firewall
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -2886,7 +2963,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -2935,6 +3012,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -2965,6 +3046,10 @@ paths:
           in: path
           name: forwardingRule
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -3036,6 +3121,10 @@ paths:
           in: path
           name: forwardingRule
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -3157,7 +3246,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -3206,6 +3295,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -3236,6 +3329,10 @@ paths:
           in: path
           name: healthCheck
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -3294,10 +3391,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the HealthCheck resource to update.
+        - description: Name of the HealthCheck resource to patch.
           in: path
           name: healthCheck
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -3313,6 +3414,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - healthChecks
     put:
@@ -3328,6 +3431,10 @@ paths:
           in: path
           name: healthCheck
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -3410,7 +3517,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -3459,6 +3566,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -3489,6 +3600,10 @@ paths:
           in: path
           name: httpHealthCheck
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -3552,6 +3667,10 @@ paths:
           name: httpHealthCheck
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -3583,6 +3702,10 @@ paths:
           in: path
           name: httpHealthCheck
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -3665,7 +3788,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -3714,6 +3837,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -3744,6 +3871,10 @@ paths:
           in: path
           name: httpsHealthCheck
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -3802,10 +3933,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the HttpsHealthCheck resource to update.
+        - description: Name of the HttpsHealthCheck resource to patch.
           in: path
           name: httpsHealthCheck
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -3821,6 +3956,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpsHealthChecks
     put:
@@ -3836,6 +3973,10 @@ paths:
           in: path
           name: httpsHealthCheck
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -3918,7 +4059,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -3971,6 +4112,10 @@ paths:
           in: query
           name: forceCreation
           type: boolean
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -4044,6 +4189,10 @@ paths:
           in: path
           name: image
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -4119,6 +4268,10 @@ paths:
           name: image
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -4128,6 +4281,82 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - images
+  '/{project}/global/images/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.images.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - images
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/images/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.images.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -4239,7 +4468,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -4288,6 +4517,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -4318,6 +4551,10 @@ paths:
           in: path
           name: instanceTemplate
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -4408,6 +4645,50 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - instanceTemplates
+  '/{project}/global/licenses':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Create a License resource in the specified project.
+      operationId: compute.licenses.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/License'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - licenses
   '/{project}/global/licenses/{license}':
     get:
       description: Returns the specified License resource. Get a list of available licenses by making a list() request.
@@ -4469,7 +4750,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -4518,6 +4799,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -4548,6 +4833,10 @@ paths:
           in: path
           name: network
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -4620,6 +4909,10 @@ paths:
           name: network
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -4659,6 +4952,10 @@ paths:
           name: network
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -4697,6 +4994,10 @@ paths:
           in: path
           name: network
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -4775,7 +5076,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -4900,7 +5201,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -4948,6 +5249,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -5021,6 +5326,10 @@ paths:
           name: route
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5093,7 +5402,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -5133,6 +5442,82 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/snapshots/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.snapshots.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - snapshots
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/snapshots/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.snapshots.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - snapshots
   '/{project}/global/snapshots/{resource}/setLabels':
     parameters:
       - $ref: '#/parameters/alt'
@@ -5231,6 +5616,10 @@ paths:
           name: snapshot
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5303,7 +5692,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -5351,6 +5740,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -5424,6 +5817,10 @@ paths:
           name: sslCertificate
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5496,7 +5893,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -5544,6 +5941,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -5617,6 +6018,10 @@ paths:
           name: targetHttpProxy
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5689,7 +6094,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -5737,6 +6142,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -5810,6 +6219,10 @@ paths:
           name: targetHttpsProxy
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5882,7 +6295,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -5930,6 +6343,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -6003,6 +6420,10 @@ paths:
           name: targetSslProxy
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -6074,6 +6495,10 @@ paths:
           name: targetSslProxy
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -6113,6 +6538,10 @@ paths:
           name: targetSslProxy
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -6151,6 +6580,10 @@ paths:
           in: path
           name: targetSslProxy
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -6192,7 +6625,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -6240,6 +6673,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -6313,6 +6750,10 @@ paths:
           name: targetTcpProxy
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -6384,6 +6825,10 @@ paths:
           name: targetTcpProxy
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -6422,6 +6867,10 @@ paths:
           in: path
           name: targetTcpProxy
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -6463,7 +6912,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -6511,6 +6960,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -6584,6 +7037,10 @@ paths:
           name: urlMap
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -6633,7 +7090,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified UrlMap resource with the data included in the request. This method supports patch semantics.
+      description: Patches the specified UrlMap resource with the data included in the request. This method supports patch semantics.
       operationId: compute.urlMaps.patch
       parameters:
         - description: Project ID for this request.
@@ -6641,10 +7098,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the UrlMap resource to update.
+        - description: Name of the UrlMap resource to patch.
           in: path
           name: urlMap
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -6660,6 +7121,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - urlMaps
     put:
@@ -6675,6 +7138,10 @@ paths:
           in: path
           name: urlMap
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -6714,6 +7181,10 @@ paths:
           in: path
           name: urlMap
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -6838,6 +7309,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -6871,6 +7346,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -6912,7 +7391,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -7018,7 +7497,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -7072,6 +7551,10 @@ paths:
           name: region
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -7107,6 +7590,10 @@ paths:
           in: path
           name: address
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -7188,6 +7675,10 @@ paths:
           in: path
           name: resource
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -7280,7 +7771,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -7339,6 +7830,10 @@ paths:
           name: autoscaler
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -7368,6 +7863,10 @@ paths:
           in: path
           name: region
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -7402,6 +7901,10 @@ paths:
         - description: Name of the autoscaler to update.
           in: query
           name: autoscaler
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -7438,6 +7941,10 @@ paths:
           in: path
           name: autoscaler
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -7567,7 +8074,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -7621,6 +8128,10 @@ paths:
           name: region
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -7656,6 +8167,10 @@ paths:
           in: path
           name: backendService
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -7724,10 +8239,14 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the BackendService resource to update.
+        - description: Name of the BackendService resource to patch.
           in: path
           name: backendService
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -7743,6 +8262,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionBackendServices
     put:
@@ -7763,6 +8284,10 @@ paths:
           in: path
           name: backendService
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -7871,6 +8396,197 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionBackendServices
+  '/{project}/regions/{region}/commitments':
+    get:
+      description: Retrieves a list of commitments contained within the specified region.
+      operationId: compute.regionCommitments.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CommitmentList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionCommitments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates an commitment in the specified project using the data included in the request.
+      operationId: compute.regionCommitments.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Commitment'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionCommitments
+  '/{project}/regions/{region}/commitments/{commitment}':
+    get:
+      description: Returns the specified commitment resource. Get a list of available commitments by making a list() request.
+      operationId: compute.regionCommitments.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the commitment to return.
+          in: path
+          name: commitment
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Commitment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionCommitments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/commitments/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionCommitments.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionCommitments
   '/{project}/regions/{region}/diskTypes':
     get:
       description: Retrieves a list of regional disk types available to the specified project.
@@ -7900,7 +8616,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -8011,7 +8727,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -8065,6 +8781,10 @@ paths:
           name: region
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - description: Optional. Source image to restore onto a disk.
           in: query
           name: sourceImage
@@ -8104,6 +8824,10 @@ paths:
           in: path
           name: disk
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -8189,6 +8913,10 @@ paths:
         - in: query
           name: guestFlush
           type: boolean
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -8233,6 +8961,10 @@ paths:
           name: disk
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -8276,6 +9008,10 @@ paths:
           in: path
           name: resource
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -8368,7 +9104,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -8422,6 +9158,10 @@ paths:
           name: region
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -8457,6 +9197,10 @@ paths:
           in: path
           name: forwardingRule
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -8539,6 +9283,10 @@ paths:
           name: forwardingRule
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -8582,6 +9330,10 @@ paths:
           in: path
           name: resource
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -8674,7 +9426,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -8728,6 +9480,10 @@ paths:
           name: region
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -8763,6 +9519,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -8836,6 +9596,10 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -8870,6 +9634,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -8915,6 +9683,10 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -8958,6 +9730,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -9059,6 +9835,10 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -9109,6 +9889,10 @@ paths:
           name: size
           required: true
           type: integer
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -9148,6 +9932,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -9193,6 +9981,10 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -9236,6 +10028,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -9328,7 +10124,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -9452,7 +10248,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -9515,6 +10311,10 @@ paths:
           in: path
           name: instanceGroup
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -9607,7 +10407,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -9747,7 +10547,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -9800,6 +10600,10 @@ paths:
           in: path
           name: region
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -9883,6 +10687,10 @@ paths:
           name: router
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -9937,7 +10745,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified Router resource with the data included in the request. This method supports patch semantics.
+      description: Patches the specified Router resource with the data included in the request. This method supports patch semantics.
       operationId: compute.routers.patch
       parameters:
         - description: Project ID for this request.
@@ -9950,10 +10758,14 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the Router resource to update.
+        - description: Name of the Router resource to patch.
           in: path
           name: router
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -9969,6 +10781,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - routers
     put:
@@ -9989,6 +10803,10 @@ paths:
           in: path
           name: router
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -10123,7 +10941,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -10176,6 +10994,10 @@ paths:
           in: path
           name: region
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -10277,8 +11099,6 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - subnetworks
   '/{project}/regions/{region}/subnetworks/{resource}/testIamPermissions':
@@ -10346,6 +11166,10 @@ paths:
           in: path
           name: subnetwork
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -10428,6 +11252,10 @@ paths:
           name: subnetwork
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -10471,6 +11299,10 @@ paths:
           in: path
           name: subnetwork
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -10517,7 +11349,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -10570,6 +11402,10 @@ paths:
           in: path
           name: region
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -10653,6 +11489,10 @@ paths:
           name: targetPool
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -10734,6 +11574,10 @@ paths:
           name: targetPool
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -10777,6 +11621,10 @@ paths:
           in: path
           name: targetPool
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -10868,6 +11716,10 @@ paths:
           name: targetPool
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -10911,6 +11763,10 @@ paths:
           in: path
           name: targetPool
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -10960,6 +11816,10 @@ paths:
           in: query
           name: failoverRatio
           type: number
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -11005,7 +11865,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -11058,6 +11918,10 @@ paths:
           in: path
           name: region
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -11141,6 +12005,10 @@ paths:
           name: targetVpnGateway
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -11223,7 +12091,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -11277,6 +12145,10 @@ paths:
           name: region
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -11320,6 +12192,10 @@ paths:
           in: path
           name: resource
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -11403,6 +12279,10 @@ paths:
           name: vpnTunnel
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -11474,6 +12354,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -11508,6 +12392,10 @@ paths:
           name: project
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -11541,6 +12429,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -11587,6 +12479,10 @@ paths:
           name: targetHttpProxy
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -11626,6 +12522,10 @@ paths:
           name: targetHttpsProxy
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -11664,6 +12564,10 @@ paths:
           in: path
           name: targetHttpsProxy
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -11705,7 +12609,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -11811,7 +12715,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -11922,7 +12826,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -11981,6 +12885,10 @@ paths:
           name: autoscaler
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -12010,6 +12918,10 @@ paths:
           in: path
           name: zone
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -12044,6 +12956,10 @@ paths:
         - description: Name of the autoscaler to update.
           in: query
           name: autoscaler
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -12080,6 +12996,10 @@ paths:
           in: path
           name: autoscaler
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -12209,7 +13129,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -12262,6 +13182,10 @@ paths:
           in: path
           name: zone
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -12321,94 +13245,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-  '/{project}/zones/{zone}/commitments/{resource}/getIamPolicy':
-    get:
-      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-      operationId: compute.commitments.getIamPolicy
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: Name of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Policy'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-      tags:
-        - commitments
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{project}/zones/{zone}/commitments/{resource}/setIamPolicy':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: compute.commitments.setIamPolicy
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: Name of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Policy'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Policy'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-      tags:
-        - commitments
   '/{project}/zones/{zone}/commitments/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -12484,7 +13320,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -12595,7 +13431,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -12649,6 +13485,10 @@ paths:
           name: zone
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - description: Optional. Source image to restore onto a disk.
           in: query
           name: sourceImage
@@ -12688,6 +13528,10 @@ paths:
           in: path
           name: disk
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -12773,6 +13617,10 @@ paths:
         - in: query
           name: guestFlush
           type: boolean
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -12817,6 +13665,10 @@ paths:
           name: disk
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -12826,6 +13678,92 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - disks
+  '/{project}/zones/{zone}/disks/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.disks.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - disks
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/disks/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.disks.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -12860,6 +13798,10 @@ paths:
           in: path
           name: resource
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -12952,7 +13894,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -13063,7 +14005,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -13117,6 +14059,10 @@ paths:
           name: zone
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -13152,6 +14098,10 @@ paths:
           in: path
           name: host
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -13290,8 +14240,6 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - hosts
   '/{project}/zones/{zone}/hosts/{resource}/testIamPermissions':
@@ -13369,7 +14317,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -13423,6 +14371,10 @@ paths:
           name: zone
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -13458,6 +14410,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -13513,7 +14469,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a managed instance group using the information that you specify in the request. The field statefulPolicy is updated using PATCH semantics. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
       operationId: compute.instanceGroupManagers.patch
       parameters:
         - description: Project ID for this request.
@@ -13530,6 +14486,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -13548,7 +14508,7 @@ paths:
       tags:
         - instanceGroupManagers
     put:
-      description: Updates a managed instance group using the information that you specify in the request. The field statefulPolicy is updated using PATCH semantics. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method.
       operationId: compute.instanceGroupManagers.update
       parameters:
         - description: Project ID for this request.
@@ -13565,6 +14525,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -13610,6 +14574,10 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -13653,6 +14621,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -13754,6 +14726,10 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -13803,6 +14779,10 @@ paths:
           name: size
           required: true
           type: integer
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -13845,6 +14825,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -13890,6 +14874,10 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -13934,6 +14922,10 @@ paths:
           name: instanceGroupManager
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -13977,6 +14969,10 @@ paths:
           in: path
           name: instanceGroupManager
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -14069,7 +15065,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -14123,6 +15119,10 @@ paths:
           name: zone
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -14158,6 +15158,10 @@ paths:
           in: path
           name: instanceGroup
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -14240,6 +15244,10 @@ paths:
           name: instanceGroup
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -14298,7 +15306,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -14362,6 +15370,10 @@ paths:
           name: instanceGroup
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -14405,6 +15417,10 @@ paths:
           in: path
           name: instanceGroup
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -14497,7 +15513,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -14551,6 +15567,10 @@ paths:
           name: zone
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -14586,6 +15606,10 @@ paths:
           in: path
           name: instance
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -14673,6 +15697,10 @@ paths:
           name: networkInterface
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -14721,6 +15749,10 @@ paths:
           in: query
           name: forceAttach
           type: boolean
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -14775,6 +15807,10 @@ paths:
           name: networkInterface
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -14820,6 +15856,10 @@ paths:
           name: deviceName
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -14860,6 +15900,10 @@ paths:
           name: instance
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -14899,7 +15943,7 @@ paths:
           minimum: 1
           name: port
           type: integer
-        - description: 'For the initial request, leave this field unspecified. For subsequent calls, this field should be set to the next value that was returned in the previous call.'
+        - description: 'Returns output starting from a specific byte position. Use this to page through output when the output is too large to return in a single request. For the initial request, leave this field unspecified. For subsequent calls, this field should be set to the next value returned in the previous call.'
           in: query
           name: start
           type: string
@@ -14963,6 +16007,10 @@ paths:
           name: deviceName
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -15002,6 +16050,10 @@ paths:
           in: path
           name: instance
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -15047,6 +16099,10 @@ paths:
           name: instance
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -15090,6 +16146,10 @@ paths:
           in: path
           name: instance
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -15135,10 +16195,62 @@ paths:
           name: instance
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Metadata'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
+  '/{project}/zones/{zone}/instances/{instance}/setMinCpuPlatform':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Changes the minimum cpu/platform that this instance should be started as. This is called on a stopped instance.
+      operationId: compute.instances.setMinCpuPlatform
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the instance scoping this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesSetMinCpuPlatformRequest'
       responses:
         '200':
           description: Successful response
@@ -15179,6 +16291,10 @@ paths:
           name: instance
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
@@ -15205,7 +16321,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sets the service account on the instance.
+      description: 'Sets the service account on the instance. For more information, read Changing the service account and access scopes for an instance.'
       operationId: compute.instances.setServiceAccount
       parameters:
         - description: Project ID for this request.
@@ -15222,6 +16338,10 @@ paths:
           in: path
           name: instance
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -15267,10 +16387,54 @@ paths:
           name: instance
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Tags'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
+  '/{project}/zones/{zone}/instances/{instance}/simulateMaintenanceEvent':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Simulates a maintenance event on the instance.
+      operationId: compute.instances.simulateMaintenanceEvent
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the instance scoping this request.
+          in: path
+          name: instance
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -15311,6 +16475,10 @@ paths:
           name: instance
           required: true
           type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -15350,6 +16518,10 @@ paths:
           in: path
           name: instance
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -15399,6 +16571,10 @@ paths:
           in: query
           name: discardLocalSsd
           type: boolean
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -15443,6 +16619,10 @@ paths:
           in: query
           name: discardLocalSsd
           type: boolean
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -15487,6 +16667,10 @@ paths:
           in: query
           name: networkInterface
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -15588,8 +16772,6 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - instances
   '/{project}/zones/{zone}/instances/{resource}/testIamPermissions':
@@ -15667,7 +16849,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -15778,7 +16960,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -15918,7 +17100,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
           in: query
           minimum: 0
           name: maxResults
@@ -15971,6 +17153,10 @@ paths:
           in: path
           name: zone
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
         - in: body
           name: body
@@ -16053,6 +17239,10 @@ paths:
           in: path
           name: targetInstance
           required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -16594,7 +17784,10 @@ definitions:
           Instance templates do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys.
     type: object
   AuditConfig:
-    description: 'Specifies the audit configuration for a service. It consists of which permission types are logged, and what identities, if any, are exempted from logging. An AuditConifg must have one or more AuditLogConfigs.'
+    description: |-
+      Specifies the audit configuration for a service. It consists of which permission types are logged, and what identities, if any, are exempted from logging. An AuditConifg must have one or more AuditLogConfigs.
+
+      If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditConfig are exempted. Example Policy with multiple AuditConfigs: { "audit_configs": [ { "service": "allServices" "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", }, { "log_type": "ADMIN_READ", } ] }, { "service": "fooservice@googleapis.com" "audit_log_configs": [ { "log_type": "DATA_READ", }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:bar@gmail.com" ] } ] } ] } For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
         description: The configuration for logging of each type of permission.
@@ -16602,7 +17795,7 @@ definitions:
           $ref: '#/definitions/AuditLogConfig'
         type: array
       exemptedMembers:
-        description: Specifies the identities that are exempted from "data access" audit logging for the `service` specified above. Follows the same format of Binding.members. This field is deprecated in favor of per-permission-type exemptions.
+        description: ''
         items:
           type: string
         type: array
@@ -16981,6 +18174,9 @@ definitions:
       bucketName:
         description: Cloud Storage bucket name.
         type: string
+      cdnPolicy:
+        $ref: '#/definitions/BackendBucketCdnPolicy'
+        description: Cloud CDN Coniguration for this BackendBucket.
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -17004,6 +18200,19 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  BackendBucketCdnPolicy:
+    description: Message containing Cloud CDN configuration for a backend bucket.
+    properties:
+      signedUrlKeyNames:
+        description: '[Output Only] Names of the keys currently configured for Cloud CDN Signed URL on this backend bucket.'
+        items:
+          type: string
+        type: array
+      signedUrlTtlSec:
+        description: 'Number of seconds up to which the response to a signed URL request will be cached in the CDN. After this time period, the Signed URL will be revalidated before being served. Defaults to 1hr (3600s). If this field is set, Cloud CDN will internally act as though all responses from this bucket had a ?Cache-Control: public, max-age=[TTL]? header, regardless of any existing Cache-Control header. The actual headers served in responses will not be altered.'
+        format: int64
         type: string
     type: object
   BackendBucketList:
@@ -17114,7 +18323,7 @@ definitions:
         description: |-
           The protocol this BackendService uses to communicate with backends.
 
-          Possible values are HTTP, HTTPS, HTTP2, TCP and SSL. The default is HTTP.
+          Possible values are HTTP, HTTPS, TCP, and SSL. The default is HTTP.
 
           For internal load balancing, the possible values are TCP and UDP, and the default is TCP.
         enum:
@@ -17127,6 +18336,9 @@ definitions:
         type: string
       region:
         description: '[Output Only] URL of the region where the regional backend service resides. This field is not applicable to global backend services.'
+        type: string
+      securityPolicy:
+        description: '[Output Only] The resource URL for the security policy associated with this backend service.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -17181,6 +18393,15 @@ definitions:
       cacheKeyPolicy:
         $ref: '#/definitions/CacheKeyPolicy'
         description: The CacheKeyPolicy for this CdnPolicy.
+      signedUrlKeyNames:
+        description: '[Output Only] Names of the keys currently configured for Cloud CDN Signed URL on this backend service.'
+        items:
+          type: string
+        type: array
+      signedUrlTtlSec:
+        description: 'Number of seconds up to which the response to a signed URL request will be cached in the CDN. After this time period, the Signed URL will be revalidated before being served. Defaults to 1hr (3600s). If this field is set, Cloud CDN will internally act as though all responses from this backend had a ?Cache-Control: public, max-age=[TTL]? header, regardless of any existing Cache-Control header. The actual headers served in responses will not be altered.'
+        format: int64
+        type: string
     type: object
   BackendServiceGroupHealth:
     properties:
@@ -17194,7 +18415,7 @@ definitions:
         type: string
     type: object
   BackendServiceIAP:
-    description: Identity-Aware Proxy (Cloud Gatekeeper)
+    description: Identity-Aware Proxy
     properties:
       enabled:
         type: boolean
@@ -17221,7 +18442,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#backendServiceList for lists of backend services.'
         type: string
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -17366,6 +18587,9 @@ definitions:
           - THIRTY_SIX_MONTH
           - TWELVE_MONTH
         type: string
+      region:
+        description: '[Output Only] URL of the region where this commitment may be used.'
+        type: string
       resources:
         description: List of commitment amounts for particular resources. Note that VCPU and MEMORY resource commitments must occur together.
         items:
@@ -17492,6 +18716,7 @@ definitions:
       iam:
         description: Trusted attributes supplied by the IAM system.
         enum:
+          - APPROVER
           - ATTRIBUTION
           - AUTHORITY
           - NO_ATTR
@@ -17624,7 +18849,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: Labels to apply to this disk. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
+        description: Labels to apply to this disk. These can be later modified by the setLabels method.
         type: object
       lastAttachTimestamp:
         description: '[Output Only] Last attach timestamp in RFC3339 text format.'
@@ -17743,7 +18968,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#diskAggregatedList for aggregated lists of persistent disks.'
         type: string
       nextPageToken:
-        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results. Acceptable values are 0 to 500, inclusive. (Default: 500)'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -17765,7 +18990,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#diskList for lists of disks.'
         type: string
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: 'This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -17976,6 +19201,19 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  DistributionPolicy:
+    properties:
+      zones:
+        items:
+          $ref: '#/definitions/DistributionPolicyZoneConfiguration'
+        type: array
+    type: object
+  DistributionPolicyZoneConfiguration:
+    properties:
+      zone:
+        description: URL of the zone where managed instance group is spawning instances (for regional resources). Zone has to belong to the region where managed instance group is located.
+        type: string
     type: object
   Firewall:
     description: Represents a Firewall resource.
@@ -18256,7 +19494,7 @@ definitions:
         type: string
       target:
         description: |-
-          The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global TargetHttpProxy or TargetHttpsProxy resource. The forwarded traffic must be of a type appropriate to the target object. For example, TargetHttpProxy requires HTTP traffic, and TargetHttpsProxy requires HTTPS traffic.
+          The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For example, TargetHttpProxy requires HTTP traffic, and TargetHttpsProxy requires HTTPS traffic.
 
           This field is not used for internal load balancing.
         type: string
@@ -18385,7 +19623,7 @@ definitions:
         description: 'The value of the host header in the HTTP/2 health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
         type: string
       port:
-        description: The TCP port number for the health check request. The default value is 443.
+        description: The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
         format: int32
         type: integer
       portName:
@@ -18410,7 +19648,7 @@ definitions:
         description: 'The value of the host header in the HTTP health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
         type: string
       port:
-        description: The TCP port number for the health check request. The default value is 80.
+        description: The TCP port number for the health check request. The default value is 80. Valid values are 1 through 65535.
         format: int32
         type: integer
       portName:
@@ -18435,7 +19673,7 @@ definitions:
         description: 'The value of the host header in the HTTPS health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
         type: string
       port:
-        description: The TCP port number for the health check request. The default value is 443.
+        description: The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
         format: int32
         type: integer
       portName:
@@ -18596,6 +19834,18 @@ definitions:
         default: 'compute#host'
         description: '[Output Only] The type of the resource. Always compute#host for host.'
         type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for this request, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
+
+          To see the latest fingerprint, make get() request to the host.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this host.
+        type: object
       name:
         description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         type: string
@@ -19072,7 +20322,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: Labels to apply to this image. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
+        description: Labels to apply to this image. These can be later modified by the setLabels method.
         type: object
       licenses:
         description: Any applicable license URI.
@@ -19114,6 +20364,13 @@ definitions:
         description: The customer-supplied encryption key of the source disk. Required if the source disk is protected by a customer-supplied encryption key.
       sourceDiskId:
         description: The ID value of the disk used to create this image. This value may be used to determine whether the image was taken from the current or a previous instance of a given disk name.
+        type: string
+      sourceImage:
+        description: |-
+          URL of the source image used to create this image. This can be a full or valid partial URL. You must provide exactly one of:  
+          - this property, or  
+          - the rawDisk.source property, or  
+          - the sourceDisk property   in order to create an image.
         type: string
       sourceType:
         default: RAW
@@ -19213,7 +20470,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: Labels to apply to this instance. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
+        description: Labels to apply to this instance. These can be later modified by the setLabels method.
         type: object
       machineType:
         description: |-
@@ -19237,6 +20494,7 @@ definitions:
         type: string
       name:
         description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       networkInterfaces:
         description: 'An array of configurations for this interface. This specifies how this interface is configured to interact with other network services, such as connecting to the internet. Only one interface is supported per instance.'
@@ -19250,7 +20508,10 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
       serviceAccounts:
-        description: 'A list of service accounts, with their specified scopes, authorized for this instance. Service accounts generate access tokens that can be accessed through the metadata server and used to authenticate applications on the instance. See Service Accounts for more information.'
+        description: |-
+          A list of service accounts, with their specified scopes, authorized for this instance. Only one service account per VM instance is supported.
+
+          Service accounts generate access tokens that can be accessed through the metadata server and used to authenticate applications on the instance. See Service Accounts for more information.
         items:
           $ref: '#/definitions/ServiceAccount'
         type: array
@@ -19417,6 +20678,9 @@ definitions:
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
+      distributionPolicy:
+        $ref: '#/definitions/DistributionPolicy'
+        description: Policy valid only for regional managed instance groups.
       failoverAction:
         description: 'The action to perform in case of zone failure. Only one value is supported, NO_FAILOVER. The default is NO_FAILOVER.'
         enum:
@@ -19464,7 +20728,7 @@ definitions:
         type: string
       spreadingPolicy:
         $ref: '#/definitions/SpreadingPolicy'
-        description: Policy valid only for regional managed instance groups.
+        description: Policy valid only for regional managed instance groups. Deprecated in favor of distribution_policy.
       targetPools:
         description: The URLs for all TargetPool resources to which instances in the instanceGroup field are added. The target pools automatically apply to all of the instances in the managed instance group.
         items:
@@ -19933,7 +21197,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: Labels to apply to instances that are created from this template. Each label key/value pair must comply with RFC1035. Label values may be empty.
+        description: Labels to apply to instances that are created from this template.
         type: object
       machineType:
         description: The machine type to use for instances that are created from this template.
@@ -20102,10 +21366,6 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: |-
-          A list of labels to apply for this instance. Changing instance labels will also change the instance tags.
-
-          Each label key & value must comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. For example, "webserver-frontend": "images". A label value can also be empty (e.g. "my-label": "").
         type: object
     type: object
   InstancesSetMachineResourcesRequest:
@@ -20119,6 +21379,12 @@ definitions:
     properties:
       machineType:
         description: 'Full or partial URL of the machine type resource. See Machine Types for a full list of machine types. For example: zones/us-central1-f/machineTypes/n1-standard-1'
+        type: string
+    type: object
+  InstancesSetMinCpuPlatformRequest:
+    properties:
+      minCpuPlatform:
+        description: Minimum cpu/platform this instance should be started at.
         type: string
     type: object
   InstancesSetServiceAccountRequest:
@@ -20157,6 +21423,16 @@ definitions:
       chargesUseFee:
         description: '[Output Only] If true, the customer will be charged license fee for running software that contains this license on an instance.'
         type: boolean
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
       kind:
         default: 'compute#license'
         description: '[Output Only] Type of resource. Always compute#license for licenses.'
@@ -20169,12 +21445,25 @@ definitions:
         description: '[Output Only] Name of the resource. The name is 1-63 characters long and complies with RFC1035.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
+      resourceRequirements:
+        $ref: '#/definitions/LicenseResourceRequirements'
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       transferable:
         description: 'If false, licenses will not be copied from the source resource when creating an image from a disk, disk from snapshot, or snapshot from disk.'
         type: boolean
+    type: object
+  LicenseResourceRequirements:
+    properties:
+      minGuestCpuCount:
+        description: Minimum number of guest cpus required to use the Instance. Enforced at Instance creation and Instance start.
+        format: int32
+        type: integer
+      minMemoryMb:
+        description: Minimum memory required to use the Instance. Enforced at Instance creation and Instance start.
+        format: int32
+        type: integer
     type: object
   LogConfig:
     description: Specifies what kind of log the caller must write
@@ -20636,7 +21925,7 @@ definitions:
         description: '[Output Only] Reserved for future use.'
         type: string
       creationTimestamp:
-        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        description: '[Deprecated] This field is deprecated.'
         type: string
       description:
         description: '[Output Only] A textual description of the operation, which is set when the operation is created.'
@@ -21046,7 +22335,6 @@ definitions:
           - DISKS_TOTAL_GB
           - FIREWALLS
           - FORWARDING_RULES
-          - GPUS
           - HEALTH_CHECKS
           - IMAGES
           - INSTANCES
@@ -21056,6 +22344,7 @@ definitions:
           - IN_USE_ADDRESSES
           - LOCAL_SSD_TOTAL_GB
           - NETWORKS
+          - NVIDIA_K80_GPUS
           - PREEMPTIBLE_CPUS
           - REGIONAL_AUTOSCALERS
           - REGIONAL_INSTANCE_GROUP_MANAGERS
@@ -21814,7 +23103,7 @@ definitions:
   SSLHealthCheck:
     properties:
       port:
-        description: The TCP port number for the health check request. The default value is 443.
+        description: The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
         format: int32
         type: integer
       portName:
@@ -21867,7 +23156,7 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
       start:
-        description: '[Output Only] The starting byte position of the output that was returned. This should match the start parameter sent with the request. If the serial console output exceeds the size of the buffer, older output will be overwritten by newer content and the start values will be mismatched.'
+        description: 'The starting byte position of the output that was returned. This should match the start parameter sent with the request. If the serial console output exceeds the size of the buffer, older output will be overwritten by newer content and the start values will be mismatched.'
         format: int64
         type: string
     type: object
@@ -21914,7 +23203,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: Labels to apply to this snapshot. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
+        description: Labels to apply to this snapshot. These can be later modified by the setLabels method. Label values may be empty.
         type: object
       licenses:
         description: '[Output Only] A list of public visible licenses that apply to this snapshot. This can be because the original image had licenses attached (such as a Windows image).'
@@ -21990,6 +23279,7 @@ definitions:
         type: string
     type: object
   SpreadingPolicy:
+    description: Deprecated in favor of distribution policy.
     properties:
       zones:
         items:
@@ -22218,7 +23508,7 @@ definitions:
   TCPHealthCheck:
     properties:
       port:
-        description: The TCP port number for the health check request. The default value is 80.
+        description: The TCP port number for the health check request. The default value is 80. Valid values are 1 through 65535.
         format: int32
         type: integer
       portName:
@@ -22508,7 +23798,7 @@ definitions:
         type: object
     type: object
   TargetPool:
-    description: 'A TargetPool resource. This resource defines a pool of instances, associated HttpHealthCheck resources, and the fallback target pool.'
+    description: 'A TargetPool resource. This resource defines a pool of instances, an associated HttpHealthCheck resource, and the fallback target pool.'
     properties:
       backupPool:
         description: |-
@@ -22534,7 +23824,7 @@ definitions:
         format: float
         type: number
       healthChecks:
-        description: A list of URLs to the HttpHealthCheck resource. A member instance in this pool is considered healthy if and only if all specified health checks pass. An empty list means all member instances will be considered healthy at all times.
+        description: The URL of the HttpHealthCheck resource. A member instance in this pool is considered healthy if and only if the health checks pass. An empty list means all member instances will be considered healthy at all times. Only HttpHealthChecks are supported. Only one health check may be specified.
         items:
           type: string
         type: array
@@ -22633,7 +23923,7 @@ definitions:
   TargetPoolsAddHealthCheckRequest:
     properties:
       healthChecks:
-        description: A list of HttpHealthCheck resources to add to the target pool.
+        description: The HttpHealthCheck to add to the target pool.
         items:
           $ref: '#/definitions/HealthCheckReference'
         type: array
@@ -23056,7 +24346,7 @@ definitions:
   UDPHealthCheck:
     properties:
       port:
-        description: The UDP port number for the health check request.
+        description: The UDP port number for the health check request. Valid values are 1 through 65535.
         format: int32
         type: integer
       portName:

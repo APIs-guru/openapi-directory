@@ -110,10 +110,6 @@ paths:
         JSON-LD format and compatible with http://schema.org
       operationId: kgsearch.entities.search
       parameters:
-        - description: Enables indenting of json results.
-          in: query
-          name: indent
-          type: boolean
         - collectionFormat: multi
           description: |-
             The list of language codes (defined in ISO 693) to run the query with,
@@ -155,6 +151,10 @@ paths:
             type: string
           name: types
           type: array
+        - description: Enables indenting of json results.
+          in: query
+          name: indent
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -163,19 +163,19 @@ paths:
       tags:
         - entities
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
 definitions:
   SearchResponse:
     description: |-

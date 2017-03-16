@@ -29,7 +29,7 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
-      'https://mail.google.com/': View and manage your mail
+      'https://mail.google.com/': 'Read, send, delete, and manage your email'
       'https://www.googleapis.com/auth/gmail.compose': Manage drafts and send emails
       'https://www.googleapis.com/auth/gmail.insert': Insert mail into your mailbox
       'https://www.googleapis.com/auth/gmail.labels': Manage mailbox labels
@@ -1159,7 +1159,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: Updates the auto-forwarding setting for the specified account. A verified forwarding address must be specified when auto-forwarding is enabled.
+      description: |-
+        Updates the auto-forwarding setting for the specified account. A verified forwarding address must be specified when auto-forwarding is enabled.
+
+        This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.updateAutoForwarding
       parameters:
         - default: me
@@ -1340,7 +1343,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Creates a forwarding address. If ownership verification is required, a message will be sent to the recipient and the resource''s verification status will be set to pending; otherwise, the resource will be created with verification status set to accepted.'
+      description: |-
+        Creates a forwarding address. If ownership verification is required, a message will be sent to the recipient and the resource's verification status will be set to pending; otherwise, the resource will be created with verification status set to accepted.
+
+        This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.forwardingAddresses.create
       parameters:
         - default: me
@@ -1365,7 +1371,10 @@ paths:
         - users
   '/{userId}/settings/forwardingAddresses/{forwardingEmail}':
     delete:
-      description: Deletes the specified forwarding address and revokes any verification that may have been required.
+      description: |-
+        Deletes the specified forwarding address and revokes any verification that may have been required.
+
+        This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.forwardingAddresses.delete
       parameters:
         - default: me
@@ -1580,7 +1589,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Creates a custom "from" send-as alias. If an SMTP MSA is specified, Gmail will attempt to connect to the SMTP service to validate the configuration before creating the alias. If ownership verification is required for the alias, a message will be sent to the email address and the resource''s verification status will be set to pending; otherwise, the resource will be created with verification status set to accepted. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias.'
+      description: |-
+        Creates a custom "from" send-as alias. If an SMTP MSA is specified, Gmail will attempt to connect to the SMTP service to validate the configuration before creating the alias. If ownership verification is required for the alias, a message will be sent to the email address and the resource's verification status will be set to pending; otherwise, the resource will be created with verification status set to accepted. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias.
+
+        This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.sendAs.create
       parameters:
         - default: me
@@ -1605,7 +1617,10 @@ paths:
         - users
   '/{userId}/settings/sendAs/{sendAsEmail}':
     delete:
-      description: Deletes the specified send-as alias. Revokes any verification that may have been required for using it.
+      description: |-
+        Deletes the specified send-as alias. Revokes any verification that may have been required for using it.
+
+        This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.sendAs.delete
       parameters:
         - default: me
@@ -1667,7 +1682,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates a send-as alias. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias. This method supports patch semantics.'
+      description: |-
+        Updates a send-as alias. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias.
+
+        Addresses other than the primary address for the account can only be updated by service account clients that have been delegated domain-wide authority. This method supports patch semantics.
       operationId: gmail.users.settings.sendAs.patch
       parameters:
         - default: me
@@ -1698,7 +1716,10 @@ paths:
       tags:
         - users
     put:
-      description: 'Updates a send-as alias. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias.'
+      description: |-
+        Updates a send-as alias. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias.
+
+        Addresses other than the primary address for the account can only be updated by service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.sendAs.update
       parameters:
         - default: me
@@ -1927,7 +1948,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sends a verification email to the specified send-as alias address. The verification status must be pending.
+      description: |-
+        Sends a verification email to the specified send-as alias address. The verification status must be pending.
+
+        This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.sendAs.verify
       parameters:
         - default: me

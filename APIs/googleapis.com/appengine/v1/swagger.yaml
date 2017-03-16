@@ -121,7 +121,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Creates an App Engine application for a Google Cloud Platform project. This requires a project that excludes an App Engine application. For details about creating a project without an application, see the Google Cloud Resource Manager create project topic (https://cloud.google.com/resource-manager/docs/creating-project).'
+      description: 'Creates an App Engine application for a Google Cloud Platform project. Required fields: id - The ID of the target Cloud Platform project. location - The region (https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.For more information about App Engine applications, see Managing Projects, Applications, and Billing (https://cloud.google.com/appengine/docs/python/console/).'
       operationId: appengine.apps.create
       parameters:
         - in: body
@@ -177,7 +177,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     patch:
-      description: 'Updates the specified Application resource. You can update the following fields: auth_domain (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps#Application.FIELDS.auth_domain) default_cookie_expiration (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps#Application.FIELDS.default_cookie_expiration)'
+      description: 'Updates the specified Application resource. You can update the following fields: auth_domain - Google authentication domain for controlling user access to the application. default_cookie_expiration - Cookie expiration policy for the application.'
       operationId: appengine.apps.patch
       parameters:
         - description: 'Part of `name`. Name of the Application resource to update. Example: apps/myapp.'
@@ -520,7 +520,7 @@ paths:
           in: query
           name: updateMask
           type: string
-        - description: 'Set to true to gradually shift traffic from one version to another single version. By default, traffic is shifted immediately. For gradual traffic migration, the target version must be located within instances that are configured for both warmup requests (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#inboundservicetype) and automatic scaling (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#automaticscaling). You must specify the shardBy (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services#shardby) field in the Service resource. Gradual traffic migration is not supported in the App Engine flexible environment. For examples, see Migrating and Splitting Traffic (https://cloud.google.com/appengine/docs/admin-api/migrating-splitting-traffic).'
+        - description: 'Set to true to gradually shift traffic to one or more versions that you specify. By default, traffic is shifted immediately. For gradual traffic migration, the target versions must be located within instances that are configured for both warmup requests (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#inboundservicetype) and automatic scaling (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#automaticscaling). You must specify the shardBy (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services#shardby) field in the Service resource. Gradual traffic migration is not supported in the App Engine flexible environment. For examples, see Migrating and Splitting Traffic (https://cloud.google.com/appengine/docs/admin-api/migrating-splitting-traffic).'
           in: query
           name: migrateTraffic
           type: boolean
@@ -747,7 +747,7 @@ paths:
         - apps
   '/v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances':
     get:
-      description: Lists the instances of a version.
+      description: 'Lists the instances of a version.Tip: To aggregate details about instances over time, see the Stackdriver Monitoring API (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).'
       operationId: appengine.apps.services.versions.instances.list
       parameters:
         - description: 'Part of `parent`. Name of the parent Version resource. Example: apps/myapp/services/default/versions/v1.'
@@ -1044,6 +1044,11 @@ definitions:
         items:
           $ref: '#/definitions/UrlDispatchRule'
         type: array
+      gcrDomain:
+        description: The Google Container Registry domain used for storing managed build docker images for this application.
+        type: string
+      iap:
+        $ref: '#/definitions/IdentityAwareProxy'
       id:
         description: 'Identifier of the Application resource. This identifier is equivalent to the project ID of the Google Cloud Platform project where you want to deploy your application. Example: myapp.'
         type: string
@@ -1052,6 +1057,14 @@ definitions:
         type: string
       name:
         description: 'Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly'
+        type: string
+      servingStatus:
+        description: Serving status of this application.
+        enum:
+          - UNSPECIFIED
+          - SERVING
+          - USER_DISABLED
+          - SYSTEM_DISABLED
         type: string
     type: object
   AutomaticScaling:
@@ -1111,10 +1124,10 @@ definitions:
         type: integer
     type: object
   ContainerInfo:
-    description: Docker image that is used to start a VM container for the version you deploy.
+    description: Docker image that is used to create a container and start a VM instance for the version that you deploy. Only applicable for instances running in the App Engine flexible environment.
     properties:
       image:
-        description: 'URI to the hosted container image in a Docker repository. The URI must be fully qualified and include a tag or digest. Examples: "gcr.io/my-project/image:tag" or "gcr.io/my-project/image@digest"'
+        description: 'URI to the hosted container image in Google Container Registry. The URI must be fully qualified and include a tag or digest. Examples: "gcr.io/my-project/image:tag" or "gcr.io/my-project/image@digest"'
         type: string
     type: object
   CpuUtilization:
@@ -1140,7 +1153,7 @@ definitions:
     properties:
       container:
         $ref: '#/definitions/ContainerInfo'
-        description: A Docker image that App Engine uses to run the version. Only applicable for instances in App Engine flexible environment.
+        description: The Docker image for the container that runs the version. Only applicable for instances running in the App Engine flexible environment.
       files:
         additionalProperties:
           $ref: '#/definitions/FileInfo'
@@ -1240,6 +1253,22 @@ definitions:
         format: uint32
         type: integer
     type: object
+  IdentityAwareProxy:
+    description: Identity-Aware Proxy
+    properties:
+      enabled:
+        description: 'Whether the serving infrastructure will authenticate and authorize all incoming requests.If true, the oauth2_client_id and oauth2_client_secret fields must be non-empty.'
+        type: boolean
+      oauth2ClientId:
+        description: OAuth2 client ID to use for the authentication flow.
+        type: string
+      oauth2ClientSecret:
+        description: 'OAuth2 client secret to use for the authentication flow.For security reasons, this value cannot be retrieved via the API. Instead, the SHA-256 hash of the value is returned in the oauth2_client_secret_sha256 field.@InputOnly'
+        type: string
+      oauth2ClientSecretSha256:
+        description: Hex-encoded SHA-256 hash of the client secret.@OutputOnly
+        type: string
+    type: object
   Instance:
     description: An Instance resource is the computing unit that App Engine uses to automatically scale an application.
     properties:
@@ -1324,7 +1353,7 @@ definitions:
         type: string
     type: object
   ListLocationsResponse:
-    description: The response message for LocationService.ListLocations.
+    description: The response message for Locations.ListLocations.
     properties:
       locations:
         description: A list of locations that matches the specified filter in the request.
@@ -1370,6 +1399,33 @@ definitions:
         items:
           $ref: '#/definitions/Version'
         type: array
+    type: object
+  LivenessCheck:
+    description: Health checking configuration for VM instances. Unhealthy instances are killed and replaced with new instances.
+    properties:
+      checkInterval:
+        description: Interval between health checks.
+        type: string
+      healthyThreshold:
+        description: Number of consecutive successful checks required before considering the VM healthy.
+        format: uint32
+        type: integer
+      host:
+        description: 'Host header to send when performing a HTTP Liveness check. Example: "myapp.appspot.com"'
+        type: string
+      initialDelay:
+        description: The initial delay before starting to execute the checks.
+        type: string
+      path:
+        description: The request path.
+        type: string
+      timeout:
+        description: Time before the check is considered failed.
+        type: string
+      unhealthyThreshold:
+        description: Number of consecutive failed checks required before considering the VM unhealthy.
+        format: uint32
+        type: integer
     type: object
   Location:
     description: A resource that represents Google Cloud Platform location.
@@ -1538,6 +1594,60 @@ definitions:
           type: string
         type: array
     type: object
+  OperationMetadataV1Alpha:
+    description: Metadata for the given google.longrunning.Operation.
+    properties:
+      endTime:
+        description: Time that this operation completed.@OutputOnly
+        type: string
+      ephemeralMessage:
+        description: Ephemeral message that may change every time the operation is polled. @OutputOnly
+        type: string
+      insertTime:
+        description: Time that this operation was created.@OutputOnly
+        type: string
+      method:
+        description: 'API method that initiated this operation. Example: google.appengine.v1alpha.Versions.CreateVersion.@OutputOnly'
+        type: string
+      target:
+        description: 'Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly'
+        type: string
+      user:
+        description: User who requested this operation.@OutputOnly
+        type: string
+      warning:
+        description: Durable messages that persist on every operation poll. @OutputOnly
+        items:
+          type: string
+        type: array
+    type: object
+  OperationMetadataV1Beta:
+    description: Metadata for the given google.longrunning.Operation.
+    properties:
+      endTime:
+        description: Time that this operation completed.@OutputOnly
+        type: string
+      ephemeralMessage:
+        description: Ephemeral message that may change every time the operation is polled. @OutputOnly
+        type: string
+      insertTime:
+        description: Time that this operation was created.@OutputOnly
+        type: string
+      method:
+        description: 'API method that initiated this operation. Example: google.appengine.v1beta.Versions.CreateVersion.@OutputOnly'
+        type: string
+      target:
+        description: 'Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly'
+        type: string
+      user:
+        description: User who requested this operation.@OutputOnly
+        type: string
+      warning:
+        description: Durable messages that persist on every operation poll. @OutputOnly
+        items:
+          type: string
+        type: array
+    type: object
   OperationMetadataV1Beta5:
     description: Metadata for the given google.longrunning.Operation.
     properties:
@@ -1556,6 +1666,30 @@ definitions:
       user:
         description: User who requested this operation.@OutputOnly
         type: string
+    type: object
+  ReadinessCheck:
+    description: Readiness checking configuration for VM instances. Unhealthy instances are removed from traffic rotation.
+    properties:
+      checkInterval:
+        description: Interval between health checks.
+        type: string
+      healthyThreshold:
+        description: Number of consecutive successful checks required before receiving traffic.
+        format: uint32
+        type: integer
+      host:
+        description: 'Host header to send when performing a HTTP Readiness check. Example: "myapp.appspot.com"'
+        type: string
+      path:
+        description: The request path.
+        type: string
+      timeout:
+        description: Time before the check is considered failed.
+        type: string
+      unhealthyThreshold:
+        description: Number of consecutive failed checks required before removing traffic.
+        format: uint32
+        type: integer
     type: object
   RepairApplicationRequest:
     description: Request message for 'Applications.RepairApplication'.
@@ -1820,6 +1954,9 @@ definitions:
         items:
           $ref: '#/definitions/Library'
         type: array
+      livenessCheck:
+        $ref: '#/definitions/LivenessCheck'
+        description: Configures liveness health checking for VM instances. Unhealthy instances are stopped and replaced with new instancesOnly returned in GET requests if view=FULL is set.
       manualScaling:
         $ref: '#/definitions/ManualScaling'
         description: 'A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.'
@@ -1832,6 +1969,9 @@ definitions:
       nobuildFilesRegex:
         description: Files that match this pattern will not be built into this version. Only applicable for Go runtimes.Only returned in GET requests if view=FULL is set.
         type: string
+      readinessCheck:
+        $ref: '#/definitions/ReadinessCheck'
+        description: Configures readiness health checking for VM instances. Unhealthy instances are not put into the backend traffic rotation.Only returned in GET requests if view=FULL is set.
       resources:
         $ref: '#/definitions/Resources'
         description: Machine resources for this version. Only applicable for VM runtimes.

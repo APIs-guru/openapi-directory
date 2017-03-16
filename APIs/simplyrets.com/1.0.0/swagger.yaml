@@ -560,7 +560,8 @@ paths:
           required: false
           type: integer
         - description: |
-            Used as a cursor for pagination.
+            Used as a cursor for pagination. When using `lastId`, the `sort` parameter
+            will not work.
           in: query
           name: lastId
           required: false
@@ -732,6 +733,19 @@ paths:
           name: sort
           required: false
           type: string
+        - description: |
+            When set to `false`, The `X-Total-Count` header will not
+            be returned
+
+            Counting the listings can contribute to slower API calls
+            due to the extra queries that need to be run to get an
+            exact count.
+
+            Disabling count can increase query speeds.
+          in: query
+          name: count
+          required: false
+          type: integer
       responses:
         '200':
           description: |

@@ -163,8 +163,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -176,6 +174,8 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
     put:
       description: Updates an existing group. You can change any group attributes except name.
       operationId: monitoring.projects.groups.update
@@ -208,8 +208,6 @@ paths:
         - projects
   '/v3/{name}/collectdTimeSeries':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -221,6 +219,8 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
     post:
       description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside class="caution">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>'
       operationId: monitoring.projects.collectdTimeSeries.create
@@ -260,10 +260,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns the descendants of the specified group. This is a superset of the results returned by the childrenOfGroup filter, and includes children-of-children, and so forth.'
-          in: query
-          name: descendantsOfGroup
-          type: string
         - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
           name: pageToken
@@ -280,6 +276,10 @@ paths:
           in: query
           name: childrenOfGroup
           type: string
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns the descendants of the specified group. This is a superset of the results returned by the childrenOfGroup filter, and includes children-of-children, and so forth.'
+          in: query
+          name: descendantsOfGroup
+          type: string
       responses:
         '200':
           description: Successful response
@@ -295,8 +295,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -308,6 +306,8 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
     post:
       description: Creates a new group.
       operationId: monitoring.projects.groups.create
@@ -386,8 +386,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -399,6 +397,8 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
   '/v3/{name}/metricDescriptors':
     get:
       description: Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
@@ -441,8 +441,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -454,6 +452,8 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
     post:
       description: Creates a new metric descriptor. User-created metric descriptors define custom metrics.
       operationId: monitoring.projects.metricDescriptors.create
@@ -493,6 +493,12 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |
+            An optional filter describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
+            resource.type = starts_with("gce_") AND resource.label:id
+          in: query
+          name: filter
+          type: string
         - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
           name: pageToken
@@ -501,12 +507,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: |
-            An optional filter describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
-            resource.type = starts_with("gce_") AND resource.label:id
-          in: query
-          name: filter
-          type: string
       responses:
         '200':
           description: Successful response
@@ -524,8 +524,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -537,6 +535,8 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
   '/v3/{name}/timeSeries':
     get:
       description: Lists time series that match a filter. This method does not require a Stackdriver account.
@@ -548,6 +548,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: 'A positive number that is the maximum number of results to return. When view field sets to FULL, it limits the number of Points server will return; if view field is HEADERS, it limits the number of TimeSeries server will return.'
+          in: query
+          name: pageSize
+          type: integer
         - description: 'Specifies the order in which the points of the time series should be returned. By default, results are not ordered. Currently, this field must be left blank.'
           in: query
           name: orderBy
@@ -577,6 +581,10 @@ paths:
           in: query
           name: filter
           type: string
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          in: query
+          name: pageToken
+          type: string
         - description: 'The approach to be used to align individual time series. Not all alignment functions may be applied to all time series, depending on the metric type and value type of the original time series. Alignment may change the metric type or the value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
           enum:
             - ALIGN_NONE
@@ -598,10 +606,6 @@ paths:
             - ALIGN_PERCENTILE_05
           in: query
           name: aggregation.perSeriesAligner
-          type: string
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
-          in: query
-          name: pageToken
           type: string
         - description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
           in: query
@@ -629,10 +633,6 @@ paths:
           in: query
           name: aggregation.alignmentPeriod
           type: string
-        - description: 'A positive number that is the maximum number of results to return. When view field sets to FULL, it limits the number of Points server will return; if view field is HEADERS, it limits the number of TimeSeries server will return.'
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -648,8 +648,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -661,6 +659,8 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
     post:
       description: 'Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.'
       operationId: monitoring.projects.timeSeries.create

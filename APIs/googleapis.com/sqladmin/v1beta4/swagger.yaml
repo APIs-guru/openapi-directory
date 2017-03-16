@@ -86,6 +86,11 @@ paths:
     get:
       description: List all available database flags for Google Cloud SQL instances.
       operationId: sql.flags.list
+      parameters:
+        - description: Database version for flag retrieval. Flags are specific to the database version.
+          in: query
+          name: databaseVersion
+          type: string
       responses:
         '200':
           description: Successful response
@@ -115,6 +120,10 @@ paths:
           in: path
           name: project
           required: true
+          type: string
+        - description: A filter expression for filtering listed instances.
+          in: query
+          name: filter
           type: string
         - description: The maximum number of results to return per response.
           in: query
@@ -1974,6 +1983,16 @@ definitions:
         description: 'The type of this IP address. A PRIMARY address is an address that can accept incoming connections. An OUTGOING address is the source address of connections originating from the instance, if supported.'
         type: string
     type: object
+  Labels:
+    description: User defined labels for Cloud SQL instances.
+    properties:
+      key:
+        description: The key of the label.
+        type: string
+      value:
+        description: The value of the label.
+        type: string
+    type: object
   LocationPreference:
     description: 'Preferred location. This specifies where a Cloud SQL instance should preferably be located, either in a specific Compute Engine zone, or co-located with an App Engine application. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.'
     properties:
@@ -2200,10 +2219,7 @@ definitions:
           type: string
         type: array
       availabilityType:
-        description: |-
-          The availability type. This can be one of the following.
-          ZONAL: A Cloud SQL instance that is zonally available. The instance is bound to a single GCE zone and may be inaccessible during an outage for that GCE zone.
-          REGIONAL: A Cloud SQL instance that is regionally available. The instance is provisioned in multiple zones within a region and is able to provide higher availability than an instance with a zonal availability type.
+        description: Reserved for future use.
         type: string
       backupConfiguration:
         $ref: '#/definitions/BackupConfiguration'
@@ -2233,6 +2249,11 @@ definitions:
         default: 'sql#settings'
         description: 'This is always sql#settings.'
         type: string
+      labels:
+        description: User defined labels.
+        items:
+          $ref: '#/definitions/Labels'
+        type: array
       locationPreference:
         $ref: '#/definitions/LocationPreference'
         description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance. App Engine co-location is only applicable to First Generation instances.

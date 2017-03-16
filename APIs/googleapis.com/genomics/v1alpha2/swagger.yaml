@@ -122,6 +122,13 @@ paths:
       operationId: genomics.pipelines.list
       parameters:
         - description: |-
+            Pipelines with names that match this prefix should be
+            returned.  If unspecified, all pipelines in the project, up to
+            `pageSize`, will be returned.
+          in: query
+          name: namePrefix
+          type: string
+        - description: |-
             Token to use to indicate where to start getting results.
             If unspecified, returns the first page of results.
           in: query
@@ -139,13 +146,6 @@ paths:
           in: query
           name: projectId
           type: string
-        - description: |-
-            Pipelines with names that match this prefix should be
-            returned.  If unspecified, all pipelines in the project, up to
-            `pageSize`, will be returned.
-          in: query
-          name: namePrefix
-          type: string
       responses:
         '200':
           description: Successful response
@@ -159,8 +159,6 @@ paths:
       tags:
         - pipelines
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -168,10 +166,12 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates a pipeline that can be run later. Create takes a Pipeline that
@@ -252,8 +252,6 @@ paths:
       tags:
         - pipelines
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -261,10 +259,12 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1alpha2/pipelines:getControllerConfig':
     get:
       description: |-
@@ -292,8 +292,6 @@ paths:
       tags:
         - pipelines
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -301,14 +299,14 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1alpha2/pipelines:run':
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -316,10 +314,12 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Runs a pipeline. If `pipelineId` is specified in the request, then
@@ -353,8 +353,6 @@ paths:
         - pipelines
   '/v1alpha2/pipelines:setOperationStatus':
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -362,10 +360,12 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     put:
       description: |-
         Sets status of a given operation. Any new timestamps (as determined by
@@ -416,8 +416,6 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -425,14 +423,14 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1alpha2/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
@@ -440,10 +438,12 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients may use Operations.GetOperation or Operations.ListOperations to check whether the cancellation succeeded or the operation completed despite cancellation.'
       operationId: genomics.operations.cancel
@@ -983,8 +983,8 @@ definitions:
           a private IP VM for debugging, you can ssh to a public VM and then ssh into
           the private VM's Internal IP.  If noAddress is set, this pipeline run may
           only load docker images from Google Container Registry and not Docker Hub.
-          ** Note: To use this option, your project must be in Google Access for
-          Private IPs Early Access Program.**
+          Before using this, you must
+          [configure access to Google services from internal IPs](https://cloud.google.com/compute/docs/configure-private-google-access#configuring_access_to_google_services_from_internal_ips).
         type: boolean
       preemptible:
         description: |-

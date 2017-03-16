@@ -23,6 +23,7 @@ produces:
   - application/json
 tags:
   - name: addresses
+  - name: crowdsales
   - name: deposit
   - name: deposit_address
   - name: deposits
@@ -53,6 +54,21 @@ paths:
       summary: Check Deposit Address
       tags:
         - addresses
+  '/v2/crowdsales/{key}.json':
+    get:
+      operationId: GET--version-crowdsales--key---format-
+      parameters:
+        - description: Crowdsale plan key
+          in: path
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get crowdsales plan info
+      tags:
+        - crowdsales
   /v2/deposit.json:
     get:
       operationId: GET--version-deposit---format-
@@ -101,7 +117,7 @@ paths:
           name: signature
           required: true
           type: string
-        - description: 'The account to which you want to deposit. Available values: cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc, amp, 1st, rep, ans, zec, zmc, gnt, ebc'
+        - description: 'The account to which you want to deposit. Available values: cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc, amp, 1st, rep, ans, zec, zmc, gnt'
           in: query
           name: currency
           required: true
@@ -131,7 +147,7 @@ paths:
           name: signature
           required: true
           type: string
-        - description: 'Currency value contains  cny,btc,eth,pls,note,bts,bitcny,bitusd,bitbtc,yun,nxt,ltc,doge,sc,dgd,dcs,dao,etc,amp,1st,rep,ans,zec,zmc,gnt,ebc'
+        - description: 'Currency value contains  cny,btc,eth,pls,note,bts,bitcny,bitusd,bitbtc,yun,nxt,ltc,doge,sc,dgd,dcs,dao,etc,amp,1st,rep,ans,zec,zmc,gnt'
           in: query
           name: currency
           required: false

@@ -265,6 +265,8 @@ definitions:
     properties:
       asAdministrators:
         $ref: '#/definitions/ServerAdministrators'
+      backupConfiguration:
+        $ref: '#/definitions/BackupConfiguration'
     type: object
   AnalysisServicesServerProperties:
     allOf:
@@ -342,6 +344,22 @@ definitions:
         type: array
     required:
       - value
+    type: object
+  BackupConfiguration:
+    description: An object that represents backup configurations
+    properties:
+      accessKey:
+        description: The access key of storage account used for backup configuration
+        type: string
+      blobContainer:
+        description: The name of blob container for backup configuration
+        type: string
+      storageAccount:
+        description: Storage account full resource id for backup configuration
+        type: string
+    required:
+      - storageAccount
+      - blobContainer
     type: object
   Resource:
     description: Represents an instance of an Analysis Services resource.

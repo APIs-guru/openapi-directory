@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Reads and publishes results from Cloud Test Lab.
+  description: Reads and publishes results from Firebase Test Lab.
   title: Cloud Tool Results
   version: v1beta3
   x-apiClientRegistration:
@@ -22,7 +22,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: toolresults
 externalDocs:
-  url: 'https://developers.google.com/cloud-test-lab/'
+  url: 'https://firebase.google.com/docs/test-lab/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -707,6 +707,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/PerfMetricsSummary'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:

@@ -1923,9 +1923,7 @@ definitions:
   NAWelcomePersons:
     properties:
       face:
-        items:
-          $ref: '#/definitions/NAWelcomeFace'
-        type: array
+        $ref: '#/definitions/NAWelcomeFace'
       id:
         description: Id of the person.
         type: string

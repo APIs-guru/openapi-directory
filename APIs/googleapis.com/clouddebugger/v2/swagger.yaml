@@ -110,13 +110,11 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: controller
   - name: debugger
+  - name: controller
 paths:
   /v2/controller/debuggees/register:
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -128,6 +126,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     post:
       description: |-
         Registers the debuggee with the controller service.
@@ -211,8 +211,6 @@ paths:
       tags:
         - controller
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -224,10 +222,10 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
   '/v2/controller/debuggees/{debuggeeId}/breakpoints/{id}':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -239,6 +237,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     put:
       description: |-
         Updates the breakpoint state or mutable fields.
@@ -284,12 +284,6 @@ paths:
       operationId: clouddebugger.debugger.debuggees.list
       parameters:
         - description: |-
-            The client version making the call.
-            Following: `domain/type/version` (e.g., `google.com/intellij/v1`).
-          in: query
-          name: clientVersion
-          type: string
-        - description: |-
             When set to `true`, the result includes all debuggees. Otherwise, the
             result includes only debuggees that are active.
           in: query
@@ -298,6 +292,12 @@ paths:
         - description: Project number of a Google Cloud project whose debuggees to list.
           in: query
           name: project
+          type: string
+        - description: |-
+            The client version making the call.
+            Following: `domain/type/version` (e.g., `google.com/intellij/v1`).
+          in: query
+          name: clientVersion
           type: string
       responses:
         '200':
@@ -312,8 +312,6 @@ paths:
       tags:
         - debugger
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -325,6 +323,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
   '/v2/debugger/debuggees/{debuggeeId}/breakpoints':
     get:
       description: Lists all breakpoints for the debuggee.
@@ -335,12 +335,6 @@ paths:
           name: debuggeeId
           required: true
           type: string
-        - description: |-
-            This field is deprecated. The following fields are always stripped out of
-            the result: `stack_frames`, `evaluated_expressions` and `variable_table`.
-          in: query
-          name: stripResults
-          type: boolean
         - description: |-
             A wait token that, if specified, blocks the call until the breakpoints
             list has changed, or a server selected timeout has expired.  The value
@@ -375,6 +369,12 @@ paths:
           in: query
           name: includeAllUsers
           type: boolean
+        - description: |-
+            This field is deprecated. The following fields are always stripped out of
+            the result: `stack_frames`, `evaluated_expressions` and `variable_table`.
+          in: query
+          name: stripResults
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -388,8 +388,6 @@ paths:
       tags:
         - debugger
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -401,10 +399,10 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
   '/v2/debugger/debuggees/{debuggeeId}/breakpoints/set':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -416,6 +414,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     post:
       description: Sets the breakpoint to the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.set
@@ -513,8 +513,6 @@ paths:
       tags:
         - debugger
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -526,6 +524,8 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
 definitions:
   AliasContext:
     description: An alias to a repo revision.

@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: The Service User API allows service consumers to enable services they want to use on Google Cloud Platform or disable services they no longer use. Consumers can also list the set of services they have already enabled.
+  description: 'Enables services that service consumers want to use on Google Cloud Platform, lists the available or enabled services, or disables services that service consumers no longer use.'
   title: Google Service User
   version: v1
   x-apiClientRegistration:
@@ -22,7 +22,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: serviceuser
 externalDocs:
-  url: 'https://cloud.google.com/service-user/'
+  url: 'https://cloud.google.com/service-management/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -111,25 +111,74 @@ parameters:
     type: string
 tags:
   - name: projects
+  - name: services
 paths:
-  '/v1/{name}:disable':
+  '/v1/services:search':
+    get:
+      description: |-
+        Search available services.
+
+        When no filter is specified, returns all accessible services. For
+        authenticated users, also returns all services the calling user has
+        "servicemanagement.services.bind" permission for.
+      operationId: serviceuser.services.search
+      parameters:
+        - description: Requested size of the next page of data.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Token identifying which result to start with; returned by a previous list
+            call.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SearchServicesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - services
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
+  '/v1/{name}:disable':
+    parameters:
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
     post:
       description: |-
-        Disable a managed service for a consumer.
+        Disable a service so it can no longer be used with a
+        project. This prevents unintended usage that may cause unexpected billing
+        charges or security leaks.
 
         Operation<response: google.protobuf.Empty>
       operationId: serviceuser.projects.services.disable
@@ -165,27 +214,26 @@ paths:
         - projects
   '/v1/{name}:enable':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
-        Enable a managed service for a consumer with the default settings.
+        Enable a service so it can be used with a project.
+        See [Cloud Auth Guide](https://cloud.google.com/docs/authentication) for
+        more information.
 
         Operation<response: google.protobuf.Empty>
-
-        google.rpc.Status errors may contain a
-        google.rpc.PreconditionFailure error detail.
       operationId: serviceuser.projects.services.enable
       parameters:
         - description: |-
@@ -252,19 +300,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
 definitions:
   Api:
     description: Api is a light-weight descriptor for a protocol buffer service.
@@ -473,6 +521,25 @@ definitions:
           Selects the methods to which this rule applies.
 
           Refer to selector for syntax details.
+        type: string
+    type: object
+  AuthorizationConfig:
+    description: |-
+      Configuration of authorization.
+
+      This section determines the authorization provider, if unspecified, then no
+      authorization check will be done.
+
+      Example:
+
+          experimental:
+            authorization:
+              provider: firebaserules.googleapis.com
+    properties:
+      provider:
+        description: |-
+          The name of the authorization provider, such as
+          firebaserules.googleapis.com.
         type: string
     type: object
   Backend:
@@ -748,17 +815,6 @@ definitions:
     description: Request message for EnableService method.
     properties: {}
     type: object
-  EnabledService:
-    description: |-
-      An EnabledService message contains the details about a service that has been
-      enabled for use.
-    properties:
-      service:
-        $ref: '#/definitions/Service'
-        description: |-
-          The Service definition for the enabled service
-          Only the name and title fields will be populated.
-    type: object
   Endpoint:
     description: |-
       `Endpoint` describes a network endpoint that serves a set of APIs.
@@ -852,6 +908,15 @@ definitions:
         items:
           $ref: '#/definitions/Option'
         type: array
+    type: object
+  Experimental:
+    description: |-
+      Experimental service configuration. These configuration options can
+      only be used by whitelisted users.
+    properties:
+      authorization:
+        $ref: '#/definitions/AuthorizationConfig'
+        description: Authorization configuration.
     type: object
   Field:
     description: A single field of a message type.
@@ -1171,15 +1236,16 @@ definitions:
       mediaDownload:
         $ref: '#/definitions/MediaDownload'
         description: |-
-          Do not use this. For media support, add instead
-          [][google.bytestream.RestByteStream] as an API to your
-          configuration.
+          Use this only for Scotty Requests. Do not use this for bytestream methods.
+          For media support, add instead [][google.bytestream.RestByteStream] as an
+          API to your configuration.
       mediaUpload:
         $ref: '#/definitions/MediaUpload'
         description: |-
-          Do not use this. For media support, add instead
+          Use this only for Scotty Requests. Do not use this for media support using
+          Bytestream, add instead
           [][google.bytestream.RestByteStream] as an API to your
-          configuration.
+          configuration for Bytestream methods.
       patch:
         description: Used for updating a resource.
         type: string
@@ -1232,7 +1298,7 @@ definitions:
       services:
         description: Services enabled for the specified parent.
         items:
-          $ref: '#/definitions/EnabledService'
+          $ref: '#/definitions/PublishedService'
         type: array
     type: object
   LogDescriptor:
@@ -1345,23 +1411,35 @@ definitions:
     type: object
   MediaDownload:
     description: |-
-      Do not use this. For media support, add instead
-      [][google.bytestream.RestByteStream] as an API to your
-      configuration.
+      Use this only for Scotty Requests. Do not use this for media support using
+      Bytestream, add instead [][google.bytestream.RestByteStream] as an API to
+      your configuration for Bytestream methods.
     properties:
+      downloadService:
+        description: |-
+          DO NOT USE THIS FIELD UNTIL THIS WARNING IS REMOVED.
+
+          Specify name of the download service if one is used for download.
+        type: string
       enabled:
         description: Whether download is enabled.
         type: boolean
     type: object
   MediaUpload:
     description: |-
-      Do not use this. For media support, add instead
-      [][google.bytestream.RestByteStream] as an API to your
-      configuration.
+      Use this only for Scotty Requests. Do not use this for media support using
+      Bytestream, add instead [][google.bytestream.RestByteStream] as an API to
+      your configuration for Bytestream methods.
     properties:
       enabled:
         description: Whether upload is enabled.
         type: boolean
+      uploadService:
+        description: |-
+          DO NOT USE THIS FIELD UNTIL THIS WARNING IS REMOVED.
+
+          Specify name of the upload service if one is used for upload.
+        type: string
     type: object
   Method:
     description: Method represents a method of an api.
@@ -1819,6 +1897,30 @@ definitions:
           `TakeSnapshotResponse`.
         type: object
     type: object
+  OperationMetadata:
+    description: The metadata associated with a long running operation resource.
+    properties:
+      progressPercentage:
+        description: 'Percentage of completion of this operation, ranging from 0 to 100.'
+        format: int32
+        type: integer
+      resourceNames:
+        description: |-
+          The full name of the resources that this operation is directly
+          associated with.
+        items:
+          type: string
+        type: array
+      startTime:
+        description: The start time of the operation.
+        format: google-datetime
+        type: string
+      steps:
+        description: Detailed status information for each step. The order is undetermined.
+        items:
+          $ref: '#/definitions/Step'
+        type: array
+    type: object
   Option:
     description: |-
       A protocol buffer option, which can be attached to a message, field,
@@ -1874,6 +1976,36 @@ definitions:
           honored in the generated docset.
         items:
           $ref: '#/definitions/Page'
+        type: array
+    type: object
+  PublishedService:
+    description: |-
+      The published version of a Service that is managed by
+      Google Service Management.
+    properties:
+      name:
+        description: |-
+          The resource name of the service.
+
+          A valid name would be:
+          - services/serviceuser.googleapis.com
+        type: string
+      service:
+        $ref: '#/definitions/Service'
+        description: The service's published configuration.
+    type: object
+  SearchServicesResponse:
+    description: Response message for SearchServices method.
+    properties:
+      nextPageToken:
+        description: |-
+          Token that can be passed to `ListAvailableServices` to resume a paginated
+          query.
+        type: string
+      services:
+        description: Services available publicly or available to the authenticated caller.
+        items:
+          $ref: '#/definitions/PublishedService'
         type: array
     type: object
   Service:
@@ -1958,6 +2090,9 @@ definitions:
         items:
           $ref: '#/definitions/Enum'
         type: array
+      experimental:
+        $ref: '#/definitions/Experimental'
+        description: Experimental configuration.
       http:
         $ref: '#/definitions/Http'
         description: HTTP configuration.
@@ -2001,6 +2136,9 @@ definitions:
           Members of this project can manage the service configuration,
           manage consumption of the service, etc.
         type: string
+      sourceInfo:
+        $ref: '#/definitions/SourceInfo'
+        description: Output only. The source information for this configuration if available.
       systemParameters:
         $ref: '#/definitions/SystemParameters'
         description: System parameter configuration.
@@ -2047,6 +2185,17 @@ definitions:
           The path-qualified name of the .proto file that contained the associated
           protobuf element.  For example: `"google/protobuf/source_context.proto"`.
         type: string
+    type: object
+  SourceInfo:
+    description: Source information used to create a Service Config
+    properties:
+      sourceFiles:
+        description: All files used during config generation.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
     type: object
   Status:
     description: |-
@@ -2121,6 +2270,23 @@ definitions:
           A developer-facing error message, which should be in English. Any
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
+        type: string
+    type: object
+  Step:
+    description: Represents the status of one operation step.
+    properties:
+      description:
+        description: The short description of the step.
+        type: string
+      status:
+        description: The status code.
+        enum:
+          - STATUS_UNSPECIFIED
+          - DONE
+          - NOT_STARTED
+          - IN_PROGRESS
+          - FAILED
+          - CANCELLED
         type: string
     type: object
   SystemParameter:

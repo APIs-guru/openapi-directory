@@ -331,7 +331,7 @@ paths:
           name: top
           required: false
           type: integer
-        - description: Return total amount of items for a given filter criteria.
+        - description: Return total number of items for a given filter criteria.
           enum:
             - None
             - AllPages
@@ -574,7 +574,7 @@ paths:
           name: top
           required: false
           type: integer
-        - description: Return total amount of items for a given filter criteria.
+        - description: Return total number of items for a given filter criteria.
           enum:
             - None
             - AllPages
@@ -1053,7 +1053,7 @@ paths:
           name: top
           required: false
           type: integer
-        - description: Return total amount of items for a given filter criteria.
+        - description: Return total number of items for a given filter criteria.
           enum:
             - None
             - AllPages
@@ -1284,7 +1284,7 @@ paths:
           name: top
           required: false
           type: integer
-        - description: Return total amount of items for a given filter criteria.
+        - description: Return total number of items for a given filter criteria.
           enum:
             - None
             - AllPages
@@ -2139,7 +2139,7 @@ definitions:
   PagedDataRequest:
     properties:
       inlinecount:
-        description: Return total amount of items for a given filter criteria.
+        description: Return total number of items for a given filter criteria.
         enum:
           - None
           - AllPages

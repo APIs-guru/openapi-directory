@@ -4366,10 +4366,12 @@ definitions:
         description: User's password
         type: string
       phones: {}
+      posixAccounts: {}
       primaryEmail:
         description: username of User
         type: string
       relations: {}
+      sshPublicKeys: {}
       suspended:
         description: Indicates if user is suspended
         type: boolean
@@ -4600,6 +4602,36 @@ definitions:
         format: int32
         type: integer
     type: object
+  UserPosixAccount:
+    description: 'JSON template for a POSIX account entry. Description of the field family: go/fbs-posix.'
+    properties:
+      gecos:
+        description: The GECOS (user information) entry for this account.
+        type: string
+      gid:
+        description: The default group ID.
+        format: int32
+        type: integer
+      homeDirectory:
+        description: The path to the home directory for this account.
+        type: string
+      primary:
+        description: If this is user's primary account within the SystemId.
+        type: boolean
+      shell:
+        description: The path to the login shell for this account.
+        type: string
+      systemId:
+        description: System identifier for which account Username or Uid apply to.
+        type: string
+      uid:
+        description: The user ID.
+        format: int32
+        type: integer
+      username:
+        description: The username of the account.
+        type: string
+    type: object
   UserRelation:
     description: JSON template for a relation entry.
     properties:
@@ -4611,6 +4643,21 @@ definitions:
         type: string
       value:
         description: The name of the relation.
+        type: string
+    type: object
+  UserSshPublicKey:
+    description: JSON template for a POSIX account entry.
+    properties:
+      expirationTimeUsec:
+        description: An expiration time in microseconds since epoch.
+        format: int64
+        type: string
+      fingerprint:
+        description: A SHA-256 fingerprint of the SSH public key. (Read-only)
+        readOnly: true
+        type: string
+      key:
+        description: An SSH public key.
         type: string
     type: object
   UserUndelete:

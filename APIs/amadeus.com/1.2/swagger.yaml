@@ -124,13 +124,13 @@ paths:
           name: location
           required: true
           type: string
-        - default: '2017-03-07'
+        - default: '2017-08-07'
           description: 'Date on which the car rental will be collected from the car rental location. If no time is provided, a default value of 09:00 is used. Past availability is not displayed, future availability becomes less useful from about 6 months from the current date.'
           in: query
           name: pick_up
           required: true
           type: string
-        - default: '2017-03-08'
+        - default: '2017-08-08'
           description: 'Date at which the car rental will end and the car will be returned to the rental location. If no time is provided, a default value of 17:00 is used.'
           in: query
           name: drop_off
@@ -224,13 +224,13 @@ paths:
           name: radius
           required: true
           type: integer
-        - default: '2017-03-07'
+        - default: '2017-08-07'
           description: 'Date on which the car rental will be collected from the car rental location. If no time is provided, a default value of 09:00 is used. Past availability is not displayed, future availability becomes less useful from about 6 months from the current date.'
           in: query
           name: pick_up
           required: true
           type: string
-        - default: '2017-03-08'
+        - default: '2017-08-08'
           description: 'Date at which the car rental will end and the car will be returned to the rental location. If no time is provided, a default value of 17:00 is used.'
           in: query
           name: drop_off
@@ -321,13 +321,13 @@ paths:
           name: destination
           required: true
           type: string
-        - default: '2017-03-25'
+        - default: '2017-08-25'
           description: 'The date on which the traveler will depart from the origin to go to the destination. The maximum scope for a date range is 2 days, for a larger scope, use the Extensive Search! '
           in: query
           name: departure_date
           required: true
           type: string
-        - default: '2017-03-28'
+        - default: '2017-08-28'
           description: 'The date on which the traveler will depart from the destination to return to the origin. If this parameter is not specified, the search will find only one-way trips. If this, or the return_by parameter are specified, only return trips are found'
           in: query
           name: return_date
@@ -417,7 +417,7 @@ paths:
           name: destination
           required: true
           type: string
-        - default: 2017-03-16--2017-03-26
+        - default: 2017-08-16--2017-08-26
           description: |
             Range of dates between which the traveler could depart. Dates are specified in the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> yyyy-MM-dd date format. Ranges are inclusive and ranges of months will apply from the start to the end of the month. If just a single date is specified, only that date will be searched. By default, the date range starts today and applies up to 361 in the future is applied. Past dates are generally not supported, future dates should be in the next 361 days, although results start to become sparse after about 6 months in the future, as airlines may still be defining their schedules. The default is to search all future dates available. 
           in: query
@@ -486,7 +486,7 @@ paths:
           name: destination
           required: false
           type: string
-        - default: 2017-03-16--2017-03-26
+        - default: 2017-08-16--2017-08-26
           description: 'Range of dates between which the traveler could depart. Dates are specified in the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> yyyy-MM-dd date format. Ranges are inclusive and ranges of months will apply from the start to the end of the month. If just a single date is specified, only that date will be searched. By default, the date range starts today and applies up to 361 in the future is applied. Past dates are generally not supported, future dates should be in the next 361 days, although results start to become sparse after about 6 months in the future, as airlines may still be defining their schedules. The default is to search all future dates available.'
           in: query
           name: departure_date
@@ -553,26 +553,26 @@ paths:
           name: destination
           required: true
           type: string
-        - default: '2017-03-25'
+        - default: '2017-08-25'
           description: 'The date on which the traveler will depart from the origin to go to the destination. You can specify a date range of up to 2 days. For a larger date range, use the Extensive Search. Dates are specified in the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> yyyy-MM-dd date format and separated by --.'
           format: string
           in: query
           name: departure_date
           required: true
           type: string
-        - default: '2017-03-28'
+        - default: '2017-08-28'
           description: 'The date on which the traveler will depart from the destination to return to the origin. If this parameter is not specified, the search will find only one-way trips. If this, or the return_by parameter are specified, only return trips are found. You can specify a date range of up to 2 days.'
           in: query
           name: return_date
           required: false
           type: string
-        - default: '2017-03-25T16:00'
+        - default: '2017-08-25T16:00'
           description: 'The datetime by which the outbound flight should arrive, based on local time at the destination airport.  Date-times are specified in the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> yyyy-MM-ddTHH:mm date format'
           in: query
           name: arrive_by
           required: false
           type: string
-        - default: '2017-03-28T08:00'
+        - default: '2017-08-28T08:00'
           description: 'The time by which the inbound flight should arrive, based on local time at the airport specified as the origin parameter'
           in: query
           name: return_by
@@ -666,13 +666,13 @@ paths:
           name: location
           required: true
           type: string
-        - default: '2017-03-15'
+        - default: '2017-08-15'
           description: 'Date on which the guest will begin their stay in the hotel. Past availability is not displayed, future availability becomes less useful from about 6 months from the current date.'
           in: query
           name: check_in
           required: true
           type: string
-        - default: '2017-03-16'
+        - default: '2017-08-16'
           description: Date on which the guest will end their stay in the hotel.
           in: query
           name: check_out
@@ -767,13 +767,13 @@ paths:
           name: north_east_corner
           required: true
           type: string
-        - default: '2017-03-15'
+        - default: '2017-08-15'
           description: 'Date on which the guest will begin their stay in the hotel. Past availability is not displayed, future availability becomes less useful from about 6 months from the current date.'
           in: query
           name: check_in
           required: true
           type: string
-        - default: '2017-03-16'
+        - default: '2017-08-16'
           description: Date on which the guest will end their stay in the hotel.
           in: query
           name: check_out
@@ -868,13 +868,13 @@ paths:
           name: radius
           required: true
           type: integer
-        - default: '2017-03-15'
+        - default: '2017-08-15'
           description: 'Date on which the guest will begin their stay in the hotel. Past availability is not displayed, future availability becomes less useful from about 6 months from the current date.'
           in: query
           name: check_in
           required: true
           type: string
-        - default: '2017-03-16'
+        - default: '2017-08-16'
           description: Date on which the guest will end their stay in the hotel.
           in: query
           name: check_out
@@ -957,13 +957,13 @@ paths:
           name: property_code
           required: true
           type: string
-        - default: '2017-03-14'
+        - default: '2017-08-14'
           description: 'Date on which the guest will begin their stay in the hotel. Past availability is not displayed, future availability becomes less useful from about 6 months from the current date.'
           in: query
           name: check_in
           required: true
           type: string
-        - default: '2017-03-15'
+        - default: '2017-08-15'
           description: Date on which the guest will end their stay in the hotel.
           in: query
           name: check_out
@@ -1293,7 +1293,7 @@ paths:
           name: destination
           required: true
           type: string
-        - default: '2017-01-25'
+        - default: '2017-04-25'
           description: The date or range of dates on which you would like to depart from the origin station to go to the destination.
           in: query
           name: departure_date
@@ -1326,7 +1326,7 @@ paths:
           name: origin
           required: true
           type: string
-        - default: '2017-01-25'
+        - default: '2017-04-25'
           description: The date on which you would like to depart from the origin station to go to the destination.
           format: date
           in: query
@@ -1395,7 +1395,7 @@ paths:
         <p>This estimated search is based on Amadeus' Travel Intelligence Engine, a high performance scalable cloud-based platform, born in the age of Big Data and purposely built for the industry bringing total flexibility and speed to business intelligence for travel. Please see <a href="http://www.amadeus.com/travelintelligence">amadeus.com/travelintelligence</a> for more information.</p>
       operationId: Top Flight Destinations
       parameters:
-        - default: 2015-09
+        - default: 2016-09
           description: 'Period, in month of the year (YYYY-MM), when consumers are traveling. Only periods from 2011-01 up to previous month of the current year are valid. Future dates are not supported.'
           in: query
           name: period
@@ -1434,7 +1434,7 @@ paths:
         <p>This estimated search is based on Amadeus' Travel Intelligence Engine, a high performance scalable cloud-based platform, born in the age of Big Data and purposely built for the industry bringing total flexibility and speed to business intelligence for travel. Please see <a href="http://www.amadeus.com/travelintelligence">amadeus.com/travelintelligence</a> for more information.</p>
       operationId: Top Flight Searches
       parameters:
-        - default: 2015-09
+        - default: 2016-09
           description: 'Period of date (month or year) when consumers are searching to travel. Use YYYY-MM for month or YYYY for year. Only periods from year 2011-01 up to current year, previous month are valid. Future dates are not supported.'
           in: query
           name: period
@@ -2389,6 +2389,7 @@ definitions:
     properties:
       href:
         description: Hyperlink reference URL to the target
+        format: url
         type: string
     required:
       - href

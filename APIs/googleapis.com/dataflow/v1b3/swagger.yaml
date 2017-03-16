@@ -113,19 +113,19 @@ tags:
 paths:
   '/v1b3/projects/{projectId}/WorkerMessages':
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Send a worker_message to the service.
       operationId: dataflow.projects.workerMessages
@@ -161,19 +161,6 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: The kind of filter to use.
-          enum:
-            - UNKNOWN
-            - ALL
-            - TERMINATED
-            - ACTIVE
-          in: query
-          name: filter
-          type: string
-        - description: The location that contains this job.
-          in: query
-          name: location
-          type: string
         - description: |-
             Set this to the 'next_page_token' field of a previous response
             to request additional results in a long list.
@@ -192,8 +179,22 @@ paths:
             - JOB_VIEW_UNKNOWN
             - JOB_VIEW_SUMMARY
             - JOB_VIEW_ALL
+            - JOB_VIEW_DESCRIPTION
           in: query
           name: view
+          type: string
+        - description: The kind of filter to use.
+          enum:
+            - UNKNOWN
+            - ALL
+            - TERMINATED
+            - ACTIVE
+          in: query
+          name: filter
+          type: string
+        - description: The location that contains this job.
+          in: query
+          name: location
           type: string
       responses:
         '200':
@@ -208,19 +209,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Creates a Cloud Dataflow job.
       operationId: dataflow.projects.jobs.create
@@ -230,21 +231,22 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: Deprecated. This field is now in the Job message.
-          in: query
-          name: replaceJobId
-          type: string
         - description: The level of information requested in response.
           enum:
             - JOB_VIEW_UNKNOWN
             - JOB_VIEW_SUMMARY
             - JOB_VIEW_ALL
+            - JOB_VIEW_DESCRIPTION
           in: query
           name: view
           type: string
         - description: The location that contains this job.
           in: query
           name: location
+          type: string
+        - description: Deprecated. This field is now in the Job message.
+          in: query
+          name: replaceJobId
           type: string
         - in: body
           name: body
@@ -277,17 +279,18 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location that contains this job.
-          in: query
-          name: location
-          type: string
         - description: The level of information requested in response.
           enum:
             - JOB_VIEW_UNKNOWN
             - JOB_VIEW_SUMMARY
             - JOB_VIEW_ALL
+            - JOB_VIEW_DESCRIPTION
           in: query
           name: view
+          type: string
+        - description: The location that contains this job.
+          in: query
+          name: location
           type: string
       responses:
         '200':
@@ -302,19 +305,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     put:
       description: Updates the state of an existing Cloud Dataflow job.
       operationId: dataflow.projects.jobs.update
@@ -351,19 +354,19 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/jobs/{jobId}/debug/getConfig':
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Get encoded debug configuration for component. Not cacheable.
       operationId: dataflow.projects.jobs.debug.getConfig
@@ -396,19 +399,19 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/jobs/{jobId}/debug/sendCapture':
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Send encoded debug capture data for component.
       operationId: dataflow.projects.jobs.debug.sendCapture
@@ -455,16 +458,6 @@ paths:
           required: true
           type: string
         - description: |-
-            Return only messages with timestamps < end_time. The default is now
-            (i.e. return up to the latest messages available).
-          in: query
-          name: endTime
-          type: string
-        - description: The location which contains the job specified by job_id.
-          in: query
-          name: location
-          type: string
-        - description: |-
             If specified, return only messages with timestamps >= start_time.
             The default is the job creation time (i.e. beginning of messages).
           in: query
@@ -495,6 +488,16 @@ paths:
           in: query
           name: minimumImportance
           type: string
+        - description: The location which contains the job specified by job_id.
+          in: query
+          name: location
+          type: string
+        - description: |-
+            Return only messages with timestamps < end_time. The default is now
+            (i.e. return up to the latest messages available).
+          in: query
+          name: endTime
+          type: string
       responses:
         '200':
           description: Successful response
@@ -508,19 +511,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
   '/v1b3/projects/{projectId}/jobs/{jobId}/metrics':
     get:
       description: Request the job status.
@@ -559,34 +562,34 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
   '/v1b3/projects/{projectId}/jobs/{jobId}/workItems:lease':
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Leases a dataflow WorkItem to run.
       operationId: dataflow.projects.jobs.workItems.lease
@@ -619,19 +622,19 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/jobs/{jobId}/workItems:reportStatus':
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Reports the status of dataflow WorkItems leased by a worker.
       operationId: dataflow.projects.jobs.workItems.reportStatus
@@ -704,6 +707,7 @@ paths:
             - JOB_VIEW_UNKNOWN
             - JOB_VIEW_SUMMARY
             - JOB_VIEW_ALL
+            - JOB_VIEW_DESCRIPTION
           in: query
           name: view
           type: string
@@ -720,19 +724,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Creates a Cloud Dataflow job.
       operationId: dataflow.projects.locations.jobs.create
@@ -756,6 +760,7 @@ paths:
             - JOB_VIEW_UNKNOWN
             - JOB_VIEW_SUMMARY
             - JOB_VIEW_ALL
+            - JOB_VIEW_DESCRIPTION
           in: query
           name: view
           type: string
@@ -800,6 +805,7 @@ paths:
             - JOB_VIEW_UNKNOWN
             - JOB_VIEW_SUMMARY
             - JOB_VIEW_ALL
+            - JOB_VIEW_DESCRIPTION
           in: query
           name: view
           type: string
@@ -816,19 +822,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     put:
       description: Updates the state of an existing Cloud Dataflow job.
       operationId: dataflow.projects.locations.jobs.update
@@ -934,19 +940,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
   '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/metrics':
     get:
       description: Request the job status.
@@ -986,34 +992,34 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
   '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/workItems:lease':
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Leases a dataflow WorkItem to run.
       operationId: dataflow.projects.locations.jobs.workItems.lease
@@ -1051,19 +1057,19 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/workItems:reportStatus':
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Reports the status of dataflow WorkItems leased by a worker.
       operationId: dataflow.projects.locations.jobs.workItems.reportStatus
@@ -1101,19 +1107,19 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/templates':
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
     post:
       description: Creates a Cloud Dataflow job from a template.
       operationId: dataflow.projects.templates.create
@@ -1132,6 +1138,109 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/templates:get':
+    get:
+      description: Get the template associated with a template.
+      operationId: dataflow.projects.templates.get
+      parameters:
+        - description: Required. The ID of the Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The view to retrieve. Defaults to METADATA_ONLY.
+          enum:
+            - METADATA_ONLY
+          in: query
+          name: view
+          type: string
+        - description: |-
+            Required. A Cloud Storage path to the template from which to
+            create the job.
+            Must be a valid Cloud Storage URL, beginning with `gs://`.
+          in: query
+          name: gcsPath
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetTemplateResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+  '/v1b3/projects/{projectId}/templates:launch':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+    post:
+      description: Launch a template.
+      operationId: dataflow.projects.templates.launch
+      parameters:
+        - description: Required. The ID of the Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            Required. A Cloud Storage path to the template from which to create
+            the job.
+            Must be valid Cloud Storage URL, beginning with 'gs://'.
+          in: query
+          name: gcsPath
+          type: string
+        - description: |-
+            Whether or not the job should actually be executed after
+            validating parameters. Defaults to false. Validation errors do
+            not cause the HTTP request to fail if true.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LaunchTemplateParameters'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LaunchTemplateResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1251,6 +1360,38 @@ definitions:
           Total active CPU time across all cores (ie., non-idle) in milliseconds
           since start-up.
         format: uint64
+        type: string
+    type: object
+  ComponentSource:
+    description: |-
+      Description of an interstitial value between transforms in an execution
+      stage.
+    properties:
+      name:
+        description: Dataflow service generated name for this source.
+        type: string
+      originalTransformOrCollection:
+        description: |-
+          User name for the original user transform or collection with which this
+          source is most closely associated.
+        type: string
+      userName:
+        description: Human-readable name for this transform; may be user or system generated.
+        type: string
+    type: object
+  ComponentTransform:
+    description: Description of a transform executed as part of an execution stage.
+    properties:
+      name:
+        description: Dataflow service generated name for this source.
+        type: string
+      originalTransform:
+        description: |-
+          User name for the original user transform with which this transform is
+          most closely associated.
+        type: string
+      userName:
+        description: Human-readable name for this transform; may be user or system generated.
         type: string
     type: object
   ComputationTopology:
@@ -1542,6 +1683,63 @@ definitions:
         format: int32
         type: integer
     type: object
+  DisplayData:
+    description: Data provided with a pipeline or transform to provide descriptive info.
+    properties:
+      boolValue:
+        description: Contains value if the data is of a boolean type.
+        type: boolean
+      durationValue:
+        description: Contains value if the data is of duration type.
+        format: google-duration
+        type: string
+      floatValue:
+        description: Contains value if the data is of float type.
+        format: float
+        type: number
+      int64Value:
+        description: Contains value if the data is of int64 type.
+        format: int64
+        type: string
+      javaClassValue:
+        description: Contains value if the data is of java class type.
+        type: string
+      key:
+        description: |-
+          The key identifying the display data.
+          This is intended to be used as a label for the display data
+          when viewed in a dax monitoring system.
+        type: string
+      label:
+        description: An optional label to display in a dax UI for the element.
+        type: string
+      namespace:
+        description: |-
+          The namespace for the key. This is usually a class name or programming
+          language namespace (i.e. python module) which defines the display data.
+          This allows a dax monitoring system to specially handle the data
+          and perform custom rendering.
+        type: string
+      shortStrValue:
+        description: |-
+          A possible additional shorter value to display.
+          For example a java_class_name_value of com.mypackage.MyDoFn
+          will be stored with MyDoFn as the short_str_value and
+          com.mypackage.MyDoFn as the java_class_name value.
+          short_str_value can be displayed and java_class_name_value
+          will be displayed as a tooltip.
+        type: string
+      strValue:
+        description: Contains value if the data is of string type.
+        type: string
+      timestampValue:
+        description: Contains value if the data is of timestamp type.
+        format: google-datetime
+        type: string
+      url:
+        description: An optional full URL.
+        type: string
+    type: object
   DistributionUpdate:
     description: A metric value representing a distribution.
     properties:
@@ -1660,6 +1858,52 @@ definitions:
           $ref: '#/definitions/WorkerPool'
         type: array
     type: object
+  ExecutionStageSummary:
+    description: |-
+      Description of the composing transforms, names/ids, and input/outputs of a
+      stage of execution.  Some composing transforms and sources may have been
+      generated by the Dataflow service during execution planning.
+    properties:
+      componentSource:
+        description: Collections produced and consumed by component transforms of this stage.
+        items:
+          $ref: '#/definitions/ComponentSource'
+        type: array
+      componentTransform:
+        description: Transforms that comprise this execution stage.
+        items:
+          $ref: '#/definitions/ComponentTransform'
+        type: array
+      id:
+        description: Dataflow service generated id for this stage.
+        type: string
+      inputSource:
+        description: Input sources for this stage.
+        items:
+          $ref: '#/definitions/StageSource'
+        type: array
+      kind:
+        description: Type of tranform this stage is executing.
+        enum:
+          - UNKNOWN_KIND
+          - PAR_DO_KIND
+          - GROUP_BY_KEY_KIND
+          - FLATTEN_KIND
+          - READ_KIND
+          - WRITE_KIND
+          - CONSTANT_KIND
+          - SINGLETON_KIND
+          - SHUFFLE_KIND
+        type: string
+      name:
+        description: Dataflow service generated name for this stage.
+        type: string
+      outputSource:
+        description: Output sources for this stage.
+        items:
+          $ref: '#/definitions/StageSource'
+        type: array
+    type: object
   FailedLocation:
     description: Indicates which location failed to respond to a request for data.
     properties:
@@ -1715,6 +1959,20 @@ definitions:
       config:
         description: The encoded debug configuration for the requested component.
         type: string
+    type: object
+  GetTemplateResponse:
+    description: The response to a GetTemplate request.
+    properties:
+      metadata:
+        $ref: '#/definitions/TemplateMetadata'
+        description: |-
+          The template metadata describing the template name, available
+          parameters, etc.
+      status:
+        $ref: '#/definitions/Status'
+        description: |-
+          The status of the get template request. Any problems with the
+          request will be indicated in the error_details.
     type: object
   InstructionInput:
     description: |-
@@ -1837,7 +2095,7 @@ definitions:
         description: The environment for the job.
       executionInfo:
         $ref: '#/definitions/JobExecutionInfo'
-        description: Information about how the Cloud Dataflow service will run the job.
+        description: Deprecated.
       id:
         description: |-
           The unique ID of this job.
@@ -1874,6 +2132,13 @@ definitions:
           The name must match the regular expression
           `[a-z]([-a-z0-9]{0,38}[a-z0-9])?`
         type: string
+      pipelineDescription:
+        $ref: '#/definitions/PipelineDescription'
+        description: |-
+          Preliminary field: The format of this data may change at any time.
+          A description of the user pipeline and stages through which it is executed.
+          Created by Cloud Dataflow service.  Only retrieved with
+          JOB_VIEW_DESCRIPTION or JOB_VIEW_ALL.
       projectId:
         description: The ID of the Cloud Platform project that the job belongs to.
         type: string
@@ -2069,6 +2334,35 @@ definitions:
       start:
         description: The start (inclusive) of the key range.
         type: string
+    type: object
+  LaunchTemplateParameters:
+    description: Parameters to provide to the template being launched.
+    properties:
+      environment:
+        $ref: '#/definitions/RuntimeEnvironment'
+        description: The runtime environment for the job.
+      jobName:
+        description: Required. The job name to use for the created job.
+        type: string
+      parameters:
+        additionalProperties:
+          type: string
+        description: The runtime parameters to pass to the job.
+        type: object
+    type: object
+  LaunchTemplateResponse:
+    description: Response to the request to launch a template.
+    properties:
+      job:
+        $ref: '#/definitions/Job'
+        description: |-
+          The job that was launched, if the request was not a dry run and
+          the job was successfully launched.
+      status:
+        $ref: '#/definitions/Status'
+        description: |-
+          The status of the launch template request. Any problems with the request
+          will be indicated in the error_details.
     type: object
   LeaseWorkItemRequest:
     description: Request to lease WorkItems.
@@ -2394,6 +2688,27 @@ definitions:
         $ref: '#/definitions/WriteInstruction'
         description: Additional information for Write instructions.
     type: object
+  ParameterMetadata:
+    description: Metadata for a specific parameter.
+    properties:
+      helpText:
+        description: Required. The help text to display for the parameter.
+        type: string
+      isOptional:
+        description: Optional. Whether the parameter is optional. Defaults to false.
+        type: boolean
+      label:
+        description: Required. The label to display for the parameter.
+        type: string
+      name:
+        description: Required. The name of the parameter.
+        type: string
+      regexes:
+        description: Optional. Regexes that the parameter must match.
+        items:
+          type: string
+        type: array
+    type: object
   PartialGroupByKeyInstruction:
     description: |-
       An instruction that does a partial group-by-key.
@@ -2427,6 +2742,28 @@ definitions:
           description: Properties of the object.
         description: The value combining function to invoke.
         type: object
+    type: object
+  PipelineDescription:
+    description: |-
+      A descriptive representation of submitted pipeline as well as the executed
+      form.  This data is provided by the Dataflow service for ease of visualizing
+      the pipeline and interpretting Dataflow provided metrics.
+    properties:
+      displayData:
+        description: Pipeline level display data.
+        items:
+          $ref: '#/definitions/DisplayData'
+        type: array
+      executionPipelineStage:
+        description: Description of each stage of execution of the pipeline.
+        items:
+          $ref: '#/definitions/ExecutionStageSummary'
+        type: array
+      originalPipelineTransform:
+        description: Description of each transform in the pipeline and collections between them.
+        items:
+          $ref: '#/definitions/TransformSummary'
+        type: array
     type: object
   Position:
     description: |-
@@ -2969,6 +3306,25 @@ definitions:
         format: uint32
         type: integer
     type: object
+  StageSource:
+    description: Description of an input or output of an execution stage.
+    properties:
+      name:
+        description: Dataflow service generated name for this source.
+        type: string
+      originalTransformOrCollection:
+        description: |-
+          User name for the original user transform or collection with which this
+          source is most closely associated.
+        type: string
+      sizeBytes:
+        description: 'Size of the source, if measurable.'
+        format: int64
+        type: string
+      userName:
+        description: Human-readable name for this source; may be user or system generated.
+        type: string
+    type: object
   StateFamilyConfig:
     description: State family configuration.
     properties:
@@ -3096,6 +3452,7 @@ definitions:
         description: |-
           Named properties associated with the step. Each kind of
           predefined step has its own required set of properties.
+          Must be provided on Create.  Only retrieved with JOB_VIEW_ALL.
         type: object
     type: object
   StreamLocation:
@@ -3335,6 +3692,28 @@ definitions:
         description: The file to store the workflow in.
         type: string
     type: object
+  TemplateMetadata:
+    description: Metadata describing a template.
+    properties:
+      bypassTempDirValidation:
+        description: |-
+          If true, will bypass the validation that the temp directory is
+          writable. This should only be used with templates for pipelines
+          that are guaranteed not to need to write to the temp directory,
+          which is subject to change based on the optimizer.
+        type: boolean
+      description:
+        description: Optional. A description of the template.
+        type: string
+      name:
+        description: Required. The name of the template.
+        type: string
+      parameters:
+        description: The parameters for the template.
+        items:
+          $ref: '#/definitions/ParameterMetadata'
+        type: array
+    type: object
   TopologyConfig:
     description: |-
       Global topology of the streaming Dataflow job, including all
@@ -3363,6 +3742,44 @@ definitions:
           type: string
         description: Maps user stage names to stable computation names.
         type: object
+    type: object
+  TransformSummary:
+    description: 'Description of the type, names/ids, and input/outputs for a transform.'
+    properties:
+      displayData:
+        description: Transform-specific display data.
+        items:
+          $ref: '#/definitions/DisplayData'
+        type: array
+      id:
+        description: SDK generated id of this transform instance.
+        type: string
+      inputCollectionName:
+        description: User names for all collection inputs to this transform.
+        items:
+          type: string
+        type: array
+      kind:
+        description: Type of transform.
+        enum:
+          - UNKNOWN_KIND
+          - PAR_DO_KIND
+          - GROUP_BY_KEY_KIND
+          - FLATTEN_KIND
+          - READ_KIND
+          - WRITE_KIND
+          - CONSTANT_KIND
+          - SINGLETON_KIND
+          - SHUFFLE_KIND
+        type: string
+      name:
+        description: User provided name for this transform instance.
+        type: string
+      outputCollectionName:
+        description: User  names for all collection outputs to this transform.
+        items:
+          type: string
+        type: array
     type: object
   WorkItem:
     description: |-

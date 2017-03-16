@@ -84,18 +84,22 @@ paths:
           description: Successful request to get more information about a log profile.
           examples:
             application/json:
-              categories:
-                - Write
-                - Delete
-                - Action
-              locations:
-                - eastus
-                - westus
-              retentionPolicy:
-                days: 1
-                enabled: true
-              serviceBusRuleId: /subscriptions/6983c752-c9b8-48dd-b4d4-da739beb7e98/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/myNamespace/RootManageSharedAccessKey
-              storageAccountId: /subscriptions/6983c752-c9b8-48dd-b4d4-da739beb7e98/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/armlogs1
+              id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/providers/microsoft.insights/logprofiles/default
+              location: ''
+              name: default
+              properties:
+                categories:
+                  - Delete
+                  - Write
+                  - Action
+                locations:
+                  - global
+                retentionPolicy:
+                  days: 3
+                  enabled: true
+                serviceBusRuleId: ''
+                storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162
+              type: ''
           schema:
             $ref: '#/definitions/LogProfileResource'
       tags:
@@ -111,25 +115,29 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/LogProfileProperties'
+            $ref: '#/definitions/LogProfileResource'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Successful request to create or update a log profile
           examples:
             application/json:
-              categories:
-                - Write
-                - Delete
-                - Action
-              locations:
-                - eastus
-                - westus
-              retentionPolicy:
-                days: 1
-                enabled: true
-              serviceBusRuleId: /subscriptions/6983c752-c9b8-48dd-b4d4-da739beb7e98/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/myNamespace/RootManageSharedAccessKey
-              storageAccountId: /subscriptions/6983c752-c9b8-48dd-b4d4-da739beb7e98/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/armlogs1
+              id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/providers/microsoft.insights/logprofiles/default
+              location: ''
+              name: default
+              properties:
+                categories:
+                  - Delete
+                  - Write
+                  - Action
+                locations:
+                  - global
+                retentionPolicy:
+                  days: 3
+                  enabled: true
+                serviceBusRuleId: ''
+                storageAccountId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162
+              type: ''
           schema:
             $ref: '#/definitions/LogProfileResource'
       tags:
@@ -168,7 +176,6 @@ definitions:
         description: the resource id of the storage account to which you would like to send the Activity Log.
         type: string
     required:
-      - storageAccountId
       - locations
   LogProfileResource:
     allOf:

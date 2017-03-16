@@ -170,7 +170,7 @@ paths:
           name: top
           required: false
           type: integer
-        - description: Return total amount of items for a given filter criteria.
+        - description: Return total number of items for a given filter criteria.
           enum:
             - None
             - AllPages
@@ -267,7 +267,7 @@ paths:
           name: top
           required: false
           type: integer
-        - description: Return total amount of items for a given filter criteria.
+        - description: Return total number of items for a given filter criteria.
           enum:
             - None
             - AllPages
@@ -603,7 +603,7 @@ paths:
           name: top
           required: false
           type: integer
-        - description: Return total amount of items for a given filter criteria.
+        - description: Return total number of items for a given filter criteria.
           enum:
             - None
             - AllPages
@@ -1153,6 +1153,112 @@ paths:
       summary: Cancel one reservation.
       tags:
         - Bookings
+  /api/booking/v0/daily_rates:
+    get:
+      consumes: []
+      deprecated: false
+      description: "With the rates request you can get a list of different daily rates. You will have to at least \r\n            specify the hotel, the channel code, and a calendar range. The channel code will define which rates will be \r\n            returned based on the access control configuration for the rates. Additionally rate plan codes may be specified in\r\n            the request in order to limit only those rates of the given plans, if they are not specified, it will return all the public rate plans.\r\n            If requested the caller may specify whether he wants policies or not."
+      operationId: DailyRates_GetDailyRates
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Define the hotel id to request the availability for.
+          format: int32
+          in: query
+          name: hotelId
+          required: true
+          type: integer
+        - description: Define the first business day you would like to get availability numbers for. The day should not be in the past.
+          format: date-time
+          in: query
+          name: from
+          required: true
+          type: string
+        - description: "Define the last business day you would like to get rates for (inclusive). The maximum time span between <i>'From'</i> and <i>'To'</i>\r\n            is limited to 365 days. This can't be less than the 'From' date."
+          format: date-time
+          in: query
+          name: to
+          required: true
+          type: string
+        - description: Define the channel code in order to look up the rates for.
+          in: query
+          name: channelCode
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: Define the sections you want to expand and get informed about rates for.
+          in: query
+          items:
+            enum:
+              - None
+              - Policies
+              - RatePlans
+            type: string
+          name: expand
+          required: false
+          type: array
+        - collectionFormat: csv
+          description: 'Define the codes of rate plans to show in the response. A list of comma '','' separated rate plan codes.'
+          in: query
+          items:
+            type: string
+          name: ratePlanCodes
+          required: false
+          type: array
+        - description: Amount of items to skip.
+          format: int32
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Amount of items to select.
+          format: int32
+          in: query
+          name: top
+          required: false
+          type: integer
+        - description: Return total number of items for a given filter criteria.
+          enum:
+            - None
+            - AllPages
+          in: query
+          name: inlinecount
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Different rates for the requested stay details grouped by room type.
+          schema:
+            $ref: '#/definitions/DailyRatesResponse'
+        '204':
+          description: When there are no data to return.
+        '400':
+          description: The request failed to validate. One of the missing request parameters was missing or their value was wrong.
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI. This code will not be returned when there are no data to return for (please see 204).
+        '409':
+          description: When an error occurs which prevent the API to return a response and is normally cause by bad input.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: 'Get a list of daily rates given a hotel Id, a channel code and a date range.'
+      tags:
+        - DailyRates
   /api/booking/v0/rates:
     get:
       consumes: []
@@ -2242,6 +2348,16 @@ definitions:
           $ref: '#/definitions/RoomAvailabilityDetail'
         type: array
     type: object
+  DailyCalendarRate:
+    properties:
+      business_day:
+        format: date-time
+        type: string
+      offers:
+        items:
+          $ref: '#/definitions/DailyRateOffer'
+        type: array
+    type: object
   DailyRate:
     properties:
       addon_services:
@@ -2273,6 +2389,127 @@ definitions:
       room_type:
         description: Code of the room type which is booked for that day
         type: string
+    type: object
+  DailyRateCancellationPolicy:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      code:
+        type: string
+    type: object
+  DailyRateHotel:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      code:
+        type: string
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+    type: object
+  DailyRateNoShowPolicy:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      code:
+        type: string
+    type: object
+  DailyRateOffer:
+    properties:
+      cancellation_policy_code:
+        type: string
+      guarantee_type_code:
+        type: string
+      noshow_policy_code:
+        type: string
+      rateplan_code:
+        type: string
+      room_type_details:
+        items:
+          $ref: '#/definitions/DailyRateRoomOffer'
+        type: array
+    type: object
+  DailyRatePlan:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      code:
+        type: string
+      currency:
+        description: Three letter ISO code.
+        type: string
+      name:
+        type: string
+    type: object
+  DailyRateRoomOffer:
+    properties:
+      available_rooms_count:
+        format: int32
+        type: integer
+      is_available:
+        type: boolean
+      rates:
+        items:
+          $ref: '#/definitions/DailyRoomRate'
+        type: array
+      restrictions:
+        $ref: '#/definitions/Restrictions'
+      room_type_code:
+        type: string
+      unavailable_reason:
+        description: If there is an issue and this room offer is unavailable (IsAvailable=false) this message may be not empty.
+        type: string
+    type: object
+  DailyRatesResponse:
+    properties:
+      _count:
+        description: The number of items matching your request in total for all pages.
+        format: int32
+        type: integer
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      daily_rates:
+        items:
+          $ref: '#/definitions/DailyCalendarRate'
+        type: array
+      hotel:
+        $ref: '#/definitions/DailyRateHotel'
+      policies:
+        $ref: '#/definitions/Policies'
+      rateplans:
+        items:
+          $ref: '#/definitions/DailyRatePlan'
+        type: array
+      room_types:
+        items:
+          $ref: '#/definitions/RoomType'
+        type: array
+    type: object
+  DailyRoomRate:
+    properties:
+      adults:
+        format: int32
+        type: integer
+      rate:
+        format: double
+        type: number
     type: object
   DepositPolicy:
     properties:
@@ -2431,6 +2668,43 @@ definitions:
           $ref: '#/definitions/Card'
         type: array
     type: object
+  GetDailyRatesRequest:
+    properties:
+      channelCode:
+        description: Define the channel code in order to look up the rates for.
+        type: string
+      expand:
+        description: Define the sections you want to expand and get informed about rates for.
+        items:
+          enum:
+            - None
+            - Policies
+            - RatePlans
+          type: string
+        type: array
+      from:
+        description: Define the first business day you would like to get availability numbers for. The day should not be in the past.
+        format: date-time
+        type: string
+      hotelId:
+        description: Define the hotel id to request the availability for.
+        format: int32
+        type: integer
+      ratePlanCodes:
+        description: 'Define the codes of rate plans to show in the response. A list of comma '','' separated rate plan codes.'
+        items:
+          type: string
+        type: array
+      to:
+        description: "Define the last business day you would like to get rates for (inclusive). The maximum time span between <i>'From'</i> and <i>'To'</i>\r\n            is limited to 365 days. This can't be less than the 'From' date."
+        format: date-time
+        type: string
+    required:
+      - hotelId
+      - from
+      - to
+      - channelCode
+    type: object
   GroupMaster:
     properties:
       code:
@@ -2483,6 +2757,25 @@ definitions:
       valid_token:
         description: "Tells you if there is a token for a valid creadit card on the reservation that can be used to\r\n            capture the reservations amount or to guarantee for the reservation"
         type: boolean
+    type: object
+  GuaranteeTypes:
+    properties:
+      accepted:
+        items:
+          enum:
+            - PM4Hold
+            - PM6Hold
+            - GuaranteeByCompany
+            - GuaranteeByTravelAgent
+            - GuaranteeToGuestAccount
+            - GuaranteeToCreditCard
+            - Deposit
+            - Prepayment
+            - NonGuaranteed
+          type: string
+        type: array
+      code:
+        type: string
     type: object
   HotelInfo:
     properties:
@@ -2668,7 +2961,7 @@ definitions:
   PagedDataRequest:
     properties:
       inlinecount:
-        description: Return total amount of items for a given filter criteria.
+        description: Return total number of items for a given filter criteria.
         enum:
           - None
           - AllPages
@@ -2681,6 +2974,21 @@ definitions:
         description: Amount of items to select.
         format: int32
         type: integer
+    type: object
+  Policies:
+    properties:
+      cancellation_policies:
+        items:
+          $ref: '#/definitions/DailyRateCancellationPolicy'
+        type: array
+      guarantee_types:
+        items:
+          $ref: '#/definitions/GuaranteeTypes'
+        type: array
+      noshow_policies:
+        items:
+          $ref: '#/definitions/DailyRateNoShowPolicy'
+        type: array
     type: object
   PreCheckInRequest:
     description: With this request you can execute a precheckin on a reservation
@@ -3170,6 +3478,24 @@ definitions:
           $ref: '#/definitions/ReservationResponse'
         type: array
     type: object
+  Restrictions:
+    properties:
+      closed:
+        type: boolean
+      closed_to_arrival:
+        type: boolean
+      closed_to_departure:
+        type: boolean
+      maximum_length_of_stay:
+        format: int32
+        type: integer
+      minimum_length_of_stay:
+        format: int32
+        type: integer
+      minimum_stay_through:
+        format: int32
+        type: integer
+    type: object
   RoomAvailabilityDetail:
     properties:
       _links:
@@ -3287,6 +3613,18 @@ definitions:
         type: string
       room_type:
         description: The room type code for the specified business day
+        type: string
+    type: object
+  RoomType:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      code:
+        type: string
+      name:
         type: string
     type: object
   RoomTypeCount:

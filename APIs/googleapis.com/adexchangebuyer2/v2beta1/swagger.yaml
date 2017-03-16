@@ -146,8 +146,6 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -159,6 +157,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     post:
       description: Creates a new client buyer.
       operationId: adexchangebuyer2.accounts.clients.create
@@ -210,8 +210,6 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -223,6 +221,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     put:
       description: Updates an existing client buyer.
       operationId: adexchangebuyer2.accounts.clients.update
@@ -277,12 +277,6 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. Server may return fewer clients than requested.
-            If unspecified, server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
             A token identifying a page of results the server should return.
             Typically, this is the value of
             ListClientUserInvitationsResponse.nextPageToken
@@ -292,6 +286,12 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: |-
+            Requested page size. Server may return fewer clients than requested.
+            If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -303,8 +303,6 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -316,6 +314,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     post:
       description: |-
         Creates and sends out an email invitation to access
@@ -381,8 +381,6 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -394,6 +392,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
   '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/users':
     get:
       description: |-
@@ -444,8 +444,6 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -457,6 +455,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
   '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/users/{userId}':
     get:
       description: Retrieves an existing client user.
@@ -490,8 +490,6 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -503,6 +501,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     put:
       description: |-
         Updates an existing client user.
@@ -540,7 +540,476 @@ paths:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
+  '/v2beta1/accounts/{accountId}/creatives':
+    get:
+      description: Lists creatives.
+      operationId: adexchangebuyer2.accounts.creatives.list
+      parameters:
+        - description: |-
+            The account to list the creatives from.
+            Specify "-" to list all creatives the current user has access to.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListCreativesResponse.next_page_token
+            returned from the previous call to 'ListCreatives' method.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Requested page size. The server may return fewer creatives than requested
+            (due to timeout constraint) even if more are available via another call.
+            If unspecified, server will pick an appropriate default.
+            Acceptable values are 1 to 1000, inclusive.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            An optional query string to filter creatives. If no filter is specified,
+            all active creatives will be returned.
+            Supported queries are:
+            <ul>
+            <li>accountId=<i>account_id_string</i>
+            <li>creativeId=<i>creative_id_string</i>
+            <li>dealsStatus: {approved, conditionally_approved, disapproved,
+                               not_checked}
+            <li>openAuctionStatus: {approved, conditionally_approved, disapproved,
+                                      not_checked}
+            <li>attribute: {a numeric attribute from the list of attributes}
+            <li>disapprovalReason: {a reason from DisapprovalReason
+            </ul>
+            Example: 'accountId=12345 AND (dealsStatus:disapproved AND disapprovalReason:unacceptable_content) OR attribute:47'
+          in: query
+          name: query
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListCreativesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+    post:
+      description: Creates a creative.
+      operationId: adexchangebuyer2.accounts.creatives.create
+      parameters:
+        - description: |-
+            The account that this creative belongs to.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            Indicates if multiple creatives can share an ID or not. Default is
+            NO_DUPLICATES (one ID per creative).
+          enum:
+            - NO_DUPLICATES
+            - FORCE_ENABLE_DUPLICATE_IDS
+          in: query
+          name: duplicateIdMode
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Creative'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Creative'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}':
+    get:
+      description: Gets a creative.
+      operationId: adexchangebuyer2.accounts.creatives.get
+      parameters:
+        - description: The account the creative belongs to.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The ID of the creative to retrieve.
+          in: path
+          name: creativeId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Creative'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+    put:
+      description: Updates a creative.
+      operationId: adexchangebuyer2.accounts.creatives.update
+      parameters:
+        - description: |-
+            The account that this creative belongs to.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            The buyer-defined creative ID of this creative.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          in: path
+          name: creativeId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Creative'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Creative'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations':
+    get:
+      description: List all creative-deal associations.
+      operationId: adexchangebuyer2.accounts.creatives.dealAssociations.list
+      parameters:
+        - description: |-
+            The account to list the associations from.
+            Specify "-" to list all creatives the current user has access to.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            The creative ID to list the associations from.
+            Specify "-" to list all creatives under the above account.
+          in: path
+          name: creativeId
+          required: true
+          type: string
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListDealAssociationsResponse.next_page_token
+            returned from the previous call to 'ListDealAssociations' method.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Requested page size. Server may return fewer associations than requested.
+            If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            An optional query string to filter deal associations. If no filter is
+            specified, all associations will be returned.
+            Supported queries are:
+            <ul>
+            <li>accountId=<i>account_id_string</i>
+            <li>creativeId=<i>creative_id_string</i>
+            <li>dealsId=<i>deals_id_string</i>
+            <li>dealsStatus:{approved, conditionally_approved, disapproved,
+                              not_checked}
+            <li>openAuctionStatus:{approved, conditionally_approved, disapproved,
+                                     not_checked}
+            </ul>
+            Example: 'dealsId=12345 AND dealsStatus:disapproved'
+          in: query
+          name: query
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListDealAssociationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations:add':
+    parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+    post:
+      description: Associate an existing deal with a creative.
+      operationId: adexchangebuyer2.accounts.creatives.dealAssociations.add
+      parameters:
+        - description: The account the creative belongs to.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The ID of the creative associated with the deal.
+          in: path
+          name: creativeId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AddDealAssociationRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations:remove':
+    parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+    post:
+      description: Remove the association between a deal and a creative.
+      operationId: adexchangebuyer2.accounts.creatives.dealAssociations.remove
+      parameters:
+        - description: The account the creative belongs to.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The ID of the creative associated with the deal.
+          in: path
+          name: creativeId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemoveDealAssociationRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}:stopWatching':
+    parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+    post:
+      description: |-
+        Stops watching a creative. Will stop push notifications being sent to the
+        topics when the creative changes status.
+      operationId: adexchangebuyer2.accounts.creatives.stopWatching
+      parameters:
+        - description: The account of the creative to stop notifications for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            The creative ID of the creative to stop notifications for.
+            Specify "-" to specify stopping account level notifications.
+          in: path
+          name: creativeId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StopWatchingCreativeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}:watch':
+    parameters:
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+    post:
+      description: |-
+        Watches a creative. Will result in push notifications being sent to the
+        topic when the creative changes status.
+      operationId: adexchangebuyer2.accounts.creatives.watch
+      parameters:
+        - description: The account of the creative to watch.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            The creative ID to watch for status changes.
+            Specify "-" to watch all creatives under the above account.
+            If both creative-level and account-level notifications are
+            sent, only a single notification will be sent to the
+            creative-level notification topic.
+          in: path
+          name: creativeId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/WatchCreativeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
 definitions:
+  AddDealAssociationRequest:
+    description: A request for associating a deal and a creative.
+    properties:
+      association:
+        $ref: '#/definitions/CreativeDealAssociation'
+        description: The association between a creative and a deal that should be added.
+    type: object
+  AppContext:
+    description: '@OutputOnly The app type the restriction applies to for mobile device.'
+    properties:
+      appTypes:
+        description: The app types this restriction applies to.
+        items:
+          enum:
+            - NATIVE
+            - WEB
+          type: string
+        type: array
+    type: object
+  AuctionContext:
+    description: '@OutputOnly The auction type the restriction applies to.'
+    properties:
+      auctionTypes:
+        description: The auction types this restriction applies to.
+        items:
+          enum:
+            - OPEN_AUCTION
+            - DIRECT_DEALS
+          type: string
+        type: array
+    type: object
   Client:
     description: |-
       A client resource represents a client buyer&mdash;an agency,
@@ -690,6 +1159,444 @@ definitions:
         format: int64
         type: string
     type: object
+  Correction:
+    description: '@OutputOnly Shows any corrections that were applied to this creative.'
+    properties:
+      contexts:
+        description: The contexts for the correction.
+        items:
+          $ref: '#/definitions/ServingContext'
+        type: array
+      details:
+        description: Additional details about what was corrected.
+        items:
+          type: string
+        type: array
+      type:
+        description: The type of correction that was applied to the creative.
+        enum:
+          - CORRECTION_TYPE_UNSPECIFIED
+          - VENDOR_IDS_ADDED
+          - SSL_ATTRIBUTE_REMOVED
+          - FLASH_FREE_ATTRIBUTE_REMOVED
+          - FLASH_FREE_ATTRIBUTE_ADDED
+          - REQUIRED_ATTRIBUTE_ADDED
+          - REQUIRED_VENDOR_ADDED
+          - SSL_ATTRIBUTE_ADDED
+          - IN_BANNER_VIDEO_ATTRIBUTE_ADDED
+          - MRAID_ATTRIBUTE_ADDED
+          - FLASH_ATTRIBUTE_REMOVED
+          - VIDEO_IN_SNIPPET_ATTRIBUTE_ADDED
+        type: string
+    type: object
+  Creative:
+    description: A creative and its classification data.
+    properties:
+      accountId:
+        description: |-
+          The account that this creative belongs to.
+          Can be used to filter the response of the
+          creatives.list
+          method.
+        type: string
+      adChoicesDestinationUrl:
+        description: The link to AdChoices destination page.
+        type: string
+      advertiserName:
+        description: The name of the company being advertised in the creative.
+        type: string
+      agencyId:
+        description: The agency ID for this creative.
+        format: int64
+        type: string
+      apiUpdateTime:
+        description: '@OutputOnly The last update timestamp of the creative via API.'
+        format: google-datetime
+        type: string
+      attributes:
+        description: |-
+          All attributes for the ads that may be shown from this creative.
+          Can be used to filter the response of the
+          creatives.list
+          method.
+        items:
+          enum:
+            - ATTRIBUTE_UNSPECIFIED
+            - IS_TAGGED
+            - IS_COOKIE_TARGETED
+            - IS_USER_INTEREST_TARGETED
+            - EXPANDING_DIRECTION_NONE
+            - EXPANDING_DIRECTION_UP
+            - EXPANDING_DIRECTION_DOWN
+            - EXPANDING_DIRECTION_LEFT
+            - EXPANDING_DIRECTION_RIGHT
+            - EXPANDING_DIRECTION_UP_LEFT
+            - EXPANDING_DIRECTION_UP_RIGHT
+            - EXPANDING_DIRECTION_DOWN_LEFT
+            - EXPANDING_DIRECTION_DOWN_RIGHT
+            - EXPANDING_DIRECTION_UP_OR_DOWN
+            - EXPANDING_DIRECTION_LEFT_OR_RIGHT
+            - EXPANDING_DIRECTION_ANY_DIAGONAL
+            - EXPANDING_ACTION_ROLLOVER_TO_EXPAND
+            - INSTREAM_VAST_VIDEO_TYPE_VPAID_FLASH
+            - RICH_MEDIA_CAPABILITY_TYPE_MRAID
+            - RICH_MEDIA_CAPABILITY_TYPE_SSL
+            - RICH_MEDIA_CAPABILITY_TYPE_INTERSTITIAL
+            - NATIVE_ELIGIBILITY_ELIGIBLE
+            - NATIVE_ELIGIBILITY_NOT_ELIGIBLE
+            - RENDERING_SIZELESS_ADX
+          type: string
+        type: array
+      clickThroughUrls:
+        description: The set of destination URLs for the creative.
+        items:
+          type: string
+        type: array
+      corrections:
+        description: '@OutputOnly Shows any corrections that were applied to this creative.'
+        items:
+          $ref: '#/definitions/Correction'
+        type: array
+      creativeId:
+        description: |-
+          The buyer-defined creative ID of this creative.
+          Can be used to filter the response of the
+          creatives.list
+          method.
+        type: string
+      dealsStatus:
+        description: |-
+          @OutputOnly The top-level deals status of this creative.
+          If disapproved, an entry for 'auctionType=DIRECT_DEALS' (or 'ALL') in
+          serving_restrictions will also exist. Note
+          that this may be nuanced with other contextual restrictions, in which case,
+          it may be preferable to read from serving_restrictions directly.
+          Can be used to filter the response of the
+          creatives.list
+          method.
+        enum:
+          - STATUS_UNSPECIFIED
+          - NOT_CHECKED
+          - CONDITIONALLY_APPROVED
+          - APPROVED
+          - DISAPPROVED
+        type: string
+      detectedAdvertiserIds:
+        description: '@OutputOnly Detected advertiser IDs, if any.'
+        items:
+          format: int64
+          type: string
+        type: array
+      detectedDomains:
+        description: |-
+          @OutputOnly
+          The detected domains for this creative.
+        items:
+          type: string
+        type: array
+      detectedLanguages:
+        description: |-
+          @OutputOnly
+          The detected languages for this creative. The order is arbitrary. The codes
+          are 2 or 5 characters and are documented at
+          https://developers.google.com/adwords/api/docs/appendix/languagecodes.
+        items:
+          type: string
+        type: array
+      detectedProductCategories:
+        description: |-
+          @OutputOnly Detected product categories, if any.
+          See the ad-product-categories.txt file in the technical documentation
+          for a list of IDs.
+        items:
+          format: int32
+          type: integer
+        type: array
+      detectedSensitiveCategories:
+        description: |-
+          @OutputOnly Detected sensitive categories, if any.
+          See the ad-sensitive-categories.txt file in the technical documentation for
+          a list of IDs. You should use these IDs along with the
+          excluded-sensitive-category field in the bid request to filter your bids.
+        items:
+          format: int32
+          type: integer
+        type: array
+      filteringStats:
+        $ref: '#/definitions/FilteringStats'
+        description: '@OutputOnly The filtering stats for this creative.'
+      html:
+        $ref: '#/definitions/HtmlContent'
+        description: An HTML creative.
+      impressionTrackingUrls:
+        description: The set of URLs to be called to record an impression.
+        items:
+          type: string
+        type: array
+      native:
+        $ref: '#/definitions/NativeContent'
+        description: A native creative.
+      openAuctionStatus:
+        description: |-
+          @OutputOnly The top-level open auction status of this creative.
+          If disapproved, an entry for 'auctionType = OPEN_AUCTION' (or 'ALL') in
+          serving_restrictions will also exist. Note
+          that this may be nuanced with other contextual restrictions, in which case,
+          it may be preferable to read from serving_restrictions directly.
+          Can be used to filter the response of the
+          creatives.list
+          method.
+        enum:
+          - STATUS_UNSPECIFIED
+          - NOT_CHECKED
+          - CONDITIONALLY_APPROVED
+          - APPROVED
+          - DISAPPROVED
+        type: string
+      restrictedCategories:
+        description: All restricted categories for the ads that may be shown from this creative.
+        items:
+          enum:
+            - NO_RESTRICTED_CATEGORIES
+            - ALCOHOL
+          type: string
+        type: array
+      servingRestrictions:
+        description: |-
+          @OutputOnly The granular status of this ad in specific contexts.
+          A context here relates to where something ultimately serves (for example,
+          a physical location, a platform, an HTTPS vs HTTP request, or the type
+          of auction).
+        items:
+          $ref: '#/definitions/ServingRestriction'
+        type: array
+      vendorIds:
+        description: |-
+          All vendor IDs for the ads that may be shown from this creative.
+          See https://storage.googleapis.com/adx-rtb-dictionaries/vendors.txt
+          for possible values.
+        items:
+          format: int32
+          type: integer
+        type: array
+      version:
+        description: '@OutputOnly The version of this creative.'
+        format: int32
+        type: integer
+      video:
+        $ref: '#/definitions/VideoContent'
+        description: A video creative.
+    type: object
+  CreativeDealAssociation:
+    description: The association between a creative and a deal.
+    properties:
+      accountId:
+        description: The account the creative belongs to.
+        type: string
+      creativeId:
+        description: The ID of the creative associated with the deal.
+        type: string
+      dealsId:
+        description: The externalDealId for the deal associated with the creative.
+        type: string
+    type: object
+  Date:
+    description: |-
+      Represents a whole calendar date, e.g. date of birth. The time of day and
+      time zone are either specified elsewhere or are not significant. The date
+      is relative to the Proleptic Gregorian Calendar. The day may be 0 to
+      represent a year and month where the day is not significant, e.g. credit card
+      expiration date. The year may be 0 to represent a month and day independent
+      of year, e.g. anniversary date. Related types are google.type.TimeOfDay
+      and `google.protobuf.Timestamp`.
+    properties:
+      day:
+        description: |-
+          Day of month. Must be from 1 to 31 and valid for the year and month, or 0
+          if specifying a year/month where the day is not significant.
+        format: int32
+        type: integer
+      month:
+        description: Month of year. Must be from 1 to 12.
+        format: int32
+        type: integer
+      year:
+        description: |-
+          Year of date. Must be from 1 to 9999, or 0 if specifying a date without
+          a year.
+        format: int32
+        type: integer
+    type: object
+  Disapproval:
+    description: '@OutputOnly The reason and details for a disapproval.'
+    properties:
+      details:
+        description: Additional details about the reason for disapproval.
+        items:
+          type: string
+        type: array
+      reason:
+        description: The categorized reason for disapproval.
+        enum:
+          - LENGTH_OF_IMAGE_ANIMATION
+          - BROKEN_URL
+          - MEDIA_NOT_FUNCTIONAL
+          - INVALID_FOURTH_PARTY_CALL
+          - INCORRECT_REMARKETING_DECLARATION
+          - LANDING_PAGE_ERROR
+          - AD_SIZE_DOES_NOT_MATCH_AD_SLOT
+          - NO_BORDER
+          - FOURTH_PARTY_BROWSER_COOKIES
+          - LSO_OBJECTS
+          - BLANK_CREATIVE
+          - DESTINATION_URLS_UNDECLARED
+          - PROBLEM_WITH_CLICK_MACRO
+          - INCORRECT_AD_TECHNOLOGY_DECLARATION
+          - INCORRECT_DESTINATION_URL_DECLARATION
+          - EXPANDABLE_INCORRECT_DIRECTION
+          - EXPANDABLE_DIRECTION_NOT_SUPPORTED
+          - EXPANDABLE_INVALID_VENDOR
+          - EXPANDABLE_FUNCTIONALITY
+          - VIDEO_INVALID_VENDOR
+          - VIDEO_UNSUPPORTED_LENGTH
+          - VIDEO_UNSUPPORTED_FORMAT
+          - VIDEO_FUNCTIONALITY
+          - LANDING_PAGE_DISABLED
+          - MALWARE_SUSPECTED
+          - ADULT_IMAGE_OR_VIDEO
+          - INACCURATE_AD_TEXT
+          - COUNTERFEIT_DESIGNER_GOODS
+          - POP_UP
+          - INVALID_RTB_PROTOCOL_USAGE
+          - RAW_IP_ADDRESS_IN_SNIPPET
+          - UNACCEPTABLE_CONTENT_SOFTWARE
+          - UNAUTHORIZED_COOKIE_ON_GOOGLE_DOMAIN
+          - UNDECLARED_FLASH_OBJECTS
+          - INVALID_SSL_DECLARATION
+          - DIRECT_DOWNLOAD_IN_AD
+          - MAXIMUM_DOWNLOAD_SIZE_EXCEEDED
+          - DESTINATION_URL_SITE_NOT_CRAWLABLE
+          - BAD_URL_LEGAL_DISAPPROVAL
+          - PHARMA_GAMBLING_ALCOHOL_NOT_ALLOWED
+          - DYNAMIC_DNS_AT_DESTINATION_URL
+          - POOR_IMAGE_OR_VIDEO_QUALITY
+          - UNACCEPTABLE_IMAGE_CONTENT
+          - INCORRECT_IMAGE_LAYOUT
+          - IRRELEVANT_IMAGE_OR_VIDEO
+          - DESTINATION_SITE_DOES_NOT_ALLOW_GOING_BACK
+          - MISLEADING_CLAIMS_IN_AD
+          - RESTRICTED_PRODUCTS
+          - UNACCEPTABLE_CONTENT
+          - AUTOMATED_AD_CLICKING
+          - INVALID_URL_PROTOCOL
+          - UNDECLARED_RESTRICTED_CONTENT
+          - INVALID_REMARKETING_LIST_USAGE
+          - DESTINATION_SITE_NOT_CRAWLABLE_ROBOTS_TXT
+          - CLICK_TO_DOWNLOAD_NOT_AN_APP
+          - INACCURATE_REVIEW_EXTENSION
+          - SEXUALLY_EXPLICIT_CONTENT
+          - GAINING_AN_UNFAIR_ADVANTAGE
+          - GAMING_THE_GOOGLE_NETWORK
+          - DANGEROUS_PRODUCTS_KNIVES
+          - DANGEROUS_PRODUCTS_EXPLOSIVES
+          - DANGEROUS_PRODUCTS_GUNS
+          - DANGEROUS_PRODUCTS_DRUGS
+          - DANGEROUS_PRODUCTS_TOBACCO
+          - DANGEROUS_PRODUCTS_WEAPONS
+          - UNCLEAR_OR_IRRELEVANT_AD
+          - PROFESSIONAL_STANDARDS
+          - DYSFUNCTIONAL_PROMOTION
+          - INVALID_INTEREST_BASED_AD
+          - MISUSE_OF_PERSONAL_INFORMATION
+          - OMISSION_OF_RELEVANT_INFORMATION
+          - UNAVAILABLE_PROMOTIONS
+          - MISLEADING_PROMOTIONS
+          - INAPPROPRIATE_CONTENT
+          - SENSITIVE_EVENTS
+          - SHOCKING_CONTENT
+          - ENABLING_DISHONEST_BEHAVIOR
+          - TECHNICAL_REQUIREMENTS
+          - RESTRICTED_POLITICAL_CONTENT
+          - UNSUPPORTED_CONTENT
+          - INVALID_BIDDING_METHOD
+          - VIDEO_TOO_LONG
+          - VIOLATES_JAPANESE_PHARMACY_LAW
+          - UNACCREDITED_PET_PHARMACY
+          - ABORTION
+          - CONTRACEPTIVES
+          - NEED_CERTIFICATES_TO_ADVERTISE_IN_CHINA
+          - KCDSP_REGISTRATION
+          - NOT_FAMILY_SAFE
+          - CLINICAL_TRIAL_RECRUITMENT
+          - MAXIMUM_NUMBER_OF_HTTP_CALLS_EXCEEDED
+          - MAXIMUM_NUMBER_OF_COOKIES_EXCEEDED
+          - PERSONAL_LOANS
+          - UNSUPPORTED_FLASH_CONTENT
+        type: string
+    type: object
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
+    type: object
+  FilteringStats:
+    description: |-
+      @OutputOnly Filtering reasons for this creative during a period of a single
+      day (from midnight to midnight Pacific).
+    properties:
+      date:
+        $ref: '#/definitions/Date'
+        description: |-
+          The day during which the data was collected.
+          The data is collected from 00:00:00 to 23:59:59 PT.
+          During switches from PST to PDT and back, the day may
+          contain 23 or 25 hours of data instead of the usual 24.
+      reasons:
+        description: The set of filtering reasons for this date.
+        items:
+          $ref: '#/definitions/Reason'
+        type: array
+    type: object
+  HtmlContent:
+    description: HTML content for a creative.
+    properties:
+      height:
+        description: The height of the HTML snippet in pixels.
+        format: int32
+        type: integer
+      snippet:
+        description: The HTML snippet that displays the ad when inserted in the web page.
+        type: string
+      width:
+        description: The width of the HTML snippet in pixels.
+        format: int32
+        type: integer
+    type: object
+  Image:
+    description: |-
+      An image resource. You may provide a larger image than was requested,
+      so long as the aspect ratio is preserved.
+    properties:
+      height:
+        description: Image height in pixels.
+        format: int32
+        type: integer
+      url:
+        description: The URL of the image.
+        type: string
+      width:
+        description: Image width in pixels.
+        format: int32
+        type: integer
+    type: object
   ListClientUserInvitationsResponse:
     properties:
       invitations:
@@ -741,5 +1648,227 @@ definitions:
           field in the subsequent call to the
           accounts.clients.list method
           to retrieve the next page of results.
+        type: string
+    type: object
+  ListCreativesResponse:
+    description: A response for listing creatives.
+    properties:
+      creatives:
+        description: The list of creatives.
+        items:
+          $ref: '#/definitions/Creative'
+        type: array
+      nextPageToken:
+        description: |-
+          A token to retrieve the next page of results.
+          Pass this value in the
+          ListCreativesRequest.page_token
+          field in the subsequent call to `ListCreatives` method to retrieve the next
+          page of results.
+        type: string
+    type: object
+  ListDealAssociationsResponse:
+    description: A response for listing creative and deal associations
+    properties:
+      associations:
+        description: The list of associations.
+        items:
+          $ref: '#/definitions/CreativeDealAssociation'
+        type: array
+      nextPageToken:
+        description: |-
+          A token to retrieve the next page of results.
+          Pass this value in the
+          ListDealAssociationsRequest.page_token
+          field in the subsequent call to 'ListDealAssociation' method to retrieve
+          the next page of results.
+        type: string
+    type: object
+  LocationContext:
+    description: '@OutputOnly The Geo criteria the restriction applies to.'
+    properties:
+      geoCriteriaIds:
+        description: |-
+          IDs representing the geo location for this context.
+          Please refer to the
+          [geo-table.csv](https://storage.googleapis.com/adx-rtb-dictionaries/geo-table.csv)
+          file for different geo criteria IDs.
+        items:
+          format: int32
+          type: integer
+        type: array
+    type: object
+  NativeContent:
+    description: Native content for a creative.
+    properties:
+      advertiserName:
+        description: 'The name of the advertiser or sponsor, to be displayed in the ad creative.'
+        type: string
+      appIcon:
+        $ref: '#/definitions/Image'
+        description: 'The app icon, for app download ads.'
+      body:
+        description: A long description of the ad.
+        type: string
+      callToAction:
+        description: A label for the button that the user is supposed to click.
+        type: string
+      clickLinkUrl:
+        description: The URL that the browser/SDK will load when the user clicks the ad.
+        type: string
+      clickTrackingUrl:
+        description: The URL to use for click tracking.
+        type: string
+      headline:
+        description: A short title for the ad.
+        type: string
+      image:
+        $ref: '#/definitions/Image'
+        description: A large image.
+      logo:
+        $ref: '#/definitions/Image'
+        description: 'A smaller image, for the advertiser''s logo.'
+      priceDisplayText:
+        description: The price of the promoted app including currency info.
+        type: string
+      starRating:
+        description: 'The app rating in the app store. Must be in the range [0-5].'
+        format: double
+        type: number
+      storeUrl:
+        description: The URL to the app store to purchase/download the promoted app.
+        type: string
+      videoUrl:
+        description: The URL to fetch a native video ad.
+        type: string
+    type: object
+  PlatformContext:
+    description: '@OutputOnly The type of platform the restriction applies to.'
+    properties:
+      platforms:
+        description: The platforms this restriction applies to.
+        items:
+          enum:
+            - DESKTOP
+            - ANDROID
+            - IOS
+          type: string
+        type: array
+    type: object
+  Reason:
+    description: A specific filtering status and how many times it occurred.
+    properties:
+      count:
+        description: |-
+          The number of times the creative was filtered for the status. The
+          count is aggregated across all publishers on the exchange.
+        format: int64
+        type: string
+      status:
+        description: |-
+          The filtering status code. Please refer to the
+          [creative-status-codes.txt](https://storage.googleapis.com/adx-rtb-dictionaries/creative-status-codes.txt)
+          file for different statuses.
+        format: int32
+        type: integer
+    type: object
+  RemoveDealAssociationRequest:
+    description: A request for removing the association between a deal and a creative.
+    properties:
+      association:
+        $ref: '#/definitions/CreativeDealAssociation'
+        description: The association between a creative and a deal that should be removed.
+    type: object
+  SecurityContext:
+    description: '@OutputOnly A security context.'
+    properties:
+      securities:
+        description: The security types in this context.
+        items:
+          enum:
+            - INSECURE
+            - SSL
+          type: string
+        type: array
+    type: object
+  ServingContext:
+    description: The serving context for this restriction.
+    properties:
+      all:
+        description: Matches all contexts.
+        enum:
+          - SIMPLE_CONTEXT
+        type: string
+      appType:
+        $ref: '#/definitions/AppContext'
+        description: Matches impressions for a particular app type.
+      auctionType:
+        $ref: '#/definitions/AuctionContext'
+        description: Matches impressions for a particular auction type.
+      location:
+        $ref: '#/definitions/LocationContext'
+        description: |-
+          Matches impressions coming from users *or* publishers in a specific
+          location.
+      platform:
+        $ref: '#/definitions/PlatformContext'
+        description: Matches impressions coming from a particular platform.
+      securityType:
+        $ref: '#/definitions/SecurityContext'
+        description: Matches impressions for a particular security type.
+    type: object
+  ServingRestriction:
+    description: |-
+      @OutputOnly A representation of the status of an ad in a
+      specific context. A context here relates to where something ultimately serves
+      (for example, a user or publisher geo, a platform, an HTTPS vs HTTP request,
+      or the type of auction).
+    properties:
+      contexts:
+        description: The contexts for the restriction.
+        items:
+          $ref: '#/definitions/ServingContext'
+        type: array
+      disapprovalReasons:
+        description: |-
+          Any disapprovals bound to this restriction.
+          Only present if status=DISAPPROVED.
+          Can be used to filter the response of the
+          creatives.list
+          method.
+        items:
+          $ref: '#/definitions/Disapproval'
+        type: array
+      status:
+        description: |-
+          The status of the creative in this context (for example, it has been
+          explicitly disapproved or is pending review).
+        enum:
+          - STATUS_UNSPECIFIED
+          - DISAPPROVAL
+          - PENDING_REVIEW
+        type: string
+    type: object
+  StopWatchingCreativeRequest:
+    description: A request for stopping notifications for changes to creative Status.
+    properties: {}
+    type: object
+  VideoContent:
+    description: Video content for a creative.
+    properties:
+      videoUrl:
+        description: The URL to fetch a video ad.
+        type: string
+    type: object
+  WatchCreativeRequest:
+    description: A request for watching changes to creative Status.
+    properties:
+      topic:
+        description: |-
+          The Pub/Sub topic to publish notifications to.
+          This topic must already exist and must give permission to
+          ad-exchange-buyside-reports@google.com to write to the topic.
+          This should be the full resource name in
+          "projects/{project_id}/topics/{topic_id}" format.
         type: string
     type: object

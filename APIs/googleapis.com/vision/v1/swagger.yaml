@@ -112,19 +112,19 @@ tags:
 paths:
   '/v1/images:annotate':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
     post:
       description: Run image detection and annotation for a batch of images.
       operationId: vision.images.annotate
@@ -164,6 +164,9 @@ definitions:
   AnnotateImageResponse:
     description: Response to an image annotation request.
     properties:
+      cropHintsAnnotation:
+        $ref: '#/definitions/CropHintsAnnotation'
+        description: 'If present, crop hints have completed successfully.'
       error:
         $ref: '#/definitions/Status'
         description: |-
@@ -175,6 +178,13 @@ definitions:
         items:
           $ref: '#/definitions/FaceAnnotation'
         type: array
+      fullTextAnnotation:
+        $ref: '#/definitions/TextAnnotation'
+        description: |-
+          If present, text (OCR) detection or document (OCR) text detection has
+          completed successfully.
+          This annotation provides the structural hierarchy for the OCR detected
+          text.
       imagePropertiesAnnotation:
         $ref: '#/definitions/ImageProperties'
         description: 'If present, image properties were extracted successfully.'
@@ -197,12 +207,13 @@ definitions:
         $ref: '#/definitions/SafeSearchAnnotation'
         description: 'If present, safe-search annotation has completed successfully.'
       textAnnotations:
-        description: |-
-          If present, text (OCR) detection or document (OCR) text detection has
-          completed successfully.
+        description: 'If present, text (OCR) detection has completed successfully.'
         items:
           $ref: '#/definitions/EntityAnnotation'
         type: array
+      webDetection:
+        $ref: '#/definitions/WebDetection'
+        description: 'If present, web detection has completed successfully.'
     type: object
   BatchAnnotateImagesRequest:
     description: Multiple image annotation requests are batched into a single service call.
@@ -221,6 +232,46 @@ definitions:
         items:
           $ref: '#/definitions/AnnotateImageResponse'
         type: array
+    type: object
+  Block:
+    description: Logical element on the page.
+    properties:
+      blockType:
+        description: 'Detected block type (text, image etc) for this block.'
+        enum:
+          - UNKNOWN
+          - TEXT
+          - TABLE
+          - PICTURE
+          - RULER
+          - BARCODE
+        type: string
+      boundingBox:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding box for the block.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+            * when the text is horizontal it might look like:
+               0----1
+               |    |
+               3----2
+            * when it's rotated 180 degrees around the top-left corner it becomes:
+               2----3
+               |    |
+               1----0
+            and the vertice order will still be (0, 1, 2, 3).
+      paragraphs:
+        description: List of paragraphs in this block (if this blocks is of type text).
+        items:
+          $ref: '#/definitions/Paragraph'
+        type: array
+      property:
+        $ref: '#/definitions/TextProperty'
+        description: Additional information detected for the block.
     type: object
   BoundingPoly:
     description: A bounding polygon for the detected image annotation.
@@ -394,6 +445,81 @@ definitions:
         description: 'Image-specific score for this color. Value in range [0, 1].'
         format: float
         type: number
+    type: object
+  CropHint:
+    description: Single crop hint that is used to generate a new crop when serving an image.
+    properties:
+      boundingPoly:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding polygon for the crop region. The coordinates of the bounding
+          box are in the original image's scale, as returned in `ImageParams`.
+      confidence:
+        description: 'Confidence of this being a salient region.  Range [0, 1].'
+        format: float
+        type: number
+      importanceFraction:
+        description: |-
+          Fraction of importance of this salient region with respect to the original
+          image.
+        format: float
+        type: number
+    type: object
+  CropHintsAnnotation:
+    description: Set of crop hints that are used to generate new crops when serving images.
+    properties:
+      cropHints:
+        description: Crop hint results.
+        items:
+          $ref: '#/definitions/CropHint'
+        type: array
+    type: object
+  CropHintsParams:
+    description: Parameters for crop hints annotation request.
+    properties:
+      aspectRatios:
+        description: |-
+          Aspect ratios in floats, representing the ratio of the width to the height
+          of the image. For example, if the desired aspect ratio is 4/3, the
+          corresponding float value should be 1.33333.  If not specified, the
+          best possible crop is returned. The number of provided aspect ratios is
+          limited to a maximum of 16; any aspect ratios provided after the 16th are
+          ignored.
+        items:
+          format: float
+          type: number
+        type: array
+    type: object
+  DetectedBreak:
+    description: Detected start or end of a structural component.
+    properties:
+      isPrefix:
+        description: True if break prepends the element.
+        type: boolean
+      type:
+        description: Detected break type.
+        enum:
+          - UNKNOWN
+          - SPACE
+          - SURE_SPACE
+          - EOL_SURE_SPACE
+          - HYPHEN
+          - LINE_BREAK
+        type: string
+    type: object
+  DetectedLanguage:
+    description: Detected language for a structural component.
+    properties:
+      confidence:
+        description: 'Confidence of detected language. Range [0, 1].'
+        format: float
+        type: number
+      languageCode:
+        description: |-
+          The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+          information, see
+          http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+        type: string
     type: object
   DominantColorsAnnotation:
     description: Set of dominant colors and their corresponding scores.
@@ -612,8 +738,11 @@ definitions:
           - LOGO_DETECTION
           - LABEL_DETECTION
           - TEXT_DETECTION
+          - DOCUMENT_TEXT_DETECTION
           - SAFE_SEARCH_DETECTION
           - IMAGE_PROPERTIES
+          - CROP_HINTS
+          - WEB_DETECTION
         type: string
     type: object
   Image:
@@ -636,6 +765,9 @@ definitions:
   ImageContext:
     description: Image context and/or feature-specific parameters.
     properties:
+      cropHintsParams:
+        $ref: '#/definitions/CropHintsParams'
+        description: Parameters for crop hints annotation request.
       languageHints:
         description: |-
           List of languages to use for TEXT_DETECTION. In most cases, an empty value
@@ -671,6 +803,19 @@ definitions:
           [Google Cloud Storage Request
           URIs](https://cloud.google.com/storage/docs/reference-uris)).
           NOTE: Cloud Storage object versioning is not supported.
+        type: string
+      imageUri:
+        description: |-
+          Image URI which supports:
+          1) Google Cloud Storage image URI, which must be in the following form:
+          `gs://bucket_name/object_name` (for details, see
+          [Google Cloud Storage Request
+          URIs](https://cloud.google.com/storage/docs/reference-uris)).
+          NOTE: Cloud Storage object versioning is not supported.
+          2) Publicly accessible image HTTP/HTTPS URL.
+          This is preferred over the legacy `gcs_image_uri` above. When both
+          `gcs_image_uri` and `image_uri` are specified, `image_uri` takes
+          precedence.
         type: string
     type: object
   Landmark:
@@ -795,6 +940,56 @@ definitions:
         $ref: '#/definitions/LatLng'
         description: lat/long location coordinates.
     type: object
+  Page:
+    description: Detected page from OCR.
+    properties:
+      blocks:
+        description: 'List of blocks of text, images etc on this page.'
+        items:
+          $ref: '#/definitions/Block'
+        type: array
+      height:
+        description: Page height in pixels.
+        format: int32
+        type: integer
+      property:
+        $ref: '#/definitions/TextProperty'
+        description: Additional information detected on the page.
+      width:
+        description: Page width in pixels.
+        format: int32
+        type: integer
+    type: object
+  Paragraph:
+    description: Structural unit of text representing a number of words in certain order.
+    properties:
+      boundingBox:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding box for the paragraph.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+            * when the text is horizontal it might look like:
+               0----1
+               |    |
+               3----2
+            * when it's rotated 180 degrees around the top-left corner it becomes:
+               2----3
+               |    |
+               1----0
+            and the vertice order will still be (0, 1, 2, 3).
+      property:
+        $ref: '#/definitions/TextProperty'
+        description: Additional information detected for the paragraph.
+      words:
+        description: List of words in this paragraph.
+        items:
+          $ref: '#/definitions/Word'
+        type: array
+    type: object
   Position:
     description: |-
       A 3D position in the image, used primarily for Face detection landmarks.
@@ -819,6 +1014,10 @@ definitions:
     properties:
       name:
         description: Name of the property.
+        type: string
+      uint64Value:
+        description: Value of numeric properties.
+        format: uint64
         type: string
       value:
         description: Value of the property.
@@ -949,6 +1148,65 @@ definitions:
           google.rpc.Status.details field, or localized by the client.
         type: string
     type: object
+  Symbol:
+    description: A single symbol representation.
+    properties:
+      boundingBox:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding box for the symbol.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+            * when the text is horizontal it might look like:
+               0----1
+               |    |
+               3----2
+            * when it's rotated 180 degrees around the top-left corner it becomes:
+               2----3
+               |    |
+               1----0
+            and the vertice order will still be (0, 1, 2, 3).
+      property:
+        $ref: '#/definitions/TextProperty'
+        description: Additional information detected for the symbol.
+      text:
+        description: The actual UTF-8 representation of the symbol.
+        type: string
+    type: object
+  TextAnnotation:
+    description: |-
+      TextAnnotation contains a structured representation of OCR extracted text.
+      The hierarchy of an OCR extracted text structure is like this:
+          TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol
+      Each structural component, starting from Page, may further have their own
+      properties. Properties describe detected languages, breaks etc.. Please
+      refer to the google.cloud.vision.v1.TextAnnotation.TextProperty message
+      definition below for more detail.
+    properties:
+      pages:
+        description: List of pages detected by OCR.
+        items:
+          $ref: '#/definitions/Page'
+        type: array
+      text:
+        description: UTF-8 text detected on the pages.
+        type: string
+    type: object
+  TextProperty:
+    description: Additional information detected on the structural component.
+    properties:
+      detectedBreak:
+        $ref: '#/definitions/DetectedBreak'
+        description: Detected start or end of a text segment.
+      detectedLanguages:
+        description: A list of detected languages together with confidence.
+        items:
+          $ref: '#/definitions/DetectedLanguage'
+        type: array
+    type: object
   Vertex:
     description: |-
       A vertex represents a 2D point in the image.
@@ -962,4 +1220,108 @@ definitions:
         description: Y coordinate.
         format: int32
         type: integer
+    type: object
+  WebDetection:
+    description: Relevant information for the image from the Internet.
+    properties:
+      fullMatchingImages:
+        description: |-
+          Fully matching images from the Internet.
+          They're definite neardups and most often a copy of the query image with
+          merely a size change.
+        items:
+          $ref: '#/definitions/WebImage'
+        type: array
+      pagesWithMatchingImages:
+        description: Web pages containing the matching images from the Internet.
+        items:
+          $ref: '#/definitions/WebPage'
+        type: array
+      partialMatchingImages:
+        description: |-
+          Partial matching images from the Internet.
+          Those images are similar enough to share some key-point features. For
+          example an original image will likely have partial matching for its crops.
+        items:
+          $ref: '#/definitions/WebImage'
+        type: array
+      webEntities:
+        description: Deduced entities from similar images on the Internet.
+        items:
+          $ref: '#/definitions/WebEntity'
+        type: array
+    type: object
+  WebEntity:
+    description: Entity deduced from similar images on the Internet.
+    properties:
+      description:
+        description: 'Canonical description of the entity, in English.'
+        type: string
+      entityId:
+        description: Opaque entity ID.
+        type: string
+      score:
+        description: |-
+          Overall relevancy score for the entity.
+          Not normalized and not comparable across different image queries.
+        format: float
+        type: number
+    type: object
+  WebImage:
+    description: Metadata for online images.
+    properties:
+      score:
+        description: |-
+          Overall relevancy score for the image.
+          Not normalized and not comparable across different image queries.
+        format: float
+        type: number
+      url:
+        description: The result image URL.
+        type: string
+    type: object
+  WebPage:
+    description: Metadata for web pages.
+    properties:
+      score:
+        description: |-
+          Overall relevancy score for the web page.
+          Not normalized and not comparable across different image queries.
+        format: float
+        type: number
+      url:
+        description: The result web page URL.
+        type: string
+    type: object
+  Word:
+    description: A word representation.
+    properties:
+      boundingBox:
+        $ref: '#/definitions/BoundingPoly'
+        description: |-
+          The bounding box for the word.
+          The vertices are in the order of top-left, top-right, bottom-right,
+          bottom-left. When a rotation of the bounding box is detected the rotation
+          is represented as around the top-left corner as defined when the text is
+          read in the 'natural' orientation.
+          For example:
+            * when the text is horizontal it might look like:
+               0----1
+               |    |
+               3----2
+            * when it's rotated 180 degrees around the top-left corner it becomes:
+               2----3
+               |    |
+               1----0
+            and the vertice order will still be (0, 1, 2, 3).
+      property:
+        $ref: '#/definitions/TextProperty'
+        description: Additional information detected for the word.
+      symbols:
+        description: |-
+          List of symbols in the word.
+          The order of the symbols follows the natural reading order.
+        items:
+          $ref: '#/definitions/Symbol'
+        type: array
     type: object

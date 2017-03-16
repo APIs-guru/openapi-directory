@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: Provides a historical view of activity.
-  title: Google Apps Activity
+  title: G Suite Activity
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -29,7 +29,7 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
-      'https://www.googleapis.com/auth/activity': View the activity history of your Google Apps
+      'https://www.googleapis.com/auth/activity': View the activity history of your Google apps
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
       'https://www.googleapis.com/auth/drive.metadata': View and manage metadata of files in your Google Drive
       'https://www.googleapis.com/auth/drive.metadata.readonly': View metadata for files in your Google Drive

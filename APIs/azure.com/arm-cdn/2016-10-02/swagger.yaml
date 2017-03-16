@@ -101,6 +101,8 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Edgenodes
+      x-ms-pageable:
+        nextLinkName: nextLink
   /providers/Microsoft.Cdn/operations:
     get:
       description: Lists all of the available CDN REST API operations.
@@ -123,7 +125,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/checkResourceUsage':
     post:
       description: Check the quota and actual usage of the CDN profiles under the given subscription.
-      operationId: CheckResourceUsage
+      operationId: ListResourceUsage
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
@@ -675,6 +677,78 @@ paths:
       tags:
         - CustomDomains
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/disableCustomHttps':
+    post:
+      description: Disable https delivery of the custom domain.
+      operationId: CustomDomains_DisableCustomHttps
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the CDN profile which is unique within the resource group.
+          in: path
+          name: profileName
+          required: true
+          type: string
+        - description: Name of the endpoint under the profile which is unique globally.
+          in: path
+          name: endpointName
+          required: true
+          type: string
+        - description: Name of the custom domain within an endpoint.
+          in: path
+          name: customDomainName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+          schema:
+            $ref: '#/definitions/CustomDomain'
+        default:
+          description: CDN error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - CustomDomains
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/enableCustomHttps':
+    post:
+      description: Enable https delivery of the custom domain.
+      operationId: CustomDomains_EnableCustomHttps
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the CDN profile which is unique within the resource group.
+          in: path
+          name: profileName
+          required: true
+          type: string
+        - description: Name of the endpoint under the profile which is unique globally.
+          in: path
+          name: endpointName
+          required: true
+          type: string
+        - description: Name of the custom domain within an endpoint.
+          in: path
+          name: customDomainName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+          schema:
+            $ref: '#/definitions/CustomDomain'
+        default:
+          description: CDN error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - CustomDomains
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/load':
     post:
       description: Pre-loads a content to CDN. Available for Verizon Profiles.
@@ -1028,6 +1102,19 @@ definitions:
   CustomDomainProperties:
     description: The JSON object that contains the properties of the custom domain to create.
     properties:
+      customHttpsProvisioningState:
+        description: Provisioning state of Custom Https of the custom domain.
+        enum:
+          - Enabling
+          - Enabled
+          - Disabling
+          - Disabled
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CustomHttpsProvisioningState
       hostName:
         description: The host name of the custom domain. Must be a domain name.
         type: string
@@ -1118,6 +1205,9 @@ definitions:
   EdgenodeResult:
     description: Result of the request to list CDN edgenodes. It contains a list of ip address group and a URL link to get the next set of results.
     properties:
+      nextLink:
+        description: URL to get the next set of edgenode list results if there are any.
+        type: string
       value:
         description: Edge node of CDN service.
         items:

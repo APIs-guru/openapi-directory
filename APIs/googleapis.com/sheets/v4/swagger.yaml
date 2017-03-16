@@ -115,19 +115,19 @@ tags:
 paths:
   /v4/spreadsheets:
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: 'Creates a spreadsheet, returning the newly created spreadsheet.'
       operationId: sheets.spreadsheets.create
@@ -209,34 +209,34 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
   '/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: |-
         Copies a single sheet from a spreadsheet to another spreadsheet.
@@ -287,6 +287,21 @@ paths:
           required: true
           type: string
         - description: |-
+            The major dimension that results should use.
+
+            For example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,
+            then requesting `range=A1:B2,majorDimension=ROWS` will return
+            `[[1,2],[3,4]]`,
+            whereas requesting `range=A1:B2,majorDimension=COLUMNS` will return
+            `[[1,3],[2,4]]`.
+          enum:
+            - DIMENSION_UNSPECIFIED
+            - ROWS
+            - COLUMNS
+          in: query
+          name: majorDimension
+          type: string
+        - description: |-
             How values should be represented in the output.
             The default render option is ValueRenderOption.FORMATTED_VALUE.
           enum:
@@ -307,21 +322,6 @@ paths:
           in: query
           name: dateTimeRenderOption
           type: string
-        - description: |-
-            The major dimension that results should use.
-
-            For example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,
-            then requesting `range=A1:B2,majorDimension=ROWS` will return
-            `[[1,2],[3,4]]`,
-            whereas requesting `range=A1:B2,majorDimension=COLUMNS` will return
-            `[[1,3],[2,4]]`.
-          enum:
-            - DIMENSION_UNSPECIFIED
-            - ROWS
-            - COLUMNS
-          in: query
-          name: majorDimension
-          type: string
       responses:
         '200':
           description: Successful response
@@ -339,19 +339,19 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     put:
       description: |-
         Sets values in a range of a spreadsheet.
@@ -368,25 +368,6 @@ paths:
           in: path
           name: range
           required: true
-          type: string
-        - description: How the input data should be interpreted.
-          enum:
-            - INPUT_VALUE_OPTION_UNSPECIFIED
-            - RAW
-            - USER_ENTERED
-          in: query
-          name: valueInputOption
-          type: string
-        - description: |-
-            Determines how dates, times, and durations in the response should be
-            rendered. This is ignored if response_value_render_option is
-            FORMATTED_VALUE.
-            The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-          enum:
-            - SERIAL_NUMBER
-            - FORMATTED_STRING
-          in: query
-          name: responseDateTimeRenderOption
           type: string
         - description: |-
             Determines if the update response should include the values
@@ -408,6 +389,25 @@ paths:
           in: query
           name: responseValueRenderOption
           type: string
+        - description: How the input data should be interpreted.
+          enum:
+            - INPUT_VALUE_OPTION_UNSPECIFIED
+            - RAW
+            - USER_ENTERED
+          in: query
+          name: valueInputOption
+          type: string
+        - description: |-
+            Determines how dates, times, and durations in the response should be
+            rendered. This is ignored if response_value_render_option is
+            FORMATTED_VALUE.
+            The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+          enum:
+            - SERIAL_NUMBER
+            - FORMATTED_STRING
+          in: query
+          name: responseDateTimeRenderOption
+          type: string
         - in: body
           name: body
           schema:
@@ -426,28 +426,28 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values/{range}:append':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: |-
         Appends values to a spreadsheet. The input range is used to search for
         existing data and find a "table" within that range. Values will be
         appended to the next row of the table, starting with the first column of
         the table. See the
-        [guide](/sheets/guides/values#appending_values)
+        [guide](/sheets/api/guides/values#appending_values)
         and
-        [sample code](/sheets/samples/writing#append_values)
+        [sample code](/sheets/api/samples/writing#append_values)
         for specific details of how tables are detected and data is appended.
 
         The caller must specify the spreadsheet ID, range, and
@@ -469,13 +469,6 @@ paths:
           name: range
           required: true
           type: string
-        - description: |-
-            Determines if the update response should include the values
-            of the cells that were appended. By default, responses
-            do not include the updated values.
-          in: query
-          name: includeValuesInResponse
-          type: boolean
         - description: |-
             Determines how values in the response should be rendered.
             The default render option is ValueRenderOption.FORMATTED_VALUE.
@@ -512,6 +505,13 @@ paths:
           in: query
           name: responseDateTimeRenderOption
           type: string
+        - description: |-
+            Determines if the update response should include the values
+            of the cells that were appended. By default, responses
+            do not include the updated values.
+          in: query
+          name: includeValuesInResponse
+          type: boolean
         - in: body
           name: body
           schema:
@@ -530,19 +530,19 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values/{range}:clear':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: |-
         Clears values from a spreadsheet.
@@ -579,19 +579,19 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchClear':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: |-
         Clears one or more ranges of values from a spreadsheet.
@@ -693,34 +693,34 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
   '/v4/spreadsheets/{spreadsheetId}/values:batchUpdate':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: |-
         Sets values in one or more ranges of a spreadsheet.
@@ -752,19 +752,19 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}:batchUpdate':
     parameters:
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
     post:
       description: |-
         Applies one or more updates to the spreadsheet.
@@ -1627,6 +1627,9 @@ definitions:
       textFormat:
         $ref: '#/definitions/TextFormat'
         description: The format of the text in the cell (unless overridden by a format run).
+      textRotation:
+        $ref: '#/definitions/TextRotation'
+        description: The rotation applied to text in a cell
       verticalAlignment:
         description: The vertical alignment of the value in the cell.
         enum:
@@ -2630,14 +2633,14 @@ definitions:
     properties:
       convergenceThreshold:
         description: |-
-          When iterative calculation is enabled, the threshold value such that
-          calculation rounds stop when succesive results differ by less.
+          When iterative calculation is enabled and successive results differ by
+          less than this threshold value, the calculation rounds stop.
         format: double
         type: number
       maxIterations:
         description: |-
           When iterative calculation is enabled, the maximum number of calculation
-          rounds to perform during iterative calculation.
+          rounds to perform.
         format: int32
         type: integer
     type: object
@@ -2698,7 +2701,7 @@ definitions:
         description: |-
           Pattern string used for formatting.  If not set, a default pattern based on
           the user's locale will be used if necessary for the given type.
-          See the [Date and Number Formats guide](/sheets/guides/formats) for more
+          See the [Date and Number Formats guide](/sheets/api/guides/formats) for more
           information about the supported patterns.
         type: string
       type:
@@ -3575,6 +3578,35 @@ definitions:
         description: The character index where this run starts.
         format: int32
         type: integer
+    type: object
+  TextRotation:
+    description: The rotation applied to text in a cell.
+    properties:
+      angle:
+        description: |-
+          The angle between the standard orientation and the desired orientation.
+          Measured in degrees. Valid values are between -90 and 90. Positive
+          angles are angled upwards, negative are angled downwards.
+
+          Note: For LTR text direction positive angles are in the counterclockwise
+          direction, whereas for RTL they are in the clockwise direction
+        format: int32
+        type: integer
+      vertical:
+        description: |-
+          If true, text reads top to bottom, but the orientation of individual
+          characters is unchanged.
+          For example:
+
+              | V |
+              | e |
+              | r |
+              | t |
+              | i |
+              | c |
+              | a |
+              | l |
+        type: boolean
     type: object
   TextToColumnsRequest:
     description: |-

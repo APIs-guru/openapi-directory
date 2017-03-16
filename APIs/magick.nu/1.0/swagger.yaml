@@ -17,29 +17,33 @@ info:
     version: '1.2'
   x-providerName: magick.nu
 tags:
-  - name: svstradingAccounts
+  - name: strategies
   - name: tradingAccounts
   - name: users
 paths:
-  /svstradingAccounts:
-    post:
-      consumes:
-        - application/json
-      operationId: postSvstradingAccounts
+  '/strategies/strategyId/{strategyId}':
+    get:
+      operationId: getStrategiesStrategyIdStrategyId
       parameters:
-        - in: body
-          name: body
+        - in: path
+          name: strategyId
           required: true
-          schema:
-            $ref: '#/definitions/SVSTradingAccountDTO'
-      produces:
-        - application/json
+          type: string
       responses:
         '200':
           description: No response was specified
-      summary: Create a new Trading Account
+      summary: Get Strategy by ID
       tags:
-        - svstradingAccounts
+        - strategies
+  /strategies/templates:
+    get:
+      operationId: getStrategiesTemplates
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get all Template Strategies
+      tags:
+        - strategies
   /tradingAccounts:
     post:
       consumes:
@@ -107,22 +111,6 @@ paths:
       tags:
         - users
 definitions:
-  SVSTradingAccountDTO:
-    properties:
-      country:
-        type: string
-      email:
-        type: string
-      forename:
-        type: string
-      lastName:
-        type: string
-      password:
-        type: string
-      phoneNumber:
-        type: string
-      title:
-        type: string
   TradingAccount:
     properties:
       brokerServer:

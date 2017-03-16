@@ -112,19 +112,19 @@ tags:
 paths:
   /v1/shortLinks:
     parameters:
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Creates a short Dynamic Link given either a valid long Dynamic Link or
@@ -250,6 +250,9 @@ definitions:
 
           Required.
         type: string
+      navigationInfo:
+        $ref: '#/definitions/NavigationInfo'
+        description: Information of navigation behavior of a Firebase Dynamic Links.
       socialMetaTagInfo:
         $ref: '#/definitions/SocialMetaTagInfo'
         description: |-
@@ -373,6 +376,15 @@ definitions:
       iosIpadFallbackLink:
         description: 'If specified, this overrides the ios_fallback_link value on iPads.'
         type: string
+    type: object
+  NavigationInfo:
+    description: Information of navigation behavior.
+    properties:
+      enableForcedRedirect:
+        description: |-
+          If this option is on, FDL click will be forced to redirect rather than
+          show an interstitial page.
+        type: boolean
     type: object
   SocialMetaTagInfo:
     description: |-

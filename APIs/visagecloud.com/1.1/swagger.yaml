@@ -7,12 +7,12 @@ info:
   contact:
     email: office@visagecloud.com
     name: VisageCloud
-    url: 'http://visageCloud.com'
+    url: 'https://visagecloud.com'
   description: 'Face search, recognition & classification API. Just make a call to our REST API each time your app needs to access face recognition and classification capabilities.'
   license:
     name: As per Developer Terms of Use
-    url: 'http://visagecloud.com/developer-terms-of-use'
-  termsOfService: 'http://visagecloud.com/terms-of-use'
+    url: 'https://visagecloud.com/developer-terms-of-use'
+  termsOfService: 'https://visagecloud.com/terms-of-use'
   title: VisageCloud
   version: '1.1'
   x-logo:
@@ -22,23 +22,23 @@ info:
     url: 'https://visagecloud.com/v2/api-docs'
     version: '2.0'
   x-providerName: visagecloud.com
-produces:
-  - '*/*'
 securityDefinitions:
   accessKey:
-    description: accessKey
+    description: The accessKey provided by VisageCloud
     in: query
     name: accessKey
     type: apiKey
 security:
   - accessKey: []
 tags:
-  - description: Collection Controller
-    name: collection-controller
-  - description: Analysis Controller
-    name: analysis-controller
-  - description: Profile Controller
-    name: profile-controller
+  - description: Manages Streams
+    name: Stream
+  - description: Performs image-recognition related operations
+    name: Analysis
+  - description: Manages collections
+    name: Collection
+  - description: Manages profiles associated with collections
+    name: Profile
 paths:
   /rest/v1.1/analysis/detection:
     post:
@@ -46,27 +46,29 @@ paths:
         - multipart/form-data
       operationId: performAnalysisUsingPOST
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
         - default: true
-          description: storePicture
+          description: Boolean value indicating whether you want the original picture to be stored for later retrieval
           in: query
           name: storePicture
           required: false
           type: boolean
-        - description: pictureURL
+        - description: 'The URL of the picture, assuming it is served by a third party server. Server should be accesible from the Internet or through another netwoek by VisageCloud infrastructure'
           in: query
           name: pictureURL
           required: false
           type: string
-        - description: picture
+        - description: 'The multipart/form-data version of the image, in case a direct upload is used. At least one of picture or pictureURL must be present'
           in: formData
           name: picture
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -82,25 +84,27 @@ paths:
           description: Not Found
       summary: Perform detection on a given picture or picture URL
       tags:
-        - analysis-controller
+        - Analysis
   /rest/v1.1/analysis/listLatest:
     get:
       consumes:
         - application/json
       operationId: retriveLatestUsingGET
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
         - default: 100
-          description: count
+          description: How many records to retrieve at a time
           format: int32
           in: query
           name: count
           required: false
           type: integer
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -114,31 +118,31 @@ paths:
           description: Not Found
       summary: Retrieve the last *count* operations per current account
       tags:
-        - analysis-controller
+        - Analysis
   /rest/v1.1/analysis/recognition:
     post:
       consumes:
         - multipart/form-data
       operationId: performRecognitionUsingPOST
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
         - default: true
-          description: storePicture
+          description: Boolean value indicating whether you want the original picture to be stored for later retrieval
           in: query
           name: storePicture
           required: false
           type: boolean
-        - description: collectionId
+        - description: Uniquely identified collection that can store multiple profiles
           in: query
           name: collectionId
           required: true
           type: string
         - collectionFormat: multi
-          description: labels
+          description: Labels associated with the given picture or picture URL
           in: query
           items:
             type: string
@@ -146,7 +150,7 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: attributeFilters
+          description: Filters that will be applied on the recognition operation
           enum:
             - GENDER_FILTER
             - AGE_GROUP_FILTER
@@ -159,16 +163,18 @@ paths:
           name: attributeFilters
           required: false
           type: array
-        - description: pictureURL
+        - description: The URL of the picture
           in: query
           name: pictureURL
           required: false
           type: string
-        - description: picture
+        - description: The picture itself
           in: formData
           name: picture
           required: false
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -184,23 +190,25 @@ paths:
           description: Not Found
       summary: Perform labeled recognition on a given picture or picture URL
       tags:
-        - analysis-controller
+        - Analysis
   /rest/v1.1/analysis/retrieve:
     get:
       consumes:
         - application/json
       operationId: retrieveAnalysisUsingGET
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
-        - description: analysisId
+        - description: The ID of the analysis for which the data will be retrieved
           in: query
           name: analysisId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -214,23 +222,20 @@ paths:
           description: Not Found
       summary: Retrieve a complete analysis object including both detection and recognition information
       tags:
-        - analysis-controller
+        - Analysis
   /rest/v1.1/collection/all:
     get:
       consumes:
         - application/json
       operationId: getAllCollectionsUsingGET
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
-        - description: collectionId
-          in: query
-          name: collectionId
-          required: true
-          type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -244,23 +249,25 @@ paths:
           description: Not Found
       summary: Retrieve all collections
       tags:
-        - collection-controller
+        - Collection
   /rest/v1.1/collection/collection:
     delete:
       consumes:
         - application/json
       operationId: removeFaceFromProfileUsingDELETE
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
-        - description: collectionId
+        - description: The id of the collection that will be removed
           in: query
           name: collectionId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -274,22 +281,24 @@ paths:
           description: Forbidden
       summary: Delete existing collection
       tags:
-        - collection-controller
+        - Collection
     get:
       consumes:
         - application/json
       operationId: getProfilesFromCollectionUsingGET
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
-        - description: collectionId
+        - description: The id of the collection for which the data will be retrieved
           in: query
           name: collectionId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -301,24 +310,26 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Retrieve existing collection content.
+      summary: Retrieve existing collection content
       tags:
-        - collection-controller
+        - Collection
     post:
       consumes:
         - application/json
       operationId: addCollectionUsingPOST
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
-        - description: collectionName
+        - description: The name of the collection that will be created
           in: query
           name: collectionName
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -332,35 +343,37 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Create new empty collection with given name.
+      summary: Create new empty collection with given name
       tags:
-        - collection-controller
+        - Collection
   /rest/v1.1/profile/map:
     delete:
       consumes:
         - application/json
       operationId: removeFaceFromProfileUsingDELETE_1
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
-        - description: faceHash
+        - description: The face that will be removed from a profile
           in: query
           name: faceHash
           required: true
           type: string
-        - description: profileId
+        - description: The profile that contains the face
           in: query
           name: profileId
           required: true
           type: string
-        - description: collectionId
+        - description: The collection that contains the profile
           in: query
           name: collectionId
           required: true
           type: string
+      produces:
+        - '*/*'
       responses:
         '200':
           description: OK
@@ -372,29 +385,31 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-      summary: 'Removes (unmaps) a face, identified by faceHash, from a profile, identified by profileID.'
+      summary: 'Removes (unmaps) a face, identified by faceHash, from a profile, identified by profileId'
       tags:
-        - profile-controller
+        - Profile
     get:
       consumes:
         - application/json
       operationId: getFacesFromProfileUsingGET
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
-        - description: profileId
+        - description: The profile that contains the faces
           in: query
           name: profileId
           required: true
           type: string
-        - description: collectionId
+        - description: The collection that contains the profile
           in: query
           name: collectionId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -406,34 +421,36 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Gets all the faceHashes associated to a profile.
+      summary: Gets all the faceHashes associated to a profile
       tags:
-        - profile-controller
+        - Profile
     post:
       consumes:
         - application/json
       operationId: mapFaceToProfileUsingPOST
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
-        - description: faceHash
+        - description: The face that will be added to a profile
           in: query
           name: faceHash
           required: true
           type: string
-        - description: profileId
+        - description: The profile that will store the face
           in: query
           name: profileId
           required: true
           type: string
-        - description: collectionId
+        - description: The collection that contains the profile
           in: query
           name: collectionId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -447,43 +464,45 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: 'Adds (maps) a face, identified by faceHash, to a profile, identified by profileID.'
+      summary: 'Adds (maps) a face, identified by faceHash, to a profile, identified by profileId'
       tags:
-        - profile-controller
+        - Profile
   /rest/v1.1/profile/profile:
     post:
       consumes:
         - application/json
       operationId: addProfileUsingPOST
       parameters:
-        - description: secretKey
+        - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
-        - description: collectionId
+        - description: Uniquely identified collection that can store multiple profiles
           in: query
           name: collectionId
           required: true
           type: string
-        - description: externalId
+        - description: External reference to additional information you don’t want to share with VisageCloud
           in: query
           name: externalId
           required: false
           type: string
-        - description: screenName
+        - description: Human-readable label for the profile
           in: query
           name: screenName
           required: false
           type: string
         - collectionFormat: multi
-          description: labels
+          description: Allows you to do finer filtering in face recognition
           in: query
           items:
             type: string
           name: labels
           required: false
           type: array
+      produces:
+        - application/json
       responses:
         '200':
           description: OK
@@ -497,9 +516,75 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Creates a new profile with no faces associated to it (empty profile).
+      summary: Creates a new profile with no faces associated to it (empty profile)
       tags:
-        - profile-controller
+        - Profile
+  /rest/v1.1/stream/collection:
+    post:
+      consumes:
+        - application/json
+      operationId: addCollectionUsingPOST_1
+      parameters:
+        - description: The secretKey or readOnlyKey provided by VisageCloud
+          in: query
+          name: secretKey
+          required: true
+          type: string
+        - description: The name of the stream that will be created
+          in: query
+          name: streamName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Create new stream with given name
+      tags:
+        - Stream
+  /rest/v1.1/stream/stream:
+    delete:
+      consumes:
+        - application/json
+      operationId: removeFaceFromProfileUsingDELETE_2
+      parameters:
+        - description: The secretKey or readOnlyKey provided by VisageCloud
+          in: query
+          name: secretKey
+          required: true
+          type: string
+        - description: The id of the stream that will be removed
+          in: query
+          name: streamId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Delete existing stream
+      tags:
+        - Stream
 definitions:
   RestResponse:
     properties:

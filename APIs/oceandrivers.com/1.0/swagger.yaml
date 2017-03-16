@@ -130,6 +130,11 @@ paths:
           name: wave
           required: false
           type: string
+        - description: Direct file I want to extract
+          in: query
+          name: entryid
+          required: false
+          type: string
       responses:
         '200':
           description: No response was specified

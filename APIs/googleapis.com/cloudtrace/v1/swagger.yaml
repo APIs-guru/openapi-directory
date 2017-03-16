@@ -169,16 +169,16 @@ paths:
           name: endTime
           type: string
         - description: |-
-            Token identifying the page of results to return. If provided, use the
-            value of the `next_page_token` field from a previous request. Optional.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             End of the time interval (inclusive) during which the trace data was
             collected from the application.
           in: query
           name: startTime
+          type: string
+        - description: |-
+            Token identifying the page of results to return. If provided, use the
+            value of the `next_page_token` field from a previous request. Optional.
+          in: query
+          name: pageToken
           type: string
       responses:
         '200':
@@ -193,19 +193,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
     patch:
       description: |-
         Sends new traces to Stackdriver Trace or updates existing traces. If the ID
@@ -264,19 +264,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
 definitions:
   Empty:
     description: |-

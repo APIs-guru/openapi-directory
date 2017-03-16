@@ -228,6 +228,29 @@ tags:
       url: 'https://www.appveyor.com/docs/api/environments-deployments/'
     name: Environment
 paths:
+  /account/encrypt:
+    post:
+      operationId: encryptValue
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/EncryptRequest'
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: Success
+          examples:
+            text/plain: wsnoY4v1v1Uofj0xf8E6FA==
+          schema:
+            type: string
+        default:
+          $ref: '#/responses/Error'
+      summary: Encrypt a value for use in StoredValue.
+      tags:
+        - Project
   '/buildjobs/{jobId}/log':
     get:
       externalDocs:
@@ -599,19 +622,15 @@ paths:
           description: Success
           examples:
             application/json:
-              - created: '2014-01-23T18:13:52.2268502+00:00'
-                deploymentEnvironmentId: 14
+              - deploymentEnvironmentId: 14
                 name: azure-blob-1
                 provider: AzureBlob
-                updated: '2014-06-02T18:13:32.5106126+00:00'
-              - created: '2014-01-23T06:46:31.1215919+00:00'
-                deploymentEnvironmentId: 12
+              - deploymentEnvironmentId: 12
                 name: azure-deploy-test
                 provider: AzureCS
-                updated: '2014-08-11T18:48:06.2002179+00:00'
           schema:
             items:
-              $ref: '#/definitions/DeploymentEnvironment'
+              $ref: '#/definitions/DeploymentEnvironmentLookupModel'
             type: array
         default:
           $ref: '#/responses/Error'
@@ -2063,17 +2082,13 @@ definitions:
     type: string
   Build:
     allOf:
+      - $ref: '#/definitions/BuildLookupModel'
       - $ref: '#/definitions/Timestamped'
       - properties:
           authorName:
             type: string
           authorUsername:
             type: string
-          branch:
-            type: string
-          buildId:
-            minimum: 0
-            type: integer
           buildNumber:
             minimum: 0
             type: integer
@@ -2092,11 +2107,10 @@ definitions:
           isTag:
             type: boolean
           jobs:
+            description: Always empty in getProjectHistory and startDeployment responses.
             items:
               $ref: '#/definitions/BuildJob'
             type: array
-          message:
-            type: string
           messageExtended:
             type: string
           messages:
@@ -2113,8 +2127,6 @@ definitions:
             type: string
           status:
             $ref: '#/definitions/Status'
-          version:
-            type: string
         type: object
   BuildCloudName:
     enum:
@@ -2151,6 +2163,18 @@ definitions:
             minimum: 0
             type: integer
         type: object
+  BuildLookupModel:
+    properties:
+      branch:
+        type: string
+      buildId:
+        minimum: 0
+        type: integer
+      message:
+        type: string
+      version:
+        type: string
+    type: object
   BuildMessage:
     properties:
       category:
@@ -2275,27 +2299,17 @@ definitions:
     type: string
   Deployment:
     allOf:
+      - $ref: '#/definitions/DeploymentLookupModel'
       - $ref: '#/definitions/Timestamped'
       - properties:
           build:
             $ref: '#/definitions/Build'
-          deploymentId:
-            minimum: 0
-            type: integer
           environment:
             $ref: '#/definitions/DeploymentEnvironment'
-          finished:
-            format: date-time
-            type: string
           jobs:
             items:
               $ref: '#/definitions/DeploymentJob'
             type: array
-          started:
-            format: date-time
-            type: string
-          status:
-            $ref: '#/definitions/Status'
         type: object
   DeploymentCancellation:
     example:
@@ -2309,15 +2323,11 @@ definitions:
     type: object
   DeploymentEnvironment:
     allOf:
+      - $ref: '#/definitions/DeploymentEnvironmentLookupModel'
       - $ref: '#/definitions/Timestamped'
       - properties:
           accountId:
             type: integer
-          deploymentEnvironmentId:
-            minimum: 0
-            type: integer
-          name:
-            type: string
           projectsMode:
             description: |-
               0 is "Any project can be deployed to the environment"
@@ -2328,12 +2338,9 @@ definitions:
               - 1
               - 2
             type: integer
-          provider:
-            $ref: '#/definitions/DeploymentProviderType'
           securityDescriptor:
             $ref: '#/definitions/SecurityDescriptor'
         type: object
-    description: 'Note that `projectsMode` is always 0 from /api/environments.  Non-zero values come from /api/environments/{deploymentEnvironmentId}/settings'
   DeploymentEnvironmentAddition:
     example:
       name: production
@@ -2369,24 +2376,27 @@ definitions:
       - provider
       - settings
     type: object
-  DeploymentEnvironmentDeployment:
-    properties:
-      deployment:
-        $ref: '#/definitions/Deployment'
-      environment:
-        $ref: '#/definitions/DeploymentEnvironment'
-    type: object
   DeploymentEnvironmentDeploymentsResults:
     properties:
       deployments:
         items:
-          $ref: '#/definitions/ProjectDeployment'
+          $ref: '#/definitions/EnvironmentDeploymentModel'
         type: array
       environment:
         $ref: '#/definitions/DeploymentEnvironment'
     required:
       - environment
       - deployments
+    type: object
+  DeploymentEnvironmentLookupModel:
+    properties:
+      deploymentEnvironmentId:
+        minimum: 0
+        type: integer
+      name:
+        type: string
+      provider:
+        $ref: '#/definitions/DeploymentProviderType'
     type: object
   DeploymentEnvironmentProject:
     properties:
@@ -2429,7 +2439,9 @@ definitions:
           environmentAccessKey:
             type: string
           projects:
-            description: Projects available for selection in UI
+            description: |
+              Projects available for selection in UI.
+              Only present in response from getEnvironmentSettings.
             items:
               $ref: '#/definitions/DeploymentEnvironmentProject'
             type: array
@@ -2474,6 +2486,22 @@ definitions:
             minimum: 0
             type: integer
         type: object
+  DeploymentLookupModel:
+    properties:
+      build:
+        $ref: '#/definitions/BuildLookupModel'
+      deploymentId:
+        minimum: 0
+        type: integer
+      finished:
+        format: date-time
+        type: string
+      started:
+        format: date-time
+        type: string
+      status:
+        $ref: '#/definitions/Status'
+    type: object
   DeploymentNotificationFrequency:
     enum:
       - all
@@ -2550,6 +2578,21 @@ definitions:
       - projectSlug
       - buildVersion
     type: object
+  EncryptRequest:
+    example:
+      plainValue: encryptme
+    properties:
+      plainValue:
+        default: ''
+        type: string
+    type: object
+  EnvironmentDeploymentModel:
+    allOf:
+      - $ref: '#/definitions/DeploymentLookupModel'
+      - properties:
+          project:
+            $ref: '#/definitions/ProjectLookupModel'
+        type: object
   Error:
     properties:
       message:
@@ -2877,18 +2920,17 @@ definitions:
     type: string
   Project:
     allOf:
+      - $ref: '#/definitions/ProjectLookupModel'
       - $ref: '#/definitions/Timestamped'
       - properties:
           accountId:
             minimum: 0
             readOnly: true
             type: integer
-          accountName:
-            readOnly: true
-            type: string
           alwaysBuildClosedPullRequests:
             type: boolean
           builds:
+            description: Only non-empty for response from getProjects.
             items:
               $ref: '#/definitions/Build'
             readOnly: true
@@ -2901,14 +2943,11 @@ definitions:
             type: boolean
           isPrivate:
             type: boolean
-          name:
-            type: string
           nuGetFeed:
             $ref: '#/definitions/NuGetFeed'
-          projectId:
-            minimum: 0
-            type: integer
+            description: Not present in response from addProject.
           repositoryBranch:
+            description: Not present in response from addProject.
             type: string
           repositoryName:
             type: string
@@ -2920,15 +2959,12 @@ definitions:
             type: boolean
           securityDescriptor:
             $ref: '#/definitions/SecurityDescriptor'
+            description: Not present in response from addProject. Not always present in response from getProjects (only after updateProject or startBuild?).
           skipBranchesWithoutAppveyorYml:
             type: boolean
-          slug:
-            readOnly: true
-            type: string
           tags:
             type: string
         required:
-          - projectId
           - repositoryName
         type: object
   ProjectAddition:
@@ -3233,11 +3269,18 @@ definitions:
       - project
       - deployment
     type: object
+  ProjectDeploymentModel:
+    allOf:
+      - $ref: '#/definitions/DeploymentLookupModel'
+      - properties:
+          environment:
+            $ref: '#/definitions/DeploymentEnvironmentLookupModel'
+        type: object
   ProjectDeploymentsResults:
     properties:
       deployments:
         items:
-          $ref: '#/definitions/DeploymentEnvironmentDeployment'
+          $ref: '#/definitions/ProjectDeploymentModel'
         type: array
       project:
         $ref: '#/definitions/Project'
@@ -3250,6 +3293,22 @@ definitions:
         type: array
       project:
         $ref: '#/definitions/Project'
+    type: object
+  ProjectLookupModel:
+    properties:
+      accountName:
+        readOnly: true
+        type: string
+      name:
+        type: string
+      projectId:
+        minimum: 0
+        type: integer
+      slug:
+        readOnly: true
+        type: string
+    required:
+      - projectId
     type: object
   ProjectSettingsResults:
     example:
@@ -3605,6 +3664,11 @@ definitions:
       isEncrypted:
         type: boolean
       value:
+        description: |-
+          Encrypted values can be created using the encryptValue operation.
+
+          Empty environment variables are represented by missing (null) value
+          rather than an empty string.
         type: string
     type: object
   StringValueObject:
@@ -3682,6 +3746,7 @@ definitions:
       successfulBuildNotification: all
       userId: 3019
   UserAccountRolesResults:
+    description: 'The roles property contains all roles, not only the role for which the user is a member.'
     properties:
       roles:
         items:

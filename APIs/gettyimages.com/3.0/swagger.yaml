@@ -1200,6 +1200,7 @@ paths:
             - downloads
             - editorial_segments
             - editorial_source
+            - entity_details
             - event_ids
             - graphical_style
             - id
@@ -1248,6 +1249,7 @@ paths:
               - downloads
               - editorial_segments
               - editorial_source
+              - entity_details
               - event_ids
               - graphical_style
               - id
@@ -1337,6 +1339,7 @@ paths:
             - downloads
             - editorial_segments
             - editorial_source
+            - entity_details
             - event_ids
             - graphical_style
             - id
@@ -1385,6 +1388,7 @@ paths:
               - downloads
               - editorial_segments
               - editorial_source
+              - entity_details
               - event_ids
               - graphical_style
               - id
@@ -1468,6 +1472,7 @@ paths:
             - display_set
             - editorial_segments
             - editorial_source
+            - entity_details
             - event_ids
             - graphical_style
             - id
@@ -1508,6 +1513,7 @@ paths:
               - display_set
               - editorial_segments
               - editorial_source
+              - entity_details
               - event_ids
               - graphical_style
               - id
@@ -1711,18 +1717,6 @@ paths:
           name: Authorization
           required: false
           type: string
-        - description: Filters to events with a matching editorial segment.
-          enum:
-            - archival
-            - entertainment
-            - news
-            - publicity
-            - royalty
-            - sport
-          in: query
-          name: editorial_segment
-          required: true
-          type: string
         - description: 'Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).'
           format: date-time
           in: query
@@ -1733,6 +1727,18 @@ paths:
           format: date-time
           in: query
           name: date_to
+          required: false
+          type: string
+        - description: Filters to events with a matching editorial segment.
+          enum:
+            - archival
+            - entertainment
+            - news
+            - publicity
+            - royalty
+            - sport
+          in: query
+          name: editorial_segment
           required: false
           type: string
         - description: 'Specifies fields to return. Default set is ''id'',''name'',''start_date''.'
@@ -1762,6 +1768,23 @@ paths:
           name: fields
           required: false
           type: array
+        - description: Request results starting at a page number (default is 1).
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Request number of images to return in each page.
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+        - description: Return only images tagged with specific phrase
+          in: query
+          name: phrase
+          required: false
+          type: string
       produces:
         - application/json
         - text/json
@@ -1771,7 +1794,7 @@ paths:
           schema:
             $ref: '#/definitions/events_result'
         '400':
-          description: MalformedRequest
+          description: SearchPhraseOrEditorialSegmentRequired
         '401':
           description: Unauthorized
         '403':
@@ -2022,6 +2045,7 @@ paths:
             - display_set
             - editorial_segments
             - editorial_source
+            - entity_details
             - event_ids
             - graphical_style
             - id
@@ -2062,6 +2086,7 @@ paths:
               - display_set
               - editorial_segments
               - editorial_source
+              - entity_details
               - event_ids
               - graphical_style
               - id
@@ -2992,6 +3017,7 @@ paths:
             - display_set
             - editorial_segments
             - editorial_source
+            - entity_details
             - event_ids
             - graphical_style
             - id
@@ -3030,6 +3056,7 @@ paths:
               - display_set
               - editorial_segments
               - editorial_source
+              - entity_details
               - event_ids
               - graphical_style
               - id
@@ -3085,6 +3112,12 @@ paths:
           name: keyword_ids
           required: false
           type: array
+        - description: 'Filter search results based on minimum quality ranking. Possible values 1, 2, 3 with 1 being best.'
+          format: int32
+          in: query
+          name: minimum_quality_rank
+          required: false
+          type: integer
         - description: Filter based on minimum size requested.
           enum:
             - x_small
@@ -3197,7 +3230,7 @@ paths:
           schema:
             $ref: '#/definitions/editorial_image_search_results'
         '400':
-          description: InvalidColor
+          description: MinimumQualityRankOutOfRange
         '401':
           description: Unauthorized
         '403':
@@ -3349,6 +3382,7 @@ paths:
             - detail_set
             - display_set
             - editorial_segments
+            - entity_details
             - era
             - id
             - keywords
@@ -3381,6 +3415,7 @@ paths:
               - detail_set
               - display_set
               - editorial_segments
+              - entity_details
               - era
               - id
               - keywords
@@ -3937,6 +3972,7 @@ paths:
             - detail_set
             - display_set
             - editorial_segments
+            - entity_details
             - era
             - id
             - keywords
@@ -3969,6 +4005,7 @@ paths:
               - detail_set
               - display_set
               - editorial_segments
+              - entity_details
               - era
               - id
               - keywords
@@ -4162,6 +4199,7 @@ paths:
             - downloads
             - era
             - editorial_segments
+            - entity_details
             - keywords
             - license_model
             - mastered_to
@@ -4195,6 +4233,7 @@ paths:
               - downloads
               - era
               - editorial_segments
+              - entity_details
               - keywords
               - license_model
               - mastered_to
@@ -4269,6 +4308,7 @@ paths:
             - downloads
             - era
             - editorial_segments
+            - entity_details
             - keywords
             - license_model
             - mastered_to
@@ -4302,6 +4342,7 @@ paths:
               - downloads
               - era
               - editorial_segments
+              - entity_details
               - keywords
               - license_model
               - mastered_to
@@ -4779,6 +4820,16 @@ definitions:
     properties:
       text:
         type: string
+    type: object
+  cost:
+    properties:
+      units:
+        description: The type of value. Currently credits is the only supported value
+        type: string
+      value:
+        description: The number of units
+        format: int32
+        type: integer
     type: object
   countries:
     properties:
@@ -5529,6 +5580,16 @@ definitions:
     type: object
   keywords:
     properties:
+      entity_types:
+        description: 'Lists the person types for a specific person. E.g., ''Musician'', ''Politician''.'
+        items:
+          type: string
+        type: array
+      entity_uris:
+        description: Lists the URIs where detailed information can be found for a specific person.
+        items:
+          type: string
+        type: array
       keyword_id:
         description: Specifies the unique identifier for the keyword.
         type: string

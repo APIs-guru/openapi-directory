@@ -11858,47 +11858,47 @@ definitions:
       reasonCode:
         description: The dispute's reason code
         enum:
-          - 1000
-          - 12
-          - 2
-          - 30
-          - 31
-          - 35
-          - 37
-          - 40
-          - 41
-          - 42
-          - 46
-          - 47
-          - 49
-          - 50
-          - 53
-          - 54
-          - 55
-          - 57
-          - 59
-          - 60
-          - 62
-          - 7
-          - 70
-          - 71
-          - 72
-          - 73
-          - 74
-          - 75
-          - 76
-          - 77
-          - 79
-          - 8
-          - 80
-          - 81
-          - 82
-          - 83
-          - 85
-          - 86
-          - 93
-          - 0
-          - 63
+          - '1000'
+          - '12'
+          - '2'
+          - '30'
+          - '31'
+          - '35'
+          - '37'
+          - '40'
+          - '41'
+          - '42'
+          - '46'
+          - '47'
+          - '49'
+          - '50'
+          - '53'
+          - '54'
+          - '55'
+          - '57'
+          - '59'
+          - '60'
+          - '62'
+          - '7'
+          - '70'
+          - '71'
+          - '72'
+          - '73'
+          - '74'
+          - '75'
+          - '76'
+          - '77'
+          - '79'
+          - '8'
+          - '80'
+          - '81'
+          - '82'
+          - '83'
+          - '85'
+          - '86'
+          - '93'
+          - '00'
+          - '63'
           - A01
           - A02
           - A08
@@ -11974,6 +11974,19 @@ definitions:
           - UA30
           - UA31
           - UA38
+          - duplicate
+          - fraudulent
+          - subscription_canceled
+          - product_unacceptable
+          - product_not_received
+          - unrecognized
+          - credit_not_processed
+          - customer_initiated
+          - incorrect_account_details
+          - insufficient_funds
+          - bank_cannot_process
+          - debit_not_authorized
+          - general
         type: string
       resolvedTime:
         allOf:

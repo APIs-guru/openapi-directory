@@ -17,6 +17,8 @@ info:
   x-providerName: botify.com
 externalDocs:
   url: 'https://developers.botify.com/'
+produces:
+  - application/json
 securityDefinitions:
   DjangoRestToken:
     in: header
@@ -28,48 +30,42 @@ paths:
   '/analyses/{username}/{project_slug}':
     get:
       description: List all analyses for a project
-      operationId: getAnalyses
+      operationId: getProjectAnalyses
       parameters:
-        - description: Page Number
+        - default: 1
+          description: Page Number
           in: query
           name: page
+          required: false
           type: integer
         - description: Page Size
           in: query
           name: size
+          required: false
           type: integer
-      produces:
-        - application/json
+        - description: Return only successfully finished analyses
+          in: query
+          name: only_success
+          required: false
+          type: boolean
       responses:
         '200':
           description: Successful operation
           schema:
             properties:
               count:
-                description: ''
-                readOnly: true
                 type: integer
               next:
-                description: ''
-                readOnly: true
                 type: string
               page:
-                description: ''
-                readOnly: true
                 type: integer
               previous:
-                description: ''
-                readOnly: true
                 type: string
               results:
-                description: ''
                 items:
                   $ref: '#/definitions/Analysis'
-                readOnly: true
                 type: array
               size:
-                description: ''
-                readOnly: true
                 type: integer
             type: object
         default:
@@ -78,7 +74,7 @@ paths:
             $ref: '#/definitions/DefaultPayload'
       summary: List all analyses for a project
       tags:
-        - Analysis
+        - Project
     parameters:
       - description: User's identifier
         in: path
@@ -95,8 +91,6 @@ paths:
       description: Get an Analysis detail
       operationId: getAnalysisSummary
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
@@ -130,8 +124,6 @@ paths:
       description: Return global statistics for an analysis
       operationId: getCrawlStatistics
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
@@ -180,13 +172,11 @@ paths:
           name: frequency
           required: true
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/Default'
+            $ref: '#/definitions/CrawlStatisticsTime'
         default:
           description: error payload
           schema:
@@ -215,13 +205,13 @@ paths:
       description: Return a list of 1000 latest URLs crawled (all crawled URLs or only URLS with HTTP errors)
       operationId: getCrawlStatisticsUrls
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/Default'
+            items:
+              $ref: '#/definitions/CrawlStatisticsUrls'
+            type: array
         default:
           description: error payload
           schema:
@@ -247,57 +237,46 @@ paths:
         type: string
       - description: URLs list type (crawled URLs or error URLs)
         enum:
-          - crawled
-          - errors
+          - organic
+          - social
         in: path
         name: list_type
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/ganalytics/orphan_urls/{medium}/{source}':
     get:
-      description: 'List of Orphan URLs. URLs which generated visits from the selected source according to Google Analytics data, but were not crawled with by the Botify crawler (either because no links to them were found on the website, or because the crawler was not allowed to follow these links according to the project settings).   For a search engine (medium: origanic; sources: all, aol, ask, baidu, bing, google, naver, yahoo, yandex) or a social network (medium: social; sources: all, facebook, google+, linkedin, pinterest, reddit, tumblr, twitter)'
+      description: 'Legacy    List of Orphan URLs. URLs which generated visits from the selected source according to Google Analytics data, but were not crawled with by the Botify crawler (either because no links to them were found on the website, or because the crawler was not allowed to follow these links according to the project settings).   For a search engine (medium: origanic; sources: all, aol, ask, baidu, bing, google, naver, yahoo, yandex) or a social network (medium: social; sources: all, facebook, google+, linkedin, pinterest, reddit, tumblr, twitter)'
       operationId: getGanalyticsOrphanURLs
       parameters:
-        - description: Page Number
+        - default: 1
+          description: Page Number
           in: query
           name: page
+          required: false
           type: integer
         - description: Page Size
           in: query
           name: size
+          required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
             properties:
               count:
-                description: ''
-                readOnly: true
                 type: integer
               next:
-                description: ''
-                readOnly: true
                 type: string
               page:
-                description: ''
-                readOnly: true
                 type: integer
               previous:
-                description: ''
-                readOnly: true
                 type: string
               results:
-                description: ''
                 items:
-                  $ref: '#/definitions/Default'
-                readOnly: true
+                  $ref: '#/definitions/CrawlOrphanURLs'
                 type: array
               size:
-                description: ''
-                readOnly: true
                 type: integer
             type: object
         default:
@@ -358,13 +337,11 @@ paths:
       description: Get inlinks percentiles
       operationId: getLinksPercentiles
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/Default'
+            $ref: '#/definitions/LinksPercentiles'
         default:
           description: error payload
           schema:
@@ -393,13 +370,11 @@ paths:
       description: Lost pagerank
       operationId: getPageRankLost
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/Default'
+            $ref: '#/definitions/PageRankLost'
         default:
           description: error payload
           schema:
@@ -428,13 +403,11 @@ paths:
       description: 'Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc.)'
       operationId: getSitemapsReport
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/Default'
+            $ref: '#/definitions/SitemapsReport'
         default:
           description: error payload
           schema:
@@ -463,46 +436,35 @@ paths:
       description: 'Sample list of URLs which were found in your sitemaps but outside of the crawl perimeter defined for the project, for instance domain/subdomain or protocol (HTTP/HTTPS) not allowed in the crawl settings.'
       operationId: getSitemapsSamplesOutOfConfig
       parameters:
-        - description: Page Number
+        - default: 1
+          description: Page Number
           in: query
           name: page
+          required: false
           type: integer
         - description: Page Size
           in: query
           name: size
+          required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
             properties:
               count:
-                description: ''
-                readOnly: true
                 type: integer
               next:
-                description: ''
-                readOnly: true
                 type: string
               page:
-                description: ''
-                readOnly: true
                 type: integer
               previous:
-                description: ''
-                readOnly: true
                 type: string
               results:
-                description: ''
                 items:
-                  $ref: '#/definitions/Default'
-                readOnly: true
+                  type: string
                 type: array
               size:
-                description: ''
-                readOnly: true
                 type: integer
             type: object
         default:
@@ -533,46 +495,35 @@ paths:
       description: 'Sample list of URLs which were found in your sitemaps, within the project allowed scope (allowed domains/subdomains/protocols), but not found by the Botify crawler.'
       operationId: getSitemapsSamplesSitemapsOnly
       parameters:
-        - description: Page Number
+        - default: 1
+          description: Page Number
           in: query
           name: page
+          required: false
           type: integer
         - description: Page Size
           in: query
           name: size
+          required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
             properties:
               count:
-                description: ''
-                readOnly: true
                 type: integer
               next:
-                description: ''
-                readOnly: true
                 type: string
               page:
-                description: ''
-                readOnly: true
                 type: integer
               previous:
-                description: ''
-                readOnly: true
                 type: string
               results:
-                description: ''
                 items:
-                  $ref: '#/definitions/Default'
-                readOnly: true
+                  type: string
                 type: array
               size:
-                description: ''
-                readOnly: true
                 type: integer
             type: object
         default:
@@ -603,46 +554,35 @@ paths:
       description: Top domains
       operationId: getLinksTopDomains
       parameters:
-        - description: Page Number
+        - default: 1
+          description: Page Number
           in: query
           name: page
+          required: false
           type: integer
         - description: Page Size
           in: query
           name: size
+          required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
             properties:
               count:
-                description: ''
-                readOnly: true
                 type: integer
               next:
-                description: ''
-                readOnly: true
                 type: string
               page:
-                description: ''
-                readOnly: true
                 type: integer
               previous:
-                description: ''
-                readOnly: true
                 type: string
               results:
-                description: ''
                 items:
-                  $ref: '#/definitions/Default'
-                readOnly: true
+                  $ref: '#/definitions/LinksTopDomains'
                 type: array
               size:
-                description: ''
-                readOnly: true
                 type: integer
             type: object
         default:
@@ -673,46 +613,35 @@ paths:
       description: Top subddomains
       operationId: getLinksTopSubdomains
       parameters:
-        - description: Page Number
+        - default: 1
+          description: Page Number
           in: query
           name: page
+          required: false
           type: integer
         - description: Page Size
           in: query
           name: size
+          required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
             properties:
               count:
-                description: ''
-                readOnly: true
                 type: integer
               next:
-                description: ''
-                readOnly: true
                 type: string
               page:
-                description: ''
-                readOnly: true
                 type: integer
               previous:
-                description: ''
-                readOnly: true
                 type: string
               results:
-                description: ''
                 items:
-                  $ref: '#/definitions/Default'
-                readOnly: true
+                  $ref: '#/definitions/LinksTopDomains'
                 type: array
               size:
-                description: ''
-                readOnly: true
                 type: integer
             type: object
         default:
@@ -738,6 +667,95 @@ paths:
         name: analysis_slug
         required: true
         type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/visits/orphan_urls/{medium}/{source}':
+    get:
+      description: 'List of Orphan URLs. URLs which generated visits from the selected source according to Google Analytics data, but were not crawled with by the Botify crawler (either because no links to them were found on the website, or because the crawler was not allowed to follow these links according to the project settings).   For a search engine (medium: origanic; sources: all, aol, ask, baidu, bing, google, naver, yahoo, yandex) or a social network (medium: social; sources: all, facebook, google+, linkedin, pinterest, reddit, tumblr, twitter)'
+      operationId: getVisitsOrphanURLs
+      parameters:
+        - default: 1
+          description: Page Number
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+              page:
+                type: integer
+              previous:
+                type: string
+              results:
+                items:
+                  $ref: '#/definitions/CrawlOrphanURLs'
+                type: array
+              size:
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: List of Orphan URLs
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
+      - description: 'Type of traffic, value: ''organic'' (from search engine)or ''social'' (from a social network)'
+        enum:
+          - organic
+          - social
+        in: path
+        name: medium
+        required: true
+        type: string
+      - description: 'Traffic source, value: name of the search engine or social network'
+        enum:
+          - all
+          - aol
+          - ask
+          - baidu
+          - bing
+          - facebook
+          - google
+          - google+
+          - linkedin
+          - naver
+          - pinterest
+          - reddit
+          - tumblr
+          - twitter
+          - yahoo
+          - yandex
+        in: path
+        name: source
+        required: true
+        type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls':
     parameters:
       - description: User's identifier
@@ -759,12 +777,13 @@ paths:
       description: Executes a query and returns a paginated response
       operationId: getUrls
       parameters:
-        - in: body
+        - description: Urls query
+          in: body
           name: UrlsQuery
           schema:
             $ref: '#/definitions/UrlsQuery'
         - default: current
-          description: Analysis context to execute the query
+          description: Analysis context
           enum:
             - current
             - disappeared
@@ -786,38 +805,24 @@ paths:
           name: size
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
-        '201':
+        '200':
           description: Successful operation
           schema:
             properties:
               count:
-                description: ''
-                readOnly: true
                 type: integer
               next:
-                description: ''
-                readOnly: true
                 type: string
               page:
-                description: ''
-                readOnly: true
                 type: integer
               previous:
-                description: ''
-                readOnly: true
                 type: string
               results:
-                description: ''
                 items:
-                  $ref: '#/definitions/Default'
-                readOnly: true
+                  $ref: '#/definitions/UrlDetail'
                 type: array
               size:
-                description: ''
-                readOnly: true
                 type: integer
             type: object
         default:
@@ -848,12 +853,13 @@ paths:
       description: Query aggregator. It accepts multiple queries
       operationId: getUrlsAggs
       parameters:
-        - in: body
+        - description: UrlsAggs queries
+          in: body
           name: UrlsAggsQueries
           schema:
             $ref: '#/definitions/UrlsAggsQueries'
         - default: current
-          description: ''
+          description: Analysis context
           enum:
             - current
             - disappeared
@@ -863,13 +869,13 @@ paths:
           name: area
           required: false
           type: string
-      produces:
-        - application/json
       responses:
-        '201':
+        '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/Default'
+            items:
+              $ref: '#/definitions/UrlsAggs'
+            type: array
         default:
           description: error payload
           schema:
@@ -883,7 +889,7 @@ paths:
       operationId: getUrlsDatamodel
       parameters:
         - default: current
-          description: ''
+          description: Analysis context
           enum:
             - current
             - disappeared
@@ -893,13 +899,11 @@ paths:
           name: area
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/Default'
+            $ref: '#/definitions/Datamodel'
         default:
           description: error payload
           schema:
@@ -928,46 +932,35 @@ paths:
       description: A list of the CSV Exports requests and their current status
       operationId: getUrlsExports
       parameters:
-        - description: Page Number
+        - default: 1
+          description: Page Number
           in: query
           name: page
+          required: false
           type: integer
         - description: Page Size
           in: query
           name: size
+          required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
             properties:
               count:
-                description: ''
-                readOnly: true
                 type: integer
               next:
-                description: ''
-                readOnly: true
                 type: string
               page:
-                description: ''
-                readOnly: true
                 type: integer
               previous:
-                description: ''
-                readOnly: true
                 type: string
               results:
-                description: ''
                 items:
                   $ref: '#/definitions/CsvExportStatus'
-                readOnly: true
                 type: array
               size:
-                description: ''
-                readOnly: true
                 type: integer
             type: object
         default:
@@ -997,12 +990,13 @@ paths:
       description: Creates a new UrlExport object and starts a task that will export the results into a csv. Returns the model id that manages the task
       operationId: createUrlsExport
       parameters:
-        - in: body
+        - description: Urls query
+          in: body
           name: UrlsQuery
           schema:
             $ref: '#/definitions/UrlsQuery'
         - default: current
-          description: ''
+          description: Analysis context
           enum:
             - current
             - disappeared
@@ -1012,8 +1006,6 @@ paths:
           name: area
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '201':
           description: Successful operation
@@ -1031,8 +1023,6 @@ paths:
       description: Checks the status of an CSVUrlExportJob object. Returns json object with the status.
       operationId: getUrlsExportStatus
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
@@ -1087,12 +1077,13 @@ paths:
       description: Return most frequent segments (= suggested patterns in the previous version) for a Botify Query.
       operationId: getUrlsSuggestedFilters
       parameters:
-        - in: body
+        - description: UrlsAggs query
+          in: body
           name: UrlsAggsQuery
           schema:
             $ref: '#/definitions/UrlsAggsQuery'
         - default: current
-          description: ''
+          description: Analysis context
           enum:
             - current
             - new
@@ -1100,8 +1091,6 @@ paths:
           name: area
           required: false
           type: string
-      produces:
-        - application/json
       responses:
         '201':
           description: Successful operation
@@ -1119,15 +1108,6 @@ paths:
       description: Gets the detail of an URL for an analysis
       operationId: getUrlDetail
       parameters:
-        - default: current
-          description: Analysis lookup context
-          enum:
-            - current
-            - disappeared
-          in: query
-          name: area
-          required: false
-          type: string
         - collectionFormat: csv
           description: comma separated list of fields to return (c.f. URLs Datamodel)
           in: query
@@ -1136,13 +1116,11 @@ paths:
           name: fields
           required: false
           type: array
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/Default'
+            $ref: '#/definitions/UrlDetail'
         default:
           description: error payload
           schema:
@@ -1174,48 +1152,41 @@ paths:
   '/projects/{username}':
     get:
       description: List all active projects for the user
-      operationId: getProjects
+      operationId: getUserProjects
       parameters:
-        - description: Page Number
+        - description: Project's name
+          in: query
+          name: name
+          type: string
+        - default: 1
+          description: Page Number
           in: query
           name: page
+          required: false
           type: integer
         - description: Page Size
           in: query
           name: size
+          required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
             properties:
               count:
-                description: ''
-                readOnly: true
                 type: integer
               next:
-                description: ''
-                readOnly: true
                 type: string
               page:
-                description: ''
-                readOnly: true
                 type: integer
               previous:
-                description: ''
-                readOnly: true
                 type: string
               results:
-                description: ''
                 items:
                   $ref: '#/definitions/Project'
-                readOnly: true
                 type: array
               size:
-                description: ''
-                readOnly: true
                 type: integer
             type: object
         default:
@@ -1224,88 +1195,47 @@ paths:
             $ref: '#/definitions/DefaultPayload'
       summary: List all active projects for the user
       tags:
-        - Project
+        - User
     parameters:
       - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-  '/projects/{username}/{project_slug}/features/url_rewriting/rules_validator':
-    parameters:
-      - description: User's identifier
-        in: path
-        name: username
-        required: true
-        type: string
-      - description: Project's identifier
-        in: path
-        name: project_slug
-        required: true
-        type: string
-    post:
-      description: Match and replace parts of a URL based on rules passed in POST data.
-      operationId: testUrlRewritingRules
-      parameters: []
-      produces:
-        - application/json
-      responses:
-        '201':
-          description: Successful operation
-          schema:
-            $ref: '#/definitions/URLRewritingRulesSerializer'
-        default:
-          description: error payload
-          schema:
-            $ref: '#/definitions/DefaultPayload'
-      summary: Match and replace parts of a URL based on rules passed in POST data
-      tags:
-        - Project
   '/projects/{username}/{project_slug}/filters':
     get:
       description: 'List all the project''s saved filters (each filter''s name, ID and filter value)'
       operationId: getSavedFilters
       parameters:
-        - description: Page Number
+        - default: 1
+          description: Page Number
           in: query
           name: page
+          required: false
           type: integer
         - description: Page Size
           in: query
           name: size
+          required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
           schema:
             properties:
               count:
-                description: ''
-                readOnly: true
                 type: integer
               next:
-                description: ''
-                readOnly: true
                 type: string
               page:
-                description: ''
-                readOnly: true
                 type: integer
               previous:
-                description: ''
-                readOnly: true
                 type: string
               results:
-                description: ''
                 items:
                   $ref: '#/definitions/ProjectSavedFilter'
-                readOnly: true
                 type: array
               size:
-                description: ''
-                readOnly: true
                 type: integer
             type: object
         default:
@@ -1331,8 +1261,6 @@ paths:
       description: 'Retrieves a specific saved filter''s name, ID and filter value'
       operationId: getSavedFilter
       parameters: []
-      produces:
-        - application/json
       responses:
         '200':
           description: Successful operation
@@ -1356,8 +1284,7 @@ paths:
         name: project_slug
         required: true
         type: string
-      - description: Saved Filter's identifier
-        in: path
+      - in: path
         name: identifier
         required: true
         type: string
@@ -1377,12 +1304,13 @@ paths:
       description: Project Query aggregator. It accepts multiple queries that will be executed on all completed analyses in the project
       operationId: getProjectUrlsAggs
       parameters:
-        - in: body
+        - description: UrlsAggs queries
+          in: body
           name: UrlsAggsQueries
           schema:
             $ref: '#/definitions/UrlsAggsQueries'
         - default: current
-          description: Analysis context to execute the queries
+          description: Analyses context
           enum:
             - current
             - disappeared
@@ -1405,8 +1333,6 @@ paths:
           name: nb_analyses
           required: false
           type: integer
-      produces:
-        - application/json
       responses:
         '201':
           description: Successful operation
@@ -1420,188 +1346,198 @@ paths:
       tags:
         - Project
 definitions:
+  AdvancedExportStatus:
+    properties:
+      advanced_export_type:
+        type: string
+      date_created:
+        format: date-time
+        readOnly: true
+        type: string
+      job_id:
+        readOnly: true
+        type: string
+      job_status:
+        readOnly: true
+        type: string
+      job_url:
+        readOnly: true
+        type: string
+      nb_lines:
+        readOnly: true
+        type: string
+      query:
+        readOnly: true
+        type: string
+      results:
+        readOnly: true
+        type: string
+    required:
+      - advanced_export_type
+    type: object
+  AdvancedExporter:
+    properties:
+      group:
+        type: string
+      lines:
+        format: int64
+        type: integer
+      name:
+        type: string
+      type:
+        type: string
+    required:
+      - type
+      - name
+      - group
+      - lines
+    type: object
+  AdvancedExporters:
+    properties:
+      exporters:
+        items:
+          $ref: '#/definitions/AdvancedExporter'
+        type: array
+    required:
+      - exporters
+    type: object
   Analysis:
     properties:
       config:
-        description: ''
         readOnly: true
         type: string
       date_created:
-        description: ''
         format: date-time
-        readOnly: false
         type: string
       date_finished:
-        description: ''
         format: date-time
-        readOnly: false
         type: string
       date_last_modified:
         description: Date of last modified analysis
         format: date-time
-        readOnly: false
         type: string
       date_launched:
-        description: ''
         format: date-time
-        readOnly: false
         type: string
       features:
-        description: ''
         readOnly: true
         type: string
       id:
-        description: ''
         format: int64
         readOnly: true
         type: integer
       name:
-        description: ''
         readOnly: true
         type: string
       slug:
-        description: ''
         readOnly: true
         type: string
       status:
-        description: ''
         readOnly: true
         type: string
       url:
-        description: ''
         readOnly: true
         type: string
       urls_done:
-        description: ''
         readOnly: true
         type: string
       urls_in_queue:
-        description: ''
         readOnly: true
         type: string
       user:
         $ref: '#/definitions/User'
-        description: ''
-        readOnly: false
     required:
       - user
     type: object
   AnalysisDetail:
     properties:
       config:
-        description: ''
         readOnly: true
         type: string
       date_finished:
-        description: ''
         format: date-time
-        readOnly: false
         type: string
       date_last_modified:
         description: Date of last modified analysis
         format: date-time
-        readOnly: false
         type: string
       date_launched:
-        description: ''
         format: date-time
-        readOnly: false
         type: string
       failures:
-        description: ''
         readOnly: true
         type: string
       features:
-        description: ''
         readOnly: true
         type: string
       id:
-        description: ''
         format: int64
         readOnly: true
         type: integer
       name:
-        description: ''
         readOnly: true
         type: string
       red_button_domain:
-        description: ''
-        readOnly: false
         type: string
       slug:
-        description: ''
         readOnly: true
         type: string
       url:
-        description: ''
         readOnly: true
         type: string
       urls_done:
-        description: ''
         readOnly: true
         type: string
       urls_in_queue:
-        description: ''
         readOnly: true
         type: string
       user:
         $ref: '#/definitions/User'
-        description: ''
-        readOnly: false
     required:
       - user
+    type: object
+  CrawlOrphanURLs:
+    properties:
+      url:
+        type: string
+      visits:
+        format: int64
+        type: integer
+    required:
+      - url
+      - visits
     type: object
   CrawlStatistics:
     properties:
       depth_current:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
       last_upd_dt:
-        description: ''
         format: date-time
-        readOnly: false
         type: string
       pages_dones:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
       pages_dones_2xx:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
       pages_dones_3xx:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
       pages_dones_4xx:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
       pages_dones_5xx:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
       pages_dones_networkerror:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
       pages_dones_xxx:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
       pages_known:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
     required:
       - depth_current
@@ -1615,47 +1551,193 @@ definitions:
       - pages_dones_4xx
       - pages_known
     type: object
+  CrawlStatisticsTime:
+    properties:
+      avg_delay:
+        items:
+          $ref: '#/definitions/CrawlStatisticsTimePoint'
+        type: array
+      avg_size:
+        items:
+          $ref: '#/definitions/CrawlStatisticsTimePoint'
+        type: array
+      frequency:
+        type: string
+      http_code_2xx:
+        items:
+          $ref: '#/definitions/CrawlStatisticsTimePoint'
+        type: array
+      http_code_3xx:
+        items:
+          $ref: '#/definitions/CrawlStatisticsTimePoint'
+        type: array
+      http_code_4xx:
+        items:
+          $ref: '#/definitions/CrawlStatisticsTimePoint'
+        type: array
+      http_code_5xx:
+        items:
+          $ref: '#/definitions/CrawlStatisticsTimePoint'
+        type: array
+      http_code_xxx:
+        items:
+          $ref: '#/definitions/CrawlStatisticsTimePoint'
+        type: array
+      last_update_date:
+        format: date-time
+        type: string
+      new_urls:
+        items:
+          $ref: '#/definitions/CrawlStatisticsTimePoint'
+        type: array
+    required:
+      - avg_delay
+      - http_code_2xx
+      - http_code_3xx
+      - http_code_4xx
+      - http_code_5xx
+      - http_code_xxx
+      - frequency
+      - last_update_date
+      - avg_size
+      - new_urls
+    type: object
+  CrawlStatisticsTimePoint:
+    properties:
+      count:
+        format: int64
+        type: integer
+      datetime:
+        format: date-time
+        type: string
+    required:
+      - count
+      - datetime
+    type: object
+  CrawlStatisticsUrls:
+    properties:
+      content_type:
+        type: string
+      date:
+        type: string
+      delay_first_byte:
+        format: int64
+        type: integer
+      delay_last_byte:
+        format: int64
+        type: integer
+      gzip:
+        type: boolean
+      http:
+        format: int64
+        type: integer
+      length:
+        format: int64
+        type: integer
+      redirects_to:
+        type: string
+      url:
+        type: string
+    required:
+      - http
+      - url
+      - delay_last_byte
+      - gzip
+      - length
+      - content_type
+      - date
+      - delay_first_byte
+    type: object
   CsvExportStatus:
     properties:
       area:
-        description: ''
-        format: int64
-        readOnly: false
-        type: integer
+        default: current
+        type: string
       date_created:
-        description: ''
         format: date-time
         readOnly: true
         type: string
       job_id:
-        description: ''
         readOnly: true
         type: string
       job_status:
-        description: ''
         readOnly: true
         type: string
       job_url:
-        description: ''
         readOnly: true
         type: string
       nb_results:
-        description: ''
         format: int64
         maximum: 2147483647
         minimum: 0
-        readOnly: false
         type: integer
       query:
         $ref: '#/definitions/UrlsQuery'
-        description: ''
-        readOnly: false
       results:
-        description: ''
         readOnly: true
         type: string
     required:
       - query
+    type: object
+  Datamodel:
+    properties:
+      aliases:
+        type: object
+      fields:
+        items:
+          $ref: '#/definitions/DatamodelField'
+        type: array
+      groups:
+        items:
+          $ref: '#/definitions/DatamodelGroup'
+        type: array
+      max_timeseries_fields:
+        format: int64
+        type: integer
+    required:
+      - fields
+      - groups
+    type: object
+  DatamodelField:
+    properties:
+      aliases:
+        items:
+          type: string
+        type: array
+      group:
+        type: string
+      id:
+        type: string
+      multiple:
+        type: boolean
+      name:
+        type: string
+      permissions:
+        items:
+          type: string
+        type: array
+      subtype:
+        type: string
+      type:
+        type: string
+    required:
+      - multiple
+      - name
+      - subtype
+      - group
+      - type
+      - id
+      - permissions
+    type: object
+  DatamodelGroup:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    required:
+      - id
+      - name
     type: object
   Default:
     properties: {}
@@ -1679,15 +1761,11 @@ definitions:
   FieldValues:
     properties:
       count:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
       results:
-        description: ''
         items:
           $ref: '#/definitions/FieldValuesResult'
-        readOnly: false
         type: array
     required:
       - count
@@ -1696,44 +1774,143 @@ definitions:
   FieldValuesResult:
     properties:
       nb_urls:
-        description: ''
         format: int64
-        readOnly: false
         type: integer
       value:
-        description: ''
-        readOnly: false
         type: string
     required:
       - value
       - nb_urls
     type: object
+  LinksPercentiles:
+    properties:
+      domain:
+        type: string
+      percentiles:
+        items:
+          $ref: '#/definitions/LinksPercentilesItem'
+        type: array
+    required:
+      - domain
+      - percentiles
+    type: object
+  LinksPercentilesItem:
+    properties:
+      avg:
+        format: int64
+        type: integer
+      id:
+        format: int64
+        type: integer
+      max:
+        format: int64
+        type: integer
+      metric_total:
+        format: int64
+        type: integer
+      min:
+        format: int64
+        type: integer
+      url_total:
+        format: int64
+        type: integer
+    required:
+      - min
+      - max
+      - url_total
+      - metric_total
+      - avg
+      - id
+    type: object
+  LinksTopDomains:
+    properties:
+      domain:
+        type: string
+      follow_links:
+        format: int64
+        type: integer
+      follow_samples:
+        items:
+          $ref: '#/definitions/LinksTopDomainsSamples'
+        type: array
+      nofollow_links:
+        format: int64
+        type: integer
+      nofollow_samples:
+        items:
+          $ref: '#/definitions/LinksTopDomainsSamples'
+        type: array
+      unique_follow_links:
+        format: int64
+        type: integer
+      unique_nofollow_links:
+        format: int64
+        type: integer
+    required:
+      - follow_links
+      - nofollow_links
+      - domain
+      - follow_samples
+      - nofollow_samples
+      - unique_follow_links
+      - unique_nofollow_links
+    type: object
+  LinksTopDomainsSamples:
+    properties:
+      sources:
+        items:
+          type: string
+        type: array
+      unique_links:
+        format: int64
+        type: integer
+      url:
+        type: string
+    required:
+      - url
+      - sources
+      - unique_links
+    type: object
+  PageRankLost:
+    properties:
+      external:
+        format: float
+        type: number
+      non_crawled:
+        format: float
+        type: number
+      robots_txt:
+        format: float
+        type: number
+    required:
+      - non_crawled
+      - external
+      - robots_txt
+    type: object
   Project:
     properties:
       active:
-        description: ''
-        readOnly: false
         type: boolean
       current_settings:
-        $ref: '#/definitions/ProjectSettingsSerializer'
-        description: ''
-        readOnly: false
+        $ref: '#/definitions/ProjectSettings'
       date_created:
-        description: ''
         readOnly: true
         type: string
+      has_log_analysis:
+        readOnly: true
+        type: boolean
+      last_analysis:
+        readOnly: true
+        type: object
       name:
-        description: ''
-        readOnly: false
         type: string
       slug:
-        description: ''
-        readOnly: false
+        type: string
+      url:
+        readOnly: true
         type: string
       user:
         $ref: '#/definitions/User'
-        description: ''
-        readOnly: false
     required:
       - name
       - slug
@@ -1741,124 +1918,86 @@ definitions:
       - current_settings
     type: object
   ProjectSavedFilter:
+    description: Project's saved UrlFilter
     properties:
       filters:
-        description: ''
-        readOnly: false
         type: object
       identifier:
-        description: ''
         readOnly: true
         type: string
       name:
-        description: ''
-        readOnly: false
         type: string
     required:
       - name
       - filters
     type: object
-  ProjectSettingsSerializer:
+  ProjectSettings:
     properties:
       allowed_domains:
-        description: ''
         items:
           type: string
-        readOnly: false
         type: array
       blacklisted_domains:
-        description: ''
         items:
           type: string
-        readOnly: false
         type: array
       compare_crawl:
-        description: ''
-        readOnly: false
         type: boolean
       crawl_gzip:
-        description: ''
-        readOnly: false
         type: boolean
       extra_headers:
-        description: ''
-        readOnly: false
         type: string
       google_analytics_account_email:
         description: Keep email in case user delete his social auth connection
-        readOnly: false
         type: string
       google_analytics_nb_days:
-        description: ''
         format: int64
         maximum: 90
         minimum: 1
-        readOnly: false
         type: integer
       google_analytics_site_id:
-        description: ''
         format: int64
         maximum: 2147483647
         minimum: -2147483648
-        readOnly: false
         type: integer
       google_social_auth_id:
-        description: ''
         format: int64
         maximum: 2147483647
         minimum: -2147483648
-        readOnly: false
         type: integer
       has_robots_txt:
-        description: ''
         readOnly: true
         type: string
       header_settings:
-        description: ''
         items:
           type: string
-        readOnly: false
         type: array
       max_depth:
-        description: ''
         format: int64
         maximum: 2147483647
         minimum: 0
-        readOnly: false
         type: integer
       max_nb_pages:
-        description: ''
         format: int64
         maximum: 2147483647
         minimum: 1
-        readOnly: false
         type: integer
       max_pages_per_sec:
-        description: ''
         format: int64
         maximum: 2147483647
         minimum: 1
-        readOnly: false
         type: integer
       respect_nofollow:
-        description: ''
-        readOnly: false
         type: boolean
       sitemaps:
-        description: ''
         items:
           type: string
-        readOnly: false
         type: array
       start_urls:
-        description: ''
         items:
           type: string
-        readOnly: false
         type: array
       user_agent:
-        description: ''
-        readOnly: false
         type: string
     required:
       - start_urls
@@ -1868,116 +2007,192 @@ definitions:
       - sitemaps
       - header_settings
     type: object
-  RewritingRuleSerializer:
+  RewritingRule:
     properties:
       ignore_case:
-        description: ''
-        readOnly: false
         type: boolean
       regex:
-        description: ''
-        readOnly: false
         type: string
       replace:
-        description: ''
-        readOnly: false
         type: string
     required:
       - regex
       - replace
       - ignore_case
     type: object
-  URLRewritingRulesSerializer:
+  SitemapsReport:
     properties:
-      rules:
-        description: ''
+      count:
+        format: int64
+        type: integer
+      errors:
         items:
-          $ref: '#/definitions/RewritingRuleSerializer'
-        readOnly: false
+          $ref: '#/definitions/SitemapsReportSitemap'
         type: array
-      urls:
-        description: ''
+      sitemap_indexes:
+        items:
+          $ref: '#/definitions/SitemapsReportSitemap'
+        type: array
+      sitemap_only:
+        $ref: '#/definitions/SitemapsReportOnly'
+      sitemaps:
+        items:
+          $ref: '#/definitions/SitemapsReportSitemap'
+        type: array
+    required:
+      - count
+      - sitemap_only
+      - sitemap_indexes
+      - sitemaps
+      - errors
+    type: object
+  SitemapsReportOnly:
+    properties:
+      in_configuration:
+        format: int64
+        type: integer
+      out_of_configuration:
+        format: int64
+        type: integer
+    required:
+      - out_of_configuration
+      - in_configuration
+    type: object
+  SitemapsReportSitemap:
+    properties:
+      error:
+        $ref: '#/definitions/SitemapsReportSitemapError'
+      file_type:
+        type: string
+      invalid_urls:
+        format: int64
+        type: integer
+      sitemap_indexes:
         items:
           type: string
-        readOnly: false
+        type: array
+      url:
+        type: string
+      valid_urls:
+        format: int64
+        type: integer
+    required:
+      - url
+    type: object
+  SitemapsReportSitemapError:
+    properties:
+      message:
+        type: string
+      type:
+        type: string
+    required:
+      - type
+      - message
+    type: object
+  URLRewritingRules:
+    properties:
+      rules:
+        items:
+          $ref: '#/definitions/RewritingRule'
+        type: array
+      urls:
+        items:
+          type: string
         type: array
     required:
       - urls
       - rules
+    type: object
+  UrlDetail:
+    properties: {}
+    type: object
+  UrlsAgg:
+    properties:
+      aggs:
+        items:
+          type: object
+        type: array
+      count:
+        format: int64
+        type: integer
+    required:
+      - count
+    type: object
+  UrlsAggs:
+    properties:
+      data:
+        $ref: '#/definitions/UrlsAgg'
+      error:
+        $ref: '#/definitions/UrlsErrorAgg'
+      status:
+        format: int64
+        type: integer
+    required:
+      - status
     type: object
   UrlsAggsQueries:
     items:
       $ref: '#/definitions/UrlsAggsQuery'
     type: array
   UrlsAggsQuery:
+    description: UrlsAggs query
     properties:
       aggs:
-        description: ''
         items:
           type: object
-        readOnly: false
         type: array
       filters:
-        description: ''
-        readOnly: false
         type: object
     type: object
+  UrlsErrorAgg:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    required:
+      - message
+      - error_code
+    type: object
   UrlsQuery:
+    description: Urls query
     properties:
       fields:
-        description: ''
         items:
           type: string
-        readOnly: false
         type: array
       filters:
-        description: ''
-        readOnly: false
         type: object
       sort:
-        description: ''
         items:
           type: object
-        readOnly: false
         type: array
     type: object
   User:
     properties:
       company_name:
-        description: ''
-        readOnly: false
         type: string
       date_joined:
-        description: ''
         format: date-time
-        readOnly: false
         type: string
       email:
-        description: ''
-        readOnly: false
         type: string
       first_name:
-        description: ''
-        readOnly: false
         type: string
       is_organization:
-        description: ''
         readOnly: true
         type: string
       last_name:
-        description: ''
-        readOnly: false
         type: string
       login:
-        description: ''
         readOnly: true
         type: string
       status:
-        description: ''
-        readOnly: false
         type: string
       url:
-        description: ''
         readOnly: true
         type: string
+    type: object
+  string:
+    properties: {}
     type: object

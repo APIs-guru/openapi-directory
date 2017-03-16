@@ -7,8 +7,8 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Enables client applications to check web resources (most commonly URLs) against Google-generated lists of unsafe web resources.
-  title: Safe Browsing APIs
+  description: 'The Safe Browsing API is an experimental API that allows client applications to check URLs against Google''s constantly-updated blacklists of suspected phishing and malware pages. Your client application can use the API to download an encrypted table for local, client-side lookups of URLs.'
+  title: Google Safe Browsing
   version: v4
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -16,7 +16,7 @@ info:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/safebrowsing/v4/rest'
+    url: 'https://safebrowsing.googleapis.com/$discovery/rest?version=v4'
     version: v1
   x-preferred: true
   x-providerName: googleapis.com
@@ -26,6 +26,9 @@ externalDocs:
 parameters:
   $.xgafv:
     description: V1 error format.
+    enum:
+      - '1'
+      - '2'
     in: query
     name: $.xgafv
     type: string
@@ -37,6 +40,10 @@ parameters:
   alt:
     default: json
     description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
     in: query
     name: alt
     type: string
@@ -93,26 +100,110 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: threatMatches
   - name: threatListUpdates
-  - name: fullHashes
+  - name: encodedFullHashes
   - name: threatLists
+  - name: threatMatches
+  - name: fullHashes
+  - name: encodedUpdates
 paths:
+  '/v4/encodedFullHashes/{encodedRequest}':
+    get:
+      description: ''
+      operationId: safebrowsing.encodedFullHashes.get
+      parameters:
+        - description: A serialized FindFullHashesRequest proto.
+          in: path
+          name: encodedRequest
+          required: true
+          type: string
+        - description: |-
+            A client ID that (hopefully) uniquely identifies the client implementation
+            of the Safe Browsing API.
+          in: query
+          name: clientId
+          type: string
+        - description: The version of the client implementation.
+          in: query
+          name: clientVersion
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/FindFullHashesResponse'
+      tags:
+        - encodedFullHashes
+    parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+  '/v4/encodedUpdates/{encodedRequest}':
+    get:
+      description: ''
+      operationId: safebrowsing.encodedUpdates.get
+      parameters:
+        - description: A serialized FetchThreatListUpdatesRequest proto.
+          in: path
+          name: encodedRequest
+          required: true
+          type: string
+        - description: |-
+            A client ID that uniquely identifies the client implementation of the Safe
+            Browsing API.
+          in: query
+          name: clientId
+          type: string
+        - description: The version of the client implementation.
+          in: query
+          name: clientVersion
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/FetchThreatListUpdatesResponse'
+      tags:
+        - encodedUpdates
+    parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v4/fullHashes:find':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: Finds the full hashes that match the requested hash prefixes.
       operationId: safebrowsing.fullHashes.find
@@ -130,21 +221,23 @@ paths:
         - fullHashes
   '/v4/threatListUpdates:fetch':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
-      description: Fetches the most recent threat list updates. A client can request updates for multiple lists at once.
+      description: |-
+        Fetches the most recent threat list updates. A client can request updates
+        for multiple lists at once.
       operationId: safebrowsing.threatListUpdates.fetch
       parameters:
         - in: body
@@ -170,34 +263,34 @@ paths:
       tags:
         - threatLists
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v4/threatMatches:find':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: Finds the threat entries that match the Safe Browsing lists.
       operationId: safebrowsing.threatMatches.find
@@ -218,7 +311,9 @@ definitions:
     description: The expected state of a client's local database.
     properties:
       sha256:
-        description: 'The SHA256 hash of the client state; that is, of the sorted list of all hashes present in the database.'
+        description: |-
+          The SHA256 hash of the client state; that is, of the sorted list of all
+          hashes present in the database.
         format: byte
         type: string
     type: object
@@ -226,7 +321,9 @@ definitions:
     description: The client metadata associated with Safe Browsing API requests.
     properties:
       clientId:
-        description: A client ID that (hopefully) uniquely identifies the client implementation of the Safe Browsing API.
+        description: |-
+          A client ID that (hopefully) uniquely identifies the client implementation
+          of the Safe Browsing API.
         type: string
       clientVersion:
         description: The version of the client implementation.
@@ -236,15 +333,24 @@ definitions:
     description: The constraints for this update.
     properties:
       maxDatabaseEntries:
-        description: 'Sets the maximum number of entries that the client is willing to have in the local database. This should be a power of 2 between 2**10 and 2**20. If zero, no database size limit is set.'
+        description: |-
+          Sets the maximum number of entries that the client is willing to have
+          in the local database. This should be a power of 2 between 2**10 and
+          2**20. If zero, no database size limit is set.
         format: int32
         type: integer
       maxUpdateEntries:
-        description: 'The maximum size in number of entries. The update will not contain more entries than this value. This should be a power of 2 between 2**10 and 2**20. If zero, no update size limit is set.'
+        description: |-
+          The maximum size in number of entries. The update will not contain more
+          entries than this value.  This should be a power of 2 between 2**10 and
+          2**20.  If zero, no update size limit is set.
         format: int32
         type: integer
       region:
-        description: Requests the list for a specific geographic location. If not set the server may pick that value based on the user's IP address. Expects ISO 3166-1 alpha-2 format.
+        description: |-
+          Requests the list for a specific geographic location. If not set the
+          server may pick that value based on the user's IP address. Expects ISO
+          3166-1 alpha-2 format.
         type: string
       supportedCompressions:
         description: The compression types supported by the client.
@@ -257,7 +363,11 @@ definitions:
         type: array
     type: object
   FetchThreatListUpdatesRequest:
-    description: 'Describes a Safe Browsing API update request. Clients can request updates for multiple lists in a single request. NOTE: Field index 2 is unused. NEXT: 4'
+    description: |-
+      Describes a Safe Browsing API update request. Clients can request updates for
+      multiple lists in a single request.
+      NOTE: Field index 2 is unused.
+      NEXT: 5
     properties:
       client:
         $ref: '#/definitions/ClientInfo'
@@ -276,12 +386,20 @@ definitions:
           $ref: '#/definitions/ListUpdateResponse'
         type: array
       minimumWaitDuration:
-        description: The minimum duration the client must wait before issuing any update request. If this field is not set clients may update as soon as they want.
+        description: |-
+          The minimum duration the client must wait before issuing any update
+          request. If this field is not set clients may update as soon as they want.
+        format: google-duration
         type: string
     type: object
   FindFullHashesRequest:
     description: Request to return full hashes matched by the provided hash prefixes.
     properties:
+      apiClient:
+        $ref: '#/definitions/ClientInfo'
+        description: |-
+          Client metadata associated with callers of higher-level APIs built on top
+          of the client's implementation.
       client:
         $ref: '#/definitions/ClientInfo'
         description: The client metadata.
@@ -303,10 +421,17 @@ definitions:
           $ref: '#/definitions/ThreatMatch'
         type: array
       minimumWaitDuration:
-        description: 'The minimum duration the client must wait before issuing any find hashes request. If this field is not set, clients can issue a request as soon as they want.'
+        description: |-
+          The minimum duration the client must wait before issuing any find hashes
+          request. If this field is not set, clients can issue a request as soon as
+          they want.
+        format: google-duration
         type: string
       negativeCacheDuration:
-        description: 'For requested entities that did not match the threat list, how long to cache the response.'
+        description: |-
+          For requested entities that did not match the threat list, how long to
+          cache the response.
+        format: google-duration
         type: string
     type: object
   FindThreatMatchesRequest:
@@ -355,7 +480,9 @@ definitions:
           - CHROME
         type: string
       state:
-        description: The current state of the client for the requested list (the encrypted client state that was received from the last successful list update).
+        description: |-
+          The current state of the client for the requested list (the encrypted
+          client state that was received from the last successful list update).
         format: byte
         type: string
       threatEntryType:
@@ -365,6 +492,9 @@ definitions:
           - URL
           - EXECUTABLE
           - IP_RANGE
+          - CHROME_EXTENSION
+          - FILENAME
+          - CERT
         type: string
       threatType:
         description: The type of threat posed by entries present in the list.
@@ -380,13 +510,20 @@ definitions:
     description: An update to an individual list.
     properties:
       additions:
-        description: A set of entries to add to a local threat type's list. Repeated to allow for a combination of compressed and raw data to be sent in a single response.
+        description: |-
+          A set of entries to add to a local threat type's list. Repeated to allow
+          for a combination of compressed and raw data to be sent in a single
+          response.
         items:
           $ref: '#/definitions/ThreatEntrySet'
         type: array
       checksum:
         $ref: '#/definitions/Checksum'
-        description: 'The expected SHA256 hash of the client state; that is, of the sorted list of all hashes present in the database after applying the provided update. If the client state doesn''t match the expected state, the client must disregard this update and retry later.'
+        description: |-
+          The expected SHA256 hash of the client state; that is, of the sorted list
+          of all hashes present in the database after applying the provided update.
+          If the client state doesn't match the expected state, the client must
+          disregard this update and retry later.
       newClientState:
         description: 'The new client state, in encrypted format. Opaque to clients.'
         format: byte
@@ -405,12 +542,16 @@ definitions:
           - CHROME
         type: string
       removals:
-        description: A set of entries to remove from a local threat type's list. Repeated for the same reason as above.
+        description: |-
+          A set of entries to remove from a local threat type's list. In practice,
+          this field is empty or contains exactly one ThreatEntrySet.
         items:
           $ref: '#/definitions/ThreatEntrySet'
         type: array
       responseType:
-        description: The type of response. This may indicate that an action is required by the client when the response is received.
+        description: |-
+          The type of response. This may indicate that an action is required by the
+          client when the response is received.
         enum:
           - RESPONSE_TYPE_UNSPECIFIED
           - PARTIAL_UPDATE
@@ -423,6 +564,9 @@ definitions:
           - URL
           - EXECUTABLE
           - IP_RANGE
+          - CHROME_EXTENSION
+          - FILENAME
+          - CERT
         type: string
       threatType:
         description: The threat type for which data is returned.
@@ -438,23 +582,35 @@ definitions:
     description: A single metadata entry.
     properties:
       key:
-        description: The metadata entry key.
+        description: 'The metadata entry key. For JSON requests, the key is base64-encoded.'
         format: byte
         type: string
       value:
-        description: The metadata entry value.
+        description: 'The metadata entry value. For JSON requests, the value is base64-encoded.'
         format: byte
         type: string
     type: object
   RawHashes:
-    description: 'The uncompressed threat entries in hash format of a particular prefix length. Hashes can be anywhere from 4 to 32 bytes in size. A large majority are 4 bytes, but some hashes are lengthened if they collide with the hash of a popular URL. Used for sending ThreatEntrySet to clients that do not support compression, or when sending non-4-byte hashes to clients that do support compression.'
+    description: |-
+      The uncompressed threat entries in hash format of a particular prefix length.
+      Hashes can be anywhere from 4 to 32 bytes in size. A large majority are 4
+      bytes, but some hashes are lengthened if they collide with the hash of a
+      popular URL.
+
+      Used for sending ThreatEntrySet to clients that do not support compression,
+      or when sending non-4-byte hashes to clients that do support compression.
     properties:
       prefixSize:
-        description: The number of bytes for each prefix encoded below. This field can be anywhere from 4 (shortest prefix) to 32 (full SHA256 hash).
+        description: |-
+          The number of bytes for each prefix encoded below.  This field can be
+          anywhere from 4 (shortest prefix) to 32 (full SHA256 hash).
         format: int32
         type: integer
       rawHashes:
-        description: 'The hashes, all concatenated into one long string. Each hash has a prefix size of |prefix_size| above. Hashes are sorted in lexicographic order.'
+        description: |-
+          The hashes, in binary format, concatenated into one long string. Hashes are
+          sorted in lexicographic order. For JSON API users, hashes are
+          base64-encoded.
         format: byte
         type: string
     type: object
@@ -469,34 +625,50 @@ definitions:
         type: array
     type: object
   RiceDeltaEncoding:
-    description: The Rice-Golomb encoded data. Used for sending compressed 4-byte hashes or compressed removal indices.
+    description: |-
+      The Rice-Golomb encoded data. Used for sending compressed 4-byte hashes or
+      compressed removal indices.
     properties:
       encodedData:
         description: The encoded deltas that are encoded using the Golomb-Rice coder.
         format: byte
         type: string
       firstValue:
-        description: 'The offset of the first entry in the encoded data, or, if only a single integer was encoded, that single integer''s value.'
+        description: |-
+          The offset of the first entry in the encoded data, or, if only a single
+          integer was encoded, that single integer's value.
         format: int64
         type: string
       numEntries:
-        description: 'The number of entries that are delta encoded in the encoded data. If only a single integer was encoded, this will be zero and the single value will be stored in `first_value`.'
+        description: |-
+          The number of entries that are delta encoded in the encoded data. If only a
+          single integer was encoded, this will be zero and the single value will be
+          stored in `first_value`.
         format: int32
         type: integer
       riceParameter:
-        description: 'The Golomb-Rice parameter, which is a number between 2 and 28. This field is missing (that is, zero) if `num_entries` is zero.'
+        description: |-
+          The Golomb-Rice parameter, which is a number between 2 and 28. This field
+          is missing (that is, zero) if `num_entries` is zero.
         format: int32
         type: integer
     type: object
   ThreatEntry:
-    description: 'An individual threat; for example, a malicious URL or its hash representation. Only one of these fields should be set.'
+    description: |-
+      An individual threat; for example, a malicious URL or its hash
+      representation. Only one of these fields should be set.
     properties:
       digest:
-        description: The digest of an executable in SHA256 format. The API supports both binary and hex digests.
+        description: |-
+          The digest of an executable in SHA256 format. The API supports both
+          binary and hex digests. For JSON requests, digests are base64-encoded.
         format: byte
         type: string
       hash:
-        description: 'A hash prefix, consisting of the most significant 4-32 bytes of a SHA256 hash. This field is in binary format.'
+        description: |-
+          A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
+          hash. This field is in binary format. For JSON requests, hashes are
+          base64-encoded.
         format: byte
         type: string
       url:
@@ -504,7 +676,9 @@ definitions:
         type: string
     type: object
   ThreatEntryMetadata:
-    description: The metadata associated with a specific threat entry. The client is expected to know the metadata key/value pairs associated with each threat type.
+    description: |-
+      The metadata associated with a specific threat entry. The client is expected
+      to know the metadata key/value pairs associated with each threat type.
     properties:
       entries:
         description: The metadata entries.
@@ -513,7 +687,9 @@ definitions:
         type: array
     type: object
   ThreatEntrySet:
-    description: A set of threats that should be added or removed from a client's local database.
+    description: |-
+      A set of threats that should be added or removed from a client's local
+      database.
     properties:
       compressionType:
         description: The compression type for the entries in this set.
@@ -530,13 +706,22 @@ definitions:
         description: The raw removal indices for a local list.
       riceHashes:
         $ref: '#/definitions/RiceDeltaEncoding'
-        description: 'The encoded 4-byte prefixes of SHA256-formatted entries, using a Golomb-Rice encoding.'
+        description: |-
+          The encoded 4-byte prefixes of SHA256-formatted entries, using a
+          Golomb-Rice encoding. The hashes are converted to uint32, sorted in
+          ascending order, then delta encoded and stored as encoded_data.
       riceIndices:
         $ref: '#/definitions/RiceDeltaEncoding'
-        description: 'The encoded local, lexicographically-sorted list indices, using a Golomb-Rice encoding. Used for sending compressed removal indices.'
+        description: |-
+          The encoded local, lexicographically-sorted list indices, using a
+          Golomb-Rice encoding. Used for sending compressed removal indices. The
+          removal indices (uint32) are sorted in ascending order, then delta encoded
+          and stored as encoded_data.
     type: object
   ThreatInfo:
-    description: The information regarding one or more threats that a client submits when checking for matches in threat lists.
+    description: |-
+      The information regarding one or more threats that a client submits when
+      checking for matches in threat lists.
     properties:
       platformTypes:
         description: The platform types to be checked.
@@ -566,6 +751,9 @@ definitions:
             - URL
             - EXECUTABLE
             - IP_RANGE
+            - CHROME_EXTENSION
+            - FILENAME
+            - CERT
           type: string
         type: array
       threatTypes:
@@ -581,7 +769,10 @@ definitions:
         type: array
     type: object
   ThreatListDescriptor:
-    description: 'Describes an individual threat list. A list is defined by three parameters: the type of threat posed, the type of platform targeted by the threat, and the type of entries in the list.'
+    description: |-
+      Describes an individual threat list. A list is defined by three parameters:
+      the type of threat posed, the type of platform targeted by the threat, and
+      the type of entries in the list.
     properties:
       platformType:
         description: The platform type targeted by the list's entries.
@@ -603,6 +794,9 @@ definitions:
           - URL
           - EXECUTABLE
           - IP_RANGE
+          - CHROME_EXTENSION
+          - FILENAME
+          - CERT
         type: string
       threatType:
         description: The threat type posed by the list's entries.
@@ -618,7 +812,10 @@ definitions:
     description: A match when checking a threat entry in the Safe Browsing threat lists.
     properties:
       cacheDuration:
-        description: The cache lifetime for the returned match. Clients must not cache this response for more than this duration to avoid false positives.
+        description: |-
+          The cache lifetime for the returned match. Clients must not cache this
+          response for more than this duration to avoid false positives.
+        format: google-duration
         type: string
       platformType:
         description: The platform type matching this threat.
@@ -646,6 +843,9 @@ definitions:
           - URL
           - EXECUTABLE
           - IP_RANGE
+          - CHROME_EXTENSION
+          - FILENAME
+          - CERT
         type: string
       threatType:
         description: The threat type matching this threat.

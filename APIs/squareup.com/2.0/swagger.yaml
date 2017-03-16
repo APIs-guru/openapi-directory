@@ -3,6 +3,15 @@ schemes:
   - https
 host: connect.squareup.com
 info:
+  contact:
+    email: developers@squareup.com
+    name: Square Developer Platform
+    url: 'https://squareup.com/developers'
+  description: Client library for accessing the Square Connect APIs
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  termsOfService: 'https://connect.squareup.com/tos'
   title: Square Connect
   version: '2.0'
   x-logo:
@@ -12,10 +21,35 @@ info:
     url: 'https://raw.githubusercontent.com/square/connect-api-specification/master/api.json'
     version: '2.0'
   x-providerName: squareup.com
+externalDocs:
+  description: 'Read the official documentation here:'
+  url: 'https://docs.connect.squareup.com/'
 consumes:
   - application/json
 produces:
   - application/json
+securityDefinitions:
+  oauth2:
+    authorizationUrl: 'https://connect.squareup.com/oauth2/authorize?<PARAMETERS>'
+    flow: accessCode
+    scopes:
+      BANK_ACCOUNTS_READ: GET endpoints related to a merchant's bank accounts
+      CUSTOMERS_READ: ' GET endpoints related to customer management'
+      CUSTOMERS_WRITE: 'POST, PUT, and DELETE endpoints related to customer management'
+      EMPLOYEES_READ: GET endpoints related to employee management
+      EMPLOYEES_WRITE: 'POST, PUT, and DELETE endpoints related to employee management'
+      ITEMS_READ: GET endpoints related to a merchant's item library
+      ITEMS_WRITE: 'POST, PUT, and DELETE endpoints related to a merchant''s item library'
+      MERCHANT_PROFILE_READ: GET endpoints related to a merchant's business and location entities. Almost all Connect API applications need this permission in order to obtain a merchant's location IDs
+      ORDERS_READ: GET endpoints related to a merchant's Square online store.
+      ORDERS_WRITE: 'POST, PUT, and DELETE endpoints related to a merchant''s Square online store'
+      PAYMENTS_READ: GET endpoints related to transactions and refunds
+      PAYMENTS_WRITE: 'POST, PUT, and DELETE endpoints related to transactions and refunds. E-commerce applications must request this permission'
+      SETTLEMENTS_READ: GET endpoints related to settlements (deposits)
+      TIMECARDS_READ: GET endpoints related to employee timecards
+      TIMECARDS_WRITE: 'POST, PUT, and DELETE endpoints related to employee timecards'
+    tokenUrl: 'https://connect.squareup.com/oauth2/token'
+    type: oauth2
 paths:
   /v2/customers:
     get:
@@ -2497,6 +2531,7 @@ definitions:
           - PAYMENT_NOT_REFUNDABLE
           - INVALID_CARD_DATA
           - IDEMPOTENCY_KEY_REUSED
+          - UNEXPECTED_VALUE
           - CARD_DECLINED
           - VERIFY_CVV_FAILURE
           - VERIFY_AVS_FAILURE
@@ -2599,6 +2634,7 @@ definitions:
       - PAYMENT_NOT_REFUNDABLE
       - INVALID_CARD_DATA
       - IDEMPOTENCY_KEY_REUSED
+      - UNEXPECTED_VALUE
       - CARD_DECLINED
       - VERIFY_CVV_FAILURE
       - VERIFY_AVS_FAILURE

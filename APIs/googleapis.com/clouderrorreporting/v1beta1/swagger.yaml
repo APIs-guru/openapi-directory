@@ -142,34 +142,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
   '/v1beta1/{name}':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
     put:
       description: |-
         Replace the data for the specified group.
@@ -239,6 +239,12 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
+          in: query
+          name: serviceFilter.resourceType
+          type: string
         - description: Restricts the query to the specified time range.
           enum:
             - PERIOD_UNSPECIFIED
@@ -254,15 +260,15 @@ paths:
           in: query
           name: groupId
           type: string
-        - description: '[Optional] A `next_page_token` provided by a previous response.'
-          in: query
-          name: pageToken
-          type: string
         - description: |-
             [Optional] The exact value to match against
             [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
           in: query
           name: serviceFilter.service
+          type: string
+        - description: '[Optional] A `next_page_token` provided by a previous response.'
+          in: query
+          name: pageToken
           type: string
         - description: '[Optional] The maximum number of results to return per response.'
           in: query
@@ -273,12 +279,6 @@ paths:
             [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
           in: query
           name: serviceFilter.version
-          type: string
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.resource_type`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
-          in: query
-          name: serviceFilter.resourceType
           type: string
       responses:
         '200':
@@ -291,34 +291,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
   '/v1beta1/{projectName}/events:report':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
     post:
       description: |-
         Report an individual error event.
@@ -372,30 +372,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            [Optional] The preferred duration for a single returned `TimedCount`.
-            If not set, no timed counts are returned.
-          in: query
-          name: timedCountDuration
-          type: string
-        - description: |-
-            [Optional] A `next_page_token` provided by a previous response. To view
-            additional results, pass this token along with the identical query
-            parameters as the first request.
-          in: query
-          name: pageToken
-          type: string
-        - description: Restricts the query to the specified time range.
-          enum:
-            - PERIOD_UNSPECIFIED
-            - PERIOD_1_HOUR
-            - PERIOD_6_HOURS
-            - PERIOD_1_DAY
-            - PERIOD_1_WEEK
-            - PERIOD_30_DAYS
-          in: query
-          name: timeRange.period
-          type: string
         - description: |-
             [Optional] The alignment of the timed counts to be returned.
             Default is `ALIGNMENT_EQUAL_AT_END`.
@@ -455,6 +431,30 @@ paths:
           in: query
           name: serviceFilter.resourceType
           type: string
+        - description: |-
+            [Optional] The preferred duration for a single returned `TimedCount`.
+            If not set, no timed counts are returned.
+          in: query
+          name: timedCountDuration
+          type: string
+        - description: |-
+            [Optional] A `next_page_token` provided by a previous response. To view
+            additional results, pass this token along with the identical query
+            parameters as the first request.
+          in: query
+          name: pageToken
+          type: string
+        - description: Restricts the query to the specified time range.
+          enum:
+            - PERIOD_UNSPECIFIED
+            - PERIOD_1_HOUR
+            - PERIOD_6_HOURS
+            - PERIOD_1_DAY
+            - PERIOD_1_WEEK
+            - PERIOD_30_DAYS
+          in: query
+          name: timeRange.period
+          type: string
       responses:
         '200':
           description: Successful response
@@ -466,19 +466,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
 definitions:
   DeleteEventsResponse:
     description: Response message for deleting error events.

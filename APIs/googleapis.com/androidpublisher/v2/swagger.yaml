@@ -2081,7 +2081,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{packageName}/reviews':
     get:
-      description: Returns a list of reviews.
+      description: Returns a list of reviews. Only reviews from last week will be returned.
       operationId: androidpublisher.reviews.list
       parameters:
         - description: 'Unique identifier for the Android app for which we want reviews; for example, "com.spiffygame".'
@@ -2833,6 +2833,10 @@ definitions:
         type: string
       startTimeMillis:
         description: 'Time at which the subscription was granted, in milliseconds since the Epoch.'
+        format: int64
+        type: string
+      userCancellationTimeMillis:
+        description: 'The time at which the subscription was canceled by the user, in milliseconds since the epoch. Only present if cancelReason is 0.'
         format: int64
         type: string
     type: object
