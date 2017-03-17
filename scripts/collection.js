@@ -54,7 +54,7 @@ var program = require('commander');
 
 var errExitCode = 255;
 program
-  .option('-0', 'allways return 0 as exit code', function () {
+  .option('-0', 'always return 0 as exit code', function () {
     errExitCode = 0;
   });
 
@@ -187,7 +187,7 @@ function validatePrefered(specs) {
     _.each(versions, function (value, version) {
       assert(!_.isUndefined(value), `Missing value for "x-preferred" in "${id}" "${version}"`);
       assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}"`);
-      assert(value !== true || !seenTrue, `Multiply preferred versions in "${id}" "${version}"`);
+      assert(value !== true || !seenTrue, `Multiple preferred versions in "${id}" "${version}"`);
       seenTrue = value || seenTrue;
     });
     assert(seenTrue, `At least one preferred should be true in "${id}"`);
@@ -251,7 +251,7 @@ function appendFixup(fixupPath, spec, editedSpec) {
   if (_.isEqual(spec, editedSpec))
     return;
 
-  //Before diff we need to unpatch, it's a way to appeand changes
+  //Before diff we need to unpatch, it's a way to append changes
   revertFixup(fixupPath, spec);
   saveFixup(fixupPath, spec, editedSpec);
 }
