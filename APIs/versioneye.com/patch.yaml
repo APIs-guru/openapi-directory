@@ -5,3 +5,12 @@ info:
   description: 'VersionEye is a cross-platform search engine for free/libre/open source software libraries.'
   x-logo:
     url: 'https://versioneye.files.wordpress.com/2015/05/versioneyetransparent.png'
+paths:
+  '/projects':
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+  '/projects/{project_key}':
+    post:
+      consumes:
+        - application/x-www-form-urlencoded

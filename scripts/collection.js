@@ -814,6 +814,11 @@ function applyMergePatch(target, patch) {
     if (_.isPlainObject(target[key]))
       return applyMergePatch(target[key], value);
 
+    if ((_.isArray(target[key])) && (_.isArray(value))) {
+      target[key] = target[key].concat(value);
+	  return target[key].concat(value);
+    }
+
     assert(_.isUndefined(target[key]), 'Patch tried to override property: ' + key);
     target[key] = value;
   });

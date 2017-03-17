@@ -615,6 +615,8 @@ paths:
         - logs
   /packages:
     post:
+      consumes:
+        - application/x-www-form-urlencoded
       description: Upload a ZIP package
       parameters:
         - description: ZIP package
