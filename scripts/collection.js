@@ -84,6 +84,7 @@ program
 program
   .command('validate')
   .description('validate collection')
+  .arguments('[DIR]')
   .action(validateCollection);
 
 program
@@ -144,8 +145,8 @@ function updateCollection(dir) {
     .done();
 }
 
-function validateCollection() {
-  var specs = util.getSpecs();
+function validateCollection(dir) {
+  var specs = util.getSpecs(dir);
 
   validatePrefered(specs);
 
