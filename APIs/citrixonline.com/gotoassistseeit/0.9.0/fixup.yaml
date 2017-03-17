@@ -1,3 +1,12 @@
+definitions:
+  Response_401_Unauthorized:
+    - description: Missing or invalid authorization header
+    - 0
+    - 0
+  Response_403_Forbidden:
+    - description: You do not have the required permissions for this operation
+    - 0
+    - 0
 paths:
   /sessions:
     get:
@@ -7,9 +16,9 @@ paths:
             schema:
               $ref: '#/definitions/PagedSessionDetails'
         '401':
-          - $ref: '#/definitions/Response_401_Unauthorized'
+          - $ref: '#/responses/Response_401_Unauthorized'
         '403':
-          - $ref: '#/definitions/Response_403_Forbidden'
+          - $ref: '#/responses/Response_403_Forbidden'
         200 OK:
           - description: Returns the requested session details
             schema:
@@ -31,9 +40,9 @@ paths:
             schema:
               $ref: '#/definitions/Session'
         '401':
-          - $ref: '#/definitions/Response_401_Unauthorized'
+          - $ref: '#/responses/Response_401_Unauthorized'
         '403':
-          - $ref: '#/definitions/Response_403_Forbidden'
+          - $ref: '#/responses/Response_403_Forbidden'
         201 Created:
           - description: The session has been created.
             schema:
@@ -56,9 +65,9 @@ paths:
             schema:
               $ref: '#/definitions/SessionDetails'
         '401':
-          - $ref: '#/definitions/Response_401_Unauthorized'
+          - $ref: '#/responses/Response_401_Unauthorized'
         '403':
-          - $ref: '#/definitions/Response_403_Forbidden'
+          - $ref: '#/responses/Response_403_Forbidden'
         '404':
           - description: 'There is no data for a session with the given uuid. Either the uuid is invalid, or the session data is no longer available.'
         '409':
@@ -85,3 +94,8 @@ paths:
           - description: Session details are not available yet. You might get this when immediately requesting session details after session creation while data is not consistent yet. Please retry later.
           - 0
           - 0
+responses:
+  - Response_401_Unauthorized:
+      description: Missing or invalid authorization header
+    Response_403_Forbidden:
+      description: You do not have the required permissions for this operation

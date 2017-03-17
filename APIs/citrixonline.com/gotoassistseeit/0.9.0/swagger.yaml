@@ -29,6 +29,11 @@ parameters:
     name: Authorization
     required: true
     type: string
+responses:
+  Response_401_Unauthorized:
+    description: Missing or invalid authorization header
+  Response_403_Forbidden:
+    description: You do not have the required permissions for this operation
 paths:
   /sessions:
     get:
@@ -70,9 +75,9 @@ paths:
           schema:
             $ref: '#/definitions/PagedSessionDetails'
         '401':
-          $ref: '#/definitions/Response_401_Unauthorized'
+          $ref: '#/responses/Response_401_Unauthorized'
         '403':
-          $ref: '#/definitions/Response_403_Forbidden'
+          $ref: '#/responses/Response_403_Forbidden'
       summary: Get details for multiple GoToAssist Seeit sessions
       tags:
         - Sessions
@@ -86,9 +91,9 @@ paths:
           schema:
             $ref: '#/definitions/Session'
         '401':
-          $ref: '#/definitions/Response_401_Unauthorized'
+          $ref: '#/responses/Response_401_Unauthorized'
         '403':
-          $ref: '#/definitions/Response_403_Forbidden'
+          $ref: '#/responses/Response_403_Forbidden'
       summary: Create a GoToAssist Seeit session
       tags:
         - Sessions
@@ -109,9 +114,9 @@ paths:
           schema:
             $ref: '#/definitions/SessionDetails'
         '401':
-          $ref: '#/definitions/Response_401_Unauthorized'
+          $ref: '#/responses/Response_401_Unauthorized'
         '403':
-          $ref: '#/definitions/Response_403_Forbidden'
+          $ref: '#/responses/Response_403_Forbidden'
         '404':
           description: 'There is no data for a session with the given uuid. Either the uuid is invalid, or the session data is no longer available.'
         '409':
@@ -178,10 +183,6 @@ definitions:
       - number
       - totalElements
       - totalPages
-  Response_401_Unauthorized:
-    description: Missing or invalid authorization header
-  Response_403_Forbidden:
-    description: You do not have the required permissions for this operation
   Session:
     properties:
       startUrl:
