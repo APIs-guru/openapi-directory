@@ -1,0 +1,23 @@
+paths:
+  '/repos/{owner}/{repo}/forks':
+    get:
+      parameters:
+        '2':
+          default:
+            - newes
+            - newest
+          enum:
+            '0':
+              - newest
+            '1':
+              - oldest
+            '_0':
+              - newes
+              - 0
+              - 0
+            '_1':
+              - oldes
+              - 0
+              - 0
+            _t: a
+        _t: a
