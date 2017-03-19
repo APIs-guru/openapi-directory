@@ -216,7 +216,7 @@ function addToCollection(format, url, command) {
           var originSwagger = error.context.swagger;
           if (originSpec.format !== 'swagger_2') {
             var editedOrigin = YAML.safeLoad(match[1]);
-            appendFixup(getOriginFixupPath(originSpec), serilazeSpec(originSpec), editedOrigin);
+            appendFixup(getOriginFixupPath(originSpec), serializeSpec(originSpec), editedOrigin);
           }
 
           if (!_.isUndefined(originSwagger)) {
@@ -650,7 +650,7 @@ function fixSpec(swagger, errors) {
   return fixed;
 }
 
-function serilazeSpec(spec) {
+function serializeSpec(spec) {
   var data = {spec: spec.spec};
   if (spec.subResources)
     data.subResources = spec.subResources;
@@ -662,7 +662,7 @@ function errorToString(error, context) {
 
   var result = '++++++++++++++++++++++++++ Begin ' + source + ' +++++++++++++++++++++\n';
   if (spec && (spec.format !== 'swagger_2' || _.isUndefined(swagger))) {
-    result += util.Yaml2String(serilazeSpec(spec));
+    result += util.Yaml2String(serializeSpec(spec));
   }
 
   result += '???????????????????? Swagger ' + source + ' ????????????????????????????\n';
