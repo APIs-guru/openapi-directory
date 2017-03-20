@@ -7847,31 +7847,6 @@ paths:
                 'filter' => 'currency:USD',
             ]);
   '/queue/payments/{id}':
-    delete:
-      responses:
-        '204':
-          description: Payment was deleted
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '409':
-          description: Payment is already handled and cannot be removed
-      summary: Delete a pending payment
-      tags:
-        - Payments
     get:
       description: |
         Retrieve a payment with specified identifier string
@@ -12698,6 +12673,12 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: Invoice's delivery contact ID
+      discounts:
+        description: Discounts applied
+        items:
+          allOf:
+            - $ref: '#/definitions/InvoiceDiscount'
+        type: array
       dueTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -12738,6 +12719,25 @@ definitions:
       - websiteId
       - currency
     type: object
+  InvoiceDiscount:
+    properties:
+      amount:
+        description: Total amount that was discounted by this Coupon
+        format: double
+        type: number
+      description:
+        description: Discount description
+        type: string
+      redemptionCode:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Coupon's redemption code
+      redemptionId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Redemption ID
+    readOnly: true
+    type: object
   InvoiceIssue:
     properties:
       issuedTime:
@@ -12758,6 +12758,11 @@ definitions:
       description:
         description: Invoice item's description
         type: string
+      discountAmount:
+        description: Invoice item discount amount
+        format: double
+        readOnly: true
+        type: number
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'

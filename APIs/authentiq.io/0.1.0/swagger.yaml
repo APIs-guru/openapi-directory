@@ -311,11 +311,15 @@ paths:
       summary: Client Registration Endpoint.
       tags:
         - Client Management
-  /client/<client_id>:
+  '/client/{client_id}':
     delete:
       description: ''
       operationId: clientClient_id
-      parameters: []
+      parameters:
+        - in: path
+          name: client_id
+          required: true
+          type: string
       responses:
         '200':
           description: Success
@@ -337,7 +341,11 @@ paths:
         See also:
         - [Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
       operationId: getClient
-      parameters: []
+      parameters:
+        - in: path
+          name: client_id
+          required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -379,6 +387,10 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Client'
+        - in: path
+          name: client_id
+          required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -401,7 +413,7 @@ paths:
       summary: Client Configuration Update Endpoint.
       tags:
         - Client Management
-  /client/<client_id>/session:
+  '/client/{client_id}/session':
     post:
       operationId: clientclient_idsession
       parameters:
@@ -409,6 +421,10 @@ paths:
           in: formData
           name: scope
           required: false
+          type: string
+        - in: path
+          name: client_id
+          required: true
           type: string
       responses:
         '201':
@@ -447,7 +463,7 @@ paths:
       summary: Create an anonymous authentication session.
       tags:
         - Sessions
-  /session/<session_id>:
+  '/session/{session_id}':
     post:
       consumes:
         - application/jwt
@@ -481,6 +497,10 @@ paths:
           in: formData
           name: userinfo
           required: false
+          type: string
+        - in: path
+          name: session_id
+          required: true
           type: string
       responses:
         '200':

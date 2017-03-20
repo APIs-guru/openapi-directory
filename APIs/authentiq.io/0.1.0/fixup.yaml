@@ -1,3 +1,326 @@
 definitions:
   Error:
     - {}
+paths:
+  /client/<client_id>:
+    - delete:
+        description: ''
+        operationId: clientClient_id
+        parameters: []
+        responses:
+          '200':
+            description: Success
+          '401':
+            description: No access to Client object
+          '404':
+            description: Client ID does not exist
+        security:
+          - client_registration_token: []
+          - oauth_code: []
+          - oauth_implicit: []
+        summary: Delete a client.
+        tags:
+          - Client Management
+      get:
+        description: |
+          An OIDC Client Configuration Endpoint.
+
+          See also:
+          - [Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
+        operationId: getClient
+        parameters: []
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: Success
+            schema:
+              $ref: '#/definitions/Client'
+          '401':
+            description: No access to Client object (incorrect secret)
+            schema:
+              $ref: '#/definitions/Error'
+          '404':
+            description: Client ID not found
+            schema:
+              $ref: '#/definitions/Error'
+          default:
+            $ref: '#/responses/OAuth2ErrorResponse'
+        security:
+          - client_registration_token: []
+          - oauth_code: []
+          - oauth_implicit: []
+        summary: Client Configuration Read Endpoint.
+        tags:
+          - Client Management
+      put:
+        consumes:
+          - application/json
+          - multipart/form-data
+        description: |
+          An OIDC Client Configuration Endpoint.
+
+          See also:
+          - [Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
+        operationId: updateClient
+        parameters:
+          - description: Client object that needs to be added to the Account
+            in: body
+            name: body
+            required: true
+            schema:
+              $ref: '#/definitions/Client'
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: Success
+            schema:
+              $ref: '#/definitions/Client'
+          '401':
+            description: No access to Client object (incorrect secret)
+          '404':
+            description: Client ID not found
+          default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/Error'
+        security:
+          - client_registration_token: []
+          - oauth_code: []
+          - oauth_implicit: []
+        summary: Client Configuration Update Endpoint.
+        tags:
+          - Client Management
+    - 0
+    - 0
+  /client/<client_id>/session:
+    - post:
+        operationId: clientclient_idsession
+        parameters:
+          - description: space sep list of strings
+            in: formData
+            name: scope
+            required: false
+            type: string
+        responses:
+          '201':
+            description: A new authentication session.
+            schema:
+              $ref: '#/definitions/Session'
+          default:
+            $ref: '#/responses/OAuth2ErrorResponse'
+        security:
+          - client_secret: []
+          - user_jwt: []
+        summary: Create a new authentication session for a client.
+        tags:
+          - Sessions
+    - 0
+    - 0
+  '/client/{client_id}':
+    - delete:
+        description: ''
+        operationId: clientClient_id
+        parameters: []
+        responses:
+          '200':
+            description: Success
+          '401':
+            description: No access to Client object
+          '404':
+            description: Client ID does not exist
+        security:
+          - client_registration_token: []
+          - oauth_code: []
+          - oauth_implicit: []
+        summary: Delete a client.
+        tags:
+          - Client Management
+      get:
+        description: |
+          An OIDC Client Configuration Endpoint.
+
+          See also:
+          - [Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
+        operationId: getClient
+        parameters: []
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: Success
+            schema:
+              $ref: '#/definitions/Client'
+          '401':
+            description: No access to Client object (incorrect secret)
+            schema:
+              $ref: '#/definitions/Error'
+          '404':
+            description: Client ID not found
+            schema:
+              $ref: '#/definitions/Error'
+          default:
+            $ref: '#/responses/OAuth2ErrorResponse'
+        security:
+          - client_registration_token: []
+          - oauth_code: []
+          - oauth_implicit: []
+        summary: Client Configuration Read Endpoint.
+        tags:
+          - Client Management
+      put:
+        consumes:
+          - application/json
+          - multipart/form-data
+        description: |
+          An OIDC Client Configuration Endpoint.
+
+          See also:
+          - [Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
+        operationId: updateClient
+        parameters:
+          - description: Client object that needs to be added to the Account
+            in: body
+            name: body
+            required: true
+            schema:
+              $ref: '#/definitions/Client'
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: Success
+            schema:
+              $ref: '#/definitions/Client'
+          '401':
+            description: No access to Client object (incorrect secret)
+          '404':
+            description: Client ID not found
+          default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/Error'
+        security:
+          - client_registration_token: []
+          - oauth_code: []
+          - oauth_implicit: []
+        summary: Client Configuration Update Endpoint.
+        tags:
+          - Client Management
+  '/client/{client_id}/session':
+    - post:
+        operationId: clientclient_idsession
+        parameters:
+          - description: space sep list of strings
+            in: formData
+            name: scope
+            required: false
+            type: string
+        responses:
+          '201':
+            description: A new authentication session.
+            schema:
+              $ref: '#/definitions/Session'
+          default:
+            $ref: '#/responses/OAuth2ErrorResponse'
+        security:
+          - client_secret: []
+          - user_jwt: []
+        summary: Create a new authentication session for a client.
+        tags:
+          - Sessions
+  /session/<session_id>:
+    - post:
+        consumes:
+          - application/jwt
+          - application/x-www-form-urlencoded
+          - multipart/form-data
+        description: |
+          This method is used by Authentiq ID app to post signed identity claims after end-user consent.
+        operationId: session1234
+        parameters:
+          - description: ''
+            in: query
+            name: token
+            required: false
+            type: string
+          - description: ''
+            in: formData
+            name: bind_token
+            required: false
+            type: string
+          - description: ''
+            in: formData
+            name: push_token
+            required: false
+            type: string
+          - description: ''
+            in: formData
+            name: id_token
+            required: false
+            type: string
+          - description: ''
+            in: formData
+            name: userinfo
+            required: false
+            type: string
+        responses:
+          '200':
+            description: Successful token upload.
+            schema:
+              $ref: '#/definitions/Session'
+          default:
+            $ref: '#/responses/OAuth2ErrorResponse'
+        security:
+          - client_secret: []
+          - user_jwt: []
+        summary: Add identity tokens to pending authentication session.
+    - 0
+    - 0
+  '/session/{session_id}':
+    - post:
+        consumes:
+          - application/jwt
+          - application/x-www-form-urlencoded
+          - multipart/form-data
+        description: |
+          This method is used by Authentiq ID app to post signed identity claims after end-user consent.
+        operationId: session1234
+        parameters:
+          - description: ''
+            in: query
+            name: token
+            required: false
+            type: string
+          - description: ''
+            in: formData
+            name: bind_token
+            required: false
+            type: string
+          - description: ''
+            in: formData
+            name: push_token
+            required: false
+            type: string
+          - description: ''
+            in: formData
+            name: id_token
+            required: false
+            type: string
+          - description: ''
+            in: formData
+            name: userinfo
+            required: false
+            type: string
+        responses:
+          '200':
+            description: Successful token upload.
+            schema:
+              $ref: '#/definitions/Session'
+          default:
+            $ref: '#/responses/OAuth2ErrorResponse'
+        security:
+          - client_secret: []
+          - user_jwt: []
+        summary: Add identity tokens to pending authentication session.
