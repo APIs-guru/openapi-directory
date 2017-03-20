@@ -79,6 +79,14 @@ paths:
           description: OK. The account name is valid but is already in use.
         '404':
           description: Not Found. The account name is available and valid.
+      x-ms-examples:
+        DocumentDBDatabaseAccountCheckNameExists:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+          responses:
+            '200': {}
+            '404': {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/databaseAccounts':
     get:
       description: Lists all the Azure DocumentDB database accounts available under the subscription.
@@ -91,6 +99,46 @@ paths:
           description: The operation completed successfully.
           schema:
             $ref: '#/definitions/DatabaseAccountsListResult'
+      x-ms-examples:
+        DocumentDBDatabaseAccountList:
+          parameters:
+            api-version: '2015-04-08'
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
+                    kind: GlobalDocumentDB
+                    location: West US
+                    name: ddb1
+                    properties:
+                      consistencyPolicy:
+                        defaultConsistencyLevel: Session
+                        maxIntervalInSeconds: 5
+                        maxStalenessPrefix: 100
+                      databaseAccountOfferType: Standard
+                      documentEndpoint: 'https://ddb1.documents.azure.com:443/'
+                      failoverPolicies:
+                        - failoverPriority: 0
+                          id: ddb1-eastus
+                          locationName: East US
+                      ipRangeFilter: ''
+                      provisioningState: Succeeded
+                      readLocations:
+                        - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                          failoverPriority: 0
+                          id: ddb1-eastus
+                          locationName: East US
+                          provisioningState: Succeeded
+                      writeLocations:
+                        - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                          failoverPriority: 0
+                          id: ddb1-eastus
+                          locationName: East US
+                          provisioningState: Succeeded
+                    tags: {}
+                    type: Microsoft.DocumentDB/databaseAccounts
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts':
     get:
@@ -105,6 +153,47 @@ paths:
           description: The operation completed successfully.
           schema:
             $ref: '#/definitions/DatabaseAccountsListResult'
+      x-ms-examples:
+        DocumentDBDatabaseAccountListByResourceGroup:
+          parameters:
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
+                    kind: GlobalDocumentDB
+                    location: West US
+                    name: ddb1
+                    properties:
+                      consistencyPolicy:
+                        defaultConsistencyLevel: Session
+                        maxIntervalInSeconds: 5
+                        maxStalenessPrefix: 100
+                      databaseAccountOfferType: Standard
+                      documentEndpoint: 'https://ddb1.documents.azure.com:443/'
+                      failoverPolicies:
+                        - failoverPriority: 0
+                          id: ddb1-eastus
+                          locationName: East US
+                      ipRangeFilter: ''
+                      provisioningState: Succeeded
+                      readLocations:
+                        - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                          failoverPriority: 0
+                          id: ddb1-eastus
+                          locationName: East US
+                          provisioningState: Succeeded
+                      writeLocations:
+                        - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                          failoverPriority: 0
+                          id: ddb1-eastus
+                          locationName: East US
+                          provisioningState: Succeeded
+                    tags: {}
+                    type: Microsoft.DocumentDB/databaseAccounts
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}':
     delete:
@@ -120,6 +209,16 @@ paths:
           description: The database account delete operation will complete asynchronously.
         '204':
           description: The specified account does not exist in the subscription.
+      x-ms-examples:
+        DocumentDBDatabaseAccountDelete:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: Retrieves the properties of an existing Azure DocumentDB database account.
@@ -134,6 +233,47 @@ paths:
           description: The database account properties were retrieved successfully.
           schema:
             $ref: '#/definitions/DatabaseAccount'
+      x-ms-examples:
+        DocumentDBDatabaseAccountGet:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
+                kind: GlobalDocumentDB
+                location: West US
+                name: ddb1
+                properties:
+                  consistencyPolicy:
+                    defaultConsistencyLevel: Session
+                    maxIntervalInSeconds: 5
+                    maxStalenessPrefix: 100
+                  databaseAccountOfferType: Standard
+                  documentEndpoint: 'https://ddb1.documents.azure.com:443/'
+                  failoverPolicies:
+                    - failoverPriority: 0
+                      id: ddb1-eastus
+                      locationName: East US
+                  ipRangeFilter: ''
+                  provisioningState: Succeeded
+                  readLocations:
+                    - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                      failoverPriority: 0
+                      id: ddb1-eastus
+                      locationName: East US
+                      provisioningState: Succeeded
+                  writeLocations:
+                    - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                      failoverPriority: 0
+                      id: ddb1-eastus
+                      locationName: East US
+                      provisioningState: Succeeded
+                tags: {}
+                type: Microsoft.DocumentDB/databaseAccounts
     patch:
       description: Patches the properties of an existing Azure DocumentDB database account.
       operationId: DatabaseAccounts_Patch
@@ -153,6 +293,50 @@ paths:
           description: The properties of the database account were patched successfully.
           schema:
             $ref: '#/definitions/DatabaseAccount'
+      x-ms-examples:
+        DocumentDBDatabaseAccountPatch:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+            updateParameters:
+              tags:
+                dept: finance
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
+                kind: GlobalDocumentDB
+                location: West US
+                name: ddb1
+                properties:
+                  consistencyPolicy:
+                    defaultConsistencyLevel: Session
+                    maxIntervalInSeconds: 5
+                    maxStalenessPrefix: 100
+                  databaseAccountOfferType: Standard
+                  documentEndpoint: 'https://ddb1.documents.azure.com:443/'
+                  failoverPolicies:
+                    - failoverPriority: 0
+                      id: ddb1-eastus
+                      locationName: East US
+                  ipRangeFilter: ''
+                  provisioningState: Succeeded
+                  readLocations:
+                    - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                      failoverPriority: 0
+                      id: ddb1-eastus
+                      locationName: East US
+                      provisioningState: Succeeded
+                  writeLocations:
+                    - documentEndpoint: 'https://ddb1-eastus.documents.azure.com:443/'
+                      failoverPriority: 0
+                      id: ddb1-eastus
+                      locationName: East US
+                      provisioningState: Succeeded
+                tags: {}
+                type: Microsoft.DocumentDB/databaseAccounts
       x-ms-long-running-operation: true
     put:
       description: Creates or updates an Azure DocumentDB database account.
@@ -173,6 +357,111 @@ paths:
           description: The database account create or update operation will complete asynchronously.
           schema:
             $ref: '#/definitions/DatabaseAccount'
+      x-ms-examples:
+        DocumentDBDatabaseAccountCreateMax:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            createUpdateParameters:
+              kind: GlobalDocumentDB
+              location: westus
+              properties:
+                consistencyPolicy:
+                  defaultConsistencyLevel: BoundedStaleness
+                  maxIntervalInSeconds: 10
+                  maxStalenessPrefix: 200
+                databaseAccountOfferType: Standard
+                ipRangeFilter: 10.10.10.10
+                locations:
+                  - failoverPriority: 0
+                    locationName: southcentralus
+                  - failoverPriority: 1
+                    locationName: eastus
+              tags: {}
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
+                kind: GlobalDocumentDB
+                location: West US
+                name: ddb1
+                properties:
+                  consistencyPolicy:
+                    defaultConsistencyLevel: BoundedStaleness
+                    maxIntervalInSeconds: 10
+                    maxStalenessPrefix: 200
+                  databaseAccountOfferType: Standard
+                  failoverPolicies:
+                    - failoverPriority: 0
+                      id: ddb1-southcentralus
+                      locationName: South Central US
+                    - failoverPriority: 1
+                      id: ddb1-eastus
+                      locationName: East US
+                  ipRangeFilter: 10.10.10.10
+                  provisioningState: Initializing
+                  readLocations:
+                    - failoverPriority: 0
+                      id: ddb1-southcentralus
+                      locationName: South Central US
+                      provisioningState: Initializing
+                    - failoverPriority: 1
+                      id: ddb1-eastus
+                      locationName: East US
+                      provisioningState: Initializing
+                  writeLocations:
+                    - failoverPriority: 0
+                      id: ddb1-southcentralus
+                      locationName: South Central US
+                      provisioningState: Initializing
+                tags: {}
+                type: Microsoft.DocumentDB/databaseAccounts
+        DocumentDBDatabaseAccountCreateMin:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            createUpdateParameters:
+              location: westus
+              properties:
+                databaseAccountOfferType: Standard
+                locations:
+                  - failoverPriority: 0
+                    locationName: southcentralus
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
+                kind: GlobalDocumentDB
+                location: West US
+                name: ddb1
+                properties:
+                  consistencyPolicy:
+                    defaultConsistencyLevel: Session
+                    maxIntervalInSeconds: 5
+                    maxStalenessPrefix: 100
+                  databaseAccountOfferType: Standard
+                  failoverPolicies:
+                    - failoverPriority: 0
+                      id: ddb1-southcentralus
+                      locationName: South Central US
+                  ipRangeFilter: ''
+                  provisioningState: Initializing
+                  readLocations:
+                    - failoverPriority: 0
+                      id: ddb1-southcentralus
+                      locationName: South Central US
+                      provisioningState: Initializing
+                  writeLocations:
+                    - failoverPriority: 0
+                      id: ddb1-southcentralus
+                      locationName: South Central US
+                      provisioningState: Initializing
+                tags: {}
+                type: Microsoft.DocumentDB/databaseAccounts
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange':
     post:
@@ -194,7 +483,59 @@ paths:
           description: Accepted. The failover policy change operation will complete asynchronously.
         '204':
           description: No Content
+      x-ms-examples:
+        DocumentDBDatabaseAccountFailoverPriorityChange:
+          parameters:
+            accountName: ddb1-failover
+            api-version: '2015-04-08'
+            failoverParameters:
+              failoverPolicies:
+                - failoverPriority: 0
+                  locationName: eastus
+                - failoverPriority: 1
+                  locationName: westus
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listConnectionStrings':
+    post:
+      description: Lists the connection strings for the specified Azure DocumentDB database account.
+      operationId: DatabaseAccounts_ListConnectionStrings
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/DatabaseAccountListConnectionStringsResult'
+      x-ms-examples:
+        DocumentDBDatabaseAccountListConnectionStrings:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body: {}
+        DocumentDBDatabaseAccountListConnectionStringsMongo:
+          parameters:
+            api-version: '2015-04-08'
+            name: mongo-ddb1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                connectionStrings:
+                  - connectionString: connection-string
+                    description: description
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listKeys':
     post:
       description: Lists the access keys for the specified Azure DocumentDB database account.
@@ -209,6 +550,21 @@ paths:
           description: The operation completed successfully.
           schema:
             $ref: '#/definitions/DatabaseAccountListKeysResult'
+      x-ms-examples:
+        DocumentDBDatabaseAccountListKeys:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                primaryMasterKey: primaryMasterKey
+                properties:
+                  primaryReadonlyMasterKey: primaryReadonlyMasterKey
+                  secondaryReadonlyMasterKey: secondaryReadonlyMasterKey
+                secondaryMasterKey: secondaryMasterKey
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys':
     get:
       description: Lists the read-only access keys for the specified Azure DocumentDB database account.
@@ -223,6 +579,18 @@ paths:
           description: The operation completed successfully.
           schema:
             $ref: '#/definitions/DatabaseAccountListReadOnlyKeysResult'
+      x-ms-examples:
+        DocumentDBDatabaseAccountListReadOnlyKeys:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                primaryReadonlyMasterKey: primaryReadonlyMasterKey
+                secondaryReadonlyMasterKey: secondaryReadonlyMasterKey
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/regenerateKey':
     post:
       description: Regenerates an access key for the specified Azure DocumentDB database account.
@@ -243,6 +611,18 @@ paths:
           description: OK
         '202':
           description: Accepted. The regenerate key operation will complete asynchronously.
+      x-ms-examples:
+        DocumentDBDatabaseAccountRegenerateKey:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            keyToRegenerate:
+              keyKind: primary
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202': {}
       x-ms-long-running-operation: true
 definitions:
   ConsistencyPolicy:
@@ -294,6 +674,17 @@ definitions:
         $ref: '#/definitions/DatabaseAccountProperties'
         x-ms-client-flatten: true
     type: object
+  DatabaseAccountConnectionString:
+    description: Connection string for the DocumentDB account
+    properties:
+      connectionString:
+        description: Value of the connection string
+        readOnly: true
+        type: string
+      description:
+        description: Description of the connection string
+        readOnly: true
+        type: string
   DatabaseAccountCreateUpdateParameters:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -336,6 +727,14 @@ definitions:
       - locations
       - databaseAccountOfferType
     type: object
+  DatabaseAccountListConnectionStringsResult:
+    description: The connection strings for the given database account.
+    properties:
+      connectionStrings:
+        description: An array that contains the connection strings for the DocumentDB account.
+        items:
+          $ref: '#/definitions/DatabaseAccountConnectionString'
+        type: array
   DatabaseAccountListKeysResult:
     description: The access keys for the given database account.
     properties:

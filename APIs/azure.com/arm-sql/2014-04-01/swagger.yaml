@@ -3,11 +3,11 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: 'Provides create, read, update and delete functionality for Azure SQL resources including servers, databases, elastic pools, recommendations, operations, and usage metrics.'
-  title: Azure SQL Database API spec
+  description: 'Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, operations, and usage metrics.'
+  title: Azure SQL Database
   version: '2014-04-01'
   x-apisguru-categories:
-    - cloud
+    - enterprise
   x-logo:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
@@ -30,6 +30,13 @@ parameters:
     name: api-version
     required: true
     type: string
+  DatabaseExpandParameter:
+    description: 'A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.'
+    in: query
+    name: $expand
+    required: false
+    type: string
+    x-ms-parameter-location: method
   ResourceGroupParameter:
     description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
     in: path
@@ -38,7 +45,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
   ServerNameParameter:
-    description: The name of the Azure SQL server.
+    description: The name of the server.
     in: path
     name: serverName
     required: true
@@ -51,9 +58,22 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.Sql/operations:
+    get:
+      description: Lists all of the available SQL Rest API operations.
+      operationId: ListOperations
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/OperationListResult'
+      tags:
+        - Operations
   '/subscriptions/{subscriptionId}/providers/Microsoft.Sql/servers':
     get:
-      description: Returns information about an Azure SQL server.
+      description: Returns a list of servers.
       operationId: Servers_List
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -65,10 +85,45 @@ paths:
             $ref: '#/definitions/ServerListResult'
       tags:
         - Servers
+      x-ms-examples:
+        List servers:
+          parameters:
+            api-version: '2014-04-01'
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645
+                    kind: v12.0
+                    location: Japan East
+                    name: sqlcrudtest-4645
+                    properties:
+                      administratorLogin: dummylogin
+                      administratorLoginPassword: null
+                      externalAdministratorLogin: null
+                      externalAdministratorSid: null
+                      fullyQualifiedDomainName: sqlcrudtest-4645.database.windows.net
+                      state: Ready
+                      version: '12.0'
+                    type: Microsoft.Sql/servers
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-6661
+                    kind: v12.0
+                    location: Japan East
+                    name: sqlcrudtest-6661
+                    properties:
+                      administratorLogin: dummylogin
+                      administratorLoginPassword: null
+                      externalAdministratorLogin: null
+                      externalAdministratorSid: null
+                      fullyQualifiedDomainName: sqlcrudtest-6661.database.windows.net
+                      state: Ready
+                      version: '12.0'
+                    type: Microsoft.Sql/servers
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers':
     get:
-      description: Returns information about an Azure SQL server.
+      description: Returns a list of servers in a resource group.
       operationId: Servers_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -81,6 +136,42 @@ paths:
             $ref: '#/definitions/ServerListResult'
       tags:
         - Servers
+      x-ms-examples:
+        List servers by resource group:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: sqlcrudtest-7398
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645
+                    kind: v12.0
+                    location: Japan East
+                    name: sqlcrudtest-4645
+                    properties:
+                      administratorLogin: dummylogin
+                      administratorLoginPassword: null
+                      externalAdministratorLogin: null
+                      externalAdministratorSid: null
+                      fullyQualifiedDomainName: sqlcrudtest-4645.database.windows.net
+                      state: Ready
+                      version: '12.0'
+                    type: Microsoft.Sql/servers
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-6661
+                    kind: v12.0
+                    location: Japan East
+                    name: sqlcrudtest-6661
+                    properties:
+                      administratorLogin: dummylogin
+                      administratorLoginPassword: null
+                      externalAdministratorLogin: null
+                      externalAdministratorSid: null
+                      fullyQualifiedDomainName: sqlcrudtest-6661.database.windows.net
+                      state: Ready
+                      version: '12.0'
+                    type: Microsoft.Sql/servers
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}':
     delete:
@@ -98,9 +189,21 @@ paths:
           description: Accepted
       tags:
         - Servers
+      x-ms-examples:
+        Delete SQL Server:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: sqlcrudtest-7398
+            serverName: sqlcrudtest-6661
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body: ''
+            '204':
+              body: ''
     get:
-      description: Gets information about an Azure SQL server.
-      operationId: Servers_GetByResourceGroup
+      description: Gets a server.
+      operationId: Servers_Get
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -113,8 +216,33 @@ paths:
             $ref: '#/definitions/Server'
       tags:
         - Servers
+      x-ms-examples:
+        Get Server:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: sqlcrudtest-7398
+            serverName: sqlcrudtest-4645
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645
+                kind: v12.0
+                location: Japan East
+                name: sqlcrudtest-4645
+                properties:
+                  administratorLogin: dummylogin
+                  administratorLoginPassword: null
+                  externalAdministratorLogin: null
+                  externalAdministratorSid: null
+                  fullyQualifiedDomainName: sqlcrudtest-4645.database.windows.net
+                  state: Ready
+                  version: '12.0'
+                tags:
+                  tagKey1: TagValue1
+                type: Microsoft.Sql/servers
     put:
-      description: Creates a new Azure SQL server.
+      description: Creates or updates a new server.
       operationId: Servers_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -138,15 +266,115 @@ paths:
             $ref: '#/definitions/Server'
       tags:
         - Servers
+      x-ms-examples:
+        Create server max:
+          parameters:
+            api-version: '2014-04-01'
+            parameters:
+              location: Japan East
+              properties:
+                administratorLogin: dummylogin
+                administratorLoginPassword: Un53cuRE!
+                fullyQualifiedDomainName: sqlcrudtest-4645.database.windows.net
+                state: Ready
+                version: '12.0'
+              tags:
+                tagKey1: TagValue1
+            resourceGroupName: sqlcrudtest-7398
+            serverName: sqlcrudtest-4645
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645
+                kind: v12.0
+                location: Japan East
+                name: sqlcrudtest-4645
+                properties:
+                  administratorLogin: dummylogin
+                  administratorLoginPassword: Un53cuRE!
+                  externalAdministratorLogin: null
+                  externalAdministratorSid: null
+                  fullyQualifiedDomainName: sqlcrudtest-4645.database.windows.net
+                  state: Ready
+                  version: '12.0'
+                tags:
+                  tagKey1: TagValue1
+                type: Microsoft.Sql/servers
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645
+                kind: v12.0
+                location: Japan East
+                name: sqlcrudtest-4645
+                properties:
+                  administratorLogin: dummylogin
+                  administratorLoginPassword: Un53cuRE!
+                  externalAdministratorLogin: null
+                  externalAdministratorSid: null
+                  fullyQualifiedDomainName: sqlcrudtest-4645.database.windows.net
+                  state: Ready
+                  version: '12.0'
+                tags:
+                  tagKey1: TagValue1
+                type: Microsoft.Sql/servers
+        Create server min:
+          parameters:
+            api-version: '2014-04-01'
+            parameters:
+              location: Japan East
+              properties:
+                administratorLogin: dummylogin
+                administratorLoginPassword: Un53cuRE!
+            resourceGroupName: sqlcrudtest-7398
+            serverName: sqlcrudtest-4645
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645
+                kind: v12.0
+                location: Japan East
+                name: sqlcrudtest-4645
+                properties:
+                  administratorLogin: dummylogin
+                  administratorLoginPassword: Un53cuRE!
+                  externalAdministratorLogin: null
+                  externalAdministratorSid: null
+                  fullyQualifiedDomainName: sqlcrudtest-4645.database.windows.net
+                  state: Ready
+                  version: '12.0'
+                type: Microsoft.Sql/servers
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645
+                kind: v12.0
+                location: Japan East
+                name: sqlcrudtest-4645
+                properties:
+                  administratorLogin: dummylogin
+                  administratorLoginPassword: Un53cuRE!
+                  externalAdministratorLogin: null
+                  externalAdministratorSid: null
+                  fullyQualifiedDomainName: sqlcrudtest-4645.database.windows.net
+                  state: Ready
+                  version: '12.0'
+                type: Microsoft.Sql/servers
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases':
     get:
-      description: Returns information about an Azure SQL database.
+      description: Returns a list of databases in a server.
       operationId: Databases_ListByServer
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/DatabaseExpandParameter'
+        - description: An OData filter expression that describes a subset of databases to return.
+          in: query
+          name: $filter
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -154,17 +382,177 @@ paths:
             $ref: '#/definitions/DatabaseListResult'
       tags:
         - Databases
+      x-ms-examples:
+        List databases by server:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: sqlcrudtest-6845
+            serverName: sqlcrudtest-7177
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6845/providers/Microsoft.Sql/servers/sqlcrudtest-7177/databases/master
+                    kind: 'v12.0,system'
+                    location: Japan East
+                    name: master
+                    properties:
+                      collation: SQL_Latin1_General_CP1_CI_AS
+                      containmentState: 2
+                      creationDate: '2017-02-10T00:59:33.483Z'
+                      currentServiceObjectiveId: 620323bf-2879-4807-b30d-c2e6d7b3b3aa
+                      databaseId: e760a51c-3dce-4d8c-976b-a2b929a73e08
+                      defaultSecondaryLocation: Japan West
+                      earliestRestoreDate: null
+                      edition: System
+                      elasticPoolName: null
+                      failoverGroupId: null
+                      maxSizeBytes: '32212254720'
+                      readScale: Disabled
+                      requestedServiceObjectiveId: 620323bf-2879-4807-b30d-c2e6d7b3b3aa
+                      requestedServiceObjectiveName: System2
+                      sampleName: null
+                      serviceLevelObjective: System2
+                      status: Online
+                    type: Microsoft.Sql/servers/databases
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6845/providers/Microsoft.Sql/servers/sqlcrudtest-7177/databases/sqlcrudtest-1142
+                    kind: 'v12.0,user'
+                    location: Japan East
+                    name: sqlcrudtest-1142
+                    properties:
+                      collation: SQL_Latin1_General_CP1_CI_AS
+                      containmentState: 2
+                      creationDate: '2017-02-10T01:03:34.04Z'
+                      currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                      databaseId: 11c1813c-52db-4d17-95d7-119eda1850b1
+                      defaultSecondaryLocation: Japan West
+                      earliestRestoreDate: '2017-02-10T01:14:10.233Z'
+                      edition: Standard
+                      elasticPoolName: null
+                      failoverGroupId: null
+                      maxSizeBytes: '268435456000'
+                      readScale: Disabled
+                      requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                      requestedServiceObjectiveName: S0
+                      sampleName: null
+                      serviceLevelObjective: S0
+                      status: Online
+                    type: Microsoft.Sql/servers/databases
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6845/providers/Microsoft.Sql/servers/sqlcrudtest-7177/databases/sqlcrudtest-2788
+                    kind: 'v12.0,user'
+                    location: Japan East
+                    name: sqlcrudtest-2788
+                    properties:
+                      collation: SQL_Latin1_General_CP1_CI_AS
+                      containmentState: 2
+                      creationDate: '2017-02-10T01:00:21.067Z'
+                      currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                      databaseId: d63e118b-41cf-49b9-8dac-aa6ef6f91731
+                      defaultSecondaryLocation: Japan West
+                      earliestRestoreDate: '2017-02-10T01:10:52.25Z'
+                      edition: Standard
+                      elasticPoolName: null
+                      failoverGroupId: null
+                      maxSizeBytes: '268435456000'
+                      readScale: Disabled
+                      requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                      requestedServiceObjectiveName: S0
+                      sampleName: null
+                      serviceLevelObjective: S0
+                      status: Online
+                    type: Microsoft.Sql/servers/databases
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6845/providers/Microsoft.Sql/servers/sqlcrudtest-7177/databases/sqlcrudtest-6877
+                    kind: 'v12.0,user'
+                    location: Japan East
+                    name: sqlcrudtest-6877
+                    properties:
+                      collation: SQL_Latin1_General_CP1_CI_AS
+                      containmentState: 2
+                      creationDate: '2017-02-10T01:02:28.853Z'
+                      currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                      databaseId: 40ac16e8-855c-439c-b495-c97e918a771c
+                      defaultSecondaryLocation: Japan West
+                      earliestRestoreDate: '2017-02-10T01:13:21.66Z'
+                      edition: Standard
+                      elasticPoolName: null
+                      failoverGroupId: null
+                      maxSizeBytes: '268435456000'
+                      readScale: Disabled
+                      requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                      requestedServiceObjectiveName: S0
+                      sampleName: null
+                      serviceLevelObjective: S0
+                      status: Online
+                    type: Microsoft.Sql/servers/databases
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6845/providers/Microsoft.Sql/servers/sqlcrudtest-7177/databases/sqlcrudtest-9888
+                    kind: 'v12.0,user'
+                    location: Japan East
+                    name: sqlcrudtest-9888
+                    properties:
+                      collation: SQL_Latin1_General_CP1_CI_AS
+                      containmentState: 2
+                      creationDate: '2017-02-10T01:01:25.347Z'
+                      currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                      databaseId: 59daf4ad-082f-4ac5-b38a-ed656b937980
+                      defaultSecondaryLocation: Japan West
+                      earliestRestoreDate: '2017-02-10T01:12:05.303Z'
+                      edition: Standard
+                      elasticPoolName: null
+                      failoverGroupId: null
+                      maxSizeBytes: '268435456000'
+                      readScale: Disabled
+                      requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                      requestedServiceObjectiveName: S0
+                      sampleName: null
+                      serviceLevelObjective: S0
+                      status: Online
+                    type: Microsoft.Sql/servers/databases
+        List databases by server with filter:
+          parameters:
+            $filter: properties/edition eq 'System'
+            api-version: '2014-04-01'
+            resourceGroupName: sqlcrudtest-6845
+            serverName: sqlcrudtest-7177
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6845/providers/Microsoft.Sql/servers/sqlcrudtest-7177/databases/master
+                    kind: 'v12.0,system'
+                    location: Japan East
+                    name: master
+                    properties:
+                      collation: SQL_Latin1_General_CP1_CI_AS
+                      containmentState: 2
+                      creationDate: '2017-02-10T00:59:33.483Z'
+                      currentServiceObjectiveId: 620323bf-2879-4807-b30d-c2e6d7b3b3aa
+                      databaseId: e760a51c-3dce-4d8c-976b-a2b929a73e08
+                      defaultSecondaryLocation: Japan West
+                      earliestRestoreDate: null
+                      edition: System
+                      elasticPoolName: null
+                      failoverGroupId: null
+                      maxSizeBytes: '32212254720'
+                      readScale: Disabled
+                      requestedServiceObjectiveId: 620323bf-2879-4807-b30d-c2e6d7b3b3aa
+                      requestedServiceObjectiveName: System2
+                      sampleName: null
+                      serviceLevelObjective: System2
+                      status: Online
+                    type: Microsoft.Sql/servers/databases
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}':
     delete:
-      description: Deletes an Azure SQL database.
+      description: Deletes a database.
       operationId: Databases_Delete
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL database to be deleted.
+        - description: The name of the database to be deleted.
           in: path
           name: databaseName
           required: true
@@ -176,24 +564,33 @@ paths:
           description: NoContent
       tags:
         - Databases
+      x-ms-examples:
+        Delete a database:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: sqlcrudtest-331
+            resourceGroupName: sqlcrudtest-6852
+            serverName: sqlcrudtest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body: ''
+            '204':
+              body: ''
     get:
-      description: Gets information about an Azure SQL database.
+      description: Gets a database.
       operationId: Databases_Get
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL database to be retrieved.
+        - description: The name of the database to be retrieved.
           in: path
           name: databaseName
           required: true
           type: string
-        - description: 'The comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption.'
-          in: query
-          name: $expand
-          required: false
-          type: string
+        - $ref: '#/parameters/DatabaseExpandParameter'
       responses:
         '200':
           description: OK
@@ -201,15 +598,51 @@ paths:
             $ref: '#/definitions/Database'
       tags:
         - Databases
+      x-ms-examples:
+        Get a database:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: sqlcrudtest-9187
+            resourceGroupName: sqlcrudtest-6852
+            serverName: sqlcrudtest-2080
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-9187
+                kind: 'v12.0,user'
+                location: Japan East
+                name: sqlcrudtest-9187
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-10T00:56:19.2Z'
+                  currentServiceObjectiveId: dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
+                  databaseId: 200216b2-dc19-4866-85aa-f73fe4a1ebac
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:06:29.78Z'
+                  edition: Basic
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '2147483648'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
+                  requestedServiceObjectiveName: Basic
+                  sampleName: null
+                  serviceLevelObjective: Basic
+                  status: Online
+                tags:
+                  tagKey1: TagValue1
+                type: Microsoft.Sql/servers/databases
     put:
-      description: 'Creates a new Azure SQL database or updates an existing Azure SQL database. Location is a required property in the request body, and it must be the same as the location of the SQL server.'
+      description: 'Creates a new database or updates an existing database. Location is a required property in the request body, and it must be the same as the location of the SQL server.'
       operationId: Databases_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL database to be operated on (updated or created).
+        - description: The name of the database to be operated on (updated or created).
           in: path
           name: databaseName
           required: true
@@ -231,21 +664,601 @@ paths:
             $ref: '#/definitions/Database'
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/Database'
       tags:
         - Databases
+      x-ms-examples:
+        Create a database as a copy:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: testdb
+            parameters:
+              location: Japan East
+              properties:
+                createMode: Copy
+                sourceDatabaseId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-3782/databases/testdb
+            resourceGroupName: sqlcrudtest-4799
+            serverName: sqlcrudtest-6440
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-6440/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-6440/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '202': {}
+        Create a database as a non-readable secondary:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: testdb
+            parameters:
+              location: Japan East
+              properties:
+                createMode: NonReadableSecondary
+                sourceDatabaseId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-3782/databases/testdb
+            resourceGroupName: sqlcrudtest-4799
+            serverName: sqlcrudtest-6440
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-6440/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-6440/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '202': {}
+        Create a database as a point in time restore:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: testdb
+            parameters:
+              location: Japan East
+              properties:
+                createMode: PointInTimeRestore
+                restorePointInTime: '2017-02-16T21:24:37.467Z'
+                sourceDatabaseId: /subscriptions/00000000-1111-2222-3333-444444444444 /resourceGroups/sqlcrudtest-8412/providers/Microsoft.Sql/servers/sqlcrudtest-3782/databases/testdb
+            resourceGroupName: sqlcrudtest-8412
+            serverName: sqlcrudtest-3584
+            subscriptionId: '00000000-1111-2222-3333-444444444444 '
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-3782/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-3782/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '202': {}
+        Create a database as an online secondary:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: testdb
+            parameters:
+              location: Japan East
+              properties:
+                createMode: OnlineSecondary
+                sourceDatabaseId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-3782/databases/testdb
+            resourceGroupName: sqlcrudtest-4799
+            serverName: sqlcrudtest-6440
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-3782/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-3782/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '202': {}
+        Create a database max:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: testdb
+            parameters:
+              location: Japan East
+              properties:
+                collation: SQL_Latin1_General_CP1_CI_AS
+                containmentState: 2
+                createMode: Default
+                creationDate: '2017-02-10T01:37:18.847Z'
+                currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                databaseId: 816c5f7e-0e36-4eec-9c51-eee7a276c14c
+                defaultSecondaryLocation: Japan West
+                earliestRestoreDate: '2017-02-10T01:48:08.237Z'
+                edition: Standard
+                maxSizeBytes: '268435456000'
+                readScale: Disabled
+                requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                requestedServiceObjectiveName: S0
+                sampleName: AdventureWorksLT
+                serviceLevelObjective: S0
+                status: Online
+            resourceGroupName: sqlcrudtest-4799
+            serverName: sqlcrudtest-6440
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-8931/providers/Microsoft.Sql/servers/sqlcrudtest-1932/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  createMode: Default
+                  creationDate: '2017-02-10T01:37:18.847Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  databaseId: 816c5f7e-0e36-4eec-9c51-eee7a276c14c
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:48:08.237Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  sourceDatabaseId: null
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-8931/providers/Microsoft.Sql/servers/sqlcrudtest-1932/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  createMode: Default
+                  creationDate: '2017-02-10T01:37:18.847Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  databaseId: 816c5f7e-0e36-4eec-9c51-eee7a276c14c
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:48:08.237Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  sourceDatabaseId: null
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '202': {}
+        Create a database min:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: testdb
+            parameters:
+              location: Japan East
+            resourceGroupName: sqlcrudtest-4799
+            serverName: sqlcrudtest-5961
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-5961/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-5961/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '202': {}
+        Update a database max:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: testdb
+            parameters:
+              location: Japan East
+              properties:
+                collation: SQL_Latin1_General_CP1_CI_AS
+                containmentState: 2
+                createMode: Default
+                currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                defaultSecondaryLocation: Japan West
+                earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                edition: Standard
+                maxSizeBytes: '268435456000'
+                readScale: Disabled
+                requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                requestedServiceObjectiveName: S0
+                serviceLevelObjective: S0
+                status: Online
+            resourceGroupName: sqlcrudtest-4799
+            serverName: sqlcrudtest-5961
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-5961/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-5961/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '202': {}
+        Update a database min:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: testdb
+            parameters:
+              location: Japan East
+            resourceGroupName: sqlcrudtest-4799
+            serverName: sqlcrudtest-5961
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-5961/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-5961/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  creationDate: '2017-02-24T22:39:46.547Z'
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '202': {}
+        Update a database's elastic pool':
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: testdb
+            parameters:
+              location: Japan East
+              properties:
+                elasticPoolName: '7537'
+            resourceGroupName: sqlcrudtest-4799
+            serverName: sqlcrudtest-6440
+            subscriptionId: 9d4e2ad0-e20b-4464-9219-353bded52513
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-6440/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4799/providers/Microsoft.Sql/servers/sqlcrudtest-6440/databases/testdb
+                kind: 'v12.0,user'
+                location: Japan East
+                name: testdb
+                properties:
+                  collation: SQL_Latin1_General_CP1_CI_AS
+                  containmentState: 2
+                  currentServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  defaultSecondaryLocation: Japan West
+                  earliestRestoreDate: '2017-02-10T01:52:52.923Z'
+                  edition: Standard
+                  elasticPoolName: null
+                  failoverGroupId: null
+                  maxSizeBytes: '268435456000'
+                  readScale: Disabled
+                  requestedServiceObjectiveId: f1173c43-91bd-4aaa-973c-54e79e15235b
+                  requestedServiceObjectiveName: S0
+                  sampleName: null
+                  serviceLevelObjective: S0
+                  status: Online
+                type: Microsoft.Sql/servers/databases
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause':
     post:
-      description: Pause an Azure SQL Data Warehouse database.
-      operationId: Databases_PauseDataWarehouse
+      description: Pauses a data warehouse.
+      operationId: Databases_Pause
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Data Warehouse database to pause.
+        - description: The name of the data warehouse to pause.
           in: path
           name: databaseName
           required: true
@@ -260,14 +1273,14 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints':
     get:
-      description: Returns a list of Azure SQL database restore points.
+      description: Returns a list of database restore points.
       operationId: Databases_ListRestorePoints
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL database from which to retrieve available restore points.
+        - description: The name of the database from which to retrieve available restore points.
           in: path
           name: databaseName
           required: true
@@ -282,14 +1295,14 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume':
     post:
-      description: Resume an Azure SQL Data Warehouse database.
-      operationId: Databases_ResumeDataWarehouse
+      description: Resumes a data warehouse.
+      operationId: Databases_Resume
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Data Warehouse database to resume.
+        - description: The name of the data warehouse to resume.
           in: path
           name: databaseName
           required: true
@@ -304,7 +1317,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/serviceTierAdvisors':
     get:
-      description: Returns information about service tier advisors for specified database.
+      description: Returns service tier advisors for specified database.
       operationId: Databases_ListServiceTierAdvisors
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -326,7 +1339,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/serviceTierAdvisors/{serviceTierAdvisorName}':
     get:
-      description: Gets information about a service tier advisor.
+      description: Gets a service tier advisor.
       operationId: Databases_GetServiceTierAdvisor
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -352,14 +1365,14 @@ paths:
         - ServiceTierAdvisors
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/current':
     get:
-      description: Gets an Azure SQL Database Transparent Data Encryption Response.
+      description: Gets a database's transparent data encryption configuration.
       operationId: Databases_GetTransparentDataEncryptionConfiguration
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL database for which the Transparent Data Encryption applies.
+        - description: The name of the database for which the transparent data encryption applies.
           in: path
           name: databaseName
           required: true
@@ -372,14 +1385,14 @@ paths:
       tags:
         - TransparentDataEncryption
     put:
-      description: Creates or updates an Azure SQL Database Transparent Data Encryption Operation.
+      description: Creates or updates a database's transparent data encryption configuration.
       operationId: Databases_CreateOrUpdateTransparentDataEncryptionConfiguration
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL database for which setting the Transparent Data Encryption applies.
+        - description: The name of the database for which setting the transparent data encryption applies.
           in: path
           name: databaseName
           required: true
@@ -403,14 +1416,14 @@ paths:
         - TransparentDataEncryption
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/current/operationResults':
     get:
-      description: Returns an Azure SQL Database Transparent Data Encryption Activity Response.
+      description: Returns a database's transparent data encryption operation result.
       operationId: Databases_ListTransparentDataEncryptionActivity
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL database for which the Transparent Data Encryption applies.
+        - description: The name of the database for which the transparent data encryption applies.
           in: path
           name: databaseName
           required: true
@@ -425,14 +1438,14 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages':
     get:
-      description: Returns information about Azure SQL database usages.
+      description: Returns database usages.
       operationId: Databases_ListUsages
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL database.
+        - description: The name of the database.
           in: path
           name: databaseName
           required: true
@@ -444,10 +1457,29 @@ paths:
             $ref: '#/definitions/DatabaseMetricListResult'
       tags:
         - Databases
+      x-ms-examples:
+        List database usage metrics:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: '3481'
+            resourceGroupName: sqlcrudtest-6730
+            serverName: sqlcrudtest-9007
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 4194304
+                    displayName: Database Size
+                    limit: 268435456000
+                    name: database_size
+                    nextResetTime: null
+                    resourceName: '3481'
+                    unit: Bytes
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools':
     get:
-      description: Returns information about Azure SQL elastic pools.
+      description: Returns a list of elastic pools in a server.
       operationId: ElasticPools_ListByServer
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -461,17 +1493,67 @@ paths:
             $ref: '#/definitions/ElasticPoolListResult'
       tags:
         - ElasticPools
+      x-ms-examples:
+        List elastic pools:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-2729
+                    kind: null
+                    location: Japan East
+                    name: sqlcrudtest-2729
+                    properties:
+                      creationDate: '2017-02-10T01:27:21.32Z'
+                      databaseDtuMax: 5
+                      databaseDtuMin: 0
+                      dtu: 50
+                      edition: Basic
+                      state: Ready
+                      storageMB: 5000
+                    type: Microsoft.Sql/servers/elasticPools
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-3191
+                    kind: null
+                    location: Japan East
+                    name: sqlcrudtest-3191
+                    properties:
+                      creationDate: '2017-02-10T01:26:26.45Z'
+                      databaseDtuMax: 5
+                      databaseDtuMin: 0
+                      dtu: 50
+                      edition: Basic
+                      state: Ready
+                      storageMB: 5000
+                    type: Microsoft.Sql/servers/elasticPools
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                    kind: null
+                    location: Japan East
+                    name: sqlcrudtest-8102
+                    properties:
+                      creationDate: '2017-02-10T01:25:25.033Z'
+                      databaseDtuMax: 5
+                      databaseDtuMin: 0
+                      dtu: 50
+                      edition: Basic
+                      state: Ready
+                      storageMB: 5000
+                    type: Microsoft.Sql/servers/elasticPools
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}':
     delete:
-      description: Deletes the Azure SQL elastic pool.
+      description: Deletes the elastic pool.
       operationId: ElasticPools_Delete
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Elastic Pool to be deleted.
+        - description: The name of the elastic pool to be deleted.
           in: path
           name: elasticPoolName
           required: true
@@ -483,15 +1565,28 @@ paths:
           description: Accepted
       tags:
         - ElasticPools
+      x-ms-examples:
+        Delete elastic pool:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-3851
+            resourceGroupName: sqlcrudtest-3129
+            serverName: sqlcrudtest-228
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body: ''
+            '204':
+              body: ''
     get:
-      description: Gets information about an Azure SQL elastic pool.
+      description: Gets an elastic pool.
       operationId: ElasticPools_Get
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Elastic Pool to be retrieved.
+        - description: The name of the elastic pool to be retrieved.
           in: path
           name: elasticPoolName
           required: true
@@ -503,20 +1598,44 @@ paths:
             $ref: '#/definitions/ElasticPool'
       tags:
         - ElasticPools
+      x-ms-examples:
+        Get elastic pool:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-8102
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
     put:
-      description: Creates a new Azure SQL elastic pool or updates an existing Azure SQL elastic pool.
+      description: Creates a new elastic pool or updates an existing elastic pool.
       operationId: ElasticPools_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Elastic Pool to be operated on (Updated or created).
+        - description: The name of the elastic pool to be operated on (updated or created).
           in: path
           name: elasticPoolName
           required: true
           type: string
-        - description: The required parameters for creating or updating an Elastic Pool.
+        - description: The required parameters for creating or updating an elastic pool.
           in: body
           name: parameters
           required: true
@@ -533,21 +1652,200 @@ paths:
             $ref: '#/definitions/ElasticPool'
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/ElasticPool'
       tags:
         - ElasticPools
+      x-ms-examples:
+        Create elastic pool max:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-8102
+            parameters:
+              location: Japan East
+              properties:
+                creationDate: '2017-02-10T01:25:25.033Z'
+                databaseDtuMax: 5
+                databaseDtuMin: 0
+                dtu: 50
+                edition: Basic
+                state: Ready
+                storageMB: 5000
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+            '202': {}
+        Create elastic pool min:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-8102
+            parameters:
+              location: Japan East
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 100
+                  databaseDtuMin: 0
+                  dtu: 100
+                  edition: Standard
+                  state: Ready
+                  storageMB: 102400
+                type: Microsoft.Sql/servers/elasticPools
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 100
+                  databaseDtuMin: 0
+                  dtu: 100
+                  edition: Standard
+                  state: Ready
+                  storageMB: 102400
+                type: Microsoft.Sql/servers/elasticPools
+            '202': {}
+        Update elastic pool max:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-8102
+            parameters:
+              location: Japan East
+              properties:
+                creationDate: '2017-02-10T01:25:25.033Z'
+                databaseDtuMax: 5
+                databaseDtuMin: 0
+                dtu: 50
+                edition: Basic
+                state: Ready
+                storageMB: 5000
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+            '202': {}
+        Update elastic pool min:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: sqlcrudtest-8102
+            parameters:
+              location: Japan East
+            resourceGroupName: sqlcrudtest-2369
+            serverName: sqlcrudtest-8069
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+            '201':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102
+                kind: null
+                location: Japan East
+                name: sqlcrudtest-8102
+                properties:
+                  creationDate: '2017-02-10T01:25:25.033Z'
+                  databaseDtuMax: 5
+                  databaseDtuMin: 0
+                  dtu: 50
+                  edition: Basic
+                  state: Ready
+                  storageMB: 5000
+                type: Microsoft.Sql/servers/elasticPools
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases':
     get:
-      description: Returns information about an Azure SQL database inside of an Azure SQL elastic pool.
+      description: Returns a list of databases in an elastic pool.
       operationId: ElasticPools_ListDatabases
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Elastic Pool to be retrieved.
+        - description: The name of the elastic pool to be retrieved.
           in: path
           name: elasticPoolName
           required: true
@@ -562,19 +1860,19 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases/{databaseName}':
     get:
-      description: Gets information about an Azure SQL database inside of an Azure SQL elastic pool.
+      description: Gets a database inside of an elastic pool.
       operationId: ElasticPools_GetDatabase
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Elastic Pool to be retrieved.
+        - description: The name of the elastic pool to be retrieved.
           in: path
           name: elasticPoolName
           required: true
           type: string
-        - description: The name of the Azure SQL database to be retrieved.
+        - description: The name of the database to be retrieved.
           in: path
           name: databaseName
           required: true
@@ -588,14 +1886,14 @@ paths:
         - ElasticPools
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolActivity':
     get:
-      description: Returns information about Azure SQL elastic pool activities.
+      description: Returns elastic pool activities.
       operationId: ElasticPools_ListActivity
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Elastic Pool for which to get the current activity.
+        - description: The name of the elastic pool for which to get the current activity.
           in: path
           name: elasticPoolName
           required: true
@@ -607,17 +1905,51 @@ paths:
             $ref: '#/definitions/ElasticPoolActivityListResult'
       tags:
         - ElasticPools
+      x-ms-examples:
+        List Elastic pool activity:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: '8749'
+            resourceGroupName: sqlcrudtest-4291
+            serverName: sqlcrudtest-6574
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-4291/providers/Microsoft.Sql/servers/sqlcrudtest-6574/elasticPools/8749/elasticPoolActivity/851f1672-f7f0-46f6-a262-ee9b51e18e97
+                    location: Japan East
+                    name: 851f1672-f7f0-46f6-a262-ee9b51e18e97
+                    properties:
+                      elasticPoolName: '8749'
+                      endTime: '2017-02-10T02:03:23.263Z'
+                      errorCode: null
+                      errorMessage: null
+                      errorSeverity: null
+                      operation: CREATE
+                      operationId: 851f1672-f7f0-46f6-a262-ee9b51e18e97
+                      percentComplete: 100
+                      requestedDatabaseDtuCap: 5
+                      requestedDatabaseDtuGuarantee: 0
+                      requestedDtuGuarantee: 100
+                      requestedElasticPoolName: null
+                      requestedStorageLimitInGB: 9
+                      requestedStorageLimitInMB: 10000
+                      serverName: sqlcrudtest-6574
+                      startTime: '2017-02-10T02:03:06.16Z'
+                      state: COMPLETED
+                    type: Microsoft.Sql/servers/elasticPools/elasticPoolActivity
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolDatabaseActivity':
     get:
-      description: Returns information about activity on Azure SQL databases inside of an Azure SQL elastic pool.
+      description: Returns activity on databases inside of an elastic pool.
       operationId: ElasticPools_ListDatabaseActivity
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Elastic Pool.
+        - description: The name of the elastic pool.
           in: path
           name: elasticPoolName
           required: true
@@ -629,11 +1961,63 @@ paths:
             $ref: '#/definitions/ElasticPoolDatabaseActivityListResult'
       tags:
         - ElasticPools
+      x-ms-examples:
+        List elastic pool database activity:
+          parameters:
+            api-version: '2014-04-01'
+            elasticPoolName: '7537'
+            resourceGroupName: sqlcrudtest-4673
+            serverName: sqlcrudtest-603
+            subscriptionId: 9d4e2ad0-e20b-4464-9219-353bded52513
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/9d4e2ad0-e20b-4464-9219-353bded52513/resourceGroups/sqlcrudtest-4673/providers/Microsoft.Sql/servers/sqlcrudtest-603/elasticPools/7537/elasticPoolDatabaseActivity/3a3272b3-f1fe-423c-9feb-7b843157eda5
+                    location: Japan East
+                    name: 3a3272b3-f1fe-423c-9feb-7b843157eda5
+                    properties:
+                      currentElasticPoolName: '7537'
+                      currentServiceObjective: ElasticPool
+                      databaseName: '2396'
+                      endTime: '2016-10-23T03:08:02.95'
+                      errorCode: null
+                      errorMessage: null
+                      errorSeverity: null
+                      operation: UPDATE
+                      operationId: 3a3272b3-f1fe-423c-9feb-7b843157eda5
+                      percentComplete: 100
+                      requestedElasticPoolName: null
+                      requestedServiceObjective: null
+                      serverName: sqlcrudtest-603
+                      startTime: '2016-10-23T03:07:12.577'
+                      state: COMPLETED
+                    type: Microsoft.Sql/servers/elasticPools/elasticPoolDatabaseActivity
+                  - id: /subscriptions/9d4e2ad0-e20b-4464-9219-353bded52513/resourceGroups/sqlcrudtest-4673/providers/Microsoft.Sql/servers/sqlcrudtest-603/elasticPools/7537/elasticPoolDatabaseActivity/95108a78-384e-48d3-b4de-7bf23b93a26d
+                    location: Japan East
+                    name: 95108a78-384e-48d3-b4de-7bf23b93a26d
+                    properties:
+                      currentElasticPoolName: '7537'
+                      currentServiceObjective: ElasticPool
+                      databaseName: '2396'
+                      endTime: '2016-10-23T03:06:49.197'
+                      errorCode: null
+                      errorMessage: null
+                      errorSeverity: null
+                      operation: CREATE
+                      operationId: 95108a78-384e-48d3-b4de-7bf23b93a26d
+                      percentComplete: 100
+                      requestedElasticPoolName: null
+                      requestedServiceObjective: null
+                      serverName: sqlcrudtest-603
+                      startTime: '2016-10-23T03:06:11.19'
+                      state: COMPLETED
+                    type: Microsoft.Sql/servers/elasticPools/elasticPoolDatabaseActivity
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools':
     get:
-      description: Returns information about Azure SQL Recommended Elastic Pools.
-      operationId: RecommendedElasticPools_List
+      description: Returns recommended elastic pools.
+      operationId: RecommendedElasticPools_ListByServer
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -649,14 +2033,14 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}':
     get:
-      description: Gets information about an Azure SQL Recommended Elastic Pool.
+      description: Gets a recommented elastic pool.
       operationId: RecommendedElasticPools_Get
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Recommended Elastic Pool to be retrieved.
+        - description: The name of the recommended elastic pool to be retrieved.
           in: path
           name: recommendedElasticPoolName
           required: true
@@ -670,14 +2054,14 @@ paths:
         - RecommendedElasticPools
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases':
     get:
-      description: Returns information about an Azure SQL database inside of an Azure SQL Recommended Elastic Pool.
+      description: Returns a list of databases inside a recommented elastic pool.
       operationId: RecommendedElasticPools_ListDatabases
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Recommended Elastic Pool to be retrieved.
+        - description: The name of the recommended elastic pool to be retrieved.
           in: path
           name: recommendedElasticPoolName
           required: true
@@ -692,19 +2076,19 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases/{databaseName}':
     get:
-      description: Gets information about an Azure SQL database inside of an Azure SQL Recommended Elastic Pool.
+      description: Gets a database inside of a recommented elastic pool.
       operationId: RecommendedElasticPools_GetDatabases
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Elastic Pool to be retrieved.
+        - description: The name of the elastic pool to be retrieved.
           in: path
           name: recommendedElasticPoolName
           required: true
           type: string
-        - description: The name of the Azure SQL database to be retrieved.
+        - description: The name of the database to be retrieved.
           in: path
           name: databaseName
           required: true
@@ -718,14 +2102,14 @@ paths:
         - RecommendedElasticPools
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/metrics':
     get:
-      description: Returns information about an recommended elastic pool metrics.
+      description: Returns a recommented elastic pool metrics.
       operationId: RecommendedElasticPools_ListMetrics
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the Azure SQL Recommended Elastic Pool to be retrieved.
+        - description: The name of the recommended elastic pool to be retrieved.
           in: path
           name: recommendedElasticPoolName
           required: true
@@ -740,7 +2124,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives':
     get:
-      description: Returns information about Azure SQL database Service Objectives.
+      description: Returns database service objectives.
       operationId: Servers_ListServiceObjectives
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -757,7 +2141,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives/{serviceObjectiveName}':
     get:
-      description: Gets information about an Azure SQL database Service Objective.
+      description: Gets a database service objective.
       operationId: Servers_GetServiceObjective
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -778,7 +2162,7 @@ paths:
         - ServiceObjectives
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages':
     get:
-      description: Returns information about Azure SQL server usage.
+      description: Returns server usages.
       operationId: Servers_ListUsages
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -792,45 +2176,60 @@ paths:
             $ref: '#/definitions/ServerMetricListResult'
       tags:
         - Servers
+      x-ms-examples:
+        List servers usages:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: sqlcrudtest-6730
+            serverName: sqlcrudtest-9007
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 0
+                    displayName: Database Throughput Unit Quota
+                    limit: 45000
+                    name: server_dtu_quota
+                    nextResetTime: null
+                    resourceName: sqlcrudtest-9007
+                    unit: DTUs
+                  - currentValue: 0
+                    displayName: Database Throughput Unit Quota
+                    limit: 45000
+                    name: server_dtu_quota_current
+                    nextResetTime: null
+                    resourceName: sqlcrudtest-9007
+                    unit: DTUs
       x-ms-pageable: {}
 definitions:
-  Column:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: Represents an Azure SQL Database table column.
-    properties:
-      properties:
-        $ref: '#/definitions/ColumnProperties'
-        description: The properties representing the resource.
-        x-ms-client-flatten: true
-  ColumnProperties:
-    description: Represents the properties of an Azure SQL Database table column.
-    properties:
-      columnType:
-        description: The type of Azure SQL Database table column.
-        readOnly: true
-        type: string
   Database:
     allOf:
-      - $ref: '#/definitions/Resource'
-    description: Represents an Azure SQL Database.
+      - $ref: '#/definitions/TrackedResource'
+    description: Represents a database.
     properties:
+      kind:
+        description: Kind of database.  This is metadata used for the Azure portal experience.
+        readOnly: true
+        type: string
       properties:
         $ref: '#/definitions/DatabaseProperties'
         description: The properties representing the resource.
         x-ms-client-flatten: true
   DatabaseListResult:
-    description: Represents the response to a List Azure SQL Database request.
+    description: Represents the response to a list database request.
     properties:
       value:
-        description: The list of Azure SQL Databases housed in the server.
+        description: The list of databases housed in the server.
         items:
           $ref: '#/definitions/Database'
         type: array
     required:
       - value
   DatabaseMetric:
-    description: Represents Azure SQL Database metrics.
+    allOf:
+      - $ref: '#/definitions/SubResource'
+    description: Represents database metrics.
     properties:
       currentValue:
         description: The current value of the metric.
@@ -860,28 +2259,48 @@ definitions:
         readOnly: true
         type: string
   DatabaseMetricListResult:
-    description: Represents the response to a List Azure SQL Database metrics request.
+    description: Represents the response to a list database metrics request.
     properties:
       value:
-        description: The list of Azure SQL Database metrics for the database.
+        description: The list of database metrics for the database.
         items:
           $ref: '#/definitions/DatabaseMetric'
         type: array
     required:
       - value
   DatabaseProperties:
-    description: Represents the properties of an Azure SQL Database.
+    description: Represents the properties of a database.
     properties:
       collation:
-        description: The collation of the Azure SQL database.
+        description: 'The collation of the database. If createMode is not Default, this value is ignored.'
         type: string
+        x-ms-mutability:
+          - create
+          - read
       containmentState:
-        description: The containment state of the Azure SQL database.
+        description: The containment state of the database.
         format: int64
         readOnly: true
         type: integer
       createMode:
-        description: Specifies the type of database to create.
+        description: |-
+          Specifies the mode of database creation.
+
+          Default: regular database creation.
+
+          Copy: creates a database as a copy of an existing database. sourceDatabaseId must be specified as the resource ID of the source database.
+
+          OnlineSecondary/NonReadableSecondary: creates a database as a (readable or nonreadable) secondary replica of an existing database. sourceDatabaseId must be specified as the resource ID of the existing primary database.
+
+          PointInTimeRestore: Creates a database by restoring a point in time backup of an existing database. sourceDatabaseId must be specified as the resource ID of the existing database, and restorePointInTime must be specified.
+
+          Recovery: Creates a database by restoring a geo-replicated backup. sourceDatabaseId must be specified as the recoverable database resource ID to restore.
+
+          Restore: Creates a database by restoring a backup of a deleted database. sourceDatabaseId must be specified. If sourceDatabaseId is the database's original resource ID, then sourceDatabaseDeletionDate must be specified. Otherwise sourceDatabaseId must be the restorable dropped database resource ID and sourceDatabaseDeletionDate is ignored. restorePointInTime may also be specified to restore from an earlier point in time.
+
+          RestoreLongTermRetentionBackup: Creates a database by restoring from a long term retention vault. recoveryServicesRecoveryPointResourceId must be specified as the recovery point resource ID.
+
+          Copy, NonReadableSecondary, OnlineSecondary and RestoreLongTermRetentionBackup are not supported for DataWarehouse edition.
         enum:
           - Copy
           - Default
@@ -890,17 +2309,20 @@ definitions:
           - PointInTimeRestore
           - Recovery
           - Restore
+          - RestoreLongTermRetentionBackup
         type: string
         x-ms-enum:
           modelAsString: true
-          name: createMode
+          name: CreateMode
+        x-ms-mutability:
+          - create
       creationDate:
-        description: The creation date of the Azure SQL database (ISO8601 format).
+        description: The creation date of the database (ISO8601 format).
         format: date-time
         readOnly: true
         type: string
       currentServiceObjectiveId:
-        description: The current Service Level Objective ID of the Azure SQL database. This is the ID of the Service Level Objective that is currently active.
+        description: The current service level objective ID of the database. This is the ID of the service level objective that is currently active.
         enum:
           - dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
           - f1173c43-91bd-4aaa-973c-54e79e15235b
@@ -910,6 +2332,12 @@ definitions:
           - 7203483a-c4fb-4304-9e9f-17c71c904f5d
           - a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0
           - a7c4c615-cfb1-464b-b252-925be0a19446
+          - 26e021db-f1f9-4c98-84c6-92af8ef433d7
+          - 29dd7459-4a7c-4e56-be22-f0adda49440d
+          - c99ac918-dbea-463f-a475-16ec020fdc12
+          - 620323bf-2879-4807-b30d-c2e6d7b3b3aa
+          - 33d0db1f-6893-4210-99f9-463fb9b496a4
+          - da24338c-a6c9-46c2-a4bf-4ac95b496ae4
         format: uuid
         readOnly: true
         type: string
@@ -917,7 +2345,7 @@ definitions:
           modelAsString: true
           name: ServiceObjectiveId
       databaseId:
-        description: The ID of the Azure SQL database.
+        description: The ID of the database.
         readOnly: true
         type: string
       defaultSecondaryLocation:
@@ -925,12 +2353,12 @@ definitions:
         readOnly: true
         type: string
       earliestRestoreDate:
-        description: The recovery period start date of the Azure SQL database. This records the start date and time when recovery is available for this Azure SQL Database (ISO8601 format).
+        description: This records the earliest start date and time that restore is available for this database (ISO8601 format).
         format: date-time
         readOnly: true
         type: string
       edition:
-        description: The edition of the Azure SQL database. The DatabaseEditions enumeration contains all the valid editions.
+        description: 'The edition of the database. The DatabaseEditions enumeration contains all the valid editions. If createMode is NonReadableSecondary or OnlineSecondary, this value is ignored. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: "Capabilities_ListByLocation."'
         enum:
           - Web
           - Business
@@ -940,24 +2368,45 @@ definitions:
           - Free
           - Stretch
           - DataWarehouse
+          - System
+          - System2
         type: string
         x-ms-enum:
           modelAsString: true
-          name: DatabaseEditions
+          name: DatabaseEdition
       elasticPoolName:
-        description: The name of the Azure SQL Elastic Pool the database is in.
+        description: 'The name of the elastic pool the database is in. If elasticPoolName and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveName is ignored. Not supported for DataWarehouse edition.'
+        type: string
+      failoverGroupId:
+        description: The id indicating the failover group containing this database.
+        format: uuid
+        readOnly: true
         type: string
       maxSizeBytes:
-        description: 'The max size of the Azure SQL database expressed in bytes. Note: Only the following sizes are supported (in addition to limitations being placed on each edition): { 100 MB | 500 MB |1 GB | 5 GB | 10 GB | 20 GB | 30 GB … 150 GB | 200 GB … 500 GB }'
+        description: 'The max size of the database expressed in bytes. If createMode is not Default, this value is ignored. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: "Capabilities_ListByLocation."'
         type: string
+      readScale:
+        description: 'Conditional. If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not. Not supported for DataWarehouse edition.'
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          name: ReadScale
       recommendedIndex:
         description: The recommended indices for this database.
         items:
           $ref: '#/definitions/RecommendedIndex'
         readOnly: true
         type: array
+      recoveryServicesRecoveryPointResourceId:
+        description: 'Conditional. If createMode is RestoreLongTermRetentionBackup, then this value is required. Specifies the resource ID of the recovery point to restore from.'
+        format: date-time
+        type: string
+        x-ms-mutability:
+          - create
       requestedServiceObjectiveId:
-        description: 'The configured Service Level Objective ID of the Azure SQL database. This is the Service Level Objective that is in the process of being applied to the Azure SQL database. Once successfully updated, it will match the value of currentServiceObjectiveId property.'
+        description: 'The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: "Capabilities_ListByLocation."'
         enum:
           - dd6d99bb-f193-4ec1-86f2-43d3bccbc49c
           - f1173c43-91bd-4aaa-973c-54e79e15235b
@@ -967,13 +2416,19 @@ definitions:
           - 7203483a-c4fb-4304-9e9f-17c71c904f5d
           - a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0
           - a7c4c615-cfb1-464b-b252-925be0a19446
+          - 26e021db-f1f9-4c98-84c6-92af8ef433d7
+          - 29dd7459-4a7c-4e56-be22-f0adda49440d
+          - c99ac918-dbea-463f-a475-16ec020fdc12
+          - 620323bf-2879-4807-b30d-c2e6d7b3b3aa
+          - 33d0db1f-6893-4210-99f9-463fb9b496a4
+          - da24338c-a6c9-46c2-a4bf-4ac95b496ae4
         format: uuid
         type: string
         x-ms-enum:
           modelAsString: true
           name: ServiceObjectiveId
       requestedServiceObjectiveName:
-        description: 'The name of the configured Service Level Objective of the Azure SQL database. This is the Service Level Objective that is in the process of being applied to the Azure SQL database. Once successfully updated, it will match the value of serviceLevelObjective property.'
+        description: 'The name of the configured service level objective of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of serviceLevelObjective property. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: "Capabilities_ListByLocation."'
         enum:
           - Basic
           - S0
@@ -983,18 +2438,35 @@ definitions:
           - P1
           - P2
           - P3
+          - P4
+          - P6
+          - P11
+          - P15
+          - System
+          - System2
+          - ElasticPool
         type: string
         x-ms-enum:
           modelAsString: true
           name: ServiceObjectiveName
-      schemas:
-        description: The schemas from this database.
-        items:
-          $ref: '#/definitions/Schema'
-        readOnly: true
-        type: array
+      restorePointInTime:
+        description: 'Conditional. If createMode is PointInTimeRestore, this value is required. If createMode is Restore, this value is optional. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database''s earliestRestoreDate value.'
+        format: date-time
+        type: string
+        x-ms-mutability:
+          - create
+      sampleName:
+        description: 'Indicates the name of the sample schema to apply when creating this database. If createMode is not Default, this value is ignored. Not supported for DataWarehouse edition.'
+        enum:
+          - AdventureWorksLT
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SampleName
+        x-ms-mutability:
+          - create
       serviceLevelObjective:
-        description: The current Service Level Objective of the Azure SQL database.
+        description: The current service level objective of the database.
         enum:
           - Basic
           - S0
@@ -1004,6 +2476,13 @@ definitions:
           - P1
           - P2
           - P3
+          - P4
+          - P6
+          - P11
+          - P15
+          - System
+          - System2
+          - ElasticPool
         readOnly: true
         type: string
         x-ms-enum:
@@ -1015,11 +2494,19 @@ definitions:
           $ref: '#/definitions/ServiceTierAdvisor'
         readOnly: true
         type: array
-      sourceDatabaseId:
-        description: 'Conditional. Specifies the resource ID of the source database. If createMode is not set to Default, then this value must be specified. The name of the source database must be the same. NOTE: Collation, Edition, and MaxSizeBytes must remain the same while the link is active. Values specified for these parameters will be ignored.'
+      sourceDatabaseDeletionDate:
+        description: 'Conditional. If createMode is Restore and sourceDatabaseId is the deleted database''s original resource id when it existed (as opposed to its current restorable dropped database id), then this value is required. Specifies the time that the database was deleted.'
+        format: date-time
         type: string
+        x-ms-mutability:
+          - create
+      sourceDatabaseId:
+        description: 'Conditional. If createMode is Copy, NonReadableSecondary, OnlineSecondary, PointInTimeRestore, Recovery, or Restore, then this value is required. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or OnlineSecondary, the name of the source database must be the same as the new database being created.'
+        type: string
+        x-ms-mutability:
+          - create
       status:
-        description: The status of the Azure SQL database.
+        description: The status of the database.
         readOnly: true
         type: string
       transparentDataEncryption:
@@ -1028,43 +2515,49 @@ definitions:
           $ref: '#/definitions/TransparentDataEncryption'
         readOnly: true
         type: array
-      upgradeHint:
-        $ref: '#/definitions/UpgradeHint'
-        description: The upgrade hint for this database.
-        readOnly: true
   ElasticPool:
     allOf:
-      - $ref: '#/definitions/Resource'
-    description: Represents an Azure SQL Database elastic pool.
+      - $ref: '#/definitions/TrackedResource'
+    description: Represents a database elastic pool.
     properties:
+      kind:
+        description: Kind of elastic pool.  This is metadata used for the Azure portal experience.
+        readOnly: true
+        type: string
       properties:
         $ref: '#/definitions/ElasticPoolProperties'
         description: The properties representing the resource.
         x-ms-client-flatten: true
   ElasticPoolActivity:
     allOf:
-      - $ref: '#/definitions/Resource'
-    description: Represents the activity on an Azure SQL Elastic Pool.
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents the activity on an elastic pool.
     properties:
+      location:
+        description: The geo-location where the resource lives
+        type: string
+        x-ms-mutability:
+          - read
+          - create
       properties:
         $ref: '#/definitions/ElasticPoolActivityProperties'
         description: The properties representing the resource.
         x-ms-client-flatten: true
   ElasticPoolActivityListResult:
-    description: Represents the response to a List Azure SQL Elastic Pool Activity request.
+    description: Represents the response to a list elastic pool activity request.
     properties:
       value:
-        description: The list of Azure SQL Elastic Pool Activities.
+        description: The list of elastic pool activities.
         items:
           $ref: '#/definitions/ElasticPoolActivity'
         type: array
     required:
       - value
   ElasticPoolActivityProperties:
-    description: Represents the properties of an Azure SQL Elastic Pool.
+    description: Represents the properties of an elastic pool.
     properties:
       elasticPoolName:
-        description: The name of the Elastic Pool.
+        description: The name of the elastic pool.
         readOnly: true
         type: string
       endTime:
@@ -1099,6 +2592,16 @@ definitions:
         format: int32
         readOnly: true
         type: integer
+      requestedDatabaseDtuCap:
+        description: The requested per database DTU cap.
+        format: int32
+        readOnly: true
+        type: integer
+      requestedDatabaseDtuGuarantee:
+        description: The requested per database DTU guarantee.
+        format: int32
+        readOnly: true
+        type: integer
       requestedDatabaseDtuMax:
         description: The requested max DTU per database if available.
         format: int32
@@ -1114,8 +2617,13 @@ definitions:
         format: int32
         readOnly: true
         type: integer
+      requestedDtuGuarantee:
+        description: The requested DTU guarantee.
+        format: int32
+        readOnly: true
+        type: integer
       requestedElasticPoolName:
-        description: The requested name for the Elastic Pool if available.
+        description: The requested name for the elastic pool if available.
         readOnly: true
         type: string
       requestedStorageLimitInGB:
@@ -1123,8 +2631,13 @@ definitions:
         format: int64
         readOnly: true
         type: integer
+      requestedStorageLimitInMB:
+        description: The requested storage limit in MB.
+        format: int32
+        readOnly: true
+        type: integer
       serverName:
-        description: The name of the Azure SQL server the Elastic Pool is in.
+        description: The name of the server the elastic pool is in.
         readOnly: true
         type: string
       startTime:
@@ -1138,28 +2651,34 @@ definitions:
         type: string
   ElasticPoolDatabaseActivity:
     allOf:
-      - $ref: '#/definitions/Resource'
-    description: Represents the activity on an Azure SQL Elastic Pool.
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents the activity on an elastic pool.
     properties:
+      location:
+        description: The geo-location where the resource lives
+        type: string
+        x-ms-mutability:
+          - read
+          - create
       properties:
         $ref: '#/definitions/ElasticPoolDatabaseActivityProperties'
         description: The properties representing the resource.
         x-ms-client-flatten: true
   ElasticPoolDatabaseActivityListResult:
-    description: Represents the response to a List Azure SQL Elastic Pool Database Activity request.
+    description: Represents the response to a list elastic pool database activity request.
     properties:
       value:
-        description: The list of Azure SQL Elastic Pool Database Activities.
+        description: The list of elastic pool database activities.
         items:
           $ref: '#/definitions/ElasticPoolDatabaseActivity'
         type: array
     required:
       - value
   ElasticPoolDatabaseActivityProperties:
-    description: Represents the properties of an Azure SQL Elastic Pool Database Activity.
+    description: Represents the properties of an elastic pool database activity.
     properties:
       currentElasticPoolName:
-        description: The name of the current Elastic Pool the database is in if available.
+        description: The name of the current elastic pool the database is in if available.
         readOnly: true
         type: string
       currentServiceObjective:
@@ -1195,6 +2714,7 @@ definitions:
         type: string
       operationId:
         description: The unique operation ID.
+        format: uuid
         readOnly: true
         type: string
       percentComplete:
@@ -1203,7 +2723,7 @@ definitions:
         readOnly: true
         type: integer
       requestedElasticPoolName:
-        description: The name for the Elastic Pool the database is moving into if available.
+        description: The name for the elastic pool the database is moving into if available.
         readOnly: true
         type: string
       requestedServiceObjective:
@@ -1211,7 +2731,7 @@ definitions:
         readOnly: true
         type: string
       serverName:
-        description: The name of the Azure SQL server the Elastic Pool is in.
+        description: The name of the server the elastic pool is in.
         readOnly: true
         type: string
       startTime:
@@ -1224,37 +2744,37 @@ definitions:
         readOnly: true
         type: string
   ElasticPoolListResult:
-    description: Represents the response to a List Azure SQL Elastic Pool request.
+    description: Represents the response to a list elastic pool request.
     properties:
       value:
-        description: The list of Azure SQL Elastic Pools hosted in the server.
+        description: The list of elastic pools hosted in the server.
         items:
           $ref: '#/definitions/ElasticPool'
         type: array
     required:
       - value
   ElasticPoolProperties:
-    description: Represents the properties of an Azure SQL Elastic Pool.
+    description: Represents the properties of an elastic pool.
     properties:
       creationDate:
-        description: The creation date of the Azure SQL Elastic Pool (ISO8601 format).
+        description: The creation date of the elastic pool (ISO8601 format).
         format: date-time
         readOnly: true
         type: string
       databaseDtuMax:
-        description: The maximum DTU any one SQL Azure Database can consume.
+        description: The maximum DTU any one database can consume.
         format: int32
         type: integer
       databaseDtuMin:
-        description: The minimum DTU all SQL Azure Databases are guaranteed.
+        description: The minimum DTU all databases are guaranteed.
         format: int32
         type: integer
       dtu:
-        description: The total shared DTU for the SQL Azure Database Elastic Pool.
+        description: The total shared DTU for the database elastic pool.
         format: int32
         type: integer
       edition:
-        description: The edition of the Azure SQL Elastic Pool.
+        description: The edition of the elastic pool.
         enum:
           - Basic
           - Standard
@@ -1262,9 +2782,12 @@ definitions:
         type: string
         x-ms-enum:
           modelAsString: true
-          name: ElasticPoolEditions
+          name: ElasticPoolEdition
+        x-ms-mutability:
+          - create
+          - read
       state:
-        description: The state of the Azure SQL Elastic Pool.
+        description: The state of the elastic pool.
         enum:
           - Creating
           - Ready
@@ -1275,9 +2798,28 @@ definitions:
           modelAsString: true
           name: ElasticPoolState
       storageMB:
-        description: Gets storage limit for the SQL Azure Database Elastic Pool in MB.
+        description: Gets storage limit for the database elastic pool in MB.
         format: int32
         type: integer
+  Operation:
+    description: SQL REST API operation definition.
+    properties:
+      display:
+        description: Display metadata associated with the operation.
+        properties:
+          operation:
+            description: 'Type of operation: get, read, delete, etc.'
+            type: string
+          provider:
+            description: 'Service provider: Microsoft SQL Database.'
+            type: string
+          resource:
+            description: 'Resource on which the operation is performed: Server, Database, etc.'
+            type: string
+      name:
+        description: 'Operation name: {provider}/{resource}/{operation}'
+        type: string
+    type: object
   OperationImpact:
     description: 'Represents impact of an operation, both in absolute and relative terms.'
     properties:
@@ -1299,59 +2841,52 @@ definitions:
         description: The unit in which estimated impact to dimension is measured.
         readOnly: true
         type: string
-  RecommendedDatabaseProperties:
-    description: Represents the properties of a recommended Azure SQL Database being upgraded.
+  OperationListResult:
+    description: Result of the request to list SQL operations. It contains a list of operations and a URL link to get the next set of results.
     properties:
-      Name:
-        description: The name of the Azure SQL database being upgraded.
+      nextLink:
+        description: URL to get the next set of operation list results if there are any.
         type: string
-      TargetEdition:
-        description: The target edition for the Azure SQL database being upgraded.
-        enum:
-          - Basic
-          - Standard
-          - Premium
-          - Free
-          - Stretch
-          - DataWarehouse
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: TargetDatabaseEditions
-      TargetServiceLevelObjective:
-        description: The target Service Level Objective for the Azure SQL database being upgraded.
-        type: string
-  RecommendedElasticPool:
+      value:
+        description: List of SQL operations supported by the SQL resource provider.
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
+  ProxyResource:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Represents an Azure SQL Recommended Elastic Pool.
+    description: ARM proxy resource.
+  RecommendedElasticPool:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a recommented elastic pool.
     properties:
       properties:
         $ref: '#/definitions/RecommendedElasticPoolProperties'
         description: The properites representing the resource.
         x-ms-client-flatten: true
   RecommendedElasticPoolListMetricsResult:
-    description: Represents the response to a List Azure SQL Recommended Elastic Pool metrics request.
+    description: Represents the response to a list recommended elastic pool metrics request.
     properties:
       value:
-        description: The list of Azure SQL Recommended Elastic Pools metrics.
+        description: The list of recommended elastic pools metrics.
         items:
           $ref: '#/definitions/RecommendedElasticPoolMetric'
         type: array
     required:
       - value
   RecommendedElasticPoolListResult:
-    description: Represents the response to a List Azure SQL Recommended Elastic Pool request.
+    description: Represents the response to a list recommended elastic pool request.
     properties:
       value:
-        description: The list of Azure SQL Recommended Elastic Pools hosted in the server.
+        description: The list of recommended elastic pools hosted in the server.
         items:
           $ref: '#/definitions/RecommendedElasticPool'
         type: array
     required:
       - value
   RecommendedElasticPoolMetric:
-    description: Represents Azure SQL recommended elastic pool metric.
+    description: Represents recommended elastic pool metric.
     properties:
       dateTime:
         description: The time of metric (ISO8601 format).
@@ -1366,7 +2901,7 @@ definitions:
         format: double
         type: number
   RecommendedElasticPoolProperties:
-    description: Represents the properties of an Azure SQL Recommended Elastic Pool.
+    description: Represents the properties of a recommented elastic pool.
     properties:
       databaseDtuMax:
         description: The maximum DTU for the database.
@@ -1377,7 +2912,7 @@ definitions:
         format: double
         type: number
       databaseEdition:
-        description: The edition of the Azure SQL Recommended Elastic Pool. The ElasticPoolEditions enumeration contains all the valid editions.
+        description: The edition of the recommended elastic pool. The ElasticPoolEdition enumeration contains all the valid editions.
         enum:
           - Basic
           - Standard
@@ -1386,15 +2921,15 @@ definitions:
         type: string
         x-ms-enum:
           modelAsString: true
-          name: ElasticPoolEditions
+          name: ElasticPoolEdition
       databases:
-        description: The list of Azure SQL Databases in this pool. Expanded property
+        description: The list of databases in this pool. Expanded property
         items:
           $ref: '#/definitions/Database'
         readOnly: true
         type: array
       dtu:
-        description: The DTU for the SQL Azure Recommended Elastic Pool.
+        description: The DTU for the recommended elastic pool.
         format: double
         type: number
       maxObservedDtu:
@@ -1408,7 +2943,7 @@ definitions:
         readOnly: true
         type: number
       metrics:
-        description: The list of Azure SQL Databases housed in the server. Expanded property
+        description: The list of databases housed in the server. Expanded property
         items:
           $ref: '#/definitions/RecommendedElasticPoolMetric'
         readOnly: true
@@ -1429,8 +2964,8 @@ definitions:
         type: number
   RecommendedIndex:
     allOf:
-      - $ref: '#/definitions/Resource'
-    description: Represents an Azure SQL Database recommended index.
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a database recommended index.
     properties:
       properties:
         $ref: '#/definitions/RecommendedIndexProperties'
@@ -1438,10 +2973,10 @@ definitions:
         readOnly: true
         x-ms-client-flatten: true
   RecommendedIndexProperties:
-    description: Represents the properties of an Azure SQL Database recommended index.
+    description: Represents the properties of a database recommended index.
     properties:
       action:
-        description: 'The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance. Possible values are ''Create'', ''Drop'', ''Rebuild''.'
+        description: 'The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance.'
         enum:
           - Create
           - Drop
@@ -1449,7 +2984,7 @@ definitions:
         readOnly: true
         type: string
         x-ms-enum:
-          name: RecommendedIndexActions
+          name: RecommendedIndexAction
       columns:
         description: Columns over which to build index
         items:
@@ -1487,7 +3022,7 @@ definitions:
         readOnly: true
         type: string
         x-ms-enum:
-          name: RecommendedIndexTypes
+          name: RecommendedIndexType
       lastModified:
         description: The UTC datetime of when was this resource last changed (ISO8601 format).
         format: date-time
@@ -1504,7 +3039,7 @@ definitions:
         readOnly: true
         type: string
       state:
-        description: 'The current recommendation state. Current options are: ''Active'', ''Pending'', ''Executing'', ''Verifying'', ''Pending Revert'', ''Reverting'', ''Reverted'', ''Ignored'', ''Expired'', ''Blocked'', ''Success''.'
+        description: The current recommendation state.
         enum:
           - Active
           - Pending
@@ -1520,58 +3055,48 @@ definitions:
         readOnly: true
         type: string
         x-ms-enum:
-          name: RecommendedIndexStates
+          name: RecommendedIndexState
       table:
         description: The table on which to build index.
         readOnly: true
         type: string
   Resource:
-    description: Resource properties
+    description: ARM resource.
     properties:
       id:
-        description: Resource ID
+        description: Resource ID.
         readOnly: true
-        type: string
-      location:
-        description: Resource location
         type: string
       name:
-        description: Resource name
+        description: Resource name.
         readOnly: true
         type: string
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags
-        type: object
       type:
-        description: Resource type
+        description: Resource type.
         readOnly: true
         type: string
-    required:
-      - location
     x-ms-azure-resource: true
   RestorePoint:
     allOf:
-      - $ref: '#/definitions/Resource'
-    description: Represents an Azure SQL Database restore point.
+      - $ref: '#/definitions/ProxyResource'
+    description: Represents a database restore point.
     properties:
       properties:
         $ref: '#/definitions/RestorePointProperties'
         description: The properties representing the restore point.
         x-ms-client-flatten: true
   RestorePointListResult:
-    description: Represents the response to a List Azure SQL Database restore points request.
+    description: Represents the response to a list database restore points request.
     properties:
       value:
-        description: The list of a given Azure SQL Database restore points.
+        description: The list of a given database restore points.
         items:
           $ref: '#/definitions/RestorePoint'
         type: array
     required:
       - value
   RestorePointProperties:
-    description: Represents the properties of an Azure SQL Database restore point.
+    description: Represents the properties of a database restore point.
     properties:
       earliestRestoreDate:
         description: Earliest restore time (ISO8601 format). Populated when restorePointType = DISCRETE. Null otherwise.
@@ -1584,7 +3109,7 @@ definitions:
         readOnly: true
         type: string
       restorePointType:
-        description: The restore point type of the Azure SQL database restore point.
+        description: The restore point type of the database restore point.
         enum:
           - DISCRETE
           - CONTINUOUS
@@ -1592,45 +3117,31 @@ definitions:
         type: string
         x-ms-enum:
           name: RestorePointTypes
-  Schema:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: Represents an Azure SQL Database schema.
-    properties:
-      properties:
-        $ref: '#/definitions/SchemaProperties'
-        description: The properties representing the resource.
-        x-ms-client-flatten: true
-  SchemaProperties:
-    description: Represents the properties of an Azure SQL Database schema.
-    properties:
-      tables:
-        description: The tables from this database.
-        items:
-          $ref: '#/definitions/Table'
-        readOnly: true
-        type: array
   Server:
     allOf:
-      - $ref: '#/definitions/Resource'
-    description: Represents an Azure SQL server.
+      - $ref: '#/definitions/TrackedResource'
+    description: Represents a server.
     properties:
+      kind:
+        description: Kind of sql server.  This is metadata used for the Azure portal experience.
+        readOnly: true
+        type: string
       properties:
         $ref: '#/definitions/ServerProperties'
         description: Represents the properties of the resource.
         x-ms-client-flatten: true
   ServerListResult:
-    description: Represents the response to a Get Azure SQL server request.
+    description: Represents the response to a get server request.
     properties:
       value:
-        description: The list of Azure SQL servers.
+        description: The list of servers.
         items:
           $ref: '#/definitions/Server'
         type: array
     required:
       - value
   ServerMetric:
-    description: Represents Azure SQL server metrics.
+    description: Represents server metrics.
     properties:
       currentValue:
         description: The current value of the metric.
@@ -1646,6 +3157,10 @@ definitions:
         format: double
         readOnly: true
         type: number
+      name:
+        description: Name of the server usage metric.
+        readOnly: true
+        type: string
       nextResetTime:
         description: The next reset time for the metric (ISO8601 format).
         format: date-time
@@ -1660,28 +3175,52 @@ definitions:
         readOnly: true
         type: string
   ServerMetricListResult:
-    description: Represents the response to a List Azure SQL server metrics request.
+    description: Represents the response to a list server metrics request.
     properties:
       value:
-        description: The list of Azure SQL server metrics for the server.
+        description: The list of server metrics for the server.
         items:
           $ref: '#/definitions/ServerMetric'
         type: array
     required:
       - value
   ServerProperties:
-    description: Represents the properties of an Azure SQL server.
+    description: Represents the properties of a server.
     properties:
       administratorLogin:
         description: Administrator username for the server. Can only be specified when the server is being created (and is required for creation).
         type: string
+        x-ms-mutability:
+          - create
+          - read
       administratorLoginPassword:
         description: The administrator login password (required for server creation).
+        type: string
+        x-ms-mutability:
+          - create
+          - update
+      externalAdministratorLogin:
+        description: 'The display name of the Azure Active Directory object with admin permissions on this server. Legacy parameter, always null. To check for Active Directory admin, query .../servers/{serverName}/administrators'
+        readOnly: true
+        type: string
+      externalAdministratorSid:
+        description: 'The ID of the Active Azure Directory object with admin permissions on this server. Legacy parameter, always null. To check for Active Directory admin, query .../servers/{serverName}/administrators.'
+        format: uuid
+        readOnly: true
         type: string
       fullyQualifiedDomainName:
         description: The fully qualified domain name of the server.
         readOnly: true
         type: string
+      state:
+        description: The state of the server.
+        enum:
+          - Ready
+          - Disabled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          name: ServerState
       version:
         description: The version of the server.
         enum:
@@ -1693,25 +3232,25 @@ definitions:
           name: ServerVersion
   ServiceObjective:
     allOf:
-      - $ref: '#/definitions/SqlSubResource'
-    description: Represents an Azure SQL Database Service Objective.
+      - $ref: '#/definitions/SubResource'
+    description: Represents a database service objective.
     properties:
       properties:
         $ref: '#/definitions/ServiceObjectiveProperties'
         description: Represents the properties of the resource.
         x-ms-client-flatten: true
   ServiceObjectiveListResult:
-    description: Represents the response to a Get Azure SQL Database Service Objectives request.
+    description: Represents the response to a get database service objectives request.
     properties:
       value:
-        description: The list of Azure SQL Database Service Objectives.
+        description: The list of database service objectives.
         items:
           $ref: '#/definitions/ServiceObjective'
         type: array
     required:
       - value
   ServiceObjectiveProperties:
-    description: Represents the properties of an Azure SQL Database Service Objective.
+    description: Represents the properties of a database service objective.
     properties:
       description:
         description: The description for the service level objective.
@@ -1735,7 +3274,7 @@ definitions:
         type: string
   ServiceTierAdvisor:
     allOf:
-      - $ref: '#/definitions/SqlSubResource'
+      - $ref: '#/definitions/SubResource'
     description: Represents a Service Tier Advisor.
     properties:
       properties:
@@ -1865,6 +3404,13 @@ definitions:
           - P1
           - P2
           - P3
+          - P4
+          - P6
+          - P11
+          - P15
+          - System
+          - System2
+          - ElasticPool
         type: string
         x-ms-enum:
           modelAsString: true
@@ -1880,12 +3426,18 @@ definitions:
           - 7203483a-c4fb-4304-9e9f-17c71c904f5d
           - a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0
           - a7c4c615-cfb1-464b-b252-925be0a19446
+          - 26e021db-f1f9-4c98-84c6-92af8ef433d7
+          - 29dd7459-4a7c-4e56-be22-f0adda49440d
+          - c99ac918-dbea-463f-a475-16ec020fdc12
+          - 620323bf-2879-4807-b30d-c2e6d7b3b3aa
+          - 33d0db1f-6893-4210-99f9-463fb9b496a4
+          - da24338c-a6c9-46c2-a4bf-4ac95b496ae4
         format: uuid
         type: string
         x-ms-enum:
           modelAsString: true
           name: ServiceObjectiveId
-  SqlSubResource:
+  SubResource:
     description: Subresource properties
     properties:
       id:
@@ -1896,43 +3448,32 @@ definitions:
         description: Resource name
         readOnly: true
         type: string
-  Table:
+  TrackedResource:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Represents an Azure SQL Database table.
+    description: ARM tracked top level resource.
     properties:
-      properties:
-        $ref: '#/definitions/TableProperties'
-        description: The properties representing the resource.
-        x-ms-client-flatten: true
-  TableProperties:
-    description: Represents the properties of an Azure SQL Database table.
-    properties:
-      columns:
-        description: The columns from this table.
-        items:
-          $ref: '#/definitions/Column'
-        readOnly: true
-        type: array
-      recommendedIndexes:
-        description: The recommended indices for this table.
-        items:
-          $ref: '#/definitions/RecommendedIndex'
-        readOnly: true
-        type: array
-      tableType:
-        description: The type of Azure SQL Database table.
-        enum:
-          - BaseTable
-          - View
-        readOnly: true
+      location:
+        description: Resource location.
         type: string
-        x-ms-enum:
-          name: TableType
+        x-ms-mutability:
+          - read
+          - create
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+        x-ms-mutability:
+          - read
+          - create
+          - update
+    required:
+      - location
   TransparentDataEncryption:
     allOf:
-      - $ref: '#/definitions/SqlSubResource'
-    description: Represents an Azure SQL Database Transparent Data Encryption .
+      - $ref: '#/definitions/SubResource'
+    description: Represents a database transparent data encryption .
     properties:
       properties:
         $ref: '#/definitions/TransparentDataEncryptionProperties'
@@ -1940,33 +3481,33 @@ definitions:
         x-ms-client-flatten: true
   TransparentDataEncryptionActivity:
     allOf:
-      - $ref: '#/definitions/SqlSubResource'
-    description: Represents an Azure SQL Database Transparent Data Encryption Scan.
+      - $ref: '#/definitions/SubResource'
+    description: Represents a database transparent data encryption Scan.
     properties:
       properties:
         $ref: '#/definitions/TransparentDataEncryptionActivityProperties'
         description: Represents the properties of the resource.
         x-ms-client-flatten: true
   TransparentDataEncryptionActivityListResult:
-    description: Represents the response to a List Azure SQL Database Transparent Data Encryption Activity request.
+    description: Represents the response to a list database transparent data encryption activity request.
     properties:
       value:
-        description: The list of Azure SQL Database Transparent Data Encryption Activities.
+        description: The list of database transparent data encryption activities.
         items:
           $ref: '#/definitions/TransparentDataEncryptionActivity'
         type: array
     required:
       - value
   TransparentDataEncryptionActivityProperties:
-    description: Represents the properties of an Azure SQL Database Transparent Data Encryption Scan.
+    description: Represents the properties of a database transparent data encryption Scan.
     properties:
       percentComplete:
-        description: The percent complete of the transparent data encryption scan for a Azure SQL Database.
+        description: The percent complete of the transparent data encryption scan for a database.
         format: float
         readOnly: true
         type: number
       status:
-        description: The status of the Azure SQL database.
+        description: The status of the database.
         enum:
           - Encrypting
           - Decrypting
@@ -1974,67 +3515,15 @@ definitions:
         type: string
         x-ms-enum:
           modelAsString: true
-          name: TransparentDataEncryptionActivityStates
+          name: TransparentDataEncryptionActivityStatus
   TransparentDataEncryptionProperties:
-    description: Represents the properties of an Azure SQL Database Transparent Data Encryption.
+    description: Represents the properties of a database transparent data encryption.
     properties:
       status:
-        description: The status of the Azure SQL Database Transparent Data Encryption.
+        description: The status of the database transparent data encryption.
         enum:
           - Enabled
           - Disabled
         type: string
         x-ms-enum:
-          name: TransparentDataEncryptionStates
-  UpgradeHint:
-    description: Represents a Upgrade Hint.
-    properties:
-      targetServiceLevelObjective:
-        description: TargetServiceLevelObjective for upgrade hint.
-        type: string
-      targetServiceLevelObjectiveId:
-        description: TargetServiceLevelObjectiveId for upgrade hint.
-        format: uuid
-        type: string
-  UpgradeRecommendedElasticPoolProperties:
-    description: Represents the properties of a Azure SQL Recommended Elastic Pool being upgraded.
-    properties:
-      DatabaseCollection:
-        description: The list of database names to be put in the Azure SQL Recommended Elastic Pool being upgraded.
-        items:
-          type: string
-        type: array
-      DatabaseDtuMax:
-        description: The DTU cap for database for the Azure SQL Recommended Elastic Pool being upgraded.
-        format: int32
-        type: integer
-      DatabaseDtuMin:
-        description: The DTU guarantee for database for the Azure SQL Recommended Elastic Pool being upgraded.
-        format: int32
-        type: integer
-      Dtu:
-        description: The DTU guarantee for the Azure SQL Recommended Elastic Pool being upgraded.
-        format: int32
-        type: integer
-      Edition:
-        description: The target edition for the Azure SQL Recommended Elastic Pool being upgraded.
-        enum:
-          - Basic
-          - Standard
-          - Premium
-        type: string
-        x-ms-enum:
-          name: TargetElasticPoolEditions
-      IncludeAllDatabases:
-        description: Gets or sets whether all databases to be put in the Azure SQL Recommended Elastic Pool being upgraded.
-        type: boolean
-      Name:
-        description: The name of the Azure SQL Recommended Elastic Pool being upgraded.
-        type: string
-      StorageMb:
-        description: The storage limit in MB for the Azure SQL Recommended Elastic Pool being upgraded.
-        format: int32
-        type: integer
-    required:
-      - Name
-      - Edition
+          name: TransparentDataEncryptionStatus
