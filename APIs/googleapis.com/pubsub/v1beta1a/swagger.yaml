@@ -147,19 +147,19 @@ paths:
       tags:
         - subscriptions
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Creates a subscription on a given topic for a given subscriber.
@@ -188,19 +188,19 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/acknowledge:
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Acknowledges a particular received message: the Pub/Sub system can remove
@@ -228,19 +228,19 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/modifyAckDeadline:
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: Modifies the Ack deadline for a message received from a pull request.
       operationId: pubsub.subscriptions.modifyAckDeadline
@@ -263,19 +263,19 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/modifyPushConfig:
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Modifies the <code>PushConfig</code> for a specified subscription.
@@ -303,19 +303,19 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/pull:
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Pulls a single message from the server.
@@ -343,19 +343,19 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/pullBatch:
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Pulls messages from the server. Returns an empty list if there are no
@@ -428,19 +428,19 @@ paths:
       tags:
         - subscriptions
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
   /v1beta1a/topics:
     get:
       description: Lists matching topics.
@@ -473,19 +473,19 @@ paths:
       tags:
         - topics
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: Creates the given topic with the given name.
       operationId: pubsub.topics.create
@@ -508,19 +508,19 @@ paths:
         - topics
   /v1beta1a/topics/publish:
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Adds a message to the topic.  Returns NOT_FOUND if the topic does not
@@ -545,19 +545,19 @@ paths:
         - topics
   /v1beta1a/topics/publishBatch:
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Adds one or more messages to the topic. Returns NOT_FOUND if the topic does
@@ -632,19 +632,19 @@ paths:
       tags:
         - topics
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
 definitions:
   AcknowledgeRequest:
     description: Request for the Acknowledge method.

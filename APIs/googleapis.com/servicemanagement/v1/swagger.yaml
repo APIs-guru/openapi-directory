@@ -111,9 +111,78 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: services
   - name: operations
+  - name: services
 paths:
+  /v1/operations:
+    get:
+      description: Lists service operations that match the specified filter in the request.
+      operationId: servicemanagement.operations.list
+      parameters:
+        - description: |-
+            A string for filtering Operations.
+              The following filter fields are supported&#58;
+
+              * serviceName&#58; Required. Only `=` operator is allowed.
+              * startTime&#58; The time this job was started, in ISO 8601 format.
+                Allowed operators are `>=`,  `>`, `<=`, and `<`.
+              * status&#58; Can be `done`, `in_progress`, or `failed`. Allowed
+                operators are `=`, and `!=`.
+
+              Filter expression supports conjunction (AND) and disjunction (OR)
+              logical operators. However, the serviceName restriction must be at the
+              top-level and can only be combined with other restrictions via the AND
+              logical operator.
+
+              Examples&#58;
+
+              * `serviceName={some-service}.googleapis.com`
+              * `serviceName={some-service}.googleapis.com AND startTime>="2017-02-01"`
+              * `serviceName={some-service}.googleapis.com AND status=done`
+              * `serviceName={some-service}.googleapis.com AND (status=done OR startTime>="2017-02-01")`
+          in: query
+          name: filter
+          type: string
+        - description: Not used.
+          in: query
+          name: name
+          type: string
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The maximum number of operations to return. If unspecified, defaults to
+            50. The maximum value is 100.
+          in: query
+          name: pageSize
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListOperationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+      tags:
+        - operations
+    parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   /v1/services:
     get:
       description: |-
@@ -129,15 +198,6 @@ paths:
       operationId: servicemanagement.services.list
       parameters:
         - description: |-
-            Include services consumed by the specified consumer.
-
-            The Google Service Management implementation accepts the following
-            forms:
-            - project:<project_id>
-          in: query
-          name: consumerId
-          type: string
-        - description: |-
             Token identifying which result to start with; returned by a previous list
             call.
           in: query
@@ -150,6 +210,15 @@ paths:
         - description: Include services produced by the specified project.
           in: query
           name: producerProjectId
+          type: string
+        - description: |-
+            Include services consumed by the specified consumer.
+
+            The Google Service Management implementation accepts the following
+            forms:
+            - project:<project_id>
+          in: query
+          name: consumerId
           type: string
       responses:
         '200':
@@ -168,19 +237,19 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Creates a new managed service.
@@ -265,19 +334,19 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
   '/v1/services/{serviceName}/config':
     get:
       description: Gets a service configuration (version) for a managed service.
@@ -290,10 +359,6 @@ paths:
           name: serviceName
           required: true
           type: string
-        - description: The id of the service configuration resource.
-          in: query
-          name: configId
-          type: string
         - description: |-
             Specifies which parts of the Service Config should be returned in the
             response.
@@ -302,6 +367,10 @@ paths:
             - FULL
           in: query
           name: view
+          type: string
+        - description: The id of the service configuration resource.
+          in: query
+          name: configId
           type: string
       responses:
         '200':
@@ -320,19 +389,19 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
   '/v1/services/{serviceName}/configs':
     get:
       description: |-
@@ -347,14 +416,14 @@ paths:
           name: serviceName
           required: true
           type: string
-        - description: The token of the page to retrieve.
-          in: query
-          name: pageToken
-          type: string
         - description: The max number of items to include in the response list.
           in: query
           name: pageSize
           type: integer
+        - description: The token of the page to retrieve.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -372,19 +441,19 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Creates a new service configuration (version) for a managed service.
@@ -459,34 +528,34 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
   '/v1/services/{serviceName}/configs:submit':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Creates a new service configuration (version) for a managed service based
@@ -562,19 +631,19 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Creates a new service configuration rollout. Based on rollout, the
@@ -646,34 +715,34 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
   '/v1/services/{serviceName}:disable':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Disables a service for a project, so it can no longer be
@@ -708,19 +777,19 @@ paths:
         - services
   '/v1/services/{serviceName}:enable':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Enables a service for a project, so it can be used
@@ -756,19 +825,19 @@ paths:
         - services
   '/v1/services/{serviceName}:undelete':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Revives a previously deleted managed service. The method restores the
@@ -800,19 +869,19 @@ paths:
         - services
   '/v1/services:generateConfigReport':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Generates and returns a report (errors, warnings and changes from
@@ -871,34 +940,34 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
   '/v1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Gets the access control policy for a resource.
@@ -932,19 +1001,19 @@ paths:
         - services
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -977,19 +1046,19 @@ paths:
         - services
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
@@ -1160,7 +1229,7 @@ definitions:
       service:
         description: |-
           Specifies a service that will be enabled for audit logging.
-          For example, `resourcemanager`, `storage`, `compute`.
+          For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
           `allServices` is a special value that covers all services.
         type: string
     type: object

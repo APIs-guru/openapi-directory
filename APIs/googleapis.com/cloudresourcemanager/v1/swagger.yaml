@@ -124,12 +124,6 @@ paths:
         `resourcemanager.projects.get`.
       operationId: cloudresourcemanager.liens.list
       parameters:
-        - description: |-
-            The name of the resource to list all attached Liens.
-            For example, `projects/1234`.
-          in: query
-          name: parent
-          type: string
         - description: 'The `next_page_token` value returned from a previous List request, if any.'
           in: query
           name: pageToken
@@ -138,6 +132,12 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            The name of the resource to list all attached Liens.
+            For example, `projects/1234`.
+          in: query
+          name: parent
+          type: string
       responses:
         '200':
           description: Successful response
@@ -151,19 +151,19 @@ paths:
       tags:
         - liens
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: |-
         Create a Lien which applies to the resource denoted by the `parent` field.
@@ -193,19 +193,19 @@ paths:
         - liens
   '/v1/organizations:search':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: |-
         Searches Organization resources that are visible to the user and satisfy
@@ -238,14 +238,6 @@ paths:
         New Projects do not necessarily appear at the end of the list.
       operationId: cloudresourcemanager.projects.list
       parameters:
-        - description: |-
-            A pagination token returned from a previous call to ListProjects
-            that indicates from where listing should continue.
-
-            Optional.
-          in: query
-          name: pageToken
-          type: string
         - description: |-
             The maximum number of Projects to return in the response.
             The server can return fewer Projects than requested.
@@ -280,6 +272,14 @@ paths:
           in: query
           name: filter
           type: string
+        - description: |-
+            A pagination token returned from a previous call to ListProjects
+            that indicates from where listing should continue.
+
+            Optional.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -293,19 +293,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: |-
         Request that a new Project be created. The result is an Operation which
@@ -408,19 +408,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     put:
       description: |-
         Updates the attributes of the Project identified by the specified
@@ -453,19 +453,19 @@ paths:
         - projects
   '/v1/projects/{projectId}:getAncestry':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: |-
         Gets a list of ancestors in the resource hierarchy for the Project
@@ -500,19 +500,19 @@ paths:
         - projects
   '/v1/projects/{projectId}:undelete':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: |-
         Restores the Project identified by the specified
@@ -548,19 +548,19 @@ paths:
         - projects
   '/v1/projects/{resource}:getIamPolicy':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: |-
         Returns the IAM access control policy for the specified Project.
@@ -592,19 +592,19 @@ paths:
         - projects
   '/v1/projects/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: |-
         Sets the IAM access control policy for the specified Project. Replaces
@@ -670,19 +670,19 @@ paths:
         - projects
   '/v1/projects/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: Returns permissions that a caller has on the specified Project.
       operationId: cloudresourcemanager.projects.testIamPermissions
@@ -764,34 +764,34 @@ paths:
       tags:
         - operations
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
   '/v1/{resource}:getIamPolicy':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: |-
         Gets the access control policy for an Organization resource. May be empty
@@ -825,19 +825,19 @@ paths:
         - organizations
   '/v1/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: |-
         Sets the access control policy on an Organization resource. Replaces any
@@ -869,19 +869,19 @@ paths:
         - organizations
   '/v1/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
     post:
       description: |-
         Returns permissions that a caller has on the specified Organization.
@@ -924,8 +924,8 @@ definitions:
   AuditConfig:
     description: |-
       Specifies the audit configuration for a service.
-      It consists of which permission types are logged, and what identities, if
-      any, are exempted from logging.
+      The configuration determines which permission types are logged, and what
+      identities, if any, are exempted from logging.
       An AuditConifg must have one or more AuditLogConfigs.
 
       If there are AuditConfigs for both `allServices` and a specific service,
@@ -982,7 +982,7 @@ definitions:
       service:
         description: |-
           Specifies a service that will be enabled for audit logging.
-          For example, `resourcemanager`, `storage`, `compute`.
+          For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
           `allServices` is a special value that covers all services.
         type: string
     type: object
@@ -1112,7 +1112,7 @@ definitions:
           - RESOURCE_DELETED
           - PARENT_DELETED
           - CYCLE_INTRODUCED_ERROR
-          - FOLDER_ALREADY_BEING_MOVED
+          - FOLDER_BEING_MOVED
           - FOLDER_TO_DELETE_NON_EMPTY
         type: string
     type: object
@@ -1582,8 +1582,8 @@ definitions:
       updateMask:
         description: |-
           OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-          the fields in the mask will be modified. If no mask is provided, a default
-          mask is used:
+          the fields in the mask will be modified. If no mask is provided, the
+          following default mask is used:
           paths: "bindings, etag"
           This field is only used by Cloud IAM.
         format: google-fieldmask

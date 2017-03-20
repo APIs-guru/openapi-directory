@@ -119,8 +119,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -206,8 +206,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -254,8 +254,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -275,8 +275,7 @@ paths:
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
+            See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
@@ -297,8 +296,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -312,8 +311,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -331,8 +330,7 @@ paths:
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
+            See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
@@ -358,8 +356,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -382,8 +380,7 @@ paths:
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
-            `resource` is usually specified as a path. For example, a Project
-            resource is specified as `projects/{project}`.
+            See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
@@ -458,8 +455,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -473,8 +470,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -521,8 +518,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -567,8 +564,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -614,8 +611,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -708,8 +705,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -730,6 +727,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: Maximum number of subscription names to return.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             The value returned by the last `ListTopicSubscriptionsResponse`; indicates
             that this is a continuation of a prior `ListTopicSubscriptions` call, and
@@ -737,10 +738,6 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: Maximum number of subscription names to return.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -756,8 +753,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -771,8 +768,8 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'

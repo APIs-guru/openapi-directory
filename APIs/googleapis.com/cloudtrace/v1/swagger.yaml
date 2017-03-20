@@ -124,6 +124,24 @@ paths:
           required: true
           type: string
         - description: |-
+            Maximum number of traces to return. If not specified or <= 0, the
+            implementation selects a reasonable value.  The implementation may
+            return fewer traces than the requested page size. Optional.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Type of data returned for traces in the list. Optional. Default is
+            `MINIMAL`.
+          enum:
+            - VIEW_TYPE_UNSPECIFIED
+            - MINIMAL
+            - ROOTSPAN
+            - COMPLETE
+          in: query
+          name: view
+          type: string
+        - description: |-
             Field used to sort the returned traces. Optional.
             Can be one of the following:
 
@@ -151,34 +169,16 @@ paths:
           name: endTime
           type: string
         - description: |-
-            End of the time interval (inclusive) during which the trace data was
-            collected from the application.
-          in: query
-          name: startTime
-          type: string
-        - description: |-
             Token identifying the page of results to return. If provided, use the
             value of the `next_page_token` field from a previous request. Optional.
           in: query
           name: pageToken
           type: string
         - description: |-
-            Maximum number of traces to return. If not specified or <= 0, the
-            implementation selects a reasonable value.  The implementation may
-            return fewer traces than the requested page size. Optional.
+            End of the time interval (inclusive) during which the trace data was
+            collected from the application.
           in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            Type of data returned for traces in the list. Optional. Default is
-            `MINIMAL`.
-          enum:
-            - VIEW_TYPE_UNSPECIFIED
-            - MINIMAL
-            - ROOTSPAN
-            - COMPLETE
-          in: query
-          name: view
+          name: startTime
           type: string
       responses:
         '200':
@@ -193,19 +193,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
     patch:
       description: |-
         Sends new traces to Stackdriver Trace or updates existing traces. If the ID
@@ -264,19 +264,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
 definitions:
   Empty:
     description: |-

@@ -110,16 +110,6 @@ paths:
         JSON-LD format and compatible with http://schema.org
       operationId: kgsearch.entities.search
       parameters:
-        - collectionFormat: multi
-          description: |-
-            The list of entity id to be used for search instead of query string.
-            To specify multiple ids in the HTTP request, repeat the parameter in the
-            URL as in ...?ids=A&ids=B
-          in: query
-          items:
-            type: string
-          name: ids
-          type: array
         - description: Limits the number of entities to be returned.
           in: query
           name: limit
@@ -155,6 +145,16 @@ paths:
             type: string
           name: languages
           type: array
+        - collectionFormat: multi
+          description: |-
+            The list of entity id to be used for search instead of query string.
+            To specify multiple ids in the HTTP request, repeat the parameter in the
+            URL as in ...?ids=A&ids=B
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
       responses:
         '200':
           description: Successful response
@@ -165,13 +165,13 @@ paths:
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'

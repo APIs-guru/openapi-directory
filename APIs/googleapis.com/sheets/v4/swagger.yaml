@@ -115,11 +115,6 @@ tags:
 paths:
   /v4/spreadsheets:
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
@@ -128,6 +123,11 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Creates a spreadsheet, returning the newly created spreadsheet.'
       operationId: sheets.spreadsheets.create
@@ -209,11 +209,6 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
@@ -222,13 +217,13 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
   '/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
@@ -237,6 +232,11 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Copies a single sheet from a spreadsheet to another spreadsheet.
@@ -339,11 +339,6 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
@@ -352,6 +347,11 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Sets values in a range of a spreadsheet.
@@ -426,11 +426,6 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values/{range}:append':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
@@ -439,6 +434,11 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Appends values to a spreadsheet. The input range is used to search for
@@ -469,6 +469,13 @@ paths:
           name: range
           required: true
           type: string
+        - description: |-
+            Determines if the update response should include the values
+            of the cells that were appended. By default, responses
+            do not include the updated values.
+          in: query
+          name: includeValuesInResponse
+          type: boolean
         - description: |-
             Determines how values in the response should be rendered.
             The default render option is ValueRenderOption.FORMATTED_VALUE.
@@ -505,13 +512,6 @@ paths:
           in: query
           name: responseDateTimeRenderOption
           type: string
-        - description: |-
-            Determines if the update response should include the values
-            of the cells that were appended. By default, responses
-            do not include the updated values.
-          in: query
-          name: includeValuesInResponse
-          type: boolean
         - in: body
           name: body
           schema:
@@ -530,11 +530,6 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values/{range}:clear':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
@@ -543,6 +538,11 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Clears values from a spreadsheet.
@@ -579,11 +579,6 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchClear':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
@@ -592,6 +587,11 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Clears one or more ranges of values from a spreadsheet.
@@ -633,6 +633,27 @@ paths:
           name: spreadsheetId
           required: true
           type: string
+        - description: |-
+            How values should be represented in the output.
+            The default render option is ValueRenderOption.FORMATTED_VALUE.
+          enum:
+            - FORMATTED_VALUE
+            - UNFORMATTED_VALUE
+            - FORMULA
+          in: query
+          name: valueRenderOption
+          type: string
+        - description: |-
+            How dates, times, and durations should be represented in the output.
+            This is ignored if value_render_option is
+            FORMATTED_VALUE.
+            The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+          enum:
+            - SERIAL_NUMBER
+            - FORMATTED_STRING
+          in: query
+          name: dateTimeRenderOption
+          type: string
         - collectionFormat: multi
           description: The A1 notation of the values to retrieve.
           in: query
@@ -655,27 +676,6 @@ paths:
           in: query
           name: majorDimension
           type: string
-        - description: |-
-            How values should be represented in the output.
-            The default render option is ValueRenderOption.FORMATTED_VALUE.
-          enum:
-            - FORMATTED_VALUE
-            - UNFORMATTED_VALUE
-            - FORMULA
-          in: query
-          name: valueRenderOption
-          type: string
-        - description: |-
-            How dates, times, and durations should be represented in the output.
-            This is ignored if value_render_option is
-            FORMATTED_VALUE.
-            The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-          enum:
-            - SERIAL_NUMBER
-            - FORMATTED_STRING
-          in: query
-          name: dateTimeRenderOption
-          type: string
       responses:
         '200':
           description: Successful response
@@ -693,11 +693,6 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
@@ -706,13 +701,13 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
   '/v4/spreadsheets/{spreadsheetId}/values:batchUpdate':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
@@ -721,6 +716,11 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Sets values in one or more ranges of a spreadsheet.
@@ -752,11 +752,6 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}:batchUpdate':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
@@ -765,6 +760,11 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Applies one or more updates to the spreadsheet.

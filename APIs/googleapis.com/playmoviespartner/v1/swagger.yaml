@@ -195,9 +195,8 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -208,6 +207,7 @@ paths:
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
   '/v1/accounts/{accountId}/avails/{availId}':
     get:
       description: Get an Avail given its avail group id and avail id.
@@ -234,9 +234,8 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -247,6 +246,7 @@ paths:
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
   '/v1/accounts/{accountId}/orders':
     get:
       description: |-
@@ -261,22 +261,13 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: |-
-            Filter that matches Orders with a `name`, `show`, `season` or `episode`
-            that contains the given case-insensitive name.
-          in: query
-          name: name
-          type: string
-        - collectionFormat: multi
-          description: See _List methods rules_ for info about this field.
-          in: query
-          items:
-            type: string
-          name: studioNames
-          type: array
         - description: See _List methods rules_ for info about this field.
           in: query
           name: pageToken
+          type: string
+        - description: 'Filter Orders that match a case-insensitive, partner-specific custom id.'
+          in: query
+          name: customId
           type: string
         - collectionFormat: multi
           description: Filter Orders that match any of the given `video_id`s.
@@ -285,10 +276,6 @@ paths:
             type: string
           name: videoIds
           type: array
-        - description: 'Filter Orders that match a case-insensitive, partner-specific custom id.'
-          in: query
-          name: customId
-          type: string
         - description: See _List methods rules_ for info about this field.
           in: query
           name: pageSize
@@ -314,6 +301,19 @@ paths:
             type: string
           name: status
           type: array
+        - description: |-
+            Filter that matches Orders with a `name`, `show`, `season` or `episode`
+            that contains the given case-insensitive name.
+          in: query
+          name: name
+          type: string
+        - collectionFormat: multi
+          description: See _List methods rules_ for info about this field.
+          in: query
+          items:
+            type: string
+          name: studioNames
+          type: array
       responses:
         '200':
           description: Successful response
@@ -325,9 +325,8 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -338,6 +337,7 @@ paths:
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
   '/v1/accounts/{accountId}/orders/{orderId}':
     get:
       description: |-
@@ -368,9 +368,8 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -381,6 +380,7 @@ paths:
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
   '/v1/accounts/{accountId}/storeInfos':
     get:
       description: |-
@@ -395,6 +395,35 @@ paths:
           name: accountId
           required: true
           type: string
+        - collectionFormat: multi
+          description: Filter StoreInfos that match any of the given `season_id`s.
+          in: query
+          items:
+            type: string
+          name: seasonIds
+          type: array
+        - description: See _List methods rules_ for info about this field.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Filter StoreInfos that match a given `video_id`.
+            NOTE: this field is deprecated and will be removed on V2; `video_ids`
+            should be used instead.
+          in: query
+          name: videoId
+          type: string
+        - collectionFormat: multi
+          description: Filter StoreInfos that match any of the given `video_id`s.
+          in: query
+          items:
+            type: string
+          name: videoIds
+          type: array
+        - description: See _List methods rules_ for info about this field.
+          in: query
+          name: pageSize
+          type: integer
         - collectionFormat: multi
           description: Filter StoreInfos that match any of the given `mid`s.
           in: query
@@ -418,13 +447,6 @@ paths:
             type: string
           name: countries
           type: array
-        - collectionFormat: multi
-          description: See _List methods rules_ for info about this field.
-          in: query
-          items:
-            type: string
-          name: studioNames
-          type: array
         - description: |-
             Filter that matches StoreInfos with a `name` or `show_name`
             that contains the given case-insensitive name.
@@ -432,34 +454,12 @@ paths:
           name: name
           type: string
         - collectionFormat: multi
-          description: Filter StoreInfos that match any of the given `season_id`s.
+          description: See _List methods rules_ for info about this field.
           in: query
           items:
             type: string
-          name: seasonIds
+          name: studioNames
           type: array
-        - collectionFormat: multi
-          description: Filter StoreInfos that match any of the given `video_id`s.
-          in: query
-          items:
-            type: string
-          name: videoIds
-          type: array
-        - description: |-
-            Filter StoreInfos that match a given `video_id`.
-            NOTE: this field is deprecated and will be removed on V2; `video_ids`
-            should be used instead.
-          in: query
-          name: videoId
-          type: string
-        - description: See _List methods rules_ for info about this field.
-          in: query
-          name: pageToken
-          type: string
-        - description: See _List methods rules_ for info about this field.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -471,9 +471,8 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -484,6 +483,7 @@ paths:
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
   '/v1/accounts/{accountId}/storeInfos/{videoId}/country/{country}':
     get:
       description: |-
@@ -519,9 +519,8 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
@@ -532,6 +531,7 @@ paths:
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
 definitions:
   Avail:
     description: |-

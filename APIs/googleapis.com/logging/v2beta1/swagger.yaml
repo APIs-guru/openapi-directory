@@ -113,26 +113,26 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: organizations
-  - name: entries
   - name: projects
   - name: billingAccounts
   - name: monitoredResourceDescriptors
+  - name: organizations
+  - name: entries
 paths:
   '/v2beta1/entries:list':
     parameters:
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
     post:
       description: 'Lists log entries. Use this method to retrieve log entries from Stackdriver Logging. For ways to export log entries, see Exporting Logs.'
@@ -160,18 +160,18 @@ paths:
         - entries
   '/v2beta1/entries:write':
     parameters:
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
     post:
       description: Writes log entries to Stackdriver Logging.
@@ -200,14 +200,14 @@ paths:
       description: Lists the descriptors for monitored resource types used by Stackdriver Logging.
       operationId: logging.monitoredResourceDescriptors.list
       parameters:
-        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
-          in: query
-          name: pageSize
-          type: integer
         - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
           in: query
           name: pageToken
           type: string
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -225,23 +225,23 @@ paths:
       tags:
         - monitoredResourceDescriptors
     parameters:
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
   '/v2beta1/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.billingAccounts.logs.delete
+      operationId: logging.organizations.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -266,20 +266,20 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - organizations
     parameters:
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
   '/v2beta1/{metricName}':
     delete:
@@ -337,18 +337,18 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
     put:
       description: Creates or updates a logs-based metric.
@@ -384,7 +384,7 @@ paths:
   '/v2beta1/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.billingAccounts.logs.list
+      operationId: logging.organizations.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -420,20 +420,20 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - organizations
     parameters:
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
   '/v2beta1/{parent}/metrics':
     get:
@@ -473,18 +473,18 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
     post:
       description: Creates a logs-based metric.
@@ -533,14 +533,14 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
-          in: query
-          name: pageSize
-          type: integer
         - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
           in: query
           name: pageToken
           type: string
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -558,18 +558,18 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
     post:
       description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the current time is outside the sink''s start and end times or the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
@@ -669,18 +669,18 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
     put:
       description: 'Updates a sink. If the named sink doesn''t exist, then this method is identical to sinks.create. If the named sink does exist, then this method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated filter might also have a new writer_identity; see the unique_writer_identity field.'

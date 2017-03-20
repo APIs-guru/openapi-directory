@@ -137,19 +137,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{name}:listSpans':
     get:
       description: Returns a list of spans within a trace.
@@ -182,19 +182,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{parent}/traces':
     get:
       description: Returns of a list of traces that match the specified filter conditions.
@@ -206,6 +206,39 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            An optional filter for the request.
+            Example:
+            `version_label_key:a some_label:some_label_key`
+            returns traces from version `a` and has `some_label` with `some_label_key`.
+          in: query
+          name: filter
+          type: string
+        - description: |-
+            End of the time interval (inclusive) during which the trace data was
+            collected from the application.
+          in: query
+          name: endTime
+          type: string
+        - description: |-
+            Token identifying the page of results to return. If provided, use the
+            value of the `next_page_token` field from a previous request. Optional.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Start of the time interval (inclusive) during which the trace data was
+            collected from the application.
+          in: query
+          name: startTime
+          type: string
+        - description: |-
+            Maximum number of traces to return. If not specified or <= 0, the
+            implementation selects a reasonable value. The implementation may
+            return fewer traces than the requested page size. Optional.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             Field used to sort the returned traces. Optional.
             Can be one of the following:
@@ -223,39 +256,6 @@ paths:
           in: query
           name: orderBy
           type: string
-        - description: |-
-            An optional filter for the request.
-            Example:
-            `version_label_key:a some_label:some_label_key`
-            returns traces from version `a` and has `some_label` with `some_label_key`.
-          in: query
-          name: filter
-          type: string
-        - description: |-
-            End of the time interval (inclusive) during which the trace data was
-            collected from the application.
-          in: query
-          name: endTime
-          type: string
-        - description: |-
-            Start of the time interval (inclusive) during which the trace data was
-            collected from the application.
-          in: query
-          name: startTime
-          type: string
-        - description: |-
-            Token identifying the page of results to return. If provided, use the
-            value of the `next_page_token` field from a previous request. Optional.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            Maximum number of traces to return. If not specified or <= 0, the
-            implementation selects a reasonable value. The implementation may
-            return fewer traces than the requested page size. Optional.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -269,34 +269,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{parent}/traces:batchUpdate':
     parameters:
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Sends new spans to Stackdriver Trace or updates existing spans. If the

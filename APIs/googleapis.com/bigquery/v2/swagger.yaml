@@ -443,6 +443,10 @@ paths:
           name: tableId
           required: true
           type: string
+        - description: 'List of fields to return (comma-separated). If unspecified, all fields are returned'
+          in: query
+          name: selectedFields
+          type: string
       responses:
         '200':
           description: Successful response
@@ -562,6 +566,10 @@ paths:
         - description: 'Page token, returned by a previous call, identifying the result set'
           in: query
           name: pageToken
+          type: string
+        - description: 'List of fields to return (comma-separated). If unspecified, all fields are returned'
+          in: query
+          name: selectedFields
           type: string
         - description: Zero-based index of the starting row to read
           in: query
@@ -1027,14 +1035,14 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: '[Experimental] The labels associated with this dataset. You can use these to organize and group your datasets. You can set this property when inserting or updating a dataset. See Labeling Datasets for more information.'
+        description: The labels associated with this dataset. You can use these to organize and group your datasets. You can set this property when inserting or updating a dataset. See Labeling Datasets for more information.
         type: object
       lastModifiedTime:
         description: '[Output-only] The date when this dataset or any of its tables was last modified, in milliseconds since the epoch.'
         format: int64
         type: string
       location:
-        description: '[Experimental] The geographic location where the dataset should reside. Possible values include EU and US. The default value is US.'
+        description: The geographic location where the dataset should reside. Possible values include EU and US. The default value is US.
         type: string
       selfLink:
         description: '[Output-only] A URL that can be used to access the resource again. You can use this URL in Get or Update requests to the resource.'
@@ -1062,7 +1070,7 @@ definitions:
             labels:
               additionalProperties:
                 type: string
-              description: '[Experimental] The labels associated with this dataset. You can use these to organize and group your datasets.'
+              description: The labels associated with this dataset. You can use these to organize and group your datasets.
               type: object
           type: object
         type: array
@@ -1173,7 +1181,7 @@ definitions:
   ExternalDataConfiguration:
     properties:
       autodetect:
-        description: '[Experimental] Try to detect schema and format options automatically. Any option specified explicitly will be honored.'
+        description: Try to detect schema and format options automatically. Any option specified explicitly will be honored.
         type: boolean
       bigtableOptions:
         $ref: '#/definitions/BigtableOptions'
@@ -1198,7 +1206,7 @@ definitions:
         $ref: '#/definitions/TableSchema'
         description: '[Optional] The schema for the data. Schema is required for CSV and JSON formats. Schema is disallowed for Google Cloud Bigtable, Cloud Datastore backups, and Avro formats.'
       sourceFormat:
-        description: '[Required] The data format. For CSV files, specify "CSV". For Google sheets, specify "GOOGLE_SHEETS". For newline-delimited JSON, specify "NEWLINE_DELIMITED_JSON". For Avro files, specify "AVRO". For Google Cloud Datastore backups, specify "DATASTORE_BACKUP". [Experimental] For Google Cloud Bigtable, specify "BIGTABLE". Please note that reading from Google Cloud Bigtable is experimental and has to be enabled for your project. Please contact Google Cloud Support to enable this for your project.'
+        description: '[Required] The data format. For CSV files, specify "CSV". For Google sheets, specify "GOOGLE_SHEETS". For newline-delimited JSON, specify "NEWLINE_DELIMITED_JSON". For Avro files, specify "AVRO". For Google Cloud Datastore backups, specify "DATASTORE_BACKUP". [Beta] For Google Cloud Bigtable, specify "BIGTABLE".'
         type: string
       sourceUris:
         description: '[Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one ''*'' wildcard character and it must come after the ''bucket'' name. Size limits related to load jobs apply to external data sources. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups, exactly one URI can be specified, and it must end with ''.backup_info''. Also, the ''*'' wildcard character is not allowed.'
@@ -1230,7 +1238,7 @@ definitions:
         description: The resource type of the response.
         type: string
       numDmlAffectedRows:
-        description: '[Output-only, Experimental] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
+        description: '[Output-only] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
         format: int64
         type: string
       pageToken:
@@ -1360,7 +1368,7 @@ definitions:
         description: Indicates if BigQuery should allow quoted data sections that contain newline characters in a CSV file. The default value is false.
         type: boolean
       autodetect:
-        description: '[Experimental] Indicates if we should automatically infer the options and schema for CSV and JSON sources.'
+        description: Indicates if we should automatically infer the options and schema for CSV and JSON sources.
         type: boolean
       createDisposition:
         description: '[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a ''notFound'' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.'
@@ -1385,7 +1393,7 @@ definitions:
         description: '[Optional] Specifies a string that represents a null value in a CSV file. For example, if you specify "\N", BigQuery interprets "\N" as a null value when loading a CSV file. The default value is the empty string. If you set this property to a custom value, BigQuery still interprets the empty string as a null value for all data types except for STRING and BYTE. For STRING and BYTE columns, BigQuery interprets the empty string as an empty value.'
         type: string
       projectionFields:
-        description: '[Experimental] If sourceFormat is set to "DATASTORE_BACKUP", indicates which entity properties to load into BigQuery from a Cloud Datastore backup. Property names are case sensitive and must be top-level properties. If no properties are specified, BigQuery loads all properties. If any named property isn''t found in the Cloud Datastore backup, an invalid error is returned in the job result.'
+        description: 'If sourceFormat is set to "DATASTORE_BACKUP", indicates which entity properties to load into BigQuery from a Cloud Datastore backup. Property names are case sensitive and must be top-level properties. If no properties are specified, BigQuery loads all properties. If any named property isn''t found in the Cloud Datastore backup, an invalid error is returned in the job result.'
         items:
           type: string
         type: array
@@ -1452,7 +1460,7 @@ definitions:
         format: int64
         type: string
       parameterMode:
-        description: '[Experimental] Standard SQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (@myparam) query parameters in this query.'
+        description: Standard SQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (@myparam) query parameters in this query.
         type: string
       preserveNulls:
         description: '[Deprecated] This property is deprecated.'
@@ -1486,7 +1494,7 @@ definitions:
         description: '[Optional] Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. Moreover, the query cache is only available when a query does not have a destination table specified. The default value is true.'
         type: boolean
       userDefinedFunctionResources:
-        description: '[Experimental] Describes user-defined function resources used in the query.'
+        description: Describes user-defined function resources used in the query.
         items:
           $ref: '#/definitions/UserDefinedFunctionResource'
         type: array
@@ -1608,11 +1616,11 @@ definitions:
         description: '[Output-only] Whether the query result was fetched from the query cache.'
         type: boolean
       numDmlAffectedRows:
-        description: '[Output-only, Experimental] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
+        description: '[Output-only] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
         format: int64
         type: string
       queryPlan:
-        description: '[Output-only, Experimental] Describes execution plan for the query.'
+        description: '[Output-only] Describes execution plan for the query.'
         items:
           $ref: '#/definitions/ExplainQueryStage'
         type: array
@@ -1804,7 +1812,7 @@ definitions:
         format: uint32
         type: integer
       parameterMode:
-        description: '[Experimental] Standard SQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (@myparam) query parameters in this query.'
+        description: Standard SQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (@myparam) query parameters in this query.
         type: string
       preserveNulls:
         description: '[Deprecated] This property is deprecated.'
@@ -1813,7 +1821,7 @@ definitions:
         description: '[Required] A query string, following the BigQuery query syntax, of the query to execute. Example: "SELECT count(f1) FROM [myProjectId:myDatasetId.myTableId]".'
         type: string
       queryParameters:
-        description: '[Experimental] Query parameters for Standard SQL queries.'
+        description: Query parameters for Standard SQL queries.
         items:
           $ref: '#/definitions/QueryParameter'
         type: array
@@ -1851,7 +1859,7 @@ definitions:
         description: The resource type.
         type: string
       numDmlAffectedRows:
-        description: '[Output-only, Experimental] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
+        description: '[Output-only] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
         format: int64
         type: string
       pageToken:
@@ -2167,7 +2175,7 @@ definitions:
         description: 'Specifies whether to use BigQuery''s legacy SQL for this view. The default value is true. If set to false, the view will use BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/ Queries and views that reference this view must use the same flag value.'
         type: boolean
       userDefinedFunctionResources:
-        description: '[Experimental] Describes user-defined function resources used in the query.'
+        description: Describes user-defined function resources used in the query.
         items:
           $ref: '#/definitions/UserDefinedFunctionResource'
         type: array

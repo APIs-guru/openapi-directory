@@ -108,8 +108,8 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: projects
   - name: operations
+  - name: projects
 paths:
   /v1beta2/operations:
     get:
@@ -121,10 +121,6 @@ paths:
         to use different resource name schemes, such as `users/*/operations`.
       operationId: cloudfunctions.operations.list
       parameters:
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
         - description: The name of the operation collection.
           in: query
           name: name
@@ -137,6 +133,10 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
       responses:
         '200':
           description: Successful response
@@ -148,19 +148,19 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1beta2/{location}/functions':
     get:
       description: Returns a list of functions that belong to the requested project.
@@ -199,19 +199,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Creates a new function. If a function with the given name already exists in
@@ -266,13 +266,10 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: cloudfunctions.operations.get
+      description: Returns a function with the given name from the requested project.
+      operationId: cloudfunctions.projects.locations.functions.get
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the function which details should be obtained.
           in: path
           name: name
           required: true
@@ -282,26 +279,26 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/CloudFunction'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - operations
+        - projects
     parameters:
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     put:
       description: Updates existing function.
       operationId: cloudfunctions.projects.locations.functions.update
@@ -337,6 +334,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
         - description: The standard list page size.
           in: query
           name: pageSize
@@ -344,10 +345,6 @@ paths:
         - description: The standard list filter.
           in: query
           name: filter
-          type: string
-        - description: The standard list page token.
-          in: query
-          name: pageToken
           type: string
       responses:
         '200':
@@ -360,34 +357,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
   '/v1beta2/{name}:call':
     parameters:
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/bearer_token'
     post:
       description: |-
         Invokes synchronously deployed function. To be used for testing, very

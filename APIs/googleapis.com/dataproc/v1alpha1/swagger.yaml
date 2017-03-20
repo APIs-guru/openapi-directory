@@ -108,8 +108,8 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: projects
   - name: operations
+  - name: projects
 paths:
   '/v1alpha1/projects/{projectId}/regions/{region}/clusters':
     get:
@@ -126,6 +126,10 @@ paths:
           name: region
           required: true
           type: string
+        - description: The standard List page size.
+          in: query
+          name: pageSize
+          type: integer
         - description: 'Optional A filter constraining which clusters to list. Valid filters contain label terms such as: labels.key1 = val1 AND (-labels.k2 = val2 OR labels.k3 = val3)'
           in: query
           name: filter
@@ -134,10 +138,6 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: The standard List page size.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -149,19 +149,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     post:
       description: Request to create a cluster in a project.
       operationId: dataproc.projects.regions.clusters.create
@@ -250,19 +250,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     patch:
       description: Request to update a cluster in a project.
       operationId: dataproc.projects.regions.clusters.patch
@@ -369,19 +369,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     patch:
       description: Updates a job in a project.
       operationId: dataproc.projects.regions.jobs.patch
@@ -421,19 +421,19 @@ paths:
         - projects
   '/v1alpha1/projects/{projectId}/regions/{region}/jobs/{jobId}:cancel':
     parameters:
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     post:
       description: 'Starts a job cancellation request. To access the job resource after cancellation, call regions/{region}/jobs:list or regions/{region}/jobs:get.'
       operationId: dataproc.projects.regions.jobs.cancel
@@ -469,19 +469,19 @@ paths:
         - projects
   '/v1alpha1/projects/{projectId}/regions/{region}/jobs:list':
     parameters:
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     post:
       description: 'Lists regions/{region}/jobs in a project.'
       operationId: dataproc.projects.regions.jobs.list
@@ -512,19 +512,19 @@ paths:
         - projects
   '/v1alpha1/projects/{projectId}/regions/{region}/jobs:submit':
     parameters:
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     post:
       description: Submits a job to a cluster.
       operationId: dataproc.projects.regions.jobs.submit
@@ -584,6 +584,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: 'Required A JSON object that contains filters for the list operation, in the format {"key1":"value1","key2":"value2", ..., }. Possible keys include project_id, cluster_name, and operation_state_matcher.If project_id is set, requests the list of operations that belong to the specified Google Cloud Platform project ID. This key is required.If cluster_name is set, requests the list of operations that were submitted to the specified cluster name. This key is optional.If operation_state_matcher is set, requests the list of operations that match one of the following status options: ALL, ACTIVE, or NON_ACTIVE.'
+          in: query
+          name: filter
+          type: string
         - description: The standard List page token.
           in: query
           name: pageToken
@@ -592,10 +596,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: 'Required A JSON object that contains filters for the list operation, in the format {"key1":"value1","key2":"value2", ..., }. Possible keys include project_id, cluster_name, and operation_state_matcher.If project_id is set, requests the list of operations that belong to the specified Google Cloud Platform project ID. This key is required.If cluster_name is set, requests the list of operations that were submitted to the specified cluster name. This key is optional.If operation_state_matcher is set, requests the list of operations that match one of the following status options: ALL, ACTIVE, or NON_ACTIVE.'
-          in: query
-          name: filter
-          type: string
       responses:
         '200':
           description: Successful response
@@ -607,34 +607,34 @@ paths:
       tags:
         - operations
     parameters:
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
   '/v1alpha1/{name}:cancel':
     parameters:
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
     post:
       description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED. Clients may use Operations.GetOperation or other methods to check whether the cancellation succeeded or the operation completed despite cancellation.'
       operationId: dataproc.operations.cancel
@@ -861,6 +861,13 @@ definitions:
       stateStartTime:
         description: Time when this state was entered.
         format: google-datetime
+        type: string
+      substate:
+        description: Output-only Additional state information that includes status reported by the agent.
+        enum:
+          - UNSPECIFIED
+          - UNHEALTHY
+          - STALE_STATUS
         type: string
     type: object
   DiagnoseClusterOutputLocation:
@@ -1185,6 +1192,14 @@ definitions:
       stateStartTime:
         description: Output-only The time when this state was entered.
         format: google-datetime
+        type: string
+      substate:
+        description: 'Output-only Additional state information, which includes status reported by the agent.'
+        enum:
+          - UNSPECIFIED
+          - SUBMITTED
+          - QUEUED
+          - STALE_STATUS
         type: string
     type: object
   ListClustersResponse:

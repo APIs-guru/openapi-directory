@@ -108,8 +108,8 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: projects
   - name: operations
+  - name: projects
 paths:
   '/v1/projects/{projectId}/builds':
     get:
@@ -148,19 +148,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     post:
       description: |-
         Starts a build with the specified configuration.
@@ -219,34 +219,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
   '/v1/projects/{projectId}/builds/{id}:cancel':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     post:
       description: Cancels a requested build in progress.
       operationId: cloudbuild.projects.builds.cancel
@@ -299,19 +299,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     post:
       description: |-
         Creates a new BuildTrigger.
@@ -394,19 +394,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     patch:
       description: |-
         Updates an BuildTrigger by its project ID and trigger ID.
@@ -463,34 +463,34 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -736,10 +736,10 @@ definitions:
 
           The Docker daemon's cache will already have the latest versions of all of
           the officially supported build steps
-          (https://github.com/GoogleCloudPlatform/cloud-builders). The Docker daemon
-          will also have cached many of the layers for some popular images, like
-          "ubuntu", "debian", but they will be refreshed at the time you attempt to
-          use them.
+          ([https://github.com/GoogleCloudPlatform/cloud-builders](https://github.com/GoogleCloudPlatform/cloud-builders)).
+          The Docker daemon will also have cached many of the layers for some popular
+          images, like "ubuntu", "debian", but they will be refreshed at the time you
+          attempt to use them.
 
           If you built an image in a previous build step, it will be stored in the
           host's Docker daemon's cache and is available to use as the name for a

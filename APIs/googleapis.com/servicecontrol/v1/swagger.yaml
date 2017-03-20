@@ -113,19 +113,19 @@ tags:
 paths:
   '/v1/services/{serviceName}:allocateQuota':
     parameters:
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Attempts to allocate quota for the specified consumer. It should be called
@@ -134,6 +134,16 @@ paths:
         This method requires the `servicemanagement.services.quota`
         permission on the specified service. For more information, see
         [Google Cloud IAM](https://cloud.google.com/iam).
+
+        **NOTE:** the client code **must** fail-open if the server returns one
+        of the following quota errors:
+        -   `PROJECT_STATUS_UNVAILABLE`
+        -   `SERVICE_STATUS_UNAVAILABLE`
+        -   `BILLING_STATUS_UNAVAILABLE`
+        -   `QUOTA_SYSTEM_UNAVAILABLE`
+
+        The server may inject above errors to prohibit any hard dependency
+        on the quota system.
       operationId: servicecontrol.services.allocateQuota
       parameters:
         - description: |-
@@ -163,19 +173,19 @@ paths:
         - services
   '/v1/services/{serviceName}:check':
     parameters:
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Checks an operation with Google Service Control to decide whether
@@ -220,19 +230,19 @@ paths:
         - services
   '/v1/services/{serviceName}:endReconciliation':
     parameters:
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Signals the quota controller that service ends the ongoing usage
@@ -270,19 +280,19 @@ paths:
         - services
   '/v1/services/{serviceName}:releaseQuota':
     parameters:
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Releases previously allocated quota done through AllocateQuota method.
@@ -290,6 +300,16 @@ paths:
         This method requires the `servicemanagement.services.quota`
         permission on the specified service. For more information, see
         [Google Cloud IAM](https://cloud.google.com/iam).
+
+        **NOTE:** the client code **must** fail-open if the server returns one
+        of the following quota errors:
+        -   `PROJECT_STATUS_UNVAILABLE`
+        -   `SERVICE_STATUS_UNAVAILABLE`
+        -   `BILLING_STATUS_UNAVAILABLE`
+        -   `QUOTA_SYSTEM_UNAVAILABLE`
+
+        The server may inject above errors to prohibit any hard dependency
+        on the quota system.
       operationId: servicecontrol.services.releaseQuota
       parameters:
         - description: |-
@@ -319,19 +339,19 @@ paths:
         - services
   '/v1/services/{serviceName}:report':
     parameters:
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Reports operation results to Google Service Control, such as logs and
@@ -377,19 +397,19 @@ paths:
         - services
   '/v1/services/{serviceName}:startReconciliation':
     parameters:
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
         Unlike rate quota, allocation quota does not get refilled periodically.
@@ -497,6 +517,10 @@ definitions:
           3. For both rate quota and allocation quota, the quota limit reached
           condition will be specified using the following boolean metric:
             "serviceruntime.googleapis.com/quota/exceeded"
+
+          4. For allocation quota, value for each quota limit associated with
+          the metrics will be specified using the following gauge metric:
+            "serviceruntime.googleapis.com/quota/limit"
         items:
           $ref: '#/definitions/MetricValueSet'
         type: array
@@ -807,7 +831,17 @@ definitions:
           logging and diagnostics purposes.
         type: string
       quotaMetrics:
-        description: Metric values as tracked by One Platform before the adjustment was made.
+        description: |-
+          Metric values as tracked by One Platform before the adjustment was made.
+          The following metrics will be included:
+
+          1. Per quota metric total usage will be specified using the following gauge
+          metric:
+            "serviceruntime.googleapis.com/allocation/consumer/quota_used_count"
+
+          2. Value for each quota limit associated with the metrics will be specified
+          using the following gauge metric:
+            "serviceruntime.googleapis.com/quota/limit"
         items:
           $ref: '#/definitions/MetricValueSet'
         type: array
@@ -1361,6 +1395,10 @@ definitions:
           2. For allocation quota, per quota metric total usage will be specified
           using the following gauge metric:
             "serviceruntime.googleapis.com/allocation/consumer/quota_used_count"
+
+          3. For allocation quota, value for each quota limit associated with
+          the metrics will be specified using the following gauge metric:
+            "serviceruntime.googleapis.com/quota/limit"
         items:
           $ref: '#/definitions/MetricValueSet'
         type: array
@@ -1500,7 +1538,15 @@ definitions:
       quotaMetrics:
         description: |-
           Metric values as tracked by One Platform before the start of
-          reconciliation.
+          reconciliation. The following metrics will be included:
+
+          1. Per quota metric total usage will be specified using the following gauge
+          metric:
+            "serviceruntime.googleapis.com/allocation/consumer/quota_used_count"
+
+          2. Value for each quota limit associated with the metrics will be specified
+          using the following gauge metric:
+            "serviceruntime.googleapis.com/quota/limit"
         items:
           $ref: '#/definitions/MetricValueSet'
         type: array

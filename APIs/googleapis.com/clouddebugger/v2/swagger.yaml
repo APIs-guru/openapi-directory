@@ -115,6 +115,10 @@ tags:
 paths:
   /v2/controller/debuggees/register:
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -124,10 +128,6 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
     post:
       description: |-
         Registers the debuggee with the controller service.
@@ -211,6 +211,10 @@ paths:
       tags:
         - controller
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -220,12 +224,12 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
   '/v2/controller/debuggees/{debuggeeId}/breakpoints/{id}':
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -235,10 +239,6 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
     put:
       description: |-
         Updates the breakpoint state or mutable fields.
@@ -312,6 +312,10 @@ paths:
       tags:
         - debugger
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -321,10 +325,6 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
   '/v2/debugger/debuggees/{debuggeeId}/breakpoints':
     get:
       description: Lists all breakpoints for the debuggee.
@@ -335,6 +335,12 @@ paths:
           name: debuggeeId
           required: true
           type: string
+        - description: |-
+            This field is deprecated. The following fields are always stripped out of
+            the result: `stack_frames`, `evaluated_expressions` and `variable_table`.
+          in: query
+          name: stripResults
+          type: boolean
         - description: |-
             A wait token that, if specified, blocks the call until the breakpoints
             list has changed, or a server selected timeout has expired.  The value
@@ -369,12 +375,6 @@ paths:
           in: query
           name: includeInactive
           type: boolean
-        - description: |-
-            This field is deprecated. The following fields are always stripped out of
-            the result: `stack_frames`, `evaluated_expressions` and `variable_table`.
-          in: query
-          name: stripResults
-          type: boolean
       responses:
         '200':
           description: Successful response
@@ -388,6 +388,10 @@ paths:
       tags:
         - debugger
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -397,12 +401,12 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
   '/v2/debugger/debuggees/{debuggeeId}/breakpoints/set':
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -412,10 +416,6 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
     post:
       description: Sets the breakpoint to the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.set
@@ -513,6 +513,10 @@ paths:
       tags:
         - debugger
     parameters:
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -522,10 +526,6 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
 definitions:
   AliasContext:
     description: An alias to a repo revision.

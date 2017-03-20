@@ -168,6 +168,9 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
@@ -178,9 +181,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     put:
       description: |-
         Update a `Release`.
@@ -308,6 +308,9 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
@@ -318,9 +321,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Create a `Release`.
@@ -392,10 +392,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Next page token for loading the next batch of `Ruleset` instances.
-          in: query
-          name: pageToken
-          type: string
         - description: |-
             Page size to load. Maximum of 100. Defaults to 10.
             Note: `page_size` is just a hint and the service may choose to load less
@@ -404,6 +400,10 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: Next page token for loading the next batch of `Ruleset` instances.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -419,6 +419,9 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
@@ -429,9 +432,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Create a `Ruleset` from `Source`.
@@ -469,6 +469,9 @@ paths:
         - projects
   '/v1/{name}:test':
     parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
@@ -479,9 +482,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
     post:
       description: |-
         Test `Source` for syntactic and semantic correctness. Issues present in the

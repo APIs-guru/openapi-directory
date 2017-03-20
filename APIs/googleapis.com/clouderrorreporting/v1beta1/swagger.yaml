@@ -142,34 +142,34 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/oauth_token'
   '/v1beta1/{name}':
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/oauth_token'
     put:
       description: |-
         Replace the data for the specified group.
@@ -239,15 +239,19 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: '[Required] The group for which events shall be returned.'
+          in: query
+          name: groupId
+          type: string
+        - description: '[Optional] A `next_page_token` provided by a previous response.'
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             [Optional] The exact value to match against
             [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
           in: query
           name: serviceFilter.service
-          type: string
-        - description: '[Optional] A `next_page_token` provided by a previous response.'
-          in: query
-          name: pageToken
           type: string
         - description: '[Optional] The maximum number of results to return per response.'
           in: query
@@ -276,10 +280,6 @@ paths:
           in: query
           name: timeRange.period
           type: string
-        - description: '[Required] The group for which events shall be returned.'
-          in: query
-          name: groupId
-          type: string
       responses:
         '200':
           description: Successful response
@@ -291,34 +291,34 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/oauth_token'
   '/v1beta1/{projectName}/events:report':
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Report an individual error event.
@@ -372,6 +372,12 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            [Optional] The exact value to match against
+            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
+          in: query
+          name: serviceFilter.service
+          type: string
         - description: |-
             [Optional] The maximum number of results to return per response.
             Default is 20.
@@ -449,12 +455,6 @@ paths:
             type: string
           name: groupId
           type: array
-        - description: |-
-            [Optional] The exact value to match against
-            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
-          in: query
-          name: serviceFilter.service
-          type: string
       responses:
         '200':
           description: Successful response
@@ -466,19 +466,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/oauth_token'
 definitions:
   DeleteEventsResponse:
     description: Response message for deleting error events.

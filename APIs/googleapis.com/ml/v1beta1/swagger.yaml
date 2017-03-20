@@ -174,8 +174,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -198,6 +198,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
         - description: The standard list page size.
           in: query
           name: pageSize
@@ -205,10 +209,6 @@ paths:
         - description: The standard list filter.
           in: query
           name: filter
-          type: string
-        - description: The standard list page token.
-          in: query
-          name: pageToken
           type: string
       responses:
         '200':
@@ -226,8 +226,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -241,8 +241,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -310,8 +310,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -325,8 +325,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -370,8 +370,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -429,6 +429,15 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            Optional. The number of jobs to retrieve per "page" of results. If there
+            are more remaining results than this number, the response message will
+            contain a valid value in the `next_page_token` field.
+
+            The default value is 20, and the maximum page size is 100.
+          in: query
+          name: pageSize
+          type: integer
         - description: Optional. Specifies the subset of jobs to retrieve.
           in: query
           name: filter
@@ -441,15 +450,6 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: |-
-            Optional. The number of jobs to retrieve per "page" of results. If there
-            are more remaining results than this number, the response message will
-            contain a valid value in the `next_page_token` field.
-
-            The default value is 20, and the maximum page size is 100.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -466,8 +466,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -552,8 +552,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
@@ -644,8 +644,8 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'

@@ -146,17 +146,11 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets information about a model version.
-
-        Models can have multiple versions. You can call
-        [projects.models.versions.list](/ml/reference/rest/v1/projects.models.versions/list)
-        to get the same information that this method returns for all of the
-        versions of a model.
-      operationId: ml.projects.models.versions.get
+      description: Describes a job.
+      operationId: ml.projects.jobs.get
       parameters:
         - description: |-
-            Required. The name of the version.
+            Required. The name of the job to get the description of.
 
             Authorization: requires `Viewer` role on the parent project.
           in: path
@@ -168,26 +162,26 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleCloudMlV1__Version'
+            $ref: '#/definitions/GoogleCloudMlV1__Job'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{name}/operations':
     get:
       description: |-
@@ -204,6 +198,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
         - description: The standard list page token.
           in: query
           name: pageToken
@@ -212,10 +210,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
       responses:
         '200':
           description: Successful response
@@ -227,49 +221,42 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{name}:cancel':
     parameters:
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
     post:
-      description: |-
-        Starts asynchronous cancellation on a long-running operation.  The server
-        makes a best effort to cancel the operation, but success is not
-        guaranteed.  If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-        Operations.GetOperation or
-        other methods to check whether the cancellation succeeded or whether the
-        operation completed despite cancellation. On successful cancellation,
-        the operation is not deleted; instead, it becomes an operation with
-        an Operation.error value with a google.rpc.Status.code of 1,
-        corresponding to `Code.CANCELLED`.
-      operationId: ml.projects.operations.cancel
+      description: Cancels a running job.
+      operationId: ml.projects.jobs.cancel
       parameters:
-        - description: The name of the operation resource to be cancelled.
+        - description: |-
+            Required. The name of the job to cancel.
+
+            Authorization: requires `Editor` role on the parent project.
           in: path
           name: name
           required: true
@@ -318,34 +305,34 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
   '/v1/{name}:predict':
     parameters:
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Performs prediction on the data in the request.
@@ -378,19 +365,19 @@ paths:
         - projects
   '/v1/{name}:setDefault':
     parameters:
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Designates a version to be the default for the model.
@@ -442,6 +429,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: Optional. Specifies the subset of jobs to retrieve.
+          in: query
+          name: filter
+          type: string
         - description: |-
             Optional. A page token to request the next page of results.
 
@@ -459,10 +450,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: Optional. Specifies the subset of jobs to retrieve.
-          in: query
-          name: filter
-          type: string
       responses:
         '200':
           description: Successful response
@@ -474,19 +461,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: Creates a training or a batch prediction job.
       operationId: ml.projects.jobs.create
@@ -560,19 +547,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Creates a model which will later contain one or more versions.
@@ -652,19 +639,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/oauth_token'
     post:
       description: |-
         Creates a new version of a model from a trained TensorFlow model.

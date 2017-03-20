@@ -112,24 +112,20 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: readgroupsets
-  - name: reads
+  - name: referencesets
   - name: callsets
-  - name: annotationsets
+  - name: reads
+  - name: readgroupsets
   - name: variants
+  - name: annotationsets
   - name: references
   - name: datasets
   - name: variantsets
   - name: annotations
   - name: operations
-  - name: referencesets
 paths:
   /v1/annotations:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -139,6 +135,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Creates a new annotation. Caller must have WRITE permission
@@ -183,10 +183,6 @@ paths:
         - annotations
   /v1/annotations/search:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -196,6 +192,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Searches for annotations that match the given criteria. Results are
@@ -275,10 +275,6 @@ paths:
       tags:
         - annotations
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -288,6 +284,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     put:
       description: |-
         Updates an annotation. Caller must have
@@ -327,10 +327,6 @@ paths:
         - annotations
   '/v1/annotations:batchCreate':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -340,6 +336,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Creates one or more new annotations atomically. All annotations must
@@ -376,10 +376,6 @@ paths:
         - annotations
   /v1/annotationsets:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -389,6 +385,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Creates a new annotation set. Caller must have WRITE permission for the
@@ -421,10 +421,6 @@ paths:
         - annotationsets
   /v1/annotationsets/search:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -434,6 +430,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Searches for annotation sets that match the given criteria. Annotation sets
@@ -511,10 +511,6 @@ paths:
       tags:
         - annotationsets
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -524,6 +520,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     put:
       description: |-
         Updates an annotation set. The update must respect all mutability
@@ -563,10 +563,6 @@ paths:
         - annotationsets
   /v1/callsets:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -576,6 +572,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Creates a new call set.
@@ -603,10 +603,6 @@ paths:
         - callsets
   /v1/callsets/search:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -616,6 +612,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Gets a list of call sets matching the criteria.
@@ -702,10 +702,6 @@ paths:
       tags:
         - callsets
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -715,6 +711,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     patch:
       description: |-
         Updates a call set.
@@ -797,10 +797,6 @@ paths:
       tags:
         - datasets
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -810,6 +806,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Creates a new dataset.
@@ -896,10 +896,6 @@ paths:
       tags:
         - datasets
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -909,6 +905,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     patch:
       description: |-
         Updates a dataset.
@@ -951,10 +951,6 @@ paths:
         - datasets
   '/v1/datasets/{datasetId}:undelete':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -964,6 +960,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Undeletes a dataset by restoring a dataset which was deleted via this API.
@@ -998,10 +998,6 @@ paths:
         - datasets
   /v1/readgroupsets/search:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1011,6 +1007,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Searches for read group sets matching the criteria.
@@ -1099,10 +1099,6 @@ paths:
       tags:
         - readgroupsets
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1112,6 +1108,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     patch:
       description: |-
         Updates a read group set.
@@ -1181,12 +1181,6 @@ paths:
           required: true
           type: string
         - description: |-
-            The name of the reference to query, within the reference set associated
-            with this query. Optional.
-          in: query
-          name: referenceName
-          type: string
-        - description: |-
             The end position of the range on the reference, 0-based exclusive. If
             specified, `referenceName` must also be specified. If unset or 0, defaults
             to the length of the reference.
@@ -1223,6 +1217,12 @@ paths:
           in: query
           name: targetBucketWidth
           type: string
+        - description: |-
+            The name of the reference to query, within the reference set associated
+            with this query. Optional.
+          in: query
+          name: referenceName
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1238,10 +1238,6 @@ paths:
       tags:
         - readgroupsets
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1251,12 +1247,12 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
   '/v1/readgroupsets/{readGroupSetId}:export':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1266,6 +1262,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Exports a read group set to a BAM file in Google Cloud Storage.
@@ -1307,10 +1307,6 @@ paths:
         - readgroupsets
   '/v1/readgroupsets:import':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1320,6 +1316,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Creates read group sets by asynchronously importing the provided
@@ -1362,10 +1362,6 @@ paths:
         - readgroupsets
   /v1/reads/search:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1375,6 +1371,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Gets a list of reads for one or more read group sets.
@@ -1423,10 +1423,6 @@ paths:
         - reads
   /v1/references/search:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1436,6 +1432,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Searches for references which match the given criteria.
@@ -1499,10 +1499,6 @@ paths:
       tags:
         - references
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1512,6 +1508,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
   '/v1/references/{referenceId}/bases':
     get:
       description: |-
@@ -1531,6 +1531,12 @@ paths:
           required: true
           type: string
         - description: |-
+            The end position (0-based, exclusive) of this query. Defaults to the length
+            of this reference.
+          in: query
+          name: end
+          type: string
+        - description: |-
             The continuation token, which is used to page through large result sets.
             To get the next page of results, set this parameter to the value of
             `nextPageToken` from the previous response.
@@ -1548,12 +1554,6 @@ paths:
           in: query
           name: start
           type: string
-        - description: |-
-            The end position (0-based, exclusive) of this query. Defaults to the length
-            of this reference.
-          in: query
-          name: end
-          type: string
       responses:
         '200':
           description: Successful response
@@ -1569,10 +1569,6 @@ paths:
       tags:
         - references
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1582,12 +1578,12 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
   /v1/referencesets/search:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1597,6 +1593,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Searches for reference sets which match the given criteria.
@@ -1660,10 +1660,6 @@ paths:
       tags:
         - referencesets
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1673,12 +1669,12 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
   /v1/variants:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1688,6 +1684,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Creates a new variant.
@@ -1715,10 +1715,6 @@ paths:
         - variants
   /v1/variants/search:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1728,6 +1724,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Gets a list of variants matching the criteria.
@@ -1814,10 +1814,6 @@ paths:
       tags:
         - variants
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1827,6 +1823,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     patch:
       description: |-
         Updates a variant.
@@ -1870,10 +1870,6 @@ paths:
         - variants
   '/v1/variants:import':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1883,6 +1879,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Creates variant data by asynchronously importing the provided information.
@@ -1925,10 +1925,6 @@ paths:
         - variants
   '/v1/variants:merge':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -1938,6 +1934,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Merges the given variants with existing variants.
@@ -2051,10 +2051,6 @@ paths:
         - variants
   /v1/variantsets:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -2064,6 +2060,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Creates a new variant set.
@@ -2095,10 +2095,6 @@ paths:
         - variantsets
   /v1/variantsets/search:
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -2108,6 +2104,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Returns a list of all variant sets matching search criteria.
@@ -2195,10 +2195,6 @@ paths:
       tags:
         - variantsets
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -2208,6 +2204,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     patch:
       description: |-
         Updates a variant set using patch semantics.
@@ -2252,10 +2252,6 @@ paths:
         - variantsets
   '/v1/variantsets/{variantSetId}:export':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -2265,6 +2261,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Exports variant set data to an external destination.
@@ -2326,10 +2326,6 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -2339,12 +2335,12 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -2354,6 +2350,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients may use Operations.GetOperation or Operations.ListOperations to check whether the cancellation succeeded or the operation completed despite cancellation.'
       operationId: genomics.operations.cancel
@@ -2382,10 +2382,6 @@ paths:
         - operations
   '/v1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -2395,6 +2391,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Gets the access control policy for the dataset. This is empty if the
@@ -2434,10 +2434,6 @@ paths:
         - datasets
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -2447,6 +2443,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Sets the access control policy on the specified dataset. Replaces any
@@ -2486,10 +2486,6 @@ paths:
         - datasets
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
@@ -2499,6 +2495,10 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/uploadType'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
