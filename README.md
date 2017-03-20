@@ -36,8 +36,8 @@ Update procedure
 --------------------------
 All specs are automatically updated from their original source.
 You can see it under `x-origin` property inside [each](https://github.com/APIs-guru/api-models/search?utf8=%E2%9C%93&q=x-origin+filename%3Aswagger.yaml) of `swagger.yaml` files.
-I run update script every day and manually check diffs before commit.
-If you see some API is not updated for more than one week please open [an issue](https://github.com/APIs-guru/api-models/issues/new).
+We run our update script at least weekly and manually check diffs before commit.
+If you see some APIs are not updated for more than 2 weeks please open [an issue](https://github.com/APIs-guru/api-models/issues/new).
 
 Existing integrations
 --------------------------
