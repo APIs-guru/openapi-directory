@@ -18,6 +18,8 @@ var util = require('./util');
 var specSources = require('./spec_sources');
 var sp = require('./sortParameters.js');
 
+var warnings = [];
+
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
     includeValueOnMove: true
@@ -140,7 +142,7 @@ function updateCollection(dir) {
         .then(swagger => {
           var newFilename = util.getSwaggerPath(swagger);
           if (newFilename !== filename)
-            throw Error(`Spec was moved from "${filename}" to "${newFilename}"`);
+            warnings.push(`Spec was moved from "${filename}" to "${newFilename}"`);
         });
     })
     .done();
@@ -761,6 +763,7 @@ function patchSwagger(swagger, exPatch) {
 
   if (swagger.host.indexOf('googleapis.com')>=0) {
     sp.sortParameters(swagger);
+    sp.sortTags(swagger);
   }
 
   for (var p in swagger.paths) {
@@ -871,3 +874,11 @@ function applyMergePatch(target, patch) {
 function logYaml(json) {
   console.error(util.Yaml2String(json));
 }
+
+process.on('exit', function() {
+  if (warnings.length) {
+    for (var w of warnings) {
+      console.log(w);
+    }
+  }
+});
