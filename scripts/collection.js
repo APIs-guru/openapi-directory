@@ -157,7 +157,9 @@ function validateCollection(dir) {
     //FIXME: check location
     //assert(util.getSwaggerPath(swagger) === filename, 'Incorect location');
 
-    return validateSwagger(swagger)
+    var source = util.getOriginUrl(swagger);
+
+    return validateSwagger(swagger, source)
       .then(({errors, warnings}) => {
         if (warnings)
           logYaml(warnings);
@@ -302,7 +304,7 @@ function writeSpec(source, format, exPatch) {
       extractApiKeysFromParameters(swagger);
       simplifyProduceConsume(swagger);
 
-      return validateAndFix(swagger)
+      return validateAndFix(swagger, source)
     })
     .then(validation => {
       context.validation = validation;
@@ -313,6 +315,8 @@ function writeSpec(source, format, exPatch) {
       if (validation.warnings)
         logYaml(validation.warnings);
 
+      context.swagger = validation.resolved;
+
       util.saveSwagger(context.swagger);
       return context.swagger;
     })
@@ -321,16 +325,16 @@ function writeSpec(source, format, exPatch) {
     });
 }
 
-function validateAndFix(swagger) {
-  return validateSwagger(swagger)
+function validateAndFix(swagger, source) {
+  return validateSwagger(swagger, source)
     .then(result => {
       if (!result.errors)
         return result;
 
       if (fixSpec(swagger, result.errors))
-        return validateAndFix(swagger);
+        return validateAndFix(swagger, source);
       else
-        return validateSwagger(swagger);
+        return validateSwagger(swagger, source);
     });
 }
 
@@ -684,8 +688,15 @@ function errorToString(error, context) {
   return result;
 }
 
-function validateSwagger(swagger) {
+function validateSwagger(swagger, source) {
   return converter.getSpec(swagger, 'swagger_2')
+    .then(function(spec){
+      var relativeBase = source.split('/');
+      relativeBase.pop();
+      relativeBase = relativeBase.join('/');
+      spec.jsonRefs = {relativeBase: relativeBase};
+      return spec;
+    })
     .then(spec => spec.validate())
     .then(result => {
       if (result.errors && swagger['x-hasEquivalentPaths']) {
