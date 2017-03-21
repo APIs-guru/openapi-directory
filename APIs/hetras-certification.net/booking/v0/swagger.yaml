@@ -63,16 +63,12 @@ paths:
         - description: Number of adults per room.
           format: byte
           in: query
-          maximum: 255
-          minimum: 1
           name: adults
           required: true
           type: string
         - description: Number of rooms.
           format: byte
           in: query
-          maximum: 255
-          minimum: 1
           name: rooms
           required: true
           type: string
@@ -1304,14 +1300,12 @@ paths:
         - description: Number of adults per room.
           format: byte
           in: query
-          minimum: 1
           name: adults
           required: true
           type: string
         - description: Number of rooms (default is 1).
           format: byte
           in: query
-          minimum: 1
           name: rooms
           required: false
           type: string

@@ -62,8 +62,6 @@ paths:
           type: array
         - description: 'Number of results to be displayed - 10 (by default, if not specified) to 30'
           in: query
-          maximum: 30
-          minimum: 1
           name: limit
           required: false
           type: string
@@ -305,8 +303,6 @@ paths:
           type: array
         - description: 'Number of results to be displayed - 10 (by default, if not specified) to 30'
           in: query
-          maximum: 30
-          minimum: 1
           name: limit
           required: false
           type: string

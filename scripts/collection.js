@@ -700,6 +700,22 @@ function validateSwagger(swagger) {
     });
 }
 
+function lintParameter(param) {
+  _.each([
+    { type: 'integer', prop: 'minLength'},
+    { type: 'integer', prop: 'maxLength'},
+    { type: 'string', prop: 'minimum'},
+    { type: 'string', prop: 'maximum'},
+    { type: 'string', prop: 'exclusiveMinimum'},
+    { type: 'string', prop: 'exclusiveMaximum'},
+    { type: 'string', prop: 'multipleOf'}
+  ], function(bug) {
+    if ((param.type === bug.type) && (typeof param[bug.prop] !== 'undefined'))
+      delete param[bug.prop];
+  });
+  return param;
+}
+
 function patchSwagger(swagger, exPatch) {
   //use 1.0.0 as default version
   if (_.isUndefined(swagger.info.version))
@@ -730,6 +746,17 @@ function patchSwagger(swagger, exPatch) {
   });
 
   removeEmpty(swagger.info);
+
+  for (var p in swagger.paths) {
+    var pathItem = swagger.paths[p];
+    for (var o in pathItem) {
+      var op = pathItem[o];
+      if (op.parameters)
+        for (var param of op.parameters) {
+          lintParameter(param);
+        }
+    }
+  }
 
   applyMergePatch(swagger, exPatch);
 
