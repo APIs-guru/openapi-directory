@@ -46,7 +46,7 @@ rr(pathspec,function(err, files) {
                       utils.exec('git checkout HEAD '+file);
                   }
                   else {
-                      console.log('Other changes');
+                      console.log('  Other changes');
                       sp.sortParameters(currentObj, headObj, originalHead);
                       fs.writeFileSync(file,yaml.safeDump(currentObj,{lineWidth:-1}),'utf8');
                   }

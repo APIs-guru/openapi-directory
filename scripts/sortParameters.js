@@ -1,3 +1,5 @@
+var util = require('util');
+
 var _ = require('lodash');
 
 function sortFunc(a,b) {
@@ -30,7 +32,7 @@ function sortParameters(swagger, comparison, source) {
                     op.parameters = op.parameters.sort(sortFunc);
                     if (comparison && comparison.paths[p] && comparison.paths[p][o] && comparison.paths[p][o].parameters && 
                         _.isEqual(op.parameters, comparison.paths[p][o].parameters)) {
-                        op.parameters = source.paths[p][o];
+                        op.parameters = source.paths[p][o].parameters;
                     }
                 }
             }
