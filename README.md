@@ -1,3 +1,6 @@
+
+
+
 ![banner]
 
 [![APIs in collection][numApis-image]][apisDir-link]
@@ -21,7 +24,9 @@ Our goal is to create a machine-readable Wikipedia for REST APIs with the follow
 
 If you want to reference this project and you need an icon or even a banner, check our [branding guide](https://github.com/APIs-guru/branding).
 
-Also, we provide services and consultancy around the Swagger spec and REST APIs in general.
+Although the project is still under the auspices of APIs.guru, it is now maintained by [Mike Ralphson](https://github.com/MikeRalphson) of [Mermade Software](https://github.com/mermade). Check out our other [OpenAPI-related projects](https://github.com/search?q=org%3AMermade+openapi).
+
+APIs.guru provide services and consultancy around GraphQL, OpenAPI/Swagger spec and APIs in general.
 You can contact us at founders@apis.guru.
 
 What does APIs.guru do?
@@ -55,6 +60,8 @@ Also used as test suite in following projects:
  - [ReDoc](https://github.com/Rebilly/ReDoc) - Swagger-generated API Reference Documentation
  - [ardoq-swagger-addon](https://github.com/ardoq/ardoq-swagger-addon) - Ardoq Open API (Swagger) Addon
  - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for Swagger(OpenApi) Request parameters and Response objects.
+ 
+ 
 
 API spec acceptance criteria
 --------------------------
@@ -77,7 +84,7 @@ Spec sources
 --------------------------
 Some specs are taken from Open Source projects:
  - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(aka Swagger) spec for Instagram API
- - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(aka Swagger) spec for BBC Nitro API
+ - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(aka Swagger) spec for BBC Nitro and iBL APIs
  - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI (aka Swagger 2.0) spec for Medium API
 
 [banner]: https://apis.guru/branding/banner.svg "APIs.guru"
