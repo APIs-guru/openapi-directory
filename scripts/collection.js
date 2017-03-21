@@ -16,6 +16,7 @@ var Promise = require('bluebird');
 var makeRequest = require('makeRequest');
 var util = require('./util');
 var specSources = require('./spec_sources');
+var sp = require('./sortParameters.js');
 
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
@@ -746,6 +747,10 @@ function patchSwagger(swagger, exPatch) {
   });
 
   removeEmpty(swagger.info);
+
+  if (swagger.host.indexOf('googleapis.com')>=0) {
+    sp.sortParameters(swagger);
+  }
 
   for (var p in swagger.paths) {
     var pathItem = swagger.paths[p];
