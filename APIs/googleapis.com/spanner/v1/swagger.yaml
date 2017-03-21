@@ -295,12 +295,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a particular instance configuration.
-      operationId: spanner.projects.instanceConfigs.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: spanner.projects.instances.operations.get
       parameters:
-        - description: |-
-            Required. The name of the requested instance configuration. Values are of
-            the form `projects/<project>/instanceConfigs/<config>`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -310,7 +311,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/InstanceConfig'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

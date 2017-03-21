@@ -2323,13 +2323,13 @@ definitions:
           The physical location of this range assignment to be used for
           streaming computation cross-worker message delivery.
         type: string
+      deprecatedPersistentDirectory:
+        description: |-
+          DEPRECATED. The location of the persistent state for this range, as a
+          persistent directory in the worker local filesystem.
+        type: string
       end:
         description: The end (exclusive) of the key range.
-        type: string
-      persistentDirectory:
-        description: |-
-          The location of the persistent state for this range, as a
-          persistent directory in the worker local filesystem.
         type: string
       start:
         description: The start (inclusive) of the key range.
@@ -2358,11 +2358,6 @@ definitions:
         description: |-
           The job that was launched, if the request was not a dry run and
           the job was successfully launched.
-      status:
-        $ref: '#/definitions/Status'
-        description: |-
-          The status of the launch template request. Any problems with the request
-          will be indicated in the error_details.
     type: object
   LeaseWorkItemRequest:
     description: Request to lease WorkItems.
