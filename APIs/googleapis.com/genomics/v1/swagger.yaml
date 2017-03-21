@@ -112,17 +112,17 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: referencesets
-  - name: callsets
-  - name: reads
   - name: readgroupsets
+  - name: reads
+  - name: callsets
   - name: variants
   - name: annotationsets
   - name: references
   - name: datasets
-  - name: variantsets
   - name: annotations
+  - name: variantsets
   - name: operations
+  - name: referencesets
 paths:
   /v1/annotations:
     parameters:

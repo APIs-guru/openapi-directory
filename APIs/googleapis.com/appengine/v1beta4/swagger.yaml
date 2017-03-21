@@ -1520,33 +1520,6 @@ definitions:
           type: string
         type: array
     type: object
-  OperationMetadataV1Alpha:
-    description: Metadata for the given google.longrunning.Operation.
-    properties:
-      endTime:
-        description: Time that this operation completed.@OutputOnly
-        type: string
-      ephemeralMessage:
-        description: Ephemeral message that may change every time the operation is polled. @OutputOnly
-        type: string
-      insertTime:
-        description: Time that this operation was created.@OutputOnly
-        type: string
-      method:
-        description: 'API method that initiated this operation. Example: google.appengine.v1alpha.Versions.CreateVersion.@OutputOnly'
-        type: string
-      target:
-        description: 'Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly'
-        type: string
-      user:
-        description: User who requested this operation.@OutputOnly
-        type: string
-      warning:
-        description: Durable messages that persist on every operation poll. @OutputOnly
-        items:
-          type: string
-        type: array
-    type: object
   OperationMetadataV1Beta:
     description: Metadata for the given google.longrunning.Operation.
     properties:

@@ -1229,6 +1229,7 @@ definitions:
         type: string
       perfUnit:
         enum:
+          - bytesPerSecond
           - kibibyte
           - percent
           - perfUnitUnspecified
@@ -1241,6 +1242,9 @@ definitions:
           - memoryRssPrivate
           - memoryRssShared
           - memoryRssTotal
+          - memoryTotal
+          - networkReceived
+          - networkSent
           - ntBytesReceived
           - ntBytesTransferred
           - sampleSeriesTypeUnspecified

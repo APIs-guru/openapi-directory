@@ -2434,20 +2434,20 @@ paths:
       description: Updates the specified firewall rule with the data included in the request. This method supports patch semantics.
       operationId: compute.firewalls.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Firewall'
+        - description: Name of the firewall rule to patch.
+          in: path
+          name: firewall
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: Name of the firewall rule to update.
-          in: path
-          name: firewall
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Firewall'
       responses:
         '200':
           description: Successful response
@@ -2458,6 +2458,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - firewalls
     put:
@@ -9610,6 +9612,50 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - subnetworks
+  '/{project}/regions/{region}/subnetworks/{subnetwork}/setPrivateIpGoogleAccess':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Set whether VMs in this subnet can access Google services without assigning external IP addresses through Cloudpath.
+      operationId: compute.subnetworks.setPrivateIpGoogleAccess
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SubnetworksSetPrivateIpGoogleAccessRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Subnetwork resource.
+          in: path
+          name: subnetwork
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - subnetworks
   '/{project}/regions/{region}/targetPools':
     get:
       description: Retrieves a list of target pools available to the specified project and region.
@@ -15577,6 +15623,7 @@ definitions:
           - APPROVER
           - ATTRIBUTION
           - AUTHORITY
+          - JUSTIFICATION_TYPE
           - NO_ATTR
           - SECURITY_REALM
         type: string
@@ -16075,8 +16122,36 @@ definitions:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
+      denied:
+        description: The list of DENY rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a permitted connection.
+        items:
+          properties:
+            IPProtocol:
+              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, sctp), or the IP protocol number.'
+              type: string
+            ports:
+              description: |-
+                An optional list of ports to which this rule applies. This field is only applicable for UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, this rule applies to connections through any port.
+
+                Example inputs include: ["22"], ["80","443"], and ["12345-12349"].
+              items:
+                type: string
+              type: array
+          type: object
+        type: array
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      destinationRanges:
+        description: 'If destination ranges are specified, the firewall will apply only to traffic that has destination IP address in these ranges. These ranges must be expressed in CIDR format. Only IPv4 is supported.'
+        items:
+          type: string
+        type: array
+      direction:
+        description: 'Direction of traffic to which this firewall applies; default is INGRESS. Note: For INGRESS traffic, it is NOT supported to specify destinationRanges; For EGRESS traffic, it is NOT supported to specify sourceRanges OR sourceTags.'
+        enum:
+          - EGRESS
+          - INGRESS
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -16099,6 +16174,10 @@ definitions:
           - projects/myproject/global/networks/my-network 
           - global/networks/default
         type: string
+      priority:
+        description: 'Priority for this rule. This is an integer between 0 and 65535, both inclusive. When not specified, the value assumed is 1000. Relative priorities determine precedence of conflicting rules. Lower value of priority implies higher precedence (eg, a rule with priority 0 has higher precedence than a rule with priority 1). DENY rules take precedence over ALLOW rules having equal priority.'
+        format: int32
+        type: integer
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
@@ -17919,6 +17998,9 @@ definitions:
       lastAttempt:
         $ref: '#/definitions/ManagedInstanceLastAttempt'
         description: '[Output Only] Information about the last attempt to create or delete the instance.'
+      version:
+        $ref: '#/definitions/ManagedInstanceVersion'
+        description: '[Output Only] Intended version of this instance.'
     type: object
   ManagedInstanceLastAttempt:
     properties:
@@ -17941,6 +18023,15 @@ definitions:
               type: object
             type: array
         type: object
+    type: object
+  ManagedInstanceVersion:
+    properties:
+      instanceTemplate:
+        description: '[Output Only] The intended template of the instance. This field is empty when current_action is one of { DELETING, ABANDONING }.'
+        type: string
+      name:
+        description: '[Output Only] Name of the version.'
+        type: string
     type: object
   Metadata:
     description: A metadata key/value entry.
@@ -19641,6 +19732,11 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  SubnetworksSetPrivateIpGoogleAccessRequest:
+    properties:
+      privateIpGoogleAccess:
+        type: boolean
     type: object
   TCPHealthCheck:
     properties:

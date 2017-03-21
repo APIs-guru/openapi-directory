@@ -1040,7 +1040,7 @@ definitions:
         description: 'Hostname used to reach this application, as resolved by App Engine.@OutputOnly'
         type: string
       dispatchRules:
-        description: HTTP path dispatch rules for requests to the application that do not explicitly target a service or version. Rules are order-dependent.@OutputOnly
+        description: HTTP path dispatch rules for requests to the application that do not explicitly target a service or version. Rules are order-dependent. Up to 20 dispatch rules can be supported.@OutputOnly
         items:
           $ref: '#/definitions/UrlDispatchRule'
         type: array
@@ -1594,33 +1594,6 @@ definitions:
           type: string
         type: array
     type: object
-  OperationMetadataV1Alpha:
-    description: Metadata for the given google.longrunning.Operation.
-    properties:
-      endTime:
-        description: Time that this operation completed.@OutputOnly
-        type: string
-      ephemeralMessage:
-        description: Ephemeral message that may change every time the operation is polled. @OutputOnly
-        type: string
-      insertTime:
-        description: Time that this operation was created.@OutputOnly
-        type: string
-      method:
-        description: 'API method that initiated this operation. Example: google.appengine.v1alpha.Versions.CreateVersion.@OutputOnly'
-        type: string
-      target:
-        description: 'Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly'
-        type: string
-      user:
-        description: User who requested this operation.@OutputOnly
-        type: string
-      warning:
-        description: Durable messages that persist on every operation poll. @OutputOnly
-        items:
-          type: string
-        type: array
-    type: object
   OperationMetadataV1Beta:
     description: Metadata for the given google.longrunning.Operation.
     properties:
@@ -1807,6 +1780,7 @@ definitions:
           - UNSPECIFIED
           - COOKIE
           - IP
+          - RANDOM
         type: string
     type: object
   UrlDispatchRule:
@@ -1816,7 +1790,7 @@ definitions:
         description: 'Domain name to match against. The wildcard "*" is supported if specified before a period: "*.".Defaults to matching all domains: "*".'
         type: string
       path:
-        description: Pathname within the host. Must start with a "/". A single "*" can be included at the end of the path. The sum of the lengths of the domain and path may not exceed 100 characters.
+        description: Pathname within the host. Must start with a "/". A single "*" can be included at the end of the path.The sum of the lengths of the domain and path may not exceed 100 characters.
         type: string
       service:
         description: 'Resource ID of a service in this application that should serve the matched request. The service must already exist. Example: default.'

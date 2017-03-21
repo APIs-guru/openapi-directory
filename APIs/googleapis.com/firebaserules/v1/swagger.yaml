@@ -146,7 +146,6 @@ paths:
         - description: |-
             Resource name of the `Release`.
 
-
             Format: `projects/{project_id}/releases/{release_id}`
           in: path
           name: name
@@ -185,9 +184,9 @@ paths:
       description: |-
         Update a `Release`.
 
-        Only updates to the `ruleset_name` field will be honored. `Release` rename
-        is not supported. To create a `Release` use the CreateRelease method
-        instead.
+        Only updates to the `ruleset_name` and `test_suite_name` fields will be
+        honored. `Release` rename is not supported. To create a `Release` use the
+        CreateRelease method.
       operationId: firebaserules.projects.releases.update
       parameters:
         - description: |-
@@ -240,9 +239,38 @@ paths:
     get:
       description: |-
         List the `Release` values for a project. This list may optionally be
-        filtered by `Release` name or `Ruleset` id or both.
+        filtered by `Release` name, `Ruleset` name, `TestSuite` name, or any
+        combination thereof.
       operationId: firebaserules.projects.releases.list
       parameters:
+        - description: |-
+            `Release` filter. The list method supports filters with restrictions on the
+            `Release.name`, `Release.ruleset_name`, and `Release.test_suite_name`.
+
+            Example 1: A filter of 'name=prod*' might return `Release`s with names
+            within 'projects/foo' prefixed with 'prod':
+
+            Name                          | Ruleset Name
+            ------------------------------|-------------
+            projects/foo/releases/prod    | projects/foo/rulesets/uuid1234
+            projects/foo/releases/prod/v1 | projects/foo/rulesets/uuid1234
+            projects/foo/releases/prod/v2 | projects/foo/rulesets/uuid8888
+
+            Example 2: A filter of `name=prod* ruleset_name=uuid1234` would return only
+            `Release` instances for 'projects/foo' with names prefixed with 'prod'
+            referring to the same `Ruleset` name of 'uuid1234':
+
+            Name                          | Ruleset Name
+            ------------------------------|-------------
+            projects/foo/releases/prod    | projects/foo/rulesets/1234
+            projects/foo/releases/prod/v1 | projects/foo/rulesets/1234
+
+            In the examples, the filter parameters refer to the search filters are
+            relative to the project. Fully qualified prefixed may also be used. e.g.
+            `test_suite_name=projects/foo/testsuites/uuid1`
+          in: query
+          name: filter
+          type: string
         - description: |-
             Resource name for the project.
 
@@ -253,46 +281,18 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            `Release` filter. The list method supports filters with restrictions on the
-            `Release` `name` and also on the `Ruleset` `ruleset_name`.
-
-            Example 1) A filter of 'name=prod*' might return `Release`s with names
-            within 'projects/foo' prefixed with 'prod':
-
-            Name                          | Ruleset Name
-            ------------------------------|-------------
-            projects/foo/releases/prod    | projects/foo/rulesets/uuid1234
-            projects/foo/releases/prod/v1 | projects/foo/rulesets/uuid1234
-            projects/foo/releases/prod/v2 | projects/foo/rulesets/uuid8888
-
-            Example 2) A filter of `name=prod* ruleset_name=uuid1234` would return only
-            `Release` instances for 'projects/foo' with names prefixed with 'prod'
-            referring to the same `Ruleset` name of 'uuid1234':
-
-            Name                          | Ruleset Name
-            ------------------------------|-------------
-            projects/foo/releases/prod    | projects/foo/rulesets/1234
-            projects/foo/releases/prod/v1 | projects/foo/rulesets/1234
-
-            In the examples, the filter parameters refer to the search filters for
-            release and ruleset names are relative to the project releases and rulesets
-            collections. Fully qualified prefixed may also be used. e.g.
-            `name=projects/foo/releases/prod* ruleset_name=projects/foo/rulesets/uuid1`
+            Page size to load. Maximum of 100. Defaults to 10.
+            Note: `page_size` is just a hint and the service may choose to load fewer
+            than `page_size` results due to the size of the output. To traverse all of
+            the releases, the caller should iterate until the `page_token` on the
+            response is empty.
           in: query
-          name: filter
-          type: string
+          name: pageSize
+          type: integer
         - description: Next page token for the next batch of `Release` instances.
           in: query
           name: pageToken
           type: string
-        - description: |-
-            Page size to load. Maximum of 100. Defaults to 10.
-            Note: `page_size` is just a hint and the service may choose to load less
-            than `page_size` due to the size of the output. To traverse all of the
-            releases, caller should iterate until the `page_token` is empty.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -344,8 +344,7 @@ paths:
         The table reflects the `Ruleset` rollout in progress. The `prod` and
         `prod/beta` releases refer to the same `Ruleset`. However, `prod/v23`
         refers to a new `Ruleset`. The `Ruleset` reference for a `Release` may be
-        updated using the UpdateRelease method, and the custom `Release` name
-        may be referenced by specifying the `X-Firebase-Rules-Release-Name` header.
+        updated using the UpdateRelease method.
       operationId: firebaserules.projects.releases.create
       parameters:
         - description: |-
@@ -376,13 +375,24 @@ paths:
   '/v1/{name}/rulesets':
     get:
       description: |-
-        List `Ruleset` metadata only and optionally filter the results by Ruleset
+        List `Ruleset` metadata only and optionally filter the results by `Ruleset`
         name.
 
         The full `Source` contents of a `Ruleset` may be retrieved with
         GetRuleset.
       operationId: firebaserules.projects.rulesets.list
       parameters:
+        - description: |-
+            `Ruleset` filter. The list method supports filters with restrictions on
+            `Ruleset.name`.
+
+            Filters on `Ruleset.create_time` should use the `date` function which
+            parses strings that conform to the RFC 3339 date/time specifications.
+
+            Example: `create_time > date("2017-01-01") AND name=UUID-*`
+          in: query
+          name: filter
+          type: string
         - description: |-
             Resource name for the project.
 
@@ -484,14 +494,13 @@ paths:
       - $ref: '#/parameters/uploadType'
     post:
       description: |-
-        Test `Source` for syntactic and semantic correctness. Issues present in the
-        rules, if any, will be returned to the caller with a description, severity,
-        and source location.
+        Test `Source` for syntactic and semantic correctness. Issues present, if
+        any, will be returned to the caller with a description, severity, and
+        source location.
 
-        The test method will typically be executed with a developer provided
-        `Source`, but if regression testing is desired, this method may be
-        executed against a `Ruleset` resource name and the `Source` will be
-        retrieved from the persisted `Ruleset`.
+        The test method may be executed with `Source` or a `Ruleset` name.
+        Passing `Source` is useful for unit testing new rules. Passing a `Ruleset`
+        name is useful for regression testing an existing rule.
 
         The following is an example of `Source` that permits users to upload images
         to a bucket bearing their user id and matching the correct metadata:
@@ -501,26 +510,31 @@ paths:
             // Users are allowed to subscribe and unsubscribe to the blog.
             service firebase.storage {
               match /users/{userId}/images/{imageName} {
-                  allow write: if userId == request.userId
-                      && (imageName.endsWith('.png') || imageName.endsWith('.jpg'))
-                      && resource.mimeType.startsWith('image/')
+                  allow write: if userId == request.auth.uid
+                      && (imageName.matches('*.png$')
+                      || imageName.matches('*.jpg$'))
+                      && resource.mimeType.matches('^image/')
               }
             }
       operationId: firebaserules.projects.test
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestRulesetRequest'
         - description: |-
-            Name of the project.
+            Tests may either provide `source` or a `Ruleset` resource name.
 
+            For tests against `source`, the resource name must refer to the project:
             Format: `projects/{project_id}`
+
+            For tests against a `Ruleset`, this must be the `Ruleset` resource name:
+            Format: `projects/{project_id}/rulesets/{ruleset_id}`
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestRulesetRequest'
       responses:
         '200':
           description: Successful response
@@ -563,6 +577,19 @@ definitions:
         description: File name.
         type: string
     type: object
+  FunctionCall:
+    description: |-
+      Represents a service-defined function call that was invoked during test
+      execution.
+    properties:
+      args:
+        description: The arguments that were provided to the function.
+        items: {}
+        type: array
+      function:
+        description: Name of the function invoked.
+        type: string
+    type: object
   Issue:
     description: 'Issues include warnings, errors, and deprecation notices.'
     properties:
@@ -596,7 +623,7 @@ definitions:
         type: array
     type: object
   ListRulesetsResponse:
-    description: The response for FirebaseRulesService.ListRulesets
+    description: The response for FirebaseRulesService.ListRulesets.
     properties:
       nextPageToken:
         description: |-
@@ -617,7 +644,7 @@ definitions:
       createTime:
         description: |-
           Time the release was created.
-          @OutputOnly
+          Output only.
         format: google-datetime
         type: string
       name:
@@ -655,7 +682,7 @@ definitions:
       updateTime:
         description: |-
           Time the release was updated.
-          @OutputOnly
+          Output only.
         format: google-datetime
         type: string
     type: object
@@ -667,14 +694,14 @@ definitions:
       createTime:
         description: |-
           Time the `Ruleset` was created.
-          @OutputOnly
+          Output only.
         format: google-datetime
         type: string
       name:
         description: |-
           Name of the `Ruleset`. The ruleset_id is auto generated by the service.
           Format: `projects/{project_id}/rulesets/{ruleset_id}`
-          @OutputOnly
+          Output only.
         type: string
       source:
         $ref: '#/definitions/Source'
@@ -706,12 +733,61 @@ definitions:
         format: int32
         type: integer
     type: object
+  TestResult:
+    description: |-
+      Test result message containing the state of the test as well as a
+      description and source position for test failures.
+    properties:
+      debugMessages:
+        description: |-
+          Debug messages related to test execution issues encountered during
+          evaluation.
+
+          Debug messages may be related to too many or too few invocations of
+          function mocks or to runtime errors that occur during evaluation.
+
+          For example: ```Unable to read variable [name: "resource"]```
+        items:
+          type: string
+        type: array
+      errorPosition:
+        $ref: '#/definitions/SourcePosition'
+        description: |-
+          Position in the `Source` or `Ruleset` where the principle runtime error
+          occurs.
+
+          Evaluation of an expression may result in an error. Rules are deny by
+          default, so a `DENY` expectation when an error is generated is valid.
+          When there is a `DENY` with an error, the `SourcePosition` is returned.
+
+          E.g. `error_position { line: 19 column: 37 }`
+      functionCalls:
+        description: |-
+          The set of function calls made to service-defined methods.
+
+          Function calls are included in the order in which they are encountered
+          during evaluation, are provided for both mocked and unmocked functions,
+          and included on the response regardless of the test `state`.
+        items:
+          $ref: '#/definitions/FunctionCall'
+        type: array
+      state:
+        description: State of the test.
+        enum:
+          - STATE_UNSPECIFIED
+          - SUCCESS
+          - FAILURE
+        type: string
+    type: object
   TestRulesetRequest:
     description: The request for FirebaseRulesService.TestRuleset.
     properties:
       source:
         $ref: '#/definitions/Source'
-        description: '`Source` to be checked for correctness.'
+        description: |-
+          Optional `Source` to be checked for correctness.
+
+          This field must not be set when the resource name refers to a `Ruleset`.
     type: object
   TestRulesetResponse:
     description: The response for FirebaseRulesService.TestRuleset.
@@ -722,5 +798,13 @@ definitions:
           `ERROR` severity will prevent tests from executing.
         items:
           $ref: '#/definitions/Issue'
+        type: array
+      testResults:
+        description: |-
+          The set of test results given the test cases in the `TestSuite`.
+          The results will appear in the same order as the test cases appear in the
+          `TestSuite`.
+        items:
+          $ref: '#/definitions/TestResult'
         type: array
     type: object

@@ -239,6 +239,73 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
+  '/v1/presentations/{presentationId}/pages/{pageObjectId}/thumbnail':
+    get:
+      description: |-
+        Generates a thumbnail of the latest version of the specified page in the
+        presentation and returns a URL to the thumbnail image.
+      operationId: slides.presentations.pages.getThumbnail
+      parameters:
+        - description: The object ID of the page whose thumbnail to retrieve.
+          in: path
+          name: pageObjectId
+          required: true
+          type: string
+        - description: The ID of the presentation to retrieve.
+          in: path
+          name: presentationId
+          required: true
+          type: string
+        - description: |-
+            The optional mime type of the thumbnail image.
+
+            If you don't specify the mime type, the default mime type will be PNG.
+          enum:
+            - PNG
+          in: query
+          name: thumbnailProperties.mimeType
+          type: string
+        - description: |-
+            The optional thumbnail image size.
+
+            If you don't specify the size, the server chooses a default size of the
+            image.
+          enum:
+            - THUMBNAIL_SIZE_UNSPECIFIED
+            - LARGE
+          in: query
+          name: thumbnailProperties.thumbnailSize
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Thumbnail'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations.readonly'
+      tags:
+        - presentations
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/presentations/{presentationId}:batchUpdate':
     parameters:
       - $ref: '#/parameters/uploadType'
@@ -3086,6 +3153,29 @@ definitions:
           - TEXT2
           - BACKGROUND2
         type: string
+    type: object
+  Thumbnail:
+    description: The thumbnail of a page.
+    properties:
+      contentUrl:
+        description: |-
+          The content URL of the thumbnail image.
+
+          The URL to the image has a default lifetime of 30 minutes.
+          This URL is tagged with the account of the requester. Anyone with the URL
+          effectively accesses the image as the original requester. Access to the
+          image may be lost if the presentation's sharing settings change.
+          The mime type of the thumbnail image is the same as specified in the
+          `GetPageThumbnailRequest`.
+        type: string
+      height:
+        description: The positive height in pixels of the thumbnail image.
+        format: int32
+        type: integer
+      width:
+        description: The positive width in pixels of the thumbnail image.
+        format: int32
+        type: integer
     type: object
   UpdateImagePropertiesRequest:
     description: Update the properties of an Image.

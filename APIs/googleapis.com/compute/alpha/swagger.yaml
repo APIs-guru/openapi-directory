@@ -7815,6 +7815,14 @@ paths:
       description: Updates an autoscaler in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.regionAutoscalers.patch
       parameters:
+        - description: Name of the autoscaler to patch.
+          in: query
+          name: autoscaler
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Autoscaler'
         - description: Project ID for this request.
           in: path
           name: project
@@ -7825,19 +7833,10 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the autoscaler to update.
-          in: query
-          name: autoscaler
-          required: true
-          type: string
         - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Autoscaler'
       responses:
         '200':
           description: Successful response
@@ -7848,6 +7847,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionAutoscalers
     post:
@@ -12870,29 +12871,28 @@ paths:
       description: Updates an autoscaler in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.autoscalers.patch
       parameters:
+        - description: Name of the autoscaler to patch.
+          in: query
+          name: autoscaler
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Autoscaler'
         - description: Project ID for this request.
           in: path
           name: project
-          required: true
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: Name of the autoscaler to update.
-          in: query
-          name: autoscaler
           required: true
           type: string
         - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Autoscaler'
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -12903,6 +12903,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - autoscalers
     post:
@@ -18719,6 +18721,7 @@ definitions:
           - APPROVER
           - ATTRIBUTION
           - AUTHORITY
+          - JUSTIFICATION_TYPE
           - NO_ATTR
           - SECURITY_REALM
         type: string
