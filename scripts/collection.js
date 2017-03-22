@@ -88,6 +88,7 @@ program
 program
   .command('validate')
   .description('validate collection')
+  .option('-q, --quiet', 'suppress two common warnings')
   .arguments('[DIR]')
   .action(validateCollection);
 
@@ -153,7 +154,7 @@ function updateCollection(dir) {
     .done();
 }
 
-function validateCollection(dir) {
+function validateCollection(dir, command) {
   var specs = util.getSpecs(dir);
 
   validatePrefered(specs);
@@ -168,8 +169,15 @@ function validateCollection(dir) {
 
     return validateSwagger(swagger, source)
       .then(({errors, warnings}) => {
-        if (warnings)
-          logYaml(warnings);
+        if (warnings) {
+          if (command.quiet) {
+            _.remove(warnings, function (warning) {
+              return ((warning.code === 'UNUSED_DEFINITION') || (warning.code === 'EXTRA_REFERENCE_PROPERTIES'));
+            });
+          }
+          if (warnings.length)
+            logYaml(warnings);
+        }
         if (errors) {
           logYaml(errors);
           throw Error('Validation errors detected');

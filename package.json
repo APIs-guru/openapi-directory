@@ -36,7 +36,7 @@
     "url": "git://github.com/APIs-guru/api-models.git"
   },
   "scripts": {
-    "test": "scripts/collection.js validate",
+    "test": "scripts/collection.js validate -q",
     "deploy": "scripts/deploy.js && ./scripts/deploy_badges.js && gulp publish"
   }
 }
