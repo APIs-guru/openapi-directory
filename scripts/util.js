@@ -132,12 +132,13 @@ exports.getApiId = function (swagger) {
   return id;
 }
 
-exports.getPathComponents = function (swagger) {
+exports.getPathComponents = function (swagger, stripVersion) {
   var serviceName = exports.getServiceName(swagger);
   var path = [exports.getProviderName(swagger)];
   if (serviceName)
     path.push(serviceName);
-  path.push(swagger.info.version);
+  if (!stripVersion)
+    path.push(swagger.info.version||'1.0.0');
 
   path = _.map(path, function (str) {
     str = sanitize(str);

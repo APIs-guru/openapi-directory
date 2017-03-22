@@ -3,6 +3,7 @@
 
 var assert = require('assert');
 var fs = require('fs');
+var pathLib = require('path');
 
 var _ = require('lodash');
 var jp = require('json-pointer');
@@ -38,7 +39,7 @@ converter.ResourceReaders.url = function (url) {
     }
   };
   return makeRequest('get', url, options)
-    .then(([, data]) => data);
+    .then(([, data]) => data.split('\r').join(''));
 }
 
 class SpecError extends Error {
@@ -68,7 +69,7 @@ program
 
 program
   .command('refresh')
-  .description('run refresh')
+  .description('run refresh - read and write back fixup.yaml files')
   .arguments('[DIR]')
   .action(refreshCollection);
 
@@ -98,8 +99,12 @@ program
 program
   .command('add')
   .description('add new spec')
+  .option('-b, --background <BACKGROUND>', 'specify background colour')
+  .option('-c, --categories <CATEGORIES>', 'csv list of categories')
   .option('-f, --fixup', 'try to fix spec')
+  .option('-l, --logo <LOGO>', 'specify logo url')
   .option('-s, --service <NAME>', 'supply service name')
+  .option('-u, --unofficial','set unofficial flag')
   .arguments('<FORMAT> <URL>')
   .action(addToCollection);
 
@@ -204,6 +209,20 @@ function addToCollection(format, url, command) {
   var exPatch = {info: {}};
   if (command.service)
     exPatch.info['x-serviceName'] = command.service;
+  if (command.logo) {
+    exPatch.info['x-logo'] = {
+	  url: command.logo
+	};
+	if ((command.logo && command.logo.indexOf('.jpg')<0) || command.background){
+	  exPatch.info['x-logo'].backgroundColor = command.background||'#FFFFFF';
+	}
+  }
+  if (command.unofficial) {
+    exPatch.info['x-unofficialSpec'] = true;
+  }
+  if (command.categories) {
+    exPatch.info['x-apisguru-categories'] = command.categories.split(',');
+  }
 
   writeSpec(url, format, exPatch)
     .catch(SpecError, error => {
@@ -320,6 +339,15 @@ function writeSpec(source, format, exPatch) {
       context.swagger = validation.resolved;
 
       util.saveSwagger(context.swagger);
+
+      if (Object.keys(exPatch.info).length) {
+        var patchFilename = pathLib.join(util.getPathComponents(context.swagger, true).join('/'),'patch.yaml');
+        if (!fs.existsSync(patchFilename)) {
+          console.log('* Wrote new patch.yaml');
+          fs.writeFileSync(patchFilename,YAML.safeDump(exPatch),'utf8');
+        }
+      }
+
       return context.swagger;
     })
     .catch(e => {
