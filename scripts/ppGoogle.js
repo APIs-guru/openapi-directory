@@ -41,6 +41,9 @@ rr(pathspec,function(err, files) {
                   var originalHead = _.cloneDeep(headObj);
                   sp.sortParameters(headObj);
                   sp.sortParameters(currentObj);
+                  sp.sortTags(headObj);
+                  sp.sortTags(currentObj);
+
                   if (_.isEqual(currentObj, headObj)) {
                       console.log('  Same after sorting!');
                       utils.exec('git checkout HEAD '+file);
