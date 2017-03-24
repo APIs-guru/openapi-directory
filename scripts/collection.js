@@ -4,6 +4,7 @@
 var assert = require('assert');
 var fs = require('fs');
 var pathLib = require('path');
+var utilLib = require('util');
 
 var _ = require('lodash');
 var jp = require('json-pointer');
@@ -82,6 +83,7 @@ program
 program
   .command('update')
   .description('run update')
+  .option('-q, --quiet', 'suppress two common warnings')
   .arguments('[DIR]')
   .action(updateCollection);
 
@@ -140,11 +142,11 @@ function fixupSwagger(swaggerPath) {
     .done();
 }
 
-function updateCollection(dir) {
+function updateCollection(dir, command) {
   specSources.getLeads(util.getSpecs(dir))
     .then(leads => _.toPairs(leads))
     .each(([filename, lead]) => {
-      return writeSpecFromLead(lead)
+      return writeSpecFromLead(lead, command)
         .then(swagger => {
           var newFilename = util.getSwaggerPath(swagger);
           if (newFilename !== filename)
@@ -232,7 +234,7 @@ function addToCollection(format, url, command) {
     exPatch.info['x-apisguru-categories'] = command.categories.split(',');
   }
 
-  writeSpec(url, format, exPatch)
+  writeSpec(url, format, exPatch, command)
     .catch(SpecError, error => {
       if (!command.fixup)
         throw error;
@@ -300,7 +302,7 @@ function updateCatalogLeads() {
     .done();
 }
 
-function writeSpecFromLead(lead) {
+function writeSpecFromLead(lead, command) {
   var origin = util.getOrigin(lead);
   var source = origin.url;
   var format = converter.getFormatName(origin.format, origin.version);
@@ -308,10 +310,10 @@ function writeSpecFromLead(lead) {
   var exPatch = _.cloneDeep(lead);
   delete exPatch.info['x-origin'];
 
-  return writeSpec(source, format, exPatch);
+  return writeSpec(source, format, exPatch, command);
 }
 
-function writeSpec(source, format, exPatch) {
+function writeSpec(source, format, exPatch, command) {
   var context = {source};
 
   return converter.getSpec(source, format)
@@ -340,6 +342,12 @@ function writeSpec(source, format, exPatch) {
 
       if (validation.errors)
         throw Error('Validation errors!!!');
+
+      if (command && command.quiet) {
+        _.remove(warnings, function (warning) {
+          return ((warning.code === 'UNUSED_DEFINITION') || (warning.code === 'EXTRA_REFERENCE_PROPERTIES'));
+        });
+      }
 
       if (validation.warnings)
         logYaml(validation.warnings);
@@ -848,7 +856,7 @@ function convertToSwagger(spec) {
   return spec.convertTo('swagger_2')
     .then(swagger => {
       _.merge(swagger.spec.info, {
-        'x-providerName': parseHost(swagger.spec),
+        'x-providerName': parseHost(swagger.spec, spec.source),
         'x-origin': {
           format: spec.formatName,
           version: spec.getFormatVersion(),
@@ -859,7 +867,7 @@ function convertToSwagger(spec) {
     });
 }
 
-function parseHost(swagger) {
+function parseHost(swagger, altSource) {
   var swHost = swagger.host;
 
   assert(swHost, 'Missing host');
@@ -867,6 +875,7 @@ function parseHost(swagger) {
   assert(swHost !== 'raw.githubusercontent.com', 'Missing host + spec hosted on GitHub');
 
   var p = parseDomain(swHost);
+  if (!p) p = parseDomain(altSource);
   p.domain = p.domain.replace(/^www.?/, '')
   p.subdomain = p.subdomain.replace(/^www.?/, '')
   //TODO: use subdomain to detect 'x-serviceName'
@@ -918,3 +927,4 @@ process.on('exit', function() {
     }
   }
 });
+
