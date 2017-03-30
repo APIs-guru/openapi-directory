@@ -358,7 +358,8 @@ function writeSpec(source, format, exPatch, command) {
 
       if (Object.keys(exPatch.info).length) {
         var patchFilename = pathLib.join(util.getPathComponents(context.swagger, true).join('/'),'patch.yaml');
-        if (!fs.existsSync(patchFilename)) {
+        var patchFilename2 = pathLib.join(util.getPathComponents(context.swagger).join('/'),'patch.yaml');
+        if (!fs.existsSync(patchFilename) && !fs.existsSync(patchFilename2)) {
           console.log('* Wrote new patch.yaml');
           fs.writeFileSync(patchFilename,YAML.safeDump(exPatch),'utf8');
         }
