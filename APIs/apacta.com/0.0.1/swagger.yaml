@@ -1877,6 +1877,12 @@ paths:
           in: query
           name: is_offer
           type: integer
+        - enum:
+            - 0
+            - 1
+          in: query
+          name: is_locked
+          type: integer
         - format: date
           in: query
           name: date_from
@@ -1935,6 +1941,8 @@ paths:
                 maxLength: 8
                 type: integer
               is_draft:
+                type: boolean
+              is_locked:
                 type: boolean
               is_offer:
                 type: boolean
@@ -4357,6 +4365,8 @@ definitions:
         maxLength: 8
         type: integer
       is_draft:
+        type: boolean
+      is_locked:
         type: boolean
       is_offer:
         type: boolean
