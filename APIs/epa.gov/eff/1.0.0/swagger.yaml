@@ -21,6 +21,9 @@ info:
     <br>
     Additional ECHO Resources:&nbsp&nbsp <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
     <br>
+  license:
+    name: This page was built with the Swagger API.
+    url: 'https://swagger.io'
   title: U.S. EPA Enforcement and Compliance History Online (ECHO) - Effluent Charting and Reporting
   version: 1.0.0
   x-apisguru-categories:
@@ -42,7 +45,7 @@ produces:
   - application/xml
 parameters:
   callback:
-    description: JSONP Callback.  For use with JSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
     in: query
     name: callback
     required: false
@@ -60,8 +63,11 @@ parameters:
     required: false
     type: string
   output:
-    default: JSON
-    description: 'Output format: JSONP, JSON or XML.'
+    description: |-
+      Output Format Flag.  Enter one of the following keywords:
+      - JSON = Data model formatted as Javascript Object Notation (default).
+      - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+      - XML = Data model formatted as Extensible Markup Language.
     enum:
       - JSONP
       - JSON
@@ -403,6 +409,8 @@ definitions:
         example: 30-APR-14
         title: Monitoring Period End Date
         type: string
+      NODEDesc:
+        type: string
       NODICode:
         description: The unique code indicating why no DMR Value was submitted by the permittee for a Monitoring Period End Date
         example: C
@@ -427,6 +435,8 @@ definitions:
         description: 'The code representing the unit of measure applicable to the limit and DMR values entered by the user (e.g., 30-day average, daily maximum)'
         example: DC
         title: Statistical Base Code
+        type: string
+      StatisticalBaseDesc:
         type: string
       StatisticalBaseTypeCode:
         description: 'The code indicating whether the statistical base code is a minimum, average, or maximum for purposes of calculating compliance against the limit value'
@@ -492,6 +502,7 @@ definitions:
       - StdUnitDesc
       - LimitValueStdUnits
       - StatisticalBaseCode
+      - StatisticalBaseDesc
       - StatisticalBaseTypeCode
       - StatisticalBaseTypeDesc
       - LimitValueQualifierCode
@@ -510,17 +521,18 @@ definitions:
       - ValueReceivedDate
       - DaysLate
       - NODICode
+      - NODEDesc
       - ExceedencePct
     type: object
   eff1_NPDESViolations:
     description: NPDES Violations Object
     properties:
-      NpdesViolationId:
+      NPDESViolationId:
         description: The unique identifier in ICIS-NPDES for the NPDES Violation
         example: '3401214483'
         title: NPDES Violation ID
         type: string
-      RncDetectionCode:
+      RNCDetectionCode:
         description: |-
           The code indicating the reportable noncompliance (RNC) detected for a violation:
           - A = Enforcement Order
@@ -549,27 +561,27 @@ definitions:
         example: K
         title: RNC Violation Code
         type: string
-      RncDetectionDate:
+      RNCDetectionDate:
         description: The date that the exceedance was detected
         example: 28-FEB-16
         title: Detection Date
         type: string
-      RncDetectionDesc:
+      RNCDetectionDesc:
         description: A description of the reportable noncompliance (RNC) detected
         example: 'Non-receipt Violation, Non-Monthly Average'
         title: RNC Violation
         type: string
-      RncResolutionCode:
+      RNCResolutionCode:
         description: The code indicating the resolution of noncompliance (RNC) for a violation
         example: '2'
         title: RNC Resolution Type Code
         type: string
-      RncResolutionDate:
+      RNCResolutionDate:
         description: The date RNC was marked to its current resolution status. It can be entered manually or automatically
         example: 01-FEB-16
         title: Resolution Date
         type: string
-      RncResolutionDesc:
+      RNCResolutionDesc:
         description: |-
           - 1 = Unresolved RNC
           - 2 = Back into Compliance

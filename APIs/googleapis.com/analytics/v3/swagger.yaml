@@ -3061,6 +3061,33 @@ paths:
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/remarketingAudiences/{remarketingAudienceId}':
+    delete:
+      description: Delete a remarketing audience.
+      operationId: analytics.management.remarketingAudience.delete
+      parameters:
+        - description: Account ID to which the remarketing audience belongs.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The ID of the remarketing audience to delete.
+          in: path
+          name: remarketingAudienceId
+          required: true
+          type: string
+        - description: Web property ID to which the remarketing audience belongs.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+      tags:
+        - management
     get:
       description: Gets a remarketing audience to which the user has access.
       operationId: analytics.management.remarketingAudience.get

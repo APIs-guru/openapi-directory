@@ -348,6 +348,43 @@ paths:
       summary: Create new empty collection with given name
       tags:
         - Collection
+  /rest/v1.1/profile/enrollmentStatus:
+    get:
+      consumes:
+        - application/json
+      operationId: getProfileEnrollmentStatusUsingGET
+      parameters:
+        - description: The secretKey or readOnlyKey provided by VisageCloud
+          in: query
+          name: secretKey
+          required: true
+          type: string
+        - description: The profile that contains the faces
+          in: query
+          name: profileId
+          required: true
+          type: string
+        - description: The collection that contains the profile
+          in: query
+          name: collectionId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Gets the enrollment status of a profile: information on whether it is suitable for authentication.'
+      tags:
+        - Profile
   /rest/v1.1/profile/map:
     delete:
       consumes:
@@ -521,20 +558,59 @@ paths:
       summary: Creates a new profile with no faces associated to it (empty profile)
       tags:
         - Profile
-  /rest/v1.1/stream/collection:
-    post:
+  /rest/v1.1/stream/frames:
+    get:
       consumes:
         - application/json
-      operationId: addCollectionUsingPOST_1
+      operationId: getLastNFramesUsingGET
       parameters:
         - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
           name: secretKey
           required: true
           type: string
-        - description: The name of the stream that will be created
+        - description: The id of the stream for which the frames will be retrieved
           in: query
-          name: streamName
+          name: streamId
+          required: true
+          type: string
+        - default: 10
+          description: How many frames to retrieve at a time
+          format: int32
+          in: query
+          name: count
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get last processed N frames from stream
+      tags:
+        - Stream
+  /rest/v1.1/stream/start:
+    patch:
+      consumes:
+        - application/json
+      operationId: startStreamUsingPATCH
+      parameters:
+        - description: The secretKey or readOnlyKey provided by VisageCloud
+          in: query
+          name: secretKey
+          required: true
+          type: string
+        - description: The id of the stream that will be started
+          in: query
+          name: id
           required: true
           type: string
       produces:
@@ -544,22 +620,52 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/RestResponse'
-        '201':
-          description: Created
+        '204':
+          description: No Content
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
-        '404':
-          description: Not Found
-      summary: Create new stream with given name
+      summary: Start existing stream
+      tags:
+        - Stream
+  /rest/v1.1/stream/stop:
+    patch:
+      consumes:
+        - application/json
+      operationId: stopStreamUsingPATCH
+      parameters:
+        - description: The secretKey or readOnlyKey provided by VisageCloud
+          in: query
+          name: secretKey
+          required: true
+          type: string
+        - description: The id of the stream that will be stopped
+          in: query
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Stop existing stream
       tags:
         - Stream
   /rest/v1.1/stream/stream:
     delete:
       consumes:
         - application/json
-      operationId: removeFaceFromProfileUsingDELETE_2
+      operationId: removeStreamUsingDELETE
       parameters:
         - description: The secretKey or readOnlyKey provided by VisageCloud
           in: query
@@ -568,7 +674,7 @@ paths:
           type: string
         - description: The id of the stream that will be removed
           in: query
-          name: streamId
+          name: id
           required: true
           type: string
       produces:
@@ -585,6 +691,76 @@ paths:
         '403':
           description: Forbidden
       summary: Delete existing stream
+      tags:
+        - Stream
+    post:
+      consumes:
+        - application/json
+      operationId: addStreamUsingPOST
+      parameters:
+        - description: The secretKey or readOnlyKey provided by VisageCloud
+          in: query
+          name: secretKey
+          required: true
+          type: string
+        - description: The name of the stream that will be created
+          in: query
+          name: name
+          required: true
+          type: string
+        - description: The url of the stream
+          in: query
+          name: url
+          required: true
+          type: string
+        - default: WEBRTC_PULL
+          description: Streaming method
+          enum:
+            - WEBRTC_PULL
+            - WEBRTC_PUSH
+            - SNAPSHOT_PULL
+          in: query
+          name: method
+          required: false
+          type: string
+        - description: Username
+          in: query
+          name: username
+          required: true
+          type: string
+        - description: Password
+          in: query
+          name: password
+          required: true
+          type: string
+        - default: false
+          description: Boolean value indicating whether you want the original picture to be stored for later retrieval
+          in: query
+          name: storeOriginalFrames
+          required: false
+          type: boolean
+        - default: false
+          description: Boolean value indicating whether the stream is currently active or not
+          in: query
+          name: isActive
+          required: false
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Create new stream with given name
       tags:
         - Stream
 definitions:

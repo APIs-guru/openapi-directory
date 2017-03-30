@@ -11899,6 +11899,9 @@ definitions:
         items:
           $ref: '#/definitions/Backend'
         type: array
+      cdnPolicy:
+        $ref: '#/definitions/BackendServiceCdnPolicy'
+        description: Cloud CDN configuration for this BackendService.
       connectionDraining:
         $ref: '#/definitions/ConnectionDraining'
       creationTimestamp:
@@ -12020,6 +12023,13 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
+  BackendServiceCdnPolicy:
+    description: Message containing Cloud CDN configuration for a backend service.
+    properties:
+      cacheKeyPolicy:
+        $ref: '#/definitions/CacheKeyPolicy'
+        description: The CacheKeyPolicy for this CdnPolicy.
+    type: object
   BackendServiceGroupHealth:
     properties:
       healthStatus:
@@ -12110,6 +12120,29 @@ definitions:
         type: string
       path:
         type: string
+    type: object
+  CacheKeyPolicy:
+    description: Message containing what to include in the cache key for a request for Cloud CDN.
+    properties:
+      includeHost:
+        description: 'If true, requests to different hosts will be cached separately.'
+        type: boolean
+      includeProtocol:
+        description: 'If true, http and https requests will be cached separately.'
+        type: boolean
+      includeQueryString:
+        description: 'If true, include query string parameters in the cache key according to query_string_whitelist and query_string_blacklist. If neither is set, the entire query string will be included. If false, the query string will be excluded from the cache key entirely.'
+        type: boolean
+      queryStringBlacklist:
+        description: 'Names of query string parameters to exclude in cache keys. All other parameters will be included. Either specify query_string_whitelist or query_string_blacklist, not both. ''&'' and ''='' will be percent encoded and not treated as delimiters.'
+        items:
+          type: string
+        type: array
+      queryStringWhitelist:
+        description: 'Names of query string parameters to include in cache keys. All other parameters will be excluded. Either specify query_string_whitelist or query_string_blacklist, not both. ''&'' and ''='' will be percent encoded and not treated as delimiters.'
+        items:
+          type: string
+        type: array
     type: object
   ConnectionDraining:
     description: Message containing connection draining configuration.
@@ -15261,7 +15294,7 @@ definitions:
         description: 'IP address and range of the interface. The IP range must be in the RFC3927 link-local IP space. The value must be a CIDR-formatted string, for example: 169.254.0.1/30. NOTE: Do not truncate the address as it represents the IP address of the interface.'
         type: string
       linkedVpnTunnel:
-        description: URI of linked VPN tunnel. It must be in the same region as the router. Each interface can have at most one linked resource.
+        description: URI of the linked VPN tunnel. It must be in the same region as the router. Each interface can have at most one linked resource and it could either be a VPN Tunnel or an interconnect attachment.
         type: string
       name:
         description: Name of this interface entry. The name must be 1-63 characters long and comply with RFC1035.

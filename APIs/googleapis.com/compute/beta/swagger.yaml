@@ -1929,12 +1929,7 @@ paths:
       description: Updates the specified BackendBucket resource with the data included in the request. This method supports patch semantics.
       operationId: compute.backendBuckets.patch
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the BackendBucket resource to update.
+        - description: Name of the BackendBucket resource to patch.
           in: path
           name: backendBucket
           required: true
@@ -1943,6 +1938,11 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/BackendBucket'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1953,6 +1953,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendBuckets
     put:
@@ -2138,15 +2140,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
+      description: Patches the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
       operationId: compute.backendServices.patch
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the BackendService resource to update.
+        - description: Name of the BackendService resource to patch.
           in: path
           name: backendService
           required: true
@@ -2155,6 +2152,11 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/BackendService'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2165,6 +2167,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendServices
     put:
@@ -2921,20 +2925,20 @@ paths:
       description: Updates a HealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.healthChecks.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HealthCheck'
+        - description: Name of the HealthCheck resource to patch.
+          in: path
+          name: healthCheck
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: Name of the HealthCheck resource to update.
-          in: path
-          name: healthCheck
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/HealthCheck'
       responses:
         '200':
           description: Successful response
@@ -2945,6 +2949,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - healthChecks
     put:
@@ -3174,20 +3180,20 @@ paths:
       description: Updates a HttpHealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.httpHealthChecks.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HttpHealthCheck'
+        - description: Name of the HttpHealthCheck resource to patch.
+          in: path
+          name: httpHealthCheck
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: Name of the HttpHealthCheck resource to update.
-          in: path
-          name: httpHealthCheck
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/HttpHealthCheck'
       responses:
         '200':
           description: Successful response
@@ -3198,6 +3204,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpHealthChecks
     put:
@@ -3427,20 +3435,20 @@ paths:
       description: Updates a HttpsHealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.httpsHealthChecks.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HttpsHealthCheck'
+        - description: Name of the HttpsHealthCheck resource to patch.
+          in: path
+          name: httpsHealthCheck
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: Name of the HttpsHealthCheck resource to update.
-          in: path
-          name: httpsHealthCheck
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/HttpsHealthCheck'
       responses:
         '200':
           description: Successful response
@@ -3451,6 +3459,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpsHealthChecks
     put:
@@ -6218,23 +6228,23 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified UrlMap resource with the data included in the request. This method supports patch semantics.
+      description: Patches the specified UrlMap resource with the data included in the request. This method supports patch semantics.
       operationId: compute.urlMaps.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UrlMap'
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: Name of the UrlMap resource to update.
+        - description: Name of the UrlMap resource to patch.
           in: path
           name: urlMap
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UrlMap'
       responses:
         '200':
           description: Successful response
@@ -6245,6 +6255,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - urlMaps
     put:
@@ -7255,6 +7267,15 @@ paths:
       description: Updates the specified regional BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
       operationId: compute.regionBackendServices.patch
       parameters:
+        - description: Name of the BackendService resource to patch.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendService'
         - description: Project ID for this request.
           in: path
           name: project
@@ -7265,15 +7286,6 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the BackendService resource to update.
-          in: path
-          name: backendService
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BackendService'
       responses:
         '200':
           description: Successful response
@@ -7284,6 +7296,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionBackendServices
     put:
@@ -9107,9 +9121,13 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified Router resource with the data included in the request. This method supports patch semantics.
+      description: Patches the specified Router resource with the data included in the request. This method supports patch semantics.
       operationId: compute.routers.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Router'
         - description: Project ID for this request.
           in: path
           name: project
@@ -9120,15 +9138,11 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the Router resource to update.
+        - description: Name of the Router resource to patch.
           in: path
           name: router
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Router'
       responses:
         '200':
           description: Successful response
@@ -9139,6 +9153,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - routers
     put:
@@ -14757,7 +14773,7 @@ definitions:
     type: object
   AuditConfig:
     description: |-
-      Specifies the audit configuration for a service. It consists of which permission types are logged, and what identities, if any, are exempted from logging. An AuditConifg must have one or more AuditLogConfigs.
+      Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConifg must have one or more AuditLogConfigs.
 
       If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditConfig are exempted. Example Policy with multiple AuditConfigs: { "audit_configs": [ { "service": "allServices" "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", }, { "log_type": "ADMIN_READ", } ] }, { "service": "fooservice@googleapis.com" "audit_log_configs": [ { "log_type": "DATA_READ", }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:bar@gmail.com" ] } ] } ] } For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
     properties:
@@ -14772,7 +14788,7 @@ definitions:
           type: string
         type: array
       service:
-        description: 'Specifies a service that will be enabled for audit logging. For example, `resourcemanager`, `storage`, `compute`. `allServices` is a special value that covers all services.'
+        description: 'Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.'
         type: string
     type: object
   AuditLogConfig:
@@ -18627,6 +18643,7 @@ definitions:
           - AUTOSCALERS
           - BACKEND_BUCKETS
           - BACKEND_SERVICES
+          - COMMITMENTS
           - CPUS
           - CPUS_ALL_REGIONS
           - DISKS_TOTAL_GB
@@ -19156,7 +19173,7 @@ definitions:
         description: 'IP address and range of the interface. The IP range must be in the RFC3927 link-local IP space. The value must be a CIDR-formatted string, for example: 169.254.0.1/30. NOTE: Do not truncate the address as it represents the IP address of the interface.'
         type: string
       linkedVpnTunnel:
-        description: URI of linked VPN tunnel. It must be in the same region as the router. Each interface can have at most one linked resource.
+        description: URI of the linked VPN tunnel. It must be in the same region as the router. Each interface can have at most one linked resource and it could either be a VPN Tunnel or an interconnect attachment.
         type: string
       name:
         description: Name of this interface entry. The name must be 1-63 characters long and comply with RFC1035.
@@ -19189,6 +19206,11 @@ definitions:
     properties:
       bestRoutes:
         description: Best routes for this router's network.
+        items:
+          $ref: '#/definitions/Route'
+        type: array
+      bestRoutesForRouter:
+        description: Best routes learned by this router.
         items:
           $ref: '#/definitions/Route'
         type: array

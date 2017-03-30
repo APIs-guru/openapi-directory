@@ -127,7 +127,7 @@ paths:
         - description: |-
             Required. The name of the version. You can get the names of all the
             versions of a model by calling
-            [projects.models.versions.list](/ml/reference/rest/v1beta1/projects.models.versions/list).
+            [projects.models.versions.list](/ml-engine/reference/rest/v1beta1/projects.models.versions/list).
 
             Authorization: requires `Editor` role on the parent project.
           in: path
@@ -146,11 +146,17 @@ paths:
       tags:
         - projects
     get:
-      description: Describes a job.
-      operationId: ml.projects.jobs.get
+      description: |-
+        Gets information about a model version.
+
+        Models can have multiple versions. You can call
+        [projects.models.versions.list](/ml-engine/reference/rest/v1beta1/projects.models.versions/list)
+        to get the same information that this method returns for all of the
+        versions of a model.
+      operationId: ml.projects.models.versions.get
       parameters:
         - description: |-
-            Required. The name of the job to get the description of.
+            Required. The name of the version.
 
             Authorization: requires `Viewer` role on the parent project.
           in: path
@@ -162,7 +168,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleCloudMlV1beta1__Job'
+            $ref: '#/definitions/GoogleCloudMlV1beta1__Version'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -250,17 +256,24 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
     post:
-      description: Cancels a running job.
-      operationId: ml.projects.jobs.cancel
+      description: |-
+        Starts asynchronous cancellation on a long-running operation.  The server
+        makes a best effort to cancel the operation, but success is not
+        guaranteed.  If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+        Operations.GetOperation or
+        other methods to check whether the cancellation succeeded or whether the
+        operation completed despite cancellation. On successful cancellation,
+        the operation is not deleted; instead, it becomes an operation with
+        an Operation.error value with a google.rpc.Status.code of 1,
+        corresponding to `Code.CANCELLED`.
+      operationId: ml.projects.operations.cancel
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/GoogleCloudMlV1beta1__CancelJobRequest'
-        - description: |-
-            Required. The name of the job to cancel.
-
-            Authorization: requires `Editor` role on the parent project.
+        - description: The name of the operation resource to be cancelled.
           in: path
           name: name
           required: true
@@ -390,10 +403,14 @@ paths:
         setting manually using this method.
       operationId: ml.projects.models.versions.setDefault
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudMlV1beta1__SetDefaultVersionRequest'
         - description: |-
             Required. The name of the version to make the default for the model. You
             can get the names of all the versions of a model by calling
-            [projects.models.versions.list](/ml/reference/rest/v1beta1/projects.models.versions/list).
+            [projects.models.versions.list](/ml-engine/reference/rest/v1beta1/projects.models.versions/list).
 
             Authorization: requires `Editor` role on the parent project.
           in: path
@@ -401,10 +418,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GoogleCloudMlV1beta1__SetDefaultVersionRequest'
       responses:
         '200':
           description: Successful response
@@ -566,7 +579,7 @@ paths:
 
         You must add at least one version before you can request predictions from
         the model. Add versions by calling
-        [projects.models.versions.create](/ml/reference/rest/v1beta1/projects.models.versions/create).
+        [projects.models.versions.create](/ml-engine/reference/rest/v1beta1/projects.models.versions/create).
       operationId: ml.projects.models.create
       parameters:
         - description: |-
@@ -661,7 +674,7 @@ paths:
         model. When you add a version to a model that already has one or more
         versions, the default version does not automatically change. If you want a
         new version to be the default, you must call
-        [projects.models.versions.setDefault](/ml/reference/rest/v1beta1/projects.models.versions/setDefault).
+        [projects.models.versions.setDefault](/ml-engine/reference/rest/v1beta1/projects.models.versions/setDefault).
       operationId: ml.projects.models.versions.create
       parameters:
         - description: |-
@@ -789,7 +802,7 @@ definitions:
       Each version is a trained model deployed in the cloud, ready to handle
       prediction requests. A model can have multiple versions. You can get
       information about all of the versions of a given model by calling
-      [projects.models.versions.list](/ml/reference/rest/v1/projects.models.versions/list).
+      [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
     properties:
       createTime:
         description: Output only. The time the version was created.
@@ -799,11 +812,11 @@ definitions:
         description: |-
           Required. The Google Cloud Storage location of the trained model used to
           create the version. See the
-          [overview of model deployment](/ml/docs/concepts/deployment-overview) for
+          [overview of model deployment](/ml-engine/docs/concepts/deployment-overview) for
           more informaiton.
 
           When passing Version to
-          [projects.models.versions.create](/ml/reference/rest/v1/projects.models.versions/create)
+          [projects.models.versions.create](/ml-engine/reference/rest/v1/projects.models.versions/create)
           the model service uses the specified location as the source of the model.
           Once deployed, the model version is hosted by the prediction service, so
           this location is useful only as a historical record.
@@ -817,7 +830,7 @@ definitions:
           requests that do not specify a version.
 
           You can change the default version by calling
-          [projects.methods.versions.setDefault](/ml/reference/rest/v1/projects.models.versions/setDefault).
+          [projects.methods.versions.setDefault](/ml-engine/reference/rest/v1/projects.models.versions/setDefault).
         type: boolean
       lastUseTime:
         description: Output only. The time the version was last used for prediction.
@@ -1060,7 +1073,7 @@ definitions:
           handle prediction requests that do not specify a version.
 
           You can change the default version by calling
-          [projects.methods.versions.setDefault](/ml/reference/rest/v1beta1/projects.models.versions/setDefault).
+          [projects.methods.versions.setDefault](/ml-engine/reference/rest/v1beta1/projects.models.versions/setDefault).
       description:
         description: Optional. The description specified for the model when it was created.
         type: string
@@ -1080,6 +1093,12 @@ definitions:
           Optional. The list of regions where the model is going to be deployed.
           Currently only one region per model is supported.
           Defaults to 'us-central1' if nothing is set.
+          Note:
+          *   No matter where a model is deployed, it can always be accessed by
+              users from anywhere, both for online and batch prediction.
+          *   The region for a batch prediction job is set by the region field when
+              submitting the batch prediction job and does not take its value from
+              this field.
         items:
           type: string
         type: array
@@ -1626,7 +1645,7 @@ definitions:
       Each version is a trained model deployed in the cloud, ready to handle
       prediction requests. A model can have multiple versions. You can get
       information about all of the versions of a given model by calling
-      [projects.models.versions.list](/ml/reference/rest/v1beta1/projects.models.versions/list).
+      [projects.models.versions.list](/ml-engine/reference/rest/v1beta1/projects.models.versions/list).
     properties:
       createTime:
         description: Output only. The time the version was created.
@@ -1636,11 +1655,11 @@ definitions:
         description: |-
           Required. The Google Cloud Storage location of the trained model used to
           create the version. See the
-          [overview of model deployment](/ml/docs/concepts/deployment-overview) for
+          [overview of model deployment](/ml-engine/docs/concepts/deployment-overview) for
           more informaiton.
 
           When passing Version to
-          [projects.models.versions.create](/ml/reference/rest/v1beta1/projects.models.versions/create)
+          [projects.models.versions.create](/ml-engine/reference/rest/v1beta1/projects.models.versions/create)
           the model service uses the specified location as the source of the model.
           Once deployed, the model version is hosted by the prediction service, so
           this location is useful only as a historical record.
@@ -1654,7 +1673,7 @@ definitions:
           requests that do not specify a version.
 
           You can change the default version by calling
-          [projects.methods.versions.setDefault](/ml/reference/rest/v1beta1/projects.models.versions/setDefault).
+          [projects.methods.versions.setDefault](/ml-engine/reference/rest/v1beta1/projects.models.versions/setDefault).
         type: boolean
       lastUseTime:
         description: Output only. The time the version was last used for prediction.

@@ -681,6 +681,10 @@ definitions:
       nextSyncToken:
         description: The token that can be used to retrieve changes since the last request.
         type: string
+      totalPeople:
+        description: The total number of people in the list without pagination.
+        format: int32
+        type: integer
     type: object
   Locale:
     description: A person's locale preference.

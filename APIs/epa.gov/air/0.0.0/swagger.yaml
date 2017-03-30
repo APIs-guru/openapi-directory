@@ -21,8 +21,13 @@ info:
     <br><b>4)</b>&nbsp Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of facility information that meets the QID query criteria.
     <br>
     <br>
+    Use the qcolumns parameter to customize your search results.  Use the Metdata service endpoint for a list of available output objects, their Column Ids, and their definitions to help you build your customized output. 
+    <br><br>
     Additional ECHO Resources:&nbsp&nbsp <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
     <br>
+  license:
+    name: This page was built with the Swagger API.
+    url: 'https://swagger.io'
   title: U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Air Act
   version: 0.0.0
   x-apisguru-categories:
@@ -68,7 +73,7 @@ parameters:
     required: false
     type: number
   callback:
-    description: JSONP Callback.  For use with JSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
     in: query
     name: callback
     required: false
@@ -97,17 +102,6 @@ parameters:
     name: newsort
     required: false
     type: number
-  output:
-    default: JSON
-    description: 'Output format: JSONP, JSON or XML.'
-    enum:
-      - JSONP
-      - JSON
-      - XML
-    in: query
-    name: output
-    required: false
-    type: string
   p_act:
     description: Active Permits/Facilities Flag.  Provide Y or N to filter results to facilities with active permits.
     enum:
@@ -478,16 +472,16 @@ parameters:
   p_med:
     description: |-
       Filter Results by Media.
-      - W = Water
-      - R = RCRA (Hazardous Waste)
       - M = RMP (Risk Management Plan)
+      - R = RCRA (Hazardous Waste)
       - S = SDWA (Public Drinking Water Systems)
-      - ALL (Water + RCRA + SDWA)
+      - W = Water
+      - ALL = Water and RCRA and SDWA
     enum:
-      - W
-      - R
       - M
+      - R
       - S
+      - W
       - ALL
     in: query
     name: p_med
@@ -696,6 +690,12 @@ parameters:
     name: p_pollvio
     required: false
     type: string
+  p_pretty_print:
+    description: Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.
+    in: query
+    name: p_pretty_print
+    required: false
+    type: number
   p_prog:
     description: Air Program Code Filter.  Enter one or more Air program codes to filter results.  Provide multiple values as a comma-delimited list.
     in: query
@@ -722,6 +722,12 @@ parameters:
     in: query
     name: p_psncq
     required: false
+    type: string
+  p_qid:
+    description: Query ID Selector.  Enter the QueryID number from a previously run query.
+    in: query
+    name: p_qid
+    required: true
     type: string
   p_qiv:
     description: |-
@@ -978,6 +984,12 @@ parameters:
     name: p_tribeid
     required: false
     type: number
+  p_tribename:
+    description: Tribe Name Filter.  Enter a single tribe name to filter results.
+    in: query
+    name: p_tribename
+    required: false
+    type: string
   p_usmex:
     description: US-Mexico Border Flag.  Enter Y/N to restrict searches to facilities located within 100KM of the border.
     enum:
@@ -1045,10 +1057,16 @@ parameters:
     required: false
     type: number
   qcolumns:
-    description: 'Results Column Limiter.  Enter a comma-delimited list of column positions to limit results to only desired columns or provide an asterisk to obtain all possible columns.  When qcolumns is unspecified each ECHO service provides a default set of columns considered appropriate for average use.  This parameter provides a mechanism to tune this further.  The list of positions and corresponding columns may be obtained via calling the metadata endpoint for each service.  Use with caution as while ECHO data structures are largely static, breaking changes are possible as ECHO implements new features.'
+    description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
     in: query
     name: qcolumns
     required: false
+    type: string
+  qid:
+    description: Query ID Selector.  Enter the QueryID number from a previously run query.
+    in: query
+    name: qid
+    required: true
     type: string
   queryset:
     description: 'Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.'
@@ -1109,15 +1127,20 @@ paths:
     get:
       description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return a comma sepated vaule (CSV) file of the facilities found.'
       parameters:
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
           in: query
-          name: qid
-          required: true
-          type: number
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/qcolumns'
+        - $ref: '#/parameters/p_pretty_print'
       responses:
         '200':
-          description: Results are a comma separated value (CSV) file.
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
           schema:
             type: file
       summary: Clean Air Act Download Data Service
@@ -1126,15 +1149,20 @@ paths:
     post:
       description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return a comma sepated vaule (CSV) file of the facilities found.'
       parameters:
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
           in: query
-          name: qid
-          required: true
-          type: number
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/qcolumns'
+        - $ref: '#/parameters/p_pretty_print'
       responses:
         '200':
-          description: Results are a comma separated value (CSV) file.
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
           schema:
             type: file
       summary: Clean Air Act Download Data Service
@@ -1144,7 +1172,19 @@ paths:
     get:
       description: Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/p_fn'
         - $ref: '#/parameters/p_sa'
         - $ref: '#/parameters/p_sa1'
@@ -1214,6 +1254,7 @@ paths:
         - $ref: '#/parameters/p_qs'
         - $ref: '#/parameters/p_sfs'
         - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
         - $ref: '#/parameters/p_tribedist'
         - $ref: '#/parameters/p_owop'
         - $ref: '#/parameters/p_agoo'
@@ -1270,7 +1311,19 @@ paths:
     post:
       description: Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/p_fn'
         - $ref: '#/parameters/p_sa'
         - $ref: '#/parameters/p_sa1'
@@ -1340,6 +1393,7 @@ paths:
         - $ref: '#/parameters/p_qs'
         - $ref: '#/parameters/p_sfs'
         - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
         - $ref: '#/parameters/p_tribedist'
         - $ref: '#/parameters/p_owop'
         - $ref: '#/parameters/p_agoo'
@@ -1397,7 +1451,19 @@ paths:
     get:
       description: Returns either an array of Facilities or an array of Clusters that meet the specified search criteria.
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+            - CSV = Facility results formatted as comma delimited file download.
+            - GEOJSON = Facility results formatted as GeoJSON feature collection.
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/p_fn'
         - $ref: '#/parameters/p_sa'
         - $ref: '#/parameters/p_sa1'
@@ -1467,6 +1533,7 @@ paths:
         - $ref: '#/parameters/p_qs'
         - $ref: '#/parameters/p_sfs'
         - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
         - $ref: '#/parameters/p_tribedist'
         - $ref: '#/parameters/p_owop'
         - $ref: '#/parameters/p_agoo'
@@ -1504,6 +1571,7 @@ paths:
         - $ref: '#/parameters/summarylist'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/qcolumns'
+        - $ref: '#/parameters/p_pretty_print'
       responses:
         '200':
           description: 'Results will either be an array of Facilities or an array of Clusters. The search will return clusters if the number of facilities returned is greater than the resposeset size, otherwise individual facility records will be returned.'
@@ -1521,7 +1589,19 @@ paths:
     post:
       description: Returns either an array of Facilities or an array of Clusters that meet the specified search criteria.
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+            - CSV = Facility results formatted as comma delimited file download.
+            - GEOJSON = Facility results formatted as GeoJSON feature collection.
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/p_fn'
         - $ref: '#/parameters/p_sa'
         - $ref: '#/parameters/p_sa1'
@@ -1591,6 +1671,7 @@ paths:
         - $ref: '#/parameters/p_qs'
         - $ref: '#/parameters/p_sfs'
         - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
         - $ref: '#/parameters/p_tribedist'
         - $ref: '#/parameters/p_owop'
         - $ref: '#/parameters/p_agoo'
@@ -1628,6 +1709,7 @@ paths:
         - $ref: '#/parameters/summarylist'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/qcolumns'
+        - $ref: '#/parameters/p_pretty_print'
       responses:
         '200':
           description: 'Results will either be an array of Facilities or an array of Clusters. The search will return clusters if the number of facilities returned is greater than the resposeset size, otherwise individual facility records will be returned.'
@@ -1642,16 +1724,120 @@ paths:
       summary: Clean Air Act Facility Enhanced Search
       tags:
         - Facilities
+  /air_rest_services.get_geojson:
+    get:
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return GeoJSON of the facilities found.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - GEOJSON = Facility results formatted as GeoJSON feature collection (default).
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/newsort'
+        - $ref: '#/parameters/descending'
+        - $ref: '#/parameters/qcolumns'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are formatted as a GeoJSON feature collection.
+          schema:
+            $ref: '#/definitions/air6_FeatureCollection'
+      summary: Clean Air Act GeoJSON Service
+      tags:
+        - Facilities
+    post:
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return GeoJSON of the facilities found.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - GEOJSON = Facility results formatted as GeoJSON feature collection (default).
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/newsort'
+        - $ref: '#/parameters/descending'
+        - $ref: '#/parameters/qcolumns'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are formatted as a GeoJSON feature collection.
+          schema:
+            $ref: '#/definitions/air6_FeatureCollection'
+      summary: Clean Air Act GeoJSON Service
+      tags:
+        - Facilities
+  /air_rest_services.get_info_clusters:
+    get:
+      description: 'Based on the QID obtained from a clustered get_facility_info query, download cluster facility information as either a CSV or GEOJSON file.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_qid'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
+          schema:
+            type: file
+      summary: Clean Air Act Info Clusters Service
+      tags:
+        - Facilities
+    post:
+      description: 'Based on the QID obtained from a clustered get_facility_info query, download cluster facility information as either a CSV or GEOJSON file.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_qid'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
+          schema:
+            type: file
+      summary: Clean Air Act Info Clusters Service
+      tags:
+        - Facilities
   /air_rest_services.get_map:
     get:
       description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_facilities facility query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
       parameters:
-        - $ref: '#/parameters/output'
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
           in: query
-          name: qid
-          required: true
+          name: output
+          required: false
           type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/tablelist'
         - $ref: '#/parameters/c1_lat'
@@ -1676,12 +1862,20 @@ paths:
     post:
       description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_facilities facility query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
       parameters:
-        - $ref: '#/parameters/output'
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
           in: query
-          name: qid
-          required: true
+          name: output
+          required: false
           type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/tablelist'
         - $ref: '#/parameters/c1_lat'
@@ -1707,12 +1901,20 @@ paths:
     get:
       description: 'GET_QID is passed with a query ID corresponding to a previously run get_facilities query. It then returns a Facility object containing all matching facilities. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
       parameters:
-        - $ref: '#/parameters/output'
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
           in: query
-          name: qid
-          required: true
+          name: output
+          required: false
           type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/pageno'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/newsort'
@@ -1735,12 +1937,20 @@ paths:
     post:
       description: 'GET_QID is passed with a query ID corresponding to a previously run get_facilities query. It then returns a Facility object containing all matching facilities. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
       parameters:
-        - $ref: '#/parameters/output'
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
           in: query
-          name: qid
-          required: true
+          name: output
+          required: false
           type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/pageno'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/newsort'
@@ -1764,7 +1974,19 @@ paths:
     get:
       description: 'Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facility_info and other service endpoints.'
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/callback'
       responses:
         '200':
@@ -1783,7 +2005,19 @@ paths:
     post:
       description: 'Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facility_info and other service endpoints.'
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/callback'
       responses:
         '200':
@@ -1800,6 +2034,25 @@ paths:
       tags:
         - Metadata
 definitions:
+  Geometry:
+    description: GeoJSON Geometry Object
+    properties:
+      coordinates:
+        description: 'Array of coordinate values in longitude, latitude format.'
+        example: -87.86253
+        items:
+          type: number
+        title: Coordinates Array
+        type: array
+      type:
+        description: 'Indicator of the geometry represented in the GeoJSON Feature, for Echo will always be "Point".'
+        example: Point
+        title: Geometry
+        type: string
+    required:
+      - type
+      - coordinates
+    type: object
   air1_ClusterData:
     description: Cluster Data Object
     properties:
@@ -2002,6 +2255,7 @@ definitions:
         example: '05'
         type: string
       AIREvalCnt:
+        example: '0'
         type: string
       AIRFIPSCode:
         type: string
@@ -2066,6 +2320,7 @@ definitions:
         example: 'N'
         type: string
       AIRMnthsInHpv:
+        example: '2'
         type: string
       AIRNaics:
         example: '812320'
@@ -2126,6 +2381,7 @@ definitions:
       CWAIDs:
         type: string
       CalculatedAccuracyMeters:
+        example: '50'
         title: Calculated Accuracy in Meters
         type: string
       CensusBlockGroup:
@@ -2248,6 +2504,7 @@ definitions:
           Facility Percent Minority
         type: string
       FacPopulationDensity:
+        example: '9611.17'
         type: string
       FacSicCodes:
         type: string
@@ -2304,6 +2561,13 @@ definitions:
       MaxPctileUs:
         description: The maximum percentile from all individual EJSCREEN indicators.
         example: '98'
+        type: string
+      MaxScore:
+        description: '[Col. 121]'
+        example: '1'
+        title: Max Score
+        type: string
+      Over80CountUs:
         type: string
       PctileCancerUs:
         description: The national percentile of the census block group for the EJSCREEN NATA air toxics cancer risk indicator.
@@ -2369,6 +2633,10 @@ definitions:
       SDWAIDs:
         description: A unique 9-character ID assigned for each public water system within the Safe Drinking Water Information System (SDWIS).
         example: DC0000001
+        type: string
+      Score:
+        example: '1'
+        title: Score
         type: string
       SourceID:
         description: Unique Identifier assigned by EPA.
@@ -2671,6 +2939,7 @@ definitions:
         example: '05'
         type: string
       AIREvalCnt:
+        example: '0'
         type: string
       AIRFIPSCode:
         type: string
@@ -2735,6 +3004,7 @@ definitions:
         example: 'N'
         type: string
       AIRMnthsInHpv:
+        example: '2'
         type: string
       AIRNaics:
         example: '812320'
@@ -2795,6 +3065,7 @@ definitions:
       CWAIDs:
         type: string
       CalculatedAccuracyMeters:
+        example: '50'
         title: Calculated Accuracy in Meters
         type: string
       CensusBlockGroup:
@@ -2917,6 +3188,7 @@ definitions:
           Facility Percent Minority
         type: string
       FacPopulationDensity:
+        example: '9611.17'
         type: string
       FacSicCodes:
         type: string
@@ -2974,10 +3246,17 @@ definitions:
         description: The maximum percentile from all individual EJSCREEN indicators.
         example: '98'
         type: string
+      MaxScore:
+        description: '[Col. 121]'
+        example: '1'
+        title: Max Score
+        type: string
       ObjectId:
         description: Sequential number assigned to each facility returned
         example: '1'
         title: Object Identifier
+        type: string
+      Over80CountUs:
         type: string
       PctileCancerUs:
         description: The national percentile of the census block group for the EJSCREEN NATA air toxics cancer risk indicator.
@@ -3043,6 +3322,10 @@ definitions:
       SDWAIDs:
         description: A unique 9-character ID assigned for each public water system within the Safe Drinking Water Information System (SDWIS).
         example: DC0000001
+        type: string
+      Score:
+        example: '1'
+        title: Score
         type: string
       SourceID:
         description: Unique Identifier assigned by EPA.
@@ -3366,6 +3649,603 @@ definitions:
       - PageNo
       - Facilities
     type: object
+  air6_Feature:
+    description: GeoJSON Feature Object
+    properties:
+      geometry:
+        $ref: '#/definitions/Geometry'
+      properties:
+        $ref: '#/definitions/air6_properties'
+      type:
+        description: Static marker indicating object is a GeoJSON Feature.
+        example: Feature
+        title: Feature
+        type: string
+    required:
+      - type
+      - geometry
+      - properties
+    type: object
+  air6_FeatureCollection:
+    description: GeoJSON Feature Collection Object
+    properties:
+      features:
+        description: Array of features in the feature collection.
+        items:
+          $ref: '#/definitions/air6_Feature'
+        title: Features Array
+        type: array
+      type:
+        description: Static marker indicating object is a GeoJSON Feature Collection.
+        example: FeatureCollection
+        title: Feature Collection
+        type: string
+    required:
+      - type
+      - features
+    type: object
+  air6_properties:
+    description: GeoJSON Properties Object
+    properties:
+      AIR3yrComplQtrsStatus:
+        example: ______UUUUUU
+        type: string
+      AIRCaseIDs:
+        description: Space-delimited list of AIR cases associated with the facility.
+        example: 05-1993-1585 05-2014-5021
+        type: string
+      AIRCity:
+        type: string
+      AIRCmsCategoryCode:
+        description: 'A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.'
+        example: 20011FRTTT5001F
+        type: string
+      AIRCmsCategoryDesc:
+        description: 'A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.'
+        example: 20011FRTTT5001F
+        type: string
+      AIRCounty:
+        description: The name of the county where the AIR facility is located.
+        example: Racine
+        type: string
+      AIRCurrComplStatus:
+        example: No Viol
+        type: string
+      AIRCurrHpv:
+        example: 'No'
+        type: string
+      AIRDaysLastEval:
+        example: 2806
+        type: number
+      AIREPARegion:
+        description: The EPA region where the AIR facility is located.
+        example: '05'
+        type: string
+      AIREvalCnt:
+        example: 0
+        type: number
+      AIRFIPSCode:
+        type: string
+      AIRFacilityTypeCode:
+        example: POF
+        type: string
+      AIRFeaCnt:
+        example: '2'
+        type: string
+      AIRIDs:
+        description: Air Facility System (AFS) ID.
+        example: DC0000001100195254
+        title: AIR Facility System ID
+        type: string
+      AIRIeaCnt:
+        type: string
+      AIRIndianCntryFlg:
+        description: Flag indicating whether the AIR facility is located in Indian country.
+        example: 'N'
+        title: AIR Facility Indian Country Flag
+        type: string
+      AIRLastEvalDate:
+        example: 05/18/2009
+        type: string
+      AIRLastEvalDateEPA:
+        example: 05/16/2014
+        type: string
+      AIRLastEvalDateState:
+        example: 05/18/2009
+        type: string
+      AIRLastFeaDate:
+        example: 05/16/2014
+        type: string
+      AIRLastFeaDateEPA:
+        type: string
+      AIRLastFeaDateState:
+        type: string
+      AIRLastIeaDate:
+        example: 04/25/2014
+        type: string
+      AIRLastIeaDateEPA:
+        example: 04/25/2014
+        type: string
+      AIRLastIeaDateState:
+        type: string
+      AIRLastPenaltyDate:
+        type: string
+      AIRLastStckDateEPA:
+        type: string
+      AIRLastStckDateState:
+        type: string
+      AIRLastStckTestDate:
+        type: string
+      AIRLastStckTestResults:
+        type: string
+      AIRLastViolDate:
+        type: string
+      AIRMacts:
+        example: ZZZZZ
+        type: string
+      AIRMajorFlag:
+        example: 'N'
+        type: string
+      AIRMnthsInHpv:
+        example: 1
+        type: number
+      AIRNaics:
+        example: '812320'
+        type: string
+      AIRName:
+        description: The name of the AIR Facility.
+        example: WEST PARK CLEANERS
+        title: Air Facility Name
+        type: string
+      AIRPenalties:
+        example: $435
+        type: string
+      AIRPollRecentViol:
+        type: string
+      AIRPrograms:
+        description: Comma-delimited list of AIR programs.
+        example: 'MACT, SIP'
+        title: Air Programs
+        type: string
+      AIRQtrsInHpv:
+        example: 0
+        type: number
+      AIRQtrsWithViol:
+        example: 2
+        type: number
+      AIRRecentViolCnt:
+        example: 2
+        type: number
+      AIRState:
+        description: The state where the AIR facility is located.
+        example: WI
+        title: AIR Facility State
+        type: string
+      AIRStatus:
+        description: The status of the AIR facility location.
+        example: Permanently Closed
+        title: Air Facility Status
+        type: string
+      AIRStreet:
+        description: The street address of the AIR facility location.
+        example: 2130 P STREET N.W.
+        title: AIR Facility Street Address
+        type: string
+      AIRTRIbalEPAids:
+        type: string
+      AIRTRIbalNames:
+        type: string
+      AIRUniverse:
+        example: Minor Emissions
+        type: string
+      AIRZip:
+        description: The five-digit zip code of the AIR facility.
+        example: '20037'
+        title: AIR Facility Zip Code
+        type: string
+      ActiveLower48:
+        type: string
+      CWAIDs:
+        type: string
+      CalculatedAccuracyMeters:
+        example: 50
+        title: Calculated Accuracy in Meters
+        type: number
+      CensusBlockGroup:
+        description: 'A geographic unit used by the United States Census Bureau, generally defined to contain between 600 and 3,000 people.'
+        example: '110010096022'
+        title: Census Block Group
+        type: string
+      ChesapeakeBayFlag:
+        description: Displays "Y" if the facility is located within the Chesapeake Bay watershed.
+        example: 'Y'
+        title: |
+          Chesapeake Bay Flag
+        type: string
+      CollectionMethod:
+        description: '??'
+        example: ADDRESS MATCHING-HOUSE NUMBER
+        title: Collection Method
+        type: string
+      CurrSvFlag:
+        description: Indicates if the facility has a current significant violation. 1 = Yes
+        example: 1
+        title: Current Significant Violation Flag
+        type: number
+      CurrVioFlag:
+        description: Indicates if the facility has a current violation. 1 = Yes
+        example: 1
+        title: Current Violation Flag
+        type: number
+      EPASystem:
+        description: |-
+          The EPA data system in which permit and facility records are kept. EPA's Facility Registry System (FRS) links all program database records (such as permit IDs and IDs facilities use in reporting to EPA) together. The following list describes the individual data systems that are linked to from the detailed facility report: 
+
+          - AFS: Air Facility System for Clean Air Act stationary source programs.
+          - ICP: Integrated Compliance Information System for Clean Water Act programs monitoring National Pollutant Discharge Elimination System (NPDES) permits.
+          - RCR: Resource Conservation and Recovery Act Information System (RCRAInfo) for tracking the Resource Conservation and Recovery Act (RCRA) programs.
+          - NCDB: National Compliance Database System for monitoring national performance of the Toxic Substance Control Act (TSCA); the Emergency Planning and Right-to-Know Act, Section 313 (EPCRA); the Asbestos Hazard Emergency Response (AHERA); and the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
+          - TRI: Toxics Release Inventory for Emergency Planning and Community Right-to-Know Act, Section 313 submissions.
+          - NEI: National Emissions Inventory database contains information on stationary and mobile sources that emit criteria air pollutants and their precursors, as well as hazardous air pollutants (HAPs). The database includes estimates of annual emissions, by source, of air pollutants in each area of the country, on an annual basis.
+          - TSCA: Toxic Substances Control Act addressing the production, importation, use, and disposal of specific chemicals.
+        example: ICP
+        title: EPA Data System
+        type: string
+      Ea5yrFlag:
+        description: Indicates if the facility has a formal enforcement action within the last 5 years. 1 = Yes
+        example: 0
+        type: number
+      EisIDs:
+        example: '7509611'
+        type: string
+      EjscreenFlag:
+        type: string
+      EjscreenFlagUs:
+        type: string
+      FacCamdReporter:
+        type: string
+      FacDerivedHuc:
+        description: The 8-digit Hydrologic Unit Code (HUC) of the watershed in which the facility resides. A HUC number is assigned to every watershed in the nation and uniquely identifies the watershed.
+        example: '552968'
+        title: Watershed (HUC Code)
+        type: string
+      FacDerivedTRIbes:
+        type: string
+      FacDerivedWBD:
+        type: string
+      FacDerivedWBDName:
+        type: string
+      FacEisAIRReleases:
+        type: string
+      FacEisReporter:
+        type: string
+      FacFIPSCode:
+        description: The 2-digit Federal Information Processing Standards (FIPS) code to identify the county that a facility is located in.
+        example: '55001'
+        title: FIPS Code
+        type: string
+      FacFederalAgencyCode:
+        description: 'Indicates the federal agency, as classified in FRS. Federal agencies are installations that are owned and operated by the U.S. government. The five-character code consists of a letter followed by four numbers. There are four possible letters that can occupy the first character position: C = Civilian Federal Agency; D = Department of Defense; E = Department of Energy; X = Unknown. The second and third characters represent the agency code, while the fourth and fifth characters represent the bureau code.'
+        example: E
+        title: |
+          Facility Federal Agency Code
+        type: string
+      FacFederalAgencyName:
+        type: string
+      FacGHGCO2Releases:
+        type: string
+      FacGHGReporter:
+        type: string
+      FacIndianCntryFlg:
+        description: Flag showing Y/N whether the facility is located in Indian Country.
+        title: Facility Indian Country Flag
+        type: string
+      FacIndianSpatialFlg:
+        type: string
+      FacMapFlg:
+        description: Graphical indicator denoting whether geographical data required to map a facility are available.
+        example: 'Y'
+        title: Facility Mapped Flag
+        type: string
+      FacMapIcon:
+        description: The default map icon image file calculated for the facility by the ECHO program.
+        example: CWA-NC-MJ-2.png
+        title: Facility Map Icon
+        type: string
+      FacNaaFlag:
+        type: string
+      FacPercentMinority:
+        description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
+        example: 45.379
+        title: |
+          Facility Percent Minority
+        type: number
+      FacPopulationDensity:
+        example: 9611.17
+        type: number
+      FacSicCodes:
+        type: string
+      FacTRIAIRReleases:
+        example: '36'
+        type: string
+      FacTRICarcAIRReleases:
+        example: '24'
+        type: string
+      FacTRIHapsAIRReleases:
+        example: '35.5'
+        type: string
+      FacTRIReporter:
+        description: Indicates whether facility reported to the Toxics Release Inventory (TRI) for the most recent reporting year.
+        example: B
+        title: Facility TRI Reporter
+        type: string
+      FacUsMexBorderFlg:
+        description: A Y/N flag indicating that the facility is within 100KM of the US-Mexico Border.
+        example: 'Y'
+        title: Near US-Mexico Border
+        type: string
+      GHGIDs:
+        type: string
+      HasPollRpt:
+        description: '???'
+        example: 'Y'
+        type: string
+      Infea5yrFlag:
+        description: Indicates if the facility has an informal enforcement action within the last 5 years. 1 = Yes.
+        example: 1
+        type: number
+      Insp5yrFlag:
+        description: Indicates if the facility has an inspection within the last 5 years. 1 = Yes
+        example: 1
+        title: Inspected Within Last Five Years Flag
+        type: number
+      LocalControlRegionCode:
+        description: Code for regions within a state. Search criteria for DFR in OTIS.
+        title: Local Control Region Code
+        type: string
+      LocalControlRegionName:
+        description: Regions within a state. Search criteria for DFR in OTIS.
+        title: Local Control Region Name
+        type: string
+      Lower48:
+        description: Flag showing Y/N whether location is within the contiguous (lower 48) United States.
+        example: 'Y'
+        title: Contiguous United States Flag
+        type: string
+      Map:
+        title: Map
+        type: string
+      MaxPctileUs:
+        description: The maximum percentile from all individual EJSCREEN indicators.
+        example: 54.7
+        type: number
+      MaxScore:
+        description: '[Col. 121]'
+        example: 1
+        title: Max Score
+        type: number
+      Over80CountUs:
+        type: number
+      PctileCancerUs:
+        description: The national percentile of the census block group for the EJSCREEN NATA air toxics cancer risk indicator.
+        example: 99
+        type: number
+      PctileDpmUs:
+        description: The national percentile of the census block group for the EJSCREEN diesel particulate matter indicator.
+        example: 99
+        type: number
+      PctileO3Us:
+        description: The national percentile of the census block group for the EJSCREEN ozone indicator.
+        example: 52.4
+        type: number
+      PctilePctpre1960Us:
+        description: The national percentile of the census block group for the EJSCREEN Lead paint indicator.
+        example: 14.6
+        type: number
+      PctilePmUs:
+        description: The national percentile of the census block group for the EJSCREEN particulate matter indicator.
+        example: 52.4
+        type: number
+      PctileProximityNPDESUs:
+        description: The national percentile of the census block group for the EJSCREEN proximity to major direct water dischargers indicator.
+        example: 45.3
+        type: number
+      PctileProximityNplUs:
+        description: The national percentile of the census block group for the EJSCREEN proximity to National Priorities List (NPL) sites indicator.
+        example: 38.9
+        type: number
+      PctileProximityRmpUs:
+        description: The national percentile of the census block group for the EJSCREEN proximity to Risk Management Plan (RMP) sites indicator.
+        example: 54.7
+        type: number
+      PctileProximityTsdfUs:
+        description: The national percentile of the census block group for the EJSCREEN proximity to Treatment Storage and Disposal Facilities (TSDFs) indicator.
+        example: 42.4
+        type: number
+      PctileRespUs:
+        description: The national percentile of the census block group for the EJSCREEN NATA respiratory hazard index indicator.
+        example: 41.9
+        type: number
+      PctileTrafficScoreUs:
+        description: The national percentile of the census block group for the EJSCREEN Traffic proximity and volume indicator.
+        example: 7
+        type: number
+      RCRAIDs:
+        description: A unique 12-character ID assigned for each record/permit/site/facility within the RCRAInfo database.
+        example: VAD981111784
+        title: Resource Conservation and Recovery Act IDs
+        type: string
+      ReferencePoint:
+        description: '??'
+        example: ENTRANCE POINT OF A FACILITY OR STATION
+        title: Reference Point
+        type: string
+      RegistryID:
+        description: An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases.
+        example: '110020837601'
+        title: FRS ID
+        type: string
+      RmpIDs:
+        type: string
+      SDWAIDs:
+        description: A unique 9-character ID assigned for each public water system within the Safe Drinking Water Information System (SDWIS).
+        example: DC0000001
+        type: string
+      Score:
+        example: 1
+        title: Score
+        type: number
+      SourceID:
+        description: Unique Identifier assigned by EPA.
+        example: ALR040033
+        title: EPA Source Identifier
+        type: string
+      Statute:
+        description: |-
+          The name of the statute associated with each of the permits and identifiers linked to the facility: 
+          - CAA = the Clean Air Act
+          - CWA = the Clean Water Act
+          - RCRA = the Resource Conservation and Recovery Act
+          - EP313 = the Emergency Planning and Community Right-to-Know Act, Section 313 (also known as the Toxics Release Inventory Program)
+          - TSCA = the Toxic Substances Control Act
+          - SDWA = the Safe Drinking Water Act
+        example: CWA
+        title: Regulatory Statute
+        type: string
+      TRIIDs:
+        description: 'A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.'
+        example: 20011FRTTT5001F
+        title: Toxics Release Inventory Program IDs
+        type: string
+      TRIbalFlag:
+        example: 1
+        title: Tribal Lands Flag
+        type: number
+      ViolFlag:
+        description: Indicates if the facility had a violation within the last 3 years. 1 = Yes
+        example: 1
+        title: Violation Flag
+        type: number
+    required:
+      - SourceID
+      - EPASystem
+      - RegistryID
+      - Statute
+      - AIRName
+      - AIRStreet
+      - AIRCity
+      - AIRState
+      - AIRZip
+      - AIRCounty
+      - LocalControlRegionCode
+      - LocalControlRegionName
+      - AIRFIPSCode
+      - AIREPARegion
+      - AIRStatus
+      - AIRIndianCntryFlg
+      - AIRTRIbalEPAids
+      - AIRTRIbalNames
+      - FacFIPSCode
+      - FacUsMexBorderFlg
+      - AIRUniverse
+      - AIRNaics
+      - FacSicCodes
+      - FacPercentMinority
+      - FacPopulationDensity
+      - FacFederalAgencyCode
+      - FacFederalAgencyName
+      - ChesapeakeBayFlag
+      - AIRIDs
+      - CWAIDs
+      - RCRAIDs
+      - TRIIDs
+      - SDWAIDs
+      - AIRCaseIDs
+      - GHGIDs
+      - EisIDs
+      - AIRMacts
+      - AIRPrograms
+      - AIRCurrHpv
+      - AIRCurrComplStatus
+      - AIRQtrsInHpv
+      - AIRMnthsInHpv
+      - AIRQtrsWithViol
+      - AIRPollRecentViol
+      - AIRRecentViolCnt
+      - AIRLastViolDate
+      - AIREvalCnt
+      - AIRLastEvalDate
+      - AIRDaysLastEval
+      - AIRLastStckTestDate
+      - AIRLastStckDateEPA
+      - AIRLastStckDateState
+      - AIRLastStckTestResults
+      - AIRIeaCnt
+      - AIRLastIeaDate
+      - AIRFeaCnt
+      - AIRLastFeaDate
+      - AIRPenalties
+      - AIRLastPenaltyDate
+      - AIRLastEvalDateEPA
+      - AIRLastEvalDateState
+      - AIRLastFeaDateEPA
+      - AIRLastFeaDateState
+      - AIRLastIeaDateEPA
+      - AIRLastIeaDateState
+      - FacTRIReporter
+      - FacTRIAIRReleases
+      - FacTRICarcAIRReleases
+      - FacTRIHapsAIRReleases
+      - FacEisAIRReleases
+      - FacGHGCO2Releases
+      - FacDerivedHuc
+      - FacDerivedWBD
+      - FacDerivedWBDName
+      - FacMapFlg
+      - FacMapIcon
+      - FacNaaFlag
+      - FacGHGReporter
+      - FacEisReporter
+      - FacCamdReporter
+      - AIRFacilityTypeCode
+      - AIRMajorFlag
+      - RmpIDs
+      - AIR3yrComplQtrsStatus
+      - HasPollRpt
+      - CensusBlockGroup
+      - PctilePctpre1960Us
+      - PctileDpmUs
+      - PctileCancerUs
+      - PctileRespUs
+      - PctileTrafficScoreUs
+      - PctileProximityNPDESUs
+      - PctileProximityNplUs
+      - PctileProximityRmpUs
+      - PctileProximityTsdfUs
+      - PctileO3Us
+      - PctilePmUs
+      - MaxPctileUs
+      - EjscreenFlagUs
+      - EjscreenFlag
+      - AIRCmsCategoryCode
+      - AIRCmsCategoryDesc
+      - TRIbalFlag
+      - CurrSvFlag
+      - ViolFlag
+      - CurrVioFlag
+      - Insp5yrFlag
+      - Ea5yrFlag
+      - Infea5yrFlag
+      - Lower48
+      - ActiveLower48
+      - FacDerivedTRIbes
+      - FacIndianCntryFlg
+      - FacIndianSpatialFlg
+      - CollectionMethod
+      - ReferencePoint
+      - CalculatedAccuracyMeters
+      - Map
+    type: object
   met_Results:
     description: Results Object
     properties:
@@ -3401,6 +4281,10 @@ definitions:
         example: NUMBER
         title: Data Type
         type: string
+      Description:
+        description: A description of the category of Supplemental Environment Project (SEP) for a settlement.
+        title: Description
+        type: string
       ObjectName:
         title: Object Name
         type: string
@@ -3410,6 +4294,7 @@ definitions:
       - DataLength
       - ColumnID
       - ObjectName
+      - Description
     type: object
   qp0_QueryParameters:
     description: Query Parameters Object

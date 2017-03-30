@@ -21,8 +21,13 @@ info:
     <br><b>4)</b>&nbsp Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of facility information that meets the QID query criteria.
     <br>
     <br>
+    Use the qcolumns parameter to customize your search results.  Use the Metdata service endpoint for a list of available output objects, their Column Ids, and their definitions to help you build your customized output. 
+    <br><br>
     Additional ECHO Resources:&nbsp&nbsp <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
     <br>
+  license:
+    name: This page was built with the Swagger API.
+    url: 'https://swagger.io'
   title: U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Water Act (CWA) Rest Services
   version: 0.0.0
   x-apisguru-categories:
@@ -68,7 +73,7 @@ parameters:
     required: false
     type: number
   callback:
-    description: JSONP Callback.  For use with JSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
     in: query
     name: callback
     required: false
@@ -493,6 +498,24 @@ parameters:
     name: p_maj
     required: false
     type: string
+  p_med:
+    description: |-
+      Filter Results by Media.
+      - A = Air
+      - M = RMP (Risk Management Plan)
+      - R = RCRA (Hazardous Waste)
+      - S = SDWA (Public Drinking Water Systems)
+      - ALL = Air and RCRA and Water
+    enum:
+      - A
+      - M
+      - R
+      - S
+      - ALL
+    in: query
+    name: p_med
+    required: false
+    type: string
   p_months_last_dmr:
     description: The number of months since the last Discharge Monitoring Report has been submitted.
     in: query
@@ -790,6 +813,12 @@ parameters:
     name: p_pm
     required: false
     type: string
+  p_pretty_print:
+    description: Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.
+    in: query
+    name: p_pretty_print
+    required: false
+    type: number
   p_psncq:
     description: |-
       Quarters in Significant Noncompliance Limiter.  Enter a coded value to limit results to facilities with given quarter of significant noncompliance.
@@ -898,6 +927,12 @@ parameters:
     in: query
     name: p_ptype
     required: false
+    type: string
+  p_qid:
+    description: Query ID Selector.  Enter the QueryID number from a previously run query.
+    in: query
+    name: p_qid
+    required: true
     type: string
   p_qiv:
     description: |-
@@ -1014,6 +1049,12 @@ parameters:
     name: p_tribeid
     required: false
     type: number
+  p_tribename:
+    description: Tribe Name Filter.  Enter a single tribe name to filter results.
+    in: query
+    name: p_tribename
+    required: false
+    type: string
   p_usmex:
     description: US-Mexico Border Flag.  Enter Y/N to restrict searches to facilities located within 100KM of the border.
     enum:
@@ -1080,6 +1121,12 @@ parameters:
     name: pageno
     required: false
     type: number
+  qid:
+    description: Query ID Selector.  Enter the QueryID number from a previously run query.
+    in: query
+    name: qid
+    required: true
+    type: string
   queryset:
     description: 'Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.'
     in: query
@@ -1182,53 +1229,64 @@ parameters:
 paths:
   /cwa_rest_services.get_download:
     get:
-      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return a comma sepated vaule (CSV) file of the facilities found.'
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return GeoJSON of the facilities found.'
       parameters:
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
           in: query
-          name: qid
-          required: true
-          type: number
-        - description: 'Results Column Limiter.  Enter a comma-delimited list of column positions to limit results to only desired columns or provide an asterisk to obtain all possible columns.  When qcolumns is unspecified each ECHO service provides a default set of columns considered appropriate for average use.  This parameter provides a mechanism to tune this further.  The list of positions and corresponding columns may be obtained via calling the metadata endpoint for each service.  Use with caution as while ECHO data structures are largely static, breaking changes are possible as ECHO implements new features.'
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
           in: query
           name: qcolumns
           required: false
           type: string
+        - $ref: '#/parameters/p_pretty_print'
       responses:
         '200':
-          description: Results are a comma separated value (CSV) file.
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
           schema:
             type: file
-      summary: Clean Water Act (CWA) Download Data Service
+      summary: Clean Water Act (CWA) GeoJSON Service
       tags:
         - Facility Information
     post:
-      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return a comma sepated vaule (CSV) file of the facilities found.'
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return GeoJSON of the facilities found.'
       parameters:
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
           in: query
-          name: qid
-          required: true
-          type: number
-        - description: 'Results Column Limiter.  Enter a comma-delimited list of column positions to limit results to only desired columns or provide an asterisk to obtain all possible columns.  When qcolumns is unspecified each ECHO service provides a default set of columns considered appropriate for average use.  This parameter provides a mechanism to tune this further.  The list of positions and corresponding columns may be obtained via calling the metadata endpoint for each service.  Use with caution as while ECHO data structures are largely static, breaking changes are possible as ECHO implements new features.'
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
           in: query
           name: qcolumns
           required: false
           type: string
+        - $ref: '#/parameters/p_pretty_print'
       responses:
         '200':
-          description: Results are a comma separated value (CSV) file.
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
           schema:
             type: file
-      summary: Clean Water Act (CWA) Download Data Service
+      summary: Clean Water Act (CWA) GeoJSON Service
       tags:
         - Facility Information
   /cwa_rest_services.get_facilities:
     get:
       description: Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -1277,12 +1335,14 @@ paths:
         - $ref: '#/parameters/p_ico'
         - $ref: '#/parameters/p_huc'
         - $ref: '#/parameters/p_pid'
+        - $ref: '#/parameters/p_med'
         - $ref: '#/parameters/p_ysl'
         - $ref: '#/parameters/p_ysly'
         - $ref: '#/parameters/p_ysla'
         - $ref: '#/parameters/p_qs'
         - $ref: '#/parameters/p_sfs'
         - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
         - $ref: '#/parameters/p_tribedist'
         - $ref: '#/parameters/p_pstat'
         - $ref: '#/parameters/p_ptype'
@@ -1350,7 +1410,7 @@ paths:
         - $ref: '#/parameters/maplist'
         - $ref: '#/parameters/summarylist'
         - $ref: '#/parameters/callback'
-        - description: List of comma-separated column IDs of output fields that will be returned.
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
           in: query
           name: qcolumns
           required: false
@@ -1372,8 +1432,11 @@ paths:
     post:
       description: Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -1422,12 +1485,14 @@ paths:
         - $ref: '#/parameters/p_ico'
         - $ref: '#/parameters/p_huc'
         - $ref: '#/parameters/p_pid'
+        - $ref: '#/parameters/p_med'
         - $ref: '#/parameters/p_ysl'
         - $ref: '#/parameters/p_ysly'
         - $ref: '#/parameters/p_ysla'
         - $ref: '#/parameters/p_qs'
         - $ref: '#/parameters/p_sfs'
         - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
         - $ref: '#/parameters/p_tribedist'
         - $ref: '#/parameters/p_pstat'
         - $ref: '#/parameters/p_ptype'
@@ -1495,7 +1560,7 @@ paths:
         - $ref: '#/parameters/maplist'
         - $ref: '#/parameters/summarylist'
         - $ref: '#/parameters/callback'
-        - description: List of comma-separated column IDs of output fields that will be returned.
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
           in: query
           name: qcolumns
           required: false
@@ -1518,13 +1583,15 @@ paths:
     get:
       description: Returns either an array of Facilities or an array of Clusters that meet the specified search criteria.
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON, XML or CSV.'
-          enum:
-            - JSONP
-            - JSON
-            - XML
-            - CSV
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+            - CSV = Facility results formatted as comma delimited file download.
+            - GEOJSON = Facility results formatted as GeoJSON feature collection.
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
           in: query
           name: output
           required: false
@@ -1569,12 +1636,14 @@ paths:
         - $ref: '#/parameters/p_ico'
         - $ref: '#/parameters/p_huc'
         - $ref: '#/parameters/p_pid'
+        - $ref: '#/parameters/p_med'
         - $ref: '#/parameters/p_ysl'
         - $ref: '#/parameters/p_ysly'
         - $ref: '#/parameters/p_ysla'
         - $ref: '#/parameters/p_qs'
         - $ref: '#/parameters/p_sfs'
         - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
         - $ref: '#/parameters/p_tribedist'
         - $ref: '#/parameters/p_pstat'
         - $ref: '#/parameters/p_ptype'
@@ -1638,11 +1707,12 @@ paths:
         - $ref: '#/parameters/p_decouple'
         - $ref: '#/parameters/responseset'
         - $ref: '#/parameters/callback'
-        - description: List of comma-separated column IDs of output fields that will be returned.
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
           in: query
           name: qcolumns
           required: false
           type: string
+        - $ref: '#/parameters/p_pretty_print'
       responses:
         '200':
           description: 'Results will either be an array of Facilities or an array of Clusters. The search will return clusters if the number of facilities returned is greater than the resposeset size, otherwise individual facility records will be returned.'
@@ -1660,13 +1730,15 @@ paths:
     post:
       description: Returns either an array of Facilities or an array of Clusters that meet the specified search criteria.
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON, XML or CSV.'
-          enum:
-            - JSONP
-            - JSON
-            - XML
-            - CSV
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+            - CSV = Facility results formatted as comma delimited file download.
+            - GEOJSON = Facility results formatted as GeoJSON feature collection.
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
           in: query
           name: output
           required: false
@@ -1711,12 +1783,14 @@ paths:
         - $ref: '#/parameters/p_ico'
         - $ref: '#/parameters/p_huc'
         - $ref: '#/parameters/p_pid'
+        - $ref: '#/parameters/p_med'
         - $ref: '#/parameters/p_ysl'
         - $ref: '#/parameters/p_ysly'
         - $ref: '#/parameters/p_ysla'
         - $ref: '#/parameters/p_qs'
         - $ref: '#/parameters/p_sfs'
         - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
         - $ref: '#/parameters/p_tribedist'
         - $ref: '#/parameters/p_pstat'
         - $ref: '#/parameters/p_ptype'
@@ -1780,11 +1854,12 @@ paths:
         - $ref: '#/parameters/p_decouple'
         - $ref: '#/parameters/responseset'
         - $ref: '#/parameters/callback'
-        - description: List of comma-separated column IDs of output fields that will be returned.
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
           in: query
           name: qcolumns
           required: false
           type: string
+        - $ref: '#/parameters/p_pretty_print'
       responses:
         '200':
           description: 'Results will either be an array of Facilities or an array of Clusters. The search will return clusters if the number of facilities returned is greater than the resposeset size, otherwise individual facility records will be returned.'
@@ -1799,12 +1874,119 @@ paths:
       summary: Clean Water Act (CWA) Facility Enhanced Search Service
       tags:
         - Facility Information
+  /cwa_rest_services.get_geojson:
+    get:
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return a comma sepated vaule (CSV) file of the facilities found.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - GEOJSON = Facility results formatted as GeoJSON feature collection (default).
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/newsort'
+        - $ref: '#/parameters/descending'
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
+          in: query
+          name: qcolumns
+          required: false
+          type: string
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are formatted as a GeoJSON feature collection.
+          schema:
+            $ref: '#/definitions/cwa5_FeatureCollection'
+      summary: Clean Water Act (CWA) Download Data Service
+      tags:
+        - Facility Information
+    post:
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return a comma sepated vaule (CSV) file of the facilities found.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - GEOJSON = Facility results formatted as GeoJSON feature collection (default).
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/newsort'
+        - $ref: '#/parameters/descending'
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
+          in: query
+          name: qcolumns
+          required: false
+          type: string
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are formatted as a GeoJSON feature collection.
+          schema:
+            $ref: '#/definitions/cwa5_FeatureCollection'
+      summary: Clean Water Act (CWA) Download Data Service
+      tags:
+        - Facility Information
+  /cwa_rest_services.get_info_clusters:
+    get:
+      description: 'Based on the QID obtained from a clustered get_facility_info query, download cluster facility information as either a CSV or GEOJSON file.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_qid'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
+          schema:
+            type: file
+      summary: Clean Water Act (CWA) Info Clusters Service
+      tags:
+        - Facility Information
+    post:
+      description: 'Based on the QID obtained from a clustered get_facility_info query, download cluster facility information as either a CSV or GEOJSON file.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_qid'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
+          schema:
+            type: file
+      summary: Clean Water Act (CWA) Info Clusters Service
+      tags:
+        - Facility Information
   /cwa_rest_services.get_map:
     get:
       description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_facilities facility query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -1813,11 +1995,7 @@ paths:
           name: output
           required: false
           type: string
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
-          in: query
-          name: qid
-          required: true
-          type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/tablelist'
         - $ref: '#/parameters/c1_lat'
@@ -1842,8 +2020,11 @@ paths:
     post:
       description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_facilities facility query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -1852,11 +2033,7 @@ paths:
           name: output
           required: false
           type: string
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
-          in: query
-          name: qid
-          required: true
-          type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/tablelist'
         - $ref: '#/parameters/c1_lat'
@@ -1882,8 +2059,11 @@ paths:
     get:
       description: 'GET_QID is passed with a query ID corresponding to a previously run get_facilities query. It then returns a Facility object containing all matching facilities. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -1892,16 +2072,12 @@ paths:
           name: output
           required: false
           type: string
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
-          in: query
-          name: qid
-          required: true
-          type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/pageno'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/newsort'
         - $ref: '#/parameters/descending'
-        - description: List of comma-separated column IDs of output fields that will be returned.
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
           in: query
           name: qcolumns
           required: false
@@ -1923,8 +2099,11 @@ paths:
     post:
       description: 'GET_QID is passed with a query ID corresponding to a previously run get_facilities query. It then returns a Facility object containing all matching facilities. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -1933,16 +2112,12 @@ paths:
           name: output
           required: false
           type: string
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
-          in: query
-          name: qid
-          required: true
-          type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/pageno'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/newsort'
         - $ref: '#/parameters/descending'
-        - description: List of comma-separated column IDs of output fields that will be returned.
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
           in: query
           name: qcolumns
           required: false
@@ -1965,8 +2140,11 @@ paths:
     get:
       description: 'Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facility_info and other service endpoints.'
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -1993,8 +2171,11 @@ paths:
     post:
       description: 'Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facility_info and other service endpoints.'
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2022,8 +2203,11 @@ paths:
     get:
       description: Returns the EPA Standard Indian Tribes and Native Alaskan Villages tribal_id and tribe_name.
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2051,8 +2235,11 @@ paths:
     post:
       description: Returns the EPA Standard Indian Tribes and Native Alaskan Villages tribal_id and tribe_name.
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2081,8 +2268,11 @@ paths:
     get:
       description: Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term.
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2113,8 +2303,11 @@ paths:
     post:
       description: Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term.
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2145,8 +2338,11 @@ paths:
   /rest_lookups.cwa_pollutants:
     get:
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2174,8 +2370,11 @@ paths:
         - Lookups
     post:
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2205,8 +2404,11 @@ paths:
     get:
       description: Look up Federal Agency Code
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2235,8 +2437,11 @@ paths:
     post:
       description: Look up Federal Agency Code
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2266,8 +2471,11 @@ paths:
     get:
       description: Returns the ICIS NPDES Compliance Monitoring Type Code and Description.
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2296,8 +2504,11 @@ paths:
     post:
       description: Returns the ICIS NPDES Compliance Monitoring Type Code and Description.
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2325,10 +2536,13 @@ paths:
         - Lookups
   /rest_lookups.icis_law_sections:
     get:
-      description: Returns the ICIS NPDES Law Section Descriptions.
+      description: Returns the ICIS Law Section Descriptions.
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2354,14 +2568,17 @@ paths:
             required:
               - Results
             type: object
-      summary: ECHO ICIS NPDES Law Sections Lookup Service
+      summary: ECHO ICIS Law Sections Lookup Service
       tags:
         - Lookups
     post:
-      description: Returns the ICIS NPDES Law Section Descriptions.
+      description: Returns the ICIS Law Section Descriptions.
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2387,14 +2604,17 @@ paths:
             required:
               - Results
             type: object
-      summary: ECHO ICIS NPDES Law Sections Lookup Service
+      summary: ECHO ICIS Law Sections Lookup Service
       tags:
         - Lookups
   /rest_lookups.naics_codes:
     get:
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2422,8 +2642,11 @@ paths:
         - Lookups
     post:
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2453,8 +2676,11 @@ paths:
     get:
       description: ICIS Limit Parameter Code and Name lookup based on the supply of a partial parameter name. (NPDES = National Pollutant Discharge Elimination System)
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2482,8 +2708,11 @@ paths:
     post:
       description: ICIS Limit Parameter Code and Name lookup based on the supply of a partial parameter name. (NPDES = National Pollutant Discharge Elimination System)
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2512,8 +2741,11 @@ paths:
     get:
       description: USGS Watershed Boundary Dataset (WBD) Name lookup based on a supplied WBD Code and Watershed Level
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2542,8 +2774,11 @@ paths:
     post:
       description: USGS Watershed Boundary Dataset (WBD) Name lookup based on a supplied WBD Code and Watershed Level
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2573,8 +2808,11 @@ paths:
     get:
       description: USGS Watershed Boundary Dataset (WBD) Code lookup based on a supplied WBD Name and Watershed Level
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2603,8 +2841,11 @@ paths:
     post:
       description: USGS Watershed Boundary Dataset (WBD) Code lookup based on a supplied WBD Name and Watershed Level
       parameters:
-        - default: JSON
-          description: 'Output format: JSONP, JSON or XML.'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
           enum:
             - JSONP
             - JSON
@@ -2631,6 +2872,25 @@ paths:
       tags:
         - Lookups
 definitions:
+  Geometry:
+    description: GeoJSON Geometry Object
+    properties:
+      coordinates:
+        description: 'Array of coordinate values in longitude, latitude format.'
+        example: -87.86253
+        items:
+          type: number
+        title: Coordinates Array
+        type: array
+      type:
+        description: 'Indicator of the geometry represented in the GeoJSON Feature, for Echo will always be "Point".'
+        example: Point
+        title: Geometry
+        type: string
+    required:
+      - type
+      - coordinates
+    type: object
   cwa1_Facilities:
     description: Facilities Object
     properties:
@@ -2982,6 +3242,7 @@ definitions:
         title: Zip
         type: string
       CalculatedAccuracyMeters:
+        example: '50'
         title: Calculated Accuracy in Meters
         type: string
       CensusBlockGroup:
@@ -3028,12 +3289,10 @@ definitions:
       DmrPounds:
         description: Total pounds of pollutants discharged by the NPDES ID for the most recent complete calendar year.
         example: '500696'
-        format: float
         type: string
       DmrTwpe:
         description: Total toxic-weighted pounds equivalent (TWPE) discharged by the NPDES ID for the most recent complete calendar year. TWPE is the mass of a pollutant or chemical discharged that accounts for its relative toxicity.
         example: '1.15'
-        format: double
         type: string
       DschToMs4:
         type: string
@@ -3056,6 +3315,7 @@ definitions:
         example: '0'
         type: string
       EffExceeds:
+        example: '3'
         type: string
       EjscreenFlag:
         type: string
@@ -3072,6 +3332,10 @@ definitions:
       FacDerivedTRIbes:
         type: string
       FacDerivedWBD:
+        type: string
+      FacDerivedWBDHu8:
+        type: string
+      FacDerivedWBDHu8Name:
         type: string
       FacDerivedWBDName:
         type: string
@@ -3179,6 +3443,11 @@ definitions:
         description: The maximum percentile from all individual EJSCREEN indicators.
         example: '98'
         type: string
+      MaxScore:
+        description: '[Col. 121]'
+        example: '1'
+        title: Max Score
+        type: string
       MissDmrQtrs:
         type: string
       MsgpPermitType:
@@ -3197,6 +3466,8 @@ definitions:
         type: string
       OperatorZip:
         title: Operator Zip Code
+        type: string
+      Over80CountUs:
         type: string
       PastCalYrAverageFlow:
         type: string
@@ -3252,6 +3523,9 @@ definitions:
         description: The national percentile of the census block group for the EJSCREEN Traffic proximity and volume indicator.
         example: '92'
         type: string
+      PermitComponents:
+        example: POTW
+        type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
         example: 'Chlorine|Flow, in conduit or thru treatment plant|Oil and grease|Solids, total suspended|Thermal Discharge|pH'
@@ -3276,6 +3550,10 @@ definitions:
         description: 'A nationally unique and permanent identifier for the waterbody, assigned by the US Geological Survey.'
         example: '144957244039'
         title: Reach Address Database Reach Code
+        type: string
+      RadWBDHu8:
+        type: string
+      RadWBDHu8Name:
         type: string
       RadWBDHuc12:
         description: |-
@@ -3306,6 +3584,10 @@ definitions:
       SDWAIDs:
         description: A unique 9-character ID assigned for each public water system within the Safe Drinking Water Information System (SDWIS).
         example: DC0000001
+        type: string
+      Score:
+        example: '1'
+        title: Score
         type: string
       Sector:
         title: Sector
@@ -3532,6 +3814,11 @@ definitions:
       - CalculatedAccuracyMeters
       - Map
       - AlrExceedences
+      - PermitComponents
+      - RadWBDHu8
+      - RadWBDHu8Name
+      - FacDerivedWBDHu8
+      - FacDerivedWBDHu8Name
     type: object
   cwa1_MapData:
     description: Map Data Object
@@ -3718,6 +4005,12 @@ definitions:
         description: Summary count of the number of CWA facilities or SDWA public drinking water systems with current violations.
         example: '0'
         type: string
+      ClusterCount:
+        title: Cluster Count
+        type: string
+      ClusterIcon:
+        title: Cluster Icon
+        type: string
       ClusterLatitude:
         description: The latitude in decimal degrees expressed using the NAD83 horizontal datum.
         example: '38.904149'
@@ -3728,6 +4021,15 @@ definitions:
         example: '-77.017094'
         title: Cluster Longitude
         type: string
+      ClusterName:
+        title: Cluster Name
+        type: string
+      ClusterType:
+        title: Cluster Type
+        type: string
+      ClusterValue:
+        title: Cluster Value
+        type: string
       EPARegionCode:
         description: The EPA region where the facility is located. EPA has 10 regional offices that execute programs within several states and territories
         example: '03'
@@ -3737,10 +4039,18 @@ definitions:
         description: Summary count of the number of facilities with a formal enforcement action in the past five years
         example: '1'
         type: string
+      INSPRows:
+        description: Number of facilities with insp_5yr_flag populated (CWP_DATE_LAST_INSPECTION)
+        example: '1'
+        type: string
       IndianCountryRows:
         description: Number of facilities with tribal_flag populated
         example: '0'
         title: Indian Country Row Count
+        type: string
+      InfFEARows:
+        description: Number of facilities with infea_5yr_flag populated (INFORMAL_ENF_ACT_COUNT > 0)
+        example: '0'
         type: string
       ObjectId:
         description: Sequential number assigned to each facility returned
@@ -3765,12 +4075,19 @@ definitions:
       - ObjectId
       - ClusterLatitude
       - ClusterLongitude
+      - ClusterIcon
+      - ClusterType
+      - ClusterName
+      - ClusterValue
+      - ClusterCount
       - IndianCountryRows
       - EPARegionCode
       - SVRows
       - CVRows
       - V3Rows
       - FEARows
+      - InfFEARows
+      - INSPRows
       - TotalPenalties
     type: object
   cwa2_ClusterOutput:
@@ -3781,13 +4098,7 @@ definitions:
           $ref: '#/definitions/cwa2_ClusterData'
         title: Cluster Data
         type: array
-      ClusterRecords:
-        description: Number of clusters returned.
-        example: '199'
-        title: Cluster Records
-        type: string
     required:
-      - ClusterRecords
       - ClusterData
     type: object
   cwa2_Facilities:
@@ -4141,6 +4452,7 @@ definitions:
         title: Zip
         type: string
       CalculatedAccuracyMeters:
+        example: '50'
         title: Calculated Accuracy in Meters
         type: string
       CensusBlockGroup:
@@ -4187,12 +4499,10 @@ definitions:
       DmrPounds:
         description: Total pounds of pollutants discharged by the NPDES ID for the most recent complete calendar year.
         example: '500696'
-        format: float
         type: string
       DmrTwpe:
         description: Total toxic-weighted pounds equivalent (TWPE) discharged by the NPDES ID for the most recent complete calendar year. TWPE is the mass of a pollutant or chemical discharged that accounts for its relative toxicity.
         example: '1.15'
-        format: double
         type: string
       DschToMs4:
         type: string
@@ -4215,6 +4525,7 @@ definitions:
         example: '0'
         type: string
       EffExceeds:
+        example: '3'
         type: string
       EjscreenFlag:
         type: string
@@ -4231,6 +4542,10 @@ definitions:
       FacDerivedTRIbes:
         type: string
       FacDerivedWBD:
+        type: string
+      FacDerivedWBDHu8:
+        type: string
+      FacDerivedWBDHu8Name:
         type: string
       FacDerivedWBDName:
         type: string
@@ -4338,6 +4653,11 @@ definitions:
         description: The maximum percentile from all individual EJSCREEN indicators.
         example: '98'
         type: string
+      MaxScore:
+        description: '[Col. 121]'
+        example: '1'
+        title: Max Score
+        type: string
       MissDmrQtrs:
         type: string
       MsgpPermitType:
@@ -4361,6 +4681,8 @@ definitions:
         type: string
       OperatorZip:
         title: Operator Zip Code
+        type: string
+      Over80CountUs:
         type: string
       PastCalYrAverageFlow:
         type: string
@@ -4416,6 +4738,9 @@ definitions:
         description: The national percentile of the census block group for the EJSCREEN Traffic proximity and volume indicator.
         example: '92'
         type: string
+      PermitComponents:
+        example: POTW
+        type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
         example: 'Chlorine|Flow, in conduit or thru treatment plant|Oil and grease|Solids, total suspended|Thermal Discharge|pH'
@@ -4440,6 +4765,10 @@ definitions:
         description: 'A nationally unique and permanent identifier for the waterbody, assigned by the US Geological Survey.'
         example: '144957244039'
         title: Reach Address Database Reach Code
+        type: string
+      RadWBDHu8:
+        type: string
+      RadWBDHu8Name:
         type: string
       RadWBDHuc12:
         description: |-
@@ -4470,6 +4799,10 @@ definitions:
       SDWAIDs:
         description: A unique 9-character ID assigned for each public water system within the Safe Drinking Water Information System (SDWIS).
         example: DC0000001
+        type: string
+      Score:
+        example: '1'
+        title: Score
         type: string
       Sector:
         title: Sector
@@ -4697,6 +5030,11 @@ definitions:
       - CalculatedAccuracyMeters
       - Map
       - AlrExceedences
+      - PermitComponents
+      - RadWBDHu8
+      - RadWBDHu8Name
+      - FacDerivedWBDHu8
+      - FacDerivedWBDHu8Name
     type: object
   cwa2_Results:
     description: Results Object
@@ -4803,10 +5141,24 @@ definitions:
   cwa3_MapData:
     description: Map Data Object
     properties:
+      CWAstatus:
+        description: Quarterly compliance status for the most recent 13 quarters. Each letter indicates the compliance status for the corresponding quarter.
+        example: VV_______V_VV
+        type: string
+      FormalCount:
+        description: The number of formal enforcement actions that have been taken against the facility
+        example: '1'
+        title: Formal Count
+        type: string
       ICON:
         description: Name of each individual icon file within the URL base
         example: CAA-IC-MN-N.png
         title: Icon
+        type: string
+      InformalCount:
+        description: The number of informal enforcement actions that have been taken against the facility
+        example: '1'
+        title: Informal Count
         type: string
       LAT:
         description: 'The latitude of the facility in degrees, to four decimal places'
@@ -4817,6 +5169,11 @@ definitions:
         description: 'The longitude of the facility in degrees, to four decimal places'
         example: '-77.062981'
         title: Longitude
+        type: string
+      LastInsp:
+        description: The unique identifier for the last inspection
+        example: '901'
+        title: Last Inspection
         type: string
       NAME:
         description: 'For DFR, this is the Facility name. The name corresponds to the TYPE value'
@@ -4840,6 +5197,10 @@ definitions:
       - TYPE
       - NAME
       - PUV
+      - CWAstatus
+      - LastInsp
+      - FormalCount
+      - InformalCount
     type: object
   cwa3_MapOutput:
     description: Map Output Object
@@ -4905,6 +5266,961 @@ definitions:
       - PageNo
       - Facilities
     type: object
+  cwa5_Feature:
+    description: GeoJSON Feature Object
+    properties:
+      geometry:
+        $ref: '#/definitions/Geometry'
+      properties:
+        $ref: '#/definitions/cwa5_properties'
+      type:
+        description: Static marker indicating object is a GeoJSON Feature.
+        example: Feature
+        title: Feature
+        type: string
+    required:
+      - type
+      - geometry
+      - properties
+    type: object
+  cwa5_FeatureCollection:
+    description: GeoJSON Feature Collection Object
+    properties:
+      features:
+        description: Array of GeoJSON feature objects.
+        items:
+          $ref: '#/definitions/cwa5_Feature'
+        title: Features Array
+        type: array
+      type:
+        description: Static marker indicating object is a GeoJSON Feature Collection.
+        example: FeatureCollection
+        title: Feature Collection
+        type: string
+    required:
+      - type
+      - features
+    type: object
+  cwa5_properties:
+    description: GeoJSON Properties Object
+    properties:
+      AIRIDs:
+        description: Air Facility System (AFS) ID.
+        example: DC0000001100195254
+        title: AIR Facility System ID
+        type: string
+      ActiveLower48:
+        type: string
+      AlrExceedences:
+        type: string
+      AssociatedPollutant:
+        description: Description of pollutant(s) or pollutant constituent(s) associated with each industrial activity exposed to stormwater.
+        type: string
+      AttainsAquaticLifeUseFlg:
+        description: Displays "Y" if the waterbody in which the facility resides is designated for aquatic life use. The data are from the ATTAINS database.
+        example: 'Y'
+        title: ATTAINS Aquatic Life Use Flag
+        type: string
+      AttainsAuCategory:
+        description: |-
+          The impairment class or category of the waterbody in which the facility is permitted to discharge directly. The data are from the ATTAINS database:
+          - 5  = Impaired: TMDL needed. Available information indicates that at least one designated use is not being supported and a TMDL is needed (also known as the 303(d) listed waters).
+          - 4  = Impaired: TMDL not needed. Available information indicates that at least one designated use is not being supported, but a TMDL is not needed (see subcategories).
+          - 4a = TMDL completed. A TMDL has been completed, but impairment still exists.
+          - 4b = TMDL alternative. Impairment is being addressed by a method other than a TMDL (e.g., stream bank improvements).
+          - 4c = Non-pollutant causes. Cause of impairment is not a pollutant (e.g., habitat destruction).
+        example: '5'
+        title: ATTAINS Assessment Unit Category
+        type: string
+      AttainsCauseGroups:
+        description: Lists all groups of pollutants or stressors that are causing impairment in the assessed waterbody. The data are from the ATTAINS database.
+        example: POLYCHLORINATED BIPHENYLS (PCBS) | TOXIC ORGANICS
+        title: ATTAINS Cause Groups
+        type: string
+      AttainsCycleYear:
+        description: The year in which the most recent state assessment occurred for the waterbody. The data are from the ATTAINS database.
+        example: '2012'
+        title: ATTAINS Cycle Year
+        type: string
+      AttainsExceptnlUseFlg:
+        description: Displays "Y" if the waterbody in which the facility resides is designated for exceptional use. The data are from the ATTAINS database.
+        example: 'Y'
+        title: ATTAINS Exceptional Use Flag
+        type: string
+      AttainsImpWaterFlg:
+        description: Displays "Y" if the waterbody in which the facility resides is listed for impairment. The data are from the ATTAINS database.
+        example: 'Y'
+        title: ATTAINS Impaired Water Flag
+        type: string
+      AttainsPossibleNPDESParams:
+        description: Lists all pollutants discharged by the facility that are potentially contributing to the impairment of local waterbodies.
+        example: pH
+        title: ATTAINS Possible NPDES Parameters
+        type: string
+      AttainsRecreationUseFlg:
+        description: Displays "Y" if the waterbody in which the facility resides is designated for recreational use. The data are from the ATTAINS database.
+        example: 'Y'
+        title: ATTAINS Recreational Use Flag
+        type: string
+      AttainsShellfishUseFlg:
+        description: Displays "Y" if the waterbody in which the facility resides is designated for shellfish use. The data are from the ATTAINS database.
+        example: 'Y'
+        title: ATTAINS Shellfish Use Flag
+        type: string
+      AttainsSource:
+        description: The CWA Report in which the waterbody data can be found. The data are from the Assessment TMDL Tracking & Implementation System (ATTAINS) database.
+        example: 303(d)
+        title: ATTAINS Source
+        type: string
+      AttainsStateCauses:
+        description: Lists all pollutants or stressors that are causing impairment in the assessed waterbody. The data are from the ATTAINS database.
+        example: PH | POLYCHLORINATED BIPHENYLS (PCBS)
+        title: ATTAINS State Causes
+        type: string
+      BeachCloseLast2yrsFlg:
+        description: Displays "Y" if the facility is located on or near a waterbody with a beach closure within the last two years.
+        example: 'Y'
+        type: string
+      BeachCloseLastYearFlg:
+        description: Displays "Y" if the facility is located on or near a waterbody with a beach closure within the last year.
+        example: 'Y'
+        type: string
+      CWP13qtrsComplStatus:
+        description: Each letter indicates the compliance status for the corresponding quarter.
+        example: UUUUUUUU__VV_
+        type: string
+      CWPActualAverageFlowNmbr:
+        description: The actual amount of the facility's wastewater flow measured in million gallons per day (MGD).
+        example: 448
+        type: number
+      CWPCaseIDs:
+        description: 'Indicates the ICIS Case Number, a unique number identifying the civil enforcement action.'
+        example: 03-2014-0228
+        type: string
+      CWPCity:
+        description: City in which the facility is located.
+        example: HUNTSVILLE
+        title: City
+        type: string
+      CWPComplianceTracking:
+        description: 'Extent to which data is being entered and effluent exceedances are being identified (Off, On, Partial).'
+        example: 'On'
+        type: string
+      CWPCounty:
+        description: County in which the facility is located.
+        example: District of Columbia
+        title: County
+        type: string
+      CWPCsoFlag:
+        description: The discharge from a Combined Sewer System at a point prior to the treatment plant. CSOs are point sources subject to NPDES permit requirements including both technology-based and water quality-based requirements of the Clean Water Act.
+        example: 'N'
+        title: Combined Sewer Overflows (CSOs)?
+        type: string
+      CWPCsoOutfalls:
+        description: The number of discharge outfalls at points prior to the treatment plant.
+        example: '59'
+        title: CSO Outfalls
+        type: string
+      CWPCurrentSNCStatus:
+        description: The type of noncompliance when a major source is in significant violation or a minor source has a Category 1 violation.
+        example: D (DMR NR)
+        type: string
+      CWPCurrentSNCStatusDate:
+        description: The status date of the facility's Significant Noncompliance designation.
+        example: 12/31/2015
+        type: string
+      CWPCurrentVioStatus:
+        type: string
+      CWPCurrentViol:
+        description: 'Displays "Y" if the facility is currently in any violation under the Clean Water Act, either in Noncompliance or Significant Noncompliance.'
+        example: 'Y'
+        type: string
+      CWPDateLastFea:
+        description: Indicates the effective date of the most recent listed formal enforcement action taken against the facility within the last five years.
+        example: 06/01/2006
+        type: string
+      CWPDateLastFeaEPA:
+        description: Indicates the effective date of the most recent listed formal enforcement action taken against the facility by EPA within the last five years.
+        example: 06/01/2006
+        type: string
+      CWPDateLastFeaSt:
+        description: Indicates the effective date of the most recent listed formal enforcement action taken against the facility by a state environmental agency within the last five years.
+        example: 09/27/2010
+        type: string
+      CWPDateLastIeaEPA:
+        description: Indicates the effective date of the most recent listed informal enforcement action taken against the facility by EPA within the last five years.
+        example: 12/09/1992
+        type: string
+      CWPDateLastIeaSt:
+        description: Indicates the effective date of the most recent listed informal enforcement action taken against the facility by a state environmental agency within the last five years.
+        example: 06/09/2013
+        type: string
+      CWPDateLastInformalEa:
+        description: Indicates the effective date of the most recent listed informal enforcement action taken against the facility within the last five years.
+        example: 06/09/2013
+        title: Date of Last Informal Enf Action
+        type: string
+      CWPDateLastInspEPA:
+        description: Indicates the effective date of the most recent inspection taken against the facility by EPA within the last five years.
+        example: 07/29/2015
+        type: string
+      CWPDateLastInspSt:
+        description: Indicates the effective date of the most recent inspection taken against the facility by a state environmental agency within the last five years.
+        example: 09/15/2004
+        type: string
+      CWPDateLastInspection:
+        description: 'The date on which the most recent inspection of the facility took place. For the CAA, the date on which a Full Compliance Evaluation (FCE) was completed.'
+        example: 07/29/2015
+        title: Date of Last Inspection
+        type: string
+      CWPDateLastPenalty:
+        description: Indicates date of most recent penalty against the facility within the last five years.
+        example: 09/27/2010
+        type: string
+      CWPDaysLastInspection:
+        description: Indicates the number of days since the most recent inspection of the facility. Inspections listed within the last five years are included.
+        example: 247
+        type: number
+      CWPE90Cnt:
+        description: 'Displays the number of instances where effluent limits have been exceeded in the past 3 years (E90 compliance code), based on monthly Discharge Monitoring Reports (DMRs) submitted by facilities.'
+        example: 5
+        title: Effluent Violations (5 yrs)
+        type: number
+      CWPEPARegion:
+        description: The EPA region where the facility is located. EPA has 10 regional offices that execute programs within several states and territories.
+        example: '03'
+        title: EPA Region
+        type: string
+      CWPEffectiveDate:
+        type: string
+      CWPExpirationDate:
+        description: Date that the permit expires.
+        example: 04/19/2005
+        title: Date of Permit Expiration
+        type: string
+      CWPFIPSCode:
+        type: string
+      CWPFacilityTypeIndicator:
+        description: Each National Pollutant Discharge Elimination System (NPDES) permit is defined by the program office as a Major or non-major discharger. This field also indicates the permit type.
+        example: NON-POTW
+        title: Facility Type
+        type: string
+      CWPFormalEaCnt:
+        description: 'Indicates the total number of enforcement actions taken against the facility within the last five years. "NA" indicates that this measure is not applicable for facilities with no associated CAA, CWA, or RCRA permits.'
+        example: '1'
+        type: string
+      CWPImpWaterFlg:
+        description: 'Displays "Y" if the permitted facility discharges directly into category 4 or 5 impaired waters, as designated under section 303(d) of the Clean Water Act.'
+        example: 'Y'
+        title: Impaired Water Body
+        type: string
+      CWPIndianCntryFlg:
+        description: Displays "Y" if a facility is located in Indian country.
+        example: 'Y'
+        title: In Indian Country
+        type: string
+      CWPInformalEnfActCount:
+        description: Indicates the total number of informal enforcement actions/notices of violations (NOVs) taken against the facility within the last five years.
+        example: 3
+        title: Information Enforcement Actions (5 yrs)
+        type: number
+      CWPInspectionCount:
+        description: 'The number of inspections/compliance evaluations, under the corresponding statute, occurring at the facility within the last five years.'
+        example: 4
+        title: Inspections (5 yrs)
+        type: number
+      CWPIssueDate:
+        type: string
+      CWPMajorMinorStatusFlag:
+        description: |-
+          Facilities marked "M" for major refers to CWA major permittees.
+          - M = Major
+          - N = Minor
+        example: 'N'
+        title: Major/Minor Status Flag
+        type: string
+      CWPNaicsCodes:
+        description: Indicates the facility's or permit's primary North American Industry Classification System (NAICS) Code.
+        example: '236220'
+        title: NAICS Code
+        type: string
+      CWPName:
+        description: 'Facility or permit holder name, as maintained in ICIS-NPDES.'
+        example: REDSTONE ARSENAL
+        title: Facility Name
+        type: string
+      CWPPermitStatusCode:
+        description: The code associated with the facility's NPDES permit status.
+        example: ADC
+        title: Permit Status (Code)
+        type: string
+      CWPPermitStatusDesc:
+        description: The current stage/status in the NPDES permit life cycle.
+        example: Effective
+        title: Permit Status Description
+        type: string
+      CWPPermitTypeCode:
+        description: The code associated with the facility's NPDES permit classification.
+        example: NPD
+        title: Permit Type (Code)
+        type: string
+      CWPPermitTypeDesc:
+        description: |-
+          NPDES facility permit classification:
+          - NPDES Individual Permit
+          - General Permit Covered Facility
+          - NPDES Master General Permit
+          - Associated Permit Record
+          - Individual Industrial User Permit
+          - Individual State Issued Permit
+          - State Issued Master General Permit
+          - Unpermitted Facility
+        example: General Permit Covered Facility
+        title: Permit Type Description
+        type: string
+      CWPQtrsInNC:
+        description: 'Count of the number of quarters, out of the last twelve quarters, in which the permit or site is considered either with violations, in non-compliance (NC) status, or in Significant Non-compliance (SNC), as described above under Current Compliance Status.'
+        example: 4
+        type: number
+      CWPQtrsInSNC:
+        description: 'Count of the number of quarters, out of the last twelve quarters, in which the permit is considered in Significant Non-compliance (SNC).'
+        example: 2
+        type: number
+      CWPSNCEventDesc:
+        description: Describes the event that resulted in the facility's status of Significant Noncompliance.
+        type: string
+      CWPSicCodes:
+        description: Indicates the facility's or permit's primary Standard Industrial Classification (SIC) Code.
+        example: '4911'
+        title: SIC Code
+        type: string
+      CWPState:
+        description: Facility location - two-digit state abbreviation.
+        example: AL
+        title: State
+        type: string
+      CWPStateDistrict:
+        description: The State Congressional District the facility is located within.
+        type: string
+      CWPStateWaterBodyCode:
+        description: |-
+          Code from the Assessment TMDL Tracking & Implementation System (ATTAINS) database, assigned by the US Geological Survey, used to classify watersheds in the United States and the Caribbean. The code consists of twelve digits which correspond to six levels of classification:
+          - Region (first-level, 2-digit HUC)
+          - Subregion (second-level, 4-digit HUC)
+          - Accounting unit (third-level, 6-digit HUC)
+          - Cataloguing unit (fourth-level, 8-digit HUC)
+          - Watershed (fifth-level, 10-digit HUC)
+          - Subwatershed (sixth-level, 12-digit HUC)
+        example: '552968'
+        type: string
+      CWPStateWaterBodyName:
+        description: The name of the watershed from the ATTAINS database in which the facility resides.
+        example: POTOMAC RIVER
+        type: string
+      CWPStatus:
+        description: |-
+          An indication of the facility's current compliance status under the Clean Water Act:
+          - Significant Violation
+          - Noncompliance
+          - No Violation
+          - Unknown
+        example: No Violation
+        title: Current Compliance Status
+        type: string
+      CWPStreet:
+        description: Facility street address
+        example: BUILDING 3240 AREA
+        title: Street Address
+        type: string
+      CWPTRIbalLandCode:
+        type: string
+      CWPTerminationDate:
+        type: string
+      CWPTotalDesignFlowNmbr:
+        description: The amount of wastewater flow in million gallons per day (MGD) that the facility is designed for.
+        example: 40
+        type: number
+      CWPTotalPenalties:
+        description: The total penalty value incurred over 5 years.
+        example: '$6,524'
+        type: string
+      CWPVersionNmbr:
+        description: The version number of the facility's NPDES permit.
+        example: 0
+        title: Permit Version Number
+        type: number
+      CWPZip:
+        description: Facility ZIP code
+        example: '35898'
+        title: Zip
+        type: string
+      CalculatedAccuracyMeters:
+        example: 50
+        title: Calculated Accuracy in Meters
+        type: number
+      CensusBlockGroup:
+        description: 'A geographic unit used by the United States Census Bureau, generally defined to contain between 600 and 3,000 people.'
+        example: '110010096022'
+        title: Census Block Group
+        type: string
+      CertifiedDate:
+        title: Certified Date
+        type: string
+      ChesapeakeBayFlag:
+        description: Displays "Y" if the facility is located within the Chesapeake Bay watershed.
+        example: 'Y'
+        title: |
+          Chesapeake Bay Flag
+        type: string
+      CollectionMethod:
+        description: '??'
+        example: ADDRESS MATCHING-HOUSE NUMBER
+        title: Collection Method
+        type: string
+      ControlMeasure:
+        description: Description of control measures employed to comply with the non-numeric technology-based effluent limits required in Part 2.1.2 and Part 8.
+        title: Control Measure
+        type: string
+      ControlMeasureSchedule:
+        description: Description of schedule for control measures associated with good housekeeping and maintenance.
+        title: Control Measure Schedule
+        type: string
+      CurrSvFlag:
+        description: Indicates if the facility has a current significant violation. 1 = Yes
+        example: 1
+        title: Current Significant Violation Flag
+        type: number
+      CurrVioFlag:
+        description: Indicates if the facility has a current violation. 1 = Yes
+        example: 1
+        title: Current Violation Flag
+        type: number
+      DmrImpairedPoll:
+        description: The pollutants with limits or monitoring requirements in a facility's NPDES permit with the potential to contribute to impairment of local waterbodies
+        example: 'Mercury | Oil and grease | Solids, total suspended | Temperature, water deg. centigrade | Temperature, water deg. fahrenheit | pH'
+        type: string
+      DmrPounds:
+        description: Total pounds of pollutants discharged by the NPDES ID for the most recent complete calendar year.
+        example: 4012
+        type: number
+      DmrTwpe:
+        description: Total toxic-weighted pounds equivalent (TWPE) discharged by the NPDES ID for the most recent complete calendar year. TWPE is the mass of a pollutant or chemical discharged that accounts for its relative toxicity.
+        example: 1.15
+        type: number
+      DschToMs4:
+        type: string
+      EPASystem:
+        description: |-
+          The EPA data system in which permit and facility records are kept. EPA's Facility Registry System (FRS) links all program database records (such as permit IDs and IDs facilities use in reporting to EPA) together. The following list describes the individual data systems that are linked to from the detailed facility report: 
+
+          - AFS: Air Facility System for Clean Air Act stationary source programs.
+          - ICP: Integrated Compliance Information System for Clean Water Act programs monitoring National Pollutant Discharge Elimination System (NPDES) permits.
+          - RCR: Resource Conservation and Recovery Act Information System (RCRAInfo) for tracking the Resource Conservation and Recovery Act (RCRA) programs.
+          - NCDB: National Compliance Database System for monitoring national performance of the Toxic Substance Control Act (TSCA); the Emergency Planning and Right-to-Know Act, Section 313 (EPCRA); the Asbestos Hazard Emergency Response (AHERA); and the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
+          - TRI: Toxics Release Inventory for Emergency Planning and Community Right-to-Know Act, Section 313 submissions.
+          - NEI: National Emissions Inventory database contains information on stationary and mobile sources that emit criteria air pollutants and their precursors, as well as hazardous air pollutants (HAPs). The database includes estimates of annual emissions, by source, of air pollutants in each area of the country, on an annual basis.
+          - TSCA: Toxic Substances Control Act addressing the production, importation, use, and disposal of specific chemicals.
+        example: ICP
+        title: EPA Data System
+        type: string
+      Ea5yrFlag:
+        description: Indicates if the facility has a formal enforcement action within the last 5 years. 1 = Yes
+        example: 0
+        type: number
+      EffExceeds:
+        example: 3
+        type: number
+      EjscreenFlag:
+        type: string
+      EjscreenFlagUs:
+        type: string
+      ExposedActivity:
+        description: Description of onsite industrial activities exposed to stormwater and potential spill and leak areas.
+        type: string
+      FacDerivedHuc:
+        description: The 8-digit Hydrologic Unit Code (HUC) of the watershed in which the facility resides. A HUC number is assigned to every watershed in the nation and uniquely identifies the watershed.
+        example: '552968'
+        title: Watershed (HUC Code)
+        type: string
+      FacDerivedTRIbes:
+        type: string
+      FacDerivedWBD:
+        type: string
+      FacDerivedWBDHu8:
+        type: string
+      FacDerivedWBDHu8Name:
+        type: string
+      FacDerivedWBDName:
+        type: string
+      FacFIPSCode:
+        description: The 2-digit Federal Information Processing Standards (FIPS) code to identify the county that a facility is located in.
+        example: '55001'
+        title: FIPS Code
+        type: string
+      FacFederalAgencyCode:
+        description: 'Indicates the federal agency, as classified in FRS. Federal agencies are installations that are owned and operated by the U.S. government. The five-character code consists of a letter followed by four numbers. There are four possible letters that can occupy the first character position: C = Civilian Federal Agency; D = Department of Defense; E = Department of Energy; X = Unknown. The second and third characters represent the agency code, while the fourth and fifth characters represent the bureau code.'
+        example: E
+        title: |
+          Facility Federal Agency Code
+        type: string
+      FacFederalAgencyName:
+        type: string
+      FacIndianCntryFlg:
+        description: Flag showing Y/N whether the facility is located in Indian Country.
+        title: Facility Indian Country Flag
+        type: string
+      FacIndianSpatialFlg:
+        type: string
+      FacMapFlg:
+        description: Graphical indicator denoting whether geographical data required to map a facility are available.
+        example: 'Y'
+        title: Facility Mapped Flag
+        type: string
+      FacMapIcon:
+        description: The default map icon image file calculated for the facility by the ECHO program.
+        example: CWA-NC-MJ-2.png
+        title: Facility Map Icon
+        type: string
+      FacPercentMinority:
+        description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
+        example: 45.379
+        title: |
+          Facility Percent Minority
+        type: number
+      FacPopDen:
+        description: The number of persons per square mile in the area being profiled. This field is the ratio of total persons (displayed in the Total Persons field) to total land area (displayed in the Land Area field).
+        example: 6716.34
+        title: |
+          Facility Population Density
+        type: number
+      FacTRIPotwTrans:
+        description: 'POTW transfer information from the Toxics Release Inventory (TRI) represents the amount of toxic chemicals transferred to a Publicly Operated Treatment Works (POTW), in pounds, for the most recent reporting year.'
+        example: '1058200'
+        type: string
+      FacTRIReporter:
+        description: Indicates whether facility reported to the Toxics Release Inventory (TRI) for the most recent reporting year.
+        example: B
+        title: Facility TRI Reporter
+        type: string
+      FacTRISwRel:
+        description: 'Chemical surface water release information from the Toxics Release Inventory (TRI) represents the total chemical releases discharged to surface water, in pounds, for the most recent reporting year.'
+        example: '0'
+        type: string
+      FacUsMexBorderFlg:
+        description: A Y/N flag indicating that the facility is within 100KM of the US-Mexico Border.
+        example: 'Y'
+        title: Near US-Mexico Border
+        type: string
+      HistoricCriterionCode:
+        type: string
+      IndswFlag:
+        type: string
+      Infea5yrFlag:
+        description: Indicates if the facility has an informal enforcement action within the last 5 years. 1 = Yes.
+        example: 1
+        type: number
+      Insp5yrFlag:
+        description: Indicates if the facility has an inspection within the last 5 years. 1 = Yes
+        example: 1
+        title: Inspected Within Last Five Years Flag
+        type: number
+      IssuingAgency:
+        description: This is the name of the organization issuing or granting a permit.
+        title: Permit Issuing Agency
+        type: string
+      LastDmrValueRcvdDate:
+        type: string
+      Lower48:
+        description: Flag showing Y/N whether location is within the contiguous (lower 48) United States.
+        example: 'Y'
+        title: Contiguous United States Flag
+        type: string
+      Map:
+        title: Map
+        type: string
+      MasterExternalPermitNmbr:
+        description: This is the unique identifier for the Master General Permit for a General Permit Covered Facility.
+        title: Master External Permit Number
+        type: string
+      MaxPctileUs:
+        description: The maximum percentile from all individual EJSCREEN indicators.
+        example: 54.7
+        type: number
+      MaxScore:
+        description: '[Col. 121]'
+        example: 1
+        title: Max Score
+        type: number
+      MissDmrQtrs:
+        type: string
+      MsgpPermitType:
+        type: string
+      OperatorAddress:
+        title: Operator Address
+        type: string
+      OperatorCity:
+        title: Operator City
+        type: string
+      OperatorName:
+        title: Operator Name
+        type: string
+      OperatorState:
+        title: Operator State
+        type: string
+      OperatorZip:
+        title: Operator Zip Code
+        type: string
+      Over80CountUs:
+        type: number
+      PastCalYrAverageFlow:
+        type: string
+      PastCalYrConvPolOvrLmt:
+        type: number
+      PastCalYrConvPollutants:
+        type: string
+      PastCalYrToxicPolOvrLmt:
+        type: number
+      PastCalYrToxicPollutants:
+        type: string
+      PctileCancerUs:
+        description: The national percentile of the census block group for the EJSCREEN NATA air toxics cancer risk indicator.
+        example: 99
+        type: number
+      PctileDpmUs:
+        description: The national percentile of the census block group for the EJSCREEN diesel particulate matter indicator.
+        example: 99
+        type: number
+      PctileO3Us:
+        description: The national percentile of the census block group for the EJSCREEN ozone indicator.
+        example: 52.4
+        type: number
+      PctilePctpre1960Us:
+        description: The national percentile of the census block group for the EJSCREEN Lead paint indicator.
+        example: 14.6
+        type: number
+      PctilePmUs:
+        description: The national percentile of the census block group for the EJSCREEN particulate matter indicator.
+        example: 52.4
+        type: number
+      PctileProximityNPDESUs:
+        description: The national percentile of the census block group for the EJSCREEN proximity to major direct water dischargers indicator.
+        example: 45.3
+        type: number
+      PctileProximityNplUs:
+        description: The national percentile of the census block group for the EJSCREEN proximity to National Priorities List (NPL) sites indicator.
+        example: 38.9
+        type: number
+      PctileProximityRmpUs:
+        description: The national percentile of the census block group for the EJSCREEN proximity to Risk Management Plan (RMP) sites indicator.
+        example: 54.7
+        type: number
+      PctileProximityTsdfUs:
+        description: The national percentile of the census block group for the EJSCREEN proximity to Treatment Storage and Disposal Facilities (TSDFs) indicator.
+        example: 42.4
+        type: number
+      PctileRespUs:
+        description: The national percentile of the census block group for the EJSCREEN NATA respiratory hazard index indicator.
+        example: 41.9
+        type: number
+      PctileTrafficScoreUs:
+        description: The national percentile of the census block group for the EJSCREEN Traffic proximity and volume indicator.
+        example: 7
+        type: number
+      PermitComponents:
+        example: POTW
+        type: string
+      PollInViolation:
+        description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
+        example: 'Chlorine|Flow, in conduit or thru treatment plant|Oil and grease|Solids, total suspended|Thermal Discharge|pH'
+        title: Pollutants with Reporting Violations
+        type: string
+      RCRAIDs:
+        description: A unique 12-character ID assigned for each record/permit/site/facility within the RCRAInfo database.
+        example: VAD981111784
+        title: Resource Conservation and Recovery Act IDs
+        type: string
+      RadGnisName:
+        description: The name of the waterbody from the Geographic Names Information System (GNIS) database in which the facility is permitted to discharge directly.
+        example: Pojoaque River
+        title: Reach Address Database GNIS Name
+        type: string
+      RadHu12Name:
+        description: 'The name of the waterbody in which the facility is permitted to discharge directly (from the Reach Address Database, RAD).'
+        example: Nichols Run-Potomac River
+        title: Reach Address Database HUC12 Name
+        type: string
+      RadReachcode:
+        description: 'A nationally unique and permanent identifier for the waterbody, assigned by the US Geological Survey.'
+        example: '144957244039'
+        title: Reach Address Database Reach Code
+        type: string
+      RadWBDHu8:
+        type: string
+      RadWBDHu8Name:
+        type: string
+      RadWBDHuc12:
+        description: |-
+          Code from the Reach Address Database (RAD), assigned by the US Geological Survey, used to classify watersheds in the United States and the Caribbean. The code consists of twelve digits which correspond to six levels of classification:
+          - Region (first-level, 2-digit HUC)
+          - Subregion (second-level, 4-digit HUC)
+          - Accounting unit (third-level, 6-digit HUC)
+          - Cataloguing unit (fourth-level, 8-digit HUC)
+          - Watershed (fifth-level, 10-digit HUC)
+          - Subwatershed (sixth-level, 12-digit HUC)
+        example: 020700081005
+        title: Reach Address Database Watershed Boundary Dataset HUC12 Code
+        type: string
+      ReceivingMs4Name:
+        description: This is the name of the receiving MS4(s).
+        title: Receiving MS4 Name
+        type: string
+      ReferencePoint:
+        description: '??'
+        example: ENTRANCE POINT OF A FACILITY OR STATION
+        title: Reference Point
+        type: string
+      RegistryID:
+        description: An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases.
+        example: '110020837601'
+        title: FRS ID
+        type: string
+      SDWAIDs:
+        description: A unique 9-character ID assigned for each public water system within the Safe Drinking Water Information System (SDWIS).
+        example: DC0000001
+        type: string
+      Score:
+        example: 1
+        title: Score
+        type: number
+      Sector:
+        title: Sector
+        type: string
+      SourceID:
+        description: Unique Identifier assigned by EPA.
+        example: ALR040033
+        title: EPA Source Identifier
+        type: string
+      SpeciesCriticalHabitalFlag:
+        description: This identifies if Endangered Species Act (ESA) provisions are met.
+        type: string
+      Statute:
+        description: |-
+          The name of the statute associated with each of the permits and identifiers linked to the facility: 
+          - CAA = the Clean Air Act
+          - CWA = the Clean Water Act
+          - RCRA = the Resource Conservation and Recovery Act
+          - EP313 = the Emergency Planning and Community Right-to-Know Act, Section 313 (also known as the Toxics Release Inventory Program)
+          - TSCA = the Toxic Substances Control Act
+          - SDWA = the Safe Drinking Water Act
+        example: CWA
+        title: Regulatory Statute
+        type: string
+      StormWaterArea:
+        title: Storm Water Area
+        type: string
+      SubmittedDate:
+        title: Submitted Date
+        type: string
+      Subsector:
+        title: Subsector
+        type: string
+      SwpppUrl:
+        description: Web address URL of Internet page where current copy of Stormwater Pollution Prevention Plan (SWPPP) is maintained.
+        type: string
+      TRIIDs:
+        description: 'A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.'
+        example: 20011FRTTT5001F
+        title: Toxics Release Inventory Program IDs
+        type: string
+      TRIbalFlag:
+        example: 1
+        title: Tribal Lands Flag
+        type: number
+      TypeOfMonitoring:
+        title: Type Of Monitoring
+        type: string
+      TypeOfWater:
+        title: Type Of Water
+        type: string
+      ViolFlag:
+        description: Indicates if the facility had a violation within the last 3 years. 1 = Yes
+        example: 1
+        title: Violation Flag
+        type: number
+    required:
+      - SourceID
+      - EPASystem
+      - RegistryID
+      - Statute
+      - CWPName
+      - CWPStreet
+      - CWPCity
+      - CWPState
+      - CWPStateDistrict
+      - CWPZip
+      - CWPCounty
+      - CWPEPARegion
+      - CWPStatus
+      - CWPIndianCntryFlg
+      - CWPTRIbalLandCode
+      - CWPVersionNmbr
+      - CWPPermitStatusCode
+      - CWPPermitStatusDesc
+      - CWPPermitTypeCode
+      - CWPPermitTypeDesc
+      - CWPExpirationDate
+      - CWPFacilityTypeIndicator
+      - CWPMajorMinorStatusFlag
+      - FacPercentMinority
+      - FacPopDen
+      - FacFederalAgencyCode
+      - CWPCurrentSNCStatus
+      - CWPSNCEventDesc
+      - CWPCurrentSNCStatusDate
+      - CWPQtrsInNC
+      - CWPCurrentViol
+      - CWPQtrsInSNC
+      - CWPInspectionCount
+      - CWPDateLastInspection
+      - CWPDateLastInformalEa
+      - CWPInformalEnfActCount
+      - FacUsMexBorderFlg
+      - CWPImpWaterFlg
+      - FacDerivedHuc
+      - FacMapFlg
+      - FacMapIcon
+      - FacFIPSCode
+      - CWPE90Cnt
+      - CWPCsoFlag
+      - CWPCsoOutfalls
+      - CWPFormalEaCnt
+      - CWPDateLastFea
+      - CWPDateLastFeaSt
+      - CWPDateLastFeaEPA
+      - CWPDateLastIeaSt
+      - CWPDateLastIeaEPA
+      - CWPDateLastInspEPA
+      - CWPDateLastInspSt
+      - CWPDateLastPenalty
+      - CWPComplianceTracking
+      - FacTRIReporter
+      - FacTRISwRel
+      - FacTRIPotwTrans
+      - CWP13qtrsComplStatus
+      - CWPDaysLastInspection
+      - CWPSicCodes
+      - CWPNaicsCodes
+      - CWPCaseIDs
+      - CWPTotalDesignFlowNmbr
+      - CWPActualAverageFlowNmbr
+      - CWPStateWaterBodyCode
+      - CWPStateWaterBodyName
+      - AttainsCycleYear
+      - RadGnisName
+      - RadReachcode
+      - RadWBDHuc12
+      - RadHu12Name
+      - AttainsSource
+      - AttainsImpWaterFlg
+      - AttainsAuCategory
+      - AttainsAquaticLifeUseFlg
+      - AttainsExceptnlUseFlg
+      - AttainsRecreationUseFlg
+      - AttainsShellfishUseFlg
+      - AttainsStateCauses
+      - AttainsCauseGroups
+      - AttainsPossibleNPDESParams
+      - BeachCloseLastYearFlg
+      - BeachCloseLast2yrsFlg
+      - ChesapeakeBayFlag
+      - AIRIDs
+      - RCRAIDs
+      - TRIIDs
+      - SDWAIDs
+      - FacDerivedWBD
+      - FacDerivedWBDName
+      - CWPFIPSCode
+      - PollInViolation
+      - DmrPounds
+      - DmrTwpe
+      - DmrImpairedPoll
+      - CurrSvFlag
+      - ViolFlag
+      - CurrVioFlag
+      - Insp5yrFlag
+      - Ea5yrFlag
+      - Infea5yrFlag
+      - CWPTotalPenalties
+      - TRIbalFlag
+      - CensusBlockGroup
+      - PctilePctpre1960Us
+      - PctileDpmUs
+      - PctileCancerUs
+      - PctileRespUs
+      - PctileTrafficScoreUs
+      - PctileProximityNPDESUs
+      - PctileProximityNplUs
+      - PctileProximityRmpUs
+      - PctileProximityTsdfUs
+      - PctileO3Us
+      - PctilePmUs
+      - MaxPctileUs
+      - EjscreenFlagUs
+      - EjscreenFlag
+      - LastDmrValueRcvdDate
+      - Lower48
+      - ActiveLower48
+      - EffExceeds
+      - MissDmrQtrs
+      - PastCalYrAverageFlow
+      - PastCalYrConvPollutants
+      - PastCalYrToxicPollutants
+      - PastCalYrConvPolOvrLmt
+      - PastCalYrToxicPolOvrLmt
+      - CWPCurrentVioStatus
+      - IndswFlag
+      - MasterExternalPermitNmbr
+      - IssuingAgency
+      - CWPIssueDate
+      - CWPEffectiveDate
+      - CWPTerminationDate
+      - CertifiedDate
+      - StormWaterArea
+      - SubmittedDate
+      - HistoricCriterionCode
+      - SpeciesCriticalHabitalFlag
+      - DschToMs4
+      - ReceivingMs4Name
+      - Sector
+      - Subsector
+      - TypeOfMonitoring
+      - TypeOfWater
+      - OperatorName
+      - OperatorAddress
+      - OperatorCity
+      - OperatorState
+      - OperatorZip
+      - SwpppUrl
+      - ExposedActivity
+      - AssociatedPollutant
+      - ControlMeasure
+      - ControlMeasureSchedule
+      - MsgpPermitType
+      - FacDerivedTRIbes
+      - FacIndianCntryFlg
+      - FacIndianSpatialFlg
+      - FacFederalAgencyName
+      - CollectionMethod
+      - ReferencePoint
+      - CalculatedAccuracyMeters
+      - Map
+      - AlrExceedences
+      - PermitComponents
+      - RadWBDHu8
+      - RadWBDHu8Name
+      - FacDerivedWBDHu8
+      - FacDerivedWBDHu8Name
+    type: object
   met_Results:
     description: Results Object
     properties:
@@ -4940,6 +6256,10 @@ definitions:
         example: NUMBER
         title: Data Type
         type: string
+      Description:
+        description: A description of the category of Supplemental Environment Project (SEP) for a settlement.
+        title: Description
+        type: string
       ObjectName:
         title: Object Name
         type: string
@@ -4949,6 +6269,7 @@ definitions:
       - DataLength
       - ColumnID
       - ObjectName
+      - Description
     type: object
   qp0_QueryParameters:
     description: Query Parameters Object

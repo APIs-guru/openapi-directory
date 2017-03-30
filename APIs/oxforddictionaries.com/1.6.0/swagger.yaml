@@ -1101,6 +1101,55 @@ paths:
       tags:
         - Wordlist
 definitions:
+  ArrayOfRelatedEntries:
+    description: A list of written or spoken words
+    items:
+      additionalProperties: false
+      properties:
+        domains:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A subject, discipline, or branch of knowledge particular to the Sense'
+        id:
+          description: The identifier of the word
+          type: string
+        language:
+          description: IANA language code specifying the language of the word
+          type: string
+        regions:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A particular area in which the pronunciation occurs, e.g. ''Great Britain'''
+        registers:
+          $ref: '#/definitions/arrayofstrings'
+          description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+          type: string
+        text:
+          type: string
+      required:
+        - text
+        - id
+      type: object
+    minItems: 1
+    type: array
+  CategorizedTextList:
+    description: various types of notes that appear
+    items:
+      additionalProperties: false
+      properties:
+        id:
+          description: The identifier of the word
+          type: string
+        text:
+          description: A note text
+          type: string
+        type:
+          description: The descriptive category of the text
+          type: string
+      required:
+        - text
+        - type
+      type: object
+    minItems: 1
+    type: array
   CrossReferencesList:
     description: 'A reference to another word that is closely related, might provide additional information about the subject, has a variant spelling or is an abbreviated form of it.'
     items:
@@ -1135,6 +1184,8 @@ definitions:
       homographNumber:
         description: Identifies the homograph grouping. The last two digits identify different entries of the same homograph. The first one/two digits identify the homograph number.
         type: string
+      notes:
+        $ref: '#/definitions/CategorizedTextList'
       pronunciations:
         $ref: '#/definitions/PronunciationsList'
       senses:
@@ -1158,6 +1209,8 @@ definitions:
         domains:
           $ref: '#/definitions/arrayofstrings'
           description: 'A subject, discipline, or branch of knowledge particular to the Sense'
+        notes:
+          $ref: '#/definitions/CategorizedTextList'
         regions:
           $ref: '#/definitions/arrayofstrings'
           description: 'A particular area in which the pronunciation occurs, e.g. ''Great Britain'''
@@ -1473,6 +1526,8 @@ definitions:
       id:
         description: The id of the sense that is required for the delete procedure
         type: string
+      notes:
+        $ref: '#/definitions/CategorizedTextList'
       pronunciations:
         $ref: '#/definitions/PronunciationsList'
       regions:
@@ -1682,6 +1737,8 @@ definitions:
         language:
           description: IANA language code specifying the language of the translation
           type: string
+        notes:
+          $ref: '#/definitions/CategorizedTextList'
         regions:
           $ref: '#/definitions/arrayofstrings'
           description: 'A particular area in which the translation occurs, e.g. ''Great Britain'''
@@ -1769,6 +1826,9 @@ definitions:
     additionalProperties: false
     description: Description of an entry for a particular part of speech
     properties:
+      derivativeOf:
+        $ref: '#/definitions/ArrayOfRelatedEntries'
+        description: Other words from which this one derives
       entries:
         items:
           $ref: '#/definitions/Entry'
@@ -1782,6 +1842,8 @@ definitions:
       lexicalCategory:
         description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
         type: string
+      notes:
+        $ref: '#/definitions/CategorizedTextList'
       pronunciations:
         $ref: '#/definitions/PronunciationsList'
       text:

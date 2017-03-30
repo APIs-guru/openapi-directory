@@ -82,8 +82,10 @@ tags:
   - name: buckets
   - name: channels
   - name: defaultObjectAccessControls
+  - name: notifications
   - name: objectAccessControls
   - name: objects
+  - name: projects
 paths:
   /b:
     get:
@@ -854,6 +856,136 @@ paths:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/b/{bucket}/notificationConfigs':
+    get:
+      description: Retrieves a list of notification subscriptions for a given bucket.
+      operationId: storage.notifications.list
+      parameters:
+        - description: Name of a GCS bucket.
+          in: path
+          name: bucket
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Notifications'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - notifications
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a notification subscription for a given bucket.
+      operationId: storage.notifications.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Notification'
+        - description: The parent bucket of the notification.
+          in: path
+          name: bucket
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Notification'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - notifications
+  '/b/{bucket}/notificationConfigs/{notification}':
+    delete:
+      description: Permanently deletes a notification subscription.
+      operationId: storage.notifications.delete
+      parameters:
+        - description: The parent bucket of the notification.
+          in: path
+          name: bucket
+          required: true
+          type: string
+        - description: ID of the notification to delete.
+          in: path
+          name: notification
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - notifications
+    get:
+      description: View a notification configuration.
+      operationId: storage.notifications.get
+      parameters:
+        - description: The parent bucket of the notification.
+          in: path
+          name: bucket
+          required: true
+          type: string
+        - description: Notification ID
+          in: path
+          name: notification
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Notification'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - notifications
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -1990,6 +2122,42 @@ paths:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - channels
+  '/projects/{projectId}/serviceAccount':
+    get:
+      description: Get the email address of this project's GCS service account.
+      operationId: storage.projects.serviceAccount.get
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ServiceAccount'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   Bucket:
     description: A bucket.
@@ -2039,6 +2207,12 @@ definitions:
         default: 'storage#bucket'
         description: 'The kind of item this is. For buckets, this is always storage#bucket.'
         type: string
+      labels:
+        additionalProperties:
+          description: An individual label entry.
+          type: string
+        description: 'User-provided labels, in key/value pairs.'
+        type: object
       lifecycle:
         description: The bucket's lifecycle configuration. See lifecycle management for more information.
         properties:
@@ -2305,6 +2479,56 @@ definitions:
               type: object
           type: object
         type: array
+    type: object
+  Notification:
+    description: A subscription to receive Google PubSub notifications.
+    properties:
+      custom_attributes:
+        additionalProperties:
+          type: string
+        description: An optional list of additional attributes to attach to each Cloud PubSub message published for this notification subscription.
+        type: object
+      etag:
+        description: HTTP 1.1 Entity tag for this subscription notification.
+        type: string
+      event_types:
+        description: 'If present, only send notifications about listed event types. If empty, sent notifications for all event types.'
+        items:
+          type: string
+        type: array
+      id:
+        description: The ID of the notification.
+        type: string
+      kind:
+        default: 'storage#notification'
+        description: 'The kind of item this is. For notifications, this is always storage#notification.'
+        type: string
+      object_name_prefix:
+        description: 'If present, only apply this notification configuration to object names that begin with this prefix.'
+        type: string
+      payload_format:
+        default: JSON_API_V1
+        description: The desired content of the Payload.
+        type: string
+      selfLink:
+        description: The canonical URL of this notification.
+        type: string
+      topic:
+        description: 'The Cloud PubSub topic to which this subscription publishes. Formatted as: ''//pubsub.googleapis.com/projects/{project-identifier}/topics/{my-topic}'''
+        type: string
+    type: object
+  Notifications:
+    description: A list of notification subscriptions.
+    properties:
+      items:
+        description: The list of items.
+        items:
+          $ref: '#/definitions/Notification'
+        type: array
+      kind:
+        default: 'storage#notifications'
+        description: 'The kind of item this is. For lists of notifications, this is always storage#notifications.'
+        type: string
     type: object
   Object:
     description: An object.
@@ -2590,6 +2814,17 @@ definitions:
       totalBytesRewritten:
         description: 'The total bytes written so far, which can be used to provide a waiting user with a progress indicator. This property is always present in the response.'
         format: uint64
+        type: string
+    type: object
+  ServiceAccount:
+    description: A subscription to receive Google PubSub notifications.
+    properties:
+      email_address:
+        description: The ID of the notification.
+        type: string
+      kind:
+        default: 'storage#serviceAccount'
+        description: 'The kind of item this is. For notifications, this is always storage#notification.'
         type: string
     type: object
   TestIamPermissionsResponse:

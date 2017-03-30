@@ -137,7 +137,7 @@ paths:
 
         **NOTE:** the client code **must** fail-open if the server returns one
         of the following quota errors:
-        -   `PROJECT_STATUS_UNVAILABLE`
+        -   `PROJECT_STATUS_UNAVAILABLE`
         -   `SERVICE_STATUS_UNAVAILABLE`
         -   `BILLING_STATUS_UNAVAILABLE`
         -   `QUOTA_SYSTEM_UNAVAILABLE`
@@ -303,7 +303,7 @@ paths:
 
         **NOTE:** the client code **must** fail-open if the server returns one
         of the following quota errors:
-        -   `PROJECT_STATUS_UNVAILABLE`
+        -   `PROJECT_STATUS_UNAVAILABLE`
         -   `SERVICE_STATUS_UNAVAILABLE`
         -   `BILLING_STATUS_UNAVAILABLE`
         -   `QUOTA_SYSTEM_UNAVAILABLE`
@@ -842,6 +842,16 @@ definitions:
           2. Value for each quota limit associated with the metrics will be specified
           using the following gauge metric:
             "serviceruntime.googleapis.com/quota/limit"
+
+          3. Delta value of the usage after the reconciliation for limits associated
+          with the metrics will be specified using the following metric:
+            "serviceruntime.googleapis.com/allocation/reconciliation_delta"
+          The delta value is defined as:
+            new_usage_from_client - existing_value_in_spanner.
+          This metric is not defined in serviceruntime.yaml or in Cloud Monarch.
+          This metric is meant for callers' use only. Since this metric is not
+          defined in the monitoring backend, reporting on this metric will result in
+          an error.
         items:
           $ref: '#/definitions/MetricValueSet'
         type: array
@@ -1206,7 +1216,7 @@ definitions:
           - SPATULA_HEADER_INVALID
           - LOAS_ROLE_INVALID
           - NO_LOAS_PROJECT
-          - PROJECT_STATUS_UNVAILABLE
+          - PROJECT_STATUS_UNAVAILABLE
           - SERVICE_STATUS_UNAVAILABLE
           - BILLING_STATUS_UNAVAILABLE
           - QUOTA_SYSTEM_UNAVAILABLE
@@ -1328,14 +1338,7 @@ definitions:
         type: string
     type: object
   QuotaProperties:
-    description: |-
-      Represents the properties needed for quota operations.
-
-      Use the metric_value_sets field in Operation message to provide cost
-      override with metric_name in <service_name>/quota/<quota_group_name>/cost
-      format. Overrides for unmatched quota groups will be ignored.
-      Costs are expected to be >= 0. Cost 0 will cause no quota check,
-      but still traffic restrictions will be enforced.
+    description: Represents the properties needed for quota operations.
     properties:
       limitByIds:
         additionalProperties:

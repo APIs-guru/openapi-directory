@@ -245,7 +245,7 @@ tags:
       and Transactions.
     name: Contacts
   - description: |
-      Coupons allows to apply different types of discounts to Invoices, Subscriptions and Plans.
+      Coupons allows to apply different types of discounts to Invoices, Subscriptions and Plans. Redeemed Coupons will be applied only to Invoices with the same currency.
     name: Coupons
   - description: |
       Customers are your customers, sometimes known as accounts, clients,
@@ -7689,6 +7689,71 @@ paths:
       summary: Create a product with predefined ID
       tags:
         - Products
+  /profile:
+    get:
+      description: |
+        Retrieve user's profile
+      responses:
+        '200':
+          description: Profile was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Profile'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve user's profile
+      tags:
+        - Profile
+    put:
+      description: |
+        Update user's profile
+      parameters:
+        - description: Profile resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Profile'
+      responses:
+        '200':
+          description: Profile was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Profile'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+          description: Invalid data was sent
+      summary: Update user's profile
+      tags:
+        - Profile
   /queue/custom-events:
     get:
       description: |
@@ -12275,6 +12340,22 @@ definitions:
           - gatewayConfig
         type: object
     description: FundSend Gateway config
+  GET:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              accountId:
+                description: GET Gateway account ID
+                type: string
+            required:
+              - accountId
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: GET Gateway config
   GatewayAccount:
     discriminator: gatewayName
     properties:
@@ -12440,6 +12521,7 @@ definitions:
       - Flexepin
       - FundSend
       - Forte
+      - GET
       - GlobalCollect
       - GlobalOne
       - iCheque
@@ -12529,6 +12611,14 @@ definitions:
     description: GlobalOne Gateway config
   GlobalWebhook:
     properties:
+      _links:
+        description: Links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -12704,6 +12794,18 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The organization's ID
         readOnly: true
+      shippingAmount:
+        description: The Invoice's shipping amount
+        format: double
+        readOnly: true
+        type: number
+      taxes:
+        description: Taxes applied to this invoice
+        items:
+          allOf:
+            - $ref: '#/definitions/InvoiceTax'
+        readOnly: true
+        type: array
       voidedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -12794,6 +12896,17 @@ definitions:
     required:
       - type
       - unitPrice
+    type: object
+  InvoiceTax:
+    properties:
+      amount:
+        description: Tax amount
+        format: double
+        type: number
+      description:
+        description: Tax description
+        type: string
+    readOnly: true
     type: object
   ItemsLink:
     allOf:
@@ -13456,6 +13569,11 @@ definitions:
           - unknown
         readOnly: true
         type: string
+      retriedPaymentId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The retried payment ID
+        readOnly: true
       retryInstruction:
         $ref: '#/definitions/PaymentRetry'
       retryNumber:
@@ -14051,6 +14169,65 @@ definitions:
         description: The product updated time
     required:
       - name
+    type: object
+  Profile:
+    properties:
+      availableCurrencies:
+        description: An array of reporting currencies enabled for the merchant
+        items:
+          type: string
+        readOnly: true
+        type: array
+      businessPhone:
+        description: The user business phone number
+        readOnly: true
+        type: string
+      country:
+        description: The user country setting - two letter code
+        readOnly: true
+        type: string
+      email:
+        description: The user email
+        format: email
+        maxLength: 100
+        readOnly: true
+        type: string
+      firstName:
+        description: User's first name
+        readOnly: true
+        type: string
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The user identifier string
+        readOnly: true
+      lastName:
+        description: User's last name
+        readOnly: true
+        type: string
+      mobilePhone:
+        description: The user mobile phone number
+        readOnly: true
+        type: string
+      preferences:
+        description: 'User preferences like timezone, language and many more. This is an object with custom properties.'
+        type: object
+      reportingCurrency:
+        description: The user's ISO Alpha-3 code used for reports
+        type: string
+      totpRequired:
+        description: The user setting of two-factor authentification
+        readOnly: true
+        type: boolean
+      totpSecret:
+        description: The user TOTP key for authentification app (if TOTP enabled)
+        readOnly: true
+        type: string
+      totpUrl:
+        description: The user link to QR-code for TOTP authentification app (if TOTP enabled)
+        format: url
+        readOnly: true
+        type: string
     type: object
   RPN:
     allOf:
@@ -15253,6 +15430,10 @@ definitions:
         format: integer
         readOnly: true
         type: number
+      scheduledTime:
+        description: The time the transaction is scheduled for collection
+        format: date-time
+        type: string
       status:
         description: Transaction status
         enum:
@@ -15467,6 +15648,9 @@ definitions:
         allOf:
           - $ref: '#/definitions/UserPermissions'
         description: The user's permissions. See the format in example
+      preferences:
+        description: 'User preferences like timezone, language and many more. This is an object with custom properties.'
+        type: object
       reportingCurrency:
         description: The user's ISO Alpha-3 code used for reports
         type: string

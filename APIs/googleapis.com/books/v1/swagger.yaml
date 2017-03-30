@@ -490,6 +490,14 @@ paths:
       description: Inserts a new annotation.
       operationId: books.mylibrary.annotations.insert
       parameters:
+        - description: The ID for the annotation to insert.
+          in: query
+          name: annotationId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Annotation'
         - description: ISO-3166-1 code to override the IP-based location.
           in: query
           name: country
@@ -502,10 +510,6 @@ paths:
           in: query
           name: source
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Annotation'
       responses:
         '200':
           description: Successful response
@@ -3214,6 +3218,11 @@ definitions:
                 type: string
             type: object
           moreFromSeries:
+            properties:
+              opted_state:
+                type: string
+            type: object
+          rewardExpirations:
             properties:
               opted_state:
                 type: string

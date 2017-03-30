@@ -26,6 +26,9 @@ info:
     <br>
     Additional ECHO Resources:&nbsp&nbsp <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
     <br>
+  license:
+    name: This page was built with the Swagger API.
+    url: 'https://swagger.io'
   title: U.S. EPA Enforcement and Compliance History Online (ECHO) - Enforcement Case Search
   version: 1.0.0
   x-apisguru-categories:
@@ -71,7 +74,7 @@ parameters:
     required: false
     type: number
   callback:
-    description: JSONP Callback.  For use with JSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
     in: query
     name: callback
     required: false
@@ -100,17 +103,6 @@ parameters:
     name: newsort
     required: false
     type: number
-  output:
-    default: JSON
-    description: 'Output format: JSONP, JSON or XML.'
-    enum:
-      - JSONP
-      - JSON
-      - XML
-    in: query
-    name: output
-    required: false
-    type: string
   p_activity_contact:
     description: Activity Contact Last Name Filter.  Enter a single last name or partial last name to filter results.  Use "%" as a wild-card for advanced searching.
     in: query
@@ -518,7 +510,7 @@ parameters:
     required: false
     type: string
   p_sic:
-    description: 'Standard Industrial Classification (SIC) Code Filter.  Enter a single 4-digit SIC Code to filter results.  If more complex filtering is required, use p_sic2 and p_sic4.'
+    description: Standard Industrial Classification (SIC) Code Filter.  Enter a single 4-digit SIC Code to filter results.
     in: query
     name: p_sic
     required: false
@@ -647,10 +639,16 @@ parameters:
     required: false
     type: number
   qcolumns:
-    description: 'Results Column Limiter.  Enter a comma-delimited list of column positions to limit results to only desired columns or provide an asterisk to obtain all possible columns.  When qcolumns is unspecified each ECHO service provides a default set of columns considered appropriate for average use.  This parameter provides a mechanism to tune this further.  The list of positions and corresponding columns may be obtained via calling the metadata endpoint for each service.  Use with caution as while ECHO data structures are largely static, breaking changes are possible as ECHO implements new features.'
+    description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
     in: query
     name: qcolumns
     required: false
+    type: string
+  qid:
+    description: Query ID Selector.  Enter the QueryID number from a previously run query.
+    in: query
+    name: qid
+    required: true
     type: string
   queryset:
     description: 'Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.'
@@ -710,7 +708,19 @@ paths:
           name: p_id
           required: false
           type: string
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/callback'
       responses:
         '200':
@@ -734,7 +744,19 @@ paths:
           name: p_id
           required: false
           type: string
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/callback'
       responses:
         '200':
@@ -754,7 +776,19 @@ paths:
     get:
       description: The get_cases service end point searches for civil enforcement and criminal cases based on the provided selection criteria.
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/p_case_category'
         - $ref: '#/parameters/p_case_status'
         - $ref: '#/parameters/p_milestone'
@@ -842,7 +876,19 @@ paths:
     post:
       description: The get_cases service end point searches for civil enforcement and criminal cases based on the provided selection criteria.
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/p_case_category'
         - $ref: '#/parameters/p_case_status'
         - $ref: '#/parameters/p_milestone'
@@ -936,7 +982,19 @@ paths:
           name: p_id
           required: false
           type: string
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/callback'
       responses:
         '200':
@@ -960,7 +1018,19 @@ paths:
           name: p_id
           required: false
           type: string
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/callback'
       responses:
         '200':
@@ -980,11 +1050,14 @@ paths:
     get:
       description: 'Based on the QID obtained from a get_cases query, return a comma sepated vaule (CSV) file of the cases found.'
       parameters:
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
           in: query
-          name: qid
-          required: true
-          type: number
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/qcolumns'
       responses:
         '200':
@@ -997,11 +1070,14 @@ paths:
     post:
       description: 'Based on the QID obtained from a get_cases query, return a comma sepated vaule (CSV) file of the cases found.'
       parameters:
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
           in: query
-          name: qid
-          required: true
-          type: number
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/qcolumns'
       responses:
         '200':
@@ -1015,12 +1091,20 @@ paths:
     get:
       description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_cases query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
       parameters:
-        - $ref: '#/parameters/output'
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
           in: query
-          name: qid
-          required: true
+          name: output
+          required: false
           type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/tablelist'
         - $ref: '#/parameters/c1_lat'
@@ -1044,12 +1128,20 @@ paths:
     post:
       description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_cases query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
       parameters:
-        - $ref: '#/parameters/output'
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
           in: query
-          name: qid
-          required: true
+          name: output
+          required: false
           type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/tablelist'
         - $ref: '#/parameters/c1_lat'
@@ -1074,12 +1166,20 @@ paths:
     get:
       description: 'GET_QID is passed with a query ID corresponding to a previously run get_cases query. It then returns a CASES object containing all matching cases. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
       parameters:
-        - $ref: '#/parameters/output'
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
           in: query
-          name: qid
-          required: true
+          name: output
+          required: false
           type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/pageno'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/newsort'
@@ -1102,12 +1202,20 @@ paths:
     post:
       description: 'GET_QID is passed with a query ID corresponding to a previously run get_cases query. It then returns a CASES object containing all matching cases. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
       parameters:
-        - $ref: '#/parameters/output'
-        - description: Query ID Selector.  Enter the QueryID number from a previously run query.
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
           in: query
-          name: qid
-          required: true
+          name: output
+          required: false
           type: string
+        - $ref: '#/parameters/qid'
         - $ref: '#/parameters/pageno'
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/newsort'
@@ -1127,11 +1235,86 @@ paths:
       summary: Enforcement Case Paginated Results Service
       tags:
         - Case Enforcement
+  /case_rest_services.metadata:
+    get:
+      description: Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_cases endpoint.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Results are an array of columns/objects.
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/met_Results'
+            required:
+              - Results
+            type: object
+      summary: Enforcement Case Metadata Service
+      tags:
+        - Metadata
+    post:
+      description: Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_cases endpoint.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Results are an array of columns/objects.
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/met_Results'
+            required:
+              - Results
+            type: object
+      summary: Enforcement Case Metadata Service
+      tags:
+        - Metadata
   /rest_lookups.icis_law_sections:
     get:
-      description: Returns the ICIS NPDES Law Section Descriptions.
+      description: Returns the ICIS Law Section Descriptions.
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/statute_code'
         - $ref: '#/parameters/status_flag'
@@ -1149,13 +1332,25 @@ paths:
             required:
               - Results
             type: object
-      summary: ECHO ICIS NPDES Law Sections Lookup Service
+      summary: ECHO ICIS Law Sections Lookup Service
       tags:
         - Lookups
     post:
-      description: Returns the ICIS NPDES Law Section Descriptions.
+      description: Returns the ICIS Law Section Descriptions.
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/callback'
         - $ref: '#/parameters/statute_code'
         - $ref: '#/parameters/status_flag'
@@ -1173,7 +1368,7 @@ paths:
             required:
               - Results
             type: object
-      summary: ECHO ICIS NPDES Law Sections Lookup Service
+      summary: ECHO ICIS Law Sections Lookup Service
       tags:
         - Lookups
 definitions:
@@ -2429,6 +2624,56 @@ definitions:
       - QueryID
       - PageNo
       - Cases
+    type: object
+  met_Results:
+    description: Results Object
+    properties:
+      Message:
+        description: Field to record messages (typically performance-related) about packet processing
+        example: Success
+        title: Message
+        type: string
+      ResultColumns:
+        items:
+          $ref: '#/definitions/met_ResultsColumns'
+        title: Result Columns
+        type: array
+    required:
+      - Message
+    type: object
+  met_ResultsColumns:
+    description: Results Column Object
+    properties:
+      ColumnID:
+        title: Column ID
+        type: string
+      ColumnName:
+        title: Column Name
+        type: string
+      DataLength:
+        description: Data length for EPA program database column.
+        example: '10'
+        title: Data Length
+        type: string
+      DataType:
+        description: Data type for EPA program database column.
+        example: NUMBER
+        title: Data Type
+        type: string
+      Description:
+        description: A description of the category of Supplemental Environment Project (SEP) for a settlement.
+        title: Description
+        type: string
+      ObjectName:
+        title: Object Name
+        type: string
+    required:
+      - ColumnName
+      - DataType
+      - DataLength
+      - ColumnID
+      - ObjectName
+      - Description
     type: object
   rlk0_LuValues:
     description: Lookup Values

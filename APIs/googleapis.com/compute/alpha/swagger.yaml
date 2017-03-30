@@ -116,6 +116,7 @@ tags:
   - name: regions
   - name: routers
   - name: routes
+  - name: securityPolicies
   - name: snapshots
   - name: sslCertificates
   - name: subnetworks
@@ -2584,6 +2585,49 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - backendServices
+  '/{project}/global/backendServices/{backendService}/setSecurityPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the security policy for the specified backend service.
+      operationId: compute.backendServices.setSecurityPolicy
+      parameters:
+        - description: Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SecurityPolicyReference'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
       tags:
         - backendServices
   '/{project}/global/backendServices/{resource}/testIamPermissions':
@@ -5378,6 +5422,243 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/securityPolicies':
+    get:
+      description: List all the policies that have been configured for the specified project.
+      operationId: compute.securityPolicies.list
+      parameters:
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SecurityPoliciesList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - securityPolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a new policy in the specified project using the data included in the request.
+      operationId: compute.securityPolicies.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SecurityPolicy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - securityPolicies
+  '/{project}/global/securityPolicies/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.securityPolicies.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - securityPolicies
+  '/{project}/global/securityPolicies/{securityPolicy}':
+    delete:
+      description: Deletes the specified policy.
+      operationId: compute.securityPolicies.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the security policy to delete.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - securityPolicies
+    get:
+      description: List all of the ordered rules present in a single specified policy.
+      operationId: compute.securityPolicies.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SecurityPolicy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - securityPolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Patches the specified policy with the data included in the request.
+      operationId: compute.securityPolicies.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SecurityPolicy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - securityPolicies
   '/{project}/global/snapshots':
     get:
       description: Retrieves the list of Snapshot resources contained within the specified project.
@@ -9579,7 +9860,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group have not yet been patched. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
       operationId: compute.regionInstanceGroupManagers.patch
       parameters:
         - description: Project ID for this request.
@@ -9615,6 +9896,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionInstanceGroupManagers
     put:
@@ -14471,7 +14754,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group have not yet been patchd. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
       operationId: compute.instanceGroupManagers.patch
       parameters:
         - description: Project ID for this request.
@@ -14507,6 +14790,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - instanceGroupManagers
     put:
@@ -15874,6 +16159,80 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/referrers':
+    get:
+      description: Retrieves the list of referrers to instances contained within the specified zone.
+      operationId: compute.instances.listReferrers
+      parameters:
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - description: 'Name of the target instance scoping this request, or ''-'' if the request should span over all instances in the container.'
+          in: path
+          name: instance
+          required: true
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InstanceListReferrers'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - instances
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/instances/{instance}/reset':
     parameters:
       - $ref: '#/parameters/alt'
@@ -17484,6 +17843,13 @@ definitions:
       address:
         description: The static external IP address represented by this resource. Only IPv4 is supported.
         type: string
+      addressType:
+        description: 'The type of address to reserve. If unspecified, defaults to EXTERNAL.'
+        enum:
+          - EXTERNAL
+          - INTERNAL
+          - UNSPECIFIED_TYPE
+        type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -17538,6 +17904,12 @@ definitions:
         enum:
           - IN_USE
           - RESERVED
+        type: string
+      subnetwork:
+        description: |-
+          For external addresses, this field should not be used.
+
+          The URL of the subnetwork in which to reserve the address. If an IP address is specified, it must be within the subnetwork's IP range.
         type: string
       users:
         description: '[Output Only] The URLs of the resources that are using this address.'
@@ -17787,7 +18159,7 @@ definitions:
     type: object
   AuditConfig:
     description: |-
-      Specifies the audit configuration for a service. It consists of which permission types are logged, and what identities, if any, are exempted from logging. An AuditConifg must have one or more AuditLogConfigs.
+      Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConifg must have one or more AuditLogConfigs.
 
       If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditConfig are exempted. Example Policy with multiple AuditConfigs: { "audit_configs": [ { "service": "allServices" "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", }, { "log_type": "ADMIN_READ", } ] }, { "service": "fooservice@googleapis.com" "audit_log_configs": [ { "log_type": "DATA_READ", }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:bar@gmail.com" ] } ] } ] } For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
     properties:
@@ -17802,7 +18174,7 @@ definitions:
           type: string
         type: array
       service:
-        description: 'Specifies a service that will be enabled for audit logging. For example, `resourcemanager`, `storage`, `compute`. `allServices` is a special value that covers all services.'
+        description: 'Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.'
         type: string
     type: object
   AuditLogConfig:
@@ -21166,6 +21538,28 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
+  InstanceListReferrers:
+    description: Contains a list of instance referrers.
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: '[Output Only] A list of referrers.'
+        items:
+          $ref: '#/definitions/Reference'
+        type: array
+      kind:
+        default: 'compute#instanceListReferrers'
+        description: '[Output Only] Type of resource. Always compute#instanceListReferrers for lists of Instance referrers.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
   InstanceMoveRequest:
     properties:
       destinationZone:
@@ -22333,6 +22727,7 @@ definitions:
           - AUTOSCALERS
           - BACKEND_BUCKETS
           - BACKEND_SERVICES
+          - COMMITMENTS
           - CPUS
           - CPUS_ALL_REGIONS
           - DISKS_TOTAL_GB
@@ -22372,6 +22767,25 @@ definitions:
         description: '[Output Only] Current usage of this metric.'
         format: double
         type: number
+    type: object
+  Reference:
+    description: Represents a reference to a resource.
+    properties:
+      kind:
+        default: 'compute#reference'
+        description: '[Output Only] Type of the resource. Always compute#reference for references.'
+        type: string
+      referenceType:
+        description: |-
+          A description of the reference type with no implied semantics. Possible values include:  
+          - MEMBER_OF
+        type: string
+      referrer:
+        description: URL of the resource which refers to the target.
+        type: string
+      target:
+        description: URL of the resource to which this reference points.
+        type: string
     type: object
   Region:
     description: Region resource.
@@ -22907,7 +23321,7 @@ definitions:
         description: 'IP address and range of the interface. The IP range must be in the RFC3927 link-local IP space. The value must be a CIDR-formatted string, for example: 169.254.0.1/30. NOTE: Do not truncate the address as it represents the IP address of the interface.'
         type: string
       linkedVpnTunnel:
-        description: URI of linked VPN tunnel. It must be in the same region as the router. Each interface can have at most one linked resource.
+        description: URI of the linked VPN tunnel. It must be in the same region as the router. Each interface can have at most one linked resource and it could either be a VPN Tunnel or an interconnect attachment.
         type: string
       name:
         description: Name of this interface entry. The name must be 1-63 characters long and comply with RFC1035.
@@ -23140,6 +23554,99 @@ definitions:
       preemptible:
         description: Whether the instance is preemptible.
         type: boolean
+    type: object
+  SecurityPoliciesList:
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: '[Output Only] A list of SecurityPolicy resources.'
+        items:
+          $ref: '#/definitions/SecurityPolicy'
+        type: array
+      kind:
+        default: 'compute#securityPoliciesList'
+        description: '[Output Only] Type of resource. Always compute#securityPoliciesList for listsof securityPolicies'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+    type: object
+  SecurityPolicy:
+    description: A security policy is comprised of one or more rules. It can also be associated with one or more 'targets'.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      fingerprint:
+        description: |-
+          Specifies a fingerprint for this resource, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
+
+          To see the latest fingerprint, make get() request to the security policy.
+        format: byte
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#securityPolicy'
+        description: '[Output only] Type of the resource. Always compute#securityPolicyfor security policies'
+        type: string
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      rules:
+        description: 'List of rules that belong to this policy. There must always be a default rule (rule with priority 2147483647 and match "*"). If no rules are provided when creating a security policy, a default rule with action "allow" will be added.'
+        items:
+          $ref: '#/definitions/SecurityPolicyRule'
+        type: array
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  SecurityPolicyReference:
+    properties:
+      securityPolicy:
+        type: string
+    type: object
+  SecurityPolicyRule:
+    description: Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny)
+    properties:
+      action:
+        description: 'The Action to preform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      kind:
+        default: 'compute#securityPolicyRule'
+        description: '[Output only] Type of the resource. Always compute#rulefor security policies'
+        type: string
+      match:
+        $ref: '#/definitions/SecurityPolicyRuleMatcher'
+        description: 'A match condition that incoming traffic is evaluated against. If it evaluates to true, the corresponding ?action? is enforced.'
+      preview:
+        description: 'If set to true, the specified action is not enforced.'
+        type: boolean
+      priority:
+        description: An integer indicating the priority of a rule in the list. Rules are evaluated in the increasing order of priority.
+        format: uint32
+        type: integer
+    type: object
+  SecurityPolicyRuleMatcher:
+    description: Represents a match condition that incoming traffic is evaluated against. Exactly one of the fields must be set.
+    properties:
+      srcIpRanges:
+        description: CIDR IP address range. Only IPv4 is supported.
+        items:
+          type: string
+        type: array
     type: object
   SerialPortOutput:
     description: An instance's serial console output.

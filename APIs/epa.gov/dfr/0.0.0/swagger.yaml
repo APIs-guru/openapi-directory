@@ -13,6 +13,9 @@ info:
     <br>
     Additional ECHO Resources:&nbsp&nbsp <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
     <br>
+  license:
+    name: This page was built with the Swagger API.
+    url: 'https://swagger.io'
   title: U.S. EPA Enforcement and Compliance History Online (ECHO) - Detailed Facility Report (DFR)
   version: 0.0.0
   x-apisguru-categories:
@@ -34,7 +37,7 @@ produces:
   - application/xml
 parameters:
   callback:
-    description: JSONP Callback.  For use with JSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
     in: query
     name: callback
     required: false
@@ -52,8 +55,11 @@ parameters:
     required: false
     type: string
   output:
-    default: JSON
-    description: 'Output format: JSONP, JSON or XML.'
+    description: |-
+      Output Format Flag.  Enter one of the following keywords:
+      - JSON = Data model formatted as Javascript Object Notation (default).
+      - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+      - XML = Data model formatted as Extensible Markup Language.
     enum:
       - JSONP
       - JSON
@@ -1928,6 +1934,270 @@ definitions:
       - Qtr13Start
       - Qtr13End
     type: object
+  dfr0_Qtr13Status:
+    description: Status Object
+    properties:
+      Qtr10Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 10 Status
+        type: string
+      Qtr11Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 11 Status
+        type: string
+      Qtr12Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 12 Status
+        type: string
+      Qtr13Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 13 Status
+        type: string
+      Qtr1Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 1 Status
+        type: string
+      Qtr2Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 2 Status
+        type: string
+      Qtr3Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 3 Status
+        type: string
+      Qtr4Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 4 Status
+        type: string
+      Qtr5Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 5 Status
+        type: string
+      Qtr6Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 6 Status
+        type: string
+      Qtr7Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 7 Status
+        type: string
+      Qtr8Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 8 Status
+        type: string
+      Qtr9Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 9 Status
+        type: string
+      SourceID:
+        description: Unique Identifier assigned by EPA.
+        example: ALR040033
+        title: EPA Source Identifier
+        type: string
+    required:
+      - SourceID
+      - Qtr1Status
+      - Qtr2Status
+      - Qtr3Status
+      - Qtr4Status
+      - Qtr5Status
+      - Qtr6Status
+      - Qtr7Status
+      - Qtr8Status
+      - Qtr9Status
+      - Qtr10Status
+      - Qtr11Status
+      - Qtr12Status
+      - Qtr13Status
+    type: object
+  dfr10_CWACSCompliance:
+    description: CWA CS Compliance Object
+    properties:
+      Header:
+        $ref: '#/definitions/dfr0_Qtr13Header'
+      Sources:
+        items:
+          $ref: '#/definitions/dfr10_Violations'
+        title: Sources
+        type: array
+    type: object
+  dfr10_Violation:
+    description: Violation Object
+    properties:
+      NPDESViolationId:
+        description: The unique identifier in ICIS-NPDES for the NPDES Violation
+        example: '3401214483'
+        title: NPDES Violation ID
+        type: string
+      Qtr10Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 10 Status
+        type: string
+      Qtr10Value:
+        title: Quarter 10 Value
+        type: string
+      Qtr11Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 11 Status
+        type: string
+      Qtr11Value:
+        title: Quarter 11 Value
+        type: string
+      Qtr12Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 12 Status
+        type: string
+      Qtr12Value:
+        title: Quarter 12 Value
+        type: string
+      Qtr13Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 13 Status
+        type: string
+      Qtr13Value:
+        title: Quarter 13 Value
+        type: string
+      Qtr1Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 1 Status
+        type: string
+      Qtr1Value:
+        title: Quarter 1 Value
+        type: string
+      Qtr2Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 2 Status
+        type: string
+      Qtr2Value:
+        title: Quarter 2 Value
+        type: string
+      Qtr3Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 3 Status
+        type: string
+      Qtr3Value:
+        title: Quarter 3 Value
+        type: string
+      Qtr4Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 4 Status
+        type: string
+      Qtr4Value:
+        title: Quarter 4 Value
+        type: string
+      Qtr5Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 5 Status
+        type: string
+      Qtr5Value:
+        title: Quarter 5 Value
+        type: string
+      Qtr6Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 6 Status
+        type: string
+      Qtr6Value:
+        title: Quarter 6 Value
+        type: string
+      Qtr7Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 7 Status
+        type: string
+      Qtr7Value:
+        title: Quarter 7 Value
+        type: string
+      Qtr8Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 8 Status
+        type: string
+      Qtr8Value:
+        title: Quarter 8 Value
+        type: string
+      Qtr9Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 9 Status
+        type: string
+      Qtr9Value:
+        title: Quarter 9 Value
+        type: string
+      SourceID:
+        description: Unique Identifier assigned by EPA.
+        example: ALR040033
+        title: EPA Source Identifier
+        type: string
+      ViolationDesc:
+        description: A description of which type of violation has occurred
+        example: Effluent Violation
+        title: Violation
+        type: string
+    required:
+      - SourceID
+      - ViolationDesc
+      - NPDESViolationId
+      - Qtr1Status
+      - Qtr1Value
+      - Qtr2Status
+      - Qtr2Value
+      - Qtr3Status
+      - Qtr3Value
+      - Qtr4Status
+      - Qtr4Value
+      - Qtr5Status
+      - Qtr5Value
+      - Qtr6Status
+      - Qtr6Value
+      - Qtr7Status
+      - Qtr7Value
+      - Qtr8Status
+      - Qtr8Value
+      - Qtr9Status
+      - Qtr9Value
+      - Qtr10Status
+      - Qtr10Value
+      - Qtr11Status
+      - Qtr11Value
+      - Qtr12Status
+      - Qtr12Value
+      - Qtr13Status
+      - Qtr13Value
+    type: object
+  dfr10_Violations:
+    description: Violations Object
+    properties:
+      Violations:
+        items:
+          $ref: '#/definitions/dfr10_Violation'
+        title: Sources
+        type: array
+    required:
+      - Violations
+    type: object
   dfr1_Results:
     description: Results Object
     properties:
@@ -1966,17 +2236,6 @@ definitions:
         type: string
     required:
       - Message
-    type: object
-  dfr4_CWACSCompliance:
-    description: CWA CS Compliance Object
-    properties:
-      Header:
-        $ref: '#/definitions/dfr0_Qtr12Header'
-      Sources:
-        items:
-          $ref: '#/definitions/dfr0_Qtr12Status'
-        title: Sources
-        type: array
     type: object
   dfr4_MapData:
     description: Map Data Object
@@ -2317,8 +2576,10 @@ definitions:
         $ref: '#/definitions/dfr6_AirQuality'
       CWA3YrCompliance:
         $ref: '#/definitions/dfr7_CWA3YrCompliance'
-      CWACSCCompliance:
-        $ref: '#/definitions/dfr4_CWACSCompliance'
+      CWACSCompliance:
+        $ref: '#/definitions/dfr10_CWACSCompliance'
+      CWAEffluentALRExceedences:
+        $ref: '#/definitions/dfr8_CWAEffluentALRExceedences'
       CWAEffluentCompliance:
         $ref: '#/definitions/dfr9_CWAEffluentCompliance'
       CWAPSCompliance:
@@ -2341,6 +2602,8 @@ definitions:
         $ref: '#/definitions/dfrH_ICISFormalActions'
       InspectionEnforcementSummary:
         $ref: '#/definitions/dfrI_InspectionEnforcementSummary'
+      LeadAndCopperRule5Yr:
+        $ref: '#/definitions/dfrG_LeadAndCopperRule5Yr'
       MapOutput:
         $ref: '#/definitions/dfrJ_MapOutput'
       Message:
@@ -2455,6 +2718,11 @@ definitions:
   dfr4_Summaries:
     description: Summaries Object
     properties:
+      Cases:
+        description: 'The number of EPA enforcement cases that have been brought against the facility, under the corresponding statute, within the designated time period.'
+        example: '1'
+        title: Case Count
+        type: string
       CurrentStatus:
         description: 'The current status for the facility during the most current quarter. (No violation, noncompliance)'
         example: No Violation
@@ -2519,6 +2787,7 @@ definitions:
       - QtrsInSNC
       - InformalActions
       - FormalActions
+      - Cases
       - TotalPenalties
       - TotalCasePenalties
     type: object
@@ -2628,6 +2897,11 @@ definitions:
         example: 'Chicago-Naperville, IL-IN-WI'
         title: Eight Hour Ozone Area - 2008
         type: string
+      ParticulateMatter1997Area:
+        description: 'If null, the facility is not located in a designated non-attainment area. If populated, the value is the name of the non-attainment area; normally this is a city or county name'
+        example: 'Washington, DC-MD-VA'
+        title: Particulate Matter Area - 1997
+        type: string
       ParticulateMatter2006Area:
         description: 'If null, the facility is not located in a designated non-attainment area. If populated, the value is the name of the non-attainment area; normally this is a city or county name'
         example: 'Washington, DC-MD-VA'
@@ -2643,6 +2917,7 @@ definitions:
       - Ozone8hr2008Area
       - Lead2008Area
       - SulfurDioxide2010Area
+      - ParticulateMatter1997Area
       - ParticulateMatter2006Area
     type: object
   dfr7_CWA3YrCompliance:
@@ -2652,16 +2927,16 @@ definitions:
         $ref: '#/definitions/dfr0_Qtr13Header'
       Sources:
         items:
-          $ref: '#/definitions/dfr7_CWA3YrCompliance.Sources'
+          $ref: '#/definitions/dfr7_Sources'
         title: Sources
         type: array
     type: object
-  dfr7_CWA3YrCompliance.Sources:
+  dfr7_Sources:
     description: CWA 3-Year Compliance Sources Object
     properties:
       Status:
         items:
-          $ref: '#/definitions/dfr0_Qtr12Status'
+          $ref: '#/definitions/dfr0_Qtr13Status'
         title: Status
         type: array
     required:
@@ -2778,29 +3053,359 @@ definitions:
     description: CWA Effluent Compliance Object
     properties:
       Header:
-        $ref: '#/definitions/dfr0_Qtr12Header'
+        $ref: '#/definitions/dfr0_Qtr13Header'
       Sources:
         items:
-          $ref: '#/definitions/dfr9_Sources'
+          $ref: '#/definitions/dfr9_Parameters'
         title: Sources
         type: array
     type: object
-  dfr9_Sources:
-    description: CWA Effluent Compliance Sources Object
+  dfr9_Parameter:
+    description: CWA Effluent Compliance Parameter Object
+    properties:
+      DischargePoint:
+        example: 001Q
+        title: Discharge Point
+        type: string
+      MeasurementType:
+        example: NMth
+        title: Measurement Type
+        type: string
+      ParameterCode:
+        description: 'The unique 5 digit numeric code identifying the parameter. If the code is less than 5 digits in the .CSV, append zeros to the beginning of the number (e.g., 100 is equivalent to 00100)'
+        example: '00400'
+        title: Parameter Code
+        type: string
+      ParameterName:
+        description: The pollutant name.
+        example: 'Iron, total [as Fe]'
+        title: Parameter Name
+        type: string
+      Qtr10Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 10 Status
+        type: string
+      Qtr10Value:
+        title: Quarter 10 Value
+        type: string
+      Qtr11Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 11 Status
+        type: string
+      Qtr11Value:
+        title: Quarter 11 Value
+        type: string
+      Qtr12Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 12 Status
+        type: string
+      Qtr12Value:
+        title: Quarter 12 Value
+        type: string
+      Qtr13Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 13 Status
+        type: string
+      Qtr13Value:
+        title: Quarter 13 Value
+        type: string
+      Qtr1Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 1 Status
+        type: string
+      Qtr1Value:
+        title: Quarter 1 Value
+        type: string
+      Qtr2Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 2 Status
+        type: string
+      Qtr2Value:
+        title: Quarter 2 Value
+        type: string
+      Qtr3Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 3 Status
+        type: string
+      Qtr3Value:
+        title: Quarter 3 Value
+        type: string
+      Qtr4Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 4 Status
+        type: string
+      Qtr4Value:
+        title: Quarter 4 Value
+        type: string
+      Qtr5Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 5 Status
+        type: string
+      Qtr5Value:
+        title: Quarter 5 Value
+        type: string
+      Qtr6Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 6 Status
+        type: string
+      Qtr6Value:
+        title: Quarter 6 Value
+        type: string
+      Qtr7Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 7 Status
+        type: string
+      Qtr7Value:
+        title: Quarter 7 Value
+        type: string
+      Qtr8Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 8 Status
+        type: string
+      Qtr8Value:
+        title: Quarter 8 Value
+        type: string
+      Qtr9Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 9 Status
+        type: string
+      Qtr9Value:
+        title: Quarter 9 Value
+        type: string
+      SourceID:
+        description: Unique Identifier assigned by EPA.
+        example: ALR040033
+        title: EPA Source Identifier
+        type: string
+    required:
+      - SourceID
+      - ParameterCode
+      - ParameterName
+      - DischargePoint
+      - MeasurementType
+      - Qtr1Status
+      - Qtr1Value
+      - Qtr2Status
+      - Qtr2Value
+      - Qtr3Status
+      - Qtr3Value
+      - Qtr4Status
+      - Qtr4Value
+      - Qtr5Status
+      - Qtr5Value
+      - Qtr6Status
+      - Qtr6Value
+      - Qtr7Status
+      - Qtr7Value
+      - Qtr8Status
+      - Qtr8Value
+      - Qtr9Status
+      - Qtr9Value
+      - Qtr10Status
+      - Qtr10Value
+      - Qtr11Status
+      - Qtr11Value
+      - Qtr12Status
+      - Qtr12Value
+      - Qtr13Status
+      - Qtr13Value
+    type: object
+  dfr9_Parameters:
+    description: CWA Effluent Compliance Parameters Object
+    properties:
+      Parameters:
+        items:
+          $ref: '#/definitions/dfr9_Parameter'
+        title: Parameters
+        type: array
     type: object
   dfrA_CWAPSCompliance:
     description: CWA PS Compliance Object
     properties:
       Header:
-        $ref: '#/definitions/dfr0_Qtr12Header'
+        $ref: '#/definitions/dfr0_Qtr13Header'
       Sources:
         items:
-          $ref: '#/definitions/dfrA_Sources'
+          $ref: '#/definitions/dfrA_Violations'
         title: Sources
         type: array
     type: object
-  dfrA_Sources:
-    description: CWA PS Compliance Sources Object
+  dfrA_Violation:
+    description: CWA PS Compliance Violation Object
+    properties:
+      NPDESViolationId:
+        description: The unique identifier in ICIS-NPDES for the NPDES Violation
+        example: '3401214483'
+        title: NPDES Violation ID
+        type: string
+      Qtr10Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 10 Status
+        type: string
+      Qtr10Value:
+        title: Quarter 10 Value
+        type: string
+      Qtr11Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 11 Status
+        type: string
+      Qtr11Value:
+        title: Quarter 11 Value
+        type: string
+      Qtr12Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 12 Status
+        type: string
+      Qtr12Value:
+        title: Quarter 12 Value
+        type: string
+      Qtr13Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 13 Status
+        type: string
+      Qtr13Value:
+        title: Quarter 13 Value
+        type: string
+      Qtr1Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 1 Status
+        type: string
+      Qtr1Value:
+        title: Quarter 1 Value
+        type: string
+      Qtr2Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 2 Status
+        type: string
+      Qtr2Value:
+        title: Quarter 2 Value
+        type: string
+      Qtr3Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 3 Status
+        type: string
+      Qtr3Value:
+        title: Quarter 3 Value
+        type: string
+      Qtr4Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 4 Status
+        type: string
+      Qtr4Value:
+        title: Quarter 4 Value
+        type: string
+      Qtr5Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 5 Status
+        type: string
+      Qtr5Value:
+        title: Quarter 5 Value
+        type: string
+      Qtr6Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 6 Status
+        type: string
+      Qtr6Value:
+        title: Quarter 6 Value
+        type: string
+      Qtr7Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 7 Status
+        type: string
+      Qtr7Value:
+        title: Quarter 7 Value
+        type: string
+      Qtr8Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 8 Status
+        type: string
+      Qtr8Value:
+        title: Quarter 8 Value
+        type: string
+      Qtr9Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 9 Status
+        type: string
+      Qtr9Value:
+        title: Quarter 9 Value
+        type: string
+      SourceID:
+        description: Unique Identifier assigned by EPA.
+        example: ALR040033
+        title: EPA Source Identifier
+        type: string
+      ViolationDesc:
+        description: A description of which type of violation has occurred
+        example: Effluent Violation
+        title: Violation
+        type: string
+    required:
+      - SourceID
+      - ViolationDesc
+      - NPDESViolationId
+      - Qtr1Status
+      - Qtr1Value
+      - Qtr2Status
+      - Qtr2Value
+      - Qtr3Status
+      - Qtr3Value
+      - Qtr4Status
+      - Qtr4Value
+      - Qtr5Status
+      - Qtr5Value
+      - Qtr6Status
+      - Qtr6Value
+      - Qtr7Status
+      - Qtr7Value
+      - Qtr8Status
+      - Qtr8Value
+      - Qtr9Status
+      - Qtr9Value
+      - Qtr10Status
+      - Qtr10Value
+      - Qtr11Status
+      - Qtr11Value
+      - Qtr12Status
+      - Qtr12Value
+      - Qtr13Status
+      - Qtr13Value
+    type: object
+  dfrA_Violations:
+    description: CWA PS Compliance Violations Object
+    properties:
+      Violations:
+        items:
+          $ref: '#/definitions/dfrA_Violation'
+        title: Violations
+        type: array
+    required:
+      - Violations
     type: object
   dfrB_CWARNCCompliance:
     description: CWA RNC Compliance Object
@@ -2809,26 +3414,193 @@ definitions:
         $ref: '#/definitions/dfr0_Qtr12Header'
       Sources:
         items:
-          $ref: '#/definitions/dfrB_Sources'
+          $ref: '#/definitions/dfrB_Statuses'
         title: Sources
         type: array
     type: object
-  dfrB_Sources:
-    description: CWA RNC Compliance Sources Object
+  dfrB_Statuses:
+    description: CWA RNC Compliance Statuses Object
+    properties:
+      Status:
+        items:
+          $ref: '#/definitions/dfr0_Qtr12Status'
+        title: Status
+        type: array
     type: object
   dfrC_CWASECompliance:
     description: CWA SE Compliance Object
     properties:
       Header:
-        $ref: '#/definitions/dfr0_Qtr12Header'
+        $ref: '#/definitions/dfr0_Qtr13Header'
       Sources:
         items:
-          $ref: '#/definitions/dfrC_Sources'
+          $ref: '#/definitions/dfrC_Violations'
         title: Sources
         type: array
     type: object
-  dfrC_Sources:
-    description: CWA SE Compliance Sources Object
+  dfrC_Sources.Violation:
+    description: CWA SE Compliance Violation Object
+    properties:
+      NPDESViolationId:
+        description: The unique identifier in ICIS-NPDES for the NPDES Violation
+        example: '3401214483'
+        title: NPDES Violation ID
+        type: string
+      Qtr10Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 10 Status
+        type: string
+      Qtr10Value:
+        title: Quarter 10 Value
+        type: string
+      Qtr11Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 11 Status
+        type: string
+      Qtr11Value:
+        title: Quarter 11 Value
+        type: string
+      Qtr12Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 12 Status
+        type: string
+      Qtr12Value:
+        title: Quarter 12 Value
+        type: string
+      Qtr13Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 13 Status
+        type: string
+      Qtr13Value:
+        title: Quarter 13 Value
+        type: string
+      Qtr1Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 1 Status
+        type: string
+      Qtr1Value:
+        title: Quarter 1 Value
+        type: string
+      Qtr2Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 2 Status
+        type: string
+      Qtr2Value:
+        title: Quarter 2 Value
+        type: string
+      Qtr3Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 3 Status
+        type: string
+      Qtr3Value:
+        title: Quarter 3 Value
+        type: string
+      Qtr4Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 4 Status
+        type: string
+      Qtr4Value:
+        title: Quarter 4 Value
+        type: string
+      Qtr5Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 5 Status
+        type: string
+      Qtr5Value:
+        title: Quarter 5 Value
+        type: string
+      Qtr6Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 6 Status
+        type: string
+      Qtr6Value:
+        title: Quarter 6 Value
+        type: string
+      Qtr7Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 7 Status
+        type: string
+      Qtr7Value:
+        title: Quarter 7 Value
+        type: string
+      Qtr8Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 8 Status
+        type: string
+      Qtr8Value:
+        title: Quarter 8 Value
+        type: string
+      Qtr9Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 9 Status
+        type: string
+      Qtr9Value:
+        title: Quarter 9 Value
+        type: string
+      SourceID:
+        description: Unique Identifier assigned by EPA.
+        example: ALR040033
+        title: EPA Source Identifier
+        type: string
+      ViolationDesc:
+        description: A description of which type of violation has occurred
+        example: Effluent Violation
+        title: Violation
+        type: string
+    required:
+      - SourceID
+      - ViolationDesc
+      - NPDESViolationId
+      - Qtr1Status
+      - Qtr1Value
+      - Qtr2Status
+      - Qtr2Value
+      - Qtr3Status
+      - Qtr3Value
+      - Qtr4Status
+      - Qtr4Value
+      - Qtr5Status
+      - Qtr5Value
+      - Qtr6Status
+      - Qtr6Value
+      - Qtr7Status
+      - Qtr7Value
+      - Qtr8Status
+      - Qtr8Value
+      - Qtr9Status
+      - Qtr9Value
+      - Qtr10Status
+      - Qtr10Value
+      - Qtr11Status
+      - Qtr11Value
+      - Qtr12Status
+      - Qtr12Value
+      - Qtr13Status
+      - Qtr13Value
+    type: object
+  dfrC_Violations:
+    description: CWA SE Compliance Violations Object
+    properties:
+      Violations:
+        items:
+          $ref: '#/definitions/dfrC_Sources.Violation'
+        title: Violations
+        type: array
+    required:
+      - Violations
     type: object
   dfrD_ComplianceSummary:
     description: Compliance Summary Object
@@ -2929,6 +3701,10 @@ definitions:
       CenterLatitude:
         description: 'The latitude of the facility in degrees, to four decimal places.'
         example: '38.798026'
+        type: string
+      CenterLongitude:
+        description: 'The longitude of the facility in degrees, to four decimal places.'
+        example: '-77.062981'
         type: string
       Child:
         description: The number and percentage of persons living in the area who are five years old or younger.
@@ -3058,6 +3834,7 @@ definitions:
     required:
       - Radius
       - CenterLatitude
+      - CenterLongitude
       - TotalPersons
       - LandArea
       - WaterArea
@@ -3185,6 +3962,23 @@ definitions:
     type: object
     xml:
       name: Action
+  dfrG_CopperSamples:
+    description: Copper Samples
+    properties:
+      CU90:
+        type: string
+      CU90Dates:
+        type: string
+      CU90Units:
+        type: string
+      CU90Value:
+        type: string
+    required:
+      - CU90
+      - CU90Value
+      - CU90Units
+      - CU90Dates
+    type: object
   dfrG_FormalActions:
     description: Formal Actions Object
     properties:
@@ -3197,6 +3991,72 @@ definitions:
           $ref: '#/definitions/dfr4_ProgramDates'
         title: Program Dates
         type: array
+    type: object
+  dfrG_LeadAndCopperRule5Yr:
+    description: Lead and Copper Rule Object
+    properties:
+      CopperSamples:
+        items:
+          $ref: '#/definitions/dfrG_CopperSamples'
+        title: Copper Samples
+        type: array
+      CuALE:
+        type: string
+      CuALEUnits:
+        type: string
+      CuALEValue:
+        type: string
+      CuSampleDates:
+        type: string
+      CuViol:
+        type: string
+      LeadAndCopperViol:
+        type: string
+      LeadCopperRuleHealthBasedViol:
+        type: string
+      LeadSamples:
+        items:
+          $ref: '#/definitions/dfrG_LeadSamples'
+        title: Lead Samples
+        type: array
+      PbALE:
+        type: string
+      PbALEUnits:
+        type: string
+      PbALEValue:
+        type: string
+      PbSampleDates:
+        type: string
+      PbViol:
+        type: string
+      RuleCode350Viol:
+        type: string
+      SourceID:
+        description: Unique Identifier assigned by EPA.
+        example: ALR040033
+        title: EPA Source Identifier
+        type: string
+      iCU90:
+        type: string
+      iPB90:
+        type: string
+    type: object
+  dfrG_LeadSamples:
+    description: Lead Samples
+    properties:
+      PB90:
+        type: string
+      PB90Dates:
+        type: string
+      PB90Units:
+        type: string
+      PB90Value:
+        type: string
+    required:
+      - PB90
+      - PB90Value
+      - PB90Units
+      - PB90Dates
     type: object
   dfrH_Action:
     description: Action Object
@@ -3424,6 +4284,20 @@ definitions:
 
           Note: The types of action noted above are nationally defined by EPA. Other types of action shown in the report are defined or maintained by EPA regions or state agencies.
         type: string
+      EPASystem:
+        description: |-
+          The EPA data system in which permit and facility records are kept. EPA's Facility Registry System (FRS) links all program database records (such as permit IDs and IDs facilities use in reporting to EPA) together. The following list describes the individual data systems that are linked to from the detailed facility report: 
+
+          - AFS: Air Facility System for Clean Air Act stationary source programs.
+          - ICP: Integrated Compliance Information System for Clean Water Act programs monitoring National Pollutant Discharge Elimination System (NPDES) permits.
+          - RCR: Resource Conservation and Recovery Act Information System (RCRAInfo) for tracking the Resource Conservation and Recovery Act (RCRA) programs.
+          - NCDB: National Compliance Database System for monitoring national performance of the Toxic Substance Control Act (TSCA); the Emergency Planning and Right-to-Know Act, Section 313 (EPCRA); the Asbestos Hazard Emergency Response (AHERA); and the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
+          - TRI: Toxics Release Inventory for Emergency Planning and Community Right-to-Know Act, Section 313 submissions.
+          - NEI: National Emissions Inventory database contains information on stationary and mobile sources that emit criteria air pollutants and their precursors, as well as hazardous air pollutants (HAPs). The database includes estimates of annual emissions, by source, of air pollutants in each area of the country, on an annual basis.
+          - TSCA: Toxic Substances Control Act addressing the production, importation, use, and disposal of specific chemicals.
+        example: ICP
+        title: EPA Data System
+        type: string
       EnfIdentifier:
         description: The number of the Enforcement Action as referred to by the Court where the action was filed; the Enforcement Action Identifier.
         example: 05-000F000550590000700023
@@ -3457,6 +4331,7 @@ definitions:
         type: string
     required:
       - Statute
+      - EPASystem
       - SourceID
       - ActionType
       - LeadAgency
@@ -3635,7 +4510,6 @@ definitions:
       - Qtr11End
       - Qtr12Start
       - Qtr12End
-      - Sources
     type: object
   dfrL_Source:
     description: Source Object
@@ -3647,9 +4521,6 @@ definitions:
           $ref: '#/definitions/dfrL_Violations'
         title: Violations
         type: array
-    required:
-      - Status
-      - Violations
     type: object
   dfrL_Violations:
     description: Violations Object
@@ -3768,6 +4639,11 @@ definitions:
         example: No Viol
         title: Quarter 12 Status
         type: string
+      Qtr13Status:
+        description: The relevant status for the quarter.
+        example: No Viol
+        title: Quarter 13 Status
+        type: string
       Qtr1Status:
         description: The relevant status for the quarter.
         example: No Viol
@@ -3833,6 +4709,7 @@ definitions:
       - Qtr10Status
       - Qtr11Status
       - Qtr12Status
+      - Qtr13Status
     type: object
   dfrM_SDWISCompliance:
     description: SDWIS Compliance Object
@@ -3866,6 +4743,16 @@ definitions:
         description: Date indicating the beginning of Quarter 12.
         example: 04/01/2016
         title: Quarter 12 Start Date
+        type: string
+      Qtr13End:
+        description: Date indicating the end of Quarter 13.
+        example: 09/30/2016
+        title: Quarter 13 End Date
+        type: string
+      Qtr13Start:
+        description: Date indicating the beginning of Quarter 13.
+        example: 07/1/2016
+        title: Quarter 13 Start Date
         type: string
       Qtr1End:
         description: Date indicating the end of Quarter 1.
@@ -3971,7 +4858,7 @@ definitions:
           $ref: '#/definitions/dfrM_RulesViolated'
         type: array
       Status:
-        $ref: '#/definitions/dfr0_Qtr12Status'
+        $ref: '#/definitions/dfr0_Qtr13Status'
     required:
       - Status
       - RulesViolated
@@ -5456,8 +6343,8 @@ definitions:
   dfrs_Results:
     description: Results Object
     properties:
-      CWACSCCompliance:
-        $ref: '#/definitions/dfr4_CWACSCompliance'
+      CWACSCompliance:
+        $ref: '#/definitions/dfr10_CWACSCompliance'
       Message:
         description: Field to record messages (typically performance-related) about packet processing
         example: Success

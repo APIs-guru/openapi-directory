@@ -177,6 +177,83 @@ paths:
       tags:
         - Math
       x-monitor: false
+  /metrics/legacy/:
+    get:
+      description: |
+        This is the root of all legacy data endpoints. For the moment it only contains aggregated pagecounts.
+
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The queriable sub-items
+          schema:
+            $ref: '#/definitions/listing'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: List legacy metrics API entry points.
+      tags:
+        - Legacy metrics
+      x-monitor: false
+  '/metrics/legacy/pagecounts/aggregate/{project}/{access-site}/{granularity}/{start}/{end}':
+    get:
+      description: |
+        Given a project and a date range, returns a timeseries of pagecounts. You can filter by access site (mobile or desktop) and you can choose between monthly, daily and hourly granularity as well.
+
+        - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Rate limit: 100 req/s
+      parameters:
+        - description: 'The name of any Wikimedia project formatted like {language code}.{project name}, for example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped off. For projects like commons without language codes, use commons.wikimedia.'
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'If you want to filter by access site, use one of desktop-site or mobile-site. If you are interested in pagecounts regardless of access site use all-sites.'
+          enum:
+            - all-sites
+            - desktop-site
+            - mobile-site
+          in: path
+          name: access-site
+          required: true
+          type: string
+        - description: 'The time unit for the response data. As of today, the supported granularities for this endpoint are hourly, daily and monthly.'
+          enum:
+            - hourly
+            - daily
+            - monthly
+          in: path
+          name: granularity
+          required: true
+          type: string
+        - description: 'The timestamp of the first hour/day/month to include, in YYYYMMDDHH format.'
+          in: path
+          name: start
+          required: true
+          type: string
+        - description: 'The timestamp of the last hour/day/month to include, in YYYYMMDDHH format. In hourly and daily granularities this value is inclusive, in the monthly granularity this value is exclusive.'
+          in: path
+          name: end
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The list of values
+          schema:
+            $ref: '#/definitions/pagecounts-project'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      tags:
+        - Pagecounts data (legacy)
+      x-monitor: false
   /metrics/pageviews/:
     get:
       description: |
@@ -256,7 +333,7 @@ paths:
         '200':
           description: The list of values
           schema:
-            $ref: '#/definitions/project'
+            $ref: '#/definitions/pageview-project'
         default:
           description: Error
           schema:
@@ -350,7 +427,7 @@ paths:
         '200':
           description: The list of values
           schema:
-            $ref: '#/definitions/article'
+            $ref: '#/definitions/pageview-article'
         default:
           description: Error
           schema:
@@ -403,7 +480,7 @@ paths:
         '200':
           description: The list of top articles in the project
           schema:
-            $ref: '#/definitions/tops'
+            $ref: '#/definitions/pageview-tops'
         default:
           description: Error
           schema:
@@ -468,27 +545,6 @@ paths:
         - Unique devices data
       x-monitor: false
 definitions:
-  article:
-    properties:
-      items:
-        items:
-          properties:
-            access:
-              type: string
-            agent:
-              type: string
-            article:
-              type: string
-            granularity:
-              type: string
-            project:
-              type: string
-            timestamp:
-              type: string
-            views:
-              format: int64
-              type: integer
-        type: array
   listing:
     description: The result format for listings
     properties:
@@ -514,19 +570,45 @@ definitions:
       - width
       - height
     type: object
-  problem:
+  pagecounts-project:
     properties:
-      detail:
-        type: string
-      instance:
-        type: string
-      title:
-        type: string
-      type:
-        type: string
-    required:
-      - type
-  project:
+      items:
+        items:
+          properties:
+            access-site:
+              type: string
+            count:
+              format: int64
+              type: integer
+            granularity:
+              type: string
+            project:
+              type: string
+            timestamp:
+              type: string
+        type: array
+  pageview-article:
+    properties:
+      items:
+        items:
+          properties:
+            access:
+              type: string
+            agent:
+              type: string
+            article:
+              type: string
+            granularity:
+              type: string
+            project:
+              type: string
+            timestamp:
+              type: string
+            views:
+              format: int64
+              type: integer
+        type: array
+  pageview-project:
     properties:
       items:
         items:
@@ -545,6 +627,36 @@ definitions:
               format: int64
               type: integer
         type: array
+  pageview-tops:
+    properties:
+      items:
+        items:
+          properties:
+            access:
+              type: string
+            articles:
+              type: string
+            day:
+              type: string
+            month:
+              type: string
+            project:
+              type: string
+            year:
+              type: string
+        type: array
+  problem:
+    properties:
+      detail:
+        type: string
+      instance:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+    required:
+      - type
   summary:
     properties:
       coordinates:
@@ -608,24 +720,6 @@ definitions:
       - width
       - height
     type: object
-  tops:
-    properties:
-      items:
-        items:
-          properties:
-            access:
-              type: string
-            articles:
-              type: string
-            day:
-              type: string
-            month:
-              type: string
-            project:
-              type: string
-            year:
-              type: string
-        type: array
   unique-devices:
     properties:
       items:

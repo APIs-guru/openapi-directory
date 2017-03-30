@@ -20,8 +20,13 @@ info:
     <br><b>3)</b>&nbsp Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of water system information that meets the QID query criteria.
     <br>
     <br>
+    Use the qcolumns parameter to customize your search results.  Use the Metdata service endpoint for a list of available output objects, their Column Ids, and their definitions to help you build your customized output. 
+    <br><br>
     Additional ECHO Resources:&nbsp&nbsp <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
     <br>
+  license:
+    name: This page was built with the Swagger API.
+    url: 'https://swagger.io'
   title: U.S. EPA Enforcement and Compliance History Online (ECHO) - Safe Drinking Water Act
   version: 0.0.0
   x-apisguru-categories:
@@ -43,7 +48,7 @@ produces:
   - application/xml
 parameters:
   callback:
-    description: JSONP Callback.  For use with JSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
     in: query
     name: callback
     required: false
@@ -63,17 +68,6 @@ parameters:
     name: newsort
     required: false
     type: number
-  output:
-    default: JSON
-    description: 'Output format: JSONP, JSON or XML.'
-    enum:
-      - JSONP
-      - JSON
-      - XML
-    in: query
-    name: output
-    required: false
-    type: string
   p_act:
     description: Active Permits/Facilities Flag.  Provide Y or N to filter results to facilities with active permits.
     enum:
@@ -500,7 +494,7 @@ parameters:
     required: false
     type: number
   qcolumns:
-    description: 'Results Column Limiter.  Enter a comma-delimited list of column positions to limit results to only desired columns or provide an asterisk to obtain all possible columns.  When qcolumns is unspecified each ECHO service provides a default set of columns considered appropriate for average use.  This parameter provides a mechanism to tune this further.  The list of positions and corresponding columns may be obtained via calling the metadata endpoint for each service.  Use with caution as while ECHO data structures are largely static, breaking changes are possible as ECHO implements new features.'
+    description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
     in: query
     name: qcolumns
     required: false
@@ -510,7 +504,7 @@ parameters:
     in: query
     name: qid
     required: true
-    type: number
+    type: string
   queryset:
     description: 'Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.'
     in: query
@@ -528,6 +522,13 @@ paths:
     get:
       description: 'Based on the QID obtained from a get_systems query, return a comma sepated vaule (CSV) file of the water systems found.'
       parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/qid'
         - $ref: '#/parameters/qcolumns'
       responses:
@@ -541,6 +542,13 @@ paths:
     post:
       description: 'Based on the QID obtained from a get_systems query, return a comma sepated vaule (CSV) file of the water systems found.'
       parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/qid'
         - $ref: '#/parameters/qcolumns'
       responses:
@@ -555,7 +563,19 @@ paths:
     get:
       description: 'GET_QID is passed with a query ID corresponding to a previously run get_systems query. It then returns a Systems object containing all matching water systems. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/qid'
         - $ref: '#/parameters/pageno'
         - $ref: '#/parameters/callback'
@@ -578,7 +598,19 @@ paths:
     post:
       description: 'GET_QID is passed with a query ID corresponding to a previously run get_systems query. It then returns a Systems object containing all matching water systems. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/qid'
         - $ref: '#/parameters/pageno'
         - $ref: '#/parameters/callback'
@@ -602,7 +634,19 @@ paths:
     get:
       description: Returns an array of public water systems that meet the specified search criteria.
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/p_fn'
         - $ref: '#/parameters/p_ct'
         - $ref: '#/parameters/p_co'
@@ -665,7 +709,19 @@ paths:
     post:
       description: Returns an array of public water systems that meet the specified search criteria.
       parameters:
-        - $ref: '#/parameters/output'
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
         - $ref: '#/parameters/p_fn'
         - $ref: '#/parameters/p_ct'
         - $ref: '#/parameters/p_co'
@@ -725,7 +781,120 @@ paths:
       summary: Safe Drinking Water Act (SDWA) Systems Search Service
       tags:
         - Safe Drinking Water
+  /sdw_rest_services.metadata:
+    get:
+      description: Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_systems endpoint.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Results are an array of columns/objects.
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/met_Results'
+            required:
+              - Results
+            type: object
+      summary: Safe Drinking Water Act (SDWA) Metadata Service
+      tags:
+        - Metadata
+    post:
+      description: Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_systems endpoint.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Results are an array of columns/objects.
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/met_Results'
+            required:
+              - Results
+            type: object
+      summary: Safe Drinking Water Act (SDWA) Metadata Service
+      tags:
+        - Metadata
 definitions:
+  met_Results:
+    description: Results Object
+    properties:
+      Message:
+        description: Field to record messages (typically performance-related) about packet processing
+        example: Success
+        title: Message
+        type: string
+      ResultColumns:
+        items:
+          $ref: '#/definitions/met_ResultsColumns'
+        title: Result Columns
+        type: array
+    required:
+      - Message
+    type: object
+  met_ResultsColumns:
+    description: Results Column Object
+    properties:
+      ColumnID:
+        title: Column ID
+        type: string
+      ColumnName:
+        title: Column Name
+        type: string
+      DataLength:
+        description: Data length for EPA program database column.
+        example: '10'
+        title: Data Length
+        type: string
+      DataType:
+        description: Data type for EPA program database column.
+        example: NUMBER
+        title: Data Type
+        type: string
+      Description:
+        description: A description of the category of Supplemental Environment Project (SEP) for a settlement.
+        title: Description
+        type: string
+      ObjectName:
+        title: Object Name
+        type: string
+    required:
+      - ColumnName
+      - DataType
+      - DataLength
+      - ColumnID
+      - ObjectName
+      - Description
+    type: object
   sdw2_Results:
     description: Results Object
     properties:
@@ -758,7 +927,6 @@ definitions:
       - QueryRows
       - QueryID
       - PageNo
-      - SDWSearchResults
     type: object
   sdw3_Results:
     description: Results Object
@@ -890,6 +1058,9 @@ definitions:
         description: Indicates whether system has monitoring and reporting violations
         example: 'Y'
         type: string
+      NewVioFlag:
+        example: 'N'
+        type: string
       OtherFlag:
         description: 'Indicates whether system has other violations, such as failing to issue annual consumer confidence reports or maintain required records'
         example: 'Y'
@@ -945,6 +1116,12 @@ definitions:
         description: EPA Region number where the system is located. Values range from 01 to 10.
         example: '3'
         type: string
+      RulesVio3YrCnt:
+        example: '5'
+        type: string
+      RulesVioCurrCnt:
+        example: '4'
+        type: string
       SDW3yrComplianceQtrsStatus:
         description: Quarterly compliance status for the most recent 12 quarters. Each letter indicates the compliance status for the corresponding quarter
         example: _____VVV_SSV
@@ -982,6 +1159,9 @@ definitions:
         description: Two-letter state abbreviation
         example: VA
         title: State
+        type: string
+      SearchedContaminantsLastValues:
+        example: '2,4,5-TP=NRM; HEXACHLOROBENZENE=NRM; Endrin=NRM'
         type: string
       SeriousViolator:
         description: 'Indicates whether system is a Serious Violator (has unresolved serious, multiple, and/or continuing violations that is designated as a priority candidate for formal enforcement)'
@@ -1062,7 +1242,6 @@ definitions:
       - CTY
       - ST
       - ZIP
-      - Tribes
       - SystemType
       - SourceWaterType
       - PopulationServed
@@ -1105,6 +1284,9 @@ definitions:
       - CuViolIn5Yr
       - PbCuViolIn5Yr
       - QuartersInSNC
+      - NewVioFlag
+      - RulesVio3YrCnt
+      - RulesVioCurrCnt
     type: object
   sdw3_Tribes:
     description: Tribes Object

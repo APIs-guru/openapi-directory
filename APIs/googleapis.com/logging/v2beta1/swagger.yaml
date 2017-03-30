@@ -113,11 +113,11 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: projects
   - name: billingAccounts
+  - name: entries
   - name: monitoredResourceDescriptors
   - name: organizations
-  - name: entries
+  - name: projects
 paths:
   '/v2beta1/entries:list':
     parameters:
@@ -241,7 +241,7 @@ paths:
   '/v2beta1/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.organizations.logs.delete
+      operationId: logging.billingAccounts.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -266,7 +266,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -384,7 +384,7 @@ paths:
   '/v2beta1/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.organizations.logs.list
+      operationId: logging.billingAccounts.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -420,7 +420,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'

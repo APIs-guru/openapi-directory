@@ -1406,8 +1406,8 @@ definitions:
       checkInterval:
         description: Interval between health checks.
         type: string
-      healthyThreshold:
-        description: Number of consecutive successful checks required before considering the VM healthy.
+      failureThreshold:
+        description: Number of consecutive failed checks required before considering the VM unhealthy.
         format: uint32
         type: integer
       host:
@@ -1419,13 +1419,13 @@ definitions:
       path:
         description: The request path.
         type: string
+      successThreshold:
+        description: Number of consecutive successful checks required before considering the VM healthy.
+        format: uint32
+        type: integer
       timeout:
         description: Time before the check is considered failed.
         type: string
-      unhealthyThreshold:
-        description: Number of consecutive failed checks required before considering the VM unhealthy.
-        format: uint32
-        type: integer
     type: object
   Location:
     description: A resource that represents Google Cloud Platform location.
@@ -1646,8 +1646,8 @@ definitions:
       checkInterval:
         description: Interval between health checks.
         type: string
-      healthyThreshold:
-        description: Number of consecutive successful checks required before receiving traffic.
+      failureThreshold:
+        description: Number of consecutive failed checks required before removing traffic.
         format: uint32
         type: integer
       host:
@@ -1656,13 +1656,13 @@ definitions:
       path:
         description: The request path.
         type: string
+      successThreshold:
+        description: Number of consecutive successful checks required before receiving traffic.
+        format: uint32
+        type: integer
       timeout:
         description: Time before the check is considered failed.
         type: string
-      unhealthyThreshold:
-        description: Number of consecutive failed checks required before removing traffic.
-        format: uint32
-        type: integer
     type: object
   RepairApplicationRequest:
     description: Request message for 'Applications.RepairApplication'.

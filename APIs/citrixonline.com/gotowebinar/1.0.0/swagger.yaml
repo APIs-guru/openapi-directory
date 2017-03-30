@@ -36,6 +36,13 @@ parameters:
     name: Authorization
     required: true
     type: string
+  accountKey:
+    description: The key of the account
+    format: int64
+    in: path
+    name: accountKey
+    required: true
+    type: integer
   coorganizerKey:
     description: The key of the internal or external co-organizer (memberKey)
     format: int64
@@ -92,6 +99,53 @@ tags:
   - description: Operations available for attendees of a given webinar session.
     name: Attendees
 paths:
+  '/accounts/{accountKey}/webinars':
+    get:
+      description: 'Retrieves the list of webinars for an account within a given date range. __*Page*__ and __*size*__ parameters are optional. Default __*page*__ is 0 and default __*size*__ is 20. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
+      operationId: getAllAccountWebinars
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/accountKey'
+        - description: 'A required start of datetime range in ISO8601 UTC format, e.g. 2015-07-13T10:00:00Z'
+          format: date-time
+          in: query
+          name: fromTime
+          required: true
+          type: string
+        - description: 'A required end of datetime range in ISO8601 UTC format, e.g. 2015-07-13T22:00:00Z'
+          format: date-time
+          in: query
+          name: toTime
+          required: true
+          type: string
+        - description: The page number to be displayed. The first page is 0.
+          format: int64
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: The size of the page.
+          format: int64
+          in: query
+          name: size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AccountWebinars'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get all webinars for an account
+      tags:
+        - Webinars
   '/organizers/{organizerKey}/historicalWebinars':
     get:
       description: Returns details for completed webinars for the specified organizer and completed webinars of other organizers where the specified organizer is a co-organizer.
@@ -783,7 +837,7 @@ paths:
         - Sessions
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}':
     get:
-      description: 'Retrieves attendance details for a specific webinar session that has ended. If attendees attended the session (''registrantsAttended''), specific attendance details, such as attendenceTime for a registrant, will also be retrieved.'
+      description: 'Retrieves attendance details for a specific webinar session that has ended. If attendees attended the session (''registrantsAttended''), specific attendance details, such as attendenceTime for a registrant, will also be retrieved. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
       operationId: getWebinarSession
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -808,7 +862,7 @@ paths:
         - Sessions
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees':
     get:
-      description: Retrieve details for all attendees of a specific webinar session.
+      description: 'Retrieve details for all attendees of a specific webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
       operationId: getAttendees
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -833,7 +887,7 @@ paths:
         - Attendees
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}':
     get:
-      description: Retrieve registration details for a particular attendee of a specific webinar session.
+      description: 'Retrieve registration details for a particular attendee of a specific webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
       operationId: getAttendee
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -857,7 +911,7 @@ paths:
         - Attendees
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/polls':
     get:
-      description: Get poll answers from a particular attendee of a specific webinar session.
+      description: 'Get poll answers from a particular attendee of a specific webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
       operationId: getAttendeePollAnswers
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -883,7 +937,7 @@ paths:
         - Attendees
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/questions':
     get:
-      description: Get questions asked by an attendee during a webinar session.
+      description: 'Get questions asked by an attendee during a webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
       operationId: getAttendeeQuestions
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -909,7 +963,7 @@ paths:
         - Attendees
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/surveys':
     get:
-      description: Retrieve survey answers from a particular attendee during a webinar session.
+      description: 'Retrieve survey answers from a particular attendee during a webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
       operationId: getAttendeeSurveyAnswers
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -935,7 +989,7 @@ paths:
         - Attendees
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/performance':
     get:
-      description: Get performance details for a session.
+      description: 'Get performance details for a session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
       operationId: getPerformance
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -958,7 +1012,7 @@ paths:
         - Sessions
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/polls':
     get:
-      description: Retrieve all collated attendee questions and answers for polls from a specific webinar session.
+      description: 'Retrieve all collated attendee questions and answers for polls from a specific webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
       operationId: getPolls
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -983,7 +1037,7 @@ paths:
         - Sessions
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/questions':
     get:
-      description: Retrieve questions and answers for a past webinar session.
+      description: 'Retrieve questions and answers for a past webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
       operationId: getQuestions
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -1008,7 +1062,7 @@ paths:
         - Sessions
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/surveys':
     get:
-      description: Retrieve surveys for a past webinar session.
+      description: 'Retrieve surveys for a past webinar session. For technical reasons, this call cannot be executed from this documentation. Please use the curl command to execute it.'
       operationId: getSurveys
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -1048,6 +1102,29 @@ definitions:
       - organizer
       - panelist
       - attendee
+  AccountWebinars:
+    description: Describes a list of webinars for an account within a given date range
+    properties:
+      _embedded:
+        $ref: '#/definitions/AccountWebinarsObject'
+        description: The webinars array for an account within a given date range
+        type: object
+      page:
+        $ref: '#/definitions/page'
+        description: The webinars page description. The first page is 0
+        type: object
+    required:
+      - _embedded
+      - page
+  AccountWebinarsObject:
+    description: ''
+    properties:
+      webinars:
+        items:
+          $ref: '#/definitions/WebinarItem'
+        type: array
+    required:
+      - webinars
   AnswerToAttendeeQuestion:
     description: Describes an answer to a question asked by an attendee during a webinar session.
     properties:
@@ -2107,6 +2184,58 @@ definitions:
       - numberOfOpenedInvitations
       - registrationUrl
       - numberOfRegistrationLinkClicks
+  WebinarItem:
+    description: Describes a webinar for an account within a given date range.
+    properties:
+      description:
+        description: A short description of the webinar
+        type: string
+      impromptu:
+        description: A boolean flag indicating if the webinar type is impromptu
+        type: boolean
+      isPasswordProtected:
+        default: false
+        description: A boolean flag indicating if the webinar is password protected
+        type: boolean
+      organizerKey:
+        description: The key of the webinar organizer
+        type: string
+      registrationUrl:
+        description: The URL the webinar invitees can use to register
+        type: string
+      subject:
+        description: The webinar subject
+        type: string
+      timeZone:
+        description: The timezone where the webinar is taking place
+        type: string
+      times:
+        description: Array with startTime and endTime for the webinar sessions
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array
+      type:
+        default: single_session
+        description: Specifies the webinar type
+        type: string
+      webinarID:
+        description: The 9-digit webinar ID
+        type: string
+      webinarKey:
+        description: The unique key of the webinar
+        type: string
+    required:
+      - webinarKey
+      - webinarID
+      - subject
+      - description
+      - times
+      - timeZone
+      - organizerKey
+      - registrationUrl
+      - impromptu
+      - isPasswordProtected
+      - type
   WebinarReqCreate:
     description: Describes the details used to create a new single session webinar.
     properties:
@@ -2162,3 +2291,47 @@ definitions:
         items:
           $ref: '#/definitions/DateTimeRange'
         type: array
+  firstPage:
+    properties:
+      href:
+        description: The first page link
+        type: string
+    required:
+      - href
+  lastPage:
+    properties:
+      href:
+        description: The last page link
+        type: string
+    required:
+      - href
+  page:
+    properties:
+      number:
+        description: The current page number. The first page is 0
+        format: int32
+        type: integer
+      size:
+        description: The page size
+        format: int32
+        type: integer
+      totalElements:
+        description: The total elements
+        format: int32
+        type: integer
+      totalPages:
+        description: The pages count
+        format: int32
+        type: integer
+    required:
+      - size
+      - totalElements
+      - totalPages
+      - number
+  selfPage:
+    properties:
+      href:
+        description: The current page link
+        type: string
+    required:
+      - href
