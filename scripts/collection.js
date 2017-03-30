@@ -356,6 +356,9 @@ function writeSpec(source, format, exPatch, command) {
 
       util.saveSwagger(context.swagger);
 
+	  delete exPatch.info['x-serviceName'];
+	  delete exPatch.info['x-preferred'];
+
       if (Object.keys(exPatch.info).length) {
         var patchFilename = pathLib.join(util.getPathComponents(context.swagger, true).join('/'),'patch.yaml');
         var patchFilename2 = pathLib.join(util.getPathComponents(context.swagger).join('/'),'patch.yaml');
