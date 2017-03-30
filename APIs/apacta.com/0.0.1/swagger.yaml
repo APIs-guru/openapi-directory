@@ -540,6 +540,10 @@ paths:
           in: query
           name: ean
           type: string
+        - description: Search for values in ERP id field
+          in: query
+          name: erp_id
+          type: string
         - description: Used to show only contacts with with one specific `ContactType`
           format: uuid
           in: query
