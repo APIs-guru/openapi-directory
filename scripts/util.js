@@ -159,7 +159,7 @@ exports.getOrigin = function (swagger) {
 }
 
 exports.getOriginUrl = function (swagger) {
-  return exports.getOrigin(swagger).url;
+  return _.last(exports.getOrigin(swagger)).url;
 }
 
 exports.saveSwagger = function (swagger) {
