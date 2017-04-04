@@ -10,6 +10,7 @@ var _ = require('lodash');
 var jp = require('json-pointer');
 var jsonPath = require('jsonpath');
 var converter = require('api-spec-converter');
+var converterVersion = require('api-spec-converter/package.json').version;
 var parseDomain = require('parse-domain');
 var jsonPatch = require('json-merge-patch');
 var YAML = require('js-yaml');
@@ -302,13 +303,17 @@ function updateCatalogLeads() {
     .done();
 }
 
-function writeSpecFromLead(lead, command) {
-  var origin = util.getOrigin(lead);
+function writeSpecFromLead(lead,command) {
+  var exPatch = _.cloneDeep(lead);
+  var origin = util.getOrigin(exPatch);
+  if (Array.isArray(origin))
+    origin = origin.pop();
   var source = origin.url;
   var format = converter.getFormatName(origin.format, origin.version);
 
-  var exPatch = _.cloneDeep(lead);
-  delete exPatch.info['x-origin'];
+  if (!exPatch.info['x-origin'].length) {
+    delete exPatch.info['x-origin'];
+  }
 
   return writeSpec(source, format, exPatch, command);
 }
@@ -860,13 +865,24 @@ function convertToSwagger(spec) {
   return spec.convertTo('swagger_2')
     .then(swagger => {
       _.merge(swagger.spec.info, {
-        'x-providerName': parseHost(swagger.spec, spec.source),
-        'x-origin': {
-          format: spec.formatName,
-          version: spec.getFormatVersion(),
-          url: spec.source
-        }
+        'x-providerName': parseHost(swagger.spec, spec.source)
       });
+	  if (typeof swagger.spec.info['x-origin'] == 'undefined')
+        swagger.spec.info['x-origin'] = [];
+	  if (!Array.isArray(swagger.spec.info['x-origin']))
+        swagger.spec.info['x-origin'] = [swagger.spec.info['x-origin']];
+      var newOrigin = {
+        format: spec.formatName,
+        version: spec.getFormatVersion(),
+        url: spec.source
+      };
+      if ((newOrigin.format !== 'swagger') || (newOrigin.version !== '2.0')) {
+        newOrigin.converter = {
+            url: 'https://github.com/lucybot/api-spec-converter',
+            version: converterVersion
+        };
+      }
+      swagger.spec.info['x-origin'].push(newOrigin);
       return swagger.spec;
     });
 }
@@ -910,10 +926,8 @@ function applyMergePatch(target, patch) {
     if (_.isPlainObject(target[key]))
       return applyMergePatch(target[key], value);
 
-    if ((_.isArray(target[key])) && (_.isArray(value))) {
-      target[key] = target[key].concat(value);
+    if ((_.isArray(target[key])) && (_.isArray(value)))
 	  return target[key].concat(value);
-    }
 
     assert(_.isUndefined(target[key]), 'Patch tried to override property: ' + key);
     target[key] = value;
