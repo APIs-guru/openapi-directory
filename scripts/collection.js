@@ -96,6 +96,12 @@ program
   .action(validateCollection);
 
 program
+  .command('check')
+  .description('check status of x-preferred flags only')
+  .arguments('[DIR]')
+  .action(checkPreferred);
+
+program
   .command('leads')
   .description('add/remove specs from 3rd-party catalogs')
   .action(updateCatalogLeads);
@@ -153,15 +159,22 @@ function updateCollection(dir, command) {
           var newFilename = util.getSwaggerPath(swagger);
           if (newFilename !== filename)
             warnings.push(`Spec was moved from "${filename}" to "${newFilename}"`);
+          if (_.isEmpty(swagger.paths))
+            warnings.push(`Spec will fail validation - no paths "${filename}"`);
         });
     })
     .done();
 }
 
+function checkPreferred(dir, command) {
+  var specs = util.getSpecs(dir);
+  validatePreferred(specs);
+}
+
 function validateCollection(dir, command) {
   var specs = util.getSpecs(dir);
 
-  validatePrefered(specs);
+  validatePreferred(specs);
 
   Promise.mapSeries(_.toPairs(specs), ([filename, swagger]) => {
     console.error('======================== ' + filename + ' ================');
@@ -190,7 +203,7 @@ function validateCollection(dir, command) {
   }).done();
 }
 
-function validatePrefered(specs) {
+function validatePreferred(specs) {
   var preferred = {}
   _.each(specs, function (swagger) {
     var id = util.getApiId(swagger);
