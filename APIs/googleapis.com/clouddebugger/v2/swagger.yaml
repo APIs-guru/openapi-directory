@@ -16,7 +16,10 @@ info:
   x-logo:
     url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://clouddebugger.googleapis.com/$discovery/rest?version=v2'
       version: v1
   x-preferred: true
@@ -110,8 +113,8 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: debugger
   - name: controller
+  - name: debugger
 paths:
   /v2/controller/debuggees/register:
     parameters:

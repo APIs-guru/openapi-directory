@@ -10,7 +10,10 @@ info:
     backgroundColor: '#1B4E65'
     url: 'https://d2071nnd6m4201.cloudfront.net/templates/balloon/images/logo.svg'
   x-origin:
-    - format: swagger
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
       url: 'https://watchful.li/api/v1/api-docs/'
       version: '1.2'
   x-providerName: watchful.li

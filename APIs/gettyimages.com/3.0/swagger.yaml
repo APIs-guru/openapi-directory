@@ -12,7 +12,10 @@ info:
   x-logo:
     url: 'http://developers.gettyimages.com/images/getty-api-logo.jpg'
   x-origin:
-    - format: swagger
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
       url: 'https://api.gettyimages.com/swagger/api-docs'
       version: '1.2'
   x-providerName: gettyimages.com
@@ -211,6 +214,16 @@ paths:
           name: page_size
           required: false
           type: integer
+        - description: Sort the list of boards by last update date or name. Defaults to date_last_updated_descending.
+          enum:
+            - date_last_updated_descending
+            - date_last_updated_ascending
+            - name_ascending
+            - name_decending
+          in: query
+          name: sort_order
+          required: false
+          type: string
       produces:
         - application/json
         - text/json

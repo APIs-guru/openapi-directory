@@ -16,7 +16,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://runtimeconfig.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
   x-preferred: false
@@ -677,48 +680,6 @@ paths:
       tags:
         - projects
   '/v1beta1/{resource}:testIamPermissions':
-    get:
-      description: |-
-        Returns permissions that a caller has on the specified resource.
-        If the resource does not exist, this will return an empty set of
-        permissions, not a NOT_FOUND error.
-
-        Note: This operation is designed to be used for building permission-aware
-        UIs and command-line tools, not for authorization checking. This operation
-        may "fail open" without warning.
-      operationId: runtimeconfig.projects.configs.waiters.testIamPermissions
-      parameters:
-        - description: |-
-            REQUIRED: The resource for which the policy detail is being requested.
-            See the operation documentation for the appropriate value for this field.
-          in: path
-          name: resource
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - collectionFormat: multi
-          description: |-
-            The set of permissions to check for the `resource`. Permissions with
-            wildcards (such as '*' or 'storage.*') are not allowed. For more
-            information see
-            [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-          in: query
-          items:
-            type: string
-          name: permissions
-          type: array
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TestIamPermissionsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
-      tags:
-        - projects
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
@@ -742,7 +703,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: runtimeconfig.projects.configs.testIamPermissions
+      operationId: runtimeconfig.projects.configs.waiters.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.

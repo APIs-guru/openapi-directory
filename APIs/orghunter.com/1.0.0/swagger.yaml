@@ -10,7 +10,10 @@ info:
   x-logo:
     url: 'http://orghunter.com/sites/all/themes/orghunter/img/logo.jpg'
   x-origin:
-    - format: swagger
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
       url: 'https://orghunter.3scale.net/swagger/spec.json'
       version: '1.2'
   x-providerName: orghunter.com

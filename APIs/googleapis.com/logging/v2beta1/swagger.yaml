@@ -16,7 +16,10 @@ info:
   x-logo:
     url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://logging.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
   x-preferred: false
@@ -241,7 +244,7 @@ paths:
   '/v2beta1/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.billingAccounts.logs.delete
+      operationId: logging.organizations.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -266,7 +269,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - organizations
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -384,7 +387,7 @@ paths:
   '/v2beta1/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.billingAccounts.logs.list
+      operationId: logging.organizations.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -420,7 +423,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - organizations
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'

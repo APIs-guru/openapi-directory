@@ -15,7 +15,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://slides.googleapis.com/$discovery/rest?version=v1'
       version: v1
   x-preferred: true
@@ -1896,8 +1899,8 @@ definitions:
       direction:
         description: |-
           The text direction of this paragraph. If unset, the value defaults to
-          LEFT_TO_RIGHT
-          since text direction is not inherited.
+          LEFT_TO_RIGHT since
+          text direction is not inherited.
         enum:
           - TEXT_DIRECTION_UNSPECIFIED
           - LEFT_TO_RIGHT

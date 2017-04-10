@@ -15,7 +15,10 @@ info:
   x-logo:
     url: 'https://www.youtube.com/yt/brand/media/image/YouTube-logo-full_color.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
       version: v1
   x-preferred: true

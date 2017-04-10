@@ -17,7 +17,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://safebrowsing.googleapis.com/$discovery/rest?version=v4'
       version: v1
   x-preferred: true
@@ -102,12 +105,12 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: threatListUpdates
   - name: encodedFullHashes
+  - name: encodedUpdates
+  - name: fullHashes
+  - name: threatListUpdates
   - name: threatLists
   - name: threatMatches
-  - name: fullHashes
-  - name: encodedUpdates
 paths:
   '/v4/encodedFullHashes/{encodedRequest}':
     get:

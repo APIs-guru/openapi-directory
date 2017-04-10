@@ -10,7 +10,10 @@ info:
   x-apisguru-categories:
     - iot
   x-origin:
-    - format: swagger
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
       url: 'https://dweet.io/play/definition'
       version: '1.2'
   x-providerName: dweet.io

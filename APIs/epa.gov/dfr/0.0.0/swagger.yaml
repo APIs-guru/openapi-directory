@@ -107,48 +107,8 @@ paths:
       summary: Detailed Facility Report Air Compliance Report Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedure obtains data for Air Compliance in the Environmental Conditions Section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of compliance statuses for 12 quarters.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrq_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Air Compliance Report Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_air_quality:
     get:
-      description: This procedure obtains data for Air Quality in the Environmental Conditions Section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes information on air quality
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfr1_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Air Quality Report Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for Air Quality in the Environmental Conditions Section of the DFR.
       parameters:
         - $ref: '#/parameters/output'
@@ -189,48 +149,8 @@ paths:
       summary: Detailed Facility Report 5 Year Compliance Monitoring History Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedure obtains data for the Compliance Monitoring History (5 years) in the Enforcement and Compliance Section of the Detailed Facility report.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of compliance histories
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfr2_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report 5 Year Compliance Monitoring History Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_compliance_summary:
     get:
-      description: This procedure obtains data for Compliance Summary Data in the Enforcement and Compliance Section of the Detailed Facility report.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of compliance summaries
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfr3_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Compliance Summary Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for Compliance Summary Data in the Enforcement and Compliance Section of the Detailed Facility report.
       parameters:
         - $ref: '#/parameters/output'
@@ -276,53 +196,8 @@ paths:
       summary: Detailed Facility Report 3 Year CWA Facility-Level Status Service
       tags:
         - Detailed Facility Report
-    post:
-      description: |-
-        This procedure obtains data for the CWA Facility-Level Status section located in the Three Year Compliance Status by Quarter portion of the DFR. Valid Compliance Statuses are as follows:
-        > "In Viol" = Facility is in violation
-        > "No Viol" = No violation found
-        > "Unk" = Unknown status
-        > "SNC/Cat 1" = SNC/Category I violation found
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of compliance statuses for 13 quarters
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrW_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report 3 Year CWA Facility-Level Status Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_cwa_cs_compliance:
     get:
-      description: This procedure obtains data for the CWA Compliance Schedule Violations section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of compliance statuses for 13 quarters.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrs_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report CWA CSV Compliance Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for the CWA Compliance Schedule Violations section of the DFR.
       parameters:
         - $ref: '#/parameters/output'
@@ -363,26 +238,6 @@ paths:
       summary: Detailed Facility Report CWA Effluent ALR Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedure obtains data for the CWA Pollutant Discharge section located in the Three Year Compliance Status by Quarter portion of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of effluent ALR for 13 quarters.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrt_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report CWA Effluent ALR Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_cwa_eff_compliance:
     get:
       description: 'This procedure obtains data for the CWA Effluent Compliance section on the DFR.  '
@@ -404,48 +259,8 @@ paths:
       summary: Detailed Facility Report CWA Effluent Compliance Service
       tags:
         - Detailed Facility Report
-    post:
-      description: 'This procedure obtains data for the CWA Effluent Compliance section on the DFR.  '
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of effluent compliance statuses for 13 quarters.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfru_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report CWA Effluent Compliance Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_cwa_ps_compliance:
     get:
-      description: This procedure obtains data for the CWA Permit Schedule Violations section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of permit schedule violations for 13 quarters.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrv_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report CWA PSV Compliance Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for the CWA Permit Schedule Violations section of the DFR.
       parameters:
         - $ref: '#/parameters/output'
@@ -498,38 +313,6 @@ paths:
       summary: Detailed Facility Report CWA RNC Compliance Service
       tags:
         - Detailed Facility Report
-    post:
-      description: |-
-        This procedure obtains data for the CWA SNC/RNC History section located in the Three Year ompliance Status by Quarter portion of the DFR. Valid Compliance Statuses are as follows.
-        > S = SNC/Category I - an enforcement action has been issued, and the facility is not meeting its compliance schedule
-        > E = SNC/Category I - effluent violations of monthly average limits (Technical Review Criteria and chronic)
-        > X = SNC/Category I - effluent violations of non-monthly average limits (Technical Review Criteria and chronic)
-        > T = SNC/Category I - compliance schedule reporting violation
-        > D = SNC/Category I - reporting violation - nonreceipt of DMR
-        > N = RNC/Category II - reportable non-compliance
-        > P = Resolved Pending - an enforcement action has been issued, and facility compliance with the action is pending final completion
-        > R = Resolved - the facility has returned to compliance with its permit conditions, either with or without issuance of an enforcement action
-        > C = Not considered in RNC/SNC based on manual review of data by state or EPA region. This manual override status is also indicated by a superscripted "m".
-        > Blank = Not considered in RNC/SNC
-        > N/A = EPA's data system is not able to determine the facility-level compliance status based upon the information available. This information may be available from a state database.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of RNC compliance statuses for 12 quarters
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrw_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report CWA RNC Compliance Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_cwa_se_compliance:
     get:
       description: This procedure obtains data for the CWA Single Event Violations section of the DFR.
@@ -551,49 +334,8 @@ paths:
       summary: Detailed Facility Report CWA SEV Compliance Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedure obtains data for the CWA Single Event Violations section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of single-event statuses for 13 quarters.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrx_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report CWA SEV Compliance Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_demographics:
     get:
-      description: Returns a complex object with Demographics from the 2010 Census and 2010 American Community Survey based on a 3 mile radius around the facility spatial coordinates.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/p_radius'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes demographics
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrY_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Demographics Report Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: Returns a complex object with Demographics from the 2010 Census and 2010 American Community Survey based on a 3 mile radius around the facility spatial coordinates.
       parameters:
         - $ref: '#/parameters/output'
@@ -636,49 +378,8 @@ paths:
       summary: Detailed Facility Report Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedure is the overall service for the Detailed Facility Report. It returns all of the data displayed in the DFR web report by invoking individual procedures that each return a targeted portion of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/p_system'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns a complex object (Detailed Facility Report) composed of objects from all of the other procedures.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfr4_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_enforcement_summary:
     get:
-      description: This procedure obtains data for the Enforcement and Compliance Summary in the Facility Summary section of the Detailed Facility Report.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of enforcement compliance summaries
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrW1_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Enforcement Summary Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for the Enforcement and Compliance Summary in the Facility Summary section of the Detailed Facility Report.
       parameters:
         - $ref: '#/parameters/output'
@@ -719,48 +420,8 @@ paths:
       summary: Detailed Facility Report Formal Actions Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedure obtains data for the Formal Enforcement Actions section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of formal actions.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrW2_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Formal Actions Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_icis_formal_actions:
     get:
-      description: 'This procedure obtains data for the Integrated Compliance Information System, Formal Enforcement Actions section of the DFR. '
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of ICIS formal actions.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfra_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report ICIS Formal Actions Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: 'This procedure obtains data for the Integrated Compliance Information System, Formal Enforcement Actions section of the DFR. '
       parameters:
         - $ref: '#/parameters/output'
@@ -801,26 +462,6 @@ paths:
       summary: Detailed Facility Report Inspections Summary Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedure obtains data for Enforcement and Compliance Summary Section of the Detailed Facility report.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of inspection enforcement summaries
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfra1_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Inspections Summary Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_map:
     get:
       description: Returns an object with the facility's latitude and longitude coordinates.
@@ -842,48 +483,8 @@ paths:
       summary: Detailed Facility Report Map Service
       tags:
         - Detailed Facility Report
-    post:
-      description: Returns an object with the facility's latitude and longitude coordinates.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes information for displaying a map
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrZ_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Map Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_naics:
     get:
-      description: This procedure obtains data for the Facility NAICS Codes section in Facility/System Characteristics of the Detailed Facility Report.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of NAICS codes
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfra2_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report NAICS Code Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for the Facility NAICS Codes section in Facility/System Characteristics of the Detailed Facility Report.
       parameters:
         - $ref: '#/parameters/output'
@@ -926,50 +527,8 @@ paths:
       summary: Detailed Facility Report Permits by Statute Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedure obtains data for the Permits by Statute section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/nnn'
-        - $ref: '#/parameters/nn2'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of permits
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrb_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Permits by Statute Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_notices:
     get:
-      description: This procedure obtains data for the Notices/Informal Actions section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of notices
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrg_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Notices Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for the Notices/Informal Actions section of the DFR.
       parameters:
         - $ref: '#/parameters/output'
@@ -1018,56 +577,8 @@ paths:
       summary: Detailed Facility Report Permits Service
       tags:
         - Detailed Facility Report
-    post:
-      description: |-
-        This procedure obtains data for the following sections of the Detailed Facility Report.
-        > Facility Information (FRS) in the Facility Summary.
-        > Regulatory Interests in the Facility Summary.
-        > Also Reports in the Facility Summary.
-        > Facility/System Characteristics in Facility/System Characteristics.
-        > Facility Contact Information in Facility/System Characteristics.
-        > Facility SIC Codes in Facility/System Characteristics section.
-        > Facility NAICS Codes in Facility/System Characteristics section.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of permits
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrg1_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Permits Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_rcra_compliance:
     get:
-      description: This procedure obtains data for the RCRA Compliance section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes RCRA compliance statuses
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrh_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report RCRA Compliance Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for the RCRA Compliance section of the DFR.
       parameters:
         - $ref: '#/parameters/output'
@@ -1108,48 +619,8 @@ paths:
       summary: Detailed Facility Report SDWA Lead and Copper Service
       tags:
         - Detailed Facility Report
-    post:
-      description: 'This procedure obtains data for the SDWA, Lead and Copper Rule section of the DFR.'
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of lead and copper rules
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrk_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report SDWA Lead and Copper Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_sdwa_sanitary_surveys:
     get:
-      description: 'This procedure obtains data for the SDWA, Sanitary Surveys section of the DFR.'
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of sanitary surveys
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrj_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report SDWA Sanitary Surveys Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: 'This procedure obtains data for the SDWA, Sanitary Surveys section of the DFR.'
       parameters:
         - $ref: '#/parameters/output'
@@ -1190,48 +661,8 @@ paths:
       summary: Detailed Facility Report SDWA Sanitary Site Visits Service
       tags:
         - Detailed Facility Report
-    post:
-      description: 'This procedure obtains data for the SDWA, Sanitary Site Visits section of the DFR.'
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of site visits
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfri_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report SDWA Sanitary Site Visits Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_sdwa_violations:
     get:
-      description: This procedure obtains data for the SDWA Violations section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes SDWA violations
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrf_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report SDWA Violations Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for the SDWA Violations section of the DFR.
       parameters:
         - $ref: '#/parameters/output'
@@ -1272,48 +703,8 @@ paths:
       summary: Detailed Facility Report SDWIS Compliance Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedure obtains data for the SDWA Compliance section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of SDWIS compliance summaries
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrl_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report SDWIS Compliance Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_sic_codes:
     get:
-      description: This procedure obtains data for the Facility SIC Codes section in Facility/System Characteristics of the Detailed Facility Report.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of SIC codes
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrg2_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report SIC Code Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for the Facility SIC Codes section in Facility/System Characteristics of the Detailed Facility Report.
       parameters:
         - $ref: '#/parameters/output'
@@ -1354,48 +745,8 @@ paths:
       summary: Detailed Facility Report Spatial Metadata Service
       tags:
         - Detailed Facility Report
-    post:
-      description: Returns an object with the facility coordinate spatial metadata.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes spatial metadata
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrg3_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Spatial Metadata Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_tri_history:
     get:
-      description: This procedure obtains data for the TRI History section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes TRI history
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrm_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report TRI History Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for the TRI History section of the DFR.
       parameters:
         - $ref: '#/parameters/output'
@@ -1436,26 +787,6 @@ paths:
       summary: Detailed Facility Report TRI Releases Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedrue obtains data for the TRI Releases section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes TRI releases
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrn_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report TRI Releases Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_tribes:
     get:
       description: This procedure obtains data for the Tribes and Reservations section of the DFR.
@@ -1477,49 +808,8 @@ paths:
       summary: Detailed Facility Report Tribes Service
       tags:
         - Detailed Facility Report
-    post:
-      description: This procedure obtains data for the Tribes and Reservations section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of tribal location information.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfro_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Tribes Service
-      tags:
-        - Detailed Facility Report
   /dfr_rest_services.get_water_quality:
     get:
-      description: This procedure obtains data for the Water Quality section of the DFR.
-      parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/p_radius'
-        - $ref: '#/parameters/callback'
-      responses:
-        '200':
-          description: Returns an object that includes an array of water quality information.
-          schema:
-            description: Root Object
-            properties:
-              Results:
-                $ref: '#/definitions/dfrp_Results'
-            required:
-              - Results
-            type: object
-      summary: Detailed Facility Report Water Quality Service
-      tags:
-        - Detailed Facility Report
-    post:
       description: This procedure obtains data for the Water Quality section of the DFR.
       parameters:
         - $ref: '#/parameters/output'

@@ -15,7 +15,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://monitoring.googleapis.com/$discovery/rest?version=v3'
       version: v1
   x-preferred: true
@@ -542,15 +545,9 @@ paths:
       description: Lists time series that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.timeSeries.list
       parameters:
-        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: 'Specifies the order in which the points of the time series should be returned. By default, results are not ordered. Currently, this field must be left blank.'
+        - description: 'The alignment period for per-time series alignment. If present, alignmentPeriod must be at least 60 seconds. After per-time series alignment, each time series will contain data points only on the period boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE, then this field is ignored. If perSeriesAligner is specified and does not equal ALIGN_NONE, then this field must be defined; otherwise an error is returned.'
           in: query
-          name: orderBy
+          name: aggregation.alignmentPeriod
           type: string
         - description: 'The approach to be used to combine time series. Not all reducer functions may be applied to all time series, depending on the metric type and the value type of the original time series. Reduction may change the metric type of value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
           enum:
@@ -570,17 +567,13 @@ paths:
           in: query
           name: aggregation.crossSeriesReducer
           type: string
-        - description: |
-            A monitoring filter that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example:
-            metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
-                metric.label.instance_name = "my-instance-name"
+        - collectionFormat: multi
+          description: 'The set of fields to preserve when crossSeriesReducer is specified. The groupByFields determine how the time series are partitioned into subsets prior to applying the aggregation function. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The crossSeriesReducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in groupByFields are aggregated away. If groupByFields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If crossSeriesReducer is not defined, this field is ignored.'
           in: query
-          name: filter
-          type: string
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
-          in: query
-          name: pageToken
-          type: string
+          items:
+            type: string
+          name: aggregation.groupByFields
+          type: array
         - description: 'The approach to be used to align individual time series. Not all alignment functions may be applied to all time series, depending on the metric type and value type of the original time series. Alignment may change the metric type or the value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
           enum:
             - ALIGN_NONE
@@ -603,9 +596,89 @@ paths:
           in: query
           name: aggregation.perSeriesAligner
           type: string
+        - description: |
+            A monitoring filter that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example:
+            metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
+                metric.label.instance_name = "my-instance-name"
+          in: query
+          name: filter
+          type: string
+        - description: Required. The end of the time interval.
+          in: query
+          name: interval.endTime
+          type: string
         - description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
           in: query
           name: interval.startTime
+          type: string
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: 'Specifies the order in which the points of the time series should be returned. By default, results are not ordered. Currently, this field must be left blank.'
+          in: query
+          name: orderBy
+          type: string
+        - description: 'A positive number that is the maximum number of results to return. When view field sets to FULL, it limits the number of Points server will return; if view field is HEADERS, it limits the number of TimeSeries server will return.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'The alignment period for per-time series alignment. If present, alignmentPeriod must be at least 60 seconds. After per-time series alignment, each time series will contain data points only on the period boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE, then this field is ignored. If perSeriesAligner is specified and does not equal ALIGN_NONE, then this field must be defined; otherwise an error is returned.'
+          in: query
+          name: secondaryAggregation.alignmentPeriod
+          type: string
+        - description: 'The approach to be used to combine time series. Not all reducer functions may be applied to all time series, depending on the metric type and the value type of the original time series. Reduction may change the metric type of value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
+          enum:
+            - REDUCE_NONE
+            - REDUCE_MEAN
+            - REDUCE_MIN
+            - REDUCE_MAX
+            - REDUCE_SUM
+            - REDUCE_STDDEV
+            - REDUCE_COUNT
+            - REDUCE_COUNT_TRUE
+            - REDUCE_FRACTION_TRUE
+            - REDUCE_PERCENTILE_99
+            - REDUCE_PERCENTILE_95
+            - REDUCE_PERCENTILE_50
+            - REDUCE_PERCENTILE_05
+          in: query
+          name: secondaryAggregation.crossSeriesReducer
+          type: string
+        - collectionFormat: multi
+          description: 'The set of fields to preserve when crossSeriesReducer is specified. The groupByFields determine how the time series are partitioned into subsets prior to applying the aggregation function. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The crossSeriesReducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in groupByFields are aggregated away. If groupByFields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If crossSeriesReducer is not defined, this field is ignored.'
+          in: query
+          items:
+            type: string
+          name: secondaryAggregation.groupByFields
+          type: array
+        - description: 'The approach to be used to align individual time series. Not all alignment functions may be applied to all time series, depending on the metric type and value type of the original time series. Alignment may change the metric type or the value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
+          enum:
+            - ALIGN_NONE
+            - ALIGN_DELTA
+            - ALIGN_RATE
+            - ALIGN_INTERPOLATE
+            - ALIGN_NEXT_OLDER
+            - ALIGN_MIN
+            - ALIGN_MAX
+            - ALIGN_MEAN
+            - ALIGN_COUNT
+            - ALIGN_SUM
+            - ALIGN_STDDEV
+            - ALIGN_COUNT_TRUE
+            - ALIGN_FRACTION_TRUE
+            - ALIGN_PERCENTILE_99
+            - ALIGN_PERCENTILE_95
+            - ALIGN_PERCENTILE_50
+            - ALIGN_PERCENTILE_05
+          in: query
+          name: secondaryAggregation.perSeriesAligner
           type: string
         - description: Specifies which information is returned about the time series.
           enum:
@@ -614,25 +687,6 @@ paths:
           in: query
           name: view
           type: string
-        - collectionFormat: multi
-          description: 'The set of fields to preserve when crossSeriesReducer is specified. The groupByFields determine how the time series are partitioned into subsets prior to applying the aggregation function. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The crossSeriesReducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in groupByFields are aggregated away. If groupByFields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If crossSeriesReducer is not defined, this field is ignored.'
-          in: query
-          items:
-            type: string
-          name: aggregation.groupByFields
-          type: array
-        - description: Required. The end of the time interval.
-          in: query
-          name: interval.endTime
-          type: string
-        - description: 'The alignment period for per-time series alignment. If present, alignmentPeriod must be at least 60 seconds. After per-time series alignment, each time series will contain data points only on the period boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE, then this field is ignored. If perSeriesAligner is specified and does not equal ALIGN_NONE, then this field must be defined; otherwise an error is returned.'
-          in: query
-          name: aggregation.alignmentPeriod
-          type: string
-        - description: 'A positive number that is the maximum number of results to return. When view field sets to FULL, it limits the number of Points server will return; if view field is HEADERS, it limits the number of TimeSeries server will return.'
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -1002,7 +1056,7 @@ definitions:
         type: string
     type: object
   ListMonitoredResourceDescriptorsResponse:
-    description: The ListMonitoredResourcDescriptors response.
+    description: The ListMonitoredResourceDescriptors response.
     properties:
       nextPageToken:
         description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'

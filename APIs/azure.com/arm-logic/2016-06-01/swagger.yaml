@@ -3774,6 +3774,9 @@ definitions:
       overrideGroupSigningCertificate:
         description: The value indicating whether to send or request a MDN.
         type: boolean
+      sha2AlgorithmFormat:
+        description: 'The Sha2 algorithm format. Valid values are Sha2, ShaHashSize, ShaHyphenHashSize, Sha2UnderscoreHashSize.'
+        type: string
       signingCertificateName:
         description: The name of the signing certificate.
         type: string
@@ -3817,6 +3820,9 @@ definitions:
       signMessage:
         description: The value indicating whether the message has to be signed.
         type: boolean
+      signingAlgorithm:
+        $ref: '#/definitions/SigningAlgorithm'
+        description: The signing algorithm.
     required:
       - overrideMessageProperties
       - encryptMessage
@@ -5285,6 +5291,18 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: SegmentTerminatorSuffix
+  SigningAlgorithm:
+    enum:
+      - NotSpecified
+      - Default
+      - SHA1
+      - SHA2256
+      - SHA2384
+      - SHA2512
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: SigningAlgorithm
   Sku:
     description: The sku type.
     properties:

@@ -10,7 +10,10 @@ info:
   x-logo:
     url: 'http://cfpb.github.io/img/logo_210.png'
   x-origin:
-    - format: swagger
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
       url: 'https://api.consumerfinance.gov/api-docs'
       version: '1.2'
   x-providerName: consumerfinance.gov

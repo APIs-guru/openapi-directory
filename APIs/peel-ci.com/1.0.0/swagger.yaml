@@ -12,7 +12,10 @@ info:
   x-logo:
     url: 'http://www.peel.com/sites/all/themes/peeltheme/img/peelLogo.svg'
   x-origin:
-    - format: swagger
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
       url: 'https://s3-us-west-2.amazonaws.com/tuneinapi.peel-ci.com/resources.json'
       version: '1.2'
   x-providerName: peel-ci.com

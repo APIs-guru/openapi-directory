@@ -15,7 +15,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://cloudfunctions.googleapis.com/$discovery/rest?version=v1beta2'
       version: v1
   x-preferred: false
@@ -111,56 +114,6 @@ tags:
   - name: operations
   - name: projects
 paths:
-  /v1beta2/operations:
-    get:
-      description: |-
-        Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding below allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`.
-      operationId: cloudfunctions.operations.list
-      parameters:
-        - description: The name of the operation collection.
-          in: query
-          name: name
-          type: string
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListOperationsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - operations
-    parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
   '/v1beta2/{location}/functions':
     get:
       description: Returns a list of functions that belong to the requested project.
@@ -566,18 +519,6 @@ definitions:
       nextPageToken:
         description: The standard List next-page token.
         type: string
-    type: object
-  ListOperationsResponse:
-    description: The response message for Operations.ListOperations.
-    properties:
-      nextPageToken:
-        description: The standard List next-page token.
-        type: string
-      operations:
-        description: A list of operations that matches the specified filter in the request.
-        items:
-          $ref: '#/definitions/Operation'
-        type: array
     type: object
   Location:
     description: A resource that represents Google Cloud Platform location.

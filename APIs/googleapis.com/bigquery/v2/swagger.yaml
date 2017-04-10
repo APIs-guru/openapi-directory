@@ -17,7 +17,10 @@ info:
   x-logo:
     url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/bigquery/v2/rest'
       version: v1
   x-preferred: true
@@ -1390,7 +1393,7 @@ definitions:
         format: int32
         type: integer
       nullMarker:
-        description: '[Optional] Specifies a string that represents a null value in a CSV file. For example, if you specify "\N", BigQuery interprets "\N" as a null value when loading a CSV file. The default value is the empty string. If you set this property to a custom value, BigQuery still interprets the empty string as a null value for all data types except for STRING and BYTE. For STRING and BYTE columns, BigQuery interprets the empty string as an empty value.'
+        description: '[Optional] Specifies a string that represents a null value in a CSV file. For example, if you specify "\N", BigQuery interprets "\N" as a null value when loading a CSV file. The default value is the empty string. If you set this property to a custom value, BigQuery throws an error if an empty string is present for all data types except for STRING and BYTE. For STRING and BYTE columns, BigQuery interprets the empty string as an empty value.'
         type: string
       projectionFields:
         description: 'If sourceFormat is set to "DATASTORE_BACKUP", indicates which entity properties to load into BigQuery from a Cloud Datastore backup. Property names are case sensitive and must be top-level properties. If no properties are specified, BigQuery loads all properties. If any named property isn''t found in the Cloud Datastore backup, an invalid error is returned in the job result.'
@@ -1435,7 +1438,8 @@ definitions:
   JobConfigurationQuery:
     properties:
       allowLargeResults:
-        description: 'If true, allows the query to produce arbitrarily large result tables at a slight cost in performance. Requires destinationTable to be set.'
+        default: false
+        description: '[Optional] If true and query uses legacy SQL dialect, allows the query to produce arbitrarily large result tables at a slight cost in performance. Requires destinationTable to be set. For standard SQL queries, this flag is ignored and large results are always allowed.'
         type: boolean
       createDisposition:
         description: '[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a ''notFound'' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.'
@@ -1448,7 +1452,7 @@ definitions:
         description: '[Optional] Describes the table where the query results should be stored. If not present, a new table will be created to store the results.'
       flattenResults:
         default: true
-        description: '[Optional] Flattens all nested and repeated fields in the query results. The default value is true. allowLargeResults must be true if this is set to false.'
+        description: '[Optional] If true and query uses legacy SQL dialect, flattens all nested and repeated fields in the query results. allowLargeResults must be true if this is set to false. For standard SQL queries, this flag is ignored and results are never flattened.'
         type: boolean
       maximumBillingTier:
         default: 1

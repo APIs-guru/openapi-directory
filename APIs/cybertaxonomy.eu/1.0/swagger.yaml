@@ -18,7 +18,10 @@ info:
   x-logo:
     url: 'http://cybertaxonomy.eu/sites/all/themes/summertime_cdm/images/cdm-platform-header_2.jpg'
   x-origin:
-    - format: swagger
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
       url: 'http://cybertaxonomy.eu/eubon-utis/api-docs'
       version: '1.2'
   x-providerName: cybertaxonomy.eu

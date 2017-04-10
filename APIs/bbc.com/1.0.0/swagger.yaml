@@ -24,6 +24,11 @@ info:
   x-logo:
     url: 'https://developer.bbc.co.uk/sites/default/files/Nitro%20On%20White.png'
   x-origin:
+    - contentType: application/json
+      converter:
+        url: 'https://github.com/mermade/bbcparse'
+        version: 1.2.0
+      url: 'http://programmes.api.bbc.com/nitro/api'
     - format: swagger
       url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/nitroApi/swagger.json'
       version: '2.0'
@@ -79,7 +84,7 @@ paths:
       parameters:
         - description: |
             Sorts:
-            * sort chronologically by scheduled start time/date, ascending
+            * scheduled_start: sort chronologically by scheduled start time/date, ascending
           enum:
             - scheduled_start
           in: query
@@ -172,7 +177,7 @@ paths:
       parameters:
         - description: |
             Sorts:
-            * sort chronologically by scheduled start time/date, ascending
+            * start_date: sort chronologically by scheduled start time/date, ascending
           enum:
             - start_date
           in: query
@@ -190,7 +195,7 @@ paths:
         - collectionFormat: multi
           description: |
             Mixins:
-            * return ancestor programme titles
+            * titles: return ancestor programme titles
           enum:
             - titles
           in: query
@@ -372,7 +377,7 @@ paths:
       parameters:
         - description: |
             Sorts:
-            * sort alphabetically by PID
+            * pid: sort alphabetically by PID
           enum:
             - pid
           in: query
@@ -389,10 +394,10 @@ paths:
         - collectionFormat: multi
           description: |
             Mixins:
-            * mixin to return the alternate images for a group
-            * mixin to return links to programme entities that group belongs to
-            * mixin to add image information for a group
-            * mixin to return related links for the group
+            * alternate_images: mixin to return the alternate images for a group
+            * group_for: mixin to return links to programme entities that group belongs to
+            * images: mixin to add image information for a group
+            * related_links: mixin to return related links for the group
           enum:
             - alternate_images
             - group_for
@@ -473,6 +478,7 @@ paths:
           description: filter for groups by partner PID
           in: query
           items:
+            default: s0000001
             minLength: 8
             pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
             type: string
@@ -522,8 +528,8 @@ paths:
       parameters:
         - description: |
             Sorts:
-            * sort numerically by position, ascending only
-            * sort alphabetically by PID
+            * group_position: sort numerically by position, ascending only
+            * pid: sort alphabetically by PID
           enum:
             - group_position
             - pid
@@ -602,6 +608,7 @@ paths:
           description: filter for images by partner PID
           in: query
           items:
+            default: s0000001
             minLength: 8
             pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
             type: string
@@ -651,7 +658,7 @@ paths:
       parameters:
         - description: |
             Sorts:
-            * sort by pid, descending
+            * pid: sort by pid, descending
           enum:
             - pid
           in: query
@@ -668,9 +675,9 @@ paths:
         - collectionFormat: multi
           description: |
             Mixins:
-            * mixin to return information about contributors to items
-            * mixin to add image information for an item
-            * mixin to return programme segment events, works in conjunction with programme or segment_event filters
+            * contributions: mixin to return information about contributors to items
+            * images: mixin to add image information for an item
+            * play_event: mixin to return programme segment events, works in conjunction with programme or segment_event filters
           enum:
             - contributions
             - images
@@ -741,6 +748,7 @@ paths:
           description: filter for items by partner PID
           in: query
           items:
+            default: s0000001
             minLength: 8
             pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
             type: string
@@ -798,7 +806,7 @@ paths:
       parameters:
         - description: |
             Sorts:
-            * sort by mid, ascending
+            * mid: sort by mid, ascending
           enum:
             - mid
           in: query
@@ -815,7 +823,7 @@ paths:
         - collectionFormat: multi
           description: |
             Mixins:
-            * mixin to add image information for a masterbrand
+            * images: mixin to add image information for a masterbrand
           enum:
             - images
           in: query
@@ -860,6 +868,7 @@ paths:
           description: filter for masterbrands by partner PID
           in: query
           items:
+            default: s0000001
             minLength: 8
             pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
             type: string
@@ -945,6 +954,7 @@ paths:
           description: filter for people by partner PID
           in: query
           items:
+            default: s0000001
             minLength: 8
             pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
             type: string
@@ -1071,16 +1081,16 @@ paths:
       parameters:
         - description: |
             Sorts:
-            * sort numerically by position in group, ascending
-            * sort alphabetically by PID, descending
-            * sort numerically by position, ascending
-            * sort by promotion rank, ascending
-            * sort chronologically by release date, descending
-            * sort by weighting of search term (use with q parameter)
-            * sort chronologically by scheduled start time/date, ascending
-            * sort alphabetically by title, ascending
-            * sort by title librarian style (ignoring leading 'The', 'A', etc), ascending
-            * sort by root pid and then preorder tree sort. Requires entities to have release date.
+            * group_position: sort numerically by position in group, ascending
+            * pid: sort alphabetically by PID, descending
+            * position: sort numerically by position, ascending
+            * promotion: sort by promotion rank, ascending
+            * release_date: sort chronologically by release date, descending
+            * relevance: sort by weighting of search term (use with q parameter)
+            * scheduled_start: sort chronologically by scheduled start time/date, ascending
+            * strict_title: sort alphabetically by title, ascending
+            * title: sort by title librarian style (ignoring leading 'The', 'A', etc), ascending
+            * tree: sort by root pid and then preorder tree sort. Requires entities to have release date.
           enum:
             - group_position
             - pid
@@ -1107,19 +1117,19 @@ paths:
         - collectionFormat: multi
           description: |
             Mixins:
-            * mixin to return the alternate images for a programme
-            * mixin to return ancestor programme titles
-            * mixin to return programme availability information
-            * mixin to return information about programmes that are currently available as simulcasts
-            * mixin to return information about programmes that are currently available on demand
-            * mixin to return information about programmes that are currently available as webcasts
-            * mixin to return information about contributors to a programme
-            * mixin to return original version duration in programme concept entities
-            * mixin to return list of genre groupings
-            * mixin to add image information for a programme
-            * mixin to add embeddable information for a programme
-            * mixin to return the programmes which appear before and after a programme (as determined by the sort applied in the request)
-            * mixin to return information about related links to a programme
+            * alternate_images: mixin to return the alternate images for a programme
+            * ancestor_titles: mixin to return ancestor programme titles
+            * availability: mixin to return programme availability information
+            * available_simulcasts: mixin to return information about programmes that are currently available as simulcasts
+            * available_versions: mixin to return information about programmes that are currently available on demand
+            * available_webcasts: mixin to return information about programmes that are currently available as webcasts
+            * contributions: mixin to return information about contributors to a programme
+            * duration: mixin to return original version duration in programme concept entities
+            * genre_groupings: mixin to return list of genre groupings
+            * images: mixin to add image information for a programme
+            * is_embeddable: mixin to add embeddable information for a programme
+            * previous_next: mixin to return the programmes which appear before and after a programme (as determined by the sort applied in the request)
+            * related_links: mixin to return information about related links to a programme
           enum:
             - alternate_images
             - ancestor_titles
@@ -1346,6 +1356,7 @@ paths:
           description: filter for programmes by partner PID
           in: query
           items:
+            default: s0000001
             minLength: 8
             pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
             type: string
@@ -1463,7 +1474,7 @@ paths:
         - collectionFormat: multi
           description: |
             Mixins:
-            * mixin to return information about related links to a promotion
+            * related_links: mixin to return information about related links to a promotion
           enum:
             - related_links
           in: query
@@ -1507,6 +1518,7 @@ paths:
           description: filter for promotions by partner PID
           in: query
           items:
+            default: s0000001
             minLength: 8
             pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
             type: string
@@ -1573,7 +1585,7 @@ paths:
       parameters:
         - description: |
             Sorts:
-            * sort chronologically by scheduled start time/date, ascending
+            * start_date: sort chronologically by scheduled start time/date, ascending
           enum:
             - start_date
           in: query
@@ -1591,8 +1603,8 @@ paths:
         - collectionFormat: multi
           description: |
             Mixins:
-            * return ancestor programme titles
-            * mixin to add image information for broadcasts and webcasts
+            * ancestor_titles: return ancestor programme titles
+            * images: mixin to add image information for broadcasts and webcasts
           enum:
             - ancestor_titles
             - images
@@ -1709,6 +1721,7 @@ paths:
           description: filter for broadcasts and webcasts by partner PID
           in: query
           items:
+            default: s0000001
             minLength: 8
             pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
             type: string
@@ -1876,6 +1889,7 @@ paths:
           description: filter for services by partner PID
           in: query
           items:
+            default: s0000001
             minLength: 8
             pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
             type: string
@@ -2152,6 +2166,7 @@ paths:
           description: filter for versions by partner PID
           in: query
           items:
+            default: s0000001
             minLength: 8
             pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
             type: string

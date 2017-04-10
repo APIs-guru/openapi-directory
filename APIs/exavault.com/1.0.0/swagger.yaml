@@ -16,7 +16,10 @@ info:
     backgroundColor: '#222222'
     url: 'https://www.exavault.com/common/images/110xNxlogo220x40.png.pagespeed.ic.N1chK3UTV9.png'
   x-origin:
-    - format: swagger
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
       url: 'https://www.exavault.com/api/docs'
       version: '1.2'
   x-providerName: exavault.com

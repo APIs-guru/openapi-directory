@@ -17,7 +17,10 @@ info:
   x-logo:
     url: 'https://www.gstatic.com/images/icons/material/product/2x/drive_32dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'
       version: v1
   x-preferred: true
@@ -1778,6 +1781,21 @@ definitions:
             format: int64
             type: string
         type: object
+      teamDriveThemes:
+        description: A list of themes that are supported for Team Drives.
+        items:
+          properties:
+            backgroundImageLink:
+              description: A link to this Team Drive theme's background image.
+              type: string
+            colorRgb:
+              description: The color of this Team Drive theme as an RGB hex string.
+              type: string
+            id:
+              description: The ID of the theme.
+              type: string
+          type: object
+        type: array
       user:
         $ref: '#/definitions/User'
         description: The authenticated user.
@@ -1949,55 +1967,55 @@ definitions:
           Entries with null values are cleared in update and copy requests.
         type: object
       capabilities:
-        description: Capabilities the current user has on the file. Each capability corresponds to a fine-grained action that a user may take.
+        description: Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
         properties:
           canAddChildren:
-            description: Whether the user can add children to this folder. This is always false when the item is not a folder.
+            description: Whether the current user can add children to this folder. This is always false when the item is not a folder.
             type: boolean
           canComment:
-            description: Whether the user can comment on the file.
+            description: Whether the current user can comment on this file.
             type: boolean
           canCopy:
-            description: 'Whether the user can copy the file. For a Team Drive item, whether non-folder descendants of this item, or this item itself if it is not a folder, can be copied.'
+            description: 'Whether the current user can copy this file. For a Team Drive item, whether the current user can copy non-folder descendants of this item, or this item itself if it is not a folder.'
             type: boolean
           canDelete:
-            description: Whether the file can be deleted by the user.
+            description: Whether the current user can delete this file.
             type: boolean
           canDownload:
-            description: Whether the file can be downloaded by the user.
+            description: Whether the current user can download this file.
             type: boolean
           canEdit:
-            description: Whether the user can edit the file's content.
+            description: Whether the current user can edit this file.
             type: boolean
           canListChildren:
-            description: Whether the user can list the children of this folder. This is always false when the item is not a folder.
+            description: Whether the current user can list the children of this folder. This is always false when the item is not a folder.
             type: boolean
           canMoveItemIntoTeamDrive:
             description: 'Whether the current user can move this item into a Team Drive. If the item is in a Team Drive, this field is equivalent to canMoveTeamDriveItem.'
             type: boolean
           canMoveTeamDriveItem:
-            description: Whether the user can move this Team Drive item by changing its parent. Note that a request to change the parent for this item may still fail depending on the new parent that is being added. Only populated for Team Drive files.
+            description: Whether the current user can move this Team Drive item by changing its parent. Note that a request to change the parent for this item may still fail depending on the new parent that is being added. Only populated for Team Drive files.
             type: boolean
           canReadRevisions:
-            description: 'Whether the user has read access to the Revisions resource of the file. For a Team Drive item, whether revisions of non-folder descendants of this item, or this item itself if it is not a folder, can be read.'
+            description: 'Whether the current user can read the revisions resource of this file. For a Team Drive item, whether revisions of non-folder descendants of this item, or this item itself if it is not a folder, can be read.'
             type: boolean
           canReadTeamDrive:
-            description: Whether the user has read access to the Team Drive to which this file belongs. Only populated for Team Drive files.
+            description: Whether the current user can read the Team Drive to which this file belongs. Only populated for Team Drive files.
             type: boolean
           canRemoveChildren:
-            description: Whether the user can remove children from this folder. This is always false when the item is not a folder.
+            description: Whether the current user can remove children from this folder. This is always false when the item is not a folder.
             type: boolean
           canRename:
-            description: Whether the file can be renamed by the user.
+            description: Whether the current user can rename this file.
             type: boolean
           canShare:
-            description: Whether the user can modify the file's permissions and sharing settings.
+            description: Whether the current user can modify the sharing settings for this file.
             type: boolean
           canTrash:
-            description: Whether the file can be trashed by the user.
+            description: Whether the current user can move this file to trash.
             type: boolean
           canUntrash:
-            description: Whether the file can be restored from the trash by the current user.
+            description: Whether the current user can restore this file from trash.
             type: boolean
         type: object
       contentHints:
@@ -2338,6 +2356,9 @@ definitions:
       allowFileDiscovery:
         description: Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type domain or anyone.
         type: boolean
+      deleted:
+        description: Whether the account of the permission has been deleted. This field only pertains to user and group permissions.
+        type: boolean
       displayName:
         description: 'A displayable name for users, groups or domains.'
         type: string
@@ -2375,7 +2396,7 @@ definitions:
           - reader
         type: string
       teamDrivePermissionDetails:
-        description: Details of whether the Permissions on this Team Drive item are inherited or directly on this item. This is an output-only field which is present only for Team Drive items.
+        description: Details of whether the permissions on this Team Drive item are inherited or directly on this item. This is an output-only field which is present only for Team Drive items.
         items:
           properties:
             inherited:
@@ -2553,26 +2574,51 @@ definitions:
   TeamDrive:
     description: Representation of a Team Drive.
     properties:
+      backgroundImageFile:
+        description: 'An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field that can only be set on a drive.teamdrives.update request that does not set themeId. When specified, all fields of the backgroundImageFile must be set.'
+        properties:
+          id:
+            description: The ID of an image file in Drive to use for the background image.
+            type: string
+          width:
+            description: 'The width of the cropped image in the closed range of 0 to 1, which is the width of the cropped image divided by the width of the entire image. The height is computed by applying a width to height aspect ratio of 80 to 9. The resulting image must be at least 1280 pixels wide and 144 pixels high.'
+            format: float
+            type: number
+          xCoordinate:
+            description: The X coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1 which is the horizontal distance from the left side of the entire image to the left side of the cropping area divided by the width of the entire image.
+            format: float
+            type: number
+          yCoordinate:
+            description: The Y coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1 which is the vertical distance from the top side of the entire image to the top side of the cropping area divided by the height of the entire image.
+            format: float
+            type: number
+        type: object
+      backgroundImageLink:
+        description: A short-lived link to this Team Drive's background image.
+        type: string
       capabilities:
         description: Capabilities the current user has on this Team Drive.
         properties:
           canAddChildren:
             description: Whether the current user can add children to folders in this Team Drive.
             type: boolean
+          canChangeTeamDriveBackground:
+            description: Whether the current user can change the background of this Team Drive.
+            type: boolean
           canComment:
             description: Whether the current user can comment on files in this Team Drive.
             type: boolean
           canCopy:
-            description: Whether files in this Team Drive can be copied by the current user.
+            description: Whether the current user can copy files in this Team Drive.
             type: boolean
           canDeleteTeamDrive:
-            description: Whether this Team Drive can be deleted by the current user.
+            description: Whether the current user can delete this Team Drive. Attempting to delete the Team Drive may still fail if there are untrashed items inside the Team Drive.
             type: boolean
           canDownload:
-            description: Whether files in this Team Drive can be downloaded by the current user.
+            description: Whether the current user can download files in this Team Drive.
             type: boolean
           canEdit:
-            description: Whether files in this Team Drive can be edited by the current user.
+            description: Whether the current user can edit files in this Team Drive
             type: boolean
           canListChildren:
             description: Whether the current user can list the children of folders in this Team Drive.
@@ -2581,21 +2627,24 @@ definitions:
             description: Whether the current user can add members to this Team Drive or remove them or change their role.
             type: boolean
           canReadRevisions:
-            description: Whether the current user has read access to the Revisions resource of files in this Team Drive.
+            description: Whether the current user can read the revisions resource of files in this Team Drive.
             type: boolean
           canRemoveChildren:
             description: Whether the current user can remove children from folders in this Team Drive.
             type: boolean
           canRename:
-            description: Whether files or folders in this Team Drive can be renamed by the current user.
+            description: Whether the current user can rename files or folders in this Team Drive.
             type: boolean
           canRenameTeamDrive:
-            description: Whether this Team Drive can be renamed by the current user.
+            description: Whether the current user can rename this Team Drive.
             type: boolean
           canShare:
             description: Whether the current user can share files or folders in this Team Drive.
             type: boolean
         type: object
+      colorRgb:
+        description: The color of this Team Drive as an RGB hex string. It can only be set on a drive.teamdrives.update request that does not set themeId.
+        type: string
       id:
         description: The ID of this Team Drive which is also the ID of the top level folder for this Team Drive.
         type: string
@@ -2605,6 +2654,9 @@ definitions:
         type: string
       name:
         description: The name of this Team Drive.
+        type: string
+      themeId:
+        description: 'The ID of the theme from which the background image and color will be set. The set of possible teamDriveThemes can be retrieved from a drive.about.get response. When not specified on a drive.teamdrives.create request, a random theme is chosen from which the background image and color are set. This is a write only field that can only be set on a request that does not set colorRgb or backgroundImageFile.'
         type: string
     type: object
   TeamDriveList:

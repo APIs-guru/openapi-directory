@@ -110,6 +110,13 @@ paths:
       summary: See featured Reverb blog posts
       tags:
         - articles
+  /articles/recently_featured:
+    get:
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - articles
   '/articles/{slug}':
     get:
       description: Display a single article
@@ -537,7 +544,7 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used'
+        - description: 'Condition: all,new,b-stock,used,non-functioning'
           in: query
           items:
             type: string
@@ -888,7 +895,7 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used'
+        - description: 'Condition: all,new,b-stock,used,non-functioning'
           in: query
           items:
             type: string
@@ -2101,12 +2108,13 @@ paths:
                 description: Category slug from /api/categories
                 type: string
               conditions:
-                description: 'Condition: all,new,b-stock,used'
+                description: 'Condition: all,new,b-stock,used,non-functioning'
                 enum:
                   - all
                   - new
                   - b-stock
                   - used
+                  - non-functioning
                 items:
                   type: string
                 type: array
@@ -2322,7 +2330,7 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used'
+        - description: 'Condition: all,new,b-stock,used,non-functioning'
           in: query
           items:
             type: string
@@ -2492,7 +2500,7 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used'
+        - description: 'Condition: all,new,b-stock,used,non-functioning'
           in: query
           items:
             type: string

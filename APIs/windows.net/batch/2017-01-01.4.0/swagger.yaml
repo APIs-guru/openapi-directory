@@ -278,6 +278,30 @@ paths:
       summary: Lists all of the certificates that have been added to the specified account.
       tags:
         - Certificates
+      x-ms-examples:
+        Certificate list:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                value:
+                  - deleteCertificateError:
+                      code: PoolsReferencingCertificate
+                      message: The specified certificate is being used by the below mentioned pool(s)
+                      values:
+                        - name: Pools
+                          value: mypool1
+                    previousState: deleting
+                    previousStateTransitionTime: '2014-07-31T21:11:58.236Z'
+                    publicData: '#####...'
+                    state: deleteFailed
+                    stateTransitionTime: '2014-07-31T21:12:58.236Z'
+                    thumbprint: 0123456789abcdef0123456789abcdef01234567
+                    thumbprintAlgorithm: sha1
+                    url: 'https://account.region.batch.azure.com/certificates(thumbprintAlgorithm=sha1,thumbprint=0123456789abcdef0123456789abcdef01234567)'
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id
@@ -286,7 +310,7 @@ paths:
       parameters:
         - description: The certificate to be added.
           in: body
-          name: Certificate
+          name: certificate
           required: true
           schema:
             $ref: '#/definitions/CertificateAddParameter'
@@ -354,6 +378,21 @@ paths:
       summary: Adds a certificate to the specified account.
       tags:
         - Certificates
+      x-ms-examples:
+        Certificate add:
+          parameters:
+            api-version: 2017-01-01.4.0
+            certificate:
+              certificateFormat: pfx
+              data: '#####...'
+              password: certpassword
+              thumbprint: 0123456789abcdef0123456789abcdef01234567
+              thumbprintAlgorithm: sha1
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '201':
+              body: ''
       x-ms-request-id: request-id
   '/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})':
     delete:
@@ -431,6 +470,17 @@ paths:
       summary: Deletes a certificate from the specified account.
       tags:
         - Certificates
+      x-ms-examples:
+        Certificate delete:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            thumbprint: 0123456789abcdef0123456789abcdef01234567
+            thumbprintAlgorithm: sha1
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
     get:
       description: Gets information about the specified certificate.
@@ -515,6 +565,31 @@ paths:
             $ref: '#/definitions/BatchError'
       tags:
         - Certificates
+      x-ms-examples:
+        Certificate get:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            thumbprint: 0123456789abcdef0123456789abcdef01234567
+            thumbprintAlgorithm: sha1
+          responses:
+            '200':
+              body:
+                deleteCertificateError:
+                  code: PoolsReferencingCertificate
+                  message: The specified certificate is being used by the below mentioned pool(s)
+                  values:
+                    - name: Pools
+                      value: mypool1
+                previousState: deleting
+                previousStateTransitionTime: '2014-07-31T21:11:58.236Z'
+                publicData: '#####...'
+                state: deleteFailed
+                stateTransitionTime: '2014-07-31T21:12:58.236Z'
+                thumbprint: 0123456789abcdef0123456789abcdef01234567
+                thumbprintAlgorithm: sha1
+                url: 'https://account.region.batch.azure.com/certificates(thumbprintAlgorithm=sha1,thumbprint=0123456789abcdef0123456789abcdef01234567)'
       x-ms-request-id: request-id
   '/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete':
     post:
@@ -595,6 +670,17 @@ paths:
       summary: Cancels a failed deletion of a certificate from the specified account.
       tags:
         - Certificates
+      x-ms-examples:
+        Certificate cancel delete:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            thumbprint: 0123456789abcdef0123456789abcdef01234567
+            thumbprintAlgorithm: sha1
+          responses:
+            '204':
+              body: ''
       x-ms-request-id: request-id
   /jobs:
     get:
@@ -696,6 +782,37 @@ paths:
       summary: Lists all of the jobs in the specified account.
       tags:
         - Jobs
+      x-ms-examples:
+        Job list:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                value:
+                  - constraints:
+                      maxTaskRetryCount: 0
+                      maxWallClockTime: P10675199DT2H48M5.4775807S
+                    creationTime: '2016-11-19T00:05:25.311915Z'
+                    eTag: '0x8D4100FC46D5BF4'
+                    executionInfo:
+                      poolId: poolId
+                      startTime: '2016-11-19T00:05:25.3309105Z'
+                    id: jobId
+                    lastModified: '2016-11-19T00:05:27.2137716Z'
+                    onAllTasksComplete: noAction
+                    onTaskFailure: noAction
+                    poolInfo:
+                      poolId: poolId
+                    previousState: disabled
+                    previousStateTransitionTime: '2016-11-19T00:05:26.88777Z'
+                    priority: 0
+                    state: active
+                    stateTransitionTime: '2016-11-19T00:05:27.2137716Z'
+                    url: 'https://account.region.batch.azure.com/jobs/jobId'
+                    usesTaskDependencies: false
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id
@@ -705,7 +822,7 @@ paths:
       parameters:
         - description: The job to be added.
           in: body
-          name: Job
+          name: job
           required: true
           schema:
             $ref: '#/definitions/JobAddParameter'
@@ -773,6 +890,98 @@ paths:
       summary: Adds a job to the specified account.
       tags:
         - Jobs
+      x-ms-examples:
+        Add a basic job:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            job:
+              id: jobId
+              poolInfo:
+                poolId: poolId
+              priority: 0
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '201':
+              body: ''
+        Add a complex job:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            job:
+              constraints:
+                maxTaskRetryCount: -1
+                maxWallClockTime: PT1H
+              id: jobId
+              jobManagerTask:
+                commandLine: myprogram.exe
+                constraints:
+                  maxTaskRetryCount: 0
+                  maxWallClockTime: PT1H
+                  retentionTime: PT1H
+                environmentSettings:
+                  - name: myvariable
+                    value: myvalue
+                id: taskId
+                killJobOnCompletion: false
+                resourceFiles:
+                  - blobSource: 'http://mystorage1.blob.core.windows.net/scripts/myprogram.exe?st=2013-08-09T08%3a49%3a37.0000000Z&se=2013-08-10T08%3a49%3a37.0000000Z&sr=c&sp=d&si=YWJjZGTVMZw%3d%3d&sig=%2bSzBm0wi8xECuGkKw97wnkSZ%2f62sxU%2b6Hq6a7qojIVE%3d'
+                    filePath: myprogram.exe
+                  - blobSource: 'http://mystorage1.blob.core.windows.net/scripts/test.txt?st=2013-08-09T08%3a49%3a37.0000000Z&se=2013-08-10T08%3a49%3a37.0000000Z&sr=c&sp=d&si=YWJjZGTVMZw%3d%3d&sig=%2bSzBm0wi8xECuGkKw97wnkSZ%2f62sxU%2b6Hq6a7qojIVE%3d'
+                    filePath: test.txt
+                runExclusive: true
+                userIdentity:
+                  autoUser:
+                    elevationLevel: admin
+                    scope: task
+              metadata:
+                - name: myproperty
+                  value: myvalue
+              poolInfo:
+                autoPoolSpecification:
+                  autoPoolIdPrefix: mypool
+                  pool:
+                    certificateReferences:
+                      - storeLocation: localMachine
+                        storeName: Root
+                        thumbprint: 0123456789abcdef0123456789abcdef01234567
+                        thumbprintAlgorithm: sha1
+                        visibility:
+                          - task
+                    cloudServiceConfiguration:
+                      osFamily: '4'
+                      targetOSVersion: '*'
+                    enableAutoScale: false
+                    enableInterNodeCommunication: true
+                    maxTasksPerNode: 2
+                    metadata:
+                      - name: myproperty
+                        value: myvalue
+                    resizeTimeout: PT15M
+                    startTask:
+                      commandLine: myprogram2.exe
+                      environmentSettings:
+                        - name: myvariable
+                          value: myvalue
+                      maxTaskRetryCount: 2
+                      resourceFiles:
+                        - blobSource: 'http://mystorage1.blob.core.windows.net/scripts/myprogram2.exe?st=2013-08-09T08%3a49%3a37.0000000Z&se=2013-08-10T08%3a49%3a37.0000000Z&sr=c&sp=d&si=YWJjZGTVMZw%3d%3d&sig= %2bSzBm0wi8xECuGkKw97wnkSZ%2f62sxU%2b6Hq6a7qojIVE%3d'
+                          filePath: myprogram2.exe
+                      userIdentity:
+                        autoUser:
+                          elevationLevel: admin
+                          scope: task
+                      waitForSuccess: true
+                    targetDedicated: 3
+                    taskSchedulingPolicy:
+                      nodeFillType: spread
+                    vmSize: small
+                  poolLifetimeOption: job
+              priority: 100
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '201':
+              body: ''
       x-ms-request-id: request-id
   '/jobs/{jobId}':
     delete:
@@ -982,6 +1191,39 @@ paths:
       summary: Gets information about the specified job.
       tags:
         - Jobs
+      x-ms-examples:
+        Job get:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                constraints:
+                  maxTaskRetryCount: 0
+                  maxWallClockTime: P10675199DT2H48M5.4775807S
+                creationTime: '2016-11-19T00:05:25.311915Z'
+                eTag: '0x8D4100FC49F0278'
+                executionInfo:
+                  endTime: '2016-11-19T00:05:27.578581Z'
+                  poolId: poolId
+                  startTime: '2016-11-19T00:05:25.3309105Z'
+                  terminateReason: UserTerminate
+                id: jobId
+                lastModified: '2016-11-19T00:05:27.5391608Z'
+                onAllTasksComplete: noAction
+                onTaskFailure: noAction
+                poolInfo:
+                  poolId: poolId
+                previousState: active
+                previousStateTransitionTime: '2016-11-19T00:05:27.2137716Z'
+                priority: 0
+                state: completed
+                stateTransitionTime: '2016-11-19T00:05:27.578581Z'
+                url: 'https://account.region.batch.azure.com/jobs/jobId'
+                usesTaskDependencies: false
       x-ms-request-id: request-id
     patch:
       description: 'This replaces only the job properties specified in the request. For example, if the job has constraints, and a request does not specify the constraints element, then the job keeps the existing constraints.'
@@ -1092,6 +1334,23 @@ paths:
       summary: Updates the properties of the specified job.
       tags:
         - Jobs
+      x-ms-examples:
+        Job patch:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            jobPatchParameter:
+              constraints:
+                maxTaskRetryCount: -1
+                maxWallClockTime: PT1H
+              poolInfo:
+                poolId: poolId
+              priority: 100
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
     put:
       description: 'This fully replaces all the updateable properties of the job. For example, if the job has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.'
@@ -1202,6 +1461,23 @@ paths:
       summary: Updates the properties of the specified job.
       tags:
         - Jobs
+      x-ms-examples:
+        Job update:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            jobUpdateParameter:
+              constraints:
+                maxTaskRetryCount: -1
+                maxWallClockTime: PT1H
+              poolInfo:
+                poolId: poolId
+              priority: 100
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
   '/jobs/{jobId}/addtaskcollection':
     post:
@@ -1273,6 +1549,79 @@ paths:
       summary: Adds a collection of tasks to the specified job.
       tags:
         - Tasks
+      x-ms-examples:
+        Add a basic collection of tasks:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            taskCollection:
+              value:
+                - commandLine: cmd /c dir /s
+                  id: simple1
+                - commandLine: cmd /c dir /s
+                  id: simple2
+          responses:
+            '200':
+              body:
+                value:
+                  - eTag: '0x8D3D623CD661246'
+                    lastModified: '2016-09-06T07:02:44.7589958Z'
+                    location: 'https://account.region.batch.azure.com/jobs/jobId/tasks/simple1'
+                    status: success
+                    taskId: simple1
+                  - eTag: '0x8D3D623CD7072CC'
+                    lastModified: '2016-09-06T07:02:44.8270028Z'
+                    location: 'https://account.region.batch.azure.com/jobs/jobId/tasks/simple2'
+                    status: success
+                    taskId: simple2
+        Add a complex collection of tasks:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            taskCollection:
+              value:
+                - affinityInfo:
+                    affinityId: affinityId
+                  commandLine: cmd /c dir /s
+                  constraints:
+                    maxTaskRetryCount: 5
+                    maxWallClockTime: P1D
+                    retentionTime: P2D
+                  environmentSettings:
+                    - name: env1
+                      value: value1
+                    - name: env2
+                      value: value2
+                  id: complex1
+                  multiInstanceSettings:
+                    commonResourceFiles:
+                      - blobSource: 'https://common.blob.core.windows.net/'
+                        filePath: common.exe
+                    coordinationCommandLine: cmd /c echo coordinating
+                    numberOfInstances: 3
+                  resourceFiles:
+                    - blobSource: 'https://account.blob.core.windows.net/'
+                      filePath: file1
+                - commandLine: cmd /c dir /s
+                  id: simple3
+          responses:
+            '200':
+              body:
+                value:
+                  - eTag: '0x8D3D623CE295629'
+                    lastModified: '2016-09-06T07:02:46.0386857Z'
+                    location: 'https://account.region.batch.azure.com/jobs/jobId/tasks/simple3'
+                    status: success
+                    taskId: simple3
+                  - eTag: '0x8D3D623CE29A412'
+                    lastModified: '2016-09-06T07:02:46.0406802Z'
+                    location: 'https://account.region.batch.azure.com/jobs/jobId/tasks/complex1'
+                    status: success
+                    taskId: complex1
       x-ms-request-id: request-id
   '/jobs/{jobId}/disable':
     post:
@@ -1384,6 +1733,18 @@ paths:
       summary: 'Disables the specified job, preventing new tasks from running.'
       tags:
         - Jobs
+      x-ms-examples:
+        Job disable:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobDisableParameter:
+              disableTasks: terminate
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
   '/jobs/{jobId}/enable':
     post:
@@ -1489,6 +1850,16 @@ paths:
       summary: 'Enables the specified job, allowing new tasks to run.'
       tags:
         - Jobs
+      x-ms-examples:
+        Job enable:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
   '/jobs/{jobId}/jobpreparationandreleasetaskstatus':
     get:
@@ -1589,6 +1960,36 @@ paths:
       summary: Lists the execution status of the Job Preparation and Job Release task for the specified job across the compute nodes where the job has run.
       tags:
         - Jobs
+      x-ms-examples:
+        Job list preparation and release task status:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                odata.nextLink: 'https://account.region.batch.azure.com/jobs/myjob/jobpreparationandreleasestatus?$skipToken=tvm-2167304207_1-20140905t174658z&api-version=2017-01-01.4.0'
+                value:
+                  - jobPreparationTaskExecutionInfo:
+                      endTime: '2015-05-02T20:12:42Z'
+                      exitCode: 0
+                      retryCount: 0
+                      startTime: '2015-05-01T10:20:31Z'
+                      state: completed
+                      taskRootDirectory: tasks/myjob/job-1/myjobpreptask
+                      taskRootDirectoryUrl: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2167304207_1-20140905t174658z/files/tasks/myjob/job-1/myjobpreptask'
+                    jobReleaseTaskExecutionInfo:
+                      endTime: '2015-05-02T20:12:42Z'
+                      exitCode: 0
+                      startTime: '2015-05-01T10:20:31Z'
+                      state: completed
+                      taskRootDirectory: tasks/myjob/job-1/myjobreleasetask
+                      taskRootDirectoryUrl: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2167304207_1-20140905t174658z/files/tasks/myjob/job-1/myjobreleasetask'
+                    nodeId: tvm-2167304207_1-20140905t174658z
+                    nodeUrl: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2167304207_1-20140905t174658z'
+                    poolId: poolId
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id
@@ -1698,6 +2099,55 @@ paths:
       summary: Lists all of the tasks that are associated with the specified job.
       tags:
         - Tasks
+      x-ms-examples:
+        Task list:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                value:
+                  - commandLine: cmd /c echo task1
+                    constraints:
+                      maxTaskRetryCount: 0
+                      maxWallClockTime: P10675199DT2H48M5.4775807S
+                      retentionTime: P10675199DT2H48M5.4775807S
+                    creationTime: '2016-11-21T22:43:31.4733476Z'
+                    eTag: '0x8D4125FD1A825A4'
+                    executionInfo:
+                      requeueCount: 0
+                      retryCount: 0
+                    id: task1
+                    lastModified: '2016-11-21T22:43:31.4733476Z'
+                    state: active
+                    stateTransitionTime: '2016-11-21T22:43:31.4733476Z'
+                    url: 'https://account.region.batch.azure.com/jobs/jobId/tasks/task1'
+                    userIdentity:
+                      autoUser:
+                        elevationLevel: nonAdmin
+                        scope: task
+                  - commandLine: cmd /c echo task2
+                    constraints:
+                      maxTaskRetryCount: 3
+                      maxWallClockTime: P10675199DT2H48M5.4775807S
+                      retentionTime: P10675199DT2H48M5.4775807S
+                    creationTime: '2016-11-21T22:43:31.6736345Z'
+                    eTag: '0x8D4125FD2153345'
+                    executionInfo:
+                      requeueCount: 0
+                      retryCount: 0
+                    id: task2
+                    lastModified: '2016-11-21T22:43:32.1880389Z'
+                    state: active
+                    stateTransitionTime: '2016-11-21T22:43:31.6736345Z'
+                    url: 'https://account.region.batch.azure.com/jobs/jobId/tasks/task2'
+                    userIdentity:
+                      autoUser:
+                        elevationLevel: nonAdmin
+                        scope: task
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id
@@ -1779,6 +2229,41 @@ paths:
       summary: Adds a task to the specified job.
       tags:
         - Tasks
+      x-ms-examples:
+        Add a basic task:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            task:
+              commandLine: cmd /c echo task1
+              id: task1
+          responses:
+            '201':
+              body: ''
+        Add a task with exit conditions:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            task:
+              commandLine: cmd /c exit 3
+              exitConditions:
+                exitCodeRanges:
+                  - end: 4
+                    exitOptions:
+                      jobAction: terminate
+                    start: 2
+              id: taskId
+              userIdentity:
+                autoUser:
+                  elevationLevel: nonAdmin
+                  scope: task
+          responses:
+            '201':
+              body: ''
       x-ms-request-id: request-id
   '/jobs/{jobId}/tasks/{taskId}':
     delete:
@@ -1877,6 +2362,17 @@ paths:
       summary: Deletes a task from the specified job.
       tags:
         - Tasks
+      x-ms-examples:
+        Task delete:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            taskId: taskId
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
     get:
       description: 'For multi-instance tasks, information such as affinityId, executionInfo and nodeInfo refer to the primary task. Use the list subtasks API to retrieve information about subtasks.'
@@ -2002,6 +2498,39 @@ paths:
       summary: Gets information about the specified task.
       tags:
         - Tasks
+      x-ms-examples:
+        Task get:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            taskId: taskId
+          responses:
+            '200':
+              body:
+                commandLine: cmd /c hostname
+                constraints:
+                  maxTaskRetryCount: 0
+                  maxWallClockTime: P10675199DT2H48M5.4775807S
+                  retentionTime: P10675199DT2H48M5.4775807S
+                creationTime: '2016-09-06T06:59:15.1161429Z'
+                eTag: '0x8D3D62350711C55'
+                executionInfo:
+                  requeueCount: 0
+                  retryCount: 0
+                id: testTask
+                lastModified: '2016-09-06T06:59:15.1161429Z'
+                multiInstanceSettings:
+                  coordinationCommandLine: cmd /c echo coordinating
+                  numberOfInstances: 3
+                state: active
+                stateTransitionTime: '2016-09-06T06:59:15.1161429Z'
+                url: 'https://account.region.batch.azure.com/jobs/jobId/tasks/taskId'
+                userIdentity:
+                  autoUser:
+                    elevationLevel: nonAdmin
+                    scope: task
       x-ms-request-id: request-id
     put:
       description: Updates the properties of the specified task.
@@ -2116,6 +2645,22 @@ paths:
             $ref: '#/definitions/BatchError'
       tags:
         - Tasks
+      x-ms-examples:
+        Task update:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            taskId: taskId
+            taskUpdateParameter:
+              constraints:
+                maxTaskRetryCount: 3
+                maxWallClockTime: PT1H
+                retentionTime: PT1H
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
   '/jobs/{jobId}/tasks/{taskId}/files':
     get:
@@ -2218,6 +2763,35 @@ paths:
       summary: Lists the files in a task's directory on its compute node.
       tags:
         - Files
+      x-ms-examples:
+        File list from task:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            recursive: 'false'
+            taskId: taskId
+          responses:
+            '200':
+              body:
+                value:
+                  - isDirectory: false
+                    name: startup\ProcessEnv.cmd
+                    properties:
+                      contentLength: 1813
+                      contentType: application/octet-stream
+                      creationTime: '2014-09-19T21:56:17.679195Z'
+                      lastModified: '2014-09-19T21:56:17.679195Z'
+                    url: 'https://account.region.batch.azure.com/jobs/jobId/tasks/taskId/files/startup\ProcessEnv.cmd'
+                  - isDirectory: false
+                    name: startup\stderr.txt
+                    properties:
+                      contentLength: 0
+                      contentType: application/octet-stream
+                      creationTime: '2014-09-19T21:56:17.5590855Z'
+                      lastModified: '2014-09-19T21:56:17.5590855Z'
+                    url: 'https://account.region.batch.azure.com/jobs/jobId/tasks/taskId/files/startup\stderr.txt'
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id
@@ -2297,6 +2871,19 @@ paths:
       summary: Deletes the specified task file from the compute node where the task ran.
       tags:
         - Files
+      x-ms-examples:
+        File delete from task:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            filePath: wd\testFile.txt
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            recursive: 'false'
+            taskId: task1
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
     get:
       description: Returns the content of the specified task file.
@@ -2538,6 +3125,23 @@ paths:
             $ref: '#/definitions/BatchError'
       tags:
         - Files
+      x-ms-examples:
+        File get properties from task:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            filePath: wd\testFile.txt
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            taskId: taskId
+          responses:
+            '200':
+              Content-Length: '17'
+              Content-Type: application/octet-stream
+              Last-Modified: 'Fri, 17 Feb 2017 00:00:00 GMT'
+              body: ''
+              ocp-batch-file-isdirectory: 'false'
+              ocp-creation-time: 'Fri, 17 Feb 2017 00:00:00 GMT'
       x-ms-request-id: request-id
   '/jobs/{jobId}/tasks/{taskId}/reactivate':
     post:
@@ -2648,6 +3252,17 @@ paths:
       summary: Reactivates the specified task.
       tags:
         - Tasks
+      x-ms-examples:
+        Task reactivate:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            taskId: taskId
+          responses:
+            '204':
+              body: ''
       x-ms-request-id: request-id
   '/jobs/{jobId}/tasks/{taskId}/subtasksinfo':
     get:
@@ -2734,6 +3349,44 @@ paths:
       summary: Lists all of the subtasks that are associated with the specified multi-instance task.
       tags:
         - Tasks
+      x-ms-examples:
+        Task list subtasks:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            taskId: taskId
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2016-09-06T06:59:20.0242024Z'
+                    exitCode: 0
+                    id: 1
+                    nodeInfo:
+                      affinityId: 'TVM:tvm-2544493925_3-20160905t051718z'
+                      nodeId: tvm-2544493925_3-20160905t051718z
+                      nodeUrl: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2544493925_3-20160905t051718z'
+                      poolId: mpiPool
+                      taskRootDirectory: \workitems\jobId\job-1\taskId\1
+                      taskRootDirectoryUrl: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2544493925_3-20160905t051718z/files//workitems/jobId/job-1/taskId/1'
+                    previousState: running
+                    previousStateTransitionTime: '2016-09-06T06:59:16.3139271Z'
+                    startTime: '2016-09-06T06:59:16.3139271Z'
+                    state: completed
+                    stateTransitionTime: '2016-09-06T06:59:20.0242024Z'
+                  - id: 2
+                    nodeInfo:
+                      affinityId: 'TVM:tvm-2544493925_2-20160905t051718z'
+                      nodeId: tvm-2544493925_2-20160905t051718z
+                      nodeUrl: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2544493925_2-20160905t051718z'
+                      poolId: mpiPool
+                      taskRootDirectory: \workitems\jobId\job-1\taskId\2
+                      taskRootDirectoryUrl: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2544493925_2-20160905t051718z/files//workitems/jobId/job-1/taskId/2'
+                    startTime: '2016-09-06T06:59:16.9702844Z'
+                    state: running
+                    stateTransitionTime: '2016-09-06T06:59:16.9702844Z'
       x-ms-request-id: request-id
   '/jobs/{jobId}/tasks/{taskId}/terminate':
     post:
@@ -2844,6 +3497,17 @@ paths:
       summary: Terminates the specified task.
       tags:
         - Tasks
+      x-ms-examples:
+        Task terminate:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            taskId: taskId
+          responses:
+            '204':
+              body: ''
       x-ms-request-id: request-id
   '/jobs/{jobId}/terminate':
     post:
@@ -2955,6 +3619,18 @@ paths:
       summary: 'Terminates the specified job, marking it as completed.'
       tags:
         - Jobs
+      x-ms-examples:
+        Job terminate:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobId: jobId
+            jobTerminateParameter:
+              terminateReason: User supplied termination reason
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
   /jobschedules:
     get:
@@ -3056,6 +3732,60 @@ paths:
       summary: Lists all of the job schedules in the specified account.
       tags:
         - JobSchedules
+      x-ms-examples:
+        JobSchedule list:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                value:
+                  - creationTime: '2016-11-18T21:52:22.5431125Z'
+                    eTag: '0x8D40FFD2E10996A'
+                    executionInfo:
+                      recentJob:
+                        id: 'jobSchedule1:job-1'
+                        url: 'https://account.region.batch.azure.com/jobs/jobSchedule1:job-1'
+                    id: jobSchedule1
+                    jobSpecification:
+                      constraints:
+                        maxTaskRetryCount: 0
+                        maxWallClockTime: P10675199DT2H48M5.4775807S
+                      onAllTasksComplete: noAction
+                      onTaskFailure: noAction
+                      poolInfo:
+                        poolId: poolId
+                      priority: 0
+                      usesTaskDependencies: false
+                    lastModified: '2016-11-18T21:52:24.0064874Z'
+                    previousState: disabled
+                    previousStateTransitionTime: '2016-11-18T21:52:23.6471782Z'
+                    state: active
+                    stateTransitionTime: '2016-11-18T21:52:24.0064874Z'
+                    url: 'https://account.region.batch.azure.com/jobschedules/jobSchedule1'
+                  - creationTime: '2016-11-18T21:51:05.8184017Z'
+                    eTag: '0x8D40FFCFF760B51'
+                    executionInfo:
+                      nextRunTime: '2020-01-01T12:30:00Z'
+                    id: jobSchedule2
+                    jobSpecification:
+                      constraints:
+                        maxTaskRetryCount: 0
+                        maxWallClockTime: P10675199DT2H48M5.4775807S
+                      onAllTasksComplete: noAction
+                      onTaskFailure: noAction
+                      poolInfo:
+                        poolId: testPool2
+                      priority: 0
+                      usesTaskDependencies: false
+                    lastModified: '2016-11-18T21:51:05.8184017Z'
+                    schedule:
+                      doNotRunUntil: '2020-01-01T12:30:00Z'
+                    state: active
+                    stateTransitionTime: '2016-11-18T21:51:05.8184017Z'
+                    url: 'https://account.region.batch.azure.com/jobschedules/jobSchedule2'
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id
@@ -3073,7 +3803,7 @@ paths:
             postfix: Options
         - description: The job schedule to be added.
           in: body
-          name: CloudJobSchedule
+          name: cloudJobSchedule
           required: true
           schema:
             $ref: '#/definitions/JobScheduleAddParameter'
@@ -3132,6 +3862,106 @@ paths:
       summary: Adds a job schedule to the specified account.
       tags:
         - JobSchedules
+      x-ms-examples:
+        Add a basic JobSchedule:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            cloudJobSchedule:
+              id: jobScheduleId
+              jobSpecification:
+                poolInfo:
+                  poolId: poolId
+              schedule:
+                recurrenceInterval: PT5M
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '201':
+              body: ''
+        Add a complex JobScheduleAdd:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            cloudJobSchedule:
+              id: jobScheduleId
+              jobSpecification:
+                constraints:
+                  maxTaskRetryCount: -1
+                  maxWallClockTime: PT1H
+                jobManagerTask:
+                  commandLine: myprogram.exe
+                  constraints:
+                    maxTaskRetryCount: 0
+                    maxWallClockTime: PT1H
+                    retentionTime: PT1H
+                  environmentSettings:
+                    - name: myvariable
+                      value: myvalue
+                  id: mytask1
+                  killJobOnCompletion: true
+                  resourceFiles:
+                    - blobSource: 'http://mystorage1.blob.core.windows.net/scripts/myprogram.exe?st=2013-08-09T08%3a49%3a37.0000000Z&se=2013-08-10T08%3a49%3a37.0000000Z&sr=c&sp=d&si=YWJjZGTVMZw%3d%3d&sig=%2bSzBm0wi8xECuGkKw97wnkSZ%2f62sxU%2b6Hq6a7qojIVE%3d'
+                      filePath: myprogram.exe
+                    - blobSource: 'http://mystorage1.blob.core.windows.net/scripts/test.txt?st=2013-08-09T08%3a49%3a37.0000000Z&se=2013-08-10T08%3a49%3a37.0000000Z&sr=c&sp=d&si=YWJjZGTVMZw%3d%3d&sig=%2bSzBm0wi8xECuGkKw97wnkSZ%2f62sxU%2b6Hq6a7qojIVE%3d'
+                      filePath: test.txt
+                  runExclusive: true
+                  userIdentity:
+                    autoUser:
+                      elevationLevel: nonAdmin
+                      scope: task
+                poolInfo:
+                  autoPoolSpecification:
+                    autoPoolIdPrefix: mypool
+                    pool:
+                      certificateReferences:
+                        - storeLocation: localMachine
+                          storeName: Root
+                          thumbprint: 0123456789abcdef0123456789abcdef01234567
+                          thumbprintAlgorithm: sha1
+                          visibility:
+                            - task
+                      cloudServiceConfiguration:
+                        osFamily: '4'
+                        targetOSVersion: '*'
+                      enableAutoScale: false
+                      enableInterNodeCommunication: true
+                      maxTasksPerNode: 2
+                      metadata:
+                        - name: myproperty
+                          value: myvalue
+                      resizeTimeout: PT15M
+                      startTask:
+                        commandLine: myprogram2.exe
+                        environmentSettings:
+                          - name: myvariable
+                            value: myvalue
+                        maxTaskRetryCount: 2
+                        resourceFiles:
+                          - blobSource: 'http://mystorage1.blob.core.windows.net/scripts/myprogram2.exe?st=2013-08-09T08%3a49%3a37.0000000Z&se=2013-08-10T08%3a49%3a37.0000000Z&sr=c&sp=d&si=YWJjZGTVMZw%3d%3d&sig= %2bSzBm0wi8xECuGkKw97wnkSZ%2f62sxU%2b6Hq6a7qojIVE%3d'
+                            filePath: myprogram2.exe
+                        userIdentity:
+                          autoUser:
+                            elevationLevel: admin
+                            scope: task
+                        waitForSuccess: true
+                      targetDedicated: 3
+                      taskSchedulingPolicy:
+                        nodeFillType: spread
+                      vmSize: small
+                    poolLifetimeOption: jobSchedule
+                priority: 100
+              metadata:
+                - name: myproperty
+                  value: myvalue
+              schedule:
+                doNotRunAfter: '2014-09-10T06:30:00.000Z'
+                doNotRunUntil: '2014-09-10T02:30:00.000Z'
+                recurrenceInterval: PT5M
+                startWindow: PT1M
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '201':
+              body: ''
       x-ms-request-id: request-id
   '/jobschedules/{jobScheduleId}':
     delete:
@@ -3225,6 +4055,16 @@ paths:
       summary: Deletes a job schedule from the specified account.
       tags:
         - JobSchedules
+      x-ms-examples:
+        JobSchedule delete:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobScheduleId: jobScheduleId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
     get:
       description: Gets information about the specified job schedule.
@@ -3341,6 +4181,40 @@ paths:
             $ref: '#/definitions/BatchError'
       tags:
         - JobSchedules
+      x-ms-examples:
+        JobSchedule get:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobScheduleId: jobScheduleId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                creationTime: '2016-11-18T21:52:22.5431125Z'
+                eTag: '0x8D40FFD2E848323'
+                executionInfo:
+                  endTime: '2016-11-18T21:52:24.8371778Z'
+                  recentJob:
+                    id: 'jobScheduleId:job-1'
+                    url: 'https://account.region.batch.azure.com/jobschedules/jobScheduleId:job-1'
+                id: jobScheduleId
+                jobSpecification:
+                  constraints:
+                    maxTaskRetryCount: 0
+                    maxWallClockTime: P10675199DT2H48M5.4775807S
+                  onAllTasksComplete: noAction
+                  onTaskFailure: noAction
+                  poolInfo:
+                    poolId: testPool
+                  priority: 0
+                  usesTaskDependencies: false
+                lastModified: '2016-11-18T21:52:24.7661347Z'
+                previousState: active
+                previousStateTransitionTime: '2016-11-18T21:52:24.0064874Z'
+                state: completed
+                stateTransitionTime: '2016-11-18T21:52:24.8371778Z'
+                url: 'https://account.region.batch.azure.com/jobschedules/jobScheduleId'
       x-ms-request-id: request-id
     head:
       operationId: JobSchedule_Exists
@@ -3553,6 +4427,27 @@ paths:
       summary: Updates the properties of the specified job schedule.
       tags:
         - JobSchedules
+      x-ms-examples:
+        JobSchedule patch:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobScheduleId: jobScheduleId
+            jobSchedulePatchParameter:
+              jobSpecification:
+                constraints:
+                  maxTaskRetryCount: 0
+                  maxWallClockTime: P10675199DT2H48M5.4775807S
+                poolInfo:
+                  poolId: poolId
+                priority: 0
+                usesTaskDependencies: false
+              schedule:
+                doNotRunUntil: '2025-01-01T12:30:00Z'
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
     put:
       description: 'This fully replaces all the updateable properties of the job schedule. For example, if the schedule property is not specified with this request, then the Batch service will remove the existing schedule. Changes to a job schedule only impact jobs created by the schedule after the update has taken place; currently running jobs are unaffected.'
@@ -3663,6 +4558,27 @@ paths:
       summary: Updates the properties of the specified job schedule.
       tags:
         - JobSchedules
+      x-ms-examples:
+        JobSchedule update:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobScheduleId: jobScheduleId
+            jobScheduleUpdateParameter:
+              jobSpecification:
+                constraints:
+                  maxTaskRetryCount: 0
+                  maxWallClockTime: P10675199DT2H48M5.4775807S
+                poolInfo:
+                  poolId: poolId
+                priority: 0
+                usesTaskDependencies: false
+              schedule:
+                doNotRunUntil: '2025-01-01T12:30:00Z'
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
   '/jobschedules/{jobScheduleId}/disable':
     post:
@@ -3768,6 +4684,16 @@ paths:
       summary: Disables a job schedule.
       tags:
         - JobSchedules
+      x-ms-examples:
+        JobSchedule disable:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobScheduleId: jobScheduleId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '204':
+              body: ''
       x-ms-request-id: request-id
   '/jobschedules/{jobScheduleId}/enable':
     post:
@@ -3872,6 +4798,16 @@ paths:
       summary: Enables a job schedule.
       tags:
         - JobSchedules
+      x-ms-examples:
+        JobSchedule enable:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobScheduleId: jobScheduleId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '204':
+              body: ''
       x-ms-request-id: request-id
   '/jobschedules/{jobScheduleId}/jobs':
     get:
@@ -4084,6 +5020,16 @@ paths:
       summary: Terminates a job schedule.
       tags:
         - JobSchedules
+      x-ms-examples:
+        JobSchedule terminate:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            jobScheduleId: jobScheduleId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
   /lifetimejobstats:
     get:
@@ -4153,6 +5099,29 @@ paths:
       summary: Gets lifetime summary statistics for all of the jobs in the specified account.
       tags:
         - Jobs
+      x-ms-examples:
+        Job get lifetime statistics:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                kernelCPUTime: PT0S
+                lastUpdateTime: '2014-08-04T18:30:00.4345729Z'
+                numFailedTasks: 0
+                numSucceededTasks: 0
+                numTaskRetries: 0
+                readIOGiB: 10
+                readIOps: 0
+                startTime: '2014-08-01T18:30:00.4345729Z'
+                url: 'https://account.region.batch.core.windows.net/lifetimejobstats'
+                userCPUTime: PT0S
+                waitTime: PT0S
+                wallClockTime: PT0S
+                writeIOGiB: 5
+                writeIOps: 0
       x-ms-request-id: request-id
   /lifetimepoolstats:
     get:
@@ -4222,6 +5191,36 @@ paths:
       summary: Gets lifetime summary statistics for all of the pools in the specified account.
       tags:
         - Pools
+      x-ms-examples:
+        Pool get lifetime statistics:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                lastUpdateTime: '2014-08-04T18:30:00.4345729Z'
+                resourceStats:
+                  avgCPUPercentage: 40
+                  avgDiskGiB: 125
+                  avgMemoryGiB: 2
+                  diskReadGiB: 10
+                  diskReadIOps: 0
+                  diskWriteGiB: 1
+                  diskWriteIOps: 0
+                  lastUpdateTime: '2014-08-04T18:30:00.4345729Z'
+                  networkReadGiB: 20
+                  networkWriteGiB: 25
+                  peakDiskGiB: 240
+                  peakMemoryGiB: 4
+                  startTime: '2014-08-01T18:30:00.4345729Z'
+                startTime: '2014-08-01T18:30:00.4345729Z'
+                url: 'https://account.region.batch.core.windows.net/lifetimepoolstats'
+                usageStats:
+                  dedicatedCoreTime: PT0S
+                  lastUpdateTime: '2014-08-04T18:30:00.4345729Z'
+                  startTime: '2014-08-01T18:30:00.4345729Z'
       x-ms-request-id: request-id
   /nodeagentskus:
     get:
@@ -4309,6 +5308,45 @@ paths:
       summary: Lists all node agent SKUs supported by the Azure Batch service.
       tags:
         - Accounts
+      x-ms-examples:
+        Account list node agent skus:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: batch.node.centos 7
+                    osType: linux
+                    verifiedImageReferences:
+                      - offer: CentOS
+                        publisher: OpenLogic
+                        sku: '7.2'
+                        version: latest
+                      - offer: CentOS
+                        publisher: OpenLogic
+                        sku: '7.1'
+                        version: latest
+                  - id: batch.node.debian 8
+                    osType: linux
+                    verifiedImageReferences:
+                      - offer: Debian
+                        publisher: Credativ
+                        sku: '8'
+                        version: latest
+                  - id: batch.node.windows amd64
+                    osType: windows
+                    verifiedImageReferences:
+                      - offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2012-R2-Datacenter
+                        version: latest
+                      - offer: WindowsServer
+                        publisher: MicrosoftWindowsServer
+                        sku: 2012-Datacenter
+                        version: latest
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id
@@ -4412,6 +5450,46 @@ paths:
       summary: Lists all of the pools in the specified account.
       tags:
         - Pools
+      x-ms-examples:
+        Pool list:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                value:
+                  - allocationState: steady
+                    allocationStateTransitionTime: '2016-11-21T18:27:40.287803Z'
+                    cloudServiceConfiguration:
+                      currentOSVersion: '*'
+                      osFamily: '4'
+                      targetOSVersion: '*'
+                    creationTime: '2016-11-21T18:26:39.7108787Z'
+                    currentDedicated: 3
+                    eTag: '0x8D4123BEF87D233'
+                    enableAutoScale: false
+                    enableInterNodeCommunication: false
+                    id: testPool
+                    lastModified: '2016-11-21T18:26:39.7108787Z'
+                    maxTasksPerNode: 1
+                    resizeTimeout: PT15M
+                    startTask:
+                      commandLine: cmd /c echo hello
+                      maxTaskRetryCount: 0
+                      userIdentity:
+                        autoUser:
+                          elevationLevel: nonAdmin
+                          scope: task
+                      waitForSuccess: false
+                    state: active
+                    stateTransitionTime: '2016-11-21T18:26:39.7108787Z'
+                    targetDedicated: 3
+                    taskSchedulingPolicy:
+                      nodeFillType: spread
+                    url: 'https://accountname.region.batch.azure.com/pools/testPool'
+                    vmSize: small
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id
@@ -4421,7 +5499,7 @@ paths:
       parameters:
         - description: The pool to be added.
           in: body
-          name: Pool
+          name: pool
           required: true
           schema:
             $ref: '#/definitions/PoolAddParameter'
@@ -4489,6 +5567,61 @@ paths:
       summary: Adds a pool to the specified account.
       tags:
         - Pools
+      x-ms-examples:
+        Add a CloudServiceConfiguration pool:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            pool:
+              cloudServiceConfiguration:
+                osFamily: '4'
+              enableAutoScale: false
+              enableInterNodeCommunication: true
+              id: poolId
+              maxTasksPerNode: 3
+              metadata:
+                - name: myproperty
+                  value: myvalue
+              resizeTimeout: PT15M
+              targetDedicated: 5
+              taskSchedulingPolicy:
+                nodeFillType: spread
+              vmSize: small
+          responses:
+            '201':
+              ETag: '0x8D45765A6A2DC04'
+              Last-Modified: 'Fri, 17 Feb 2017 00:00:00 GMT'
+              request-id: 00000000-0000-0000-0000-000000000000
+        Add a VirtualMachineConfiguration pool:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            pool:
+              enableAutoScale: false
+              enableInterNodeCommunication: true
+              id: pool2
+              maxTasksPerNode: 3
+              metadata:
+                - name: myproperty
+                  value: myvalue
+              resizeTimeout: PT15M
+              targetDedicated: 5
+              taskSchedulingPolicy:
+                nodeFillType: spread
+              virtualMachineConfiguration:
+                imageReference:
+                  offer: UbuntuServer
+                  publisher: Canonical
+                  sku: 16.04.0-LTS
+                nodeAgentSKUId: batch.node.ubuntu 16.04
+              vmSize: standard_a1
+          responses:
+            '201':
+              ETag: '0x8D45765A6A2DC04'
+              Last-Modified: 'Fri, 17 Feb 2017 00:00:00 GMT'
+              request-id: 00000000-0000-0000-0000-000000000000
       x-ms-request-id: request-id
   '/pools/{poolId}':
     delete:
@@ -4582,6 +5715,16 @@ paths:
       summary: Deletes a pool from the specified account.
       tags:
         - Pools
+      x-ms-examples:
+        Pool delete:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
     get:
       description: Gets information about the specified pool.
@@ -4698,6 +5841,49 @@ paths:
             $ref: '#/definitions/BatchError'
       tags:
         - Pools
+      x-ms-examples:
+        Pool get:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: pool
+          responses:
+            '200':
+              body:
+                allocationState: steady
+                allocationStateTransitionTime: '2016-11-22T18:55:24.8154041Z'
+                creationTime: '2016-11-22T18:55:24.2632496Z'
+                currentDedicated: 0
+                eTag: '0x8D413091E739A56'
+                enableAutoScale: false
+                enableInterNodeCommunication: false
+                id: pool
+                lastModified: '2016-11-22T18:55:25.2608598Z'
+                maxTasksPerNode: 1
+                resizeTimeout: PT15M
+                startTask:
+                  commandLine: /bin/bash -c 'echo start task'
+                  maxTaskRetryCount: 0
+                  userIdentity:
+                    autoUser:
+                      elevationLevel: nonAdmin
+                      scope: task
+                  waitForSuccess: false
+                state: active
+                stateTransitionTime: '2016-11-22T18:55:24.2632496Z'
+                targetDedicated: 0
+                taskSchedulingPolicy:
+                  nodeFillType: spread
+                url: 'https://account.region.batch.azure.com/pools/pool'
+                virtualMachineConfiguration:
+                  imageReference:
+                    offer: UbuntuServer
+                    publisher: Canonical
+                    sku: 16.04.0-LTS
+                    version: latest
+                  nodeAgentSKUId: batch.node.ubuntu 16.04
+                vmSize: standard_a1
       x-ms-request-id: request-id
     head:
       description: Gets basic properties of a pool.
@@ -5095,6 +6281,19 @@ paths:
       summary: Enables automatic scaling for a pool.
       tags:
         - Pools
+      x-ms-examples:
+        Pool enable autoscale:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolEnableAutoScaleParameter:
+              autoScaleEvaluationInterval: PT8M
+              autoScaleFormula: $TargetDedicated=0
+            poolId: poolId
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/evaluateautoscale':
     post:
@@ -5178,6 +6377,20 @@ paths:
       summary: Gets the result of evaluating an automatic scaling formula on the pool.
       tags:
         - Pools
+      x-ms-examples:
+        Pool evaluate autoscale:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolEvaluateAutoScaleParameter:
+              autoScaleFormula: $TargetDedicated=1
+            poolId: poolId
+          responses:
+            '200':
+              body:
+                results: $TargetDedicated=1;$NodeDeallocationOption=requeue
+                timestamp: '2016-11-22T19:39:28.5246331Z'
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes':
     get:
@@ -5277,6 +6490,98 @@ paths:
       summary: Lists the compute nodes in the specified pool.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Node list:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '200':
+              body:
+                value:
+                  - affinityId: 'TVM:tvm-1695681911_1-20161122t193202z'
+                    allocationTime: '2016-11-22T19:32:02.8155319Z'
+                    id: tvm-1695681911_1-20161122t193202z
+                    ipAddress: 1.1.1.1
+                    lastBootTime: '2016-11-22T22:22:24.4634125Z'
+                    runningTasksCount: 0
+                    schedulingState: enabled
+                    startTask:
+                      commandLine: cmd /c echo hello
+                      maxTaskRetryCount: 0
+                      userIdentity:
+                        autoUser:
+                          elevationLevel: nonAdmin
+                          scope: task
+                      waitForSuccess: false
+                    startTaskInfo:
+                      endTime: '2016-11-22T22:22:27.567189Z'
+                      exitCode: 0
+                      retryCount: 0
+                      startTime: '2016-11-22T22:22:27.2236818Z'
+                      state: completed
+                    state: idle
+                    stateTransitionTime: '2016-11-22T22:22:27.2236818Z'
+                    totalTasksRun: 0
+                    totalTasksSucceeded: 0
+                    url: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-1695681911_1-20161122t193202z'
+                    vmSize: small
+                  - affinityId: 'TVM:tvm-1695681911_2-20161122t193202z'
+                    allocationTime: '2016-11-22T19:32:02.8155319Z'
+                    id: tvm-1695681911_2-20161122t193202z
+                    ipAddress: 1.1.1.1
+                    lastBootTime: '2016-11-22T19:37:28.623369Z'
+                    runningTasksCount: 0
+                    schedulingState: enabled
+                    startTask:
+                      commandLine: cmd /c echo hello
+                      maxTaskRetryCount: 0
+                      userIdentity:
+                        autoUser:
+                          elevationLevel: nonAdmin
+                          scope: task
+                      waitForSuccess: false
+                    startTaskInfo:
+                      endTime: '2016-11-22T19:37:31.838028Z'
+                      exitCode: 0
+                      retryCount: 0
+                      startTime: '2016-11-22T19:37:31.4285526Z'
+                      state: completed
+                    state: idle
+                    stateTransitionTime: '2016-11-22T19:37:31.4285526Z'
+                    totalTasksRun: 0
+                    totalTasksSucceeded: 0
+                    url: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-1695681911_2-20161122t193202z'
+                    vmSize: small
+                  - affinityId: 'TVM:tvm-1695681911_3-20161122t193202z'
+                    allocationTime: '2016-11-22T19:32:02.8155319Z'
+                    id: tvm-1695681911_3-20161122t193202z
+                    ipAddress: 1.1.1.1
+                    lastBootTime: '2016-11-22T19:36:48.21721Z'
+                    runningTasksCount: 0
+                    schedulingState: enabled
+                    startTask:
+                      commandLine: cmd /c echo hello
+                      maxTaskRetryCount: 0
+                      userIdentity:
+                        autoUser:
+                          elevationLevel: nonAdmin
+                          scope: task
+                      waitForSuccess: false
+                    startTaskInfo:
+                      endTime: '2016-11-22T19:36:51.2363447Z'
+                      exitCode: 0
+                      retryCount: 0
+                      startTime: '2016-11-22T19:36:51.0013378Z'
+                      state: completed
+                    state: idle
+                    stateTransitionTime: '2016-11-22T19:36:51.0013378Z'
+                    totalTasksRun: 0
+                    totalTasksSucceeded: 0
+                    url: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-1695681911_3-20161122t193202z'
+                    vmSize: small
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id
@@ -5364,6 +6669,44 @@ paths:
       summary: Gets information about the specified compute node.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Node get:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeId: tvm-1695681911_2-20161122t193202z
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '200':
+              body:
+                affinityId: 'TVM:tvm-1695681911_2-20161122t193202z'
+                allocationTime: '2016-11-22T19:32:02.8155319Z'
+                id: tvm-1695681911_2-20161122t193202z
+                ipAddress: 1.1.1.1
+                lastBootTime: '2016-11-22T19:37:28.623369Z'
+                runningTasksCount: 0
+                schedulingState: enabled
+                startTask:
+                  commandLine: cmd /c echo hello
+                  maxTaskRetryCount: 0
+                  userIdentity:
+                    autoUser:
+                      elevationLevel: nonAdmin
+                      scope: task
+                  waitForSuccess: false
+                startTaskInfo:
+                  endTime: '2016-11-22T19:37:31.838028Z'
+                  exitCode: 0
+                  retryCount: 0
+                  startTime: '2016-11-22T19:37:31.4285526Z'
+                  state: completed
+                state: idle
+                stateTransitionTime: '2016-11-22T19:37:31.4285526Z'
+                totalTasksRun: 0
+                totalTasksSucceeded: 0
+                url: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-1695681911_2-20161122t193202z'
+                vmSize: small
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/disablescheduling':
     post:
@@ -5449,6 +6792,19 @@ paths:
       summary: Disables task scheduling on the specified compute node.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Node disable scheduling:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeDisableSchedulingParameter:
+              nodeDisableSchedulingOption: terminate
+            nodeId: tvm-1695681911_1-20161122t193202z
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/enablescheduling':
     post:
@@ -5528,6 +6884,17 @@ paths:
       summary: Enables task scheduling on the specified compute node.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Node enable scheduling:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeId: tvm-1695681911_1-20161122t193202z
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/files':
     get:
@@ -5630,6 +6997,38 @@ paths:
       summary: Lists all of the files in task directories on the specified compute node.
       tags:
         - Files
+      x-ms-examples:
+        File list from node:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeId: tvm-1695681911_1-20161122t193202z
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+            recursive: 'false'
+          responses:
+            '200':
+              body:
+                value:
+                  - isDirectory: true
+                    name: shared
+                    url: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2167304207_2-20140919t215614z/files/shared'
+                  - isDirectory: false
+                    name: startup\ProcessEnv.cmd
+                    properties:
+                      contentLength: 1813
+                      contentType: application/octet-stream
+                      creationTime: '2014-09-19T21:56:17.679195Z'
+                      lastModified: '2014-09-19T21:56:17.679195Z'
+                    url: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2167304207_2-20140919t215614z/files/startup\ProcessEnv.cmd'
+                  - isDirectory: false
+                    name: startup\stderr.txt
+                    properties:
+                      contentLength: 0
+                      contentType: application/octet-stream
+                      creationTime: '2014-09-19T21:56:17.5590855Z'
+                      lastModified: '2014-09-19T21:56:17.5590855Z'
+                    url: 'https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2167304207_2-20140919t215614z/files/startup\stderr.txt'
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id
@@ -5709,9 +7108,22 @@ paths:
       summary: Deletes the specified task file from the compute node.
       tags:
         - Files
+      x-ms-examples:
+        File delete from node:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            filePath: workitems\jobId\job-1\task1\wd\testFile.txt
+            nodeId: tvm-1695681911_1-20161122t193202z
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+            recursive: 'false'
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
     get:
-      description: Returns the content of the specified task file.
+      description: Returns the content of the specified compute node file.
       operationId: File_GetFromComputeNode
       parameters:
         - description: The ID of the pool that contains the compute node.
@@ -5724,7 +7136,7 @@ paths:
           name: nodeId
           required: true
           type: string
-        - description: The path to the task file that you want to get the content of.
+        - description: The path to the compute node file that you want to get the content of.
           in: path
           name: filePath
           required: true
@@ -5950,6 +7362,23 @@ paths:
             $ref: '#/definitions/BatchError'
       tags:
         - Files
+      x-ms-examples:
+        File get properties from node:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            filePath: workitems\jobId\job-1\task1\wd\testFile.txt
+            nodeId: nodeId
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '200':
+              Content-Length: '17'
+              Content-Type: application/octet-stream
+              Last-Modified: 'Fri, 17 Feb 2017 00:00:00 GMT'
+              body: ''
+              ocp-batch-file-isdirectory: 'false'
+              ocp-creation-time: 'Fri, 17 Feb 2017 00:00:00 GMT'
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/rdp':
     get:
@@ -6115,6 +7544,19 @@ paths:
       summary: Restarts the specified compute node.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Node reboot:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeId: tvm-1695681911_1-20161122t193202z
+            nodeRebootParameter:
+              nodeRebootOption: terminate
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/reimage':
     post:
@@ -6201,6 +7643,19 @@ paths:
       summary: Reinstalls the operating system on the specified compute node.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Node reimage:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeId: tvm-1695681911_1-20161122t193202z
+            nodeReimageParameter:
+              nodeReimageOption: terminate
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/remoteloginsettings':
     get:
@@ -6280,6 +7735,19 @@ paths:
       summary: Gets the settings required for remote login to a compute node.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Node get remote login settings:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeId: tvm-1695681911_1-20161121t182739z
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '200':
+              body:
+                remoteLoginIPAddress: 1.1.1.1
+                remoteLoginPort: 50000
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/users':
     post:
@@ -6298,7 +7766,7 @@ paths:
           type: string
         - description: The user account to be created.
           in: body
-          name: User
+          name: user
           required: true
           schema:
             $ref: '#/definitions/ComputeNodeUser'
@@ -6366,6 +7834,22 @@ paths:
       summary: Adds a user account to the specified compute node.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Node add user:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeId: tvm-1695681911_1-20161121t182739z
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+            user:
+              expiryTime: '2017-08-01T00:00:00Z'
+              isAdmin: false
+              name: userName
+              password: Password
+          responses:
+            '201':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/nodes/{nodeId}/users/{userName}':
     delete:
@@ -6439,6 +7923,18 @@ paths:
       summary: Deletes a user account from the specified compute node.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Node delete user:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeId: tvm-1695681911_1-20161121t182739z
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+            userName: userName
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
     put:
       description: 'This operation replaces of all the updateable properties of the account. For example, if the expiryTime element is not specified, the current value is replaced with the default value, not left unmodified. You can update a user account on a node only when it is in the idle or running state.'
@@ -6529,6 +8025,21 @@ paths:
       summary: Updates the password or expiration time of a user account on the specified compute node.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Node update user:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeId: tvm-1695681911_1-20161121t182739z
+            nodeUpdateUserParameter:
+              expiryTime: '2016-11-27T00:45:48.7320857Z'
+              password: '12345'
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+            userName: userName
+          responses:
+            '200':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/removenodes':
     post:
@@ -6640,6 +8151,20 @@ paths:
       summary: Removes compute nodes from the specified pool.
       tags:
         - ComputeNodes
+      x-ms-examples:
+        Pool remove nodes:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            nodeRemoveParameter:
+              nodeList:
+                - tvm-1695681911_1-20161122t224741z
+                - tvm-1695681911_2-20161122t224741z
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/resize':
     post:
@@ -6751,6 +8276,18 @@ paths:
       summary: Changes the number of compute nodes that are assigned to a pool.
       tags:
         - Pools
+      x-ms-examples:
+        Pool resize:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: resizePool
+            poolResizeParameter:
+              targetDedicated: 1
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/stopresize':
     post:
@@ -6856,6 +8393,16 @@ paths:
       summary: Stops an ongoing resize operation on the pool.
       tags:
         - Pools
+      x-ms-examples:
+        Pool stop resize:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+          responses:
+            '202':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/updateproperties':
     post:
@@ -6937,6 +8484,22 @@ paths:
       summary: Updates the properties of the specified pool.
       tags:
         - Pools
+      x-ms-examples:
+        Pool update:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+            poolId: poolId
+            poolUpdatePropertiesParameter:
+              applicationPackageReferences: []
+              certificateReferences: []
+              metadata: []
+              startTask:
+                commandLine: /bin/bash -c 'echo start task'
+          responses:
+            '204':
+              body: ''
       x-ms-request-id: request-id
   '/pools/{poolId}/upgradeos':
     post:
@@ -7154,6 +8717,30 @@ paths:
       summary: 'Lists the usage metrics, aggregated by pool across individual time intervals, for the specified account.'
       tags:
         - Pools
+      x-ms-examples:
+        Pool list usage metrics:
+          parameters:
+            api-version: 2017-01-01.4.0
+            client-request-id: 00000000-0000-0000-0000-000000000000
+            ocp-data: 'Fri, 17 Feb 2017 00:00:00 GMT'
+          responses:
+            '200':
+              body:
+                value:
+                  - dataEgressGiB: 0.00622838735580444
+                    dataIngressGiB: 0.0692861778661609
+                    endTime: '2013-04-01T00:30:00Z'
+                    poolId: p1
+                    startTime: '2013-04-01T00:00:00Z'
+                    totalCoreHours: 39.384838
+                    vmSize: a1
+                  - dataEgressGiB: 0.06222838735580444
+                    dataIngressGiB: 0.6092861778661609
+                    endTime: '2013-04-01T01:00:00Z'
+                    poolId: p2
+                    startTime: '2013-04-01T00:30:00Z'
+                    totalCoreHours: 3039.384838
+                    vmSize: a8
       x-ms-pageable:
         nextLinkName: odata.nextLink
       x-ms-request-id: request-id

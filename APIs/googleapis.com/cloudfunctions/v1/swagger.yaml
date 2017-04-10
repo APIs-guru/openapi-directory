@@ -15,7 +15,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://cloudfunctions.googleapis.com/$discovery/rest?version=v1'
       version: v1
   x-preferred: true
@@ -23,14 +26,6 @@ info:
   x-serviceName: cloudfunctions
 externalDocs:
   url: 'https://cloud.google.com/functions'
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
 parameters:
   $.xgafv:
     description: V1 error format.
@@ -107,72 +102,9 @@ parameters:
     in: query
     name: upload_protocol
     type: string
-tags:
-  - name: projects
-paths:
-  '/v1/{name}':
-    get:
-      description: Get information about a location.
-      operationId: cloudfunctions.projects.locations.get
-      parameters:
-        - description: Resource name for the location.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Location'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
+tags: []
+paths: {}
 definitions:
-  Location:
-    description: A resource that represents Google Cloud Platform location.
-    properties:
-      labels:
-        additionalProperties:
-          type: string
-        description: |-
-          Cross-service attributes for the location. For example
-
-              {"cloud.googleapis.com/region": "us-east1"}
-        type: object
-      locationId:
-        description: 'The canonical id for this location. For example: `"us-east1"`.'
-        type: string
-      metadata:
-        additionalProperties:
-          description: Properties of the object. Contains field @type with type URL.
-        description: |-
-          Service-specific metadata. For example the available capacity at the given
-          location.
-        type: object
-      name:
-        description: |-
-          Resource name for the location, which may vary between implementations.
-          For example: `"projects/example-project/locations/us-east1"`
-        type: string
-    type: object
   OperationMetadataV1Beta2:
     description: Metadata describing an Operation
     properties:

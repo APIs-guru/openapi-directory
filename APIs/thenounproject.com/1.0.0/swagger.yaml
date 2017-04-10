@@ -11,7 +11,10 @@ info:
   x-logo:
     url: 'https://thenounproject.com/static/img/nounproject_logo.png'
   x-origin:
-    - format: swagger
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
       url: 'http://api.thenounproject.com/config/api-doc'
       version: '1.2'
   x-providerName: thenounproject.com

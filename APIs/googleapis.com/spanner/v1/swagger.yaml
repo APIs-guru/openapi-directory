@@ -16,7 +16,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://spanner.googleapis.com/$discovery/rest?version=v1'
       version: v1
   x-preferred: true
@@ -1176,9 +1179,53 @@ definitions:
   AuditConfig:
     description: |-
       Specifies the audit configuration for a service.
-      It consists of which permission types are logged, and what identities, if
-      any, are exempted from logging.
+      The configuration determines which permission types are logged, and what
+      identities, if any, are exempted from logging.
       An AuditConifg must have one or more AuditLogConfigs.
+
+      If there are AuditConfigs for both `allServices` and a specific service,
+      the union of the two AuditConfigs is used for that service: the log_types
+      specified in each AuditConfig are enabled, and the exempted_members in each
+      AuditConfig are exempted.
+      Example Policy with multiple AuditConfigs:
+      {
+        "audit_configs": [
+          {
+            "service": "allServices"
+            "audit_log_configs": [
+              {
+                "log_type": "DATA_READ",
+                "exempted_members": [
+                  "user:foo@gmail.com"
+                ]
+              },
+              {
+                "log_type": "DATA_WRITE",
+              },
+              {
+                "log_type": "ADMIN_READ",
+              }
+            ]
+          },
+          {
+            "service": "fooservice@googleapis.com"
+            "audit_log_configs": [
+              {
+                "log_type": "DATA_READ",
+              },
+              {
+                "log_type": "DATA_WRITE",
+                "exempted_members": [
+                  "user:bar@gmail.com"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+      logging. It also exempts foo@gmail.com from DATA_READ logging, and
+      bar@gmail.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
         description: |-
@@ -1188,11 +1235,6 @@ definitions:
           $ref: '#/definitions/AuditLogConfig'
         type: array
       exemptedMembers:
-        description: |-
-          Specifies the identities that are exempted from "data access" audit
-          logging for the `service` specified above.
-          Follows the same format of Binding.members.
-          This field is deprecated in favor of per-permission-type exemptions.
         items:
           type: string
         type: array
@@ -1365,6 +1407,7 @@ definitions:
           - ATTRIBUTION
           - SECURITY_REALM
           - APPROVER
+          - JUSTIFICATION_TYPE
         type: string
       op:
         description: An operator to apply the subject with.
@@ -2558,8 +2601,8 @@ definitions:
       updateMask:
         description: |-
           OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-          the fields in the mask will be modified. If no mask is provided, a default
-          mask is used:
+          the fields in the mask will be modified. If no mask is provided, the
+          following default mask is used:
           paths: "bindings, etag"
           This field is only used by Cloud IAM.
         format: google-fieldmask

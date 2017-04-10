@@ -15,7 +15,10 @@ info:
   x-logo:
     url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/sqladmin/v1beta4/rest'
       version: v1
   x-preferred: true

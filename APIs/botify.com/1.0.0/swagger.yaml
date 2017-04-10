@@ -1406,6 +1406,9 @@ definitions:
     type: object
   Analysis:
     properties:
+      computing_revision:
+        readOnly: true
+        type: string
       config:
         readOnly: true
         type: string
@@ -1454,6 +1457,9 @@ definitions:
     type: object
   AnalysisDetail:
     properties:
+      computing_revision:
+        readOnly: true
+        type: string
       config:
         readOnly: true
         type: string
@@ -1485,6 +1491,9 @@ definitions:
       slug:
         readOnly: true
         type: string
+      status:
+        readOnly: true
+        type: string
       url:
         readOnly: true
         type: string
@@ -1498,6 +1507,30 @@ definitions:
         $ref: '#/definitions/User'
     required:
       - user
+    type: object
+  AnalysisUpdateLaunch:
+    description: Launch Analysis Update
+    properties:
+      refresh_features:
+        items:
+          type: string
+        type: array
+    required:
+      - refresh_features
+    type: object
+  AnalysisUpdateSuggest:
+    properties:
+      add_on_features:
+        items:
+          $ref: '#/definitions/SuggestedUpdatesAddOnFeatures'
+        type: array
+      features_to_update:
+        items:
+          $ref: '#/definitions/SuggestedUpdatesFeaturesToUpdate'
+        type: array
+    required:
+      - add_on_features
+      - features_to_update
     type: object
   CrawlOrphanURLs:
     properties:
@@ -2091,6 +2124,29 @@ definitions:
     required:
       - type
       - message
+    type: object
+  SuggestedUpdatesAddOnFeatures:
+    properties:
+      name:
+        type: string
+      options:
+        type: object
+    required:
+      - name
+      - options
+    type: object
+  SuggestedUpdatesFeaturesToUpdate:
+    properties:
+      name:
+        type: string
+      new_options:
+        type: object
+      previous_options:
+        type: object
+    required:
+      - name
+      - previous_options
+      - new_options
     type: object
   URLRewritingRules:
     properties:

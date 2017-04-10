@@ -185,7 +185,8 @@ paths:
           required: false
           type: string
         - default: login
-          description: "\tSpace-delimited, case sensitive list of ASCII string values that specifies whether the Authorization Server prompts the End-User for reauthentication and consent. The supported values are: `none`, `login`, `consent`. If `consent` the end-user is asked to (re)confirm what claims they share. Use `none` to check for an active session.\n"
+          description: |
+            Space-delimited, case sensitive list of ASCII string values that specifies whether the Authorization Server prompts the End-User for reauthentication and consent. The supported values are: `none`, `login`, `consent`. If `consent` the end-user is asked to (re)confirm what claims they share. Use `none` to check for an active session.
           in: query
           name: prompt
           required: false
@@ -424,6 +425,23 @@ paths:
           $ref: '#/responses/OAuth2Error'
         default:
           $ref: '#/responses/OAuth2Error'
+      security:
+        - oauth_code:
+            - oidc
+            - email
+            - phone
+            - address
+            - 'aq:location'
+            - 'aq:name'
+            - 'aq:push'
+        - oauth_implicit:
+            - oidc
+            - email
+            - phone
+            - address
+            - 'aq:location'
+            - 'aq:name'
+            - 'aq:push'
       summary: Retrieve their user profile
       tags:
         - Authentication
@@ -469,11 +487,6 @@ definitions:
     description: Client object
     properties:
       application_type:
-        default: web
-        type: string
-      backchannel_logout_session_required:
-        type: boolean
-      backchannel_logout_uri:
         type: string
       client_id:
         type: string
@@ -486,15 +499,16 @@ definitions:
           type: string
         type: array
       default_max_age:
-        format: int32
+        format: int64
         type: integer
+      default_scopes:
+        items:
+          type: string
+        type: array
       grant_types:
         items:
           type: string
         type: array
-      id_token_signed_response_alg:
-        default: HS256
-        type: string
       logo_uri:
         type: string
       policy_uri:
@@ -507,12 +521,6 @@ definitions:
         items:
           type: string
         type: array
-      subject_type:
-        default: public
-        type: string
-      token_endpoint_auth_method:
-        default: client_secret_basic
-        type: string
       tos_uri:
         type: string
     required:

@@ -15,7 +15,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://partners.googleapis.com/$discovery/rest?version=v2'
       version: v1
   x-preferred: true
@@ -100,16 +103,16 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: analytics
+  - name: clientMessages
+  - name: companies
   - name: exams
   - name: leads
   - name: offers
-  - name: userStates
-  - name: analytics
-  - name: v2
-  - name: users
-  - name: companies
   - name: userEvents
-  - name: clientMessages
+  - name: userStates
+  - name: users
+  - name: v2
 paths:
   /v2/analytics:
     get:

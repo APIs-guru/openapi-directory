@@ -15,7 +15,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://dataflow.googleapis.com/$discovery/rest?version=v1b3'
       version: v1
   x-preferred: true
@@ -665,6 +668,51 @@ paths:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
+  '/v1b3/projects/{projectId}/locations/{location}/WorkerMessages':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Send a worker_message to the service.
+      operationId: dataflow.projects.locations.workerMessages
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendWorkerMessagesRequest'
+        - description: The location which contains the job
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: The project to send the WorkerMessages to.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SendWorkerMessagesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
   '/v1b3/projects/{projectId}/locations/{location}/jobs':
     get:
       description: List the jobs of a project.
@@ -863,6 +911,106 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/debug/getConfig':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Get encoded debug configuration for component. Not cacheable.
+      operationId: dataflow.projects.locations.jobs.debug.getConfig
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetDebugConfigRequest'
+        - description: The job id.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: The location which contains the job specified by job_id.
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: The project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetDebugConfigResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/debug/sendCapture':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Send encoded debug capture data for component.
+      operationId: dataflow.projects.locations.jobs.debug.sendCapture
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendDebugCaptureRequest'
+        - description: The job id.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: The location which contains the job specified by job_id.
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: The project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SendDebugCaptureResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1105,6 +1253,164 @@ paths:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
+  '/v1b3/projects/{projectId}/locations/{location}/templates':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a Cloud Dataflow job from a template.
+      operationId: dataflow.projects.locations.templates.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateJobFromTemplateRequest'
+        - description: The location to which to direct the request.
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: Required. The ID of the Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/locations/{location}/templates:get':
+    get:
+      description: Get the template associated with a template.
+      operationId: dataflow.projects.locations.templates.get
+      parameters:
+        - description: |-
+            Required. A Cloud Storage path to the template from which to
+            create the job.
+            Must be a valid Cloud Storage URL, beginning with `gs://`.
+          in: query
+          name: gcsPath
+          type: string
+        - description: The location to which to direct the request.
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: Required. The ID of the Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The view to retrieve. Defaults to METADATA_ONLY.
+          enum:
+            - METADATA_ONLY
+          in: query
+          name: view
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetTemplateResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1b3/projects/{projectId}/locations/{location}/templates:launch':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Launch a template.
+      operationId: dataflow.projects.locations.templates.launch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LaunchTemplateParameters'
+        - description: |-
+            Whether or not the job should actually be executed after
+            validating parameters. Defaults to false. Validation errors do
+            not cause the HTTP request to fail if true.
+          in: query
+          name: dryRun
+          type: boolean
+        - description: |-
+            Required. A Cloud Storage path to the template from which to create
+            the job.
+            Must be valid Cloud Storage URL, beginning with 'gs://'.
+          in: query
+          name: gcsPath
+          type: string
+        - description: The location to which to direct the request.
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: Required. The ID of the Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LaunchTemplateResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
   '/v1b3/projects/{projectId}/templates':
     parameters:
       - $ref: '#/parameters/upload_protocol'
@@ -1150,17 +1456,21 @@ paths:
       description: Get the template associated with a template.
       operationId: dataflow.projects.templates.get
       parameters:
-        - description: Required. The ID of the Cloud Platform project that the job belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: |-
             Required. A Cloud Storage path to the template from which to
             create the job.
             Must be a valid Cloud Storage URL, beginning with `gs://`.
           in: query
           name: gcsPath
+          type: string
+        - description: The location to which to direct the request.
+          in: query
+          name: location
+          type: string
+        - description: Required. The ID of the Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
           type: string
         - description: The view to retrieve. Defaults to METADATA_ONLY.
           enum:
@@ -1213,18 +1523,10 @@ paths:
       description: Launch a template.
       operationId: dataflow.projects.templates.launch
       parameters:
-        - description: Required. The ID of the Cloud Platform project that the job belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: |-
-            Required. A Cloud Storage path to the template from which to create
-            the job.
-            Must be valid Cloud Storage URL, beginning with 'gs://'.
-          in: query
-          name: gcsPath
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LaunchTemplateParameters'
         - description: |-
             Whether or not the job should actually be executed after
             validating parameters. Defaults to false. Validation errors do
@@ -1232,10 +1534,22 @@ paths:
           in: query
           name: dryRun
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LaunchTemplateParameters'
+        - description: |-
+            Required. A Cloud Storage path to the template from which to create
+            the job.
+            Must be valid Cloud Storage URL, beginning with 'gs://'.
+          in: query
+          name: gcsPath
+          type: string
+        - description: The location to which to direct the request.
+          in: query
+          name: location
+          type: string
+        - description: Required. The ID of the Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1599,6 +1913,9 @@ definitions:
       jobName:
         description: Required. The job name to use for the created job.
         type: string
+      location:
+        description: The location to which to direct the request.
+        type: string
       parameters:
         additionalProperties:
           type: string
@@ -1948,6 +2265,9 @@ definitions:
         description: |-
           The internal component id for which debug configuration is
           requested.
+        type: string
+      location:
+        description: The location which contains the job specified by job_id.
         type: string
       workerId:
         description: 'The worker id, i.e., VM hostname.'
@@ -2948,6 +3268,9 @@ definitions:
       data:
         description: The encoded debug information.
         type: string
+      location:
+        description: The location which contains the job specified by job_id.
+        type: string
       workerId:
         description: 'The worker id, i.e., VM hostname.'
         type: string
@@ -2961,6 +3284,9 @@ definitions:
   SendWorkerMessagesRequest:
     description: A request for sending worker messages to the service.
     properties:
+      location:
+        description: The location which contains the job
+        type: string
       workerMessages:
         description: The WorkerMessages to send.
         items:

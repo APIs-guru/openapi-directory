@@ -7050,136 +7050,6 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
-  '/payments/{id}/lead-source':
-    delete:
-      description: |
-        Delete a Lead Source that belongs to a certain payment
-      responses:
-        '204':
-          description: Lead Source was deleted
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '409':
-          description: Lead Source cannot be deleted
-      summary: Delete a Lead Source for a payment
-      tags:
-        - Payments
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $payment = $client->payments()->deleteLeadSource('paymentId');
-    get:
-      description: |
-        Retrieve a Lead Source of given payment
-      responses:
-        '200':
-          description: Lead Source was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieve a payment's Lead Source
-      tags:
-        - Payments
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $payment = $client->payments()->load('paymentId');
-            $leadSource = $payment->getLeadSource();
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    put:
-      description: |
-        Create a Lead Source for a payment
-      parameters:
-        - description: Lead Source resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/LeadSource'
-      responses:
-        '200':
-          description: Lead Source was updated
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '201':
-          description: Lead Source was created
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/LeadSource'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create a Lead Source for a payment
-      tags:
-        - Payments
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $leadSourceForm = new Rebilly\Entities\LeadSource();
-            $leadSourceForm->setSource('TestSource');
-            $leadSourceForm->setCampaign('TestCampaign');
-
-            try {
-                $payment = $client->payments()->updateLeadSource('paymentId', $leadSourceForm);
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
   /plans:
     get:
       description: |
@@ -9633,6 +9503,136 @@ paths:
         - Transactions
     parameters:
       - $ref: '#/parameters/resourceId'
+  '/transactions/{id}/lead-source':
+    delete:
+      description: |
+        Delete a Lead Source that belongs to a certain transaction
+      responses:
+        '204':
+          description: Lead Source was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          description: Lead Source cannot be deleted
+      summary: Delete a Lead Source for a transaction
+      tags:
+        - Transactions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payment = $client->transactions()->deleteLeadSource('transactionId');
+    get:
+      description: |
+        Retrieve a Lead Source of given transaction
+      responses:
+        '200':
+          description: Lead Source was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a transaction's Lead Source
+      tags:
+        - Transactions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $transaction = $client->transactions()->load('transactionId');
+            $leadSource = $transaction->getLeadSource();
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      description: |
+        Create a Lead Source for a transaction
+      parameters:
+        - description: Lead Source resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LeadSource'
+      responses:
+        '200':
+          description: Lead Source was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '201':
+          description: Lead Source was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/LeadSource'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a Lead Source for a transaction
+      tags:
+        - Transactions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $leadSourceForm = new Rebilly\Entities\LeadSource();
+            $leadSourceForm->setSource('TestSource');
+            $leadSourceForm->setCampaign('TestCampaign');
+
+            try {
+                $transaction = $client->transactions()->updateLeadSource('transactionId', $leadSourceForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/transactions/{id}/refund':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -11139,7 +11139,7 @@ definitions:
     description: BraintreePayments Gateway config
   CardinalCommerce:
     allOf:
-      - $ref: '#/definitions/Mpi'
+      - $ref: '#/definitions/PayvisionMpis'
       - properties:
           merchantId:
             description: Cardinal MerchantId
@@ -11319,6 +11319,21 @@ definitions:
           - gatewayConfig
         type: object
     description: China Union Pay Gateway config
+  CommonScheduleInstruction:
+    description: The calculation instruction of scheduled time
+    discriminator: method
+    properties:
+      method:
+        enum:
+          - auto
+          - immediately
+          - date-interval
+          - day-of-month
+          - day-of-week
+        type: string
+    required:
+      - method
+    type: object
   Condition:
     discriminator: op
     properties:
@@ -11605,14 +11620,20 @@ definitions:
         description: The custom event description
         type: string
       eventType:
-        $ref: '#/definitions/CustomEventType'
+        description: Rebilly custom event type
+        enum:
+          - subscription-ended
+          - subscription-trial-ended
+          - payment-card-expired
+          - invoice-past-due
+        type: string
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: The custom event identifier string
         readOnly: true
       scheduleInstruction:
-        $ref: '#/definitions/ScheduleMethod'
+        $ref: '#/definitions/CustomEventScheduleInstruction'
       title:
         description: The custom event title
         type: string
@@ -11622,15 +11643,19 @@ definitions:
       - chronology
       - scheduleInstruction
     type: object
-  CustomEventType:
-    description: Rebilly custom event type
-    enum:
-      - subscription-ended
-      - subscription-trial-ended
-      - payment-card-expired
-      - invoice-past-due
-    readOnly: true
-    type: string
+  CustomEventScheduleInstruction:
+    description: The calculation instruction of scheduled time
+    discriminator: method
+    properties:
+      method:
+        enum:
+          - date-interval
+          - day-of-month
+          - day-of-week
+        type: string
+    required:
+      - method
+    type: object
   CustomField:
     description: A separate Custom Field schema
     properties:
@@ -11736,14 +11761,14 @@ definitions:
     required:
       - rel
     type: object
-  Datacash:
+  DataCash:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
       - properties:
           gatewayConfig:
             properties:
               client:
-                description: Datacash Gateway client
+                description: DataCash Gateway client
                 type: string
               delay:
                 default: 0
@@ -11751,7 +11776,7 @@ definitions:
                 minimum: 0
                 type: integer
               password:
-                description: Datacash Gateway password
+                description: DataCash Gateway password
                 format: password
                 type: string
               policy:
@@ -11766,10 +11791,27 @@ definitions:
               - policy
               - delay
             type: object
+          mpi:
+            $ref: '#/definitions/DataCashMpis'
         required:
           - gatewayConfig
         type: object
-    description: Datacash Gateway config
+    description: DataCash Gateway config
+  DataCashMpi:
+    allOf:
+      - $ref: '#/definitions/DataCashMpis'
+    description: DataCash Integrated
+  DataCashMpis:
+    description: DataCash Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - DataCashMpi
+    required:
+      - name
   DayOfWeek:
     enum:
       - Sunday
@@ -12109,10 +12151,23 @@ definitions:
               - clientId
               - apiKey
             type: object
+          mpi:
+            $ref: '#/definitions/EMerchantPayMpis'
         required:
           - gatewayConfig
         type: object
     description: EMerchantPay Gateway config
+  EMerchantPayMpis:
+    description: EMerchantPay Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - Other
+    required:
+      - name
   Email:
     properties:
       email:
@@ -12515,7 +12570,7 @@ definitions:
       - Chase
       - ChinaUnionPay
       - Credorax
-      - Datacash
+      - DataCash
       - Dengi
       - EMerchantPay
       - Flexepin
@@ -12584,10 +12639,27 @@ definitions:
               - apiKeyId
               - apiSecretKey
             type: object
+          mpi:
+            $ref: '#/definitions/GlobalCollectMpis'
         required:
           - gatewayConfig
         type: object
     description: GlobalCollect Gateway config
+  GlobalCollectMpi:
+    allOf:
+      - $ref: '#/definitions/GlobalCollectMpis'
+    description: GlobalCollect Integrated
+  GlobalCollectMpis:
+    description: GlobalCollect Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - GlobalCollectMpi
+    required:
+      - name
   GlobalOne:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -12700,10 +12772,27 @@ definitions:
               - accountId
               - digestPassword
             type: object
+          mpi:
+            $ref: '#/definitions/IlixiumMpis'
         required:
           - gatewayConfig
         type: object
     description: Ilixium Gateway config
+  IlixiumMpi:
+    allOf:
+      - $ref: '#/definitions/IlixiumMpis'
+    description: Ilixium Integrated
+  IlixiumMpis:
+    description: IlixiumMpis Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - IlixiumMpi
+    required:
+      - name
   InvalidError:
     allOf:
       - $ref: '#/definitions/Error'
@@ -13143,14 +13232,6 @@ definitions:
           - gatewayConfig
         type: object
     description: Moneris Gateway config
-  Mpi:
-    discriminator: name
-    properties:
-      name:
-        $ref: '#/definitions/MpiName'
-    required:
-      - name
-    type: object
   MpiName:
     description: The Merchant plug-in Name
     enum:
@@ -13324,10 +13405,27 @@ definitions:
               - storePwd
               - accountNum
             type: object
+          mpi:
+            $ref: '#/definitions/OptimalMpis'
         required:
           - gatewayConfig
         type: object
     description: Optimal Gateway config
+  OptimalMpi:
+    allOf:
+      - $ref: '#/definitions/OptimalMpis'
+    description: Optimal Integrated
+  OptimalMpis:
+    description: Optimal Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - OptimalMpi
+    required:
+      - name
   Organization:
     properties:
       _links:
@@ -13396,7 +13494,11 @@ definitions:
     type: object
   Other:
     allOf:
-      - $ref: '#/definitions/Mpi'
+      - $ref: '#/definitions/EMerchantPayMpis'
+      - $ref: '#/definitions/PayvisionMpis'
+      - $ref: '#/definitions/VantivLitleMpis'
+      - $ref: '#/definitions/WalpayMpis'
+      - $ref: '#/definitions/WorldpayMpis'
     description: Other
   PandaGateway:
     allOf:
@@ -13793,7 +13895,7 @@ definitions:
             paymentInstruction:
               $ref: '#/definitions/AmountAdjustment'
             scheduleInstruction:
-              $ref: '#/definitions/ScheduleMethod'
+              $ref: '#/definitions/CommonScheduleInstruction'
           required:
             - scheduleInstruction
             - paymentInstruction
@@ -13915,15 +14017,28 @@ definitions:
               - memberGuid
             type: object
           mpi:
-            $ref: '#/definitions/Mpi'
+            $ref: '#/definitions/PayvisionMpis'
         required:
           - gatewayConfig
         type: object
     description: Payvision Gateway config
   PayvisionMpi:
     allOf:
-      - $ref: '#/definitions/Mpi'
+      - $ref: '#/definitions/PayvisionMpis'
     description: Payvision Integrated
+  PayvisionMpis:
+    description: Payvision Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - PayvisionMpi
+          - CardinalCommerce
+          - Other
+    required:
+      - name
   Plan:
     properties:
       _links:
@@ -14321,6 +14436,27 @@ definitions:
         type: object
     description: Redemption restrictions
     type: object
+  RedirectUrls:
+    description: The redirect URIs
+    properties:
+      cancel:
+        format: url
+        type: string
+      decline:
+        format: url
+        type: string
+      error:
+        format: url
+        type: string
+      success:
+        format: url
+        type: string
+    required:
+      - error
+      - success
+      - decline
+      - cancel
+    type: object
   Redsys:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -14394,6 +14530,18 @@ definitions:
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
     maxLength: 50
     type: string
+  RetriedTransactionLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - retriedTransaction
+        type: string
+    required:
+      - rel
+    type: object
   Rule:
     description: The rule
     properties:
@@ -14533,21 +14681,6 @@ definitions:
           - gatewayConfig
         type: object
     description: Sagepay Gateway config
-  ScheduleMethod:
-    description: The calculation instruction of scheduled time
-    discriminator: method
-    properties:
-      method:
-        enum:
-          - auto
-          - immediately
-          - date-interval
-          - day-of-month
-          - day-of-week
-        type: string
-    required:
-      - method
-    type: object
   SelfLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -15248,10 +15381,11 @@ definitions:
           - $ref: '#/definitions/CustomerLink'
           - $ref: '#/definitions/WebsiteLink'
           - $ref: '#/definitions/PaymentCardLink'
-          - $ref: '#/definitions/PaymentLink'
           - $ref: '#/definitions/ParentTransactionLink'
+          - $ref: '#/definitions/RetriedTransactionLink'
           - $ref: '#/definitions/BillingContactLink'
-        maxItems: 6
+          - $ref: '#/definitions/LeadSourceLink'
+        maxItems: 9
         minItems: 1
         readOnly: true
         type: array
@@ -15287,6 +15421,8 @@ definitions:
         description: The transactions's currency
         readOnly: true
         type: string
+      customFields:
+        $ref: '#/definitions/ResourceCustomFields'
       customerId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -15326,6 +15462,10 @@ definitions:
             type: number
         readOnly: true
         type: object
+      description:
+        description: The payment description
+        maxLength: 255
+        type: string
       gateway:
         description: The related gateway information
         properties:
@@ -15402,8 +15542,12 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         readOnly: true
         type: array
+      isRebill:
+        readOnly: true
+        type: boolean
       method:
-        $ref: '#/definitions/Method'
+        allOf:
+          - $ref: '#/definitions/Method'
         description: Payment Method
       parentTransactionId:
         allOf:
@@ -15412,10 +15556,16 @@ definitions:
         readOnly: true
       paymentInstrument:
         $ref: '#/definitions/PaymentInstrument'
+      processedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Transaction processed time
       rebillNumber:
         description: The transactions's rebill number
         readOnly: true
         type: integer
+      redirectUrls:
+        $ref: '#/definitions/RedirectUrls'
       result:
         description: Transaction result
         enum:
@@ -15425,6 +15575,17 @@ definitions:
           - unknown
         readOnly: true
         type: string
+      retriedTransactionId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The retried transaction ID
+        readOnly: true
+      retryInstruction:
+        $ref: '#/definitions/PaymentRetry'
+      retryNumber:
+        description: The position in the sequence of retries
+        readOnly: true
+        type: integer
       riskScore:
         description: The transactions's risk score
         format: integer
@@ -15797,10 +15958,23 @@ definitions:
               - password
               - merchantId
             type: object
+          mpi:
+            $ref: '#/definitions/VantivLitleMpis'
         required:
           - gatewayConfig
         type: object
     description: VantivLitle Gateway config
+  VantivLitleMpis:
+    description: VantivLitle Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - Other
+    required:
+      - name
   Walpay:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -15818,10 +15992,23 @@ definitions:
               - merchantName
               - merchantPin
             type: object
+          mpi:
+            $ref: '#/definitions/WalpayMpis'
         required:
           - gatewayConfig
         type: object
     description: Walpay Gateway config
+  WalpayMpis:
+    description: WalpayMpis Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - Other
+    required:
+      - name
   Webhook:
     properties:
       body:
@@ -16049,10 +16236,27 @@ definitions:
               - businessCaseSignature
               - delay
             type: object
+          mpi:
+            $ref: '#/definitions/WirecardMpis'
         required:
           - gatewayConfig
         type: object
     description: Wirecard Gateway config
+  WirecardMpi:
+    allOf:
+      - $ref: '#/definitions/WirecardMpis'
+    description: Wirecard Integrated
+  WirecardMpis:
+    description: Wirecard Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - WirecardMpi
+    required:
+      - name
   Worldpay:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -16071,10 +16275,23 @@ definitions:
               - merchantCode
               - merchantPassword
             type: object
+          mpi:
+            $ref: '#/definitions/WorldpayMpis'
         required:
           - gatewayConfig
         type: object
     description: Worldpay Gateway config
+  WorldpayMpis:
+    description: Worldpay Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - Other
+    required:
+      - name
   ach:
     allOf:
       - $ref: '#/definitions/PaymentInstrument'
@@ -16099,7 +16316,7 @@ definitions:
     type: object
   auto:
     allOf:
-      - $ref: '#/definitions/ScheduleMethod'
+      - $ref: '#/definitions/CommonScheduleInstruction'
     description: Rebilly will choose the best time to schedule the attempt
   basic:
     allOf:
@@ -16180,7 +16397,8 @@ definitions:
       - $ref: '#/definitions/UserPasswordAuthorization'
   date-interval:
     allOf:
-      - $ref: '#/definitions/ScheduleMethod'
+      - $ref: '#/definitions/CommonScheduleInstruction'
+      - $ref: '#/definitions/CustomEventScheduleInstruction'
       - properties:
           duration:
             minimum: 1
@@ -16193,7 +16411,8 @@ definitions:
         type: object
   day-of-month:
     allOf:
-      - $ref: '#/definitions/ScheduleMethod'
+      - $ref: '#/definitions/CommonScheduleInstruction'
+      - $ref: '#/definitions/CustomEventScheduleInstruction'
       - properties:
           day:
             description: |
@@ -16210,7 +16429,8 @@ definitions:
         type: object
   day-of-week:
     allOf:
-      - $ref: '#/definitions/ScheduleMethod'
+      - $ref: '#/definitions/CommonScheduleInstruction'
+      - $ref: '#/definitions/CustomEventScheduleInstruction'
       - properties:
           day:
             $ref: '#/definitions/DayOfWeek'
@@ -16383,7 +16603,7 @@ definitions:
     description: iCheque Gateway config
   immediately:
     allOf:
-      - $ref: '#/definitions/ScheduleMethod'
+      - $ref: '#/definitions/CommonScheduleInstruction'
   in:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -16626,7 +16846,7 @@ definitions:
               - invoice-total
             type: string
           scheduleInstruction:
-            $ref: '#/definitions/ScheduleMethod'
+            $ref: '#/definitions/CommonScheduleInstruction'
         required:
           - scheduleInstruction
           - amountPolicy

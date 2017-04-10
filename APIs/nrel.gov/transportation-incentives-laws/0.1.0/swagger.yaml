@@ -13,7 +13,10 @@ info:
     backgroundColor: '#0079C5'
     url: 'http://www.nrel.gov/client/img/nrel_logo.png'
   x-origin:
-    - format: swagger
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
       url: 'http://developer.nrel.gov/docs/transportation/transportation-incentives-laws-v1/api-docs.json'
       version: '1.2'
   x-providerName: nrel.gov

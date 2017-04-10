@@ -2069,6 +2069,403 @@ paths:
       summary: Edit invoice
       tags:
         - Invoices
+  /materials:
+    get:
+      parameters:
+        - description: Used to filter on the `barcode` of the materials
+          in: query
+          name: barcode
+          required: false
+          type: string
+        - description: Used to filter on the `name` of the materials
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Used to find materials used in specific project by `project_id`
+          format: uuid
+          in: query
+          name: project_id
+          required: false
+          type: string
+        - description: Used to find currently rented materials
+          in: query
+          name: currently_rented
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/Material'
+                type: array
+              pagination:
+                $ref: '#/definitions/PaginationDetails'
+              success:
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: View list of all materials
+      tags:
+        - Materials
+  '/materials/{material_id}':
+    delete:
+      parameters:
+        - in: path
+          name: material_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  type: object
+                type: array
+              success:
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Delete material
+      tags:
+        - Materials
+    get:
+      parameters:
+        - in: path
+          name: material_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Material'
+              success:
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: View material
+      tags:
+        - Materials
+    put:
+      parameters:
+        - in: path
+          name: material_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  type: object
+                type: array
+              success:
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Edit material
+      tags:
+        - Materials
+  '/materials/{material_id}/rentals/':
+    get:
+      parameters:
+        - in: path
+          name: material_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/MaterialRental'
+                type: array
+              pagination:
+                $ref: '#/definitions/PaginationDetails'
+              success:
+                default: true
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Show list of rentals for specific material
+      tags:
+        - MaterialRentals
+    post:
+      parameters:
+        - in: body
+          name: material_rental
+          schema:
+            properties:
+              form_id:
+                format: uuid
+                type: string
+              from_date:
+                format: dateTime
+                type: string
+              is_invoiced:
+                format: dateTime
+                type: string
+              material_id:
+                format: uuid
+                type: string
+              project_id:
+                format: uuid
+                type: string
+              quantity:
+                format: float
+                type: number
+              to_date:
+                format: dateTime
+                type: string
+            type: object
+        - in: path
+          name: material_id
+          required: true
+          type: string
+      responses:
+        '201':
+          description: OK
+          schema:
+            properties:
+              data:
+                properties:
+                  id:
+                    format: uuid
+                    type: string
+                type: object
+              success:
+                default: true
+                type: boolean
+            type: object
+        '422':
+          description: Validation error
+          schema:
+            $ref: '#/definitions/ErrorValidation'
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Add material rental
+      tags:
+        - MaterialRentals
+  '/materials/{material_id}/rentals/checkout/':
+    post:
+      parameters:
+        - in: path
+          name: material_id
+          required: true
+          type: string
+        - in: body
+          name: material_rental
+          schema:
+            properties:
+              form_id:
+                format: uuid
+                type: string
+              material_rental_id:
+                format: uuid
+                type: string
+              to_date:
+                format: dateTime
+                type: string
+            type: object
+      responses:
+        '201':
+          description: OK
+          schema:
+            properties:
+              data:
+                properties:
+                  id:
+                    format: uuid
+                    type: string
+                type: object
+              success:
+                default: true
+                type: boolean
+            type: object
+        '422':
+          description: Validation error
+          schema:
+            $ref: '#/definitions/ErrorValidation'
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Checkout material rental
+      tags:
+        - MaterialRentals
+  '/materials/{material_id}/rentals/{material_rental_id}/':
+    delete:
+      description: Delete rental for material
+      parameters:
+        - format: uuid
+          in: path
+          name: material_id
+          required: true
+          type: string
+        - format: uuid
+          in: path
+          name: material_rental_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                type: object
+              success:
+                default: true
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Delete material rental
+      tags:
+        - MaterialRentals
+    get:
+      parameters:
+        - in: path
+          name: material_id
+          required: true
+          type: string
+        - in: path
+          name: material_rental_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/MaterialRental'
+              success:
+                type: boolean
+            type: object
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorNotFound'
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Show rental foor materi
+      tags:
+        - MaterialRentals
+    post:
+      parameters:
+        - in: body
+          name: material
+          schema:
+            properties:
+              barcode:
+                type: string
+              billing_cysle:
+                enum:
+                  - hourly
+                  - daily
+                  - weekly
+                type: string
+              cost_price:
+                format: float
+                type: number
+              description:
+                type: string
+              is_single_usage:
+                type: boolean
+              name:
+                type: string
+              selling_price:
+                format: float
+                type: number
+            type: object
+        - in: path
+          name: material_id
+          required: true
+          type: string
+        - in: path
+          name: material_rental_id
+          required: true
+          type: string
+      responses:
+        '201':
+          description: OK
+          schema:
+            properties:
+              data:
+                properties:
+                  id:
+                    format: uuid
+                    type: string
+                type: object
+              success:
+                default: true
+                type: boolean
+            type: object
+        '422':
+          description: Validation error
+          schema:
+            $ref: '#/definitions/ErrorValidation'
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Add material
+      tags:
+        - Materials
+    put:
+      description: Edit material rental
+      parameters:
+        - format: uuid
+          in: path
+          name: material_id
+          required: true
+          type: string
+        - format: uuid
+          in: path
+          name: material_rental_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                type: object
+              success:
+                default: true
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Edit material rental
+      tags:
+        - MaterialRentals
   /ping:
     get:
       responses:
@@ -4442,6 +4839,86 @@ definitions:
         type: number
       user_id:
         format: uuid
+        type: string
+    type: object
+  Material:
+    properties:
+      barcode:
+        maxLength: 255
+        type: string
+      billing_cycle:
+        maxLength: 255
+        type: string
+      company_id:
+        format: uuid
+        type: string
+      cost_price:
+        format: float
+        type: number
+      created:
+        $ref: '#/definitions/created'
+      created_by_id:
+        format: uuid
+        type: string
+      deleted:
+        $ref: '#/definitions/deleted'
+      description:
+        maxLength: 8192
+        type: string
+      id:
+        format: uuid
+        type: string
+      is_single_usage:
+        type: boolean
+      modified:
+        $ref: '#/definitions/modified'
+      modified_by_id:
+        format: uuid
+        type: string
+      name:
+        maxLength: 2048
+        type: string
+      selling_price:
+        format: float
+        type: number
+    type: object
+  MaterialRental:
+    properties:
+      amount:
+        format: float
+        type: number
+      created:
+        $ref: '#/definitions/created'
+      created_by_id:
+        format: uuid
+        type: string
+      deleted:
+        $ref: '#/definitions/deleted'
+      from_date:
+        format: dateTime
+        type: string
+      id:
+        format: uuid
+        type: string
+      is_invoiced:
+        format: dateTime
+        type: string
+      material_id:
+        format: uuid
+        type: string
+      modified:
+        $ref: '#/definitions/modified'
+      modified_by_id:
+        format: uuid
+        type: string
+      project_id:
+        format: uuid
+        type: string
+      quantity:
+        format: float
+        type: number
+      to_date:
+        format: dateTime
         type: string
     type: object
   PaginationDetails:

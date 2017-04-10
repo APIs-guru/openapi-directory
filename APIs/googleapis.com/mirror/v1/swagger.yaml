@@ -15,7 +15,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/mirror/v1/rest'
       version: v1
   x-preferred: true
@@ -551,6 +554,10 @@ paths:
         - audio/l24
         - audio/l8
         - audio/lpc
+        - audio/melp
+        - audio/melp1200
+        - audio/melp2400
+        - audio/melp600
         - audio/midi
         - audio/mobile-xmf
         - audio/mp3
@@ -651,6 +658,7 @@ paths:
         - audio/x-tta
         - audio/x-wav
         - audio/xm
+        - image/apng
         - image/bmp
         - image/cgm
         - image/dicom-rle
@@ -986,6 +994,10 @@ paths:
         - audio/l24
         - audio/l8
         - audio/lpc
+        - audio/melp
+        - audio/melp1200
+        - audio/melp2400
+        - audio/melp600
         - audio/midi
         - audio/mobile-xmf
         - audio/mp3
@@ -1086,6 +1098,7 @@ paths:
         - audio/x-tta
         - audio/x-wav
         - audio/xm
+        - image/apng
         - image/bmp
         - image/cgm
         - image/dicom-rle
@@ -1380,6 +1393,10 @@ paths:
         - audio/l24
         - audio/l8
         - audio/lpc
+        - audio/melp
+        - audio/melp1200
+        - audio/melp2400
+        - audio/melp600
         - audio/midi
         - audio/mobile-xmf
         - audio/mp3
@@ -1480,6 +1497,7 @@ paths:
         - audio/x-tta
         - audio/x-wav
         - audio/xm
+        - image/apng
         - image/bmp
         - image/cgm
         - image/dicom-rle

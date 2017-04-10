@@ -17,7 +17,10 @@ info:
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
-    - format: google
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
       url: 'https://ml.googleapis.com/$discovery/rest?version=v1'
       version: v1
   x-preferred: true
@@ -146,11 +149,17 @@ paths:
       tags:
         - projects
     get:
-      description: Describes a job.
-      operationId: ml.projects.jobs.get
+      description: |-
+        Gets information about a model version.
+
+        Models can have multiple versions. You can call
+        [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list)
+        to get the same information that this method returns for all of the
+        versions of a model.
+      operationId: ml.projects.models.versions.get
       parameters:
         - description: |-
-            Required. The name of the job to get the description of.
+            Required. The name of the version.
 
             Authorization: requires `Viewer` role on the parent project.
           in: path
@@ -162,7 +171,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleCloudMlV1__Job'
+            $ref: '#/definitions/GoogleCloudMlV1__Version'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -250,17 +259,24 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
     post:
-      description: Cancels a running job.
-      operationId: ml.projects.jobs.cancel
+      description: |-
+        Starts asynchronous cancellation on a long-running operation.  The server
+        makes a best effort to cancel the operation, but success is not
+        guaranteed.  If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+        Operations.GetOperation or
+        other methods to check whether the cancellation succeeded or whether the
+        operation completed despite cancellation. On successful cancellation,
+        the operation is not deleted; instead, it becomes an operation with
+        an Operation.error value with a google.rpc.Status.code of 1,
+        corresponding to `Code.CANCELLED`.
+      operationId: ml.projects.operations.cancel
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/GoogleCloudMlV1__CancelJobRequest'
-        - description: |-
-            Required. The name of the job to cancel.
-
-            Authorization: requires `Editor` role on the parent project.
+        - description: The name of the operation resource to be cancelled.
           in: path
           name: name
           required: true
