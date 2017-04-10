@@ -18,11 +18,11 @@ module.exports = function () {
           info: {
             'x-serviceName': value.name,
             'x-preferred': value.preferred,
-            'x-origin': {
+            'x-origin': [{
               url: value.discoveryRestUrl,
               format: 'google',
               version: 'v1'
-            }
+            }]
           }
         };
       });

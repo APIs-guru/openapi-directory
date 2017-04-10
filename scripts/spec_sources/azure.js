@@ -25,11 +25,11 @@ module.exports = function () {
     return {
       info: {
         'x-serviceName': service,
-        'x-origin': {
+        'x-origin': [{
           url: util.rawGitHubUrl('Azure', 'azure-rest-api-specs', filename),
           format: 'swagger',
           version: '2.0'
-        }
+        }]
       }
     }
   });

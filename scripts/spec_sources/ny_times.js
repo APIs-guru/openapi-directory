@@ -12,11 +12,11 @@ module.exports = function () {
     return {
       info: {
         'x-serviceName': filename.split('/')[0],
-        'x-origin': {
+        'x-origin': [{
           url: util.rawGitHubUrl('NYTimes', 'public_api_specs', filename),
           format: 'swagger',
           version: '2.0'
-        }
+        }]
       }
     }
   });
