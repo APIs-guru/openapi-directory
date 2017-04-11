@@ -110,7 +110,7 @@ program
   .command('add')
   .description('add new spec')
   .option('-b, --background <BACKGROUND>', 'specify background colour')
-  .option('-d, --description <LANG>', 'specify description language')
+  .option('-d, --desclang <LANG>', 'specify description language')
   .option('-c, --categories <CATEGORIES>', 'csv list of categories')
   .option('-f, --fixup', 'try to fix spec')
   .option('-l, --logo <LOGO>', 'specify logo url')
@@ -248,8 +248,8 @@ function addToCollection(format, url, command) {
   if (command.categories) {
     exPatch.info['x-apisguru-categories'] = command.categories.split(',');
   }
-  if (command.description) {
-    exPatch.info['x-description-language'] = command.description;
+  if (command.desclang) {
+    exPatch.info['x-description-language'] = command.desclang;
   }
 
   writeSpec(url, format, exPatch, command)
