@@ -168,6 +168,7 @@ exports.getOriginUrl = function (swagger) {
 exports.saveSwagger = function (swagger) {
   var path = exports.getSwaggerPath(swagger);
   exports.saveYaml(path, swagger);
+  return path;
 }
 
 exports.exec = function (cmd) {

@@ -159,10 +159,6 @@ function updateCollection(dir, command) {
           var newFilename = util.getSwaggerPath(swagger);
           if (newFilename !== filename)
             warnings.push(`Definition was moved from "${filename}" to "${newFilename}"`);
-          if (_.isEmpty(swagger.paths))
-            warnings.push(`Definition will fail validation - no paths "${filename}"`);
-          if (!swagger.info.description)
-            warnings.push('Definition has no info.description');
         });
     })
     .done();
@@ -378,7 +374,12 @@ function writeSpec(source, format, exPatch, command) {
 
       context.swagger = validation.resolved;
 
-      util.saveSwagger(context.swagger);
+      var filename = util.saveSwagger(context.swagger);
+
+      if (_.isEmpty(context.swagger.paths))
+        warnings.push(`Definition will fail validation - no paths "${filename}"`);
+      if (!context.swagger.info.description)
+        warnings.push(`Definition has no info.description "${filename}"`);
 
 	  delete exPatch.info['x-serviceName'];
 	  delete exPatch.info['x-preferred'];
