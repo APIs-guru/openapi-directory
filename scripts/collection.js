@@ -66,7 +66,7 @@ program
 
 program
   .command('urls')
-  .description('show source url for specs')
+  .description('show source url for definitions')
   .action(urlsCollection);
 
 program
@@ -103,16 +103,16 @@ program
 
 program
   .command('leads')
-  .description('add/remove specs from 3rd-party catalogs')
+  .description('add/remove definitions from 3rd-party catalogs')
   .action(updateCatalogLeads);
 
 program
   .command('add')
-  .description('add new spec')
+  .description('add new definition')
   .option('-b, --background <BACKGROUND>', 'specify background colour')
   .option('-d, --desclang <LANG>', 'specify description language')
   .option('-c, --categories <CATEGORIES>', 'csv list of categories')
-  .option('-f, --fixup', 'try to fix spec')
+  .option('-f, --fixup', 'try to fix definition')
   .option('-l, --logo <LOGO>', 'specify logo url')
   .option('-s, --service <NAME>', 'supply service name')
   .option('-u, --unofficial','set unofficial flag')
@@ -158,9 +158,11 @@ function updateCollection(dir, command) {
         .then(swagger => {
           var newFilename = util.getSwaggerPath(swagger);
           if (newFilename !== filename)
-            warnings.push(`Spec was moved from "${filename}" to "${newFilename}"`);
+            warnings.push(`Definition was moved from "${filename}" to "${newFilename}"`);
           if (_.isEmpty(swagger.paths))
-            warnings.push(`Spec will fail validation - no paths "${filename}"`);
+            warnings.push(`Definition will fail validation - no paths "${filename}"`);
+          if (!swagger.info.description)
+            warnings.push('Definition has no info.description');
         });
     })
     .done();
@@ -178,7 +180,7 @@ function validateCollection(dir, command) {
 
   Promise.mapSeries(_.toPairs(specs), ([filename, swagger]) => {
     console.error('======================== ' + filename + ' ================');
-    assert(!_.isEmpty(swagger.paths), 'Spec should have operations');
+    assert(!_.isEmpty(swagger.paths), 'Definition should have operations');
     //FIXME: check location
     //assert(util.getSwaggerPath(swagger) === filename, 'Incorect location');
 
@@ -385,8 +387,8 @@ function writeSpec(source, format, exPatch, command) {
         var patchFilename = pathLib.join(util.getPathComponents(context.swagger, true).join('/'),'patch.yaml');
         var patchFilename2 = pathLib.join(util.getPathComponents(context.swagger).join('/'),'patch.yaml');
         if (!fs.existsSync(patchFilename) && !fs.existsSync(patchFilename2)) {
-          console.log('* Wrote new patch.yaml');
-          fs.writeFileSync(patchFilename,YAML.safeDump(exPatch),'utf8');
+          console.log('* Wrote new '+patchFilename);
+          fs.writeFileSync(patchFilename,YAML.safeDump(exPatch,{lineWidth:-1}),'utf8');
         }
       }
 
