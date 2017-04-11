@@ -658,10 +658,16 @@ function fixSpec(swagger, errors) {
           newValue = '#/definitions/' + value;
         break;
       case 'DUPLICATE_OPERATIONID':
-	  	console.log('  Has duplicate operationIds');
-        //FIXME: find better solutions than strip all 'operationId'
+        //FIXME: find better solution than to strip all duplicate 'operationId'
+		var operationIds = jsonPath.query(swagger, '$.paths[*][*].operationId');
+        operationIds = _.filter(operationIds, function (value, index, iteratee) {
+          return _.includes(iteratee, value, index + 1);
+        });
         jsonPath.apply(swagger, '$.paths[*][*].operationId', function (value) {
-          return undefined;
+          if (_.find(operationIds,function(e){
+		    return e === value;
+		  })) return undefined
+		  else return value;
         });
         fixed = true;
         break;
