@@ -137,8 +137,11 @@ exports.getPathComponents = function (swagger, stripVersion) {
   var path = [exports.getProviderName(swagger)];
   if (serviceName)
     path.push(serviceName);
-  if (!stripVersion)
-    path.push(swagger.info.version||'1.0.0');
+  if (!stripVersion) {
+    var version = swagger.info.version||'1.0.0';
+    version = version.split(' (')[0];
+    path.push(version);
+  }
 
   path = _.map(path, function (str) {
     str = sanitize(str);
