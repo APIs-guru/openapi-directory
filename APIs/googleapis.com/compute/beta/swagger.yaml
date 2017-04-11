@@ -3784,7 +3784,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on an image. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on an image. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.images.setLabels
       parameters:
         - description: Project ID for this request.
@@ -4782,7 +4782,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on a snapshot. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on a snapshot. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.snapshots.setLabels
       parameters:
         - description: Project ID for this request.
@@ -11677,7 +11677,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on a disk. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on a disk. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.disks.setLabels
       parameters:
         - description: Project ID for this request.
@@ -13398,7 +13398,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets labels on an instance. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets labels on an instance. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.instances.setLabels
       parameters:
         - description: Project ID for this request.
@@ -16930,6 +16930,7 @@ definitions:
           $ref: '#/definitions/AttachedDisk'
         type: array
       guestAccelerators:
+        description: List of the type and count of accelerator cards attached to the instance.
         items:
           $ref: '#/definitions/AcceleratorConfig'
         type: array
@@ -17759,6 +17760,7 @@ definitions:
   InstancesSetMachineResourcesRequest:
     properties:
       guestAccelerators:
+        description: List of the type and count of accelerator cards attached to the instance.
         items:
           $ref: '#/definitions/AcceleratorConfig'
         type: array

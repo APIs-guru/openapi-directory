@@ -23,6 +23,7 @@ paths:
   /v1/districts:
     get:
       description: Search the SchoolDigger database for districts. You may use any combination of criteria as query parameters.
+      operationId: Districts_GetAllDistricts
       parameters:
         - description: Two character state (e.g. 'CA') - required
           in: query
@@ -141,6 +142,7 @@ paths:
   '/v1/districts/{id}':
     get:
       description: Retrieve a single district record from the SchoolDigger database
+      operationId: Districts_GetDistrict
       parameters:
         - description: The 7 digit District ID (e.g. 0642150)
           in: path
@@ -278,6 +280,7 @@ paths:
   /v1/schools:
     get:
       description: Search the SchoolDigger database for schools. You may use any combination of criteria as query parameters.
+      operationId: Schools_GetAllSchools
       parameters:
         - description: Two character state (e.g. 'CA') - required
           in: query
@@ -431,6 +434,7 @@ paths:
   '/v1/schools/{id}':
     get:
       description: Retrieve a school record from the SchoolDigger database
+      operationId: Schools_GetSchool
       parameters:
         - description: The 12 digit School ID (e.g. 064215006903)
           in: path

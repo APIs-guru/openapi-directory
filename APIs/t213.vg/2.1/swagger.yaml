@@ -270,6 +270,7 @@ paths:
   '/V1/addresses/{addressId}':
     delete:
       description: Delete customer address by ID.
+      operationId: customerAddressRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: addressId
@@ -302,6 +303,7 @@ paths:
   /V1/attributeMetadata/customer:
     get:
       description: Get all attribute metadata.
+      operationId: customerCustomerMetadataV1GetAllAttributesMetadataGet
       responses:
         '200':
           description: 200 Success.
@@ -326,6 +328,7 @@ paths:
   '/V1/attributeMetadata/customer/attribute/{attributeCode}':
     get:
       description: Retrieve attribute metadata.
+      operationId: customerCustomerMetadataV1GetAttributeMetadataGet
       parameters:
         - in: path
           name: attributeCode
@@ -357,6 +360,7 @@ paths:
   /V1/attributeMetadata/customer/custom:
     get:
       description: Get custom attributes metadata for the given data interface.
+      operationId: customerCustomerMetadataV1GetCustomAttributesMetadataGet
       parameters:
         - in: query
           name: dataInterfaceName
@@ -386,6 +390,7 @@ paths:
   '/V1/attributeMetadata/customer/form/{formCode}':
     get:
       description: Retrieve all attributes filtered by form code
+      operationId: customerCustomerMetadataV1GetAttributesGet
       parameters:
         - in: path
           name: formCode
@@ -415,6 +420,7 @@ paths:
   /V1/attributeMetadata/customerAddress:
     get:
       description: Get all attribute metadata.
+      operationId: customerAddressMetadataV1GetAllAttributesMetadataGet
       responses:
         '200':
           description: 200 Success.
@@ -439,6 +445,7 @@ paths:
   '/V1/attributeMetadata/customerAddress/attribute/{attributeCode}':
     get:
       description: Retrieve attribute metadata.
+      operationId: customerAddressMetadataV1GetAttributeMetadataGet
       parameters:
         - in: path
           name: attributeCode
@@ -470,6 +477,7 @@ paths:
   /V1/attributeMetadata/customerAddress/custom:
     get:
       description: Get custom attributes metadata for the given data interface.
+      operationId: customerAddressMetadataV1GetCustomAttributesMetadataGet
       parameters:
         - in: query
           name: dataInterfaceName
@@ -499,6 +507,7 @@ paths:
   '/V1/attributeMetadata/customerAddress/form/{formCode}':
     get:
       description: Retrieve all attributes filtered by form code
+      operationId: customerAddressMetadataV1GetAttributesGet
       parameters:
         - in: path
           name: formCode
@@ -528,6 +537,7 @@ paths:
   /V1/bundle-products/options/add:
     post:
       description: Add new option for bundle product
+      operationId: bundleProductOptionManagementV1SavePost
       parameters:
         - in: body
           name: $body
@@ -560,6 +570,7 @@ paths:
   /V1/bundle-products/options/types:
     get:
       description: Get all types for options for bundle products
+      operationId: bundleProductOptionTypeListV1GetItemsGet
       responses:
         '200':
           description: 200 Success.
@@ -580,6 +591,7 @@ paths:
   '/V1/bundle-products/options/{optionId}':
     put:
       description: Add new option for bundle product
+      operationId: bundleProductOptionManagementV1SavePut
       parameters:
         - in: path
           name: optionId
@@ -616,6 +628,7 @@ paths:
   '/V1/bundle-products/{productSku}/children':
     get:
       description: Get all children for Bundle product
+      operationId: bundleProductLinkManagementV1GetChildrenGet
       parameters:
         - in: path
           name: productSku
@@ -649,6 +662,7 @@ paths:
   '/V1/bundle-products/{sku}/links/{id}':
     put:
       description: ''
+      operationId: bundleProductLinkManagementV1SaveChildPut
       parameters:
         - in: path
           name: sku
@@ -689,6 +703,7 @@ paths:
   '/V1/bundle-products/{sku}/links/{optionId}':
     post:
       description: Add child product to specified Bundle option by product sku
+      operationId: bundleProductLinkManagementV1AddChildByProductSkuPost
       parameters:
         - in: path
           name: sku
@@ -729,6 +744,7 @@ paths:
   '/V1/bundle-products/{sku}/options/all':
     get:
       description: Get all options for bundle product
+      operationId: bundleProductOptionRepositoryV1GetListGet
       parameters:
         - in: path
           name: sku
@@ -758,6 +774,7 @@ paths:
   '/V1/bundle-products/{sku}/options/{optionId}':
     delete:
       description: Remove bundle option
+      operationId: bundleProductOptionRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: sku
@@ -788,6 +805,7 @@ paths:
         - bundleProductOptionRepositoryV1
     get:
       description: Get option for bundle product
+      operationId: bundleProductOptionRepositoryV1GetGet
       parameters:
         - in: path
           name: sku
@@ -819,6 +837,7 @@ paths:
   '/V1/bundle-products/{sku}/options/{optionId}/children/{childSku}':
     delete:
       description: Remove product from Bundle product option
+      operationId: bundleProductLinkManagementV1RemoveChildDelete
       parameters:
         - in: path
           name: sku
@@ -854,6 +873,7 @@ paths:
   /V1/carts/:
     post:
       description: Creates an empty cart and quote for a guest.
+      operationId: quoteCartManagementV1CreateEmptyCartPost
       responses:
         '200':
           description: 200 Success.
@@ -877,6 +897,7 @@ paths:
   '/V1/carts/guest-carts/{cartId}/checkGiftCard/{giftCardCode}':
     get:
       description: ''
+      operationId: giftCardAccountGuestGiftCardAccountManagementV1CheckGiftCardGet
       parameters:
         - in: path
           name: cartId
@@ -904,6 +925,7 @@ paths:
   '/V1/carts/guest-carts/{cartId}/giftCards':
     post:
       description: ''
+      operationId: giftCardAccountGuestGiftCardAccountManagementV1AddGiftCardPost
       parameters:
         - in: path
           name: cartId
@@ -932,6 +954,7 @@ paths:
   '/V1/carts/guest-carts/{cartId}/giftCards/{giftCardCode}':
     delete:
       description: Remove GiftCard Account entity
+      operationId: giftCardAccountGuestGiftCardAccountManagementV1DeleteByQuoteIdDelete
       parameters:
         - in: path
           name: cartId
@@ -955,6 +978,7 @@ paths:
   /V1/carts/licence:
     get:
       description: Lists active checkout agreements.
+      operationId: checkoutAgreementsCheckoutAgreementsRepositoryV1GetListGet
       responses:
         '200':
           description: 200 Success.
@@ -975,6 +999,7 @@ paths:
   /V1/carts/mine:
     get:
       description: Returns information for the cart for a specified customer.
+      operationId: quoteCartManagementV1GetCartForCustomerGet
       responses:
         '200':
           description: 200 Success.
@@ -1018,6 +1043,7 @@ paths:
         - quoteCartManagementV1
     put:
       description: Save quote
+      operationId: quoteCartRepositoryV1SavePut
       parameters:
         - in: body
           name: $body
@@ -1042,6 +1068,7 @@ paths:
   /V1/carts/mine/balance/apply:
     post:
       description: Apply store credit
+      operationId: customerBalanceBalanceManagementV1ApplyPost
       responses:
         '200':
           description: 200 Success.
@@ -1116,6 +1143,7 @@ paths:
   '/V1/carts/mine/checkGiftCard/{giftCardCode}':
     get:
       description: ''
+      operationId: giftCardAccountGiftCardAccountManagementV1CheckGiftCardGet
       parameters:
         - in: path
           name: giftCardCode
@@ -1143,6 +1171,7 @@ paths:
   /V1/carts/mine/collect-totals:
     put:
       description: Set shipping/billing methods and additional data for cart and collect totals.
+      operationId: quoteCartTotalManagementV1CollectTotalsPut
       parameters:
         - in: body
           name: $body
@@ -1427,6 +1456,7 @@ paths:
   /V1/carts/mine/giftCards:
     post:
       description: ''
+      operationId: giftCardAccountGiftCardAccountManagementV1SaveByQuoteIdPost
       parameters:
         - in: body
           name: $body
@@ -1628,6 +1658,7 @@ paths:
   /V1/carts/mine/payment-information:
     get:
       description: Get payment information
+      operationId: checkoutPaymentInformationManagementV1GetPaymentInformationGet
       responses:
         '200':
           description: 200 Success.
@@ -1645,6 +1676,7 @@ paths:
         - checkoutPaymentInformationManagementV1
     post:
       description: Set payment information and place order for a specified cart.
+      operationId: checkoutPaymentInformationManagementV1SavePaymentInformationAndPlaceOrderPost
       parameters:
         - in: body
           name: $body
@@ -1759,6 +1791,7 @@ paths:
   /V1/carts/mine/set-payment-information:
     post:
       description: Set payment information for a specified cart.
+      operationId: checkoutPaymentInformationManagementV1SavePaymentInformationPost
       parameters:
         - in: body
           name: $body
@@ -1897,6 +1930,7 @@ paths:
   /V1/carts/search:
     get:
       description: 'Enables administrative users to list carts that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included.  See http://devdocs.magento.com/codelinks/attributes.html#CartRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: quoteCartRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -1944,6 +1978,7 @@ paths:
   '/V1/carts/{cartId}':
     get:
       description: Enables an administrative user to return information for a specified cart.
+      operationId: quoteCartRepositoryV1GetGet
       parameters:
         - in: path
           name: cartId
@@ -1970,6 +2005,7 @@ paths:
         - quoteCartRepositoryV1
     put:
       description: Assigns a specified customer to a specified shopping cart.
+      operationId: quoteCartManagementV1AssignCustomerPut
       parameters:
         - description: The cart ID.
           in: path
@@ -2369,6 +2405,7 @@ paths:
   '/V1/carts/{cartId}/giftCards':
     put:
       description: ''
+      operationId: giftCardAccountGiftCardAccountManagementV1SaveByQuoteIdPut
       parameters:
         - in: path
           name: cartId
@@ -2786,6 +2823,7 @@ paths:
   '/V1/carts/{quoteId}/giftCards':
     get:
       description: Return GiftCard Account cards
+      operationId: giftCardAccountGiftCardAccountManagementV1GetListByQuoteIdGet
       parameters:
         - in: path
           name: quoteId
@@ -2845,6 +2883,7 @@ paths:
   /V1/categories:
     get:
       description: Retrieve list of categories
+      operationId: catalogCategoryManagementV1GetTreeGet
       parameters:
         - in: query
           name: rootCategoryId
@@ -2875,6 +2914,7 @@ paths:
         - catalogCategoryManagementV1
     post:
       description: Create category service
+      operationId: catalogCategoryRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -2907,6 +2947,7 @@ paths:
   /V1/categories/attributes:
     get:
       description: Retrieve all attributes for entity type
+      operationId: catalogCategoryAttributeRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -2954,6 +2995,7 @@ paths:
   '/V1/categories/attributes/{attributeCode}':
     get:
       description: Retrieve specific attribute
+      operationId: catalogCategoryAttributeRepositoryV1GetGet
       parameters:
         - in: path
           name: attributeCode
@@ -2977,6 +3019,7 @@ paths:
   '/V1/categories/attributes/{attributeCode}/options':
     get:
       description: Retrieve list of attribute options
+      operationId: catalogCategoryAttributeOptionManagementV1GetItemsGet
       parameters:
         - in: path
           name: attributeCode
@@ -3006,6 +3049,7 @@ paths:
   '/V1/categories/{categoryId}':
     delete:
       description: Delete category by identifier
+      operationId: catalogCategoryRepositoryV1DeleteByIdentifierDelete
       parameters:
         - in: path
           name: categoryId
@@ -3033,6 +3077,7 @@ paths:
         - catalogCategoryRepositoryV1
     get:
       description: Get info about category by category id
+      operationId: catalogCategoryRepositoryV1GetGet
       parameters:
         - in: path
           name: categoryId
@@ -3064,6 +3109,7 @@ paths:
   '/V1/categories/{categoryId}/move':
     put:
       description: Move category
+      operationId: catalogCategoryManagementV1MovePut
       parameters:
         - in: path
           name: categoryId
@@ -3106,6 +3152,7 @@ paths:
   '/V1/categories/{categoryId}/products':
     get:
       description: Get products assigned to category
+      operationId: catalogCategoryLinkManagementV1GetAssignedProductsGet
       parameters:
         - in: path
           name: categoryId
@@ -3130,6 +3177,7 @@ paths:
         - catalogCategoryLinkManagementV1
     post:
       description: Assign a product to the required category
+      operationId: catalogCategoryLinkRepositoryV1SavePost
       parameters:
         - in: path
           name: categoryId
@@ -3166,6 +3214,7 @@ paths:
         - catalogCategoryLinkRepositoryV1
     put:
       description: Assign a product to the required category
+      operationId: catalogCategoryLinkRepositoryV1SavePut
       parameters:
         - in: path
           name: categoryId
@@ -3203,6 +3252,7 @@ paths:
   '/V1/categories/{categoryId}/products/{sku}':
     delete:
       description: Remove the product assignment from the category by category id and sku
+      operationId: catalogCategoryLinkRepositoryV1DeleteByIdsDelete
       parameters:
         - in: path
           name: categoryId
@@ -3235,6 +3285,7 @@ paths:
   '/V1/categories/{id}':
     put:
       description: Create category service
+      operationId: catalogCategoryRepositoryV1SavePut
       parameters:
         - in: path
           name: id
@@ -3271,6 +3322,7 @@ paths:
   /V1/cmsBlock:
     post:
       description: Save block.
+      operationId: cmsBlockRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -3303,6 +3355,7 @@ paths:
   /V1/cmsBlock/search:
     get:
       description: Retrieve blocks matching the specified criteria.
+      operationId: cmsBlockRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -3354,6 +3407,7 @@ paths:
   '/V1/cmsBlock/{blockId}':
     delete:
       description: Delete block by ID.
+      operationId: cmsBlockRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: blockId
@@ -3385,6 +3439,7 @@ paths:
         - cmsBlockRepositoryV1
     get:
       description: Retrieve block.
+      operationId: cmsBlockRepositoryV1GetByIdGet
       parameters:
         - in: path
           name: blockId
@@ -3412,6 +3467,7 @@ paths:
   '/V1/cmsBlock/{id}':
     put:
       description: Save block.
+      operationId: cmsBlockRepositoryV1SavePut
       parameters:
         - in: path
           name: id
@@ -3448,6 +3504,7 @@ paths:
   /V1/cmsPage:
     post:
       description: Save page.
+      operationId: cmsPageRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -3480,6 +3537,7 @@ paths:
   /V1/cmsPage/search:
     get:
       description: Retrieve pages matching the specified criteria.
+      operationId: cmsPageRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -3531,6 +3589,7 @@ paths:
   '/V1/cmsPage/{id}':
     put:
       description: Save page.
+      operationId: cmsPageRepositoryV1SavePut
       parameters:
         - in: path
           name: id
@@ -3567,6 +3626,7 @@ paths:
   '/V1/cmsPage/{pageId}':
     delete:
       description: Delete page by ID.
+      operationId: cmsPageRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: pageId
@@ -3598,6 +3658,7 @@ paths:
         - cmsPageRepositoryV1
     get:
       description: Retrieve page.
+      operationId: cmsPageRepositoryV1GetByIdGet
       parameters:
         - in: path
           name: pageId
@@ -3625,6 +3686,7 @@ paths:
   /V1/configurable-products/variation:
     put:
       description: Generate variation based on same product
+      operationId: configurableProductConfigurableProductManagementV1GenerateVariationPut
       parameters:
         - in: body
           name: $body
@@ -3660,6 +3722,7 @@ paths:
   '/V1/configurable-products/{sku}/child':
     post:
       description: ''
+      operationId: configurableProductLinkManagementV1AddChildPost
       parameters:
         - in: path
           name: sku
@@ -3692,6 +3755,7 @@ paths:
   '/V1/configurable-products/{sku}/children':
     get:
       description: Get all children for Configurable product
+      operationId: configurableProductLinkManagementV1GetChildrenGet
       parameters:
         - in: path
           name: sku
@@ -3717,6 +3781,7 @@ paths:
   '/V1/configurable-products/{sku}/children/{childSku}':
     delete:
       description: Remove configurable product option
+      operationId: configurableProductLinkManagementV1RemoveChildDelete
       parameters:
         - in: path
           name: sku
@@ -3748,6 +3813,7 @@ paths:
   '/V1/configurable-products/{sku}/options':
     post:
       description: Save option
+      operationId: configurableProductOptionRepositoryV1SavePost
       parameters:
         - in: path
           name: sku
@@ -3788,6 +3854,7 @@ paths:
   '/V1/configurable-products/{sku}/options/all':
     get:
       description: Get all options for configurable product
+      operationId: configurableProductOptionRepositoryV1GetListGet
       parameters:
         - in: path
           name: sku
@@ -3817,6 +3884,7 @@ paths:
   '/V1/configurable-products/{sku}/options/{id}':
     delete:
       description: Remove option from configurable product
+      operationId: configurableProductOptionRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: sku
@@ -3847,6 +3915,7 @@ paths:
         - configurableProductOptionRepositoryV1
     get:
       description: Get option for configurable product
+      operationId: configurableProductOptionRepositoryV1GetGet
       parameters:
         - in: path
           name: sku
@@ -3877,6 +3946,7 @@ paths:
         - configurableProductOptionRepositoryV1
     put:
       description: Save option
+      operationId: configurableProductOptionRepositoryV1SavePut
       parameters:
         - in: path
           name: sku
@@ -3921,6 +3991,7 @@ paths:
   /V1/coupons:
     post:
       description: Save a coupon.
+      operationId: salesRuleCouponRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -3957,6 +4028,7 @@ paths:
   /V1/coupons/deleteByCodes:
     post:
       description: Delete coupon by coupon codes.
+      operationId: salesRuleCouponManagementV1DeleteByCodesPost
       parameters:
         - in: body
           name: $body
@@ -3997,6 +4069,7 @@ paths:
   /V1/coupons/deleteByIds:
     post:
       description: Delete coupon by coupon ids.
+      operationId: salesRuleCouponManagementV1DeleteByIdsPost
       parameters:
         - in: body
           name: $body
@@ -4037,6 +4110,7 @@ paths:
   /V1/coupons/generate:
     post:
       description: Generate coupon for a rule
+      operationId: salesRuleCouponManagementV1GeneratePost
       parameters:
         - in: body
           name: $body
@@ -4071,6 +4145,7 @@ paths:
   /V1/coupons/search:
     get:
       description: 'Retrieve a coupon using the specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#CouponRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: salesRuleCouponRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -4122,6 +4197,7 @@ paths:
   '/V1/coupons/{couponId}':
     delete:
       description: Delete coupon by coupon id.
+      operationId: salesRuleCouponRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: couponId
@@ -4153,6 +4229,7 @@ paths:
         - salesRuleCouponRepositoryV1
     get:
       description: Get coupon by coupon id.
+      operationId: salesRuleCouponRepositoryV1GetByIdGet
       parameters:
         - in: path
           name: couponId
@@ -4183,6 +4260,7 @@ paths:
         - salesRuleCouponRepositoryV1
     put:
       description: Save a coupon.
+      operationId: salesRuleCouponRepositoryV1SavePut
       parameters:
         - in: path
           name: couponId
@@ -4223,6 +4301,7 @@ paths:
   /V1/creditmemo:
     post:
       description: Performs persist operations for a specified credit memo.
+      operationId: salesCreditmemoRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -4251,6 +4330,7 @@ paths:
   /V1/creditmemo/refund:
     post:
       description: Prepare creditmemo to refund and save it.
+      operationId: salesCreditmemoManagementV1RefundPost
       parameters:
         - in: body
           name: $body
@@ -4281,6 +4361,7 @@ paths:
   '/V1/creditmemo/{id}':
     get:
       description: Loads a specified credit memo.
+      operationId: salesCreditmemoRepositoryV1GetGet
       parameters:
         - description: The credit memo ID.
           in: path
@@ -4304,6 +4385,7 @@ paths:
         - salesCreditmemoRepositoryV1
     put:
       description: Cancels a specified credit memo.
+      operationId: salesCreditmemoManagementV1CancelPut
       parameters:
         - description: The credit memo ID.
           in: path
@@ -4332,6 +4414,7 @@ paths:
   '/V1/creditmemo/{id}/comments':
     get:
       description: Lists comments for a specified credit memo.
+      operationId: salesCreditmemoManagementV1GetCommentsListGet
       parameters:
         - description: The credit memo ID.
           in: path
@@ -4355,6 +4438,7 @@ paths:
         - salesCreditmemoManagementV1
     post:
       description: Performs persist operations for a specified entity.
+      operationId: salesCreditmemoCommentRepositoryV1SavePost
       parameters:
         - in: path
           name: id
@@ -4387,6 +4471,7 @@ paths:
   '/V1/creditmemo/{id}/emails':
     post:
       description: Emails a user a specified credit memo.
+      operationId: salesCreditmemoManagementV1NotifyPost
       parameters:
         - description: The credit memo ID.
           in: path
@@ -4411,6 +4496,7 @@ paths:
   /V1/creditmemos:
     get:
       description: 'Lists credit memos that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#CreditmemoRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: salesCreditmemoRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -4458,6 +4544,7 @@ paths:
   /V1/customerGroups:
     post:
       description: Save customer group.
+      operationId: customerGroupRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -4556,6 +4643,7 @@ paths:
   /V1/customerGroups/search:
     get:
       description: 'Retrieve customer groups. The list of groups can be filtered to exclude the NOT_LOGGED_IN group using the first parameter and/or it can be filtered by tax class. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#GroupRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: customerGroupRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -4607,6 +4695,7 @@ paths:
   '/V1/customerGroups/{id}':
     delete:
       description: Delete customer group by ID.
+      operationId: customerGroupRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: id
@@ -4638,6 +4727,7 @@ paths:
         - customerGroupRepositoryV1
     get:
       description: Get customer group by group ID.
+      operationId: customerGroupRepositoryV1GetByIdGet
       parameters:
         - in: path
           name: id
@@ -4668,6 +4758,7 @@ paths:
         - customerGroupRepositoryV1
     put:
       description: Save customer group.
+      operationId: customerGroupRepositoryV1SavePut
       parameters:
         - in: path
           name: id
@@ -4708,6 +4799,7 @@ paths:
   '/V1/customerGroups/{id}/permissions':
     get:
       description: Check if customer group can be deleted.
+      operationId: customerGroupManagementV1IsReadonlyGet
       parameters:
         - in: path
           name: id
@@ -4739,6 +4831,7 @@ paths:
   /V1/customers:
     post:
       description: Create customer account. Perform necessary business operations like sending email.
+      operationId: customerAccountManagementV1CreateAccountPost
       parameters:
         - in: body
           name: $body
@@ -4771,6 +4864,7 @@ paths:
   '/V1/customers/addresses/{addressId}':
     get:
       description: Retrieve customer address.
+      operationId: customerAddressRepositoryV1GetByIdGet
       parameters:
         - in: path
           name: addressId
@@ -4798,6 +4892,7 @@ paths:
   /V1/customers/confirm:
     post:
       description: Resend confirmation email.
+      operationId: customerAccountManagementV1ResendConfirmationPost
       parameters:
         - in: body
           name: $body
@@ -4836,6 +4931,7 @@ paths:
   /V1/customers/isEmailAvailable:
     post:
       description: Check if given email is associated with a customer account in given website.
+      operationId: customerAccountManagementV1IsEmailAvailablePost
       parameters:
         - in: body
           name: $body
@@ -4930,6 +5026,7 @@ paths:
   /V1/customers/me/activate:
     put:
       description: Activate a customer account using a key that was sent in a confirmation email.
+      operationId: customerAccountManagementV1ActivateByIdPut
       parameters:
         - in: body
           name: $body
@@ -4988,6 +5085,7 @@ paths:
   /V1/customers/me/password:
     put:
       description: Change customer password.
+      operationId: customerAccountManagementV1ChangePasswordByIdPut
       parameters:
         - in: body
           name: $body
@@ -5050,6 +5148,7 @@ paths:
   /V1/customers/password:
     put:
       description: Send an email to the customer with a password reset link.
+      operationId: customerAccountManagementV1InitiatePasswordResetPut
       parameters:
         - in: body
           name: $body
@@ -5084,6 +5183,7 @@ paths:
   /V1/customers/search:
     get:
       description: 'Retrieve customers which match a specified criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#CustomerRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: customerCustomerRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -5135,6 +5235,7 @@ paths:
   /V1/customers/validate:
     put:
       description: Validate customer data.
+      operationId: customerAccountManagementV1ValidatePut
       parameters:
         - in: body
           name: $body
@@ -5167,6 +5268,7 @@ paths:
   '/V1/customers/{customerId}':
     delete:
       description: Delete customer by ID.
+      operationId: customerCustomerRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: customerId
@@ -5289,6 +5391,7 @@ paths:
   '/V1/customers/{customerId}/confirm':
     get:
       description: Gets the account confirmation status.
+      operationId: customerAccountManagementV1GetConfirmationStatusGet
       parameters:
         - in: path
           name: customerId
@@ -5316,6 +5419,7 @@ paths:
   '/V1/customers/{customerId}/password/resetLinkToken/{resetPasswordLinkToken}':
     get:
       description: Check if password reset token is valid.
+      operationId: customerAccountManagementV1ValidateResetPasswordLinkTokenGet
       parameters:
         - in: path
           name: customerId
@@ -5348,6 +5452,7 @@ paths:
   '/V1/customers/{customerId}/permissions/readonly':
     get:
       description: Check if customer can be deleted.
+      operationId: customerAccountManagementV1IsReadonlyGet
       parameters:
         - in: path
           name: customerId
@@ -5410,6 +5515,7 @@ paths:
   '/V1/customers/{email}/activate':
     put:
       description: Activate a customer account using a key that was sent in a confirmation email.
+      operationId: customerAccountManagementV1ActivatePut
       parameters:
         - in: path
           name: email
@@ -5488,6 +5594,7 @@ paths:
   /V1/directory/countries:
     get:
       description: Get all countries and regions information for the store.
+      operationId: directoryCountryInformationAcquirerV1GetCountriesInfoGet
       responses:
         '200':
           description: 200 Success.
@@ -5504,6 +5611,7 @@ paths:
   '/V1/directory/countries/{countryId}':
     get:
       description: Get country and region information for the store.
+      operationId: directoryCountryInformationAcquirerV1GetCountryInfoGet
       parameters:
         - in: path
           name: countryId
@@ -5527,6 +5635,7 @@ paths:
   /V1/directory/currency:
     get:
       description: Get currency information for the store.
+      operationId: directoryCurrencyInformationAcquirerV1GetCurrencyInfoGet
       responses:
         '200':
           description: 200 Success.
@@ -5541,6 +5650,7 @@ paths:
   /V1/eav/attribute-sets:
     post:
       description: Create attribute set from data
+      operationId: eavAttributeSetManagementV1CreatePost
       parameters:
         - in: body
           name: $body
@@ -5579,6 +5689,7 @@ paths:
   /V1/eav/attribute-sets/list:
     get:
       description: 'Retrieve list of Attribute Sets This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#AttributeSetRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: eavAttributeSetRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -5626,6 +5737,7 @@ paths:
   '/V1/eav/attribute-sets/{attributeSetId}':
     delete:
       description: Remove attribute set by given ID
+      operationId: eavAttributeSetRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: attributeSetId
@@ -5652,6 +5764,7 @@ paths:
         - eavAttributeSetRepositoryV1
     get:
       description: Retrieve attribute set information based on given ID
+      operationId: eavAttributeSetRepositoryV1GetGet
       parameters:
         - in: path
           name: attributeSetId
@@ -5678,6 +5791,7 @@ paths:
         - eavAttributeSetRepositoryV1
     put:
       description: Save attribute set data
+      operationId: eavAttributeSetRepositoryV1SavePut
       parameters:
         - in: path
           name: attributeSetId
@@ -5718,6 +5832,7 @@ paths:
   /V1/gift-wrappings:
     get:
       description: Return list of gift wrapping data objects based on search criteria
+      operationId: giftWrappingWrappingRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -5764,6 +5879,7 @@ paths:
         - giftWrappingWrappingRepositoryV1
     post:
       description: Create/Update new gift wrapping with data object values
+      operationId: giftWrappingWrappingRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -5798,6 +5914,7 @@ paths:
   '/V1/gift-wrappings/{id}':
     delete:
       description: Delete gift wrapping
+      operationId: giftWrappingWrappingRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: id
@@ -5824,6 +5941,7 @@ paths:
         - giftWrappingWrappingRepositoryV1
     get:
       description: Return data object for specified wrapping ID and store.
+      operationId: giftWrappingWrappingRepositoryV1GetGet
       parameters:
         - in: path
           name: id
@@ -5851,6 +5969,7 @@ paths:
   '/V1/gift-wrappings/{wrappingId}':
     put:
       description: Create/Update new gift wrapping with data object values
+      operationId: giftWrappingWrappingRepositoryV1SavePut
       parameters:
         - in: path
           name: wrappingId
@@ -5889,6 +6008,7 @@ paths:
   /V1/giftregistry/mine/estimate-shipping-methods:
     post:
       description: Estimate shipping
+      operationId: giftRegistryShippingMethodManagementV1EstimateByRegistryIdPost
       parameters:
         - in: body
           name: $body
@@ -5925,6 +6045,7 @@ paths:
   /V1/guest-carts:
     post:
       description: Enable an customer or guest user to create an empty cart and quote for an anonymous customer.
+      operationId: quoteGuestCartManagementV1CreateEmptyCartPost
       responses:
         '200':
           description: 200 Success.
@@ -5944,6 +6065,7 @@ paths:
   '/V1/guest-carts/{cartId}':
     get:
       description: Enable a guest user to return information for a specified cart.
+      operationId: quoteGuestCartRepositoryV1GetGet
       parameters:
         - in: path
           name: cartId
@@ -5966,6 +6088,7 @@ paths:
         - quoteGuestCartRepositoryV1
     put:
       description: Assign a specified customer to a specified shopping cart.
+      operationId: quoteGuestCartManagementV1AssignCustomerPut
       parameters:
         - description: The cart ID.
           in: path
@@ -6003,6 +6126,7 @@ paths:
   '/V1/guest-carts/{cartId}/billing-address':
     get:
       description: Return the billing address for a specified quote.
+      operationId: quoteGuestBillingAddressManagementV1GetGet
       parameters:
         - description: The cart ID.
           in: path
@@ -6026,6 +6150,7 @@ paths:
         - quoteGuestBillingAddressManagementV1
     post:
       description: Assign a specified billing address to a specified cart.
+      operationId: quoteGuestBillingAddressManagementV1AssignPost
       parameters:
         - description: The cart ID.
           in: path
@@ -6060,6 +6185,7 @@ paths:
   '/V1/guest-carts/{cartId}/collect-totals':
     put:
       description: Set shipping/billing methods and additional data for cart and collect totals for guest.
+      operationId: quoteGuestCartTotalManagementV1CollectTotalsPut
       parameters:
         - description: The cart ID.
           in: path
@@ -6097,6 +6223,7 @@ paths:
   '/V1/guest-carts/{cartId}/coupons':
     delete:
       description: Delete a coupon from a specified cart.
+      operationId: quoteGuestCouponManagementV1RemoveDelete
       parameters:
         - description: The cart ID.
           in: path
@@ -6120,6 +6247,7 @@ paths:
         - quoteGuestCouponManagementV1
     get:
       description: Return information for a coupon in a specified cart.
+      operationId: quoteGuestCouponManagementV1GetGet
       parameters:
         - description: The cart ID.
           in: path
@@ -6145,6 +6273,7 @@ paths:
   '/V1/guest-carts/{cartId}/coupons/{couponCode}':
     put:
       description: Add a coupon by code to a specified cart.
+      operationId: quoteGuestCouponManagementV1SetPut
       parameters:
         - description: The cart ID.
           in: path
@@ -6174,6 +6303,7 @@ paths:
   '/V1/guest-carts/{cartId}/estimate-shipping-methods':
     post:
       description: Estimate shipping by address and return list of available shipping methods
+      operationId: quoteGuestShipmentEstimationV1EstimateByExtendedAddressPost
       parameters:
         - in: path
           name: cartId
@@ -6205,6 +6335,7 @@ paths:
   '/V1/guest-carts/{cartId}/gift-message':
     get:
       description: Return the gift message for a specified order.
+      operationId: giftMessageGuestCartRepositoryV1GetGet
       parameters:
         - description: The shopping cart ID.
           in: path
@@ -6224,6 +6355,7 @@ paths:
         - giftMessageGuestCartRepositoryV1
     post:
       description: Set the gift message for an entire order.
+      operationId: giftMessageGuestCartRepositoryV1SavePost
       parameters:
         - description: The cart ID.
           in: path
@@ -6257,6 +6389,7 @@ paths:
   '/V1/guest-carts/{cartId}/gift-message/{itemId}':
     get:
       description: Return the gift message for a specified item in a specified shopping cart.
+      operationId: giftMessageGuestItemRepositoryV1GetGet
       parameters:
         - description: The shopping cart ID.
           in: path
@@ -6285,6 +6418,7 @@ paths:
         - giftMessageGuestItemRepositoryV1
     post:
       description: Set the gift message for a specified item in a specified shopping cart.
+      operationId: giftMessageGuestItemRepositoryV1SavePost
       parameters:
         - description: The cart ID.
           in: path
@@ -6323,6 +6457,7 @@ paths:
   '/V1/guest-carts/{cartId}/items':
     get:
       description: List items that are assigned to a specified cart.
+      operationId: quoteGuestCartItemRepositoryV1GetListGet
       parameters:
         - description: The cart ID.
           in: path
@@ -6349,6 +6484,7 @@ paths:
         - quoteGuestCartItemRepositoryV1
     post:
       description: Add the specified item to the specified cart.
+      operationId: quoteGuestCartItemRepositoryV1SavePost
       parameters:
         - in: path
           name: cartId
@@ -6381,6 +6517,7 @@ paths:
   '/V1/guest-carts/{cartId}/items/{itemId}':
     delete:
       description: Remove the specified item from the specified cart.
+      operationId: quoteGuestCartItemRepositoryV1DeleteByIdDelete
       parameters:
         - description: The cart ID.
           in: path
@@ -6409,6 +6546,7 @@ paths:
         - quoteGuestCartItemRepositoryV1
     put:
       description: Add the specified item to the specified cart.
+      operationId: quoteGuestCartItemRepositoryV1SavePut
       parameters:
         - in: path
           name: cartId
@@ -6445,6 +6583,7 @@ paths:
   '/V1/guest-carts/{cartId}/order':
     put:
       description: Place an order for a specified cart.
+      operationId: quoteGuestCartManagementV1PlaceOrderPut
       parameters:
         - description: The cart ID.
           in: path
@@ -6477,6 +6616,7 @@ paths:
   '/V1/guest-carts/{cartId}/payment-information':
     get:
       description: Get payment information
+      operationId: checkoutGuestPaymentInformationManagementV1GetPaymentInformationGet
       parameters:
         - in: path
           name: cartId
@@ -6495,6 +6635,7 @@ paths:
         - checkoutGuestPaymentInformationManagementV1
     post:
       description: Set payment information and place order for a specified cart.
+      operationId: checkoutGuestPaymentInformationManagementV1SavePaymentInformationAndPlaceOrderPost
       parameters:
         - in: path
           name: cartId
@@ -6533,6 +6674,7 @@ paths:
   '/V1/guest-carts/{cartId}/payment-methods':
     get:
       description: 'List available payment methods for a specified shopping cart. This call returns an array of objects, but detailed information about each object’s attributes might not be included.  See http://devdocs.magento.com/codelinks/attributes.html#GuestPaymentMethodManagementInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: quoteGuestPaymentMethodManagementV1GetListGet
       parameters:
         - description: The cart ID.
           in: path
@@ -6560,6 +6702,7 @@ paths:
   '/V1/guest-carts/{cartId}/selected-payment-method':
     get:
       description: Return the payment method for a specified shopping cart.
+      operationId: quoteGuestPaymentMethodManagementV1GetGet
       parameters:
         - description: The cart ID.
           in: path
@@ -6583,6 +6726,7 @@ paths:
         - quoteGuestPaymentMethodManagementV1
     put:
       description: Add a specified payment method to a specified shopping cart.
+      operationId: quoteGuestPaymentMethodManagementV1SetPut
       parameters:
         - description: The cart ID.
           in: path
@@ -6617,6 +6761,7 @@ paths:
   '/V1/guest-carts/{cartId}/set-payment-information':
     post:
       description: Set payment information for a specified cart.
+      operationId: checkoutGuestPaymentInformationManagementV1SavePaymentInformationPost
       parameters:
         - in: path
           name: cartId
@@ -6655,6 +6800,7 @@ paths:
   '/V1/guest-carts/{cartId}/shipping-information':
     post:
       description: ''
+      operationId: checkoutGuestShippingInformationManagementV1SaveAddressInformationPost
       parameters:
         - in: path
           name: cartId
@@ -6683,6 +6829,7 @@ paths:
   '/V1/guest-carts/{cartId}/shipping-methods':
     get:
       description: List applicable shipping methods for a specified quote.
+      operationId: quoteGuestShippingMethodManagementV1GetListGet
       parameters:
         - description: The shopping cart ID.
           in: path
@@ -6710,6 +6857,7 @@ paths:
   '/V1/guest-carts/{cartId}/totals':
     get:
       description: Return quote totals data for a specified cart.
+      operationId: quoteGuestCartTotalRepositoryV1GetGet
       parameters:
         - description: The cart ID.
           in: path
@@ -6734,6 +6882,7 @@ paths:
   '/V1/guest-carts/{cartId}/totals-information':
     post:
       description: Calculate quote totals based on address and shipping method.
+      operationId: checkoutGuestTotalsInformationManagementV1CalculatePost
       parameters:
         - in: path
           name: cartId
@@ -6762,6 +6911,7 @@ paths:
   '/V1/guest-giftregistry/{cartId}/estimate-shipping-methods':
     post:
       description: Estimate shipping
+      operationId: giftRegistryGuestCartShippingMethodManagementV1EstimateByRegistryIdPost
       parameters:
         - description: The shopping cart ID.
           in: path
@@ -6799,6 +6949,7 @@ paths:
   /V1/integration/admin/token:
     post:
       description: Create access token for admin given the admin credentials.
+      operationId: integrationAdminTokenServiceV1CreateAdminAccessTokenPost
       parameters:
         - in: body
           name: $body
@@ -6835,6 +6986,7 @@ paths:
   /V1/integration/customer/token:
     post:
       description: Create access token for admin given the customer credentials.
+      operationId: integrationCustomerTokenServiceV1CreateCustomerAccessTokenPost
       parameters:
         - in: body
           name: $body
@@ -6867,6 +7019,7 @@ paths:
   '/V1/invoice/{invoiceId}/refund':
     post:
       description: Create refund for invoice
+      operationId: salesRefundInvoiceV1ExecutePost
       parameters:
         - in: path
           name: invoiceId
@@ -6909,6 +7062,7 @@ paths:
   /V1/invoices:
     get:
       description: 'Lists invoices that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#InvoiceRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: salesInvoiceRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -6956,6 +7110,7 @@ paths:
   /V1/invoices/:
     post:
       description: Performs persist operations for a specified invoice.
+      operationId: salesInvoiceRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -6984,6 +7139,7 @@ paths:
   /V1/invoices/comments:
     post:
       description: Performs persist operations for a specified invoice comment.
+      operationId: salesInvoiceCommentRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -7012,6 +7168,7 @@ paths:
   '/V1/invoices/{id}':
     get:
       description: Loads a specified invoice.
+      operationId: salesInvoiceRepositoryV1GetGet
       parameters:
         - description: The invoice ID.
           in: path
@@ -7036,6 +7193,7 @@ paths:
   '/V1/invoices/{id}/capture':
     post:
       description: Sets invoice capture.
+      operationId: salesInvoiceManagementV1SetCapturePost
       parameters:
         - in: path
           name: id
@@ -7059,6 +7217,7 @@ paths:
   '/V1/invoices/{id}/comments':
     get:
       description: Lists comments for a specified invoice.
+      operationId: salesInvoiceManagementV1GetCommentsListGet
       parameters:
         - description: The invoice ID.
           in: path
@@ -7083,6 +7242,7 @@ paths:
   '/V1/invoices/{id}/emails':
     post:
       description: Emails a user a specified invoice.
+      operationId: salesInvoiceManagementV1NotifyPost
       parameters:
         - description: The invoice ID.
           in: path
@@ -7107,6 +7267,7 @@ paths:
   '/V1/invoices/{id}/void':
     post:
       description: Voids a specified invoice.
+      operationId: salesInvoiceManagementV1SetVoidPost
       parameters:
         - description: The invoice ID.
           in: path
@@ -7131,6 +7292,7 @@ paths:
   /V1/modules:
     get:
       description: Returns an array of enabled modules
+      operationId: backendModuleServiceV1GetModulesGet
       responses:
         '200':
           description: 200 Success.
@@ -7151,6 +7313,7 @@ paths:
   '/V1/order/{orderId}/invoice':
     post:
       description: ''
+      operationId: salesInvoiceOrderV1ExecutePost
       parameters:
         - in: path
           name: orderId
@@ -7193,6 +7356,7 @@ paths:
   '/V1/order/{orderId}/refund':
     post:
       description: Create offline refund for order
+      operationId: salesRefundOrderV1ExecutePost
       parameters:
         - in: path
           name: orderId
@@ -7233,6 +7397,7 @@ paths:
   '/V1/order/{orderId}/ship':
     post:
       description: Creates new Shipment for given Order.
+      operationId: salesShipOrderV1ExecutePost
       parameters:
         - in: path
           name: orderId
@@ -7282,6 +7447,7 @@ paths:
   /V1/orders:
     get:
       description: 'Lists orders that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#OrderRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: salesOrderRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -7329,6 +7495,7 @@ paths:
   /V1/orders/:
     post:
       description: Performs persist operations for a specified order.
+      operationId: salesOrderRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -7357,6 +7524,7 @@ paths:
   /V1/orders/create:
     put:
       description: Performs persist operations for a specified order.
+      operationId: salesOrderRepositoryV1SavePut
       parameters:
         - in: body
           name: $body
@@ -7385,6 +7553,7 @@ paths:
   /V1/orders/items:
     get:
       description: 'Lists order items that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#OrderItemRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: salesOrderItemRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -7432,6 +7601,7 @@ paths:
   '/V1/orders/items/{id}':
     get:
       description: Loads a specified order item.
+      operationId: salesOrderItemRepositoryV1GetGet
       parameters:
         - description: The order item ID.
           in: path
@@ -7456,6 +7626,7 @@ paths:
   '/V1/orders/{id}':
     get:
       description: Loads a specified order.
+      operationId: salesOrderRepositoryV1GetGet
       parameters:
         - description: The order ID.
           in: path
@@ -7480,6 +7651,7 @@ paths:
   '/V1/orders/{id}/cancel':
     post:
       description: Cancels a specified order.
+      operationId: salesOrderManagementV1CancelPost
       parameters:
         - description: The order ID.
           in: path
@@ -7504,6 +7676,7 @@ paths:
   '/V1/orders/{id}/comments':
     get:
       description: Lists comments for a specified order.
+      operationId: salesOrderManagementV1GetCommentsListGet
       parameters:
         - description: The order ID.
           in: path
@@ -7527,6 +7700,7 @@ paths:
         - salesOrderManagementV1
     post:
       description: Adds a comment to a specified order.
+      operationId: salesOrderManagementV1AddCommentPost
       parameters:
         - description: The order ID.
           in: path
@@ -7560,6 +7734,7 @@ paths:
   '/V1/orders/{id}/emails':
     post:
       description: Emails a user a specified order.
+      operationId: salesOrderManagementV1NotifyPost
       parameters:
         - description: The order ID.
           in: path
@@ -7584,6 +7759,7 @@ paths:
   '/V1/orders/{id}/hold':
     post:
       description: Holds a specified order.
+      operationId: salesOrderManagementV1HoldPost
       parameters:
         - description: The order ID.
           in: path
@@ -7608,6 +7784,7 @@ paths:
   '/V1/orders/{id}/statuses':
     get:
       description: Gets the status for a specified order.
+      operationId: salesOrderManagementV1GetStatusGet
       parameters:
         - description: The order ID.
           in: path
@@ -7633,6 +7810,7 @@ paths:
   '/V1/orders/{id}/unhold':
     post:
       description: Releases a specified order from hold status.
+      operationId: salesOrderManagementV1UnHoldPost
       parameters:
         - description: The order ID.
           in: path
@@ -7657,6 +7835,7 @@ paths:
   '/V1/orders/{parent_id}':
     put:
       description: Performs persist operations for a specified order address.
+      operationId: salesOrderAddressRepositoryV1SavePut
       parameters:
         - in: path
           name: parent_id
@@ -7689,6 +7868,7 @@ paths:
   /V1/products:
     get:
       description: Get product list
+      operationId: catalogProductRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -7735,6 +7915,7 @@ paths:
         - catalogProductRepositoryV1
     post:
       description: Create product
+      operationId: catalogProductRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -7769,6 +7950,7 @@ paths:
   /V1/products/attribute-sets:
     post:
       description: Create attribute set from data
+      operationId: catalogAttributeSetManagementV1CreatePost
       parameters:
         - in: body
           name: $body
@@ -7804,6 +7986,7 @@ paths:
   /V1/products/attribute-sets/attributes:
     post:
       description: Assign attribute to attribute set
+      operationId: catalogProductAttributeManagementV1AssignPost
       parameters:
         - in: body
           name: $body
@@ -7845,6 +8028,7 @@ paths:
   /V1/products/attribute-sets/groups:
     post:
       description: Save attribute group
+      operationId: catalogProductAttributeGroupRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -7873,6 +8057,7 @@ paths:
   /V1/products/attribute-sets/groups/list:
     get:
       description: Retrieve list of attribute groups
+      operationId: catalogProductAttributeGroupRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -7924,6 +8109,7 @@ paths:
   '/V1/products/attribute-sets/groups/{groupId}':
     delete:
       description: Remove attribute group by id
+      operationId: catalogProductAttributeGroupRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: groupId
@@ -7947,6 +8133,7 @@ paths:
   /V1/products/attribute-sets/sets/list:
     get:
       description: Retrieve list of Attribute Sets
+      operationId: catalogAttributeSetRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -7994,6 +8181,7 @@ paths:
   '/V1/products/attribute-sets/{attributeSetId}':
     delete:
       description: Remove attribute set by given ID
+      operationId: catalogAttributeSetRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: attributeSetId
@@ -8020,6 +8208,7 @@ paths:
         - catalogAttributeSetRepositoryV1
     get:
       description: Retrieve attribute set information based on given ID
+      operationId: catalogAttributeSetRepositoryV1GetGet
       parameters:
         - in: path
           name: attributeSetId
@@ -8046,6 +8235,7 @@ paths:
         - catalogAttributeSetRepositoryV1
     put:
       description: Save attribute set data
+      operationId: catalogAttributeSetRepositoryV1SavePut
       parameters:
         - in: path
           name: attributeSetId
@@ -8086,6 +8276,7 @@ paths:
   '/V1/products/attribute-sets/{attributeSetId}/attributes':
     get:
       description: Retrieve related attributes based on given attribute set ID
+      operationId: catalogProductAttributeManagementV1GetAttributesGet
       parameters:
         - in: path
           name: attributeSetId
@@ -8115,6 +8306,7 @@ paths:
   '/V1/products/attribute-sets/{attributeSetId}/attributes/{attributeCode}':
     delete:
       description: Remove attribute from attribute set
+      operationId: catalogProductAttributeManagementV1UnassignDelete
       parameters:
         - in: path
           name: attributeSetId
@@ -8146,6 +8338,7 @@ paths:
   '/V1/products/attribute-sets/{attributeSetId}/groups':
     put:
       description: Save attribute group
+      operationId: catalogProductAttributeGroupRepositoryV1SavePut
       parameters:
         - in: path
           name: attributeSetId
@@ -8178,6 +8371,7 @@ paths:
   /V1/products/attributes:
     get:
       description: Retrieve all attributes for entity type
+      operationId: catalogProductAttributeRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -8224,6 +8418,7 @@ paths:
         - catalogProductAttributeRepositoryV1
     post:
       description: Save attribute data
+      operationId: catalogProductAttributeRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -8256,6 +8451,7 @@ paths:
   /V1/products/attributes/types:
     get:
       description: Retrieve list of product attribute types
+      operationId: catalogProductAttributeTypesListV1GetItemsGet
       responses:
         '200':
           description: 200 Success.
@@ -8276,6 +8472,7 @@ paths:
   '/V1/products/attributes/{attributeCode}':
     delete:
       description: Delete Attribute by id
+      operationId: catalogProductAttributeRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: attributeCode
@@ -8302,6 +8499,7 @@ paths:
         - catalogProductAttributeRepositoryV1
     get:
       description: Retrieve specific attribute
+      operationId: catalogProductAttributeRepositoryV1GetGet
       parameters:
         - in: path
           name: attributeCode
@@ -8328,6 +8526,7 @@ paths:
         - catalogProductAttributeRepositoryV1
     put:
       description: Save attribute data
+      operationId: catalogProductAttributeRepositoryV1SavePut
       parameters:
         - in: path
           name: attributeCode
@@ -8364,6 +8563,7 @@ paths:
   '/V1/products/attributes/{attributeCode}/options':
     get:
       description: Retrieve list of attribute options
+      operationId: catalogProductAttributeOptionManagementV1GetItemsGet
       parameters:
         - in: path
           name: attributeCode
@@ -8392,6 +8592,7 @@ paths:
         - catalogProductAttributeOptionManagementV1
     post:
       description: Add option to attribute
+      operationId: catalogProductAttributeOptionManagementV1AddPost
       parameters:
         - in: path
           name: attributeCode
@@ -8428,6 +8629,7 @@ paths:
   '/V1/products/attributes/{attributeCode}/options/{optionId}':
     delete:
       description: Delete option from attribute
+      operationId: catalogProductAttributeOptionManagementV1DeleteDelete
       parameters:
         - in: path
           name: attributeCode
@@ -8459,6 +8661,7 @@ paths:
   '/V1/products/downloadable-links/samples/{id}':
     delete:
       description: Delete downloadable sample
+      operationId: downloadableSampleRepositoryV1DeleteDelete
       parameters:
         - in: path
           name: id
@@ -8482,6 +8685,7 @@ paths:
   '/V1/products/downloadable-links/{id}':
     delete:
       description: Delete downloadable link
+      operationId: downloadableLinkRepositoryV1DeleteDelete
       parameters:
         - in: path
           name: id
@@ -8505,6 +8709,7 @@ paths:
   /V1/products/links/types:
     get:
       description: Retrieve information about available product link types
+      operationId: catalogProductLinkTypeListV1GetItemsGet
       responses:
         '200':
           description: 200 Success.
@@ -8525,6 +8730,7 @@ paths:
   '/V1/products/links/{type}/attributes':
     get:
       description: Provide a list of the product link type attributes
+      operationId: catalogProductLinkTypeListV1GetItemAttributesGet
       parameters:
         - in: path
           name: type
@@ -8550,6 +8756,7 @@ paths:
   '/V1/products/media/types/{attributeSetName}':
     get:
       description: Retrieve the list of media attributes (fronted input type is media_image) assigned to the given attribute set.
+      operationId: catalogProductMediaAttributeManagementV1GetListGet
       parameters:
         - in: path
           name: attributeSetName
@@ -8576,6 +8783,7 @@ paths:
   /V1/products/options:
     post:
       description: Save Custom Option
+      operationId: catalogProductCustomOptionRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -8604,6 +8812,7 @@ paths:
   /V1/products/options/types:
     get:
       description: Get custom option types
+      operationId: catalogProductCustomOptionTypeListV1GetItemsGet
       responses:
         '200':
           description: 200 Success.
@@ -8624,6 +8833,7 @@ paths:
   '/V1/products/options/{optionId}':
     put:
       description: Save Custom Option
+      operationId: catalogProductCustomOptionRepositoryV1SavePut
       parameters:
         - in: path
           name: optionId
@@ -8656,6 +8866,7 @@ paths:
   /V1/products/types:
     get:
       description: Retrieve available product types
+      operationId: catalogProductTypeListV1GetProductTypesGet
       responses:
         '200':
           description: 200 Success.
@@ -8676,6 +8887,7 @@ paths:
   '/V1/products/{productSku}/stockItems/{itemId}':
     put:
       description: ''
+      operationId: catalogInventoryStockRegistryV1UpdateStockItemBySkuPut
       parameters:
         - in: path
           name: productSku
@@ -8716,6 +8928,7 @@ paths:
   '/V1/products/{sku}':
     delete:
       description: ''
+      operationId: catalogProductRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: sku
@@ -8743,6 +8956,7 @@ paths:
         - catalogProductRepositoryV1
     get:
       description: Get info about product by product SKU
+      operationId: catalogProductRepositoryV1GetGet
       parameters:
         - in: path
           name: sku
@@ -8781,6 +8995,7 @@ paths:
         - catalogProductRepositoryV1
     put:
       description: Create product
+      operationId: catalogProductRepositoryV1SavePut
       parameters:
         - in: path
           name: sku
@@ -8819,6 +9034,7 @@ paths:
   '/V1/products/{sku}/downloadable-links':
     get:
       description: List of links with associated samples
+      operationId: downloadableLinkRepositoryV1GetListGet
       parameters:
         - in: path
           name: sku
@@ -8843,6 +9059,7 @@ paths:
         - downloadableLinkRepositoryV1
     post:
       description: Update downloadable link of the given product (link type and its resources cannot be changed)
+      operationId: downloadableLinkRepositoryV1SavePost
       parameters:
         - in: path
           name: sku
@@ -8877,6 +9094,7 @@ paths:
   '/V1/products/{sku}/downloadable-links/samples':
     get:
       description: List of samples for downloadable product
+      operationId: downloadableSampleRepositoryV1GetListGet
       parameters:
         - in: path
           name: sku
@@ -8901,6 +9119,7 @@ paths:
         - downloadableSampleRepositoryV1
     post:
       description: Update downloadable sample of the given product
+      operationId: downloadableSampleRepositoryV1SavePost
       parameters:
         - in: path
           name: sku
@@ -8935,6 +9154,7 @@ paths:
   '/V1/products/{sku}/downloadable-links/samples/{id}':
     put:
       description: Update downloadable sample of the given product
+      operationId: downloadableSampleRepositoryV1SavePut
       parameters:
         - in: path
           name: sku
@@ -8973,6 +9193,7 @@ paths:
   '/V1/products/{sku}/downloadable-links/{id}':
     put:
       description: Update downloadable link of the given product (link type and its resources cannot be changed)
+      operationId: downloadableLinkRepositoryV1SavePut
       parameters:
         - in: path
           name: sku
@@ -9011,6 +9232,7 @@ paths:
   '/V1/products/{sku}/group-prices/{customerGroupId}/tiers':
     get:
       description: Get tier price of product
+      operationId: catalogProductTierPriceManagementV1GetListGet
       parameters:
         - in: path
           name: sku
@@ -9045,6 +9267,7 @@ paths:
   '/V1/products/{sku}/group-prices/{customerGroupId}/tiers/{qty}':
     delete:
       description: Remove tier price from product
+      operationId: catalogProductTierPriceManagementV1RemoveDelete
       parameters:
         - in: path
           name: sku
@@ -9081,6 +9304,7 @@ paths:
   '/V1/products/{sku}/group-prices/{customerGroupId}/tiers/{qty}/price/{price}':
     post:
       description: Create tier price for product
+      operationId: catalogProductTierPriceManagementV1AddPost
       parameters:
         - in: path
           name: sku
@@ -9121,6 +9345,7 @@ paths:
   '/V1/products/{sku}/links':
     post:
       description: Assign a product link to another product
+      operationId: catalogProductLinkManagementV1SetProductLinksPost
       parameters:
         - in: path
           name: sku
@@ -9158,6 +9383,7 @@ paths:
         - catalogProductLinkManagementV1
     put:
       description: Save product link
+      operationId: catalogProductLinkRepositoryV1SavePut
       parameters:
         - in: path
           name: sku
@@ -9194,6 +9420,7 @@ paths:
   '/V1/products/{sku}/links/{type}':
     get:
       description: Provide the list of links for a specific product
+      operationId: catalogProductLinkManagementV1GetLinkedItemsByTypeGet
       parameters:
         - in: path
           name: sku
@@ -9223,6 +9450,7 @@ paths:
   '/V1/products/{sku}/links/{type}/{linkedProductSku}':
     delete:
       description: ''
+      operationId: catalogProductLinkRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: sku
@@ -9258,6 +9486,7 @@ paths:
   '/V1/products/{sku}/media':
     get:
       description: Retrieve the list of gallery entries associated with given product
+      operationId: catalogProductAttributeMediaGalleryManagementV1GetListGet
       parameters:
         - in: path
           name: sku
@@ -9282,6 +9511,7 @@ paths:
         - catalogProductAttributeMediaGalleryManagementV1
     post:
       description: Create new gallery entry
+      operationId: catalogProductAttributeMediaGalleryManagementV1CreatePost
       parameters:
         - in: path
           name: sku
@@ -9319,6 +9549,7 @@ paths:
   '/V1/products/{sku}/media/{entryId}':
     delete:
       description: Remove gallery entry
+      operationId: catalogProductAttributeMediaGalleryManagementV1RemoveDelete
       parameters:
         - in: path
           name: sku
@@ -9349,6 +9580,7 @@ paths:
         - catalogProductAttributeMediaGalleryManagementV1
     get:
       description: Return information about gallery entry
+      operationId: catalogProductAttributeMediaGalleryManagementV1GetGet
       parameters:
         - in: path
           name: sku
@@ -9379,6 +9611,7 @@ paths:
         - catalogProductAttributeMediaGalleryManagementV1
     put:
       description: Update gallery entry
+      operationId: catalogProductAttributeMediaGalleryManagementV1UpdatePut
       parameters:
         - in: path
           name: sku
@@ -9419,6 +9652,7 @@ paths:
   '/V1/products/{sku}/options':
     get:
       description: Get the list of custom options for a specific product
+      operationId: catalogProductCustomOptionRepositoryV1GetListGet
       parameters:
         - in: path
           name: sku
@@ -9444,6 +9678,7 @@ paths:
   '/V1/products/{sku}/options/{optionId}':
     delete:
       description: ''
+      operationId: catalogProductCustomOptionRepositoryV1DeleteByIdentifierDelete
       parameters:
         - in: path
           name: sku
@@ -9470,6 +9705,7 @@ paths:
         - catalogProductCustomOptionRepositoryV1
     get:
       description: Get custom option for a specific product
+      operationId: catalogProductCustomOptionRepositoryV1GetGet
       parameters:
         - in: path
           name: sku
@@ -9497,6 +9733,7 @@ paths:
   '/V1/products/{sku}/websites':
     post:
       description: Assign a product to the website
+      operationId: catalogProductWebsiteLinkRepositoryV1SavePost
       parameters:
         - in: path
           name: sku
@@ -9533,6 +9770,7 @@ paths:
         - catalogProductWebsiteLinkRepositoryV1
     put:
       description: Assign a product to the website
+      operationId: catalogProductWebsiteLinkRepositoryV1SavePut
       parameters:
         - in: path
           name: sku
@@ -9570,6 +9808,7 @@ paths:
   '/V1/products/{sku}/websites/{websiteId}':
     delete:
       description: Remove the website assignment from the product by product sku
+      operationId: catalogProductWebsiteLinkRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: sku
@@ -9602,6 +9841,7 @@ paths:
   /V1/returns:
     get:
       description: Return list of rma data objects based on search criteria
+      operationId: rmaRmaManagementV1SearchGet
       parameters:
         - description: Field
           in: query
@@ -9648,6 +9888,7 @@ paths:
         - rmaRmaManagementV1
     post:
       description: Save RMA
+      operationId: rmaRmaManagementV1SaveRmaPost
       parameters:
         - in: body
           name: $body
@@ -9676,6 +9917,7 @@ paths:
   '/V1/returns/{id}':
     delete:
       description: Delete RMA
+      operationId: rmaRmaRepositoryV1DeleteDelete
       parameters:
         - in: path
           name: id
@@ -9707,6 +9949,7 @@ paths:
         - rmaRmaRepositoryV1
     get:
       description: Return data object for specified RMA id
+      operationId: rmaRmaRepositoryV1GetGet
       parameters:
         - in: path
           name: id
@@ -9729,6 +9972,7 @@ paths:
         - rmaRmaRepositoryV1
     put:
       description: Save RMA
+      operationId: rmaRmaManagementV1SaveRmaPut
       parameters:
         - in: path
           name: id
@@ -9761,6 +10005,7 @@ paths:
   '/V1/returns/{id}/comments':
     get:
       description: Comments list
+      operationId: rmaCommentManagementV1CommentsListGet
       parameters:
         - in: path
           name: id
@@ -9783,6 +10028,7 @@ paths:
         - rmaCommentManagementV1
     post:
       description: Add comment
+      operationId: rmaCommentManagementV1AddCommentPost
       parameters:
         - in: path
           name: id
@@ -9819,6 +10065,7 @@ paths:
   '/V1/returns/{id}/labels':
     get:
       description: Get shipping label int the PDF format
+      operationId: rmaTrackManagementV1GetShippingLabelPdfGet
       parameters:
         - in: path
           name: id
@@ -9842,6 +10089,7 @@ paths:
   '/V1/returns/{id}/tracking-numbers':
     get:
       description: Get track list
+      operationId: rmaTrackManagementV1GetTracksGet
       parameters:
         - in: path
           name: id
@@ -9864,6 +10112,7 @@ paths:
         - rmaTrackManagementV1
     post:
       description: Add track
+      operationId: rmaTrackManagementV1AddTrackPost
       parameters:
         - in: path
           name: id
@@ -9896,6 +10145,7 @@ paths:
   '/V1/returns/{id}/tracking-numbers/{trackId}':
     delete:
       description: Remove track by id
+      operationId: rmaTrackManagementV1RemoveTrackByIdDelete
       parameters:
         - in: path
           name: id
@@ -9923,6 +10173,7 @@ paths:
   /V1/returnsAttributeMetadata:
     get:
       description: Get all attribute metadata.
+      operationId: rmaRmaAttributesManagementV1GetAllAttributesMetadataGet
       responses:
         '200':
           description: 200 Success.
@@ -9943,6 +10194,7 @@ paths:
   /V1/returnsAttributeMetadata/custom:
     get:
       description: Get custom attribute metadata for the given Data object's attribute set
+      operationId: rmaRmaAttributesManagementV1GetCustomAttributesMetadataGet
       parameters:
         - description: Data object class name
           in: query
@@ -9969,6 +10221,7 @@ paths:
   '/V1/returnsAttributeMetadata/form/{formCode}':
     get:
       description: Retrieve all attributes filtered by form code
+      operationId: rmaRmaAttributesManagementV1GetAttributesGet
       parameters:
         - in: path
           name: formCode
@@ -9994,6 +10247,7 @@ paths:
   '/V1/returnsAttributeMetadata/{attributeCode}':
     get:
       description: Retrieve attribute metadata.
+      operationId: rmaRmaAttributesManagementV1GetAttributeMetadataGet
       parameters:
         - in: path
           name: attributeCode
@@ -10017,6 +10271,7 @@ paths:
   /V1/reward/mine/use-reward:
     post:
       description: Set reward points to quote
+      operationId: rewardRewardManagementV1SetPost
       responses:
         '200':
           description: 200 Success.
@@ -10035,6 +10290,7 @@ paths:
   /V1/salesRules:
     post:
       description: Save sales rule.
+      operationId: salesRuleRuleRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -10071,6 +10327,7 @@ paths:
   /V1/salesRules/search:
     get:
       description: 'Retrieve sales rules that match te specified criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#RuleRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: salesRuleRuleRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -10122,6 +10379,7 @@ paths:
   '/V1/salesRules/{ruleId}':
     delete:
       description: Delete rule by ID.
+      operationId: salesRuleRuleRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: ruleId
@@ -10153,6 +10411,7 @@ paths:
         - salesRuleRuleRepositoryV1
     get:
       description: Get rule by ID.
+      operationId: salesRuleRuleRepositoryV1GetByIdGet
       parameters:
         - in: path
           name: ruleId
@@ -10183,6 +10442,7 @@ paths:
         - salesRuleRuleRepositoryV1
     put:
       description: Save sales rule.
+      operationId: salesRuleRuleRepositoryV1SavePut
       parameters:
         - in: path
           name: ruleId
@@ -10223,6 +10483,7 @@ paths:
   /V1/search:
     get:
       description: Make Full Text Search and return found Documents
+      operationId: searchV1SearchGet
       parameters:
         - in: query
           name: 'searchCriteria[requestName]'
@@ -10269,6 +10530,7 @@ paths:
   /V1/shipment/:
     post:
       description: Performs persist operations for a specified shipment.
+      operationId: salesShipmentRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -10297,6 +10559,7 @@ paths:
   /V1/shipment/track:
     post:
       description: Performs persist operations for a specified shipment track.
+      operationId: salesShipmentTrackRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -10325,6 +10588,7 @@ paths:
   '/V1/shipment/track/{id}':
     delete:
       description: Deletes a specified shipment track by ID.
+      operationId: salesShipmentTrackRepositoryV1DeleteByIdDelete
       parameters:
         - description: The shipment track ID.
           in: path
@@ -10349,6 +10613,7 @@ paths:
   '/V1/shipment/{id}':
     get:
       description: Loads a specified shipment.
+      operationId: salesShipmentRepositoryV1GetGet
       parameters:
         - description: The shipment ID.
           in: path
@@ -10373,6 +10638,7 @@ paths:
   '/V1/shipment/{id}/comments':
     get:
       description: Lists comments for a specified shipment.
+      operationId: salesShipmentManagementV1GetCommentsListGet
       parameters:
         - description: The shipment ID.
           in: path
@@ -10396,6 +10662,7 @@ paths:
         - salesShipmentManagementV1
     post:
       description: Performs persist operations for a specified shipment comment.
+      operationId: salesShipmentCommentRepositoryV1SavePost
       parameters:
         - in: path
           name: id
@@ -10428,6 +10695,7 @@ paths:
   '/V1/shipment/{id}/emails':
     post:
       description: Emails user a specified shipment.
+      operationId: salesShipmentManagementV1NotifyPost
       parameters:
         - description: The shipment ID.
           in: path
@@ -10452,6 +10720,7 @@ paths:
   '/V1/shipment/{id}/label':
     get:
       description: Gets a specified shipment label.
+      operationId: salesShipmentManagementV1GetLabelGet
       parameters:
         - description: The shipment label ID.
           in: path
@@ -10477,6 +10746,7 @@ paths:
   /V1/shipments:
     get:
       description: 'Lists shipments that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#ShipmentRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: salesShipmentRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -10524,6 +10794,7 @@ paths:
   /V1/stockItems/lowStock/:
     get:
       description: Retrieves a list of SKU's with low inventory qty
+      operationId: catalogInventoryStockRegistryV1GetLowStockItemsGet
       parameters:
         - in: query
           name: scopeId
@@ -10559,6 +10830,7 @@ paths:
   '/V1/stockItems/{productSku}':
     get:
       description: ''
+      operationId: catalogInventoryStockRegistryV1GetStockItemBySkuGet
       parameters:
         - in: path
           name: productSku
@@ -10590,6 +10862,7 @@ paths:
   '/V1/stockStatuses/{productSku}':
     get:
       description: ''
+      operationId: catalogInventoryStockRegistryV1GetStockStatusBySkuGet
       parameters:
         - in: path
           name: productSku
@@ -10621,6 +10894,7 @@ paths:
   /V1/store/storeConfigs:
     get:
       description: ''
+      operationId: storeStoreConfigManagerV1GetStoreConfigsGet
       parameters:
         - in: query
           items:
@@ -10648,6 +10922,7 @@ paths:
   /V1/store/storeGroups:
     get:
       description: Retrieve list of all groups
+      operationId: storeGroupRepositoryV1GetListGet
       responses:
         '200':
           description: 200 Success.
@@ -10668,6 +10943,7 @@ paths:
   /V1/store/storeViews:
     get:
       description: Retrieve list of all stores
+      operationId: storeStoreRepositoryV1GetListGet
       responses:
         '200':
           description: 200 Success.
@@ -10688,6 +10964,7 @@ paths:
   /V1/store/websites:
     get:
       description: Retrieve list of all websites
+      operationId: storeWebsiteRepositoryV1GetListGet
       responses:
         '200':
           description: 200 Success.
@@ -10708,6 +10985,7 @@ paths:
   /V1/taxClasses:
     post:
       description: Create a Tax Class
+      operationId: taxTaxClassRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -10745,6 +11023,7 @@ paths:
   /V1/taxClasses/search:
     get:
       description: 'Retrieve tax classes which match a specific criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#TaxClassRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: taxTaxClassRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -10796,6 +11075,7 @@ paths:
   '/V1/taxClasses/{classId}':
     put:
       description: Create a Tax Class
+      operationId: taxTaxClassRepositoryV1SavePut
       parameters:
         - in: path
           name: classId
@@ -10837,6 +11117,7 @@ paths:
   '/V1/taxClasses/{taxClassId}':
     delete:
       description: Delete a tax class with the given tax class id.
+      operationId: taxTaxClassRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: taxClassId
@@ -10864,6 +11145,7 @@ paths:
         - taxTaxClassRepositoryV1
     get:
       description: Get a tax class with the given tax class id.
+      operationId: taxTaxClassRepositoryV1GetGet
       parameters:
         - in: path
           name: taxClassId
@@ -10891,6 +11173,7 @@ paths:
   /V1/taxRates:
     post:
       description: Create or update tax rate
+      operationId: taxTaxRateRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -10926,6 +11209,7 @@ paths:
         - taxTaxRateRepositoryV1
     put:
       description: Create or update tax rate
+      operationId: taxTaxRateRepositoryV1SavePut
       parameters:
         - in: body
           name: $body
@@ -10962,6 +11246,7 @@ paths:
   /V1/taxRates/search:
     get:
       description: 'Search TaxRates This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#TaxRateRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: taxTaxRateRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -11013,6 +11298,7 @@ paths:
   '/V1/taxRates/{rateId}':
     delete:
       description: Delete tax rate
+      operationId: taxTaxRateRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: rateId
@@ -11043,6 +11329,7 @@ paths:
         - taxTaxRateRepositoryV1
     get:
       description: Get tax rate
+      operationId: taxTaxRateRepositoryV1GetGet
       parameters:
         - in: path
           name: rateId
@@ -11070,6 +11357,7 @@ paths:
   /V1/taxRules:
     post:
       description: Save TaxRule
+      operationId: taxTaxRuleRepositoryV1SavePost
       parameters:
         - in: body
           name: $body
@@ -11105,6 +11393,7 @@ paths:
         - taxTaxRuleRepositoryV1
     put:
       description: Save TaxRule
+      operationId: taxTaxRuleRepositoryV1SavePut
       parameters:
         - in: body
           name: $body
@@ -11141,6 +11430,7 @@ paths:
   /V1/taxRules/search:
     get:
       description: 'Search TaxRules This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#TaxRuleRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: taxTaxRuleRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -11192,6 +11482,7 @@ paths:
   '/V1/taxRules/{ruleId}':
     delete:
       description: Delete TaxRule
+      operationId: taxTaxRuleRepositoryV1DeleteByIdDelete
       parameters:
         - in: path
           name: ruleId
@@ -11222,6 +11513,7 @@ paths:
         - taxTaxRuleRepositoryV1
     get:
       description: Get TaxRule
+      operationId: taxTaxRuleRepositoryV1GetGet
       parameters:
         - in: path
           name: ruleId
@@ -11245,6 +11537,7 @@ paths:
   /V1/transactions:
     get:
       description: 'Lists transactions that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#TransactionRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.'
+      operationId: salesTransactionRepositoryV1GetListGet
       parameters:
         - description: Field
           in: query
@@ -11292,6 +11585,7 @@ paths:
   '/V1/transactions/{id}':
     get:
       description: Loads a specified transaction.
+      operationId: salesTransactionRepositoryV1GetGet
       parameters:
         - description: The transaction ID.
           in: path
@@ -11316,6 +11610,7 @@ paths:
   '/V1/worldpay-guest-carts/{cartId}/payment-information':
     post:
       description: Proxy handler for guest place order
+      operationId: worldpayGuestPaymentInformationManagementProxyV1SavePaymentInformationAndPlaceOrderPost
       parameters:
         - in: path
           name: cartId

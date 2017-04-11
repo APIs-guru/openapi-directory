@@ -45,6 +45,7 @@ paths:
   /v3/asset-changes/change-sets:
     put:
       consumes: []
+      operationId: AssetChanges_PutAssetChanges
       parameters:
         - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
           in: header
@@ -86,6 +87,7 @@ paths:
   '/v3/asset-changes/change-sets/{change-set-id}':
     delete:
       consumes: []
+      operationId: AssetChanges_DeleteAssetChanges
       parameters:
         - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
           in: header
@@ -121,6 +123,7 @@ paths:
   /v3/asset-changes/channels:
     get:
       consumes: []
+      operationId: AssetChanges_GetPartnerChannel
       parameters:
         - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
           in: header
@@ -148,6 +151,7 @@ paths:
       consumes:
         - application/json
         - text/json
+      operationId: AssetRegistration_Register
       parameters:
         - description: Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.
           in: header
@@ -183,6 +187,7 @@ paths:
   /v3/boards:
     get:
       consumes: []
+      operationId: Boards_GetAllBoards
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -245,6 +250,7 @@ paths:
       consumes:
         - application/json
         - text/json
+      operationId: Boards_CreateBoard
       parameters:
         - description: Specify a name and description of the board to create (name is required).
           in: body
@@ -284,6 +290,7 @@ paths:
   '/v3/boards/{board_id}':
     delete:
       consumes: []
+      operationId: Boards_DeleteBoard
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -319,6 +326,7 @@ paths:
         - Boards
     get:
       consumes: []
+      operationId: Boards_GetBoard
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -358,6 +366,7 @@ paths:
       consumes:
         - application/json
         - text/json
+      operationId: Boards_UpdateBoard
       parameters:
         - description: Specify a new name and description for the board (name is required).
           in: body
@@ -400,6 +409,7 @@ paths:
   '/v3/boards/{board_id}/assets':
     delete:
       consumes: []
+      operationId: Boards_RemoveAssets
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -448,6 +458,7 @@ paths:
       consumes:
         - application/json
         - text/json
+      operationId: Boards_AddAssets
       parameters:
         - description: List assets to add to the board.
           in: body
@@ -496,6 +507,7 @@ paths:
   '/v3/boards/{board_id}/assets/{asset_id}':
     delete:
       consumes: []
+      operationId: Boards_RemoveAsset
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -536,6 +548,7 @@ paths:
         - Boards
     put:
       consumes: []
+      operationId: Boards_AddAsset
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -581,6 +594,7 @@ paths:
   '/v3/boards/{board_id}/comments':
     get:
       consumes: []
+      operationId: Boards_GetComments
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -620,6 +634,7 @@ paths:
       consumes:
         - application/json
         - text/json
+      operationId: Boards_AddComment
       parameters:
         - description: Comment to be added to the board.
           in: body
@@ -666,6 +681,7 @@ paths:
   '/v3/boards/{board_id}/comments/{comment_id}':
     delete:
       consumes: []
+      operationId: Boards_DeleteComment
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -711,6 +727,7 @@ paths:
   /v3/collections:
     get:
       consumes: []
+      operationId: Collections_GetCollections
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -738,6 +755,7 @@ paths:
   /v3/countries:
     get:
       consumes: []
+      operationId: Countries_GetCountries
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -765,6 +783,7 @@ paths:
   /v3/downloads:
     get:
       consumes: []
+      operationId: Downloads_GetDownloads
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -911,6 +930,7 @@ paths:
     post:
       consumes: []
       description: "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                video available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200."
+      operationId: Downloads_PostVideoDownloads
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -1039,6 +1059,7 @@ paths:
     get:
       consumes: []
       description: Returns an array of event metadata
+      operationId: Events_GetBatch
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -1106,6 +1127,7 @@ paths:
     get:
       consumes: []
       description: Returns an array of event metadata
+      operationId: Events_Get
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -1170,6 +1192,7 @@ paths:
   /v3/images:
     get:
       consumes: []
+      operationId: Images_GetBatch
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -1313,6 +1336,7 @@ paths:
   '/v3/images/{id}':
     get:
       consumes: []
+      operationId: Images_Get
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -1454,6 +1478,7 @@ paths:
   '/v3/images/{id}/similar':
     get:
       consumes: []
+      operationId: Images_GetSimilarImages
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -1591,6 +1616,7 @@ paths:
   /v3/products:
     get:
       consumes: []
+      operationId: Products_GetProducts
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -1631,6 +1657,7 @@ paths:
   /v3/purchased-assets:
     get:
       consumes: []
+      operationId: Purchases_GetPreviousAssetPurchases
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -1679,6 +1706,7 @@ paths:
   /v3/purchased-images:
     get:
       consumes: []
+      operationId: Purchases_GetPreviousPurchases
       parameters:
         - description: 'Provide access token in the format of ''Bearer {token}''.'
           in: header
@@ -1727,6 +1755,7 @@ paths:
   /v3/search/events:
     get:
       consumes: []
+      operationId: Search_GetEvents
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -1803,7 +1832,7 @@ paths:
           name: page_size
           required: false
           type: integer
-        - description: Return only images tagged with specific phrase
+        - description: Filters to events related to this phrase
           in: query
           name: phrase
           required: false
@@ -1828,6 +1857,7 @@ paths:
   /v3/search/images:
     get:
       consumes: []
+      operationId: Search_GetImagesByPhrase
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -1952,7 +1982,7 @@ paths:
           name: collections_filter_type
           required: false
           type: string
-        - description: 'Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244).'
+        - description: 'Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244). Note: when specified, results will not contain editorial images.'
           in: query
           name: color
           required: false
@@ -2310,6 +2340,7 @@ paths:
   /v3/search/images/creative:
     get:
       consumes: []
+      operationId: Search_GetCreativeImagesByPhrase
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -2765,6 +2796,7 @@ paths:
   /v3/search/images/editorial:
     get:
       consumes: []
+      operationId: Search_GetEditorialImagesByPhrase
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -2887,11 +2919,6 @@ paths:
             - exclude
           in: query
           name: collections_filter_type
-          required: false
-          type: string
-        - description: 'Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244).'
-          in: query
-          name: color
           required: false
           type: string
         - description: Filter based on image composition.
@@ -3268,6 +3295,7 @@ paths:
   /v3/search/videos:
     get:
       consumes: []
+      operationId: Search_GetVideosByPhrase
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -3568,6 +3596,7 @@ paths:
   /v3/search/videos/creative:
     get:
       consumes: []
+      operationId: Search_GetCreativeVideosByPhrase
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -3853,6 +3882,7 @@ paths:
   /v3/search/videos/editorial:
     get:
       consumes: []
+      operationId: Search_GetEditorialVideosByPhrase
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -4149,6 +4179,7 @@ paths:
       consumes:
         - application/json
         - text/json
+      operationId: Usage_Put
       parameters:
         - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
           in: header
@@ -4191,6 +4222,7 @@ paths:
   /v3/videos:
     get:
       consumes: []
+      operationId: Videos_GetBatch
       parameters:
         - description: Specifies the language of result values.
           in: header
@@ -4304,6 +4336,7 @@ paths:
   '/v3/videos/{id}':
     get:
       consumes: []
+      operationId: Videos_Get
       parameters:
         - description: Specifies the language of result values.
           in: header

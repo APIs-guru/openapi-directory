@@ -1363,6 +1363,9 @@ definitions:
         description: The timestamp when the password was last updated.
         format: double
         type: number
+      phoneNumber:
+        description: User's phone number.
+        type: string
       photoUrl:
         description: The URL of the user profile photo.
         type: string
@@ -1378,6 +1381,9 @@ definitions:
               type: string
             federatedId:
               description: User's identifier at IDP.
+              type: string
+            phoneNumber:
+              description: User's phone number.
               type: string
             photoUrl:
               description: The user's photo url at the IDP.

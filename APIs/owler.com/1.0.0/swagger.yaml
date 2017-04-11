@@ -45,6 +45,7 @@ paths:
   /v1/company/basicsearch:
     get:
       description: The Company Basic Search API searches for a company based on the input and will returns results containing basic details about matching companies. By default the API returns the top 10 available results unless the limit is specified. The maximum limit is restricted to 30.
+      operationId: basicCompanySearch
       parameters:
         - description: Search term
           in: query
@@ -286,6 +287,7 @@ paths:
   /v1/company/search:
     get:
       description: The Company Search API searches for a company based on the input and will returns results containing basic details about matching companies. By default the API returns the top 10 available results unless the limit is specified. The maximum limit is restricted to 30.
+      operationId: searchCompany
       parameters:
         - description: Search term
           in: query
@@ -445,6 +447,7 @@ paths:
   /v1/feed:
     get:
       description: The Feeds API provides a list of feeds and individual feed information for the given Company Ids and Category. By default the API returns the latest 10 feeds available unless the limit is specified. The maximum result is restricted to 100 feeds per API request.
+      operationId: getFeeds
       parameters:
         - default: json
           description: 'Format of the response content - json (by default if not specified), xml'

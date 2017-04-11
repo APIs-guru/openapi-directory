@@ -643,18 +643,12 @@ definitions:
       requestId:
         description: Unique request ID used for logging and debugging. Please include in any error reporting or troubleshooting requests.
         type: string
-      resource:
-        $ref: '#/definitions/Survey'
-        description: Survey object containing the specification of the started Survey.
     type: object
   SurveysStopResponse:
     properties:
       requestId:
         description: Unique request ID used for logging and debugging. Please include in any error reporting or troubleshooting requests.
         type: string
-      resource:
-        $ref: '#/definitions/Survey'
-        description: Survey object containing the specification of the stopped Survey.
     type: object
   TokenPagination:
     properties:

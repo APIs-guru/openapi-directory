@@ -29,6 +29,7 @@ tags:
 paths:
   '/alert/{who}/when/{thing}/{condition}':
     get:
+      operationId: createAlertGET
       parameters:
         - description: A comma separated list of Email addresses to send the alert to.
           in: path
@@ -108,6 +109,7 @@ paths:
         - dweets
   '/get/alert/for/{thing}':
     get:
+      operationId: getAlert
       parameters:
         - description: A unique name of a thing.
           in: path
@@ -146,6 +148,7 @@ paths:
         - dweets
   '/get/latest/dweet/for/{thing}':
     get:
+      operationId: getLatestDweet
       parameters:
         - description: A unique name of a thing.
           in: path
@@ -165,6 +168,7 @@ paths:
         - dweets
   '/get/stored/alerts/for/{thing}':
     get:
+      operationId: getStoredAlerts
       parameters:
         - description: A unique name of a thing.
           in: path
@@ -234,6 +238,7 @@ paths:
   '/listen/for/dweets/from/{thing}':
     get:
       description: 'Sorry, this function uses HTTP chunked responses and cannot be tested here. Try something like: <pre>curl --raw https://dweet.io/listen/for/dweets/from/{thing}</pre>'
+      operationId: listenForDweets
       parameters:
         - in: path
           name: thing
@@ -247,6 +252,7 @@ paths:
         - dweets
   '/lock/{thing}':
     get:
+      operationId: lockThing
       parameters:
         - description: A unique name of a thing.
           in: path
@@ -271,6 +277,7 @@ paths:
         - locks
   '/remove/alert/for/{thing}':
     get:
+      operationId: removeAlert
       parameters:
         - description: A unique name of a thing.
           in: path
@@ -290,6 +297,7 @@ paths:
         - alerts
   '/remove/lock/{lock}':
     get:
+      operationId: removeLock
       parameters:
         - description: A valid dweet.io lock.
           in: path
@@ -309,6 +317,7 @@ paths:
         - locks
   '/unlock/{thing}':
     get:
+      operationId: unlockThing
       parameters:
         - description: A unique name of a thing.
           in: path

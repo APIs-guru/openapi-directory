@@ -273,6 +273,29 @@ paths:
             $ref: '#/definitions/GraphError'
       tags:
         - ApplicationPasswordCredentials
+  '/{tenantID}/getObjectsByObjectIds':
+    post:
+      description: Gets AD group membership for the specified AD object IDs.
+      operationId: Objects_GetObjectsByObjectIds
+      parameters:
+        - description: Objects filtering parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/GetObjectsParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: OK. The operation was successful.
+          schema:
+            $ref: '#/definitions/GetObjectsResult'
+      tags:
+        - Objects
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: Objects_GetObjectsByObjectIdsNext
   '/{tenantID}/groups':
     get:
       description: Gets list of groups for the current tenant.
@@ -1071,6 +1094,24 @@ definitions:
         description: Error message value.
         type: string
         x-ms-client-name: message
+  GetObjectsParameters:
+    description: Request parameters for the GetObjectsByObjectIds API.
+    properties:
+      includeDirectoryObjectReferences:
+        description: 'If true, also searches for object IDs in the partner tenant.'
+        type: boolean
+      objectIds:
+        description: The requested object IDs.
+        items:
+          type: string
+        type: array
+      types:
+        description: The requested object types.
+        items:
+          type: string
+        type: array
+    required:
+      - includeDirectoryObjectReferences
   GetObjectsResult:
     description: The response to an Active Directory object inquiry API request.
     properties:
@@ -1475,6 +1516,29 @@ x-ms-paths:
       x-ms-pageable:
         nextLinkName: odata.nextLink
         operationName: Groups_ListNext
+  '/{tenantID}/{nextLink}?Objects_GetObjectsByObjectIdsNext':
+    post:
+      description: Gets AD group membership for the specified AD object IDs.
+      operationId: Objects_GetObjectsByObjectIdsNext
+      parameters:
+        - description: Next link for the list operation.
+          in: path
+          name: nextLink
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: OK. The operation was successful.
+          schema:
+            $ref: '#/definitions/GetObjectsResult'
+      tags:
+        - Objects
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: Objects_GetObjectsByObjectIdsNext
   '/{tenantID}/{nextLink}?ServicePrincipals_ListNext':
     get:
       description: Gets a list of service principals from the current tenant.

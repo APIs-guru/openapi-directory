@@ -134,9 +134,7 @@ paths:
         '200':
           description: OK
           schema:
-            items:
-              $ref: '#/definitions/AccountWebinars'
-            type: array
+            $ref: '#/definitions/AccountWebinarsResponse'
         '400':
           description: Bad Request
         '403':
@@ -1102,11 +1100,72 @@ definitions:
       - organizer
       - panelist
       - attendee
+  AccountWebinar:
+    description: Describes a webinar for an account within a given date range.
+    properties:
+      description:
+        description: A short description of the webinar
+        type: string
+      impromptu:
+        description: A boolean flag indicating if the webinar type is impromptu
+        type: boolean
+      isPasswordProtected:
+        default: false
+        description: A boolean flag indicating if the webinar is password protected
+        type: boolean
+      organizerKey:
+        description: The key of the webinar organizer
+        type: string
+      registrationUrl:
+        description: The URL the webinar invitees can use to register
+        type: string
+      subject:
+        description: The webinar subject
+        type: string
+      timeZone:
+        description: The timezone where the webinar is taking place
+        type: string
+      times:
+        description: Array with startTime and endTime for the webinar sessions
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array
+      type:
+        default: single_session
+        description: Specifies the webinar type
+        type: string
+      webinarID:
+        description: The 9-digit webinar ID
+        type: string
+      webinarKey:
+        description: The unique key of the webinar
+        type: string
+    required:
+      - webinarKey
+      - webinarID
+      - subject
+      - description
+      - times
+      - timeZone
+      - organizerKey
+      - registrationUrl
+      - impromptu
+      - isPasswordProtected
+      - type
   AccountWebinars:
+    description: ''
+    properties:
+      webinars:
+        items:
+          $ref: '#/definitions/AccountWebinar'
+        type: array
+    required:
+      - webinars
+  AccountWebinarsResponse:
     description: Describes a list of webinars for an account within a given date range
     properties:
       _embedded:
-        $ref: '#/definitions/AccountWebinarsObject'
+        $ref: '#/definitions/AccountWebinars'
         description: The webinars array for an account within a given date range
         type: object
       page:
@@ -1116,15 +1175,6 @@ definitions:
     required:
       - _embedded
       - page
-  AccountWebinarsObject:
-    description: ''
-    properties:
-      webinars:
-        items:
-          $ref: '#/definitions/WebinarItem'
-        type: array
-    required:
-      - webinars
   AnswerToAttendeeQuestion:
     description: Describes an answer to a question asked by an attendee during a webinar session.
     properties:
@@ -2184,58 +2234,6 @@ definitions:
       - numberOfOpenedInvitations
       - registrationUrl
       - numberOfRegistrationLinkClicks
-  WebinarItem:
-    description: Describes a webinar for an account within a given date range.
-    properties:
-      description:
-        description: A short description of the webinar
-        type: string
-      impromptu:
-        description: A boolean flag indicating if the webinar type is impromptu
-        type: boolean
-      isPasswordProtected:
-        default: false
-        description: A boolean flag indicating if the webinar is password protected
-        type: boolean
-      organizerKey:
-        description: The key of the webinar organizer
-        type: string
-      registrationUrl:
-        description: The URL the webinar invitees can use to register
-        type: string
-      subject:
-        description: The webinar subject
-        type: string
-      timeZone:
-        description: The timezone where the webinar is taking place
-        type: string
-      times:
-        description: Array with startTime and endTime for the webinar sessions
-        items:
-          $ref: '#/definitions/DateTimeRange'
-        type: array
-      type:
-        default: single_session
-        description: Specifies the webinar type
-        type: string
-      webinarID:
-        description: The 9-digit webinar ID
-        type: string
-      webinarKey:
-        description: The unique key of the webinar
-        type: string
-    required:
-      - webinarKey
-      - webinarID
-      - subject
-      - description
-      - times
-      - timeZone
-      - organizerKey
-      - registrationUrl
-      - impromptu
-      - isPasswordProtected
-      - type
   WebinarReqCreate:
     description: Describes the details used to create a new single session webinar.
     properties:

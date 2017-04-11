@@ -1192,7 +1192,7 @@ definitions:
       domains:
         description: |-
           The domain of data this is charting.
-          Only a single domain is currently supported.
+          Only a single domain is supported.
         items:
           $ref: '#/definitions/BasicChartDomain'
         type: array
@@ -1292,7 +1292,10 @@ definitions:
           resource.
         type: boolean
       requests:
-        description: A list of updates to apply to the spreadsheet.
+        description: |-
+          A list of updates to apply to the spreadsheet.
+          Requests will be applied in the order they are specified.
+          If any request is not valid, no requests will be applied.
         items:
           $ref: '#/definitions/Request'
         type: array

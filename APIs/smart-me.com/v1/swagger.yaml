@@ -28,6 +28,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: Creates a Access Token to write on a Card (e.g. NFC)
+      operationId: AccessToken_Put
       parameters:
         - in: body
           name: accessTokenToPut
@@ -57,6 +58,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: Set an action for the specified device.
+      operationId: Actions_Post
       parameters:
         - description: The Action Data
           in: body
@@ -76,6 +78,7 @@ paths:
       consumes: []
       deprecated: false
       description: Gets all available Actions of a Device
+      operationId: Actions_Get
       parameters:
         - description: The ID of the device
           in: path
@@ -126,6 +129,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: "Creates or updates a Custom Device or updates it's values.\r\n            A Custom Device can be any device that like to add some measurement values to the smart-me Cloud.\r\n            Only use a custom device for all non meters.\r\n            For a new device leave the ID empty. To create a device you have to set the DeviceEnergyType.\r\n            To update values, add the ID of the device and the values you like to set.  (See the Data Type Model for more Information)"
+      operationId: CustomDevice_Post
       parameters:
         - description: Device object with all the data
           in: body
@@ -177,6 +181,7 @@ paths:
       consumes: []
       deprecated: false
       description: Gets a Device by it's Serial Number. The Serial is the part before the "-".
+      operationId: DeviceBySerial_Get
       parameters:
         - description: The Serial Number of the device
           format: int64
@@ -226,6 +231,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: "Creates or updates a Device or updates it's values. \r\n            For a new device leave the ID empty. To create a device you have to set the DeviceEnergyType.\r\n            To update values, add the ID of the device and the values you like to set.  (See the Data Type Model for more Information)"
+      operationId: Devices_Post
       parameters:
         - description: Device object with all the data
           in: body
@@ -276,6 +282,7 @@ paths:
       consumes: []
       deprecated: false
       description: "Updates the On/Off Switch on a device\r\n            For new implementations please use the \"actions\" command"
+      operationId: Devices_Put
       parameters:
         - description: The ID of the device
           in: path
@@ -315,6 +322,7 @@ paths:
       consumes: []
       deprecated: false
       description: Gets all Devices for an Energy Type
+      operationId: DevicesByEnergy_Get
       parameters:
         - enum:
             - MeterTypeUnknown
@@ -354,6 +362,7 @@ paths:
       consumes: []
       deprecated: false
       description: Gets all Devices by it's Sub Type (e.g. E-Charging Station)
+      operationId: DevicesBySubType_Get
       parameters:
         - enum:
             - MeterSubTypeUnknown
@@ -389,6 +398,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r\n            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest."
+      operationId: MBus_Post
       parameters:
         - description: The M-BUS Telegram
           in: body
@@ -423,6 +433,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: Sets the Name of a Meter or a Folder
+      operationId: MeterFolderInformation_Post
       parameters:
         - in: body
           name: meterFolderInformation
@@ -441,6 +452,7 @@ paths:
       consumes: []
       deprecated: false
       description: 'Beta: Gets the General Information for a Meter or a Folder'
+      operationId: MeterFolderInformation_Get
       parameters:
         - in: path
           name: id
@@ -464,6 +476,7 @@ paths:
       consumes: []
       deprecated: false
       description: Gets the Values for a Meter at a given Date. The first Value found before the given Date is returned.
+      operationId: MeterValues_Get
       parameters:
         - in: path
           name: id
@@ -497,6 +510,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: "Sign up a new User.\r\n            The sign up is done on the smart-me Cloud."
+      operationId: SignUp_Post
       parameters:
         - description: The user data
           in: body
@@ -526,6 +540,7 @@ paths:
       consumes: []
       deprecated: false
       description: Gets the informations for the user.
+      operationId: User_Get
       produces:
         - application/json
         - text/json
@@ -544,6 +559,7 @@ paths:
       consumes: []
       deprecated: false
       description: 'Beta: Gets all active virtual meters.'
+      operationId: VirtualMeterActive_Get
       produces:
         - application/json
         - text/json
@@ -568,6 +584,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: 'Beta: Virtual Meter API: Activates a Meter and add the Consumption to a Virtual Meter assosiated with the User.'
+      operationId: VirtualMeterActive_Post
       parameters:
         - description: The Meter to activate
           in: body
@@ -604,6 +621,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: 'Beta: Virtual Meter API: Deactivates a Virtual Meter.'
+      operationId: VirtualMeterDeactivate_Post
       parameters:
         - description: The Meter to activate
           in: body
@@ -635,6 +653,7 @@ paths:
       consumes: []
       deprecated: false
       description: 'Beta: Gets all Meters available to activate as a Virtual Meter.'
+      operationId: VirtualMeters_Get
       produces:
         - application/json
         - text/json

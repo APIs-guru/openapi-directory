@@ -396,8 +396,11 @@ definitions:
     description: Represents the SKU name and Azure pricing tier for Analysis Services resource.
     properties:
       name:
-        description: 'Name of the SKU level for the server being provisioned. Possible values are: ''S1'', ''S2'', ''S4'', and ''D1''.'
+        description: Name of the SKU level for the server being provisioned.
         enum:
+          - B1
+          - B2
+          - S0
           - S1
           - S2
           - S4
@@ -407,9 +410,10 @@ definitions:
           modelAsString: true
           name: SkuName
       tier:
-        description: 'The name of the Azure pricing tier to which the SKU applies. Possible values are: ''Development'' and ''Standard''.'
+        description: The name of the Azure pricing tier to which the SKU applies.
         enum:
           - Development
+          - Basic
           - Standard
         type: string
         x-ms-enum:

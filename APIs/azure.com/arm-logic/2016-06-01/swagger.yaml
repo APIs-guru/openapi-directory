@@ -3131,6 +3131,67 @@ paths:
             $ref: '#/definitions/Object'
       tags:
         - Workflows
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/listSwagger':
+    post:
+      description: Gets an OpenAPI definition for the workflow.
+      operationId: Workflows_ListSwagger
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Workflows
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/regenerateAccessKey':
+    post:
+      description: Regenerates the callback URL access key for request triggers.
+      operationId: Workflows_RegenerateAccessKey
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The access key type.
+          in: body
+          name: keyType
+          required: true
+          schema:
+            $ref: '#/definitions/RegenerateActionParameter'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Workflows
+      x-ms-examples:
+        Regenerate the callback URL access key for request triggers:
+          parameters:
+            api-version: '2016-06-01'
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            workflowName: testWorkflowName
+          responses:
+            '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs':
     get:
       description: Gets a list of workflow runs.
@@ -3433,7 +3494,7 @@ paths:
           name: triggerName
           required: true
           type: string
-        - description: The workflow trigger history name.
+        - description: The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.
           in: path
           name: historyName
           required: true
@@ -3446,6 +3507,49 @@ paths:
             $ref: '#/definitions/WorkflowTriggerHistory'
       tags:
         - WorkflowTriggerHistories
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}/resubmit':
+    post:
+      description: Resubmits a workflow run based on the trigger history.
+      operationId: WorkflowTriggerHistories_Resubmit
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow trigger name.
+          in: path
+          name: triggerName
+          required: true
+          type: string
+        - description: The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.
+          in: path
+          name: historyName
+          required: true
+          type: string
+        - $ref: '#/parameters/api-version'
+      responses:
+        '202':
+          description: OK
+      tags:
+        - WorkflowTriggerHistories
+      x-ms-examples:
+        Resubmit a workflow run based on the trigger history:
+          parameters:
+            api-version: '2016-06-01'
+            historyName: testHistoryName
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            triggerName: testTriggerName
+            workflowName: testWorkflowName
+          responses:
+            '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/listCallbackUrl':
     post:
       description: Gets the callback URL for a workflow trigger.
@@ -3565,6 +3669,66 @@ paths:
             $ref: '#/definitions/WorkflowVersion'
       tags:
         - WorkflowVersions
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions/{versionId}/triggers/{triggerName}/listCallbackUrl':
+    post:
+      description: Lists the callback URL for a trigger of a workflow version.
+      operationId: WorkflowVersions_ListCallbackUrl
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          type: string
+        - description: The workflow versionId.
+          in: path
+          name: versionId
+          required: true
+          type: string
+        - description: The workflow trigger name.
+          in: path
+          name: triggerName
+          required: true
+          type: string
+        - description: The callback URL parameters.
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/GetCallbackUrlParameters'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkflowTriggerCallbackUrl'
+      tags:
+        - WorkflowTriggers
+      x-ms-examples:
+        Get callback URL for a trigger of a workflow version:
+          parameters:
+            api-version: '2016-06-01'
+            resourceGroupName: testResourceGroup
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            triggerName: testTriggerName
+            versionId: testWorkflowVersionId
+            workflowName: testWorkflowName
+          responses:
+            '200':
+              body:
+                basePath: 'http://test-host:100/workflows/fb9c8d79b15f41ce9b12861862f43546/versions/08587100027316071865/triggers/manualTrigger/paths/invoke'
+                method: POST
+                queries:
+                  api-version: 2015-08-01-preview
+                  sig: IxEQ_ygZf6WNEQCbjV0Vs6p6Y4DyNEJVAa86U5B4xhk
+                  sp: /versions/08587100027316071865/triggers/manualTrigger/run
+                  sv: '1.0'
+                value: 'http://test-host:100/workflows/fb9c8d79b15f41ce9b12861862f43546/versions/08587100027316071865/triggers/manualTrigger/paths/invoke?api-version=2015-08-01-preview&sp=%2Fversions%2F08587100027316071865%2Ftriggers%2FmanualTrigger%2Frun&sv=1.0&sig=IxEQ_ygZf6WNEQCbjV0Vs6p6Y4DyNEJVAa86U5B4xhk'
 definitions:
   AS2AcknowledgementConnectionSettings:
     description: The AS2 agreement acknowledegment connection settings.
@@ -5232,6 +5396,13 @@ definitions:
         format: int32
         type: integer
     type: object
+  RegenerateActionParameter:
+    description: The access key regenerate action content.
+    properties:
+      keyType:
+        $ref: '#/definitions/KeyType'
+        description: The key type.
+    type: object
   Resource:
     description: The base resource type.
     properties:
@@ -5270,6 +5441,30 @@ definitions:
       type:
         description: Gets the resource type.
         readOnly: true
+        type: string
+    type: object
+  RetryHistory:
+    description: The retry history.
+    properties:
+      clientRequestId:
+        description: Gets the client request Id.
+        type: string
+      code:
+        description: Gets the status code.
+        type: string
+      endTime:
+        description: Gets the end time.
+        format: date-time
+        type: string
+      error:
+        $ref: '#/definitions/ErrorResponse'
+        description: Gets the error response.
+      serviceRequestId:
+        description: Gets the service request Id.
+        type: string
+      startTime:
+        description: Gets the start time.
+        format: date-time
         type: string
     type: object
   SchemaType:
@@ -5560,6 +5755,11 @@ definitions:
         $ref: '#/definitions/ContentLink'
         description: Gets the link to outputs.
         readOnly: true
+      retryHistory:
+        description: Gets the retry histories.
+        items:
+          $ref: '#/definitions/RetryHistory'
+        type: array
       startTime:
         description: Gets the start time.
         format: date-time

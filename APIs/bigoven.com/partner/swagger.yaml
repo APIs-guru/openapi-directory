@@ -37,6 +37,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Collection_GetCollection
       parameters:
         - description: the collection identifier
           format: int32
@@ -76,6 +77,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Collection_GetCollectionMeta
       parameters:
         - description: the collection identifier
           format: int32
@@ -95,6 +97,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Collection_Collections
       parameters:
         - in: query
           name: test
@@ -114,6 +117,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Glossary_ByTerm
       parameters:
         - description: 'Keyword used to look up article, e.g., asparagus'
           in: path
@@ -132,6 +136,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Glossary_Get
       parameters:
         - description: identifier of article to retrieve
           format: int32
@@ -151,6 +156,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
+      operationId: GroceryList_Delete
       responses:
         '200':
           description: OK
@@ -162,6 +168,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: GroceryList_Get
       responses:
         '200':
           description: OK
@@ -179,6 +186,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: GroceryList_Department
       parameters:
         - in: body
           name: model
@@ -204,6 +212,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: GroceryList_Post
       parameters:
         - description: 'name, quantity, unit, notes, department'
           in: body
@@ -223,6 +232,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
+      operationId: GroceryList_DeleteItemByGuid
       parameters:
         - description: ''
           in: path
@@ -245,6 +255,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: GroceryList_GroceryListItemGuid
       parameters:
         - description: ''
           in: body
@@ -273,6 +284,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: GroceryList_AddRecipe
       parameters:
         - in: body
           name: data
@@ -296,6 +308,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: GroceryList_PostGroceryListSync
       parameters:
         - in: body
           name: req
@@ -319,6 +332,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: Recipe_Post
       parameters:
         - description: ''
           in: body
@@ -342,6 +356,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: Recipe_Put
       parameters:
         - description: ''
           in: body
@@ -361,6 +376,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Recipe_AutoComplete
       parameters:
         - description: ''
           in: query
@@ -387,6 +403,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Recipe_Categories
       responses:
         '200':
           description: OK
@@ -401,6 +418,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
+      operationId: Review_DeleteReply
       parameters:
         - description: ''
           in: path
@@ -423,6 +441,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: Review_PutReply
       parameters:
         - description: ''
           in: path
@@ -468,6 +487,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: Review_Put
       parameters:
         - description: ''
           in: path
@@ -492,6 +512,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Review_GetReplies
       parameters:
         - description: ''
           in: path
@@ -528,6 +549,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: Review_PostReply
       parameters:
         - description: ''
           in: path
@@ -552,6 +574,7 @@ paths:
     post:
       consumes: []
       deprecated: false
+      operationId: Recipe_Scan
       parameters:
         - in: query
           name: test
@@ -587,6 +610,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
+      operationId: Recipe_Delete
       parameters:
         - format: int32
           in: path
@@ -604,6 +628,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Recipe_Get
       parameters:
         - description: the Recipe ID to retrieve
           format: int32
@@ -632,6 +657,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: Recipe_Feedback
       parameters:
         - description: ''
           format: int32
@@ -657,6 +683,7 @@ paths:
     post:
       consumes: []
       deprecated: false
+      operationId: Images_UploadRecipeImage
       parameters:
         - in: path
           name: recipeId
@@ -694,6 +721,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Images_Get
       parameters:
         - description: Recipe ID (required)
           format: int32
@@ -720,6 +748,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: Note_Post
       parameters:
         - description: recipeId (int)
           format: int32
@@ -745,6 +774,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
+      operationId: Note_Delete
       parameters:
         - description: recipeId (int)
           format: int32
@@ -769,6 +799,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Note_Get
       parameters:
         - description: recipe identifier (integer)
           format: int32
@@ -798,6 +829,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: Note_Put
       parameters:
         - format: int32
           in: path
@@ -826,6 +858,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Note_GetNotes
       parameters:
         - description: recipeId (int)
           format: int32
@@ -857,6 +890,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Images_GetRecipePhotos
       parameters:
         - description: Recipe ID (required)
           format: int32
@@ -886,6 +920,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Recipe_Related
       parameters:
         - format: int32
           in: path
@@ -939,6 +974,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: Review_Post
       parameters:
         - description: ''
           format: int32
@@ -964,6 +1000,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
+      operationId: Review_Delete
       parameters:
         - description: ''
           in: path
@@ -1014,6 +1051,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
+      operationId: Review_PutLegacy
       parameters:
         - description: reviewId (int)
           format: int32
@@ -1045,6 +1083,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Review_GetReviews
       parameters:
         - description: recipe id (int)
           format: int32
@@ -1078,6 +1117,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Images_GetScanImages
       parameters:
         - description: the recipe identifier (int)
           format: int32
@@ -1099,6 +1139,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Recipe_RecipeSearch
       parameters:
         - description: Search anywhere in the recipe for the keyword
           in: query
@@ -1286,6 +1327,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Recipe_GetRandomRecipe
       responses:
         '200':
           description: OK
@@ -1298,6 +1340,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Recipe_Raves
       parameters:
         - description: 'page, starting with 1'
           format: int32
@@ -1325,6 +1368,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      operationId: Recipe_RecentViews
       parameters:
         - description: Page number starting with 1
           format: int32

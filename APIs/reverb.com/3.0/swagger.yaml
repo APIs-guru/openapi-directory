@@ -278,15 +278,6 @@ paths:
           description: Unexpected error
       tags:
         - categories
-  /categories/traits:
-    get:
-      description: Get a unique list of corresponding traits from a list of categories
-      responses:
-        default:
-          description: Unexpected error
-      summary: Get a unique list of corresponding traits from a list of categories
-      tags:
-        - categories
   '/categories/{product_type}/{category}':
     get:
       description: Get subcategory details

@@ -44,6 +44,7 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
       description: <p>This operation provides a list of categories.</p>
+      operationId: get categories
       parameters: []
       responses:
         '200':
@@ -114,6 +115,7 @@ paths:
   /v1/charitysearch:
     post:
       description: <p>This operation provides summary data.</p>
+      operationId: get summary
       parameters:
         - description: Employer Identification Number (EIN)
           in: query

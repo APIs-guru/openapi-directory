@@ -1903,7 +1903,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on a GlobalAddress. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on a GlobalAddress. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.globalAddresses.setLabels
       parameters:
         - description: Project ID for this request.
@@ -2191,6 +2191,93 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/BackendBucket'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
+  '/{project}/global/backendBuckets/{backendBucket}/addSignedUrlKey':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds the given Signed URL Key to the backend bucket.
+      operationId: compute.backendBuckets.addSignedUrlKey
+      parameters:
+        - description: Name of the BackendBucket resource to which the Signed URL Key should be added. The name should conform to RFC1035.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SignedUrlKey'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendBuckets
+  '/{project}/global/backendBuckets/{backendBucket}/deleteSignedUrlKey':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Deletes the given Signed URL Key from the backend bucket.
+      operationId: compute.backendBuckets.deleteSignedUrlKey
+      parameters:
+        - description: Name of the BackendBucket resource to which the Signed URL Key should be added. The name should conform to RFC1035.
+          in: path
+          name: backendBucket
+          required: true
+          type: string
+        - description: The name of the Signed URL Key to delete.
+          in: query
+          name: keyName
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2538,6 +2625,93 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/BackendService'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendServices
+  '/{project}/global/backendServices/{backendService}/addSignedUrlKey':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds the given Signed URL Key to the specified backend service.
+      operationId: compute.backendServices.addSignedUrlKey
+      parameters:
+        - description: Name of the BackendService resource to which the Signed URL Key should be added. The name should conform to RFC1035.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SignedUrlKey'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - backendServices
+  '/{project}/global/backendServices/{backendService}/deleteSignedUrlKey':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Deletes the given Signed URL Key from the specified backend service.
+      operationId: compute.backendServices.deleteSignedUrlKey
+      parameters:
+        - description: Name of the BackendService resource to which the Signed URL Key should be added. The name should conform to RFC1035.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - description: The name of the Signed URL Key to delete.
+          in: query
+          name: keyName
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
+          in: query
+          name: requestId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3199,7 +3373,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on the specified resource. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on the specified resource. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.globalForwardingRules.setLabels
       parameters:
         - description: Project ID for this request.
@@ -4421,7 +4595,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on an image. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on an image. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.images.setLabels
       parameters:
         - description: Project ID for this request.
@@ -5812,7 +5986,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on a snapshot. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on a snapshot. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.snapshots.setLabels
       parameters:
         - description: Project ID for this request.
@@ -7942,7 +8116,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on an Address. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on an Address. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.addresses.setLabels
       parameters:
         - description: Project ID for this request.
@@ -9598,7 +9772,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on the specified resource. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on the specified resource. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.forwardingRules.setLabels
       parameters:
         - description: Project ID for this request.
@@ -12462,7 +12636,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on a VpnTunnel. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on a VpnTunnel. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.vpnTunnels.setLabels
       parameters:
         - description: Project ID for this request.
@@ -14069,7 +14243,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on a disk. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets the labels on a disk. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.disks.setLabels
       parameters:
         - description: Project ID for this request.
@@ -16397,7 +16571,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets labels on an instance. To learn more about labels, read the Labeling or Tagging Resources documentation.'
+      description: 'Sets labels on an instance. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.instances.setLabels
       parameters:
         - description: Project ID for this request.
@@ -20750,6 +20924,12 @@ definitions:
           - the rawDisk.source property, or  
           - the sourceDisk property   in order to create an image.
         type: string
+      sourceImageEncryptionKey:
+        $ref: '#/definitions/CustomerEncryptionKey'
+        description: The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key.
+      sourceImageId:
+        description: '[Output Only] The ID value of the image used to create this image. This value may be used to determine whether the image was taken from the current or a previous instance of a given image name.'
+        type: string
       sourceType:
         default: RAW
         description: The type of the image used to create this disk. The default and only value is RAW
@@ -20807,6 +20987,7 @@ definitions:
           $ref: '#/definitions/AttachedDisk'
         type: array
       guestAccelerators:
+        description: List of the type and count of accelerator cards attached to the instance.
         items:
           $ref: '#/definitions/AcceleratorConfig'
         type: array
@@ -21594,6 +21775,11 @@ definitions:
         items:
           $ref: '#/definitions/AttachedDisk'
         type: array
+      guestAccelerators:
+        description: A list of guest accelerator cards' type and count to use for instances created from the instance template.
+        items:
+          $ref: '#/definitions/AcceleratorConfig'
+        type: array
       labels:
         additionalProperties:
           type: string
@@ -21771,6 +21957,7 @@ definitions:
   InstancesSetMachineResourcesRequest:
     properties:
       guestAccelerators:
+        description: List of the type and count of accelerator cards attached to the instance.
         items:
           $ref: '#/definitions/AcceleratorConfig'
         type: array
@@ -23684,6 +23871,17 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  SignedUrlKey:
+    description: Represents a customer-supplied Signing Key used by Cloud CDN Signed URLs
+    properties:
+      keyName:
+        description: 'Name of the key. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      keyValue:
+        description: 128-bit key value used for signing the URL. The key value must be a valid RFC 4648 Section 5 base64url encoded string.
+        type: string
     type: object
   Snapshot:
     description: A persistent disk snapshot resource.
