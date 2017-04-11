@@ -58,6 +58,7 @@ paths:
     get:
       deprecated: false
       description: Returns your account's credit balance
+      operationId: getBalance
       responses:
         '200':
           description: Success
@@ -76,6 +77,7 @@ paths:
     post:
       deprecated: false
       description: 'Transfers credits between two users in the same team. The <i>account email address</i> fields as well as the <i>number of credits to transfer</i> are required. '
+      operationId: transfer
       parameters:
         - description: request
           in: body
@@ -101,6 +103,7 @@ paths:
     get:
       deprecated: false
       description: Find a user for a particular email address
+      operationId: search
       parameters:
         - description: search by email address
           in: query
@@ -151,6 +154,7 @@ paths:
     get:
       deprecated: false
       description: Gets a user from a given user id
+      operationId: getUser
       parameters:
         - description: userId
           format: int64

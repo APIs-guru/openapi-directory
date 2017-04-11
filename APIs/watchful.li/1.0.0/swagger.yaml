@@ -44,6 +44,7 @@ paths:
   /audits:
     get:
       description: Returns a list of audits
+      operationId: getAudits
       parameters:
         - description: 'Number of object to return (max 100, default 25)'
           format: int64
@@ -80,6 +81,7 @@ paths:
         - audits
     post:
       description: Create a audit
+      operationId: CreateAudits
       parameters:
         - description: JSON object Audit
           in: body
@@ -110,6 +112,7 @@ paths:
   /audits/metadata:
     get:
       description: Returns a list of fields
+      operationId: getFieldsAudits
       produces:
         - application/json
         - application/xml
@@ -125,6 +128,7 @@ paths:
   '/audits/{id}':
     delete:
       description: Delete a specific audit
+      operationId: deleteAuditById
       parameters:
         - description: ID of audit that needs to be deleted
           format: int64
@@ -151,6 +155,7 @@ paths:
         - audits
     get:
       description: Returns a audit based on ID
+      operationId: getAuditById
       parameters:
         - description: ID of audit that needs to be fetched
           format: int64
@@ -183,6 +188,7 @@ paths:
   /extensions:
     get:
       description: Returns a list Extensions
+      operationId: getExtensions
       parameters:
         - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
@@ -255,6 +261,7 @@ paths:
   /extensions/metadata:
     get:
       description: Returns a list of fields
+      operationId: getFieldsExtensions
       produces:
         - application/json
         - application/xml
@@ -270,6 +277,7 @@ paths:
   '/extensions/{id}/ignore':
     post:
       description: Set 'ignore updates' for a given extension / site_id
+      operationId: ignoreExtensionUpdate
       parameters:
         - description: ID of the extension
           format: int64
@@ -295,6 +303,7 @@ paths:
   '/extensions/{id}/unignore':
     post:
       description: Remove 'ignore updates' for a given extension
+      operationId: unignoreExtensionUpdate
       parameters:
         - description: ID of the extension
           format: int64
@@ -320,6 +329,7 @@ paths:
   '/extensions/{id}/update':
     post:
       description: Update the extension on the remote site
+      operationId: updateExtension
       parameters:
         - description: ID of the extension
           format: int64
@@ -345,6 +355,7 @@ paths:
   /feedbacks:
     get:
       description: Returns a list of feedbacks
+      operationId: getFeedbacks
       parameters:
         - description: 'Fields to return separate by comas (es. name,id)'
           in: query
@@ -367,6 +378,7 @@ paths:
         - feedbacks
     post:
       description: Create a feedback
+      operationId: createFeedbacks
       parameters:
         - description: JSON object Feedback
           in: body
@@ -397,6 +409,7 @@ paths:
   /feedbacks/metadata:
     get:
       description: Returns a list of fields
+      operationId: getFieldsFeedbacks
       produces:
         - application/json
         - application/xml
@@ -486,6 +499,7 @@ paths:
   /logs/export:
     get:
       description: Returns a file contain the list of logs
+      operationId: getExportLogs
       parameters:
         - description: Format of exported file (PDF or CSV)
           enum:
@@ -562,6 +576,7 @@ paths:
   /logs/metadata:
     get:
       description: Returns a list of fields
+      operationId: getFieldsLogs
       produces:
         - application/json
         - application/xml
@@ -577,6 +592,7 @@ paths:
   /logs/types:
     get:
       description: Returns a list of log types
+      operationId: getTypesLogs
       produces:
         - application/json
         - application/xml
@@ -592,6 +608,7 @@ paths:
   '/logs/{id}':
     delete:
       description: Delete a specific log
+      operationId: deleteLogById
       parameters:
         - description: ID of log that needs to be deleted
           format: int64
@@ -621,6 +638,7 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
       description: Upload a ZIP package
+      operationId: uploadZipPackage
       parameters:
         - description: ZIP package
           in: formData
@@ -776,6 +794,7 @@ paths:
   /sites:
     get:
       description: Returns a list of Sites
+      operationId: getSites
       parameters:
         - description: List of sites id separated by comma
           in: query
@@ -883,6 +902,7 @@ paths:
         - sites
     post:
       description: Create a site
+      operationId: createSite
       parameters:
         - description: JSON object Site
           in: body
@@ -954,6 +974,7 @@ paths:
         - sites
     get:
       description: Return a site based on ID
+      operationId: getSiteById
       parameters:
         - description: ID that needs to be fetched
           format: int64
@@ -1020,6 +1041,7 @@ paths:
   '/sites/{id}/audits':
     get:
       description: Return audits for a specific website
+      operationId: getSiteAudits
       parameters:
         - description: ID of the website
           format: int64
@@ -1070,6 +1092,7 @@ paths:
         - sites
     post:
       description: Create an audit for the site
+      operationId: createAudits
       parameters:
         - description: ID of the website
           format: int64
@@ -1101,6 +1124,7 @@ paths:
   '/sites/{id}/backupnow':
     post:
       description: Add the site to the backup queue
+      operationId: addSiteToBackupQueue
       parameters:
         - description: ID of the website
           format: int64
@@ -1128,6 +1152,7 @@ paths:
   '/sites/{id}/backupprofiles':
     get:
       description: Return backup profile
+      operationId: getBackupProfiles
       parameters:
         - description: ID of the website
           format: int64
@@ -1153,6 +1178,7 @@ paths:
   '/sites/{id}/backups':
     get:
       description: List of latest backups
+      operationId: getListBackups
       parameters:
         - description: ID of the website
           format: int64
@@ -1178,6 +1204,7 @@ paths:
   '/sites/{id}/backupstart':
     post:
       description: Start a remote backup for the site
+      operationId: startSiteBackup
       parameters:
         - description: ID of the website
           format: int64
@@ -1205,6 +1232,7 @@ paths:
   '/sites/{id}/backupstep':
     post:
       description: Step (continue) a remote backup for the site
+      operationId: stepSiteBackup
       parameters:
         - description: ID of the website
           format: int64
@@ -1281,6 +1309,7 @@ paths:
       tags:
         - sites
     post:
+      operationId: installExtension
       parameters:
         - description: ID of the website
           format: int64
@@ -1393,6 +1422,7 @@ paths:
         - sites
     post:
       description: Create a custom log for a specific website
+      operationId: CreateLog
       parameters:
         - description: ID of the website
           format: int64
@@ -1430,6 +1460,7 @@ paths:
   '/sites/{id}/monitor':
     delete:
       description: Return boolean
+      operationId: deleteMonitor
       parameters:
         - description: ID of the website
           format: int64
@@ -1456,6 +1487,7 @@ paths:
         - sites
     post:
       description: Return boolean
+      operationId: postMonitor
       parameters:
         - description: ID of the website
           format: int64
@@ -1483,6 +1515,7 @@ paths:
   '/sites/{id}/scanner':
     get:
       description: Scan the site for malware
+      operationId: scanner
       parameters:
         - description: ID of the website
           format: int64
@@ -1577,6 +1610,7 @@ paths:
         - sites
     post:
       description: Add tags for a specific website
+      operationId: postTags
       parameters:
         - description: ID of the website
           format: int64
@@ -1612,6 +1646,7 @@ paths:
   '/sites/{id}/updatejoomla':
     post:
       description: Update Joomla core on the remote site
+      operationId: updateJoomla
       parameters:
         - description: ID of the website
           format: int64
@@ -1639,6 +1674,7 @@ paths:
   '/sites/{id}/uptime':
     get:
       description: Return uptime data
+      operationId: getUptime
       parameters:
         - description: ID of the website
           format: int64
@@ -1666,6 +1702,7 @@ paths:
   '/sites/{id}/validate':
     get:
       description: validate the site
+      operationId: validateSite
       parameters:
         - description: ID of the website
           format: int64
@@ -1692,6 +1729,7 @@ paths:
         - sites
   '/sites/{id}/validatedebug':
     get:
+      operationId: validateDebugSite
       parameters:
         - description: ID of the website
           format: int64
@@ -1719,6 +1757,7 @@ paths:
   /ssousers:
     get:
       description: Returns a list of SSO Users
+      operationId: getSsoUsers
       produces:
         - application/json
         - application/xml
@@ -1735,6 +1774,7 @@ paths:
         - ssousers
     post:
       description: Create a SSO User
+      operationId: CreateSsoUsers
       parameters:
         - description: JSON object SsoUsers
           in: body
@@ -1765,6 +1805,7 @@ paths:
   '/ssousers/{id}':
     delete:
       description: Delete a specific SSO User
+      operationId: deleteSsoUserById
       parameters:
         - description: ID of SSO User that needs to be deleted
           format: int64
@@ -1791,6 +1832,7 @@ paths:
         - ssousers
     get:
       description: Returns a SSO User based on ID
+      operationId: getSsoUsersById
       parameters:
         - description: ID of SSO User that needs to be fetched
           format: int64
@@ -1822,6 +1864,7 @@ paths:
         - ssousers
     put:
       description: Update a SSO User
+      operationId: UpdateSsoUsers
       parameters:
         - description: ID of SSO User that needs to be updated
           format: int64
@@ -1917,6 +1960,7 @@ paths:
         - tags
     post:
       description: Create a tag
+      operationId: CreateTags
       parameters:
         - description: JSON object Tag
           in: body
@@ -1988,6 +2032,7 @@ paths:
         - tags
     get:
       description: Returns a tag based on ID
+      operationId: getTagById
       parameters:
         - description: ID of tag that needs to be fetched
           format: int64
@@ -2019,6 +2064,7 @@ paths:
         - tags
     put:
       description: Update a tag
+      operationId: UpdateTag
       parameters:
         - description: ID of tag
           format: int64
@@ -2054,6 +2100,7 @@ paths:
   '/tags/{id}/sites':
     get:
       description: Returns a list of sites based with a specific tag id
+      operationId: getSitesByTags
       parameters:
         - description: ID of tag that needs to be fetched
           format: int64
@@ -2156,6 +2203,7 @@ paths:
         - tags
   /versions:
     get:
+      operationId: getVersions
       parameters:
         - description: 'Fields to return separate by comas: name,id'
           in: query
@@ -2176,6 +2224,7 @@ paths:
         - versions
   '/versions/{id}':
     get:
+      operationId: getVersion
       parameters:
         - description: ID of version that needs to be fetched
           format: int64

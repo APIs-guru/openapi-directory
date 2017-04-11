@@ -27,6 +27,7 @@ tags:
 paths:
   /api/v1/models.json:
     get:
+      operationId: 'Api::V1::Models#index'
       parameters:
         - description: Page number
           in: query
@@ -51,6 +52,7 @@ paths:
       tags:
         - models
     post:
+      operationId: 'Api::V1::Models#create'
       parameters:
         - description: Vendor ID
           in: formData
@@ -154,6 +156,7 @@ paths:
         - models
   /api/v1/models/search.json:
     get:
+      operationId: 'Api::V1::Models#search'
       parameters:
         - description: Page number
           in: query
@@ -239,6 +242,7 @@ paths:
         - models
   '/api/v1/models/{id}.json':
     get:
+      operationId: 'Api::V1::Models#show'
       parameters:
         - description: Model ID
           in: path
@@ -477,6 +481,7 @@ paths:
         - models
   /api/v1/recorders.json:
     get:
+      operationId: 'Api::V1::Recorders#index'
       parameters:
         - description: Page number
           in: query
@@ -501,6 +506,7 @@ paths:
       tags:
         - recorders
     post:
+      operationId: 'Api::V1::Recorders#create'
       parameters:
         - description: Vendor ID
           in: formData
@@ -674,6 +680,7 @@ paths:
         - recorders
   /api/v1/recorders/search.json:
     get:
+      operationId: 'Api::V1::Recorders#search'
       parameters:
         - description: Page number
           in: query
@@ -784,6 +791,7 @@ paths:
         - recorders
   '/api/v1/recorders/{id}.json':
     get:
+      operationId: 'Api::V1::Recorders#show'
       parameters:
         - description: Recorder ID
           in: path
@@ -1162,6 +1170,7 @@ paths:
         - recorders
   /api/v1/vendors.json:
     get:
+      operationId: 'Api::V1::Vendors#index'
       parameters:
         - description: Page number
           in: query
@@ -1186,6 +1195,7 @@ paths:
       tags:
         - vendors
     post:
+      operationId: 'Api::V1::Vendors#create'
       parameters:
         - description: Name
           in: formData
@@ -1219,6 +1229,7 @@ paths:
         - vendors
   '/api/v1/vendors/{id}.json':
     get:
+      operationId: 'Api::V1::Vendors#show'
       parameters:
         - description: Vendor ID
           in: path
