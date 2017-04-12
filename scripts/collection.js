@@ -372,7 +372,7 @@ function writeSpec(source, format, exPatch, command) {
       if (validation.warnings)
         logYaml(validation.warnings);
 
-      context.swagger = validation.resolved;
+      context.swagger = validation.remotesResolved;
 
       var filename = util.saveSwagger(context.swagger);
 
@@ -776,7 +776,11 @@ function validateSwagger(swagger, source) {
       var relativeBase = source.split('/');
       relativeBase.pop();
       relativeBase = relativeBase.join('/');
-      spec.jsonRefs = {relativeBase: relativeBase};
+      spec.jsonRefs = {relativeBase: relativeBase, loaderOptions: {processContent: 
+	    function (res, cb) {
+	      cb(undefined, YAML.safeLoad(res.text,{json:true}));
+        }
+	  }};
       return spec;
     })
     .then(spec => spec.validate())

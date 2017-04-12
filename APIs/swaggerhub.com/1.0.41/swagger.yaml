@@ -1,0 +1,3189 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.swaggerhub.com
+info:
+  contact:
+    email: info@swaggerhub.com
+    name: SwaggerHub
+    url: 'http://swaggerhub.com'
+  description: The registry API for SwaggerHub
+  title: SwaggerHub Registry
+  version: 1.0.41
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: 'https://pbs.twimg.com/profile_images/725794797592690688/r20oBBuu_400x400.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.swaggerhub.com/apis/swagger-hub/registry-api/1.0.41'
+      version: '2.0'
+  x-providerName: swaggerhub.com
+produces:
+  - application/json
+securityDefinitions:
+  TokenSecured:
+    in: header
+    name: Authorization
+    type: apiKey
+tags:
+  - name: APIs
+  - name: Domains
+  - name: Plugins
+paths:
+  /apis:
+    get:
+      description: ''
+      operationId: searchApis
+      parameters:
+        - description: free text query to match
+          in: query
+          name: query
+          required: false
+          type: string
+        - default: ALL
+          description: matches against published state
+          enum:
+            - ALL
+            - PUBLISHED
+          in: query
+          name: state
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: matches against tags associated with an API
+          in: query
+          items:
+            type: string
+          name: tag
+          required: false
+          type: array
+        - default: 0
+          description: page to return
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results per page
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: NAME
+          description: sort criteria
+          enum:
+            - NAME
+            - UPDATED
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: ASC
+          description: sort order
+          enum:
+            - ASC
+            - DESC
+          in: query
+          name: order
+          required: false
+          type: string
+      responses:
+        '200':
+          description: a list of APIs in APIs.json format
+          schema:
+            $ref: '#/definitions/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves a list of currently defined APIs in APIs.json format
+      tags:
+        - APIs
+  /apis/.template:
+    get:
+      operationId: getApiTemplates
+      parameters: []
+      responses:
+        '200':
+          description: template catalog
+          schema:
+            $ref: '#/definitions/TemplateCatalog'
+      security:
+        - TokenSecured: []
+      summary: Retrieves list of apis templates
+      tags:
+        - APIs
+  '/apis/{owner}':
+    get:
+      description: ''
+      operationId: getOwnerApis
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - default: 0
+          description: page to return
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results per page
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: NAME
+          description: sort criteria
+          enum:
+            - NAME
+            - UPDATED
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: ASC
+          description: sort order
+          enum:
+            - ASC
+            - DESC
+          in: query
+          name: order
+          required: false
+          type: string
+      responses:
+        '200':
+          description: a list of APIs in APIs.json format
+          schema:
+            $ref: '#/definitions/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves an APIs.json listing of all APIs defined for this owner
+      tags:
+        - APIs
+    put:
+      operationId: updateOwner
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: Token for updating owner name
+          in: query
+          name: newNameToken
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Owner was updated
+      security:
+        - TokenSecured: []
+      summary: Updates owner
+      tags:
+        - APIs
+  '/apis/{owner}/{api}':
+    delete:
+      description: ''
+      operationId: deleteApi
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+      responses:
+        '200':
+          description: the API was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: specified API not found
+        '409':
+          description: the API has published versions and can not be deleted
+      security:
+        - TokenSecured: []
+      summary: Deletes the specified API
+      tags:
+        - APIs
+    get:
+      operationId: getApiVersions
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+      responses:
+        '200':
+          description: a list of API versions in APIs.json format
+          schema:
+            $ref: '#/definitions/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves an APIs.json listing for all API versions for this owner and API
+      tags:
+        - APIs
+    post:
+      consumes:
+        - application/json
+        - application/yaml
+      description: Saves the provided Swagger definition; the owner must match the token owner. The version will be extracted from the Swagger definitions itself.
+      operationId: saveDefinition
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - default: false
+          description: Defines whether the API has to be private
+          in: query
+          name: isPrivate
+          required: false
+          type: boolean
+        - description: api version
+          in: query
+          name: version
+          required: false
+          type: string
+        - description: the Swagger definition of this API
+          in: body
+          name: definition
+          required: true
+          schema:
+            type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: the API was successfully saved
+        '201':
+          description: new API was successfully saved
+        '205':
+          description: the API was successfully saved and should be reloaded
+        '400':
+          description: the Swagger definition was invalid
+        '403':
+          description: maximum number of APIs reached
+        '409':
+          description: can not overwrite a published API version
+        '415':
+          description: invalid content type
+      security:
+        - TokenSecured: []
+      summary: Saves the provided Swagger definition
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/.collaboration':
+    delete:
+      operationId: deleteCollaboration
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+      responses:
+        default:
+          description: successfully deleted a collaboration
+      summary: Deletes API's collaboration
+      tags:
+        - APIs
+    get:
+      operationId: getCollaboration
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - default: false
+          in: query
+          name: expandTeams
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: the existing collaboration on an API
+          schema:
+            $ref: '#/definitions/Collaboration'
+      summary: Gets API's collaboration
+      tags:
+        - APIs
+    put:
+      operationId: updateCollaboration
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Collaboration'
+      responses:
+        default:
+          description: successfully updated API collaboration
+      summary: Updates API's collaboration
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/.newname':
+    post:
+      operationId: renameApi
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: New name
+          in: query
+          name: newName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: API was successfully renamed
+        '409':
+          description: API or domain with the new name already exists
+      security:
+        - TokenSecured: []
+      summary: Renames API
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/.template':
+    post:
+      description: ''
+      operationId: saveApiDefinitionByTemplate
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - default: false
+          description: Defines whether the API has to be private
+          in: query
+          name: isPrivate
+          required: false
+          type: boolean
+        - description: Template id
+          in: query
+          name: template
+          required: true
+          type: string
+      responses:
+        '200':
+          description: API was successfully saved
+        '201':
+          description: new API was successfully saved
+        '205':
+          description: the API was successfully saved and should be reloaded
+        '403':
+          description: maximum number of APIs reached
+        '409':
+          description: can not overwrite a published API version
+      security:
+        - TokenSecured: []
+      summary: Creates API by template
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/.transfer':
+    post:
+      description: ''
+      operationId: transferApi
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: New owner
+          in: query
+          name: newOwner
+          required: true
+          type: string
+        - description: Transfer integrations
+          in: query
+          name: transferIntegrations
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: the Swagger API was transfered
+          schema:
+            properties: {}
+            type: object
+      security:
+        - TokenSecured: []
+      summary: transfers api to another owner
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}':
+    delete:
+      description: ''
+      operationId: deleteApiVersion
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: the API version was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: specified API not found
+        '409':
+          description: the API version is published and can not be deleted or it is the only version of this API
+      security:
+        - TokenSecured: []
+      summary: Deletes a particular version of the specified API
+      tags:
+        - APIs
+    get:
+      description: ''
+      operationId: getDefinition
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/yaml
+      responses:
+        '200':
+          description: the Swagger API in requested format
+          schema:
+            properties: {}
+            type: object
+        '404':
+          description: specified API not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the Swagger definition for the specified API and version
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/.bump':
+    post:
+      description: Adds API version.
+      operationId: bumpApi
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - default: false
+          description: Defines whether the API has to be private
+          in: query
+          name: isPrivate
+          required: false
+          type: boolean
+        - description: New api version
+          in: query
+          name: newVersion
+          required: true
+          type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        '201':
+          description: the API was successfully forked
+        '403':
+          description: maximum number of API versions reached
+        '409':
+          description: can not overwrite existing API
+      security:
+        - TokenSecured: []
+      summary: Adds API version
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/.comment':
+    get:
+      operationId: getApiComments
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: comments for the specified API
+          schema:
+            items:
+              $ref: '#/definitions/ClosableComment'
+            type: array
+        '204':
+          description: no comments were found for the specified API
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified API not found
+      security:
+        - TokenSecured: []
+      summary: Returns the list of comments for the specified API
+      tags:
+        - APIs
+    post:
+      operationId: addApiComment
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NewComment'
+      responses:
+        '201':
+          description: newly created comment for the specified API
+          schema:
+            $ref: '#/definitions/ClosableComment'
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified API not found
+      security:
+        - TokenSecured: []
+      summary: Adds a new comment to the specified API
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/.comment/batch':
+    post:
+      operationId: updateApiComments
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CommentsBatch'
+      responses:
+        '200':
+          description: comments were updated
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified API or comment or reply not found
+      security:
+        - TokenSecured: []
+      summary: Updates passed batch of comments
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/.comment/{comment}':
+    delete:
+      operationId: deleteApiComment
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+      responses:
+        '200':
+          description: comment was deleted
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified API or comment was not found
+      security:
+        - TokenSecured: []
+      summary: Deletes specified comment
+      tags:
+        - APIs
+    patch:
+      operationId: updateApiComment
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/ClosableCommentPatch'
+      responses:
+        '200':
+          description: comment was updated
+          schema:
+            $ref: '#/definitions/ClosableComment'
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified API or comment was not found
+      security:
+        - TokenSecured: []
+      summary: Updates specified comment
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/.comment/{comment}/reply':
+    post:
+      operationId: addApiCommentReply
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NewReply'
+      responses:
+        '201':
+          description: newly created reply
+          schema:
+            items:
+              $ref: '#/definitions/Comment'
+            type: array
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified API or comment not found
+      security:
+        - TokenSecured: []
+      summary: Adds a new reply to the specified comment
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/.comment/{comment}/reply/{reply}':
+    delete:
+      operationId: deleteApiCommentReply
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+        - description: reply identifier
+          in: path
+          name: reply
+          required: true
+          type: string
+      responses:
+        '200':
+          description: comment reply was deleted
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified API or comment or reply was not found
+      security:
+        - TokenSecured: []
+      summary: Deletes specified comment reply
+      tags:
+        - APIs
+    patch:
+      operationId: updateApiCommentReply
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+        - description: reply identifier
+          in: path
+          name: reply
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/CommentPatch'
+      responses:
+        '200':
+          description: comment reply was updated
+          schema:
+            $ref: '#/definitions/Comment'
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified API or comment or reply was not found
+      security:
+        - TokenSecured: []
+      summary: Updates specified comment reply
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/.comment/{comment}/status/{status}':
+    put:
+      operationId: setApiCommentStatus
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+        - description: comment status
+          enum:
+            - OPEN
+            - RESOLVED
+          in: path
+          name: status
+          required: true
+          type: string
+      responses:
+        '200':
+          description: comment status was updated
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified API or comment not found
+      security:
+        - TokenSecured: []
+      summary: Updates status to the specified comment
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/.draft':
+    delete:
+      description: ''
+      operationId: deleteDraftApi
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: the draft was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: specified API not found
+      security:
+        - TokenSecured: []
+      summary: Deletes a particular version of the specified API
+      tags:
+        - Drafts
+    get:
+      description: ''
+      operationId: getDraft
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/yaml
+      responses:
+        '200':
+          description: the draft in requested format
+          schema:
+            properties: {}
+            type: object
+        '404':
+          description: specified draft not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the draft for the specified API and version
+      tags:
+        - Drafts
+    put:
+      consumes:
+        - application/json
+        - application/yaml
+      description: Saves the provided draft for a swagger definition.
+      operationId: saveDraft
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: the Swagger definition of this API
+          in: body
+          name: definition
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the draft was successfully saved
+        '201':
+          description: new draft was successfully saved
+        '205':
+          description: the draft was successfully saved and should be reloaded
+        '400':
+          description: the Swagger definition was invalid
+        '403':
+          description: maximum number of drafts reached
+        '415':
+          description: invalid content type
+      security:
+        - TokenSecured: []
+      summary: Saves the provided draft for a Swagger definition
+      tags:
+        - Drafts
+  '/apis/{owner}/{api}/{version}/.fork':
+    post:
+      description: Forks the provided Swagger definition.
+      operationId: forkApi
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - default: false
+          description: Defines whether the API has to be private
+          in: query
+          name: isPrivate
+          required: false
+          type: boolean
+        - description: New spec id
+          in: body
+          name: newSpec
+          required: true
+          schema:
+            $ref: '#/definitions/SpecId'
+        - description: force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        '201':
+          description: the API was successfully forked
+        '403':
+          description: maximum number of APIs reached
+        '409':
+          description: can not overwrite existing API
+      security:
+        - TokenSecured: []
+      summary: Forks the provided Swagger definition
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/compare':
+    get:
+      description: Compares two APIs
+      operationId: compareApis
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: |
+            The method to use for comparing two APIs.
+            * FULL - Full line-by-line text comparison of the two APIs
+            * LOGICAL - Compares if the two API's are logically equivalent. Ignores non-structural fields like descriptions, examples etc. Also ignores order when not important.
+            * STRUCTURAL - Like LOGICAL but also compares non-structural fields
+          enum:
+            - FULL
+            - LOGICAL
+            - STRUCTURAL
+          in: query
+          name: method
+          required: true
+          type: string
+        - description: URL to external API or path to internal API
+          in: query
+          name: otherApiPath
+          required: true
+          type: string
+      responses:
+        '200':
+          description: the two APIs were successfully compared
+          schema:
+            $ref: '#/definitions/Comparison'
+        '401':
+          description: the API to compare with was not accessible
+        '404':
+          description: the API to compare with was not found
+      security:
+        - TokenSecured: []
+      summary: Compares two APIs
+      tags:
+        - APIs
+    post:
+      description: Compares two APIs
+      operationId: compareApisFromFile
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: |
+            The method to use for comparing two APIs.
+            * FULL - Full line-by-line text comparison of the two APIs
+            * LOGICAL - Compares if the two API's are logically equivalent. Ignores non-structural fields like descriptions, examples etc. Also ignores order when not important.
+            * STRUCTURAL - Like LOGICAL but also compares non-structural fields
+          enum:
+            - FULL
+            - LOGICAL
+            - STRUCTURAL
+          in: query
+          name: method
+          required: true
+          type: string
+        - description: the definition parsed from an uploaded file.
+          in: body
+          name: definition
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the two APIs were successfully compared
+          schema:
+            $ref: '#/definitions/Comparison'
+        '403':
+          description: access denied
+      security:
+        - TokenSecured: []
+      summary: Compares two APIs
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/swagger.json':
+    get:
+      description: ''
+      operationId: getJsonDefinition
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: the Swagger API in JSON format
+          schema:
+            properties: {}
+            type: object
+        '404':
+          description: specified API not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the Swagger definition for the specified API and version in JSON format
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/swagger.yaml':
+    get:
+      description: ''
+      operationId: getYamlDefinition
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      produces:
+        - application/yaml
+      responses:
+        '200':
+          description: the Swagger API in YAML format
+          schema:
+            properties: {}
+            type: object
+        '404':
+          description: specified API not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the Swagger definition for the specified API and version in YAML format
+      tags:
+        - APIs
+  /domains:
+    get:
+      operationId: searchDomains
+      parameters:
+        - description: free text query to match
+          in: query
+          name: query
+          required: false
+          type: string
+        - default: ALL
+          description: matches against published state
+          enum:
+            - ALL
+            - PUBLISHED
+          in: query
+          name: state
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: matches against tags associated with a domain
+          in: query
+          items:
+            type: string
+          name: tag
+          required: false
+          type: array
+        - default: 0
+          description: page to return
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results per page
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: NAME
+          description: sort criteria
+          enum:
+            - NAME
+            - UPDATED
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: ASC
+          description: sort order
+          enum:
+            - ASC
+            - DESC
+          in: query
+          name: order
+          required: false
+          type: string
+      responses:
+        '200':
+          description: a list of APIs in APIs.json format
+          schema:
+            $ref: '#/definitions/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves a list of currently defined domains in APIs.json format
+      tags:
+        - Domains
+  /domains/.template:
+    get:
+      operationId: getDomainTemplates
+      parameters: []
+      responses:
+        '200':
+          description: template catalog
+          schema:
+            $ref: '#/definitions/TemplateCatalog'
+      security:
+        - TokenSecured: []
+      summary: Retrieves list of domains templates
+      tags:
+        - Domains
+  '/domains/{owner}':
+    get:
+      operationId: getOwnerDomains
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - default: 0
+          description: page to return
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results per page
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: NAME
+          description: sort criteria
+          enum:
+            - NAME
+            - UPDATED
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: ASC
+          description: sort order
+          enum:
+            - ASC
+            - DESC
+          in: query
+          name: order
+          required: false
+          type: string
+      responses:
+        '200':
+          description: a list of domains in APIs.json format
+          schema:
+            $ref: '#/definitions/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves an APIs.json listing of all domains defined for this owner
+      tags:
+        - Domains
+  '/domains/{owner}/.refs':
+    get:
+      operationId: getOwnerReferences
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+      responses:
+        '200':
+          description: a list of APIs and domains in APIs.json format
+          schema:
+            $ref: '#/definitions/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves an APIs.json listing of entries referensing owner domains
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}':
+    delete:
+      operationId: deleteDomain
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: the domain was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: specified domain not found
+        '409':
+          description: the domain has published versions and can not be deleted
+        '424':
+          description: can't delete because there are some dependencies for domain
+      security:
+        - TokenSecured: []
+      summary: Deletes the specified domain
+      tags:
+        - Domains
+    get:
+      operationId: getDomainVersions
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+      responses:
+        '200':
+          description: a list of domain versions in APIs.json format
+          schema:
+            $ref: '#/definitions/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves an APIs.json listing for all domain versions for this owner and domain
+      tags:
+        - Domains
+    post:
+      consumes:
+        - application/json
+        - application/yaml
+      operationId: saveDomainDefinition
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - default: false
+          description: Defines whether the API has to be private
+          in: query
+          name: isPrivate
+          required: false
+          type: boolean
+        - description: domain version
+          in: query
+          name: version
+          required: true
+          type: string
+        - description: the Swagger definition of this Domain
+          in: body
+          name: definition
+          required: false
+          schema:
+            type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: the domain was successfully saved
+        '201':
+          description: new domain was successfully saved
+        '205':
+          description: the domain was successfully saved and should be reloaded
+        '403':
+          description: maximum number of domains reached
+        '409':
+          description: can not overwrite a published domain version
+        '415':
+          description: invalid content type
+      security:
+        - TokenSecured: []
+      summary: Saves the provided Swagger definition of a domain
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/.newname':
+    post:
+      operationId: renameDomain
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: New name
+          in: query
+          name: newName
+          required: true
+          type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Domain was successfully renamed
+        '409':
+          description: API or domain with the new name already exists
+      security:
+        - TokenSecured: []
+      summary: Renames domain
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/.transfer':
+    post:
+      description: ''
+      operationId: transferDomain
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: New owner
+          in: query
+          name: newOwner
+          required: true
+          type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: the Swagger Domain was transfered
+          schema:
+            properties: {}
+            type: object
+      security:
+        - TokenSecured: []
+      summary: transfers domain to another owner
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}':
+    delete:
+      operationId: deleteDomainVersion
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: the domain version was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: specified domain not found
+        '409':
+          description: the domain version is published and can not be deleted or it is the only version of this API
+        '424':
+          description: can't delete because there are some dependencies for domain
+      security:
+        - TokenSecured: []
+      summary: Deletes a particular version of the specified domain
+      tags:
+        - Domains
+    get:
+      operationId: getDomainDefinition
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/yaml
+      responses:
+        '200':
+          description: the Swagger domain in requested format
+          schema:
+            properties: {}
+            type: object
+        '404':
+          description: specified domain not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the Swagger definition for the specified domain and version
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/.bump':
+    post:
+      description: Adds domain version.
+      operationId: bumpDomain
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - default: false
+          description: Defines whether the API has to be private
+          in: query
+          name: isPrivate
+          required: false
+          type: boolean
+        - description: New domain version
+          in: query
+          name: newVersion
+          required: true
+          type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        '201':
+          description: the domain was successfully created
+        '403':
+          description: maximum number of domain versions reached
+        '409':
+          description: can not overwrite existing domain
+      security:
+        - TokenSecured: []
+      summary: Adds domain version
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/.comment':
+    get:
+      operationId: getDomainComments
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: comments for the specified domain
+          schema:
+            items:
+              $ref: '#/definitions/ClosableComment'
+            type: array
+        '204':
+          description: no comments were found for the specified domain
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified domain not found
+      security:
+        - TokenSecured: []
+      summary: Returns the list of comments for the specified domain
+      tags:
+        - Domains
+    post:
+      operationId: addDomainComment
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NewComment'
+      responses:
+        '200':
+          description: newly created comment for the specified domain
+          schema:
+            $ref: '#/definitions/ClosableComment'
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified domain not found
+      security:
+        - TokenSecured: []
+      summary: Adds a new comment to the specified domain
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/.comment/batch':
+    post:
+      operationId: updateDomainComments
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CommentsBatch'
+      responses:
+        '200':
+          description: comments were updated
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified domain or comment or reply not found
+      security:
+        - TokenSecured: []
+      summary: Updates passed batch of comments
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/.comment/{comment}':
+    delete:
+      operationId: deleteDomainComment
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+      responses:
+        '200':
+          description: comment was deleted
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified domain or comment was not found
+      security:
+        - TokenSecured: []
+      summary: Deletes specified comment
+      tags:
+        - Domains
+    patch:
+      operationId: updateDomainComment
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/ClosableCommentPatch'
+      responses:
+        '200':
+          description: comment was updated
+          schema:
+            $ref: '#/definitions/ClosableComment'
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified domain or comment was not found
+      security:
+        - TokenSecured: []
+      summary: Updates specified comment
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/.comment/{comment}/reply':
+    post:
+      operationId: addDomainCommentReply
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NewReply'
+      responses:
+        '200':
+          description: newly created reply
+          schema:
+            items:
+              $ref: '#/definitions/Comment'
+            type: array
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified domain or comment not found
+      security:
+        - TokenSecured: []
+      summary: Adds a new reply to the specified comment
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/.comment/{comment}/reply/{reply}':
+    delete:
+      operationId: deleteDomainCommentReply
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+        - description: reply identifier
+          in: path
+          name: reply
+          required: true
+          type: string
+      responses:
+        '200':
+          description: comment reply was deleted
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified domain or comment or reply was not found
+      security:
+        - TokenSecured: []
+      summary: Deletes specified comment reply
+      tags:
+        - Domains
+    patch:
+      operationId: updateDomainCommentReply
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+        - description: reply identifier
+          in: path
+          name: reply
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/CommentPatch'
+      responses:
+        '200':
+          description: comment reply was updated
+          schema:
+            $ref: '#/definitions/Comment'
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified domain or comment or reply was not found
+      security:
+        - TokenSecured: []
+      summary: Updates specified comment reply
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/.comment/{comment}/status/{status}':
+    put:
+      operationId: setDomainCommentStatus
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: comment identifier
+          in: path
+          name: comment
+          required: true
+          type: string
+        - description: comment status
+          enum:
+            - OPEN
+            - RESOLVED
+          in: path
+          name: status
+          required: true
+          type: string
+      responses:
+        '200':
+          description: comment status was updated
+        '401':
+          description: access token is not set or invalid
+        '404':
+          description: specified domain or comment not found
+      security:
+        - TokenSecured: []
+      summary: Updates status to the specified comment
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/.draft':
+    delete:
+      description: ''
+      operationId: deleteDraftDomain
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: the draft was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: Draft domain not found
+      security:
+        - TokenSecured: []
+      summary: Deletes a particular version of the specified Domain
+      tags:
+        - Drafts
+    get:
+      description: ''
+      operationId: getDraftDomain
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/yaml
+      responses:
+        '200':
+          description: the draft in requested format
+          schema:
+            properties: {}
+            type: object
+        '404':
+          description: specified draft not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the draft for the specified domain
+      tags:
+        - Drafts
+    put:
+      consumes:
+        - application/json
+        - application/yaml
+      description: Saves the provided draft for a domain definition.
+      operationId: saveDraftDomain
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - description: the Swagger definition of this Domain
+          in: body
+          name: definition
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the draft was successfully saved
+        '201':
+          description: new draft was successfully saved
+        '205':
+          description: the draft was successfully saved
+        '400':
+          description: the domain definition was invalid
+        '415':
+          description: invalid content type
+      security:
+        - TokenSecured: []
+      summary: Saves the provided draft for a domain.
+      tags:
+        - Drafts
+  '/domains/{owner}/{domain}/{version}/.fork':
+    post:
+      description: Forks the provided domain definition.
+      operationId: forkDomain
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - default: false
+          description: Defines whether the API has to be private
+          in: query
+          name: isPrivate
+          required: false
+          type: boolean
+        - description: New spec id
+          in: body
+          name: newSpec
+          required: true
+          schema:
+            $ref: '#/definitions/SpecId'
+        - description: force update
+          in: query
+          name: force
+          required: false
+          type: boolean
+      responses:
+        '201':
+          description: the domain was successfully forked
+        '403':
+          description: maximum number of domains reached
+        '409':
+          description: can not overwrite existing domain
+      security:
+        - TokenSecured: []
+      summary: Forks the provided domain definition
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/.template':
+    post:
+      description: ''
+      operationId: saveDomainDefinitionByTemplate
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+        - default: false
+          description: Defines whether the API has to be private
+          in: query
+          name: isPrivate
+          required: false
+          type: boolean
+        - description: Template id
+          in: query
+          name: template
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Domain was successfully saved
+        '201':
+          description: new Domain was successfully saved
+        '205':
+          description: the Domain was successfully saved and should be reloaded
+        '403':
+          description: maximum number of Domains reached
+        '409':
+          description: can not overwrite a published Domain version
+      security:
+        - TokenSecured: []
+      summary: Creates Domain by template
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/domain.json':
+    get:
+      operationId: getDomainJsonDefinition
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: definition in JSON format
+          schema:
+            properties: {}
+            type: object
+        '404':
+          description: specified domain not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the definition for the specified domain and version in JSON format
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/domain.yaml':
+    get:
+      operationId: getDomainYamlDefinition
+      parameters:
+        - description: API owner identifier
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          type: string
+      produces:
+        - application/yaml
+      responses:
+        '200':
+          description: definition in YAML format
+          schema:
+            properties: {}
+            type: object
+        '404':
+          description: specified domain not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the definition for the specified domain and version in YAML format
+      tags:
+        - Domains
+  /plugins:
+    get:
+      description: ''
+      operationId: getAvailablePlugins
+      parameters: []
+      responses:
+        '200':
+          description: a list of plugins in json format
+          schema:
+            items:
+              $ref: '#/definitions/PluginDefinition'
+            type: array
+        '403':
+          description: access denied
+      security:
+        - TokenSecured: []
+      summary: Retrieves a list of all available plugins (ignore system plugins)
+      tags:
+        - Plugins
+  /plugins/configurations:
+    delete:
+      description: Deletes the provided Plugin configuration
+      operationId: removePluginConfiguration
+      parameters:
+        - description: the Plugin configuration to be added or updated
+          in: body
+          name: pluginConfiguration
+          required: true
+          schema:
+            $ref: '#/definitions/PluginConfiguration'
+      responses:
+        '200':
+          description: the Plugin configuration was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: the Plugin configuration was not found
+      security:
+        - TokenSecured: []
+      summary: Deletes the provided Plugin configuration
+      tags:
+        - Plugins
+    get:
+      description: Retrieves a list of enabled plugin configurations
+      operationId: getPlugins
+      parameters:
+        - description: plugin configuration objectId
+          in: query
+          name: objectId
+          required: true
+          type: string
+        - default: 0
+          description: page to return
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results per page
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: a list of plugin configurations in json format
+          schema:
+            items:
+              $ref: '#/definitions/PluginConfiguration'
+            type: array
+        '403':
+          description: access denied
+      security:
+        - TokenSecured: []
+      summary: Retrieves a list of enabled plugin configurations
+      tags:
+        - Plugins
+    post:
+      consumes:
+        - application/json
+        - application/yaml
+      description: Saves the provided Plugin configuration
+      operationId: addPluginConfiguration
+      parameters:
+        - description: the Plugin configuration to be added or updated
+          in: body
+          name: pluginConfiguration
+          required: true
+          schema:
+            $ref: '#/definitions/PluginConfiguration'
+        - default: false
+          description: 'if true, also execute plugin'
+          in: query
+          name: trigger
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: the Plugin configuration was successfully saved
+        '400':
+          description: the Plugin configuration was invalid
+        '403':
+          description: access denied
+        '409':
+          description: cannot add plugin configuration with same id
+        '415':
+          description: invalid content type
+      security:
+        - TokenSecured: []
+      summary: Saves the provided Plugin configuration
+      tags:
+        - Plugins
+    put:
+      consumes:
+        - application/json
+        - application/yaml
+      description: Updated the provided Plugin configuration
+      operationId: updatePluginConfiguration
+      parameters:
+        - description: the Plugin configuration to be added or updated
+          in: body
+          name: pluginConfiguration
+          required: true
+          schema:
+            $ref: '#/definitions/PluginConfiguration'
+        - default: false
+          description: 'if true, also execute plugin'
+          in: query
+          name: trigger
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: the Plugin configuration was successfully updated
+        '400':
+          description: the Plugin configuration was invalid
+        '403':
+          description: access denied
+        '404':
+          description: the Plugin configuration was not found
+        '415':
+          description: invalid content type
+      security:
+        - TokenSecured: []
+      summary: Updated the provided Plugin configuration
+      tags:
+        - Plugins
+  '/plugins/configurations/execute/{id}':
+    post:
+      description: triggers execution of plugin configuration identified by id
+      operationId: triggerPluginConfiguration
+      parameters:
+        - description: plugin configuration id
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful execution
+        '403':
+          description: access denied
+      security:
+        - TokenSecured: []
+      summary: triggers execution of plugin configuration identified by id
+      tags:
+        - Plugins
+  /plugins/configurations/schema:
+    post:
+      consumes:
+        - application/json
+        - application/yaml
+      description: Get configuration schema for the provided Plugin configuration
+      operationId: buildConfigurationSchema
+      parameters:
+        - description: the Plugin configuration to be added or updated
+          in: body
+          name: pluginConfiguration
+          required: true
+          schema:
+            $ref: '#/definitions/PluginConfiguration'
+      responses:
+        '200':
+          description: the configuration schema in json format
+          schema:
+            properties: {}
+            type: object
+        '400':
+          description: the Plugin configuration was invalid
+        '403':
+          description: access denied
+        '415':
+          description: invalid content type
+      security:
+        - TokenSecured: []
+      summary: get configuration schema for the provided Plugin configuration
+      tags:
+        - Plugins
+  /token:
+    post:
+      consumes:
+        - application/json
+        - application/yaml
+      description: ''
+      operationId: getApiTokenByCredentials
+      parameters:
+        - description: user credentials
+          in: body
+          name: user
+          required: true
+          schema:
+            $ref: '#/definitions/UserCredentials'
+      responses:
+        '200':
+          description: the API Token as string
+          schema:
+            $ref: '#/definitions/AccessToken'
+        '401':
+          description: API not allowed for github users
+        '404':
+          description: cannot retrieve token for given user
+      summary: Retrieves an API token valid for the user identified by user object in body
+      tags:
+        - APIs
+definitions:
+  AccessToken:
+    properties:
+      token:
+        type: string
+    type: object
+  ApiMetadata:
+    properties:
+      categories:
+        items:
+          type: string
+        type: array
+      defaultVersion:
+        type: string
+      links:
+        items:
+          $ref: '#/definitions/ApiMetadataLink'
+        type: array
+      tags:
+        items:
+          type: string
+        type: array
+    required:
+      - categories
+      - tags
+    type: object
+  ApiMetadataLink:
+    properties:
+      type:
+        type: string
+      url:
+        type: string
+    required:
+      - type
+      - url
+    type: object
+  ApisJson:
+    properties:
+      apis:
+        items:
+          $ref: '#/definitions/ApisJsonApi'
+        type: array
+      created:
+        format: date-time
+        type: string
+      description:
+        type: string
+      modified:
+        format: date-time
+        type: string
+      name:
+        type: string
+      offset:
+        format: int32
+        type: integer
+      specificationVersion:
+        type: string
+      totalCount:
+        format: int64
+        type: integer
+      url:
+        type: string
+    type: object
+  ApisJsonApi:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+      properties:
+        items:
+          $ref: '#/definitions/ApisJsonProperty'
+        type: array
+      tags:
+        items:
+          type: string
+        type: array
+    type: object
+  ApisJsonProperty:
+    description: an API property
+    properties:
+      type:
+        type: string
+    type: object
+  ApisJsonUrlProperty:
+    allOf:
+      - $ref: '#/definitions/ApisJsonProperty'
+      - description: an API property where the value is a URL
+        properties:
+          url:
+            format: url
+            type: string
+        type: object
+  ApisJsonValueProperty:
+    allOf:
+      - $ref: '#/definitions/ApisJsonProperty'
+      - description: an API property with a string value
+        properties:
+          value:
+            type: string
+        type: object
+  ClosableComment:
+    allOf:
+      - $ref: '#/definitions/Comment'
+      - properties:
+          position:
+            format: int32
+            type: integer
+          replies:
+            items:
+              $ref: '#/definitions/Comment'
+            type: array
+          status:
+            enum:
+              - OPEN
+              - RESOLVED
+            type: string
+        type: object
+  ClosableCommentPatch:
+    allOf:
+      - $ref: '#/definitions/CommentPatch'
+      - properties:
+          position:
+            format: int32
+            type: integer
+        type: object
+  CodegenLanguage:
+    properties:
+      customValues:
+        additionalProperties:
+          type: string
+        type: object
+      visible:
+        default: true
+        type: boolean
+    required:
+      - visible
+    type: object
+  CodegenSettings:
+    properties:
+      client:
+        additionalProperties:
+          $ref: '#/definitions/CodegenLanguage'
+        type: object
+      server:
+        additionalProperties:
+          $ref: '#/definitions/CodegenLanguage'
+        type: object
+    type: object
+  Collaboration:
+    properties:
+      hint:
+        $ref: '#/definitions/CollaborationHint'
+      members:
+        items:
+          $ref: '#/definitions/CollaborationMembership'
+        type: array
+      owner:
+        readOnly: true
+        type: string
+      owners:
+        items:
+          type: string
+        type: array
+      pendingMembers:
+        items:
+          $ref: '#/definitions/CollaborationMembership'
+        type: array
+      teams:
+        items:
+          $ref: '#/definitions/CollaborationTeamMembership'
+        type: array
+    required:
+      - hint
+    type: object
+  CollaborationHint:
+    properties:
+      type:
+        description: type identifier of the managed entity
+        format: uuid
+        type: string
+    required:
+      - type
+    type: object
+  CollaborationMember:
+    properties:
+      name:
+        type: string
+      startTime:
+        format: date-time
+        readOnly: true
+        type: string
+      title:
+        readOnly: true
+        type: string
+      uuid:
+        readOnly: true
+        type: string
+    required:
+      - name
+    type: object
+  CollaborationMembership:
+    allOf:
+      - $ref: '#/definitions/CollaborationMember'
+      - properties:
+          blocked:
+            readOnly: true
+            type: boolean
+          donotdisturb:
+            readOnly: true
+            type: boolean
+          roles:
+            items:
+              enum:
+                - EDIT
+                - COMMENT
+                - VIEW
+              type: string
+            type: array
+        required:
+          - roles
+        type: object
+  CollaborationMembershipList:
+    properties:
+      hint:
+        $ref: '#/definitions/CollaborationHint'
+      items:
+        items:
+          $ref: '#/definitions/CollaborationMembership'
+        type: array
+    required:
+      - hint
+    type: object
+  CollaborationRoles:
+    properties:
+      api:
+        type: string
+      owner:
+        type: string
+      roles:
+        items:
+          enum:
+            - EDIT
+            - COMMENT
+            - VIEW
+          type: string
+        type: array
+    type: object
+  CollaborationTeamMembership:
+    allOf:
+      - $ref: '#/definitions/CollaborationMembership'
+      - properties:
+          members:
+            items:
+              $ref: '#/definitions/CollaborationMember'
+            type: array
+        type: object
+  Comment:
+    properties:
+      body:
+        type: string
+      created:
+        format: date-time
+        type: string
+      id:
+        type: string
+      modified:
+        format: date-time
+        type: string
+      user:
+        $ref: '#/definitions/User'
+    required:
+      - body
+      - created
+      - id
+      - user
+    type: object
+  CommentPatch:
+    properties:
+      body:
+        type: string
+    type: object
+  CommentsBatch:
+    properties:
+      addComment:
+        items:
+          $ref: '#/definitions/NewComment'
+        type: array
+      addReply:
+        additionalProperties:
+          items:
+            $ref: '#/definitions/NewReply'
+          type: array
+        type: object
+      deleteComment:
+        items:
+          type: string
+        type: array
+      deleteReply:
+        additionalProperties:
+          items:
+            type: string
+          type: array
+        type: object
+      updateComment:
+        additionalProperties:
+          $ref: '#/definitions/ClosableCommentPatch'
+        type: object
+      updateReply:
+        additionalProperties:
+          additionalProperties:
+            $ref: '#/definitions/CommentPatch'
+          type: object
+        type: object
+      updateStatus:
+        additionalProperties:
+          enum:
+            - OPEN
+            - RESOLVED
+          type: string
+        type: object
+    type: object
+  Comparison:
+    description: a list of differences between two APIs
+    items:
+      $ref: '#/definitions/ComparisonPart'
+    properties: {}
+    type: array
+  ComparisonDetail:
+    description: details for one side of a ComparisonPart
+    properties:
+      content:
+        description: the content of the API definition between `startPosition` and `endPosition`
+        type: string
+      endPosition:
+        $ref: '#/definitions/Position'
+      path:
+        description: the path to the object (notation similar to JSONPath)
+        type: string
+      startPosition:
+        $ref: '#/definitions/Position'
+    required:
+      - content
+      - endPosition
+      - startPosition
+    type: object
+  ComparisonPart:
+    description: a part of the API that was (or wasn't) changed
+    properties:
+      base:
+        $ref: '#/definitions/ComparisonDetail'
+      other:
+        $ref: '#/definitions/ComparisonDetail'
+      type:
+        description: |
+          the type of change that this part describes
+          * UNMODIFIED - this part is the same in both APIs. Only available for FULL compare.
+          * INSERTED - this is present in `other` but missing in `base`. `base` will not be present.
+          * DELETED - this is present in `base` but missing in `other`. `other` will not be present.
+          * CHANGED - this has been changed between `base` and `other`. Both `base` and `other` present.
+        enum:
+          - UNMODIFIED
+          - INSERTED
+          - DELETED
+          - CHANGED
+        type: string
+    required:
+      - type
+    type: object
+  GitHubExportSettings:
+    properties:
+      branch:
+        type: string
+      notificationEmail:
+        type: string
+      owner:
+        type: string
+      path:
+        type: string
+      repository:
+        type: string
+      token:
+        type: string
+      yamlPath:
+        type: string
+    required:
+      - branch
+      - notificationEmail
+      - owner
+      - repository
+      - token
+    type: object
+  LifecycleSettings:
+    properties:
+      published:
+        type: boolean
+    type: object
+  NewComment:
+    properties:
+      body:
+        type: string
+      position:
+        format: int32
+        type: integer
+      replies:
+        items:
+          $ref: '#/definitions/NewReply'
+        type: array
+    required:
+      - body
+      - position
+    type: object
+  NewReply:
+    properties:
+      body:
+        type: string
+    required:
+      - body
+    type: object
+  PluginConfiguration:
+    properties:
+      configuration:
+        additionalProperties:
+          type: string
+        type: object
+      definitionId:
+        type: string
+      draft:
+        type: boolean
+      id:
+        format: UUID
+        type: string
+      lifecycles:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      objectId:
+        type: string
+      ownerName:
+        type: string
+      path:
+        type: string
+    required:
+      - definitionId
+      - lifecycles
+      - name
+      - objectId
+      - ownerName
+      - path
+    type: object
+  PluginDefinition:
+    properties:
+      configurationSchema:
+        properties: {}
+        type: object
+      createdBy:
+        type: string
+      createdOn:
+        format: date-time
+        type: string
+      enabled:
+        type: boolean
+      id:
+        type: string
+      implementingClass:
+        type: string
+      limit:
+        description: count of allowed configurations
+        format: int64
+        type: integer
+      name:
+        type: string
+      version:
+        type: string
+    required:
+      - configurationSchema
+      - createdBy
+      - createdOn
+      - enabled
+      - implementingClass
+      - name
+      - version
+    type: object
+  Position:
+    description: a position in a text document
+    properties:
+      column:
+        type: integer
+      line:
+        type: integer
+    required:
+      - column
+      - line
+    type: object
+  Private:
+    properties:
+      private:
+        type: boolean
+    required:
+      - private
+    type: object
+  SpecId:
+    properties:
+      name:
+        type: string
+      owner:
+        type: string
+      version:
+        type: string
+    required:
+      - name
+      - owner
+      - version
+    type: object
+  SystemPluginConfiguration:
+    properties:
+      configuration:
+        additionalProperties:
+          type: string
+        type: object
+      id:
+        format: UUID
+        type: string
+      implementingClass:
+        type: string
+      lifecycles:
+        items:
+          type: string
+        type: array
+      version:
+        type: string
+    required:
+      - implementingClass
+      - lifecycles
+      - version
+    type: object
+  Template:
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+    required:
+      - id
+      - title
+    type: object
+  TemplateCatalog:
+    properties:
+      default:
+        $ref: '#/definitions/Template'
+      templates:
+        items:
+          $ref: '#/definitions/Template'
+        type: array
+    type: object
+  User:
+    properties:
+      active:
+        type: boolean
+      id:
+        type: string
+    type: object
+  UserCredentials:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  VersionMetadata:
+    properties:
+      codegenSettings:
+        $ref: '#/definitions/CodegenSettings'
+    type: object
