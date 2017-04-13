@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: An API to enable creating and using machine learning models.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Machine Learning Engine
   version: v1beta1
   x-apiClientRegistration:
@@ -802,14 +806,16 @@ definitions:
         description: |-
           Required. The Google Cloud Storage location of the trained model used to
           create the version. See the
-          [overview of model deployment](/ml-engine/docs/concepts/deployment-overview) for
-          more informaiton.
+          [overview of model
+          deployment](/ml-engine/docs/concepts/deployment-overview) for more
+          informaiton.
 
           When passing Version to
           [projects.models.versions.create](/ml-engine/reference/rest/v1/projects.models.versions/create)
           the model service uses the specified location as the source of the model.
           Once deployed, the model version is hosted by the prediction service, so
           this location is useful only as a historical record.
+          The total number of model files can't exceed 1000.
         type: string
       description:
         description: Optional. The description specified for the version when it was created.
@@ -1537,6 +1543,7 @@ definitions:
         description: |-
           Required. The Google Cloud Storage location of the packages with
           the training program and any additional dependencies.
+          The maximum number of package URIs is 100.
         items:
           type: string
         type: array
@@ -1645,14 +1652,16 @@ definitions:
         description: |-
           Required. The Google Cloud Storage location of the trained model used to
           create the version. See the
-          [overview of model deployment](/ml-engine/docs/concepts/deployment-overview) for
-          more informaiton.
+          [overview of model
+          deployment](/ml-engine/docs/concepts/deployment-overview) for more
+          informaiton.
 
           When passing Version to
           [projects.models.versions.create](/ml-engine/reference/rest/v1beta1/projects.models.versions/create)
           the model service uses the specified location as the source of the model.
           Once deployed, the model version is hosted by the prediction service, so
           this location is useful only as a historical record.
+          The total number of model files can't exceed 1000.
         type: string
       description:
         description: Optional. The description specified for the version when it was created.

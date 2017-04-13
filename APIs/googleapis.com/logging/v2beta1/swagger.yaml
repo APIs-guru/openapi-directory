@@ -9,6 +9,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Writes log entries and manages your Stackdriver Logging configuration.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Stackdriver Logging
   version: v2beta1
   x-apiClientRegistration:
@@ -244,7 +248,7 @@ paths:
   '/v2beta1/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.organizations.logs.delete
+      operationId: logging.billingAccounts.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -269,7 +273,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -387,7 +391,7 @@ paths:
   '/v2beta1/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.organizations.logs.list
+      operationId: logging.billingAccounts.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -423,7 +427,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'

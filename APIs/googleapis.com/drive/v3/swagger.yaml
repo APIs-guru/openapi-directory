@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Drive
   version: v3
   x-apiClientRegistration:
@@ -401,7 +405,7 @@ paths:
           name: orderBy
           type: string
         - default: 100
-          description: The maximum number of files to return per page.
+          description: The maximum number of files to return per page. Partial or empty result pages are possible even before the end of the files list has been reached.
           in: query
           maximum: 1000
           minimum: 1

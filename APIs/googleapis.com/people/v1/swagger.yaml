@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Provides access to information about profiles and contacts.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google People
   version: v1
   x-apiClientRegistration:
@@ -856,13 +860,11 @@ definitions:
   Person:
     description: |-
       Information about a person merged from various data sources such as the
-      authenticated user's contacts and profile data. Fields other than IDs,
-      metadata, and group memberships are user-edited.
+      authenticated user's contacts and profile data.
 
       Most fields can have multiple items. The items in a field have no guaranteed
       order, but each non-empty field is guaranteed to have exactly one field with
       `metadata.primary` set to true.
-      NEXT_ID: 31
     properties:
       addresses:
         description: The person's street addresses.

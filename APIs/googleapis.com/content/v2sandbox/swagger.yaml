@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages product items, inventory, and Merchant Center accounts for Google Shopping.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Content API for Shopping
   version: v2sandbox
   x-apiClientRegistration:
@@ -264,7 +268,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Cancels all line items in an order. This method can only be called for non-multi-client accounts.
+      description: 'Cancels all line items in an order, making a full refund. This method can only be called for non-multi-client accounts.'
       operationId: content.orders.cancel
       parameters:
         - description: The ID of the managing account.
@@ -301,7 +305,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Cancels a line item. This method can only be called for non-multi-client accounts.
+      description: 'Cancels a line item, making a full refund. This method can only be called for non-multi-client accounts.'
       operationId: content.orders.cancellineitem
       parameters:
         - description: The ID of the managing account.

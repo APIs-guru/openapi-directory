@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Reads and publishes results from Firebase Test Lab.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Tool Results firstparty
   version: v1beta3firstparty
   x-apiClientRegistration:
@@ -727,24 +731,9 @@ paths:
         May return any of the following canonical error codes: - NOT_FOUND - The containing Step does not exist
       operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.list
       parameters:
-        - description: The cloud project
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: A tool results history ID.
-          in: path
-          name: historyId
-          required: true
-          type: string
         - description: A tool results execution ID.
           in: path
           name: executionId
-          required: true
-          type: string
-        - description: A tool results step ID.
-          in: path
-          name: stepId
           required: true
           type: string
         - collectionFormat: multi
@@ -753,12 +742,28 @@ paths:
           items:
             enum:
               - cpu
+              - graphics
               - memory
               - network
               - perfMetricTypeUnspecified
             type: string
           name: filter
           type: array
+        - description: A tool results history ID.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: The cloud project
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1226,6 +1231,7 @@ definitions:
       perfMetricType:
         enum:
           - cpu
+          - graphics
           - memory
           - network
           - perfMetricTypeUnspecified
@@ -1233,6 +1239,7 @@ definitions:
       perfUnit:
         enum:
           - bytesPerSecond
+          - framesPerSecond
           - kibibyte
           - percent
           - perfUnitUnspecified
@@ -1242,6 +1249,7 @@ definitions:
           - cpuKernel
           - cpuTotal
           - cpuUser
+          - graphicsFrameRate
           - memoryRssPrivate
           - memoryRssShared
           - memoryRssTotal
@@ -1652,6 +1660,7 @@ definitions:
         items:
           enum:
             - cpu
+            - graphics
             - memory
             - network
             - perfMetricTypeUnspecified
