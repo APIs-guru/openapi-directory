@@ -1,0 +1,82 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.apitore.com
+basePath: /api/14
+info:
+  description: 'Url to Href links.<BR />[Endpoint] https://api.apitore.com/api/14'
+  title: Url2Href APIs
+  version: 0.0.1
+  x-description-language: jp
+  x-logo:
+    url: 'https://apitore.com/img/apis/14.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/14'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: url2hrefApis
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - description: Jsoup Controller
+    name: jsoup-controller
+paths:
+  /jsoup/url2href:
+    get:
+      description: 'Jsoup Web scraper.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/jsoup-response">jsoup-response</a><BR />&nbsp; Class: com.apitore.banana.response.org.jsoup.LinkResponseEntity<BR />'
+      operationId: url2hrefUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: URL
+          in: query
+          name: url
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LinkResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Extract href links from URL
+      tags:
+        - jsoup-controller
+definitions:
+  LinkResponseEntity:
+    properties:
+      endTime:
+        description: End date
+        type: string
+      links:
+        description: Links
+        items:
+          type: string
+        type: array
+      log:
+        description: Log message
+        type: string
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      startTime:
+        description: Start date
+        type: string
+    required:
+      - endTime
+      - links
+      - log
+      - processTime
+      - startTime
+    type: object

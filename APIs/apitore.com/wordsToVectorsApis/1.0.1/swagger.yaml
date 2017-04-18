@@ -1,0 +1,86 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.apitore.com
+basePath: /api/10
+info:
+  description: 'Word to vectors.<BR />[Endpoint] https://api.apitore.com/api/10'
+  title: Words to Vectors APIs
+  version: 1.0.1
+  x-description-language: jp
+  x-logo:
+    url: 'https://apitore.com/img/apis/10.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/10'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: wordsToVectorsApis
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - description: Word 2 Vec Controller
+    name: word-2-vec-controller
+paths:
+  /word2vec-neologd-jawiki/wordvector:
+    get:
+      description: 'Word2Vec JaWikipedia 2016-9-15 dump.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/word2vec-response">word2vec-response</a><BR />&nbsp; Class: com.apitore.banana.response.word2vec.WordVectorResponseEntity<BR />'
+      operationId: wordvectorUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: word
+          in: query
+          name: word
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WordVectorResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Word2Vec wordvector
+      tags:
+        - word-2-vec-controller
+definitions:
+  WordVectorResponseEntity:
+    properties:
+      endTime:
+        description: End date
+        type: string
+      log:
+        description: Log message
+        type: string
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      startTime:
+        description: Start date
+        type: string
+      vector:
+        description: Vector
+        items:
+          format: double
+          type: number
+        type: array
+      word:
+        description: Input word
+        type: string
+    required:
+      - endTime
+      - log
+      - processTime
+      - startTime
+      - word
+    type: object

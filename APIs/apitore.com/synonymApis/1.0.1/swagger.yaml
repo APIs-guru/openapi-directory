@@ -1,0 +1,109 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.apitore.com
+basePath: /api/9
+info:
+  description: 'Return synonymous words. (equal to "word2vec distance")<BR />[Endpoint] https://api.apitore.com/api/9'
+  title: Synonym APIs
+  version: 1.0.1
+  x-description-language: jp
+  x-logo:
+    url: 'https://apitore.com/img/apis/9.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/9'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: synonymApis
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - description: Word 2 Vec Controller
+    name: word-2-vec-controller
+paths:
+  /word2vec-neologd-jawiki/distance:
+    get:
+      description: 'Word2Vec JaWikipedia 2016-9-15 dump.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/word2vec-response">word2vec-response</a><BR />&nbsp; Class: com.apitore.banana.response.word2vec.DistanceResponseEntity<BR />'
+      operationId: distanceUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: word
+          in: query
+          name: word
+          required: true
+          type: string
+        - default: 1
+          description: 'num [max 10, default 1]'
+          format: int32
+          in: query
+          name: num
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DistanceResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Word2Vec distance
+      tags:
+        - word-2-vec-controller
+definitions:
+  DistanceEntity:
+    properties:
+      distance:
+        description: cosine distance
+        format: double
+        type: number
+      word:
+        description: word
+        type: string
+    required:
+      - distance
+      - word
+    type: object
+  DistanceResponseEntity:
+    properties:
+      distances:
+        description: Distances
+        items:
+          $ref: '#/definitions/DistanceEntity'
+        type: array
+      endTime:
+        description: End date
+        type: string
+      input:
+        description: Input word
+        type: string
+      log:
+        description: Log message
+        type: string
+      num:
+        description: Input num
+        type: string
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      startTime:
+        description: Start date
+        type: string
+    required:
+      - endTime
+      - input
+      - log
+      - num
+      - processTime
+      - startTime
+    type: object

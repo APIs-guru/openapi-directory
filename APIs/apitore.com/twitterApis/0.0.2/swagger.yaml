@@ -1,0 +1,262 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.apitore.com
+basePath: /api/23
+info:
+  description: 'Call Twitter APIs.<BR />[Endpoint] https://api.apitore.com/api/23'
+  title: Twitter APIs
+  version: 0.0.2
+  x-description-language: jp
+  x-logo:
+    url: 'https://apitore.com/img/apis/23.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/23'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: twitterApis
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - description: Twitter Simple Controller
+    name: twitter-simple-controller
+paths:
+  /twitter/mytimeline:
+    get:
+      description: 'Get my timeline tweets.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/twitter-response">twitter-response</a><BR />&nbsp; Class: com.apitore.banana.response.twitter.TwitterResponseEntity<BR />'
+      operationId: myTimelineUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - default: -1
+          description: Get after this id.
+          format: int64
+          in: query
+          name: sinceId
+          required: false
+          type: integer
+        - default: -1
+          description: Get before this id.
+          format: int64
+          in: query
+          name: maxId
+          required: false
+          type: integer
+        - default: 1
+          description: Numof requests. Return up to 200 x iter tweets.
+          format: int32
+          in: query
+          name: iter
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TwitterResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get my tweets.
+      tags:
+        - twitter-simple-controller
+  /twitter/mytweet:
+    get:
+      description: 'Get my tweets.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/twitter-response">twitter-response</a><BR />&nbsp; Class: com.apitore.banana.response.twitter.TwitterResponseEntity<BR />'
+      operationId: myTweetUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - default: -1
+          description: Get after this id.
+          format: int64
+          in: query
+          name: sinceId
+          required: false
+          type: integer
+        - default: -1
+          description: Get before this id.
+          format: int64
+          in: query
+          name: maxId
+          required: false
+          type: integer
+        - default: 1
+          description: Numof requests. Return up to 200 x iter tweets.
+          format: int32
+          in: query
+          name: iter
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TwitterResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get my tweets.
+      tags:
+        - twitter-simple-controller
+  /twitter/search:
+    get:
+      description: 'Tweets search API.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/twitter-response">twitter-response</a><BR />&nbsp; Class: com.apitore.banana.response.twitter.TwitterResponseEntity<BR />'
+      operationId: searchUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: Search query
+          in: query
+          name: q
+          required: true
+          type: string
+        - default: -1
+          description: Search after this id.
+          format: int64
+          in: query
+          name: sinceId
+          required: false
+          type: integer
+        - default: -1
+          description: Search before this id.
+          format: int64
+          in: query
+          name: maxId
+          required: false
+          type: integer
+        - default: 1
+          description: Numof search requests. Return up to 100 x iter tweets.
+          format: int32
+          in: query
+          name: iter
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TwitterResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Search tweets.
+      tags:
+        - twitter-simple-controller
+definitions:
+  TweetEntity:
+    properties:
+      createdAt:
+        description: Tweet date
+        format: int64
+        type: integer
+      favorited:
+        type: boolean
+      favoritedCount:
+        description: Number of be favorited
+        format: int32
+        type: integer
+      retweetCount:
+        description: Number of be retweeted
+        format: int32
+        type: integer
+      retweeted:
+        type: boolean
+      sentiment:
+        description: Tweet sentiment by Apitore sentiment API
+        type: string
+      sentimentScore:
+        description: Tweet sentiment score by Apitore sentiment API
+        format: double
+        type: number
+      source:
+        description: Tweet client
+        type: string
+      statusId:
+        description: Status ID
+        format: int64
+        type: integer
+      text:
+        description: Tweet text
+        type: string
+      userId:
+        description: User ID
+        format: int64
+        type: integer
+      userName:
+        description: User name
+        type: string
+      userProfileImageURL:
+        description: User profile image URL
+        type: string
+      userScreenName:
+        description: User screen name
+        type: string
+    required:
+      - createdAt
+      - favoritedCount
+      - retweetCount
+      - source
+      - statusId
+      - text
+      - userId
+      - userName
+      - userProfileImageURL
+      - userScreenName
+    type: object
+  TwitterResponseEntity:
+    properties:
+      endTime:
+        description: End date
+        type: string
+      log:
+        description: Log message
+        type: string
+      numofTweets:
+        description: 'Output: Numof tweets'
+        format: int32
+        type: integer
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      query:
+        description: 'Input: query'
+        type: string
+      startTime:
+        description: Start date
+        type: string
+      tweets:
+        description: 'Output: Tweets'
+        items:
+          $ref: '#/definitions/TweetEntity'
+        type: array
+    required:
+      - endTime
+      - log
+      - numofTweets
+      - processTime
+      - query
+      - startTime
+      - tweets
+    type: object

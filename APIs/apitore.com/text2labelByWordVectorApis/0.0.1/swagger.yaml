@@ -1,0 +1,109 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.apitore.com
+basePath: /api/19
+info:
+  description: 'Text to label by word2vec of contents.<BR />[Endpoint] https://api.apitore.com/api/19'
+  title: Text2Label by word vector APIs
+  version: 0.0.1
+  x-description-language: jp
+  x-logo:
+    url: 'https://apitore.com/img/apis/19.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/19'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: text2labelByWordVectorApis
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - description: Text 2 Label By Word Vector Controller
+    name: text-2-label-by-word-vector-controller
+paths:
+  /text2label-wordvector/get:
+    get:
+      description: 'Text2Label by kmeans of word vectors.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/summarize-response">summarize-response</a><BR />&nbsp; Class: com.apitore.banana.response.summarize.LabelResponseEntity<BR />'
+      operationId: getUsingGET_2
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: text
+          in: query
+          name: text
+          required: true
+          type: string
+        - default: 1
+          description: 'num [max 10, default 1]'
+          format: int32
+          in: query
+          name: num
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LabelResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get labels from text
+      tags:
+        - text-2-label-by-word-vector-controller
+definitions:
+  LabelEntity:
+    properties:
+      label:
+        description: label
+        type: string
+      score:
+        description: tfidf score
+        format: double
+        type: number
+    required:
+      - label
+      - score
+    type: object
+  LabelResponseEntity:
+    properties:
+      endTime:
+        description: End date
+        type: string
+      input:
+        description: Input word
+        type: string
+      labels:
+        description: Distances
+        items:
+          $ref: '#/definitions/LabelEntity'
+        type: array
+      log:
+        description: Log message
+        type: string
+      num:
+        description: Input num
+        type: string
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      startTime:
+        description: Start date
+        type: string
+    required:
+      - endTime
+      - input
+      - log
+      - num
+      - processTime
+      - startTime
+    type: object

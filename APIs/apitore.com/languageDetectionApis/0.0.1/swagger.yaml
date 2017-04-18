@@ -1,0 +1,132 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.apitore.com
+basePath: /api/22
+info:
+  description: 'Language detection.<BR />[Endpoint] https://api.apitore.com/api/22'
+  title: Language Detection APIs
+  version: 0.0.1
+  x-description-language: jp
+  x-logo:
+    url: 'https://apitore.com/img/apis/22.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/22'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: languageDetectionApis
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - description: Lang Detect Controller
+    name: lang-detect-controller
+paths:
+  /langdetect/get:
+    get:
+      description: 'Language Detection.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/langdetect-response">langdetect-response</a><BR />&nbsp; Class: com.apitore.banana.response.org.jsoup.LanguageResponseEntity<BR />'
+      operationId: getUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: 'Text [10-20 words over is recommended]'
+          in: query
+          name: text
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LanguageResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Language Detection. This supports 53 languages.
+      tags:
+        - lang-detect-controller
+  /langdetect/short/get:
+    get:
+      description: 'Language Detection.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/langdetect-response">langdetect-response</a><BR />&nbsp; Class: com.apitore.banana.response.org.jsoup.LanguageResponseEntity<BR />'
+      operationId: smGetUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: 'Text [Short message like tweet is supported]'
+          in: query
+          name: text
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LanguageResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Language Detection for Short Messages. This supports 53 languages.
+      tags:
+        - lang-detect-controller
+definitions:
+  LanguageEntity:
+    properties:
+      lang:
+        description: language
+        type: string
+      prob:
+        description: probability
+        format: double
+        type: number
+    required:
+      - lang
+      - prob
+    type: object
+  LanguageResponseEntity:
+    properties:
+      endTime:
+        description: End date
+        type: string
+      language:
+        description: 'Output: prediction'
+        type: string
+      log:
+        description: Log message
+        type: string
+      probabilities:
+        description: 'Output: probabilities'
+        items:
+          $ref: '#/definitions/LanguageEntity'
+        type: array
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      startTime:
+        description: Start date
+        type: string
+      text:
+        description: 'Input: text'
+        type: string
+    required:
+      - endTime
+      - language
+      - log
+      - probabilities
+      - processTime
+      - startTime
+      - text
+    type: object
