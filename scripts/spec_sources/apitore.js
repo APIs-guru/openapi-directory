@@ -18,6 +18,7 @@ module.exports = function () {
 	var apiNumber = _.last(components);
   	var entry = listing[api];
 	result.push({info: {
+      'version': entry.version,
       'x-providerName': 'apitore.com',
       'x-serviceName': entry.title.split('(').join('_').split(')').join('_').toCamelCase(),
 	  'x-description-language': 'jp',
