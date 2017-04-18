@@ -17,6 +17,7 @@ module.exports = function () {
   console.log('SwaggerHub latest published version: '+version);
   return [{
     info: {
+      'x-providerName': 'swaggerhub.com',
       'x-origin': [{
         url: baseUrl+'/'+version,
         format: 'swagger',

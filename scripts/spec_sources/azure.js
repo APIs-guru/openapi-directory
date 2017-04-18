@@ -24,6 +24,7 @@ module.exports = function () {
 
     return {
       info: {
+        'x-providerName': 'azure.com',
         'x-serviceName': service,
         'x-origin': [{
           url: util.rawGitHubUrl('Azure', 'azure-rest-api-specs', filename),

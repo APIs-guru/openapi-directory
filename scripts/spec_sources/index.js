@@ -26,6 +26,7 @@ exports.getLeads = function (specs) {
     .values().flatten()
     .map(swagger => ({
       info: {
+        'x-providerName': util.getProviderName(swagger),
         'x-serviceName': util.getServiceName(swagger),
         'x-origin': util.getOrigin(swagger)
       }
