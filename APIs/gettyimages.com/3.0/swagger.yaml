@@ -3447,6 +3447,7 @@ paths:
             - originally_shot_on
             - preview
             - product_types
+            - referral_destinations
             - shot_speed
             - source
             - summary_set
@@ -3481,6 +3482,7 @@ paths:
               - originally_shot_on
               - preview
               - product_types
+              - referral_destinations
               - shot_speed
               - source
               - summary_set
@@ -3746,6 +3748,7 @@ paths:
             - originally_shot_on
             - preview
             - product_types
+            - referral_destinations
             - shot_speed
             - source
             - summary_set
@@ -3777,6 +3780,7 @@ paths:
               - originally_shot_on
               - preview
               - product_types
+              - referral_destinations
               - shot_speed
               - source
               - summary_set
@@ -4041,6 +4045,7 @@ paths:
             - originally_shot_on
             - preview
             - product_types
+            - referral_destinations
             - shot_speed
             - source
             - summary_set
@@ -4075,6 +4080,7 @@ paths:
               - originally_shot_on
               - preview
               - product_types
+              - referral_destinations
               - shot_speed
               - source
               - summary_set
@@ -4269,6 +4275,7 @@ paths:
             - originally_shot_on
             - preview
             - product_types
+            - referral_destinations
             - shot_speed
             - source
             - summary_set
@@ -4304,6 +4311,7 @@ paths:
               - originally_shot_on
               - video_preview
               - product_types
+              - referral_destinations
               - shot_speed
               - source
               - summary_set
@@ -4381,6 +4389,7 @@ paths:
             - originally_shot_on
             - preview
             - product_types
+            - referral_destinations
             - shot_speed
             - source
             - summary_set
@@ -4416,6 +4425,7 @@ paths:
               - originally_shot_on
               - video_preview
               - product_types
+              - referral_destinations
               - shot_speed
               - source
               - summary_set
@@ -5921,6 +5931,11 @@ definitions:
         items:
           type: string
         type: array
+      referral_destinations:
+        description: Lists the referral destinations for Getty Images assets.
+        items:
+          $ref: '#/definitions/referral_destination'
+        type: array
       shot_speed:
         description: 'Specifies the speed the at which the video was shot. Possible values are: real_time, slow_motion, time_lapse, and null.'
         type: string
@@ -6007,6 +6022,11 @@ definitions:
         description: 'Lists the product types for the video. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, creditpack.'
         items:
           type: string
+        type: array
+      referral_destinations:
+        description: Lists the referral destinations for Getty Images assets.
+        items:
+          $ref: '#/definitions/referral_destination'
         type: array
       shot_speed:
         description: 'Specifies the speed the at which the video was shot. Possible values are: real_time, slow_motion, time_lapse, and null.'

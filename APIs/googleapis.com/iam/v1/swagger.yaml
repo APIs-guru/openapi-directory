@@ -886,10 +886,24 @@ definitions:
           For example, a Cloud Platform project with id `my-project` will be named
           `//cloudresourcemanager.googleapis.com/projects/my-project`.
         type: string
+      pageSize:
+        description: Optional limit on the number of roles to include in the response.
+        format: int32
+        type: integer
+      pageToken:
+        description: |-
+          Optional pagination token returned in an earlier
+          QueryGrantableRolesResponse.
+        type: string
     type: object
   QueryGrantableRolesResponse:
     description: The grantable role query response.
     properties:
+      nextPageToken:
+        description: |-
+          To retrieve the next page of results, set
+          `QueryGrantableRolesRequest.page_token` to this value.
+        type: string
       roles:
         description: The list of matching roles.
         items:

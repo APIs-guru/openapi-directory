@@ -1065,6 +1065,9 @@ definitions:
           Optional. An advanced logs filter. The only exported log entries are those that are in the resource owning the sink and that match the filter. The filter must use the log entry format specified by the output_version_format parameter. For example, in the v2 format:
           logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR
         type: string
+      includeChildren:
+        description: 'Optional. This field presently applies only to sinks in organizations and folders. If true, then logs from children of this entity will also be available to this sink for export. Whether particular log entries from the children are exported depends on the sink''s filter expression. For example, if this sink is associated with an organization, then logs from all projects in the organization as well as from the organization itself will be available for export.'
+        type: boolean
       name:
         description: 'Required. The client-assigned sink identifier, unique within the project. Example: "my-syslog-errors-to-pubsub". Sink identifiers are limited to 100 characters and can include only the following characters: upper and lower-case alphanumeric characters, underscores, hyphens, and periods.'
         type: string

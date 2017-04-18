@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Creates and runs virtual machines on Google Cloud Platform.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Compute Engine
   version: alpha
   x-apiClientRegistration:
@@ -86,7 +90,6 @@ tags:
   - name: backendBuckets
   - name: backendServices
   - name: clientSslPolicies
-  - name: commitments
   - name: diskTypes
   - name: disks
   - name: firewalls
@@ -426,7 +429,7 @@ paths:
   '/{project}/aggregated/commitments':
     get:
       description: Retrieves an aggregated list of commitments.
-      operationId: compute.commitments.aggregatedList
+      operationId: compute.regionCommitments.aggregatedList
       parameters:
         - description: Project ID for this request.
           in: path
@@ -478,7 +481,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
-        - commitments
+        - regionCommitments
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -1903,7 +1906,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on a GlobalAddress. To learn more about labels, read the Labeling Resources documentation.'
+      description: 'Sets the labels on a GlobalAddress. To learn more about labels, read the Labeling or Tagging Resources documentation.'
       operationId: compute.globalAddresses.setLabels
       parameters:
         - description: Project ID for this request.
@@ -3086,7 +3089,7 @@ paths:
       tags:
         - firewalls
     put:
-      description: Updates the specified firewall rule with the data included in the request.
+      description: 'Updates the specified firewall rule with the data included in the request. Using PUT method, can only update following fields of firewall rule: allowed, description, sourceRanges, sourceTags, targetTags.'
       operationId: compute.firewalls.update
       parameters:
         - description: Project ID for this request.
@@ -3373,7 +3376,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on the specified resource. To learn more about labels, read the Labeling Resources documentation.'
+      description: 'Sets the labels on the specified resource. To learn more about labels, read the Labeling or Tagging Resources documentation.'
       operationId: compute.globalForwardingRules.setLabels
       parameters:
         - description: Project ID for this request.
@@ -4595,7 +4598,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on an image. To learn more about labels, read the Labeling Resources documentation.'
+      description: 'Sets the labels on an image. To learn more about labels, read the Labeling or Tagging Resources documentation.'
       operationId: compute.images.setLabels
       parameters:
         - description: Project ID for this request.
@@ -5986,7 +5989,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on a snapshot. To learn more about labels, read the Labeling Resources documentation.'
+      description: 'Sets the labels on a snapshot. To learn more about labels, read the Labeling or Tagging Resources documentation.'
       operationId: compute.snapshots.setLabels
       parameters:
         - description: Project ID for this request.
@@ -8116,7 +8119,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on an Address. To learn more about labels, read the Labeling Resources documentation.'
+      description: 'Sets the labels on an Address. To learn more about labels, read the Labeling or Tagging Resources documentation.'
       operationId: compute.addresses.setLabels
       parameters:
         - description: Project ID for this request.
@@ -9772,7 +9775,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on the specified resource. To learn more about labels, read the Labeling Resources documentation.'
+      description: 'Sets the labels on the specified resource. To learn more about labels, read the Labeling or Tagging Resources documentation.'
       operationId: compute.forwardingRules.setLabels
       parameters:
         - description: Project ID for this request.
@@ -9926,7 +9929,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.'
+      description: |-
+        Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
+
+        A regional managed instance group can contain up to 2000 instances.
       operationId: compute.regionInstanceGroupManagers.insert
       parameters:
         - description: Project ID for this request.
@@ -10037,7 +10043,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group have not yet been patched. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
       operationId: compute.regionInstanceGroupManagers.patch
       parameters:
         - description: Project ID for this request.
@@ -10126,7 +10132,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.'
+      description: |-
+        Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.regionInstanceGroupManagers.abandonInstances
       parameters:
         - description: Project ID for this request.
@@ -10174,7 +10183,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
+      description: |-
+        Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.regionInstanceGroupManagers.deleteInstances
       parameters:
         - description: Project ID for this request.
@@ -10278,7 +10290,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+      description: |-
+        Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.regionInstanceGroupManagers.recreateInstances
       parameters:
         - description: Project ID for this request.
@@ -12636,7 +12651,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on a VpnTunnel. To learn more about labels, read the Labeling Resources documentation.'
+      description: 'Sets the labels on a VpnTunnel. To learn more about labels, read the Labeling or Tagging Resources documentation.'
       operationId: compute.vpnTunnels.setLabels
       parameters:
         - description: Project ID for this request.
@@ -13562,197 +13577,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - autoscalers
-  '/{project}/zones/{zone}/commitments':
-    get:
-      description: Retrieves a list of commitments contained within the specified zone.
-      operationId: compute.commitments.list
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: |-
-            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
-
-            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
-
-            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
-
-            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
-
-            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
-          in: query
-          name: filter
-          type: string
-        - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
-          in: query
-          minimum: 0
-          name: maxResults
-          type: integer
-        - description: |-
-            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-
-            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-
-            Currently, only sorting by name or creationTimestamp desc is supported.
-          in: query
-          name: orderBy
-          type: string
-        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CommitmentList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-      tags:
-        - commitments
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Creates an commitment in the specified project using the data included in the request.
-      operationId: compute.commitments.insert
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: 'begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.'
-          in: query
-          name: requestId
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Commitment'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-      tags:
-        - commitments
-  '/{project}/zones/{zone}/commitments/{commitment}':
-    get:
-      description: Returns the specified commitment resource. Get a list of available commitments by making a list() request.
-      operationId: compute.commitments.get
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: Name of the commitment to return.
-          in: path
-          name: commitment
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Commitment'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-      tags:
-        - commitments
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{project}/zones/{zone}/commitments/{resource}/testIamPermissions':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Returns permissions that a caller has on the specified resource.
-      operationId: compute.commitments.testIamPermissions
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: Name of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TestPermissionsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-      tags:
-        - commitments
   '/{project}/zones/{zone}/diskTypes':
     get:
       description: Retrieves a list of disk types available to the specified project.
@@ -14243,7 +14067,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets the labels on a disk. To learn more about labels, read the Labeling Resources documentation.'
+      description: 'Sets the labels on a disk. To learn more about labels, read the Labeling or Tagging Resources documentation.'
       operationId: compute.disks.setLabels
       parameters:
         - description: Project ID for this request.
@@ -14820,7 +14644,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.'
+      description: |-
+        Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
+
+        A managed instance group can have up to 1000 VM instances per group.
       operationId: compute.instanceGroupManagers.insert
       parameters:
         - description: Project ID for this request.
@@ -14931,7 +14758,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group have not yet been patchd. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listManagedInstances method. This method supports patch semantics.
       operationId: compute.instanceGroupManagers.patch
       parameters:
         - description: Project ID for this request.
@@ -14972,7 +14799,7 @@ paths:
       tags:
         - instanceGroupManagers
     put:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listManagedInstances method.
       operationId: compute.instanceGroupManagers.update
       parameters:
         - description: Project ID for this request.
@@ -15020,7 +14847,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.'
+      description: |-
+        Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.instanceGroupManagers.abandonInstances
       parameters:
         - description: Project ID for this request.
@@ -15068,7 +14898,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
+      description: |-
+        Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.instanceGroupManagers.deleteInstances
       parameters:
         - description: Project ID for this request.
@@ -15172,7 +15005,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+      description: |-
+        Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.instanceGroupManagers.recreateInstances
       parameters:
         - description: Project ID for this request.
@@ -16420,7 +16256,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Performs a hard reset on the instance.
+      description: 'Performs a reset on the instance. For more information, see Resetting an instance.'
       operationId: compute.instances.reset
       parameters:
         - description: Project ID for this request.
@@ -16571,7 +16407,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sets labels on an instance. To learn more about labels, read the Labeling Resources documentation.'
+      description: 'Sets labels on an instance. To learn more about labels, read the Labeling or Tagging Resources documentation.'
       operationId: compute.instances.setLabels
       parameters:
         - description: Project ID for this request.
@@ -17984,7 +17820,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#accessConfig for access configs.'
         type: string
       name:
-        description: Name of this access configuration.
+        description: 'The name of this access configuration. The default and recommended name is External NAT but you can use any arbitrary string you would like. For example, My external IP or Network Access.'
         type: string
       natIP:
         description: 'An external IP address associated with this instance. Specify an unused static external IP address available to the project or leave this field undefined to use an IP from a shared ephemeral IP address pool. If you specify a static external IP address, it must live in the same region as the zone of the instance.'
@@ -17994,6 +17830,7 @@ definitions:
         enum:
           - PREMIUM
           - SELECT
+          - STANDARD
         type: string
       publicDnsName:
         description: '[Output Only] The public DNS domain name for the instance.'
@@ -18018,7 +17855,7 @@ definitions:
     description: A reserved address resource.
     properties:
       address:
-        description: The static external IP address represented by this resource. Only IPv4 is supported.
+        description: The static external IP address represented by this resource.
         type: string
       addressType:
         description: 'The type of address to reserve. If unspecified, defaults to EXTERNAL.'
@@ -18069,6 +17906,7 @@ definitions:
         enum:
           - PREMIUM
           - SELECT
+          - STANDARD
         type: string
       region:
         description: '[Output Only] URL of the region where the regional address resides. This field is not applicable to global addresses.'
@@ -18338,7 +18176,13 @@ definitions:
     description: |-
       Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConifg must have one or more AuditLogConfigs.
 
-      If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditConfig are exempted. Example Policy with multiple AuditConfigs: { "audit_configs": [ { "service": "allServices" "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", }, { "log_type": "ADMIN_READ", } ] }, { "service": "fooservice@googleapis.com" "audit_log_configs": [ { "log_type": "DATA_READ", }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:bar@gmail.com" ] } ] } ] } For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
+      If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditConfig are exempted.
+
+      Example Policy with multiple AuditConfigs:
+
+      { "audit_configs": [ { "service": "allServices" "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", }, { "log_type": "ADMIN_READ", } ] }, { "service": "fooservice@googleapis.com" "audit_log_configs": [ { "log_type": "DATA_READ", }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:bar@gmail.com" ] } ] } ] }
+
+      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
     properties:
       auditLogConfigs:
         description: The configuration for logging of each type of permission.
@@ -18825,6 +18669,15 @@ definitions:
 
           When the load balancing scheme is INTERNAL, this field is not used.
         type: boolean
+      failoverRatio:
+        description: |-
+          The value of the field must be in [0, 1]. If set, 'backends[].failover' must be set. They together define the fallback behavior of the primary backend: if the ratio of the healthy VMs in the primary backend is at or below this number, traffic arriving at the load-balanced IP will be directed to the failover backend.
+
+          In case where 'failoverRatio' is not set or all the VMs in the backup backend are unhealthy, the traffic will be directed back to the primary backend in the "force" mode, where traffic will be spread to the healthy VMs with the best effort, or to all VMs when no VM is healthy.
+
+          This field is only used with l4 load balancing.
+        format: float
+        type: number
       fingerprint:
         description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a BackendService. An up-to-date fingerprint must be provided in order to update the BackendService.
         format: byte
@@ -19163,9 +19016,6 @@ definitions:
       statusMessage:
         description: '[Output Only] An optional, human-readable explanation of the status.'
         type: string
-      zone:
-        description: '[Output Only] URL of the zone where this commitment may be used.'
-        type: string
     type: object
   CommitmentAggregatedList:
     properties:
@@ -19316,6 +19166,9 @@ definitions:
   CustomerEncryptionKey:
     description: Represents a customer-supplied encryption key
     properties:
+      kmsKeyName:
+        description: The name of the encryption key that is stored in Google Cloud KMS.
+        type: string
       rawKey:
         description: 'Specifies a 256-bit customer-supplied encryption key, encoded in RFC 4648 base64 to either encrypt or decrypt this resource.'
         type: string
@@ -19998,6 +19851,7 @@ definitions:
         enum:
           - PREMIUM
           - SELECT
+          - STANDARD
         type: string
       portRange:
         description: |-
@@ -20009,7 +19863,7 @@ definitions:
         description: |-
           This field is not used for external load balancing.
 
-          When the load balancing scheme is INTERNAL, a single port or a comma separated list of ports can be configured. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule. If the port list is not provided then all ports are allowed to pass through.
+          When the load balancing scheme is INTERNAL, a single port or a comma separated list of ports can be configured. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule.
 
           You may specify a maximum of up to 5 ports.
         items:
@@ -20046,7 +19900,7 @@ definitions:
         type: string
       target:
         description: |-
-          The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For example, TargetHttpProxy requires HTTP traffic, and TargetHttpsProxy requires HTTPS traffic.
+          The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object.
 
           This field is not used for internal load balancing.
         type: string
@@ -21062,7 +20916,7 @@ definitions:
         type: array
       scheduling:
         $ref: '#/definitions/Scheduling'
-        description: Scheduling options for this instance.
+        description: Sets the scheduling options for this instance.
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
@@ -21074,6 +20928,9 @@ definitions:
         items:
           $ref: '#/definitions/ServiceAccount'
         type: array
+      startRestricted:
+        description: '[Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity.'
+        type: boolean
       status:
         description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, and TERMINATED.'
         enum:
@@ -21285,9 +21142,6 @@ definitions:
       serviceAccount:
         description: 'Service account will be used as credentials for all operations performed by managed instance group on instances. The service accounts needs all permissions required to create and delete instances. When not specified, the service account {projectNumber}@cloudservices.gserviceaccount.com will be used.'
         type: string
-      spreadingPolicy:
-        $ref: '#/definitions/SpreadingPolicy'
-        description: Policy valid only for regional managed instance groups. Deprecated in favor of distribution_policy.
       targetPools:
         description: The URLs for all TargetPool resources to which instances in the instanceGroup field are added. The target pools automatically apply to all of the instances in the managed instance group.
         items:
@@ -21791,6 +21645,9 @@ definitions:
       metadata:
         $ref: '#/definitions/Metadata'
         description: The metadata key/value pairs to assign to instances that are created from this template. These pairs can consist of custom metadata or predefined keys. See Project and instance metadata for more information.
+      minCpuPlatform:
+        description: Minimum cpu/platform to be used by this instance. The instance may be scheduled on the specified or later cpu/platform.
+        type: string
       networkInterfaces:
         description: An array of network access configurations for this interface.
         items:
@@ -23117,7 +22974,7 @@ definitions:
   RegionInstanceGroupManagersAbandonInstancesRequest:
     properties:
       instances:
-        description: The names of one or more instances to abandon.
+        description: 'The URLs of one or more instances to abandon. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].'
         items:
           type: string
         type: array
@@ -23125,7 +22982,7 @@ definitions:
   RegionInstanceGroupManagersDeleteInstancesRequest:
     properties:
       instances:
-        description: The names of one or more instances to delete.
+        description: 'The URLs of one or more instances to delete. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].'
         items:
           type: string
         type: array
@@ -23451,6 +23308,16 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
     type: object
+  RouterAdvertisedPrefix:
+    description: Description-tagged prefixes for the router to advertise.
+    properties:
+      description:
+        description: User-specified description for the prefix.
+        type: string
+      prefix:
+        description: The prefix to advertise. The value must be a CIDR-formatted string.
+        type: string
+    type: object
   RouterAggregatedList:
     description: Contains a list of routers.
     properties:
@@ -23476,6 +23343,24 @@ definitions:
     type: object
   RouterBgp:
     properties:
+      advertiseMode:
+        description: User-specified flag to indicate which mode to use for advertisement.
+        enum:
+          - CUSTOM
+          - DEFAULT
+        type: string
+      advertisedGroups:
+        description: User-specified list of prefix groups to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and is advertised to all peers of the router. These groups will be advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.
+        items:
+          enum:
+            - ALL_SUBNETS
+          type: string
+        type: array
+      advertisedPrefixs:
+        description: User-specified list of individual prefixes to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and is advertised to all peers of the router. These prefixes will be advertised in addition to any specified groups. Leave this field blank to advertise no custom prefixes.
+        items:
+          $ref: '#/definitions/RouterAdvertisedPrefix'
+        type: array
       asn:
         description: 'Local BGP Autonomous System Number (ASN). Must be an RFC6996 private ASN, either 16-bit or 32-bit. The value will be fixed for this router resource. All VPN tunnels that link to this router will have the same local ASN.'
         format: uint32
@@ -23483,6 +23368,24 @@ definitions:
     type: object
   RouterBgpPeer:
     properties:
+      advertiseMode:
+        description: User-specified flag to indicate which mode to use for advertisement.
+        enum:
+          - CUSTOM
+          - DEFAULT
+        type: string
+      advertisedGroups:
+        description: User-specified list of prefix groups to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in Bgp message). These groups will be advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.
+        items:
+          enum:
+            - ALL_SUBNETS
+          type: string
+        type: array
+      advertisedPrefixs:
+        description: User-specified list of individual prefixes to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in Bgp message). These prefixes will be advertised in addition to any specified groups. Leave this field blank to advertise no custom prefixes.
+        items:
+          $ref: '#/definitions/RouterAdvertisedPrefix'
+        type: array
       advertisedRoutePriority:
         description: 'The priority of routes advertised to this BGP peer. In the case where there is more than one matching route of maximum length, the routes with lowest priority value win.'
         format: uint32
@@ -23733,7 +23636,10 @@ definitions:
     description: Sets the scheduling options for an Instance.
     properties:
       automaticRestart:
-        description: Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user). You can only set the automatic restart option for standard instances. Preemptible instances cannot be automatically restarted.
+        description: |-
+          Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user). You can only set the automatic restart option for standard instances. Preemptible instances cannot be automatically restarted.
+
+          By default, this is set to true so an instance is automatically restarted if it is terminated by Compute Engine.
         type: boolean
       onHostMaintenance:
         description: 'Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Setting Instance Scheduling Options.'
@@ -23742,7 +23648,7 @@ definitions:
           - TERMINATE
         type: string
       preemptible:
-        description: Whether the instance is preemptible.
+        description: 'Defines whether the instance is preemptible. This can only be set during instance creation, it cannot be set or changed after the instance has been created.'
         type: boolean
     type: object
   SecurityPoliciesList:
@@ -23987,20 +23893,6 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
-        type: string
-    type: object
-  SpreadingPolicy:
-    description: Deprecated in favor of distribution policy.
-    properties:
-      zones:
-        items:
-          $ref: '#/definitions/SpreadingPolicyZoneConfiguration'
-        type: array
-    type: object
-  SpreadingPolicyZoneConfiguration:
-    properties:
-      zone:
-        description: URL of the zone where managed instance group is spawning instances (for regional resources). Zone has to belong to the region where managed instance group is located.
         type: string
     type: object
   SslCertificate:

@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Creates and runs virtual machines on Google Cloud Platform.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Compute Engine
   version: v1
   x-apiClientRegistration:
@@ -1553,12 +1557,7 @@ paths:
       description: Updates the specified BackendBucket resource with the data included in the request. This method supports patch semantics.
       operationId: compute.backendBuckets.patch
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the BackendBucket resource to update.
+        - description: Name of the BackendBucket resource to patch.
           in: path
           name: backendBucket
           required: true
@@ -1567,6 +1566,11 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/BackendBucket'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1577,6 +1581,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendBuckets
     put:
@@ -1762,15 +1768,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
+      description: Patches the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
       operationId: compute.backendServices.patch
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the BackendService resource to update.
+        - description: Name of the BackendService resource to patch.
           in: path
           name: backendService
           required: true
@@ -1779,6 +1780,11 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/BackendService'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1789,6 +1795,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendServices
     put:
@@ -2014,7 +2022,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified firewall rule with the data included in the request. This method supports patch semantics.
+      description: 'Updates the specified firewall rule with the data included in the request. Using PUT method, can only update following fields of firewall rule: allowed, description, sourceRanges, sourceTags, targetTags. This method supports patch semantics.'
       operationId: compute.firewalls.patch
       parameters:
         - description: Project ID for this request.
@@ -2044,7 +2052,7 @@ paths:
       tags:
         - firewalls
     put:
-      description: Updates the specified firewall rule with the data included in the request.
+      description: 'Updates the specified firewall rule with the data included in the request. Using PUT method, can only update following fields of firewall rule: allowed, description, sourceRanges, sourceTags, targetTags.'
       operationId: compute.firewalls.update
       parameters:
         - description: Project ID for this request.
@@ -2420,20 +2428,20 @@ paths:
       description: Updates a HealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.healthChecks.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HealthCheck'
+        - description: Name of the HealthCheck resource to patch.
+          in: path
+          name: healthCheck
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: Name of the HealthCheck resource to update.
-          in: path
-          name: healthCheck
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/HealthCheck'
       responses:
         '200':
           description: Successful response
@@ -2444,6 +2452,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - healthChecks
     put:
@@ -2632,20 +2642,20 @@ paths:
       description: Updates a HttpHealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.httpHealthChecks.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HttpHealthCheck'
+        - description: Name of the HttpHealthCheck resource to patch.
+          in: path
+          name: httpHealthCheck
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: Name of the HttpHealthCheck resource to update.
-          in: path
-          name: httpHealthCheck
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/HttpHealthCheck'
       responses:
         '200':
           description: Successful response
@@ -2656,6 +2666,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpHealthChecks
     put:
@@ -2844,20 +2856,20 @@ paths:
       description: Updates a HttpsHealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.httpsHealthChecks.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HttpsHealthCheck'
+        - description: Name of the HttpsHealthCheck resource to patch.
+          in: path
+          name: httpsHealthCheck
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: Name of the HttpsHealthCheck resource to update.
-          in: path
-          name: httpsHealthCheck
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/HttpsHealthCheck'
       responses:
         '200':
           description: Successful response
@@ -2868,6 +2880,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpsHealthChecks
     put:
@@ -4798,23 +4812,23 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified UrlMap resource with the data included in the request. This method supports patch semantics.
+      description: Patches the specified UrlMap resource with the data included in the request. This method supports patch semantics.
       operationId: compute.urlMaps.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UrlMap'
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: Name of the UrlMap resource to update.
+        - description: Name of the UrlMap resource to patch.
           in: path
           name: urlMap
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UrlMap'
       responses:
         '200':
           description: Successful response
@@ -4825,6 +4839,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - urlMaps
     put:
@@ -5349,6 +5365,14 @@ paths:
       description: Updates an autoscaler in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.regionAutoscalers.patch
       parameters:
+        - description: Name of the autoscaler to patch.
+          in: query
+          name: autoscaler
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Autoscaler'
         - description: Project ID for this request.
           in: path
           name: project
@@ -5359,15 +5383,6 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the autoscaler to update.
-          in: query
-          name: autoscaler
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Autoscaler'
       responses:
         '200':
           description: Successful response
@@ -5378,6 +5393,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionAutoscalers
     post:
@@ -5693,6 +5710,15 @@ paths:
       description: Updates the specified regional BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
       operationId: compute.regionBackendServices.patch
       parameters:
+        - description: Name of the BackendService resource to patch.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendService'
         - description: Project ID for this request.
           in: path
           name: project
@@ -5703,15 +5729,6 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the BackendService resource to update.
-          in: path
-          name: backendService
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BackendService'
       responses:
         '200':
           description: Successful response
@@ -5722,6 +5739,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionBackendServices
     put:
@@ -6090,7 +6109,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.'
+      description: |-
+        Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
+
+        A regional managed instance group can contain up to 2000 instances.
       operationId: compute.regionInstanceGroupManagers.insert
       parameters:
         - description: Project ID for this request.
@@ -6202,7 +6224,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.'
+      description: |-
+        Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.regionInstanceGroupManagers.abandonInstances
       parameters:
         - description: Project ID for this request.
@@ -6246,7 +6271,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
+      description: |-
+        Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.regionInstanceGroupManagers.deleteInstances
       parameters:
         - description: Project ID for this request.
@@ -6346,7 +6374,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+      description: |-
+        Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.regionInstanceGroupManagers.recreateInstances
       parameters:
         - description: Project ID for this request.
@@ -7060,9 +7091,13 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified Router resource with the data included in the request. This method supports patch semantics.
+      description: Patches the specified Router resource with the data included in the request. This method supports patch semantics.
       operationId: compute.routers.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Router'
         - description: Project ID for this request.
           in: path
           name: project
@@ -7073,15 +7108,11 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the Router resource to update.
+        - description: Name of the Router resource to patch.
           in: path
           name: router
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Router'
       responses:
         '200':
           description: Successful response
@@ -7092,6 +7123,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - routers
     put:
@@ -7421,6 +7454,50 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/SubnetworksExpandIpCidrRangeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - subnetworks
+  '/{project}/regions/{region}/subnetworks/{subnetwork}/setPrivateIpGoogleAccess':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Set whether VMs in this subnet can access Google services without assigning external IP addresses through Cloudpath.
+      operationId: compute.subnetworks.setPrivateIpGoogleAccess
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SubnetworksSetPrivateIpGoogleAccessRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Subnetwork resource.
+          in: path
+          name: subnetwork
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -8584,6 +8661,14 @@ paths:
       description: Updates an autoscaler in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.autoscalers.patch
       parameters:
+        - description: Name of the autoscaler to patch.
+          in: query
+          name: autoscaler
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Autoscaler'
         - description: Project ID for this request.
           in: path
           name: project
@@ -8594,15 +8679,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: Name of the autoscaler to update.
-          in: query
-          name: autoscaler
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Autoscaler'
       responses:
         '200':
           description: Successful response
@@ -8613,6 +8689,8 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - autoscalers
     post:
@@ -9200,7 +9278,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.'
+      description: |-
+        Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
+
+        A managed instance group can have up to 1000 VM instances per group.
       operationId: compute.instanceGroupManagers.insert
       parameters:
         - description: Project ID for this request.
@@ -9312,7 +9393,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.'
+      description: |-
+        Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.instanceGroupManagers.abandonInstances
       parameters:
         - description: Project ID for this request.
@@ -9356,7 +9440,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
+      description: |-
+        Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.instanceGroupManagers.deleteInstances
       parameters:
         - description: Project ID for this request.
@@ -9456,7 +9543,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+      description: |-
+        Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+
+        You can specify a maximum of 1000 instances with this method per request.
       operationId: compute.instanceGroupManagers.recreateInstances
       parameters:
         - description: Project ID for this request.
@@ -10375,7 +10465,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Performs a hard reset on the instance.
+      description: 'Performs a reset on the instance. For more information, see Resetting an instance.'
       operationId: compute.instances.reset
       parameters:
         - description: Project ID for this request.
@@ -11284,7 +11374,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#accessConfig for access configs.'
         type: string
       name:
-        description: Name of this access configuration.
+        description: 'The name of this access configuration. The default and recommended name is External NAT but you can use any arbitrary string you would like. For example, My external IP or Network Access.'
         type: string
       natIP:
         description: 'An external IP address associated with this instance. Specify an unused static external IP address available to the project or leave this field undefined to use an IP from a shared ephemeral IP address pool. If you specify a static external IP address, it must live in the same region as the zone of the instance.'
@@ -11300,7 +11390,7 @@ definitions:
     description: A reserved address resource.
     properties:
       address:
-        description: The static external IP address represented by this resource. Only IPv4 is supported.
+        description: The static external IP address represented by this resource.
         type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -12720,7 +12810,7 @@ definitions:
         description: |-
           This field is not used for external load balancing.
 
-          When the load balancing scheme is INTERNAL, a single port or a comma separated list of ports can be configured. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule. If the port list is not provided then all ports are allowed to pass through.
+          When the load balancing scheme is INTERNAL, a single port or a comma separated list of ports can be configured. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule.
 
           You may specify a maximum of up to 5 ports.
         items:
@@ -12742,7 +12832,7 @@ definitions:
         type: string
       target:
         description: |-
-          The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For example, TargetHttpProxy requires HTTP traffic, and TargetHttpsProxy requires HTTPS traffic.
+          The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object.
 
           This field is not used for internal load balancing.
         type: string
@@ -13348,7 +13438,7 @@ definitions:
         type: array
       scheduling:
         $ref: '#/definitions/Scheduling'
-        description: Scheduling options for this instance.
+        description: Sets the scheduling options for this instance.
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
@@ -14944,7 +15034,7 @@ definitions:
   RegionInstanceGroupManagersAbandonInstancesRequest:
     properties:
       instances:
-        description: The names of one or more instances to abandon.
+        description: 'The URLs of one or more instances to abandon. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].'
         items:
           type: string
         type: array
@@ -14952,7 +15042,7 @@ definitions:
   RegionInstanceGroupManagersDeleteInstancesRequest:
     properties:
       instances:
-        description: The names of one or more instances to delete.
+        description: 'The URLs of one or more instances to delete. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].'
         items:
           type: string
         type: array
@@ -15472,7 +15562,10 @@ definitions:
     description: Sets the scheduling options for an Instance.
     properties:
       automaticRestart:
-        description: Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user). You can only set the automatic restart option for standard instances. Preemptible instances cannot be automatically restarted.
+        description: |-
+          Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user). You can only set the automatic restart option for standard instances. Preemptible instances cannot be automatically restarted.
+
+          By default, this is set to true so an instance is automatically restarted if it is terminated by Compute Engine.
         type: boolean
       onHostMaintenance:
         description: 'Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Setting Instance Scheduling Options.'
@@ -15481,7 +15574,7 @@ definitions:
           - TERMINATE
         type: string
       preemptible:
-        description: Whether the instance is preemptible.
+        description: 'Defines whether the instance is preemptible. This can only be set during instance creation, it cannot be set or changed after the instance has been created.'
         type: boolean
     type: object
   SerialPortOutput:
@@ -15695,6 +15788,9 @@ definitions:
       network:
         description: 'The URL of the network to which this subnetwork belongs, provided by the client when initially creating the subnetwork. Only networks that are in the distributed mode can have subnetworks.'
         type: string
+      privateIpGoogleAccess:
+        description: Whether the VMs in this subnet can access Google services without assigned external IP addresses.
+        type: boolean
       region:
         description: URL of the region where the Subnetwork resides.
         type: string
@@ -15801,6 +15897,11 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  SubnetworksSetPrivateIpGoogleAccessRequest:
+    properties:
+      privateIpGoogleAccess:
+        type: boolean
     type: object
   TCPHealthCheck:
     properties:

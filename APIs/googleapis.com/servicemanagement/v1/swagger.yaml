@@ -1182,42 +1182,45 @@ definitions:
       the union of the two AuditConfigs is used for that service: the log_types
       specified in each AuditConfig are enabled, and the exempted_members in each
       AuditConfig are exempted.
+
       Example Policy with multiple AuditConfigs:
-      {
-        "audit_configs": [
+
           {
-            "service": "allServices"
-            "audit_log_configs": [
+            "audit_configs": [
               {
-                "log_type": "DATA_READ",
-                "exempted_members": [
-                  "user:foo@gmail.com"
+                "service": "allServices"
+                "audit_log_configs": [
+                  {
+                    "log_type": "DATA_READ",
+                    "exempted_members": [
+                      "user:foo@gmail.com"
+                    ]
+                  },
+                  {
+                    "log_type": "DATA_WRITE",
+                  },
+                  {
+                    "log_type": "ADMIN_READ",
+                  }
                 ]
               },
               {
-                "log_type": "DATA_WRITE",
-              },
-              {
-                "log_type": "ADMIN_READ",
-              }
-            ]
-          },
-          {
-            "service": "fooservice@googleapis.com"
-            "audit_log_configs": [
-              {
-                "log_type": "DATA_READ",
-              },
-              {
-                "log_type": "DATA_WRITE",
-                "exempted_members": [
-                  "user:bar@gmail.com"
+                "service": "fooservice.googleapis.com"
+                "audit_log_configs": [
+                  {
+                    "log_type": "DATA_READ",
+                  },
+                  {
+                    "log_type": "DATA_WRITE",
+                    "exempted_members": [
+                      "user:bar@gmail.com"
+                    ]
+                  }
                 ]
               }
             ]
           }
-        ]
-      }
+
       For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
       logging. It also exempts foo@gmail.com from DATA_READ logging, and
       bar@gmail.com from DATA_WRITE logging.
@@ -3427,143 +3430,6 @@ definitions:
       Quota configuration helps to achieve fairness and budgeting in service
       usage.
 
-      - Fairness is achieved through the use of short-term quota limits
-        that are usually defined over a time window of several seconds or
-        minutes. When such a limit is applied, for example at the user
-        level, it ensures that no single user will monopolize the service
-        or a given customer's allocated portion of it.
-      - Budgeting is achieved through the use of long-term quota limits
-        that are usually defined over a time window of one or more
-        days. These limits help client application developers predict the
-        usage and help budgeting.
-
-      Quota enforcement uses a simple token-based algorithm for resource sharing.
-
-      The quota configuration structure is as follows:
-
-      - `QuotaLimit` defines a single enforceable limit with a specified
-        token amount that can be consumed over a specific duration and
-        applies to a particular entity, like a project or an end user. If
-        the limit applies to a user, each user making the request will
-        get the specified number of tokens to consume. When the tokens
-        run out, the requests from that user will be blocked until the
-        duration elapses and the next duration window starts.
-
-      - `QuotaGroup` groups a set of quota limits.
-
-      - `QuotaRule` maps a method to a set of quota groups. This allows
-        sharing of quota groups across methods as well as one method
-        consuming tokens from more than one quota group. When a group
-        contains multiple limits, requests to a method consuming tokens
-        from that group must satisfy all the limits in that group.
-
-      Example:
-
-          quota:
-            groups:
-            - name: ReadGroup
-              description: Read requests
-              limits:
-              - name: ProjectQps
-                default_limit: 10000
-                duration: 100s
-                limit_by: CLIENT_PROJECT
-
-              - name: UserQps
-                default_limit: 200
-                duration: 100s
-                limit_by: USER
-
-            - name: WriteGroup
-              description: Write requests
-              limits:
-              - name: ProjectQps
-                default_limit: 1000
-                max_limit: 2000
-                duration: 100s
-                limit_by: CLIENT_PROJECT
-
-              - name: UserQps
-                default_limit: 200
-                max_limit: 400
-                duration: 100s
-                limit_by: USER
-
-            rules:
-            - selector: "*"
-              groups:
-              - group: ReadGroup
-            - selector: google.calendar.Calendar.Update
-              groups:
-              - group: WriteGroup
-                cost: 2
-            - selector: google.calendar.Calendar.Delete
-              groups:
-              - group: WriteGroup
-
-      Here, the configuration defines two quota groups: ReadGroup and WriteGroup,
-      each defining its own per-second and per-second-per-user limits. Note that
-      One Platform enforces per-second limits averaged over 100 second window. The
-      rules map ReadGroup for all methods, except for Update and Delete.
-      These two methods consume from WriteGroup, with Update method consuming at
-      twice the rate as Delete method.
-
-      Multiple quota groups can be specified for a method. The quota limits in all
-      of those groups will be enforced. Example:
-
-          quota:
-            groups:
-            - name: WriteGroup
-              description: Write requests
-              limits:
-              - name: ProjectQps
-                default_limit: 1000
-                max_limit: 1000
-                duration: 100s
-                limit_by: CLIENT_PROJECT
-
-              - name: UserQps
-                default_limit: 200
-                max_limit: 400
-                duration: 100s
-                limit_by: USER
-
-            - name: StorageGroup
-              description: Storage requests
-              limits:
-              - name: StorageQuota
-                default_limit: 1000
-                duration: 0
-                limit_by: USER
-
-            rules:
-            - selector: google.calendar.Calendar.Create
-              groups:
-              - group: StorageGroup
-              - group: WriteGroup
-            - selector: google.calendar.Calendar.Delete
-              groups:
-              - group: StorageGroup
-
-      In the above example, the Create and Delete methods manage the user's
-      storage space. In addition, Create method uses WriteGroup to manage the
-      requests. In this case, requests to Create method need to satisfy all quota
-      limits defined in both quota groups.
-
-      One can disable quota for selected method(s) identified by the selector by
-      setting disable_quota to true. For example,
-
-            rules:
-            - selector: "*"
-              group:
-              - group ReadGroup
-            - selector: google.calendar.Calendar.Select
-              disable_quota: true
-
-
-      We are deprecating the group based quota configuration described above, and
-      moving to use metric based quota configuration described below.
-
       The quota configuration works this way:
       - The service configuration defines a set of metrics.
       - For API calls, the quota.metric_rules maps methods to metrics with
@@ -3574,12 +3440,6 @@ definitions:
       An example quota configuration in yaml format:
 
          quota:
-           limits:
-           - name: apiReadQpsPerProjectPerUser
-             metric: library.googleapis.com/read_calls
-             unit: "1/min/{project}/{user}" # per-user limit for consumer projects
-             values:
-               STANDARD: 1000
 
            - name: apiWriteQpsPerProject
              metric: library.googleapis.com/write_calls
@@ -3587,28 +3447,6 @@ definitions:
              values:
                STANDARD: 10000
 
-           - name: borrowedCountPerOrganization
-             metric: library.googleapis.com/borrowed_count
-             is_precise: true
-             unit: "1/{organization}" # allocation limit for organizations
-             values:
-               LOW: 200
-               STANDARD: 1000
-               HIGH: 10000
-
-           - name: borrowedCountPerOrganizationPerRegion
-             metric: library.googleapis.com/borrowed_count
-             unit: "1/{organization}/{region}"
-             is_precise: true
-             values:
-               LOW: 20
-               STANDARD: 200
-               HIGH: 2000
-               VERY_HIGH: 5000
-               LOW/us-central1: 50
-               STANDARD/us-central1: 500
-               HIGH/us-central1: 4000
-               VERY_HIGH/us-central1: 5000
 
            # The metric rules bind all methods to the read_calls metric,
            # except for the UpdateBook and DeleteBook methods. These two methods
@@ -3635,11 +3473,6 @@ definitions:
 
            - name: library.googleapis.com/write_calls
              display_name: Write requests
-             metric_kind: DELTA
-             value_type: INT64
-
-           - name: library.googleapis.com/borrowed_count
-             display_name: Borrowed books
              metric_kind: DELTA
              value_type: INT64
     properties:
@@ -3775,8 +3608,6 @@ definitions:
             * "/{folder}" quota for a folder.
             * "/{resource}" quota for a universal resource.
           * Zero or more quota segmentation dimension. Not all combos are valid.
-            * "/{user}" quota for every user GAIA ID or client ip address.
-              User GAIA ID has precedence over client ip address.
             * "/{region}" quota for every region. Not to be used with time intervals.
             * Otherwise the resources granted on the target is not segmented.
             * "/{zone}" quota for every zone. Not to be used with time intervals.

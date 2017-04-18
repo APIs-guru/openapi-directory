@@ -3187,6 +3187,8 @@ paths:
         Regenerate the callback URL access key for request triggers:
           parameters:
             api-version: '2016-06-01'
+            keyType:
+              keyType: Primary
             resourceGroupName: testResourceGroup
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             workflowName: testWorkflowName
@@ -3549,7 +3551,7 @@ paths:
             triggerName: testTriggerName
             workflowName: testWorkflowName
           responses:
-            '200': {}
+            '202': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/listCallbackUrl':
     post:
       description: Gets the callback URL for a workflow trigger.
@@ -3713,6 +3715,9 @@ paths:
         Get callback URL for a trigger of a workflow version:
           parameters:
             api-version: '2016-06-01'
+            parameters:
+              keyType: Primary
+              notAfter: '2017-03-05T08:00:00Z'
             resourceGroupName: testResourceGroup
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
             triggerName: testTriggerName
@@ -5957,6 +5962,26 @@ definitions:
   WorkflowTriggerCallbackUrl:
     description: The workflow trigger callback URL.
     properties:
+      basePath:
+        description: Gets the workflow trigger callback URL base path.
+        readOnly: true
+        type: string
+      method:
+        description: Gets the workflow trigger callback URL HTTP method.
+        readOnly: true
+        type: string
+      queries:
+        $ref: '#/definitions/WorkflowTriggerListCallbackUrlQueries'
+        description: Gets the workflow trigger callback URL query parameters.
+      relativePath:
+        description: Gets the workflow trigger callback URL relative path.
+        readOnly: true
+        type: string
+      relativePathParameters:
+        description: Gets the workflow trigger callback URL relative path parameters.
+        items:
+          type: string
+        type: array
       value:
         description: Gets the workflow trigger callback URL.
         readOnly: true
@@ -6053,6 +6078,22 @@ definitions:
       trackingId:
         description: Gets the tracking id.
         readOnly: true
+        type: string
+    type: object
+  WorkflowTriggerListCallbackUrlQueries:
+    description: Gets the workflow trigger callback URL query parameters.
+    properties:
+      api-version:
+        description: The api version.
+        type: string
+      sig:
+        description: The SAS signature.
+        type: string
+      sp:
+        description: The SAS permissions.
+        type: string
+      sv:
+        description: The SAS version.
         type: string
     type: object
   WorkflowTriggerListResult:

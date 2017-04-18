@@ -37,6 +37,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
       'https://www.googleapis.com/auth/userinfo.email': View your email address
     type: oauth2
 parameters:
@@ -155,6 +156,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -212,6 +215,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -268,6 +273,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -307,6 +314,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -356,6 +365,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -401,6 +412,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -445,6 +458,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -514,6 +529,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -564,6 +581,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -624,6 +643,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -669,6 +690,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -713,6 +736,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -772,6 +797,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -829,6 +856,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -869,6 +898,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -918,6 +949,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -969,6 +1002,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1018,6 +1053,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -1088,6 +1125,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1139,6 +1178,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -1204,6 +1245,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1254,6 +1297,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1299,6 +1344,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1338,6 +1385,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -1412,6 +1461,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1452,6 +1503,8 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1490,6 +1543,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -1562,6 +1617,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
@@ -1644,6 +1701,41 @@ definitions:
       position:
         $ref: '#/definitions/Position'
         description: A Position at which to split the work item.
+    type: object
+  AutoscalingEvent:
+    description: |-
+      A structured message reporting an autoscaling decision made by the Dataflow
+      service.
+    properties:
+      currentNumWorkers:
+        description: The current number of workers the job has.
+        format: int64
+        type: string
+      description:
+        $ref: '#/definitions/StructuredMessage'
+        description: |-
+          A message describing why the system decided to adjust the current
+          number of workers, why it failed, or why the system decided to
+          not make any changes to the number of workers.
+      eventType:
+        description: The type of autoscaling event to report.
+        enum:
+          - TYPE_UNKNOWN
+          - TARGET_NUM_WORKERS_CHANGED
+          - CURRENT_NUM_WORKERS_CHANGED
+          - ACTUATION_FAILURE
+          - NO_CHANGE
+        type: string
+      targetNumWorkers:
+        description: The target number of workers the worker pool wants to resize to use.
+        format: int64
+        type: string
+      time:
+        description: |-
+          The time this event was emitted to indicate a new target or current
+          num_workers value.
+        format: google-datetime
+        type: string
     type: object
   AutoscalingSettings:
     description: Settings for WorkerPool autoscaling.
@@ -2179,6 +2271,32 @@ definitions:
           $ref: '#/definitions/WorkerPool'
         type: array
     type: object
+  ExecutionStageState:
+    description: A message describing the state of a particular execution stage.
+    properties:
+      currentStateTime:
+        description: The time at which the stage transitioned to this state.
+        format: google-datetime
+        type: string
+      executionStageName:
+        description: The name of the execution stage.
+        type: string
+      executionStageState:
+        description: Executions stage states allow the same set of values as JobState.
+        enum:
+          - JOB_STATE_UNKNOWN
+          - JOB_STATE_STOPPED
+          - JOB_STATE_RUNNING
+          - JOB_STATE_DONE
+          - JOB_STATE_FAILED
+          - JOB_STATE_CANCELLED
+          - JOB_STATE_UPDATED
+          - JOB_STATE_DRAINING
+          - JOB_STATE_DRAINED
+          - JOB_STATE_PENDING
+          - JOB_STATE_CANCELLING
+        type: string
+    type: object
   ExecutionStageSummary:
     description: |-
       Description of the composing transforms, names/ids, and input/outputs of a
@@ -2409,6 +2527,8 @@ definitions:
           - JOB_STATE_UPDATED
           - JOB_STATE_DRAINING
           - JOB_STATE_DRAINED
+          - JOB_STATE_PENDING
+          - JOB_STATE_CANCELLING
         type: string
       currentStateTime:
         description: The timestamp associated with the current state.
@@ -2499,7 +2619,16 @@ definitions:
           - JOB_STATE_UPDATED
           - JOB_STATE_DRAINING
           - JOB_STATE_DRAINED
+          - JOB_STATE_PENDING
+          - JOB_STATE_CANCELLING
         type: string
+      stageStates:
+        description: |-
+          This field may be mutated by the Cloud Dataflow service;
+          callers cannot mutate it.
+        items:
+          $ref: '#/definitions/ExecutionStageState'
+        type: array
       steps:
         description: The top-level steps that constitute the entire job.
         items:
@@ -2566,9 +2695,7 @@ definitions:
     description: A particular message pertaining to a Dataflow job.
     properties:
       id:
-        description: |-
-          Identifies the message.  This is automatically generated by the
-          service; the caller should treat it as an opaque string.
+        description: Deprecated.
         type: string
       messageImportance:
         description: Importance level of the message.
@@ -2727,6 +2854,11 @@ definitions:
   ListJobMessagesResponse:
     description: Response to a request to list job messages.
     properties:
+      autoscalingEvents:
+        description: Autoscaling events in ascending timestamp order.
+        items:
+          $ref: '#/definitions/AutoscalingEvent'
+        type: array
       jobMessages:
         description: Messages in ascending timestamp order.
         items:
@@ -3006,6 +3138,15 @@ definitions:
       write:
         $ref: '#/definitions/WriteInstruction'
         description: Additional information for Write instructions.
+    type: object
+  Parameter:
+    description: Structured data associated with this message.
+    properties:
+      key:
+        description: Key or name for this parameter.
+        type: string
+      value:
+        description: Value for this parameter.
     type: object
   ParameterMetadata:
     description: Metadata for a specific parameter.
@@ -3919,6 +4060,26 @@ definitions:
         description: Elements of the list.
         items:
           type: string
+        type: array
+    type: object
+  StructuredMessage:
+    description: |-
+      A rich message format, including a human readable string, a key for
+      identifying the message, and structured data associated with the message for
+      programmatic consumption.
+    properties:
+      messageKey:
+        description: |-
+          Idenfier for this message type.  Used by external systems to
+          internationalize or personalize message.
+        type: string
+      messageText:
+        description: Human-readable version of message.
+        type: string
+      parameters:
+        description: The structured data associated with this message.
+        items:
+          $ref: '#/definitions/Parameter'
         type: array
     type: object
   TaskRunnerSettings:

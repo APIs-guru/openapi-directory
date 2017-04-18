@@ -3004,7 +3004,7 @@ paths:
       - $ref: '#/parameters/resourceId'
     put:
       description: |
-        Create or update a custom event with predefined identifier string
+        Create a custom event with predefined identifier string
       parameters:
         - description: Custom event resource
           in: body
@@ -3036,7 +3036,7 @@ paths:
           description: Custom event can't be modified
         '422':
           $ref: '#/responses/InvalidDataError'
-      summary: Create or update a custom event with predefined ID
+      summary: Create a custom event with predefined ID
       tags:
         - Custom Events
   '/custom-events/{id}/rules':
@@ -6534,7 +6534,7 @@ paths:
         - lang: PHP
           source: |
             $paymentCardForm = new Rebilly\Entities\PaymentCard();
-            $paymentCardForm->setCustmerId('customerId');
+            $paymentCardForm->setCustomerId('customerId');
             $paymentCardForm->setPan('4111111111111111');
             $paymentCardForm->setExpYear(2025);
             $paymentCardForm->setExpMonth(8);
@@ -6709,7 +6709,7 @@ paths:
         - lang: PHP
           source: |
             $paymentCardForm = new Rebilly\Entities\PaymentCard();
-            $paymentCardForm->setCustmerId('customerId');
+            $paymentCardForm->setCustomerId('customerId');
             $paymentCardForm->setPan('4111111111111111');
             $paymentCardForm->setExpYear(2025);
             $paymentCardForm->setExpMonth(8);
