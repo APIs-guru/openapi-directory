@@ -16,6 +16,7 @@ module.exports = function () {
       return _.map(data.items, function (value) {
         return {
           info: {
+		    'x-providerName': 'googleapis.com',
             'x-serviceName': value.name,
             'x-preferred': value.preferred,
             'x-origin': [{
