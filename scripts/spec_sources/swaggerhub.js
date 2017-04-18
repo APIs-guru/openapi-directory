@@ -8,14 +8,14 @@ module.exports = function () {
   var json = JSON.parse(util.exec('wget -q -O- '+baseUrl));
   var mostRecent = _.findLast(json.apis,function(e){
     return _.find(e.properties,function(e){
-		return ((e.type == 'X-Published') && (e.value == 'true'));
-	});
+      return ((e.type == 'X-Published') && (e.value == 'true'));
+    });
   });
   var version = _.find(mostRecent.properties,function(e){
-		return (e.type == 'X-Version');
+    return (e.type == 'X-Version');
   }).value;
   console.log('SwaggerHub latest published version: '+version);
-  return {
+  return [{
     info: {
       'x-origin': [{
         url: baseUrl+'/'+version,
@@ -23,5 +23,5 @@ module.exports = function () {
         version: '2.0'
       }]
     }
-  };
+  }];
 }

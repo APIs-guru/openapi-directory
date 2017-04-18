@@ -11,6 +11,7 @@ module.exports = function () {
   return _.map(files, filename => {
     return {
       info: {
+	    'x-providerName': 'nytimes.com',
         'x-serviceName': filename.split('/')[0],
         'x-origin': [{
           url: util.rawGitHubUrl('NYTimes', 'public_api_specs', filename),

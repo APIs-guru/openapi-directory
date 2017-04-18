@@ -381,6 +381,7 @@ function writeSpec(source, format, exPatch, command) {
       if (!context.swagger.info.description)
         warnings.push(`Definition has no info.description "${filename}"`);
 
+	  delete exPatch.info['x-providerName'];
 	  delete exPatch.info['x-serviceName'];
 	  delete exPatch.info['x-preferred'];
 
@@ -959,6 +960,10 @@ function applyMergePatch(target, patch) {
 
     if ((_.isArray(target[key])) && (_.isArray(value)))
 	  return target[key].concat(value);
+
+    if ((typeof target[key] !== 'undefined') && (target[key] === value)) {
+      return value;
+    }
 
     assert(_.isUndefined(target[key]), 'Patch tried to override property: ' + key);
     target[key] = value;

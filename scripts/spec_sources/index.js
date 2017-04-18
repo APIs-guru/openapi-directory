@@ -11,7 +11,8 @@ var specSources = {
   'azure.com': require('./azure'),
   'windows.net': require('./azure'),
   'nytimes.com': require('./ny_times'),
-  'swaggerhub.com': require('./swaggerhub')
+  'swaggerhub.com': require('./swaggerhub'),
+  'apitore.com': require('./apitore')
 };
 var catalogProviders = _.keys(specSources);
 
@@ -35,6 +36,16 @@ exports.getLeads = function (specs) {
     .then(catalogLeads => {
       var leads = _(catalogLeads).values().concat(urlLeads).value();
       leads = indexByOriginUrl(leads);
+
+	  // add new catalog leads (MER)
+	  for (var l in leads) {
+	  	var lead = leads[l];
+	  	var filename = util.getSwaggerPath(lead);
+		if (!specs[filename]) { // we should compare on origin url
+	  	  specs[filename] = lead;
+		}
+	  }
+
       return _(specs).mapValues((swagger, filename) => {
         var lead = leads[util.getOriginUrl(swagger)];
         assert(lead, '!!! Delete ' + filename);
