@@ -8,17 +8,21 @@ info:
     name: the Wikimedia Services team
     url: 'http://mediawiki.org/wiki/RESTBase'
   description: |
-    This API aims to provide coherent and low-latency access to Wikimedia content and services. It is currently in beta testing, so things aren't completely locked down yet. Each entry point has explicit stability markers to inform you about development status and change policy, according to [our API version policy](https://www.mediawiki.org/wiki/API_versioning).
+    This API provides cacheable and straightforward access to Wikimedia content and data, in machine-readable formats. Each entry point has explicit stability markers to inform you about development status and change policy, according to [our API version policy](https://www.mediawiki.org/wiki/API_versioning).
+    See https://www.mediawiki.org/wiki/REST_API for background and details.
     ### High-volume access
-      - Don't perform more than 500 requests/s to this API.
-      - Set a unique `User-Agent` header that allows us to contact you
-        quickly. Email addresses or URLs of contact pages work well.
+      - Limit your clients to no more than 200 requests/s to this API.
+      - Set a unique `User-Agent` or `Api-User-Agent` header that
+        allows us to contact you quickly. Email addresses or URLs
+        of contact pages work well.
+
+    By using this API, you agree to Wikimedia's  [Terms of Use](https://wikimediafoundation.org/wiki/Terms_of_Use) and [Privacy Policy](https://wikimediafoundation.org/wiki/Privacy_policy), and you irrevocably agree to release modifications or additions made through this API under the  [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)  License and the [GFDL](https://www.gnu.org/copyleft/fdl.html).
   license:
     name: Apache2
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
   termsOfService: 'https://wikimediafoundation.org/wiki/Terms_of_Use'
   title: Wikimedia
-  version: 1.0.0-beta
+  version: 1.0.0
   x-apisguru-categories:
     - media
   x-logo:
