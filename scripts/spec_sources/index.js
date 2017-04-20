@@ -12,7 +12,8 @@ var specSources = {
   'windows.net': require('./azure'),
   'nytimes.com': require('./ny_times'),
   'swaggerhub.com': require('./swaggerhub'),
-  'apitore.com': require('./apitore')
+  'apitore.com': require('./apitore'),
+  'gov.bc.ca': require('./bcgov')
 };
 var catalogProviders = _.keys(specSources);
 

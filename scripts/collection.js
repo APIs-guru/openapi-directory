@@ -965,7 +965,11 @@ function applyMergePatch(target, patch) {
       return value;
     }
 
-    assert(_.isUndefined(target[key]), 'Patch tried to override property: ' + key);
+	if (key == 'x-providerName') {
+      return value;
+	}
+
+    assert(_.isUndefined(target[key]), 'Patch tried to override property: ' + key + ' ' + target[key] + ' ' + value);
     target[key] = value;
   });
 };
