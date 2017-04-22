@@ -677,10 +677,12 @@ paths:
             Mixins:
             * contributions: mixin to return information about contributors to items
             * images: mixin to add image information for an item
+            * offset: mixin to return programme segment offsets, works in conjunction with programme filter
             * play_event: mixin to return programme segment events, works in conjunction with programme or segment_event filters
           enum:
             - contributions
             - images
+            - offset
             - play_event
           in: query
           items:
@@ -1126,10 +1128,13 @@ paths:
             * contributions: mixin to return information about contributors to a programme
             * duration: mixin to return original version duration in programme concept entities
             * genre_groupings: mixin to return list of genre groupings
+            * genre_groups: mixin to return list of genre groups
             * images: mixin to add image information for a programme
             * is_embeddable: mixin to add embeddable information for a programme
             * previous_next: mixin to return the programmes which appear before and after a programme (as determined by the sort applied in the request)
             * related_links: mixin to return information about related links to a programme
+            * titles: mixin to return ancestor programme titles
+            * versions_availability: mixin to return information about programmes that are currently available
           enum:
             - alternate_images
             - ancestor_titles
@@ -1140,10 +1145,13 @@ paths:
             - contributions
             - duration
             - genre_groupings
+            - genre_groups
             - images
             - is_embeddable
             - previous_next
             - related_links
+            - titles
+            - versions_availability
           in: query
           items:
             type: string
@@ -1183,6 +1191,13 @@ paths:
           name: availability_entity_type
           required: false
           type: array
+        - description: filter for subset of programmes that are available after or at the specified datetime
+          format: date-time
+          in: query
+          name: availability_from
+          required: false
+          type: string
+          x-deprecated: true
         - collectionFormat: multi
           description: filter for a subset of programmes that are available for a given type
           enum:
@@ -1605,9 +1620,11 @@ paths:
             Mixins:
             * ancestor_titles: return ancestor programme titles
             * images: mixin to add image information for broadcasts and webcasts
+            * titles: return ancestor programme titles
           enum:
             - ancestor_titles
             - images
+            - titles
           in: query
           items:
             type: string
