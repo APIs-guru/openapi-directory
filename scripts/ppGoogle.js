@@ -25,9 +25,10 @@ rr(pathspec,function(err, files) {
           file = file.split('\\').join('/');
           console.log(file);
           var current = fs.readFileSync(file,'utf8');
-          var head = utils.exec('git show HEAD:./'+file);
+          var head = utils.exec('git show HEAD:./'+file, true);
+		  if (head != '') {
           var currentHash = sha256(current);
-          var headHash = sha256(head);
+	      var headHash = sha256(head);
           if (currentHash === headHash) {
               console.log('  Same');
           }
@@ -56,6 +57,7 @@ rr(pathspec,function(err, files) {
 
               }
 
+          }
           }
       }
   }

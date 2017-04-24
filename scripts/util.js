@@ -171,7 +171,7 @@ exports.saveSwagger = function (swagger) {
   return path;
 }
 
-exports.exec = function (cmd) {
+exports.exec = function (cmd, canFail) {
   var glovalVerbose = sh.config.verbose;
   sh.config.verbose = false;
   console.log(cmd);
@@ -180,7 +180,7 @@ exports.exec = function (cmd) {
     silent: true
   });
   sh.config.verbose = glovalVerbose;
-  assert(result.code === 0);
+  if (!canFail) assert(result.code === 0);
   return result.stdout;
 }
 

@@ -13,7 +13,8 @@ var specSources = {
   'nytimes.com': require('./ny_times'),
   'swaggerhub.com': require('./swaggerhub'),
   'apitore.com': require('./apitore'),
-  'gov.bc.ca': require('./bcgov')
+  'gov.bc.ca': require('./bcgov'),
+  'bclaws.ca': require('./bcgov')
 };
 var catalogProviders = _.keys(specSources);
 
@@ -45,6 +46,7 @@ exports.getLeads = function (specs) {
 	  	var lead = leads[l];
 	  	var filename = util.getSwaggerPath(lead);
 		if (!specs[filename]) { // we should compare on origin url
+		  console.log('!!! Adding ' + filename);
 	  	  specs[filename] = lead;
 		}
 	  }
