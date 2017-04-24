@@ -1,0 +1,2080 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.beezup.com
+basePath: /v2/user/marketplaces/orders
+info:
+  contact:
+    email: support@beezup.com
+  description: This API will gives you the ability to manage your orders.
+  license:
+    name: BeezUP
+    url: 'http://www.beezup.com'
+  title: Marketplaces - Orders
+  version: '2.0'
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://avatars0.githubusercontent.com/u/25665430'
+  x-origin:
+    - format: swagger
+      url: 'https://beezup.github.io/api-user_marketplaces_orders/swagger.json'
+      version: '2.0'
+  x-providerName: beezup.com
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  api_key:
+    description: the api subscription key
+    in: header
+    name: Ocp-Apim-Subscription-Key
+    type: apiKey
+security:
+  - api_key: []
+parameters:
+  accountIdParameter:
+    description: The account identifier
+    format: int32
+    in: path
+    name: accountId
+    required: true
+    type: integer
+    x-example: 1001
+  beezUPOrderIdParameter:
+    description: The order BeezUP identifier
+    in: path
+    name: beezUPOrderId
+    required: true
+    type: string
+    x-example: '00000000000000000000000000000000000000000000000'
+  changeOrderTypeParameter:
+    description: The order change type
+    in: path
+    name: changeOrderType
+    required: true
+    type: string
+    x-lov: OrderChangeBusinessOperationType
+  marketplaceTechnicalCodeParameter:
+    description: The marketplace technical code
+    in: path
+    name: marketplaceTechnicalCode
+    required: true
+    type: string
+    x-example: Amazon
+  testModeInQueryParameter:
+    default: false
+    description: 'If true, the operation will be be commited. But the validation will be taken in account.'
+    in: query
+    name: testMode
+    required: false
+    type: boolean
+    x-example: false
+  userNameInQueryParameter:
+    description: Sometimes the user in the e-commerce application is not the same than the subscription key you indicate in your settings. We recommand you to indicate the login of the user in your appplication.
+    in: query
+    name: userName
+    required: true
+    type: string
+tags:
+  - description: All global operations
+    name: Global
+  - description: All operations related to only one order
+    name: One Order
+  - description: All order list operations
+    name: List
+  - description: All batch operations on orders to reduce rate calls
+    name: Batches
+  - description: All auto transitions operations
+    name: AutoTransitions
+  - description: All order exportation operations
+    name: Exports
+paths:
+  /automaticTransitions:
+    get:
+      operationId: GetAutomaticTransitions
+      parameters: []
+      responses:
+        '200':
+          description: Get Automatic Transitions
+          schema:
+            $ref: '#/definitions/automaticTransitionInfos'
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Get automatic order status transition list
+      tags:
+        - AutoTransitions
+    post:
+      operationId: ConfigureAutomaticTransitions
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/saveAutomaticTransitionRequest'
+      responses:
+        '204':
+          description: Configure Automatic Transitions
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Configure automatic order status transitions
+      tags:
+        - AutoTransitions
+  '/batches/changeOrders/{changeOrderType}':
+    post:
+      description: The purpose of this  operation is to reduce the amount of request to the API.
+      operationId: ChangeOrderList
+      parameters:
+        - description: The order change type
+          in: path
+          name: changeOrderType
+          required: true
+          type: string
+          x-lov: OrderChangeBusinessOperationType
+        - description: Sometimes the user in the e-commerce application is not the same than the subscription key you indicate in your settings. We recommand you to indicate the login of the user in your appplication.
+          in: query
+          name: userName
+          required: true
+          type: string
+        - default: false
+          description: 'If true, the operation will be be commited. But the validation will be taken in account.'
+          in: query
+          name: testMode
+          required: false
+          type: boolean
+          x-example: false
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/changeOrderListRequest'
+      responses:
+        '204':
+          description: Orders changed
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Batches the change order operation.
+      tags:
+        - Batches
+  /batches/clearMerchantOrderInfos:
+    post:
+      description: The purpose of this  operation is to reduce the amount of request to the API.
+      operationId: ClearMerchantOrderInfoList
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/clearMerchantOrderInfoListRequest'
+      responses:
+        '204':
+          description: Merchant order info list cleared
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Batches the clear merchant order info operation.
+      tags:
+        - Batches
+  /batches/setMerchantOrderInfos:
+    post:
+      description: The purpose of this  operation is to reduce the amount of request to the API.
+      operationId: SetMerchantOrderInfoList
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/setMerchantOrderInfoListRequest'
+      responses:
+        '204':
+          description: Merchant order info list set
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Batches the set merchant order info operation.
+      tags:
+        - Batches
+  /exportations:
+    get:
+      operationId: GetOrderExportations
+      parameters:
+        - description: The page number you want to get
+          format: int32
+          in: query
+          minimum: 1
+          name: pageNumber
+          required: true
+          type: integer
+          x-example: 1
+        - description: The count of orders exportation you want to get
+          format: int32
+          in: query
+          maximum: 100
+          minimum: 25
+          name: pageSize
+          required: true
+          type: integer
+          x-example: 25
+      responses:
+        '200':
+          description: Exports
+          schema:
+            $ref: '#/definitions/orderExportations'
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Get the order exportation list
+      tags:
+        - Exports
+    post:
+      description: This will create a file with all your orders related to your filter
+      operationId: ExportOrders
+      parameters:
+        - default: csv
+          description: The type of the file to export
+          enum:
+            - csv
+          in: query
+          name: format
+          required: true
+          type: string
+          x-example: csv
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/exportOrderListRequest'
+      responses:
+        '202':
+          description: Orders exportation accepted
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Export orders
+      tags:
+        - Exports
+  /harvest:
+    post:
+      operationId: HarvestAll
+      parameters: []
+      responses:
+        '202':
+          description: Harvest request accepted
+          headers:
+            Retry-After:
+              description: Indicates the duration to wait in second to be able to make this request again
+              type: integer
+        '409':
+          description: Harvest rate limit exceeded
+          headers:
+            Retry-After:
+              description: Indicates the duration to wait in second to be able to make this request again
+              type: integer
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Harvest orders from all marketplaces
+      tags:
+        - Global
+  /list/full:
+    post:
+      description: The purpose of this API is to reduce the request count.
+      operationId: GetOrderListFull
+      parameters:
+        - collectionFormat: csv
+          description: Indicates that the client accepts that the response will be compressed to reduce traffic size.
+          in: header
+          items:
+            type: string
+          name: Accept-Encoding
+          required: true
+          type: array
+        - in: body
+          name: request
+          required: false
+          schema:
+            $ref: '#/definitions/orderListRequest'
+      responses:
+        '200':
+          description: Order list
+          schema:
+            $ref: '#/definitions/orderListFull'
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Get order list with all order properties and all order items.
+      tags:
+        - List
+  /list/light:
+    post:
+      operationId: GetOrderListLight
+      parameters:
+        - in: body
+          name: request
+          required: false
+          schema:
+            $ref: '#/definitions/orderListRequest'
+      responses:
+        '200':
+          description: Order list
+          schema:
+            $ref: '#/definitions/orderListLight'
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Get order list without details
+      tags:
+        - List
+  /status:
+    get:
+      operationId: GetMarketplaceAccountsSynchronization
+      parameters: []
+      responses:
+        '200':
+          description: Account synchronizations
+          schema:
+            $ref: '#/definitions/accountSynchronizations'
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Get marketplace accounts synchronization status
+      tags:
+        - Global
+  '/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}':
+    get:
+      operationId: GetOrder
+      parameters:
+        - description: The marketplace technical code
+          in: path
+          name: marketplaceTechnicalCode
+          required: true
+          type: string
+          x-example: Amazon
+        - description: The account identifier
+          format: int32
+          in: path
+          name: accountId
+          required: true
+          type: integer
+          x-example: 1001
+        - description: The order BeezUP identifier
+          in: path
+          name: beezUPOrderId
+          required: true
+          type: string
+          x-example: '00000000000000000000000000000000000000000000000'
+      responses:
+        '200':
+          description: Order information
+          schema:
+            $ref: '#/definitions/order'
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Get order details
+      tags:
+        - One Order
+  '/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/clearMerchantOrderInfo':
+    post:
+      operationId: ClearMerchantOrderInfo
+      parameters:
+        - description: The marketplace technical code
+          in: path
+          name: marketplaceTechnicalCode
+          required: true
+          type: string
+          x-example: Amazon
+        - description: The account identifier
+          format: int32
+          in: path
+          name: accountId
+          required: true
+          type: integer
+          x-example: 1001
+        - description: The order BeezUP identifier
+          in: path
+          name: beezUPOrderId
+          required: true
+          type: string
+          x-example: '00000000000000000000000000000000000000000000000'
+      responses:
+        '204':
+          description: Merchant order info cleared
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Clear the merchant info related to this order
+      tags:
+        - One Order
+  '/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/harvest':
+    post:
+      operationId: HarvestOrder
+      parameters:
+        - description: The marketplace technical code
+          in: path
+          name: marketplaceTechnicalCode
+          required: true
+          type: string
+          x-example: Amazon
+        - description: The account identifier
+          format: int32
+          in: path
+          name: accountId
+          required: true
+          type: integer
+          x-example: 1001
+        - description: The order BeezUP identifier
+          in: path
+          name: beezUPOrderId
+          required: true
+          type: string
+          x-example: '00000000000000000000000000000000000000000000000'
+      responses:
+        '202':
+          description: Harvest order request accepted
+          headers:
+            Retry-After:
+              description: Indicates the duration to wait in second to be able to make this request again
+              type: integer
+        '409':
+          description: Harvest rate limit exceeded
+          headers:
+            Retry-After:
+              description: Indicates the duration to wait in second to be able to make this request again
+              type: integer
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Harvest a specific order from the marketplace
+      tags:
+        - One Order
+  '/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/history':
+    get:
+      operationId: GetOrderHistory
+      parameters:
+        - description: The marketplace technical code
+          in: path
+          name: marketplaceTechnicalCode
+          required: true
+          type: string
+          x-example: Amazon
+        - description: The account identifier
+          format: int32
+          in: path
+          name: accountId
+          required: true
+          type: integer
+          x-example: 1001
+        - description: The order BeezUP identifier
+          in: path
+          name: beezUPOrderId
+          required: true
+          type: string
+          x-example: '00000000000000000000000000000000000000000000000'
+      responses:
+        '200':
+          description: Order history
+          schema:
+            $ref: '#/definitions/orderHistory'
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Get the harvest history and the change status operations
+      tags:
+        - One Order
+  '/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/setMerchantOrderInfo':
+    post:
+      operationId: SetMerchantOrderInfo
+      parameters:
+        - description: The marketplace technical code
+          in: path
+          name: marketplaceTechnicalCode
+          required: true
+          type: string
+          x-example: Amazon
+        - description: The account identifier
+          format: int32
+          in: path
+          name: accountId
+          required: true
+          type: integer
+          x-example: 1001
+        - description: The order BeezUP identifier
+          in: path
+          name: beezUPOrderId
+          required: true
+          type: string
+          x-example: '00000000000000000000000000000000000000000000000'
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/setMerchantOrderInfoRequest'
+      responses:
+        '204':
+          description: Merchant order info set
+      summary: Associate your merchant order identifier to this order
+      tags:
+        - One Order
+  '/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/{changeOrderType}':
+    post:
+      operationId: ChangeOrder
+      parameters:
+        - description: The marketplace technical code
+          in: path
+          name: marketplaceTechnicalCode
+          required: true
+          type: string
+          x-example: Amazon
+        - description: The account identifier
+          format: int32
+          in: path
+          name: accountId
+          required: true
+          type: integer
+          x-example: 1001
+        - description: The order BeezUP identifier
+          in: path
+          name: beezUPOrderId
+          required: true
+          type: string
+          x-example: '00000000000000000000000000000000000000000000000'
+        - description: The order change type
+          in: path
+          name: changeOrderType
+          required: true
+          type: string
+          x-lov: OrderChangeBusinessOperationType
+        - description: Sometimes the user in the e-commerce application is not the same than the subscription key you indicate in your settings. We recommand you to indicate the login of the user in your appplication.
+          in: query
+          name: userName
+          required: true
+          type: string
+        - default: false
+          description: 'If true, the operation will be be commited. But the validation will be taken in account.'
+          in: query
+          name: testMode
+          required: false
+          type: boolean
+          x-example: false
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/changeOrderRequest'
+      responses:
+        '200':
+          description: Order changed
+          schema:
+            $ref: '#/definitions/changeOrderResponse'
+        default:
+          description: Occurs when something goes wrong
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      summary: Change order status
+      tags:
+        - One Order
+definitions:
+  BeezUP.Common.CurrencyCode:
+    description: |
+      The currency code <a href="https://en.wikipedia.org/wiki/ISO_4217">(ISO 4217)</a>
+    example: '"EUR"'
+    type: string
+  BeezUP.Common.ErrorResponseMessage:
+    properties:
+      errors:
+        items:
+          $ref: '#/definitions/BeezUP.Common.UserErrorMessage'
+        type: array
+    required:
+      - errors
+    type: object
+  BeezUP.Common.ErrorSummary:
+    properties:
+      errorArguments:
+        additionalProperties:
+          type: string
+        type: object
+      errorCode:
+        type: string
+      errorGuid:
+        format: uuid
+        type: string
+      errorMessage:
+        type: string
+      exceptionDetail:
+        $ref: '#/definitions/BeezUP.Common.ExceptionDetail'
+      objectName:
+        type: string
+      propertyName:
+        type: string
+      propertyValue:
+        type: string
+      source:
+        type: string
+      technicalErrorMessage:
+        type: string
+      utcDate:
+        format: date-time
+        type: string
+    type: object
+  BeezUP.Common.ExceptionDetail:
+    properties:
+      helpLink:
+        type: string
+      message:
+        type: string
+      stackTrace:
+        type: string
+      type:
+        type: string
+    type: object
+  BeezUP.Common.Href:
+    description: Indicate the relative uri for this link
+    example: '"/v2/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}"'
+    type: string
+  BeezUP.Common.HttpMethod:
+    default: GET
+    description: Indicate the http method to use on this link
+    enum:
+      - GET
+      - POST
+      - PATCH
+      - DELETE
+      - PUT
+      - HEAD
+    example: '"GET"'
+    type: string
+  BeezUP.Common.InfoSummaries:
+    properties:
+      errors:
+        items:
+          $ref: '#/definitions/BeezUP.Common.ErrorSummary'
+        type: array
+      informations:
+        items:
+          $ref: '#/definitions/BeezUP.Common.InfoSummary'
+        type: array
+      successes:
+        items:
+          $ref: '#/definitions/BeezUP.Common.SuccessSummary'
+        type: array
+      warnings:
+        items:
+          $ref: '#/definitions/BeezUP.Common.WarningSummary'
+        type: array
+    type: object
+  BeezUP.Common.InfoSummary:
+    properties:
+      informationArguments:
+        additionalProperties:
+          type: string
+        type: object
+      informationCode:
+        type: string
+      informationMessage:
+        type: string
+      objectName:
+        type: string
+      propertyName:
+        type: string
+      propertyValue:
+        type: string
+    type: object
+  BeezUP.Common.LOVLink2:
+    description: Describe the way you have to follow to get access to the LOV
+    properties:
+      href:
+        description: Indicate the relative uri pattern to the list of value
+        example: '/v2/public/{listName}'
+        type: string
+      listName:
+        description: The name of the list of value
+        example: Go2CultureName
+        type: string
+      rel:
+        description: Indicate the relation name related to the link
+        example: LOV_Go2CultureName
+        type: string
+    type: object
+  BeezUP.Common.Link2:
+    properties:
+      href:
+        $ref: '#/definitions/BeezUP.Common.Href'
+      info:
+        $ref: '#/definitions/BeezUP.Common.InfoSummaries'
+      method:
+        $ref: '#/definitions/BeezUP.Common.HttpMethod'
+      operationId:
+        $ref: '#/definitions/BeezUP.Common.OperationId'
+      parameters:
+        items:
+          $ref: '#/definitions/BeezUP.Common.LinkParameter2'
+        minItems: 0
+        type: array
+        uniqueItems: true
+      rel:
+        description: Indicate the relation name related to the link
+        example: self
+        type: string
+    required:
+      - rel
+    type: object
+  BeezUP.Common.LinkParameter2:
+    properties:
+      in:
+        description: |
+          * path: if the parameter must be pass in the path uri
+          * header: if the parameter must be passed in http header
+          * query: if the parameter must be passed in querystring
+          * body: if the paramter must be passed in the body
+        enum:
+          - path
+          - header
+          - query
+          - body
+        example: path
+        type: string
+      lovLink:
+        $ref: '#/definitions/BeezUP.Common.LOVLink2'
+        description: This parameter expect the values indicated in this list of values.
+      lovRequired:
+        description: 'If true, you MUST use indicate a value from the list of values otherwise it''s a freetext'
+        example: true
+        type: boolean
+      name:
+        description: The name of the parameter
+        example: marketplaceTechnicalCode
+        type: string
+      required:
+        example: true
+        type: boolean
+      type:
+        description: The value type of the parameter
+        enum:
+          - string
+          - integer
+          - number
+          - boolean
+          - object
+          - array
+          - date
+          - date-time
+        example: string
+        type: string
+      value:
+        description: The value of the parameter
+        example: '1234'
+        type: string
+    required:
+      - name
+    type: object
+  BeezUP.Common.OperationId:
+    description: The operationId to call.
+    example: '"GetOrder"'
+    type: string
+  BeezUP.Common.PaginationResult:
+    example:
+      entryCount: 25
+      links:
+        - hRef: /v2/user/marketplaces/orders
+          method: GET
+          parameters:
+            - in: query
+              name: beginPeriodUtcDate
+              value: '2014-08-25T07:32:31.584Z'
+            - in: query
+              name: endPeriodUtcDate
+              value: '2014-09-24T07:32:31.584Z'
+            - in: query
+              name: pageSize
+              value: 25
+            - in: query
+              name: pageNumber
+              value: 1
+          rel: first
+        - hRef: /v2/user/marketplaces/orders
+          method: GET
+          parameters:
+            - in: query
+              name: beginPeriodUtcDate
+              value: '2014-08-25T07:32:31.584Z'
+            - in: query
+              name: endPeriodUtcDate
+              value: '2014-09-24T07:32:31.584Z'
+            - in: query
+              name: pageSize
+              value: 25
+            - in: query
+              name: pageNumber
+              value: 38
+          rel: last
+        - href: /v2/user/marketplaces/orders
+          method: GET
+          parameters:
+            - in: query
+              name: beginPeriodUtcDate
+              value: '2014-08-25T07:32:31.584Z'
+            - in: query
+              name: endPeriodUtcDate
+              value: '2014-09-24T07:32:31.584Z'
+            - in: query
+              name: pageSize
+              value: 25
+            - in: query
+              name: pageNumber
+              value: 2
+          rel: next
+      pageCount: 38
+      totalEntryCount: 943
+    properties:
+      entryCount:
+        description: The entry count currently returned
+        example: 25
+        minimum: 0
+        type: integer
+      links:
+        description: 'The navigation links ''first'', ''last'', ''next'', ''previous'''
+        items:
+          $ref: '#/definitions/BeezUP.Common.Link2'
+        minItems: 0
+        type: array
+        uniqueItems: true
+      pageCount:
+        description: The page count
+        example: 38
+        minimum: 0
+        type: integer
+      totalEntryCount:
+        description: The total entry count
+        example: 943
+        minimum: 0
+        type: integer
+    type: object
+  BeezUP.Common.SuccessSummary:
+    properties:
+      objectName:
+        type: string
+      propertyName:
+        type: string
+      propertyValue:
+        type: string
+      successArguments:
+        additionalProperties:
+          type: string
+        type: object
+      successCode:
+        type: string
+      successMessage:
+        type: string
+    type: object
+  BeezUP.Common.UserErrorMessage:
+    properties:
+      arguments:
+        description: a dictionary string/object
+        items:
+          $ref: '#/definitions/BeezUP.Common.UserErrorMessage_arguments'
+        type: array
+      code:
+        description: the error code. The error code can be a pattern containing the argument's name
+        example: CatalogImportationAlreadyInProgress(ExecutionId currentCatalogImportationId)
+        type: string
+      cultureName:
+        description: 'If the error is translated, the culture name will be indicated'
+        example: en
+        type: string
+        x-lov: Go2CultureName
+      message:
+        description: The error message
+        example: |
+          There is already an importation in progress: b24d0dd8-a561-478a-9b26-34f573f03527
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  BeezUP.Common.UserErrorMessage_arguments:
+    properties:
+      name:
+        description: The key of the parameter
+        example: currentCatalogImportationId
+        type: string
+      value:
+        description: The value of the parameter. Depending to the type.
+        example: b24d0dd8-a561-478a-9b26-34f573f03527
+        properties: {}
+        type: object
+    required:
+      - name
+      - value
+  BeezUP.Common.UserId:
+    description: The user identifier
+    example: '"8a7fbdec-9e71-472e-9974-27d5c1d57cf8"'
+    format: guid
+    type: string
+  BeezUP.Common.WarningSummary:
+    properties:
+      technicalErrorMessage:
+        type: string
+      warningArguments:
+        additionalProperties:
+          type: string
+        type: object
+      warningCode:
+        type: string
+      warningMessage:
+        type: string
+    type: object
+  accountId:
+    description: The marketplace account identifier in BeezUP. This account identifier is based on your api settings.
+    example: 1234
+    format: int32
+    type: integer
+  accountSynchronization:
+    properties:
+      accountId:
+        $ref: '#/definitions/accountId'
+      completedHarvestSynchroUtcDate:
+        format: date-time
+        type: string
+      marketplaceBusinessCode:
+        $ref: '#/definitions/marketplaceBusinessCode'
+      marketplaceTechnicalCode:
+        $ref: '#/definitions/marketplaceTechnicalCode'
+    type: object
+  accountSynchronizations:
+    properties:
+      accountSynchronizations:
+        items:
+          $ref: '#/definitions/accountSynchronization'
+        type: array
+    type: object
+  automaticTransition:
+    properties:
+      accountId:
+        $ref: '#/definitions/accountId'
+      enabled:
+        example: false
+        type: boolean
+      marketplaceTechnicalCode:
+        $ref: '#/definitions/marketplaceTechnicalCode'
+      orderStatusTransitionId:
+        example: 1234
+        format: int32
+        type: integer
+    required:
+      - accountId
+      - enabled
+      - marketplaceTechnicalCode
+      - orderStatusTransitionId
+    type: object
+  automaticTransitionInfo:
+    allOf:
+      - $ref: '#/definitions/automaticTransition'
+      - properties:
+          beezUPOrderStatus:
+            $ref: '#/definitions/beezUPOrderStatus'
+          businessOperationType:
+            $ref: '#/definitions/businessOperationType'
+          marketplaceBusinessCode:
+            $ref: '#/definitions/marketplaceBusinessCode'
+        required:
+          - beezUPOrderStatus
+          - businessOperationType
+          - marketplaceBusinessCode
+        type: object
+  automaticTransitionInfos:
+    properties:
+      automaticTransitionInfos:
+        items:
+          $ref: '#/definitions/automaticTransitionInfo'
+        type: array
+    type: object
+  beezUPOrderId:
+    description: The order BeezUP identifier
+    example: '00000000000000000000000000000000000000000000000'
+    format: uuid
+    type: string
+  beezUPOrderStatus:
+    description: BeezUP order status. Unified for all marketplaces.
+    example: Shipped
+    type: string
+    x-lov: BeezUPOrderState
+  businessOperationType:
+    example: ShipOrder
+    type: string
+    x-lov: OrderChangeBusinessOperationType
+  changeOrderListRequest:
+    description: Contains all change order operations you want to make
+    properties:
+      changeOrders:
+        description: The change order operations
+        example:
+          - beezUPOrderId: '00000000000000000000000000000000000000000000000'
+            changeOrderRequest:
+              order_Shipping_CarrierName: La poste
+              order_Shipping_EstimatedDeliveryDate: '2014-09-24T09:58:00.000Z'
+              order_Shipping_FulfillmentDate: '2014-09-23T09:58:00.000Z'
+              order_Shipping_ShipperTrackingNumber: 1H01845163783
+              order_Shipping_ShippingUrl: 'https://trackingpackage.com?number=1H01845163783'
+        items:
+          $ref: '#/definitions/changeOrderListRequestItem'
+        type: array
+    required:
+      - changeOrders
+    type: object
+  changeOrderListRequestItem:
+    description: Contains the order identifier and the change order request
+    properties:
+      beezUPOrderId:
+        $ref: '#/definitions/beezUPOrderId'
+      changeOrderRequest:
+        $ref: '#/definitions/changeOrderRequest'
+    required:
+      - beezUPOrderId
+      - changeOrderRequest
+    type: object
+  changeOrderReporting:
+    description: The reporting related to a change order operation
+    properties:
+      changeOrderType:
+        $ref: '#/definitions/businessOperationType'
+      creationUtcDate:
+        description: The creation UTC date of the execution
+        example: '2017-04-01T13:10:03Z'
+        format: date-time
+        type: string
+      details:
+        additionalProperties:
+          properties: {}
+          type: object
+        type: object
+      errorMessage:
+        description: The error message during the execution
+        example: 'null'
+        type: string
+      executionUUID:
+        $ref: '#/definitions/executionUUID'
+      ipAddress:
+        description: The IP address who request this operation
+        example: 127.0.0.1
+        type: string
+      lastUpdateUtcDate:
+        description: The last update UTC date of the execution
+        example: '2017-04-01T13:10:05Z'
+        format: date-time
+        type: string
+      processingStatus:
+        description: The processing status of the execution
+        example: Done
+        type: string
+      sourceType:
+        $ref: '#/definitions/sourceType'
+      sourceUserId:
+        $ref: '#/definitions/BeezUP.Common.UserId'
+      sourceUserName:
+        example: Guillaume Tell
+        type: string
+      testMode:
+        description: This operation was a test
+        example: false
+        type: boolean
+    type: object
+  changeOrderRequest:
+    additionalProperties:
+      properties: {}
+      type: object
+      x-lov: OrderMetaInfoPosted
+    description: All properties with the prefix order_ are translated in the list of values /user/lov/OrderMetaInfoPosted
+    example:
+      order_Shipping_CarrierName: La poste
+      order_Shipping_EstimatedDeliveryDate: '2014-09-24T09:58:00.000Z'
+      order_Shipping_FulfillmentDate: '2014-09-23T09:58:00.000Z'
+      order_Shipping_ShipperTrackingNumber: 1H01845163783
+      order_Shipping_ShippingUrl: 'https://trackingpackage.com?number=1H01845163783'
+    type: object
+  changeOrderResponse:
+    properties:
+      info:
+        $ref: '#/definitions/BeezUP.Common.InfoSummaries'
+      links:
+        items:
+          $ref: '#/definitions/BeezUP.Common.Link2'
+        type: array
+    type: object
+  clearMerchantOrderInfoListRequest:
+    properties:
+      orders:
+        example:
+          - accountId: 1234
+            beezUPOrderId: '00000000000000000000000000000000000000000000000'
+            marketplaceTechnicalCode: Amazon
+          - accountId: 5678
+            beezUPOrderId: '00000000000000000000000000000000000000000000000'
+            marketplaceTechnicalCode: Amazon
+          - accountId: 9876
+            beezUPOrderId: '00000000000000000000000000000000000000000000000'
+            marketplaceTechnicalCode: Ebay
+        items:
+          $ref: '#/definitions/orderIdentifier'
+        maxItems: 100
+        minItems: 1
+        type: array
+        uniqueItems: true
+    required:
+      - orders
+    type: object
+  dateSearchType:
+    default: Modification
+    description: Indicates on which date you want to make the filter.
+    enum:
+      - Purchase
+      - Modification
+      - MarketPlaceModification
+    type: string
+  executionUUID:
+    description: The execution identifier
+    example: 8D4176FA78D5A7Fffa91e9edc694ec5858be9a1b109507c
+    format: uuid
+    type: string
+  exportOrderListRequest:
+    properties:
+      orderListRequest:
+        $ref: '#/definitions/orderListRequest'
+    required:
+      - orderListRequest
+    type: object
+  harvestOrderReporting:
+    description: The reporting related to a harvest order operation
+    properties:
+      beezUPForcedStatus:
+        description: The marketplace order status forced by BeezUP during the order change oepration. This could happend when there is no status on the marketplace side.
+        example: In_progress_3
+        type: string
+      beezUPStatus:
+        $ref: '#/definitions/beezUPOrderStatus'
+      creationUtcDate:
+        description: The creation UTC date of the execution
+        example: '2017-04-01T13:10:03Z'
+        format: date-time
+        type: string
+      errorMessage:
+        description: The warning message during the execution
+        example: 'null'
+        type: string
+      executionUUID:
+        $ref: '#/definitions/executionUUID'
+      lastUpdateUtcDate:
+        description: The last update UTC date of the execution
+        example: '2017-04-01T13:10:05Z'
+        format: date-time
+        type: string
+      marketplaceStatus:
+        description: The order marketplace status
+        example: In_progress_3
+        type: string
+      processingStatus:
+        description: The processing status of the execution
+        example: Done
+        type: string
+      warningMessage:
+        description: The warning message during the execution
+        example: 'null'
+        type: string
+    type: object
+  marketplaceBusinessCode:
+    description: 'In an marketplace technical code like CDiscount you can have several marketplaces like GO SPORT, etc. We identify them by a business code.'
+    example: GOSPORT
+    type: string
+    x-lov: MarketplaceBusinessCode
+  marketplaceOrderId:
+    description: The order marketplace identifier
+    example: AMAZON12345
+    type: string
+  marketplaceOrderStatus:
+    description: The marketplace order state
+    example: In_progress_3
+    type: string
+  marketplaceTechnicalCode:
+    description: The technical code of the marketplace.
+    example: Amazon
+    type: string
+    x-lov: OMMarketplaceTechnicalCode
+  order:
+    allOf:
+      - $ref: '#/definitions/orderHeader'
+      - description: Describe in details all informations related to an order. All properties with the prefix order_ are translated in the list of values /user/lov/OrderMetaInfoOrderDetails.
+        properties:
+          orderItems:
+            items:
+              $ref: '#/definitions/orderItem'
+            type: array
+          order_Buyer_AddressCity:
+            description: The Buyer address city of this order
+            example: Marseille
+            type: string
+          order_Buyer_AddressCountryIsoCodeAlpha2:
+            description: 'The Buyer address country iso code alpha 2 (see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Decoding_table for more details)'
+            example: FR
+            type: string
+          order_Buyer_AddressCountryName:
+            description: The Buyer address country name
+            example: France
+            type: string
+          order_Buyer_AddressLine1:
+            description: The Buyer address line 1 of this order
+            example: 5 rue amélie
+            type: string
+          order_Buyer_AddressLine2:
+            description: The Buyer address line 2 of this order
+            example: 'null'
+            type: string
+          order_Buyer_AddressLine3:
+            description: The Buyer address line 3 of this order
+            example: 'null'
+            type: string
+          order_Buyer_AddressPostalCode:
+            description: The Buyer address postal code of this order
+            example: '13014'
+            type: string
+          order_Buyer_AddressStateOrRegion:
+            description: The Buyer address state or region of this order
+            example: BDR
+            type: string
+          order_Buyer_Civility:
+            description: The buyer civility for this order
+            example: 'null'
+            type: string
+          order_Buyer_CompanyName:
+            description: The buyer company name for this order
+            example: 'null'
+            type: string
+          order_Buyer_Email:
+            description: The email of the buyer for this order
+            example: client_000000@manomano.fr
+            type: string
+          order_Buyer_Identifier:
+            description: The buyer identifier for this order
+            example: 'null'
+            type: string
+          order_Buyer_MobilePhone:
+            description: The mobile phone number of the buyer for this order
+            example: '+33000000042'
+            type: string
+          order_Buyer_Phone:
+            description: The phone number of the buyer for this order
+            example: '+33000000101'
+            type: string
+          order_Comment:
+            description: The comment associated to this order
+            example: 'null'
+            type: string
+          order_MarketPlaceChannel:
+            description: Useful to identify the origin of the order. For example in Amazon.
+            example: Amazon France
+            type: string
+          order_OrderItemsSourceUri:
+            description: |
+              Technical information: The url to the source of this order items. We received this information from the marketplace.
+            example: 'http://beezupblob.com/orderItems.xml'
+            format: uri
+            type: string
+          order_OrderSourceUri:
+            description: |
+              Technical information: The url to the source of this order. We received this information from the marketplace.
+            example: 'http://beezupblob.com/order.xml'
+            format: uri
+            type: string
+          order_PayingUtcDate:
+            description: The UTC date of the payment of this order
+            example: '2017-04-01T13:22:01Z'
+            format: date-time
+            type: string
+          order_PaymentMethod:
+            description: The payment method of this order
+            example: 1 / 1X
+            type: string
+          order_Shipping_AddressCity:
+            description: The shipping address city of this order
+            example: Marseille
+            type: string
+          order_Shipping_AddressCountryIsoCodeAlpha2:
+            description: 'The shipping address country iso code alpha 2 (see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Decoding_table for more details)'
+            example: FR
+            type: string
+          order_Shipping_AddressCountryName:
+            description: The shipping address country name
+            example: France
+            type: string
+          order_Shipping_AddressLine1:
+            description: The shipping address line 1 of this order
+            example: 5 rue amélie
+            type: string
+          order_Shipping_AddressLine2:
+            description: The shipping address line 2 of this order
+            example: 'null'
+            type: string
+          order_Shipping_AddressLine3:
+            description: The shipping address line 3 of this order
+            example: 'null'
+            type: string
+          order_Shipping_AddressName:
+            description: The name of the person in the shipping address for this order
+            example: Jacques BAUREGARD
+            type: string
+          order_Shipping_AddressPostalCode:
+            description: The shipping address postal code of this order
+            example: '13014'
+            type: string
+          order_Shipping_AddressStateOrRegion:
+            description: The shipping address state or region of this order
+            example: BDR
+            type: string
+          order_Shipping_Civility:
+            description: The civility of the person in the shipping address for this order
+            example: MRS
+            type: string
+          order_Shipping_CompanyName:
+            description: The company name of the shipping address for this order
+            example: My Company
+            type: string
+          order_Shipping_EarliestShipUtcDate:
+            description: The UTC date of the earliest ship for this order
+            example: '2017-04-02T21:30:00Z'
+            format: date-time
+            type: string
+          order_Shipping_Email:
+            description: The email of the person in the shipping address for this order
+            example: client_000000@manomano.fr
+            type: string
+          order_Shipping_LatestShipUtcDate:
+            description: The UTC date of the latest ship for this order
+            example: '2017-04-30T21:30:00Z'
+            format: date-time
+            type: string
+          order_Shipping_Method:
+            description: The shipping method of this order
+            example: DPD Domicile
+            type: string
+          order_Shipping_MobilePhone:
+            description: The mobile phone number of the person in the shipping address for this order
+            example: '+33000000042'
+            type: string
+          order_Shipping_Phone:
+            description: The phone number of the person in the shipping address for this order
+            example: '+33000000041'
+            type: string
+          order_Shipping_Price:
+            description: The shipping price of this order
+            example: 6.9
+            format: decimal
+            type: number
+          order_Shipping_ShippingTax:
+            description: The shipping tax for this order
+            example: 0
+            format: decimal
+            type: number
+          order_TotalCommission:
+            description: The total commission of this order
+            example: 0
+            format: decimal
+            type: number
+          order_TotalTax:
+            description: The total tax of this order
+            example: 0
+            format: decimal
+            type: number
+          transitionLinks:
+            example:
+              - href: '/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/{changeOrderType}'
+                method: POST
+                operationId: ChangeOrder
+                parameters:
+                  - in: header
+                    name: If-Match
+                    value: '"ca071a4580129f932a03971968ffef69"'
+                  - in: path
+                    name: marketplaceTechnicalCode
+                    required: true
+                    value: Amazon
+                  - in: path
+                    name: accountId
+                    required: true
+                    type: integer
+                    value: 1001
+                  - in: path
+                    name: beezUPOrderId
+                    required: true
+                    value: '00000000000000000000000000000000000000000000000'
+                  - in: path
+                    name: changeOrderType
+                    required: true
+                    value: ShipOrder
+                  - in: query
+                    name: userName
+                    required: true
+                  - in: query
+                    name: testMode
+                    type: boolean
+                  - in: body
+                    name: order_Shipping_ShipperTrackingNumber
+                    required: true
+                    type: string
+                  - in: body
+                    name: order_Shipping_ShippingUrl
+                    type: string
+                  - in: body
+                    lovLink:
+                      href: '/v2/user/lov/{listName}'
+                      listName: AuchanCarrierCode
+                      rel: LOV_AuchanCarrierCode
+                    lovRequired: true
+                    name: order_Shipping_CarrierName
+                    type: string
+                  - in: body
+                    name: order_Shipping_FulfillmentDate
+                    type: date-time
+                  - in: body
+                    name: order_Shipping_EstimatedDeliveryDate
+                    type: date-time
+                rel: ShipOrder
+              - href: '/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/{changeOrderType}'
+                method: POST
+                operationId: ChangeOrder
+                parameters:
+                  - in: header
+                    name: If-Match
+                    value: '"ca071a4580129f932a03971968ffef69"'
+                  - in: path
+                    name: marketplaceTechnicalCode
+                    required: true
+                    value: Amazon
+                  - in: path
+                    name: accountId
+                    required: true
+                    type: integer
+                    value: 1001
+                  - in: path
+                    name: beezUPOrderId
+                    required: true
+                    value: '00000000000000000000000000000000000000000000000'
+                  - in: path
+                    name: changeOrderType
+                    required: true
+                    value: RefundOrder
+                  - in: query
+                    name: userName
+                    required: true
+                  - in: query
+                    name: testMode
+                    type: boolean
+                  - in: body
+                    name: order_Shipping_Price
+                    type: number
+                rel: RefundOrder
+            items:
+              $ref: '#/definitions/BeezUP.Common.Link2'
+            type: array
+        required:
+          - orderItems
+          - transitionLinks
+        type: object
+  orderExportationReporting:
+    description: Represent the reporting of the orders exportation.
+    properties:
+      abortionUtcDate:
+        example: 'null'
+        format: date-time
+        type: string
+      beginUtcDate:
+        example: '2017-04-01T13:10:12Z'
+        format: date-time
+        type: string
+      blobNameUri:
+        example: 'http://beezuporder2.blob.com/yourReport.csv'
+        type: string
+      endUtcDate:
+        example: '2017-04-01T15:10:12Z'
+        format: date-time
+        type: string
+      enqueuedUtcDate:
+        example: '2017-04-01T13:09:12Z'
+        format: date-time
+        type: string
+      errorMessage:
+        example: 'null'
+        type: string
+      executionUUID:
+        example: '00000000000000000000000000000000000000000000000'
+        format: uuid
+        type: string
+      expirationUtcDate:
+        example: '2017-04-01T13:39:12Z'
+        format: date-time
+        type: string
+      failureUtcDate:
+        example: 'null'
+        format: date-time
+        type: string
+      ipAddress:
+        example: 127.0.0.1
+        type: string
+      jsonCriteria:
+        description: Raw representation of the JSON
+        example: '{"StartDate:"2016-09-30T22:00:00Z","EndDate:"2016-10-30T23:00:00Z","OrderListingFilterDateSearchType:0,"MarketPlaceOrderIds:null,"BeezUPOrderStatusNames:null,"ResultByPage:20,"MerchantOrderIds:null,"PageIndex:0,"MarketPlaceTechnicalCodes:["PriceMinister","Amazon","CDiscount","Mirakl"],"MarketPlaceBusinessCodes:["PRICEMINISTER"],"AccountIds:[1234,987],"StoreIds:["00000000-0000-0000-0000-00000000007c"],"BuyerFullName:null}'
+        type: string
+      lastUpdateUtcDate:
+        example: '2017-04-01T15:10:12Z'
+        format: date-time
+        type: string
+      orderCount:
+        example: 1024
+        format: int32
+        type: integer
+      processingStatus:
+        $ref: '#/definitions/orderExportationReportingProcessingStatus'
+      remainingOrderCount:
+        example: 0
+        format: int32
+        type: integer
+      resumedUtcDate:
+        example: 'null'
+        format: date-time
+        type: string
+      sourceType:
+        $ref: '#/definitions/sourceType'
+      sourceUserId:
+        $ref: '#/definitions/BeezUP.Common.UserId'
+      sourceUserName:
+        example: Marilyn monroe
+        type: string
+      suspendedUtcDate:
+        example: 'null'
+        format: date-time
+        type: string
+      timeoutDuration:
+        example: '00:30:00'
+        type: string
+      warningMessage:
+        example: 'null'
+        type: string
+    required:
+      - enqueuedUtcDate
+      - executionUUID
+      - ipAddress
+      - processingStatus
+      - sourceType
+      - sourceUserName
+    type: object
+  orderExportationReportingProcessingStatus:
+    enum:
+      - None
+      - InProgress
+      - Done
+      - Failed
+      - AlreadyInProgress
+      - Aborted
+      - Suspended
+    example: Done
+    type: string
+  orderExportations:
+    description: The list of orders exportation
+    properties:
+      exportations:
+        items:
+          $ref: '#/definitions/orderExportationReporting'
+        type: array
+      paginationResult:
+        $ref: '#/definitions/BeezUP.Common.PaginationResult'
+    type: object
+  orderHeader:
+    description: Describe the basic information related to an order. All properties with the prefix order_ are translated in the list of values /user/lov/OrderMetaInfoOrderDetails
+    properties:
+      accountId:
+        $ref: '#/definitions/accountId'
+      beezUPOrderId:
+        $ref: '#/definitions/beezUPOrderId'
+      eTag:
+        description: |
+          ETag value to identify the order. For more details go to this link: http://tools.ietf.org/html/rfc7232#section-2.3
+        example: '"ca071a4580129f932a03971968ffef69"'
+        type: string
+      links:
+        example:
+          - href: '/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}'
+            method: GET
+            parameters:
+              - in: path
+                name: marketplaceTechnicalCode
+                required: true
+                value: Amazon
+              - in: path
+                name: accountId
+                required: true
+                type: integer
+                value: 1001
+              - in: path
+                name: beezUPOrderId
+                required: true
+                value: '00000000000000000000000000000000000000000000000'
+            rel: self
+          - href: '/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/history'
+            method: GET
+            parameters:
+              - in: path
+                name: marketplaceTechnicalCode
+                required: true
+                type: string
+                value: Amazon
+              - in: path
+                name: accountId
+                required: true
+                type: integer
+                value: 1001
+              - in: path
+                name: beezUPOrderId
+                required: true
+                type: string
+                value: '00000000000000000000000000000000000000000000000'
+            rel: history
+          - href: '/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/SetMerchantOrderId'
+            method: POST
+            parameters:
+              - in: path
+                name: marketplaceTechnicalCode
+                required: true
+                type: string
+                value: Amazon
+              - in: path
+                name: accountId
+                required: true
+                type: integer
+                value: 1001
+              - in: path
+                name: beezUPOrderId
+                required: true
+                type: string
+                value: '00000000000000000000000000000000000000000000000'
+              - in: body
+                name: order_MerchantOrderId
+                required: true
+                type: string
+              - in: body
+                name: order_MerchantECommerceSoftwareName
+                type: string
+              - in: body
+                name: order_MerchantECommerceSoftwareVersion
+                type: string
+            rel: setMerchantOrderId
+          - href: '/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/clearmerchandorderid'
+            method: POST
+            parameters:
+              - in: path
+                name: marketplaceTechnicalCode
+                required: true
+                type: string
+                value: Amazon
+              - in: path
+                name: accountId
+                required: true
+                type: integer
+                value: 1001
+              - in: path
+                name: beezUPOrderId
+                required: true
+                type: string
+                value: '00000000000000000000000000000000000000000000000'
+            rel: clearMerchantOrderId
+          - href: '/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/harvest'
+            method: POST
+            parameters:
+              - in: path
+                name: marketplaceTechnicalCode
+                required: true
+                type: string
+                value: Amazon
+              - in: path
+                name: accountId
+                required: true
+                type: integer
+                value: 1001
+              - in: path
+                name: beezUPOrderId
+                required: true
+                type: string
+                value: '00000000000000000000000000000000000000000000000'
+            rel: harvest
+        items:
+          $ref: '#/definitions/BeezUP.Common.Link2'
+        type: array
+      marketplaceBusinessCode:
+        $ref: '#/definitions/marketplaceBusinessCode'
+      marketplaceTechnicalCode:
+        $ref: '#/definitions/marketplaceTechnicalCode'
+      order_Buyer_Name:
+        $ref: '#/definitions/order_Buyer_Name'
+      order_CurrencyCode:
+        $ref: '#/definitions/BeezUP.Common.CurrencyCode'
+      order_LastModificationUtcDate:
+        description: The last modification UTC date done by BeezUP of this order.
+        example: '2017-04-16T10:30:23Z'
+        format: date-time
+        type: string
+      order_MarketplaceLastModificationUtcDate:
+        description: The last modification UTC date done by the marketplace on this order.
+        example: '2017-04-16T10:25:23Z'
+        format: date-time
+        type: string
+      order_MarketplaceOrderId:
+        $ref: '#/definitions/marketplaceOrderId'
+      order_MerchantECommerceSoftwareName:
+        $ref: '#/definitions/order_MerchantECommerceSoftwareName'
+      order_MerchantECommerceSoftwareVersion:
+        $ref: '#/definitions/order_MerchantECommerceSoftwareVersion'
+      order_MerchantOrderId:
+        $ref: '#/definitions/order_MerchantOrderId'
+      order_PurchaseUtcDate:
+        description: The purchase date of this order
+        example: '2017-03-31T21:30:23Z'
+        format: date-time
+        type: string
+      order_Status_BeezUPOrderStatus:
+        $ref: '#/definitions/beezUPOrderStatus'
+      order_Status_MarketplaceOrderStatus:
+        $ref: '#/definitions/marketplaceOrderStatus'
+      order_TotalPrice:
+        description: The total price of this order (corresponding to the amount paid by the customer)
+        example: 101.42
+        format: decimal
+        type: number
+      processing:
+        $ref: '#/definitions/processing'
+    required:
+      - accountId
+      - beezUPOrderId
+      - eTag
+      - links
+      - marketplaceBusinessCode
+      - marketplaceTechnicalCode
+      - order_LastModificationUtcDate
+      - order_MarketplaceLastModificationUtcDate
+      - order_MarketplaceOrderId
+      - order_PurchaseUtcDate
+      - order_Status_BeezUPOrderStatus
+      - processing
+    type: object
+  orderHistory:
+    description: Describe the history related to an order
+    properties:
+      changeOrderReportings:
+        description: The list of change order operation
+        items:
+          $ref: '#/definitions/changeOrderReporting'
+        type: array
+      harvestOrderReportings:
+        items:
+          $ref: '#/definitions/harvestOrderReporting'
+        type: array
+      info:
+        $ref: '#/definitions/BeezUP.Common.InfoSummaries'
+      lastModificationUtcDate:
+        format: date-time
+        type: string
+    type: object
+  orderIdentifier:
+    properties:
+      accountId:
+        $ref: '#/definitions/accountId'
+      beezUPOrderId:
+        $ref: '#/definitions/beezUPOrderId'
+      marketplaceTechnicalCode:
+        $ref: '#/definitions/marketplaceTechnicalCode'
+    required:
+      - accountId
+      - beezUPOrderId
+      - marketplaceTechnicalCode
+    type: object
+  orderItem:
+    description: Describe an order item. All properties with the prefix orderItem_ are translated in the list of values /user/lov/OrderMetaInfoOrderItems
+    properties:
+      beezUPOrderItemId:
+        description: The BeezUP identifier of the order Item
+        example: '1'
+        type: string
+      orderItem_BeezUPStoreId:
+        description: The store id in the beezup system related to the order item. This property will help you to match the order to the inventory system.
+        example: 00000000-cceb-4c20-b2c9-000000000000
+        type: string
+      orderItem_ImageUrl:
+        description: The URL of the image of the order item
+        example: 'http://blabla.com//das6-45.jpg'
+        type: string
+      orderItem_ItemPrice:
+        description: The price of the order item
+        example: 6.86
+        format: decimal
+        type: number
+      orderItem_ItemTax:
+        description: The tax of the order item
+        example: 0
+        format: decimal
+        type: number
+      orderItem_MarketPlaceProductId:
+        description: The marketplace product identifier of the order item
+        example: ''
+        type: string
+      orderItem_MerchantImportedProductId:
+        description: The product id indicated in the catalog importation in BeezUP system for this order item. This property will help you to match the order to the inventory system.
+        example: '73267'
+        type: string
+      orderItem_MerchantImportedProductIdColumnName:
+        description: The column name for the product id indicated in the catalog importation in BeezUP system related to this order item. This property will help you to match the order to the inventory system.
+        example: reference
+        type: string
+      orderItem_MerchantImportedProductUrl:
+        description: The product url indicated in the catalog importation in BeezUP system related to this order item
+        example: 'http://blabla.com/my-folder/73267.html'
+        type: string
+      orderItem_MerchantProductId:
+        description: The merchant product id of the order item
+        example: BlaLdas6-4.5
+        type: string
+      orderItem_MerchantProductIdColumnName:
+        description: The column name indicate in the mapping for the product id related to the order item
+        example: reference_produit
+        type: string
+      orderItem_OrderItemType:
+        description: The order item type of the order item
+        example: Product
+        type: string
+      orderItem_Quantity:
+        description: The quantity of the order item
+        example: 1
+        format: decimal
+        type: number
+      orderItem_Shipping_Price:
+        description: The shipping price of the order item
+        example: 0
+        format: decimal
+        type: number
+      orderItem_Title:
+        description: The title of the order item
+        example: bLA acide-plomb 6v-4.5ah 70x48x106mm
+        type: string
+      orderItem_TotalPrice:
+        description: The total price of the order item
+        example: 6.86
+        format: decimal
+        type: number
+    required:
+      - beezUPOrderItemId
+      - orderItem_OrderItemType
+    type: object
+  orderListFull:
+    properties:
+      orders:
+        items:
+          $ref: '#/definitions/order'
+        type: array
+      paginationResult:
+        $ref: '#/definitions/BeezUP.Common.PaginationResult'
+    required:
+      - orders
+      - paginationResult
+    type: object
+  orderListLight:
+    properties:
+      orders:
+        items:
+          $ref: '#/definitions/orderHeader'
+        type: array
+      paginationResult:
+        $ref: '#/definitions/BeezUP.Common.PaginationResult'
+    required:
+      - orders
+      - paginationResult
+    type: object
+  orderListRequest:
+    properties:
+      accountIds:
+        description: Account id list
+        example:
+          - 12345
+        items:
+          $ref: '#/definitions/accountId'
+        type: array
+      beezUPOrderStatuses:
+        example:
+          - InProgress
+        items:
+          $ref: '#/definitions/beezUPOrderStatus'
+        type: array
+      beginPeriodUtcDate:
+        description: 'The begin period you want to make the search. The period MUST not be greater than 30 days. If null, the current date minus 30 days will be used.'
+        example: '2017-03-01T13:10:01Z'
+        format: date-time
+        type: string
+      dateSearchType:
+        $ref: '#/definitions/dateSearchType'
+      endPeriodUtcDate:
+        description: The end period of you search. The period MUST not be greater than 30 days. If null the current date will be used.
+        example: '2017-04-01T13:10:01Z'
+        format: date-time
+        type: string
+      marketplaceBusinessCodes:
+        example:
+          - PRICEMINISTER
+        items:
+          $ref: '#/definitions/marketplaceBusinessCode'
+        type: array
+      marketplaceOrderIds:
+        example:
+          - AmazonOrderId1234
+        items:
+          $ref: '#/definitions/marketplaceOrderId'
+        type: array
+      marketplaceTechnicalCodes:
+        example:
+          - PriceMinister
+        items:
+          $ref: '#/definitions/marketplaceTechnicalCode'
+        type: array
+      order_Buyer_Name:
+        $ref: '#/definitions/order_Buyer_Name'
+      order_MerchantOrderIds:
+        description: Merchant order id list
+        example:
+          - MyOrderId1234
+        items:
+          $ref: '#/definitions/order_MerchantOrderId'
+        type: array
+      pageNumber:
+        $ref: '#/definitions/pageNumber'
+      pageSize:
+        $ref: '#/definitions/pageSize'
+    type: object
+  order_Buyer_Name:
+    description: Buyer full name
+    example: Monroe
+    type: string
+  order_MerchantECommerceSoftwareName:
+    description: The e-commerce software name of the merchant
+    example: Prestashop
+    type: string
+  order_MerchantECommerceSoftwareVersion:
+    description: The e-commece software version of the merchant
+    example: 123.0.1
+    type: string
+  order_MerchantOrderId:
+    description: The order merchant identifier
+    example: MyOrderMerchantId
+    type: string
+  pageNumber:
+    default: 1
+    description: Indicates the page number
+    example: 1
+    format: int32
+    minimum: 1
+    type: integer
+  pageSize:
+    default: 100
+    description: Indicate the order count per page
+    example: 100
+    format: int32
+    maximum: 100
+    minimum: 25
+    type: integer
+  processing:
+    description: 'If true, there is currently a harvest or an order change in progress. Otherwise false.'
+    example: false
+    type: boolean
+  saveAutomaticTransitionRequest:
+    properties:
+      automaticTransitions:
+        items:
+          $ref: '#/definitions/automaticTransition'
+        type: array
+    required:
+      - automaticTransitions
+    type: object
+  setMerchantOrderInfoListRequest:
+    properties:
+      order_MerchantECommerceSoftwareName:
+        $ref: '#/definitions/order_MerchantECommerceSoftwareName'
+      order_MerchantECommerceSoftwareVersion:
+        $ref: '#/definitions/order_MerchantECommerceSoftwareVersion'
+      orders:
+        example:
+          - accountId: 1234
+            beezUPOrderId: 8D47FF1427A26B064ca98e95f644361ada5a5be0bbb3b53
+            marketplaceTechnicalCode: Amazon
+            order_MerchantOrderId: BX1234
+          - accountId: 5678
+            beezUPOrderId: 8D47FF149F213D055f26e3c413e4c9ba5c5cfda460547a4
+            marketplaceTechnicalCode: Amazon
+            order_MerchantOrderId: BX5678
+          - accountId: 9876
+            beezUPOrderId: 8D47FF150217B60bdec05ab61c445d1a59e3da050b52823
+            marketplaceTechnicalCode: Ebay
+            order_MerchantOrderId: BX9876
+        items:
+          $ref: '#/definitions/setMerchantOrderInfoListRequestItem'
+        maxItems: 100
+        minItems: 1
+        type: array
+        uniqueItems: true
+    required:
+      - orders
+    type: object
+  setMerchantOrderInfoListRequestItem:
+    allOf:
+      - $ref: '#/definitions/orderIdentifier'
+      - properties:
+          order_MerchantOrderId:
+            $ref: '#/definitions/order_MerchantOrderId'
+        required:
+          - order_MerchantOrderId
+        type: object
+  setMerchantOrderInfoRequest:
+    properties:
+      order_MerchantECommerceSoftwareName:
+        $ref: '#/definitions/order_MerchantECommerceSoftwareName'
+      order_MerchantECommerceSoftwareVersion:
+        $ref: '#/definitions/order_MerchantECommerceSoftwareVersion'
+      order_MerchantOrderId:
+        $ref: '#/definitions/order_MerchantOrderId'
+    required:
+      - order_MerchantOrderId
+    type: object
+  sourceType:
+    description: Indicates the origin of the operation
+    enum:
+      - Api
+      - Go
+    example: Api
+    type: string
+x-api-name: V2UserMarketplacesOrders
+x-api-namespace: BeezUP.MarketPlace2.Orders
+x-azure-api-id: a2dbab9d-5143-4a7e-9fb5-d77fa4a451e7
+x-basePath: /v2/user/marketplaces/orders
+x-host: api.beezup.com
