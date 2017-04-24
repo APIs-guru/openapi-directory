@@ -660,6 +660,11 @@ definitions:
           type: string
         description: Substitutions data for Build resource.
         type: object
+      tags:
+        description: Tags for annotation of a Build. These are not docker tags.
+        items:
+          type: string
+        type: array
       timeout:
         description: |-
           Amount of time that this build should be allowed to run, to second

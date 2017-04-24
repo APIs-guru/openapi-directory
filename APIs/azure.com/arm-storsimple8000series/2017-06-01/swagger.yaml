@@ -1,0 +1,1076 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: StorSimpleSeries8000ManagementClient
+  version: '2017-06-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storsimple8000series/2017-06-01/swagger/storsimple.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: arm-storsimple8000series
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  apiVersionParameter:
+    description: The api version
+    in: query
+    name: api-version
+    required: true
+    type: string
+  managerNameParameter:
+    description: The manager name
+    in: path
+    maxLength: 50
+    minLength: 2
+    name: managerName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  resourceGroupNameParameter:
+    description: The resource group name
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  subscriptionIdParameter:
+    description: The subscription id
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  /providers/Microsoft.StorSimple/operations:
+    get:
+      deprecated: false
+      description: Lists all of the available REST API operations of the Microsoft.Storsimple provider
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of available provider operations.
+          schema:
+            $ref: '#/definitions/AvailableProviderOperationList'
+      tags:
+        - Operations
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.StorSimple/managers':
+    get:
+      deprecated: false
+      description: Retrieves all the managers in a subscription.
+      operationId: Managers_List
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of StorSimple managers.
+          schema:
+            $ref: '#/definitions/ManagerList'
+      tags:
+        - Managers
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers':
+    get:
+      deprecated: false
+      description: Retrieves all the managers in a resource group.
+      operationId: Managers_ListByResourceGroup
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of StorSimple managers.
+          schema:
+            $ref: '#/definitions/ManagerList'
+      tags:
+        - Managers
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}':
+    delete:
+      deprecated: false
+      description: Deletes the manager.
+      operationId: Managers_Delete
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The StorSimple manager has been successfully deleted
+        '204':
+          description: The StorSimple manager is already in a deleted state
+      tags:
+        - Managers
+    get:
+      deprecated: false
+      description: Returns the properties of the specified manager name.
+      operationId: Managers_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The StorSimple manager.
+          schema:
+            $ref: '#/definitions/Manager'
+      tags:
+        - Managers
+    put:
+      deprecated: false
+      description: Creates or updates the manager.
+      operationId: Managers_CreateOrUpdate
+      parameters:
+        - description: The manager.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Manager'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The StorSimple manager has been successfully updated
+          schema:
+            $ref: '#/definitions/Manager'
+        '201':
+          description: The StorSimple manager has been successfully created
+          schema:
+            $ref: '#/definitions/Manager'
+      tags:
+        - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/configureDevice':
+    post:
+      deprecated: false
+      description: Complete minimal setup before using the device.
+      operationId: Devices_Configure
+      parameters:
+        - description: The minimal properties to configure a device.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ConfigureDeviceRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to configure device.
+        '204':
+          description: Successfully configured the device.
+      tags:
+        - Devices
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices':
+    get:
+      deprecated: false
+      description: Returns the list of devices for the specified manager.
+      operationId: Devices_ListByManager
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Specify $expand=details to populate additional fields related to the device.
+          in: query
+          name: $expand
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The collection of devices.
+          schema:
+            $ref: '#/definitions/DeviceList'
+      tags:
+        - Devices
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}':
+    delete:
+      deprecated: false
+      description: Deletes the device.
+      operationId: Devices_Delete
+      parameters:
+        - description: The device name.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to delete the device.
+        '204':
+          description: Successfully deleted the device.
+      tags:
+        - Devices
+      x-ms-long-running-operation: true
+    get:
+      deprecated: false
+      description: Returns the properties of the specified device.
+      operationId: Devices_Get
+      parameters:
+        - description: The device name.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Specify $expand=details to populate additional fields related to the device.
+          in: query
+          name: $expand
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The device.
+          schema:
+            $ref: '#/definitions/Device'
+      tags:
+        - Devices
+    patch:
+      deprecated: false
+      description: Patches the device.
+      operationId: Devices_Update
+      parameters:
+        - description: The device Name.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+        - description: Patch representation of the device.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/DevicePatch'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully patched the device.
+          schema:
+            $ref: '#/definitions/Device'
+      tags:
+        - Devices
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/deactivate':
+    post:
+      deprecated: false
+      description: Deactivates the device.
+      operationId: Devices_Deactivate
+      parameters:
+        - description: The device name.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to deactivate the device.
+        '204':
+          description: Successfully deactivated the device.
+      tags:
+        - Devices
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/publicEncryptionKey':
+    post:
+      deprecated: false
+      description: Returns the public encryption key of the device.
+      operationId: Managers_GetDevicePublicEncryptionKey
+      parameters:
+        - description: The device name.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The public key.
+          schema:
+            $ref: '#/definitions/PublicKey'
+      tags:
+        - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/encryptionSettings/default':
+    get:
+      deprecated: false
+      description: Returns the encryption settings of the manager.
+      operationId: Managers_GetEncryptionSettings
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The encryption settings.
+          schema:
+            $ref: '#/definitions/EncryptionSettings'
+      tags:
+        - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/extendedInformation/vaultExtendedInfo':
+    delete:
+      deprecated: false
+      description: Deletes the extended info of the manager.
+      operationId: Managers_DeleteExtendedInfo
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: The extended information on the manager has been successfully deleted
+      tags:
+        - Managers
+    get:
+      deprecated: false
+      description: Returns the extended information of the specified manager name.
+      operationId: Managers_GetExtendedInfo
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The manager extended information.
+          schema:
+            $ref: '#/definitions/ManagerExtendedInfo'
+      tags:
+        - Managers
+    patch:
+      deprecated: false
+      description: Updates the extended info of the manager.
+      operationId: Managers_UpdateExtendedInfo
+      parameters:
+        - description: The manager extended information.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ManagerExtendedInfo'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Pass the ETag of ExtendedInfo fetched from GET call
+          in: header
+          name: If-Match
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The extended information on the manager has been successfully created
+          schema:
+            $ref: '#/definitions/ManagerExtendedInfo'
+      tags:
+        - Managers
+    put:
+      deprecated: false
+      description: Creates the extended info of the manager.
+      operationId: Managers_CreateExtendedInfo
+      parameters:
+        - description: The manager extended information.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ManagerExtendedInfo'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The extended information on the manager has been successfully created
+          schema:
+            $ref: '#/definitions/ManagerExtendedInfo'
+      tags:
+        - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/listActivationKey':
+    post:
+      deprecated: false
+      description: Returns the activation key of the manager.
+      operationId: Managers_GetActivationKey
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The activation key.
+          schema:
+            $ref: '#/definitions/Key'
+      tags:
+        - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/listPrivateEncryptionKey':
+    post:
+      deprecated: false
+      description: Returns the symmetric encrypted private encryption key of the manager.
+      operationId: Managers_GetPrivateEncryptionKey
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The private encryption key.
+          schema:
+            $ref: '#/definitions/SymmetricEncryptedSecret'
+      tags:
+        - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/listPublicEncryptionKey':
+    post:
+      deprecated: false
+      description: Returns the symmetric encrypted public encryption key of the manager.
+      operationId: Managers_GetPublicEncryptionKey
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The encryption key.
+          schema:
+            $ref: '#/definitions/SymmetricEncryptedSecret'
+      tags:
+        - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/regenerateActivationKey':
+    post:
+      deprecated: false
+      description: Re-generates and returns the activation key of the manager.
+      operationId: Managers_RegenerateActivationKey
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The regenerated activation key.
+          schema:
+            $ref: '#/definitions/Key'
+      tags:
+        - Managers
+definitions:
+  AsymmetricEncryptedSecret:
+    description: Represent the secrets intended for encryption with asymmetric key pair.
+    properties:
+      encryptionAlgorithm:
+        description: Algorithm used to encrypt "Value".
+        enum:
+          - None
+          - AES256
+          - RSAES_PKCS1_v_1_5
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EncryptionAlgorithm
+      encryptionCertThumbprint:
+        description: 'Thumbprint certificate that was used to encrypt "Value". If the value in unencrypted, it will be null.'
+        type: string
+      value:
+        description: The value of the secret.
+        type: string
+    required:
+      - value
+      - encryptionAlgorithm
+    type: object
+  AsymmetricEncryptedSecretList:
+    description: Collection of asymmetric encrypted secret entities
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/AsymmetricEncryptedSecret'
+        type: array
+    required:
+      - value
+    type: object
+  AvailableProviderOperation:
+    description: Represents available provider operation.
+    properties:
+      display:
+        $ref: '#/definitions/AvailableProviderOperationDisplay'
+        description: Contains the localized display information for this particular operation/action.
+      name:
+        description: 'The name of the operation being performed on a particular object. Name format: "{resourceProviderNamespace}/{resourceType}/{read|write|delete|action}". Eg. Microsoft.StorSimple/managers/devices/volumeContainers/read, Microsoft.StorSimple/managers/devices/alerts/clearAlerts/action'
+        type: string
+      origin:
+        description: 'The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is "user,system"'
+        type: string
+      properties:
+        $ref: '#/definitions/AvailableProviderOperationProperties'
+        description: Reserved for future use.
+        x-ms-client-flatten: true
+    type: object
+  AvailableProviderOperationDisplay:
+    description: 'Contains the localized display information for this particular operation/action. These value will be used by several clients for (a) custom role definitions for RBAC, (b) complex query filters for the event service and (c) audit history/records for management operations.'
+    properties:
+      description:
+        description: 'The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise - it will be used in tool tips and detailed views.'
+        type: string
+      operation:
+        description: 'The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting). It should use Title Casing and include the entity/resource to which it applies.'
+        type: string
+      provider:
+        description: The localized friendly form of the resource provider name - it is expected to also include the publisher/company responsible. It should use Title Casing and begin with 'Microsoft' for 1st party services.
+        type: string
+      resource:
+        description: 'The localized friendly form of the resource type related to this action/operation - it should match the public documentation for the resource provider. It should use Title Casing – for examples, please refer to the ''name'' section.'
+        type: string
+    type: object
+  AvailableProviderOperationList:
+    description: List of available provider operations.
+    properties:
+      nextLink:
+        description: The NextLink.
+        type: string
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/AvailableProviderOperation'
+        type: array
+    required:
+      - value
+    type: object
+  AvailableProviderOperationProperties:
+    description: Represents properties of AvailableProviderOperation
+    properties: {}
+    type: object
+  BaseModel:
+    description: Represents the base class for all other ARM object models
+    properties:
+      id:
+        description: The Path Id that uniquely identifies the object
+        readOnly: true
+        type: string
+      kind:
+        description: The Kind of the object. Currently only Series8000 is supported
+        enum:
+          - Series8000
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: Kind
+      name:
+        description: The name of the object
+        readOnly: true
+        type: string
+      type:
+        description: The hierarchical type of the object
+        readOnly: true
+        type: string
+    type: object
+  ConfigureDeviceRequest:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: Mandatory device configuration request
+    properties:
+      properties:
+        $ref: '#/definitions/ConfigureDeviceRequestProperties'
+        description: Properties of the Configure device.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  ConfigureDeviceRequestProperties:
+    description: Configure device properties
+    properties:
+      currentDeviceName:
+        description: Current name of the device
+        type: string
+      dnsSettings:
+        $ref: '#/definitions/SecondaryDNSSettings'
+        description: Secondary DNS Settings of the device.
+      friendlyName:
+        description: Friendly name for the device
+        type: string
+      networkInterfaceData0Settings:
+        $ref: '#/definitions/NetworkInterfaceData0Settings'
+        description: Data 0 Network interface card settings.
+      timeZone:
+        description: 'The device Time Zone. For eg: "Pacific Standard Time"'
+        type: string
+    required:
+      - friendlyName
+      - currentDeviceName
+      - timeZone
+    type: object
+  Device:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: Represents a StorSimple device along with its properties
+    properties:
+      properties:
+        $ref: '#/definitions/DeviceProperties'
+        description: Collection of properties for the device
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  DeviceDetails:
+    description: Additional details having endpoint count and volume container count
+    properties:
+      endpointCount:
+        description: Total number of endpoints that are currently on the device ( i.e. number of volumes)
+        format: int32
+        type: integer
+      volumeContainerCount:
+        description: Total number of volume containers on the device
+        format: int32
+        type: integer
+    type: object
+  DeviceList:
+    description: Collection of Devices
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/Device'
+        type: array
+    required:
+      - value
+    type: object
+  DevicePatch:
+    description: Represents the patch request for the device.
+    properties:
+      properties:
+        $ref: '#/definitions/DevicePatchProperties'
+        description: Properties of the device patch.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  DevicePatchProperties:
+    description: Patch Device properties.
+    properties:
+      deviceDescription:
+        description: Short description given for the device
+        type: string
+    type: object
+  DeviceProperties:
+    description: Encases all the properties of the Device
+    properties:
+      activationTime:
+        description: The UTC time at which the device was activated
+        format: date-time
+        type: string
+      activeController:
+        description: The active controller.
+        enum:
+          - Unknown
+          - None
+          - Controller0
+          - Controller1
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ControllerId
+      agentGroupVersion:
+        description: The device agent group version.
+        format: int32
+        type: integer
+      availableLocalStorageInBytes:
+        description: Storage in bytes that is available locally on the device
+        format: int64
+        type: integer
+      availableTieredStorageInBytes:
+        description: Storage in bytes that is available on the device for tiered volumes
+        format: int64
+        type: integer
+      culture:
+        description: 'Language culture setting on the device. For eg: "en-US"'
+        type: string
+      details:
+        $ref: '#/definitions/DeviceDetails'
+        description: Additional details having endpoint count and volume container count
+      deviceConfigurationStatus:
+        description: Current state of device configuration
+        enum:
+          - Complete
+          - Pending
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: DeviceConfigurationStatus
+      deviceDescription:
+        description: The device description.
+        type: string
+      deviceLocation:
+        description: The location of the Virtual appliance
+        type: string
+      deviceSoftwareVersion:
+        description: Version number of the software running on the device
+        type: string
+      deviceType:
+        description: Type of the device
+        enum:
+          - Invalid
+          - Series8000VirtualAppliance
+          - Series8000PhysicalAppliance
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: DeviceType
+      friendlyName:
+        description: The friendly name of the device.
+        type: string
+      friendlySoftwareName:
+        description: Friendly name for the software version
+        type: string
+      friendlySoftwareVersion:
+        description: The device friendly software version.
+        type: string
+      modelDescription:
+        description: Name of the device model
+        type: string
+      networkInterfaceCardCount:
+        description: The number of network interface cards
+        format: int32
+        type: integer
+      provisionedLocalStorageInBytes:
+        description: Storage in bytes that has been provisioned on the device
+        format: int64
+        type: integer
+      provisionedTieredStorageInBytes:
+        description: Storage in bytes that has been provisioned on the device for tiered volumes
+        format: int64
+        type: integer
+      serialNumber:
+        description: The serial number.
+        type: string
+      status:
+        description: Current status of the device
+        enum:
+          - Unknown
+          - Online
+          - Offline
+          - Deactivated
+          - RequiresAttention
+          - MaintenanceMode
+          - Creating
+          - Provisioning
+          - Deactivating
+          - Deleted
+          - ReadyToSetup
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: DeviceStatus
+      targetIqn:
+        description: The target iqn.
+        type: string
+      totalTieredStorageInBytes:
+        description: Storage in bytes of the total tiered storage available on the device
+        format: int64
+        type: integer
+      usingStorageInBytes:
+        description: Storage in bytes that is being currently used including both local and cloud
+        format: int64
+        type: integer
+      virtualMachineApiType:
+        description: The virtual machine API type.
+        enum:
+          - Classic
+          - Arm
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: VirtualMachineApiType
+    required:
+      - friendlyName
+      - activationTime
+      - culture
+      - deviceDescription
+      - deviceSoftwareVersion
+      - deviceConfigurationStatus
+      - targetIqn
+      - modelDescription
+      - status
+      - serialNumber
+      - deviceType
+      - activeController
+      - friendlySoftwareVersion
+    type: object
+  EncryptionSettings:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The EncryptionSettings
+    properties:
+      properties:
+        $ref: '#/definitions/EncryptionSettingsProperties'
+        description: Properties of the EncryptionSettings.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  EncryptionSettingsProperties:
+    description: The properties of EncryptionSettings
+    properties:
+      encryptionStatus:
+        description: The encryption status which indicates if encryption is enabled or not.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EncryptionStatus
+      keyRolloverStatus:
+        description: 'The key rollover status which indicates if key rollover is required or not. If secrets encryption has been upgraded, then it requires key rollover.'
+        enum:
+          - Required
+          - NotRequired
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: KeyRolloverStatus
+    required:
+      - encryptionStatus
+      - keyRolloverStatus
+    type: object
+  Key:
+    description: The key.
+    properties:
+      activationKey:
+        description: The activation key for the device
+        type: string
+    required:
+      - activationKey
+    type: object
+  Manager:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The StorSimple Manager
+    properties:
+      etag:
+        description: ETag of the Manager
+        type: string
+      properties:
+        $ref: '#/definitions/ManagerProperties'
+        description: List of properties of the Manager
+        x-ms-client-flatten: true
+    type: object
+  ManagerExtendedInfo:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The extended info of the manager.
+    properties:
+      etag:
+        description: ETag of the Resource
+        type: string
+      properties:
+        $ref: '#/definitions/ManagerExtendedInfoProperties'
+        description: The extended info properties.
+        x-ms-client-flatten: true
+    type: object
+  ManagerExtendedInfoProperties:
+    description: Properties of the ManagerExtendedInfo
+    properties:
+      algorithm:
+        description: Represents the encryption algorithm used to encrypt the keys. None - if Key is saved in plain text format. AlgorithmName - if Key is encrypted
+        type: string
+      encryptionKey:
+        description: Represents the CEK of the resource
+        type: string
+      encryptionKeyThumbprint:
+        description: Represents the Cert thumbprint that was used to encrypt the CEK
+        type: string
+      integrityKey:
+        description: Represents the CIK of the resource
+        type: string
+      portalCertificateThumbprint:
+        description: Represents the portal thumbprint which can be used optionally to encrypt the entire data before storing it.
+        type: string
+      version:
+        description: Represents the version of the ExtendedInfo object being persisted
+        type: string
+    required:
+      - integrityKey
+      - algorithm
+    type: object
+  ManagerIntrinsicSettings:
+    description: Intrinsic settings which refers to the type of the Storsimple manager
+    properties:
+      type:
+        description: Refers to the type of the StorSimple Manager
+        enum:
+          - GardaV1
+          - HelsinkiV1
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ManagerType
+    required:
+      - type
+    type: object
+  ManagerList:
+    description: List of storsimple Managers under a particular resourceGroup
+    properties:
+      value:
+        description: List of Managers
+        items:
+          $ref: '#/definitions/Manager'
+        type: array
+    required:
+      - value
+    type: object
+  ManagerProperties:
+    description: The properties of the Manager
+    properties:
+      cisIntrinsicSettings:
+        $ref: '#/definitions/ManagerIntrinsicSettings'
+        description: Specifies if the Manager is Garda or Helsinki
+      provisioningState:
+        description: Specifies the state of the resource as it is getting provisioned. Value of "Succeeded" means the Manager was successfully created
+        type: string
+      sku:
+        $ref: '#/definitions/ManagerSku'
+        description: Specifies the Sku
+    type: object
+  ManagerSku:
+    description: The Sku.
+    properties:
+      name:
+        description: Refers to the sku name which should be "Standard"
+        enum:
+          - Standard
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ManagerSkuType
+    required:
+      - name
+    type: object
+  NetworkInterfaceData0Settings:
+    description: Network interface Data 0 IP settings
+    properties:
+      controllerOneIp:
+        description: Controller 1's IPv4 address
+        type: string
+      controllerZeroIp:
+        description: Controller 0's IPv4 address
+        type: string
+    type: object
+  PublicKey:
+    description: The public key.
+    properties:
+      key:
+        description: The key
+        type: string
+    required:
+      - key
+    type: object
+  Resource:
+    description: The Azure Resource.
+    properties:
+      id:
+        description: The Resource Id
+        readOnly: true
+        type: string
+      location:
+        description: The Geo location of the Manager
+        type: string
+      name:
+        description: The Resource Name
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Tags attached to the Manager
+        type: object
+      type:
+        description: The Resource type
+        readOnly: true
+        type: string
+    required:
+      - location
+    type: object
+    x-ms-azure-resource: true
+  SecondaryDNSSettings:
+    description: Mandatory DNS settings
+    properties:
+      secondaryDnsServers:
+        description: Secondary DNS Server address
+        items:
+          type: string
+        type: array
+    type: object
+  SymmetricEncryptedSecret:
+    description: Represents secrets encrypted using Symmetric Encryption Key.
+    properties:
+      encryptionAlgorithm:
+        description: Algorithm used to encrypt "Value"
+        enum:
+          - None
+          - AES256
+          - RSAES_PKCS1_v_1_5
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EncryptionAlgorithm
+      value:
+        description: The value of the secret itself. If the secret is in plaintext or null then EncryptionAlgorithm will be none
+        type: string
+      valueCertificateThumbprint:
+        description: Thumbprint cert that was used to encrypt "Value"
+        type: string
+    required:
+      - value
+      - encryptionAlgorithm
+    type: object

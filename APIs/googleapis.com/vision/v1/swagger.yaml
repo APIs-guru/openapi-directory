@@ -1234,8 +1234,7 @@ definitions:
       fullMatchingImages:
         description: |-
           Fully matching images from the Internet.
-          They're definite neardups and most often a copy of the query image with
-          merely a size change.
+          Can include resized copies of the query image.
         items:
           $ref: '#/definitions/WebImage'
         type: array

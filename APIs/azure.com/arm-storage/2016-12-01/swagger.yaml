@@ -826,6 +826,11 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: AccountStatus
+      supportsHttpsTrafficOnly:
+        default: false
+        description: Allows https traffic only to storage service if sets to true.
+        type: boolean
+        x-ms-client-name: EnableHttpsTrafficOnly
   StorageAccountPropertiesCreateParameters:
     description: The parameters used to create the storage account.
     properties:
@@ -844,6 +849,11 @@ definitions:
       encryption:
         $ref: '#/definitions/Encryption'
         description: Provides the encryption settings on the account. If left unspecified the account encryption settings will remain the same. The default setting is unencrypted.
+      supportsHttpsTrafficOnly:
+        default: false
+        description: Allows https traffic only to storage service if sets to true.
+        type: boolean
+        x-ms-client-name: EnableHttpsTrafficOnly
   StorageAccountPropertiesUpdateParameters:
     description: The parameters used when updating a storage account.
     properties:
@@ -862,6 +872,11 @@ definitions:
       encryption:
         $ref: '#/definitions/Encryption'
         description: Provides the encryption settings on the account. The default setting is unencrypted.
+      supportsHttpsTrafficOnly:
+        default: false
+        description: Allows https traffic only to storage service if sets to true.
+        type: boolean
+        x-ms-client-name: EnableHttpsTrafficOnly
   StorageAccountRegenerateKeyParameters:
     description: The parameters used to regenerate the storage account key.
     properties:

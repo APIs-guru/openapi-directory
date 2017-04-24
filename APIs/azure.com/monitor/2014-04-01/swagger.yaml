@@ -1,0 +1,134 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: MonitorClient
+  version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/monitor/2014-04-01/swagger/usageMetrics_API.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: monitor
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ResourceUriParameter:
+    description: The identifier of the resource.
+    in: path
+    name: resourceUri
+    required: true
+    type: string
+    x-ms-parameter-location: method
+    x-ms-skip-url-encoding: true
+paths:
+  '/{resourceUri}/usages':
+    get:
+      description: 'The List operation lists the usage metrics for the resource.<br>**WARNING**: This operation will be *deprecated* in the next release.'
+      operationId: UsageMetrics_List
+      parameters:
+        - $ref: '#/parameters/ResourceUriParameter'
+        - description: 'Client Api Version. NOTE: This is not a client property, it must be explicit in the call and there is no default value.'
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: 'The filter to apply on the operation.<br>**WARNING**: $filter not documented since the operation will be deprecated in the next release.'
+          in: query
+          name: $filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful request to get the list of usage metric values
+          schema:
+            $ref: '#/definitions/UsageMetricCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - UsageMetrics
+      x-ms-odata: '#/definitions/UsageMetric'
+      x-ms-pageable: {}
+definitions:
+  ErrorResponse:
+    description: Describes the format of Error response.
+    properties:
+      code:
+        description: Error code
+        type: string
+      message:
+        description: Error message indicating why the operation failed.
+        type: string
+    type: object
+  LocalizableString:
+    description: The localizable string class.
+    properties:
+      localizedValue:
+        description: the locale specific value.
+        type: string
+      value:
+        description: the invariant value.
+        type: string
+    required:
+      - value
+  UsageMetric:
+    description: Usage Metric data.
+    properties:
+      currentValue:
+        description: the current value for the usage metric.
+        format: double
+        type: number
+      id:
+        description: the id for the usage metric.
+        type: string
+      limit:
+        description: the quota limit the usage metric.
+        format: double
+        type: number
+      name:
+        $ref: '#/definitions/LocalizableString'
+        description: the usage metric name and display name.
+      nextResetTime:
+        description: the next reset time for the current value.
+        format: date-time
+        type: string
+      quotaPeriod:
+        description: the amount of time it takes to reset the value.
+        format: duration
+        type: string
+      unit:
+        description: the unit for the usage metric.
+        type: string
+  UsageMetricCollection:
+    description: Represents collection of usage metrics.
+    properties:
+      value:
+        description: the usage values.
+        items:
+          $ref: '#/definitions/UsageMetric'
+        type: array
+    required:
+      - value

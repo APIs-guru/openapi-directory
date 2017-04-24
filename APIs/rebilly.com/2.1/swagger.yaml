@@ -11609,7 +11609,7 @@ definitions:
   CustomEvent:
     properties:
       chronology:
-        description: The arrangement of events in the order of their occurrence
+        description: The emitting time of the custom event relatively to the system event
         enum:
           - before
           - after
@@ -11620,7 +11620,7 @@ definitions:
         description: The custom event description
         type: string
       eventType:
-        description: Rebilly custom event type
+        description: The system event type
         enum:
           - subscription-ended
           - subscription-trial-ended
@@ -11632,6 +11632,9 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The custom event identifier string
         readOnly: true
+      rulesCount:
+        readOnly: true
+        type: integer
       scheduleInstruction:
         $ref: '#/definitions/CustomEventScheduleInstruction'
       title:
@@ -16317,7 +16320,6 @@ definitions:
   auto:
     allOf:
       - $ref: '#/definitions/CommonScheduleInstruction'
-    description: Rebilly will choose the best time to schedule the attempt
   basic:
     allOf:
       - $ref: '#/definitions/WebhookAuthorization'
@@ -16401,6 +16403,7 @@ definitions:
       - $ref: '#/definitions/CustomEventScheduleInstruction'
       - properties:
           duration:
+            description: The number of the units
             minimum: 1
             type: integer
           unit:

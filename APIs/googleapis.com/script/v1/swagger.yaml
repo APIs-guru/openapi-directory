@@ -282,6 +282,40 @@ definitions:
           they can only return primitive types such as a `string`, `number`, `array`,
           `object`, or `boolean`.
     type: object
+  JoinAsyncRequest:
+    description: |-
+      A request to retrieve the results from a collection of requests,
+      specified by the operation resource names.
+    properties:
+      names:
+        description: |-
+          List of operation resource names that we want to join,
+          as returned from a call to RunAsync.
+        items:
+          type: string
+        type: array
+      scriptId:
+        description: |-
+          The script id which specifies the script which all processes in the names
+          field must be from.
+        type: string
+      timeout:
+        description: Timeout for information retrieval in milliseconds.
+        format: google-duration
+        type: string
+    type: object
+  JoinAsyncResponse:
+    description: An object that provides the return value for the JoinAsync method.
+    properties:
+      results:
+        additionalProperties:
+          $ref: '#/definitions/Operation'
+        description: |-
+          The return values for each script function, in a map of operation resource
+          names to the Operation containing the result of the process. The response
+          will contain either an error or the result of the script function.
+        type: object
+    type: object
   Operation:
     description: |-
       The response will not arrive until the function finishes executing. The maximum runtime is listed in the guide to [limitations in Apps Script](https://developers.google.com/apps-script/guides/services/quotas#current_limitations).

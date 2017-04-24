@@ -847,14 +847,26 @@ definitions:
       apnsCertificate:
         description: The APNS certificate.
         type: string
+      appId:
+        description: 'The issuer (iss) registered claim key, whose value is your 10-character Team ID, obtained from your developer account'
+        type: string
+      appName:
+        description: The name of the application
+        type: string
       certificateKey:
         description: The certificate key.
         type: string
       endpoint:
         description: The endpoint of this credential.
         type: string
+      keyId:
+        description: 'A 10-character key identifier (kid) key, obtained from your developer account'
+        type: string
       thumbprint:
         description: The Apns certificate Thumbprint
+        type: string
+      token:
+        description: 'Provider Authentication Token, obtained through your developer account'
         type: string
   BaiduCredential:
     description: Description of a NotificationHub BaiduCredential.

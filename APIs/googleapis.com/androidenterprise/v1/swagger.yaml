@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages the deployment of apps to Android for Work users.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Play EMM
   version: v1
   x-apiClientRegistration:
@@ -2739,9 +2743,9 @@ definitions:
           Identifies the extent to which the device is controlled by a managed Google Play EMM in various deployment configurations.
 
           Possible values include: 
-          - "managedDevice", a device that has the EMM's device policy controller (DPC) as the device owner, 
-          - "managedProfile", a device that has a profile managed by the DPC (DPC is profile owner) in addition to a separate, personal profile that is unavailable to the DPC, 
-          - "containerApp", a device running the container App. The container App is managed by the DPC, 
+          - "managedDevice", a device that has the EMM's device policy controller (DPC) as the device owner. 
+          - "managedProfile", a device that has a profile managed by the DPC (DPC is profile owner) in addition to a separate, personal profile that is unavailable to the DPC. 
+          - "containerApp", no longer used (deprecated). 
           - "unmanagedProfile", a device that has been allowed (by the domain's admin, using the Admin Console to enable the privilege) to use managed Google Play, but the profile is itself not owned by a DPC.
         type: string
     type: object
@@ -3209,7 +3213,7 @@ definitions:
         description: 'Whether this product is free, free with in-app purchases, or paid. If the pricing is unknown, this means the product is not generally available anymore (even though it might still be available to people who own it).'
         type: string
       requiresContainerApp:
-        description: Whether this app can only be installed on devices using the Android container app.
+        description: Deprecated.
         type: boolean
       smallIconUrl:
         description: A link to a smaller image that can be used as an icon for the product. This image is suitable for use at up to 128px x 128px.
@@ -3283,7 +3287,7 @@ definitions:
           type: string
         type: array
       productSetBehavior:
-        description: 'The interpretation of this product set. "unknown" should never be sent and is ignored if received. "whitelist" means that this product set constitutes a whitelist. "includeAll" means that all products are accessible, including products that are approved, products with revoked approval, and products that have never been approved. If the value is "includeAll", the value of the productId field is therefore ignored. If a value is not supplied, it is interpreted to be "whitelist" for backwards compatibility.'
+        description: 'The interpretation of this product set. "unknown" should never be sent and is ignored if received. "whitelist" means that the user is entitled to access the product set. "includeAll" means that all products are accessible, including products that are approved, products with revoked approval, and products that have never been approved. "allApproved" means that the user is entitled to access all products that are approved for the enterprise. If the value is "allApproved" or "includeAll", the productId field is ignored. If no value is provided, it is interpreted as "whitelist" for backwards compatibility.'
         type: string
     type: object
   ProductsApproveRequest:

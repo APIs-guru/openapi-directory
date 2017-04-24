@@ -1178,7 +1178,8 @@ paths:
           name: username
           required: false
           type: string
-        - in: query
+        - description: ''
+          in: query
           name: token
           required: false
           type: string
@@ -1222,7 +1223,8 @@ paths:
           name: cuisine
           required: false
           type: string
-        - in: query
+        - description: ''
+          in: query
           name: db
           required: false
           type: string
@@ -1313,6 +1315,12 @@ paths:
           format: int32
           in: query
           name: cps
+          required: false
+          type: integer
+        - description: 'optional. When set to 1, this will limit search results to "best of" recipes as determined by various internal editorial and programmatic algorithms. For the most comprehensive results, don''t include this parameter.'
+          format: int32
+          in: query
+          name: champion
           required: false
           type: integer
       responses:

@@ -3614,6 +3614,8 @@ paths:
                     type: string
                   locality:
                     type: string
+                  name:
+                    type: string
                   phone:
                     type: string
                   postal_code:
@@ -3805,6 +3807,37 @@ paths:
       summary: Get seller's feedback as a seller
       tags:
         - shops
+  /vinyl/listings:
+    get:
+      parameters:
+        - description: Merchandising UUID of the release
+          in: query
+          name: merchandising_uuid
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - vinyl
+    post:
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - vinyl
+  '/vinyl/listings/{id}':
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - vinyl
   /wants:
     get:
       description: A list of wanted items by the user

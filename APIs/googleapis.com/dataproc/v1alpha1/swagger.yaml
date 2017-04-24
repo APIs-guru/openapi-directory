@@ -797,32 +797,32 @@ definitions:
     description: Metadata describing the operation.
     properties:
       clusterName:
-        description: Output-only Name of the cluster for the operation.
+        description: Output-only. Name of the cluster for the operation.
         type: string
       clusterUuid:
-        description: Output-only Cluster UUID for the operation.
+        description: Output-only. Cluster UUID for the operation.
         type: string
       description:
-        description: Output-only Short description of operation.
+        description: Output-only. Short description of operation.
         type: string
       labels:
         additionalProperties:
           type: string
-        description: Output-only Labels associated with the operation
+        description: Output-only. Labels associated with the operation
         type: object
       operationType:
-        description: Output-only The operation type.
+        description: Output-only. The operation type.
         type: string
       status:
         $ref: '#/definitions/ClusterOperationStatus'
-        description: Output-only Current operation status.
+        description: Output-only. Current operation status.
       statusHistory:
-        description: Output-only The previous operation status.
+        description: Output-only. The previous operation status.
         items:
           $ref: '#/definitions/ClusterOperationStatus'
         type: array
       warnings:
-        description: Output-only Errors encountered during operation execution.
+        description: Output-only. Errors encountered during operation execution.
         items:
           type: string
         type: array
@@ -831,13 +831,13 @@ definitions:
     description: The status of the operation.
     properties:
       details:
-        description: Output-onlyA message containing any operation metadata details.
+        description: Output-only.A message containing any operation metadata details.
         type: string
       innerState:
-        description: Output-only A message containing the detailed operation state.
+        description: Output-only. A message containing the detailed operation state.
         type: string
       state:
-        description: Output-only A message containing the operation state.
+        description: Output-only. A message containing the operation state.
         enum:
           - UNKNOWN
           - PENDING
@@ -845,7 +845,7 @@ definitions:
           - DONE
         type: string
       stateStartTime:
-        description: Output-only The time this state was entered.
+        description: Output-only. The time this state was entered.
         format: google-datetime
         type: string
     type: object
@@ -888,7 +888,7 @@ definitions:
     description: The location of diagnostic output.
     properties:
       outputUri:
-        description: Output-only The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
+        description: Output-only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
         type: string
     type: object
   DiskConfiguration:

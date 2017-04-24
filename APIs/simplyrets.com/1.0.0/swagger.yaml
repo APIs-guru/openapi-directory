@@ -136,12 +136,13 @@ paths:
             defaults to Residential, and you can only specify one type
             in a single query.
           enum:
-            - Residential
-            - Rental
-            - Multifamily
-            - Condominium
-            - Commercial
-            - Land
+            - residential
+            - rental
+            - multifamily
+            - condominium
+            - commercial
+            - land
+            - farm
           in: query
           name: type
           required: false
@@ -447,6 +448,7 @@ paths:
             - condominium
             - commercial
             - land
+            - farm
           in: query
           items:
             type: string

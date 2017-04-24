@@ -1429,13 +1429,6 @@ paths:
           schema:
             $ref: '#/definitions/LaunchTemplateParameters'
         - description: |-
-            Whether or not the job should actually be executed after
-            validating parameters. Defaults to false. Validation errors do
-            not cause the HTTP request to fail if true.
-          in: query
-          name: dryRun
-          type: boolean
-        - description: |-
             Required. A Cloud Storage path to the template from which to create
             the job.
             Must be valid Cloud Storage URL, beginning with 'gs://'.
@@ -1452,6 +1445,12 @@ paths:
           name: projectId
           required: true
           type: string
+        - description: |-
+            If true, the request is validated but not actually executed.
+            Defaults to false.
+          in: query
+          name: validateOnly
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -1587,13 +1586,6 @@ paths:
           schema:
             $ref: '#/definitions/LaunchTemplateParameters'
         - description: |-
-            Whether or not the job should actually be executed after
-            validating parameters. Defaults to false. Validation errors do
-            not cause the HTTP request to fail if true.
-          in: query
-          name: dryRun
-          type: boolean
-        - description: |-
             Required. A Cloud Storage path to the template from which to create
             the job.
             Must be valid Cloud Storage URL, beginning with 'gs://'.
@@ -1609,6 +1601,12 @@ paths:
           name: projectId
           required: true
           type: string
+        - description: |-
+            If true, the request is validated but not actually executed.
+            Defaults to false.
+          in: query
+          name: validateOnly
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -2159,6 +2157,13 @@ definitions:
       count:
         $ref: '#/definitions/SplitInt64'
         description: The count of the number of elements present in the distribution.
+      logBuckets:
+        description: |-
+          (Optional) Logarithmic histogram of values.
+          Each log may be in no more than one bucket. Order does not matter.
+        items:
+          $ref: '#/definitions/LogBucket'
+        type: array
       max:
         $ref: '#/definitions/SplitInt64'
         description: The maximum value present in the distribution.
@@ -2886,6 +2891,26 @@ definitions:
       nextPageToken:
         description: Set if there may be more results than fit in this response.
         type: string
+    type: object
+  LogBucket:
+    description: Bucket of values for Distribution's logarithmic histogram.
+    properties:
+      count:
+        description: Number of values in this bucket.
+        format: int64
+        type: string
+      log:
+        description: |-
+          floor(log2(value)); defined to be zero for nonpositive values.
+            log(-1) = 0
+            log(0) = 0
+            log(1) = 0
+            log(2) = 1
+            log(3) = 1
+            log(4) = 2
+            log(5) = 2
+        format: int32
+        type: integer
     type: object
   MapTask:
     description: |-
@@ -4009,6 +4034,19 @@ definitions:
           type: string
         description: Map from user step names to state families.
         type: object
+      windmillServiceEndpoint:
+        description: |-
+          If present, the worker must use this endpoint to communicate with Windmill
+          Service dispatchers, otherwise the worker must continue to use whatever
+          endpoint it had been using.
+        type: string
+      windmillServicePort:
+        description: |-
+          If present, the worker must use this port to communicate with Windmill
+          Service dispatchers. Only applicable when windmill_service_endpoint is
+          specified.
+        format: int64
+        type: string
     type: object
   StreamingSetupTask:
     description: A task which initializes part of a streaming Dataflow job.
