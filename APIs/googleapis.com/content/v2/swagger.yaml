@@ -35,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/content': Manage your product listings and accounts for Google Shopping
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/content': Manage your product listings and accounts for Google Shopping
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -104,6 +112,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - accounts
     parameters:
@@ -143,6 +153,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - accounts
   /accountstatuses/batch:
@@ -168,6 +180,8 @@ paths:
             $ref: '#/definitions/AccountstatusesCustomBatchResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - accountstatuses
@@ -200,6 +214,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - accounttax
   /datafeeds/batch:
@@ -230,6 +246,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - datafeeds
   /datafeedstatuses/batch:
@@ -255,6 +273,8 @@ paths:
             $ref: '#/definitions/DatafeedstatusesCustomBatchResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - datafeedstatuses
@@ -287,6 +307,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - inventory
   /orders/batch:
@@ -313,6 +335,8 @@ paths:
             $ref: '#/definitions/OrdersCustomBatchResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -345,6 +369,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - products
   /productstatuses/batch:
@@ -371,6 +397,8 @@ paths:
             $ref: '#/definitions/ProductstatusesCustomBatchResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - productstatuses
@@ -403,6 +431,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - shippingsettings
   '/{merchantId}/accounts':
@@ -430,6 +460,8 @@ paths:
             $ref: '#/definitions/AccountsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - accounts
@@ -466,6 +498,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - accounts
   '/{merchantId}/accounts/{accountId}':
@@ -493,6 +527,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - accounts
     get:
@@ -516,6 +552,8 @@ paths:
             $ref: '#/definitions/Account'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - accounts
@@ -557,6 +595,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - accounts
     put:
@@ -589,6 +629,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - accounts
   '/{merchantId}/accountstatuses':
@@ -616,6 +658,8 @@ paths:
             $ref: '#/definitions/AccountstatusesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - accountstatuses
@@ -649,6 +693,8 @@ paths:
             $ref: '#/definitions/AccountStatus'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - accountstatuses
@@ -686,6 +732,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - accounttax
     parameters:
@@ -718,6 +766,8 @@ paths:
             $ref: '#/definitions/AccountTax'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - accounttax
@@ -759,6 +809,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - accounttax
     put:
@@ -791,6 +843,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - accounttax
   '/{merchantId}/datafeeds':
@@ -818,6 +872,8 @@ paths:
             $ref: '#/definitions/DatafeedsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - datafeeds
@@ -853,6 +909,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - datafeeds
   '/{merchantId}/datafeeds/{datafeedId}':
@@ -878,6 +936,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - datafeeds
     get:
@@ -899,6 +959,8 @@ paths:
             $ref: '#/definitions/Datafeed'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - datafeeds
@@ -938,6 +1000,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - datafeeds
     put:
@@ -968,6 +1032,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - datafeeds
   '/{merchantId}/datafeedstatuses':
@@ -995,6 +1061,8 @@ paths:
             $ref: '#/definitions/DatafeedstatusesListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - datafeedstatuses
@@ -1026,6 +1094,8 @@ paths:
             $ref: '#/definitions/DatafeedStatus'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - datafeedstatuses
@@ -1080,6 +1150,8 @@ paths:
             $ref: '#/definitions/InventorySetResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - inventory
@@ -1151,6 +1223,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
     parameters:
@@ -1183,6 +1257,8 @@ paths:
             $ref: '#/definitions/Order'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -1229,6 +1305,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/cancel':
@@ -1265,6 +1343,8 @@ paths:
             $ref: '#/definitions/OrdersCancelResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -1303,6 +1383,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/refund':
@@ -1339,6 +1421,8 @@ paths:
             $ref: '#/definitions/OrdersRefundResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -1377,6 +1461,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/shipLineItems':
@@ -1413,6 +1499,8 @@ paths:
             $ref: '#/definitions/OrdersShipLineItemsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -1451,6 +1539,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/updateShipment':
@@ -1488,6 +1578,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
@@ -1512,6 +1604,8 @@ paths:
             $ref: '#/definitions/OrdersGetByMerchantOrderIdResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -1553,6 +1647,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - products
     parameters:
@@ -1588,6 +1684,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - products
   '/{merchantId}/products/{productId}':
@@ -1615,6 +1713,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - products
     get:
@@ -1638,6 +1738,8 @@ paths:
             $ref: '#/definitions/Product'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - products
@@ -1679,6 +1781,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - productstatuses
     parameters:
@@ -1711,6 +1815,8 @@ paths:
             $ref: '#/definitions/ProductStatus'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - productstatuses
@@ -1748,6 +1854,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - shippingsettings
     parameters:
@@ -1780,6 +1888,8 @@ paths:
             $ref: '#/definitions/ShippingSettings'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - shippingsettings
@@ -1821,6 +1931,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - shippingsettings
     put:
@@ -1853,6 +1965,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - shippingsettings
   '/{merchantId}/supportedCarriers':
@@ -1872,6 +1986,8 @@ paths:
             $ref: '#/definitions/ShippingsettingsGetSupportedCarriersResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - shippingsettings
@@ -1913,6 +2029,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/testorders/{orderId}/advance':
@@ -1946,6 +2064,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/testordertemplates/{templateName}':
@@ -1975,6 +2095,8 @@ paths:
             $ref: '#/definitions/OrdersGetTestOrderTemplateResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders

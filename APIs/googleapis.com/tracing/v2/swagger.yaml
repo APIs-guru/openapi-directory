@@ -34,12 +34,22 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/trace.append': Write Trace data for a project or application
       'https://www.googleapis.com/auth/trace.readonly': Read Trace data for a project or application
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/trace.append': Write Trace data for a project or application
+      'https://www.googleapis.com/auth/trace.readonly': Read Trace data for a project or application
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -164,7 +174,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/trace.append'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/trace.append'
       tags:
         - projects
@@ -212,7 +226,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/trace.append'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/trace.append'
       tags:
         - projects
@@ -287,7 +305,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/trace.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/trace.readonly'
       tags:
         - projects
@@ -332,7 +354,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/trace.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/trace.readonly'
       tags:
         - projects
@@ -357,19 +383,15 @@ definitions:
       allowed per Span.
     properties:
       attributes:
-        additionalProperties:
-          $ref: '#/definitions/AttributeValue'
+        $ref: '#/definitions/Attributes'
         description: |-
           A set of attributes on the annotation. A maximum of 4 attributes are
-          allowed per Annotation. The maximum key length is 128 bytes. The
-          value can be a string (up to 256 bytes), integer, or boolean
-          (true/false).
-        type: object
+          allowed per Annotation.
       description:
+        $ref: '#/definitions/TruncatableString'
         description: |-
           A user-supplied message describing the event. The maximum length for
-          the description is 256 characters.
-        type: string
+          the description is 256 bytes.
     type: object
   AttributeValue:
     description: 'The allowed types for the value side of an attribute key:value pair.'
@@ -382,8 +404,37 @@ definitions:
         format: int64
         type: string
       stringValue:
-        description: A string value.
-        type: string
+        $ref: '#/definitions/TruncatableString'
+        description: A string value (up to 256 bytes).
+    type: object
+  Attributes:
+    description: 'Attributes of a span with a key:value format.'
+    properties:
+      attributeMap:
+        additionalProperties:
+          $ref: '#/definitions/AttributeValue'
+        description: |-
+          The maximum key length is 128 bytes (attributes are dropped if the
+          key size is larger than the maximum allowed). The value can be a string
+          (up to 256 bytes), integer, or boolean (true/false). Some common pair
+          examples:
+
+              "/instance_id": "my-instance"
+              "/zone": "us-central1-a"
+              "/grpc/peer_address": "ip:port" (dns, etc.)
+              "/grpc/deadline": "Duration"
+              "/http/user_agent"
+              "/http/request_bytes": 300
+              "/http/response_bytes": 1200
+              "/http/url": google.com/apis
+              "abc.com/myattribute": true
+        type: object
+      droppedAttributesCount:
+        description: |-
+          The number of dropped attributes after the maximum size was enforced. If
+          0 then no attributes were dropped.
+        format: int32
+        type: integer
     type: object
   BatchWriteSpansRequest:
     description: The request message for the `BatchWriteSpans` method.
@@ -435,6 +486,23 @@ definitions:
           - PARENT
         type: string
     type: object
+  Links:
+    description: |-
+      A collection of links, which are references from this span to a span
+      in the same or different trace.
+    properties:
+      droppedLinksCount:
+        description: |-
+          The number of dropped links after the maximum size was enforced. If
+          0 then no links were dropped.
+        format: int32
+        type: integer
+      link:
+        description: A collection of links.
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+    type: object
   ListSpansResponse:
     description: The response message for the `ListSpans` method.
     properties:
@@ -469,15 +537,15 @@ definitions:
     description: Binary module.
     properties:
       buildId:
+        $ref: '#/definitions/TruncatableString'
         description: |-
           Build_id is a unique identifier for the module, usually a hash of its
           contents (up to 128 characters).
-        type: string
       module:
+        $ref: '#/definitions/TruncatableString'
         description: |-
           E.g. main binary, kernel modules, and dynamic libraries
           such as libc.so, sharedlib.so (up to 256 characters).
-        type: string
     type: object
   NetworkEvent:
     description: |-
@@ -521,26 +589,12 @@ definitions:
       and/or overlaps between spans in a trace.
     properties:
       attributes:
-        additionalProperties:
-          $ref: '#/definitions/AttributeValue'
+        $ref: '#/definitions/Attributes'
         description: |-
-          Attributes of a span with a key:value format. A maximum of 16 custom
-          attributes are allowed per Span. The maximum key length is 128 bytes. The
-          value can be a string (up to 256 bytes), integer, or boolean (true/false).
-
-          Some common pair examples:
-
-              "/instance_id": "my-instance"
-              "/zone": "us-central1-a"
-              "/grpc/peer_address": "ip:port" (dns, etc.)
-              "/grpc/deadline": "Duration"
-              "/http/user_agent"
-              "/http/request_bytes": 300
-              "/http/response_bytes": 1200
-              "/http/url": google.com/apis
-              "abc.com/myattribute": true
-        type: object
+          A set of attributes on the span. A maximum of 32 attributes are allowed per
+          Span.
       displayName:
+        $ref: '#/definitions/TruncatableString'
         description: |-
           Description of the operation in the span. It is sanitized and displayed in
           the Stackdriver Trace tool in the
@@ -549,7 +603,7 @@ definitions:
           name. For the same executable and the same call point, a best practice is
           to use a consistent operation name, which makes it easier to correlate
           cross-trace spans.
-        type: string
+          The maximum length for the display_name is 128 bytes.
       endTime:
         description: |-
           End time of the span.
@@ -560,12 +614,8 @@ definitions:
         format: google-datetime
         type: string
       links:
-        description: |-
-          A collection of links, which are references from this span to a span
-          in the same or different trace.
-        items:
-          $ref: '#/definitions/Link'
-        type: array
+        $ref: '#/definitions/Links'
+        description: A maximum of 128 links are allowed per Span.
       name:
         description: |-
           The resource name of Span in the format
@@ -603,13 +653,8 @@ definitions:
         $ref: '#/definitions/Status'
         description: An optional final status for this span.
       timeEvents:
-        description: |-
-          A collection of `TimeEvent`s. A `TimeEvent` is a time-stamped annotation
-          on the span, consisting of either user-supplied key:value pairs, or
-          details of an RPC message sent/received on the network.
-        items:
-          $ref: '#/definitions/TimeEvent'
-        type: array
+        $ref: '#/definitions/TimeEvents'
+        description: A maximum of 32 annotations and 128 network events are allowed per Span.
     type: object
   StackFrame:
     description: Represents a single stack frame in a stack trace.
@@ -621,13 +666,13 @@ definitions:
         format: int64
         type: string
       fileName:
+        $ref: '#/definitions/TruncatableString'
         description: The filename of the file containing this frame (up to 256 characters).
-        type: string
       functionName:
+        $ref: '#/definitions/TruncatableString'
         description: |-
           The fully-qualified name that uniquely identifies this function or
           method (up to 1024 characters).
-        type: string
       lineNumber:
         description: Line number of the frame.
         format: int64
@@ -636,23 +681,36 @@ definitions:
         $ref: '#/definitions/Module'
         description: Binary module the code is loaded from.
       originalFunctionName:
+        $ref: '#/definitions/TruncatableString'
         description: |-
           Used when the function name is
           [mangled](http://www.avabodh.com/cxxin/namemangling.html). May be
           fully-qualified (up to 1024 characters).
-        type: string
       sourceVersion:
+        $ref: '#/definitions/TruncatableString'
         description: The version of the deployed source code (up to 128 characters).
-        type: string
+    type: object
+  StackFrames:
+    description: Represents collection of StackFrames that can be truncated.
+    properties:
+      droppedFramesCount:
+        description: |-
+          The number of dropped stack frames after the maximum size was enforced.
+          If 0 then no frames were dropped.
+        format: int32
+        type: integer
+      frame:
+        description: Stack frames in this stack trace.
+        items:
+          $ref: '#/definitions/StackFrame'
+        type: array
     type: object
   StackTrace:
     description: StackTrace collected in a trace.
     properties:
-      stackFrame:
+      stackFrames:
+        $ref: '#/definitions/StackFrames'
         description: Stack frames in this stack trace. A maximum of 128 frames are allowed.
-        items:
-          $ref: '#/definitions/StackFrame'
-        type: array
       stackTraceHashId:
         description: |-
           The hash ID is used to conserve network bandwidth for duplicate
@@ -756,6 +814,30 @@ definitions:
         format: google-datetime
         type: string
     type: object
+  TimeEvents:
+    description: |-
+      A collection of `TimeEvent`s. A `TimeEvent` is a time-stamped annotation
+      on the span, consisting of either user-supplied key:value pairs, or
+      details of an RPC message sent/received on the network.
+    properties:
+      droppedAnnotationsCount:
+        description: |-
+          The number of dropped annotations after the maximum size was enforced. If
+          0 then no annotations were dropped.
+        format: int32
+        type: integer
+      droppedNetworkEventsCount:
+        description: |-
+          The number of dropped network events after the maximum size was enforced.
+          If 0 then no annotations were dropped.
+        format: int32
+        type: integer
+      timeEvent:
+        description: A collection of `TimeEvent`s.
+        items:
+          $ref: '#/definitions/TimeEvent'
+        type: array
+    type: object
   Trace:
     description: |-
       A trace describes how long it takes for an application to perform some
@@ -768,5 +850,20 @@ definitions:
           `projects/PROJECT_ID/traces/TRACE_ID`. `TRACE_ID` is a unique identifier
           for a trace within a project and is a base16-encoded, case-insensitive
           string and is required to be 32 char long.
+        type: string
+    type: object
+  TruncatableString:
+    description: Represents a string value that might be truncated.
+    properties:
+      truncatedCharacterCount:
+        description: |-
+          The number of characters truncated from the original string value. If 0 it
+          means that the string value was not truncated.
+        format: int32
+        type: integer
+      value:
+        description: |-
+          The truncated string value. E.g. for a string attribute this may have up to
+          256 bytes.
         type: string
     type: object

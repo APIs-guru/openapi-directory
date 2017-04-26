@@ -33,11 +33,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/adsense': View and manage your AdSense data
       'https://www.googleapis.com/auth/adsense.readonly': View your AdSense data
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/adsense': View and manage your AdSense data
+      'https://www.googleapis.com/auth/adsense.readonly': View your AdSense data
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -114,7 +123,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -148,7 +161,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -188,7 +205,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -237,7 +258,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -277,7 +302,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -317,7 +346,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -367,7 +400,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -412,7 +449,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -452,7 +493,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -506,7 +551,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -551,7 +600,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -585,7 +638,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -677,7 +734,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -717,7 +778,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -768,7 +833,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -808,7 +877,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -843,7 +916,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - accounts
@@ -878,7 +955,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - adclients
@@ -922,7 +1003,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - adunits
@@ -957,7 +1042,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - adunits
@@ -992,7 +1081,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - adunits
@@ -1037,7 +1130,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - adunits
@@ -1077,7 +1174,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - customchannels
@@ -1112,7 +1213,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - customchannels
@@ -1161,7 +1266,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - customchannels
@@ -1201,7 +1310,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - urlchannels
@@ -1230,7 +1343,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - alerts
@@ -1254,7 +1371,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - metadata
@@ -1278,7 +1399,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - metadata
@@ -1372,7 +1497,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - reports
@@ -1407,7 +1536,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - reports
@@ -1453,7 +1586,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - reports
@@ -1488,7 +1625,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - savedadstyles
@@ -1518,7 +1659,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adsense'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adsense'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adsense.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adsense.readonly'
       tags:
         - savedadstyles

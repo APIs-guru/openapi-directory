@@ -33,7 +33,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/contacts': Manage your contacts
@@ -45,6 +45,22 @@ securityDefinitions:
       'https://www.googleapis.com/auth/user.phonenumbers.read': View your phone numbers
       'https://www.googleapis.com/auth/userinfo.email': View your email address
       'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/contacts': Manage your contacts
+      'https://www.googleapis.com/auth/contacts.readonly': View your contacts
+      'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
+      'https://www.googleapis.com/auth/user.addresses.read': View your street addresses
+      'https://www.googleapis.com/auth/user.birthday.read': View your complete date of birth
+      'https://www.googleapis.com/auth/user.emails.read': View your email addresses
+      'https://www.googleapis.com/auth/user.phonenumbers.read': View your phone numbers
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+      'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -162,21 +178,39 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/contacts.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/user.addresses.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/user.addresses.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/user.birthday.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/user.birthday.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/user.emails.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/user.emails.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/user.phonenumbers.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/user.phonenumbers.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.email'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
         - people
@@ -231,21 +265,39 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/contacts.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/user.addresses.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/user.addresses.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/user.birthday.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/user.birthday.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/user.emails.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/user.emails.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/user.phonenumbers.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/user.phonenumbers.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.email'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
         - people
@@ -326,7 +378,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/contacts.readonly'
       tags:
         - people

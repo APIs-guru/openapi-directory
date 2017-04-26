@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Creates and manages users and groups for accessing Google Compute Engine virtual machines.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud User Accounts
   version: vm_beta
   x-apiClientRegistration:
@@ -29,13 +33,24 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud.useraccounts': Manage your Google Cloud User Accounts
       'https://www.googleapis.com/auth/cloud.useraccounts.readonly': View your Google Cloud User Accounts
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud.useraccounts': Manage your Google Cloud User Accounts
+      'https://www.googleapis.com/auth/cloud.useraccounts.readonly': View your Google Cloud User Accounts
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -134,11 +149,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - groups
@@ -171,7 +194,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - groups
@@ -198,7 +225,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - groups
@@ -224,11 +255,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - groups
@@ -275,7 +314,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - groups
@@ -314,7 +357,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - groups
@@ -369,11 +416,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - globalAccountsOperations
@@ -406,7 +461,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - globalAccountsOperations
@@ -432,11 +491,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - globalAccountsOperations
@@ -499,11 +566,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - users
@@ -536,7 +611,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - users
@@ -563,7 +642,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - users
@@ -589,11 +672,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - users
@@ -640,7 +731,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - users
@@ -680,7 +775,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - users
@@ -729,11 +828,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - linux
@@ -806,11 +913,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - linux

@@ -33,7 +33,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
@@ -42,6 +42,19 @@ securityDefinitions:
       'https://www.googleapis.com/auth/presentations.readonly': View your Google Slides presentations
       'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
       'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
+      'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
+      'https://www.googleapis.com/auth/presentations': View and manage your Google Slides presentations
+      'https://www.googleapis.com/auth/presentations.readonly': View your Google Slides presentations
+      'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
+      'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -156,7 +169,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/presentations'
       tags:
         - presentations
@@ -179,11 +196,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/presentations'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/presentations'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/presentations.readonly'
       tags:
         - presentations
@@ -224,11 +249,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/presentations'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/presentations'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/presentations.readonly'
       tags:
         - presentations
@@ -291,11 +324,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/presentations'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/presentations'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/presentations.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/presentations.readonly'
       tags:
         - presentations
@@ -370,13 +411,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/presentations'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/presentations'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - presentations
@@ -3127,13 +3178,35 @@ definitions:
       weightedFontFamily:
         $ref: '#/definitions/WeightedFontFamily'
         description: |-
-          The font family and rendered weight of the text. This property is
-          read-only.
+          The font family and rendered weight of the text.
 
           This field is an extension of `font_family` meant to support explicit font
           weights without breaking backwards compatibility. As such, when reading the
           style of a range of text, the value of `weighted_font_family.font_family`
-          will always be equal to that of `font_family`.
+          will always be equal to that of `font_family`. However, when writing, if
+          both fields are included in the field mask (either explicitly or through
+          the wildcard `"*"`), their values are reconciled as follows:
+
+          * If `font_family` is set and `weighted_font_family` is not, the value of
+            `font_family` will be applied with weight `400` ("normal").
+          * If both fields are set, the value of `font_family` must equal that of
+            `weighted_font_family.font_family`. If so, the font family and weight of
+            `weighted_font_family` will be applied. Otherwise, a 400 bad request
+            error is returned.
+          * If `weighted_font_family` is set and `font_family` is not, the font
+            family and weight of `weighted_font_family` will be applied.
+          * If neither field is set, the font family and weight of the text will be
+            set to inherit from its parent. Note that these properties cannot inherit
+            separately from each other.
+
+          If an update request specifies values for both `weighted_font_family` and
+          `bold`, the `weighted_font_family` will be applied first, then `bold`.
+
+          If `weighted_font_family.weight` is not set, it will default to `400`.
+
+          If `weighted_font_family` is set, then `weighted_font_family.font_family`
+          must also be set with a non-empty value. Otherwise, a 400 bad request error
+          is returned.
     type: object
   ThemeColorPair:
     description: A pair mapping a theme color type to the concrete color it represents.

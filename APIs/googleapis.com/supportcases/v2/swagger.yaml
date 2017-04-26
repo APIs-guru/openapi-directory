@@ -33,12 +33,22 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cases': View and manage your Google Support Cases
       'https://www.googleapis.com/auth/cases.readonly': View your Google Support Cases
       'https://www.googleapis.com/auth/supportcontent': View and manage your support data
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cases': View and manage your Google Support Cases
+      'https://www.googleapis.com/auth/cases.readonly': View your Google Support Cases
+      'https://www.googleapis.com/auth/supportcontent': View and manage your support data
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -128,6 +138,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - agentActivities
     parameters:
@@ -153,6 +165,8 @@ paths:
             $ref: '#/definitions/AgentActivity'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - agentActivities
@@ -181,7 +195,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - agentActivities
@@ -196,6 +214,8 @@ paths:
             $ref: '#/definitions/ListAgentSettingsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - agentSettings
@@ -218,6 +238,8 @@ paths:
             $ref: '#/definitions/GetAgentUnreadCasesInfoResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
@@ -254,6 +276,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/cases:createNewCase':
@@ -281,6 +305,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/cases:getAgentSearchCount':
@@ -294,6 +320,8 @@ paths:
             $ref: '#/definitions/GetAgentSearchCountResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
@@ -332,6 +360,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
     parameters:
@@ -367,7 +397,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - cases
@@ -390,6 +424,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - categoryInfos
     parameters:
@@ -411,6 +447,8 @@ paths:
             $ref: '#/definitions/ListTopLevelCategoryInfosResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - categoryInfos
@@ -462,6 +500,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - categoryInfos
     parameters:
@@ -497,6 +537,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - categoryInfos
   /communications:
@@ -517,6 +559,8 @@ paths:
             $ref: '#/definitions/ListCommunicationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - communications
@@ -553,6 +597,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - communications
   '/communications:buildReplyEmail':
@@ -579,6 +625,8 @@ paths:
             $ref: '#/definitions/BuildReplyEmailResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - communications
@@ -607,6 +655,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
   '/communications:createEmail':
@@ -633,6 +683,8 @@ paths:
             $ref: '#/definitions/CreateEmailResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
@@ -661,6 +713,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
   '/communications:listRelated':
@@ -681,6 +735,8 @@ paths:
             $ref: '#/definitions/ListRelatedCommunicationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - communications
@@ -717,6 +773,8 @@ paths:
             $ref: '#/definitions/SuggestReplyEmailHeadersResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - communications
@@ -789,6 +847,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - customerInteractions
     parameters:
@@ -830,6 +890,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - customerInteractions
     parameters:
@@ -855,6 +917,8 @@ paths:
             $ref: '#/definitions/ListCustomerIssuesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - customerIssues
@@ -897,6 +961,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - devices
     parameters:
@@ -925,6 +991,8 @@ paths:
             $ref: '#/definitions/GetByDeviceIdResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - devices
@@ -979,6 +1047,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - devices
     parameters:
@@ -1014,6 +1084,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - giftCards
   '/giftCards:lookup':
@@ -1040,6 +1112,8 @@ paths:
             $ref: '#/definitions/LookupGiftCardResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - giftCards
@@ -1068,6 +1142,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - giftCards
   '/giftCards:verify':
@@ -1094,6 +1170,8 @@ paths:
             $ref: '#/definitions/VerifyGiftCardResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - giftCards
@@ -1122,6 +1200,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - ginlogs
   '/hardwareAuditor/orders:list':
@@ -1148,6 +1228,8 @@ paths:
             $ref: '#/definitions/ListHardwareOrdersResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - hardwareAuditor
@@ -1176,6 +1258,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - hardwareOrders
   '/hardwareOrders:list':
@@ -1202,6 +1286,8 @@ paths:
             $ref: '#/definitions/ListHardwareOrdersResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - hardwareOrders
@@ -1230,6 +1316,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - hardwareOrders
   /opportunities:
@@ -1250,6 +1338,8 @@ paths:
             $ref: '#/definitions/ListOpportunitiesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - opportunities
@@ -1286,6 +1376,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - opportunities
   '/play/digitalContent/orders:batchGet':
@@ -1312,6 +1404,8 @@ paths:
             $ref: '#/definitions/GetOrdersResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - play
@@ -1340,6 +1434,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - play
   '/play/digitalContent/orders:search':
@@ -1366,6 +1462,8 @@ paths:
             $ref: '#/definitions/SearchOrdersResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - play
@@ -1394,6 +1492,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - play
   '/play/digitalContent/subscriptions:cancel':
@@ -1420,6 +1520,8 @@ paths:
             $ref: '#/definitions/CancelSubscriptionResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - play
@@ -1448,6 +1550,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - play
   '/play/digitalContent/subscriptions:list':
@@ -1474,6 +1578,8 @@ paths:
             $ref: '#/definitions/ListSubscriptionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - play
@@ -1502,6 +1608,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - play
   /products:
@@ -1515,6 +1623,8 @@ paths:
             $ref: '#/definitions/ListProductsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - products
@@ -1572,7 +1682,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - resolutions
@@ -1609,7 +1723,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - resolutions
@@ -1638,6 +1756,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - resolutions
   '/resolutions:suggest':
@@ -1665,7 +1785,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - resolutions
@@ -1694,6 +1818,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - rma
   '/rma:submit':
@@ -1720,6 +1846,8 @@ paths:
             $ref: '#/definitions/SubmitRmaResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - rma
@@ -1748,6 +1876,8 @@ paths:
             $ref: '#/definitions/ListRmasResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - rmas
@@ -1784,6 +1914,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - rmas
   '/rmas:listBuyersRemorseCountryCodes':
@@ -1797,6 +1929,8 @@ paths:
             $ref: '#/definitions/ListBuyersRemorseCountryCodesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - rmas
@@ -1833,6 +1967,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - rmas
   '/rmas:send':
@@ -1860,6 +1996,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - rmas
   '/teams:getMyAssignStreamSearches':
@@ -1873,6 +2011,8 @@ paths:
             $ref: '#/definitions/GetMyAssignStreamSearchesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - teams
@@ -1909,7 +2049,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - troubleshooterSessions
@@ -1938,7 +2082,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - troubleshooterSessions
@@ -1969,7 +2117,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - troubleshooterSessions
@@ -2006,7 +2158,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - troubleshooterSessions
@@ -2035,7 +2191,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - troubleshooterSessions
@@ -2064,7 +2224,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - troubleshooterSessions
@@ -2093,6 +2257,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
   '/wallets/accounts/paymentInstruments:initiateHijackReviews':
@@ -2119,6 +2285,8 @@ paths:
             $ref: '#/definitions/InitiatePaymentMethodHijackReviewsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - wallets
@@ -2147,6 +2315,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
   '/wallets/accounts:getReviewStatus':
@@ -2173,6 +2343,8 @@ paths:
             $ref: '#/definitions/GetAccountReviewStatusResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
@@ -2207,6 +2379,8 @@ paths:
             $ref: '#/definitions/GetAccountSignalsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
@@ -2243,6 +2417,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - wallets
   /wallets/bankAccountCountries:
@@ -2269,6 +2445,8 @@ paths:
             $ref: '#/definitions/ListBankAccountCountriesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
@@ -2297,6 +2475,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
   /wallets/paymentInstrumentTypeInfos:
@@ -2314,6 +2494,8 @@ paths:
             $ref: '#/definitions/ListPaymentInstrumentTypeInfosResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
@@ -2350,6 +2532,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
     parameters:
@@ -2385,6 +2569,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
   '/wallets:troubleshootAccount':
@@ -2411,6 +2597,8 @@ paths:
             $ref: '#/definitions/TroubleshootAccountResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
@@ -2439,6 +2627,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - wallets
   '/youtube/components:cancel':
@@ -2465,6 +2655,8 @@ paths:
             $ref: '#/definitions/CancelComponentsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - youtube
@@ -2493,6 +2685,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - youtube
   /youtube/onetimepurchases:
@@ -2519,6 +2713,8 @@ paths:
             $ref: '#/definitions/GetOneTimePurchasesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - youtube
@@ -2547,6 +2743,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - youtube
   '/youtube/transactions:listByEntitlements':
@@ -2573,6 +2771,8 @@ paths:
             $ref: '#/definitions/ListTransactionsResponse1'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - youtube
@@ -2601,6 +2801,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - youtube
   '/{name}':
@@ -2624,6 +2826,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
     get:
@@ -2645,6 +2849,8 @@ paths:
             $ref: '#/definitions/Rma'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - rmas
@@ -2677,6 +2883,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
     put:
@@ -2699,6 +2907,8 @@ paths:
             $ref: '#/definitions/Product'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -2732,6 +2942,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
   '/{name}/customer/shippingAddresses':
@@ -2764,6 +2976,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
   '/{name}/properties':
@@ -2783,6 +2997,8 @@ paths:
             $ref: '#/definitions/ListPropertiesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - categoryInfos
@@ -2824,6 +3040,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - hardwareShipments
   '/{name}:WaitForConsult':
@@ -2855,6 +3073,8 @@ paths:
             $ref: '#/definitions/WaitForConsultResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -2888,6 +3108,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:authenticate':
@@ -2919,6 +3141,8 @@ paths:
             $ref: '#/definitions/AuthenticateResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -2952,6 +3176,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:block':
@@ -2983,6 +3209,8 @@ paths:
             $ref: '#/definitions/BlockResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -3016,6 +3244,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:cancel':
@@ -3047,6 +3277,8 @@ paths:
             $ref: '#/definitions/CancelRmaResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - rmas
@@ -3080,6 +3312,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - rmas
   '/{name}:cancelSend':
@@ -3112,6 +3346,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
   '/{name}:checkWalletAccount':
@@ -3134,6 +3370,8 @@ paths:
             $ref: '#/definitions/CheckWalletAccountResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
@@ -3175,6 +3413,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:createRealTimeConsult':
@@ -3206,6 +3446,8 @@ paths:
             $ref: '#/definitions/CreateRealTimeConsultCaseResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -3239,6 +3481,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:dedupe':
@@ -3270,6 +3514,8 @@ paths:
             $ref: '#/definitions/DedupeResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -3303,6 +3549,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
   '/{name}:escalate':
@@ -3334,6 +3582,8 @@ paths:
             $ref: '#/definitions/EscalateResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -3367,6 +3617,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
   '/{name}:finalizeNote':
@@ -3398,6 +3650,8 @@ paths:
             $ref: '#/definitions/FinalizeNoteResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
@@ -3431,6 +3685,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:getAuthenticationCreditCardTypes':
@@ -3462,6 +3718,8 @@ paths:
             $ref: '#/definitions/GetAuthenticationCreditCardTypesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
@@ -3495,6 +3753,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
   '/{name}:getAuthenticationResult':
@@ -3526,6 +3786,8 @@ paths:
             $ref: '#/definitions/GetAuthenticationResultResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -3559,6 +3821,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:getConsultSla':
@@ -3590,6 +3854,8 @@ paths:
             $ref: '#/definitions/GetConsultSlaResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
@@ -3623,6 +3889,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - hardwareOrders
   '/{name}:getEscalationTargets':
@@ -3642,6 +3910,8 @@ paths:
             $ref: '#/definitions/GetEscalationTargetsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - products
@@ -3683,6 +3953,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - rmas
   '/{name}:getLostStolenRefundEligibility':
@@ -3714,6 +3986,8 @@ paths:
             $ref: '#/definitions/LostStolenRefundEligibility'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - hardwareShipments
@@ -3747,6 +4021,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - rmas
   '/{name}:getOrderDetail':
@@ -3778,6 +4054,8 @@ paths:
             $ref: '#/definitions/RmaOrderDetail'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - rmas
@@ -3811,6 +4089,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - rmas
   '/{name}:getRoutingTargets':
@@ -3830,6 +4110,8 @@ paths:
             $ref: '#/definitions/GetRoutingTargetsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - products
@@ -3871,6 +4153,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - hardwareShipments
   '/{name}:getShippingCustomerName':
@@ -3902,6 +4186,8 @@ paths:
             $ref: '#/definitions/ShippingCustomerName'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - hardwareShipments
@@ -3935,6 +4221,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - hardwareShipments
   '/{name}:listChildren':
@@ -3954,6 +4242,8 @@ paths:
             $ref: '#/definitions/ListChildrenCategoryInfosResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - categoryInfos
@@ -3992,6 +4282,8 @@ paths:
             $ref: '#/definitions/ListSettingsResponse1'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - products
@@ -4033,7 +4325,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - troubleshooterSessions
@@ -4067,6 +4363,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - rmas
   '/{name}:needsInfo':
@@ -4098,6 +4396,8 @@ paths:
             $ref: '#/definitions/NeedsInfoResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -4131,6 +4431,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:read':
@@ -4162,6 +4464,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -4195,6 +4499,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - hardwareShipments
   '/{name}:release':
@@ -4226,6 +4532,8 @@ paths:
             $ref: '#/definitions/ReleaseResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -4259,6 +4567,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:runRmaSteps':
@@ -4290,6 +4600,8 @@ paths:
             $ref: '#/definitions/RunRmaStepsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - rmas
@@ -4323,6 +4635,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
   '/{name}:spam':
@@ -4354,6 +4668,8 @@ paths:
             $ref: '#/definitions/SpamResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -4387,6 +4703,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:suggestNewEmailHeaders':
@@ -4406,6 +4724,8 @@ paths:
             $ref: '#/definitions/SuggestNewEmailHeadersResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
@@ -4434,6 +4754,8 @@ paths:
             $ref: '#/definitions/SuggestNoteHeadersResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases.readonly'
       tags:
         - cases
@@ -4475,6 +4797,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:transfer':
@@ -4506,6 +4830,8 @@ paths:
             $ref: '#/definitions/TransferResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -4539,7 +4865,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/supportcontent'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/supportcontent'
       tags:
         - troubleshooterSessions
@@ -4573,6 +4903,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:unblock':
@@ -4604,6 +4936,8 @@ paths:
             $ref: '#/definitions/UnblockResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -4637,6 +4971,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:update':
@@ -4669,6 +5005,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
     put:
@@ -4691,6 +5029,8 @@ paths:
             $ref: '#/definitions/CasesWorkflow'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -4724,6 +5064,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:updateConsultNote':
@@ -4755,6 +5097,8 @@ paths:
             $ref: '#/definitions/UpdateConsultNoteResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
@@ -4788,6 +5132,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:updateContactName':
@@ -4819,6 +5165,8 @@ paths:
             $ref: '#/definitions/UpdateContactNameResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -4852,6 +5200,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:updateDisconnectedChannel':
@@ -4883,6 +5233,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
@@ -4916,6 +5268,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:updateEmail':
@@ -4947,6 +5301,8 @@ paths:
             $ref: '#/definitions/UpdateEmailResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
@@ -4980,6 +5336,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases
   '/{name}:updateNote':
@@ -5012,6 +5370,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cases'
       tags:
         - communications
   '/{name}:updateSummary':
@@ -5043,6 +5403,8 @@ paths:
             $ref: '#/definitions/UpdateSummaryResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cases'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cases'
       tags:
         - cases

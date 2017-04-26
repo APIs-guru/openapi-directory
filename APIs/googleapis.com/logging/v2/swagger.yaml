@@ -34,7 +34,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
@@ -42,6 +42,18 @@ securityDefinitions:
       'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
       'https://www.googleapis.com/auth/logging.read': View log data for your projects
       'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
+      'https://www.googleapis.com/auth/logging.read': View log data for your projects
+      'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -158,11 +170,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - entries
@@ -197,9 +217,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - entries
@@ -224,11 +250,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - monitoredResourceDescriptors
@@ -249,7 +283,7 @@ paths:
   '/v2/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.organizations.logs.delete
+      operationId: logging.billingAccounts.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -271,10 +305,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -310,9 +348,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - projects
@@ -336,11 +380,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - projects
@@ -383,16 +435,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - projects
   '/v2/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.organizations.logs.list
+      operationId: logging.billingAccounts.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -421,14 +479,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -472,11 +538,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - projects
@@ -519,16 +593,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - projects
   '/v2/{parent}/sinks':
     get:
       description: Lists sinks.
-      operationId: logging.organizations.sinks.list
+      operationId: logging.billingAccounts.sinks.list
       parameters:
         - description: |
             Required. The parent resource whose sinks are to be listed:
@@ -557,14 +637,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -581,7 +669,7 @@ paths:
       - $ref: '#/parameters/key'
     post:
       description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the current time is outside the sink''s start and end times or the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
-      operationId: logging.organizations.sinks.create
+      operationId: logging.billingAccounts.sinks.create
       parameters:
         - description: |-
             Required. The resource in which to create the sink:
@@ -611,14 +699,18 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
   '/v2/{sinkName}':
     delete:
       description: 'Deletes a sink. If the sink has a unique writer_identity, then that service account is also deleted.'
-      operationId: logging.organizations.sinks.delete
+      operationId: logging.billingAccounts.sinks.delete
       parameters:
         - description: |-
             Required. The full resource name of the sink to delete, including the parent resource and the sink identifier:
@@ -640,13 +732,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     get:
       description: Gets a sink.
-      operationId: logging.organizations.sinks.get
+      operationId: logging.billingAccounts.sinks.get
       parameters:
         - description: |-
             Required. The resource name of the sink:
@@ -668,14 +764,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -692,7 +796,7 @@ paths:
       - $ref: '#/parameters/key'
     put:
       description: 'Updates a sink. If the named sink doesn''t exist, then this method is identical to sinks.create. If the named sink does exist, then this method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated filter might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.organizations.sinks.update
+      operationId: logging.billingAccounts.sinks.update
       parameters:
         - description: |-
             Required. The full resource name of the sink to update, including the parent resource and the sink identifier:
@@ -726,10 +830,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
 definitions:
   Empty:
     description: |-

@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: API for access to the data within Blogger.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Blogger
   version: v2
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/blogger': Manage your Blogger account
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/blogger': Manage your Blogger account
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -101,6 +113,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - blogs
     parameters:
@@ -132,6 +146,8 @@ paths:
             $ref: '#/definitions/PageList'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
@@ -165,6 +181,8 @@ paths:
             $ref: '#/definitions/Page'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
@@ -210,6 +228,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
     parameters:
@@ -242,6 +262,8 @@ paths:
             $ref: '#/definitions/Post'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
@@ -292,6 +314,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - comments
     parameters:
@@ -330,6 +354,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - comments
     parameters:
@@ -358,6 +384,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/blogger'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/blogger'
       tags:
         - users
     parameters:
@@ -385,6 +413,8 @@ paths:
             $ref: '#/definitions/BlogList'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - users

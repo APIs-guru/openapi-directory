@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Accesses Tag Manager accounts and containers.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Tag Manager
   version: v1
   x-apiClientRegistration:
@@ -29,7 +33,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/tagmanager.delete.containers': Delete your Google Tag Manager containers
@@ -39,6 +43,20 @@ securityDefinitions:
       'https://www.googleapis.com/auth/tagmanager.manage.users': Manage user permissions of your Google Tag Manager account and container
       'https://www.googleapis.com/auth/tagmanager.publish': Publish your Google Tag Manager container versions
       'https://www.googleapis.com/auth/tagmanager.readonly': View your Google Tag Manager container and its subcomponents
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/tagmanager.delete.containers': Delete your Google Tag Manager containers
+      'https://www.googleapis.com/auth/tagmanager.edit.containers': 'Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing'
+      'https://www.googleapis.com/auth/tagmanager.edit.containerversions': Manage your Google Tag Manager container versions
+      'https://www.googleapis.com/auth/tagmanager.manage.accounts': View and manage your Google Tag Manager accounts
+      'https://www.googleapis.com/auth/tagmanager.manage.users': Manage user permissions of your Google Tag Manager account and container
+      'https://www.googleapis.com/auth/tagmanager.publish': Publish your Google Tag Manager container versions
+      'https://www.googleapis.com/auth/tagmanager.readonly': View your Google Tag Manager container and its subcomponents
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -95,9 +113,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.manage.accounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.manage.accounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -127,9 +151,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.manage.accounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.manage.accounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -166,6 +196,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.manage.accounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.manage.accounts'
       tags:
         - accounts
   '/accounts/{accountId}/containers':
@@ -186,7 +218,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -219,6 +255,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}':
@@ -241,6 +279,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.delete.containers'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.delete.containers'
       tags:
         - accounts
@@ -266,7 +306,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -308,6 +352,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/environments':
@@ -333,7 +379,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -371,6 +421,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/environments/{environmentId}':
@@ -398,6 +450,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
@@ -428,7 +482,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -475,6 +533,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
     put:
@@ -512,6 +572,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/folders':
@@ -537,7 +599,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -575,6 +641,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/folders/{folderId}':
@@ -602,6 +670,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
@@ -632,7 +702,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -679,6 +753,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/folders/{folderId}/entities':
@@ -709,7 +785,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -780,6 +860,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/reauthorize_environments/{environmentId}':
@@ -822,6 +904,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.publish'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.publish'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/tags':
@@ -847,7 +931,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -885,6 +973,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/tags/{tagId}':
@@ -912,6 +1002,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
@@ -942,7 +1034,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -989,6 +1085,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/triggers':
@@ -1014,7 +1112,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -1052,6 +1154,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/triggers/{triggerId}':
@@ -1079,6 +1183,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
@@ -1109,7 +1215,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -1156,6 +1266,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/variables':
@@ -1181,7 +1293,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -1219,6 +1335,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/variables/{variableId}':
@@ -1246,6 +1364,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
@@ -1276,7 +1396,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -1323,6 +1447,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/versions':
@@ -1358,9 +1484,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -1398,6 +1530,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}':
@@ -1425,6 +1559,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
       tags:
         - accounts
@@ -1455,9 +1591,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
       tags:
         - accounts
@@ -1504,6 +1646,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/publish':
@@ -1546,6 +1690,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.publish'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.publish'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/restore':
@@ -1583,6 +1729,8 @@ paths:
             $ref: '#/definitions/ContainerVersion'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
@@ -1622,6 +1770,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
       tags:
         - accounts
   '/accounts/{accountId}/permissions':
@@ -1641,6 +1791,8 @@ paths:
             $ref: '#/definitions/ListAccountUsersResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.manage.users'
       tags:
         - accounts
@@ -1673,6 +1825,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
       tags:
         - accounts
   '/accounts/{accountId}/permissions/{permissionId}':
@@ -1695,6 +1849,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.manage.users'
       tags:
         - accounts
@@ -1719,6 +1875,8 @@ paths:
             $ref: '#/definitions/UserAccess'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.manage.users'
       tags:
         - accounts
@@ -1755,6 +1913,8 @@ paths:
             $ref: '#/definitions/UserAccess'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.manage.users'
       tags:
         - accounts

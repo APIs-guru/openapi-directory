@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Accesses the inventory of Ad Exchange seller users and generates reports.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Ad Exchange Seller
   version: v1.1
   x-apiClientRegistration:
@@ -29,11 +33,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/adexchange.seller': View and manage your Ad Exchange data
       'https://www.googleapis.com/auth/adexchange.seller.readonly': View your Ad Exchange data
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/adexchange.seller': View and manage your Ad Exchange data
+      'https://www.googleapis.com/auth/adexchange.seller.readonly': View your Ad Exchange data
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -105,7 +118,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - accounts
@@ -140,7 +157,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - adclients
@@ -184,7 +205,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - adunits
@@ -219,7 +244,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - adunits
@@ -264,7 +293,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - adunits
@@ -304,7 +337,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - customchannels
@@ -339,7 +376,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - customchannels
@@ -388,7 +429,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - customchannels
@@ -428,7 +473,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - urlchannels
@@ -457,7 +506,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - alerts
@@ -481,7 +534,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - metadata
@@ -505,7 +562,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - metadata
@@ -529,7 +590,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - preferreddeals
@@ -559,7 +624,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - preferreddeals
@@ -638,7 +707,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - reports
@@ -673,7 +746,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - reports
@@ -719,7 +796,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.seller'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.seller'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.seller.readonly'
       tags:
         - reports

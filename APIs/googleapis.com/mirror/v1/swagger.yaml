@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Interacts with Glass users via the timeline.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Mirror
   version: v1
   x-apiClientRegistration:
@@ -29,11 +33,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/glass.location': View your location
       'https://www.googleapis.com/auth/glass.timeline': View and manage your Glass timeline
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/glass.location': View your location
+      'https://www.googleapis.com/auth/glass.timeline': View and manage your Glass timeline
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -134,6 +147,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - contacts
     parameters:
@@ -160,6 +175,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - contacts
   '/contacts/{id}':
@@ -177,6 +194,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - contacts
@@ -196,6 +215,8 @@ paths:
             $ref: '#/definitions/Contact'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - contacts
@@ -228,6 +249,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - contacts
     put:
@@ -251,6 +274,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - contacts
   /locations:
@@ -265,7 +290,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.location'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.location'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - locations
@@ -295,7 +324,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.location'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.location'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - locations
@@ -328,6 +361,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - settings
     parameters:
@@ -349,6 +384,8 @@ paths:
             $ref: '#/definitions/SubscriptionsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - subscriptions
@@ -376,6 +413,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - subscriptions
   '/subscriptions/{id}':
@@ -393,6 +432,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - subscriptions
@@ -424,6 +465,8 @@ paths:
             $ref: '#/definitions/Subscription'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - subscriptions
@@ -471,7 +514,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.location'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.location'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - timeline
@@ -845,7 +892,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.location'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.location'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - timeline
@@ -865,7 +916,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.location'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.location'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - timeline
@@ -886,7 +941,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.location'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.location'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - timeline
@@ -919,7 +978,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.location'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.location'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - timeline
@@ -1290,7 +1353,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.location'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.location'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - timeline
@@ -1311,6 +1378,8 @@ paths:
             $ref: '#/definitions/AttachmentsListResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - timeline
@@ -1685,6 +1754,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - timeline
   '/timeline/{itemId}/attachments/{attachmentId}':
@@ -1707,6 +1778,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - timeline
@@ -1731,6 +1804,8 @@ paths:
             $ref: '#/definitions/Attachment'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/glass.timeline'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/glass.timeline'
       tags:
         - timeline

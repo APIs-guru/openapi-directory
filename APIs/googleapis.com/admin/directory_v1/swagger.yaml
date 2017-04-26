@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Admin SDK Directory API lets you view and manage enterprise resources such as users and groups, administrative notifications, security features, and more.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Admin Directory
   version: directory_v1
   x-apiClientRegistration:
@@ -31,7 +35,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/admin.directory.customer': View and manage customer related information
@@ -61,6 +65,40 @@ securityDefinitions:
       'https://www.googleapis.com/auth/admin.directory.user.security': Manage data access permissions for users on your domain
       'https://www.googleapis.com/auth/admin.directory.userschema': View and manage the provisioning of user schemas on your domain
       'https://www.googleapis.com/auth/admin.directory.userschema.readonly': View user schemas on your domain
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/admin.directory.customer': View and manage customer related information
+      'https://www.googleapis.com/auth/admin.directory.customer.readonly': View customer related information
+      'https://www.googleapis.com/auth/admin.directory.device.chromeos': View and manage your Chrome OS devices' metadata
+      'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly': View your Chrome OS devices' metadata
+      'https://www.googleapis.com/auth/admin.directory.device.mobile': View and manage your mobile devices' metadata
+      'https://www.googleapis.com/auth/admin.directory.device.mobile.action': Manage your mobile devices by performing administrative tasks
+      'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly': View your mobile devices' metadata
+      'https://www.googleapis.com/auth/admin.directory.domain': View and manage the provisioning of domains for your customers
+      'https://www.googleapis.com/auth/admin.directory.domain.readonly': View domains related to your customers
+      'https://www.googleapis.com/auth/admin.directory.group': View and manage the provisioning of groups on your domain
+      'https://www.googleapis.com/auth/admin.directory.group.member': View and manage group subscriptions on your domain
+      'https://www.googleapis.com/auth/admin.directory.group.member.readonly': View group subscriptions on your domain
+      'https://www.googleapis.com/auth/admin.directory.group.readonly': View groups on your domain
+      'https://www.googleapis.com/auth/admin.directory.notifications': View and manage notifications received on your domain
+      'https://www.googleapis.com/auth/admin.directory.orgunit': View and manage organization units on your domain
+      'https://www.googleapis.com/auth/admin.directory.orgunit.readonly': View organization units on your domain
+      'https://www.googleapis.com/auth/admin.directory.resource.calendar': View and manage the provisioning of calendar resources on your domain
+      'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly': View calendar resources on your domain
+      'https://www.googleapis.com/auth/admin.directory.rolemanagement': Manage delegated admin roles for your domain
+      'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly': View delegated admin roles for your domain
+      'https://www.googleapis.com/auth/admin.directory.user': View and manage the provisioning of users on your domain
+      'https://www.googleapis.com/auth/admin.directory.user.alias': View and manage user aliases on your domain
+      'https://www.googleapis.com/auth/admin.directory.user.alias.readonly': View user aliases on your domain
+      'https://www.googleapis.com/auth/admin.directory.user.readonly': View users on your domain
+      'https://www.googleapis.com/auth/admin.directory.user.security': Manage data access permissions for users on your domain
+      'https://www.googleapis.com/auth/admin.directory.userschema': View and manage the provisioning of user schemas on your domain
+      'https://www.googleapis.com/auth/admin.directory.userschema.readonly': View user schemas on your domain
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -146,11 +184,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - channels
@@ -159,7 +205,7 @@ paths:
       description: Retrieve all Chrome OS Devices of a customer (paginated)
       operationId: directory.chromeosdevices.list
       parameters:
-        - description: Immutable id of the Google Apps account
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
@@ -211,7 +257,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
       tags:
         - chromeosdevices
@@ -228,12 +278,12 @@ paths:
       description: Retrieve Chrome OS Device
       operationId: directory.chromeosdevices.get
       parameters:
-        - description: Immutable id of the Google Apps account
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
           type: string
-        - description: Immutable id of Chrome OS Device
+        - description: Immutable ID of Chrome OS Device
           in: path
           name: deviceId
           required: true
@@ -253,7 +303,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
       tags:
         - chromeosdevices
@@ -269,12 +323,16 @@ paths:
       description: Update Chrome OS Device. This method supports patch semantics.
       operationId: directory.chromeosdevices.patch
       parameters:
-        - description: Immutable id of the Google Apps account
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ChromeOsDevice'
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
           type: string
-        - description: Immutable id of Chrome OS Device
+        - description: Immutable ID of Chrome OS Device
           in: path
           name: deviceId
           required: true
@@ -286,10 +344,6 @@ paths:
           in: query
           name: projection
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ChromeOsDevice'
       responses:
         '200':
           description: Successful response
@@ -298,18 +352,24 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
       tags:
         - chromeosdevices
     put:
       description: Update Chrome OS Device
       operationId: directory.chromeosdevices.update
       parameters:
-        - description: Immutable id of the Google Apps account
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ChromeOsDevice'
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
           type: string
-        - description: Immutable id of Chrome OS Device
+        - description: Immutable ID of Chrome OS Device
           in: path
           name: deviceId
           required: true
@@ -321,10 +381,6 @@ paths:
           in: query
           name: projection
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ChromeOsDevice'
       responses:
         '200':
           description: Successful response
@@ -332,6 +388,8 @@ paths:
             $ref: '#/definitions/ChromeOsDevice'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
       tags:
         - chromeosdevices
@@ -348,25 +406,27 @@ paths:
       description: Take action on Chrome OS Device
       operationId: directory.chromeosdevices.action
       parameters:
-        - description: Immutable id of the Google Apps account
-          in: path
-          name: customerId
-          required: true
-          type: string
-        - description: Immutable id of Chrome OS Device
-          in: path
-          name: resourceId
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ChromeOsDeviceAction'
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - description: Immutable ID of Chrome OS Device
+          in: path
+          name: resourceId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
       tags:
         - chromeosdevices
@@ -375,7 +435,7 @@ paths:
       description: Retrieve all Mobile Devices of a customer (paginated)
       operationId: directory.mobiledevices.list
       parameters:
-        - description: Immutable id of the Google Apps account
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
@@ -428,9 +488,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
       tags:
         - mobiledevices
@@ -447,12 +513,12 @@ paths:
       description: Delete Mobile Device
       operationId: directory.mobiledevices.delete
       parameters:
-        - description: Immutable id of the Google Apps account
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
           type: string
-        - description: Immutable id of Mobile Device
+        - description: Immutable ID of Mobile Device
           in: path
           name: resourceId
           required: true
@@ -463,20 +529,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
       tags:
         - mobiledevices
     get:
       description: Retrieve Mobile Device
       operationId: directory.mobiledevices.get
       parameters:
-        - description: Immutable id of the Google Apps account
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
-          required: true
-          type: string
-        - description: Immutable id of Mobile Device
-          in: path
-          name: resourceId
           required: true
           type: string
         - description: Restrict information returned to a set of selected fields.
@@ -486,6 +549,11 @@ paths:
           in: query
           name: projection
           type: string
+        - description: Immutable ID of Mobile Device
+          in: path
+          name: resourceId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -494,9 +562,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
       tags:
         - mobiledevices
@@ -521,27 +595,31 @@ paths:
       description: Take action on Mobile Device
       operationId: directory.mobiledevices.action
       parameters:
-        - description: Immutable id of the Google Apps account
-          in: path
-          name: customerId
-          required: true
-          type: string
-        - description: Immutable id of Mobile Device
-          in: path
-          name: resourceId
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/MobileDeviceAction'
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - description: Immutable ID of Mobile Device
+          in: path
+          name: resourceId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
       tags:
         - mobiledevices
@@ -550,7 +628,7 @@ paths:
       description: Retrieve all Organization Units
       operationId: directory.orgunits.list
       parameters:
-        - description: Immutable id of the Google Apps account
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
@@ -575,7 +653,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.orgunit.readonly'
       tags:
         - orgunits
@@ -591,15 +673,15 @@ paths:
       description: Add Organization Unit
       operationId: directory.orgunits.insert
       parameters:
-        - description: Immutable id of the Google Apps account
-          in: path
-          name: customerId
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/OrgUnit'
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -607,6 +689,8 @@ paths:
             $ref: '#/definitions/OrgUnit'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.orgunit'
       tags:
         - orgunits
@@ -731,7 +815,7 @@ paths:
       description: Retrieve all schemas for a customer
       operationId: directory.schemas.list
       parameters:
-        - description: Immutable id of the Google Apps account
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
@@ -744,7 +828,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
       tags:
         - schemas
@@ -760,15 +848,15 @@ paths:
       description: Create schema.
       operationId: directory.schemas.insert
       parameters:
-        - description: Immutable id of the Google Apps account
-          in: path
-          name: customerId
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Schema'
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -776,6 +864,8 @@ paths:
             $ref: '#/definitions/Schema'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
       tags:
         - schemas
@@ -784,7 +874,7 @@ paths:
       description: Delete schema
       operationId: directory.schemas.delete
       parameters:
-        - description: Immutable id of the Google Apps account
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
@@ -800,13 +890,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
       tags:
         - schemas
     get:
       description: Retrieve schema
       operationId: directory.schemas.get
       parameters:
-        - description: Immutable id of the Google Apps account
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
@@ -824,7 +916,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
       tags:
         - schemas
@@ -840,7 +936,11 @@ paths:
       description: Update schema. This method supports patch semantics.
       operationId: directory.schemas.patch
       parameters:
-        - description: Immutable id of the Google Apps account
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Schema'
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
@@ -850,10 +950,6 @@ paths:
           name: schemaKey
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Schema'
       responses:
         '200':
           description: Successful response
@@ -862,13 +958,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
       tags:
         - schemas
     put:
       description: Update schema
       operationId: directory.schemas.update
       parameters:
-        - description: Immutable id of the Google Apps account
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Schema'
+        - description: Immutable ID of the G Suite account
           in: path
           name: customerId
           required: true
@@ -878,10 +980,6 @@ paths:
           name: schemaKey
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Schema'
       responses:
         '200':
           description: Successful response
@@ -889,6 +987,8 @@ paths:
             $ref: '#/definitions/Schema'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.userschema'
       tags:
         - schemas
@@ -897,7 +997,7 @@ paths:
       description: Lists the domain aliases of the customer.
       operationId: directory.domainAliases.list
       parameters:
-        - description: Immutable id of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -914,7 +1014,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
       tags:
         - domainAliases
@@ -930,15 +1034,15 @@ paths:
       description: Inserts a Domain alias of the customer.
       operationId: directory.domainAliases.insert
       parameters:
-        - description: Immutable id of the Google Apps account.
-          in: path
-          name: customer
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/DomainAlias'
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -946,6 +1050,8 @@ paths:
             $ref: '#/definitions/DomainAlias'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
       tags:
         - domainAliases
@@ -954,7 +1060,7 @@ paths:
       description: Deletes a Domain Alias of the customer.
       operationId: directory.domainAliases.delete
       parameters:
-        - description: Immutable id of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -970,13 +1076,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
       tags:
         - domainAliases
     get:
       description: Retrieves a domain alias of the customer.
       operationId: directory.domainAliases.get
       parameters:
-        - description: Immutable id of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -994,7 +1102,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
       tags:
         - domainAliases
@@ -1011,7 +1123,7 @@ paths:
       description: Lists the domains of the customer.
       operationId: directory.domains.list
       parameters:
-        - description: Immutable id of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1024,7 +1136,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
       tags:
         - domains
@@ -1040,15 +1156,15 @@ paths:
       description: Inserts a domain of the customer.
       operationId: directory.domains.insert
       parameters:
-        - description: Immutable id of the Google Apps account.
-          in: path
-          name: customer
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Domains'
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1057,6 +1173,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
       tags:
         - domains
   '/customer/{customer}/domains/{domainName}':
@@ -1064,7 +1182,7 @@ paths:
       description: Deletes a domain of the customer.
       operationId: directory.domains.delete
       parameters:
-        - description: Immutable id of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1080,13 +1198,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
       tags:
         - domains
     get:
       description: Retrieves a domain of the customer.
       operationId: directory.domains.get
       parameters:
-        - description: Immutable id of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1104,7 +1224,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
       tags:
         - domains
@@ -1121,7 +1245,7 @@ paths:
       description: Retrieves a list of notifications.
       operationId: directory.notifications.list
       parameters:
-        - description: The unique ID for the customer's Google account.
+        - description: The unique ID for the customer's G Suite account.
           in: path
           name: customer
           required: true
@@ -1146,6 +1270,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
     parameters:
@@ -1161,7 +1287,7 @@ paths:
       description: Deletes a notification
       operationId: directory.notifications.delete
       parameters:
-        - description: The unique ID for the customer's Google account. The customerId is also returned as part of the Users resource.
+        - description: The unique ID for the customer's G Suite account. The customerId is also returned as part of the Users resource.
           in: path
           name: customer
           required: true
@@ -1177,13 +1303,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
     get:
       description: Retrieves a notification.
       operationId: directory.notifications.get
       parameters:
-        - description: The unique ID for the customer's Google account. The customerId is also returned as part of the Users resource.
+        - description: The unique ID for the customer's G Suite account. The customerId is also returned as part of the Users resource.
           in: path
           name: customer
           required: true
@@ -1200,6 +1328,8 @@ paths:
             $ref: '#/definitions/Notification'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
@@ -1215,7 +1345,11 @@ paths:
       description: Updates a notification. This method supports patch semantics.
       operationId: directory.notifications.patch
       parameters:
-        - description: The unique ID for the customer's Google account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Notification'
+        - description: The unique ID for the customer's G Suite account.
           in: path
           name: customer
           required: true
@@ -1225,10 +1359,6 @@ paths:
           name: notificationId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Notification'
       responses:
         '200':
           description: Successful response
@@ -1237,13 +1367,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
     put:
       description: Updates a notification.
       operationId: directory.notifications.update
       parameters:
-        - description: The unique ID for the customer's Google account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Notification'
+        - description: The unique ID for the customer's G Suite account.
           in: path
           name: customer
           required: true
@@ -1253,10 +1389,6 @@ paths:
           name: notificationId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Notification'
       responses:
         '200':
           description: Successful response
@@ -1264,6 +1396,8 @@ paths:
             $ref: '#/definitions/Notification'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
@@ -1272,7 +1406,7 @@ paths:
       description: Retrieves a list of calendar resources for an account.
       operationId: directory.resources.calendars.list
       parameters:
-        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
           in: path
           name: customer
           required: true
@@ -1295,7 +1429,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
       tags:
         - resources
@@ -1311,15 +1449,15 @@ paths:
       description: Inserts a calendar resource.
       operationId: directory.resources.calendars.insert
       parameters:
-        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
-          in: path
-          name: customer
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/CalendarResource'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1327,6 +1465,8 @@ paths:
             $ref: '#/definitions/CalendarResource'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
@@ -1335,14 +1475,14 @@ paths:
       description: Deletes a calendar resource.
       operationId: directory.resources.calendars.delete
       parameters:
-        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
-          in: path
-          name: customer
-          required: true
-          type: string
         - description: The unique ID of the calendar resource to delete.
           in: path
           name: calendarResourceId
+          required: true
+          type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
           required: true
           type: string
       responses:
@@ -1351,20 +1491,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
     get:
       description: Retrieves a calendar resource.
       operationId: directory.resources.calendars.get
       parameters:
-        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
-          in: path
-          name: customer
-          required: true
-          type: string
         - description: The unique ID of the calendar resource to retrieve.
           in: path
           name: calendarResourceId
+          required: true
+          type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
           required: true
           type: string
       responses:
@@ -1375,7 +1517,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
       tags:
         - resources
@@ -1391,20 +1537,20 @@ paths:
       description: Updates a calendar resource. This method supports patch semantics.
       operationId: directory.resources.calendars.patch
       parameters:
-        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
-          in: path
-          name: customer
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CalendarResource'
         - description: The unique ID of the calendar resource to update.
           in: path
           name: calendarResourceId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CalendarResource'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1413,26 +1559,28 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
     put:
       description: Updates a calendar resource.
       operationId: directory.resources.calendars.update
       parameters:
-        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
-          in: path
-          name: customer
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CalendarResource'
         - description: The unique ID of the calendar resource to update.
           in: path
           name: calendarResourceId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CalendarResource'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1440,6 +1588,8 @@ paths:
             $ref: '#/definitions/CalendarResource'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
       tags:
         - resources
@@ -1448,7 +1598,7 @@ paths:
       description: Retrieves a paginated list of all roleAssignments.
       operationId: directory.roleAssignments.list
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1479,7 +1629,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
       tags:
         - roleAssignments
@@ -1495,15 +1649,15 @@ paths:
       description: Creates a role assignment.
       operationId: directory.roleAssignments.insert
       parameters:
-        - description: Immutable ID of the Google Apps account.
-          in: path
-          name: customer
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/RoleAssignment'
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1511,6 +1665,8 @@ paths:
             $ref: '#/definitions/RoleAssignment'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roleAssignments
@@ -1519,7 +1675,7 @@ paths:
       description: Deletes a role assignment.
       operationId: directory.roleAssignments.delete
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1535,13 +1691,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roleAssignments
     get:
       description: Retrieve a role assignment.
       operationId: directory.roleAssignments.get
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1559,7 +1717,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
       tags:
         - roleAssignments
@@ -1576,7 +1738,7 @@ paths:
       description: Retrieves a paginated list of all the roles in a domain.
       operationId: directory.roles.list
       parameters:
-        - description: Immutable id of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1599,7 +1761,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
       tags:
         - roles
@@ -1615,15 +1781,15 @@ paths:
       description: Creates a role.
       operationId: directory.roles.insert
       parameters:
-        - description: Immutable ID of the Google Apps account.
-          in: path
-          name: customer
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Role'
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1632,6 +1798,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roles
   '/customer/{customer}/roles/ALL/privileges':
@@ -1639,7 +1807,7 @@ paths:
       description: Retrieves a paginated list of all privileges for a customer.
       operationId: directory.privileges.list
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1652,7 +1820,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
       tags:
         - privileges
@@ -1669,7 +1841,7 @@ paths:
       description: Deletes a role.
       operationId: directory.roles.delete
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1685,13 +1857,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roles
     get:
       description: Retrieves a role.
       operationId: directory.roles.get
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1709,7 +1883,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
       tags:
         - roles
@@ -1725,7 +1903,11 @@ paths:
       description: Updates a role. This method supports patch semantics.
       operationId: directory.roles.patch
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Role'
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1735,10 +1917,6 @@ paths:
           name: roleId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Role'
       responses:
         '200':
           description: Successful response
@@ -1747,13 +1925,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roles
     put:
       description: Updates a role.
       operationId: directory.roles.update
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Role'
+        - description: Immutable ID of the G Suite account.
           in: path
           name: customer
           required: true
@@ -1763,10 +1947,6 @@ paths:
           name: roleId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Role'
       responses:
         '200':
           description: Successful response
@@ -1774,6 +1954,8 @@ paths:
             $ref: '#/definitions/Role'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
       tags:
         - roles
@@ -1795,7 +1977,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.customer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.customer'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.customer.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.customer.readonly'
       tags:
         - customers
@@ -1828,6 +2014,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.customer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.customer'
       tags:
         - customers
     put:
@@ -1851,6 +2039,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.customer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.customer'
       tags:
         - customers
   /groups:
@@ -1858,7 +2048,7 @@ paths:
       description: Retrieve all groups in a domain (paginated)
       operationId: directory.groups.list
       parameters:
-        - description: 'Immutable id of the Google Apps account. In case of multi-domain, to fetch all groups for a customer, fill this field instead of domain.'
+        - description: 'Immutable ID of the G Suite account. In case of multi-domain, to fetch all groups for a customer, fill this field instead of domain.'
           in: query
           name: customer
           type: string
@@ -1887,7 +2077,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - groups
@@ -1915,6 +2109,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
   '/groups/{groupKey}':
@@ -1932,6 +2128,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
@@ -1952,7 +2150,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - groups
@@ -1985,6 +2187,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
     put:
@@ -2008,6 +2212,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
   '/groups/{groupKey}/aliases':
@@ -2028,7 +2234,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - groups
@@ -2061,6 +2271,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
   '/groups/{groupKey}/aliases/{alias}':
@@ -2083,6 +2295,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group'
       tags:
         - groups
@@ -2125,11 +2339,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - members
@@ -2162,7 +2384,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
       tags:
         - members
@@ -2187,7 +2413,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
       tags:
         - members
@@ -2213,11 +2443,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
       tags:
         - members
@@ -2255,7 +2493,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
       tags:
         - members
@@ -2285,7 +2527,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
       tags:
         - members
@@ -2298,7 +2544,7 @@ paths:
           in: query
           name: customFieldMask
           type: string
-        - description: 'Immutable id of the Google Apps account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.'
+        - description: 'Immutable ID of the G Suite account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.'
           in: query
           name: customer
           type: string
@@ -2374,7 +2620,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -2402,6 +2652,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
   /users/watch:
@@ -2421,7 +2673,7 @@ paths:
           in: query
           name: customFieldMask
           type: string
-        - description: 'Immutable id of the Google Apps account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.'
+        - description: 'Immutable ID of the G Suite account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.'
           in: query
           name: customer
           type: string
@@ -2470,6 +2722,10 @@ paths:
           in: query
           name: query
           type: string
+        - in: body
+          name: resource
+          schema:
+            $ref: '#/definitions/Channel'
         - description: If set to true retrieves the list of deleted users. Default is false
           in: query
           name: showDeleted
@@ -2489,10 +2745,6 @@ paths:
           in: query
           name: viewType
           type: string
-        - in: body
-          name: resource
-          schema:
-            $ref: '#/definitions/Channel'
       responses:
         '200':
           description: Successful response
@@ -2501,7 +2753,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -2520,6 +2776,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
@@ -2561,7 +2819,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -2594,6 +2856,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
     put:
@@ -2616,6 +2880,8 @@ paths:
             $ref: '#/definitions/User'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
@@ -2644,11 +2910,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -2681,7 +2955,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias'
       tags:
         - users
@@ -2722,11 +3000,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -2751,7 +3037,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.alias'
       tags:
         - users
@@ -2780,6 +3070,8 @@ paths:
             $ref: '#/definitions/Asps'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - asps
@@ -2812,6 +3104,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - asps
     get:
@@ -2835,6 +3129,8 @@ paths:
             $ref: '#/definitions/Asp'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - asps
@@ -2874,6 +3170,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
   '/users/{userKey}/photos/thumbnail':
@@ -2891,6 +3189,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
@@ -2911,7 +3211,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
       tags:
         - users
@@ -2944,6 +3248,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
     put:
@@ -2967,6 +3273,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
   '/users/{userKey}/tokens':
@@ -2986,6 +3294,8 @@ paths:
             $ref: '#/definitions/Tokens'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - tokens
@@ -3018,6 +3328,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - tokens
     get:
@@ -3041,6 +3353,8 @@ paths:
             $ref: '#/definitions/Token'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - tokens
@@ -3080,6 +3394,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
       tags:
         - users
   '/users/{userKey}/verificationCodes':
@@ -3099,6 +3415,8 @@ paths:
             $ref: '#/definitions/VerificationCodes'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - verificationCodes
@@ -3134,6 +3452,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - verificationCodes
   '/users/{userKey}/verificationCodes/invalidate':
@@ -3159,6 +3479,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.user.security'
       tags:
         - verificationCodes
@@ -3376,7 +3698,7 @@ definitions:
         format: date-time
         type: string
       lastSync:
-        description: Date and time the device was last synchronized with the policy settings in the Google Apps administrator control panel (Read-only)
+        description: Date and time the device was last synchronized with the policy settings in the G Suite administrator control panel (Read-only)
         format: date-time
         type: string
       macAddress:
@@ -3474,7 +3796,7 @@ definitions:
         description: ETag of the resource.
         type: string
       id:
-        description: The unique ID for the customer's Google account. (Readonly)
+        description: The unique ID for the customer's G Suite account. (Readonly)
         type: string
       kind:
         default: 'admin#directory#customer'
@@ -3779,7 +4101,7 @@ definitions:
         description: ETag of the resource.
         type: string
       firstSync:
-        description: Date and time the device was first synchronized with the policy settings in the Google Apps administrator control panel (Read-only)
+        description: Date and time the device was first synchronized with the policy settings in the G Suite administrator control panel (Read-only)
         format: date-time
         type: string
       hardware:
@@ -3799,7 +4121,7 @@ definitions:
         description: Kind of resource this is.
         type: string
       lastSync:
-        description: Date and time the device was last synchronized with the policy settings in the Google Apps administrator control panel (Read-only)
+        description: Date and time the device was last synchronized with the policy settings in the G Suite administrator control panel (Read-only)
         format: date-time
         type: string
       managedAccountIsOnOwnerProfile:
@@ -4287,7 +4609,7 @@ definitions:
         description: Boolean indicating if the user should change password in next login
         type: boolean
       creationTime:
-        description: User's Google account creation time. (Read-only)
+        description: User's G Suite account creation time. (Read-only)
         format: date-time
         readOnly: true
         type: string
@@ -4353,6 +4675,7 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+      locations: {}
       name:
         $ref: '#/definitions/UserName'
         description: User's name
@@ -4502,6 +4825,31 @@ definitions:
         description: 'Each entry can have a type which indicates standard types of that entry. For example instant messengers could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value. Such types should have the CUSTOM value as type and also have a customType value.'
         type: string
     type: object
+  UserLocation:
+    description: JSON template for a location entry.
+    properties:
+      area:
+        description: 'Textual location. This is most useful for display purposes to concisely describe the location. E.g. "Mountain View, CA", "Near Seattle", "US-NYC-9TH 9A209A".'
+        type: string
+      buildingId:
+        description: Building Identifier.
+        type: string
+      customType:
+        description: Custom Type.
+        type: string
+      deskCode:
+        description: Most specific textual code of individual desk location.
+        type: string
+      floorName:
+        description: Floor name/number.
+        type: string
+      floorSection:
+        description: 'Floor Section. More specific location within the floor. E.g. if a floor is divided into sections "A", "B", and "C", this field would identify one of those values.'
+        type: string
+      type:
+        description: 'Each entry can have a type which indicates standard types of that entry. For example location could be of types default and desk. In addition to standard type, an entry can have a custom type and can give it any name. Such types should have "custom" as type and also have a customType value.'
+        type: string
+    type: object
   UserMakeAdmin:
     description: JSON request template for setting/revoking admin status of a user in Directory API.
     properties:
@@ -4611,7 +4959,7 @@ definitions:
     description: 'JSON template for a POSIX account entry. Description of the field family: go/fbs-posix.'
     properties:
       gecos:
-        description: The GECOS (user information) entry for this account.
+        description: The GECOS (user information) for this account.
         type: string
       gid:
         description: The default group ID.
@@ -4630,7 +4978,7 @@ definitions:
         description: System identifier for which account Username or Uid apply to.
         type: string
       uid:
-        description: The user ID.
+        description: The POSIX compliant user ID.
         format: int32
         type: integer
       username:

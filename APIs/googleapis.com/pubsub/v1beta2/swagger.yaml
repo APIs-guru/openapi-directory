@@ -37,11 +37,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/pubsub': View and manage Pub/Sub topics and subscriptions
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/pubsub': View and manage Pub/Sub topics and subscriptions
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -138,20 +147,27 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
     put:
-      description: Creates the given topic with the given name.
-      operationId: pubsub.projects.topics.create
+      description: |-
+        Creates a subscription to a given topic.
+        If the subscription already exists, returns `ALREADY_EXISTS`.
+        If the corresponding topic doesn't exist, returns `NOT_FOUND`.
+
+        If the name is not provided in the request, the server will assign a random
+        name for this subscription on the same project as the topic. Note that
+        for REST API requests, you must specify a name.
+      operationId: pubsub.projects.subscriptions.create
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Topic'
+            $ref: '#/definitions/Subscription'
         - description: |-
-            The name of the topic. It must have the format
-            `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
-            and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
-            underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
-            signs (`%`). It must be between 3 and 255 characters in length, and it
-            must not start with `"goog"`.
+            The name of the subscription. It must have the format
+            `"projects/{project}/subscriptions/{subscription}"`. `{subscription}` must
+            start with a letter, and contain only letters (`[A-Za-z]`), numbers
+            (`[0-9]`), dashes (`-`), underscores (`_`), periods (`.`), tildes (`~`),
+            plus (`+`) or percent signs (`%`). It must be between 3 and 255 characters
+            in length, and it must not start with `"goog"`.
           in: path
           name: name
           required: true
@@ -161,11 +177,15 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Topic'
+            $ref: '#/definitions/Subscription'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -199,7 +219,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -247,7 +271,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -271,7 +299,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: pubsub.projects.topics.getIamPolicy
+      operationId: pubsub.projects.subscriptions.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -289,7 +317,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -326,7 +358,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: pubsub.projects.topics.setIamPolicy
+      operationId: pubsub.projects.subscriptions.setIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
@@ -348,7 +380,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -376,7 +412,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: pubsub.projects.topics.testIamPermissions
+      operationId: pubsub.projects.subscriptions.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
@@ -398,7 +434,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -426,7 +466,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -448,7 +492,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -510,7 +558,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -556,7 +608,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -603,7 +659,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -648,7 +708,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -676,7 +740,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -698,7 +766,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -746,7 +818,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
@@ -804,7 +880,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
