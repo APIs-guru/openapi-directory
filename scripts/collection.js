@@ -816,6 +816,8 @@ function lintParameter(param) {
 }
 
 function patchSwagger(swagger, exPatch) {
+  if (swagger.info.version && swagger.info.version === 'version')
+    delete swagger.info.version;
   //use 1.0.0 as default version
   if (_.isUndefined(swagger.info.version))
     swagger.info.version = '1.0.0';
@@ -961,13 +963,11 @@ function applyMergePatch(target, patch) {
     if ((_.isArray(target[key])) && (_.isArray(value)))
 	  return target[key].concat(value);
 
-    if ((typeof target[key] !== 'undefined') && (target[key] === value)) {
+    if ((typeof target[key] !== 'undefined') && (target[key] === value))
       return value;
-    }
 
-	if (key == 'x-providerName') {
+	if (key === 'x-providerName')
       return value;
-	}
 
     assert(_.isUndefined(target[key]), 'Patch tried to override property: ' + key + ' ' + target[key] + ' ' + value);
     target[key] = value;
