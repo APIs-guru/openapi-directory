@@ -372,7 +372,8 @@ function writeSpec(source, format, exPatch, command) {
       if (validation.warnings)
         logYaml(validation.warnings);
 
-      context.swagger = validation.remotesResolved;
+      if (validation.remotesResolved)
+        context.swagger = validation.remotesResolved;
 
       var filename = util.saveSwagger(context.swagger);
 
