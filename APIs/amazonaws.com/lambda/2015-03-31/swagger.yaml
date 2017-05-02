@@ -1,0 +1,2093 @@
+swagger: '2.0'
+info:
+  version: '2015-03-31'
+  x-release: v4
+  title: AWS Lambda
+  description: '<fullname>AWS Lambda</fullname> <p> <b>Overview</b> </p> <p>This is the <i>AWS Lambda API Reference</i>. The AWS Lambda Developer Guide provides additional information. For the service overview, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/welcome.html">What is AWS Lambda</a>, and for information about how the service works, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">AWS Lambda: How it Works</a> in the <i>AWS Lambda Developer Guide</i>.</p>'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: lambda
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/lambda-2015-03-31.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/lambda/2015-03-31/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/lambda/'
+host: lambda.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/2015-03-31/functions/{FunctionName}/policy':
+    get:
+      operationId: GetPolicy
+      description: '<p>Returns the resource policy associated with the specified Lambda function.</p> <p> If you are using the versioning feature, you can get the resource policy associated with the specific Lambda function version or alias by specifying the version or alias name using the <code>Qualifier</code> parameter. For more information about versioning, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>. </p> <p>You need permission for the <code>lambda:GetPolicy action.</code> </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPolicyResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetPolicyRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-03-31/functions/{FunctionName}/aliases':
+    get:
+      operationId: ListAliases
+      description: '<p>Returns list of aliases created for a Lambda function. For each alias, the response includes information such as the alias ARN, description, alias name, and the function version to which it points. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html">Introduction to AWS Lambda Aliases</a>.</p> <p>This requires permission for the lambda:ListAliases action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAliasesResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAliasesRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-03-31/event-source-mappings/:
+    get:
+      operationId: ListEventSourceMappings
+      description: '<p>Returns a list of event source mappings you created using the <code>CreateEventSourceMapping</code> (see <a>CreateEventSourceMapping</a>). </p> <p>For each mapping, the API returns configuration information. You can optionally specify filters to retrieve specific event source mappings.</p> <p>If you are using the versioning feature, you can get list of event source mappings for a specific Lambda function version or an alias as described in the <code>FunctionName</code> parameter. For information about the versioning feature, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:ListEventSourceMappings</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListEventSourceMappingsResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListEventSourceMappingsRequest'
+        - name: MaxItems
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-03-31/functions:
+    post:
+      operationId: CreateFunction
+      description: '<p>Creates a new Lambda function. The function metadata is created from the request parameters, and the code for the function is provided by a .zip file in the request body. If the function name already exists, the operation will fail. Note that the function name is case-sensitive.</p> <p> If you are using versioning, you can also publish a version of the Lambda function you are creating using the <code>Publish</code> parameter. For more information about versioning, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:CreateFunction</code> action.</p>'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/FunctionConfiguration'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: CodeStorageExceededException
+          schema:
+            $ref: '#/definitions/CodeStorageExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFunctionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-03-31/functions/{FunctionName}/aliases/{Name}':
+    put:
+      operationId: UpdateAlias
+      description: '<p>Using this API you can update the function version to which the alias points and the alias description. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html">Introduction to AWS Lambda Aliases</a>.</p> <p>This requires permission for the lambda:UpdateAlias action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AliasConfiguration'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAliasRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: Name
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-03-31/event-source-mappings/{UUID}':
+    put:
+      operationId: UpdateEventSourceMapping
+      description: '<p>You can update an event source mapping. This is useful if you want to change the parameters of the existing mapping without losing your position in the stream. You can change which function will receive the stream records, but to change the stream itself, you must create a new mapping.</p> <p>If you are using the versioning feature, you can update the event source mapping to map to a specific Lambda function version or alias as described in the <code>FunctionName</code> parameter. For information about the versioning feature, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>. </p> <p>If you disable the event source mapping, AWS Lambda stops polling. If you enable again, it will resume polling from the time it had stopped polling, so you don''t lose processing of any records. However, if you delete event source mapping and create it again, it will reset.</p> <p>This operation requires permission for the <code>lambda:UpdateEventSourceMapping</code> action.</p>'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventSourceMappingConfiguration'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEventSourceMappingRequest'
+        - name: UUID
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-03-31/functions/{FunctionName}':
+    get:
+      operationId: GetFunction
+      description: '<p>Returns the configuration information of the Lambda function and a presigned URL link to the .zip file you uploaded with <a>CreateFunction</a> so you can download the .zip file. Note that the URL is valid for up to 10 minutes. The configuration information is the same information you provided as parameters when uploading the function.</p> <p>Using the optional <code>Qualifier</code> parameter, you can specify a specific function version for which you want this information. If you don''t specify this parameter, the API uses unqualified function ARN which return information about the <code>$LATEST</code> version of the Lambda function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>.</p> <p>This operation requires permission for the <code>lambda:GetFunction</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFunctionResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFunctionRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2016-08-19/account-settings/:
+    get:
+      operationId: GetAccountSettings
+      description: '<p>Returns a customer''s account settings.</p> <p>You can use this operation to retrieve Lambda limits information, such as code size and concurrency limits. For more information about limits, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/limits.html">AWS Lambda Limits</a>. You can also retrieve resource usage statistics, such as code storage usage and function count.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAccountSettingsResponse'
+        '480':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '481':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAccountSettingsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-03-31/functions/{FunctionName}/configuration':
+    put:
+      operationId: UpdateFunctionConfiguration
+      description: '<p>Updates the configuration parameters for the specified Lambda function by using the values provided in the request. You provide only the parameters you want to change. This operation must only be used on an existing Lambda function and cannot be used to update the function''s code.</p> <p>If you are using the versioning feature, note this API will always update the $LATEST version of your Lambda function. For information about the versioning feature, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:UpdateFunctionConfiguration</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FunctionConfiguration'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFunctionConfigurationRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-03-31/functions/{FunctionName}/invocations':
+    post:
+      operationId: Invoke
+      description: '<p>Invokes a specific Lambda function. For an example, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually">Create the Lambda Function and Test It Manually</a>. </p> <p>If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the <code>Qualifier</code> parameter in the request. If you don''t provide the <code>Qualifier</code> parameter, the <code>$LATEST</code> version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InvocationResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidRequestContentException
+          schema:
+            $ref: '#/definitions/InvalidRequestContentException'
+        '483':
+          description: RequestTooLargeException
+          schema:
+            $ref: '#/definitions/RequestTooLargeException'
+        '484':
+          description: UnsupportedMediaTypeException
+          schema:
+            $ref: '#/definitions/UnsupportedMediaTypeException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '486':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '487':
+          description: EC2UnexpectedException
+          schema:
+            $ref: '#/definitions/EC2UnexpectedException'
+        '488':
+          description: SubnetIPAddressLimitReachedException
+          schema:
+            $ref: '#/definitions/SubnetIPAddressLimitReachedException'
+        '489':
+          description: ENILimitReachedException
+          schema:
+            $ref: '#/definitions/ENILimitReachedException'
+        '490':
+          description: EC2ThrottledException
+          schema:
+            $ref: '#/definitions/EC2ThrottledException'
+        '491':
+          description: EC2AccessDeniedException
+          schema:
+            $ref: '#/definitions/EC2AccessDeniedException'
+        '492':
+          description: InvalidSubnetIDException
+          schema:
+            $ref: '#/definitions/InvalidSubnetIDException'
+        '493':
+          description: InvalidSecurityGroupIDException
+          schema:
+            $ref: '#/definitions/InvalidSecurityGroupIDException'
+        '494':
+          description: InvalidZipFileException
+          schema:
+            $ref: '#/definitions/InvalidZipFileException'
+        '495':
+          description: KMSDisabledException
+          schema:
+            $ref: '#/definitions/KMSDisabledException'
+        '496':
+          description: KMSInvalidStateException
+          schema:
+            $ref: '#/definitions/KMSInvalidStateException'
+        '497':
+          description: KMSAccessDeniedException
+          schema:
+            $ref: '#/definitions/KMSAccessDeniedException'
+        '498':
+          description: KMSNotFoundException
+          schema:
+            $ref: '#/definitions/KMSNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/InvocationRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2014-11-13/functions/{FunctionName}/invoke-async/':
+    post:
+      operationId: InvokeAsync
+      description: '<important> <p>This API is deprecated. We recommend you use <code>Invoke</code> API (see <a>Invoke</a>).</p> </important> <p>Submits an invocation request to AWS Lambda. Upon receiving the request, Lambda executes the specified function asynchronously. To see the logs generated by the Lambda function execution, see the CloudWatch Logs console.</p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/InvokeAsyncResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidRequestContentException
+          schema:
+            $ref: '#/definitions/InvalidRequestContentException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/InvokeAsyncRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /2015-03-31/functions/:
+    get:
+      operationId: ListFunctions
+      description: '<p>Returns a list of your Lambda functions. For each function, the response includes the function configuration information. You must use <a>GetFunction</a> to retrieve the code for your function.</p> <p>This operation requires permission for the <code>lambda:ListFunctions</code> action.</p> <p>If you are using versioning feature, the response returns list of $LATEST versions of your functions. For information about the versioning feature, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFunctionsResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListFunctionsRequest'
+        - name: MaxItems
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2017-03-31/tags/{ARN}':
+    delete:
+      operationId: UntagResource
+      description: 'Removes tags from a Lambda function. Requires the function ARN (Amazon Resource Name). '
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: ARN
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-03-31/functions/{FunctionName}/versions':
+    post:
+      operationId: PublishVersion
+      description: 'Publishes a version of your function from the current snapshot of $LATEST. That is, AWS Lambda takes a snapshot of the function code and configuration information from $LATEST and publishes a new version. The code and configuration cannot be modified after publication. For information about the versioning feature, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>. '
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/FunctionConfiguration'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: CodeStorageExceededException
+          schema:
+            $ref: '#/definitions/CodeStorageExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PublishVersionRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-03-31/functions/{FunctionName}/policy/{StatementId}':
+    delete:
+      operationId: RemovePermission
+      description: '<p>You can remove individual permissions from an resource policy associated with a Lambda function by providing a statement ID that you provided when you added the permission.</p> <p>If you are using versioning, the permissions you remove are specific to the Lambda function version or alias you specify in the <code>AddPermission</code> request via the <code>Qualifier</code> parameter. For more information about versioning, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>. </p> <p>Note that removal of a permission will cause an active event source to lose permission to the function.</p> <p>You need permission for the <code>lambda:RemovePermission</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemovePermissionRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+        - name: StatementId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2015-03-31/functions/{FunctionName}/code':
+    put:
+      operationId: UpdateFunctionCode
+      description: '<p>Updates the code for the specified Lambda function. This operation must only be used on an existing Lambda function and cannot be used to update the function configuration.</p> <p>If you are using the versioning feature, note this API will always update the $LATEST version of your Lambda function. For information about the versioning feature, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:UpdateFunctionCode</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FunctionConfiguration'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: CodeStorageExceededException
+          schema:
+            $ref: '#/definitions/CodeStorageExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFunctionCodeRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AccountLimit:
+    type: object
+    properties:
+      TotalCodeSize:
+        $ref: '#/definitions/Long'
+        description: 'Maximum size, in bytes, of a code package you can upload per region. The default size is 75 GB. '
+      CodeSizeUnzipped:
+        $ref: '#/definitions/Long'
+        description: 'Size, in bytes, of code/dependencies that you can zip into a deployment package (uncompressed zip/jar size) for uploading. The default limit is 250 MB.'
+      CodeSizeZipped:
+        $ref: '#/definitions/Long'
+        description: 'Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using Amazon S3 for uploading larger files. Default limit is 50 MB.'
+      ConcurrentExecutions:
+        $ref: '#/definitions/Integer'
+        description: 'Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Lambda Function Concurrent Executions</a>. The default limit is 100.'
+    description: Provides limits of code size and concurrency associated with the current account and region.
+  AccountUsage:
+    type: object
+    properties:
+      TotalCodeSize:
+        $ref: '#/definitions/Long'
+        description: 'Total size, in bytes, of the account''s deployment packages per region.'
+      FunctionCount:
+        $ref: '#/definitions/Long'
+        description: The number of your account's existing functions per region.
+    description: Provides code size usage and function count associated with the current account and region.
+  Action:
+    type: string
+    pattern: '(lambda:[*]|lambda:[a-zA-Z]+|[*])'
+  AddPermissionRequest:
+    type: object
+    required:
+      - StatementId
+      - Action
+      - Principal
+    example:
+      Action: 'lambda:InvokeFunction'
+      FunctionName: MyFunction
+      Principal: s3.amazonaws.com
+      SourceAccount: '123456789012'
+      SourceArn: 'arn:aws:s3:::examplebucket/*'
+      StatementId: ID-1
+    properties:
+      StatementId:
+        $ref: '#/definitions/StatementId'
+        description: A unique statement identifier.
+      Action:
+        $ref: '#/definitions/Action'
+        description: 'The AWS Lambda action you want to allow in this statement. Each Lambda action is a string starting with <code>lambda:</code> followed by the API name . For example, <code>lambda:CreateFunction</code>. You can use wildcard (<code>lambda:*</code>) to grant permission for all AWS Lambda actions. '
+      Principal:
+        $ref: '#/definitions/Principal'
+        description: 'The principal who is getting this permission. It can be Amazon S3 service Principal (<code>s3.amazonaws.com</code>) if you want Amazon S3 to invoke the function, an AWS account ID if you are granting cross-account permission, or any valid AWS service principal such as <code>sns.amazonaws.com</code>. For example, you might want to allow a custom application in another AWS account to push events to AWS Lambda by invoking your function. '
+      SourceArn:
+        $ref: '#/definitions/Arn'
+        description: '<p>This is optional; however, when granting permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) as its value. This ensures that only events generated from the specified source can invoke the function.</p> <important> <p>If you add a permission without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function.</p> </important>'
+      SourceAccount:
+        $ref: '#/definitions/SourceOwner'
+        description: 'This parameter is used for S3 and SES. The AWS account ID (without a hyphen) of the source owner. For example, if the <code>SourceArn</code> identifies a bucket, then this is the bucket owner''s account ID. You can use this additional condition to ensure the bucket you specify is owned by a specific account (it is possible the bucket owner deleted the bucket and some other AWS account created the bucket). You can also use this condition to specify all sources (that is, you don''t specify the <code>SourceArn</code>) owned by a specific account. '
+      EventSourceToken:
+        $ref: '#/definitions/EventSourceToken'
+        description: A unique token that must be supplied by the principal invoking the function. This is currently only used for Alexa Smart Home functions.
+    description: <p/>
+  AddPermissionResponse:
+    type: object
+    example:
+      Statement: ID-1
+    properties:
+      Statement:
+        $ref: '#/definitions/String'
+        description: The permission statement you specified in the request. The response returns the same as a string using a backslash ("\") as an escape character in the JSON.
+    description: <p/>
+  Alias:
+    type: string
+    pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_]+)'
+    minLength: 1
+    maxLength: 128
+  AliasConfiguration:
+    type: object
+    example:
+      AliasArn: 'arn:aws:lambda:us-west-2:123456789012:function:functionAlias'
+      Description: ''
+      FunctionVersion: '1'
+      Name: functionAlias
+    properties:
+      AliasArn:
+        $ref: '#/definitions/FunctionArn'
+        description: 'Lambda function ARN that is qualified using the alias name as the suffix. For example, if you create an alias called <code>BETA</code> that points to a helloworld function version, the ARN is <code>arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA</code>.'
+      Name:
+        $ref: '#/definitions/Alias'
+        description: Alias name.
+      FunctionVersion:
+        $ref: '#/definitions/Version'
+        description: Function version to which the alias points.
+      Description:
+        $ref: '#/definitions/Description'
+        description: Alias description.
+    description: Provides configuration information about a Lambda function version alias.
+  AliasList:
+    type: array
+    items:
+      $ref: '#/definitions/AliasConfiguration'
+  Arn:
+    type: string
+    pattern: 'arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)'
+  BatchSize:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  Blob:
+    type: string
+    format: password
+  BlobStream:
+    type: string
+  Boolean:
+    type: boolean
+  CodeStorageExceededException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+        description: <p/>
+      message:
+        $ref: '#/definitions/String'
+    description: 'You have exceeded your maximum total code size per account. <a href="http://docs.aws.amazon.com/lambda/latest/dg/limits.html">Limits</a> '
+  CreateAliasRequest:
+    type: object
+    required:
+      - Name
+      - FunctionVersion
+    properties:
+      Name:
+        $ref: '#/definitions/Alias'
+        description: Name for the alias you are creating.
+      FunctionVersion:
+        $ref: '#/definitions/Version'
+        description: Lambda function version for which you are creating the alias.
+      Description:
+        $ref: '#/definitions/Description'
+        description: Description of the alias.
+  CreateEventSourceMappingRequest:
+    type: object
+    required:
+      - EventSourceArn
+      - FunctionName
+      - StartingPosition
+    properties:
+      EventSourceArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) of the Amazon Kinesis or the Amazon DynamoDB stream that is the event source. Any record added to this stream could cause AWS Lambda to invoke your Lambda function, it depends on the <code>BatchSize</code>. AWS Lambda POSTs the Amazon Kinesis event, containing records, to your Lambda function as JSON.'
+      FunctionName:
+        $ref: '#/definitions/FunctionName'
+        description: '<p>The Lambda function to invoke when AWS Lambda detects an event on the stream.</p> <p> You can specify the function name (for example, <code>Thumbnail</code>) or you can specify Amazon Resource Name (ARN) of the function (for example, <code>arn:aws:lambda:us-west-2:account-id:function:ThumbNail</code>). </p> <p> If you are using versioning, you can also provide a qualified function ARN (ARN that is qualified with function version or alias name as suffix). For more information about versioning, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a> </p> <p>AWS Lambda also allows you to specify only the function name with the account ID qualifier (for example, <code>account-id:Thumbnail</code>). </p> <p>Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: 'Indicates whether AWS Lambda should begin polling the event source. By default, <code>Enabled</code> is true. '
+      BatchSize:
+        $ref: '#/definitions/BatchSize'
+        description: The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function. Your function receives an event with all the retrieved records. The default is 100 records.
+      StartingPosition:
+        $ref: '#/definitions/EventSourcePosition'
+        description: 'The position in the stream where AWS Lambda should start reading. Valid only for Kinesis streams. For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">ShardIteratorType</a> in the <i>Amazon Kinesis API Reference</i>. '
+      StartingPositionTimestamp:
+        $ref: '#/definitions/Date'
+        description: 'The timestamp of the data record from which to start reading. Used with <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">shard iterator type</a> AT_TIMESTAMP. If a record with this exact timestamp does not exist, the iterator returned is for the next (later) record. If the timestamp is older than the current trim horizon, the iterator returned is for the oldest untrimmed data record (TRIM_HORIZON). Valid only for Kinesis streams. '
+    description: <p/>
+  CreateFunctionRequest:
+    type: object
+    required:
+      - FunctionName
+      - Runtime
+      - Role
+      - Handler
+      - Code
+    example:
+      Code: {}
+      Description: ''
+      FunctionName: MyFunction
+      Handler: souce_file.handler_name
+      MemorySize: 128
+      Publish: true
+      Role: 'arn:aws:iam::123456789012:role/service-role/role-name'
+      Runtime: nodejs4.3
+      Timeout: 15
+      VpcConfig: {}
+    properties:
+      FunctionName:
+        $ref: '#/definitions/FunctionName'
+        description: 'The name you want to assign to the function you are uploading. The function names appear in the console and are returned in the <a>ListFunctions</a> API. Function names are used to specify functions to other AWS Lambda API operations, such as <a>Invoke</a>. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. '
+      Runtime:
+        $ref: '#/definitions/Runtime'
+        description: '<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".</p> <note> <p>You can no longer create functions using the v0.10.42 runtime version as of November, 2016. Existing functions will be supported until early 2017, but we recommend you migrate them to either nodejs6.10 or nodejs4.3 runtime version as soon as possible.</p> </note>'
+      Role:
+        $ref: '#/definitions/RoleArn'
+        description: 'The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">AWS Lambda: How it Works</a>. '
+      Handler:
+        $ref: '#/definitions/Handler'
+        description: 'The function within your code that Lambda calls to begin execution. For Node.js, it is the <i>module-name</i>.<i>export</i> value in your function. For Java, it can be <code>package.class-name::handler</code> or <code>package.class-name</code>. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/java-programming-model-handler-types.html">Lambda Function Handler (Java)</a>. '
+      Code:
+        $ref: '#/definitions/FunctionCode'
+        description: The code for the Lambda function.
+      Description:
+        $ref: '#/definitions/Description'
+        description: 'A short, user-defined function description. Lambda does not use this value. Assign a meaningful description as you see fit.'
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: 'The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds.'
+      MemorySize:
+        $ref: '#/definitions/MemorySize'
+        description: 'The amount of memory, in MB, your Lambda function is given. Lambda uses this memory size to infer the amount of CPU and memory allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.'
+      Publish:
+        $ref: '#/definitions/Boolean'
+        description: This boolean parameter can be used to request AWS Lambda to create the Lambda function and publish a version as an atomic operation.
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID.'
+      DeadLetterConfig:
+        $ref: '#/definitions/DeadLetterConfig'
+        description: 'The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic. '
+      Environment:
+        $ref: '#/definitions/Environment'
+      KMSKeyArn:
+        $ref: '#/definitions/KMSKeyArn'
+        description: 'The Amazon Resource Name (ARN) of the KMS key used to encrypt your function''s environment variables. If not provided, AWS Lambda will use a default service key.'
+      TracingConfig:
+        $ref: '#/definitions/TracingConfig'
+        description: The parent object that contains your function's tracing settings.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The list of tags (key-value pairs) assigned to the new function.
+    description: <p/>
+  Date:
+    type: string
+    format: date-time
+  DeadLetterConfig:
+    type: object
+    properties:
+      TargetArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ).
+    description: The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
+  DeleteAliasRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Name: alias
+    properties: {}
+  DeleteEventSourceMappingRequest:
+    type: object
+    example:
+      UUID: 12345kxodurf3443
+    properties: {}
+    description: <p/>
+  DeleteFunctionRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Qualifier: '1'
+    properties: {}
+  Description:
+    type: string
+    minLength: 0
+    maxLength: 256
+  EC2AccessDeniedException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: <p/>
+  EC2ThrottledException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: AWS Lambda was throttled by Amazon EC2 during Lambda function initialization using the execution role provided for the Lambda function.
+  EC2UnexpectedException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+      EC2ErrorCode:
+        $ref: '#/definitions/String'
+    description: AWS Lambda received an unexpected EC2 client exception while setting up for the Lambda function.
+  ENILimitReachedException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: 'AWS Lambda was not able to create an Elastic Network Interface (ENI) in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached.'
+  Enabled:
+    type: boolean
+  Environment:
+    type: object
+    properties:
+      Variables:
+        $ref: '#/definitions/EnvironmentVariables'
+        description: 'The key-value pairs that represent your environment''s configuration settings. The value you specify cannot contain a ",".'
+    description: The parent object that contains your environment's configuration settings.
+  EnvironmentError:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/String'
+        description: The error code returned by the environment error object.
+      Message:
+        $ref: '#/definitions/SensitiveString'
+        description: The message returned by the environment error object.
+    description: The parent object that contains error information associated with your configuration settings.
+  EnvironmentResponse:
+    type: object
+    properties:
+      Variables:
+        $ref: '#/definitions/EnvironmentVariables'
+        description: The key-value pairs returned that represent your environment's configuration settings or error information.
+      Error:
+        $ref: '#/definitions/EnvironmentError'
+    description: The parent object returned that contains your environment's configuration settings or any error information associated with your configuration settings.
+  EnvironmentVariableName:
+    type: string
+    pattern: '[a-zA-Z]([a-zA-Z0-9_])+'
+    format: password
+  EnvironmentVariableValue:
+    type: string
+    pattern: '[^,]*'
+    format: password
+  EnvironmentVariables:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/EnvironmentVariableName'
+        value:
+          $ref: '#/definitions/EnvironmentVariableValue'
+  EventSourceMappingConfiguration:
+    type: object
+    example:
+      BatchSize: 123
+      EventSourceArn: 'arn:aws:s3:::examplebucket/*'
+      FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:myFunction'
+      LastModified: '2016-11-21T19:49:20.006+0000'
+      LastProcessingResult: ''
+      State: ''
+      StateTransitionReason: ''
+      UUID: 1234xCy789012
+    properties:
+      UUID:
+        $ref: '#/definitions/String'
+        description: The AWS Lambda assigned opaque identifier for the mapping.
+      BatchSize:
+        $ref: '#/definitions/BatchSize'
+        description: The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function. Your function receives an event with all the retrieved records.
+      EventSourceArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is the source of events.
+      FunctionArn:
+        $ref: '#/definitions/FunctionArn'
+        description: The Lambda function to invoke when AWS Lambda detects an event on the stream.
+      LastModified:
+        $ref: '#/definitions/Date'
+        description: The UTC time string indicating the last time the event mapping was updated.
+      LastProcessingResult:
+        $ref: '#/definitions/String'
+        description: The result of the last AWS Lambda invocation of your Lambda function.
+      State:
+        $ref: '#/definitions/String'
+        description: 'The state of the event source mapping. It can be <code>Creating</code>, <code>Enabled</code>, <code>Disabled</code>, <code>Enabling</code>, <code>Disabling</code>, <code>Updating</code>, or <code>Deleting</code>.'
+      StateTransitionReason:
+        $ref: '#/definitions/String'
+        description: The reason the event source mapping is in its current state. It is either user-requested or an AWS Lambda-initiated state transition.
+    description: Describes mapping between an Amazon Kinesis stream and a Lambda function.
+  EventSourceMappingsList:
+    type: array
+    items:
+      $ref: '#/definitions/EventSourceMappingConfiguration'
+  EventSourcePosition:
+    type: string
+    enum:
+      - TRIM_HORIZON
+      - LATEST
+      - AT_TIMESTAMP
+  EventSourceToken:
+    type: string
+    pattern: '[a-zA-Z0-9._\-]+'
+    minLength: 0
+    maxLength: 256
+  FunctionArn:
+    type: string
+    pattern: 'arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+  FunctionCode:
+    type: object
+    properties:
+      ZipFile:
+        $ref: '#/definitions/Blob'
+        description: 'The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html">Execution Permissions</a> in the <i>AWS Lambda Developer Guide</i>. '
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: Amazon S3 bucket name where the .zip file containing your deployment package is stored. This bucket must reside in the same AWS region where you are creating the Lambda function.
+      S3Key:
+        $ref: '#/definitions/S3Key'
+        description: The Amazon S3 object (the deployment package) key name you want to upload.
+      S3ObjectVersion:
+        $ref: '#/definitions/S3ObjectVersion'
+        description: The Amazon S3 object (the deployment package) version you want to upload.
+    description: The code for the Lambda function.
+  FunctionCodeLocation:
+    type: object
+    properties:
+      RepositoryType:
+        $ref: '#/definitions/String'
+        description: The repository from which you can download the function.
+      Location:
+        $ref: '#/definitions/String'
+        description: The presigned URL you can use to download the function's .zip file that you previously uploaded. The URL is valid for up to 10 minutes.
+    description: The object for the Lambda function location.
+  FunctionConfiguration:
+    type: object
+    example:
+      CodeSha256: LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=
+      CodeSize: 123
+      Description: ''
+      FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:myFunction'
+      FunctionName: myFunction
+      Handler: index.handler
+      LastModified: '2016-11-21T19:49:20.006+0000'
+      MemorySize: 128
+      Role: 'arn:aws:iam::123456789012:role/lambda_basic_execution'
+      Runtime: python2.7
+      Timeout: 123
+      Version: '1'
+      VpcConfig: {}
+    properties:
+      FunctionName:
+        $ref: '#/definitions/FunctionName'
+        description: 'The name of the function. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.'
+      FunctionArn:
+        $ref: '#/definitions/FunctionArn'
+        description: The Amazon Resource Name (ARN) assigned to the function.
+      Runtime:
+        $ref: '#/definitions/Runtime'
+        description: The runtime environment for the Lambda function.
+      Role:
+        $ref: '#/definitions/RoleArn'
+        description: The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources.
+      Handler:
+        $ref: '#/definitions/Handler'
+        description: The function Lambda calls to begin executing your function.
+      CodeSize:
+        $ref: '#/definitions/Long'
+        description: 'The size, in bytes, of the function .zip file you uploaded.'
+      Description:
+        $ref: '#/definitions/Description'
+        description: The user-provided description.
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: 'The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds.'
+      MemorySize:
+        $ref: '#/definitions/MemorySize'
+        description: 'The memory size, in MB, you configured for the function. Must be a multiple of 64 MB.'
+      LastModified:
+        $ref: '#/definitions/Timestamp'
+        description: The time stamp of the last time you updated the function.
+      CodeSha256:
+        $ref: '#/definitions/String'
+        description: It is the SHA256 hash of your function deployment package.
+      Version:
+        $ref: '#/definitions/Version'
+        description: The version of the Lambda function.
+      VpcConfig:
+        $ref: '#/definitions/VpcConfigResponse'
+        description: VPC configuration associated with your Lambda function.
+      DeadLetterConfig:
+        $ref: '#/definitions/DeadLetterConfig'
+        description: The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
+      Environment:
+        $ref: '#/definitions/EnvironmentResponse'
+        description: The parent object that contains your environment's configuration settings.
+      KMSKeyArn:
+        $ref: '#/definitions/KMSKeyArn'
+        description: 'The Amazon Resource Name (ARN) of the KMS key used to encrypt your function''s environment variables. If empty, it means you are using the AWS Lambda default service key.'
+      TracingConfig:
+        $ref: '#/definitions/TracingConfigResponse'
+        description: The parent object that contains your function's tracing settings.
+    description: A complex type that describes function metadata.
+  FunctionList:
+    type: array
+    items:
+      $ref: '#/definitions/FunctionConfiguration'
+  FunctionName:
+    type: string
+    pattern: '(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+    minLength: 1
+    maxLength: 140
+  GetAccountSettingsRequest:
+    type: object
+    example: {}
+    properties: {}
+  GetAccountSettingsResponse:
+    type: object
+    example:
+      AccountLimit: {}
+      AccountUsage: {}
+    properties:
+      AccountLimit:
+        $ref: '#/definitions/AccountLimit'
+      AccountUsage:
+        $ref: '#/definitions/AccountUsage'
+  GetAliasRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Name: myFunctionAlias
+    properties: {}
+  GetEventSourceMappingRequest:
+    type: object
+    example:
+      UUID: 123489-xxxxx-kdla8d89d7
+    properties: {}
+    description: <p/>
+  GetFunctionConfigurationRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Qualifier: '1'
+    properties: {}
+    description: <p/>
+  GetFunctionRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Qualifier: '1'
+    properties: {}
+    description: <p/>
+  GetFunctionResponse:
+    type: object
+    example:
+      Code:
+        Location: somelocation
+        RepositoryType: S3
+      Configuration:
+        CodeSha256: LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=
+        CodeSize: 262
+        Description: A starter AWS Lambda function.
+        Environment:
+          Variables:
+            S3_BUCKET: test
+        FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:myFunction'
+        FunctionName: myFunction
+        Handler: index.handler
+        LastModified: '2016-11-21T19:49:20.006+0000'
+        MemorySize: 128
+        Role: 'arn:aws:iam::123456789012:role/lambda_basic_execution'
+        Runtime: nodejs4.3
+        Timeout: 3
+        Version: $LATEST
+        VpcConfig:
+          SecurityGroupIds: []
+          SubnetIds: []
+    properties:
+      Configuration:
+        $ref: '#/definitions/FunctionConfiguration'
+      Code:
+        $ref: '#/definitions/FunctionCodeLocation'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: Returns the list of tags associated with the function.
+    description: This response contains the object for the Lambda function location (see <a>FunctionCodeLocation</a>.
+  GetPolicyRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Qualifier: '1'
+    properties: {}
+    description: <p/>
+  GetPolicyResponse:
+    type: object
+    example:
+      Policy: ''
+    properties:
+      Policy:
+        $ref: '#/definitions/String'
+        description: The resource policy associated with the specified function. The response returns the same as a string using a backslash ("\") as an escape character in the JSON.
+    description: <p/>
+  Handler:
+    type: string
+    pattern: '[^\s]+'
+    maxLength: 128
+  HttpStatus:
+    type: integer
+  Integer:
+    type: integer
+  InvalidParameterValueException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+        description: <p/>
+      message:
+        $ref: '#/definitions/String'
+        description: <p/>
+    description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. '
+  InvalidRequestContentException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+        description: <p/>
+      message:
+        $ref: '#/definitions/String'
+        description: <p/>
+    description: The request body could not be parsed as JSON.
+  InvalidSecurityGroupIDException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: The Security Group ID provided in the Lambda function VPC configuration is invalid.
+  InvalidSubnetIDException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: The Subnet ID provided in the Lambda function VPC configuration is invalid.
+  InvalidZipFileException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: AWS Lambda could not unzip the function zip file.
+  InvocationRequest:
+    type: object
+    example:
+      ClientContext: MyApp
+      FunctionName: MyFunction
+      InvocationType: Event
+      LogType: Tail
+      Payload: 'fileb://file-path/input.json'
+      Qualifier: '1'
+    properties:
+      Payload:
+        $ref: '#/definitions/Blob'
+        description: JSON that you want to provide to your Lambda function as input.
+    description: <p/>
+  InvocationResponse:
+    type: object
+    example:
+      FunctionError: ''
+      LogResult: ''
+      Payload: '?'
+      StatusCode: 123
+    properties:
+      Payload:
+        $ref: '#/definitions/Blob'
+        description: <p> It is the JSON representation of the object returned by the Lambda function. This is present only if the invocation type is <code>RequestResponse</code>. </p> <p>In the event of a function error this field contains a message describing the error. For the <code>Handled</code> errors the Lambda function will report this message. For <code>Unhandled</code> errors AWS Lambda reports the message. </p>
+    description: 'Upon success, returns an empty response. Otherwise, throws an exception.'
+  InvocationType:
+    type: string
+    enum:
+      - Event
+      - RequestResponse
+      - DryRun
+  InvokeAsyncRequest:
+    type: object
+    required:
+      - InvokeArgs
+    example:
+      FunctionName: myFunction
+      InvokeArgs: 'fileb://file-path/input.json'
+    properties:
+      InvokeArgs:
+        $ref: '#/definitions/BlobStream'
+        description: JSON that you want to provide to your Lambda function as input.
+    description: <p/>
+  InvokeAsyncResponse:
+    type: object
+    example:
+      Status: 123
+    properties: {}
+    description: 'Upon success, it returns empty response. Otherwise, throws an exception.'
+  KMSAccessDeniedException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: Lambda was unable to decrypt the environment variables because KMS access was denied. Check the Lambda function's KMS permissions.
+  KMSDisabledException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: Lambda was unable to decrypt the environment variables because the KMS key used is disabled. Check the Lambda function's KMS key settings.
+  KMSInvalidStateException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: Lambda was unable to decrypt the environment variables because the KMS key used is in an invalid state for Decrypt. Check the function's KMS key settings.
+  KMSKeyArn:
+    type: string
+    pattern: '(arn:aws:[a-z0-9-.]+:.*)|()'
+  KMSNotFoundException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: 'Lambda was unable to decrypt the environment variables because the KMS key was not found. Check the function''s KMS key settings. '
+  ListAliasesRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      FunctionVersion: '1'
+      Marker: ''
+      MaxItems: 123
+    properties: {}
+  ListAliasesResponse:
+    type: object
+    example:
+      Aliases: []
+      NextMarker: ''
+    properties:
+      NextMarker:
+        $ref: '#/definitions/String'
+        description: 'A string, present if there are more aliases.'
+      Aliases:
+        $ref: '#/definitions/AliasList'
+        description: A list of aliases.
+  ListEventSourceMappingsRequest:
+    type: object
+    properties: {}
+    description: <p/>
+  ListEventSourceMappingsResponse:
+    type: object
+    properties:
+      NextMarker:
+        $ref: '#/definitions/String'
+        description: 'A string, present if there are more event source mappings.'
+      EventSourceMappings:
+        $ref: '#/definitions/EventSourceMappingsList'
+        description: An array of <code>EventSourceMappingConfiguration</code> objects.
+    description: Contains a list of event sources (see <a>EventSourceMappingConfiguration</a>)
+  ListFunctionsRequest:
+    type: object
+    example:
+      Marker: ''
+      MaxItems: 123
+    properties: {}
+    description: <p/>
+  ListFunctionsResponse:
+    type: object
+    example:
+      Functions: []
+      NextMarker: ''
+    properties:
+      NextMarker:
+        $ref: '#/definitions/String'
+        description: 'A string, present if there are more functions.'
+      Functions:
+        $ref: '#/definitions/FunctionList'
+        description: A list of Lambda functions.
+    description: Contains a list of AWS Lambda function configurations (see <a>FunctionConfiguration</a>.
+  ListTagsRequest:
+    type: object
+    properties: {}
+  ListTagsResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The list of tags assigned to the function.
+  ListVersionsByFunctionRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Marker: ''
+      MaxItems: 123
+    properties: {}
+    description: <p/>
+  ListVersionsByFunctionResponse:
+    type: object
+    example:
+      NextMarker: ''
+      Versions: []
+    properties:
+      NextMarker:
+        $ref: '#/definitions/String'
+        description: 'A string, present if there are more function versions.'
+      Versions:
+        $ref: '#/definitions/FunctionList'
+        description: A list of Lambda function versions.
+    description: <p/>
+  LogType:
+    type: string
+    enum:
+      - None
+      - Tail
+  Long:
+    type: integer
+  MaxListItems:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  MemorySize:
+    type: integer
+    minimum: 128
+    maximum: 1536
+  PolicyLengthExceededException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      message:
+        $ref: '#/definitions/String'
+    description: Lambda function access policy is limited to 20 KB.
+  Principal:
+    type: string
+    pattern: .*
+  PublishVersionRequest:
+    type: object
+    example:
+      CodeSha256: ''
+      Description: ''
+      FunctionName: myFunction
+    properties:
+      CodeSha256:
+        $ref: '#/definitions/String'
+        description: The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter value must match the SHA256 of the $LATEST version for the publication to succeed.
+      Description:
+        $ref: '#/definitions/Description'
+        description: 'The description for the version you are publishing. If not provided, AWS Lambda copies the description from the $LATEST version.'
+    description: <p/>
+  Qualifier:
+    type: string
+    pattern: '(|[a-zA-Z0-9$_-]+)'
+    minLength: 1
+    maxLength: 128
+  RemovePermissionRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Qualifier: '1'
+      StatementId: role-statement-id
+    properties: {}
+    description: <p/>
+  RequestTooLargeException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      message:
+        $ref: '#/definitions/String'
+    description: 'The request payload exceeded the <code>Invoke</code> request body JSON input limit. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/limits.html">Limits</a>. '
+  ResourceArn:
+    type: string
+    pattern: '(arn:aws:[a-z0-9-.]+:.*)|()'
+  ResourceConflictException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+        description: <p/>
+      message:
+        $ref: '#/definitions/String'
+        description: <p/>
+    description: The resource already exists.
+  ResourceNotFoundException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: 'The resource (for example, a Lambda function or access policy statement) specified in the request does not exist.'
+  RoleArn:
+    type: string
+    pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+  Runtime:
+    type: string
+    enum:
+      - nodejs
+      - nodejs4.3
+      - nodejs6.10
+      - java8
+      - python2.7
+      - python3.6
+      - dotnetcore1.0
+      - nodejs4.3-edge
+  S3Bucket:
+    type: string
+    pattern: '^[0-9A-Za-z\.\-_]*\(\?<!\.\)$'
+    minLength: 3
+    maxLength: 63
+  S3Key:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  S3ObjectVersion:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  SecurityGroupId:
+    type: string
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+    maxItems: 5
+  SensitiveString:
+    type: string
+    format: password
+  ServiceException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: The AWS Lambda service encountered an internal error.
+  SourceOwner:
+    type: string
+    pattern: '\d{12}'
+  StatementId:
+    type: string
+    pattern: '([a-zA-Z0-9-_]+)'
+    minLength: 1
+    maxLength: 100
+  String:
+    type: string
+  SubnetIPAddressLimitReachedException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: AWS Lambda was not able to set up VPC access for the Lambda function because one or more configured subnets has no available IP addresses.
+  SubnetId:
+    type: string
+  SubnetIds:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+    maxItems: 16
+  TagKey:
+    type: string
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The list of tags (key-value pairs) you are assigning to the Lambda function.
+  TagValue:
+    type: string
+  Tags:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  ThrottleReason:
+    type: string
+    enum:
+      - ConcurrentInvocationLimitExceeded
+      - FunctionInvocationRateLimitExceeded
+      - CallerRateLimitExceeded
+  Timeout:
+    type: integer
+    minimum: 1
+  Timestamp:
+    type: string
+  TooManyRequestsException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      message:
+        $ref: '#/definitions/String'
+      Reason:
+        $ref: '#/definitions/ThrottleReason'
+    description: <p/>
+  TracingConfig:
+    type: object
+    properties:
+      Mode:
+        $ref: '#/definitions/TracingMode'
+        description: 'Can be either PassThrough or Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.'
+    description: The parent object that contains your function's tracing settings.
+  TracingConfigResponse:
+    type: object
+    properties:
+      Mode:
+        $ref: '#/definitions/TracingMode'
+        description: The tracing mode associated with your Lambda function.
+    description: Parent object of the tracing information associated with your Lambda function.
+  TracingMode:
+    type: string
+    enum:
+      - Active
+      - PassThrough
+  UnsupportedMediaTypeException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      message:
+        $ref: '#/definitions/String'
+    description: The content type of the <code>Invoke</code> request body is not JSON.
+  UntagResourceRequest:
+    type: object
+    properties: {}
+  UpdateAliasRequest:
+    type: object
+    example:
+      Description: ''
+      FunctionName: myFunction
+      FunctionVersion: '1'
+      Name: functionAlias
+    properties:
+      FunctionVersion:
+        $ref: '#/definitions/Version'
+        description: Using this parameter you can change the Lambda function version to which the alias points.
+      Description:
+        $ref: '#/definitions/Description'
+        description: You can change the description of the alias using this parameter.
+  UpdateEventSourceMappingRequest:
+    type: object
+    example:
+      BatchSize: 123
+      Enabled: true
+      FunctionName: myFunction
+      UUID: 1234xCy789012
+    properties:
+      FunctionName:
+        $ref: '#/definitions/FunctionName'
+        description: '<p>The Lambda function to which you want the stream records sent.</p> <p> You can specify a function name (for example, <code>Thumbnail</code>) or you can specify Amazon Resource Name (ARN) of the function (for example, <code>arn:aws:lambda:us-west-2:account-id:function:ThumbNail</code>). AWS Lambda also allows you to specify a partial ARN (for example, <code>account-id:Thumbnail</code>). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. </p> <p>If you are using versioning, you can also provide a qualified function ARN (ARN that is qualified with function version or alias name as suffix). For more information about versioning, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases</a> </p> <p>Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length.</p>'
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: 'Specifies whether AWS Lambda should actively poll the stream or not. If disabled, AWS Lambda will not poll the stream.'
+      BatchSize:
+        $ref: '#/definitions/BatchSize'
+        description: The maximum number of stream records that can be sent to your Lambda function for a single invocation.
+    description: <p/>
+  UpdateFunctionCodeRequest:
+    type: object
+    example:
+      FunctionName: myFunction
+      Publish: true
+      S3Bucket: myBucket
+      S3Key: myKey
+      S3ObjectVersion: '1'
+      ZipFile: 'fileb://file-path/file.zip'
+    properties:
+      ZipFile:
+        $ref: '#/definitions/Blob'
+        description: 'The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html">Execution Permissions</a> in the <i>AWS Lambda Developer Guide</i>. '
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: Amazon S3 bucket name where the .zip file containing your deployment package is stored. This bucket must reside in the same AWS Region where you are creating the Lambda function.
+      S3Key:
+        $ref: '#/definitions/S3Key'
+        description: The Amazon S3 object (the deployment package) key name you want to upload.
+      S3ObjectVersion:
+        $ref: '#/definitions/S3ObjectVersion'
+        description: The Amazon S3 object (the deployment package) version you want to upload.
+      Publish:
+        $ref: '#/definitions/Boolean'
+        description: This boolean parameter can be used to request AWS Lambda to update the Lambda function and publish a version as an atomic operation.
+    description: <p/>
+  UpdateFunctionConfigurationRequest:
+    type: object
+    example:
+      Description: ''
+      FunctionName: myFunction
+      Handler: index.handler
+      MemorySize: 128
+      Role: 'arn:aws:iam::123456789012:role/lambda_basic_execution'
+      Runtime: python2.7
+      Timeout: 123
+      VpcConfig: {}
+    properties:
+      Role:
+        $ref: '#/definitions/RoleArn'
+        description: The Amazon Resource Name (ARN) of the IAM role that Lambda will assume when it executes your function.
+      Handler:
+        $ref: '#/definitions/Handler'
+        description: 'The function that Lambda calls to begin executing your function. For Node.js, it is the <code>module-name.export</code> value in your function. '
+      Description:
+        $ref: '#/definitions/Description'
+        description: A short user-defined function description. AWS Lambda does not use this value. Assign a meaningful description as you see fit.
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: 'The function execution time at which AWS Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds.'
+      MemorySize:
+        $ref: '#/definitions/MemorySize'
+        description: 'The amount of memory, in MB, your Lambda function is given. AWS Lambda uses this memory size to infer the amount of CPU allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+      Environment:
+        $ref: '#/definitions/Environment'
+        description: The parent object that contains your environment's configuration settings.
+      Runtime:
+        $ref: '#/definitions/Runtime'
+        description: '<p>The runtime environment for the Lambda function.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7".</p> <note> <p>You can no longer downgrade to the v0.10.42 runtime version. This version will no longer be supported as of early 2017.</p> </note>'
+      DeadLetterConfig:
+        $ref: '#/definitions/DeadLetterConfig'
+        description: The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
+      KMSKeyArn:
+        $ref: '#/definitions/KMSKeyArn'
+        description: 'The Amazon Resource Name (ARN) of the KMS key used to encrypt your function''s environment variables. If you elect to use the AWS Lambda default service key, pass in an empty string ("") for this parameter.'
+      TracingConfig:
+        $ref: '#/definitions/TracingConfig'
+        description: The parent object that contains your function's tracing settings.
+    description: <p/>
+  Version:
+    type: string
+    pattern: '(\$LATEST|[0-9]+)'
+    minLength: 1
+    maxLength: 1024
+  VpcConfig:
+    type: object
+    properties:
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: A list of one or more subnet IDs in your VPC.
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: A list of one or more security groups IDs in your VPC.
+    description: 'If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID.'
+  VpcConfigResponse:
+    type: object
+    properties:
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: A list of subnet IDs associated with the Lambda function.
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: A list of security group IDs associated with the Lambda function.
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The VPC ID associated with you Lambda function.
+    description: VPC configuration associated with your Lambda function.
+  VpcId:
+    type: string

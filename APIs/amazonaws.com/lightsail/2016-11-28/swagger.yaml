@@ -1,0 +1,4233 @@
+swagger: '2.0'
+info:
+  version: '2016-11-28'
+  x-release: v4
+  title: Amazon Lightsail
+  description: '<p>Amazon Lightsail is the easiest way to get started with AWS for developers who just need virtual private servers. Lightsail includes everything you need to launch your project quickly - a virtual machine, SSD-based storage, data transfer, DNS management, and a static IP - for a low, predictable price. You manage those Lightsail servers through the Lightsail console or by using the API or command-line interface (CLI).</p> <p>For more information about Lightsail concepts and tasks, see the <a href="http://lightsail.aws.amazon.com/ls/docs">Lightsail Dev Guide</a>.</p> <p>To use the Lightsail API or the CLI, you will need to use AWS Identity and Access Management (IAM) to generate access keys. For details about how to set this up, see the <a href="http://lightsail.aws.amazon.com/ls/docs/how-to/articles/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Lightsail Dev Guide</a>.</p>'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: lightsail
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/lightsail-2016-11-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/lightsail/2016-11-28/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/lightsail/'
+host: lightsail.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AllocateStaticIp
+      description: Allocates a static IP address.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AllocateStaticIpResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AllocateStaticIpRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AttachStaticIp':
+    post:
+      operationId: AttachStaticIp
+      description: Attaches a static IP address to a specific Amazon Lightsail instance.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachStaticIpResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttachStaticIpRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CloseInstancePublicPorts':
+    post:
+      operationId: CloseInstancePublicPorts
+      description: Closes the public ports on a specific Amazon Lightsail instance.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CloseInstancePublicPortsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CloseInstancePublicPortsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDomain':
+    post:
+      operationId: CreateDomain
+      description: 'Creates a domain resource for the specified domain (e.g., example.com).'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDomainResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDomainRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDomainEntry':
+    post:
+      operationId: CreateDomainEntry
+      description: 'Creates one of the following entry records associated with the domain: A record, CNAME record, TXT record, or MX record.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDomainEntryResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDomainEntryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateInstanceSnapshot':
+    post:
+      operationId: CreateInstanceSnapshot
+      description: 'Creates a snapshot of a specific virtual private server, or <i>instance</i>. You can use a snapshot to create a new instance that is based on that snapshot.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateInstanceSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateInstanceSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateInstances':
+    post:
+      operationId: CreateInstances
+      description: 'Creates one or more Amazon Lightsail virtual private servers, or <i>instances</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateInstancesResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateInstancesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateInstancesFromSnapshot':
+    post:
+      operationId: CreateInstancesFromSnapshot
+      description: Uses a specific snapshot as a blueprint for creating one or more new instances that are based on that identical configuration.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateInstancesFromSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateInstancesFromSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateKeyPair':
+    post:
+      operationId: CreateKeyPair
+      description: Creates sn SSH key pair.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateKeyPairResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateKeyPairRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDomain':
+    post:
+      operationId: DeleteDomain
+      description: Deletes the specified domain recordset and all of its domain records.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDomainResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDomainRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDomainEntry':
+    post:
+      operationId: DeleteDomainEntry
+      description: Deletes a specific domain entry.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDomainEntryResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDomainEntryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteInstance':
+    post:
+      operationId: DeleteInstance
+      description: 'Deletes a specific Amazon Lightsail virtual private server, or <i>instance</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteInstanceResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteInstanceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteInstanceSnapshot':
+    post:
+      operationId: DeleteInstanceSnapshot
+      description: Deletes a specific snapshot of a virtual private server (or <i>instance</i>).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteInstanceSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteInstanceSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteKeyPair':
+    post:
+      operationId: DeleteKeyPair
+      description: Deletes a specific SSH key pair.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteKeyPairResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteKeyPairRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DetachStaticIp':
+    post:
+      operationId: DetachStaticIp
+      description: Detaches a static IP from the Amazon Lightsail instance to which it is attached.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetachStaticIpResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetachStaticIpRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DownloadDefaultKeyPair':
+    post:
+      operationId: DownloadDefaultKeyPair
+      description: Downloads the default SSH key pair from the user's account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DownloadDefaultKeyPairResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DownloadDefaultKeyPairRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetActiveNames':
+    post:
+      operationId: GetActiveNames
+      description: Returns the names of all active (not deleted) resources.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetActiveNamesResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetActiveNamesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetBlueprints':
+    post:
+      operationId: GetBlueprints
+      description: 'Returns the list of available instance images, or <i>blueprints</i>. You can use a blueprint to create a new virtual private server already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBlueprintsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBlueprintsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetBundles':
+    post:
+      operationId: GetBundles
+      description: Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or <i>instance</i>).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBundlesResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBundlesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDomain':
+    post:
+      operationId: GetDomain
+      description: Returns information about a specific domain recordset.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDomainResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDomainRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDomains':
+    post:
+      operationId: GetDomains
+      description: Returns a list of all domains in the user's account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDomainsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDomainsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetInstance':
+    post:
+      operationId: GetInstance
+      description: 'Returns information about a specific Amazon Lightsail instance, which is a virtual private server.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInstanceResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInstanceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetInstanceAccessDetails':
+    post:
+      operationId: GetInstanceAccessDetails
+      description: 'Returns temporary SSH keys you can use to connect to a specific virtual private server, or <i>instance</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInstanceAccessDetailsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInstanceAccessDetailsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetInstanceMetricData':
+    post:
+      operationId: GetInstanceMetricData
+      description: 'Returns the data points for the specified Amazon Lightsail instance metric, given an instance name.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInstanceMetricDataResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInstanceMetricDataRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetInstancePortStates':
+    post:
+      operationId: GetInstancePortStates
+      description: 'Returns the port states for a specific virtual private server, or <i>instance</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInstancePortStatesResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInstancePortStatesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetInstanceSnapshot':
+    post:
+      operationId: GetInstanceSnapshot
+      description: Returns information about a specific instance snapshot.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInstanceSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInstanceSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetInstanceSnapshots':
+    post:
+      operationId: GetInstanceSnapshots
+      description: Returns all instance snapshots for the user's account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInstanceSnapshotsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInstanceSnapshotsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetInstanceState':
+    post:
+      operationId: GetInstanceState
+      description: Returns the state of a specific instance. Works on one instance at a time.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInstanceStateResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInstanceStateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetInstances':
+    post:
+      operationId: GetInstances
+      description: 'Returns information about all Amazon Lightsail virtual private servers, or <i>instances</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInstancesResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInstancesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetKeyPair':
+    post:
+      operationId: GetKeyPair
+      description: Returns information about a specific key pair.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetKeyPairResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetKeyPairRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetKeyPairs':
+    post:
+      operationId: GetKeyPairs
+      description: Returns information about all key pairs in the user's account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetKeyPairsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetKeyPairsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetOperation':
+    post:
+      operationId: GetOperation
+      description: 'Returns information about a specific operation. Operations include events such as when you create an instance, allocate a static IP, attach a static IP, and so on.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetOperationResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetOperationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetOperations':
+    post:
+      operationId: GetOperations
+      description: '<p>Returns information about all operations.</p> <p>Results are returned from oldest to newest, up to a maximum of 200. Results can be paged by making each subsequent call to <code>GetOperations</code> use the maximum (last) <code>statusChangedAt</code> value from the previous request.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetOperationsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetOperationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetOperationsForResource':
+    post:
+      operationId: GetOperationsForResource
+      description: 'Gets operations for a specific resource (e.g., an instance or a static IP).'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetOperationsForResourceResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetOperationsForResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRegions':
+    post:
+      operationId: GetRegions
+      description: Returns a list of all valid regions for Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRegionsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRegionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetStaticIp':
+    post:
+      operationId: GetStaticIp
+      description: Returns information about a specific static IP.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetStaticIpResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetStaticIpRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetStaticIps':
+    post:
+      operationId: GetStaticIps
+      description: Returns information about all static IPs in the user's account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetStaticIpsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetStaticIpsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ImportKeyPair':
+    post:
+      operationId: ImportKeyPair
+      description: Imports a public SSH key from a specific key pair.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ImportKeyPairResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ImportKeyPairRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#IsVpcPeered':
+    post:
+      operationId: IsVpcPeered
+      description: Returns a Boolean value indicating whether your Lightsail VPC is peered.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/IsVpcPeeredResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/IsVpcPeeredRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#OpenInstancePublicPorts':
+    post:
+      operationId: OpenInstancePublicPorts
+      description: Adds public ports to an Amazon Lightsail instance.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/OpenInstancePublicPortsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/OpenInstancePublicPortsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PeerVpc':
+    post:
+      operationId: PeerVpc
+      description: Tries to peer the Lightsail VPC with the user's default VPC.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PeerVpcResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PeerVpcRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RebootInstance':
+    post:
+      operationId: RebootInstance
+      description: 'Restarts a specific instance. When your Amazon Lightsail instance is finished rebooting, Lightsail assigns a new public IP address. To use the same IP address after restarting, create a static IP address and attach it to the instance.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RebootInstanceResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RebootInstanceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ReleaseStaticIp':
+    post:
+      operationId: ReleaseStaticIp
+      description: Deletes a specific static IP from your account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ReleaseStaticIpResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReleaseStaticIpRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartInstance':
+    post:
+      operationId: StartInstance
+      description: 'Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartInstanceResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartInstanceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopInstance':
+    post:
+      operationId: StopInstance
+      description: Stops a specific Amazon Lightsail instance that is currently running.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopInstanceResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopInstanceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UnpeerVpc':
+    post:
+      operationId: UnpeerVpc
+      description: Attempts to unpeer the Lightsail VPC from the user's default VPC.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UnpeerVpcResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UnpeerVpcRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDomainEntry':
+    post:
+      operationId: UpdateDomainEntry
+      description: Updates a domain recordset after it is created.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDomainEntryResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDomainEntryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AccessDeniedException:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/string'
+      docs:
+        $ref: '#/definitions/string'
+      message:
+        $ref: '#/definitions/string'
+      tip:
+        $ref: '#/definitions/string'
+    description: Lightsail throws this exception when the user cannot be authenticated or uses invalid credentials to access a resource.
+  AccessDirection:
+    type: string
+    enum:
+      - inbound
+      - outbound
+  AccountSetupInProgressException:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/string'
+      docs:
+        $ref: '#/definitions/string'
+      message:
+        $ref: '#/definitions/string'
+      tip:
+        $ref: '#/definitions/string'
+    description: Lightsail throws this exception when an account is still in the setup in progress state.
+  AllocateStaticIpRequest:
+    type: object
+    required:
+      - staticIpName
+    properties:
+      staticIpName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the static IP address.
+  AllocateStaticIpResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the static IP address you allocated.
+  AttachStaticIpRequest:
+    type: object
+    required:
+      - staticIpName
+      - instanceName
+    properties:
+      staticIpName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the static IP.
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The instance name to which you want to attach the static IP address.
+  AttachStaticIpResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about your API operations.
+  AvailabilityZone:
+    type: object
+    properties:
+      zoneName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the Availability Zone.
+      state:
+        $ref: '#/definitions/NonEmptyString'
+        description: The state of the Availability Zone.
+    description: Describes an Availability Zone.
+  AvailabilityZoneList:
+    type: array
+    items:
+      $ref: '#/definitions/AvailabilityZone'
+  Base64:
+    type: string
+  Blueprint:
+    type: object
+    properties:
+      blueprintId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The ID for the virtual private server image (e.g., <code>app_wordpress_4_4</code> or <code>app_lamp_7_0</code>).'
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The friendly name of the blueprint (e.g., <code>Amazon Linux</code>).'
+      group:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The group name of the blueprint (e.g., <code>amazon-linux</code>).'
+      type:
+        $ref: '#/definitions/BlueprintType'
+        description: 'The type of the blueprint (e.g., <code>os</code> or <code>app</code>).'
+      description:
+        $ref: '#/definitions/string'
+        description: The description of the blueprint.
+      isActive:
+        $ref: '#/definitions/boolean'
+        description: 'A Boolean value indicating whether the blueprint is active. When you update your blueprints, you will inactivate old blueprints and keep the most recent versions active.'
+      minPower:
+        $ref: '#/definitions/integer'
+        description: The minimum machine size required to run this blueprint. <code>0</code> indicates that the blueprint runs on all instances.
+      version:
+        $ref: '#/definitions/string'
+        description: 'The version number of the operating system, application, or stack (e.g., <code>2016.03.0</code>).'
+      versionCode:
+        $ref: '#/definitions/string'
+        description: The version code.
+      productUrl:
+        $ref: '#/definitions/string'
+        description: The product URL to learn more about the image or blueprint.
+      licenseUrl:
+        $ref: '#/definitions/string'
+        description: The end-user license agreement URL for the image or blueprint.
+    description: Describes a blueprint (a virtual private server image).
+  BlueprintList:
+    type: array
+    items:
+      $ref: '#/definitions/Blueprint'
+  BlueprintType:
+    type: string
+    enum:
+      - os
+      - app
+  Bundle:
+    type: object
+    properties:
+      price:
+        $ref: '#/definitions/float'
+        description: 'The price in US dollars (e.g., <code>5.0</code>).'
+      cpuCount:
+        $ref: '#/definitions/integer'
+        description: 'The number of vCPUs included in the bundle (e.g., <code>2</code>).'
+      diskSizeInGb:
+        $ref: '#/definitions/integer'
+        description: 'The size of the SSD (e.g., <code>30</code>).'
+      bundleId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The bundle ID (e.g., <code>micro_1_0</code>).'
+      instanceType:
+        $ref: '#/definitions/string'
+        description: 'The Amazon EC2 instance type (e.g., <code>t2.micro</code>).'
+      isActive:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the bundle is active.
+      name:
+        $ref: '#/definitions/string'
+        description: 'A friendly name for the bundle (e.g., <code>Micro</code>).'
+      power:
+        $ref: '#/definitions/integer'
+        description: 'The power of the bundle (e.g., <code>500</code>).'
+      ramSizeInGb:
+        $ref: '#/definitions/float'
+        description: 'The amount of RAM in GB (e.g., <code>2.0</code>).'
+      transferPerMonthInGb:
+        $ref: '#/definitions/integer'
+        description: 'The data transfer rate per month in GB (e.g., <code>2000</code>).'
+    description: 'Describes a bundle, which is a set of specs describing your virtual private server (or <i>instance</i>).'
+  BundleList:
+    type: array
+    items:
+      $ref: '#/definitions/Bundle'
+  CloseInstancePublicPortsRequest:
+    type: object
+    required:
+      - portInfo
+      - instanceName
+    properties:
+      portInfo:
+        $ref: '#/definitions/PortInfo'
+        description: Information about the public port you are trying to close.
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance on which you're attempting to close the public ports.
+  CloseInstancePublicPortsResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs that contains information about the operation.
+  CreateDomainEntryRequest:
+    type: object
+    required:
+      - domainName
+      - domainEntry
+    properties:
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: 'The domain name (e.g., <code>example.com</code>) for which you want to create the domain entry.'
+      domainEntry:
+        $ref: '#/definitions/DomainEntry'
+        description: An array of key-value pairs containing information about the domain entry request.
+  CreateDomainEntryResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the operation.
+  CreateDomainRequest:
+    type: object
+    required:
+      - domainName
+    properties:
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: '<p>The domain name to manage (e.g., <code>example.com</code>).</p> <note> <p>You cannot register a new domain name using Lightsail. You must register a domain name using Amazon Route 53 or another domain name registrar. If you have already registered your domain, you can enter its name in this parameter to manage the DNS records for that domain.</p> </note>'
+  CreateDomainResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the domain resource you created.
+  CreateInstanceSnapshotRequest:
+    type: object
+    required:
+      - instanceSnapshotName
+      - instanceName
+    properties:
+      instanceSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name for your new snapshot.
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The Lightsail instance on which to base your snapshot.
+  CreateInstanceSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the results of your create instances snapshot request.
+  CreateInstancesFromSnapshotRequest:
+    type: object
+    required:
+      - instanceNames
+      - availabilityZone
+      - instanceSnapshotName
+      - bundleId
+    properties:
+      instanceNames:
+        $ref: '#/definitions/StringList'
+        description: The names for your new instances.
+      availabilityZone:
+        $ref: '#/definitions/string'
+        description: 'The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-1a</code> (case sensitive).'
+      instanceSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots.
+      bundleId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The bundle of specification information for your virtual private server (or <i>instance</i>), including the pricing plan (e.g., <code>micro_1_0</code>).'
+      userData:
+        $ref: '#/definitions/string'
+        description: '<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get –y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps">Dev Guide</a>.</p> </note>'
+      keyPairName:
+        $ref: '#/definitions/ResourceName'
+        description: The name for your key pair.
+  CreateInstancesFromSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the results of your create instances from snapshot request.
+  CreateInstancesRequest:
+    type: object
+    required:
+      - instanceNames
+      - availabilityZone
+      - blueprintId
+      - bundleId
+    properties:
+      instanceNames:
+        $ref: '#/definitions/StringList'
+        description: 'The names to use for your new Lightsail instances. Separate multiple values using quotation marks and commas, for example: <code>["MyFirstInstance","MySecondInstance"]</code> '
+      availabilityZone:
+        $ref: '#/definitions/string'
+        description: 'The Availability Zone in which to create your instance. Use the following format: <code>us-east-1a</code> (case sensitive).'
+      customImageName:
+        $ref: '#/definitions/ResourceName'
+        description: The name for your custom image.
+      blueprintId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The ID for a virtual private server image (e.g., <code>app_wordpress_4_4</code> or <code>app_lamp_7_0</code>). Use the get blueprints operation to return a list of available images (or <i>blueprints</i>).'
+      bundleId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The bundle of specification information for your virtual private server (or <i>instance</i>), including the pricing plan (e.g., <code>micro_1_0</code>).'
+      userData:
+        $ref: '#/definitions/string'
+        description: '<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get –y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps">Dev Guide</a>.</p> </note>'
+      keyPairName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your key pair.
+  CreateInstancesResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the results of your create instances request.
+  CreateKeyPairRequest:
+    type: object
+    required:
+      - keyPairName
+    properties:
+      keyPairName:
+        $ref: '#/definitions/ResourceName'
+        description: The name for your new key pair.
+  CreateKeyPairResult:
+    type: object
+    properties:
+      keyPair:
+        $ref: '#/definitions/KeyPair'
+        description: An array of key-value pairs containing information about the new key pair you just created.
+      publicKeyBase64:
+        $ref: '#/definitions/Base64'
+        description: A base64-encoded public key of the <code>ssh-rsa</code> type.
+      privateKeyBase64:
+        $ref: '#/definitions/Base64'
+        description: A base64-encoded RSA private key.
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the results of your create key pair request.
+  DeleteDomainEntryRequest:
+    type: object
+    required:
+      - domainName
+      - domainEntry
+    properties:
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain entry to delete.
+      domainEntry:
+        $ref: '#/definitions/DomainEntry'
+        description: An array of key-value pairs containing information about your domain entries.
+  DeleteDomainEntryResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the results of your delete domain entry request.
+  DeleteDomainRequest:
+    type: object
+    required:
+      - domainName
+    properties:
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: The specific domain name to delete.
+  DeleteDomainResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the results of your delete domain request.
+  DeleteInstanceRequest:
+    type: object
+    required:
+      - instanceName
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance to delete.
+  DeleteInstanceResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the results of your delete instance request.
+  DeleteInstanceSnapshotRequest:
+    type: object
+    required:
+      - instanceSnapshotName
+    properties:
+      instanceSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the snapshot to delete.
+  DeleteInstanceSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the results of your delete instance snapshot request.
+  DeleteKeyPairRequest:
+    type: object
+    required:
+      - keyPairName
+    properties:
+      keyPairName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the key pair to delete.
+  DeleteKeyPairResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the results of your delete key pair request.
+  DetachStaticIpRequest:
+    type: object
+    required:
+      - staticIpName
+    properties:
+      staticIpName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the static IP to detach from the instance.
+  DetachStaticIpResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the results of your detach static IP request.
+  Disk:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the disk.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the disk.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The date when the disk was created.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The region and Availability Zone where the disk is located.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type of the disk. '
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: The size of the disk in GB.
+      gbInUse:
+        $ref: '#/definitions/integer'
+        description: The number of GB in use by the disk.
+      isSystemDisk:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether this disk is a system disk (has an operating system loaded on it).
+      iops:
+        $ref: '#/definitions/integer'
+        description: The input/output operations per second (IOPS) of the disk.
+      path:
+        $ref: '#/definitions/string'
+        description: The disk path.
+      attachedTo:
+        $ref: '#/definitions/string'
+        description: The resources to which the disk is attached.
+      isAttached:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the disk is attached.
+      attachmentState:
+        $ref: '#/definitions/string'
+        description: The attachment state of the disk.
+    description: Describes the hard disk (an SSD).
+  DiskList:
+    type: array
+    items:
+      $ref: '#/definitions/Disk'
+  Domain:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the domain.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The Amazon Resource Name (ARN) of the domain recordset (e.g., <code>arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE</code>).'
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The date when the domain recordset was created.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The AWS Region and Availability Zones where the domain recordset was created.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type. '
+      domainEntries:
+        $ref: '#/definitions/DomainEntryList'
+        description: An array of key-value pairs containing information about the domain entries.
+    description: Describes a domain where you are storing recordsets in Lightsail.
+  DomainEntry:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the domain recordset entry.
+      name:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+      target:
+        $ref: '#/definitions/string'
+        description: 'The target AWS name server (e.g., <code>ns-111.awsdns-22.com.</code>).'
+      type:
+        $ref: '#/definitions/DomainEntryType'
+        description: 'The type of domain entry (e.g., <code>SOA</code> or <code>NS</code>).'
+      options:
+        $ref: '#/definitions/DomainEntryOptions'
+        description: The options for the domain entry.
+    description: Describes a domain recordset entry.
+  DomainEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/DomainEntry'
+  DomainEntryOptions:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DomainEntryOptionsKeys'
+        value:
+          $ref: '#/definitions/string'
+  DomainEntryOptionsKeys:
+    type: string
+  DomainEntryType:
+    type: string
+  DomainList:
+    type: array
+    items:
+      $ref: '#/definitions/Domain'
+  DomainName:
+    type: string
+  DownloadDefaultKeyPairRequest:
+    type: object
+    properties: {}
+  DownloadDefaultKeyPairResult:
+    type: object
+    properties:
+      publicKeyBase64:
+        $ref: '#/definitions/Base64'
+        description: A base64-encoded public key of the <code>ssh-rsa</code> type.
+      privateKeyBase64:
+        $ref: '#/definitions/Base64'
+        description: A base64-encoded RSA private key.
+  GetActiveNamesRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for paginating results from your get active names request.
+  GetActiveNamesResult:
+    type: object
+    properties:
+      activeNames:
+        $ref: '#/definitions/StringList'
+        description: The list of active names returned by the get active names request.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get active names request.
+  GetBlueprintsRequest:
+    type: object
+    properties:
+      includeInactive:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether to include inactive results in your request.
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get blueprints request.
+  GetBlueprintsResult:
+    type: object
+    properties:
+      blueprints:
+        $ref: '#/definitions/BlueprintList'
+        description: An array of key-value pairs that contains information about the available blueprints.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get blueprints request.
+  GetBundlesRequest:
+    type: object
+    properties:
+      includeInactive:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value that indicates whether to include inactive bundle results in your request.
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get bundles request.
+  GetBundlesResult:
+    type: object
+    properties:
+      bundles:
+        $ref: '#/definitions/BundleList'
+        description: An array of key-value pairs that contains information about the available bundles.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get active names request.
+  GetDomainRequest:
+    type: object
+    required:
+      - domainName
+    properties:
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: The domain name for which your want to return information about.
+  GetDomainResult:
+    type: object
+    properties:
+      domain:
+        $ref: '#/definitions/Domain'
+        description: An array of key-value pairs containing information about your get domain request.
+  GetDomainsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get domains request.
+  GetDomainsResult:
+    type: object
+    properties:
+      domains:
+        $ref: '#/definitions/DomainList'
+        description: An array of key-value pairs containing information about each of the domain entries in the user's account.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get active names request.
+  GetInstanceAccessDetailsRequest:
+    type: object
+    required:
+      - instanceName
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance to access.
+      protocol:
+        $ref: '#/definitions/InstanceAccessProtocol'
+        description: The protocol to use to connect to your instance. Defaults to <code>ssh</code>.
+  GetInstanceAccessDetailsResult:
+    type: object
+    properties:
+      accessDetails:
+        $ref: '#/definitions/InstanceAccessDetails'
+        description: An array of key-value pairs containing information about a get instance access request.
+  GetInstanceMetricDataRequest:
+    type: object
+    required:
+      - instanceName
+      - metricName
+      - period
+      - startTime
+      - endTime
+      - unit
+      - statistics
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance for which you want to get metrics data.
+      metricName:
+        $ref: '#/definitions/InstanceMetricName'
+        description: 'The metric name to get data about. '
+      period:
+        $ref: '#/definitions/MetricPeriod'
+        description: The time period for which you are requesting data.
+      startTime:
+        $ref: '#/definitions/timestamp'
+        description: The start time of the time period.
+      endTime:
+        $ref: '#/definitions/timestamp'
+        description: The end time of the time period.
+      unit:
+        $ref: '#/definitions/MetricUnit'
+        description: The unit. The list of valid values is below.
+      statistics:
+        $ref: '#/definitions/MetricStatisticList'
+        description: 'The instance statistics. '
+  GetInstanceMetricDataResult:
+    type: object
+    properties:
+      metricName:
+        $ref: '#/definitions/InstanceMetricName'
+        description: 'The metric name to return data for. '
+      metricData:
+        $ref: '#/definitions/MetricDatapointList'
+        description: An array of key-value pairs containing information about the results of your get instance metric data request.
+  GetInstancePortStatesRequest:
+    type: object
+    required:
+      - instanceName
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance.
+  GetInstancePortStatesResult:
+    type: object
+    properties:
+      portStates:
+        $ref: '#/definitions/PortStateList'
+        description: Information about the port states resulting from your request.
+  GetInstanceRequest:
+    type: object
+    required:
+      - instanceName
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance.
+  GetInstanceResult:
+    type: object
+    properties:
+      instance:
+        $ref: '#/definitions/Instance'
+        description: An array of key-value pairs containing information about the specified instance.
+  GetInstanceSnapshotRequest:
+    type: object
+    required:
+      - instanceSnapshotName
+    properties:
+      instanceSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the snapshot for which you are requesting information.
+  GetInstanceSnapshotResult:
+    type: object
+    properties:
+      instanceSnapshot:
+        $ref: '#/definitions/InstanceSnapshot'
+        description: An array of key-value pairs containing information about the results of your get instance snapshot request.
+  GetInstanceSnapshotsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get instance snapshots request.
+  GetInstanceSnapshotsResult:
+    type: object
+    properties:
+      instanceSnapshots:
+        $ref: '#/definitions/InstanceSnapshotList'
+        description: An array of key-value pairs containing information about the results of your get instance snapshots request.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get instance snapshots request.
+  GetInstanceStateRequest:
+    type: object
+    required:
+      - instanceName
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance to get state information about.
+  GetInstanceStateResult:
+    type: object
+    properties:
+      state:
+        $ref: '#/definitions/InstanceState'
+        description: The state of the instance.
+  GetInstancesRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get instances request.
+  GetInstancesResult:
+    type: object
+    properties:
+      instances:
+        $ref: '#/definitions/InstanceList'
+        description: An array of key-value pairs containing information about your instances.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get instances request.
+  GetKeyPairRequest:
+    type: object
+    required:
+      - keyPairName
+    properties:
+      keyPairName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the key pair for which you are requesting information.
+  GetKeyPairResult:
+    type: object
+    properties:
+      keyPair:
+        $ref: '#/definitions/KeyPair'
+        description: An array of key-value pairs containing information about the key pair.
+  GetKeyPairsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get key pairs request.
+  GetKeyPairsResult:
+    type: object
+    properties:
+      keyPairs:
+        $ref: '#/definitions/KeyPairList'
+        description: An array of key-value pairs containing information about the key pairs.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get key pairs request.
+  GetOperationRequest:
+    type: object
+    required:
+      - operationId
+    properties:
+      operationId:
+        $ref: '#/definitions/NonEmptyString'
+        description: A GUID used to identify the operation.
+  GetOperationResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the results of your get operation request.
+  GetOperationsForResourceRequest:
+    type: object
+    required:
+      - resourceName
+    properties:
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the resource for which you are requesting information.
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get operations for resource request.
+  GetOperationsForResourceResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the results of your get operations for resource request.
+      nextPageCount:
+        $ref: '#/definitions/string'
+        description: Returns the number of pages of results that remain.
+  GetOperationsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get operations request.
+  GetOperationsResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the results of your get operations request.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get operations request.
+  GetRegionsRequest:
+    type: object
+    properties:
+      includeAvailabilityZones:
+        $ref: '#/definitions/boolean'
+        description: 'A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., <code>us-east-1a</code>.'
+  GetRegionsResult:
+    type: object
+    properties:
+      regions:
+        $ref: '#/definitions/RegionList'
+        description: An array of key-value pairs containing information about your get regions request.
+  GetStaticIpRequest:
+    type: object
+    required:
+      - staticIpName
+    properties:
+      staticIpName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the static IP in Lightsail.
+  GetStaticIpResult:
+    type: object
+    properties:
+      staticIp:
+        $ref: '#/definitions/StaticIp'
+        description: An array of key-value pairs containing information about the requested static IP.
+  GetStaticIpsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get static IPs request.
+  GetStaticIpsResult:
+    type: object
+    properties:
+      staticIps:
+        $ref: '#/definitions/StaticIpList'
+        description: An array of key-value pairs containing information about your get static IPs request.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your get static IPs request.
+  ImportKeyPairRequest:
+    type: object
+    required:
+      - keyPairName
+      - publicKeyBase64
+    properties:
+      keyPairName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the key pair for which you want to import the public key.
+      publicKeyBase64:
+        $ref: '#/definitions/Base64'
+        description: A base64-encoded public key of the <code>ssh-rsa</code> type.
+  ImportKeyPairResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the request operation.
+  Instance:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name the user gave the instance (e.g., <code>Amazon_Linux-1GB-Virginia-1</code>).'
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The Amazon Resource Name (ARN) of the instance (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).'
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'The timestamp when the instance was created (e.g., <code>1479734909.17</code>).'
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The region name and availability zone where the instance is located.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resource (usually <code>Instance</code>).
+      blueprintId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The blueprint ID (e.g., <code>os_amlinux_2016_03</code>).'
+      blueprintName:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The friendly name of the blueprint (e.g., <code>Amazon Linux</code>).'
+      bundleId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The bundle for the instance (e.g., <code>micro_1_0</code>).'
+      isStaticIp:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether this instance has a static IP assigned to it.
+      privateIpAddress:
+        $ref: '#/definitions/IpAddress'
+        description: The private IP address of the instance.
+      publicIpAddress:
+        $ref: '#/definitions/IpAddress'
+        description: The public IP address of the instance.
+      ipv6Address:
+        $ref: '#/definitions/IpV6Address'
+        description: The IPv6 address of the instance.
+      hardware:
+        $ref: '#/definitions/InstanceHardware'
+        description: The size of the vCPU and the amount of RAM for the instance.
+      networking:
+        $ref: '#/definitions/InstanceNetworking'
+        description: Information about the public ports and monthly data transfer rates for the instance.
+      state:
+        $ref: '#/definitions/InstanceState'
+        description: 'The status code and the state (e.g., <code>running</code>) for the instance.'
+      username:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The user name for connecting to the instance (e.g., <code>ec2-user</code>).'
+      sshKeyName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the SSH key being used to connect to the instance (e.g., <code>LightsailDefaultKeyPair</code>).'
+    description: Describes an instance (a virtual private server).
+  InstanceAccessDetails:
+    type: object
+    properties:
+      certKey:
+        $ref: '#/definitions/string'
+        description: 'For SSH access, the public key to use when accessing your instance For OpenSSH clients (e.g., command line SSH), you should save this value to <code>tempkey-cert.pub</code>.'
+      expiresAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'For SSH access, the date on which the temporary keys expire.'
+      ipAddress:
+        $ref: '#/definitions/IpAddress'
+        description: The public IP address of the Amazon Lightsail instance.
+      password:
+        $ref: '#/definitions/string'
+        description: 'For RDP access, the temporary password of the Amazon EC2 instance.'
+      privateKey:
+        $ref: '#/definitions/string'
+        description: 'For SSH access, the temporary private key. For OpenSSH clients (e.g., command line SSH), you should save this value to <code>tempkey</code>).'
+      protocol:
+        $ref: '#/definitions/InstanceAccessProtocol'
+        description: The protocol for these Amazon Lightsail instance access details.
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of this Amazon Lightsail instance.
+      username:
+        $ref: '#/definitions/string'
+        description: The user name to use when logging in to the Amazon Lightsail instance.
+    description: The parameters for gaining temporary access to one of your Amazon Lightsail instances.
+  InstanceAccessProtocol:
+    type: string
+    enum:
+      - ssh
+      - rdp
+  InstanceHardware:
+    type: object
+    properties:
+      cpuCount:
+        $ref: '#/definitions/integer'
+        description: The number of vCPUs the instance has.
+      disks:
+        $ref: '#/definitions/DiskList'
+        description: The disks attached to the instance.
+      ramSizeInGb:
+        $ref: '#/definitions/float'
+        description: 'The amount of RAM in GB on the instance (e.g., <code>1.0</code>).'
+    description: Describes the hardware for the instance.
+  InstanceList:
+    type: array
+    items:
+      $ref: '#/definitions/Instance'
+  InstanceMetricName:
+    type: string
+    enum:
+      - CPUUtilization
+      - NetworkIn
+      - NetworkOut
+      - StatusCheckFailed
+      - StatusCheckFailed_Instance
+      - StatusCheckFailed_System
+  InstanceNetworking:
+    type: object
+    properties:
+      monthlyTransfer:
+        $ref: '#/definitions/MonthlyTransfer'
+        description: The amount of data in GB allocated for monthly data transfers.
+      ports:
+        $ref: '#/definitions/InstancePortInfoList'
+        description: An array of key-value pairs containing information about the ports on the instance.
+    description: Describes monthly data transfer rates and port information for an instance.
+  InstancePortInfo:
+    type: object
+    properties:
+      fromPort:
+        $ref: '#/definitions/Port'
+        description: The first port in the range.
+      toPort:
+        $ref: '#/definitions/Port'
+        description: The last port in the range.
+      protocol:
+        $ref: '#/definitions/NetworkProtocol'
+        description: 'The protocol. '
+      accessFrom:
+        $ref: '#/definitions/string'
+        description: 'The location from which access is allowed (e.g., <code>Anywhere (0.0.0.0/0)</code>).'
+      accessType:
+        $ref: '#/definitions/PortAccessType'
+        description: The type of access (<code>Public</code> or <code>Private</code>).
+      commonName:
+        $ref: '#/definitions/string'
+        description: The common name.
+      accessDirection:
+        $ref: '#/definitions/AccessDirection'
+        description: The access direction (<code>inbound</code> or <code>outbound</code>).
+    description: Describes information about the instance ports.
+  InstancePortInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/InstancePortInfo'
+  InstanceSnapshot:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the snapshot.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The Amazon Resource Name (ARN) of the snapshot (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).'
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'The timestamp when the snapshot was created (e.g., <code>1479907467.024</code>).'
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The region name and availability zone where you created the snapshot.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resource (usually <code>InstanceSnapshot</code>).
+      state:
+        $ref: '#/definitions/InstanceSnapshotState'
+        description: The state the snapshot is in.
+      progress:
+        $ref: '#/definitions/string'
+        description: The progress of the snapshot.
+      fromInstanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The instance from which the snapshot was created.
+      fromInstanceArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).'
+      fromBlueprintId:
+        $ref: '#/definitions/string'
+        description: 'The blueprint ID from which you created the snapshot (e.g., <code>os_debian_8_3</code>). A blueprint is a virtual private server (or <i>instance</i>) image used to create instances quickly.'
+      fromBundleId:
+        $ref: '#/definitions/string'
+        description: 'The bundle ID from which you created the snapshot (e.g., <code>micro_1_0</code>).'
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: The size in GB of the SSD.
+    description: 'Describes the snapshot of the virtual private server, or <i>instance</i>.'
+  InstanceSnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceSnapshot'
+  InstanceSnapshotState:
+    type: string
+    enum:
+      - pending
+      - error
+      - available
+  InstanceState:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/integer'
+        description: The status code for the instance.
+      name:
+        $ref: '#/definitions/string'
+        description: 'The state of the instance (e.g., <code>running</code> or <code>pending</code>).'
+    description: Describes the virtual private server (or <i>instance</i>) status.
+  InvalidInputException:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/string'
+      docs:
+        $ref: '#/definitions/string'
+      message:
+        $ref: '#/definitions/string'
+      tip:
+        $ref: '#/definitions/string'
+    description: Lightsail throws this exception when user input does not conform to the validation rules of an input field.
+  IpAddress:
+    type: string
+    pattern: '([0-9]{1,3}\.){3}[0-9]{1,3}'
+  IpV6Address:
+    type: string
+    pattern: '([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}'
+  IsVpcPeeredRequest:
+    type: object
+    properties: {}
+  IsVpcPeeredResult:
+    type: object
+    properties:
+      isPeered:
+        $ref: '#/definitions/boolean'
+        description: 'Returns <code>true</code> if the Lightsail VPC is peered; otherwise, <code>false</code>.'
+  IsoDate:
+    type: string
+    format: date-time
+  KeyPair:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The friendly name of the SSH key pair.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The Amazon Resource Name (ARN) of the key pair (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).'
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'The timestamp when the key pair was created (e.g., <code>1479816991.349</code>).'
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The region name and Availability Zone where the key pair was created.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The resource type (usually <code>KeyPair</code>).
+      fingerprint:
+        $ref: '#/definitions/Base64'
+        description: The RSA fingerprint of the key pair.
+    description: Describes the SSH key pair.
+  KeyPairList:
+    type: array
+    items:
+      $ref: '#/definitions/KeyPair'
+  MetricDatapoint:
+    type: object
+    properties:
+      average:
+        $ref: '#/definitions/double'
+        description: The average.
+      maximum:
+        $ref: '#/definitions/double'
+        description: The maximum.
+      minimum:
+        $ref: '#/definitions/double'
+        description: The minimum.
+      sampleCount:
+        $ref: '#/definitions/double'
+        description: The sample count.
+      sum:
+        $ref: '#/definitions/double'
+        description: The sum.
+      timestamp:
+        $ref: '#/definitions/timestamp'
+        description: 'The timestamp (e.g., <code>1479816991.349</code>).'
+      unit:
+        $ref: '#/definitions/MetricUnit'
+        description: 'The unit. '
+    description: Describes the metric data point.
+  MetricDatapointList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDatapoint'
+  MetricPeriod:
+    type: integer
+    minimum: 60
+    maximum: 86400
+  MetricStatistic:
+    type: string
+    enum:
+      - Minimum
+      - Maximum
+      - Sum
+      - Average
+      - SampleCount
+  MetricStatisticList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricStatistic'
+  MetricUnit:
+    type: string
+    enum:
+      - Seconds
+      - Microseconds
+      - Milliseconds
+      - Bytes
+      - Kilobytes
+      - Megabytes
+      - Gigabytes
+      - Terabytes
+      - Bits
+      - Kilobits
+      - Megabits
+      - Gigabits
+      - Terabits
+      - Percent
+      - Count
+      - Bytes/Second
+      - Kilobytes/Second
+      - Megabytes/Second
+      - Gigabytes/Second
+      - Terabytes/Second
+      - Bits/Second
+      - Kilobits/Second
+      - Megabits/Second
+      - Gigabits/Second
+      - Terabits/Second
+      - Count/Second
+      - None
+  MonthlyTransfer:
+    type: object
+    properties:
+      gbPerMonthAllocated:
+        $ref: '#/definitions/integer'
+        description: The amount allocated per month (in GB).
+    description: Describes the monthly data transfer in and out of your virtual private server (or <i>instance</i>).
+  NetworkProtocol:
+    type: string
+    enum:
+      - tcp
+      - all
+      - udp
+  NonEmptyString:
+    type: string
+    pattern: .*\S.*
+  NotFoundException:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/string'
+      docs:
+        $ref: '#/definitions/string'
+      message:
+        $ref: '#/definitions/string'
+      tip:
+        $ref: '#/definitions/string'
+    description: Lightsail throws this exception when it cannot find a resource.
+  OpenInstancePublicPortsRequest:
+    type: object
+    required:
+      - portInfo
+      - instanceName
+    properties:
+      portInfo:
+        $ref: '#/definitions/PortInfo'
+        description: An array of key-value pairs containing information about the port mappings.
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance for which you want to open the public ports.
+  OpenInstancePublicPortsResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the request operation.
+  Operation:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the operation.
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The resource name.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type. '
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'The timestamp when the operation was initialized (e.g., <code>1479816991.349</code>).'
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The region and Availability Zone.
+      isTerminal:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the operation is terminal.
+      operationDetails:
+        $ref: '#/definitions/string'
+        description: 'Details about the operation (e.g., <code>Debian-1GB-Virginia-1</code>).'
+      operationType:
+        $ref: '#/definitions/OperationType'
+        description: 'The type of operation. '
+      status:
+        $ref: '#/definitions/OperationStatus'
+        description: 'The status of the operation. '
+      statusChangedAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'The timestamp when the status was changed (e.g., <code>1479816991.349</code>).'
+      errorCode:
+        $ref: '#/definitions/string'
+        description: The error code.
+      errorDetails:
+        $ref: '#/definitions/string'
+        description: The error details.
+    description: Describes the API operation.
+  OperationFailureException:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/string'
+      docs:
+        $ref: '#/definitions/string'
+      message:
+        $ref: '#/definitions/string'
+      tip:
+        $ref: '#/definitions/string'
+    description: Lightsail throws this exception when an operation fails to execute.
+  OperationList:
+    type: array
+    items:
+      $ref: '#/definitions/Operation'
+  OperationStatus:
+    type: string
+    enum:
+      - NotStarted
+      - Started
+      - Failed
+      - Completed
+  OperationType:
+    type: string
+    enum:
+      - DeleteInstance
+      - CreateInstance
+      - StopInstance
+      - StartInstance
+      - RebootInstance
+      - OpenInstancePublicPorts
+      - CloseInstancePublicPorts
+      - AllocateStaticIp
+      - ReleaseStaticIp
+      - AttachStaticIp
+      - DetachStaticIp
+      - UpdateDomainEntry
+      - DeleteDomainEntry
+      - CreateDomain
+      - DeleteDomain
+      - CreateInstanceSnapshot
+      - DeleteInstanceSnapshot
+      - CreateInstancesFromSnapshot
+  PeerVpcRequest:
+    type: object
+    properties: {}
+  PeerVpcResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the request operation.
+  Port:
+    type: integer
+    minimum: 0
+    maximum: 65535
+  PortAccessType:
+    type: string
+    enum:
+      - Public
+      - Private
+  PortInfo:
+    type: object
+    properties:
+      fromPort:
+        $ref: '#/definitions/Port'
+        description: The first port in the range.
+      toPort:
+        $ref: '#/definitions/Port'
+        description: The last port in the range.
+      protocol:
+        $ref: '#/definitions/NetworkProtocol'
+        description: 'The protocol. '
+    description: Describes information about the ports on your virtual private server (or <i>instance</i>).
+  PortState:
+    type: string
+    enum:
+      - open
+      - closed
+  PortStateList:
+    type: array
+    items:
+      $ref: '#/definitions/PortState'
+  RebootInstanceRequest:
+    type: object
+    required:
+      - instanceName
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance to reboot.
+  RebootInstanceResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the request operation.
+  Region:
+    type: object
+    properties:
+      continentCode:
+        $ref: '#/definitions/string'
+        description: 'The continent code (e.g., <code>NA</code>, meaning North America).'
+      description:
+        $ref: '#/definitions/string'
+        description: 'The description of the AWS Region (e.g., <code>This region is recommended to serve users in the eastern United States and eastern Canada</code>).'
+      displayName:
+        $ref: '#/definitions/string'
+        description: 'The display name (e.g., <code>Virginia</code>).'
+      name:
+        $ref: '#/definitions/RegionName'
+        description: 'The region name (e.g., <code>us-east-1</code>).'
+      availabilityZones:
+        $ref: '#/definitions/AvailabilityZoneList'
+        description: The Availability Zones.
+    description: Describes the AWS Region.
+  RegionList:
+    type: array
+    items:
+      $ref: '#/definitions/Region'
+  RegionName:
+    type: string
+    enum:
+      - us-east-1
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-central-1
+      - ap-south-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+  ReleaseStaticIpRequest:
+    type: object
+    required:
+      - staticIpName
+    properties:
+      staticIpName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the static IP to delete.
+  ReleaseStaticIpResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the request operation.
+  ResourceLocation:
+    type: object
+    properties:
+      availabilityZone:
+        $ref: '#/definitions/string'
+        description: The Availability Zone.
+      regionName:
+        $ref: '#/definitions/RegionName'
+        description: The AWS Region name.
+    description: Describes the resource location.
+  ResourceName:
+    type: string
+    pattern: '\w[\w\-]*\w'
+  ResourceType:
+    type: string
+    enum:
+      - Instance
+      - StaticIp
+      - KeyPair
+      - InstanceSnapshot
+      - Domain
+      - PeeredVpc
+  ServiceException:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/string'
+      docs:
+        $ref: '#/definitions/string'
+      message:
+        $ref: '#/definitions/string'
+      tip:
+        $ref: '#/definitions/string'
+    description: A general service exception.
+  StartInstanceRequest:
+    type: object
+    required:
+      - instanceName
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance (a virtual private server) to start.
+  StartInstanceResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the request operation.
+  StaticIp:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the static IP (e.g., <code>StaticIP-Virginia-EXAMPLE</code>).'
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The Amazon Resource Name (ARN) of the static IP (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).'
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'The timestamp when the static IP was created (e.g., <code>1479735304.222</code>).'
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The region and Availability Zone where the static IP was created.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The resource type (usually <code>StaticIp</code>).
+      ipAddress:
+        $ref: '#/definitions/IpAddress'
+        description: The static IP address.
+      attachedTo:
+        $ref: '#/definitions/ResourceName'
+        description: 'The instance where the static IP is attached (e.g., <code>Amazon_Linux-1GB-Virginia-1</code>).'
+      isAttached:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the static IP is attached.
+    description: Describes the static IP.
+  StaticIpList:
+    type: array
+    items:
+      $ref: '#/definitions/StaticIp'
+  StopInstanceRequest:
+    type: object
+    required:
+      - instanceName
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance (a virtual private server) to stop.
+  StopInstanceResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the request operation.
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
+  UnauthenticatedException:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/string'
+      docs:
+        $ref: '#/definitions/string'
+      message:
+        $ref: '#/definitions/string'
+      tip:
+        $ref: '#/definitions/string'
+    description: Lightsail throws this exception when the user has not been authenticated.
+  UnpeerVpcRequest:
+    type: object
+    properties: {}
+  UnpeerVpcResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: An array of key-value pairs containing information about the request operation.
+  UpdateDomainEntryRequest:
+    type: object
+    required:
+      - domainName
+      - domainEntry
+    properties:
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain recordset to update.
+      domainEntry:
+        $ref: '#/definitions/DomainEntry'
+        description: An array of key-value pairs containing information about the domain entry.
+  UpdateDomainEntryResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An array of key-value pairs containing information about the request operation.
+  boolean:
+    type: boolean
+  double:
+    type: number
+    format: double
+  float:
+    type: number
+    format: float
+  integer:
+    type: integer
+  string:
+    type: string
+  timestamp:
+    type: string
+    format: date-time

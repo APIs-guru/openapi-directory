@@ -1,0 +1,1961 @@
+swagger: '2.0'
+info:
+  version: '2016-05-01'
+  x-release: v4
+  title: Amazon WorkDocs
+  description: '<p>The WorkDocs API is designed for the following use cases:</p> <ul> <li> <p>File Migration: File migration applications are supported for users who want to migrate their files from an on-premise or off-premise file system or service. Users can insert files into a user directory structure, as well as allow for basic metadata changes, such as modifications to the permissions of files.</p> </li> <li> <p>Security: Support security applications are supported for users who have additional security needs, such as anti-virus or data loss prevention. The APIs, in conjunction with Amazon CloudTrail, allow these applications to detect when changes occur in Amazon WorkDocs, so the application can take the necessary actions and replace the target file. The application can also choose to email the user if the target file violates the policy.</p> </li> <li> <p>eDiscovery/Analytics: General administrative applications are supported, such as eDiscovery and analytics. These applications can choose to mimic and/or record the actions in an Amazon WorkDocs site, in conjunction with Amazon CloudTrails, to replicate data for eDiscovery, backup, or analytical applications.</p> </li> </ul> <p>All Amazon WorkDocs APIs are Amazon authenticated, certificate-signed APIs. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as set in the IAM policy). This includes, but is not limited to, the ability to modify file permissions and upload any file to any user. This allows developers to perform the three use cases above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: workdocs
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/workdocs-2016-05-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/workdocs/2016-05-01/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/workdocs/'
+host: workdocs.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/api/v1/documents/{DocumentId}/versions/{VersionId}':
+    patch:
+      operationId: UpdateDocumentVersion
+      description: '<p>Changes the status of the document version to ACTIVE. </p> <p>Amazon WorkDocs also sets its document container to ACTIVE. This is the last step in a document upload, after the client uploads the document to an S3-presigned URL returned by <a>InitiateDocumentVersionUpload</a>. </p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '483':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+        '484':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '485':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '486':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '487':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDocumentVersionRequest'
+        - name: DocumentId
+          in: path
+          type: string
+          required: true
+        - name: VersionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/users/{UserId}/activation':
+    delete:
+      operationId: DeactivateUser
+      description: 'Deactivates the specified user, which revokes the user''s access to Amazon WorkDocs.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '483':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeactivateUserRequest'
+        - name: UserId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/resources/{ResourceId}/permissions':
+    delete:
+      operationId: RemoveAllResourcePermissions
+      description: Removes all the permissions from the specified resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '482':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveAllResourcePermissionsRequest'
+        - name: ResourceId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /api/v1/folders:
+    post:
+      operationId: CreateFolder
+      description: Creates a folder with the specified name and parent folder.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFolderResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: EntityAlreadyExistsException
+          schema:
+            $ref: '#/definitions/EntityAlreadyExistsException'
+        '482':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '485':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '486':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '487':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFolderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/organizations/{OrganizationId}/subscriptions':
+    get:
+      operationId: DescribeNotificationSubscriptions
+      description: Lists the specified notification subscriptions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeNotificationSubscriptionsResponse'
+        '480':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '481':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeNotificationSubscriptionsRequest'
+        - name: OrganizationId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /api/v1/users:
+    get:
+      operationId: DescribeUsers
+      description: '<p>Describes the specified users. You can describe all users or filter the results (for example, by status or organization).</p> <p>By default, Amazon WorkDocs returns the first 24 active or pending users. If there are more results, the response includes a marker that you can use to request the next set of results.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeUsersResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '482':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeUsersRequest'
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}':
+    patch:
+      operationId: UpdateDocument
+      description: 'Updates the specified attributes of the specified document. The user must have access to both the document and its parent folder, if applicable.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: EntityAlreadyExistsException
+          schema:
+            $ref: '#/definitions/EntityAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+        '484':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '485':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '486':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '487':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '488':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDocumentRequest'
+        - name: DocumentId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/folders/{FolderId}':
+    patch:
+      operationId: UpdateFolder
+      description: 'Updates the specified attributes of the specified folder. The user must have access to both the folder and its parent folder, if applicable.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: EntityAlreadyExistsException
+          schema:
+            $ref: '#/definitions/EntityAlreadyExistsException'
+        '482':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '486':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '487':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '488':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFolderRequest'
+        - name: FolderId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/folders/{FolderId}/contents':
+    get:
+      operationId: DescribeFolderContents
+      description: '<p>Describes the contents of the specified folder, including its documents and sub-folders.</p> <p>By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeFolderContentsResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeFolderContentsRequest'
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: FolderId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/organizations/{OrganizationId}/subscriptions/{SubscriptionId}':
+    delete:
+      operationId: DeleteNotificationSubscription
+      description: Deletes the specified subscription from the specified organization.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '481':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteNotificationSubscriptionRequest'
+        - name: OrganizationId
+          in: path
+          type: string
+          required: true
+        - name: SubscriptionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/users/{UserId}':
+    patch:
+      operationId: UpdateUser
+      description: 'Updates the specified attributes of the specified user, and grants or revokes administrative privileges to the Amazon WorkDocs site.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateUserResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '483':
+          description: IllegalUserStateException
+          schema:
+            $ref: '#/definitions/IllegalUserStateException'
+        '484':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: DeactivatingLastSystemUserException
+          schema:
+            $ref: '#/definitions/DeactivatingLastSystemUserException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateUserRequest'
+        - name: UserId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}/versions':
+    get:
+      operationId: DescribeDocumentVersions
+      description: '<p>Retrieves the document versions for the specified document.</p> <p>By default, only active versions are returned.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDocumentVersionsResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '483':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '484':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDocumentVersionsRequest'
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: DocumentId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}/path':
+    get:
+      operationId: GetDocumentPath
+      description: '<p>Retrieves the path information (the hierarchy from the root folder) for the requested document.</p> <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested document and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the names of the parent folders.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDocumentPathResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '483':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDocumentPathRequest'
+        - name: DocumentId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/folders/{FolderId}/path':
+    get:
+      operationId: GetFolderPath
+      description: '<p>Retrieves the path information (the hierarchy from the root folder) for the specified folder.</p> <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested folder and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the parent folder names.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFolderPathResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '483':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFolderPathRequest'
+        - name: FolderId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /api/v1/documents:
+    post:
+      operationId: InitiateDocumentVersionUpload
+      description: '<p>Creates a new document object and version object.</p> <p>The client specifies the parent folder ID and name of the document to upload. The ID is optionally specified when creating a new version of an existing document. This is the first step to upload a document. Next, upload the document to the URL returned from the call, and then call <a>UpdateDocumentVersion</a>.</p> <p>To cancel the document upload, call <a>AbortDocumentVersionUpload</a>.</p>'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/InitiateDocumentVersionUploadResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: EntityAlreadyExistsException
+          schema:
+            $ref: '#/definitions/EntityAlreadyExistsException'
+        '482':
+          description: StorageLimitExceededException
+          schema:
+            $ref: '#/definitions/StorageLimitExceededException'
+        '483':
+          description: StorageLimitWillExceedException
+          schema:
+            $ref: '#/definitions/StorageLimitWillExceedException'
+        '484':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+        '485':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '486':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '487':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '488':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/InitiateDocumentVersionUploadRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/resources/{ResourceId}/permissions/{PrincipalId}':
+    delete:
+      operationId: RemoveResourcePermission
+      description: Removes the permission for the specified principal from the specified resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '482':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveResourcePermissionRequest'
+        - name: ResourceId
+          in: path
+          type: string
+          required: true
+        - name: PrincipalId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AbortDocumentVersionUploadRequest:
+    type: object
+    properties: {}
+  ActivateUserRequest:
+    type: object
+    properties: {}
+  ActivateUserResponse:
+    type: object
+    properties:
+      User:
+        $ref: '#/definitions/User'
+        description: The user information.
+  AddResourcePermissionsRequest:
+    type: object
+    required:
+      - Principals
+    properties:
+      Principals:
+        $ref: '#/definitions/SharePrincipalList'
+        description: 'The users, groups, or organization being granted permission.'
+  AddResourcePermissionsResponse:
+    type: object
+    properties:
+      ShareResults:
+        $ref: '#/definitions/ShareResultsList'
+        description: The share results.
+  ConcurrentModificationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The resource hierarchy is changing.
+  CreateFolderRequest:
+    type: object
+    required:
+      - ParentFolderId
+    properties:
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the new folder.
+      ParentFolderId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the parent folder.
+  CreateFolderResponse:
+    type: object
+    properties:
+      Metadata:
+        $ref: '#/definitions/FolderMetadata'
+        description: The metadata of the folder.
+  CreateNotificationSubscriptionRequest:
+    type: object
+    required:
+      - Endpoint
+      - Protocol
+      - SubscriptionType
+    properties:
+      Endpoint:
+        $ref: '#/definitions/SubscriptionEndPointType'
+        description: 'The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with "https://".'
+      Protocol:
+        $ref: '#/definitions/SubscriptionProtocolType'
+        description: 'The protocol to use. The supported value is https, which delivers JSON-encoded messasges using HTTPS POST.'
+      SubscriptionType:
+        $ref: '#/definitions/SubscriptionType'
+        description: The notification type.
+  CreateNotificationSubscriptionResponse:
+    type: object
+    properties:
+      Subscription:
+        $ref: '#/definitions/Subscription'
+        description: The subscription.
+  CreateUserRequest:
+    type: object
+    required:
+      - Username
+      - GivenName
+      - Surname
+      - Password
+    properties:
+      OrganizationId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the organization.
+      Username:
+        $ref: '#/definitions/UsernameType'
+        description: The login name of the user.
+      GivenName:
+        $ref: '#/definitions/UserAttributeValueType'
+        description: The given name of the user.
+      Surname:
+        $ref: '#/definitions/UserAttributeValueType'
+        description: The surname of the user.
+      Password:
+        $ref: '#/definitions/PasswordType'
+        description: The password of the user.
+      TimeZoneId:
+        $ref: '#/definitions/TimeZoneIdType'
+        description: The time zone ID of the user.
+      StorageRule:
+        $ref: '#/definitions/StorageRuleType'
+        description: The amount of storage for the user.
+  CreateUserResponse:
+    type: object
+    properties:
+      User:
+        $ref: '#/definitions/User'
+        description: The user information.
+  DeactivateUserRequest:
+    type: object
+    properties: {}
+  DeactivatingLastSystemUserException:
+    type: object
+    properties: {}
+    description: The last user in the organization is being deactivated.
+  DeleteDocumentRequest:
+    type: object
+    properties: {}
+  DeleteFolderContentsRequest:
+    type: object
+    properties: {}
+  DeleteFolderRequest:
+    type: object
+    properties: {}
+  DeleteNotificationSubscriptionRequest:
+    type: object
+    properties: {}
+  DeleteUserRequest:
+    type: object
+    properties: {}
+  DescribeDocumentVersionsRequest:
+    type: object
+    properties: {}
+  DescribeDocumentVersionsResponse:
+    type: object
+    properties:
+      DocumentVersions:
+        $ref: '#/definitions/DocumentVersionMetadataList'
+        description: The document versions.
+      Marker:
+        $ref: '#/definitions/PageMarkerType'
+        description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+  DescribeFolderContentsRequest:
+    type: object
+    properties: {}
+  DescribeFolderContentsResponse:
+    type: object
+    properties:
+      Folders:
+        $ref: '#/definitions/FolderMetadataList'
+        description: The sub-folders in the specified folder.
+      Documents:
+        $ref: '#/definitions/DocumentMetadataList'
+        description: The documents in the specified folder.
+      Marker:
+        $ref: '#/definitions/PageMarkerType'
+        description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+  DescribeNotificationSubscriptionsRequest:
+    type: object
+    properties: {}
+  DescribeNotificationSubscriptionsResponse:
+    type: object
+    properties:
+      Subscriptions:
+        $ref: '#/definitions/SubscriptionList'
+        description: The subscriptions.
+      Marker:
+        $ref: '#/definitions/PageMarkerType'
+        description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+  DescribeResourcePermissionsRequest:
+    type: object
+    properties: {}
+  DescribeResourcePermissionsResponse:
+    type: object
+    properties:
+      Principals:
+        $ref: '#/definitions/PrincipalList'
+        description: The principals.
+      Marker:
+        $ref: '#/definitions/PageMarkerType'
+        description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+  DescribeUsersRequest:
+    type: object
+    properties: {}
+  DescribeUsersResponse:
+    type: object
+    properties:
+      Users:
+        $ref: '#/definitions/OrganizationUserList'
+        description: The users.
+      TotalNumberOfUsers:
+        $ref: '#/definitions/SizeType'
+        description: The total number of users included in the results.
+      Marker:
+        $ref: '#/definitions/PageMarkerType'
+        description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+  DocumentContentType:
+    type: string
+    minLength: 1
+    maxLength: 128
+  DocumentMetadata:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the document.
+      CreatorId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the creator.
+      ParentFolderId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the parent folder.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time when the document was created.
+      ModifiedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time when the document was updated.
+      LatestVersionMetadata:
+        $ref: '#/definitions/DocumentVersionMetadata'
+        description: The latest version of the document.
+      ResourceState:
+        $ref: '#/definitions/ResourceStateType'
+        description: The resource state.
+    description: Describes the document.
+  DocumentMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentMetadata'
+  DocumentSourceType:
+    type: string
+    enum:
+      - ORIGINAL
+      - WITH_COMMENTS
+  DocumentSourceUrlMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DocumentSourceType'
+        value:
+          $ref: '#/definitions/UrlType'
+  DocumentStatusType:
+    type: string
+    enum:
+      - INITIALIZED
+      - ACTIVE
+  DocumentThumbnailType:
+    type: string
+    enum:
+      - SMALL
+      - SMALL_HQ
+      - LARGE
+  DocumentThumbnailUrlMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DocumentThumbnailType'
+        value:
+          $ref: '#/definitions/UrlType'
+  DocumentVersionIdType:
+    type: string
+    pattern: '[\w+-.@]+'
+    minLength: 1
+    maxLength: 128
+  DocumentVersionMetadata:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/DocumentVersionIdType'
+        description: The ID of the version.
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the version.
+      ContentType:
+        $ref: '#/definitions/DocumentContentType'
+        description: The content type of the document.
+      Size:
+        $ref: '#/definitions/SizeType'
+        description: 'The size of the document, in bytes.'
+      Signature:
+        $ref: '#/definitions/HashType'
+        description: The signature of the document.
+      Status:
+        $ref: '#/definitions/DocumentStatusType'
+        description: The status of the document.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time stamp when the document was first uploaded.
+      ModifiedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time stamp when the document was last uploaded.
+      ContentCreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time stamp when the content of the document was originally created.
+      ContentModifiedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time stamp when the content of the document was modified.
+      CreatorId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the creator.
+      Thumbnail:
+        $ref: '#/definitions/DocumentThumbnailUrlMap'
+        description: The thumbnail of the document.
+      Source:
+        $ref: '#/definitions/DocumentSourceUrlMap'
+        description: The source of the document.
+    description: Describes a version of a document.
+  DocumentVersionMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentVersionMetadata'
+  DocumentVersionStatus:
+    type: string
+    enum:
+      - ACTIVE
+  EmailAddressType:
+    type: string
+    pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    minLength: 1
+    maxLength: 256
+  EntityAlreadyExistsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The resource already exists.
+  EntityIdList:
+    type: array
+    items:
+      $ref: '#/definitions/IdType'
+  EntityNotExistsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+      EntityIds:
+        $ref: '#/definitions/EntityIdList'
+    description: The resource does not exist.
+  ErrorMessageType:
+    type: string
+  FailedDependencyException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: 'The AWS Directory Service cannot reach an on-premises instance. Or a dependency under the control of the organization is failing, such as a connected active directory.'
+  FieldNamesType:
+    type: string
+    pattern: '[\w,]+'
+    minLength: 1
+    maxLength: 256
+  FolderContentType:
+    type: string
+    enum:
+      - ALL
+      - DOCUMENT
+      - FOLDER
+  FolderMetadata:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the folder.
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the folder.
+      CreatorId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the creator.
+      ParentFolderId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the parent folder.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time when the folder was created.
+      ModifiedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time when the folder was updated.
+      ResourceState:
+        $ref: '#/definitions/ResourceStateType'
+        description: The resource state of the folder.
+      Signature:
+        $ref: '#/definitions/HashType'
+        description: The unique identifier created from the subfolders and documents of the folder.
+    description: Describes a folder.
+  FolderMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/FolderMetadata'
+  GetDocumentPathRequest:
+    type: object
+    properties: {}
+  GetDocumentPathResponse:
+    type: object
+    properties:
+      Path:
+        $ref: '#/definitions/ResourcePath'
+        description: The path information.
+  GetDocumentRequest:
+    type: object
+    properties: {}
+  GetDocumentResponse:
+    type: object
+    properties:
+      Metadata:
+        $ref: '#/definitions/DocumentMetadata'
+        description: The document object.
+  GetDocumentVersionRequest:
+    type: object
+    properties: {}
+  GetDocumentVersionResponse:
+    type: object
+    properties:
+      Metadata:
+        $ref: '#/definitions/DocumentVersionMetadata'
+        description: The version metadata.
+  GetFolderPathRequest:
+    type: object
+    properties: {}
+  GetFolderPathResponse:
+    type: object
+    properties:
+      Path:
+        $ref: '#/definitions/ResourcePath'
+        description: The path information.
+  GetFolderRequest:
+    type: object
+    properties: {}
+  GetFolderResponse:
+    type: object
+    properties:
+      Metadata:
+        $ref: '#/definitions/FolderMetadata'
+        description: The metadata of the folder.
+  HashType:
+    type: string
+    pattern: '[&\w+-.@]+'
+    minLength: 0
+    maxLength: 128
+  HeaderNameType:
+    type: string
+    pattern: '[\w-]+'
+    minLength: 1
+    maxLength: 256
+  HeaderValueType:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  IdType:
+    type: string
+    pattern: '[&\w+-.@]+'
+    minLength: 1
+    maxLength: 256
+  IllegalUserStateException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The user is undergoing transfer of ownership.
+  InitiateDocumentVersionUploadRequest:
+    type: object
+    required:
+      - ParentFolderId
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the document.
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the document.
+      ContentCreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time stamp when the content of the document was originally created.
+      ContentModifiedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time stamp when the content of the document was modified.
+      ContentType:
+        $ref: '#/definitions/DocumentContentType'
+        description: The content type of the document.
+      DocumentSizeInBytes:
+        $ref: '#/definitions/SizeType'
+        description: 'The size of the document, in bytes.'
+      ParentFolderId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the parent folder.
+  InitiateDocumentVersionUploadResponse:
+    type: object
+    properties:
+      Metadata:
+        $ref: '#/definitions/DocumentMetadata'
+        description: The document metadata.
+      UploadMetadata:
+        $ref: '#/definitions/UploadMetadata'
+        description: The upload metadata.
+  InvalidArgumentException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The pagination marker and/or limit fields are not valid.
+  InvalidOperationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The operation is invalid.
+  LimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: 'You''ve exceeded the maximum of 100,000 folders under the parent folder.'
+  LimitType:
+    type: integer
+    minimum: 1
+    maximum: 999
+  LocaleType:
+    type: string
+    enum:
+      - en
+      - fr
+      - ko
+      - de
+      - es
+      - ja
+      - ru
+      - zh_CN
+      - zh_TW
+      - pt_BR
+      - default
+  MessageType:
+    type: string
+    minLength: 0
+    maxLength: 2048
+    format: password
+  OrderType:
+    type: string
+    enum:
+      - ASCENDING
+      - DESCENDING
+  OrganizationUserList:
+    type: array
+    items:
+      $ref: '#/definitions/User'
+  PageMarkerType:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  PasswordType:
+    type: string
+    pattern: '[\u0020-\u00FF]+'
+    minLength: 4
+    maxLength: 32
+    format: password
+  PermissionInfo:
+    type: object
+    properties:
+      Role:
+        $ref: '#/definitions/RoleType'
+        description: The role of the user.
+      Type:
+        $ref: '#/definitions/RolePermissionType'
+        description: The type of permissions.
+    description: Describes the permissions.
+  PermissionInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/PermissionInfo'
+  PositiveSizeType:
+    type: integer
+    minimum: 0
+  Principal:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/IdType'
+        description: The ID of the resource.
+      Type:
+        $ref: '#/definitions/PrincipalType'
+        description: The type of resource.
+      Roles:
+        $ref: '#/definitions/PermissionInfoList'
+        description: The permission information for the resource.
+    description: Describes a resource.
+  PrincipalList:
+    type: array
+    items:
+      $ref: '#/definitions/Principal'
+  PrincipalType:
+    type: string
+    enum:
+      - USER
+      - GROUP
+      - INVITE
+      - ANONYMOUS
+      - ORGANIZATION
+  ProhibitedStateException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The specified document version is not in the INITIALIZED state.
+  RemoveAllResourcePermissionsRequest:
+    type: object
+    properties: {}
+  RemoveResourcePermissionRequest:
+    type: object
+    properties: {}
+  ResourceIdType:
+    type: string
+    pattern: '[\w+-.@]+'
+    minLength: 1
+    maxLength: 128
+  ResourceNameType:
+    type: string
+    pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
+    minLength: 1
+    maxLength: 255
+  ResourcePath:
+    type: object
+    properties:
+      Components:
+        $ref: '#/definitions/ResourcePathComponentList'
+        description: The components of the resource path.
+    description: Describes the path information of a resource.
+  ResourcePathComponent:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/IdType'
+        description: The ID of the resource path.
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the resource path.
+    description: Describes the resource path.
+  ResourcePathComponentList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourcePathComponent'
+  ResourceSortType:
+    type: string
+    enum:
+      - DATE
+      - NAME
+  ResourceStateType:
+    type: string
+    enum:
+      - ACTIVE
+      - RESTORING
+      - RECYCLING
+      - RECYCLED
+  RolePermissionType:
+    type: string
+    enum:
+      - DIRECT
+      - INHERITED
+  RoleType:
+    type: string
+    enum:
+      - VIEWER
+      - CONTRIBUTOR
+      - OWNER
+      - COOWNER
+  SearchQueryType:
+    type: string
+    pattern: '[\u0020-\uFFFF]+'
+    minLength: 1
+    maxLength: 512
+    format: password
+  ServiceUnavailableException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: One or more of the dependencies is unavailable.
+  SharePrincipal:
+    type: object
+    required:
+      - Id
+      - Type
+      - Role
+    properties:
+      Id:
+        $ref: '#/definitions/IdType'
+        description: The ID of the recipient.
+      Type:
+        $ref: '#/definitions/PrincipalType'
+        description: The type of the recipient.
+      Role:
+        $ref: '#/definitions/RoleType'
+        description: The role of the recipient.
+    description: 'Describes the recipient type and ID, if available.'
+  SharePrincipalList:
+    type: array
+    items:
+      $ref: '#/definitions/SharePrincipal'
+  ShareResult:
+    type: object
+    properties:
+      PrincipalId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the principal.
+      Role:
+        $ref: '#/definitions/RoleType'
+        description: The role.
+      Status:
+        $ref: '#/definitions/ShareStatusType'
+        description: The status.
+      ShareId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the resource that was shared.
+      StatusMessage:
+        $ref: '#/definitions/MessageType'
+        description: The status message.
+    description: Describes the share results of a resource.
+  ShareResultsList:
+    type: array
+    items:
+      $ref: '#/definitions/ShareResult'
+  ShareStatusType:
+    type: string
+    enum:
+      - SUCCESS
+      - FAILURE
+  SignedHeaderMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/HeaderNameType'
+        value:
+          $ref: '#/definitions/HeaderValueType'
+  SizeType:
+    type: integer
+  StorageLimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The storage limit has been exceeded.
+  StorageLimitWillExceedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The storage limit will be exceeded.
+  StorageRuleType:
+    type: object
+    properties:
+      StorageAllocatedInBytes:
+        $ref: '#/definitions/PositiveSizeType'
+        description: 'The amount of storage allocated, in bytes.'
+      StorageType:
+        $ref: '#/definitions/StorageType'
+        description: The type of storage.
+    description: Describes the storage for a user.
+  StorageType:
+    type: string
+    enum:
+      - UNLIMITED
+      - QUOTA
+  Subscription:
+    type: object
+    properties:
+      SubscriptionId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the subscription.
+      EndPoint:
+        $ref: '#/definitions/SubscriptionEndPointType'
+        description: The endpoint of the subscription.
+      Protocol:
+        $ref: '#/definitions/SubscriptionProtocolType'
+        description: The protocol of the subscription.
+    description: Describes a subscription.
+  SubscriptionEndPointType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  SubscriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/Subscription'
+    maxItems: 256
+  SubscriptionProtocolType:
+    type: string
+    enum:
+      - HTTPS
+  SubscriptionType:
+    type: string
+    enum:
+      - ALL
+  TimeZoneIdType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  TimestampType:
+    type: string
+    format: date-time
+  TooManySubscriptionsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: You've reached the limit on the number of subscriptions for the WorkDocs instance.
+  UnauthorizedOperationException:
+    type: object
+    properties: {}
+    description: The operation is not permitted.
+  UnauthorizedResourceAccessException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The caller does not have access to perform the action on the resource.
+  UpdateDocumentRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the document.
+      ParentFolderId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the parent folder.
+      ResourceState:
+        $ref: '#/definitions/ResourceStateType'
+        description: The resource state of the document. Note that only ACTIVE and RECYCLED are supported.
+  UpdateDocumentVersionRequest:
+    type: object
+    properties:
+      VersionStatus:
+        $ref: '#/definitions/DocumentVersionStatus'
+        description: The status of the version.
+  UpdateFolderRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the folder.
+      ParentFolderId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the parent folder.
+      ResourceState:
+        $ref: '#/definitions/ResourceStateType'
+        description: The resource state of the folder. Note that only ACTIVE and RECYCLED are accepted values from the API.
+  UpdateUserRequest:
+    type: object
+    properties:
+      GivenName:
+        $ref: '#/definitions/UserAttributeValueType'
+        description: The given name of the user.
+      Surname:
+        $ref: '#/definitions/UserAttributeValueType'
+        description: The surname of the user.
+      Type:
+        $ref: '#/definitions/UserType'
+        description: The type of the user.
+      StorageRule:
+        $ref: '#/definitions/StorageRuleType'
+        description: The amount of storage for the user.
+      TimeZoneId:
+        $ref: '#/definitions/TimeZoneIdType'
+        description: The time zone ID of the user.
+      Locale:
+        $ref: '#/definitions/LocaleType'
+        description: The locale of the user.
+  UpdateUserResponse:
+    type: object
+    properties:
+      User:
+        $ref: '#/definitions/User'
+        description: The user information.
+  UploadMetadata:
+    type: object
+    properties:
+      UploadUrl:
+        $ref: '#/definitions/UrlType'
+        description: The URL of the upload.
+      SignedHeaders:
+        $ref: '#/definitions/SignedHeaderMap'
+        description: The signed headers.
+    description: Describes the upload.
+  UrlType:
+    type: string
+    minLength: 1
+    maxLength: 1024
+    format: password
+  User:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/IdType'
+        description: The ID of the user.
+      Username:
+        $ref: '#/definitions/UsernameType'
+        description: The login name of the user.
+      EmailAddress:
+        $ref: '#/definitions/EmailAddressType'
+        description: The email address of the user.
+      GivenName:
+        $ref: '#/definitions/UserAttributeValueType'
+        description: The given name of the user.
+      Surname:
+        $ref: '#/definitions/UserAttributeValueType'
+        description: The surname of the user.
+      OrganizationId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the organization.
+      RootFolderId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the root folder.
+      RecycleBinFolderId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the recycle bin folder.
+      Status:
+        $ref: '#/definitions/UserStatusType'
+        description: The status of the user.
+      Type:
+        $ref: '#/definitions/UserType'
+        description: The type of user.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time when the user was created.
+      ModifiedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time when the user was modified.
+      TimeZoneId:
+        $ref: '#/definitions/TimeZoneIdType'
+        description: The time zone ID of the user.
+      Locale:
+        $ref: '#/definitions/LocaleType'
+        description: The locale of the user.
+      Storage:
+        $ref: '#/definitions/UserStorageMetadata'
+        description: The storage for the user.
+    description: Describes a user.
+  UserAttributeValueType:
+    type: string
+    minLength: 1
+    maxLength: 64
+  UserFilterType:
+    type: string
+    enum:
+      - ALL
+      - ACTIVE_PENDING
+  UserIdsType:
+    type: string
+    pattern: '[&\w+-.@, ]+'
+    minLength: 1
+    maxLength: 2000
+  UserSortType:
+    type: string
+    enum:
+      - USER_NAME
+      - FULL_NAME
+      - STORAGE_LIMIT
+      - USER_STATUS
+      - STORAGE_USED
+  UserStatusType:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+      - PENDING
+  UserStorageMetadata:
+    type: object
+    properties:
+      StorageUtilizedInBytes:
+        $ref: '#/definitions/SizeType'
+        description: 'The amount of storage utilized, in bytes.'
+      StorageRule:
+        $ref: '#/definitions/StorageRuleType'
+        description: The storage for a user.
+    description: Describes the storage for a user.
+  UserType:
+    type: string
+    enum:
+      - USER
+      - ADMIN
+  UsernameType:
+    type: string
+    pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?'
+    minLength: 1
+    maxLength: 256

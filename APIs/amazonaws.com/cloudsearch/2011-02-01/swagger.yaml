@@ -1,0 +1,1802 @@
+swagger: '2.0'
+info:
+  version: '2011-02-01'
+  x-release: v4
+  title: Amazon CloudSearch
+  description: '<fullname>Amazon CloudSearch Configuration Service</fullname> <p>You use the configuration service to create, configure, and manage search domains. Configuration service requests are submitted using the AWS Query protocol. AWS Query requests are HTTP or HTTPS requests submitted via HTTP GET or POST with a query parameter named Action.</p> <p>The endpoint for configuration service requests is region-specific: cloudsearch.<i>region</i>.amazonaws.com. For example, cloudsearch.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region">Regions and Endpoints</a>.</p>'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: cloudsearch
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudsearch-2011-02-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/cloudsearch/2011-02-01/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: false
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/cloudsearch/'
+host: cloudsearch.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes: []
+produces: []
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateDomain
+      description: Creates a new search domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDomainResponse'
+        '409':
+          description: LimitExceededException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDomainRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DefineIndexField':
+    post:
+      operationId: DefineIndexField
+      description: 'Configures an <code>IndexField</code> for the search domain. Used to create new fields and modify existing ones. If the field exists, the new configuration replaces the old one. You can configure a maximum of 200 index fields.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DefineIndexFieldResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DefineIndexFieldRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DefineRankExpression':
+    post:
+      operationId: DefineRankExpression
+      description: 'Configures a <code>RankExpression</code> for the search domain. Used to create new rank expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. You can configure a maximum of 50 rank expressions.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DefineRankExpressionResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DefineRankExpressionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDomain':
+    post:
+      operationId: DeleteDomain
+      description: Permanently deletes a search domain and all of its data.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDomainResponse'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDomainRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteIndexField':
+    post:
+      operationId: DeleteIndexField
+      description: Removes an <code>IndexField</code> from the search domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteIndexFieldResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteIndexFieldRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRankExpression':
+    post:
+      operationId: DeleteRankExpression
+      description: Removes a <code>RankExpression</code> from the search domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteRankExpressionResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRankExpressionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAvailabilityOptions':
+    post:
+      operationId: DescribeAvailabilityOptions
+      description: 'Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAvailabilityOptionsResponse'
+        '409':
+          description: DisabledOperationException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAvailabilityOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDefaultSearchField':
+    post:
+      operationId: DescribeDefaultSearchField
+      description: Gets the default search field configured for the search domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDefaultSearchFieldResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDefaultSearchFieldRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDomains':
+    post:
+      operationId: DescribeDomains
+      description: Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDomainsResponse'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDomainsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeIndexFields':
+    post:
+      operationId: DescribeIndexFields
+      description: Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. Shows all fields by default.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeIndexFieldsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeIndexFieldsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeRankExpressions':
+    post:
+      operationId: DescribeRankExpressions
+      description: 'Gets the rank expressions configured for the search domain. Can be limited to specific rank expressions by name. Shows all rank expressions by default. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRankExpressionsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeRankExpressionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeServiceAccessPolicies':
+    post:
+      operationId: DescribeServiceAccessPolicies
+      description: Gets information about the resource-based policies that control access to the domain's document and search services.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeServiceAccessPoliciesResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeServiceAccessPoliciesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStemmingOptions':
+    post:
+      operationId: DescribeStemmingOptions
+      description: Gets the stemming dictionary configured for the search domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeStemmingOptionsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeStemmingOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStopwordOptions':
+    post:
+      operationId: DescribeStopwordOptions
+      description: Gets the stopwords configured for the search domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeStopwordOptionsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeStopwordOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSynonymOptions':
+    post:
+      operationId: DescribeSynonymOptions
+      description: Gets the synonym dictionary configured for the search domain.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSynonymOptionsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSynonymOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#IndexDocuments':
+    post:
+      operationId: IndexDocuments
+      description: Tells the search domain to start indexing its documents using the latest text processing options and <code>IndexFields</code>. This operation must be invoked to make options whose <a>OptionStatus</a> has <code>OptionState</code> of <code>RequiresIndexDocuments</code> visible in search results.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/IndexDocumentsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/IndexDocumentsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateAvailabilityOptions':
+    post:
+      operationId: UpdateAvailabilityOptions
+      description: 'Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateAvailabilityOptionsResponse'
+        '409':
+          description: DisabledOperationException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/DisabledOperationException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAvailabilityOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDefaultSearchField':
+    post:
+      operationId: UpdateDefaultSearchField
+      description: 'Configures the default search field for the search domain. The default search field is the text field that is searched when a search request does not specify which fields to search. By default, it is configured to include the contents of all of the domain''s text fields. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDefaultSearchFieldResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDefaultSearchFieldRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateServiceAccessPolicies':
+    post:
+      operationId: UpdateServiceAccessPolicies
+      description: Configures the policies that control access to the domain's document and search services. The maximum size of an access policy document is 100 KB.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateServiceAccessPoliciesResponse'
+        '409':
+          description: InvalidTypeException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidTypeException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateServiceAccessPoliciesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateStemmingOptions':
+    post:
+      operationId: UpdateStemmingOptions
+      description: Configures a stemming dictionary for the search domain. The stemming dictionary is used during indexing and when processing search requests. The maximum size of the stemming dictionary is 500 KB.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateStemmingOptionsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateStemmingOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateStopwordOptions':
+    post:
+      operationId: UpdateStopwordOptions
+      description: Configures stopwords for the search domain. Stopwords are used during indexing and when processing search requests. The maximum size of the stopwords dictionary is 10 KB.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateStopwordOptionsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateStopwordOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateSynonymOptions':
+    post:
+      operationId: UpdateSynonymOptions
+      description: 'Configures a synonym dictionary for the search domain. The synonym dictionary is used during indexing to configure mappings for terms that occur in text fields. The maximum size of the synonym dictionary is 100 KB. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSynonymOptionsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSynonymOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AccessPoliciesStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/PolicyDocument'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: 'A <code>PolicyDocument</code> that specifies access policies for the search domain''s services, and the current status of those policies.'
+  Arn:
+    type: string
+    description: 'An Amazon Resource Name (ARN). See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
+  AvailabilityOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/MultiAZ'
+        description: The availability options configured for the domain.
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The status and configuration of the domain's availability options.
+  BaseException:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/ErrorCode'
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: An error occurred while processing the request.
+  Boolean:
+    type: boolean
+  CreateDomainRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+  CreateDomainResponse:
+    type: object
+    properties:
+      DomainStatus:
+        $ref: '#/definitions/DomainStatus'
+    description: A response message that contains the status of a newly created domain.
+  DefaultSearchFieldStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/FieldName'
+        description: 'The name of the <code>IndexField</code> to use as the default search field. The default is an empty string, which automatically searches all text fields.'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The value of the <code>DefaultSearchField</code> configured for this search domain and its current status.
+  DefineIndexFieldRequest:
+    type: object
+    required:
+      - DomainName
+      - IndexField
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      IndexField:
+        $ref: '#/definitions/IndexField'
+  DefineIndexFieldResponse:
+    type: object
+    required:
+      - IndexField
+    properties:
+      IndexField:
+        $ref: '#/definitions/IndexFieldStatus'
+    description: A response message that contains the status of an updated index field.
+  DefineRankExpressionRequest:
+    type: object
+    required:
+      - DomainName
+      - RankExpression
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      RankExpression:
+        $ref: '#/definitions/NamedRankExpression'
+  DefineRankExpressionResponse:
+    type: object
+    required:
+      - RankExpression
+    properties:
+      RankExpression:
+        $ref: '#/definitions/RankExpressionStatus'
+    description: A response message that contains the status of an updated <code>RankExpression</code>.
+  DeleteDomainRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+  DeleteDomainResponse:
+    type: object
+    properties:
+      DomainStatus:
+        $ref: '#/definitions/DomainStatus'
+    description: 'A response message that contains the status of a newly deleted domain, or no status if the domain has already been completely deleted.'
+  DeleteIndexFieldRequest:
+    type: object
+    required:
+      - DomainName
+      - IndexFieldName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      IndexFieldName:
+        $ref: '#/definitions/FieldName'
+  DeleteIndexFieldResponse:
+    type: object
+    required:
+      - IndexField
+    properties:
+      IndexField:
+        $ref: '#/definitions/IndexFieldStatus'
+    description: A response message that contains the status of a deleted index field.
+  DeleteRankExpressionRequest:
+    type: object
+    required:
+      - DomainName
+      - RankName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      RankName:
+        $ref: '#/definitions/FieldName'
+        description: The name of the <code>RankExpression</code> to delete.
+  DeleteRankExpressionResponse:
+    type: object
+    required:
+      - RankExpression
+    properties:
+      RankExpression:
+        $ref: '#/definitions/RankExpressionStatus'
+    description: A response message that contains the status of a deleted <code>RankExpression</code>.
+  DescribeAvailabilityOptionsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain you want to describe.
+    description: 'Container for the parameters to the <code><a>DescribeAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the Deployed option to <code>true</code>.'
+  DescribeAvailabilityOptionsResponse:
+    type: object
+    properties:
+      AvailabilityOptions:
+        $ref: '#/definitions/AvailabilityOptionsStatus'
+        description: 'The availability options configured for the domain. Indicates whether Multi-AZ is enabled for the domain. '
+    description: 'The result of a <code>DescribeAvailabilityOptions</code> request. Indicates whether or not the Multi-AZ option is enabled for the domain specified in the request. '
+  DescribeDefaultSearchFieldRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+  DescribeDefaultSearchFieldResponse:
+    type: object
+    required:
+      - DefaultSearchField
+    properties:
+      DefaultSearchField:
+        $ref: '#/definitions/DefaultSearchFieldStatus'
+        description: 'The name of the <code>IndexField</code> to use for search requests issued with the <code>q</code> parameter. The default is the empty string, which automatically searches all text fields.'
+    description: A response message that contains the default search field for a search domain.
+  DescribeDomainsRequest:
+    type: object
+    properties:
+      DomainNames:
+        $ref: '#/definitions/DomainNameList'
+        description: Limits the DescribeDomains response to the specified search domains.
+  DescribeDomainsResponse:
+    type: object
+    required:
+      - DomainStatusList
+    properties:
+      DomainStatusList:
+        $ref: '#/definitions/DomainStatusList'
+    description: A response message that contains the status of one or more domains.
+  DescribeIndexFieldsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      FieldNames:
+        $ref: '#/definitions/FieldNameList'
+        description: Limits the <code>DescribeIndexFields</code> response to the specified fields.
+  DescribeIndexFieldsResponse:
+    type: object
+    required:
+      - IndexFields
+    properties:
+      IndexFields:
+        $ref: '#/definitions/IndexFieldStatusList'
+        description: The index fields configured for the domain.
+    description: A response message that contains the index fields for a search domain.
+  DescribeRankExpressionsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      RankNames:
+        $ref: '#/definitions/FieldNameList'
+        description: Limits the <code>DescribeRankExpressions</code> response to the specified fields.
+  DescribeRankExpressionsResponse:
+    type: object
+    required:
+      - RankExpressions
+    properties:
+      RankExpressions:
+        $ref: '#/definitions/RankExpressionStatusList'
+        description: The rank expressions configured for the domain.
+    description: A response message that contains the rank expressions for a search domain.
+  DescribeServiceAccessPoliciesRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+  DescribeServiceAccessPoliciesResponse:
+    type: object
+    required:
+      - AccessPolicies
+    properties:
+      AccessPolicies:
+        $ref: '#/definitions/AccessPoliciesStatus'
+    description: A response message that contains the access policies for a domain.
+  DescribeStemmingOptionsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+  DescribeStemmingOptionsResponse:
+    type: object
+    required:
+      - Stems
+    properties:
+      Stems:
+        $ref: '#/definitions/StemmingOptionsStatus'
+    description: A response message that contains the stemming options for a search domain.
+  DescribeStopwordOptionsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+  DescribeStopwordOptionsResponse:
+    type: object
+    required:
+      - Stopwords
+    properties:
+      Stopwords:
+        $ref: '#/definitions/StopwordOptionsStatus'
+    description: A response message that contains the stopword options for a search domain.
+  DescribeSynonymOptionsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+  DescribeSynonymOptionsResponse:
+    type: object
+    required:
+      - Synonyms
+    properties:
+      Synonyms:
+        $ref: '#/definitions/SynonymOptionsStatus'
+    description: A response message that contains the synonym options for a search domain.
+  DisabledOperationException:
+    type: object
+    properties: {}
+    description: The request was rejected because it attempted an operation which is not enabled.
+  DocumentCount:
+    type: integer
+    minimum: 0
+  DomainId:
+    type: string
+    description: An internally generated unique identifier for a domain.
+    minLength: 1
+    maxLength: 64
+  DomainName:
+    type: string
+    pattern: '[a-z][a-z0-9\-]+'
+    description: 'A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.'
+    minLength: 3
+    maxLength: 28
+  DomainNameList:
+    type: array
+    description: A list of domain names.
+    items:
+      $ref: '#/definitions/DomainName'
+  DomainStatus:
+    type: object
+    required:
+      - DomainId
+      - DomainName
+      - RequiresIndexDocuments
+    properties:
+      DomainId:
+        $ref: '#/definitions/DomainId'
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      Created:
+        $ref: '#/definitions/Boolean'
+        description: True if the search domain is created. It can take several minutes to initialize a domain when <a>CreateDomain</a> is called. Newly created search domains are returned from <a>DescribeDomains</a> with a false value for Created until domain creation is complete.
+      Deleted:
+        $ref: '#/definitions/Boolean'
+        description: True if the search domain has been deleted. The system must clean up resources dedicated to the search domain when <a>DeleteDomain</a> is called. Newly deleted search domains are returned from <a>DescribeDomains</a> with a true value for IsDeleted for several minutes until resource cleanup is complete.
+      NumSearchableDocs:
+        $ref: '#/definitions/DocumentCount'
+        description: The number of documents that have been submitted to the domain and indexed.
+      DocService:
+        $ref: '#/definitions/ServiceEndpoint'
+        description: The service endpoint for updating documents in a search domain.
+      SearchService:
+        $ref: '#/definitions/ServiceEndpoint'
+        description: The service endpoint for requesting search results from a search domain.
+      RequiresIndexDocuments:
+        $ref: '#/definitions/Boolean'
+        description: True if <a>IndexDocuments</a> needs to be called to activate the current domain configuration.
+      Processing:
+        $ref: '#/definitions/Boolean'
+        description: True if processing is being done to activate the current domain configuration.
+      SearchInstanceType:
+        $ref: '#/definitions/SearchInstanceType'
+        description: The instance type (such as search.m1.small) that is being used to process search requests.
+      SearchPartitionCount:
+        $ref: '#/definitions/PartitionCount'
+        description: The number of partitions across which the search index is spread.
+      SearchInstanceCount:
+        $ref: '#/definitions/InstanceCount'
+        description: The number of search instances that are available to process search requests.
+    description: The current status of the search domain.
+  DomainStatusList:
+    type: array
+    description: The current status of all of your search domains.
+    items:
+      $ref: '#/definitions/DomainStatus'
+  ErrorCode:
+    type: string
+    description: A machine-parsable string error or warning code.
+  ErrorMessage:
+    type: string
+    description: A human-readable string error or warning message.
+  FieldName:
+    type: string
+    pattern: '[a-z][a-z0-9_]*'
+    description: 'A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names "body", "docid", and "text_relevance" are reserved and cannot be specified as field or rank expression names.'
+    minLength: 1
+    maxLength: 64
+  FieldNameList:
+    type: array
+    items:
+      $ref: '#/definitions/FieldName'
+  FieldValue:
+    type: string
+    description: The value of a field or source document attribute.
+    minLength: 0
+    maxLength: 1024
+  IndexDocumentsRequest:
+    type: object
+    required:
+      - DomainName
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+  IndexDocumentsResponse:
+    type: object
+    properties:
+      FieldNames:
+        $ref: '#/definitions/FieldNameList'
+        description: The names of the fields that are currently being processed due to an <code>IndexDocuments</code> action.
+    description: The result of an <code>IndexDocuments</code> action.
+  IndexField:
+    type: object
+    required:
+      - IndexFieldName
+      - IndexFieldType
+    properties:
+      IndexFieldName:
+        $ref: '#/definitions/FieldName'
+        description: 'The name of a field in the search index. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names "body", "docid", and "text_relevance" are reserved and cannot be specified as field or rank expression names.'
+      IndexFieldType:
+        $ref: '#/definitions/IndexFieldType'
+        description: 'The type of field. Based on this type, exactly one of the <a>UIntOptions</a>, <a>LiteralOptions</a> or <a>TextOptions</a> must be present.'
+      UIntOptions:
+        $ref: '#/definitions/UIntOptions'
+        description: Options for an unsigned integer field. Present if <code>IndexFieldType</code> specifies the field is of type unsigned integer.
+      LiteralOptions:
+        $ref: '#/definitions/LiteralOptions'
+        description: Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type literal.
+      TextOptions:
+        $ref: '#/definitions/TextOptions'
+        description: Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type text.
+      SourceAttributes:
+        $ref: '#/definitions/SourceAttributeList'
+        description: 'An optional list of source attributes that provide data for this index field. If not specified, the data is pulled from a source attribute with the same name as this <code>IndexField</code>. When one or more source attributes are specified, an optional data transformation can be applied to the source data when populating the index field. You can configure a maximum of 20 sources for an <code>IndexField</code>.'
+    description: 'Defines a field in the index, including its name, type, and the source of its data. The <code>IndexFieldType</code> indicates which of the options will be present. It is invalid to specify options for a type other than the <code>IndexFieldType</code>.'
+  IndexFieldStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/IndexField'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The value of an <code>IndexField</code> and its current status.
+  IndexFieldStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/IndexFieldStatus'
+  IndexFieldType:
+    type: string
+    enum:
+      - uint
+      - literal
+      - text
+    description: The type of <code>IndexField</code>.
+  InstanceCount:
+    type: integer
+    minimum: 1
+  InternalException:
+    type: object
+    properties: {}
+    description: 'An internal error occurred while processing the request. If this problem persists, report an issue from the <a href="http://status.aws.amazon.com/">Service Health Dashboard</a>.'
+  InvalidTypeException:
+    type: object
+    properties: {}
+    description: The request was rejected because it specified an invalid type definition.
+  Language:
+    type: string
+    pattern: '[a-zA-Z]{2,8}(?:-[a-zA-Z]{2,8})*'
+    description: 'An <a href="http://tools.ietf.org/html/rfc4646">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.'
+  LimitExceededException:
+    type: object
+    properties: {}
+    description: The request was rejected because a resource limit has already been met.
+  LiteralOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: The default value for a literal field. Optional.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether search is enabled for this field. Default: False.'
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether facets are enabled for this field. Default: False.'
+      ResultEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether values of this field can be returned in search results and used for ranking. Default: False.'
+    description: Options that define a literal field in the search index.
+  MultiAZ:
+    type: boolean
+  NamedRankExpression:
+    type: object
+    required:
+      - RankName
+      - RankExpression
+    properties:
+      RankName:
+        $ref: '#/definitions/FieldName'
+        description: 'The name of a rank expression. Rank expression names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names "body", "docid", and "text_relevance" are reserved and cannot be specified as field or rank expression names.'
+      RankExpression:
+        $ref: '#/definitions/RankExpression'
+        description: '<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code>, if <code>a</code> is true, without evaluating <code>b</code> at all</li> <li>JavaScript order of precedence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>'
+    description: 'A named expression that can be evaluated at search time and used for ranking or thresholding in a search query. '
+  OptionState:
+    type: string
+    enum:
+      - RequiresIndexDocuments
+      - Processing
+      - Active
+    description: The state of processing a change to an option.
+  OptionStatus:
+    type: object
+    required:
+      - CreationDate
+      - UpdateDate
+      - State
+    properties:
+      CreationDate:
+        $ref: '#/definitions/UpdateTimestamp'
+        description: A timestamp for when this option was created.
+      UpdateDate:
+        $ref: '#/definitions/UpdateTimestamp'
+        description: A timestamp for when this option was last updated.
+      UpdateVersion:
+        $ref: '#/definitions/UIntValue'
+        description: A unique integer that indicates when this option was last updated.
+      State:
+        $ref: '#/definitions/OptionState'
+        description: '<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option''s latest value will not be visible in searches until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li> <code>Processing</code>: the option''s latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option''s latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>'
+      PendingDeletion:
+        $ref: '#/definitions/Boolean'
+        description: Indicates that the option will be deleted once processing is complete.
+    description: 'The status of an option, including when it was last updated and whether it is actively in use for searches.'
+  PartitionCount:
+    type: integer
+    minimum: 1
+  PolicyDocument:
+    type: string
+    description: '<p>An IAM access policy as described in <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html" target="_blank">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p> <p>Example: <code>{"Statement": [{"Effect":"Allow", "Action": "*", "Resource": "arn:aws:cs:us-east-1:1234567890:search/movies", "Condition": { "IpAddress": { "aws:SourceIp": ["203.0.113.1/32"] } }}, {"Effect":"Allow", "Action": "*", "Resource": "arn:aws:cs:us-east-1:1234567890:documents/movies", "Condition": { "IpAddress": { "aws:SourceIp": ["203.0.113.1/32"] } }} ] }</code></p>'
+  RankExpression:
+    type: string
+    description: The current status of the rank expression.
+    minLength: 1
+    maxLength: 10240
+  RankExpressionStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/NamedRankExpression'
+        description: The expression that is evaluated for ranking or thresholding while processing a search request.
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The value of a <code>RankExpression</code> and its current status.
+  RankExpressionStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/RankExpressionStatus'
+  ResourceNotFoundException:
+    type: object
+    properties: {}
+    description: The request was rejected because it attempted to reference a resource that does not exist.
+  SearchInstanceType:
+    type: string
+  ServiceEndpoint:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+      Endpoint:
+        $ref: '#/definitions/ServiceUrl'
+    description: 'The endpoint to which service requests can be submitted, including the actual URL prefix for sending requests and the Amazon Resource Name (ARN) so the endpoint can be referenced in other API calls such as <a>UpdateServiceAccessPolicies</a>.'
+  ServiceUrl:
+    type: string
+    description: The URL (including /version/pathPrefix) to which service requests can be submitted.
+  SourceAttribute:
+    type: object
+    required:
+      - SourceDataFunction
+    properties:
+      SourceDataFunction:
+        $ref: '#/definitions/SourceDataFunction'
+        description: Identifies the transformation to apply when copying data from a source attribute.
+      SourceDataCopy:
+        $ref: '#/definitions/SourceData'
+        description: Copies data from a source document attribute to an <code>IndexField</code>.
+      SourceDataTrimTitle:
+        $ref: '#/definitions/SourceDataTrimTitle'
+        description: Trims common title words from a source document attribute when populating an <code>IndexField</code>. This can be used to create an <code>IndexField</code> you can use for sorting.
+      SourceDataMap:
+        $ref: '#/definitions/SourceDataMap'
+        description: Maps source document attribute values to new values when populating the <code>IndexField</code>.
+    description: 'Identifies the source data for an index field. An optional data transformation can be applied to the source data when populating the index field. By default, the value of the source attribute is copied to the index field.'
+  SourceAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/SourceAttribute'
+  SourceData:
+    type: object
+    required:
+      - SourceName
+    properties:
+      SourceName:
+        $ref: '#/definitions/FieldName'
+        description: The name of the document source field to add to this <code>IndexField</code>.
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: The default value to use if the source attribute is not specified in a document. Optional.
+    description: The source attribute name and an optional default value to use if a document doesn't have an attribute of that name.
+  SourceDataFunction:
+    type: string
+    enum:
+      - Copy
+      - TrimTitle
+      - Map
+  SourceDataMap:
+    type: object
+    required:
+      - SourceName
+    properties:
+      SourceName:
+        $ref: '#/definitions/FieldName'
+        description: The name of the document source field to add to this <code>IndexField</code>.
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: The default value to use if the source attribute is not specified in a document. Optional.
+      Cases:
+        $ref: '#/definitions/StringCaseMap'
+        description: A map that translates source field values to custom values.
+    description: Specifies how to map source attribute values to custom values when populating an <code>IndexField</code>.
+  SourceDataTrimTitle:
+    type: object
+    required:
+      - SourceName
+    properties:
+      SourceName:
+        $ref: '#/definitions/FieldName'
+        description: The name of the document source field to add to this <code>IndexField</code>.
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: The default value to use if the source attribute is not specified in a document. Optional.
+      Separator:
+        $ref: '#/definitions/String'
+        description: The separator that follows the text to trim.
+      Language:
+        $ref: '#/definitions/Language'
+    description: Specifies how to trim common words from the beginning of a field to enable title sorting by that field.
+  StemmingOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/StemsDocument'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The stemming options configured for this search domain and the current status of those options.
+  StemsDocument:
+    type: string
+    description: 'Maps terms to their stems, serialized as a JSON document. The document has a single object with one property "stems" whose value is an object mapping terms to their stems. The maximum size of a stemming document is 500 KB. Example: <code>{ "stems": {"people": "person", "walking": "walk"} }</code>'
+  StopwordOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/StopwordsDocument'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The stopword options configured for this search domain and the current status of those options.
+  StopwordsDocument:
+    type: string
+    description: 'Lists stopwords serialized as a JSON document. The document has a single object with one property "stopwords" whose value is an array of strings. The maximum size of a stopwords document is 10 KB. Example: <code>{ "stopwords": ["a", "an", "the", "of"] }</code>'
+  String:
+    type: string
+  StringCaseMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/FieldValue'
+        value:
+          $ref: '#/definitions/FieldValue'
+  SynonymOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/SynonymsDocument'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The synonym options configured for this search domain and the current status of those options.
+  SynonymsDocument:
+    type: string
+    description: 'Maps terms to their synonyms, serialized as a JSON document. The document has a single object with one property "synonyms" whose value is an object mapping terms to their synonyms. Each synonym is a simple string or an array of strings. The maximum size of a stopwords document is 100 KB. Example: <code>{ "synonyms": {"cat": ["feline", "kitten"], "puppy": "dog"} }</code>'
+  TextOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: The default value for a text field. Optional.
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether facets are enabled for this field. Default: False.'
+      ResultEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether values of this field can be returned in search results and used for ranking. Default: False.'
+      TextProcessor:
+        $ref: '#/definitions/FieldName'
+        description: '<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>'
+    description: Options that define a text field in the search index.
+  UIntOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/UIntValue'
+        description: The default value for an unsigned integer field. Optional.
+    description: Options that define a <code>uint</code> field in the search index.
+  UIntValue:
+    type: integer
+    minimum: 0
+  UpdateAvailabilityOptionsRequest:
+    type: object
+    required:
+      - DomainName
+      - MultiAZ
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      MultiAZ:
+        $ref: '#/definitions/Boolean'
+        description: 'You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to <code>false</code>. '
+    description: Container for the parameters to the <code><a>UpdateAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to update and the Multi-AZ availability option.
+  UpdateAvailabilityOptionsResponse:
+    type: object
+    properties:
+      AvailabilityOptions:
+        $ref: '#/definitions/AvailabilityOptionsStatus'
+        description: 'The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain. '
+    description: 'The result of a <code>UpdateAvailabilityOptions</code> request. Contains the status of the domain''s availability options. '
+  UpdateDefaultSearchFieldRequest:
+    type: object
+    required:
+      - DomainName
+      - DefaultSearchField
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      DefaultSearchField:
+        $ref: '#/definitions/String'
+        description: 'The text field to search if the search request does not specify which field to search. The default search field is used when search terms are specified with the <code>q</code> parameter, or if a match expression specified with the <code>bq</code> parameter does not constrain the search to a particular field. The default is an empty string, which automatically searches all text fields.'
+  UpdateDefaultSearchFieldResponse:
+    type: object
+    required:
+      - DefaultSearchField
+    properties:
+      DefaultSearchField:
+        $ref: '#/definitions/DefaultSearchFieldStatus'
+    description: A response message that contains the status of an updated default search field.
+  UpdateServiceAccessPoliciesRequest:
+    type: object
+    required:
+      - DomainName
+      - AccessPolicies
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      AccessPolicies:
+        $ref: '#/definitions/PolicyDocument'
+  UpdateServiceAccessPoliciesResponse:
+    type: object
+    required:
+      - AccessPolicies
+    properties:
+      AccessPolicies:
+        $ref: '#/definitions/AccessPoliciesStatus'
+    description: A response message that contains the status of updated access policies.
+  UpdateStemmingOptionsRequest:
+    type: object
+    required:
+      - DomainName
+      - Stems
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      Stems:
+        $ref: '#/definitions/StemsDocument'
+  UpdateStemmingOptionsResponse:
+    type: object
+    required:
+      - Stems
+    properties:
+      Stems:
+        $ref: '#/definitions/StemmingOptionsStatus'
+    description: A response message that contains the status of updated stemming options.
+  UpdateStopwordOptionsRequest:
+    type: object
+    required:
+      - DomainName
+      - Stopwords
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      Stopwords:
+        $ref: '#/definitions/StopwordsDocument'
+  UpdateStopwordOptionsResponse:
+    type: object
+    required:
+      - Stopwords
+    properties:
+      Stopwords:
+        $ref: '#/definitions/StopwordOptionsStatus'
+    description: A response message that contains the status of updated stopword options.
+  UpdateSynonymOptionsRequest:
+    type: object
+    required:
+      - DomainName
+      - Synonyms
+    properties:
+      DomainName:
+        $ref: '#/definitions/DomainName'
+      Synonyms:
+        $ref: '#/definitions/SynonymsDocument'
+  UpdateSynonymOptionsResponse:
+    type: object
+    required:
+      - Synonyms
+    properties:
+      Synonyms:
+        $ref: '#/definitions/SynonymOptionsStatus'
+    description: A response message that contains the status of updated synonym options.
+  UpdateTimestamp:
+    type: string
+    format: date-time

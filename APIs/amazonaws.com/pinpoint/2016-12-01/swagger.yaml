@@ -1,0 +1,2701 @@
+swagger: '2.0'
+info:
+  version: '2016-12-01'
+  x-release: v4
+  title: Amazon Pinpoint
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: pinpoint
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/pinpoint-2016-12-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/pinpoint/2016-12-01/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/pinpoint/'
+host: pinpoint.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/v1/apps/{application-id}/campaigns':
+    get:
+      operationId: GetCampaigns
+      description: Returns information about your campaigns.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCampaignsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCampaignsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/jobs/import':
+    get:
+      operationId: GetImportJobs
+      description: Returns information about your import jobs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetImportJobsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetImportJobsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments':
+    get:
+      operationId: GetSegments
+      description: Used to get information about your segments.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSegmentsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSegmentsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/apns':
+    put:
+      operationId: UpdateApnsChannel
+      description: Use to update the APNs channel for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApnsChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApnsChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/campaigns/{campaign-id}':
+    put:
+      operationId: UpdateCampaign
+      description: Use to update a campaign.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateCampaignResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateCampaignRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: campaign-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/eventstream':
+    post:
+      operationId: PutEventStream
+      description: Use to create or update the event stream for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutEventStreamResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutEventStreamRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/gcm':
+    put:
+      operationId: UpdateGcmChannel
+      description: Use to update the GCM channel for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateGcmChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateGcmChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments/{segment-id}':
+    put:
+      operationId: UpdateSegment
+      description: Use to update a segment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSegmentResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSegmentRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: segment-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/settings':
+    put:
+      operationId: UpdateApplicationSettings
+      description: Used to update the settings for an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApplicationSettingsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApplicationSettingsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/campaigns/{campaign-id}/activities':
+    get:
+      operationId: GetCampaignActivities
+      description: Returns information about the activity performed by a campaign.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCampaignActivitiesResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCampaignActivitiesRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: campaign-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/campaigns/{campaign-id}/versions/{version}':
+    get:
+      operationId: GetCampaignVersion
+      description: Returns information about a specific version of a campaign.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCampaignVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCampaignVersionRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: campaign-id
+          in: path
+          type: string
+          required: true
+        - name: version
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/campaigns/{campaign-id}/versions':
+    get:
+      operationId: GetCampaignVersions
+      description: Returns information about your campaign versions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCampaignVersionsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCampaignVersionsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: campaign-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/endpoints/{endpoint-id}':
+    put:
+      operationId: UpdateEndpoint
+      description: Use to update an endpoint.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateEndpointResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEndpointRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: endpoint-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/jobs/import/{job-id}':
+    get:
+      operationId: GetImportJob
+      description: Returns information about an import job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetImportJobResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetImportJobRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: job-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments/{segment-id}/jobs/import':
+    get:
+      operationId: GetSegmentImportJobs
+      description: Returns a list of import jobs for a specific segment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSegmentImportJobsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSegmentImportJobsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: segment-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments/{segment-id}/versions/{version}':
+    get:
+      operationId: GetSegmentVersion
+      description: Returns information about a segment version.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSegmentVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSegmentVersionRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: segment-id
+          in: path
+          type: string
+          required: true
+        - name: version
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments/{segment-id}/versions':
+    get:
+      operationId: GetSegmentVersions
+      description: Returns information about your segment versions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSegmentVersionsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSegmentVersionsRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+        - name: segment-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/endpoints':
+    put:
+      operationId: UpdateEndpointsBatch
+      description: Use to update a batch of endpoints.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateEndpointsBatchResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEndpointsBatchRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  APNSChannelRequest:
+    type: object
+    properties:
+      Certificate:
+        $ref: '#/definitions/__string'
+        description: The distribution certificate from Apple.
+      PrivateKey:
+        $ref: '#/definitions/__string'
+        description: The certificate private key.
+    description: Apple Push Notification Service channel definition.
+  APNSChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application to which the channel applies.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique channel ID.
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who last updated this entry
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: The platform type. Will be APNS.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Apple Distribution Push Notification Service channel definition.
+  Action:
+    type: string
+    enum:
+      - OPEN_APP
+      - DEEP_LINK
+      - URL
+  ActivitiesResponse:
+    type: object
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfActivityResponse'
+        description: List of campaign activities
+    description: Activities for campaign.
+  ActivityResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application to which the campaign applies.
+      CampaignId:
+        $ref: '#/definitions/__string'
+        description: The ID of the campaign to which the activity applies.
+      End:
+        $ref: '#/definitions/__string'
+        description: The actual time the activity was marked CANCELLED or COMPLETED. Provided in ISO 8601 format.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique activity ID.
+      Result:
+        $ref: '#/definitions/__string'
+        description: |-
+          Indicates whether the activity succeeded.
+
+          Valid values: SUCCESS, FAIL
+      ScheduledStart:
+        $ref: '#/definitions/__string'
+        description: The scheduled start time for the activity in ISO 8601 format.
+      Start:
+        $ref: '#/definitions/__string'
+        description: The actual start time of the activity in ISO 8601 format.
+      State:
+        $ref: '#/definitions/__string'
+        description: |-
+          The state of the activity.
+
+          Valid values: PENDING, INITIALIZING, RUNNING, PAUSED, CANCELLED, COMPLETED
+      SuccessfulEndpointCount:
+        $ref: '#/definitions/__integer'
+        description: The total number of endpoints to which the campaign successfully delivered messages.
+      TimezonesCompletedCount:
+        $ref: '#/definitions/__integer'
+        description: The total number of timezones completed.
+      TimezonesTotalCount:
+        $ref: '#/definitions/__integer'
+        description: The total number of unique timezones present in the segment.
+      TotalEndpointCount:
+        $ref: '#/definitions/__integer'
+        description: The total number of endpoints to which the campaign attempts to deliver messages.
+      TreatmentId:
+        $ref: '#/definitions/__string'
+        description: The ID of a variation of the campaign used for A/B testing.
+    description: Activity definition
+  ApplicationSettingsResource:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The unique ID for the application.
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: The date that the settings were last updated in ISO 8601 format.
+      Limits:
+        $ref: '#/definitions/CampaignLimits'
+        description: 'The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own.'
+      QuietTime:
+        $ref: '#/definitions/QuietTime'
+        description: The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own.
+    description: Application settings.
+  AttributeDimension:
+    type: object
+    properties:
+      AttributeType:
+        $ref: '#/definitions/AttributeType'
+        description: |-
+          The type of dimension:
+          INCLUSIVE – Endpoints that match the criteria are included in the segment.
+          EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
+      Values:
+        $ref: '#/definitions/ListOf__string'
+        description: 'The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.'
+    description: Custom attibute dimension
+  AttributeType:
+    type: string
+    enum:
+      - INCLUSIVE
+      - EXCLUSIVE
+  BadRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  CampaignLimits:
+    type: object
+    properties:
+      Daily:
+        $ref: '#/definitions/__integer'
+        description: The maximum number of messages that the campaign can send daily.
+      Total:
+        $ref: '#/definitions/__integer'
+        description: The maximum total number of messages that the campaign can send.
+    description: Campaign Limits are used to limit the number of messages that can be sent to a user.
+  CampaignResponse:
+    type: object
+    properties:
+      AdditionalTreatments:
+        $ref: '#/definitions/ListOfTreatmentResource'
+        description: Treatments that are defined in addition to the default treatment.
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application to which the campaign applies.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date the campaign was created in ISO 8601 format.
+      DefaultState:
+        $ref: '#/definitions/CampaignState'
+        description: The status of the campaign's default treatment. Only present for A/B test campaigns.
+      Description:
+        $ref: '#/definitions/__string'
+        description: A description of the campaign.
+      HoldoutPercent:
+        $ref: '#/definitions/__integer'
+        description: The allocated percentage of end users who will not receive messages from this campaign.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique campaign ID.
+      IsPaused:
+        $ref: '#/definitions/__boolean'
+        description: Indicates whether the campaign is paused. A paused campaign does not send messages unless you resume it by setting IsPaused to false.
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: "The date the campaign was last updated in ISO 8601 format.\t"
+      Limits:
+        $ref: '#/definitions/CampaignLimits'
+        description: The campaign limits settings.
+      MessageConfiguration:
+        $ref: '#/definitions/MessageConfiguration'
+        description: The message configuration settings.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The custom name of the campaign.
+      Schedule:
+        $ref: '#/definitions/Schedule'
+        description: The campaign schedule.
+      SegmentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the segment to which the campaign sends messages.
+      SegmentVersion:
+        $ref: '#/definitions/__integer'
+        description: The version of the segment to which the campaign sends messages.
+      State:
+        $ref: '#/definitions/CampaignState'
+        description: |-
+          The campaign status.
+
+          An A/B test campaign will have a status of COMPLETED only when all treatments have a status of COMPLETED.
+      TreatmentDescription:
+        $ref: '#/definitions/__string'
+        description: A custom description for the treatment.
+      TreatmentName:
+        $ref: '#/definitions/__string'
+        description: The custom name of a variation of the campaign used for A/B testing.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: The campaign version number.
+    description: Campaign definition
+  CampaignState:
+    type: object
+    properties:
+      CampaignStatus:
+        $ref: '#/definitions/CampaignStatus'
+        description: |-
+          The status of the campaign, or the status of a treatment that belongs to an A/B test campaign.
+
+          Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
+    description: State of the Campaign
+  CampaignStatus:
+    type: string
+    enum:
+      - SCHEDULED
+      - EXECUTING
+      - PENDING_NEXT_RUN
+      - COMPLETED
+      - PAUSED
+  CampaignsResponse:
+    type: object
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfCampaignResponse'
+        description: A list of campaigns.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The string that you use in a subsequent request to get the next page of results in a paginated response.
+    description: List of available campaigns.
+  ChannelType:
+    type: string
+    enum:
+      - APNS
+      - GCM
+  CreateCampaignRequest:
+    type: object
+    required:
+      - WriteCampaignRequest
+    properties:
+      WriteCampaignRequest:
+        $ref: '#/definitions/WriteCampaignRequest'
+  CreateCampaignResponse:
+    type: object
+    required:
+      - CampaignResponse
+    properties:
+      CampaignResponse:
+        $ref: '#/definitions/CampaignResponse'
+  CreateImportJobRequest:
+    type: object
+    required:
+      - ImportJobRequest
+    properties:
+      ImportJobRequest:
+        $ref: '#/definitions/ImportJobRequest'
+  CreateImportJobResponse:
+    type: object
+    required:
+      - ImportJobResponse
+    properties:
+      ImportJobResponse:
+        $ref: '#/definitions/ImportJobResponse'
+  CreateSegmentRequest:
+    type: object
+    required:
+      - WriteSegmentRequest
+    properties:
+      WriteSegmentRequest:
+        $ref: '#/definitions/WriteSegmentRequest'
+  CreateSegmentResponse:
+    type: object
+    required:
+      - SegmentResponse
+    properties:
+      SegmentResponse:
+        $ref: '#/definitions/SegmentResponse'
+  DeleteApnsChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsChannelResponse:
+    type: object
+    required:
+      - APNSChannelResponse
+    properties:
+      APNSChannelResponse:
+        $ref: '#/definitions/APNSChannelResponse'
+  DeleteCampaignRequest:
+    type: object
+    properties: {}
+  DeleteCampaignResponse:
+    type: object
+    required:
+      - CampaignResponse
+    properties:
+      CampaignResponse:
+        $ref: '#/definitions/CampaignResponse'
+  DeleteEventStreamRequest:
+    type: object
+    properties: {}
+    description: DeleteEventStream Request
+  DeleteEventStreamResponse:
+    type: object
+    required:
+      - EventStream
+    properties:
+      EventStream:
+        $ref: '#/definitions/EventStream'
+    description: DeleteEventStream Response
+  DeleteGcmChannelRequest:
+    type: object
+    properties: {}
+  DeleteGcmChannelResponse:
+    type: object
+    required:
+      - GCMChannelResponse
+    properties:
+      GCMChannelResponse:
+        $ref: '#/definitions/GCMChannelResponse'
+  DeleteSegmentRequest:
+    type: object
+    properties: {}
+  DeleteSegmentResponse:
+    type: object
+    required:
+      - SegmentResponse
+    properties:
+      SegmentResponse:
+        $ref: '#/definitions/SegmentResponse'
+  DimensionType:
+    type: string
+    enum:
+      - INCLUSIVE
+      - EXCLUSIVE
+  Duration:
+    type: string
+    enum:
+      - HR_24
+      - DAY_7
+      - DAY_14
+      - DAY_30
+  EndpointBatchItem:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/__string'
+        description: The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
+      Attributes:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+      ChannelType:
+        $ref: '#/definitions/ChannelType'
+        description: |-
+          The channel type.
+
+          Valid values: APNS, GCM
+      Demographic:
+        $ref: '#/definitions/EndpointDemographic'
+        description: The endpoint demographic attributes.
+      EffectiveDate:
+        $ref: '#/definitions/__string'
+        description: The last time the endpoint was updated. Provided in ISO 8601 format.
+      EndpointStatus:
+        $ref: '#/definitions/__string'
+        description: The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique Id for the Endpoint in the batch.
+      Location:
+        $ref: '#/definitions/EndpointLocation'
+        description: The endpoint location attributes.
+      Metrics:
+        $ref: '#/definitions/MapOf__double'
+        description: Custom metrics that your app reports to Amazon Pinpoint.
+      OptOut:
+        $ref: '#/definitions/__string'
+        description: |-
+          Indicates whether a user has opted out of receiving messages with one of the following values:
+
+          ALL – User receives all messages.
+          NONE – User receives no messages.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: The unique ID for the most recent request to update the endpoint.
+      User:
+        $ref: '#/definitions/EndpointUser'
+        description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
+    description: Endpoint update request
+  EndpointBatchRequest:
+    type: object
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfEndpointBatchItem'
+        description: List of items to update. Maximum 100 items
+    description: Endpoint batch update request.
+  EndpointDemographic:
+    type: object
+    properties:
+      AppVersion:
+        $ref: '#/definitions/__string'
+        description: The version of the application associated with the endpoint.
+      Locale:
+        $ref: '#/definitions/__string'
+        description: |
+          The endpoint locale in the following format: The ISO 639-1 alpha-2 code, followed by an underscore, followed by an ISO 3166-1 alpha-2 value.
+      Make:
+        $ref: '#/definitions/__string'
+        description: 'The endpoint make, such as such as Apple or Samsung.'
+      Model:
+        $ref: '#/definitions/__string'
+        description: 'The endpoint model, such as iPhone.'
+      ModelVersion:
+        $ref: '#/definitions/__string'
+        description: The endpoint model version.
+      Platform:
+        $ref: '#/definitions/__string'
+        description: 'The endpoint platform, such as ios or android.'
+      PlatformVersion:
+        $ref: '#/definitions/__string'
+        description: The endpoint platform version.
+      Timezone:
+        $ref: '#/definitions/__string'
+        description: 'The timezone of the endpoint. Specified as a tz database value, such as Americas/Los_Angeles.'
+    description: Endpoint demographic data
+  EndpointLocation:
+    type: object
+    properties:
+      City:
+        $ref: '#/definitions/__string'
+        description: The city where the endpoint is located.
+      Country:
+        $ref: '#/definitions/__string'
+        description: 'Country according to ISO 3166-1 Alpha-2 codes. For example, US.'
+      Latitude:
+        $ref: '#/definitions/__double'
+        description: The latitude of the endpoint location. Rounded to one decimal (Roughly corresponding to a mile).
+      Longitude:
+        $ref: '#/definitions/__double'
+        description: The longitude of the endpoint location. Rounded to one decimal (Roughly corresponding to a mile).
+      PostalCode:
+        $ref: '#/definitions/__string'
+        description: The postal code or zip code of the endpoint.
+      Region:
+        $ref: '#/definitions/__string'
+        description: 'The region of the endpoint location. For example, corresponds to a state in US.'
+    description: Endpoint location data
+  EndpointRequest:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/__string'
+        description: The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
+      Attributes:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+      ChannelType:
+        $ref: '#/definitions/ChannelType'
+        description: |-
+          The channel type.
+
+          Valid values: APNS, GCM
+      Demographic:
+        $ref: '#/definitions/EndpointDemographic'
+        description: The endpoint demographic attributes.
+      EffectiveDate:
+        $ref: '#/definitions/__string'
+        description: The last time the endpoint was updated. Provided in ISO 8601 format.
+      EndpointStatus:
+        $ref: '#/definitions/__string'
+        description: The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated.
+      Location:
+        $ref: '#/definitions/EndpointLocation'
+        description: The endpoint location attributes.
+      Metrics:
+        $ref: '#/definitions/MapOf__double'
+        description: Custom metrics that your app reports to Amazon Pinpoint.
+      OptOut:
+        $ref: '#/definitions/__string'
+        description: |-
+          Indicates whether a user has opted out of receiving messages with one of the following values:
+
+          ALL – User receives all messages.
+          NONE – User receives no messages.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: The unique ID for the most recent request to update the endpoint.
+      User:
+        $ref: '#/definitions/EndpointUser'
+        description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
+    description: Endpoint update request
+  EndpointResponse:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/__string'
+        description: The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application associated with the endpoint.
+      Attributes:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+      ChannelType:
+        $ref: '#/definitions/ChannelType'
+        description: |-
+          The channel type.
+
+          Valid values: APNS, GCM
+      CohortId:
+        $ref: '#/definitions/__string'
+        description: 'A number from 0 - 99 that represents the cohort the endpoint is assigned to. Endpoints are grouped into cohorts randomly, and each cohort contains approximately 1 percent of the endpoints for an app. Amazon Pinpoint assigns cohorts to the holdout or treatment allocations for a campaign.'
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The last time the endpoint was created. Provided in ISO 8601 format.
+      Demographic:
+        $ref: '#/definitions/EndpointDemographic'
+        description: The endpoint demographic attributes.
+      EffectiveDate:
+        $ref: '#/definitions/__string'
+        description: The last time the endpoint was updated. Provided in ISO 8601 format.
+      EndpointStatus:
+        $ref: '#/definitions/__string'
+        description: The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique ID that you assigned to the endpoint. The ID should be a globally unique identifier (GUID) to ensure that it is unique compared to all other endpoints for the application.
+      Location:
+        $ref: '#/definitions/EndpointLocation'
+        description: The endpoint location attributes.
+      Metrics:
+        $ref: '#/definitions/MapOf__double'
+        description: Custom metrics that your app reports to Amazon Pinpoint.
+      OptOut:
+        $ref: '#/definitions/__string'
+        description: |-
+          Indicates whether a user has opted out of receiving messages with one of the following values:
+
+          ALL – User receives all messages.
+          NONE – User receives no messages.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: The unique ID for the most recent request to update the endpoint.
+      User:
+        $ref: '#/definitions/EndpointUser'
+        description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
+      ShardId:
+        $ref: '#/definitions/__string'
+        description: The ShardId of endpoint
+    description: Endpoint response
+  EndpointUser:
+    type: object
+    properties:
+      UserAttributes:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Custom attributes specific to the user.
+      UserId:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the user.
+    description: Endpoint user specific custom userAttributes
+  EventStream:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application from which events should be published.
+      DestinationStreamArn:
+        $ref: '#/definitions/__string'
+        description: |-
+          The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
+           Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
+           Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
+      ExternalId:
+        $ref: '#/definitions/__string'
+        description: The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream.
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: The date the event stream was last updated in ISO 8601 format.
+      LastUpdatedBy:
+        $ref: '#/definitions/__string'
+        description: The IAM user who last modified the event stream.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
+    description: Model for an event publishing subscription export.
+  ForbiddenException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  Format:
+    type: string
+    enum:
+      - CSV
+      - JSON
+  Frequency:
+    type: string
+    enum:
+      - ONCE
+      - HOURLY
+      - DAILY
+      - WEEKLY
+      - MONTHLY
+  GCMChannelRequest:
+    type: object
+    properties:
+      ApiKey:
+        $ref: '#/definitions/__string'
+        description: Platform credential API key from Google.
+    description: Google Cloud Messaging credentials
+  GCMChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application to which the channel applies.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      Credential:
+        $ref: '#/definitions/__string'
+        description: The GCM API key from Google.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique channel ID.
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who last updated this entry
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: The platform type. Will be GCM
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Google Cloud Messaging channel definition
+  GetApnsChannelRequest:
+    type: object
+    properties: {}
+  GetApnsChannelResponse:
+    type: object
+    required:
+      - APNSChannelResponse
+    properties:
+      APNSChannelResponse:
+        $ref: '#/definitions/APNSChannelResponse'
+  GetApplicationSettingsRequest:
+    type: object
+    properties: {}
+  GetApplicationSettingsResponse:
+    type: object
+    required:
+      - ApplicationSettingsResource
+    properties:
+      ApplicationSettingsResource:
+        $ref: '#/definitions/ApplicationSettingsResource'
+  GetCampaignActivitiesRequest:
+    type: object
+    properties: {}
+  GetCampaignActivitiesResponse:
+    type: object
+    required:
+      - ActivitiesResponse
+    properties:
+      ActivitiesResponse:
+        $ref: '#/definitions/ActivitiesResponse'
+  GetCampaignRequest:
+    type: object
+    properties: {}
+  GetCampaignResponse:
+    type: object
+    required:
+      - CampaignResponse
+    properties:
+      CampaignResponse:
+        $ref: '#/definitions/CampaignResponse'
+  GetCampaignVersionRequest:
+    type: object
+    properties: {}
+  GetCampaignVersionResponse:
+    type: object
+    required:
+      - CampaignResponse
+    properties:
+      CampaignResponse:
+        $ref: '#/definitions/CampaignResponse'
+  GetCampaignVersionsRequest:
+    type: object
+    properties: {}
+  GetCampaignVersionsResponse:
+    type: object
+    required:
+      - CampaignsResponse
+    properties:
+      CampaignsResponse:
+        $ref: '#/definitions/CampaignsResponse'
+  GetCampaignsRequest:
+    type: object
+    properties: {}
+  GetCampaignsResponse:
+    type: object
+    required:
+      - CampaignsResponse
+    properties:
+      CampaignsResponse:
+        $ref: '#/definitions/CampaignsResponse'
+  GetEndpointRequest:
+    type: object
+    properties: {}
+  GetEndpointResponse:
+    type: object
+    required:
+      - EndpointResponse
+    properties:
+      EndpointResponse:
+        $ref: '#/definitions/EndpointResponse'
+  GetEventStreamRequest:
+    type: object
+    properties: {}
+    description: GetEventStream Request
+  GetEventStreamResponse:
+    type: object
+    required:
+      - EventStream
+    properties:
+      EventStream:
+        $ref: '#/definitions/EventStream'
+    description: GetEventStream Response
+  GetGcmChannelRequest:
+    type: object
+    properties: {}
+  GetGcmChannelResponse:
+    type: object
+    required:
+      - GCMChannelResponse
+    properties:
+      GCMChannelResponse:
+        $ref: '#/definitions/GCMChannelResponse'
+  GetImportJobRequest:
+    type: object
+    properties: {}
+  GetImportJobResponse:
+    type: object
+    required:
+      - ImportJobResponse
+    properties:
+      ImportJobResponse:
+        $ref: '#/definitions/ImportJobResponse'
+  GetImportJobsRequest:
+    type: object
+    properties: {}
+  GetImportJobsResponse:
+    type: object
+    required:
+      - ImportJobsResponse
+    properties:
+      ImportJobsResponse:
+        $ref: '#/definitions/ImportJobsResponse'
+  GetSegmentImportJobsRequest:
+    type: object
+    properties: {}
+  GetSegmentImportJobsResponse:
+    type: object
+    required:
+      - ImportJobsResponse
+    properties:
+      ImportJobsResponse:
+        $ref: '#/definitions/ImportJobsResponse'
+  GetSegmentRequest:
+    type: object
+    properties: {}
+  GetSegmentResponse:
+    type: object
+    required:
+      - SegmentResponse
+    properties:
+      SegmentResponse:
+        $ref: '#/definitions/SegmentResponse'
+  GetSegmentVersionRequest:
+    type: object
+    properties: {}
+  GetSegmentVersionResponse:
+    type: object
+    required:
+      - SegmentResponse
+    properties:
+      SegmentResponse:
+        $ref: '#/definitions/SegmentResponse'
+  GetSegmentVersionsRequest:
+    type: object
+    properties: {}
+  GetSegmentVersionsResponse:
+    type: object
+    required:
+      - SegmentsResponse
+    properties:
+      SegmentsResponse:
+        $ref: '#/definitions/SegmentsResponse'
+  GetSegmentsRequest:
+    type: object
+    properties: {}
+  GetSegmentsResponse:
+    type: object
+    required:
+      - SegmentsResponse
+    properties:
+      SegmentsResponse:
+        $ref: '#/definitions/SegmentsResponse'
+  ImportJobRequest:
+    type: object
+    properties:
+      DefineSegment:
+        $ref: '#/definitions/__boolean'
+        description: Sets whether the endpoints create a segment when they are imported.
+      ExternalId:
+        $ref: '#/definitions/__string'
+        description: "A unique, custom ID assigned to the IAM role that restricts who can assume the role.\t"
+      Format:
+        $ref: '#/definitions/Format'
+        description: |-
+          The format of the files that contain the endpoint definitions.
+          Valid values: CSV, JSON
+      RegisterEndpoints:
+        $ref: '#/definitions/__boolean'
+        description: Sets whether the endpoints are registered with Amazon Pinpoint when they are imported.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that contains the endpoints to import.
+      S3Url:
+        $ref: '#/definitions/__string'
+        description: |-
+          A URL that points to the location within an Amazon S3 bucket that contains the endpoints to import. The location can be a folder or a single file.
+          The URL should follow this format: s3://bucket-name/folder-name/file-name
+
+          Amazon Pinpoint will import endpoints from this location and any subfolders it contains.
+      SegmentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the segment to update if the import job is meant to update an existing segment.
+      SegmentName:
+        $ref: '#/definitions/__string'
+        description: A custom name for the segment created by the import job. Use if DefineSegment is true.
+  ImportJobResource:
+    type: object
+    properties:
+      DefineSegment:
+        $ref: '#/definitions/__boolean'
+        description: Sets whether the endpoints create a segment when they are imported.
+      ExternalId:
+        $ref: '#/definitions/__string'
+        description: "A unique, custom ID assigned to the IAM role that restricts who can assume the role.\t"
+      Format:
+        $ref: '#/definitions/Format'
+        description: |-
+          The format of the files that contain the endpoint definitions.
+          Valid values: CSV, JSON
+      RegisterEndpoints:
+        $ref: '#/definitions/__boolean'
+        description: Sets whether the endpoints are registered with Amazon Pinpoint when they are imported.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that contains the endpoints to import.
+      S3Url:
+        $ref: '#/definitions/__string'
+        description: |-
+          A URL that points to the location within an Amazon S3 bucket that contains the endpoints to import. The location can be a folder or a single file.
+          The URL should follow this format: s3://bucket-name/folder-name/file-name
+
+          Amazon Pinpoint will import endpoints from this location and any subfolders it contains.
+      SegmentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the segment to update if the import job is meant to update an existing segment.
+      SegmentName:
+        $ref: '#/definitions/__string'
+        description: A custom name for the segment created by the import job. Use if DefineSegment is true.
+  ImportJobResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the application to which the import job applies.
+      CompletedPieces:
+        $ref: '#/definitions/__integer'
+        description: The number of pieces that have successfully imported as of the time of the request.
+      CompletionDate:
+        $ref: '#/definitions/__string'
+        description: The date the import job completed in ISO 8601 format.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date the import job was created in ISO 8601 format.
+      Definition:
+        $ref: '#/definitions/ImportJobResource'
+        description: The import job settings.
+      FailedPieces:
+        $ref: '#/definitions/__integer'
+        description: The number of pieces that have failed to import as of the time of the request.
+      Failures:
+        $ref: '#/definitions/ListOf__string'
+        description: 'Provides up to 100 of the first failed entries for the job, if any exist.'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the import job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: |-
+          The status of the import job.
+          Valid values: CREATED, INITIALIZING, PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED
+
+          The job status is FAILED if one or more pieces failed to import.
+      TotalFailures:
+        $ref: '#/definitions/__integer'
+        description: 'The number of endpoints that failed to import; for example, because of syntax errors.'
+      TotalPieces:
+        $ref: '#/definitions/__integer'
+        description: The total number of pieces that must be imported to finish the job. Each piece is an approximately equal portion of the endpoints to import.
+      TotalProcessed:
+        $ref: '#/definitions/__integer'
+        description: The number of endpoints that were processed by the import job.
+      Type:
+        $ref: '#/definitions/__string'
+        description: The job type. Will be Import.
+  ImportJobsResponse:
+    type: object
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfImportJobResponse'
+        description: A list of import jobs for the application.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The string that you use in a subsequent request to get the next page of results in a paginated response.
+    description: Import job list.
+  InternalServerErrorException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  JobStatus:
+    type: string
+    enum:
+      - CREATED
+      - INITIALIZING
+      - PROCESSING
+      - COMPLETING
+      - COMPLETED
+      - FAILING
+      - FAILED
+  ListOfActivityResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ActivityResponse'
+  ListOfCampaignResponse:
+    type: array
+    items:
+      $ref: '#/definitions/CampaignResponse'
+  ListOfEndpointBatchItem:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointBatchItem'
+  ListOfImportJobResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ImportJobResponse'
+  ListOfSegmentResponse:
+    type: array
+    items:
+      $ref: '#/definitions/SegmentResponse'
+  ListOfTreatmentResource:
+    type: array
+    items:
+      $ref: '#/definitions/TreatmentResource'
+  ListOfWriteTreatmentResource:
+    type: array
+    items:
+      $ref: '#/definitions/WriteTreatmentResource'
+  ListOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
+  MapOfAttributeDimension:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/AttributeDimension'
+  MapOfListOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/ListOf__string'
+  MapOf__double:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__double'
+  Message:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: |-
+          The action that occurs if the user taps a push notification delivered by the campaign:
+          OPEN_APP – Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action.
+
+          DEEP_LINK – Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app.
+
+          URL – The default mobile browser on the user's device launches and opens a web page at the URL you specify.
+      Body:
+        $ref: '#/definitions/__string'
+        description: The message body. Can include up to 140 characters.
+      ImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL that points to the icon image for the push notification icon, for example, the app icon.'
+      ImageUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used in the push notification.
+      JsonBody:
+        $ref: '#/definitions/__string'
+        description: The JSON payload used for a silent push.
+      MediaUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL that points to the media resource, for example a .mp4 or .gif file.'
+      SilentPush:
+        $ref: '#/definitions/__boolean'
+        description: |-
+          Indicates if the message should display on the users device.
+
+          Silent pushes can be used for Remote Configuration and Phone Home use cases. 
+      Title:
+        $ref: '#/definitions/__string'
+        description: The message title that displays above the message on the user's device.
+      Url:
+        $ref: '#/definitions/__string'
+        description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
+  MessageBody:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  MessageConfiguration:
+    type: object
+    properties:
+      APNSMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to APNS channels. Overrides the default message.
+      DefaultMessage:
+        $ref: '#/definitions/Message'
+        description: The default message for all channels.
+      GCMMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to GCM channels. Overrides the default message.
+    description: Message configuration for a campaign.
+  MethodNotAllowedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  NotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  PutEventStreamRequest:
+    type: object
+    required:
+      - WriteEventStream
+    properties:
+      WriteEventStream:
+        $ref: '#/definitions/WriteEventStream'
+        description: EventStream to write.
+    description: PutEventStream Request
+  PutEventStreamResponse:
+    type: object
+    required:
+      - EventStream
+    properties:
+      EventStream:
+        $ref: '#/definitions/EventStream'
+    description: PutEventStream Response
+  QuietTime:
+    type: object
+    properties:
+      End:
+        $ref: '#/definitions/__string'
+        description: The default end time for quiet time in ISO 8601 format.
+      Start:
+        $ref: '#/definitions/__string'
+        description: The default start time for quiet time in ISO 8601 format.
+    description: Quiet Time
+  RecencyDimension:
+    type: object
+    properties:
+      Duration:
+        $ref: '#/definitions/Duration'
+        description: |-
+          The length of time during which users have been active or inactive with your app.
+          Valid values: HR_24, DAY_7, DAY_14, DAY_30
+      RecencyType:
+        $ref: '#/definitions/RecencyType'
+        description: |-
+          The recency dimension type:
+          ACTIVE – Users who have used your app within the specified duration are included in the segment.
+          INACTIVE – Users who have not used your app within the specified duration are included in the segment.
+    description: Define how a segment based on recency of use.
+  RecencyType:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+  Schedule:
+    type: object
+    properties:
+      EndTime:
+        $ref: '#/definitions/__string'
+        description: The scheduled time that the campaign ends in ISO 8601 format.
+      Frequency:
+        $ref: '#/definitions/Frequency'
+        description: |-
+          How often the campaign delivers messages.
+
+          Valid values: ONCE, HOURLY, DAILY, WEEKLY, MONTHLY
+      IsLocalTime:
+        $ref: '#/definitions/__boolean'
+        description: Indicates whether the campaign schedule takes effect according to each user's local time.
+      QuietTime:
+        $ref: '#/definitions/QuietTime'
+        description: The time during which the campaign sends no messages.
+      StartTime:
+        $ref: '#/definitions/__string'
+        description: The scheduled time that the campaign begins in ISO 8601 format.
+      Timezone:
+        $ref: '#/definitions/__string'
+        description: |-
+          The starting UTC offset for the schedule if the value for isLocalTime is true
+
+          Valid values: 
+          UTC
+          UTC+01
+          UTC+02
+          UTC+03
+          UTC+03:30
+          UTC+04
+          UTC+04:30
+          UTC+05
+          UTC+05:30
+          UTC+05:45
+          UTC+06
+          UTC+06:30
+          UTC+07
+          UTC+08
+          UTC+09
+          UTC+09:30
+          UTC+10
+          UTC+10:30
+          UTC+11
+          UTC+12
+          UTC+13
+          UTC-02
+          UTC-03
+          UTC-04
+          UTC-05
+          UTC-06
+          UTC-07
+          UTC-08
+          UTC-09
+          UTC-10
+          UTC-11
+    description: Shcedule that defines when a campaign is run.
+  SegmentBehaviors:
+    type: object
+    properties:
+      Recency:
+        $ref: '#/definitions/RecencyDimension'
+        description: The recency of use.
+    description: Segment behavior dimensions
+  SegmentDemographics:
+    type: object
+    properties:
+      AppVersion:
+        $ref: '#/definitions/SetDimension'
+        description: The app version criteria for the segment.
+      DeviceType:
+        $ref: '#/definitions/SetDimension'
+        description: The device type criteria for the segment.
+      Make:
+        $ref: '#/definitions/SetDimension'
+        description: The device make criteria for the segment.
+      Model:
+        $ref: '#/definitions/SetDimension'
+        description: The device model criteria for the segment.
+      Platform:
+        $ref: '#/definitions/SetDimension'
+        description: The device platform criteria for the segment.
+    description: Segment demographic dimensions
+  SegmentDimensions:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/MapOfAttributeDimension'
+        description: Custom segment attributes.
+      Behavior:
+        $ref: '#/definitions/SegmentBehaviors'
+        description: The segment behaviors attributes.
+      Demographic:
+        $ref: '#/definitions/SegmentDemographics'
+        description: The segment demographics attributes.
+      Location:
+        $ref: '#/definitions/SegmentLocation'
+        description: The segment location attributes.
+      UserAttributes:
+        $ref: '#/definitions/MapOfAttributeDimension'
+        description: Custom segment user attributes.
+    description: Segment dimensions
+  SegmentImportResource:
+    type: object
+    properties:
+      ExternalId:
+        $ref: '#/definitions/__string'
+        description: 'A unique, custom ID assigned to the IAM role that restricts who can assume the role.'
+      Format:
+        $ref: '#/definitions/Format'
+        description: |-
+          The format of the endpoint files that were imported to create this segment.
+          Valid values: CSV, JSON
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the endpoints in Amazon S3.
+      S3Url:
+        $ref: '#/definitions/__string'
+        description: A URL that points to the Amazon S3 location from which the endpoints for this segment were imported.
+      Size:
+        $ref: '#/definitions/__integer'
+        description: The number of endpoints that were successfully imported to create this segment.
+    description: Segment import definition.
+  SegmentLocation:
+    type: object
+    properties:
+      Country:
+        $ref: '#/definitions/SetDimension'
+        description: The country filter according to ISO 3166-1 Alpha-2 codes.
+    description: Segment location dimensions
+  SegmentResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The ID of the application to which the segment applies.
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date the segment was created in ISO 8601 format.
+      Dimensions:
+        $ref: '#/definitions/SegmentDimensions'
+        description: The segment dimensions attributes.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique segment ID.
+      ImportDefinition:
+        $ref: '#/definitions/SegmentImportResource'
+        description: The import job settings.
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: The date the segment was last updated in ISO 8601 format.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of segment
+      SegmentType:
+        $ref: '#/definitions/SegmentType'
+        description: |-
+          The segment type:
+          DIMENSIONAL – A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.
+          IMPORT – A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: The segment version number.
+    description: Segment definition.
+  SegmentType:
+    type: string
+    enum:
+      - DIMENSIONAL
+      - IMPORT
+  SegmentsResponse:
+    type: object
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfSegmentResponse'
+        description: The list of segments.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: An identifier used to retrieve the next page of results. The token is null if no additional pages exist.
+    description: Segments in your account.
+  SetDimension:
+    type: object
+    properties:
+      DimensionType:
+        $ref: '#/definitions/DimensionType'
+        description: |-
+          The type of dimension:
+          INCLUSIVE – Endpoints that match the criteria are included in the segment.
+          EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
+      Values:
+        $ref: '#/definitions/ListOf__string'
+        description: 'The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.'
+    description: Dimension specification of a segment.
+  TooManyRequestsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+        description: The error message returned from the API.
+      RequestID:
+        $ref: '#/definitions/__string'
+        description: The unique message body ID.
+    description: Simple message object.
+  TreatmentResource:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique treatment ID.
+      MessageConfiguration:
+        $ref: '#/definitions/MessageConfiguration'
+        description: The message configuration settings.
+      Schedule:
+        $ref: '#/definitions/Schedule'
+        description: The campaign schedule.
+      SizePercent:
+        $ref: '#/definitions/__integer'
+        description: The allocated percentage of users for this treatment.
+      State:
+        $ref: '#/definitions/CampaignState'
+        description: The treatment status.
+      TreatmentDescription:
+        $ref: '#/definitions/__string'
+        description: A custom description for the treatment.
+      TreatmentName:
+        $ref: '#/definitions/__string'
+        description: The custom name of a variation of the campaign used for A/B testing.
+    description: Treatment resource
+  UpdateApnsChannelRequest:
+    type: object
+    required:
+      - APNSChannelRequest
+    properties:
+      APNSChannelRequest:
+        $ref: '#/definitions/APNSChannelRequest'
+  UpdateApnsChannelResponse:
+    type: object
+    required:
+      - APNSChannelResponse
+    properties:
+      APNSChannelResponse:
+        $ref: '#/definitions/APNSChannelResponse'
+  UpdateApplicationSettingsRequest:
+    type: object
+    required:
+      - WriteApplicationSettingsRequest
+    properties:
+      WriteApplicationSettingsRequest:
+        $ref: '#/definitions/WriteApplicationSettingsRequest'
+  UpdateApplicationSettingsResponse:
+    type: object
+    required:
+      - ApplicationSettingsResource
+    properties:
+      ApplicationSettingsResource:
+        $ref: '#/definitions/ApplicationSettingsResource'
+  UpdateCampaignRequest:
+    type: object
+    required:
+      - WriteCampaignRequest
+    properties:
+      WriteCampaignRequest:
+        $ref: '#/definitions/WriteCampaignRequest'
+  UpdateCampaignResponse:
+    type: object
+    required:
+      - CampaignResponse
+    properties:
+      CampaignResponse:
+        $ref: '#/definitions/CampaignResponse'
+  UpdateEndpointRequest:
+    type: object
+    required:
+      - EndpointRequest
+    properties:
+      EndpointRequest:
+        $ref: '#/definitions/EndpointRequest'
+  UpdateEndpointResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
+  UpdateEndpointsBatchRequest:
+    type: object
+    required:
+      - EndpointBatchRequest
+    properties:
+      EndpointBatchRequest:
+        $ref: '#/definitions/EndpointBatchRequest'
+  UpdateEndpointsBatchResponse:
+    type: object
+    required:
+      - MessageBody
+    properties:
+      MessageBody:
+        $ref: '#/definitions/MessageBody'
+  UpdateGcmChannelRequest:
+    type: object
+    required:
+      - GCMChannelRequest
+    properties:
+      GCMChannelRequest:
+        $ref: '#/definitions/GCMChannelRequest'
+  UpdateGcmChannelResponse:
+    type: object
+    required:
+      - GCMChannelResponse
+    properties:
+      GCMChannelResponse:
+        $ref: '#/definitions/GCMChannelResponse'
+  UpdateSegmentRequest:
+    type: object
+    required:
+      - WriteSegmentRequest
+    properties:
+      WriteSegmentRequest:
+        $ref: '#/definitions/WriteSegmentRequest'
+  UpdateSegmentResponse:
+    type: object
+    required:
+      - SegmentResponse
+    properties:
+      SegmentResponse:
+        $ref: '#/definitions/SegmentResponse'
+  WriteApplicationSettingsRequest:
+    type: object
+    properties:
+      Limits:
+        $ref: '#/definitions/CampaignLimits'
+        description: 'The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own.'
+      QuietTime:
+        $ref: '#/definitions/QuietTime'
+        description: The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own.
+    description: Creating application setting request
+  WriteCampaignRequest:
+    type: object
+    properties:
+      AdditionalTreatments:
+        $ref: '#/definitions/ListOfWriteTreatmentResource'
+        description: Treatments that are defined in addition to the default treatment.
+      Description:
+        $ref: '#/definitions/__string'
+        description: A description of the campaign.
+      HoldoutPercent:
+        $ref: '#/definitions/__integer'
+        description: The allocated percentage of end users who will not receive messages from this campaign.
+      IsPaused:
+        $ref: '#/definitions/__boolean'
+        description: Indicates whether the campaign is paused. A paused campaign does not send messages unless you resume it by setting IsPaused to false.
+      Limits:
+        $ref: '#/definitions/CampaignLimits'
+        description: The campaign limits settings.
+      MessageConfiguration:
+        $ref: '#/definitions/MessageConfiguration'
+        description: The message configuration settings.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The custom name of the campaign.
+      Schedule:
+        $ref: '#/definitions/Schedule'
+        description: The campaign schedule.
+      SegmentId:
+        $ref: '#/definitions/__string'
+        description: The ID of the segment to which the campaign sends messages.
+      SegmentVersion:
+        $ref: '#/definitions/__integer'
+        description: The version of the segment to which the campaign sends messages.
+      TreatmentDescription:
+        $ref: '#/definitions/__string'
+        description: A custom description for the treatment.
+      TreatmentName:
+        $ref: '#/definitions/__string'
+        description: The custom name of a variation of the campaign used for A/B testing.
+    description: Used to create a campaign.
+  WriteEventStream:
+    type: object
+    properties:
+      DestinationStreamArn:
+        $ref: '#/definitions/__string'
+        description: |-
+          The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
+           Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
+           Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
+      ExternalId:
+        $ref: '#/definitions/__string'
+        description: The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
+    description: Request to save an EventStream.
+  WriteSegmentRequest:
+    type: object
+    properties:
+      Dimensions:
+        $ref: '#/definitions/SegmentDimensions'
+        description: The segment dimensions attributes.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of segment
+    description: Segment definition.
+  WriteTreatmentResource:
+    type: object
+    properties:
+      MessageConfiguration:
+        $ref: '#/definitions/MessageConfiguration'
+        description: The message configuration settings.
+      Schedule:
+        $ref: '#/definitions/Schedule'
+        description: The campaign schedule.
+      SizePercent:
+        $ref: '#/definitions/__integer'
+        description: The allocated percentage of users for this treatment.
+      TreatmentDescription:
+        $ref: '#/definitions/__string'
+        description: A custom description for the treatment.
+      TreatmentName:
+        $ref: '#/definitions/__string'
+        description: The custom name of a variation of the campaign used for A/B testing.
+    description: Used to create a campaign treatment.
+  __boolean:
+    type: boolean
+  __double:
+    type: number
+    format: double
+  __integer:
+    type: integer
+  __string:
+    type: string
+  __timestamp:
+    type: string
+    format: date-time

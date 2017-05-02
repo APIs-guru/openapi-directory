@@ -1,0 +1,487 @@
+swagger: '2.0'
+info:
+  version: '2016-11-28'
+  x-release: v4
+  title: Amazon Lex Runtime Service
+  description: 'Amazon Lex provides both build and runtime endpoints. Each endpoint provides a set of operations (API). Your conversational bot uses the runtime API to understand user utterances (user input text or voice). For example, suppose a user says "I want pizza", your bot sends this input to Amazon Lex using the runtime API. Amazon Lex recognizes that the user request is for the OrderPizza intent (one of the intents defined in the bot). Then Amazon Lex engages in user conversation on behalf of the bot to elicit required information (slot values, such as pizza size and crust type), and then performs fulfillment activity (that you configured when you created the bot). You use the build-time API to create and manage your Amazon Lex bot. For a list of build-time operations, see the build-time API, . '
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: runtime.lex
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/runtime.lex-2016-11-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/runtime.lex/2016-11-28/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/lex/'
+host: runtime.lex.amazonaws.com
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/bot/{botName}/alias/{botAlias}/user/{userId}/content':
+    post:
+      operationId: PostContent
+      description: '<p> Sends user input (text or speech) to Amazon Lex. Clients use this API to send requests to Amazon Lex at runtime. Amazon Lex interprets the user input using the machine learning model that it built for the bot. </p> <p> In response, Amazon Lex returns the next message to convey to the user. Consider the following example messages: </p> <ul> <li> <p> For a user input "I would like a pizza," Amazon Lex might return a response with a message eliciting slot data (for example, <code>PizzaSize</code>): "What size pizza would you like?". </p> </li> <li> <p> After the user provides all of the pizza order information, Amazon Lex might return a response with a message to get user confirmation: "Order the pizza?". </p> </li> <li> <p> After the user replies "Yes" to the confirmation prompt, Amazon Lex might return a conclusion statement: "Thank you, your cheese pizza has been ordered.". </p> </li> </ul> <p> Not all Amazon Lex messages require a response from the user. For example, conclusion statements do not require a response. Some messages require only a yes or no response. In addition to the <code>message</code>, Amazon Lex provides additional context about the message in the response that you can use to enhance client behavior, such as displaying the appropriate client user interface. Consider the following examples: </p> <ul> <li> <p> If the message is to elicit slot data, Amazon Lex returns the following context information: </p> <ul> <li> <p> <code>x-amz-lex-dialog-state</code> header set to <code>ElicitSlot</code> </p> </li> <li> <p> <code>x-amz-lex-intent-name</code> header set to the intent name in the current context </p> </li> <li> <p> <code>x-amz-lex-slot-to-elicit</code> header set to the slot name for which the <code>message</code> is eliciting information </p> </li> <li> <p> <code>x-amz-lex-slots</code> header set to a map of slots configured for the intent with their current values </p> </li> </ul> </li> <li> <p> If the message is a confirmation prompt, the <code>x-amz-lex-dialog-state</code> header is set to <code>Confirmation</code> and the <code>x-amz-lex-slot-to-elicit</code> header is omitted. </p> </li> <li> <p> If the message is a clarification prompt configured for the intent, indicating that the user intent is not understood, the <code>x-amz-dialog-state</code> header is set to <code>ElicitIntent</code> and the <code>x-amz-slot-to-elicit</code> header is omitted. </p> </li> </ul> <p> In addition, Amazon Lex also returns your application-specific <code>sessionAttributes</code>. For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html">Managing Conversation Context</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PostContentResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: UnsupportedMediaTypeException
+          schema:
+            $ref: '#/definitions/UnsupportedMediaTypeException'
+        '486':
+          description: NotAcceptableException
+          schema:
+            $ref: '#/definitions/NotAcceptableException'
+        '487':
+          description: RequestTimeoutException
+          schema:
+            $ref: '#/definitions/RequestTimeoutException'
+        '488':
+          description: DependencyFailedException
+          schema:
+            $ref: '#/definitions/DependencyFailedException'
+        '489':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '490':
+          description: LoopDetectedException
+          schema:
+            $ref: '#/definitions/LoopDetectedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PostContentRequest'
+        - name: botName
+          in: path
+          type: string
+          required: true
+        - name: botAlias
+          in: path
+          type: string
+          required: true
+        - name: userId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/bot/{botName}/alias/{botAlias}/user/{userId}/text':
+    post:
+      operationId: PostText
+      description: '<p>Sends user input (text-only) to Amazon Lex. Client applications can use this API to send requests to Amazon Lex at runtime. Amazon Lex then interprets the user input using the machine learning model it built for the bot. </p> <p> In response, Amazon Lex returns the next <code>message</code> to convey to the user an optional <code>responseCard</code> to display. Consider the following example messages: </p> <ul> <li> <p> For a user input "I would like a pizza", Amazon Lex might return a response with a message eliciting slot data (for example, PizzaSize): "What size pizza would you like?" </p> </li> <li> <p> After the user provides all of the pizza order information, Amazon Lex might return a response with a message to obtain user confirmation "Proceed with the pizza order?". </p> </li> <li> <p> After the user replies to a confirmation prompt with a "yes", Amazon Lex might return a conclusion statement: "Thank you, your cheese pizza has been ordered.". </p> </li> </ul> <p> Not all Amazon Lex messages require a user response. For example, a conclusion statement does not require a response. Some messages require only a "yes" or "no" user response. In addition to the <code>message</code>, Amazon Lex provides additional context about the message in the response that you might use to enhance client behavior, for example, to display the appropriate client user interface. These are the <code>slotToElicit</code>, <code>dialogState</code>, <code>intentName</code>, and <code>slots</code> fields in the response. Consider the following examples: </p> <ul> <li> <p>If the message is to elicit slot data, Amazon Lex returns the following context information:</p> <ul> <li> <p> <code>dialogState</code> set to ElicitSlot </p> </li> <li> <p> <code>intentName</code> set to the intent name in the current context </p> </li> <li> <p> <code>slotToElicit</code> set to the slot name for which the <code>message</code> is eliciting information </p> </li> <li> <p> <code>slots</code> set to a map of slots, configured for the intent, with currently known values </p> </li> </ul> </li> <li> <p> If the message is a confirmation prompt, the <code>dialogState</code> is set to ConfirmIntent and <code>SlotToElicit</code> is set to null. </p> </li> <li> <p>If the message is a clarification prompt (configured for the intent) that indicates that user intent is not understood, the <code>dialogState</code> is set to ElicitIntent and <code>slotToElicit</code> is set to null. </p> </li> </ul> <p> In addition, Amazon Lex also returns your application-specific <code>sessionAttributes</code>. For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html">Managing Conversation Context</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PostTextResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: DependencyFailedException
+          schema:
+            $ref: '#/definitions/DependencyFailedException'
+        '486':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '487':
+          description: LoopDetectedException
+          schema:
+            $ref: '#/definitions/LoopDetectedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PostTextRequest'
+        - name: botName
+          in: path
+          type: string
+          required: true
+        - name: botAlias
+          in: path
+          type: string
+          required: true
+        - name: userId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  Accept:
+    type: string
+  BadGatewayException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Either the Amazon Lex bot is still building, or one of the dependent services (Amazon Polly, AWS Lambda) failed with an internal service error.'
+  BadRequestException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: ' Request validation failed, there is no usable message in the context, or the bot build failed. '
+  BlobStream:
+    type: string
+  BotAlias:
+    type: string
+  BotName:
+    type: string
+  Button:
+    type: object
+    required:
+      - text
+      - value
+    properties:
+      text:
+        $ref: '#/definitions/ButtonTextStringWithLength'
+        description: Text that is visible to the user on the button.
+      value:
+        $ref: '#/definitions/ButtonValueStringWithLength'
+        description: 'The value sent to Amazon Lex when a user chooses the button. For example, consider button text "NYC." When the user chooses the button, the value sent can be "New York City."'
+    description: 'Represents an option to be shown on the client platform (Facebook, Slack, etc.)'
+  ButtonTextStringWithLength:
+    type: string
+    minLength: 1
+    maxLength: 15
+  ButtonValueStringWithLength:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  ConflictException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: ' Two clients are using the same AWS account, Amazon Lex bot, and user ID. '
+  ContentType:
+    type: string
+    enum:
+      - application/vnd.amazonaws.card.generic
+  DependencyFailedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' One of the downstream dependencies, such as AWS Lambda or Amazon Polly, threw an exception. For example, if Amazon Lex does not have sufficient permissions to call a Lambda function, it results in Lambda throwing an exception. '
+  DialogState:
+    type: string
+    enum:
+      - ElicitIntent
+      - ConfirmIntent
+      - ElicitSlot
+      - Fulfilled
+      - ReadyForFulfillment
+      - Failed
+  ErrorMessage:
+    type: string
+  GenericAttachment:
+    type: object
+    properties:
+      title:
+        $ref: '#/definitions/StringWithLength'
+        description: The title of the option.
+      subTitle:
+        $ref: '#/definitions/StringWithLength'
+        description: The subtitle shown below the title.
+      attachmentLinkUrl:
+        $ref: '#/definitions/StringUrlWithLength'
+        description: The URL of an attachment to the response card.
+      imageUrl:
+        $ref: '#/definitions/StringUrlWithLength'
+        description: The URL of an image that is displayed to the user.
+      buttons:
+        $ref: '#/definitions/listOfButtons'
+        description: The list of options to show to the user.
+    description: 'Represents an option rendered to the user when a prompt is shown. It could be an image, a button, a link, or text. '
+  HttpContentType:
+    type: string
+  IntentName:
+    type: string
+  InternalFailureException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: Internal service error. Retry the call.
+  LimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: Exceeded a limit.
+  LoopDetectedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Lambda fulfilment function returned <code>DelegateDialogAction</code> to Amazon Lex without changing any slot values. '
+  NotAcceptableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The accept header in the request does not have a valid value.
+  NotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The resource (such as the Amazon Lex bot or an alias) that is referred to is not found.
+  PostContentRequest:
+    type: object
+    required:
+      - inputStream
+    properties:
+      inputStream:
+        $ref: '#/definitions/BlobStream'
+        description: ' User input in PCM or Opus audio format or text format as described in the <code>Content-Type</code> HTTP header. '
+  PostContentResponse:
+    type: object
+    properties:
+      audioStream:
+        $ref: '#/definitions/BlobStream'
+        description: 'The prompt (or statement) to convey to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response. '
+  PostTextRequest:
+    type: object
+    required:
+      - inputText
+    properties:
+      sessionAttributes:
+        $ref: '#/definitions/StringMap'
+        description: '<p> By using session attributes, a client application can pass contextual information in the request to Amazon Lex For example, </p> <ul> <li> <p>In Getting Started Exercise 1, the example bot uses the <code>price</code> session attribute to maintain the price of the flowers ordered (for example, "Price":25). The code hook (the Lambda function) sets this attribute based on the type of flowers ordered. For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/gs-bp-details-after-lambda.html">Review the Details of Information Flow</a>. </p> </li> <li> <p>In the BookTrip bot exercise, the bot uses the <code>currentReservation</code> session attribute to maintain slot data during the in-progress conversation to book a hotel or book a car. For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/book-trip-detail-flow.html">Details of Information Flow</a>. </p> </li> <li> <p>You might use the session attributes (key, value pairs) to track the requestID of user requests.</p> </li> </ul> <p> Amazon Lex simply passes these session attributes to the Lambda functions configured for the intent.</p> <p>In your Lambda function, you can also use the session attributes for initialization and customization (prompts and response cards). Some examples are:</p> <ul> <li> <p> Initialization - In a pizza ordering bot, if you can pass the user location as a session attribute (for example, <code>"Location" : "111 Maple street"</code>), then your Lambda function might use this information to determine the closest pizzeria to place the order (perhaps to set the storeAddress slot value). </p> </li> <li> <p> Personalize prompts - For example, you can configure prompts to refer to the user name. (For example, "Hey [FirstName], what toppings would you like?"). You can pass the user name as a session attribute (<code>"FirstName" : "Joe"</code>) so that Amazon Lex can substitute the placeholder to provide a personalize prompt to the user ("Hey Joe, what toppings would you like?"). </p> </li> </ul> <note> <p> Amazon Lex does not persist session attributes. </p> <p> If you configure a code hook for the intent, Amazon Lex passes the incoming session attributes to the Lambda function. If you want Amazon Lex to return these session attributes back to the client, the Lambda function must return them. </p> <p> If there is no code hook configured for the intent, Amazon Lex simply returns the session attributes back to the client application. </p> </note>'
+      inputText:
+        $ref: '#/definitions/Text'
+        description: The text that the user entered (Amazon Lex interprets this text).
+  PostTextResponse:
+    type: object
+    properties:
+      intentName:
+        $ref: '#/definitions/IntentName'
+        description: The current user intent that Amazon Lex is aware of.
+      slots:
+        $ref: '#/definitions/StringMap'
+        description: ' The intent slots (name/value pairs) that Amazon Lex detected so far from the user input in the conversation. '
+      sessionAttributes:
+        $ref: '#/definitions/StringMap'
+        description: A map of key-value pairs representing the session-specific context information.
+      message:
+        $ref: '#/definitions/Text'
+        description: ' A message to convey to the user. It can come from the bot''s configuration or a code hook (Lambda function). If the current intent is not configured with a code hook or the code hook returned <code>Delegate</code> as the <code>dialogAction.type</code> in its response, then Amazon Lex decides the next course of action and selects an appropriate message from the bot configuration based on the current user interaction context. For example, if Amazon Lex is not able to understand the user input, it uses a clarification prompt message (for more information, see the Error Handling section in the Amazon Lex console). Another example: if the intent requires confirmation before fulfillment, then Amazon Lex uses the confirmation prompt message in the intent configuration. If the code hook returns a message, Amazon Lex passes it as-is in its response to the client. '
+      dialogState:
+        $ref: '#/definitions/DialogState'
+        description: '<p> Identifies the current state of the user interaction. Amazon Lex returns one of the following values as <code>dialogState</code>. The client can optionally use this information to customize the user interface. </p> <ul> <li> <p> <code>ElicitIntent</code> – Amazon Lex wants to elicit user intent. </p> <p>For example, a user might utter an intent ("I want to order a pizza"). If Amazon Lex cannot infer the user intent from this utterance, it will return this dialogState.</p> </li> <li> <p> <code>ConfirmIntent</code> – Amazon Lex is expecting a "yes" or "no" response. </p> <p> For example, Amazon Lex wants user confirmation before fulfilling an intent. </p> <p>Instead of a simple "yes" or "no," a user might respond with additional information. For example, "yes, but make it thick crust pizza" or "no, I want to order a drink". Amazon Lex can process such additional information (in these examples, update the crust type slot value, or change intent from OrderPizza to OrderDrink).</p> </li> <li> <p> <code>ElicitSlot</code> – Amazon Lex is expecting a slot value for the current intent. </p> <p>For example, suppose that in the response Amazon Lex sends this message: "What size pizza would you like?". A user might reply with the slot value (e.g., "medium"). The user might also provide additional information in the response (e.g., "medium thick crust pizza"). Amazon Lex can process such additional information appropriately. </p> </li> <li> <p> <code>Fulfilled</code> – Conveys that the Lambda function configured for the intent has successfully fulfilled the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> – Conveys that the client has to fulfill the intent. </p> </li> <li> <p> <code>Failed</code> – Conveys that the conversation with the user failed. </p> <p> This can happen for various reasons including that the user did not provide an appropriate response to prompts from the service (you can configure how many times Amazon Lex can prompt a user for specific information), or the Lambda function failed to fulfill the intent. </p> </li> </ul>'
+      slotToElicit:
+        $ref: '#/definitions/String'
+        description: 'If the <code>dialogState</code> value is <code>ElicitSlot</code>, returns the name of the slot for which Amazon Lex is eliciting a value. '
+      responseCard:
+        $ref: '#/definitions/ResponseCard'
+        description: 'Represents the options that the user has to respond to the current prompt. Response Card can come from the bot configuration (in the Amazon Lex console, choose the settings button next to a slot) or from a code hook (Lambda function). '
+  RequestTimeoutException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The input speech is too long.
+  ResponseCard:
+    type: object
+    properties:
+      version:
+        $ref: '#/definitions/String'
+        description: The version of the response card format.
+      contentType:
+        $ref: '#/definitions/ContentType'
+        description: The content type of the response.
+      genericAttachments:
+        $ref: '#/definitions/genericAttachmentList'
+        description: An array of attachment objects representing options.
+    description: 'If you configure a response card when creating your bots, Amazon Lex substitutes the session attributes and slot values that are available, and then returns it. The response card can also come from a Lambda function ( <code>dialogCodeHook</code> and <code>fulfillmentActivity</code> on an intent).'
+  String:
+    type: string
+  StringMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  StringUrlWithLength:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  StringWithLength:
+    type: string
+    minLength: 1
+    maxLength: 80
+  Text:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  UnsupportedMediaTypeException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: 'The Content-Type header (<code>PostContent</code> API) has an invalid value. '
+  UserId:
+    type: string
+    pattern: '[0-9a-zA-Z._:-]+'
+    minLength: 2
+    maxLength: 100
+  genericAttachmentList:
+    type: array
+    items:
+      $ref: '#/definitions/GenericAttachment'
+    minItems: 0
+    maxItems: 10
+  listOfButtons:
+    type: array
+    items:
+      $ref: '#/definitions/Button'
+    minItems: 0
+    maxItems: 5

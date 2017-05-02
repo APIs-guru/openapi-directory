@@ -1,0 +1,1545 @@
+swagger: '2.0'
+info:
+  version: '2016-12-01'
+  x-release: v4
+  title: Amazon AppStream
+  description: <fullname>Amazon AppStream 2.0</fullname> <p>API documentation for Amazon AppStream 2.0.</p>
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: appstream2
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/appstream-2016-12-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/appstream/2016-12-01/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/appstream2/'
+host: appstream2.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AssociateFleet
+      description: Associate a fleet to a stack.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateFleetResult'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateFleet':
+    post:
+      operationId: CreateFleet
+      description: Creates a new fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFleetResult'
+        '480':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '481':
+          description: ResourceNotAvailableException
+          schema:
+            $ref: '#/definitions/ResourceNotAvailableException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: InvalidRoleException
+          schema:
+            $ref: '#/definitions/InvalidRoleException'
+        '485':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateStack':
+    post:
+      operationId: CreateStack
+      description: Create a new stack.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateStackResult'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateStackRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateStreamingURL':
+    post:
+      operationId: CreateStreamingURL
+      description: 'Creates a URL to start an AppStream 2.0 streaming session for a user. By default, the URL is valid only for 1 minute from the time that it is generated.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateStreamingURLResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceNotAvailableException
+          schema:
+            $ref: '#/definitions/ResourceNotAvailableException'
+        '482':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '483':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateStreamingURLRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteFleet':
+    post:
+      operationId: DeleteFleet
+      description: Deletes a fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteFleetResult'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteStack':
+    post:
+      operationId: DeleteStack
+      description: 'Deletes the stack. After this operation completes, the environment can no longer be activated, and any reservations made for the stack are released.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteStackResult'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteStackRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeFleets':
+    post:
+      operationId: DescribeFleets
+      description: 'If fleet names are provided, this operation describes the specified fleets; otherwise, all the fleets in the account are described.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeFleetsResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeFleetsRequest'
+      x-waiters:
+        - delay: 30
+          maxAttempts: 40
+          operation: DescribeFleets
+          acceptors:
+            - state: success
+              matcher: pathAll
+              argument: 'fleets[].state'
+              expected: ACTIVE
+            - state: failure
+              matcher: pathAny
+              argument: 'fleets[].state'
+              expected: PENDING_DEACTIVATE
+            - state: failure
+              matcher: pathAny
+              argument: 'fleets[].state'
+              expected: INACTIVE
+        - delay: 30
+          maxAttempts: 40
+          operation: DescribeFleets
+          acceptors:
+            - state: success
+              matcher: pathAll
+              argument: 'fleets[].state'
+              expected: INACTIVE
+            - state: failure
+              matcher: pathAny
+              argument: 'fleets[].state'
+              expected: PENDING_ACTIVATE
+            - state: failure
+              matcher: pathAny
+              argument: 'fleets[].state'
+              expected: ACTIVE
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeImages':
+    post:
+      operationId: DescribeImages
+      description: 'Describes the images. If a list of names is not provided, all images in your account are returned. This operation does not return a paginated result.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeImagesResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeImagesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSessions':
+    post:
+      operationId: DescribeSessions
+      description: 'Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSessionsResult'
+        '480':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSessionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStacks':
+    post:
+      operationId: DescribeStacks
+      description: 'If stack names are not provided, this operation describes the specified stacks; otherwise, all stacks in the account are described. Pass the <code>nextToken</code> value in a subsequent call to this operation to retrieve the next set of items.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeStacksResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeStacksRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateFleet':
+    post:
+      operationId: DisassociateFleet
+      description: Disassociates a fleet from a stack.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateFleetResult'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ExpireSession':
+    post:
+      operationId: ExpireSession
+      description: This operation immediately stops a streaming session.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExpireSessionResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExpireSessionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListAssociatedFleets':
+    post:
+      operationId: ListAssociatedFleets
+      description: Lists all fleets associated with the stack.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAssociatedFleetsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAssociatedFleetsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListAssociatedStacks':
+    post:
+      operationId: ListAssociatedStacks
+      description: Lists all stacks to which the specified fleet is associated.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAssociatedStacksResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAssociatedStacksRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartFleet':
+    post:
+      operationId: StartFleet
+      description: Starts a fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartFleetResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopFleet':
+    post:
+      operationId: StopFleet
+      description: Stops a fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopFleetResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateFleet':
+    post:
+      operationId: UpdateFleet
+      description: 'Updates an existing fleet. All the attributes except the fleet name can be updated in the <b>STOPPED</b> state. When a fleet is in the <b>RUNNING</b> state, only <code>DisplayName</code> and <code>ComputeCapacity</code> can be updated. A fleet cannot be updated in a status of <b>STARTING</b> or <b>STOPPING</b>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateFleetResult'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InvalidRoleException
+          schema:
+            $ref: '#/definitions/InvalidRoleException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceNotAvailableException
+          schema:
+            $ref: '#/definitions/ResourceNotAvailableException'
+        '485':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+        '486':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateStack':
+    post:
+      operationId: UpdateStack
+      description: Updates the specified fields in the stack with the specified name.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateStackResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateStackRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  Application:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The unique identifier for the application.
+      DisplayName:
+        $ref: '#/definitions/String'
+        description: The name of the application shown to the end users.
+      IconURL:
+        $ref: '#/definitions/String'
+        description: The URL for the application icon. This URL may be time-limited.
+      LaunchPath:
+        $ref: '#/definitions/String'
+        description: The path to the application executable in the instance.
+      LaunchParameters:
+        $ref: '#/definitions/String'
+        description: A list of arguments that are passed to the application at launch.
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: An application can be disabled after image creation if there is a problem.
+      Metadata:
+        $ref: '#/definitions/Metadata'
+        description: Additional attributes that describes the application.
+    description: An entry for a single application in the application catalog.
+  Applications:
+    type: array
+    items:
+      $ref: '#/definitions/Application'
+  Arn:
+    type: string
+    pattern: '^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+  AssociateFleetRequest:
+    type: object
+    required:
+      - FleetName
+      - StackName
+    properties:
+      FleetName:
+        $ref: '#/definitions/String'
+        description: The name of the fleet to associate.
+      StackName:
+        $ref: '#/definitions/String'
+        description: The name of the stack to which the fleet is associated.
+  AssociateFleetResult:
+    type: object
+    properties: {}
+  AuthenticationType:
+    type: string
+    enum:
+      - API
+      - SAML
+  Boolean:
+    type: boolean
+  BooleanObject:
+    type: boolean
+  ComputeCapacity:
+    type: object
+    required:
+      - DesiredInstances
+    properties:
+      DesiredInstances:
+        $ref: '#/definitions/Integer'
+        description: The desired number of streaming instances.
+    description: The capacity configuration for the fleet.
+  ComputeCapacityStatus:
+    type: object
+    required:
+      - Desired
+    properties:
+      Desired:
+        $ref: '#/definitions/Integer'
+        description: The desired number of streaming instances.
+      Running:
+        $ref: '#/definitions/Integer'
+        description: The total number of simultaneous streaming instances that are running.
+      InUse:
+        $ref: '#/definitions/Integer'
+        description: The number of instances that are being used for streaming.
+      Available:
+        $ref: '#/definitions/Integer'
+        description: The number of currently available instances that can be used to stream sessions.
+    description: The capacity information for the fleet.
+  ConcurrentModificationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'An API error occurred, please try again.'
+  CreateFleetRequest:
+    type: object
+    required:
+      - Name
+      - ImageName
+      - InstanceType
+      - ComputeCapacity
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+        description: A unique identifier for the fleet.
+      ImageName:
+        $ref: '#/definitions/String'
+        description: Unique name of the image used by the fleet.
+      InstanceType:
+        $ref: '#/definitions/String'
+        description: The instance type of compute resources for the fleet. Fleet instances are launched from this instance type.
+      ComputeCapacity:
+        $ref: '#/definitions/ComputeCapacity'
+        description: The parameters for the capacity allocated to the fleet.
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: The VPC configuration for the fleet.
+      MaxUserDurationInSeconds:
+        $ref: '#/definitions/Integer'
+        description: The maximum time up to which a streaming session can run.
+      DisconnectTimeoutInSeconds:
+        $ref: '#/definitions/Integer'
+        description: 'The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to his/her previous session. '
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the fleet.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The display name of the fleet.
+      EnableDefaultInternetAccess:
+        $ref: '#/definitions/BooleanObject'
+        description: Enable/Disable default Internet access from fleet.
+    description: Contains the parameters for the new fleet to create.
+  CreateFleetResult:
+    type: object
+    properties:
+      Fleet:
+        $ref: '#/definitions/Fleet'
+        description: The details for the created fleet.
+  CreateStackRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The unique identifier for this stack.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description displayed to end users on the AppStream 2.0 portal.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name displayed to end users on the AppStream 2.0 portal.
+  CreateStackResult:
+    type: object
+    properties:
+      Stack:
+        $ref: '#/definitions/Stack'
+        description: The details for the created stack.
+  CreateStreamingURLRequest:
+    type: object
+    required:
+      - StackName
+      - FleetName
+      - UserId
+    properties:
+      StackName:
+        $ref: '#/definitions/String'
+        description: The stack for which the URL is generated.
+      FleetName:
+        $ref: '#/definitions/String'
+        description: The fleet for which the URL is generated.
+      UserId:
+        $ref: '#/definitions/UserId'
+        description: A unique user ID for whom the URL is generated.
+      ApplicationId:
+        $ref: '#/definitions/String'
+        description: The ID of the application that must be launched after the session starts.
+      Validity:
+        $ref: '#/definitions/Long'
+        description: 'The validity duration of the URL in seconds. After this duration, the URL returned by this operation becomes invalid.'
+      SessionContext:
+        $ref: '#/definitions/String'
+        description: The sessionContext of the streaming URL.
+  CreateStreamingURLResult:
+    type: object
+    properties:
+      StreamingURL:
+        $ref: '#/definitions/String'
+        description: The URL to start the AppStream 2.0 streaming session.
+      Expires:
+        $ref: '#/definitions/Timestamp'
+        description: 'Elapsed seconds after the Unix epoch, at which time this URL expires.'
+  DeleteFleetRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the fleet to be deleted.
+  DeleteFleetResult:
+    type: object
+    properties: {}
+  DeleteStackRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the stack to delete.
+  DeleteStackResult:
+    type: object
+    properties: {}
+  DescribeFleetsRequest:
+    type: object
+    properties:
+      Names:
+        $ref: '#/definitions/StringList'
+        description: The fleet names to describe. Use null to describe all the fleets for the AWS account.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+  DescribeFleetsResult:
+    type: object
+    properties:
+      Fleets:
+        $ref: '#/definitions/FleetList'
+        description: The list of fleet details.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  DescribeImagesRequest:
+    type: object
+    properties:
+      Names:
+        $ref: '#/definitions/StringList'
+        description: A specific list of images to describe.
+  DescribeImagesResult:
+    type: object
+    properties:
+      Images:
+        $ref: '#/definitions/ImageList'
+        description: The list of images.
+  DescribeSessionsRequest:
+    type: object
+    required:
+      - StackName
+      - FleetName
+    properties:
+      StackName:
+        $ref: '#/definitions/String'
+        description: The name of the stack for which to list sessions.
+      FleetName:
+        $ref: '#/definitions/String'
+        description: The name of the fleet for which to list sessions.
+      UserId:
+        $ref: '#/definitions/UserId'
+        description: The user for whom to list sessions. Use null to describe all the sessions for the stack and fleet.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+      Limit:
+        $ref: '#/definitions/Integer'
+        description: The size of each page of results. The default value is 20 and the maximum supported value is 50.
+      AuthenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: 'The authentication method of the user. It can be <code>API</code> for a user authenticated using a streaming url or <code>SAML</code> for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.'
+  DescribeSessionsResult:
+    type: object
+    properties:
+      Sessions:
+        $ref: '#/definitions/SessionList'
+        description: The list of streaming sessions.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  DescribeStacksRequest:
+    type: object
+    properties:
+      Names:
+        $ref: '#/definitions/StringList'
+        description: The stack names to describe. Use null to describe all the stacks for the AWS account.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+  DescribeStacksResult:
+    type: object
+    properties:
+      Stacks:
+        $ref: '#/definitions/StackList'
+        description: The list of stack details.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  Description:
+    type: string
+    maxLength: 256
+  DisassociateFleetRequest:
+    type: object
+    required:
+      - FleetName
+      - StackName
+    properties:
+      FleetName:
+        $ref: '#/definitions/String'
+        description: The name of the fleet to disassociate.
+      StackName:
+        $ref: '#/definitions/String'
+        description: The name of the stack with which the fleet is associated.
+  DisassociateFleetResult:
+    type: object
+    properties: {}
+  DisplayName:
+    type: string
+    maxLength: 100
+  ErrorMessage:
+    type: string
+    description: The error message in the exception.
+  ExpireSessionRequest:
+    type: object
+    required:
+      - SessionId
+    properties:
+      SessionId:
+        $ref: '#/definitions/String'
+        description: The unique identifier of the streaming session to be stopped.
+  ExpireSessionResult:
+    type: object
+    properties: {}
+  Fleet:
+    type: object
+    required:
+      - Arn
+      - Name
+      - ImageName
+      - InstanceType
+      - ComputeCapacityStatus
+      - State
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN for the fleet.
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the fleet.
+      DisplayName:
+        $ref: '#/definitions/String'
+        description: The name displayed to end users on the AppStream 2.0 portal.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description displayed to end users on the AppStream 2.0 portal.
+      ImageName:
+        $ref: '#/definitions/String'
+        description: The image used by the fleet.
+      InstanceType:
+        $ref: '#/definitions/String'
+        description: 'The instance type of compute resources for the fleet. The fleet instances are launched from this instance type. '
+      ComputeCapacityStatus:
+        $ref: '#/definitions/ComputeCapacityStatus'
+        description: The capacity information for the fleet.
+      MaxUserDurationInSeconds:
+        $ref: '#/definitions/Integer'
+        description: The maximum time during which a streaming session can run.
+      DisconnectTimeoutInSeconds:
+        $ref: '#/definitions/Integer'
+        description: 'The time after disconnection when a session is considered to have ended. When a user reconnects after a disconnection, the user is connected to the same session and instance within this time interval.'
+      State:
+        $ref: '#/definitions/FleetState'
+        description: The current state for the fleet.
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: The VPC configuration for the fleet.
+      CreatedTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which the fleet was created.
+      FleetErrors:
+        $ref: '#/definitions/FleetErrors'
+        description: The list of fleet errors is appended to this list.
+      EnableDefaultInternetAccess:
+        $ref: '#/definitions/BooleanObject'
+        description: 'Default Internet access from the fleet. True (Enabled), False (Disabled).'
+    description: Contains the parameters for a fleet.
+  FleetError:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/FleetErrorCode'
+        description: The error code for the fleet error.
+      ErrorMessage:
+        $ref: '#/definitions/String'
+        description: The error message generated when the fleet has errors.
+    description: The details of the fleet error.
+  FleetErrorCode:
+    type: string
+    enum:
+      - IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION
+      - IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION
+      - IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION
+      - NETWORK_INTERFACE_LIMIT_EXCEEDED
+      - INTERNAL_SERVICE_ERROR
+      - IAM_SERVICE_ROLE_IS_MISSING
+      - SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES
+      - IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION
+      - SUBNET_NOT_FOUND
+      - IMAGE_NOT_FOUND
+      - INVALID_SUBNET_CONFIGURATION
+  FleetErrors:
+    type: array
+    items:
+      $ref: '#/definitions/FleetError'
+  FleetList:
+    type: array
+    description: A list of fleets.
+    items:
+      $ref: '#/definitions/Fleet'
+  FleetState:
+    type: string
+    enum:
+      - STARTING
+      - RUNNING
+      - STOPPING
+      - STOPPED
+  Image:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The unique identifier for the image.
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN for the image.
+      BaseImageArn:
+        $ref: '#/definitions/Arn'
+        description: The source image ARN from which this image was created.
+      DisplayName:
+        $ref: '#/definitions/String'
+        description: The display name for the image.
+      State:
+        $ref: '#/definitions/ImageState'
+        description: 'The image starts in the <b>PENDING</b> state, and then moves to <b>AVAILABLE</b> if image creation succeeds and <b>FAILED</b> if image creation has failed.'
+      Visibility:
+        $ref: '#/definitions/VisibilityType'
+        description: The visibility of an image to the user; images can be public or private.
+      ImageBuilderSupported:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether an image builder can be launched from this image.
+      Platform:
+        $ref: '#/definitions/PlatformType'
+        description: The operating system platform of the image.
+      Description:
+        $ref: '#/definitions/String'
+        description: A meaningful description for the image.
+      StateChangeReason:
+        $ref: '#/definitions/ImageStateChangeReason'
+        description: The reason why the last state change occurred.
+      Applications:
+        $ref: '#/definitions/Applications'
+        description: The applications associated with an image.
+      CreatedTime:
+        $ref: '#/definitions/Timestamp'
+        description: The timestamp when the image was created.
+    description: New streaming instances are booted from images. The image stores the application catalog and is connected to fleets.
+  ImageList:
+    type: array
+    items:
+      $ref: '#/definitions/Image'
+  ImageState:
+    type: string
+    enum:
+      - PENDING
+      - AVAILABLE
+      - FAILED
+      - DELETING
+  ImageStateChangeReason:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/ImageStateChangeReasonCode'
+        description: The state change reason code of the image.
+      Message:
+        $ref: '#/definitions/String'
+        description: The state change reason message to the end user.
+    description: The reason why the last state change occurred.
+  ImageStateChangeReasonCode:
+    type: string
+    enum:
+      - INTERNAL_ERROR
+      - IMAGE_BUILDER_NOT_AVAILABLE
+  Integer:
+    type: integer
+  InvalidParameterCombinationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Indicates an incorrect combination of parameters, or a missing parameter.'
+  InvalidRoleException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified role is invalid.
+  LimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The requested limit exceeds the permitted limit for an account.
+  ListAssociatedFleetsRequest:
+    type: object
+    required:
+      - StackName
+    properties:
+      StackName:
+        $ref: '#/definitions/String'
+        description: The name of the stack whose associated fleets are listed.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+  ListAssociatedFleetsResult:
+    type: object
+    properties:
+      Names:
+        $ref: '#/definitions/StringList'
+        description: The names of associated fleets.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+    description: The response from a successful operation.
+  ListAssociatedStacksRequest:
+    type: object
+    required:
+      - FleetName
+    properties:
+      FleetName:
+        $ref: '#/definitions/String'
+        description: The name of the fleet whose associated stacks are listed.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+  ListAssociatedStacksResult:
+    type: object
+    properties:
+      Names:
+        $ref: '#/definitions/StringList'
+        description: The names of associated stacks.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+    description: The response from a successful operation.
+  Long:
+    type: integer
+  Metadata:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  Name:
+    type: string
+    pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$'
+  OperationNotPermittedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The attempted operation is not permitted.
+  PlatformType:
+    type: string
+    enum:
+      - WINDOWS
+  ResourceAlreadyExistsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified resource already exists.
+  ResourceInUseException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified resource is in use.
+  ResourceNotAvailableException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The specified resource exists and is not in use, but isn''t available.'
+  ResourceNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified resource was not found.
+  Session:
+    type: object
+    required:
+      - Id
+      - UserId
+      - StackName
+      - FleetName
+      - State
+    properties:
+      Id:
+        $ref: '#/definitions/String'
+        description: The unique ID for a streaming session.
+      UserId:
+        $ref: '#/definitions/UserId'
+        description: The identifier of the user for whom the session was created.
+      StackName:
+        $ref: '#/definitions/String'
+        description: The name of the stack for which the streaming session was created.
+      FleetName:
+        $ref: '#/definitions/String'
+        description: The name of the fleet for which the streaming session was created.
+      State:
+        $ref: '#/definitions/SessionState'
+        description: The current state of the streaming session.
+      AuthenticationType:
+        $ref: '#/definitions/AuthenticationType'
+        description: The authentication method of the user for whom the session was created. It can be <code>API</code> for a user authenticated using a streaming url or <code>SAML</code> for a SAML federated user.
+    description: Contains the parameters for a streaming session.
+  SessionList:
+    type: array
+    description: List of sessions.
+    items:
+      $ref: '#/definitions/Session'
+  SessionState:
+    type: string
+    enum:
+      - ACTIVE
+      - PENDING
+      - EXPIRED
+    description: Possible values for the state of a streaming session.
+  Stack:
+    type: object
+    required:
+      - Name
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the stack.
+      Name:
+        $ref: '#/definitions/String'
+        description: The unique identifier of the stack.
+      Description:
+        $ref: '#/definitions/String'
+        description: A meaningful description for the stack.
+      DisplayName:
+        $ref: '#/definitions/String'
+        description: A display name for the stack.
+      CreatedTime:
+        $ref: '#/definitions/Timestamp'
+        description: The timestamp when the stack was created.
+    description: Details about a stack.
+  StackList:
+    type: array
+    description: A list of stacks.
+    items:
+      $ref: '#/definitions/Stack'
+  StartFleetRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the fleet to start.
+  StartFleetResult:
+    type: object
+    properties: {}
+  StopFleetRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the fleet to stop.
+  StopFleetResult:
+    type: object
+    properties: {}
+  String:
+    type: string
+    minLength: 1
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  SubnetIdList:
+    type: array
+    description: A list of subnet IDs.
+    items:
+      $ref: '#/definitions/String'
+    minItems: 1
+  Timestamp:
+    type: string
+    format: date-time
+  UpdateFleetRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      ImageName:
+        $ref: '#/definitions/String'
+        description: The image name from which a fleet is created.
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the fleet.
+      InstanceType:
+        $ref: '#/definitions/String'
+        description: The instance type of compute resources for the fleet. Fleet instances are launched from this instance type.
+      ComputeCapacity:
+        $ref: '#/definitions/ComputeCapacity'
+        description: 'The parameters for the capacity allocated to the fleet. '
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: The VPC configuration for the fleet.
+      MaxUserDurationInSeconds:
+        $ref: '#/definitions/Integer'
+        description: The maximum time during which a streaming session can run.
+      DisconnectTimeoutInSeconds:
+        $ref: '#/definitions/Integer'
+        description: 'The time after disconnection when a session is considered to have ended. When the user reconnects after a disconnection, the user is connected to the same instance within this time interval.'
+      DeleteVpcConfig:
+        $ref: '#/definitions/Boolean'
+        description: Delete the VPC association for the specified fleet.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description displayed to end users on the AppStream 2.0 portal.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name displayed to end users on the AppStream 2.0 portal.
+      EnableDefaultInternetAccess:
+        $ref: '#/definitions/BooleanObject'
+        description: Enable/Disable default Internet access from fleet.
+  UpdateFleetResult:
+    type: object
+    properties:
+      Fleet:
+        $ref: '#/definitions/Fleet'
+        description: A list of fleet details.
+  UpdateStackRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name displayed to end users on the AppStream 2.0 portal.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description displayed to end users on the AppStream 2.0 portal.
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the stack to update.
+  UpdateStackResult:
+    type: object
+    properties:
+      Stack:
+        $ref: '#/definitions/Stack'
+        description: A list of stack details.
+  UserId:
+    type: string
+    minLength: 2
+    maxLength: 32
+  VisibilityType:
+    type: string
+    enum:
+      - PUBLIC
+      - PRIVATE
+  VpcConfig:
+    type: object
+    required:
+      - SubnetIds
+    properties:
+      SubnetIds:
+        $ref: '#/definitions/SubnetIdList'
+        description: The list of subnets to which a network interface is established from the fleet instance.
+    description: VPC configuration information.

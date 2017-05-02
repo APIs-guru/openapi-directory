@@ -1,0 +1,840 @@
+swagger: '2.0'
+info:
+  version: '2016-06-02'
+  x-release: v4
+  title: AWS Shield
+  description: '<fullname>AWS Shield Advanced</fullname> <p>This is the <i>AWS Shield Advanced API Reference</i>. This guide is for developers who need detailed information about the AWS Shield Advanced API actions, data types, and errors. For detailed information about AWS WAF and AWS Shield Advanced features and an overview of how to use the AWS WAF and AWS Shield Advanced APIs, see the <a href="http://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF and AWS Shield Developer Guide</a>.</p>'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: shield
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/shield-2016-06-02.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/shield/2016-06-02/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/shield/'
+host: shield.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateProtection
+      description: 'Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, or an Amazon Route 53 hosted zone.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateProtectionResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: InvalidResourceException
+          schema:
+            $ref: '#/definitions/InvalidResourceException'
+        '482':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+        '483':
+          description: LimitsExceededException
+          schema:
+            $ref: '#/definitions/LimitsExceededException'
+        '484':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '485':
+          description: OptimisticLockException
+          schema:
+            $ref: '#/definitions/OptimisticLockException'
+        '486':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateProtectionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateSubscription':
+    post:
+      operationId: CreateSubscription
+      description: Activates AWS Shield Advanced for an account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSubscriptionResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSubscriptionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteProtection':
+    post:
+      operationId: DeleteProtection
+      description: Deletes an AWS Shield Advanced <a>Protection</a>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteProtectionResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OptimisticLockException
+          schema:
+            $ref: '#/definitions/OptimisticLockException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteProtectionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSubscription':
+    post:
+      operationId: DeleteSubscription
+      description: Removes AWS Shield Advanced from an account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSubscriptionResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: LockedSubscriptionException
+          schema:
+            $ref: '#/definitions/LockedSubscriptionException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSubscriptionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAttack':
+    post:
+      operationId: DescribeAttack
+      description: 'Describes the details of a DDoS attack. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAttackResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAttackRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeProtection':
+    post:
+      operationId: DescribeProtection
+      description: Lists the details of a <a>Protection</a> object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeProtectionResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeProtectionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSubscription':
+    post:
+      operationId: DescribeSubscription
+      description: Provides details about the AWS Shield Advanced subscription for an account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSubscriptionResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSubscriptionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListAttacks':
+    post:
+      operationId: ListAttacks
+      description: Returns all ongoing DDoS attacks or all DDoS attacks during a specified time period.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAttacksResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAttacksRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListProtections':
+    post:
+      operationId: ListProtections
+      description: Lists all <a>Protection</a> objects for the account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProtectionsResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListProtectionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AttackDetail:
+    type: object
+    properties:
+      AttackId:
+        $ref: '#/definitions/AttackId'
+        description: The unique identifier (ID) of the attack.
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The ARN (Amazon Resource Name) of the resource that was attacked.
+      SubResources:
+        $ref: '#/definitions/SubResourceSummaryList'
+        description: 'If applicable, additional detail about the resource being attacked, for example, IP address or URL.'
+      StartTime:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The time the attack started, in the format 2016-12-16T13:50Z.'
+      EndTime:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The time the attack ended, in the format 2016-12-16T13:50Z.'
+      AttackCounters:
+        $ref: '#/definitions/SummarizedCounterList'
+        description: List of counters that describe the attack for the specified time period.
+      Mitigations:
+        $ref: '#/definitions/MitigationList'
+        description: List of mitigation actions taken for the attack.
+    description: The details of a DDoS attack.
+  AttackId:
+    type: string
+    pattern: '[a-zA-Z0-9\\-]*'
+    minLength: 1
+    maxLength: 128
+  AttackSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/AttackSummary'
+  AttackSummary:
+    type: object
+    properties:
+      AttackId:
+        $ref: '#/definitions/String'
+        description: The unique identifier (ID) of the attack.
+      ResourceArn:
+        $ref: '#/definitions/String'
+        description: The ARN (Amazon Resource Name) of the resource that was attacked.
+      StartTime:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The start time of the attack, in the format 2016-12-16T13:50Z.'
+      EndTime:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The end time of the attack, in the format 2016-12-16T13:50Z.'
+      AttackVectors:
+        $ref: '#/definitions/AttackVectorDescriptionList'
+        description: The list of attacks for a specified time period.
+    description: Summarizes all DDoS attacks for a specified time period.
+  AttackTimestamp:
+    type: string
+    format: date-time
+  AttackVectorDescription:
+    type: object
+    required:
+      - VectorType
+    properties:
+      VectorType:
+        $ref: '#/definitions/String'
+        description: 'The attack type, for example, SNMP reflection or SYN flood.'
+    description: Describes the attack.
+  AttackVectorDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/AttackVectorDescription'
+  CreateProtectionRequest:
+    type: object
+    required:
+      - Name
+      - ResourceArn
+    properties:
+      Name:
+        $ref: '#/definitions/ProtectionName'
+        description: Friendly name for the <code>Protection</code> you are creating.
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The ARN (Amazon Resource Name) of the resource to be protected.
+  CreateProtectionResponse:
+    type: object
+    properties:
+      ProtectionId:
+        $ref: '#/definitions/ProtectionId'
+        description: The unique identifier (ID) for the <a>Protection</a> object that is created.
+  CreateSubscriptionRequest:
+    type: object
+    properties: {}
+  CreateSubscriptionResponse:
+    type: object
+    properties: {}
+  DeleteProtectionRequest:
+    type: object
+    required:
+      - ProtectionId
+    properties:
+      ProtectionId:
+        $ref: '#/definitions/ProtectionId'
+        description: The unique identifier (ID) for the <a>Protection</a> object to be deleted.
+  DeleteProtectionResponse:
+    type: object
+    properties: {}
+  DeleteSubscriptionRequest:
+    type: object
+    properties: {}
+  DeleteSubscriptionResponse:
+    type: object
+    properties: {}
+  DescribeAttackRequest:
+    type: object
+    required:
+      - AttackId
+    properties:
+      AttackId:
+        $ref: '#/definitions/AttackId'
+        description: The unique identifier (ID) for the attack that to be described.
+  DescribeAttackResponse:
+    type: object
+    properties:
+      Attack:
+        $ref: '#/definitions/AttackDetail'
+        description: The attack that is described.
+  DescribeProtectionRequest:
+    type: object
+    required:
+      - ProtectionId
+    properties:
+      ProtectionId:
+        $ref: '#/definitions/ProtectionId'
+        description: The unique identifier (ID) for the <a>Protection</a> object that is described.
+  DescribeProtectionResponse:
+    type: object
+    properties:
+      Protection:
+        $ref: '#/definitions/Protection'
+        description: The <a>Protection</a> object that is described.
+  DescribeSubscriptionRequest:
+    type: object
+    properties: {}
+  DescribeSubscriptionResponse:
+    type: object
+    properties:
+      Subscription:
+        $ref: '#/definitions/Subscription'
+        description: The AWS Shield Advanced subscription details for an account.
+  Double:
+    type: number
+    format: double
+  DurationInSeconds:
+    type: integer
+    minimum: 0
+  Integer:
+    type: integer
+  InternalErrorException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.
+  InvalidOperationException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: Exception that indicates that the operation would not cause any change to occur.
+  InvalidParameterException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: 'Exception that indicates that the parameters passed to the API are invalid. '
+  InvalidResourceException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: 'Exception that indicates that the resource is invalid. You might not have access to the resource, or the resource might not exist.'
+  LimitNumber:
+    type: integer
+  LimitType:
+    type: string
+  LimitsExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+      Type:
+        $ref: '#/definitions/LimitType'
+      Limit:
+        $ref: '#/definitions/LimitNumber'
+    description: Exception that indicates that the operation would exceed a limit.
+  ListAttacksRequest:
+    type: object
+    properties:
+      ResourceArns:
+        $ref: '#/definitions/ResourceArnFilterList'
+        description: 'The ARN (Amazon Resource Name) of the resource that was attacked. If this is left blank, all applicable resources for this account will be included.'
+      StartTime:
+        $ref: '#/definitions/TimeRange'
+        description: The time period for the attacks.
+      EndTime:
+        $ref: '#/definitions/TimeRange'
+        description: The end of the time period for the attacks.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: The <code>ListAttacksRequest.NextMarker</code> value from a previous call to <code>ListAttacksRequest</code>. Pass null if this is the first call.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of <a>AttackSummary</a> objects to be returned. If this is left blank, the first 20 results will be returned.'
+  ListAttacksResponse:
+    type: object
+    properties:
+      AttackSummaries:
+        $ref: '#/definitions/AttackSummaries'
+        description: The attack information for the specified time range.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'The token returned by a previous call to indicate that there is more data available. If not null, more results are available. Pass this value for the <code>NextMarker</code> parameter in a subsequent call to <code>ListAttacks</code> to retrieve the next set of items.'
+  ListProtectionsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: The <code>ListProtectionsRequest.NextToken</code> value from a previous call to <code>ListProtections</code>. Pass null if this is the first call.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of <a>Protection</a> objects to be returned. If this is left blank the first 20 results will be returned.
+  ListProtectionsResponse:
+    type: object
+    properties:
+      Protections:
+        $ref: '#/definitions/Protections'
+        description: The array of enabled <a>Protection</a> objects.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If you specify a value for <code>MaxResults</code> and you have more Protections than the value of MaxResults, AWS Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections.'
+  LockedSubscriptionException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: Exception that indicates that the subscription has been modified by another client. You can retry the request.
+  MaxResults:
+    type: integer
+    minimum: 0
+    maximum: 100
+  Mitigation:
+    type: object
+    properties:
+      MitigationName:
+        $ref: '#/definitions/String'
+        description: The name of the mitigation taken for this attack.
+    description: The mitigation applied to a DDoS attack.
+  MitigationList:
+    type: array
+    items:
+      $ref: '#/definitions/Mitigation'
+  OptimisticLockException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: Exception that indicates that the protection state has been modified by another client. You can retry the request.
+  Protection:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ProtectionId'
+        description: The unique identifier (ID) of the protection.
+      Name:
+        $ref: '#/definitions/ProtectionName'
+        description: 'The friendly name of the protection. For example, <code>My CloudFront distributions</code>.'
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The ARN (Amazon Resource Name) of the AWS resource that is protected.
+    description: An object that represents a resource that is under DDoS protection.
+  ProtectionId:
+    type: string
+    pattern: '[a-zA-Z0-9\\-]*'
+    minLength: 1
+    maxLength: 36
+  ProtectionName:
+    type: string
+    pattern: '[ a-zA-Z0-9_\\.\\-]*'
+    minLength: 1
+    maxLength: 128
+  Protections:
+    type: array
+    items:
+      $ref: '#/definitions/Protection'
+  ResourceAlreadyExistsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: Exception indicating the specified resource already exists.
+  ResourceArn:
+    type: string
+    minLength: 1
+  ResourceArnFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceArn'
+  ResourceNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+    description: Exception indicating the specified resource does not exist.
+  String:
+    type: string
+  SubResourceSummary:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/SubResourceType'
+        description: The <code>SubResource</code> type.
+      Id:
+        $ref: '#/definitions/String'
+        description: The unique identifier (ID) of the <code>SubResource</code>.
+      AttackVectors:
+        $ref: '#/definitions/SummarizedAttackVectorList'
+        description: The list of attack types and associated counters.
+      Counters:
+        $ref: '#/definitions/SummarizedCounterList'
+        description: The counters that describe the details of the attack.
+    description: The attack information for the specified SubResource.
+  SubResourceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/SubResourceSummary'
+  SubResourceType:
+    type: string
+    enum:
+      - IP
+      - URL
+  Subscription:
+    type: object
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The start time of the subscription, in the format "2016-12-16T13:50Z".'
+      TimeCommitmentInSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: 'The length, in seconds, of the AWS Shield Advanced subscription for the account.'
+    description: Information about the AWS Shield Advanced subscription for an account.
+  SummarizedAttackVector:
+    type: object
+    required:
+      - VectorType
+    properties:
+      VectorType:
+        $ref: '#/definitions/String'
+        description: 'The attack type, for example, SNMP reflection or SYN flood.'
+      VectorCounters:
+        $ref: '#/definitions/SummarizedCounterList'
+        description: The list of counters that describe the details of the attack.
+    description: A summary of information about the attack.
+  SummarizedAttackVectorList:
+    type: array
+    items:
+      $ref: '#/definitions/SummarizedAttackVector'
+  SummarizedCounter:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The counter name.
+      Max:
+        $ref: '#/definitions/Double'
+        description: The maximum value of the counter for a specified time period.
+      Average:
+        $ref: '#/definitions/Double'
+        description: The average value of the counter for a specified time period.
+      Sum:
+        $ref: '#/definitions/Double'
+        description: The total of counter values for a specified time period.
+      'N':
+        $ref: '#/definitions/Integer'
+        description: The number of counters for a specified time period.
+      Unit:
+        $ref: '#/definitions/String'
+        description: The unit of the counters.
+    description: The counter that describes a DDoS attack.
+  SummarizedCounterList:
+    type: array
+    items:
+      $ref: '#/definitions/SummarizedCounter'
+  TimeRange:
+    type: object
+    properties:
+      FromInclusive:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The start time, in the format 2016-12-16T13:50Z.'
+      ToExclusive:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The end time, in the format 2016-12-16T15:50Z.'
+    description: The time range.
+  Timestamp:
+    type: string
+    format: date-time
+  Token:
+    type: string
+    minLength: 1
+  errorMessage:
+    type: string

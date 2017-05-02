@@ -1,0 +1,1686 @@
+swagger: '2.0'
+info:
+  version: '2015-11-01'
+  x-release: v4
+  title: AWS Application Discovery Service
+  description: '<fullname>AWS Application Discovery Service</fullname> <p>AWS Application Discovery Service helps you plan application migration projects by automatically identifying servers, virtual machines (VMs), software, and software dependencies running in your on-premises data centers. Application Discovery Service also collects application performance data, which can help you assess the outcome of your migration. The data collected by Application Discovery Service is securely retained in an Amazon-hosted and managed database in the cloud. You can export the data as a CSV or XML file into your preferred visualization tool or cloud-migration solution to plan your migration. For more information, see the Application Discovery Service <a href="http://aws.amazon.com/application-discovery/faqs/">FAQ</a>.</p> <p>Application Discovery Service offers two modes of operation.</p> <ul> <li> <p> <b>Agentless discovery</b> mode is recommended for environments that use VMware vCenter Server. This mode doesn''t require you to install an agent on each host. Agentless discovery gathers server information regardless of the operating systems, which minimizes the time required for initial on-premises infrastructure assessment. Agentless discovery doesn''t collect information about software and software dependencies. It also doesn''t work in non-VMware environments. We recommend that you use agent-based discovery for non-VMware environments and if you want to collect information about software and software dependencies. You can also run agent-based and agentless discovery simultaneously. Use agentless discovery to quickly complete the initial infrastructure assessment and then install agents on select hosts to gather information about software and software dependencies.</p> </li> <li> <p> <b>Agent-based discovery</b> mode collects a richer set of data than agentless discovery by using Amazon software, the AWS Application Discovery Agent, which you install on one or more hosts in your data center. The agent captures infrastructure and application information, including an inventory of installed software applications, system and process performance, resource utilization, and network dependencies between workloads. The information collected by agents is secured at rest and in transit to the Application Discovery Service database in the cloud. </p> </li> </ul> <p>Application Discovery Service integrates with application discovery solutions from AWS Partner Network (APN) partners. Third-party application discovery tools can query Application Discovery Service and write to the Application Discovery Service database using a public API. You can then import the data into either a visualization tool or cloud-migration solution.</p> <important> <p>Application Discovery Service doesn''t gather sensitive information. All data is handled according to the <a href="http://aws.amazon.com/privacy/">AWS Privacy Policy</a>. You can operate Application Discovery Service using offline mode to inspect collected data before it is shared with the service.</p> </important> <p>Your AWS account must be granted access to Application Discovery Service, a process called <i>whitelisting</i>. This is true for AWS partners and customers alike. To request access, sign up for AWS Application Discovery Service <a href="http://aws.amazon.com/application-discovery/preview/">here</a>. We send you information about how to get started.</p> <p>This API reference provides descriptions, syntax, and usage examples for each of the actions and data types for Application Discovery Service. The topic for each action shows the API request parameters and the response. Alternatively, you can use one of the AWS SDKs to access an API that is tailored to the programming language or platform that you''re using. For more information, see <a href="http://aws.amazon.com/tools/#SDKs">AWS SDKs</a>.</p> <p>This guide is intended for use with the <a href="http://docs.aws.amazon.com/application-discovery/latest/userguide/"> <i>AWS Application Discovery Service User Guide</i> </a>.</p>'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: discovery
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/discovery-2015-11-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/discovery/2015-11-01/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/discovery/'
+host: discovery.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AssociateConfigurationItemsToApplication
+      description: Associates one or more configuration items with an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateConfigurationItemsToApplicationResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateConfigurationItemsToApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateApplication':
+    post:
+      operationId: CreateApplication
+      description: Creates an application with the given name and description.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateApplicationResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateTags':
+    post:
+      operationId: CreateTags
+      description: Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets. This API accepts a list of multiple configuration items.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTagsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTagsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApplications':
+    post:
+      operationId: DeleteApplications
+      description: Deletes a list of applications and their associations with configuration items.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteApplicationsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteApplicationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTags':
+    post:
+      operationId: DeleteTags
+      description: Deletes the association between configuration items and one or more tags. This API accepts a list of multiple configuration items.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTagsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTagsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAgents':
+    post:
+      operationId: DescribeAgents
+      description: Lists agents or the Connector by ID or lists all agents/Connectors associated with your user account if you did not specify an ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAgentsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAgentsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConfigurations':
+    post:
+      operationId: DescribeConfigurations
+      description: '<p>Retrieves attributes for a list of configuration item IDs. All of the supplied IDs must be for the same asset type (server, application, process, or connection). Output fields are specific to the asset type selected. For example, the output for a <i>server</i> configuration item includes a list of attributes about the server, such as host name, operating system, and number of network cards.</p> <p>For a complete list of outputs for each asset type, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#DescribeConfigurations">Using the DescribeConfigurations Action</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeConfigurationsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeConfigurationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeExportConfigurations':
+    post:
+      operationId: DescribeExportConfigurations
+      description: <p>Deprecated. Use <code>DescribeExportTasks</code> instead.</p> <p>Retrieves the status of a given export process. You can retrieve status from a maximum of 100 processes.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeExportConfigurationsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeExportConfigurationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeExportTasks':
+    post:
+      operationId: DescribeExportTasks
+      description: Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeExportTasksResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeExportTasksRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTags':
+    post:
+      operationId: DescribeTags
+      description: Retrieves a list of configuration items that are tagged with a specific tag. Or retrieves a list of all tags assigned to a specific configuration item.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTagsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTagsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateConfigurationItemsFromApplication':
+    post:
+      operationId: DisassociateConfigurationItemsFromApplication
+      description: Disassociates one or more configuration items from an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateConfigurationItemsFromApplicationResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateConfigurationItemsFromApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ExportConfigurations':
+    post:
+      operationId: ExportConfigurations
+      description: '<p>Deprecated. Use <code>StartExportTask</code> instead.</p> <p>Exports all discovered configuration data to an Amazon S3 bucket or an application that enables you to view and evaluate the data. Data includes tags and tag associations, processes, connections, servers, and system performance. This API returns an export ID that you can query using the <i>DescribeExportConfigurations</i> API. The system imposes a limit of two configuration exports in six hours.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExportConfigurationsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDiscoverySummary':
+    post:
+      operationId: GetDiscoverySummary
+      description: Retrieves a short summary of discovered assets.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDiscoverySummaryResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDiscoverySummaryRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListConfigurations':
+    post:
+      operationId: ListConfigurations
+      description: Retrieves a list of configuration items according to criteria that you specify in a filter. The filter criteria identifies the relationship requirements.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListConfigurationsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListConfigurationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListServerNeighbors':
+    post:
+      operationId: ListServerNeighbors
+      description: Retrieves a list of servers that are one network hop away from a specified server.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListServerNeighborsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListServerNeighborsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartDataCollectionByAgentIds':
+    post:
+      operationId: StartDataCollectionByAgentIds
+      description: Instructs the specified agents or connectors to start collecting data.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartDataCollectionByAgentIdsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartDataCollectionByAgentIdsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartExportTask':
+    post:
+      operationId: StartExportTask
+      description: Export the configuration data about discovered configuration items and relationships to an S3 bucket in a specified format.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartExportTaskResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartExportTaskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopDataCollectionByAgentIds':
+    post:
+      operationId: StopDataCollectionByAgentIds
+      description: Instructs the specified agents or connectors to stop collecting data.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopDataCollectionByAgentIdsResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopDataCollectionByAgentIdsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateApplication':
+    post:
+      operationId: UpdateApplication
+      description: Updates metadata about an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApplicationResponse'
+        '480':
+          description: AuthorizationErrorException
+          schema:
+            $ref: '#/definitions/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          schema:
+            $ref: '#/definitions/ServerInternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AgentConfigurationStatus:
+    type: object
+    properties:
+      agentId:
+        $ref: '#/definitions/String'
+        description: The agent/connector ID.
+      operationSucceeded:
+        $ref: '#/definitions/Boolean'
+        description: 'Information about the status of the <code>StartDataCollection</code> and <code>StopDataCollection</code> operations. The system has recorded the data collection operation. The agent/connector receives this command the next time it polls for a new command. '
+      description:
+        $ref: '#/definitions/String'
+        description: A description of the operation performed.
+    description: 'Information about agents or connectors that were instructed to start collecting data. Information includes the agent/connector ID, a description of the operation, and whether the agent/connector configuration was updated.'
+  AgentConfigurationStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentConfigurationStatus'
+  AgentId:
+    type: string
+  AgentIds:
+    type: array
+    items:
+      $ref: '#/definitions/AgentId'
+  AgentInfo:
+    type: object
+    properties:
+      agentId:
+        $ref: '#/definitions/AgentId'
+        description: The agent or connector ID.
+      hostName:
+        $ref: '#/definitions/String'
+        description: The name of the host where the agent or connector resides. The host can be a server or virtual machine.
+      agentNetworkInfoList:
+        $ref: '#/definitions/AgentNetworkInfoList'
+        description: Network details about the host where the agent or connector resides.
+      connectorId:
+        $ref: '#/definitions/String'
+        description: The ID of the connector.
+      version:
+        $ref: '#/definitions/String'
+        description: The agent or connector version.
+      health:
+        $ref: '#/definitions/AgentStatus'
+        description: The health of the agent or connector.
+      lastHealthPingTime:
+        $ref: '#/definitions/String'
+        description: Time since agent or connector health was reported.
+      collectionStatus:
+        $ref: '#/definitions/String'
+        description: Status of the collection process for an agent or connector.
+      agentType:
+        $ref: '#/definitions/String'
+        description: Type of agent.
+      registeredTime:
+        $ref: '#/definitions/String'
+        description: Agent's first registration timestamp in UTC.
+    description: 'Information about agents or connectors associated with the user’s AWS account. Information includes agent or connector IDs, IP addresses, media access control (MAC) addresses, agent or connector health, hostname where the agent or connector resides, and agent version for each agent.'
+  AgentNetworkInfo:
+    type: object
+    properties:
+      ipAddress:
+        $ref: '#/definitions/String'
+        description: The IP address for the host where the agent/connector resides.
+      macAddress:
+        $ref: '#/definitions/String'
+        description: The MAC address for the host where the agent/connector resides.
+    description: Network details about the host where the agent/connector resides.
+  AgentNetworkInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentNetworkInfo'
+  AgentStatus:
+    type: string
+    enum:
+      - HEALTHY
+      - UNHEALTHY
+      - RUNNING
+      - UNKNOWN
+      - BLACKLISTED
+      - SHUTDOWN
+  AgentsInfo:
+    type: array
+    items:
+      $ref: '#/definitions/AgentInfo'
+  ApplicationId:
+    type: string
+  ApplicationIdsList:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationId'
+  AssociateConfigurationItemsToApplicationRequest:
+    type: object
+    required:
+      - applicationConfigurationId
+      - configurationIds
+    properties:
+      applicationConfigurationId:
+        $ref: '#/definitions/ApplicationId'
+        description: The configuration ID of an application with which items are to be associated.
+      configurationIds:
+        $ref: '#/definitions/ConfigurationIdList'
+        description: The ID of each configuration item to be associated with an application.
+  AssociateConfigurationItemsToApplicationResponse:
+    type: object
+    properties: {}
+  AuthorizationErrorException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/Message'
+    description: The AWS user account does not have permission to perform the action. Check the IAM policy associated with this account.
+  Boolean:
+    type: boolean
+  BoxedInteger:
+    type: integer
+  Condition:
+    type: string
+  Configuration:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  ConfigurationId:
+    type: string
+  ConfigurationIdList:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationId'
+  ConfigurationItemType:
+    type: string
+    enum:
+      - SERVER
+      - PROCESS
+      - CONNECTION
+      - APPLICATION
+  ConfigurationTag:
+    type: object
+    properties:
+      configurationType:
+        $ref: '#/definitions/ConfigurationItemType'
+        description: A type of IT asset to tag.
+      configurationId:
+        $ref: '#/definitions/ConfigurationId'
+        description: The configuration ID for the item to tag. You can specify a list of keys and values.
+      key:
+        $ref: '#/definitions/TagKey'
+        description: 'A type of tag on which to filter. For example, <i>serverType</i>.'
+      value:
+        $ref: '#/definitions/TagValue'
+        description: A value on which to filter. For example <i>key = serverType</i> and <i>value = web server</i>.
+      timeOfCreation:
+        $ref: '#/definitions/TimeStamp'
+        description: The time the configuration tag was created in Coordinated Universal Time (UTC).
+    description: Tags for a configuration item. Tags are metadata that help you categorize IT assets.
+  ConfigurationTagSet:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationTag'
+  Configurations:
+    type: array
+    items:
+      $ref: '#/definitions/Configuration'
+  ConfigurationsDownloadUrl:
+    type: string
+  ConfigurationsExportId:
+    type: string
+  CreateApplicationRequest:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: Name of the application to be created.
+      description:
+        $ref: '#/definitions/String'
+        description: Description of the application to be created.
+  CreateApplicationResponse:
+    type: object
+    properties:
+      configurationId:
+        $ref: '#/definitions/String'
+        description: Configuration ID of an application to be created.
+  CreateTagsRequest:
+    type: object
+    required:
+      - configurationIds
+      - tags
+    properties:
+      configurationIds:
+        $ref: '#/definitions/ConfigurationIdList'
+        description: A list of configuration items that you want to tag.
+      tags:
+        $ref: '#/definitions/TagSet'
+        description: '<p>Tags that you want to associate with one or more configuration items. Specify the tags that you want to create in a <i>key</i>-<i>value</i> format. For example:</p> <p> <code>{"key": "serverType", "value": "webServer"}</code> </p>'
+  CreateTagsResponse:
+    type: object
+    properties: {}
+  CustomerAgentInfo:
+    type: object
+    required:
+      - activeAgents
+      - healthyAgents
+      - blackListedAgents
+      - shutdownAgents
+      - unhealthyAgents
+      - totalAgents
+      - unknownAgents
+    properties:
+      activeAgents:
+        $ref: '#/definitions/Integer'
+        description: Number of active discovery agents.
+      healthyAgents:
+        $ref: '#/definitions/Integer'
+        description: Number of healthy discovery agents
+      blackListedAgents:
+        $ref: '#/definitions/Integer'
+        description: Number of blacklisted discovery agents.
+      shutdownAgents:
+        $ref: '#/definitions/Integer'
+        description: Number of discovery agents with status SHUTDOWN.
+      unhealthyAgents:
+        $ref: '#/definitions/Integer'
+        description: Number of unhealthy discovery agents.
+      totalAgents:
+        $ref: '#/definitions/Integer'
+        description: Total number of discovery agents.
+      unknownAgents:
+        $ref: '#/definitions/Integer'
+        description: Number of unknown discovery agents.
+    description: Inventory data for installed discovery agents.
+  CustomerConnectorInfo:
+    type: object
+    required:
+      - activeConnectors
+      - healthyConnectors
+      - blackListedConnectors
+      - shutdownConnectors
+      - unhealthyConnectors
+      - totalConnectors
+      - unknownConnectors
+    properties:
+      activeConnectors:
+        $ref: '#/definitions/Integer'
+        description: Number of active discovery connectors.
+      healthyConnectors:
+        $ref: '#/definitions/Integer'
+        description: Number of healthy discovery connectors.
+      blackListedConnectors:
+        $ref: '#/definitions/Integer'
+        description: Number of blacklisted discovery connectors.
+      shutdownConnectors:
+        $ref: '#/definitions/Integer'
+        description: 'Number of discovery connectors with status SHUTDOWN,'
+      unhealthyConnectors:
+        $ref: '#/definitions/Integer'
+        description: Number of unhealthy discovery connectors.
+      totalConnectors:
+        $ref: '#/definitions/Integer'
+        description: Total number of discovery connectors.
+      unknownConnectors:
+        $ref: '#/definitions/Integer'
+        description: Number of unknown discovery connectors.
+    description: Inventory data for installed discovery connectors.
+  DeleteApplicationsRequest:
+    type: object
+    required:
+      - configurationIds
+    properties:
+      configurationIds:
+        $ref: '#/definitions/ApplicationIdsList'
+        description: Configuration ID of an application to be deleted.
+  DeleteApplicationsResponse:
+    type: object
+    properties: {}
+  DeleteTagsRequest:
+    type: object
+    required:
+      - configurationIds
+    properties:
+      configurationIds:
+        $ref: '#/definitions/ConfigurationIdList'
+        description: A list of configuration items with tags that you want to delete.
+      tags:
+        $ref: '#/definitions/TagSet'
+        description: '<p>Tags that you want to delete from one or more configuration items. Specify the tags that you want to delete in a <i>key</i>-<i>value</i> format. For example:</p> <p> <code>{"key": "serverType", "value": "webServer"}</code> </p>'
+  DeleteTagsResponse:
+    type: object
+    properties: {}
+  DescribeAgentsRequest:
+    type: object
+    properties:
+      agentIds:
+        $ref: '#/definitions/AgentIds'
+        description: 'The agent or the Connector IDs for which you want information. If you specify no IDs, the system returns information about all agents/Connectors associated with your AWS user account.'
+      filters:
+        $ref: '#/definitions/Filters'
+        description: '<p>You can filter the request using various logical operators and a <i>key</i>-<i>value</i> format. For example: </p> <p> <code>{"key": "collectionStatus", "value": "STARTED"}</code> </p>'
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: The total number of agents/Connectors to return in a single page of output. The maximum value is 100.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Token to retrieve the next set of results. For example, if you previously specified 100 IDs for <code>DescribeAgentsRequest$agentIds</code> but set <code>DescribeAgentsRequest$maxResults</code> to 10, you received a set of 10 results along with a token. Use that token in this query to get the next set of 10.'
+  DescribeAgentsResponse:
+    type: object
+    properties:
+      agentsInfo:
+        $ref: '#/definitions/AgentsInfo'
+        description: 'Lists agents or the Connector by ID or lists all agents/Connectors associated with your user account if you did not specify an agent/Connector ID. The output includes agent/Connector IDs, IP addresses, media access control (MAC) addresses, agent/Connector health, host name where the agent/Connector resides, and the version number of each agent/Connector.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Token to retrieve the next set of results. For example, if you specified 100 IDs for <code>DescribeAgentsRequest$agentIds</code> but set <code>DescribeAgentsRequest$maxResults</code> to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.'
+  DescribeConfigurationsAttribute:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  DescribeConfigurationsAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/DescribeConfigurationsAttribute'
+  DescribeConfigurationsRequest:
+    type: object
+    required:
+      - configurationIds
+    properties:
+      configurationIds:
+        $ref: '#/definitions/ConfigurationIdList'
+        description: One or more configuration IDs.
+  DescribeConfigurationsResponse:
+    type: object
+    properties:
+      configurations:
+        $ref: '#/definitions/DescribeConfigurationsAttributes'
+        description: A key in the response map. The value is an array of data.
+  DescribeExportConfigurationsRequest:
+    type: object
+    properties:
+      exportIds:
+        $ref: '#/definitions/ExportIds'
+        description: A unique identifier that you can use to query the export status.
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: The maximum number of results that you want to display as a part of the query.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token to get the next set of results. For example, if you specify 100 IDs for <code>DescribeExportConfigurationsRequest$exportIds</code> but set <code>DescribeExportConfigurationsRequest$maxResults</code> to 10, you get results in a set of 10. Use the token in the query to get the next set of 10.'
+  DescribeExportConfigurationsResponse:
+    type: object
+    properties:
+      exportsInfo:
+        $ref: '#/definitions/ExportsInfo'
+        description: 'Returns export details. When the status is complete, the response includes a URL for an Amazon S3 bucket where you can view the data in a CSV file.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token to get the next set of results. For example, if you specify 100 IDs for <code>DescribeExportConfigurationsRequest$exportIds</code> but set <code>DescribeExportConfigurationsRequest$maxResults</code> to 10, you get results in a set of 10. Use the token in the query to get the next set of 10.'
+  DescribeExportTasksRequest:
+    type: object
+    properties:
+      exportIds:
+        $ref: '#/definitions/ExportIds'
+        description: One or more unique identifiers used to query the status of an export request.
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: 'The maximum number of volume results returned by <code>DescribeExportTasks</code> in paginated output. When this parameter is used, <code>DescribeExportTasks</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The <code>nextToken</code> value returned from a previous paginated <code>DescribeExportTasks</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is null when there are no more results to return.
+  DescribeExportTasksResponse:
+    type: object
+    properties:
+      exportsInfo:
+        $ref: '#/definitions/ExportsInfo'
+        description: 'Contains one or more sets of export request details. When the status of a request is <code>SUCCEEDED</code>, the response includes a URL for an Amazon S3 bucket where you can view the data in a CSV file.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>DescribeExportTasks</code> request. When the results of a <code>DescribeExportTasks</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.'
+  DescribeTagsRequest:
+    type: object
+    properties:
+      filters:
+        $ref: '#/definitions/TagFilters'
+        description: 'You can filter the list using a <i>key</i>-<i>value</i> format. You can separate these items by using logical operators. Allowed filters include <code>tagKey</code>, <code>tagValue</code>, and <code>configurationId</code>. '
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: The total number of items to return in a single page of output. The maximum value is 100.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token to start the list. Use this token to get the next set of results.
+  DescribeTagsResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/ConfigurationTagSet'
+        description: 'Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The call returns a token. Use this token to get the next set of results.
+  DisassociateConfigurationItemsFromApplicationRequest:
+    type: object
+    required:
+      - applicationConfigurationId
+      - configurationIds
+    properties:
+      applicationConfigurationId:
+        $ref: '#/definitions/ApplicationId'
+        description: Configuration ID of an application from which each item is disassociated.
+      configurationIds:
+        $ref: '#/definitions/ConfigurationIdList'
+        description: Configuration ID of each item to be disassociated from an application.
+  DisassociateConfigurationItemsFromApplicationResponse:
+    type: object
+    properties: {}
+  ExportConfigurationsResponse:
+    type: object
+    properties:
+      exportId:
+        $ref: '#/definitions/ConfigurationsExportId'
+        description: A unique identifier that you can use to query the export status.
+  ExportDataFormat:
+    type: string
+    enum:
+      - CSV
+      - GRAPHML
+  ExportDataFormats:
+    type: array
+    items:
+      $ref: '#/definitions/ExportDataFormat'
+  ExportIds:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationsExportId'
+  ExportInfo:
+    type: object
+    required:
+      - exportId
+      - exportStatus
+      - statusMessage
+      - exportRequestTime
+    properties:
+      exportId:
+        $ref: '#/definitions/ConfigurationsExportId'
+        description: A unique identifier that you can use to query the export.
+      exportStatus:
+        $ref: '#/definitions/ExportStatus'
+        description: 'The status of the configuration data export. The status can succeed, fail, or be in-progress.'
+      statusMessage:
+        $ref: '#/definitions/ExportStatusMessage'
+        description: 'Helpful status messages for API callers. For example: Too many exports in the last 6 hours. Export in progress. Export was successful.'
+      configurationsDownloadUrl:
+        $ref: '#/definitions/ConfigurationsDownloadUrl'
+        description: A URL for an Amazon S3 bucket where you can review the configuration data. The URL is displayed only if the export succeeded.
+      exportRequestTime:
+        $ref: '#/definitions/ExportRequestTime'
+        description: The time that the configuration data export was initiated.
+    description: Information regarding the export status of the discovered data. The value is an array of objects.
+  ExportRequestTime:
+    type: string
+    format: date-time
+  ExportStatus:
+    type: string
+    enum:
+      - FAILED
+      - SUCCEEDED
+      - IN_PROGRESS
+  ExportStatusMessage:
+    type: string
+  ExportsInfo:
+    type: array
+    items:
+      $ref: '#/definitions/ExportInfo'
+  Filter:
+    type: object
+    required:
+      - name
+      - values
+      - condition
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: The name of the filter.
+      values:
+        $ref: '#/definitions/FilterValues'
+        description: 'A string value on which to filter. For example, if you choose the <code>destinationServer.osVersion</code> filter name, you could specify <code>Ubuntu</code> for the value.'
+      condition:
+        $ref: '#/definitions/Condition'
+        description: 'A conditional operator. The following operators are valid: EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS. If you specify multiple filters, the system utilizes all filters as though concatenated by <i>AND</i>. If you specify multiple values for a particular filter, the system differentiates the values using <i>OR</i>. Calling either <i>DescribeConfigurations</i> or <i>ListConfigurations</i> returns attributes of matching configuration items.'
+    description: '<p>A filter that can use conditional operators.</p> <p>For more information about filters, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html">Querying Discovered Configuration Items</a>. </p>'
+  FilterName:
+    type: string
+  FilterValue:
+    type: string
+  FilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/FilterValue'
+  Filters:
+    type: array
+    items:
+      $ref: '#/definitions/Filter'
+  GetDiscoverySummaryRequest:
+    type: object
+    properties: {}
+  GetDiscoverySummaryResponse:
+    type: object
+    properties:
+      servers:
+        $ref: '#/definitions/Long'
+        description: The number of servers discovered.
+      applications:
+        $ref: '#/definitions/Long'
+        description: The number of applications discovered.
+      serversMappedToApplications:
+        $ref: '#/definitions/Long'
+        description: The number of servers mapped to applications.
+      serversMappedtoTags:
+        $ref: '#/definitions/Long'
+        description: The number of servers mapped to tags.
+      agentSummary:
+        $ref: '#/definitions/CustomerAgentInfo'
+        description: 'Details about discovered agents, including agent status and health.'
+      connectorSummary:
+        $ref: '#/definitions/CustomerConnectorInfo'
+        description: 'Details about discovered connectors, including connector status and health.'
+  Integer:
+    type: integer
+  InvalidParameterException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/Message'
+    description: One or more parameters are not valid. Verify the parameters and try again.
+  InvalidParameterValueException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/Message'
+    description: The value of one or more parameters are either invalid or out of range. Verify the parameter values and try again.
+  ListConfigurationsRequest:
+    type: object
+    required:
+      - configurationType
+    properties:
+      configurationType:
+        $ref: '#/definitions/ConfigurationItemType'
+        description: 'A valid configuration identified by Application Discovery Service. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: '<p>You can filter the request using various logical operators and a <i>key</i>-<i>value</i> format. For example: </p> <p> <code>{"key": "serverType", "value": "webServer"}</code> </p> <p>For a complete list of filter options and guidance about using them with this action, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations">Querying Discovered Configuration Items</a>. </p>'
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: The total number of items to return. The maximum value is 100.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Token to retrieve the next set of results. For example, if a previous call to ListConfigurations returned 100 items, but you set <code>ListConfigurationsRequest$maxResults</code> to 10, you received a set of 10 results along with a token. Use that token in this query to get the next set of 10.'
+      orderBy:
+        $ref: '#/definitions/OrderByList'
+        description: 'Certain filter criteria return output that can be sorted in ascending or descending order. For a list of output characteristics for each filter, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations">Using the ListConfigurations Action</a>.'
+  ListConfigurationsResponse:
+    type: object
+    properties:
+      configurations:
+        $ref: '#/definitions/Configurations'
+        description: 'Returns configuration details, including the configuration ID, attribute names, and attribute values.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Token to retrieve the next set of results. For example, if your call to ListConfigurations returned 100 items, but you set <code>ListConfigurationsRequest$maxResults</code> to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.'
+  ListServerNeighborsRequest:
+    type: object
+    required:
+      - configurationId
+    properties:
+      configurationId:
+        $ref: '#/definitions/ConfigurationId'
+        description: Configuration ID of the server for which neighbors are being listed.
+      portInformationNeeded:
+        $ref: '#/definitions/Boolean'
+        description: Flag to indicate if port and protocol information is needed as part of the response.
+      neighborConfigurationIds:
+        $ref: '#/definitions/ConfigurationIdList'
+        description: List of configuration IDs to test for one-hop-away.
+      maxResults:
+        $ref: '#/definitions/Integer'
+        description: Maximum number of results to return in a single page of output.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: 'Token to retrieve the next set of results. For example, if you previously specified 100 IDs for <code>ListServerNeighborsRequest$neighborConfigurationIds</code> but set <code>ListServerNeighborsRequest$maxResults</code> to 10, you received a set of 10 results along with a token. Use that token in this query to get the next set of 10.'
+  ListServerNeighborsResponse:
+    type: object
+    required:
+      - neighbors
+    properties:
+      neighbors:
+        $ref: '#/definitions/NeighborDetailsList'
+        description: List of distinct servers that are one hop away from the given server.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: 'Token to retrieve the next set of results. For example, if you specified 100 IDs for <code>ListServerNeighborsRequest$neighborConfigurationIds</code> but set <code>ListServerNeighborsRequest$maxResults</code> to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.'
+      knownDependencyCount:
+        $ref: '#/definitions/Long'
+        description: Count of distinct servers that are one hop away from the given server.
+  Long:
+    type: integer
+  Message:
+    type: string
+  NeighborConnectionDetail:
+    type: object
+    required:
+      - sourceServerId
+      - destinationServerId
+      - connectionsCount
+    properties:
+      sourceServerId:
+        $ref: '#/definitions/ConfigurationId'
+        description: The ID of the server that opened the network connection.
+      destinationServerId:
+        $ref: '#/definitions/ConfigurationId'
+        description: The ID of the server that accepted the network connection.
+      destinationPort:
+        $ref: '#/definitions/BoxedInteger'
+        description: The destination network port for the connection.
+      transportProtocol:
+        $ref: '#/definitions/String'
+        description: The network protocol used for the connection.
+      connectionsCount:
+        $ref: '#/definitions/Long'
+        description: The number of open network connections with the neighboring server.
+    description: Details about neighboring servers.
+  NeighborDetailsList:
+    type: array
+    items:
+      $ref: '#/definitions/NeighborConnectionDetail'
+  NextToken:
+    type: string
+  OperationNotPermittedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/Message'
+    description: This operation is not permitted.
+  OrderByElement:
+    type: object
+    required:
+      - fieldName
+    properties:
+      fieldName:
+        $ref: '#/definitions/String'
+        description: The field on which to order.
+      sortOrder:
+        $ref: '#/definitions/orderString'
+        description: Ordering direction.
+    description: A field and direction for ordered output.
+  OrderByList:
+    type: array
+    items:
+      $ref: '#/definitions/OrderByElement'
+  ResourceNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/Message'
+    description: The specified configuration ID was not located. Verify the configuration ID and try again.
+  ServerInternalErrorException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/Message'
+    description: The server experienced an internal error. Try again.
+  StartDataCollectionByAgentIdsRequest:
+    type: object
+    required:
+      - agentIds
+    properties:
+      agentIds:
+        $ref: '#/definitions/AgentIds'
+        description: 'The IDs of the agents or connectors from which to start collecting data. If you send a request to an agent/connector ID that you do not have permission to contact, according to your AWS account, the service does not throw an exception. Instead, it returns the error in the <i>Description</i> field. If you send a request to multiple agents/connectors and you do not have permission to contact some of those agents/connectors, the system does not throw an exception. Instead, the system shows <code>Failed</code> in the <i>Description</i> field.'
+  StartDataCollectionByAgentIdsResponse:
+    type: object
+    properties:
+      agentsConfigurationStatus:
+        $ref: '#/definitions/AgentConfigurationStatusList'
+        description: 'Information about agents or the connector that were instructed to start collecting data. Information includes the agent/connector ID, a description of the operation performed, and whether the agent/connector configuration was updated.'
+  StartExportTaskRequest:
+    type: object
+    properties:
+      exportDataFormat:
+        $ref: '#/definitions/ExportDataFormats'
+        description: The file format for the returned export data. Default value is <code>CSV</code>.
+  StartExportTaskResponse:
+    type: object
+    properties:
+      exportId:
+        $ref: '#/definitions/ConfigurationsExportId'
+        description: ' A unique identifier used to query the status of an export request.'
+  StopDataCollectionByAgentIdsRequest:
+    type: object
+    required:
+      - agentIds
+    properties:
+      agentIds:
+        $ref: '#/definitions/AgentIds'
+        description: The IDs of the agents or connectors from which to stop collecting data.
+  StopDataCollectionByAgentIdsResponse:
+    type: object
+    properties:
+      agentsConfigurationStatus:
+        $ref: '#/definitions/AgentConfigurationStatusList'
+        description: 'Information about the agents or connector that were instructed to stop collecting data. Information includes the agent/connector ID, a description of the operation performed, and whether the agent/connector configuration was updated.'
+  String:
+    type: string
+  Tag:
+    type: object
+    required:
+      - key
+      - value
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: The type of tag on which to filter.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: A value for a tag key on which to filter.
+    description: Metadata that help you categorize IT assets.
+  TagFilter:
+    type: object
+    required:
+      - name
+      - values
+    properties:
+      name:
+        $ref: '#/definitions/FilterName'
+        description: A name of the tag filter.
+      values:
+        $ref: '#/definitions/FilterValues'
+        description: Values for the tag filter.
+    description: 'The tag filter. Valid names are: <code>tagKey</code>, <code>tagValue</code>, <code>configurationId</code>.'
+  TagFilters:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+  TagKey:
+    type: string
+  TagSet:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  TagValue:
+    type: string
+  TimeStamp:
+    type: string
+    format: date-time
+  UpdateApplicationRequest:
+    type: object
+    required:
+      - configurationId
+    properties:
+      configurationId:
+        $ref: '#/definitions/ApplicationId'
+        description: Configuration ID of the application to be updated.
+      name:
+        $ref: '#/definitions/String'
+        description: New name of the application to be updated.
+      description:
+        $ref: '#/definitions/String'
+        description: New description of the application to be updated.
+  UpdateApplicationResponse:
+    type: object
+    properties: {}
+  orderString:
+    type: string
+    enum:
+      - ASC
+      - DESC

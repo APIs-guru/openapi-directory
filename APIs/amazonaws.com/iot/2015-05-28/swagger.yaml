@@ -1,0 +1,3687 @@
+swagger: '2.0'
+info:
+  version: '2015-05-28'
+  x-release: v4
+  title: AWS IoT
+  description: '<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each thing (Thing Registry), configure logging, and create and manage policies and credentials to authenticate things.</p> <p>For more information about how AWS IoT works, see the <a href="http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html">Developer Guide</a>.</p>'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: iot
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iot-2015-05-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/iot/2015-05-28/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/iot/'
+host: iot.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  '/accept-certificate-transfer/{certificateId}':
+    patch:
+      operationId: AcceptCertificateTransfer
+      description: '<p>Accepts a pending certificate transfer. The default state of the certificate is INACTIVE.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p>'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '410':
+          description: TransferAlreadyCompletedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TransferAlreadyCompletedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AcceptCertificateTransferRequest'
+        - name: certificateId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/principal-policies/{policyName}':
+    delete:
+      operationId: DetachPrincipalPolicy
+      description: Removes the specified policy from the specified certificate.
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetachPrincipalPolicyRequest'
+        - name: policyName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/things/{thingName}/principals':
+    get:
+      operationId: ListThingPrincipals
+      description: Lists the principals associated with the specified thing.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListThingPrincipalsResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListThingPrincipalsRequest'
+        - name: thingName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/cancel-certificate-transfer/{certificateId}':
+    patch:
+      operationId: CancelCertificateTransfer
+      description: '<p>Cancels a pending transfer for the specified certificate.</p> <p><b>Note</b> Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use <a>RejectCertificateTransfer</a> instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled.</p> <p>After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.</p>'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '410':
+          description: TransferAlreadyCompletedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TransferAlreadyCompletedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelCertificateTransferRequest'
+        - name: certificateId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /certificates:
+    get:
+      operationId: ListCertificates
+      description: <p>Lists the certificates registered in your AWS account.</p> <p>The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListCertificatesResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListCertificatesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /keys-and-certificate:
+    post:
+      operationId: CreateKeysAndCertificate
+      description: '<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p><b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateKeysAndCertificateResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateKeysAndCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/policies/{policyName}':
+    get:
+      operationId: GetPolicy
+      description: Gets information about the specified policy with the policy document of the default version.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetPolicyResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetPolicyRequest'
+        - name: policyName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/policies/{policyName}/version':
+    get:
+      operationId: ListPolicyVersions
+      description: Lists the versions of the specified policy and identifies the default version.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPolicyVersionsResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPolicyVersionsRequest'
+        - name: policyName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/things/{thingName}':
+    patch:
+      operationId: UpdateThing
+      description: Updates the data for a thing.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateThingResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '409':
+          description: VersionConflictException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/VersionConflictException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateThingRequest'
+        - name: thingName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/thing-types/{thingTypeName}':
+    get:
+      operationId: DescribeThingType
+      description: Gets information about the specified thing type.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeThingTypeResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeThingTypeRequest'
+        - name: thingTypeName
+          in: path
+          type: string
+          required: true
+        - name: thingTypeName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/rules/{ruleName}':
+    patch:
+      operationId: ReplaceTopicRule
+      description: Replaces the specified rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReplaceTopicRuleRequest'
+        - name: ruleName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/cacertificate/{caCertificateId}':
+    put:
+      operationId: UpdateCACertificate
+      description: Updates a registered CA certificate.
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateCACertificateRequest'
+        - name: caCertificateId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/certificates/{certificateId}':
+    put:
+      operationId: UpdateCertificate
+      description: '<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect.</p> <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.</p>'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '406':
+          description: CertificateStateException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CertificateStateException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateCertificateRequest'
+        - name: certificateId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/policies/{policyName}/version/{policyVersionId}':
+    patch:
+      operationId: SetDefaultPolicyVersion
+      description: 'Sets the specified version of the specified policy as the policy''s default (operative) version. This action affects all certificates to which the policy is attached. To list the principals the policy is attached to, use the ListPrincipalPolicy API.'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SetDefaultPolicyVersionRequest'
+        - name: policyName
+          in: path
+          type: string
+          required: true
+        - name: policyVersionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /registrationcode:
+    get:
+      operationId: GetRegistrationCode
+      description: Gets a registration code used to register a CA certificate with AWS IoT.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRegistrationCodeResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRegistrationCodeRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/thing-types/{thingTypeName}/deprecate':
+    post:
+      operationId: DeprecateThingType
+      description: Deprecates a thing type. You can not associate new things with deprecated thing type.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeprecateThingTypeResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeprecateThingTypeRequest'
+        - name: thingTypeName
+          in: path
+          type: string
+          required: true
+        - name: thingTypeName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /endpoint:
+    get:
+      operationId: DescribeEndpoint
+      description: Returns a unique endpoint specific to the AWS account making the call.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEndpointResponse'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEndpointRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/rules/{ruleName}/disable':
+    post:
+      operationId: DisableTopicRule
+      description: Disables the specified rule.
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisableTopicRuleRequest'
+        - name: ruleName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/rules/{ruleName}/enable':
+    post:
+      operationId: EnableTopicRule
+      description: Enables the specified rule.
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnableTopicRuleRequest'
+        - name: ruleName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /loggingOptions:
+    post:
+      operationId: SetLoggingOptions
+      description: Sets the logging options.
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SetLoggingOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /cacertificates:
+    get:
+      operationId: ListCACertificates
+      description: <p>Lists the CA certificates registered for your AWS account.</p> <p>The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListCACertificatesResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListCACertificatesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/certificates-by-ca/{caCertificateId}':
+    get:
+      operationId: ListCertificatesByCA
+      description: List the device certificates signed by the specified CA certificate.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListCertificatesByCAResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListCertificatesByCARequest'
+        - name: caCertificateId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /certificates-out-going:
+    get:
+      operationId: ListOutgoingCertificates
+      description: Lists certificates that are being transfered but not yet accepted.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListOutgoingCertificatesResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListOutgoingCertificatesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /policies:
+    get:
+      operationId: ListPolicies
+      description: Lists your policies.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPoliciesResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPoliciesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /policy-principals:
+    get:
+      operationId: ListPolicyPrincipals
+      description: Lists the principals associated with the specified policy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPolicyPrincipalsResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPolicyPrincipalsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /principal-policies:
+    get:
+      operationId: ListPrincipalPolicies
+      description: 'Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href="http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax">AmazonCognito Identity format</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPrincipalPoliciesResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPrincipalPoliciesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /principals/things:
+    get:
+      operationId: ListPrincipalThings
+      description: Lists the things associated with the specified principal.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPrincipalThingsResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPrincipalThingsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /thing-types:
+    get:
+      operationId: ListThingTypes
+      description: Lists the existing thing types.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListThingTypesResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListThingTypesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /things:
+    get:
+      operationId: ListThings
+      description: 'Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example, calling <code>ListThings</code> with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListThingsResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListThingsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /rules:
+    get:
+      operationId: ListTopicRules
+      description: Lists the rules for the specific topic.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTopicRulesResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTopicRulesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /cacertificate:
+    post:
+      operationId: RegisterCACertificate
+      description: 'Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field and public key. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterCACertificateResponse'
+        '400':
+          description: CertificateValidationException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CertificateValidationException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '409':
+          description: ResourceAlreadyExistsException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '410':
+          description: LimitExceededException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterCACertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /certificate/register:
+    post:
+      operationId: RegisterCertificate
+      description: 'Registers a device certificate with AWS IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterCertificateResponse'
+        '400':
+          description: CertificateValidationException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CertificateValidationException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '406':
+          description: CertificateStateException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CertificateStateException'
+        '409':
+          description: CertificateConflictException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CertificateConflictException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/reject-certificate-transfer/{certificateId}':
+    patch:
+      operationId: RejectCertificateTransfer
+      description: '<p>Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from <b>PENDING_TRANSFER</b> to <b>INACTIVE</b>.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p> <p>This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source''s account in the INACTIVE state.</p>'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '410':
+          description: TransferAlreadyCompletedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TransferAlreadyCompletedException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RejectCertificateTransferRequest'
+        - name: certificateId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/transfer-certificate/{certificateId}':
+    patch:
+      operationId: TransferCertificate
+      description: <p>Transfers the specified certificate to the specified AWS account.</p> <p>You can cancel the transfer until it is acknowledged by the recipient.</p> <p>No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target.</p> <p>The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it.</p> <p>The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TransferCertificateResponse'
+        '400':
+          description: InvalidRequestException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '401':
+          description: UnauthorizedException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '406':
+          description: CertificateStateException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/CertificateStateException'
+        '409':
+          description: TransferConflictException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/TransferConflictException'
+        '429':
+          description: ThrottlingException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '500':
+          description: InternalFailureException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '503':
+          description: ServiceUnavailableException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TransferCertificateRequest'
+        - name: certificateId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AcceptCertificateTransferRequest:
+    type: object
+    properties: {}
+    description: The input for the AcceptCertificateTransfer operation.
+  Action:
+    type: object
+    properties:
+      dynamoDB:
+        $ref: '#/definitions/DynamoDBAction'
+        description: Write to a DynamoDB table.
+      dynamoDBv2:
+        $ref: '#/definitions/DynamoDBv2Action'
+        description: Write to a DynamoDB table. This is a new version of the DynamoDB action. It allows you to write each attribute in an MQTT message payload into a separate DynamoDB column.
+      lambda:
+        $ref: '#/definitions/LambdaAction'
+        description: Invoke a Lambda function.
+      sns:
+        $ref: '#/definitions/SnsAction'
+        description: Publish to an Amazon SNS topic.
+      sqs:
+        $ref: '#/definitions/SqsAction'
+        description: Publish to an Amazon SQS queue.
+      kinesis:
+        $ref: '#/definitions/KinesisAction'
+        description: Write data to an Amazon Kinesis stream.
+      republish:
+        $ref: '#/definitions/RepublishAction'
+        description: Publish to another MQTT topic.
+      s3:
+        $ref: '#/definitions/S3Action'
+        description: Write to an Amazon S3 bucket.
+      firehose:
+        $ref: '#/definitions/FirehoseAction'
+        description: Write to an Amazon Kinesis Firehose stream.
+      cloudwatchMetric:
+        $ref: '#/definitions/CloudwatchMetricAction'
+        description: Capture a CloudWatch metric.
+      cloudwatchAlarm:
+        $ref: '#/definitions/CloudwatchAlarmAction'
+        description: Change the state of a CloudWatch alarm.
+      elasticsearch:
+        $ref: '#/definitions/ElasticsearchAction'
+        description: Write data to an Amazon Elasticsearch Service domain.
+    description: Describes the actions associated with a rule.
+  ActionList:
+    type: array
+    items:
+      $ref: '#/definitions/Action'
+    minItems: 0
+    maxItems: 10
+  AlarmName:
+    type: string
+  AllowAutoRegistration:
+    type: boolean
+  AscendingOrder:
+    type: boolean
+  AttachPrincipalPolicyRequest:
+    type: object
+    properties: {}
+    description: The input for the AttachPrincipalPolicy operation.
+  AttachThingPrincipalRequest:
+    type: object
+    properties: {}
+    description: The input for the AttachThingPrincipal operation.
+  AttachThingPrincipalResponse:
+    type: object
+    properties: {}
+    description: The output from the AttachThingPrincipal operation.
+  AttributeName:
+    type: string
+    pattern: '[a-zA-Z0-9_.,@/:#-]+'
+    maxLength: 128
+  AttributePayload:
+    type: object
+    properties:
+      attributes:
+        $ref: '#/definitions/Attributes'
+        description: '<p>A JSON string containing up to three key-value pair in JSON format. For example:</p> <p><code>{\"attributes\":{\"string1\":\"string2\"}})</code></p>'
+      merge:
+        $ref: '#/definitions/Flag'
+        description: '<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with the attributes stored in the registry, instead of overwriting them.</p> <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p> <note> <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code>.</p> </note>'
+    description: The attribute payload.
+  AttributeValue:
+    type: string
+    pattern: '[a-zA-Z0-9_.,@/:#-]*'
+    description: An attribute value for an Thing. An empty or null value in Update means that existing value for that attribute should be deleted. Empty and null values in create are ignored.
+    maxLength: 800
+  Attributes:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeValue'
+  AutoRegistrationStatus:
+    type: string
+    enum:
+      - ENABLE
+      - DISABLE
+  AwsAccountId:
+    type: string
+    pattern: '[0-9]{12}'
+  AwsArn:
+    type: string
+  AwsIotSqlVersion:
+    type: string
+  Boolean:
+    type: boolean
+  BucketName:
+    type: string
+  CACertificate:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The ARN of the CA certificate.
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The ID of the CA certificate.
+      status:
+        $ref: '#/definitions/CACertificateStatus'
+        description: <p>The status of the CA certificate. </p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date the CA certificate was created.
+    description: A CA certificate.
+  CACertificateDescription:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The CA certificate ARN.
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The CA certificate ID.
+      status:
+        $ref: '#/definitions/CACertificateStatus'
+        description: The status of a CA certificate.
+      certificatePem:
+        $ref: '#/definitions/CertificatePem'
+        description: 'The CA certificate data, in PEM format.'
+      ownedBy:
+        $ref: '#/definitions/AwsAccountId'
+        description: The owner of the CA certificate.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date the CA certificate was created.
+      autoRegistrationStatus:
+        $ref: '#/definitions/AutoRegistrationStatus'
+        description: Whether the CA certificate configured for auto registration of device certificates. Valid values are "ENABLE" and "DISABLE"
+    description: Describes a CA certificate.
+  CACertificateStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+  CACertificates:
+    type: array
+    items:
+      $ref: '#/definitions/CACertificate'
+  CancelCertificateTransferRequest:
+    type: object
+    properties: {}
+    description: The input for the CancelCertificateTransfer operation.
+  CannedAccessControlList:
+    type: string
+    enum:
+      - private
+      - public-read
+      - public-read-write
+      - aws-exec-read
+      - authenticated-read
+      - bucket-owner-read
+      - bucket-owner-full-control
+      - log-delivery-write
+  Certificate:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The ARN of the certificate.
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The ID of the certificate.
+      status:
+        $ref: '#/definitions/CertificateStatus'
+        description: <p>The status of the certificate.</p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date and time the certificate was created.
+    description: Information about a certificate.
+  CertificateArn:
+    type: string
+  CertificateConflictException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: Unable to verify the CA certificate used to sign the device certificate you are attempting to register. This is happens when you have registered more than one CA certificate that has the same subject field and public key.
+  CertificateDescription:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The ARN of the certificate.
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The ID of the certificate.
+      caCertificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The certificate ID of the CA certificate used to sign this certificate.
+      status:
+        $ref: '#/definitions/CertificateStatus'
+        description: The status of the certificate.
+      certificatePem:
+        $ref: '#/definitions/CertificatePem'
+        description: 'The certificate data, in PEM format.'
+      ownedBy:
+        $ref: '#/definitions/AwsAccountId'
+        description: The ID of the AWS account that owns the certificate.
+      previousOwnedBy:
+        $ref: '#/definitions/AwsAccountId'
+        description: The ID of the AWS account of the previous owner of the certificate.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date and time the certificate was created.
+      lastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: The date and time the certificate was last modified.
+      transferData:
+        $ref: '#/definitions/TransferData'
+        description: The transfer data.
+    description: Describes a certificate.
+  CertificateId:
+    type: string
+    pattern: '(0x)?[a-fA-F0-9]+'
+    minLength: 64
+    maxLength: 64
+  CertificatePem:
+    type: string
+    minLength: 1
+    maxLength: 65536
+  CertificateSigningRequest:
+    type: string
+    minLength: 1
+  CertificateStateException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: The certificate operation is not allowed.
+  CertificateStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+      - REVOKED
+      - PENDING_TRANSFER
+      - REGISTER_INACTIVE
+      - PENDING_ACTIVATION
+  CertificateValidationException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: Additional information about the exception.
+    description: The certificate is invalid.
+  Certificates:
+    type: array
+    items:
+      $ref: '#/definitions/Certificate'
+  ClientId:
+    type: string
+  CloudwatchAlarmAction:
+    type: object
+    required:
+      - roleArn
+      - alarmName
+      - stateReason
+      - stateValue
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The IAM role that allows access to the CloudWatch alarm.
+      alarmName:
+        $ref: '#/definitions/AlarmName'
+        description: The CloudWatch alarm name.
+      stateReason:
+        $ref: '#/definitions/StateReason'
+        description: The reason for the alarm change.
+      stateValue:
+        $ref: '#/definitions/StateValue'
+        description: 'The value of the alarm state. Acceptable values are: OK, ALARM, INSUFFICIENT_DATA.'
+    description: Describes an action that updates a CloudWatch alarm.
+  CloudwatchMetricAction:
+    type: object
+    required:
+      - roleArn
+      - metricNamespace
+      - metricName
+      - metricValue
+      - metricUnit
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The IAM role that allows access to the CloudWatch metric.
+      metricNamespace:
+        $ref: '#/definitions/MetricNamespace'
+        description: The CloudWatch metric namespace name.
+      metricName:
+        $ref: '#/definitions/MetricName'
+        description: The CloudWatch metric name.
+      metricValue:
+        $ref: '#/definitions/MetricValue'
+        description: The CloudWatch metric value.
+      metricUnit:
+        $ref: '#/definitions/MetricUnit'
+        description: 'The <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit">metric unit</a> supported by CloudWatch.'
+      metricTimestamp:
+        $ref: '#/definitions/MetricTimestamp'
+        description: 'An optional <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp">Unix timestamp</a>.'
+    description: Describes an action that captures a CloudWatch metric.
+  CreateCertificateFromCsrRequest:
+    type: object
+    required:
+      - certificateSigningRequest
+    properties:
+      certificateSigningRequest:
+        $ref: '#/definitions/CertificateSigningRequest'
+        description: The certificate signing request (CSR).
+    description: The input for the CreateCertificateFromCsr operation.
+  CreateCertificateFromCsrResponse:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The Amazon Resource Name (ARN) of the certificate. You can use the ARN as a principal for policy operations.
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The ID of the certificate. Certificate management operations only take a certificateId.
+      certificatePem:
+        $ref: '#/definitions/CertificatePem'
+        description: 'The certificate data, in PEM format.'
+    description: The output from the CreateCertificateFromCsr operation.
+  CreateKeysAndCertificateRequest:
+    type: object
+    properties: {}
+    description: The input for the CreateKeysAndCertificate operation.
+  CreateKeysAndCertificateResponse:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The ARN of the certificate.
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: 'The ID of the certificate. AWS IoT issues a default subject name for the certificate (for example, AWS IoT Certificate).'
+      certificatePem:
+        $ref: '#/definitions/CertificatePem'
+        description: 'The certificate data, in PEM format.'
+      keyPair:
+        $ref: '#/definitions/KeyPair'
+        description: The generated key pair.
+    description: The output of the CreateKeysAndCertificate operation.
+  CreatePolicyRequest:
+    type: object
+    required:
+      - policyDocument
+    properties:
+      policyDocument:
+        $ref: '#/definitions/PolicyDocument'
+        description: 'The JSON document that describes the policy. <b>policyDocument</b> must have a minimum length of 1, with a maximum length of 2048, excluding whitespace.'
+    description: The input for the CreatePolicy operation.
+  CreatePolicyResponse:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: The policy name.
+      policyArn:
+        $ref: '#/definitions/PolicyArn'
+        description: The policy ARN.
+      policyDocument:
+        $ref: '#/definitions/PolicyDocument'
+        description: The JSON document that describes the policy.
+      policyVersionId:
+        $ref: '#/definitions/PolicyVersionId'
+        description: The policy version ID.
+    description: The output from the CreatePolicy operation.
+  CreatePolicyVersionRequest:
+    type: object
+    required:
+      - policyDocument
+    properties:
+      policyDocument:
+        $ref: '#/definitions/PolicyDocument'
+        description: 'The JSON document that describes the policy. Minimum length of 1. Maximum length of 2048, excluding whitespaces'
+    description: The input for the CreatePolicyVersion operation.
+  CreatePolicyVersionResponse:
+    type: object
+    properties:
+      policyArn:
+        $ref: '#/definitions/PolicyArn'
+        description: The policy ARN.
+      policyDocument:
+        $ref: '#/definitions/PolicyDocument'
+        description: The JSON document that describes the policy.
+      policyVersionId:
+        $ref: '#/definitions/PolicyVersionId'
+        description: The policy version ID.
+      isDefaultVersion:
+        $ref: '#/definitions/IsDefaultVersion'
+        description: Specifies whether the policy version is the default.
+    description: The output of the CreatePolicyVersion operation.
+  CreateThingRequest:
+    type: object
+    properties:
+      thingTypeName:
+        $ref: '#/definitions/ThingTypeName'
+        description: The name of the thing type associated with the new thing.
+      attributePayload:
+        $ref: '#/definitions/AttributePayload'
+        description: '<p>The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:</p> <p><code>{\"attributes\":{\"string1\":\"string2\"}})</code></p>'
+    description: The input for the CreateThing operation.
+  CreateThingResponse:
+    type: object
+    properties:
+      thingName:
+        $ref: '#/definitions/ThingName'
+        description: The name of the new thing.
+      thingArn:
+        $ref: '#/definitions/ThingArn'
+        description: The ARN of the new thing.
+    description: The output of the CreateThing operation.
+  CreateThingTypeRequest:
+    type: object
+    properties:
+      thingTypeProperties:
+        $ref: '#/definitions/ThingTypeProperties'
+        description: 'The ThingTypeProperties for the thing type to create. It contains information about the new thing type including a description, and a list of searchable thing attribute names.'
+    description: The input for the CreateThingType operation.
+  CreateThingTypeResponse:
+    type: object
+    properties:
+      thingTypeName:
+        $ref: '#/definitions/ThingTypeName'
+        description: The name of the thing type.
+      thingTypeArn:
+        $ref: '#/definitions/ThingTypeArn'
+        description: The Amazon Resource Name (ARN) of the thing type.
+    description: The output of the CreateThingType operation.
+  CreateTopicRuleRequest:
+    type: object
+    required:
+      - topicRulePayload
+    properties:
+      topicRulePayload:
+        $ref: '#/definitions/TopicRulePayload'
+        description: The rule payload.
+    description: The input for the CreateTopicRule operation.
+  CreatedAtDate:
+    type: string
+    format: date-time
+  CreationDate:
+    type: string
+    format: date-time
+  DateType:
+    type: string
+    format: date-time
+  DeleteCACertificateRequest:
+    type: object
+    properties: {}
+    description: Input for the DeleteCACertificate operation.
+  DeleteCACertificateResponse:
+    type: object
+    properties: {}
+    description: The output for the DeleteCACertificate operation.
+  DeleteCertificateRequest:
+    type: object
+    properties: {}
+    description: The input for the DeleteCertificate operation.
+  DeleteConflictException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: You can't delete the resource because it is attached to one or more resources.
+  DeletePolicyRequest:
+    type: object
+    properties: {}
+    description: The input for the DeletePolicy operation.
+  DeletePolicyVersionRequest:
+    type: object
+    properties: {}
+    description: The input for the DeletePolicyVersion operation.
+  DeleteRegistrationCodeRequest:
+    type: object
+    properties: {}
+    description: The input for the DeleteRegistrationCode operation.
+  DeleteRegistrationCodeResponse:
+    type: object
+    properties: {}
+    description: 'The output for the DeleteRegistrationCode operation. '
+  DeleteThingRequest:
+    type: object
+    properties: {}
+    description: The input for the DeleteThing operation.
+  DeleteThingResponse:
+    type: object
+    properties: {}
+    description: The output of the DeleteThing operation.
+  DeleteThingTypeRequest:
+    type: object
+    properties: {}
+    description: The input for the DeleteThingType operation.
+  DeleteThingTypeResponse:
+    type: object
+    properties: {}
+    description: The output for the DeleteThingType operation.
+  DeleteTopicRuleRequest:
+    type: object
+    properties: {}
+    description: The input for the DeleteTopicRule operation.
+  DeliveryStreamName:
+    type: string
+  DeprecateThingTypeRequest:
+    type: object
+    properties:
+      undoDeprecate:
+        $ref: '#/definitions/UndoDeprecate'
+        description: 'Whether to undeprecate a deprecated thing type. If <b>true</b>, the thing type will not be deprecated anymore and you can associate it with things.'
+    description: The input for the DeprecateThingType operation.
+  DeprecateThingTypeResponse:
+    type: object
+    properties: {}
+    description: The output for the DeprecateThingType operation.
+  DeprecationDate:
+    type: string
+    format: date-time
+  DescribeCACertificateRequest:
+    type: object
+    properties: {}
+    description: The input for the DescribeCACertificate operation.
+  DescribeCACertificateResponse:
+    type: object
+    properties:
+      certificateDescription:
+        $ref: '#/definitions/CACertificateDescription'
+        description: The CA certificate description.
+    description: The output from the DescribeCACertificate operation.
+  DescribeCertificateRequest:
+    type: object
+    properties: {}
+    description: The input for the DescribeCertificate operation.
+  DescribeCertificateResponse:
+    type: object
+    properties:
+      certificateDescription:
+        $ref: '#/definitions/CertificateDescription'
+        description: The description of the certificate.
+    description: The output of the DescribeCertificate operation.
+  DescribeEndpointRequest:
+    type: object
+    properties: {}
+    description: The input for the DescribeEndpoint operation.
+  DescribeEndpointResponse:
+    type: object
+    properties:
+      endpointAddress:
+        $ref: '#/definitions/EndpointAddress'
+        description: 'The endpoint. The format of the endpoint is as follows: <i>identifier</i>.iot.<i>region</i>.amazonaws.com.'
+    description: The output from the DescribeEndpoint operation.
+  DescribeThingRequest:
+    type: object
+    properties: {}
+    description: The input for the DescribeThing operation.
+  DescribeThingResponse:
+    type: object
+    properties:
+      defaultClientId:
+        $ref: '#/definitions/ClientId'
+        description: The default client ID.
+      thingName:
+        $ref: '#/definitions/ThingName'
+        description: The name of the thing.
+      thingTypeName:
+        $ref: '#/definitions/ThingTypeName'
+        description: The thing type name.
+      attributes:
+        $ref: '#/definitions/Attributes'
+        description: The thing attributes.
+      version:
+        $ref: '#/definitions/Version'
+        description: '<p>The current version of the thing record in the registry.</p> <note> <p>To avoid unintentional changes to the information in the registry, you can pass the version information in the <code>expectedVersion</code> parameter of the <code>UpdateThing</code> and <code>DeleteThing</code> calls.</p> </note>'
+    description: The output from the DescribeThing operation.
+  DescribeThingTypeRequest:
+    type: object
+    properties: {}
+    description: The input for the DescribeThingType operation.
+  DescribeThingTypeResponse:
+    type: object
+    properties:
+      thingTypeName:
+        $ref: '#/definitions/ThingTypeName'
+        description: The name of the thing type.
+      thingTypeProperties:
+        $ref: '#/definitions/ThingTypeProperties'
+        description: 'The ThingTypeProperties contains information about the thing type including description, and a list of searchable thing attribute names.'
+      thingTypeMetadata:
+        $ref: '#/definitions/ThingTypeMetadata'
+    description: The output for the DescribeThingType operation.
+  Description:
+    type: string
+  DetachPrincipalPolicyRequest:
+    type: object
+    properties: {}
+    description: The input for the DetachPrincipalPolicy operation.
+  DetachThingPrincipalRequest:
+    type: object
+    properties: {}
+    description: The input for the DetachThingPrincipal operation.
+  DetachThingPrincipalResponse:
+    type: object
+    properties: {}
+    description: The output from the DetachThingPrincipal operation.
+  DisableTopicRuleRequest:
+    type: object
+    properties: {}
+    description: The input for the DisableTopicRuleRequest operation.
+  DynamoDBAction:
+    type: object
+    required:
+      - tableName
+      - roleArn
+      - hashKeyField
+      - hashKeyValue
+    properties:
+      tableName:
+        $ref: '#/definitions/TableName'
+        description: The name of the DynamoDB table.
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access to the DynamoDB table.
+      operation:
+        $ref: '#/definitions/DynamoOperation'
+        description: 'The type of operation to be performed. This follows the substitution template, so it can be <code>${operation}</code>, but the substitution must result in one of the following: <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code>.'
+      hashKeyField:
+        $ref: '#/definitions/HashKeyField'
+        description: The hash key name.
+      hashKeyValue:
+        $ref: '#/definitions/HashKeyValue'
+        description: The hash key value.
+      hashKeyType:
+        $ref: '#/definitions/DynamoKeyType'
+        description: The hash key type. Valid values are "STRING" or "NUMBER"
+      rangeKeyField:
+        $ref: '#/definitions/RangeKeyField'
+        description: The range key name.
+      rangeKeyValue:
+        $ref: '#/definitions/RangeKeyValue'
+        description: The range key value.
+      rangeKeyType:
+        $ref: '#/definitions/DynamoKeyType'
+        description: The range key type. Valid values are "STRING" or "NUMBER"
+      payloadField:
+        $ref: '#/definitions/PayloadField'
+        description: The action payload. This name can be customized.
+    description: '<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p><code>"hashKeyValue": "${topic(3)}"</code></p> <p>The following field uses the timestamp:</p> <p><code>"rangeKeyValue": "${timestamp()}"</code></p>'
+  DynamoDBv2Action:
+    type: object
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access to the DynamoDB table.
+      putItem:
+        $ref: '#/definitions/PutItemInput'
+        description: '<p>Specifies the DynamoDB table to which the message data will be written. For example:</p> <p><code>{ "dynamoDBv2": { "roleArn": "aws:iam:12341251:my-role" "putItem": { "tableName": "my-table" } } }</code></p> <p>Each attribute in the message payload will be written to a separate column in the DynamoDB database.</p>'
+    description: <p>Describes an action to write to a DynamoDB table.</p> <p>This DynamoDB action writes each attribute in the message payload into it's own column in the DynamoDB table.</p>
+  DynamoKeyType:
+    type: string
+    enum:
+      - STRING
+      - NUMBER
+  DynamoOperation:
+    type: string
+  ElasticsearchAction:
+    type: object
+    required:
+      - roleArn
+      - endpoint
+      - index
+      - type
+      - id
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The IAM role ARN that has access to Elasticsearch.
+      endpoint:
+        $ref: '#/definitions/ElasticsearchEndpoint'
+        description: The endpoint of your Elasticsearch domain.
+      index:
+        $ref: '#/definitions/ElasticsearchIndex'
+        description: The Elasticsearch index where you want to store your data.
+      type:
+        $ref: '#/definitions/ElasticsearchType'
+        description: The type of document you are storing.
+      id:
+        $ref: '#/definitions/ElasticsearchId'
+        description: The unique identifier for the document you are storing.
+    description: Describes an action that writes data to an Amazon Elasticsearch Service domain.
+  ElasticsearchEndpoint:
+    type: string
+    pattern: 'https?://.*'
+  ElasticsearchId:
+    type: string
+  ElasticsearchIndex:
+    type: string
+  ElasticsearchType:
+    type: string
+  EnableTopicRuleRequest:
+    type: object
+    properties: {}
+    description: The input for the EnableTopicRuleRequest operation.
+  EndpointAddress:
+    type: string
+  FirehoseAction:
+    type: object
+    required:
+      - roleArn
+      - deliveryStreamName
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The IAM role that grants access to the Amazon Kinesis Firehost stream.
+      deliveryStreamName:
+        $ref: '#/definitions/DeliveryStreamName'
+        description: The delivery stream name.
+      separator:
+        $ref: '#/definitions/FirehoseSeparator'
+        description: 'A character separator that will be used to separate records written to the Firehose stream. Valid values are: ''\n'' (newline), ''\t'' (tab), ''\r\n'' (Windows newline), '','' (comma).'
+    description: Describes an action that writes data to an Amazon Kinesis Firehose stream.
+  FirehoseSeparator:
+    type: string
+    pattern: '([\n\t])|(\r\n)|(,)'
+  Flag:
+    type: boolean
+  FunctionArn:
+    type: string
+  GetLoggingOptionsRequest:
+    type: object
+    properties: {}
+    description: The input for the GetLoggingOptions operation.
+  GetLoggingOptionsResponse:
+    type: object
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      logLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The logging level.
+    description: The output from the GetLoggingOptions operation.
+  GetPolicyRequest:
+    type: object
+    properties: {}
+    description: The input for the GetPolicy operation.
+  GetPolicyResponse:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: The policy name.
+      policyArn:
+        $ref: '#/definitions/PolicyArn'
+        description: The policy ARN.
+      policyDocument:
+        $ref: '#/definitions/PolicyDocument'
+        description: The JSON document that describes the policy.
+      defaultVersionId:
+        $ref: '#/definitions/PolicyVersionId'
+        description: The default policy version ID.
+    description: The output from the GetPolicy operation.
+  GetPolicyVersionRequest:
+    type: object
+    properties: {}
+    description: The input for the GetPolicyVersion operation.
+  GetPolicyVersionResponse:
+    type: object
+    properties:
+      policyArn:
+        $ref: '#/definitions/PolicyArn'
+        description: The policy ARN.
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: The policy name.
+      policyDocument:
+        $ref: '#/definitions/PolicyDocument'
+        description: The JSON document that describes the policy.
+      policyVersionId:
+        $ref: '#/definitions/PolicyVersionId'
+        description: The policy version ID.
+      isDefaultVersion:
+        $ref: '#/definitions/IsDefaultVersion'
+        description: Specifies whether the policy version is the default.
+    description: The output from the GetPolicyVersion operation.
+  GetRegistrationCodeRequest:
+    type: object
+    properties: {}
+    description: The input to the GetRegistrationCode operation.
+  GetRegistrationCodeResponse:
+    type: object
+    properties:
+      registrationCode:
+        $ref: '#/definitions/RegistrationCode'
+        description: The CA certificate registration code.
+    description: The output from the GetRegistrationCode operation.
+  GetTopicRuleRequest:
+    type: object
+    properties: {}
+    description: The input for the GetTopicRule operation.
+  GetTopicRuleResponse:
+    type: object
+    properties:
+      ruleArn:
+        $ref: '#/definitions/RuleArn'
+        description: The rule ARN.
+      rule:
+        $ref: '#/definitions/TopicRule'
+        description: The rule.
+    description: The output from the GetTopicRule operation.
+  HashKeyField:
+    type: string
+  HashKeyValue:
+    type: string
+  InternalException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: An unexpected error has occurred.
+  InternalFailureException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: An unexpected error has occurred.
+  InvalidRequestException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: The request is not valid.
+  IsDefaultVersion:
+    type: boolean
+  IsDisabled:
+    type: boolean
+  Key:
+    type: string
+  KeyPair:
+    type: object
+    properties:
+      PublicKey:
+        $ref: '#/definitions/PublicKey'
+        description: The public key.
+      PrivateKey:
+        $ref: '#/definitions/PrivateKey'
+        description: The private key.
+    description: Describes a key pair.
+  KinesisAction:
+    type: object
+    required:
+      - roleArn
+      - streamName
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access to the Amazon Kinesis stream.
+      streamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the Amazon Kinesis stream.
+      partitionKey:
+        $ref: '#/definitions/PartitionKey'
+        description: The partition key.
+    description: Describes an action to write data to an Amazon Kinesis stream.
+  LambdaAction:
+    type: object
+    required:
+      - functionArn
+    properties:
+      functionArn:
+        $ref: '#/definitions/FunctionArn'
+        description: The ARN of the Lambda function.
+    description: Describes an action to invoke a Lambda function.
+  LimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: The number of attached entities exceeds the limit.
+  ListCACertificatesRequest:
+    type: object
+    properties: {}
+    description: Input for the ListCACertificates operation.
+  ListCACertificatesResponse:
+    type: object
+    properties:
+      certificates:
+        $ref: '#/definitions/CACertificates'
+        description: The CA certificates registered in your AWS account.
+      nextMarker:
+        $ref: '#/definitions/Marker'
+        description: The current position within the list of CA certificates.
+    description: The output from the ListCACertificates operation.
+  ListCertificatesByCARequest:
+    type: object
+    properties: {}
+    description: The input to the ListCertificatesByCA operation.
+  ListCertificatesByCAResponse:
+    type: object
+    properties:
+      certificates:
+        $ref: '#/definitions/Certificates'
+        description: The device certificates signed by the specified CA certificate.
+      nextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'The marker for the next set of results, or null if there are no additional results.'
+    description: The output of the ListCertificatesByCA operation.
+  ListCertificatesRequest:
+    type: object
+    properties: {}
+    description: The input for the ListCertificates operation.
+  ListCertificatesResponse:
+    type: object
+    properties:
+      certificates:
+        $ref: '#/definitions/Certificates'
+        description: The descriptions of the certificates.
+      nextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'The marker for the next set of results, or null if there are no additional results.'
+    description: The output of the ListCertificates operation.
+  ListOutgoingCertificatesRequest:
+    type: object
+    properties: {}
+    description: The input to the ListOutgoingCertificates operation.
+  ListOutgoingCertificatesResponse:
+    type: object
+    properties:
+      outgoingCertificates:
+        $ref: '#/definitions/OutgoingCertificates'
+        description: The certificates that are being transfered but not yet accepted.
+      nextMarker:
+        $ref: '#/definitions/Marker'
+        description: The marker for the next set of results.
+    description: The output from the ListOutgoingCertificates operation.
+  ListPoliciesRequest:
+    type: object
+    properties: {}
+    description: The input for the ListPolicies operation.
+  ListPoliciesResponse:
+    type: object
+    properties:
+      policies:
+        $ref: '#/definitions/Policies'
+        description: The descriptions of the policies.
+      nextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'The marker for the next set of results, or null if there are no additional results.'
+    description: The output from the ListPolicies operation.
+  ListPolicyPrincipalsRequest:
+    type: object
+    properties: {}
+    description: The input for the ListPolicyPrincipals operation.
+  ListPolicyPrincipalsResponse:
+    type: object
+    properties:
+      principals:
+        $ref: '#/definitions/Principals'
+        description: The descriptions of the principals.
+      nextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'The marker for the next set of results, or null if there are no additional results.'
+    description: The output from the ListPolicyPrincipals operation.
+  ListPolicyVersionsRequest:
+    type: object
+    properties: {}
+    description: The input for the ListPolicyVersions operation.
+  ListPolicyVersionsResponse:
+    type: object
+    properties:
+      policyVersions:
+        $ref: '#/definitions/PolicyVersions'
+        description: The policy versions.
+    description: The output from the ListPolicyVersions operation.
+  ListPrincipalPoliciesRequest:
+    type: object
+    properties: {}
+    description: The input for the ListPrincipalPolicies operation.
+  ListPrincipalPoliciesResponse:
+    type: object
+    properties:
+      policies:
+        $ref: '#/definitions/Policies'
+        description: The policies.
+      nextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'The marker for the next set of results, or null if there are no additional results.'
+    description: The output from the ListPrincipalPolicies operation.
+  ListPrincipalThingsRequest:
+    type: object
+    properties: {}
+    description: The input for the ListPrincipalThings operation.
+  ListPrincipalThingsResponse:
+    type: object
+    properties:
+      things:
+        $ref: '#/definitions/ThingNameList'
+        description: The things.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token for the next set of results, or <b>null</b> if there are no additional results.'
+    description: The output from the ListPrincipalThings operation.
+  ListThingPrincipalsRequest:
+    type: object
+    properties: {}
+    description: The input for the ListThingPrincipal operation.
+  ListThingPrincipalsResponse:
+    type: object
+    properties:
+      principals:
+        $ref: '#/definitions/Principals'
+        description: The principals associated with the thing.
+    description: The output from the ListThingPrincipals operation.
+  ListThingTypesRequest:
+    type: object
+    properties: {}
+    description: The input for the ListThingTypes operation.
+  ListThingTypesResponse:
+    type: object
+    properties:
+      thingTypes:
+        $ref: '#/definitions/ThingTypeList'
+        description: The thing types.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token for the next set of results, or <b>null</b> if there are no additional results.'
+    description: The output for the ListThingTypes operation.
+  ListThingsRequest:
+    type: object
+    properties: {}
+    description: The input for the ListThings operation.
+  ListThingsResponse:
+    type: object
+    properties:
+      things:
+        $ref: '#/definitions/ThingAttributeList'
+        description: The things.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token for the next set of results, or <b>null</b> if there are no additional results.'
+    description: The output from the ListThings operation.
+  ListTopicRulesRequest:
+    type: object
+    properties: {}
+    description: The input for the ListTopicRules operation.
+  ListTopicRulesResponse:
+    type: object
+    properties:
+      rules:
+        $ref: '#/definitions/TopicRuleList'
+        description: The rules.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token used to retrieve the next value.
+    description: The output from the ListTopicRules operation.
+  LogLevel:
+    type: string
+    enum:
+      - DEBUG
+      - INFO
+      - ERROR
+      - WARN
+      - DISABLED
+  LoggingOptionsPayload:
+    type: object
+    required:
+      - roleArn
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      logLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The logging level.
+    description: Describes the logging options payload.
+  MalformedPolicyException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: The policy documentation is not valid.
+  Marker:
+    type: string
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  Message:
+    type: string
+    maxLength: 128
+  MessageFormat:
+    type: string
+    enum:
+      - RAW
+      - JSON
+  MetricName:
+    type: string
+  MetricNamespace:
+    type: string
+  MetricTimestamp:
+    type: string
+  MetricUnit:
+    type: string
+  MetricValue:
+    type: string
+  NextToken:
+    type: string
+  OptionalVersion:
+    type: integer
+  OutgoingCertificate:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The certificate ARN.
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The certificate ID.
+      transferredTo:
+        $ref: '#/definitions/AwsAccountId'
+        description: The AWS account to which the transfer was made.
+      transferDate:
+        $ref: '#/definitions/DateType'
+        description: The date the transfer was initiated.
+      transferMessage:
+        $ref: '#/definitions/Message'
+        description: The transfer message.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The certificate creation date.
+    description: A certificate that has been transfered but not yet accepted.
+  OutgoingCertificates:
+    type: array
+    items:
+      $ref: '#/definitions/OutgoingCertificate'
+  PageSize:
+    type: integer
+    minimum: 1
+    maximum: 250
+  PartitionKey:
+    type: string
+  PayloadField:
+    type: string
+  Policies:
+    type: array
+    items:
+      $ref: '#/definitions/Policy'
+  Policy:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: The policy name.
+      policyArn:
+        $ref: '#/definitions/PolicyArn'
+        description: The policy ARN.
+    description: Describes an AWS IoT policy.
+  PolicyArn:
+    type: string
+  PolicyDocument:
+    type: string
+  PolicyName:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+    maxLength: 128
+  PolicyVersion:
+    type: object
+    properties:
+      versionId:
+        $ref: '#/definitions/PolicyVersionId'
+        description: The policy version ID.
+      isDefaultVersion:
+        $ref: '#/definitions/IsDefaultVersion'
+        description: Specifies whether the policy version is the default.
+      createDate:
+        $ref: '#/definitions/DateType'
+        description: The date and time the policy was created.
+    description: Describes a policy version.
+  PolicyVersionId:
+    type: string
+    pattern: '[0-9]+'
+  PolicyVersions:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyVersion'
+  Principal:
+    type: string
+  PrincipalArn:
+    type: string
+  Principals:
+    type: array
+    items:
+      $ref: '#/definitions/PrincipalArn'
+  PrivateKey:
+    type: string
+    minLength: 1
+    format: password
+  PublicKey:
+    type: string
+    minLength: 1
+  PutItemInput:
+    type: object
+    required:
+      - tableName
+    properties:
+      tableName:
+        $ref: '#/definitions/TableName'
+        description: The table where the message data will be written
+    description: The input for the DynamoActionVS action that specifies the DynamoDB table to which the message data will be written.
+  QueueUrl:
+    type: string
+  RangeKeyField:
+    type: string
+  RangeKeyValue:
+    type: string
+  RegisterCACertificateRequest:
+    type: object
+    required:
+      - caCertificate
+      - verificationCertificate
+    properties:
+      caCertificate:
+        $ref: '#/definitions/CertificatePem'
+        description: The CA certificate.
+      verificationCertificate:
+        $ref: '#/definitions/CertificatePem'
+        description: The private key verification certificate.
+    description: The input to the RegisterCACertificate operation.
+  RegisterCACertificateResponse:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The CA certificate ARN.
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The CA certificate identifier.
+    description: The output from the RegisterCACertificateResponse operation.
+  RegisterCertificateRequest:
+    type: object
+    required:
+      - certificatePem
+    properties:
+      certificatePem:
+        $ref: '#/definitions/CertificatePem'
+        description: 'The certificate data, in PEM format.'
+      caCertificatePem:
+        $ref: '#/definitions/CertificatePem'
+        description: The CA certificate used to sign the device certificate being registered.
+      status:
+        $ref: '#/definitions/CertificateStatus'
+    description: The input to the RegisterCertificate operation.
+  RegisterCertificateResponse:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The certificate ARN.
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The certificate identifier.
+    description: The output from the RegisterCertificate operation.
+  RegistrationCode:
+    type: string
+    pattern: '(0x)?[a-fA-F0-9]+'
+    minLength: 64
+    maxLength: 64
+  RegistrationCodeValidationException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: Additional information about the exception.
+    description: The registration code is invalid.
+  RejectCertificateTransferRequest:
+    type: object
+    properties:
+      rejectReason:
+        $ref: '#/definitions/Message'
+        description: The reason the certificate transfer was rejected.
+    description: The input for the RejectCertificateTransfer operation.
+  RemoveThingType:
+    type: boolean
+  ReplaceTopicRuleRequest:
+    type: object
+    required:
+      - topicRulePayload
+    properties:
+      topicRulePayload:
+        $ref: '#/definitions/TopicRulePayload'
+        description: The rule payload.
+    description: The input for the ReplaceTopicRule operation.
+  RepublishAction:
+    type: object
+    required:
+      - roleArn
+      - topic
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      topic:
+        $ref: '#/definitions/TopicPattern'
+        description: The name of the MQTT topic.
+    description: Describes an action to republish to another topic.
+  ResourceAlreadyExistsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+      resourceId:
+        $ref: '#/definitions/resourceId'
+        description: The ID of the resource that caused the exception.
+      resourceArn:
+        $ref: '#/definitions/resourceArn'
+        description: The ARN of the resource that caused the exception.
+    description: The resource already exists.
+  ResourceNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: The specified resource does not exist.
+  RuleArn:
+    type: string
+  RuleName:
+    type: string
+    pattern: '^[a-zA-Z0-9_]+$'
+    minLength: 1
+    maxLength: 128
+  S3Action:
+    type: object
+    required:
+      - roleArn
+      - bucketName
+      - key
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      bucketName:
+        $ref: '#/definitions/BucketName'
+        description: The Amazon S3 bucket.
+      key:
+        $ref: '#/definitions/Key'
+        description: The object key.
+      cannedAcl:
+        $ref: '#/definitions/CannedAccessControlList'
+        description: 'The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl">S3 canned ACLs</a>.'
+    description: Describes an action to write data to an Amazon S3 bucket.
+  SQL:
+    type: string
+  SearchableAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeName'
+  ServiceUnavailableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: The service is temporarily unavailable.
+  SetAsActive:
+    type: boolean
+  SetAsActiveFlag:
+    type: boolean
+  SetAsDefault:
+    type: boolean
+  SetDefaultPolicyVersionRequest:
+    type: object
+    properties: {}
+    description: The input for the SetDefaultPolicyVersion operation.
+  SetLoggingOptionsRequest:
+    type: object
+    required:
+      - loggingOptionsPayload
+    properties:
+      loggingOptionsPayload:
+        $ref: '#/definitions/LoggingOptionsPayload'
+        description: The logging options payload.
+    description: The input for the SetLoggingOptions operation.
+  SnsAction:
+    type: object
+    required:
+      - targetArn
+      - roleArn
+    properties:
+      targetArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the SNS topic.
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      messageFormat:
+        $ref: '#/definitions/MessageFormat'
+        description: 'The message format of the message to publish. Optional. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href="http://docs.aws.amazon.com/sns/latest/dg/json-formats.html"></a> refer to their official documentation.'
+    description: Describes an action to publish to an Amazon SNS topic.
+  SqlParseException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: The Rule-SQL expression can't be parsed correctly.
+  SqsAction:
+    type: object
+    required:
+      - roleArn
+      - queueUrl
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      queueUrl:
+        $ref: '#/definitions/QueueUrl'
+        description: The URL of the Amazon SQS queue.
+      useBase64:
+        $ref: '#/definitions/UseBase64'
+        description: Specifies whether to use Base64 encoding.
+    description: Describes an action to publish data to an Amazon SQS queue.
+  StateReason:
+    type: string
+  StateValue:
+    type: string
+  StreamName:
+    type: string
+  TableName:
+    type: string
+  ThingArn:
+    type: string
+  ThingAttribute:
+    type: object
+    properties:
+      thingName:
+        $ref: '#/definitions/ThingName'
+        description: The name of the thing.
+      thingTypeName:
+        $ref: '#/definitions/ThingTypeName'
+        description: 'The name of the thing type, if the thing has been associated with a type.'
+      attributes:
+        $ref: '#/definitions/Attributes'
+        description: A list of thing attributes which are name-value pairs.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the thing record in the registry.
+    description: 'The properties of the thing, including thing name, thing type name, and a list of thing attributes.'
+  ThingAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/ThingAttribute'
+  ThingName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  ThingNameList:
+    type: array
+    items:
+      $ref: '#/definitions/ThingName'
+  ThingTypeArn:
+    type: string
+  ThingTypeDefinition:
+    type: object
+    properties:
+      thingTypeName:
+        $ref: '#/definitions/ThingTypeName'
+        description: The name of the thing type.
+      thingTypeProperties:
+        $ref: '#/definitions/ThingTypeProperties'
+        description: The ThingTypeProperties for the thing type.
+      thingTypeMetadata:
+        $ref: '#/definitions/ThingTypeMetadata'
+    description: 'The definition of the thing type, including thing type name and description.'
+  ThingTypeDescription:
+    type: string
+    pattern: '[\p{Graph}\x20]*'
+    maxLength: 2028
+  ThingTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/ThingTypeDefinition'
+  ThingTypeMetadata:
+    type: object
+    properties:
+      deprecationDate:
+        $ref: '#/definitions/DeprecationDate'
+        description: The date and time when the thing type was deprecated.
+      creationDate:
+        $ref: '#/definitions/CreationDate'
+        description: The date and time when the thing type was created.
+    description: 'The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when time was deprecated.'
+  ThingTypeName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  ThingTypeProperties:
+    type: object
+    properties:
+      thingTypeDescription:
+        $ref: '#/definitions/ThingTypeDescription'
+        description: The description of the thing type.
+      searchableAttributes:
+        $ref: '#/definitions/SearchableAttributes'
+        description: A list of searchable thing attribute names.
+    description: 'The ThingTypeProperties contains information about the thing type including: a thing type description, and a list of searchable thing attribute names.'
+  ThrottlingException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: The rate exceeds the limit.
+  Topic:
+    type: string
+  TopicPattern:
+    type: string
+  TopicRule:
+    type: object
+    properties:
+      ruleName:
+        $ref: '#/definitions/RuleName'
+        description: The name of the rule.
+      sql:
+        $ref: '#/definitions/SQL'
+        description: 'The SQL statement used to query the topic. When using a SQL query with multiple lines, be sure to escape the newline characters.'
+      description:
+        $ref: '#/definitions/Description'
+        description: The description of the rule.
+      createdAt:
+        $ref: '#/definitions/CreatedAtDate'
+        description: The date and time the rule was created.
+      actions:
+        $ref: '#/definitions/ActionList'
+        description: The actions associated with the rule.
+      ruleDisabled:
+        $ref: '#/definitions/IsDisabled'
+        description: Specifies whether the rule is disabled.
+      awsIotSqlVersion:
+        $ref: '#/definitions/AwsIotSqlVersion'
+        description: The version of the SQL rules engine to use when evaluating the rule.
+    description: Describes a rule.
+  TopicRuleList:
+    type: array
+    items:
+      $ref: '#/definitions/TopicRuleListItem'
+  TopicRuleListItem:
+    type: object
+    properties:
+      ruleArn:
+        $ref: '#/definitions/RuleArn'
+        description: The rule ARN.
+      ruleName:
+        $ref: '#/definitions/RuleName'
+        description: The name of the rule.
+      topicPattern:
+        $ref: '#/definitions/TopicPattern'
+        description: The pattern for the topic names that apply.
+      createdAt:
+        $ref: '#/definitions/CreatedAtDate'
+        description: The date and time the rule was created.
+      ruleDisabled:
+        $ref: '#/definitions/IsDisabled'
+        description: Specifies whether the rule is disabled.
+    description: Describes a rule.
+  TopicRulePayload:
+    type: object
+    required:
+      - sql
+      - actions
+    properties:
+      sql:
+        $ref: '#/definitions/SQL'
+        description: 'The SQL statement used to query the topic. For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
+      description:
+        $ref: '#/definitions/Description'
+        description: The description of the rule.
+      actions:
+        $ref: '#/definitions/ActionList'
+        description: The actions associated with the rule.
+      ruleDisabled:
+        $ref: '#/definitions/IsDisabled'
+        description: Specifies whether the rule is disabled.
+      awsIotSqlVersion:
+        $ref: '#/definitions/AwsIotSqlVersion'
+        description: The version of the SQL rules engine to use when evaluating the rule.
+    description: Describes a rule.
+  TransferAlreadyCompletedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: You can't revert the certificate transfer because the transfer is already complete.
+  TransferCertificateRequest:
+    type: object
+    properties:
+      transferMessage:
+        $ref: '#/definitions/Message'
+        description: The transfer message.
+    description: The input for the TransferCertificate operation.
+  TransferCertificateResponse:
+    type: object
+    properties:
+      transferredCertificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The ARN of the certificate.
+    description: The output from the TransferCertificate operation.
+  TransferConflictException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: You can't transfer the certificate because authorization policies are still attached.
+  TransferData:
+    type: object
+    properties:
+      transferMessage:
+        $ref: '#/definitions/Message'
+        description: The transfer message.
+      rejectReason:
+        $ref: '#/definitions/Message'
+        description: The reason why the transfer was rejected.
+      transferDate:
+        $ref: '#/definitions/DateType'
+        description: The date the transfer took place.
+      acceptDate:
+        $ref: '#/definitions/DateType'
+        description: The date the transfer was accepted.
+      rejectDate:
+        $ref: '#/definitions/DateType'
+        description: The date the transfer was rejected.
+    description: Data used to transfer a certificate to an AWS account.
+  UnauthorizedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: You are not authorized to perform this operation.
+  UndoDeprecate:
+    type: boolean
+  UpdateCACertificateRequest:
+    type: object
+    properties: {}
+    description: The input to the UpdateCACertificate operation.
+  UpdateCertificateRequest:
+    type: object
+    properties: {}
+    description: The input for the UpdateCertificate operation.
+  UpdateThingRequest:
+    type: object
+    properties:
+      thingTypeName:
+        $ref: '#/definitions/ThingTypeName'
+        description: The name of the thing type.
+      attributePayload:
+        $ref: '#/definitions/AttributePayload'
+        description: '<p>A list of thing attributes, a JSON string containing name-value pairs. For example:</p> <p><code>{\"attributes\":{\"name1\":\"value2\"}})</code></p> <p>This data is used to add new attributes or update existing attributes.</p>'
+      expectedVersion:
+        $ref: '#/definitions/OptionalVersion'
+        description: 'The expected version of the thing record in the registry. If the version of the record in the registry does not match the expected version specified in the request, the <code>UpdateThing</code> request is rejected with a <code>VersionConflictException</code>.'
+      removeThingType:
+        $ref: '#/definitions/RemoveThingType'
+        description: 'Remove a thing type association. If <b>true</b>, the assocation is removed.'
+    description: The input for the UpdateThing operation.
+  UpdateThingResponse:
+    type: object
+    properties: {}
+    description: The output from the UpdateThing operation.
+  UseBase64:
+    type: boolean
+  Version:
+    type: integer
+  VersionConflictException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: 'An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter. '
+  VersionsLimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/errorMessage'
+        description: The message for the exception.
+    description: The number of policy versions exceeds the limit.
+  errorMessage:
+    type: string
+  resourceArn:
+    type: string
+  resourceId:
+    type: string

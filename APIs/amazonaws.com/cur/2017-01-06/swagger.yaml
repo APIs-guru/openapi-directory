@@ -1,0 +1,394 @@
+swagger: '2.0'
+info:
+  version: '2017-01-06'
+  x-release: v4
+  title: AWS Cost and Usage Report Service
+  description: All public APIs for AWS Cost and Usage Report service
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: cur
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cur-2017-01-06.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/cur/2017-01-06/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/cur/'
+host: cur.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: DeleteReportDefinition
+      description: Delete a specified report definition
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteReportDefinitionResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteReportDefinitionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReportDefinitions':
+    post:
+      operationId: DescribeReportDefinitions
+      description: Describe a list of report definitions owned by the account
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeReportDefinitionsResponse'
+        '480':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeReportDefinitionsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutReportDefinition':
+    post:
+      operationId: PutReportDefinition
+      description: Create a new report definition
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutReportDefinitionResponse'
+        '480':
+          description: DuplicateReportNameException
+          schema:
+            $ref: '#/definitions/DuplicateReportNameException'
+        '481':
+          description: ReportLimitReachedException
+          schema:
+            $ref: '#/definitions/ReportLimitReachedException'
+        '482':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+        '483':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutReportDefinitionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AWSRegion:
+    type: string
+    enum:
+      - us-east-1
+      - us-west-1
+      - us-west-2
+      - eu-central-1
+      - eu-west-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+    description: Region of customer S3 bucket.
+  AdditionalArtifact:
+    type: string
+    enum:
+      - REDSHIFT
+      - QUICKSIGHT
+    description: Enable support for Redshift and/or QuickSight.
+  AdditionalArtifactList:
+    type: array
+    description: A list of additional artifacts.
+    items:
+      $ref: '#/definitions/AdditionalArtifact'
+  CompressionFormat:
+    type: string
+    enum:
+      - ZIP
+      - GZIP
+    description: Preferred compression format for report.
+  DeleteReportDefinitionRequest:
+    type: object
+    properties:
+      ReportName:
+        $ref: '#/definitions/ReportName'
+    description: Request of DeleteReportDefinition
+  DeleteReportDefinitionResponse:
+    type: object
+    properties:
+      ResponseMessage:
+        $ref: '#/definitions/DeleteResponseMessage'
+    description: Response of DeleteReportDefinition
+  DeleteResponseMessage:
+    type: string
+    description: A message indicates if the deletion is successful.
+  DescribeReportDefinitionsRequest:
+    type: object
+    properties:
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+      NextToken:
+        $ref: '#/definitions/GenericString'
+    description: Request of DescribeReportDefinitions
+  DescribeReportDefinitionsResponse:
+    type: object
+    properties:
+      ReportDefinitions:
+        $ref: '#/definitions/ReportDefinitionList'
+      NextToken:
+        $ref: '#/definitions/GenericString'
+    description: Response of DescribeReportDefinitions
+  DuplicateReportNameException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: This exception is thrown when putting a report preference with a name that already exists.
+  ErrorMessage:
+    type: string
+    description: A message to show the detail of the exception.
+  GenericString:
+    type: string
+    description: A generic string.
+  InternalErrorException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: This exception is thrown on a known dependency failure.
+  MaxResults:
+    type: integer
+    description: The max number of results returned by the operation.
+    minimum: 5
+    maximum: 5
+  PutReportDefinitionRequest:
+    type: object
+    required:
+      - ReportDefinition
+    properties:
+      ReportDefinition:
+        $ref: '#/definitions/ReportDefinition'
+    description: Request of PutReportDefinition
+  PutReportDefinitionResponse:
+    type: object
+    properties: {}
+    description: Response of PutReportDefinition
+  ReportDefinition:
+    type: object
+    required:
+      - ReportName
+      - TimeUnit
+      - Format
+      - Compression
+      - AdditionalSchemaElements
+      - S3Bucket
+      - S3Prefix
+      - S3Region
+    properties:
+      ReportName:
+        $ref: '#/definitions/ReportName'
+      TimeUnit:
+        $ref: '#/definitions/TimeUnit'
+      Format:
+        $ref: '#/definitions/ReportFormat'
+      Compression:
+        $ref: '#/definitions/CompressionFormat'
+      AdditionalSchemaElements:
+        $ref: '#/definitions/SchemaElementList'
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+      S3Prefix:
+        $ref: '#/definitions/S3Prefix'
+      S3Region:
+        $ref: '#/definitions/AWSRegion'
+      AdditionalArtifacts:
+        $ref: '#/definitions/AdditionalArtifactList'
+    description: 'The definition of AWS Cost and Usage Report. Customer can specify the report name, time unit, report format, compression format, S3 bucket and additional artifacts and schema elements in the definition.'
+  ReportDefinitionList:
+    type: array
+    description: A list of report definitions.
+    items:
+      $ref: '#/definitions/ReportDefinition'
+  ReportFormat:
+    type: string
+    enum:
+      - textORcsv
+    description: Preferred format for report.
+  ReportLimitReachedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: This exception is thrown when the number of report preference reaches max limit. The max number is 5.
+  ReportName:
+    type: string
+    pattern: '[0-9A-Za-z!\-_.*\''()]+'
+    description: 'Preferred name for a report, it has to be unique. Must starts with a number/letter, case sensitive. Limited to 256 characters.'
+    maxLength: 256
+  S3Bucket:
+    type: string
+    description: Name of customer S3 bucket.
+    maxLength: 256
+  S3Prefix:
+    type: string
+    pattern: '[0-9A-Za-z!\-_.*\''()/]*'
+    description: Preferred report path prefix. Limited to 256 characters.
+    maxLength: 256
+  SchemaElement:
+    type: string
+    enum:
+      - RESOURCES
+    description: Preference of including Resource IDs. You can include additional details about individual resource IDs in your report.
+  SchemaElementList:
+    type: array
+    description: A list of schema elements.
+    items:
+      $ref: '#/definitions/SchemaElement'
+  TimeUnit:
+    type: string
+    enum:
+      - HOURLY
+      - DAILY
+    description: The frequency on which report data are measured and displayed.
+  ValidationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'This exception is thrown when providing an invalid input. eg. Put a report preference with an invalid report name, or Delete a report preference with an empty report name.'

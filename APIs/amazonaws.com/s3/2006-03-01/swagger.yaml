@@ -1,0 +1,3988 @@
+swagger: '2.0'
+info:
+  version: '2006-03-01'
+  x-release: s3
+  title: Amazon Simple Storage Service
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: s3
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/s3-2006-03-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/s3/2006-03-01/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/s3/'
+host: s3.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - text/xml
+produces:
+  - text/xml
+parameters:
+  x-amz-security-token:
+    name: x-amz-security-token
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon S3 signature
+    x-amazon-apigateway-authtype: awsS3
+security:
+  - hmac: []
+paths:
+  '/{Bucket}/{Key}':
+    delete:
+      operationId: DeleteObject
+      description: 'Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn''t a null version, Amazon S3 does not remove any objects.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteObjectOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteObjectRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}':
+    delete:
+      operationId: DeleteBucket
+      description: 'Deletes the bucket. All objects (including all object versions and Delete Markers) in the bucket must be deleted before the bucket itself can be deleted.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBucketRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?uploads':
+    post:
+      operationId: CreateMultipartUpload
+      description: '<p>Initiates a multipart upload and returns an upload ID.</p><p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateMultipartUploadOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateMultipartUploadRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?analytics':
+    get:
+      operationId: GetBucketAnalyticsConfiguration
+      description: Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketAnalyticsConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketAnalyticsConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?cors':
+    get:
+      operationId: GetBucketCors
+      description: 'Returns the cors configuration for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketCorsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketCorsRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?inventory':
+    get:
+      operationId: GetBucketInventoryConfiguration
+      description: Returns an inventory configuration (identified by the inventory ID) from the bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketInventoryConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketInventoryConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?lifecycle':
+    get:
+      operationId: GetBucketLifecycle
+      description: 'Deprecated, see the GetBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketLifecycleOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketLifecycleRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?metrics':
+    delete:
+      operationId: DeleteBucketMetricsConfiguration
+      description: Deletes a metrics configuration (specified by the metrics configuration ID) from the bucket.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBucketMetricsConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?policy':
+    delete:
+      operationId: DeleteBucketPolicy
+      description: 'Deletes the policy from the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBucketPolicyRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?replication':
+    delete:
+      operationId: DeleteBucketReplication
+      description: Deletes the replication configuration from the bucket.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBucketReplicationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?tagging':
+    delete:
+      operationId: DeleteBucketTagging
+      description: 'Deletes the tags from the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBucketTaggingRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?website':
+    delete:
+      operationId: DeleteBucketWebsite
+      description: 'This operation removes the website configuration from the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBucketWebsiteRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?tagging':
+    delete:
+      operationId: DeleteObjectTagging
+      description: Removes the tag-set from an existing object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteObjectTaggingOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteObjectTaggingRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?delete':
+    post:
+      operationId: DeleteObjects
+      description: 'This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/multiobjectdeleteapi.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteObjectsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteObjectsRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?accelerate':
+    get:
+      operationId: GetBucketAccelerateConfiguration
+      description: Returns the accelerate configuration of a bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketAccelerateConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketAccelerateConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?acl':
+    get:
+      operationId: GetBucketAcl
+      description: 'Gets the access control policy for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketAclOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketAclRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?lifecycle#GetBucketLifecycleConfiguration':
+    get:
+      operationId: GetBucketLifecycleConfiguration
+      description: Returns the lifecycle configuration information set on the bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketLifecycleConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketLifecycleConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?location#GetBucketLocation':
+    get:
+      operationId: GetBucketLocation
+      description: 'Returns the region the bucket resides in.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlocation.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketLocationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketLocationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?logging#GetBucketLogging':
+    get:
+      operationId: GetBucketLogging
+      description: 'Returns the logging status of a bucket and the permissions users have to view and modify that status. To use GET, you must be the bucket owner.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlogging.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketLoggingOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketLoggingRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?metrics#GetBucketMetricsConfiguration':
+    get:
+      operationId: GetBucketMetricsConfiguration
+      description: Gets a metrics configuration (specified by the metrics configuration ID) from the bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketMetricsConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketMetricsConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?notification#GetBucketNotification':
+    get:
+      operationId: GetBucketNotification
+      description: 'Deprecated, see the GetBucketNotificationConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/NotificationConfigurationDeprecated'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketNotificationConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?notification#GetBucketNotificationConfiguration':
+    get:
+      operationId: GetBucketNotificationConfiguration
+      description: Returns the notification configuration of a bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/NotificationConfiguration'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketNotificationConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?policy#GetBucketPolicy':
+    get:
+      operationId: GetBucketPolicy
+      description: 'Returns the policy of a specified bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETpolicy.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketPolicyOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketPolicyRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?replication#GetBucketReplication':
+    get:
+      operationId: GetBucketReplication
+      description: Returns the replication configuration of a bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketReplicationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketReplicationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?requestPayment#GetBucketRequestPayment':
+    get:
+      operationId: GetBucketRequestPayment
+      description: 'Returns the request payment configuration of a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentGET.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketRequestPaymentOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketRequestPaymentRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?tagging#GetBucketTagging':
+    get:
+      operationId: GetBucketTagging
+      description: 'Returns the tag set associated with the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETtagging.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketTaggingOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketTaggingRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?versioning#GetBucketVersioning':
+    get:
+      operationId: GetBucketVersioning
+      description: 'Returns the versioning state of a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketVersioningOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketVersioningRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?website#GetBucketWebsite':
+    get:
+      operationId: GetBucketWebsite
+      description: 'Returns the website configuration for a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETwebsite.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketWebsiteOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketWebsiteRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#GetObject':
+    get:
+      operationId: GetObject
+      description: 'Retrieves objects from Amazon S3.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGET.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetObjectOutput'
+        '480':
+          description: NoSuchKey
+          schema:
+            $ref: '#/definitions/NoSuchKey'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetObjectRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?acl#GetObjectAcl':
+    get:
+      operationId: GetObjectAcl
+      description: 'Returns the access control list (ACL) of an object.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetObjectAclOutput'
+        '480':
+          description: NoSuchKey
+          schema:
+            $ref: '#/definitions/NoSuchKey'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetObjectAclRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?tagging#GetObjectTagging':
+    get:
+      operationId: GetObjectTagging
+      description: Returns the tag-set of an object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetObjectTaggingOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetObjectTaggingRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?torrent#GetObjectTorrent':
+    get:
+      operationId: GetObjectTorrent
+      description: 'Return torrent files from a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETtorrent.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetObjectTorrentOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetObjectTorrentRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}#HeadBucket':
+    head:
+      operationId: HeadBucket
+      description: 'This operation is useful to determine if a bucket exists and you have permission to access it.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketHEAD.html</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchBucket
+          schema:
+            $ref: '#/definitions/NoSuchBucket'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/HeadBucketRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+      x-waiters:
+        - delay: 5
+          operation: HeadBucket
+          maxAttempts: 20
+          acceptors:
+            - expected: 200
+              matcher: status
+              state: success
+            - expected: 301
+              matcher: status
+              state: success
+            - expected: 403
+              matcher: status
+              state: success
+            - expected: 404
+              matcher: status
+              state: retry
+        - delay: 5
+          operation: HeadBucket
+          maxAttempts: 20
+          acceptors:
+            - expected: 404
+              matcher: status
+              state: success
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#HeadObject':
+    head:
+      operationId: HeadObject
+      description: 'The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you''re only interested in an object''s metadata. To use HEAD, you must have READ access to the object.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectHEAD.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/HeadObjectOutput'
+        '480':
+          description: NoSuchKey
+          schema:
+            $ref: '#/definitions/NoSuchKey'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/HeadObjectRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+      x-waiters:
+        - delay: 5
+          operation: HeadObject
+          maxAttempts: 20
+          acceptors:
+            - expected: 200
+              matcher: status
+              state: success
+            - expected: 404
+              matcher: status
+              state: retry
+        - delay: 5
+          operation: HeadObject
+          maxAttempts: 20
+          acceptors:
+            - expected: 404
+              matcher: status
+              state: success
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?analytics#ListBucketAnalyticsConfigurations':
+    get:
+      operationId: ListBucketAnalyticsConfigurations
+      description: Lists the analytics configurations for the bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBucketAnalyticsConfigurationsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBucketAnalyticsConfigurationsRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?inventory#ListBucketInventoryConfigurations':
+    get:
+      operationId: ListBucketInventoryConfigurations
+      description: Returns a list of inventory configurations for the bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBucketInventoryConfigurationsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBucketInventoryConfigurationsRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?metrics#ListBucketMetricsConfigurations':
+    get:
+      operationId: ListBucketMetricsConfigurations
+      description: Lists the metrics configurations for the bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBucketMetricsConfigurationsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBucketMetricsConfigurationsRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/#ListBuckets':
+    get:
+      operationId: ListBuckets
+      description: 'Returns a list of all buckets owned by the authenticated sender of the request.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTServiceGET.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBucketsOutput'
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?uploads#ListMultipartUploads':
+    get:
+      operationId: ListMultipartUploads
+      description: 'This operation lists in-progress multipart uploads.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListMPUpload.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMultipartUploadsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListMultipartUploadsRequest'
+        - name: MaxUploads
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: KeyMarker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: UploadIdMarker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?versions#ListObjectVersions':
+    get:
+      operationId: ListObjectVersions
+      description: 'Returns metadata about all of the versions of objects in a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETVersion.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListObjectVersionsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListObjectVersionsRequest'
+        - name: MaxKeys
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: KeyMarker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: VersionIdMarker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}#ListObjects':
+    get:
+      operationId: ListObjects
+      description: 'Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGET.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListObjectsOutput'
+        '480':
+          description: NoSuchBucket
+          schema:
+            $ref: '#/definitions/NoSuchBucket'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListObjectsRequest'
+        - name: MaxKeys
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?list-type=2#ListObjectsV2':
+    get:
+      operationId: ListObjectsV2
+      description: 'Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend you use this revised API for new application development.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListObjectsV2Output'
+        '480':
+          description: NoSuchBucket
+          schema:
+            $ref: '#/definitions/NoSuchBucket'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListObjectsV2Request'
+        - name: MaxKeys
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: ContinuationToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#ListParts':
+    get:
+      operationId: ListParts
+      description: 'Lists the parts that have been uploaded for a specific multipart upload.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListParts.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPartsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPartsRequest'
+        - name: MaxParts
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PartNumberMarker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?accelerate#PutBucketAccelerateConfiguration':
+    put:
+      operationId: PutBucketAccelerateConfiguration
+      description: Sets the accelerate configuration of an existing bucket.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketAccelerateConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?acl#PutBucketAcl':
+    put:
+      operationId: PutBucketAcl
+      description: 'Sets the permissions on a bucket using access control lists (ACL).<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTacl.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketAclRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?analytics#PutBucketAnalyticsConfiguration':
+    put:
+      operationId: PutBucketAnalyticsConfiguration
+      description: Sets an analytics configuration for the bucket (specified by the analytics configuration ID).
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketAnalyticsConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?cors#PutBucketCors':
+    put:
+      operationId: PutBucketCors
+      description: 'Sets the cors configuration for a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTcors.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketCorsRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?inventory#PutBucketInventoryConfiguration':
+    put:
+      operationId: PutBucketInventoryConfiguration
+      description: Adds an inventory configuration (identified by the inventory ID) from the bucket.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketInventoryConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?lifecycle#PutBucketLifecycle':
+    put:
+      operationId: PutBucketLifecycle
+      description: 'Deprecated, see the PutBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketLifecycleRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?lifecycle#PutBucketLifecycleConfiguration':
+    put:
+      operationId: PutBucketLifecycleConfiguration
+      description: 'Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketLifecycleConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?logging#PutBucketLogging':
+    put:
+      operationId: PutBucketLogging
+      description: 'Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. To set the logging status of a bucket, you must be the bucket owner.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlogging.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketLoggingRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?metrics#PutBucketMetricsConfiguration':
+    put:
+      operationId: PutBucketMetricsConfiguration
+      description: Sets a metrics configuration (specified by the metrics configuration ID) for the bucket.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketMetricsConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?notification#PutBucketNotification':
+    put:
+      operationId: PutBucketNotification
+      description: 'Deprecated, see the PutBucketNotificationConfiguraiton operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTnotification.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketNotificationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?notification#PutBucketNotificationConfiguration':
+    put:
+      operationId: PutBucketNotificationConfiguration
+      description: Enables notifications of specified events for a bucket.
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketNotificationConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?policy#PutBucketPolicy':
+    put:
+      operationId: PutBucketPolicy
+      description: 'Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketPolicyRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?replication#PutBucketReplication':
+    put:
+      operationId: PutBucketReplication
+      description: 'Creates a new replication configuration (or replaces an existing one, if present).'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketReplicationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?requestPayment#PutBucketRequestPayment':
+    put:
+      operationId: PutBucketRequestPayment
+      description: 'Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person requesting the download will be charged for the download. Documentation on requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketRequestPaymentRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?tagging#PutBucketTagging':
+    put:
+      operationId: PutBucketTagging
+      description: 'Sets the tags for a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTtagging.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketTaggingRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?versioning#PutBucketVersioning':
+    put:
+      operationId: PutBucketVersioning
+      description: 'Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketVersioningRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?website#PutBucketWebsite':
+    put:
+      operationId: PutBucketWebsite
+      description: 'Set the website configuration for a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html</p>'
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutBucketWebsiteRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#PutObject':
+    put:
+      operationId: PutObject
+      description: 'Adds an object to a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUT.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutObjectOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutObjectRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?acl#PutObjectAcl':
+    put:
+      operationId: PutObjectAcl
+      description: 'uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUTacl.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutObjectAclOutput'
+        '480':
+          description: NoSuchKey
+          schema:
+            $ref: '#/definitions/NoSuchKey'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutObjectAclRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?tagging#PutObjectTagging':
+    put:
+      operationId: PutObjectTagging
+      description: Sets the supplied tag-set to an object that already exists in a bucket
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutObjectTaggingOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutObjectTaggingRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?restore#RestoreObject':
+    post:
+      operationId: RestoreObject
+      description: 'Restores an archived copy of an object back into Amazon S3<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectRestore.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestoreObjectOutput'
+        '480':
+          description: ObjectAlreadyInActiveTierError
+          schema:
+            $ref: '#/definitions/ObjectAlreadyInActiveTierError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RestoreObjectRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#UploadPart':
+    put:
+      operationId: UploadPart
+      description: '<p>Uploads a part in a multipart upload.</p><p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPart.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UploadPartOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UploadPartRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#UploadPartCopy':
+    put:
+      operationId: UploadPartCopy
+      description: 'Uploads a part by copying data from an existing object as data source.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UploadPartCopyOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UploadPartCopyRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+definitions:
+  AbortDate:
+    type: string
+    format: date-time
+  AbortIncompleteMultipartUpload:
+    type: object
+    properties:
+      DaysAfterInitiation:
+        $ref: '#/definitions/DaysAfterInitiation'
+        description: Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.
+    description: Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
+  AbortMultipartUploadOutput:
+    type: object
+    properties: {}
+  AbortMultipartUploadRequest:
+    type: object
+    properties: {}
+  AbortRuleId:
+    type: string
+  AccelerateConfiguration:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/BucketAccelerateStatus'
+        description: The accelerate configuration of the bucket.
+  AcceptRanges:
+    type: string
+  AccessControlPolicy:
+    type: object
+    properties:
+      Grants:
+        $ref: '#/definitions/Grants'
+        description: A list of grants.
+      Owner:
+        $ref: '#/definitions/Owner'
+  AccountId:
+    type: string
+  AllowedHeader:
+    type: string
+  AllowedHeaders:
+    type: array
+    items:
+      $ref: '#/definitions/AllowedHeader'
+    xml:
+      wrapped: false
+  AllowedMethod:
+    type: string
+  AllowedMethods:
+    type: array
+    items:
+      $ref: '#/definitions/AllowedMethod'
+    xml:
+      wrapped: false
+  AllowedOrigin:
+    type: string
+  AllowedOrigins:
+    type: array
+    items:
+      $ref: '#/definitions/AllowedOrigin'
+    xml:
+      wrapped: false
+  AnalyticsAndOperator:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix to use when evaluating an AND predicate.
+      Tags:
+        $ref: '#/definitions/TagSet'
+        description: The list of tags to use when evaluating an AND predicate.
+    xml:
+      wrapped: false
+  AnalyticsConfiguration:
+    type: object
+    required:
+      - Id
+      - StorageClassAnalysis
+    properties:
+      Id:
+        $ref: '#/definitions/AnalyticsId'
+        description: The identifier used to represent an analytics configuration.
+      Filter:
+        $ref: '#/definitions/AnalyticsFilter'
+        description: 'The filter used to describe a set of objects for analyses. A filter must have exactly one prefix, one tag, or one conjunction (AnalyticsAndOperator). If no filter is provided, all objects will be considered in any analysis.'
+      StorageClassAnalysis:
+        $ref: '#/definitions/StorageClassAnalysis'
+        description: 'If present, it indicates that data related to access patterns will be collected and made available to analyze the tradeoffs between different storage classes.'
+  AnalyticsConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/AnalyticsConfiguration'
+    xml:
+      wrapped: false
+  AnalyticsExportDestination:
+    type: object
+    required:
+      - S3BucketDestination
+    properties:
+      S3BucketDestination:
+        $ref: '#/definitions/AnalyticsS3BucketDestination'
+        description: A destination signifying output to an S3 bucket.
+  AnalyticsFilter:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix to use when evaluating an analytics filter.
+      Tag:
+        $ref: '#/definitions/Tag'
+        description: The tag to use when evaluating an analytics filter.
+      And:
+        $ref: '#/definitions/AnalyticsAndOperator'
+        description: 'A conjunction (logical AND) of predicates, which is used in evaluating an analytics filter. The operator must have at least two predicates.'
+  AnalyticsId:
+    type: string
+  AnalyticsS3BucketDestination:
+    type: object
+    required:
+      - Format
+      - Bucket
+    properties:
+      Format:
+        $ref: '#/definitions/AnalyticsS3ExportFileFormat'
+        description: The file format used when exporting data to Amazon S3.
+      BucketAccountId:
+        $ref: '#/definitions/AccountId'
+        description: 'The account ID that owns the destination bucket. If no account ID is provided, the owner will not be validated prior to exporting data.'
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: The Amazon resource name (ARN) of the bucket to which data is exported.
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix to use when exporting data. The exported data begins with this prefix.
+  AnalyticsS3ExportFileFormat:
+    type: string
+    enum:
+      - CSV
+  Body:
+    type: string
+  Bucket:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/BucketName'
+        description: The name of the bucket.
+      CreationDate:
+        $ref: '#/definitions/CreationDate'
+        description: Date the bucket was created.
+  BucketAccelerateStatus:
+    type: string
+    enum:
+      - Enabled
+      - Suspended
+  BucketAlreadyExists:
+    type: object
+    properties: {}
+    description: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.
+  BucketAlreadyOwnedByYou:
+    type: object
+    properties: {}
+  BucketCannedACL:
+    type: string
+    enum:
+      - private
+      - public-read
+      - public-read-write
+      - authenticated-read
+  BucketLifecycleConfiguration:
+    type: object
+    required:
+      - Rules
+    properties:
+      Rules:
+        $ref: '#/definitions/LifecycleRules'
+  BucketLocationConstraint:
+    type: string
+    enum:
+      - EU
+      - eu-west-1
+      - us-west-1
+      - us-west-2
+      - ap-south-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - sa-east-1
+      - cn-north-1
+      - eu-central-1
+  BucketLoggingStatus:
+    type: object
+    properties:
+      LoggingEnabled:
+        $ref: '#/definitions/LoggingEnabled'
+  BucketLogsPermission:
+    type: string
+    enum:
+      - FULL_CONTROL
+      - READ
+      - WRITE
+  BucketName:
+    type: string
+  BucketVersioningStatus:
+    type: string
+    enum:
+      - Enabled
+      - Suspended
+  Buckets:
+    type: array
+    items:
+      $ref: '#/definitions/Bucket'
+  CORSConfiguration:
+    type: object
+    required:
+      - CORSRules
+    properties:
+      CORSRules:
+        $ref: '#/definitions/CORSRules'
+  CORSRule:
+    type: object
+    required:
+      - AllowedMethods
+      - AllowedOrigins
+    properties:
+      AllowedHeaders:
+        $ref: '#/definitions/AllowedHeaders'
+        description: Specifies which headers are allowed in a pre-flight OPTIONS request.
+      AllowedMethods:
+        $ref: '#/definitions/AllowedMethods'
+        description: Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.
+      AllowedOrigins:
+        $ref: '#/definitions/AllowedOrigins'
+        description: One or more origins you want customers to be able to access the bucket from.
+      ExposeHeaders:
+        $ref: '#/definitions/ExposeHeaders'
+        description: 'One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).'
+      MaxAgeSeconds:
+        $ref: '#/definitions/MaxAgeSeconds'
+        description: The time in seconds that your browser is to cache the preflight response for the specified resource.
+  CORSRules:
+    type: array
+    items:
+      $ref: '#/definitions/CORSRule'
+    xml:
+      wrapped: false
+  CacheControl:
+    type: string
+  CloudFunction:
+    type: string
+  CloudFunctionConfiguration:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/NotificationId'
+      Event:
+        $ref: '#/definitions/Event'
+      Events:
+        $ref: '#/definitions/EventList'
+      CloudFunction:
+        $ref: '#/definitions/CloudFunction'
+      InvocationRole:
+        $ref: '#/definitions/CloudFunctionInvocationRole'
+  CloudFunctionInvocationRole:
+    type: string
+  Code:
+    type: string
+  CommonPrefix:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+  CommonPrefixList:
+    type: array
+    items:
+      $ref: '#/definitions/CommonPrefix'
+    xml:
+      wrapped: false
+  CompleteMultipartUploadOutput:
+    type: object
+    properties:
+      Location:
+        $ref: '#/definitions/Location'
+      Bucket:
+        $ref: '#/definitions/BucketName'
+      Key:
+        $ref: '#/definitions/ObjectKey'
+      ETag:
+        $ref: '#/definitions/ETag'
+        description: Entity tag of the object.
+  CompleteMultipartUploadRequest:
+    type: object
+    properties:
+      MultipartUpload:
+        $ref: '#/definitions/CompletedMultipartUpload'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  CompletedMultipartUpload:
+    type: object
+    properties:
+      Parts:
+        $ref: '#/definitions/CompletedPartList'
+  CompletedPart:
+    type: object
+    properties:
+      ETag:
+        $ref: '#/definitions/ETag'
+        description: Entity tag returned when the part was uploaded.
+      PartNumber:
+        $ref: '#/definitions/PartNumber'
+        description: 'Part number that identifies the part. This is a positive integer between 1 and 10,000.'
+  CompletedPartList:
+    type: array
+    items:
+      $ref: '#/definitions/CompletedPart'
+    xml:
+      wrapped: false
+  Condition:
+    type: object
+    properties:
+      HttpErrorCodeReturnedEquals:
+        $ref: '#/definitions/HttpErrorCodeReturnedEquals'
+        description: 'The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied. Required when parent element Condition is specified and sibling KeyPrefixEquals is not specified. If both are specified, then both must be true for the redirect to be applied.'
+      KeyPrefixEquals:
+        $ref: '#/definitions/KeyPrefixEquals'
+        description: 'The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied.'
+  ContentDisposition:
+    type: string
+  ContentEncoding:
+    type: string
+  ContentLanguage:
+    type: string
+  ContentLength:
+    type: integer
+  ContentMD5:
+    type: string
+  ContentRange:
+    type: string
+  ContentType:
+    type: string
+  CopyObjectOutput:
+    type: object
+    properties:
+      CopyObjectResult:
+        $ref: '#/definitions/CopyObjectResult'
+  CopyObjectRequest:
+    type: object
+    properties: {}
+  CopyObjectResult:
+    type: object
+    properties:
+      ETag:
+        $ref: '#/definitions/ETag'
+      LastModified:
+        $ref: '#/definitions/LastModified'
+  CopyPartResult:
+    type: object
+    properties:
+      ETag:
+        $ref: '#/definitions/ETag'
+        description: Entity tag of the object.
+      LastModified:
+        $ref: '#/definitions/LastModified'
+        description: Date and time at which the object was uploaded.
+  CopySource:
+    type: string
+    pattern: \/.+\/.+
+  CopySourceIfMatch:
+    type: string
+  CopySourceIfModifiedSince:
+    type: string
+    format: date-time
+  CopySourceIfNoneMatch:
+    type: string
+  CopySourceIfUnmodifiedSince:
+    type: string
+    format: date-time
+  CopySourceRange:
+    type: string
+  CopySourceSSECustomerAlgorithm:
+    type: string
+  CopySourceSSECustomerKey:
+    type: string
+    format: password
+  CopySourceSSECustomerKeyMD5:
+    type: string
+  CopySourceVersionId:
+    type: string
+  CreateBucketConfiguration:
+    type: object
+    properties:
+      LocationConstraint:
+        $ref: '#/definitions/BucketLocationConstraint'
+        description: 'Specifies the region where the bucket will be created. If you don''t specify a region, the bucket will be created in US Standard.'
+  CreateBucketOutput:
+    type: object
+    properties: {}
+  CreateBucketRequest:
+    type: object
+    properties:
+      CreateBucketConfiguration:
+        $ref: '#/definitions/CreateBucketConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  CreateMultipartUploadOutput:
+    type: object
+    properties:
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: Name of the bucket to which the multipart upload was initiated.
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: Object key for which the multipart upload was initiated.
+      UploadId:
+        $ref: '#/definitions/MultipartUploadId'
+        description: ID for the initiated multipart upload.
+  CreateMultipartUploadRequest:
+    type: object
+    properties: {}
+  CreationDate:
+    type: string
+    format: date-time
+  Date:
+    type: string
+    format: date-time
+  Days:
+    type: integer
+  DaysAfterInitiation:
+    type: integer
+  Delete:
+    type: object
+    required:
+      - Objects
+    properties:
+      Objects:
+        $ref: '#/definitions/ObjectIdentifierList'
+      Quiet:
+        $ref: '#/definitions/Quiet'
+        description: 'Element to enable quiet mode for the request. When you add this element, you must set its value to true.'
+  DeleteBucketAnalyticsConfigurationRequest:
+    type: object
+    properties: {}
+  DeleteBucketCorsRequest:
+    type: object
+    properties: {}
+  DeleteBucketInventoryConfigurationRequest:
+    type: object
+    properties: {}
+  DeleteBucketLifecycleRequest:
+    type: object
+    properties: {}
+  DeleteBucketMetricsConfigurationRequest:
+    type: object
+    properties: {}
+  DeleteBucketPolicyRequest:
+    type: object
+    properties: {}
+  DeleteBucketReplicationRequest:
+    type: object
+    properties: {}
+  DeleteBucketRequest:
+    type: object
+    properties: {}
+  DeleteBucketTaggingRequest:
+    type: object
+    properties: {}
+  DeleteBucketWebsiteRequest:
+    type: object
+    properties: {}
+  DeleteMarker:
+    type: boolean
+  DeleteMarkerEntry:
+    type: object
+    properties:
+      Owner:
+        $ref: '#/definitions/Owner'
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: The object key.
+      VersionId:
+        $ref: '#/definitions/ObjectVersionId'
+        description: Version ID of an object.
+      IsLatest:
+        $ref: '#/definitions/IsLatest'
+        description: Specifies whether the object is (true) or is not (false) the latest version of an object.
+      LastModified:
+        $ref: '#/definitions/LastModified'
+        description: Date and time the object was last modified.
+  DeleteMarkerVersionId:
+    type: string
+  DeleteMarkers:
+    type: array
+    items:
+      $ref: '#/definitions/DeleteMarkerEntry'
+    xml:
+      wrapped: false
+  DeleteObjectOutput:
+    type: object
+    properties: {}
+  DeleteObjectRequest:
+    type: object
+    properties: {}
+  DeleteObjectTaggingOutput:
+    type: object
+    properties: {}
+  DeleteObjectTaggingRequest:
+    type: object
+    properties: {}
+  DeleteObjectsOutput:
+    type: object
+    properties:
+      Deleted:
+        $ref: '#/definitions/DeletedObjects'
+      Errors:
+        $ref: '#/definitions/Errors'
+  DeleteObjectsRequest:
+    type: object
+    required:
+      - Delete
+    properties:
+      Delete:
+        $ref: '#/definitions/Delete'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  DeletedObject:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+      VersionId:
+        $ref: '#/definitions/ObjectVersionId'
+      DeleteMarker:
+        $ref: '#/definitions/DeleteMarker'
+      DeleteMarkerVersionId:
+        $ref: '#/definitions/DeleteMarkerVersionId'
+  DeletedObjects:
+    type: array
+    items:
+      $ref: '#/definitions/DeletedObject'
+    xml:
+      wrapped: false
+  Delimiter:
+    type: string
+  Destination:
+    type: object
+    required:
+      - Bucket
+    properties:
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.
+      StorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: The class of storage used to store the object.
+  DisplayName:
+    type: string
+  ETag:
+    type: string
+  EmailAddress:
+    type: string
+  EncodingType:
+    type: string
+    enum:
+      - url
+    description: 'Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.'
+  Error:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+      VersionId:
+        $ref: '#/definitions/ObjectVersionId'
+      Code:
+        $ref: '#/definitions/Code'
+      Message:
+        $ref: '#/definitions/Message'
+  ErrorDocument:
+    type: object
+    required:
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: The object key name to use when a 4XX class error occurs.
+  Errors:
+    type: array
+    items:
+      $ref: '#/definitions/Error'
+    xml:
+      wrapped: false
+  Event:
+    type: string
+    enum:
+      - 's3:ReducedRedundancyLostObject'
+      - 's3:ObjectCreated:*'
+      - 's3:ObjectCreated:Put'
+      - 's3:ObjectCreated:Post'
+      - 's3:ObjectCreated:Copy'
+      - 's3:ObjectCreated:CompleteMultipartUpload'
+      - 's3:ObjectRemoved:*'
+      - 's3:ObjectRemoved:Delete'
+      - 's3:ObjectRemoved:DeleteMarkerCreated'
+    description: Bucket event for which to send notifications.
+  EventList:
+    type: array
+    items:
+      $ref: '#/definitions/Event'
+    xml:
+      wrapped: false
+  Expiration:
+    type: string
+  ExpirationStatus:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  ExpiredObjectDeleteMarker:
+    type: boolean
+  Expires:
+    type: string
+    format: date-time
+  ExposeHeader:
+    type: string
+  ExposeHeaders:
+    type: array
+    items:
+      $ref: '#/definitions/ExposeHeader'
+    xml:
+      wrapped: false
+  FetchOwner:
+    type: boolean
+  FilterRule:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/FilterRuleName'
+        description: 'Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.'
+      Value:
+        $ref: '#/definitions/FilterRuleValue'
+    description: Container for key value pair that defines the criteria for the filter rule.
+  FilterRuleList:
+    type: array
+    description: A list of containers for key value pair that defines the criteria for the filter rule.
+    items:
+      $ref: '#/definitions/FilterRule'
+    xml:
+      wrapped: false
+  FilterRuleName:
+    type: string
+    enum:
+      - prefix
+      - suffix
+  FilterRuleValue:
+    type: string
+  GetBucketAccelerateConfigurationOutput:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/BucketAccelerateStatus'
+        description: The accelerate configuration of the bucket.
+  GetBucketAccelerateConfigurationRequest:
+    type: object
+    properties: {}
+  GetBucketAclOutput:
+    type: object
+    properties:
+      Owner:
+        $ref: '#/definitions/Owner'
+      Grants:
+        $ref: '#/definitions/Grants'
+        description: A list of grants.
+  GetBucketAclRequest:
+    type: object
+    properties: {}
+  GetBucketAnalyticsConfigurationOutput:
+    type: object
+    properties:
+      AnalyticsConfiguration:
+        $ref: '#/definitions/AnalyticsConfiguration'
+        description: The configuration and any analyses for the analytics filter.
+  GetBucketAnalyticsConfigurationRequest:
+    type: object
+    properties: {}
+  GetBucketCorsOutput:
+    type: object
+    properties:
+      CORSRules:
+        $ref: '#/definitions/CORSRules'
+  GetBucketCorsRequest:
+    type: object
+    properties: {}
+  GetBucketInventoryConfigurationOutput:
+    type: object
+    properties:
+      InventoryConfiguration:
+        $ref: '#/definitions/InventoryConfiguration'
+        description: Specifies the inventory configuration.
+  GetBucketInventoryConfigurationRequest:
+    type: object
+    properties: {}
+  GetBucketLifecycleConfigurationOutput:
+    type: object
+    properties:
+      Rules:
+        $ref: '#/definitions/LifecycleRules'
+  GetBucketLifecycleConfigurationRequest:
+    type: object
+    properties: {}
+  GetBucketLifecycleOutput:
+    type: object
+    properties:
+      Rules:
+        $ref: '#/definitions/Rules'
+  GetBucketLifecycleRequest:
+    type: object
+    properties: {}
+  GetBucketLocationOutput:
+    type: object
+    properties:
+      LocationConstraint:
+        $ref: '#/definitions/BucketLocationConstraint'
+  GetBucketLocationRequest:
+    type: object
+    properties: {}
+  GetBucketLoggingOutput:
+    type: object
+    properties:
+      LoggingEnabled:
+        $ref: '#/definitions/LoggingEnabled'
+  GetBucketLoggingRequest:
+    type: object
+    properties: {}
+  GetBucketMetricsConfigurationOutput:
+    type: object
+    properties:
+      MetricsConfiguration:
+        $ref: '#/definitions/MetricsConfiguration'
+        description: Specifies the metrics configuration.
+  GetBucketMetricsConfigurationRequest:
+    type: object
+    properties: {}
+  GetBucketNotificationConfigurationRequest:
+    type: object
+    properties: {}
+  GetBucketPolicyOutput:
+    type: object
+    properties:
+      Policy:
+        $ref: '#/definitions/Policy'
+        description: The bucket policy as a JSON document.
+  GetBucketPolicyRequest:
+    type: object
+    properties: {}
+  GetBucketReplicationOutput:
+    type: object
+    properties:
+      ReplicationConfiguration:
+        $ref: '#/definitions/ReplicationConfiguration'
+  GetBucketReplicationRequest:
+    type: object
+    properties: {}
+  GetBucketRequestPaymentOutput:
+    type: object
+    properties:
+      Payer:
+        $ref: '#/definitions/Payer'
+        description: Specifies who pays for the download and request fees.
+  GetBucketRequestPaymentRequest:
+    type: object
+    properties: {}
+  GetBucketTaggingOutput:
+    type: object
+    required:
+      - TagSet
+    properties:
+      TagSet:
+        $ref: '#/definitions/TagSet'
+  GetBucketTaggingRequest:
+    type: object
+    properties: {}
+  GetBucketVersioningOutput:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/BucketVersioningStatus'
+        description: The versioning state of the bucket.
+      MFADelete:
+        $ref: '#/definitions/MFADeleteStatus'
+        description: 'Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.'
+  GetBucketVersioningRequest:
+    type: object
+    properties: {}
+  GetBucketWebsiteOutput:
+    type: object
+    properties:
+      RedirectAllRequestsTo:
+        $ref: '#/definitions/RedirectAllRequestsTo'
+      IndexDocument:
+        $ref: '#/definitions/IndexDocument'
+      ErrorDocument:
+        $ref: '#/definitions/ErrorDocument'
+      RoutingRules:
+        $ref: '#/definitions/RoutingRules'
+  GetBucketWebsiteRequest:
+    type: object
+    properties: {}
+  GetObjectAclOutput:
+    type: object
+    properties:
+      Owner:
+        $ref: '#/definitions/Owner'
+      Grants:
+        $ref: '#/definitions/Grants'
+        description: A list of grants.
+  GetObjectAclRequest:
+    type: object
+    properties: {}
+  GetObjectOutput:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/Body'
+        description: Object data.
+  GetObjectRequest:
+    type: object
+    properties: {}
+  GetObjectTaggingOutput:
+    type: object
+    required:
+      - TagSet
+    properties:
+      TagSet:
+        $ref: '#/definitions/TagSet'
+  GetObjectTaggingRequest:
+    type: object
+    properties: {}
+  GetObjectTorrentOutput:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/Body'
+  GetObjectTorrentRequest:
+    type: object
+    properties: {}
+  GlacierJobParameters:
+    type: object
+    required:
+      - Tier
+    properties:
+      Tier:
+        $ref: '#/definitions/Tier'
+        description: Glacier retrieval tier at which the restore will be processed.
+  Grant:
+    type: object
+    properties:
+      Grantee:
+        $ref: '#/definitions/Grantee'
+      Permission:
+        $ref: '#/definitions/Permission'
+        description: Specifies the permission given to the grantee.
+  GrantFullControl:
+    type: string
+  GrantRead:
+    type: string
+  GrantReadACP:
+    type: string
+  GrantWrite:
+    type: string
+  GrantWriteACP:
+    type: string
+  Grantee:
+    type: object
+    required:
+      - Type
+    properties:
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: Screen name of the grantee.
+      EmailAddress:
+        $ref: '#/definitions/EmailAddress'
+        description: Email address of the grantee.
+      ID:
+        $ref: '#/definitions/ID'
+        description: The canonical user ID of the grantee.
+      Type:
+        $ref: '#/definitions/Type'
+        description: Type of grantee
+      URI:
+        $ref: '#/definitions/URI'
+        description: URI of the grantee group.
+    xml:
+      namespace: 'http://www.w3.org/2001/XMLSchema-instance'
+      attribute: true
+  Grants:
+    type: array
+    items:
+      $ref: '#/definitions/Grant'
+  HeadBucketRequest:
+    type: object
+    properties: {}
+  HeadObjectOutput:
+    type: object
+    properties: {}
+  HeadObjectRequest:
+    type: object
+    properties: {}
+  HostName:
+    type: string
+  HttpErrorCodeReturnedEquals:
+    type: string
+  HttpRedirectCode:
+    type: string
+  ID:
+    type: string
+  IfMatch:
+    type: string
+  IfModifiedSince:
+    type: string
+    format: date-time
+  IfNoneMatch:
+    type: string
+  IfUnmodifiedSince:
+    type: string
+    format: date-time
+  IndexDocument:
+    type: object
+    required:
+      - Suffix
+    properties:
+      Suffix:
+        $ref: '#/definitions/Suffix'
+        description: A suffix that is appended to a request that is for a directory on the website endpoint (e.g. if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character.
+  Initiated:
+    type: string
+    format: date-time
+  Initiator:
+    type: object
+    properties:
+      ID:
+        $ref: '#/definitions/ID'
+        description: 'If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value.'
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: Name of the Principal.
+  InventoryConfiguration:
+    type: object
+    required:
+      - Destination
+      - IsEnabled
+      - Id
+      - IncludedObjectVersions
+      - Schedule
+    properties:
+      Destination:
+        $ref: '#/definitions/InventoryDestination'
+        description: Contains information about where to publish the inventory results.
+      IsEnabled:
+        $ref: '#/definitions/IsEnabled'
+        description: Specifies whether the inventory is enabled or disabled.
+      Filter:
+        $ref: '#/definitions/InventoryFilter'
+        description: Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria.
+      Id:
+        $ref: '#/definitions/InventoryId'
+        description: The ID used to identify the inventory configuration.
+      IncludedObjectVersions:
+        $ref: '#/definitions/InventoryIncludedObjectVersions'
+        description: Specifies which object version(s) to included in the inventory results.
+      OptionalFields:
+        $ref: '#/definitions/InventoryOptionalFields'
+        description: Contains the optional fields that are included in the inventory results.
+      Schedule:
+        $ref: '#/definitions/InventorySchedule'
+        description: Specifies the schedule for generating inventory results.
+  InventoryConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryConfiguration'
+    xml:
+      wrapped: false
+  InventoryDestination:
+    type: object
+    required:
+      - S3BucketDestination
+    properties:
+      S3BucketDestination:
+        $ref: '#/definitions/InventoryS3BucketDestination'
+        description: 'Contains the bucket name, file format, bucket owner (optional), and prefix (optional) where inventory results are published.'
+  InventoryFilter:
+    type: object
+    required:
+      - Prefix
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix that an object must have to be included in the inventory results.
+  InventoryFormat:
+    type: string
+    enum:
+      - CSV
+  InventoryFrequency:
+    type: string
+    enum:
+      - Daily
+      - Weekly
+  InventoryId:
+    type: string
+  InventoryIncludedObjectVersions:
+    type: string
+    enum:
+      - All
+      - Current
+  InventoryOptionalField:
+    type: string
+    enum:
+      - Size
+      - LastModifiedDate
+      - StorageClass
+      - ETag
+      - IsMultipartUploaded
+      - ReplicationStatus
+  InventoryOptionalFields:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryOptionalField'
+  InventoryS3BucketDestination:
+    type: object
+    required:
+      - Bucket
+      - Format
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: The ID of the account that owns the destination bucket.
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: The Amazon resource name (ARN) of the bucket where inventory results will be published.
+      Format:
+        $ref: '#/definitions/InventoryFormat'
+        description: Specifies the output format of the inventory results.
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix that is prepended to all inventory results.
+  InventorySchedule:
+    type: object
+    required:
+      - Frequency
+    properties:
+      Frequency:
+        $ref: '#/definitions/InventoryFrequency'
+        description: Specifies how frequently inventory results are produced.
+  IsEnabled:
+    type: boolean
+  IsLatest:
+    type: boolean
+  IsTruncated:
+    type: boolean
+  KeyCount:
+    type: integer
+  KeyMarker:
+    type: string
+  KeyPrefixEquals:
+    type: string
+  LambdaFunctionArn:
+    type: string
+  LambdaFunctionConfiguration:
+    type: object
+    required:
+      - LambdaFunctionArn
+      - Events
+    properties:
+      Id:
+        $ref: '#/definitions/NotificationId'
+      LambdaFunctionArn:
+        $ref: '#/definitions/LambdaFunctionArn'
+        description: Lambda cloud function ARN that Amazon S3 can invoke when it detects events of the specified type.
+      Events:
+        $ref: '#/definitions/EventList'
+      Filter:
+        $ref: '#/definitions/NotificationConfigurationFilter'
+    description: Container for specifying the AWS Lambda notification configuration.
+  LambdaFunctionConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/LambdaFunctionConfiguration'
+    xml:
+      wrapped: false
+  LastModified:
+    type: string
+    format: date-time
+  LifecycleConfiguration:
+    type: object
+    required:
+      - Rules
+    properties:
+      Rules:
+        $ref: '#/definitions/Rules'
+  LifecycleExpiration:
+    type: object
+    properties:
+      Date:
+        $ref: '#/definitions/Date'
+        description: Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
+      Days:
+        $ref: '#/definitions/Days'
+        description: 'Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.'
+      ExpiredObjectDeleteMarker:
+        $ref: '#/definitions/ExpiredObjectDeleteMarker'
+        description: 'Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.'
+  LifecycleRule:
+    type: object
+    required:
+      - Status
+    properties:
+      Expiration:
+        $ref: '#/definitions/LifecycleExpiration'
+      ID:
+        $ref: '#/definitions/ID'
+        description: Unique identifier for the rule. The value cannot be longer than 255 characters.
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.
+      Filter:
+        $ref: '#/definitions/LifecycleRuleFilter'
+      Status:
+        $ref: '#/definitions/ExpirationStatus'
+        description: 'If ''Enabled'', the rule is currently being applied. If ''Disabled'', the rule is not currently being applied.'
+      Transitions:
+        $ref: '#/definitions/TransitionList'
+      NoncurrentVersionTransitions:
+        $ref: '#/definitions/NoncurrentVersionTransitionList'
+      NoncurrentVersionExpiration:
+        $ref: '#/definitions/NoncurrentVersionExpiration'
+      AbortIncompleteMultipartUpload:
+        $ref: '#/definitions/AbortIncompleteMultipartUpload'
+  LifecycleRuleAndOperator:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+      Tags:
+        $ref: '#/definitions/TagSet'
+        description: All of these tags must exist in the object's tag set in order for the rule to apply.
+    description: This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.
+    xml:
+      wrapped: false
+  LifecycleRuleFilter:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: Prefix identifying one or more objects to which the rule applies.
+      Tag:
+        $ref: '#/definitions/Tag'
+        description: This tag must exist in the object's tag set in order for the rule to apply.
+      And:
+        $ref: '#/definitions/LifecycleRuleAndOperator'
+    description: 'The Filter is used to identify objects that a Lifecycle Rule applies to. A Filter must have exactly one of Prefix, Tag, or And specified.'
+  LifecycleRules:
+    type: array
+    items:
+      $ref: '#/definitions/LifecycleRule'
+    xml:
+      wrapped: false
+  ListBucketAnalyticsConfigurationsOutput:
+    type: object
+    properties:
+      IsTruncated:
+        $ref: '#/definitions/IsTruncated'
+        description: Indicates whether the returned list of analytics configurations is complete. A value of true indicates that the list is not complete and the NextContinuationToken will be provided for a subsequent request.
+      ContinuationToken:
+        $ref: '#/definitions/Token'
+        description: The ContinuationToken that represents where this request began.
+      NextContinuationToken:
+        $ref: '#/definitions/NextToken'
+        description: 'NextContinuationToken is sent when isTruncated is true, which indicates that there are more analytics configurations to list. The next request must include this NextContinuationToken. The token is obfuscated and is not a usable value.'
+      AnalyticsConfigurationList:
+        $ref: '#/definitions/AnalyticsConfigurationList'
+        description: The list of analytics configurations for a bucket.
+  ListBucketAnalyticsConfigurationsRequest:
+    type: object
+    properties: {}
+  ListBucketInventoryConfigurationsOutput:
+    type: object
+    properties:
+      ContinuationToken:
+        $ref: '#/definitions/Token'
+        description: 'If sent in the request, the marker that is used as a starting point for this inventory configuration list response.'
+      InventoryConfigurationList:
+        $ref: '#/definitions/InventoryConfigurationList'
+        description: The list of inventory configurations for a bucket.
+      IsTruncated:
+        $ref: '#/definitions/IsTruncated'
+        description: Indicates whether the returned list of inventory configurations is truncated in this response. A value of true indicates that the list is truncated.
+      NextContinuationToken:
+        $ref: '#/definitions/NextToken'
+        description: The marker used to continue this inventory configuration listing. Use the NextContinuationToken from this response to continue the listing in a subsequent request. The continuation token is an opaque value that Amazon S3 understands.
+  ListBucketInventoryConfigurationsRequest:
+    type: object
+    properties: {}
+  ListBucketMetricsConfigurationsOutput:
+    type: object
+    properties:
+      IsTruncated:
+        $ref: '#/definitions/IsTruncated'
+        description: Indicates whether the returned list of metrics configurations is complete. A value of true indicates that the list is not complete and the NextContinuationToken will be provided for a subsequent request.
+      ContinuationToken:
+        $ref: '#/definitions/Token'
+        description: The marker that is used as a starting point for this metrics configuration list response. This value is present if it was sent in the request.
+      NextContinuationToken:
+        $ref: '#/definitions/NextToken'
+        description: The marker used to continue a metrics configuration listing that has been truncated. Use the NextContinuationToken from a previously truncated list response to continue the listing. The continuation token is an opaque value that Amazon S3 understands.
+      MetricsConfigurationList:
+        $ref: '#/definitions/MetricsConfigurationList'
+        description: The list of metrics configurations for a bucket.
+  ListBucketMetricsConfigurationsRequest:
+    type: object
+    properties: {}
+  ListBucketsOutput:
+    type: object
+    properties:
+      Buckets:
+        $ref: '#/definitions/Buckets'
+      Owner:
+        $ref: '#/definitions/Owner'
+  ListMultipartUploadsOutput:
+    type: object
+    properties:
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: Name of the bucket to which the multipart upload was initiated.
+      KeyMarker:
+        $ref: '#/definitions/KeyMarker'
+        description: The key at or after which the listing began.
+      UploadIdMarker:
+        $ref: '#/definitions/UploadIdMarker'
+        description: Upload ID after which listing began.
+      NextKeyMarker:
+        $ref: '#/definitions/NextKeyMarker'
+        description: 'When a list is truncated, this element specifies the value that should be used for the key-marker request parameter in a subsequent request.'
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: 'When a prefix is provided in the request, this field contains the specified prefix. The result contains only keys starting with the specified prefix.'
+      Delimiter:
+        $ref: '#/definitions/Delimiter'
+      NextUploadIdMarker:
+        $ref: '#/definitions/NextUploadIdMarker'
+        description: 'When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request.'
+      MaxUploads:
+        $ref: '#/definitions/MaxUploads'
+        description: Maximum number of multipart uploads that could have been included in the response.
+      IsTruncated:
+        $ref: '#/definitions/IsTruncated'
+        description: Indicates whether the returned list of multipart uploads is truncated. A value of true indicates that the list was truncated. The list can be truncated if the number of multipart uploads exceeds the limit allowed or specified by max uploads.
+      Uploads:
+        $ref: '#/definitions/MultipartUploadList'
+      CommonPrefixes:
+        $ref: '#/definitions/CommonPrefixList'
+      EncodingType:
+        $ref: '#/definitions/EncodingType'
+        description: Encoding type used by Amazon S3 to encode object keys in the response.
+  ListMultipartUploadsRequest:
+    type: object
+    properties: {}
+  ListObjectVersionsOutput:
+    type: object
+    properties:
+      IsTruncated:
+        $ref: '#/definitions/IsTruncated'
+        description: 'A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria. If your results were truncated, you can make a follow-up paginated request using the NextKeyMarker and NextVersionIdMarker response parameters as a starting place in another request to return the rest of the results.'
+      KeyMarker:
+        $ref: '#/definitions/KeyMarker'
+        description: Marks the last Key returned in a truncated response.
+      VersionIdMarker:
+        $ref: '#/definitions/VersionIdMarker'
+      NextKeyMarker:
+        $ref: '#/definitions/NextKeyMarker'
+        description: Use this value for the key marker request parameter in a subsequent request.
+      NextVersionIdMarker:
+        $ref: '#/definitions/NextVersionIdMarker'
+        description: Use this value for the next version id marker parameter in a subsequent request.
+      Versions:
+        $ref: '#/definitions/ObjectVersionList'
+      DeleteMarkers:
+        $ref: '#/definitions/DeleteMarkers'
+      Name:
+        $ref: '#/definitions/BucketName'
+      Prefix:
+        $ref: '#/definitions/Prefix'
+      Delimiter:
+        $ref: '#/definitions/Delimiter'
+      MaxKeys:
+        $ref: '#/definitions/MaxKeys'
+      CommonPrefixes:
+        $ref: '#/definitions/CommonPrefixList'
+      EncodingType:
+        $ref: '#/definitions/EncodingType'
+        description: Encoding type used by Amazon S3 to encode object keys in the response.
+  ListObjectVersionsRequest:
+    type: object
+    properties: {}
+  ListObjectsOutput:
+    type: object
+    properties:
+      IsTruncated:
+        $ref: '#/definitions/IsTruncated'
+        description: A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
+      Marker:
+        $ref: '#/definitions/Marker'
+      NextMarker:
+        $ref: '#/definitions/NextMarker'
+        description: 'When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.'
+      Contents:
+        $ref: '#/definitions/ObjectList'
+      Name:
+        $ref: '#/definitions/BucketName'
+      Prefix:
+        $ref: '#/definitions/Prefix'
+      Delimiter:
+        $ref: '#/definitions/Delimiter'
+      MaxKeys:
+        $ref: '#/definitions/MaxKeys'
+      CommonPrefixes:
+        $ref: '#/definitions/CommonPrefixList'
+      EncodingType:
+        $ref: '#/definitions/EncodingType'
+        description: Encoding type used by Amazon S3 to encode object keys in the response.
+  ListObjectsRequest:
+    type: object
+    properties: {}
+  ListObjectsV2Output:
+    type: object
+    properties:
+      IsTruncated:
+        $ref: '#/definitions/IsTruncated'
+        description: A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
+      Contents:
+        $ref: '#/definitions/ObjectList'
+        description: Metadata about each object returned.
+      Name:
+        $ref: '#/definitions/BucketName'
+        description: Name of the bucket to list.
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: Limits the response to keys that begin with the specified prefix.
+      Delimiter:
+        $ref: '#/definitions/Delimiter'
+        description: A delimiter is a character you use to group keys.
+      MaxKeys:
+        $ref: '#/definitions/MaxKeys'
+        description: Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.
+      CommonPrefixes:
+        $ref: '#/definitions/CommonPrefixList'
+        description: CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by delimiter
+      EncodingType:
+        $ref: '#/definitions/EncodingType'
+        description: Encoding type used by Amazon S3 to encode object keys in the response.
+      KeyCount:
+        $ref: '#/definitions/KeyCount'
+        description: 'KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys'
+      ContinuationToken:
+        $ref: '#/definitions/Token'
+        description: ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key
+      NextContinuationToken:
+        $ref: '#/definitions/NextToken'
+        description: NextContinuationToken is sent when isTruncated is true which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken is obfuscated and is not a real key
+      StartAfter:
+        $ref: '#/definitions/StartAfter'
+        description: StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket
+  ListObjectsV2Request:
+    type: object
+    properties: {}
+  ListPartsOutput:
+    type: object
+    properties:
+      Bucket:
+        $ref: '#/definitions/BucketName'
+        description: Name of the bucket to which the multipart upload was initiated.
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: Object key for which the multipart upload was initiated.
+      UploadId:
+        $ref: '#/definitions/MultipartUploadId'
+        description: Upload ID identifying the multipart upload whose parts are being listed.
+      PartNumberMarker:
+        $ref: '#/definitions/PartNumberMarker'
+        description: Part number after which listing begins.
+      NextPartNumberMarker:
+        $ref: '#/definitions/NextPartNumberMarker'
+        description: 'When a list is truncated, this element specifies the last part in the list, as well as the value to use for the part-number-marker request parameter in a subsequent request.'
+      MaxParts:
+        $ref: '#/definitions/MaxParts'
+        description: Maximum number of parts that were allowed in the response.
+      IsTruncated:
+        $ref: '#/definitions/IsTruncated'
+        description: Indicates whether the returned list of parts is truncated.
+      Parts:
+        $ref: '#/definitions/Parts'
+      Initiator:
+        $ref: '#/definitions/Initiator'
+        description: Identifies who initiated the multipart upload.
+      Owner:
+        $ref: '#/definitions/Owner'
+      StorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: The class of storage used to store the object.
+  ListPartsRequest:
+    type: object
+    properties: {}
+  Location:
+    type: string
+  LoggingEnabled:
+    type: object
+    properties:
+      TargetBucket:
+        $ref: '#/definitions/TargetBucket'
+        description: 'Specifies the bucket where you want Amazon S3 to store server access logs. You can have your logs delivered to any bucket that you own, including the same bucket that is being logged. You can also configure multiple buckets to deliver their logs to the same target bucket. In this case you should choose a different TargetPrefix for each source bucket so that the delivered log files can be distinguished by key.'
+      TargetGrants:
+        $ref: '#/definitions/TargetGrants'
+      TargetPrefix:
+        $ref: '#/definitions/TargetPrefix'
+        description: This element lets you specify a prefix for the keys that the log files will be stored under.
+  MFA:
+    type: string
+  MFADelete:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  MFADeleteStatus:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  Marker:
+    type: string
+  MaxAgeSeconds:
+    type: integer
+  MaxKeys:
+    type: integer
+  MaxParts:
+    type: integer
+  MaxUploads:
+    type: integer
+  Message:
+    type: string
+  Metadata:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/MetadataKey'
+        value:
+          $ref: '#/definitions/MetadataValue'
+  MetadataDirective:
+    type: string
+    enum:
+      - COPY
+      - REPLACE
+  MetadataKey:
+    type: string
+  MetadataValue:
+    type: string
+  MetricsAndOperator:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix used when evaluating an AND predicate.
+      Tags:
+        $ref: '#/definitions/TagSet'
+        description: The list of tags used when evaluating an AND predicate.
+    xml:
+      wrapped: false
+  MetricsConfiguration:
+    type: object
+    required:
+      - Id
+    properties:
+      Id:
+        $ref: '#/definitions/MetricsId'
+        description: The ID used to identify the metrics configuration.
+      Filter:
+        $ref: '#/definitions/MetricsFilter'
+        description: 'Specifies a metrics configuration filter. The metrics configuration will only include objects that meet the filter''s criteria. A filter must be a prefix, a tag, or a conjunction (MetricsAndOperator).'
+  MetricsConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricsConfiguration'
+    xml:
+      wrapped: false
+  MetricsFilter:
+    type: object
+    properties:
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: The prefix used when evaluating a metrics filter.
+      Tag:
+        $ref: '#/definitions/Tag'
+        description: The tag used when evaluating a metrics filter.
+      And:
+        $ref: '#/definitions/MetricsAndOperator'
+        description: 'A conjunction (logical AND) of predicates, which is used in evaluating a metrics filter. The operator must have at least two predicates, and an object must match all of the predicates in order for the filter to apply.'
+  MetricsId:
+    type: string
+  MissingMeta:
+    type: integer
+  MultipartUpload:
+    type: object
+    properties:
+      UploadId:
+        $ref: '#/definitions/MultipartUploadId'
+        description: Upload ID that identifies the multipart upload.
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: Key of the object for which the multipart upload was initiated.
+      Initiated:
+        $ref: '#/definitions/Initiated'
+        description: Date and time at which the multipart upload was initiated.
+      StorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: The class of storage used to store the object.
+      Owner:
+        $ref: '#/definitions/Owner'
+      Initiator:
+        $ref: '#/definitions/Initiator'
+        description: Identifies who initiated the multipart upload.
+  MultipartUploadId:
+    type: string
+  MultipartUploadList:
+    type: array
+    items:
+      $ref: '#/definitions/MultipartUpload'
+    xml:
+      wrapped: false
+  NextKeyMarker:
+    type: string
+  NextMarker:
+    type: string
+  NextPartNumberMarker:
+    type: integer
+  NextToken:
+    type: string
+  NextUploadIdMarker:
+    type: string
+  NextVersionIdMarker:
+    type: string
+  NoSuchBucket:
+    type: object
+    properties: {}
+    description: The specified bucket does not exist.
+  NoSuchKey:
+    type: object
+    properties: {}
+    description: The specified key does not exist.
+  NoSuchUpload:
+    type: object
+    properties: {}
+    description: The specified multipart upload does not exist.
+  NoncurrentVersionExpiration:
+    type: object
+    properties:
+      NoncurrentDays:
+        $ref: '#/definitions/Days'
+        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
+    description: 'Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object''s lifetime.'
+  NoncurrentVersionTransition:
+    type: object
+    properties:
+      NoncurrentDays:
+        $ref: '#/definitions/Days'
+        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
+      StorageClass:
+        $ref: '#/definitions/TransitionStorageClass'
+        description: The class of storage used to store the object.
+    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA or GLACIER storage class at a specific period in the object''s lifetime.'
+  NoncurrentVersionTransitionList:
+    type: array
+    items:
+      $ref: '#/definitions/NoncurrentVersionTransition'
+    xml:
+      wrapped: false
+  NotificationConfiguration:
+    type: object
+    properties:
+      TopicConfigurations:
+        $ref: '#/definitions/TopicConfigurationList'
+      QueueConfigurations:
+        $ref: '#/definitions/QueueConfigurationList'
+      LambdaFunctionConfigurations:
+        $ref: '#/definitions/LambdaFunctionConfigurationList'
+    description: 'Container for specifying the notification configuration of the bucket. If this element is empty, notifications are turned off on the bucket.'
+  NotificationConfigurationDeprecated:
+    type: object
+    properties:
+      TopicConfiguration:
+        $ref: '#/definitions/TopicConfigurationDeprecated'
+      QueueConfiguration:
+        $ref: '#/definitions/QueueConfigurationDeprecated'
+      CloudFunctionConfiguration:
+        $ref: '#/definitions/CloudFunctionConfiguration'
+  NotificationConfigurationFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/S3KeyFilter'
+    description: 'Container for object key name filtering rules. For information about key name filtering, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.'
+  NotificationId:
+    type: string
+    description: 'Optional unique identifier for configurations in a notification configuration. If you don''t provide one, Amazon S3 will assign an ID.'
+  Object:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+      LastModified:
+        $ref: '#/definitions/LastModified'
+      ETag:
+        $ref: '#/definitions/ETag'
+      Size:
+        $ref: '#/definitions/Size'
+      StorageClass:
+        $ref: '#/definitions/ObjectStorageClass'
+        description: The class of storage used to store the object.
+      Owner:
+        $ref: '#/definitions/Owner'
+  ObjectAlreadyInActiveTierError:
+    type: object
+    properties: {}
+    description: This operation is not allowed against this storage tier
+  ObjectCannedACL:
+    type: string
+    enum:
+      - private
+      - public-read
+      - public-read-write
+      - authenticated-read
+      - aws-exec-read
+      - bucket-owner-read
+      - bucket-owner-full-control
+  ObjectIdentifier:
+    type: object
+    required:
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: Key name of the object to delete.
+      VersionId:
+        $ref: '#/definitions/ObjectVersionId'
+        description: VersionId for the specific version of the object to delete.
+  ObjectIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectIdentifier'
+    xml:
+      wrapped: false
+  ObjectKey:
+    type: string
+    minLength: 1
+  ObjectList:
+    type: array
+    items:
+      $ref: '#/definitions/Object'
+    xml:
+      wrapped: false
+  ObjectNotInActiveTierError:
+    type: object
+    properties: {}
+    description: The source object of the COPY operation is not in the active tier and is only stored in Amazon Glacier.
+  ObjectStorageClass:
+    type: string
+    enum:
+      - STANDARD
+      - REDUCED_REDUNDANCY
+      - GLACIER
+  ObjectVersion:
+    type: object
+    properties:
+      ETag:
+        $ref: '#/definitions/ETag'
+      Size:
+        $ref: '#/definitions/Size'
+        description: Size in bytes of the object.
+      StorageClass:
+        $ref: '#/definitions/ObjectVersionStorageClass'
+        description: The class of storage used to store the object.
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: The object key.
+      VersionId:
+        $ref: '#/definitions/ObjectVersionId'
+        description: Version ID of an object.
+      IsLatest:
+        $ref: '#/definitions/IsLatest'
+        description: Specifies whether the object is (true) or is not (false) the latest version of an object.
+      LastModified:
+        $ref: '#/definitions/LastModified'
+        description: Date and time the object was last modified.
+      Owner:
+        $ref: '#/definitions/Owner'
+  ObjectVersionId:
+    type: string
+  ObjectVersionList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectVersion'
+    xml:
+      wrapped: false
+  ObjectVersionStorageClass:
+    type: string
+    enum:
+      - STANDARD
+  Owner:
+    type: object
+    properties:
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+      ID:
+        $ref: '#/definitions/ID'
+  Part:
+    type: object
+    properties:
+      PartNumber:
+        $ref: '#/definitions/PartNumber'
+        description: 'Part number identifying the part. This is a positive integer between 1 and 10,000.'
+      LastModified:
+        $ref: '#/definitions/LastModified'
+        description: Date and time at which the part was uploaded.
+      ETag:
+        $ref: '#/definitions/ETag'
+        description: Entity tag returned when the part was uploaded.
+      Size:
+        $ref: '#/definitions/Size'
+        description: Size of the uploaded part data.
+  PartNumber:
+    type: integer
+  PartNumberMarker:
+    type: integer
+  Parts:
+    type: array
+    items:
+      $ref: '#/definitions/Part'
+    xml:
+      wrapped: false
+  PartsCount:
+    type: integer
+  Payer:
+    type: string
+    enum:
+      - Requester
+      - BucketOwner
+  Permission:
+    type: string
+    enum:
+      - FULL_CONTROL
+      - WRITE
+      - WRITE_ACP
+      - READ
+      - READ_ACP
+  Policy:
+    type: string
+  Prefix:
+    type: string
+  Protocol:
+    type: string
+    enum:
+      - http
+      - https
+  PutBucketAccelerateConfigurationRequest:
+    type: object
+    required:
+      - AccelerateConfiguration
+    properties:
+      AccelerateConfiguration:
+        $ref: '#/definitions/AccelerateConfiguration'
+        description: Specifies the Accelerate Configuration you want to set for the bucket.
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketAclRequest:
+    type: object
+    properties:
+      AccessControlPolicy:
+        $ref: '#/definitions/AccessControlPolicy'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketAnalyticsConfigurationRequest:
+    type: object
+    required:
+      - AnalyticsConfiguration
+    properties:
+      AnalyticsConfiguration:
+        $ref: '#/definitions/AnalyticsConfiguration'
+        description: The configuration and any analyses for the analytics filter.
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketCorsRequest:
+    type: object
+    required:
+      - CORSConfiguration
+    properties:
+      CORSConfiguration:
+        $ref: '#/definitions/CORSConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketInventoryConfigurationRequest:
+    type: object
+    required:
+      - InventoryConfiguration
+    properties:
+      InventoryConfiguration:
+        $ref: '#/definitions/InventoryConfiguration'
+        description: Specifies the inventory configuration.
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketLifecycleConfigurationRequest:
+    type: object
+    properties:
+      LifecycleConfiguration:
+        $ref: '#/definitions/BucketLifecycleConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketLifecycleRequest:
+    type: object
+    properties:
+      LifecycleConfiguration:
+        $ref: '#/definitions/LifecycleConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketLoggingRequest:
+    type: object
+    required:
+      - BucketLoggingStatus
+    properties:
+      BucketLoggingStatus:
+        $ref: '#/definitions/BucketLoggingStatus'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketMetricsConfigurationRequest:
+    type: object
+    required:
+      - MetricsConfiguration
+    properties:
+      MetricsConfiguration:
+        $ref: '#/definitions/MetricsConfiguration'
+        description: Specifies the metrics configuration.
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketNotificationConfigurationRequest:
+    type: object
+    required:
+      - NotificationConfiguration
+    properties:
+      NotificationConfiguration:
+        $ref: '#/definitions/NotificationConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketNotificationRequest:
+    type: object
+    required:
+      - NotificationConfiguration
+    properties:
+      NotificationConfiguration:
+        $ref: '#/definitions/NotificationConfigurationDeprecated'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketPolicyRequest:
+    type: object
+    required:
+      - Policy
+    properties:
+      Policy:
+        $ref: '#/definitions/Policy'
+        description: The bucket policy as a JSON document.
+  PutBucketReplicationRequest:
+    type: object
+    required:
+      - ReplicationConfiguration
+    properties:
+      ReplicationConfiguration:
+        $ref: '#/definitions/ReplicationConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketRequestPaymentRequest:
+    type: object
+    required:
+      - RequestPaymentConfiguration
+    properties:
+      RequestPaymentConfiguration:
+        $ref: '#/definitions/RequestPaymentConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketTaggingRequest:
+    type: object
+    required:
+      - Tagging
+    properties:
+      Tagging:
+        $ref: '#/definitions/Tagging'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketVersioningRequest:
+    type: object
+    required:
+      - VersioningConfiguration
+    properties:
+      VersioningConfiguration:
+        $ref: '#/definitions/VersioningConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutBucketWebsiteRequest:
+    type: object
+    required:
+      - WebsiteConfiguration
+    properties:
+      WebsiteConfiguration:
+        $ref: '#/definitions/WebsiteConfiguration'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutObjectAclOutput:
+    type: object
+    properties: {}
+  PutObjectAclRequest:
+    type: object
+    properties:
+      AccessControlPolicy:
+        $ref: '#/definitions/AccessControlPolicy'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutObjectOutput:
+    type: object
+    properties: {}
+  PutObjectRequest:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/Body'
+        description: Object data.
+  PutObjectTaggingOutput:
+    type: object
+    properties: {}
+  PutObjectTaggingRequest:
+    type: object
+    required:
+      - Tagging
+    properties:
+      Tagging:
+        $ref: '#/definitions/Tagging'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  QueueArn:
+    type: string
+  QueueConfiguration:
+    type: object
+    required:
+      - QueueArn
+      - Events
+    properties:
+      Id:
+        $ref: '#/definitions/NotificationId'
+      QueueArn:
+        $ref: '#/definitions/QueueArn'
+        description: Amazon SQS queue ARN to which Amazon S3 will publish a message when it detects events of specified type.
+      Events:
+        $ref: '#/definitions/EventList'
+      Filter:
+        $ref: '#/definitions/NotificationConfigurationFilter'
+    description: Container for specifying an configuration when you want Amazon S3 to publish events to an Amazon Simple Queue Service (Amazon SQS) queue.
+  QueueConfigurationDeprecated:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/NotificationId'
+      Event:
+        $ref: '#/definitions/Event'
+      Events:
+        $ref: '#/definitions/EventList'
+      Queue:
+        $ref: '#/definitions/QueueArn'
+  QueueConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/QueueConfiguration'
+    xml:
+      wrapped: false
+  Quiet:
+    type: boolean
+  Range:
+    type: string
+  Redirect:
+    type: object
+    properties:
+      HostName:
+        $ref: '#/definitions/HostName'
+        description: The host name to use in the redirect request.
+      HttpRedirectCode:
+        $ref: '#/definitions/HttpRedirectCode'
+        description: The HTTP redirect code to use on the response. Not required if one of the siblings is present.
+      Protocol:
+        $ref: '#/definitions/Protocol'
+        description: 'Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request.'
+      ReplaceKeyPrefixWith:
+        $ref: '#/definitions/ReplaceKeyPrefixWith'
+        description: 'The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/ (objects in the docs/ folder) to documents/, you can set a condition block with KeyPrefixEquals set to docs/ and in the Redirect set ReplaceKeyPrefixWith to /documents. Not required if one of the siblings is present. Can be present only if ReplaceKeyWith is not provided.'
+      ReplaceKeyWith:
+        $ref: '#/definitions/ReplaceKeyWith'
+        description: 'The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided.'
+  RedirectAllRequestsTo:
+    type: object
+    required:
+      - HostName
+    properties:
+      HostName:
+        $ref: '#/definitions/HostName'
+        description: Name of the host where requests will be redirected.
+      Protocol:
+        $ref: '#/definitions/Protocol'
+        description: 'Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request.'
+  ReplaceKeyPrefixWith:
+    type: string
+  ReplaceKeyWith:
+    type: string
+  ReplicationConfiguration:
+    type: object
+    required:
+      - Role
+      - Rules
+    properties:
+      Role:
+        $ref: '#/definitions/Role'
+        description: Amazon Resource Name (ARN) of an IAM role for Amazon S3 to assume when replicating the objects.
+      Rules:
+        $ref: '#/definitions/ReplicationRules'
+        description: 'Container for information about a particular replication rule. Replication configuration must have at least one rule and can contain up to 1,000 rules.'
+    description: 'Container for replication rules. You can add as many as 1,000 rules. Total replication configuration size can be up to 2 MB.'
+  ReplicationRule:
+    type: object
+    required:
+      - Prefix
+      - Status
+      - Destination
+    properties:
+      ID:
+        $ref: '#/definitions/ID'
+        description: Unique identifier for the rule. The value cannot be longer than 255 characters.
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: 'Object keyname prefix identifying one or more objects to which the rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes are not supported.'
+      Status:
+        $ref: '#/definitions/ReplicationRuleStatus'
+        description: The rule is ignored if status is not Enabled.
+      Destination:
+        $ref: '#/definitions/Destination'
+  ReplicationRuleStatus:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  ReplicationRules:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicationRule'
+    xml:
+      wrapped: false
+  ReplicationStatus:
+    type: string
+    enum:
+      - COMPLETE
+      - PENDING
+      - FAILED
+      - REPLICA
+  RequestCharged:
+    type: string
+    enum:
+      - requester
+    description: 'If present, indicates that the requester was successfully charged for the request.'
+  RequestPayer:
+    type: string
+    enum:
+      - requester
+    description: 'Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html'
+  RequestPaymentConfiguration:
+    type: object
+    required:
+      - Payer
+    properties:
+      Payer:
+        $ref: '#/definitions/Payer'
+        description: Specifies who pays for the download and request fees.
+  ResponseCacheControl:
+    type: string
+  ResponseContentDisposition:
+    type: string
+  ResponseContentEncoding:
+    type: string
+  ResponseContentLanguage:
+    type: string
+  ResponseContentType:
+    type: string
+  ResponseExpires:
+    type: string
+    format: date-time
+  Restore:
+    type: string
+  RestoreObjectOutput:
+    type: object
+    properties: {}
+  RestoreObjectRequest:
+    type: object
+    properties:
+      RestoreRequest:
+        $ref: '#/definitions/RestoreRequest'
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  RestoreRequest:
+    type: object
+    required:
+      - Days
+    properties:
+      Days:
+        $ref: '#/definitions/Days'
+        description: Lifetime of the active copy in days
+      GlacierJobParameters:
+        $ref: '#/definitions/GlacierJobParameters'
+        description: Glacier related prameters pertaining to this job.
+  Role:
+    type: string
+  RoutingRule:
+    type: object
+    required:
+      - Redirect
+    properties:
+      Condition:
+        $ref: '#/definitions/Condition'
+        description: 'A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error.'
+      Redirect:
+        $ref: '#/definitions/Redirect'
+        description: 'Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return.'
+  RoutingRules:
+    type: array
+    items:
+      $ref: '#/definitions/RoutingRule'
+  Rule:
+    type: object
+    required:
+      - Prefix
+      - Status
+    properties:
+      Expiration:
+        $ref: '#/definitions/LifecycleExpiration'
+      ID:
+        $ref: '#/definitions/ID'
+        description: Unique identifier for the rule. The value cannot be longer than 255 characters.
+      Prefix:
+        $ref: '#/definitions/Prefix'
+        description: Prefix identifying one or more objects to which the rule applies.
+      Status:
+        $ref: '#/definitions/ExpirationStatus'
+        description: 'If ''Enabled'', the rule is currently being applied. If ''Disabled'', the rule is not currently being applied.'
+      Transition:
+        $ref: '#/definitions/Transition'
+      NoncurrentVersionTransition:
+        $ref: '#/definitions/NoncurrentVersionTransition'
+      NoncurrentVersionExpiration:
+        $ref: '#/definitions/NoncurrentVersionExpiration'
+      AbortIncompleteMultipartUpload:
+        $ref: '#/definitions/AbortIncompleteMultipartUpload'
+  Rules:
+    type: array
+    items:
+      $ref: '#/definitions/Rule'
+    xml:
+      wrapped: false
+  S3KeyFilter:
+    type: object
+    properties:
+      FilterRules:
+        $ref: '#/definitions/FilterRuleList'
+    description: Container for object key name prefix and suffix filtering rules.
+  SSECustomerAlgorithm:
+    type: string
+  SSECustomerKey:
+    type: string
+    format: password
+  SSECustomerKeyMD5:
+    type: string
+  SSEKMSKeyId:
+    type: string
+    format: password
+  ServerSideEncryption:
+    type: string
+    enum:
+      - AES256
+      - 'aws:kms'
+  Size:
+    type: integer
+  StartAfter:
+    type: string
+  StorageClass:
+    type: string
+    enum:
+      - STANDARD
+      - REDUCED_REDUNDANCY
+      - STANDARD_IA
+  StorageClassAnalysis:
+    type: object
+    properties:
+      DataExport:
+        $ref: '#/definitions/StorageClassAnalysisDataExport'
+        description: A container used to describe how data related to the storage class analysis should be exported.
+  StorageClassAnalysisDataExport:
+    type: object
+    required:
+      - OutputSchemaVersion
+      - Destination
+    properties:
+      OutputSchemaVersion:
+        $ref: '#/definitions/StorageClassAnalysisSchemaVersion'
+        description: The version of the output schema to use when exporting data. Must be V_1.
+      Destination:
+        $ref: '#/definitions/AnalyticsExportDestination'
+        description: The place to store the data for an analysis.
+  StorageClassAnalysisSchemaVersion:
+    type: string
+    enum:
+      - V_1
+  Suffix:
+    type: string
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/ObjectKey'
+        description: Name of the tag.
+      Value:
+        $ref: '#/definitions/Value'
+        description: Value of the tag.
+  TagCount:
+    type: integer
+  TagSet:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  Tagging:
+    type: object
+    required:
+      - TagSet
+    properties:
+      TagSet:
+        $ref: '#/definitions/TagSet'
+  TaggingDirective:
+    type: string
+    enum:
+      - COPY
+      - REPLACE
+  TaggingHeader:
+    type: string
+  TargetBucket:
+    type: string
+  TargetGrant:
+    type: object
+    properties:
+      Grantee:
+        $ref: '#/definitions/Grantee'
+      Permission:
+        $ref: '#/definitions/BucketLogsPermission'
+        description: Logging permissions assigned to the Grantee for the bucket.
+  TargetGrants:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGrant'
+  TargetPrefix:
+    type: string
+  Tier:
+    type: string
+    enum:
+      - Standard
+      - Bulk
+      - Expedited
+  Token:
+    type: string
+  TopicArn:
+    type: string
+  TopicConfiguration:
+    type: object
+    required:
+      - TopicArn
+      - Events
+    properties:
+      Id:
+        $ref: '#/definitions/NotificationId'
+      TopicArn:
+        $ref: '#/definitions/TopicArn'
+        description: Amazon SNS topic ARN to which Amazon S3 will publish a message when it detects events of specified type.
+      Events:
+        $ref: '#/definitions/EventList'
+      Filter:
+        $ref: '#/definitions/NotificationConfigurationFilter'
+    description: Container for specifying the configuration when you want Amazon S3 to publish events to an Amazon Simple Notification Service (Amazon SNS) topic.
+  TopicConfigurationDeprecated:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/NotificationId'
+      Events:
+        $ref: '#/definitions/EventList'
+      Event:
+        $ref: '#/definitions/Event'
+        description: Bucket event for which to send notifications.
+      Topic:
+        $ref: '#/definitions/TopicArn'
+        description: Amazon SNS topic to which Amazon S3 will publish a message to report the specified events for the bucket.
+  TopicConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/TopicConfiguration'
+    xml:
+      wrapped: false
+  Transition:
+    type: object
+    properties:
+      Date:
+        $ref: '#/definitions/Date'
+        description: Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
+      Days:
+        $ref: '#/definitions/Days'
+        description: 'Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.'
+      StorageClass:
+        $ref: '#/definitions/TransitionStorageClass'
+        description: The class of storage used to store the object.
+  TransitionList:
+    type: array
+    items:
+      $ref: '#/definitions/Transition'
+    xml:
+      wrapped: false
+  TransitionStorageClass:
+    type: string
+    enum:
+      - GLACIER
+      - STANDARD_IA
+  Type:
+    type: string
+    enum:
+      - CanonicalUser
+      - AmazonCustomerByEmail
+      - Group
+  URI:
+    type: string
+  UploadIdMarker:
+    type: string
+  UploadPartCopyOutput:
+    type: object
+    properties:
+      CopyPartResult:
+        $ref: '#/definitions/CopyPartResult'
+  UploadPartCopyRequest:
+    type: object
+    properties: {}
+  UploadPartOutput:
+    type: object
+    properties: {}
+  UploadPartRequest:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/Body'
+        description: Object data.
+  Value:
+    type: string
+  VersionIdMarker:
+    type: string
+  VersioningConfiguration:
+    type: object
+    properties:
+      MFADelete:
+        $ref: '#/definitions/MFADelete'
+        description: 'Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.'
+      Status:
+        $ref: '#/definitions/BucketVersioningStatus'
+        description: The versioning state of the bucket.
+  WebsiteConfiguration:
+    type: object
+    properties:
+      ErrorDocument:
+        $ref: '#/definitions/ErrorDocument'
+      IndexDocument:
+        $ref: '#/definitions/IndexDocument'
+      RedirectAllRequestsTo:
+        $ref: '#/definitions/RedirectAllRequestsTo'
+      RoutingRules:
+        $ref: '#/definitions/RoutingRules'
+  WebsiteRedirectLocation:
+    type: string

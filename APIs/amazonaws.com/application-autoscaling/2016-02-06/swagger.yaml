@@ -1,0 +1,1007 @@
+swagger: '2.0'
+info:
+  version: '2016-02-06'
+  x-release: v4
+  title: Application Auto Scaling
+  description: '<p>With Application Auto Scaling, you can automatically scale your AWS resources. The experience similar to that of <a href="https://aws.amazon.com/autoscaling/">Auto Scaling</a>. You can use Application Auto Scaling to accomplish the following tasks:</p> <ul> <li> <p>Define scaling policies to automatically scale your AWS resources</p> </li> <li> <p>Scale your resources in response to CloudWatch alarms</p> </li> <li> <p>View the history of your scaling events</p> </li> </ul> <p>Application Auto Scaling can scale the following AWS resources:</p> <ul> <li> <p>Amazon ECS services. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html">Service Auto Scaling</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </li> <li> <p>Amazon EC2 Spot fleets. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-auto-scaling.html">Automatic Scaling for Spot Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p> </li> <li> <p>Amazon EMR clusters. For more information, see <a href="http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/emr-automatic-scaling.html">Using Automatic Scaling in Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.</p> </li> <li> <p>AppStream 2.0 fleets. For more information, see <a href="http://docs.aws.amazon.com/appstream2/latest/developerguide/autoscaling.html">Autoscaling Amazon AppStream 2.0 Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p> </li> </ul> <p>For a list of supported regions, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#as-app_region">AWS Regions and Endpoints: Application Auto Scaling</a> in the <i>AWS General Reference</i>.</p>'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: autoscaling
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/application-autoscaling-2016-02-06.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/application-autoscaling/2016-02-06/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/autoscaling/'
+host: autoscaling.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: DeleteScalingPolicy
+      description: '<p>Deletes the specified Application Auto Scaling scaling policy.</p> <p>Deleting a policy deletes the underlying alarm action, but does not delete the CloudWatch alarm associated with the scaling policy, even if it no longer has an associated action.</p> <p>To create a scaling policy or update an existing one, see <a>PutScalingPolicy</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteScalingPolicyResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ObjectNotFoundException
+          schema:
+            $ref: '#/definitions/ObjectNotFoundException'
+        '482':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteScalingPolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeregisterScalableTarget':
+    post:
+      operationId: DeregisterScalableTarget
+      description: '<p>Deregisters a scalable target.</p> <p>Deregistering a scalable target deletes the scaling policies that are associated with it.</p> <p>To create a scalable target or update an existing one, see <a>RegisterScalableTarget</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeregisterScalableTargetResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ObjectNotFoundException
+          schema:
+            $ref: '#/definitions/ObjectNotFoundException'
+        '482':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeregisterScalableTargetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalableTargets':
+    post:
+      operationId: DescribeScalableTargets
+      description: '<p>Provides descriptive information about the scalable targets in the specified namespace.</p> <p>You can filter the results using the <code>ResourceIds</code> and <code>ScalableDimension</code> parameters.</p> <p>To create a scalable target or update an existing one, see <a>RegisterScalableTarget</a>. If you are no longer using a scalable target, you can deregister it using <a>DeregisterScalableTarget</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeScalableTargetsResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeScalableTargetsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalingActivities':
+    post:
+      operationId: DescribeScalingActivities
+      description: '<p>Provides descriptive information about the scaling activities in the specified namespace from the previous six weeks.</p> <p>You can filter the results using the <code>ResourceId</code> and <code>ScalableDimension</code> parameters.</p> <p>Scaling activities are triggered by CloudWatch alarms that are associated with scaling policies. To view the scaling policies for a service namespace, see <a>DescribeScalingPolicies</a>. To create a scaling policy or update an existing one, see <a>PutScalingPolicy</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeScalingActivitiesResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeScalingActivitiesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalingPolicies':
+    post:
+      operationId: DescribeScalingPolicies
+      description: '<p>Provides descriptive information about the scaling policies in the specified namespace.</p> <p>You can filter the results using the <code>ResourceId</code>, <code>ScalableDimension</code>, and <code>PolicyNames</code> parameters.</p> <p>To create a scaling policy or update an existing one, see <a>PutScalingPolicy</a>. If you are no longer using a scaling policy, you can delete it using <a>DeleteScalingPolicy</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeScalingPoliciesResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: FailedResourceAccessException
+          schema:
+            $ref: '#/definitions/FailedResourceAccessException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '484':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeScalingPoliciesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutScalingPolicy':
+    post:
+      operationId: PutScalingPolicy
+      description: '<p>Creates or updates a policy for an Application Auto Scaling scalable target.</p> <p>Each scalable target is identified by a service namespace, resource ID, and scalable dimension. A scaling policy applies to the scalable target identified by those three attributes. You cannot create a scaling policy without first registering a scalable target using <a>RegisterScalableTarget</a>.</p> <p>To update a policy, specify its policy name and the parameters that you want to change. Any parameters that you don''t specify are not changed by this update request.</p> <p>You can view the scaling policies for a service namespace using <a>DescribeScalingPolicies</a>. If you are no longer using a scaling policy, you can delete it using <a>DeleteScalingPolicy</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutScalingPolicyResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ObjectNotFoundException
+          schema:
+            $ref: '#/definitions/ObjectNotFoundException'
+        '483':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '484':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutScalingPolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RegisterScalableTarget':
+    post:
+      operationId: RegisterScalableTarget
+      description: '<p>Registers or updates a scalable target. A scalable target is a resource that Application Auto Scaling can scale out or scale in. After you have registered a scalable target, you can use this operation to update the minimum and maximum values for your scalable dimension.</p> <p>After you register a scalable target, you can create and apply scaling policies using <a>PutScalingPolicy</a>. You can view the scaling policies for a service namespace using <a>DescribeScalableTargets</a>. If you are no longer using a scalable target, you can deregister it using <a>DeregisterScalableTarget</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterScalableTargetResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterScalableTargetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AdjustmentType:
+    type: string
+    enum:
+      - ChangeInCapacity
+      - PercentChangeInCapacity
+      - ExactCapacity
+  Alarm:
+    type: object
+    required:
+      - AlarmName
+      - AlarmARN
+    properties:
+      AlarmName:
+        $ref: '#/definitions/ResourceId'
+        description: The name of the alarm.
+      AlarmARN:
+        $ref: '#/definitions/ResourceId'
+        description: The Amazon Resource Name (ARN) of the alarm.
+    description: Represents a CloudWatch alarm associated with a scaling policy.
+  Alarms:
+    type: array
+    items:
+      $ref: '#/definitions/Alarm'
+  ConcurrentUpdateException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Concurrent updates caused an exception, for example, if you request an update to an Application Auto Scaling resource that already has a pending update.'
+  Cooldown:
+    type: integer
+  DeleteScalingPolicyRequest:
+    type: object
+    required:
+      - PolicyName
+      - ServiceNamespace
+      - ResourceId
+      - ScalableDimension
+    example:
+      PolicyName: web-app-cpu-lt-25
+      ResourceId: service/default/web-app
+      ScalableDimension: 'ecs:service:DesiredCount'
+      ServiceNamespace: ecs
+    properties:
+      PolicyName:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: The name of the scaling policy.
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+        description: 'The namespace of the AWS service. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The identifier of the resource associated with the scalable target. This string consists of the resource type and unique identifier.</p> <ul> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>EMR cluster - The resource type is <code>instancegroup</code> and the unique identifier is the cluster ID and instance group ID. Example: <code>instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.</p> </li> <li> <p>AppStream 2.0 fleet - The resource type is <code>fleet</code> and the unique identifier is the fleet name. Example: <code>fleet/sample-fleet</code>.</p> </li> </ul>'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension. This string consists of the service namespace, resource type, and scaling property.</p> <ul> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.</p> </li> <li> <p> <code>appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.</p> </li> </ul>'
+  DeleteScalingPolicyResponse:
+    type: object
+    example: {}
+    properties: {}
+  DeregisterScalableTargetRequest:
+    type: object
+    required:
+      - ServiceNamespace
+      - ResourceId
+      - ScalableDimension
+    example:
+      ResourceId: service/default/web-app
+      ScalableDimension: 'ecs:service:DesiredCount'
+      ServiceNamespace: ecs
+    properties:
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+        description: 'The namespace of the AWS service. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The identifier of the resource associated with the scalable target. This string consists of the resource type and unique identifier.</p> <ul> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>EMR cluster - The resource type is <code>instancegroup</code> and the unique identifier is the cluster ID and instance group ID. Example: <code>instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.</p> </li> <li> <p>AppStream 2.0 fleet - The resource type is <code>fleet</code> and the unique identifier is the fleet name. Example: <code>fleet/sample-fleet</code>.</p> </li> </ul>'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension associated with the scalable target. This string consists of the service namespace, resource type, and scaling property.</p> <ul> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.</p> </li> <li> <p> <code>appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.</p> </li> </ul>'
+  DeregisterScalableTargetResponse:
+    type: object
+    example: {}
+    properties: {}
+  DescribeScalableTargetsRequest:
+    type: object
+    required:
+      - ServiceNamespace
+    example:
+      ServiceNamespace: ecs
+    properties:
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+        description: 'The namespace of the AWS service. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+      ResourceIds:
+        $ref: '#/definitions/ResourceIdsMaxLen1600'
+        description: '<p>The identifier of the resource associated with the scalable target. This string consists of the resource type and unique identifier. If you specify a scalable dimension, you must also specify a resource ID.</p> <ul> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>EMR cluster - The resource type is <code>instancegroup</code> and the unique identifier is the cluster ID and instance group ID. Example: <code>instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.</p> </li> <li> <p>AppStream 2.0 fleet - The resource type is <code>fleet</code> and the unique identifier is the fleet name. Example: <code>fleet/sample-fleet</code>.</p> </li> </ul>'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension associated with the scalable target. This string consists of the service namespace, resource type, and scaling property. If you specify a scalable dimension, you must also specify a resource ID.</p> <ul> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.</p> </li> <li> <p> <code>appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '<p>The maximum number of scalable target results. This value can be between 1 and 50. The default value is 50.</p> <p>If this parameter is used, the operation returns up to <code>MaxResults</code> results at a time, along with a <code>NextToken</code> value. To get the next set of results, include the <code>NextToken</code> value in a subsequent call. If this parameter is not used, the operation returns up to 50 results and a <code>NextToken</code> value, if applicable.</p>'
+      NextToken:
+        $ref: '#/definitions/XmlString'
+        description: The token for the next set of results.
+  DescribeScalableTargetsResponse:
+    type: object
+    example:
+      ScalableTargets:
+        - CreationTime: '2016-05-06T11:21:46.199Z'
+          MaxCapacity: 10
+          MinCapacity: 1
+          ResourceId: service/default/web-app
+          RoleARN: 'arn:aws:iam::012345678910:role/ApplicationAutoscalingECSRole'
+          ScalableDimension: 'ecs:service:DesiredCount'
+          ServiceNamespace: ecs
+    properties:
+      ScalableTargets:
+        $ref: '#/definitions/ScalableTargets'
+        description: The list of scalable targets that matches the request parameters.
+      NextToken:
+        $ref: '#/definitions/XmlString'
+        description: The token required to get the next set of results. This value is <code>null</code> if there are no more results to return.
+  DescribeScalingActivitiesRequest:
+    type: object
+    required:
+      - ServiceNamespace
+    example:
+      ResourceId: service/default/web-app
+      ScalableDimension: 'ecs:service:DesiredCount'
+      ServiceNamespace: ecs
+    properties:
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+        description: 'The namespace of the AWS service. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The identifier of the resource associated with the scaling activity. This string consists of the resource type and unique identifier. If you specify a scalable dimension, you must also specify a resource ID.</p> <ul> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>EMR cluster - The resource type is <code>instancegroup</code> and the unique identifier is the cluster ID and instance group ID. Example: <code>instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.</p> </li> <li> <p>AppStream 2.0 fleet - The resource type is <code>fleet</code> and the unique identifier is the fleet name. Example: <code>fleet/sample-fleet</code>.</p> </li> </ul>'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension. This string consists of the service namespace, resource type, and scaling property. If you specify a scalable dimension, you must also specify a resource ID.</p> <ul> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.</p> </li> <li> <p> <code>appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '<p>The maximum number of scalable target results. This value can be between 1 and 50. The default value is 50.</p> <p>If this parameter is used, the operation returns up to <code>MaxResults</code> results at a time, along with a <code>NextToken</code> value. To get the next set of results, include the <code>NextToken</code> value in a subsequent call. If this parameter is not used, the operation returns up to 50 results and a <code>NextToken</code> value, if applicable.</p>'
+      NextToken:
+        $ref: '#/definitions/XmlString'
+        description: The token for the next set of results.
+  DescribeScalingActivitiesResponse:
+    type: object
+    example:
+      ScalingActivities:
+        - ActivityId: e6c5f7d1-dbbb-4a3f-89b2-51f33e766399
+          Cause: monitor alarm web-app-cpu-lt-25 in state ALARM triggered policy web-app-cpu-lt-25
+          Description: Setting desired count to 1.
+          EndTime: '2016-05-06T16:04:32.111Z'
+          ResourceId: service/default/web-app
+          ScalableDimension: 'ecs:service:DesiredCount'
+          ServiceNamespace: ecs
+          StartTime: '2016-05-06T16:03:58.171Z'
+          StatusCode: Successful
+          StatusMessage: Successfully set desired count to 1. Change successfully fulfilled by ecs.
+    properties:
+      ScalingActivities:
+        $ref: '#/definitions/ScalingActivities'
+        description: A list of scaling activity objects.
+      NextToken:
+        $ref: '#/definitions/XmlString'
+        description: The token required to get the next set of results. This value is <code>null</code> if there are no more results to return.
+  DescribeScalingPoliciesRequest:
+    type: object
+    required:
+      - ServiceNamespace
+    example:
+      ServiceNamespace: ecs
+    properties:
+      PolicyNames:
+        $ref: '#/definitions/ResourceIdsMaxLen1600'
+        description: The names of the scaling policies to describe.
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+        description: 'The namespace of the AWS service. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The identifier of the resource associated with the scaling policy. This string consists of the resource type and unique identifier. If you specify a scalable dimension, you must also specify a resource ID.</p> <ul> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>EMR cluster - The resource type is <code>instancegroup</code> and the unique identifier is the cluster ID and instance group ID. Example: <code>instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.</p> </li> <li> <p>AppStream 2.0 fleet - The resource type is <code>fleet</code> and the unique identifier is the fleet name. Example: <code>fleet/sample-fleet</code>.</p> </li> </ul>'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension. This string consists of the service namespace, resource type, and scaling property. If you specify a scalable dimension, you must also specify a resource ID.</p> <ul> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.</p> </li> <li> <p> <code>appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: '<p>The maximum number of scalable target results. This value can be between 1 and 50. The default value is 50.</p> <p>If this parameter is used, the operation returns up to <code>MaxResults</code> results at a time, along with a <code>NextToken</code> value. To get the next set of results, include the <code>NextToken</code> value in a subsequent call. If this parameter is not used, the operation returns up to 50 results and a <code>NextToken</code> value, if applicable.</p>'
+      NextToken:
+        $ref: '#/definitions/XmlString'
+        description: The token for the next set of results.
+  DescribeScalingPoliciesResponse:
+    type: object
+    example:
+      NextToken: ''
+      ScalingPolicies:
+        - Alarms:
+            - AlarmARN: 'arn:aws:cloudwatch:us-west-2:012345678910:alarm:web-app-cpu-gt-75'
+              AlarmName: web-app-cpu-gt-75
+          CreationTime: '2016-05-06T12:11:39.230Z'
+          PolicyARN: 'arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/web-app-cpu-gt-75'
+          PolicyName: web-app-cpu-gt-75
+          PolicyType: StepScaling
+          ResourceId: service/default/web-app
+          ScalableDimension: 'ecs:service:DesiredCount'
+          ServiceNamespace: ecs
+          StepScalingPolicyConfiguration:
+            AdjustmentType: PercentChangeInCapacity
+            Cooldown: 60
+            StepAdjustments:
+              - MetricIntervalLowerBound: 0
+                ScalingAdjustment: 200
+    properties:
+      ScalingPolicies:
+        $ref: '#/definitions/ScalingPolicies'
+        description: A list of scaling policy objects.
+      NextToken:
+        $ref: '#/definitions/XmlString'
+        description: The token required to get the next set of results. This value is <code>null</code> if there are no more results to return.
+  ErrorMessage:
+    type: string
+  FailedResourceAccessException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Failed access to resources caused an exception. This exception currently only applies to <a>DescribeScalingPolicies</a>. It is thrown when Application Auto Scaling is unable to retrieve the alarms associated with a scaling policy due to a client error, for example, if the role ARN specified for a scalable target does not have the proper permissions to call the CloudWatch <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html">DescribeAlarms</a> API operation on behalf of your account.'
+  InternalServiceException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The service encountered an internal error.
+  InvalidNextTokenException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The next token supplied was invalid.
+  LimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Your account exceeded a limit. This exception is thrown when a per-account resource limit is exceeded. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_as-app">Application Auto Scaling Limits</a>.'
+  MaxResults:
+    type: integer
+  MetricAggregationType:
+    type: string
+    enum:
+      - Average
+      - Minimum
+      - Maximum
+  MetricScale:
+    type: number
+    format: double
+  MinAdjustmentMagnitude:
+    type: integer
+  ObjectNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The specified object could not be found. For any <code>Put</code> or <code>Register</code> API operation, which depends on the existence of a scalable target, this exception is thrown if the scalable target with the specified service namespace, resource ID, and scalable dimension does not exist. For any <code>Delete</code> or <code>Deregister</code> API operation, this exception is thrown if the resource that is to be deleted or deregistered cannot be found.'
+  PolicyName:
+    type: string
+    pattern: '\p{Print}+'
+    minLength: 1
+    maxLength: 256
+  PolicyType:
+    type: string
+    enum:
+      - StepScaling
+  PutScalingPolicyRequest:
+    type: object
+    required:
+      - PolicyName
+      - ServiceNamespace
+      - ResourceId
+      - ScalableDimension
+    example:
+      PolicyName: fleet-cpu-gt-75
+      PolicyType: StepScaling
+      ResourceId: spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3
+      ScalableDimension: 'ec2:spot-fleet-request:TargetCapacity'
+      ServiceNamespace: ec2
+      StepScalingPolicyConfiguration:
+        AdjustmentType: PercentChangeInCapacity
+        Cooldown: 180
+        StepAdjustments:
+          - MetricIntervalLowerBound: 0
+            ScalingAdjustment: 200
+    properties:
+      PolicyName:
+        $ref: '#/definitions/PolicyName'
+        description: The name of the scaling policy.
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+        description: 'The namespace of the AWS service. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The identifier of the resource associated with the scaling policy. This string consists of the resource type and unique identifier.</p> <ul> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>EMR cluster - The resource type is <code>instancegroup</code> and the unique identifier is the cluster ID and instance group ID. Example: <code>instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.</p> </li> <li> <p>AppStream 2.0 fleet - The resource type is <code>fleet</code> and the unique identifier is the fleet name. Example: <code>fleet/sample-fleet</code>.</p> </li> </ul>'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension. This string consists of the service namespace, resource type, and scaling property.</p> <ul> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.</p> </li> <li> <p> <code>appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.</p> </li> </ul>'
+      PolicyType:
+        $ref: '#/definitions/PolicyType'
+        description: 'The policy type. If you are creating a new policy, this parameter is required. If you are updating a policy, this parameter is not required.'
+      StepScalingPolicyConfiguration:
+        $ref: '#/definitions/StepScalingPolicyConfiguration'
+        description: 'The configuration for the step scaling policy. If you are creating a new policy, this parameter is required. If you are updating a policy, this parameter is not required. For more information, see <a>StepScalingPolicyConfiguration</a> and <a>StepAdjustment</a>.'
+  PutScalingPolicyResponse:
+    type: object
+    required:
+      - PolicyARN
+    example:
+      PolicyARN: 'arn:aws:autoscaling:us-east-1:012345678910:scalingPolicy:89406401-0cb7-4130-b770-d97cca0e446b:resource/ec2/spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3:policyName/fleet-cpu-gt-75'
+    properties:
+      PolicyARN:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: The Amazon Resource Name (ARN) of the resulting scaling policy.
+  RegisterScalableTargetRequest:
+    type: object
+    required:
+      - ServiceNamespace
+      - ResourceId
+      - ScalableDimension
+    example:
+      MaxCapacity: 10
+      MinCapacity: 1
+      ResourceId: spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3
+      RoleARN: 'arn:aws:iam::012345678910:role/ApplicationAutoscalingSpotRole'
+      ScalableDimension: 'ec2:spot-fleet-request:TargetCapacity'
+      ServiceNamespace: ec2
+    properties:
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+        description: 'The namespace of the AWS service. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The identifier of the resource associated with the scalable target. This string consists of the resource type and unique identifier.</p> <ul> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>EMR cluster - The resource type is <code>instancegroup</code> and the unique identifier is the cluster ID and instance group ID. Example: <code>instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.</p> </li> <li> <p>AppStream 2.0 fleet - The resource type is <code>fleet</code> and the unique identifier is the fleet name. Example: <code>fleet/sample-fleet</code>.</p> </li> </ul>'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension associated with the scalable target. This string consists of the service namespace, resource type, and scaling property.</p> <ul> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.</p> </li> <li> <p> <code>appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.</p> </li> </ul>'
+      MinCapacity:
+        $ref: '#/definitions/ResourceCapacity'
+        description: The minimum value to scale to in response to a scale in event. This parameter is required if you are registering a scalable target and optional if you are updating one.
+      MaxCapacity:
+        $ref: '#/definitions/ResourceCapacity'
+        description: The maximum value to scale to in response to a scale out event. This parameter is required if you are registering a scalable target and optional if you are updating one.
+      RoleARN:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: The ARN of an IAM role that allows Application Auto Scaling to modify the scalable target on your behalf. This parameter is required when you register a scalable target and optional when you update one.
+  RegisterScalableTargetResponse:
+    type: object
+    example: {}
+    properties: {}
+  ResourceCapacity:
+    type: integer
+  ResourceId:
+    type: string
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  ResourceIdMaxLen1600:
+    type: string
+    minLength: 1
+    maxLength: 1600
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  ResourceIdsMaxLen1600:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceIdMaxLen1600'
+  ScalableDimension:
+    type: string
+    enum:
+      - 'ecs:service:DesiredCount'
+      - 'ec2:spot-fleet-request:TargetCapacity'
+      - 'elasticmapreduce:instancegroup:InstanceCount'
+      - 'appstream:fleet:DesiredCapacity'
+  ScalableTarget:
+    type: object
+    required:
+      - ServiceNamespace
+      - ResourceId
+      - ScalableDimension
+      - MinCapacity
+      - MaxCapacity
+      - RoleARN
+      - CreationTime
+    properties:
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+        description: 'The namespace of the AWS service. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The identifier of the resource associated with the scalable target. This string consists of the resource type and unique identifier.</p> <ul> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>EMR cluster - The resource type is <code>instancegroup</code> and the unique identifier is the cluster ID and instance group ID. Example: <code>instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.</p> </li> <li> <p>AppStream 2.0 fleet - The resource type is <code>fleet</code> and the unique identifier is the fleet name. Example: <code>fleet/sample-fleet</code>.</p> </li> </ul>'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension associated with the scalable target. This string consists of the service namespace, resource type, and scaling property.</p> <ul> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.</p> </li> <li> <p> <code>appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.</p> </li> </ul>'
+      MinCapacity:
+        $ref: '#/definitions/ResourceCapacity'
+        description: The minimum value to scale to in response to a scale in event.
+      MaxCapacity:
+        $ref: '#/definitions/ResourceCapacity'
+        description: The maximum value to scale to in response to a scale out event.
+      RoleARN:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: The ARN of an IAM role that allows Application Auto Scaling to modify the scalable target on your behalf.
+      CreationTime:
+        $ref: '#/definitions/TimestampType'
+        description: The Unix timestamp for when the scalable target was created.
+    description: Represents a scalable target.
+  ScalableTargets:
+    type: array
+    items:
+      $ref: '#/definitions/ScalableTarget'
+  ScalingActivities:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingActivity'
+  ScalingActivity:
+    type: object
+    required:
+      - ActivityId
+      - ServiceNamespace
+      - ResourceId
+      - ScalableDimension
+      - Description
+      - Cause
+      - StartTime
+      - StatusCode
+    properties:
+      ActivityId:
+        $ref: '#/definitions/ResourceId'
+        description: The unique identifier of the scaling activity.
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+        description: 'The namespace of the AWS service. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The identifier of the resource associated with the scaling activity. This string consists of the resource type and unique identifier.</p> <ul> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>EMR cluster - The resource type is <code>instancegroup</code> and the unique identifier is the cluster ID and instance group ID. Example: <code>instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.</p> </li> <li> <p>AppStream 2.0 fleet - The resource type is <code>fleet</code> and the unique identifier is the fleet name. Example: <code>fleet/sample-fleet</code>.</p> </li> </ul>'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension. This string consists of the service namespace, resource type, and scaling property.</p> <ul> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.</p> </li> <li> <p> <code>appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.</p> </li> </ul>'
+      Description:
+        $ref: '#/definitions/XmlString'
+        description: A simple description of what action the scaling activity intends to accomplish.
+      Cause:
+        $ref: '#/definitions/XmlString'
+        description: A simple description of what caused the scaling activity to happen.
+      StartTime:
+        $ref: '#/definitions/TimestampType'
+        description: The Unix timestamp for when the scaling activity began.
+      EndTime:
+        $ref: '#/definitions/TimestampType'
+        description: The Unix timestamp for when the scaling activity ended.
+      StatusCode:
+        $ref: '#/definitions/ScalingActivityStatusCode'
+        description: Indicates the status of the scaling activity.
+      StatusMessage:
+        $ref: '#/definitions/XmlString'
+        description: A simple message about the current status of the scaling activity.
+      Details:
+        $ref: '#/definitions/XmlString'
+        description: The details about the scaling activity.
+    description: Represents a scaling activity.
+  ScalingActivityStatusCode:
+    type: string
+    enum:
+      - Pending
+      - InProgress
+      - Successful
+      - Overridden
+      - Unfulfilled
+      - Failed
+  ScalingAdjustment:
+    type: integer
+  ScalingPolicies:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPolicy'
+  ScalingPolicy:
+    type: object
+    required:
+      - PolicyARN
+      - PolicyName
+      - ServiceNamespace
+      - ResourceId
+      - ScalableDimension
+      - PolicyType
+      - CreationTime
+    properties:
+      PolicyARN:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: The Amazon Resource Name (ARN) of the scaling policy.
+      PolicyName:
+        $ref: '#/definitions/PolicyName'
+        description: The name of the scaling policy.
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+        description: 'The namespace of the AWS service. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces">AWS Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The identifier of the resource associated with the scaling policy. This string consists of the resource type and unique identifier.</p> <ul> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>EMR cluster - The resource type is <code>instancegroup</code> and the unique identifier is the cluster ID and instance group ID. Example: <code>instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.</p> </li> <li> <p>AppStream 2.0 fleet - The resource type is <code>fleet</code> and the unique identifier is the fleet name. Example: <code>fleet/sample-fleet</code>.</p> </li> </ul>'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension. This string consists of the service namespace, resource type, and scaling property.</p> <ul> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.</p> </li> <li> <p> <code>appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.</p> </li> </ul>'
+      PolicyType:
+        $ref: '#/definitions/PolicyType'
+        description: The scaling policy type.
+      StepScalingPolicyConfiguration:
+        $ref: '#/definitions/StepScalingPolicyConfiguration'
+        description: The configuration for the step scaling policy.
+      Alarms:
+        $ref: '#/definitions/Alarms'
+        description: The CloudWatch alarms associated with the scaling policy.
+      CreationTime:
+        $ref: '#/definitions/TimestampType'
+        description: The Unix timestamp for when the scaling policy was created.
+    description: Represents a scaling policy.
+  ServiceNamespace:
+    type: string
+    enum:
+      - ecs
+      - elasticmapreduce
+      - ec2
+      - appstream
+  StepAdjustment:
+    type: object
+    required:
+      - ScalingAdjustment
+    properties:
+      MetricIntervalLowerBound:
+        $ref: '#/definitions/MetricScale'
+        description: 'The lower bound for the difference between the alarm threshold and the CloudWatch metric. If the metric value is above the breach threshold, the lower bound is inclusive (the metric must be greater than or equal to the threshold plus the lower bound). Otherwise, it is exclusive (the metric must be greater than the threshold plus the lower bound). A null value indicates negative infinity.'
+      MetricIntervalUpperBound:
+        $ref: '#/definitions/MetricScale'
+        description: '<p>The upper bound for the difference between the alarm threshold and the CloudWatch metric. If the metric value is above the breach threshold, the upper bound is exclusive (the metric must be less than the threshold plus the upper bound). Otherwise, it is inclusive (the metric must be less than or equal to the threshold plus the upper bound). A null value indicates positive infinity.</p> <p>The upper bound must be greater than the lower bound.</p>'
+      ScalingAdjustment:
+        $ref: '#/definitions/ScalingAdjustment'
+        description: 'The amount by which to scale, based on the specified adjustment type. A positive value adds to the current scalable dimension while a negative number removes from the current scalable dimension.'
+    description: '<p>Represents a step adjustment for a <a>StepScalingPolicyConfiguration</a>. Describes an adjustment based on the difference between the value of the aggregated CloudWatch metric and the breach threshold that you''ve defined for the alarm. </p> <p>For the following examples, suppose that you have an alarm with a breach threshold of 50:</p> <ul> <li> <p>To trigger the adjustment when the metric is greater than or equal to 50 and less than 60, specify a lower bound of 0 and an upper bound of 10.</p> </li> <li> <p>To trigger the adjustment when the metric is greater than 40 and less than or equal to 50, specify a lower bound of -10 and an upper bound of 0.</p> </li> </ul> <p>There are a few rules for the step adjustments for your step policy:</p> <ul> <li> <p>The ranges of your step adjustments can''t overlap or have a gap.</p> </li> <li> <p>At most one step adjustment can have a null lower bound. If one step adjustment has a negative lower bound, then there must be a step adjustment with a null lower bound.</p> </li> <li> <p>At most one step adjustment can have a null upper bound. If one step adjustment has a positive upper bound, then there must be a step adjustment with a null upper bound.</p> </li> <li> <p>The upper and lower bound can''t be null in the same step adjustment.</p> </li> </ul>'
+  StepAdjustments:
+    type: array
+    items:
+      $ref: '#/definitions/StepAdjustment'
+  StepScalingPolicyConfiguration:
+    type: object
+    properties:
+      AdjustmentType:
+        $ref: '#/definitions/AdjustmentType'
+        description: 'The adjustment type, which specifies how the <code>ScalingAdjustment</code> parameter in a <a>StepAdjustment</a> is interpreted.'
+      StepAdjustments:
+        $ref: '#/definitions/StepAdjustments'
+        description: A set of adjustments that enable you to scale based on the size of the alarm breach.
+      MinAdjustmentMagnitude:
+        $ref: '#/definitions/MinAdjustmentMagnitude'
+        description: 'The minimum number to adjust your scalable dimension as a result of a scaling activity. If the adjustment type is <code>PercentChangeInCapacity</code>, the scaling policy changes the scalable dimension of the scalable target by this amount.'
+      Cooldown:
+        $ref: '#/definitions/Cooldown'
+        description: '<p>The amount of time, in seconds, after a scaling activity completes where previous trigger-related scaling activities can influence future scaling events.</p> <p>For scale out policies, while <code>Cooldown</code> is in effect, the capacity that has been added by the previous scale out event that initiated the <code>Cooldown</code> is calculated as part of the desired capacity for the next scale out. The intention is to continuously (but not excessively) scale out. For example, an alarm triggers a step scaling policy to scale out an Amazon ECS service by 2 tasks, the scaling activity completes successfully, and a <code>Cooldown</code> period of 5 minutes starts. During the <code>Cooldown</code> period, if the alarm triggers the same policy again but at a more aggressive step adjustment to scale out the service by 3 tasks, the 2 tasks that were added in the previous scale out event are considered part of that capacity and only 1 additional task is added to the desired count.</p> <p>For scale in policies, the <code>Cooldown</code> period is used to block subsequent scale in requests until it has expired. The intention is to scale in conservatively to protect your application''s availability. However, if another alarm triggers a scale out policy during the <code>Cooldown</code> period after a scale-in, Application Auto Scaling scales out your scalable target immediately.</p>'
+      MetricAggregationType:
+        $ref: '#/definitions/MetricAggregationType'
+        description: 'The aggregation type for the CloudWatch metrics. Valid values are <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code>.'
+    description: Represents a step scaling policy configuration.
+  TimestampType:
+    type: string
+    format: date-time
+  ValidationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: An exception was thrown for a validation issue. Review the available parameters for the API request.
+  XmlString:
+    type: string
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'

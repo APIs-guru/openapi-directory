@@ -1,0 +1,2062 @@
+swagger: '2.0'
+info:
+  version: '2015-04-13'
+  x-release: v4
+  title: AWS CodeCommit
+  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference)</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: codecommit
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/codecommit-2015-04-13.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+    - format: swagger
+      version: '2.0'
+      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/codecommit/2015-04-13/swagger.yaml'
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+x-logo:
+  url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+  backgroundColor: '#FFFFFF'
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/codecommit/'
+host: codecommit.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: BatchGetRepositories
+      description: <p>Returns information about one or more repositories.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchGetRepositoriesOutput'
+        '480':
+          description: RepositoryNamesRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNamesRequiredException'
+        '481':
+          description: MaximumRepositoryNamesExceededException
+          schema:
+            $ref: '#/definitions/MaximumRepositoryNamesExceededException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '484':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '485':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '486':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '487':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchGetRepositoriesInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateBranch':
+    post:
+      operationId: CreateBranch
+      description: '<p>Creates a new branch in a repository and points the branch to a commit.</p> <note> <p>Calling the create branch operation does not set a repository''s default branch. To do this, call the update default branch operation.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: BranchNameRequiredException
+          schema:
+            $ref: '#/definitions/BranchNameRequiredException'
+        '484':
+          description: BranchNameExistsException
+          schema:
+            $ref: '#/definitions/BranchNameExistsException'
+        '485':
+          description: InvalidBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidBranchNameException'
+        '486':
+          description: CommitIdRequiredException
+          schema:
+            $ref: '#/definitions/CommitIdRequiredException'
+        '487':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '488':
+          description: InvalidCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidCommitIdException'
+        '489':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '490':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '491':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '492':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '493':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateBranchInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateRepository':
+    post:
+      operationId: CreateRepository
+      description: 'Creates a new, empty repository.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRepositoryOutput'
+        '480':
+          description: RepositoryNameExistsException
+          schema:
+            $ref: '#/definitions/RepositoryNameExistsException'
+        '481':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: InvalidRepositoryDescriptionException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryDescriptionException'
+        '484':
+          description: RepositoryLimitExceededException
+          schema:
+            $ref: '#/definitions/RepositoryLimitExceededException'
+        '485':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '486':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '487':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '488':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '489':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRepositoryInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRepository':
+    post:
+      operationId: DeleteRepository
+      description: '<p>Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.</p> <important><p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteRepositoryOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '483':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '484':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '485':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '486':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRepositoryInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetBlob':
+    post:
+      operationId: GetBlob
+      description: Returns the base-64 encoded content of an individual blob within a repository.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBlobOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: BlobIdRequiredException
+          schema:
+            $ref: '#/definitions/BlobIdRequiredException'
+        '484':
+          description: InvalidBlobIdException
+          schema:
+            $ref: '#/definitions/InvalidBlobIdException'
+        '485':
+          description: BlobIdDoesNotExistException
+          schema:
+            $ref: '#/definitions/BlobIdDoesNotExistException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+        '491':
+          description: FileTooLargeException
+          schema:
+            $ref: '#/definitions/FileTooLargeException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBlobInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetBranch':
+    post:
+      operationId: GetBranch
+      description: 'Returns information about a repository branch, including its name and the last commit ID.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBranchOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: BranchNameRequiredException
+          schema:
+            $ref: '#/definitions/BranchNameRequiredException'
+        '484':
+          description: InvalidBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidBranchNameException'
+        '485':
+          description: BranchDoesNotExistException
+          schema:
+            $ref: '#/definitions/BranchDoesNotExistException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBranchInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetCommit':
+    post:
+      operationId: GetCommit
+      description: 'Returns information about a commit, including commit message and committer information.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCommitOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: CommitIdRequiredException
+          schema:
+            $ref: '#/definitions/CommitIdRequiredException'
+        '484':
+          description: InvalidCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidCommitIdException'
+        '485':
+          description: CommitIdDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitIdDoesNotExistException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCommitInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDifferences':
+    post:
+      operationId: GetDifferences
+      description: 'Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference). Results can be limited to a specified path.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDifferencesOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: InvalidContinuationTokenException
+          schema:
+            $ref: '#/definitions/InvalidContinuationTokenException'
+        '484':
+          description: InvalidMaxResultsException
+          schema:
+            $ref: '#/definitions/InvalidMaxResultsException'
+        '485':
+          description: InvalidCommitIdException
+          schema:
+            $ref: '#/definitions/InvalidCommitIdException'
+        '486':
+          description: CommitRequiredException
+          schema:
+            $ref: '#/definitions/CommitRequiredException'
+        '487':
+          description: InvalidCommitException
+          schema:
+            $ref: '#/definitions/InvalidCommitException'
+        '488':
+          description: CommitDoesNotExistException
+          schema:
+            $ref: '#/definitions/CommitDoesNotExistException'
+        '489':
+          description: InvalidPathException
+          schema:
+            $ref: '#/definitions/InvalidPathException'
+        '490':
+          description: PathDoesNotExistException
+          schema:
+            $ref: '#/definitions/PathDoesNotExistException'
+        '491':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '492':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '493':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '494':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '495':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDifferencesInput'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRepository':
+    post:
+      operationId: GetRepository
+      description: <p>Returns information about a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRepositoryOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '484':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '485':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '486':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '487':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRepositoryInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetRepositoryTriggers':
+    post:
+      operationId: GetRepositoryTriggers
+      description: Gets information about triggers configured for a repository.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetRepositoryTriggersOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '483':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '484':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '485':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '486':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '487':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRepositoryTriggersInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListBranches':
+    post:
+      operationId: ListBranches
+      description: Gets information about one or more branches in a repository.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBranchesOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '484':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '485':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '486':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '487':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+        '488':
+          description: InvalidContinuationTokenException
+          schema:
+            $ref: '#/definitions/InvalidContinuationTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBranchesInput'
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListRepositories':
+    post:
+      operationId: ListRepositories
+      description: Gets information about one or more repositories.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListRepositoriesOutput'
+        '480':
+          description: InvalidSortByException
+          schema:
+            $ref: '#/definitions/InvalidSortByException'
+        '481':
+          description: InvalidOrderException
+          schema:
+            $ref: '#/definitions/InvalidOrderException'
+        '482':
+          description: InvalidContinuationTokenException
+          schema:
+            $ref: '#/definitions/InvalidContinuationTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListRepositoriesInput'
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutRepositoryTriggers':
+    post:
+      operationId: PutRepositoryTriggers
+      description: Replaces all triggers for a repository. This can be used to create or delete triggers.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutRepositoryTriggersOutput'
+        '480':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '481':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: RepositoryTriggersListRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryTriggersListRequiredException'
+        '484':
+          description: MaximumRepositoryTriggersExceededException
+          schema:
+            $ref: '#/definitions/MaximumRepositoryTriggersExceededException'
+        '485':
+          description: InvalidRepositoryTriggerNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerNameException'
+        '486':
+          description: InvalidRepositoryTriggerDestinationArnException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerDestinationArnException'
+        '487':
+          description: InvalidRepositoryTriggerRegionException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerRegionException'
+        '488':
+          description: InvalidRepositoryTriggerCustomDataException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerCustomDataException'
+        '489':
+          description: MaximumBranchesExceededException
+          schema:
+            $ref: '#/definitions/MaximumBranchesExceededException'
+        '490':
+          description: InvalidRepositoryTriggerBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerBranchNameException'
+        '491':
+          description: InvalidRepositoryTriggerEventsException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerEventsException'
+        '492':
+          description: RepositoryTriggerNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryTriggerNameRequiredException'
+        '493':
+          description: RepositoryTriggerDestinationArnRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryTriggerDestinationArnRequiredException'
+        '494':
+          description: RepositoryTriggerBranchNameListRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryTriggerBranchNameListRequiredException'
+        '495':
+          description: RepositoryTriggerEventsListRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryTriggerEventsListRequiredException'
+        '496':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '497':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '498':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '499':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '500':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutRepositoryTriggersInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TestRepositoryTriggers':
+    post:
+      operationId: TestRepositoryTriggers
+      description: 'Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test will send data from the last commit. If no data is available, sample data will be generated.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TestRepositoryTriggersOutput'
+        '480':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '481':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: RepositoryTriggersListRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryTriggersListRequiredException'
+        '484':
+          description: MaximumRepositoryTriggersExceededException
+          schema:
+            $ref: '#/definitions/MaximumRepositoryTriggersExceededException'
+        '485':
+          description: InvalidRepositoryTriggerNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerNameException'
+        '486':
+          description: InvalidRepositoryTriggerDestinationArnException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerDestinationArnException'
+        '487':
+          description: InvalidRepositoryTriggerRegionException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerRegionException'
+        '488':
+          description: InvalidRepositoryTriggerCustomDataException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerCustomDataException'
+        '489':
+          description: MaximumBranchesExceededException
+          schema:
+            $ref: '#/definitions/MaximumBranchesExceededException'
+        '490':
+          description: InvalidRepositoryTriggerBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerBranchNameException'
+        '491':
+          description: InvalidRepositoryTriggerEventsException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryTriggerEventsException'
+        '492':
+          description: RepositoryTriggerNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryTriggerNameRequiredException'
+        '493':
+          description: RepositoryTriggerDestinationArnRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryTriggerDestinationArnRequiredException'
+        '494':
+          description: RepositoryTriggerBranchNameListRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryTriggerBranchNameListRequiredException'
+        '495':
+          description: RepositoryTriggerEventsListRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryTriggerEventsListRequiredException'
+        '496':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '497':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '498':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '499':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '500':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TestRepositoryTriggersInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDefaultBranch':
+    post:
+      operationId: UpdateDefaultBranch
+      description: '<p>Sets or changes the default branch name for the specified repository.</p> <note> <p>If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: BranchNameRequiredException
+          schema:
+            $ref: '#/definitions/BranchNameRequiredException'
+        '484':
+          description: InvalidBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidBranchNameException'
+        '485':
+          description: BranchDoesNotExistException
+          schema:
+            $ref: '#/definitions/BranchDoesNotExistException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDefaultBranchInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateRepositoryDescription':
+    post:
+      operationId: UpdateRepositoryDescription
+      description: <p>Sets or changes the comment or description for a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: InvalidRepositoryDescriptionException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryDescriptionException'
+        '484':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '485':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '486':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '487':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '488':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateRepositoryDescriptionInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateRepositoryName':
+    post:
+      operationId: UpdateRepositoryName
+      description: 'Renames a repository. The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix ".git" is prohibited. For a full description of the limits on repository names, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Limits</a> in the AWS CodeCommit User Guide.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '481':
+          description: RepositoryNameExistsException
+          schema:
+            $ref: '#/definitions/RepositoryNameExistsException'
+        '482':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '483':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateRepositoryNameInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AccountId:
+    type: string
+  AdditionalData:
+    type: string
+  Arn:
+    type: string
+  BatchGetRepositoriesInput:
+    type: object
+    required:
+      - repositoryNames
+    properties:
+      repositoryNames:
+        $ref: '#/definitions/RepositoryNameList'
+        description: The names of the repositories to get information about.
+    description: Represents the input of a batch get repositories operation.
+  BatchGetRepositoriesOutput:
+    type: object
+    properties:
+      repositories:
+        $ref: '#/definitions/RepositoryMetadataList'
+        description: A list of repositories returned by the batch get repositories operation.
+      repositoriesNotFound:
+        $ref: '#/definitions/RepositoryNotFoundList'
+        description: Returns a list of repository names for which information could not be found.
+    description: Represents the output of a batch get repositories operation.
+  BlobIdDoesNotExistException:
+    type: object
+    properties: {}
+    description: The specified blob does not exist.
+  BlobIdRequiredException:
+    type: object
+    properties: {}
+    description: A blob ID is required but was not specified.
+  BlobMetadata:
+    type: object
+    properties:
+      blobId:
+        $ref: '#/definitions/ObjectId'
+        description: The full ID of the blob.
+      path:
+        $ref: '#/definitions/Path'
+        description: 'The path to the blob and any associated file name, if any.'
+      mode:
+        $ref: '#/definitions/Mode'
+        description: '<p>The file mode permissions of the blob. File mode permission codes include:</p> <ul> <li> <p> <code>100644</code> indicates read/write</p> </li> <li> <p> <code>100755</code> indicates read/write/execute</p> </li> <li> <p> <code>160000</code> indicates a submodule</p> </li> <li> <p> <code>120000</code> indicates a symlink</p> </li> </ul>'
+    description: Returns information about a specific Git blob object.
+  BranchDoesNotExistException:
+    type: object
+    properties: {}
+    description: The specified branch does not exist.
+  BranchInfo:
+    type: object
+    properties:
+      branchName:
+        $ref: '#/definitions/BranchName'
+        description: The name of the branch.
+      commitId:
+        $ref: '#/definitions/CommitId'
+        description: The ID of the last commit made to the branch.
+    description: Returns information about a branch.
+  BranchName:
+    type: string
+    minLength: 1
+    maxLength: 100
+  BranchNameExistsException:
+    type: object
+    properties: {}
+    description: The specified branch name already exists.
+  BranchNameList:
+    type: array
+    items:
+      $ref: '#/definitions/BranchName'
+  BranchNameRequiredException:
+    type: object
+    properties: {}
+    description: A branch name is required but was not specified.
+  ChangeTypeEnum:
+    type: string
+    enum:
+      - A
+      - M
+      - D
+  CloneUrlHttp:
+    type: string
+  CloneUrlSsh:
+    type: string
+  Commit:
+    type: object
+    properties:
+      treeId:
+        $ref: '#/definitions/ObjectId'
+        description: Tree information for the specified commit.
+      parents:
+        $ref: '#/definitions/ParentList'
+        description: The parent list for the specified commit.
+      message:
+        $ref: '#/definitions/Message'
+        description: The commit message associated with the specified commit.
+      author:
+        $ref: '#/definitions/UserInfo'
+        description: 'Information about the author of the specified commit. Information includes the date in timestamp format with GMT offset, the name of the author, and the email address for the author, as configured in Git.'
+      committer:
+        $ref: '#/definitions/UserInfo'
+        description: '<p>Information about the person who committed the specified commit, also known as the committer. Information includes the date in timestamp format with GMT offset, the name of the committer, and the email address for the committer, as configured in Git.</p> <p>For more information about the difference between an author and a committer in Git, see <a href="http://git-scm.com/book/ch2-3.html">Viewing the Commit History</a> in Pro Git by Scott Chacon and Ben Straub.</p>'
+      additionalData:
+        $ref: '#/definitions/AdditionalData'
+        description: Any additional data associated with the specified commit.
+    description: Returns information about a specific commit.
+  CommitDoesNotExistException:
+    type: object
+    properties: {}
+    description: 'The specified commit does not exist or no commit was specified, and the specified repository has no default branch.'
+  CommitId:
+    type: string
+  CommitIdDoesNotExistException:
+    type: object
+    properties: {}
+    description: The specified commit ID does not exist.
+  CommitIdRequiredException:
+    type: object
+    properties: {}
+    description: A commit ID was not specified.
+  CommitName:
+    type: string
+  CommitRequiredException:
+    type: object
+    properties: {}
+    description: A commit was not specified.
+  CreateBranchInput:
+    type: object
+    required:
+      - repositoryName
+      - branchName
+      - commitId
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository in which you want to create the new branch.
+      branchName:
+        $ref: '#/definitions/BranchName'
+        description: The name of the new branch to create.
+      commitId:
+        $ref: '#/definitions/CommitId'
+        description: The ID of the commit to point the new branch to.
+    description: Represents the input of a create branch operation.
+  CreateRepositoryInput:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: '<p>The name of the new repository to be created.</p> <note> <p>The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. For a full description of the limits on repository names, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Limits</a> in the AWS CodeCommit User Guide. The suffix ".git" is prohibited.</p> </note>'
+      repositoryDescription:
+        $ref: '#/definitions/RepositoryDescription'
+        description: <p>A comment or description about the new repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
+    description: Represents the input of a create repository operation.
+  CreateRepositoryOutput:
+    type: object
+    properties:
+      repositoryMetadata:
+        $ref: '#/definitions/RepositoryMetadata'
+        description: Information about the newly created repository.
+    description: Represents the output of a create repository operation.
+  CreationDate:
+    type: string
+    format: date-time
+  Date:
+    type: string
+  DeleteRepositoryInput:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository to delete.
+    description: Represents the input of a delete repository operation.
+  DeleteRepositoryOutput:
+    type: object
+    properties:
+      repositoryId:
+        $ref: '#/definitions/RepositoryId'
+        description: The ID of the repository that was deleted.
+    description: Represents the output of a delete repository operation.
+  Difference:
+    type: object
+    properties:
+      beforeBlob:
+        $ref: '#/definitions/BlobMetadata'
+        description: 'Information about a <code>beforeBlob</code> data type object, including the ID, the file mode permission code, and the path.'
+      afterBlob:
+        $ref: '#/definitions/BlobMetadata'
+        description: 'Information about an <code>afterBlob</code> data type object, including the ID, the file mode permission code, and the path.'
+      changeType:
+        $ref: '#/definitions/ChangeTypeEnum'
+        description: 'Whether the change type of the difference is an addition (A), deletion (D), or modification (M).'
+    description: Returns information about a set of differences for a commit specifier.
+  DifferenceList:
+    type: array
+    items:
+      $ref: '#/definitions/Difference'
+  Email:
+    type: string
+  EncryptionIntegrityChecksFailedException:
+    type: object
+    properties: {}
+    description: An encryption integrity check failed.
+  EncryptionKeyAccessDeniedException:
+    type: object
+    properties: {}
+    description: An encryption key could not be accessed.
+  EncryptionKeyDisabledException:
+    type: object
+    properties: {}
+    description: The encryption key is disabled.
+  EncryptionKeyNotFoundException:
+    type: object
+    properties: {}
+    description: No encryption key was found.
+  EncryptionKeyUnavailableException:
+    type: object
+    properties: {}
+    description: The encryption key is not available.
+  FileTooLargeException:
+    type: object
+    properties: {}
+    description: 'The specified file exceeds the file size limit for AWS CodeCommit. For more information about limits in AWS CodeCommit, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">AWS CodeCommit User Guide</a>.'
+  GetBlobInput:
+    type: object
+    required:
+      - repositoryName
+      - blobId
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the blob.
+      blobId:
+        $ref: '#/definitions/ObjectId'
+        description: 'The ID of the blob, which is its SHA-1 pointer.'
+    description: Represents the input of a get blob operation.
+  GetBlobOutput:
+    type: object
+    required:
+      - content
+    properties:
+      content:
+        $ref: '#/definitions/blob'
+        description: 'The content of the blob, usually a file.'
+    description: Represents the output of a get blob operation.
+  GetBranchInput:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the branch for which you want to retrieve information.
+      branchName:
+        $ref: '#/definitions/BranchName'
+        description: The name of the branch for which you want to retrieve information.
+    description: Represents the input of a get branch operation.
+  GetBranchOutput:
+    type: object
+    properties:
+      branch:
+        $ref: '#/definitions/BranchInfo'
+        description: The name of the branch.
+    description: Represents the output of a get branch operation.
+  GetCommitInput:
+    type: object
+    required:
+      - repositoryName
+      - commitId
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository to which the commit was made.
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: The commit ID.
+    description: Represents the input of a get commit operation.
+  GetCommitOutput:
+    type: object
+    required:
+      - commit
+    properties:
+      commit:
+        $ref: '#/definitions/Commit'
+        description: A commit data type object that contains information about the specified commit.
+    description: Represents the output of a get commit operation.
+  GetDifferencesInput:
+    type: object
+    required:
+      - repositoryName
+      - afterCommitSpecifier
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you want to get differences.
+      beforeCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, the full commit ID. Optional. If not specified, all changes prior to the <code>afterCommitSpecifier</code> value will be shown. If you do not use <code>beforeCommitSpecifier</code> in your request, consider limiting the results with <code>maxResults</code>.'
+      afterCommitSpecifier:
+        $ref: '#/definitions/CommitName'
+        description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit.'
+      beforePath:
+        $ref: '#/definitions/Path'
+        description: 'The file path in which to check for differences. Limits the results to this path. Can also be used to specify the previous name of a directory or folder. If <code>beforePath</code> and <code>afterPath</code> are not specified, differences will be shown for all paths.'
+      afterPath:
+        $ref: '#/definitions/Path'
+        description: 'The file path in which to check differences. Limits the results to this path. Can also be used to specify the changed name of a directory or folder, if it has changed. If not specified, differences will be shown for all paths.'
+      MaxResults:
+        $ref: '#/definitions/Limit'
+        description: A non-negative integer used to limit the number of returned results.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
+  GetDifferencesOutput:
+    type: object
+    properties:
+      differences:
+        $ref: '#/definitions/DifferenceList'
+        description: 'A differences data type object that contains information about the differences, including whether the difference is added, modified, or deleted (A, D, M).'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: An enumeration token that can be used in a request to return the next batch of the results.
+  GetRepositoryInput:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository to get information about.
+    description: Represents the input of a get repository operation.
+  GetRepositoryOutput:
+    type: object
+    properties:
+      repositoryMetadata:
+        $ref: '#/definitions/RepositoryMetadata'
+        description: Information about the repository.
+    description: Represents the output of a get repository operation.
+  GetRepositoryTriggersInput:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository for which the trigger is configured.
+    description: Represents the input of a get repository triggers operation.
+  GetRepositoryTriggersOutput:
+    type: object
+    properties:
+      configurationId:
+        $ref: '#/definitions/RepositoryTriggersConfigurationId'
+        description: The system-generated unique ID for the trigger.
+      triggers:
+        $ref: '#/definitions/RepositoryTriggersList'
+        description: The JSON block of configuration information for each trigger.
+    description: Represents the output of a get repository triggers operation.
+  InvalidBlobIdException:
+    type: object
+    properties: {}
+    description: The specified blob is not valid.
+  InvalidBranchNameException:
+    type: object
+    properties: {}
+    description: The specified branch name is not valid.
+  InvalidCommitException:
+    type: object
+    properties: {}
+    description: The specified commit is not valid.
+  InvalidCommitIdException:
+    type: object
+    properties: {}
+    description: The specified commit ID is not valid.
+  InvalidContinuationTokenException:
+    type: object
+    properties: {}
+    description: The specified continuation token is not valid.
+  InvalidMaxResultsException:
+    type: object
+    properties: {}
+    description: The specified number of maximum results is not valid.
+  InvalidOrderException:
+    type: object
+    properties: {}
+    description: The specified sort order is not valid.
+  InvalidPathException:
+    type: object
+    properties: {}
+    description: The specified path is not valid.
+  InvalidRepositoryDescriptionException:
+    type: object
+    properties: {}
+    description: The specified repository description is not valid.
+  InvalidRepositoryNameException:
+    type: object
+    properties: {}
+    description: '<p>At least one specified repository name is not valid.</p> <note> <p>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</p> </note>'
+  InvalidRepositoryTriggerBranchNameException:
+    type: object
+    properties: {}
+    description: One or more branch names specified for the trigger is not valid.
+  InvalidRepositoryTriggerCustomDataException:
+    type: object
+    properties: {}
+    description: The custom data provided for the trigger is not valid.
+  InvalidRepositoryTriggerDestinationArnException:
+    type: object
+    properties: {}
+    description: The Amazon Resource Name (ARN) for the trigger is not valid for the specified destination. The most common reason for this error is that the ARN does not meet the requirements for the service type.
+  InvalidRepositoryTriggerEventsException:
+    type: object
+    properties: {}
+    description: One or more events specified for the trigger is not valid. Check to make sure that all events specified match the requirements for allowed events.
+  InvalidRepositoryTriggerNameException:
+    type: object
+    properties: {}
+    description: The name of the trigger is not valid.
+  InvalidRepositoryTriggerRegionException:
+    type: object
+    properties: {}
+    description: The region for the trigger target does not match the region for the repository. Triggers must be created in the same region as the target for the trigger.
+  InvalidSortByException:
+    type: object
+    properties: {}
+    description: The specified sort by value is not valid.
+  LastModifiedDate:
+    type: string
+    format: date-time
+  Limit:
+    type: integer
+  ListBranchesInput:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the branches.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: An enumeration token that allows the operation to batch the results.
+    description: Represents the input of a list branches operation.
+  ListBranchesOutput:
+    type: object
+    properties:
+      branches:
+        $ref: '#/definitions/BranchNameList'
+        description: The list of branch names.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: An enumeration token that returns the batch of the results.
+    description: Represents the output of a list branches operation.
+  ListRepositoriesInput:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, another page of 1,000 records is retrieved.'
+      sortBy:
+        $ref: '#/definitions/SortByEnum'
+        description: The criteria used to sort the results of a list repositories operation.
+      order:
+        $ref: '#/definitions/OrderEnum'
+        description: The order in which to sort the results of a list repositories operation.
+    description: Represents the input of a list repositories operation.
+  ListRepositoriesOutput:
+    type: object
+    properties:
+      repositories:
+        $ref: '#/definitions/RepositoryNameIdPairList'
+        description: Lists the repositories called by the list repositories operation.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, another page of 1,000 records is retrieved.'
+    description: Represents the output of a list repositories operation.
+  MaximumBranchesExceededException:
+    type: object
+    properties: {}
+    description: The number of branches for the trigger was exceeded.
+  MaximumRepositoryNamesExceededException:
+    type: object
+    properties: {}
+    description: 'The maximum number of allowed repository names was exceeded. Currently, this number is 25.'
+  MaximumRepositoryTriggersExceededException:
+    type: object
+    properties: {}
+    description: The number of triggers allowed for the repository was exceeded.
+  Message:
+    type: string
+  Mode:
+    type: string
+  Name:
+    type: string
+  NextToken:
+    type: string
+  ObjectId:
+    type: string
+  OrderEnum:
+    type: string
+    enum:
+      - ascending
+      - descending
+  ParentList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectId'
+  Path:
+    type: string
+  PathDoesNotExistException:
+    type: object
+    properties: {}
+    description: The specified path does not exist.
+  PutRepositoryTriggersInput:
+    type: object
+    required:
+      - repositoryName
+      - triggers
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository where you want to create or update the trigger.
+      triggers:
+        $ref: '#/definitions/RepositoryTriggersList'
+        description: The JSON block of configuration information for each trigger.
+    description: Represents the input ofa put repository triggers operation.
+  PutRepositoryTriggersOutput:
+    type: object
+    properties:
+      configurationId:
+        $ref: '#/definitions/RepositoryTriggersConfigurationId'
+        description: The system-generated unique ID for the create or update operation.
+    description: Represents the output of a put repository triggers operation.
+  RepositoryDescription:
+    type: string
+    maxLength: 1000
+  RepositoryDoesNotExistException:
+    type: object
+    properties: {}
+    description: The specified repository does not exist.
+  RepositoryId:
+    type: string
+  RepositoryLimitExceededException:
+    type: object
+    properties: {}
+    description: A repository resource limit was exceeded.
+  RepositoryMetadata:
+    type: object
+    properties:
+      accountId:
+        $ref: '#/definitions/AccountId'
+        description: The ID of the AWS account associated with the repository.
+      repositoryId:
+        $ref: '#/definitions/RepositoryId'
+        description: The ID of the repository.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The repository's name.
+      repositoryDescription:
+        $ref: '#/definitions/RepositoryDescription'
+        description: A comment or description about the repository.
+      defaultBranch:
+        $ref: '#/definitions/BranchName'
+        description: The repository's default branch name.
+      lastModifiedDate:
+        $ref: '#/definitions/LastModifiedDate'
+        description: 'The date and time the repository was last modified, in timestamp format.'
+      creationDate:
+        $ref: '#/definitions/CreationDate'
+        description: 'The date and time the repository was created, in timestamp format.'
+      cloneUrlHttp:
+        $ref: '#/definitions/CloneUrlHttp'
+        description: The URL to use for cloning the repository over HTTPS.
+      cloneUrlSsh:
+        $ref: '#/definitions/CloneUrlSsh'
+        description: The URL to use for cloning the repository over SSH.
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the repository.
+    description: Information about a repository.
+  RepositoryMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryMetadata'
+  RepositoryName:
+    type: string
+    pattern: '[\w\.-]+'
+    minLength: 1
+    maxLength: 100
+  RepositoryNameExistsException:
+    type: object
+    properties: {}
+    description: The specified repository name already exists.
+  RepositoryNameIdPair:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name associated with the repository.
+      repositoryId:
+        $ref: '#/definitions/RepositoryId'
+        description: The ID associated with the repository.
+    description: Information about a repository name and ID.
+  RepositoryNameIdPairList:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryNameIdPair'
+  RepositoryNameList:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryName'
+  RepositoryNameRequiredException:
+    type: object
+    properties: {}
+    description: A repository name is required but was not specified.
+  RepositoryNamesRequiredException:
+    type: object
+    properties: {}
+    description: A repository names object is required but was not specified.
+  RepositoryNotFoundList:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryName'
+  RepositoryTrigger:
+    type: object
+    required:
+      - name
+      - destinationArn
+      - events
+    properties:
+      name:
+        $ref: '#/definitions/RepositoryTriggerName'
+        description: The name of the trigger.
+      destinationArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS).'
+      customData:
+        $ref: '#/definitions/RepositoryTriggerCustomData'
+        description: Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
+      branches:
+        $ref: '#/definitions/BranchNameList'
+        description: 'The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches.'
+      events:
+        $ref: '#/definitions/RepositoryTriggerEventList'
+        description: '<p>The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). </p> <note> <p>The valid value "all" cannot be used with any other values.</p> </note>'
+    description: Information about a trigger for a repository.
+  RepositoryTriggerBranchNameListRequiredException:
+    type: object
+    properties: {}
+    description: At least one branch name is required but was not specified in the trigger configuration.
+  RepositoryTriggerCustomData:
+    type: string
+  RepositoryTriggerDestinationArnRequiredException:
+    type: object
+    properties: {}
+    description: A destination ARN for the target service for the trigger is required but was not specified.
+  RepositoryTriggerEventEnum:
+    type: string
+    enum:
+      - all
+      - updateReference
+      - createReference
+      - deleteReference
+  RepositoryTriggerEventList:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryTriggerEventEnum'
+  RepositoryTriggerEventsListRequiredException:
+    type: object
+    properties: {}
+    description: At least one event for the trigger is required but was not specified.
+  RepositoryTriggerExecutionFailure:
+    type: object
+    properties:
+      trigger:
+        $ref: '#/definitions/RepositoryTriggerName'
+        description: The name of the trigger that did not run.
+      failureMessage:
+        $ref: '#/definitions/RepositoryTriggerExecutionFailureMessage'
+        description: Additional message information about the trigger that did not run.
+    description: A trigger failed to run.
+  RepositoryTriggerExecutionFailureList:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryTriggerExecutionFailure'
+  RepositoryTriggerExecutionFailureMessage:
+    type: string
+  RepositoryTriggerName:
+    type: string
+  RepositoryTriggerNameList:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryTriggerName'
+  RepositoryTriggerNameRequiredException:
+    type: object
+    properties: {}
+    description: A name for the trigger is required but was not specified.
+  RepositoryTriggersConfigurationId:
+    type: string
+  RepositoryTriggersList:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryTrigger'
+  RepositoryTriggersListRequiredException:
+    type: object
+    properties: {}
+    description: The list of triggers for the repository is required but was not specified.
+  SortByEnum:
+    type: string
+    enum:
+      - repositoryName
+      - lastModifiedDate
+  TestRepositoryTriggersInput:
+    type: object
+    required:
+      - repositoryName
+      - triggers
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository in which to test the triggers.
+      triggers:
+        $ref: '#/definitions/RepositoryTriggersList'
+        description: The list of triggers to test.
+    description: Represents the input of a test repository triggers operation.
+  TestRepositoryTriggersOutput:
+    type: object
+    properties:
+      successfulExecutions:
+        $ref: '#/definitions/RepositoryTriggerNameList'
+        description: 'The list of triggers that were successfully tested. This list provides the names of the triggers that were successfully tested, separated by commas.'
+      failedExecutions:
+        $ref: '#/definitions/RepositoryTriggerExecutionFailureList'
+        description: 'The list of triggers that were not able to be tested. This list provides the names of the triggers that could not be tested, separated by commas.'
+    description: Represents the output of a test repository triggers operation.
+  UpdateDefaultBranchInput:
+    type: object
+    required:
+      - repositoryName
+      - defaultBranchName
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository to set or change the default branch for.
+      defaultBranchName:
+        $ref: '#/definitions/BranchName'
+        description: The name of the branch to set as the default.
+    description: Represents the input of an update default branch operation.
+  UpdateRepositoryDescriptionInput:
+    type: object
+    required:
+      - repositoryName
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository to set or change the comment or description for.
+      repositoryDescription:
+        $ref: '#/definitions/RepositoryDescription'
+        description: 'The new comment or description for the specified repository. Repository descriptions are limited to 1,000 characters.'
+    description: Represents the input of an update repository description operation.
+  UpdateRepositoryNameInput:
+    type: object
+    required:
+      - oldName
+      - newName
+    properties:
+      oldName:
+        $ref: '#/definitions/RepositoryName'
+        description: The existing name of the repository.
+      newName:
+        $ref: '#/definitions/RepositoryName'
+        description: The new name for the repository.
+    description: Represents the input of an update repository description operation.
+  UserInfo:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the user who made the specified commit.
+      email:
+        $ref: '#/definitions/Email'
+        description: 'The email address associated with the user who made the commit, if any.'
+      date:
+        $ref: '#/definitions/Date'
+        description: The date when the specified commit was pushed to the repository.
+    description: Information about the user who made a specified commit.
+  blob:
+    type: string
