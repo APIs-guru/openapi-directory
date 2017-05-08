@@ -1,0 +1,742 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.runscope.com
+basePath: /
+info:
+  description: Manage Runscope programmatically.
+  title: Runscope
+  version: 1.0.0
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://pbs.twimg.com/profile_images/500425058955689986/zlcbgqTt.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Runscope/runscope-api-examples/master/schemas/runscope-swagger.json'
+      version: '2.0'
+  x-providerName: runscope.com
+produces:
+  - application/json
+securityDefinitions:
+  runscope_auth:
+    authorizationUrl: 'https://www.runscope.com/signin/oauth/authorize'
+    flow: accessCode
+    scopes:
+      'account:email': Allows you to read the email addresses of user accounts.
+      'api:read': Default read access.
+      'bucket:auth_token': 'Allows you to read all bucket information, including Authenticated Buckets.'
+      'bucket:write': Allows you to create new buckets on behalf of the user (up to their plan limit).
+      'message:write': Allows you to create new messages on behalf of the user (up to their plan limit).
+      'team:read': Allows you to read team details such as lists of team members and external service integrations.
+      'test:read': Allows you to read the details of API tests.
+      'test:write': 'Allows you to create, update and delete details of API tests.'
+    tokenUrl: 'https://www.runscope.com/signin/oauth/access_token'
+    type: oauth2
+parameters:
+  bucketKey:
+    description: Unique identifier for a bucket
+    in: path
+    name: bucketKey
+    required: true
+    type: string
+  environmentId:
+    description: Unique identifier for a test environment
+    in: path
+    name: environmentId
+    required: true
+    type: string
+  stepId:
+    description: Unique identifier for a test step
+    in: path
+    name: stepId
+    required: true
+    type: string
+  teamId:
+    description: Unique identifier for team
+    in: path
+    name: teamId
+    required: true
+    type: string
+  testId:
+    description: Unique identifier for a test
+    in: path
+    name: testId
+    required: true
+    type: string
+responses:
+  UnexpectedError:
+    description: Unexpected error
+    schema:
+      $ref: '#/definitions/Error'
+paths:
+  /account:
+    get:
+      description: Information about the authorized account.
+      responses:
+        '200':
+          description: Account owner and team information.
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Account'
+              meta:
+                $ref: '#/definitions/Meta'
+            type: object
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'account:email'
+      summary: Account Resource
+      tags:
+        - Account
+  /buckets:
+    get:
+      responses:
+        '200':
+          description: List of buckets associated with this authenticated account.
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Account'
+              meta:
+                $ref: '#/definitions/Meta'
+            type: object
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+      summary: Returns a list of buckets.
+      tags:
+        - Buckets
+    post:
+      parameters:
+        - in: body
+          name: NewBucket
+          required: true
+          schema:
+            $ref: '#/definitions/NewBucket'
+      responses:
+        '200':
+          description: Bucket details.
+          schema:
+            $ref: '#/definitions/Bucket'
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'bucket:write'
+      summary: Create a new bucket
+      tags:
+        - Buckets
+  '/buckets/{bucketKey}':
+    delete:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+      responses:
+        '204':
+          description: No content with no body.
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'bucket:write'
+      summary: Delete a single bucket resource.
+      tags:
+        - Buckets
+    get:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+      responses:
+        '200':
+          description: Bucket details.
+          schema:
+            $ref: '#/definitions/Bucket'
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+      summary: Returns a single bucket resource.
+      tags:
+        - Buckets
+  '/buckets/{bucketKey}/environments':
+    get:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+      responses:
+        '200':
+          description: List of shared environments belonging to this bucket.
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:read'
+      summary: Returns list of shared environments for a specified bucket.
+      tags:
+        - Shared Environments
+    post:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - in: body
+          name: NewEnvironment
+          required: true
+          schema:
+            $ref: '#/definitions/NewEnvironment'
+      responses:
+        '201':
+          description: Details of the new test environment.
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:write'
+      summary: Create new shared environment.
+      tags:
+        - Shared Environments
+  '/buckets/{bucketKey}/environments/{environmentId}':
+    put:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - $ref: '#/parameters/environmentId'
+        - in: body
+          name: ModifiedEnvironment
+          required: true
+          schema:
+            $ref: '#/definitions/NewEnvironment'
+      responses:
+        '201':
+          description: Details of the modified test environment.
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:write'
+      summary: Update the details of a test environment.
+      tags:
+        - Shared Environments
+  '/buckets/{bucketKey}/errors':
+    get:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - description: 'Maxiumum number of messages to return. Default 50, max 1000.'
+          in: query
+          name: count
+          type: integer
+        - description: Only return messages after the given Unix timestamp
+          in: query
+          name: since
+          type: integer
+        - description: Only return messages before the given Unix timestamp
+          in: query
+          name: before
+          type: integer
+      responses:
+        '200':
+          description: List of error messages in a bucket
+          schema:
+            $ref: '#/definitions/Bucket'
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+      summary: Retrieve a list of error messages in a bucket
+      tags:
+        - Messages
+  '/buckets/{bucketKey}/messages':
+    delete:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+      responses:
+        '204':
+          description: No content with no body.
+          schema:
+            $ref: '#/definitions/Bucket'
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'message:write'
+      summary: Clear a bucket (remove all messages).
+      tags:
+        - Messages
+    get:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - description: 'Maxiumum number of messages to return. Default 50, max 1000.'
+          in: query
+          name: count
+          type: integer
+        - description: Only return messages after the given Unix timestamp
+          in: query
+          name: since
+          type: integer
+        - description: Only return messages before the given Unix timestamp
+          in: query
+          name: before
+          type: integer
+      responses:
+        '200':
+          description: List of messages in a bucket
+          schema:
+            $ref: '#/definitions/Bucket'
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+      summary: Retrieve a list of messages in a bucket
+      tags:
+        - Messages
+    post:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - in: body
+          name: NewMessage
+          required: true
+          schema:
+            $ref: '#/definitions/NewMessage'
+      responses:
+        '200':
+          description: New message.
+          schema:
+            $ref: '#/definitions/Bucket'
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'message:write'
+      summary: Create a message
+      tags:
+        - Messages
+  '/buckets/{bucketKey}/messages/{messageId}':
+    get:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - description: The unique identifier for this message
+          in: path
+          name: messageId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of messages in a bucket
+          schema:
+            $ref: '#/definitions/Bucket'
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+      summary: Retrieve the details for a single message.
+      tags:
+        - Messages
+  '/buckets/{bucketKey}/tests':
+    get:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+      responses:
+        '200':
+          description: List of tests for this bucket
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/Test'
+                type: array
+              meta:
+                $ref: '#/definitions/Meta'
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:read'
+      summary: Returns a list of tests.
+      tags:
+        - Tests
+    post:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - in: body
+          name: NewTest
+          required: true
+          schema:
+            $ref: '#/definitions/NewTest'
+      responses:
+        '200':
+          description: List of tests for this bucket
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/Test'
+                type: array
+              meta:
+                $ref: '#/definitions/Meta'
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:write'
+      summary: Create a test.
+      tags:
+        - Tests
+  '/buckets/{bucketKey}/tests/{testId}':
+    delete:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - $ref: '#/parameters/testId'
+      responses:
+        '204':
+          description: No content with no body.
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:write'
+      summary: Delete a single test.
+      tags:
+        - Tests
+  '/buckets/{bucketKey}/tests/{testId}/environments':
+    get:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - $ref: '#/parameters/testId'
+      responses:
+        '200':
+          description: List of environments belonging to this test.
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:read'
+      summary: Return details of the test's environments (only those that belong to the specified test)
+      tags:
+        - Test Environments
+    post:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - $ref: '#/parameters/testId'
+        - in: body
+          name: NewEnvironment
+          required: true
+          schema:
+            $ref: '#/definitions/NewEnvironment'
+      responses:
+        '201':
+          description: Details of the new test environment.
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:write'
+      summary: Create new test environment.
+      tags:
+        - Test Environments
+  '/buckets/{bucketKey}/tests/{testId}/environments/{environmentId}':
+    put:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - $ref: '#/parameters/testId'
+        - $ref: '#/parameters/environmentId'
+        - in: body
+          name: ModifiedEnvironment
+          required: true
+          schema:
+            $ref: '#/definitions/NewEnvironment'
+      responses:
+        '201':
+          description: Details of the modified test environment.
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:write'
+      summary: Update the details of a test environment.
+      tags:
+        - Test Environments
+  '/buckets/{bucketKey}/tests/{testId}/steps':
+    get:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - $ref: '#/parameters/testId'
+      responses:
+        '200':
+          description: List of test steps for a test
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:read'
+      summary: List test steps for a test.
+      tags:
+        - Test Steps
+    post:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - $ref: '#/parameters/testId'
+        - in: body
+          name: NewStep
+          required: true
+          schema:
+            $ref: '#/definitions/NewStep'
+      responses:
+        '201':
+          description: Details of the new test step.
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:write'
+      summary: Add new test step.
+      tags:
+        - Test Steps
+  '/buckets/{bucketKey}/tests/{testId}/steps/{stepId}':
+    delete:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - $ref: '#/parameters/testId'
+        - $ref: '#/parameters/stepId'
+      responses:
+        '204':
+          description: No content with no body.
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:write'
+      summary: Delete a step from a test.
+      tags:
+        - Test Steps
+    put:
+      parameters:
+        - $ref: '#/parameters/bucketKey'
+        - $ref: '#/parameters/testId'
+        - $ref: '#/parameters/stepId'
+        - in: body
+          name: NewStep
+          required: true
+          schema:
+            $ref: '#/definitions/NewStep'
+      responses:
+        '200':
+          description: List of test steps for a test
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'test:write'
+      summary: Update the details of a single test step.
+      tags:
+        - Test Steps
+  '/teams/{teamId}/integrations':
+    get:
+      description: Returns a list of integrations configured for the team.
+      parameters:
+        - $ref: '#/parameters/teamId'
+      responses:
+        '200':
+          description: List of people associated with the team.
+          schema:
+            items:
+              $ref: '#/definitions/Account'
+            type: array
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'team:read'
+      summary: Team integrations list
+      tags:
+        - Account
+  '/teams/{teamId}/people':
+    get:
+      description: List people and integrations associated with a given team.
+      parameters:
+        - $ref: '#/parameters/teamId'
+      responses:
+        '200':
+          description: List of people associated with the team.
+          schema:
+            items:
+              $ref: '#/definitions/Account'
+            type: array
+        default:
+          $ref: '#/responses/UnexpectedError'
+      security:
+        - runscope_auth:
+            - 'api:read'
+            - 'account:email'
+            - 'team:read'
+      summary: Teams Resource
+      tags:
+        - Account
+definitions:
+  Account:
+    properties:
+      email:
+        description: 'The email address for this account. Only present if authorized with the account:email scope.'
+        type: string
+      id:
+        description: The unique identifier for this account.
+        type: string
+      name:
+        description: The name of the person for this account.
+        type: string
+      teams:
+        items:
+          $ref: '#/definitions/Team'
+        type: array
+  Bucket:
+    properties:
+      auth_token:
+        description: 'Bucket auth token if set, otherwise this value is null.'
+        type: string
+      default:
+        description: True if this bucket is the 'default' for a team. Default buckets cannot be deleted.
+        type: boolean
+      key:
+        description: The unique identifier used to address a bucket.
+        type: string
+      name:
+        description: The name of this bucket as displayed in your dashboard.
+        type: string
+      team:
+        $ref: '#/definitions/Team'
+      verify_ssl:
+        description: True if this bucket is configured to verify ssl for requests made to it.
+        type: boolean
+  Error:
+    properties:
+      code:
+        format: int32
+        type: integer
+      fields:
+        type: string
+      message:
+        type: string
+  Meta:
+    properties:
+      status:
+        description: Success or failure status of call.
+        type: string
+  NewBucket:
+    properties:
+      name:
+        description: Name of this bucket
+        type: string
+      teamId:
+        description: Unique identifier for the team this to create this bucket for.
+        type: string
+  NewEnvironment:
+    properties:
+      name:
+        description: Name of this environment.
+        type: string
+  NewMessage:
+    properties:
+      request:
+        properties:
+          body:
+            description: |
+              HTTP request body (most commonly used for POST and PUT requests). If the
+              request body contains binary data that cannot be included directly in the 
+              JSON, encode the content with Base64 and include the body_encoding attribute accordingly.
+            type: string
+          body_encoding:
+            description: |
+              If the request body was encoded with Base64, this field should be present and set to 
+              "base64". If not specified, defaults to "plaintext"
+            type: string
+          form:
+            description: |
+              JSON object of set of form fields included in a POST request. 
+              Values can either be represented as a string or as an array of strings.
+            type: string
+          headers:
+            description: JSON object of header keys and values -- with values as a string or an array of strings.
+            type: string
+          method:
+            description: 'HTTP method name (GET, POST, PUT, HEAD, OPTIONS, PATCH, DELETE, etc.)'
+            type: string
+          timestamp:
+            description: Unix timestamp indicating when the request was made.
+            format: float
+            type: number
+          url:
+            description: 'Full URL of the request, including URL querystring parameters.'
+            type: string
+        type: object
+      response:
+        properties:
+          body:
+            description: |
+              HTTP response body. If the response body contains binary data that cannot be
+              included directly in the JSON, you should encode the content with Base64.
+            type: string
+          body_encoding:
+            description: |
+              If the request body was encoded with Base64, this field should be present and set to 
+              "base64". If not specified, defaults to "plaintext"
+            type: string
+          headers:
+            description: JSON object of header keys and values -- with values as a string or an array of strings.
+            type: string
+          reason:
+            description: |
+              Textual description of HTTP status code. This will be set automatically if not 
+              provided in the API call. For example, if the status code is 404, this will be 
+              set to "Not Found" unless you explicitly specify a different reason.
+            type: string
+          response_time:
+            description: 'Length of time it took to receive the response, in seconds.'
+            format: float
+            type: number
+          status:
+            description: HTTP status code returned in the response.
+            type: integer
+          timestamp:
+            description: Unix timestamp indicating when the request was made.
+            format: float
+            type: number
+        type: object
+  NewStep:
+    properties:
+      step_type:
+        description: 'Type of test step -- request, pause, condition or ghost-inspector.'
+        type: string
+  NewTest:
+    properties:
+      description:
+        description: The description for the test.
+        type: string
+      name:
+        description: The name for the test.
+        type: string
+  Team:
+    properties:
+      id:
+        description: The unique identifier for this team.
+        type: string
+      name:
+        description: The name of this team.
+        type: string
+  Test:
+    properties:
+      created_at:
+        description: The date the test was created in seconds (Unix time stamp format).
+        type: integer
+      created_by:
+        properties:
+          email:
+            type: string
+          id:
+            type: string
+          name:
+            type: string
+        type: object
+      default_environment_id:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
