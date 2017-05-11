@@ -351,6 +351,16 @@ paths:
           name: active
           required: true
           type: boolean
+        - description: Licensee Secret for licensee.
+          in: formData
+          name: licenseeSecret
+          required: false
+          type: string
+        - description: Mark licensee for transfer.
+          in: formData
+          name: markedForTransfer
+          required: false
+          type: boolean
       responses:
         '200':
           description: Successful request
@@ -454,6 +464,16 @@ paths:
           name: name
           required: false
           type: string
+        - description: Licensee Secret for licensee.
+          in: formData
+          name: licenseeSecret
+          required: false
+          type: string
+        - description: Mark licensee for transfer.
+          in: formData
+          name: markedForTransfer
+          required: false
+          type: boolean
       responses:
         '200':
           description: Successful request
@@ -472,8 +492,45 @@ paths:
       summary: Update licensee
       tags:
         - Licensee
+  '/licensee/{licenseeNumber}/transfer':
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Licenses transfer between licensees
+      operationId: transferLicensee
+      parameters:
+        - description: Licensee number with a maximum length of 1000 characters
+          in: path
+          name: licenseeNumber
+          required: true
+          type: string
+        - description: Licensee number which licenses will be transferred
+          in: formData
+          name: transfer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          schema:
+            $ref: '#/definitions/netlicensing'
+        '400':
+          description: Malformed or illegal request
+        '403':
+          description: Access is denied
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal service error
+      security:
+        - basicAuth: []
+      summary: Transfer licensee
+      tags:
+        - Licensee
   '/licensee/{licenseeNumber}/validate':
-    get:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
       description: Validates active licenses of the licensee
       operationId: validateLicensee
       parameters:
@@ -483,13 +540,18 @@ paths:
           required: true
           type: string
         - description: 'Product number, must be provided when ''licensee auto-create'' is enabled (see also Product JavaDoc). Identifies the product to which new licensee should be added'
-          in: query
+          in: formData
           name: productNumber
           required: false
           type: string
         - description: Human-readable name for the auto-created licensee (will be set as custom Licensee property)
-          in: query
+          in: formData
           name: licenseeName
+          required: false
+          type: string
+        - description: Licensee Secret key for licensee
+          in: formData
+          name: licenseeSecret
           required: false
           type: string
       responses:
@@ -938,6 +1000,23 @@ paths:
           name: licensingInfo
           required: false
           type: string
+        - description: 'Licensee secret mode for product. Supported types: DISABLED, PREDEFINED, CLIENT'
+          enum:
+            - DISABLED
+            - PREDEFINED
+            - CLIENT
+          in: formData
+          name: licenseeSecretMode
+          required: false
+          type: string
+        - description: 'Vat mode for product. Supported types: GROSS, NET'
+          enum:
+            - GROSS
+            - NET
+          in: formData
+          name: vatMode
+          required: false
+          type: string
       responses:
         '200':
           description: Successful request
@@ -1062,6 +1141,23 @@ paths:
         - description: Licensing information.
           in: formData
           name: licensingInfo
+          required: false
+          type: string
+        - description: 'Licensee secret mode for product. Supported types: DISABLED, PREDEFINED, CLIENT'
+          enum:
+            - DISABLED
+            - PREDEFINED
+            - CLIENT
+          in: formData
+          name: licenseeSecretMode
+          required: false
+          type: string
+        - description: 'Vat mode for product. Supported types: GROSS, NET'
+          enum:
+            - GROSS
+            - NET
+          in: formData
+          name: vatMode
           required: false
           type: string
       responses:

@@ -777,6 +777,61 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:completeIpRotation':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Completes master IP rotation.
+      operationId: container.projects.zones.clusters.completeIpRotation
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CompleteIPRotationRequest'
+        - description: The name of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://developers.google.com/console/help/new/#projectnumber).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMasterAuth':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -811,6 +866,61 @@ paths:
         - description: |-
             The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:startIpRotation':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Start master IP rotation.
+      operationId: container.projects.zones.clusters.startIpRotation
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StartIPRotationRequest'
+        - description: The name of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://developers.google.com/console/help/new/#projectnumber).
           in: path
           name: projectId
           required: true
@@ -1128,9 +1238,10 @@ definitions:
         type: string
       initialClusterVersion:
         description: |-
-          [Output only] The software version of the master endpoint and kubelets used
-          in the cluster when it was first created. The version can be upgraded over
-          time.
+          The initial Kubernetes version for this cluster.  Valid versions are those
+          found in validMasterVersions returned by getServerConfig.  The version can
+          be upgraded over time; such upgrades are reflected in
+          currentMasterVersion and currentNodeVersion.
         type: string
       initialNodeCount:
         description: |-
@@ -1232,10 +1343,12 @@ definitions:
           $ref: '#/definitions/NodePool'
         type: array
       resourceLabels:
-        $ref: '#/definitions/ResourceLabels'
+        additionalProperties:
+          type: string
         description: |-
           The resource labels for the cluster to use to annotate any related GCE
           resources.
+        type: object
       selfLink:
         description: '[Output only] Server-defined URL for the resource.'
         type: string
@@ -1336,6 +1449,10 @@ definitions:
           the server.
         type: string
     type: object
+  CompleteIPRotationRequest:
+    description: CompleteIPRotationRequest moves the cluster master back into single-IP mode.
+    properties: {}
+    type: object
   CreateClusterRequest:
     description: CreateClusterRequest creates a cluster.
     properties:
@@ -1389,18 +1506,6 @@ definitions:
           When enabled, it runs a small pod in the cluster that manages the load
           balancers.
         type: boolean
-    type: object
-  Item:
-    description: |-
-      A label to be applied to Google Compute Engine resources. It must comply
-      with RFC1035 for each key and value.
-    properties:
-      key:
-        description: The Key for this label.
-        type: string
-      value:
-        description: The Value for this label.
-        type: string
     type: object
   LegacyAbac:
     description: |-
@@ -1483,10 +1588,14 @@ definitions:
         description: |-
           The password to use for HTTP basic authentication to the master endpoint.
           Because the master endpoint is open to the Internet, you should create a
-          strong password.
+          strong password.  If a password is provided for cluster creation, username
+          must be non-empty.
         type: string
       username:
-        description: The username to use for HTTP basic authentication to the master endpoint.
+        description: |-
+          The username to use for HTTP basic authentication to the master endpoint.
+          For clusters v1.6.0 and later, you can disable basic authentication by
+          providing an empty username.
         type: string
     type: object
   NodeConfig:
@@ -1754,19 +1863,6 @@ definitions:
           is taking place.
         type: string
     type: object
-  ResourceLabels:
-    description: |-
-      The set of Google Compute Engine labels that will be applied to any
-      underlying resources that the Google Container Cluster creates or uses.
-      These are merely metadata on the resources, and do not change the behavior
-      of the cluster.
-    properties:
-      items:
-        description: The list of labels.
-        items:
-          $ref: '#/definitions/Item'
-        type: array
-    type: object
   RollbackNodePoolUpgradeRequest:
     description: |-
       RollbackNodePoolUpgradeRequest rollbacks the previously Aborted or Failed
@@ -1815,8 +1911,10 @@ definitions:
           resource to get the latest fingerprint.
         type: string
       resourceLabels:
-        $ref: '#/definitions/ResourceLabels'
+        additionalProperties:
+          type: string
         description: The labels to set for that cluster.
+        type: object
     type: object
   SetLegacyAbacRequest:
     description: |-
@@ -1849,6 +1947,12 @@ definitions:
       management:
         $ref: '#/definitions/NodeManagement'
         description: NodeManagement configuration for the node pool.
+    type: object
+  StartIPRotationRequest:
+    description: |-
+      StartIPRotationRequest creates a new IP for the cluster and then performs
+      a node upgrade on each node pool to point to the new IP.
+    properties: {}
     type: object
   UpdateClusterRequest:
     description: UpdateClusterRequest updates the settings of a cluster.

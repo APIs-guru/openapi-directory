@@ -4202,6 +4202,9 @@ definitions:
           canAddChildren:
             description: Whether the current user can add children to this folder. This is always false when the item is not a folder.
             type: boolean
+          canChangeRestrictedDownload:
+            description: Whether the current user can change the restricted download label of this file.
+            type: boolean
           canComment:
             description: Whether the current user can comment on this file.
             type: boolean

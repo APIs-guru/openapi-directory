@@ -25,7 +25,7 @@ info:
       url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
       version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '442'
+  x-release: '444'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -79,7 +79,7 @@ parameters:
     default: 4
     description: The depth to return child entities.
     in: query
-    maximum: 5
+    maximum: 4
     minimum: 1
     name: initial_child_count
     required: true

@@ -303,7 +303,7 @@ definitions:
         description: |-
           The language of the text, which will be the same as the language specified
           in the request or, if not specified, the automatically-detected language.
-          See `Document.language` field for more details.
+          See Document.language field for more details.
         type: string
     type: object
   AnalyzeSentimentRequest:
@@ -311,9 +311,7 @@ definitions:
     properties:
       document:
         $ref: '#/definitions/Document'
-        description: |-
-          Input document. Currently, `analyzeSentiment` only supports English text
-          (Document.language="EN").
+        description: Input document.
       encodingType:
         description: The encoding type used by the API to calculate sentence offsets.
         enum:
@@ -333,7 +331,7 @@ definitions:
         description: |-
           The language of the text, which will be the same as the language specified
           in the request or, if not specified, the automatically-detected language.
-          See `Document.language` field for more details.
+          See Document.language field for more details.
         type: string
       sentences:
         description: The sentiment for all the sentences in the document.
@@ -363,7 +361,7 @@ definitions:
         description: |-
           The language of the text, which will be the same as the language specified
           in the request or, if not specified, the automatically-detected language.
-          See `Document.language` field for more details.
+          See Document.language field for more details.
         type: string
       sentences:
         description: Sentences in the input document.
@@ -416,7 +414,7 @@ definitions:
         description: |-
           The language of the text, which will be the same as the language specified
           in the request or, if not specified, the automatically-detected language.
-          See `Document.language` field for more details.
+          See Document.language field for more details.
         type: string
       sentences:
         description: |-
@@ -552,9 +550,8 @@ definitions:
           The language of the document (if not specified, the language is
           automatically detected). Both ISO and BCP-47 language codes are
           accepted.<br>
-          **Current Language Restrictions:**
-
-           * Only English, Spanish, and Japanese textual content are supported.
+          [Language Support](https://cloud.google.com/natural-language/docs/languages)
+          lists currently supported languages for each API method.
           If the language (either specified by the caller or automatically detected)
           is not supported by the called API method, an `INVALID_ARGUMENT` error
           is returned.

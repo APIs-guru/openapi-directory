@@ -37,6 +37,245 @@ securityDefinitions:
 security:
   - Token in query: []
   - Token in Access-Token header: []
+parameters:
+  accountId:
+    description: Unique identifier of an *Account*.
+    in: path
+    name: accountId
+    required: true
+    type: string
+  action:
+    description: Identifier of an *Action* inside a *Functionality*.
+    in: path
+    name: action
+    required: true
+    type: string
+  attributeName:
+    description: Identifier of an *Attribute* inside a *Functionality*.
+    in: path
+    name: attributeName
+    required: true
+    type: string
+  attributesNames:
+    collectionFormat: csv
+    description: One or multiple *Attribute* names separated by commas
+    in: query
+    items:
+      type: string
+    name: names
+    required: false
+    type: array
+  busId:
+    description: Unique identifier of a *Bus*.
+    in: path
+    name: busId
+    required: true
+    type: string
+  deviceId:
+    description: Unique identifier of a *Device*.
+    in: path
+    name: deviceId
+    required: true
+    type: string
+  devicesSelector.Opt:
+    description: Devices selector. Device tags or device classes or device ids or '*' for any. Multiple values are separated by '|' and interpreted as « OR ».
+    in: query
+    name: devices
+    pattern: '^(?:\\*|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
+    required: false
+    type: string
+  devicesSelector.Req:
+    description: Devices selector. Device tags or device classes or device ids or '*' for any. Multiple values are separated by '|' and interpreted as « OR ».
+    in: query
+    name: devices
+    pattern: '^(?:\\*|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
+    required: true
+    type: string
+  embedMetadata:
+    collectionFormat: csv
+    description: |
+      Request to include the given keys of metadata in the response. If a key doesn't exist on the resource it is ignored.
+      **Note:** This only applies to the top level resources.
+    in: query
+    items:
+      type: string
+    name: embed-metadata
+    required: false
+    type: array
+  from.Opt:
+    description: Beginning of the time interval.
+    format: date-time
+    in: query
+    name: from
+    required: false
+    type: string
+  from.Req:
+    description: Beginning of the time interval.
+    format: date-time
+    in: query
+    name: from
+    required: true
+    type: string
+  functionalitiesSelector.Opt:
+    description: |
+      Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
+    in: query
+    name: functionalities
+    pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
+    required: false
+    type: string
+  functionalitiesSelector.Req:
+    description: |
+      Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
+    in: query
+    name: functionalities
+    pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
+    required: true
+    type: string
+  functionalityId:
+    description: Unique identifier of a *Functionality*.
+    in: path
+    name: functionalityId
+    required: true
+    type: string
+  metadataPatch:
+    description: |
+      Modifications to apply to the metadata of the resource.
+    in: body
+    name: metadataPatch
+    required: true
+    schema:
+      $ref: '#/definitions/MetadataPatch'
+  notificationId:
+    description: Unique identifier of a *Notification*.
+    in: path
+    name: notificationId
+    required: true
+    type: string
+  placeId:
+    description: Unique identifier of a *Place*.
+    in: path
+    name: placeId
+    required: true
+    type: string
+  programId:
+    description: Unique identifier of a *Program*.
+    in: path
+    name: programId
+    required: true
+    type: string
+  span.Req:
+    description: 'Timespan: H (hour), D (day), Wmo (week starting on Monday), Wsu (week starting on Sunday), M (month), Y (year)'
+    enum:
+      - H
+      - D
+      - Wmo
+      - Wsu
+      - M
+      - 'Y'
+    in: query
+    name: span
+    required: true
+    type: string
+  tagsPatch:
+    description: |
+      Modifications to apply to the tags list of the resource.
+    in: body
+    name: tagsPatch
+    required: true
+    schema:
+      $ref: '#/definitions/TagsPatch'
+  to:
+    description: |
+      End of the interval. Default: now.
+    format: date-time
+    in: query
+    name: to
+    required: false
+    type: string
+  tokenId:
+    description: Identifier of the token
+    in: path
+    name: tokenId
+    required: true
+    type: string
+  userId:
+    description: Unique identifier of a *User*.
+    in: path
+    name: userId
+    required: true
+    type: string
+  when.Req:
+    description: A time part of the time span.
+    format: date-time
+    in: query
+    name: when
+    required: true
+    type: string
+responses:
+  ActionMultiResultOK:
+    description: Successful.
+    schema:
+      $ref: '#/definitions/ActionMultiResult'
+  DefaultError:
+    description: Other error.
+    schema:
+      $ref: '#/definitions/DefaultError'
+  DeleteOK:
+    description: Resource successfully deleted.
+  ErrorAccessAccount:
+    description: |
+      The authentication token doesn't allow to modify the *Account*.
+    schema:
+      $ref: '#/definitions/ErrorEntity'
+  ErrorAccessBus:
+    description: |
+      *Bus* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+    schema:
+      $ref: '#/definitions/ErrorSubEntity'
+  ErrorAccessDevice:
+    description: |
+      *Device* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+    schema:
+      $ref: '#/definitions/ErrorEntity'
+  ErrorAccessFunctionality:
+    description: |
+      *Functionality* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+    schema:
+      $ref: '#/definitions/ErrorEntity'
+  ErrorAccessNotification:
+    description: |
+      *Notification* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+    schema:
+      $ref: '#/definitions/ErrorEntity'
+  ErrorAccessPlace:
+    description: |
+      *Place* doesn't exist or the requester doesn't have access.
+    schema:
+      $ref: '#/definitions/ErrorEntity'
+  ErrorAccessProgram:
+    description: |
+      *Program* doesn't exist or the requester doesn't have appropriate access to the *Place*.
+    schema:
+      $ref: '#/definitions/ErrorEntity'
+  ErrorAccessUser:
+    description: |
+      *User* doesn't exist in this *Account* or the requester doesn't have access to a *Place* on which this *User* has access.
+    schema:
+      $ref: '#/definitions/ErrorEntity'
+  ErrorGatewayUnreachable:
+    description: The gateway of the Place is not reachable.
+    schema:
+      $ref: '#/definitions/ErrorGatewayUnreachable'
+  ErrorWriteAttribute:
+    description: |
+      *Attribute* is not writable.
+    schema:
+      $ref: '#/definitions/ErrorSubEntity'
+  PatchNotModified:
+    description: 'Successful, but nothing changed.'
+  PatchOK:
+    description: Modification successful.
 tags:
   - name: Entry points
   - name: Authentication
@@ -68,14 +307,9 @@ paths:
         '204':
           description: Change successful.
         '403':
-          description: |
-            The authentication token doesn't allow to modify the *Account*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessAccount'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Change the password
       tags:
         - Account
@@ -95,16 +329,16 @@ paths:
             type: array
             uniqueItems: true
         '403':
-          description: |
-            The authentication token doesn't allow to modify the *Account*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessAccount'
       summary: List Places of the Account
       tags:
         - Account
+    parameters: []
     post:
       description: |
         Create a new *Place*.
+
+        A *Device* (`class`: `MINT`, `address`: `0`) is automatically created and attached to the new *Place*.
 
         **Note:** requires full access to the *Account*.
       operationId: Account.newPlace
@@ -123,14 +357,9 @@ paths:
           schema:
             $ref: '#/definitions/PlaceCreated'
         '403':
-          description: |
-            The authentication token doesn't allow to modify the *Account*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessAccount'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Create a Place
       tags:
         - Account
@@ -150,17 +379,13 @@ paths:
             type: array
             uniqueItems: true
         '403':
-          description: |
-            The authentication token doesn't allow to modify the *Account*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessAccount'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List active Tokens of the Account
       tags:
         - Account
+    parameters: []
   '/account/tokens/{tokenId}':
     delete:
       description: |
@@ -168,42 +393,24 @@ paths:
 
         **Note:** requires full access to the *Account*.
       operationId: Account.revokeToken
-      parameters:
-        - description: Identifier of the token
-          in: path
-          name: tokenId
-          required: true
-          type: string
       responses:
         '204':
-          description: Resource successfully deleted.
+          $ref: '#/responses/DeleteOK'
         '403':
-          description: |
-            The authentication token doesn't allow to modify the *Account*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessAccount'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Revoke a Token
       tags:
         - Account
+    parameters:
+      - $ref: '#/parameters/tokenId'
   /account/users:
     get:
       description: Get the list of *Users* of this *Account*.
       operationId: Account.users
       parameters:
-        - collectionFormat: csv
-          description: |
-            Request to include the given keys of metadata in the response. If a key doesn't exist on the resource it is ignored.
-            **Note:** This only applies to the top level resources.
-          in: query
-          items:
-            type: string
-          name: embed-metadata
-          required: false
-          type: array
+        - $ref: '#/parameters/embedMetadata'
       responses:
         '200':
           description: Successful.
@@ -215,6 +422,7 @@ paths:
       summary: List Users of the Account
       tags:
         - Account
+    parameters: []
     post:
       description: |
         Add a *User*.
@@ -237,14 +445,9 @@ paths:
           schema:
             $ref: '#/definitions/UserCreated'
         '403':
-          description: |
-            The authentication token doesn't allow to modify the *Account*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessAccount'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: New User
       tags:
         - Account
@@ -255,36 +458,19 @@ paths:
 
         **Note**: requires full access to the *Account*.
       operationId: Account.deleteUser
-      parameters:
-        - description: Unique identifier of a *User*.
-          in: path
-          name: userId
-          required: true
-          type: string
       responses:
         '204':
-          description: Resource successfully deleted.
+          $ref: '#/responses/DeleteOK'
         '403':
-          description: |
-            The authentication token doesn't allow to modify the *Account*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessAccount'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Delete a User
       tags:
         - Account
     get:
       description: Get information about a *User* in the same *Account*.
       operationId: Account.getUser
-      parameters:
-        - description: Unique identifier of a *User*.
-          in: path
-          name: userId
-          required: true
-          type: string
       responses:
         '200':
           description: |
@@ -292,12 +478,12 @@ paths:
           schema:
             $ref: '#/definitions/User'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Information about a User
       tags:
         - Account
+    parameters:
+      - $ref: '#/parameters/userId'
     patch:
       description: |
         Modify a *User*.
@@ -305,11 +491,6 @@ paths:
         **Note**: requires full access to the *Account*.
       operationId: Account.patchUser
       parameters:
-        - description: Unique identifier of a *User*.
-          in: path
-          name: userId
-          required: true
-          type: string
         - in: body
           name: userPatch
           required: true
@@ -317,18 +498,13 @@ paths:
             $ref: '#/definitions/UserPatch'
       responses:
         '204':
-          description: Modification successful.
+          $ref: '#/responses/PatchOK'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            The authentication token doesn't allow to modify the *Account*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessAccount'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify a User
       tags:
         - Account
@@ -336,58 +512,36 @@ paths:
     get:
       description: Get the metadata.
       operationId: User.getMetadata
-      parameters:
-        - description: Unique identifier of a *User*.
-          in: path
-          name: userId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Metadata'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List metadata
       tags:
         - Account
+    parameters:
+      - $ref: '#/parameters/userId'
     patch:
       description: |
         Modify the metadata.
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: User.patchMetadata
       parameters:
-        - description: Unique identifier of a *User*.
-          in: path
-          name: userId
-          required: true
-          type: string
-        - description: |
-            Modifications to apply to the metadata of the resource.
-          in: body
-          name: metadataPatch
-          required: true
-          schema:
-            $ref: '#/definitions/MetadataPatch'
+        - $ref: '#/parameters/metadataPatch'
       responses:
         '200':
           description: Successful. The new metadata is returned.
           schema:
             $ref: '#/definitions/Metadata'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *User* doesn't exist in this *Account* or the requester doesn't have access to a *Place* on which this *User* has access.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessUser'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify metadata
       tags:
         - Account
@@ -427,9 +581,7 @@ paths:
           schema:
             $ref: '#/definitions/DefaultError'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       security: []
       summary: Get a token using login+password
       tags:
@@ -460,9 +612,7 @@ paths:
           schema:
             $ref: '#/definitions/DefaultError'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       security: []
       summary: Refresh a token
       tags:
@@ -489,9 +639,7 @@ paths:
         '204':
           description: 'As this request is not authenticated, response is always successful to not reveal (in)existence of accounts.'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       security: []
       summary: Ask for a new password
       tags:
@@ -510,9 +658,7 @@ paths:
           schema:
             $ref: '#/definitions/DefaultError'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Revoke a token
       tags:
         - Authentication
@@ -520,34 +666,23 @@ paths:
     get:
       description: Get information about a *Device*.
       operationId: Devices.get
-      parameters:
-        - description: Unique identifier of a *Device*.
-          in: path
-          name: deviceId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Device'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Information about a Device
       tags:
         - Device
+    parameters:
+      - $ref: '#/parameters/deviceId'
     patch:
       description: |
         Modify information about a *Device*: its name.
       operationId: Devices.patch
       parameters:
-        - description: Unique identifier of a *Device*.
-          in: path
-          name: deviceId
-          required: true
-          type: string
         - in: body
           name: devicePatch
           required: true
@@ -555,18 +690,13 @@ paths:
             $ref: '#/definitions/DevicePatch'
       responses:
         '204':
-          description: Modification successful.
+          $ref: '#/responses/PatchOK'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Device* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessDevice'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Update a Device
       tags:
         - Device
@@ -591,11 +721,7 @@ paths:
         **Note**: requires full access to the *Account*.
       operationId: Device.addFunctionality
       parameters:
-        - description: Unique identifier of a *Device*.
-          in: path
-          name: deviceId
-          required: true
-          type: string
+        - $ref: '#/parameters/deviceId'
         - in: body
           name: functionalityInfo
           required: true
@@ -611,14 +737,9 @@ paths:
           schema:
             $ref: '#/definitions/FunctionalityCreated'
         '403':
-          description: |
-            *Device* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessDevice'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Add dynamically a functionality
       tags:
         - Device
@@ -627,58 +748,36 @@ paths:
     get:
       description: Get the metadata.
       operationId: Device.getMetadata
-      parameters:
-        - description: Unique identifier of a *Device*.
-          in: path
-          name: deviceId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Metadata'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List metadata
       tags:
         - Device
+    parameters:
+      - $ref: '#/parameters/deviceId'
     patch:
       description: |
         Modify the metadata.
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: Device.patchMetadata
       parameters:
-        - description: Unique identifier of a *Device*.
-          in: path
-          name: deviceId
-          required: true
-          type: string
-        - description: |
-            Modifications to apply to the metadata of the resource.
-          in: body
-          name: metadataPatch
-          required: true
-          schema:
-            $ref: '#/definitions/MetadataPatch'
+        - $ref: '#/parameters/metadataPatch'
       responses:
         '200':
           description: Successful. The new metadata is returned.
           schema:
             $ref: '#/definitions/Metadata'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Device* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessDevice'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify metadata
       tags:
         - Device
@@ -688,23 +787,9 @@ paths:
         Run an *Action* on zero, one or multiple Functionalities selected with tags.
       operationId: Device.run
       parameters:
-        - description: Unique identifier of a *Device*.
-          in: path
-          name: deviceId
-          required: true
-          type: string
-        - description: Identifier of an *Action* inside a *Functionality*.
-          in: path
-          name: action
-          required: true
-          type: string
-        - description: |
-            Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
-          in: query
-          name: functionalities
-          pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
-          required: true
-          type: string
+        - $ref: '#/parameters/deviceId'
+        - $ref: '#/parameters/action'
+        - $ref: '#/parameters/functionalitiesSelector.Req'
         - in: body
           name: arguments
           required: true
@@ -712,17 +797,11 @@ paths:
             $ref: '#/definitions/ActionArgs'
       responses:
         '200':
-          description: Successful.
-          schema:
-            $ref: '#/definitions/ActionMultiResult'
+          $ref: '#/responses/ActionMultiResultOK'
         '450':
-          description: The gateway of the Place is not reachable.
-          schema:
-            $ref: '#/definitions/ErrorGatewayUnreachable'
+          $ref: '#/responses/ErrorGatewayUnreachable'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Run actions
       tags:
         - Action
@@ -730,56 +809,34 @@ paths:
     get:
       description: Get the tags of a *Device*.
       operationId: Device.getTags
-      parameters:
-        - description: Unique identifier of a *Device*.
-          in: path
-          name: deviceId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Tags'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List tags
       tags:
         - Device
+    parameters:
+      - $ref: '#/parameters/deviceId'
     patch:
       description: Modify the tags of a *Device*.
       operationId: Device.patchTags
       parameters:
-        - description: Unique identifier of a *Device*.
-          in: path
-          name: deviceId
-          required: true
-          type: string
-        - description: |
-            Modifications to apply to the tags list of the resource.
-          in: body
-          name: tagsPatch
-          required: true
-          schema:
-            $ref: '#/definitions/TagsPatch'
+        - $ref: '#/parameters/tagsPatch'
       responses:
         '200':
           description: Successful. The new list of tags is returned.
           schema:
             $ref: '#/definitions/Tags'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Device* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessDevice'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify tags
       tags:
         - Device
@@ -787,34 +844,23 @@ paths:
     get:
       description: Get the *Functionality*.
       operationId: Functionalities.get
-      parameters:
-        - description: Unique identifier of a *Functionality*.
-          in: path
-          name: functionalityId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Functionality'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Information about a Functionality
       tags:
         - Functionality
+    parameters:
+      - $ref: '#/parameters/functionalityId'
     patch:
       description: |
         Modify information about a *Functionality*: its name.
       operationId: Functionality.patch
       parameters:
-        - description: Unique identifier of a *Functionality*.
-          in: path
-          name: functionalityId
-          required: true
-          type: string
         - in: body
           name: functionalityPatch
           required: true
@@ -822,18 +868,13 @@ paths:
             $ref: '#/definitions/FunctionalityPatch'
       responses:
         '204':
-          description: Modification successful.
+          $ref: '#/responses/PatchOK'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Functionality* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessFunctionality'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify a Functionality
       tags:
         - Functionality
@@ -849,62 +890,35 @@ paths:
 
         If `from` is not set, only the last value is returned.
 
+        The `surround` parameter allows to ask also for one value beyond each interval boundaries.
+
         The request may fail if too many values are asked.
       operationId: Functionality.values
       parameters:
-        - description: Unique identifier of a *Functionality*.
-          in: path
-          name: functionalityId
-          required: true
-          type: string
-        - collectionFormat: csv
-          description: One or multiple *Attribute* names separated by commas
+        - $ref: '#/parameters/attributesNames'
+        - $ref: '#/parameters/from.Opt'
+        - $ref: '#/parameters/to'
+        - description: 'If true, return also one value before from and one value after to'
           in: query
-          items:
-            type: string
-          name: names
+          name: surround
           required: false
-          type: array
-        - description: Beginning of the time interval.
-          format: date-time
-          in: query
-          name: from
-          required: false
-          type: string
-        - description: |
-            End of the interval. Default: now.
-          format: date-time
-          in: query
-          name: to
-          required: false
-          type: string
+          type: boolean
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/AttributesValues'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Get history of multiple attributes
       tags:
         - Functionality
+    parameters:
+      - $ref: '#/parameters/functionalityId'
   '/functionalities/{functionalityId}/attributes/{attributeName}':
     get:
       description: Get the *Attribute* value and the last time when it changed.
       operationId: Functionality.value
-      parameters:
-        - description: Unique identifier of a *Functionality*.
-          in: path
-          name: functionalityId
-          required: true
-          type: string
-        - description: Identifier of an *Attribute* inside a *Functionality*.
-          in: path
-          name: attributeName
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
@@ -913,26 +927,17 @@ paths:
         '204':
           description: No value has yet been set on this attribute.
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Get an Attribute value
       tags:
         - Functionality
+    parameters:
+      - $ref: '#/parameters/functionalityId'
+      - $ref: '#/parameters/attributeName'
     put:
       description: Modify the value of the *Attribute*.
       operationId: Functionality.set
       parameters:
-        - description: Unique identifier of a *Functionality*.
-          in: path
-          name: functionalityId
-          required: true
-          type: string
-        - description: Identifier of an *Attribute* inside a *Functionality*.
-          in: path
-          name: attributeName
-          required: true
-          type: string
         - description: New value for the *Attribute*.
           in: body
           name: value
@@ -943,14 +948,9 @@ paths:
         '204':
           description: Successful.
         '405':
-          description: |
-            *Attribute* is not writable.
-          schema:
-            $ref: '#/definitions/ErrorSubEntity'
+          $ref: '#/responses/ErrorWriteAttribute'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify an Attribute value
       tags:
         - Functionality
@@ -958,58 +958,36 @@ paths:
     get:
       description: Get the metadata.
       operationId: Functionality.getMetadata
-      parameters:
-        - description: Unique identifier of a *Functionality*.
-          in: path
-          name: functionalityId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Metadata'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List metadata
       tags:
         - Functionality
+    parameters:
+      - $ref: '#/parameters/functionalityId'
     patch:
       description: |
         Modify the metadata.
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: Functionality.patchMetadata
       parameters:
-        - description: Unique identifier of a *Functionality*.
-          in: path
-          name: functionalityId
-          required: true
-          type: string
-        - description: |
-            Modifications to apply to the metadata of the resource.
-          in: body
-          name: metadataPatch
-          required: true
-          schema:
-            $ref: '#/definitions/MetadataPatch'
+        - $ref: '#/parameters/metadataPatch'
       responses:
         '200':
           description: Successful. The new metadata is returned.
           schema:
             $ref: '#/definitions/Metadata'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Functionality* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessFunctionality'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify metadata
       tags:
         - Functionality
@@ -1019,16 +997,8 @@ paths:
         Run an action on the Functionality.
       operationId: Functionality.run
       parameters:
-        - description: Unique identifier of a *Functionality*.
-          in: path
-          name: functionalityId
-          required: true
-          type: string
-        - description: Identifier of an *Action* inside a *Functionality*.
-          in: path
-          name: action
-          required: true
-          type: string
+        - $ref: '#/parameters/functionalityId'
+        - $ref: '#/parameters/action'
         - in: body
           name: arguments
           required: true
@@ -1040,13 +1010,9 @@ paths:
           schema:
             $ref: '#/definitions/ActionResult'
         '450':
-          description: The gateway of the Place is not reachable.
-          schema:
-            $ref: '#/definitions/ErrorGatewayUnreachable'
+          $ref: '#/responses/ErrorGatewayUnreachable'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Run an action
       tags:
         - Action
@@ -1054,56 +1020,34 @@ paths:
     get:
       description: Get the tags of a *Functionality*.
       operationId: Functionality.getTags
-      parameters:
-        - description: Unique identifier of a *Functionality*.
-          in: path
-          name: functionalityId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Tags'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List tags
       tags:
         - Functionality
+    parameters:
+      - $ref: '#/parameters/functionalityId'
     patch:
       description: Modify the tags of a *Functionality*.
       operationId: Functionality.patchTags
       parameters:
-        - description: Unique identifier of a *Functionality*.
-          in: path
-          name: functionalityId
-          required: true
-          type: string
-        - description: |
-            Modifications to apply to the tags list of the resource.
-          in: body
-          name: tagsPatch
-          required: true
-          schema:
-            $ref: '#/definitions/TagsPatch'
+        - $ref: '#/parameters/tagsPatch'
       responses:
         '200':
           description: Successful. The new list of tags is returned.
           schema:
             $ref: '#/definitions/Tags'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Functionality* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessFunctionality'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify tags
       tags:
         - Functionality
@@ -1136,13 +1080,11 @@ paths:
             $ref: '#/definitions/UserMePatch'
       responses:
         '204':
-          description: Modification successful.
+          $ref: '#/responses/PatchOK'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Update User information
       tags:
         - Entry points
@@ -1151,24 +1093,13 @@ paths:
       description: |
         Delete a *Notification*.
       operationId: Notification.delete
-      parameters:
-        - description: Unique identifier of a *Notification*.
-          in: path
-          name: notificationId
-          required: true
-          type: string
       responses:
         '204':
-          description: Resource successfully deleted.
+          $ref: '#/responses/DeleteOK'
         '403':
-          description: |
-            *Notification* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessNotification'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Delete a Notification
       tags:
         - Notification
@@ -1176,39 +1107,25 @@ paths:
       description: |
         Get information about a *Notification*.
       operationId: Notifications.get
-      parameters:
-        - description: Unique identifier of a *Notification*.
-          in: path
-          name: notificationId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Notification'
         '403':
-          description: |
-            *Notification* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessNotification'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Information about a Notification
       tags:
         - Notification
+    parameters:
+      - $ref: '#/parameters/notificationId'
     patch:
       description: |
         Modify a *Notification*.
       operationId: Notification.patch
       parameters:
-        - description: Unique identifier of a *Notification*.
-          in: path
-          name: notificationId
-          required: true
-          type: string
         - in: body
           name: notificationPatch
           required: true
@@ -1216,18 +1133,13 @@ paths:
             $ref: '#/definitions/NotificationPatch'
       responses:
         '204':
-          description: Modification successful.
+          $ref: '#/responses/PatchOK'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Notification* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessNotification'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify a Notification
       tags:
         - Notification
@@ -1235,58 +1147,36 @@ paths:
     get:
       description: Get the metadata of the *Notification*.
       operationId: Notification.getMetadata
-      parameters:
-        - description: Unique identifier of a *Notification*.
-          in: path
-          name: notificationId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Metadata'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List metadata
       tags:
         - Notification
+    parameters:
+      - $ref: '#/parameters/notificationId'
     patch:
       description: |
         Modify the metadata of a *Notification*.
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: Notification.patchMetadata
       parameters:
-        - description: Unique identifier of a *Notification*.
-          in: path
-          name: notificationId
-          required: true
-          type: string
-        - description: |
-            Modifications to apply to the metadata of the resource.
-          in: body
-          name: metadataPatch
-          required: true
-          schema:
-            $ref: '#/definitions/MetadataPatch'
+        - $ref: '#/parameters/metadataPatch'
       responses:
         '200':
           description: Successful. The new metadata is returned.
           schema:
             $ref: '#/definitions/Metadata'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Notification* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessNotification'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify metadata of a Notification
       tags:
         - Notification
@@ -1295,16 +1185,7 @@ paths:
       description: List the *Places* to which the *Token* has access.
       operationId: Me.places
       parameters:
-        - collectionFormat: csv
-          description: |
-            Request to include the given keys of metadata in the response. If a key doesn't exist on the resource it is ignored.
-            **Note:** This only applies to the top level resources.
-          in: query
-          items:
-            type: string
-          name: embed-metadata
-          required: false
-          type: array
+        - $ref: '#/parameters/embedMetadata'
       responses:
         '200':
           description: Successful response
@@ -1320,25 +1201,18 @@ paths:
     get:
       description: Get information about a *Place*.
       operationId: Places.get
-      parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful response.
           schema:
             $ref: '#/definitions/Place'
         '400':
-          description: |
-            *Place* doesn't exist or the requester doesn't have access.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessPlace'
       summary: Information about a Place
       tags:
         - Place
+    parameters:
+      - $ref: '#/parameters/placeId'
     patch:
       description: |
         Change information about a *Place*.
@@ -1346,11 +1220,6 @@ paths:
         **Note**: requires full access to the *Account*.
       operationId: Place.patch
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
         - in: body
           name: placePatch
           required: true
@@ -1358,18 +1227,13 @@ paths:
             $ref: '#/definitions/PlacePatch'
       responses:
         '204':
-          description: Modification successful.
+          $ref: '#/responses/PatchOK'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            The authentication token doesn't allow to modify the *Account*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessAccount'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Update a Place
       tags:
         - Place
@@ -1380,11 +1244,6 @@ paths:
         If `withPairing` is `true`, return only buses that allow device pairing (see `/places/{placeId}/buses/{busId}/pairing`).
       operationId: Place.buses
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
         - default: false
           description: Filter out buses that have no pairing window
           in: query
@@ -1400,13 +1259,12 @@ paths:
             type: array
             uniqueItems: true
         '403':
-          description: |
-            *Bus* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorSubEntity'
+          $ref: '#/responses/ErrorAccessBus'
       summary: List Buses
       tags:
         - Place
+    parameters:
+      - $ref: '#/parameters/placeId'
   '/places/{placeId}/buses/{busId}/pairing':
     get:
       description: |
@@ -1414,30 +1272,19 @@ paths:
 
         **Note**: requires full access to the *Account*.
       operationId: Place.pairing
-      parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
-        - description: Unique identifier of a *Bus*.
-          in: path
-          name: busId
-          required: true
-          type: string
       responses:
         '200':
           description: State information.
           schema:
             $ref: '#/definitions/BusPairing'
         '403':
-          description: |
-            *Bus* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorSubEntity'
+          $ref: '#/responses/ErrorAccessBus'
       summary: State of the pairing window
       tags:
         - Place
+    parameters:
+      - $ref: '#/parameters/placeId'
+      - $ref: '#/parameters/busId'
     put:
       description: |
         Open/Close the pairing window.
@@ -1445,16 +1292,6 @@ paths:
         **Note**: requires full access to the *Account*.
       operationId: Place.openPairing
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
-        - description: Unique identifier of a *Bus*.
-          in: path
-          name: busId
-          required: true
-          type: string
         - in: body
           name: pairing
           required: true
@@ -1466,14 +1303,9 @@ paths:
           schema:
             $ref: '#/definitions/BusPairing'
         '403':
-          description: |
-            *Bus* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorSubEntity'
+          $ref: '#/responses/ErrorAccessBus'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Open/Close the pairing window
       tags:
         - Place
@@ -1482,27 +1314,8 @@ paths:
       description: Get the list of *Devices* available in this *Place*.
       operationId: Place.devices
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
-        - description: Devices selector. Device tags or device classes or device ids or '*' for any. Multiple values are separated by '|' and interpreted as « OR ».
-          in: query
-          name: devices
-          pattern: '^(?:\\*|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
-          required: false
-          type: string
-        - collectionFormat: csv
-          description: |
-            Request to include the given keys of metadata in the response. If a key doesn't exist on the resource it is ignored.
-            **Note:** This only applies to the top level resources.
-          in: query
-          items:
-            type: string
-          name: embed-metadata
-          required: false
-          type: array
+        - $ref: '#/parameters/devicesSelector.Opt'
+        - $ref: '#/parameters/embedMetadata'
       responses:
         '200':
           description: Successful.
@@ -1512,12 +1325,12 @@ paths:
             type: array
             uniqueItems: true
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List of Devices
       tags:
         - Device
+    parameters:
+      - $ref: '#/parameters/placeId'
   '/places/{placeId}/electricity/autonomy':
     get:
       description: |
@@ -1526,41 +1339,20 @@ paths:
         `autonomy = 1 - (elec_drawn / elec_total_usage)`
       operationId: Place.Electricity.autonomy
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
-        - description: A time part of the time span.
-          format: date-time
-          in: query
-          name: when
-          required: true
-          type: string
-        - description: 'Timespan: H (hour), D (day), Wmo (week starting on Monday), Wsu (week starting on Sunday), M (month), Y (year)'
-          enum:
-            - H
-            - D
-            - Wmo
-            - Wsu
-            - M
-            - 'Y'
-          in: query
-          name: span
-          required: true
-          type: string
+        - $ref: '#/parameters/when.Req'
+        - $ref: '#/parameters/span.Req'
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/ElectricityAutonomy'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Get autonomy rate of the place
       tags:
         - Electricity
+    parameters:
+      - $ref: '#/parameters/placeId'
   '/places/{placeId}/electricity/flows':
     get:
       description: |
@@ -1583,11 +1375,6 @@ paths:
           property lists them.
       operationId: Place.Electricity.getFlows
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
         - collectionFormat: csv
           description: Names of the flows requested
           in: query
@@ -1614,12 +1401,12 @@ paths:
           schema:
             $ref: '#/definitions/ElectricityFlows'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Get electricity virtual flows
       tags:
         - Electricity
+    parameters:
+      - $ref: '#/parameters/placeId'
   '/places/{placeId}/electricity/flows/setup':
     get:
       description: |
@@ -1627,24 +1414,18 @@ paths:
 
         A functionality is attached to *at most* one flow.
       operationId: Place.Electricity.getFlowsSetup
-      parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/ElectricityFlowsSetup'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Get electricity flows setup
       tags:
         - Electricity
+    parameters:
+      - $ref: '#/parameters/placeId'
   '/places/{placeId}/electricity/self-consumption':
     get:
       description: |
@@ -1653,74 +1434,26 @@ paths:
         `selfConsumption = 1 - (elec_feed_in / elec_total_usage)`
       operationId: Place.Electricity.selfConsumption
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
-        - description: A time part of the time span.
-          format: date-time
-          in: query
-          name: when
-          required: true
-          type: string
-        - description: 'Timespan: H (hour), D (day), Wmo (week starting on Monday), Wsu (week starting on Sunday), M (month), Y (year)'
-          enum:
-            - H
-            - D
-            - Wmo
-            - Wsu
-            - M
-            - 'Y'
-          in: query
-          name: span
-          required: true
-          type: string
+        - $ref: '#/parameters/when.Req'
+        - $ref: '#/parameters/span.Req'
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/ElectricitySelfConsumption'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Get self-consumption rate of the place
       tags:
         - Electricity
+    parameters:
+      - $ref: '#/parameters/placeId'
   '/places/{placeId}/functionalities':
     get:
       description: Get the list of *Functionalities* available in this *Place*.
       operationId: Place.functionalities
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
-        - description: Devices selector. Device tags or device classes or device ids or '*' for any. Multiple values are separated by '|' and interpreted as « OR ».
-          in: query
-          name: devices
-          pattern: '^(?:\\*|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
-          required: false
-          type: string
-        - description: |
-            Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
-          in: query
-          name: functionalities
-          pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
-          required: false
-          type: string
-        - collectionFormat: csv
-          description: |
-            Request to include the given keys of metadata in the response. If a key doesn't exist on the resource it is ignored.
-            **Note:** This only applies to the top level resources.
-          in: query
-          items:
-            type: string
-          name: embed-metadata
-          required: false
-          type: array
+        - $ref: '#/parameters/embedMetadata'
       responses:
         '200':
           description: Successful.
@@ -1730,68 +1463,48 @@ paths:
             type: array
             uniqueItems: true
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List Functionalities
       tags:
         - Functionality
+    parameters:
+      - $ref: '#/parameters/placeId'
+      - $ref: '#/parameters/devicesSelector.Opt'
+      - $ref: '#/parameters/functionalitiesSelector.Opt'
   '/places/{placeId}/metadata':
     get:
       description: Get the metadata.
       operationId: Place.getMetadata
-      parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Metadata'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List metadata
       tags:
         - Place
+    parameters:
+      - $ref: '#/parameters/placeId'
     patch:
       description: |
         Modify the metadata.
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: Place.patchMetadata
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
-        - description: |
-            Modifications to apply to the metadata of the resource.
-          in: body
-          name: metadataPatch
-          required: true
-          schema:
-            $ref: '#/definitions/MetadataPatch'
+        - $ref: '#/parameters/metadataPatch'
       responses:
         '200':
           description: Successful. The new metadata is returned.
           schema:
             $ref: '#/definitions/Metadata'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Place* doesn't exist or the requester doesn't have access.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessPlace'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify metadata
       tags:
         - Place
@@ -1800,21 +1513,7 @@ paths:
       description: Get the list of *Notifications* available in this *Place*.
       operationId: Place.notifications
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
-        - collectionFormat: csv
-          description: |
-            Request to include the given keys of metadata in the response. If a key doesn't exist on the resource it is ignored.
-            **Note:** This only applies to the top level resources.
-          in: query
-          items:
-            type: string
-          name: embed-metadata
-          required: false
-          type: array
+        - $ref: '#/parameters/embedMetadata'
       responses:
         '200':
           description: Successful.
@@ -1824,21 +1523,16 @@ paths:
             type: array
             uniqueItems: true
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List Notifications
       tags:
         - Notification
+    parameters:
+      - $ref: '#/parameters/placeId'
     post:
       description: Create a new *Notification*.
       operationId: Place.newNotification
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
         - in: body
           name: notification
           required: true
@@ -1854,14 +1548,9 @@ paths:
           schema:
             $ref: '#/definitions/NotificationCreated'
         '403':
-          description: |
-            *Place* doesn't exist or the requester doesn't have access.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessPlace'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Create a Notification
       tags:
         - Notification
@@ -1870,21 +1559,7 @@ paths:
       description: Get the list of *Programs* available in this *Place*.
       operationId: Place.programs
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
-        - collectionFormat: csv
-          description: |
-            Request to include the given keys of metadata in the response. If a key doesn't exist on the resource it is ignored.
-            **Note:** This only applies to the top level resources.
-          in: query
-          items:
-            type: string
-          name: embed-metadata
-          required: false
-          type: array
+        - $ref: '#/parameters/embedMetadata'
       responses:
         '200':
           description: Successful.
@@ -1894,12 +1569,12 @@ paths:
             type: array
             uniqueItems: true
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List Programs
       tags:
         - Program
+    parameters:
+      - $ref: '#/parameters/placeId'
     post:
       description: |
         Create a new *Program*.
@@ -1907,11 +1582,6 @@ paths:
         **Note**: requires full access to the *Account*.
       operationId: Place.newProgram
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
         - in: body
           name: programInfo
           required: true
@@ -1927,14 +1597,9 @@ paths:
           schema:
             $ref: '#/definitions/ProgramCreated'
         '403':
-          description: |
-            *Place* doesn't exist or the requester doesn't have access.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessPlace'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Create a Program
       tags:
         - Program
@@ -1948,29 +1613,10 @@ paths:
         If no functionality is matched by the device/functionality selection, an empty array is returned.
       operationId: Place.run
       parameters:
-        - description: Unique identifier of a *Place*.
-          in: path
-          name: placeId
-          required: true
-          type: string
-        - description: Identifier of an *Action* inside a *Functionality*.
-          in: path
-          name: action
-          required: true
-          type: string
-        - description: Devices selector. Device tags or device classes or device ids or '*' for any. Multiple values are separated by '|' and interpreted as « OR ».
-          in: query
-          name: devices
-          pattern: '^(?:\\*|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
-          required: true
-          type: string
-        - description: |
-            Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
-          in: query
-          name: functionalities
-          pattern: '^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$'
-          required: true
-          type: string
+        - $ref: '#/parameters/placeId'
+        - $ref: '#/parameters/action'
+        - $ref: '#/parameters/devicesSelector.Req'
+        - $ref: '#/parameters/functionalitiesSelector.Req'
         - in: body
           name: arguments
           required: true
@@ -1978,17 +1624,11 @@ paths:
             $ref: '#/definitions/ActionArgs'
       responses:
         '200':
-          description: Successful.
-          schema:
-            $ref: '#/definitions/ActionMultiResult'
+          $ref: '#/responses/ActionMultiResultOK'
         '450':
-          description: The gateway of the Place is not reachable.
-          schema:
-            $ref: '#/definitions/ErrorGatewayUnreachable'
+          $ref: '#/responses/ErrorGatewayUnreachable'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Run actions
       tags:
         - Action
@@ -1999,24 +1639,13 @@ paths:
 
         **Note**: requires full access to the *Account*.
       operationId: Program.delete
-      parameters:
-        - description: Unique identifier of a *Program*.
-          in: path
-          name: programId
-          required: true
-          type: string
       responses:
         '204':
-          description: Resource successfully deleted.
+          $ref: '#/responses/DeleteOK'
         '403':
-          description: |
-            *Program* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessProgram'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Delete a Program
       tags:
         - Program
@@ -2024,29 +1653,20 @@ paths:
       description: |
         Get information about a *Program*.
       operationId: Programs.get
-      parameters:
-        - description: Unique identifier of a *Program*.
-          in: path
-          name: programId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Program'
         '403':
-          description: |
-            *Program* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessProgram'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Information about a Program
       tags:
         - Program
+    parameters:
+      - $ref: '#/parameters/programId'
     patch:
       description: |
         Modify a *Program*:
@@ -2057,11 +1677,6 @@ paths:
         **Note**: requires full access to the *Account*.
       operationId: Program.patch
       parameters:
-        - description: Unique identifier of a *Program*.
-          in: path
-          name: programId
-          required: true
-          type: string
         - in: body
           name: programPatch
           required: true
@@ -2069,18 +1684,13 @@ paths:
             $ref: '#/definitions/ProgramPatch'
       responses:
         '204':
-          description: Modification successful.
+          $ref: '#/responses/PatchOK'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Program* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessProgram'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify a Program
       tags:
         - Program
@@ -2089,24 +1699,8 @@ paths:
       description: Get the execution history list of this *Program*.
       operationId: Program.log
       parameters:
-        - description: Unique identifier of a *Program*.
-          in: path
-          name: programId
-          required: true
-          type: string
-        - description: Beginning of the time interval.
-          format: date-time
-          in: query
-          name: from
-          required: true
-          type: string
-        - description: |
-            End of the interval. Default: now.
-          format: date-time
-          in: query
-          name: to
-          required: false
-          type: string
+        - $ref: '#/parameters/from.Req'
+        - $ref: '#/parameters/to'
       responses:
         '200':
           description: Successful.
@@ -2116,100 +1710,66 @@ paths:
             type: array
             uniqueItems: true
         '403':
-          description: |
-            *Program* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessProgram'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: History of executions of a Program
       tags:
         - Program
+    parameters:
+      - $ref: '#/parameters/programId'
   '/programs/{programId}/metadata':
     get:
       description: Get the metadata of the *Program*.
       operationId: Program.getMetadata
-      parameters:
-        - description: Unique identifier of a *Program*.
-          in: path
-          name: programId
-          required: true
-          type: string
       responses:
         '200':
           description: Successful.
           schema:
             $ref: '#/definitions/Metadata'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: List metadata
       tags:
         - Program
+    parameters:
+      - $ref: '#/parameters/programId'
     patch:
       description: |
         Modify the metadata of a *Program*.
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: Program.patchMetadata
       parameters:
-        - description: Unique identifier of a *Program*.
-          in: path
-          name: programId
-          required: true
-          type: string
-        - description: |
-            Modifications to apply to the metadata of the resource.
-          in: body
-          name: metadataPatch
-          required: true
-          schema:
-            $ref: '#/definitions/MetadataPatch'
+        - $ref: '#/parameters/metadataPatch'
       responses:
         '200':
           description: Successful. The new metadata is returned.
           schema:
             $ref: '#/definitions/Metadata'
         '304':
-          description: 'Successful, but nothing changed.'
+          $ref: '#/responses/PatchNotModified'
         '403':
-          description: |
-            *Program* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessProgram'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Modify metadata of a Program
       tags:
         - Program
   '/programs/{programId}/run':
+    parameters:
+      - $ref: '#/parameters/programId'
     post:
       description: |-
         Launch the *Program*.
         The result will be available later in the run history.
       operationId: Program.run
-      parameters:
-        - description: Unique identifier of a *Program*.
-          in: path
-          name: programId
-          required: true
-          type: string
       responses:
         '204':
           description: '*Program* successfully launched.'
         '403':
-          description: |
-            *Program* doesn't exist or the requester doesn't have appropriate access to the *Place*.
-          schema:
-            $ref: '#/definitions/ErrorEntity'
+          $ref: '#/responses/ErrorAccessProgram'
         default:
-          description: Other error.
-          schema:
-            $ref: '#/definitions/DefaultError'
+          $ref: '#/responses/DefaultError'
       summary: Run the Program
       tags:
         - Program
@@ -2443,6 +2003,14 @@ definitions:
     properties:
       address:
         $ref: '#/definitions/DeviceAddress'
+      attributes:
+        additionalProperties:
+          additionalProperties:
+            $ref: '#/definitions/AnyJSON'
+          description: Each key is an attribute name
+          type: object
+        description: Each key is <FunctionalityClass>@<Endpoint>
+        type: object
       class:
         $ref: '#/definitions/DeviceClass'
       functionalities:
@@ -2464,6 +2032,7 @@ definitions:
         type: string
       name:
         description: Name of the device. User defined.
+        minLength: 2
         type: string
       place:
         $ref: '#/definitions/PlaceId'
@@ -2488,13 +2057,11 @@ definitions:
   DeviceAddress:
     minLength: 1
     pattern: '^[A-Z0-9]{1,32}$'
-    readOnly: true
     type: string
   DeviceClass:
     maxLength: 4
     minLength: 4
     pattern: '^[A-Z][A-Z0-9]{3}$'
-    readOnly: true
     type: string
   DeviceId:
     description: Unique identifier of the *Device*
@@ -2545,12 +2112,13 @@ definitions:
     properties:
       name:
         description: Name of the *Device* as defined by the user. Can be used for user interfaces.
+        minLength: 2
         type: string
     type: object
   DeviceTag:
     maxLength: 21
     minLength: 1
-    pattern: '^[a-z](?=.{0,20}$)(?:[a-z0-9_]{0,4}:[a-z0-9_])?[a-z0-9_]{0,20}$'
+    pattern: '^[a-z](?:[a-z0-9_]{0,20}|[a-z0-9_]:[a-z0-9_]{1,18}|[a-z0-9_]{2}:[a-z0-9_]{1,17}|[a-z0-9_]{3}:[a-z0-9_]{1,16}|[a-z0-9_]{4}:[a-z0-9_]{1,15})$'
     type: string
   ElectricityAutonomy:
     example:
@@ -3064,7 +2632,7 @@ definitions:
   FunctionalityTag:
     maxLength: 21
     minLength: 1
-    pattern: '^[a-z](?=.{0,20}$)(?:[a-z0-9_]{0,4}:[a-z0-9_])?[a-z0-9_]{0,20}$'
+    pattern: '^[a-z](?:[a-z0-9_]{0,20}|[a-z0-9_]:[a-z0-9_]{1,18}|[a-z0-9_]{2}:[a-z0-9_]{1,17}|[a-z0-9_]{3}:[a-z0-9_]{1,16}|[a-z0-9_]{4}:[a-z0-9_]{1,15})$'
     type: string
   Locale:
     description: |
@@ -3081,7 +2649,7 @@ definitions:
   MetadataKey:
     maxLength: 21
     minLength: 1
-    pattern: '^[a-z](?=.{0,20}$)(?:[a-z0-9_]{0,4}:[a-z0-9_])?[a-z0-9_]{0,20}$'
+    pattern: '^[a-z](?:[a-z0-9_]{0,20}|[a-z0-9_]:[a-z0-9_]{1,18}|[a-z0-9_]{2}:[a-z0-9_]{1,17}|[a-z0-9_]{3}:[a-z0-9_]{1,16}|[a-z0-9_]{4}:[a-z0-9_]{1,15})$'
     type: string
   MetadataPatch:
     properties:
@@ -3298,8 +2866,8 @@ definitions:
       - name
     type: object
     x-links:
-      - rel: full
       - href: '/places/{id}'
+        rel: full
   PlaceNew:
     properties:
       country:
@@ -3525,7 +3093,7 @@ definitions:
   Tag:
     maxLength: 21
     minLength: 1
-    pattern: '^[a-z](?=.{0,20}$)(?:[a-z0-9_]{0,4}:[a-z0-9_])?[a-z0-9_]{0,20}$'
+    pattern: '^[a-z](?:[a-z0-9_]{0,20}|[a-z0-9_]:[a-z0-9_]{1,18}|[a-z0-9_]{2}:[a-z0-9_]{1,17}|[a-z0-9_]{3}:[a-z0-9_]{1,16}|[a-z0-9_]{4}:[a-z0-9_]{1,15})$'
     type: string
   Tags:
     items:

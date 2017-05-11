@@ -1366,8 +1366,10 @@ definitions:
                 - PROTOCOL_OPENRTB_2_2 
                 - PROTOCOL_OPENRTB_2_3 
                 - PROTOCOL_OPENRTB_2_4 
+                - PROTOCOL_OPENRTB_2_5 
                 - PROTOCOL_OPENRTB_PROTOBUF_2_3 
-                - PROTOCOL_OPENRTB_PROTOBUF_2_4
+                - PROTOCOL_OPENRTB_PROTOBUF_2_4 
+                - PROTOCOL_OPENRTB_PROTOBUF_2_5
               type: string
             maximumQps:
               description: The maximum queries per second the Ad Exchange will send.
@@ -1788,7 +1790,7 @@ definitions:
           type: integer
         type: array
       servingRestrictions:
-        description: 'The granular status of this ad in specific contexts. A context here relates to where something ultimately serves (for example, a physical location, a platform, an HTTPS vs HTTP request, or the type of auction). Read-only. This field should not be set in requests.'
+        description: 'The granular status of this ad in specific contexts. A context here relates to where something ultimately serves (for example, a physical location, a platform, an HTTPS vs HTTP request, or the type of auction). Read-only. This field should not be set in requests. See the examples in the Creatives guide for more details.'
         items:
           properties:
             contexts:
@@ -1978,7 +1980,7 @@ definitions:
   DealTermsGuaranteedFixedPriceTermsBillingInfo:
     properties:
       currencyConversionTimeMs:
-        description: The timestamp (in ms since epoch) when the original reservation price for the deal was first converted to DFP currency. This is used to convert the contracted price into advertiser's currency without discrepancy.
+        description: The timestamp (in ms since epoch) when the original reservation price for the deal was first converted to DFP currency. This is used to convert the contracted price into buyer's currency without discrepancy.
         format: int64
         type: string
       dfpLineItemId:
@@ -2206,6 +2208,9 @@ definitions:
         type: string
       isRfpTemplate:
         description: Indicates whether the current deal is a RFP template. RFP template is created by buyer and not based on seller created products.
+        type: boolean
+      isSetupComplete:
+        description: 'True, if the buyside inventory setup is complete for this deal. (readonly, except via OrderSetupCompleted action)'
         type: boolean
       kind:
         default: 'adexchangebuyer#marketplaceDeal'
@@ -2611,11 +2616,14 @@ definitions:
         type: string
     type: object
   PricePerBuyer:
-    description: 'Used to specify pricing rules for buyers/advertisers. Each PricePerBuyer in an product can become [0,1] deals. To check if there is a PricePerBuyer for a particular buyer or buyer/advertiser pair, we look for the most specific matching rule - we first look for a rule matching the buyer and advertiser, next a rule with the buyer but an empty advertiser list, and otherwise look for a matching rule where no buyer is set.'
+    description: 'Used to specify pricing rules for buyers. Each PricePerBuyer in a product can become [0,1] deals. To check if there is a PricePerBuyer for a particular buyer we look for the most specific matching rule - we first look for a rule matching the buyer and otherwise look for a matching rule where no buyer is set.'
     properties:
       auctionTier:
         description: Optional access type for this buyer.
         type: string
+      billedBuyer:
+        $ref: '#/definitions/Buyer'
+        description: Reference to the buyer that will get billed.
       buyer:
         $ref: '#/definitions/Buyer'
         description: 'The buyer who will pay this price. If unset, all buyers can pay this price (if the advertisers match, and there''s no more specific rule matching the buyer).'
@@ -2637,6 +2645,12 @@ definitions:
 
       (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
     properties:
+      billedBuyer:
+        $ref: '#/definitions/Buyer'
+        description: 'The billed buyer corresponding to the buyer that created the offer. (readonly, except on create)'
+      buyer:
+        $ref: '#/definitions/Buyer'
+        description: 'The buyer that created the offer if this is a buyer initiated offer (readonly, except on create)'
       creationTimeMs:
         description: Creation time in ms. since epoch (readonly)
         format: int64
@@ -2646,6 +2660,9 @@ definitions:
         items:
           $ref: '#/definitions/ContactInformation'
         type: array
+      creatorRole:
+        description: The role that created the offer. Set to BUYER for buyer initiated offers.
+        type: string
       deliveryControl:
         $ref: '#/definitions/DeliveryControl'
         description: The set of fields around delivery control that are interesting for a buyer to see but are non-negotiable. These are set by the publisher. This message is assigned an id of 100 since some day we would want to model this as a protobuf extension.
@@ -2760,7 +2777,7 @@ definitions:
         description: True if the proposal is being renegotiated (readonly).
         type: boolean
       isSetupComplete:
-        description: 'True, if the buyside inventory setup is complete for this proposal. (readonly, except via OrderSetupCompleted action)'
+        description: 'True, if the buyside inventory setup is complete for this proposal. (readonly, except via OrderSetupCompleted action) Deprecated in favor of deal level setup complete flag.'
         type: boolean
       kind:
         default: 'adexchangebuyer#proposal'
@@ -2953,6 +2970,9 @@ definitions:
         type: array
       creativeSizeType:
         description: The Creative size type.
+        type: string
+      nativeTemplate:
+        description: The native template for native ad.
         type: string
       size:
         $ref: '#/definitions/TargetingValueSize'

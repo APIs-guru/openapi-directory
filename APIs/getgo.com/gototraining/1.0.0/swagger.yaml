@@ -1,28 +1,23 @@
 swagger: '2.0'
 schemes:
   - https
-host: api.citrixonline.com
+host: api.getgo.com
 basePath: /G2T/rest
 info:
   contact:
-    email: developer-support@citrixonline.com
+    email: developer-support@logmein.com
     name: Developer Support
-    url: 'https://developer.citrixonline.com'
+    url: 'https://goto-developer.logmein.com'
   description: 'The GoToTraining API enables developers to use the stable and robust GoToTraining functionality as the basis for online trainings in a proprietary learning management system. The GoToTraining APIs provide the ability to access the scheduling, registration, management, and reporting functions of GoToTraining from external applications. With the ability to tightly integrate GoToTraining into your learning infrastructure, you can offer your learners a seamless user experience and provide them with a market leading virtual classroom environment.'
-  termsOfService: 'https://developer.citrixonline.com/terms-use'
+  termsOfService: 'https://goto-developer.logmein.com/terms-use'
   title: GoToTraining
   version: 1.0.0
-  x-logo:
-    backgroundColor: '#5F6166'
-    url: 'https://developer.citrixonline.com/sites/all/themes/citrix_responsive/logo.png'
   x-origin:
     - format: swagger
       url: 'https://developer.citrixonline.com/sites/default/files/citrix/citrix-apis/gototraining.json'
       version: '2.0'
-  x-providerName: citrixonline.com
+  x-providerName: getgo.com
   x-serviceName: gototraining
-externalDocs:
-  url: 'https://developer.citrixonline.com/'
 consumes:
   - application/json
 produces:
@@ -70,7 +65,7 @@ paths:
   '/accounts/{accountKey}/organizers':
     get:
       deprecated: true
-      description: 'DEPRECATED: Please use the Admin API call ''Get all users'' instead. For details see https://developer.citrixonline.com/get-all-users.'
+      description: 'DEPRECATED: Please use the Admin API call ''Get all users'' instead. For details see https://goto-developer.logmein.com/get-all-users.'
       operationId: getAllOrganisers
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -953,7 +948,7 @@ definitions:
         $ref: '#/definitions/RegistrationSettings'
         description: 'Training settings, namely web registration and confirmation emails to the training registrants'
       timeZone:
-        description: 'Time zone of the training. (Must be a valid time zone ID, see https://developer.citrixonline.com/time-zones)'
+        description: 'Time zone of the training. (Must be a valid time zone ID, see https://goto-developer.logmein.com/time-zones)'
         type: string
       times:
         description: Array with startDate and endDate for the training sessions
@@ -974,7 +969,7 @@ definitions:
         description: Notify trainers via email of change to training. Default is true
         type: boolean
       timeZone:
-        description: 'Time zone of the training. Must be a valid time zone ID, see https://developer.citrixonline.com/time-zones'
+        description: 'Time zone of the training. Must be a valid time zone ID, see https://goto-developer.logmein.com/time-zones'
         type: string
       times:
         description: Start and end times for the training sessions

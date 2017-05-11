@@ -6,7 +6,7 @@ basePath: /api/37
 info:
   description: 'SentencePiece tokenizer (wikipedia).<BR />[Endpoint] https://api.apitore.com/api/37'
   title: SentencePiece APIs (wikipedia)
-  version: 0.0.2
+  version: 0.0.3
   x-description-language: jp
   x-logo:
     url: 'https://apitore.com/img/apis/37.jpg'
@@ -29,7 +29,7 @@ paths:
   /sentencepiece-bpe-wiki/get:
     get:
       description: 'SentencePiece (bpe).<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/sentencepiece-response">sentencepiece-response</a><BR />&nbsp; Class: com.apitore.banana.response.com.atilika.sentencepiece.SentencePieceTokenResponseEntity<BR />'
-      operationId: getUsingGET
+      operationId: getUsingGET_1
       parameters:
         - description: Access Token
           in: query
@@ -58,7 +58,7 @@ paths:
   /sentencepiece-unigram-wiki/get:
     get:
       description: 'SentencePiece (unigram).<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/sentencepiece-response">sentencepiece-response</a><BR />&nbsp; Class: com.apitore.banana.response.com.atilika.sentencepiece.SentencePieceTokenResponseEntity<BR />'
-      operationId: getUsingGET_1
+      operationId: getUsingGET_2
       parameters:
         - description: Access Token
           in: query

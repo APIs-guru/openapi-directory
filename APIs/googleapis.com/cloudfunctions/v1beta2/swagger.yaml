@@ -126,6 +126,58 @@ tags:
   - name: operations
   - name: projects
 paths:
+  /v1beta2/operations:
+    get:
+      description: |-
+        Lists operations that match the specified filter in the request. If the
+        server doesn't support this method, it returns `UNIMPLEMENTED`.
+
+        NOTE: the `name` binding below allows API services to override the binding
+        to use different resource name schemes, such as `users/*/operations`.
+      operationId: cloudfunctions.operations.list
+      parameters:
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
+        - description: The name of the operation collection.
+          in: query
+          name: name
+          type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListOperationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1beta2/{location}/functions':
     get:
       description: Returns a list of functions that belong to the requested project.
@@ -237,13 +289,10 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: cloudfunctions.operations.get
+      description: Returns a function with the given name from the requested project.
+      operationId: cloudfunctions.projects.locations.functions.get
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the function which details should be obtained.
           in: path
           name: name
           required: true
@@ -253,14 +302,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/CloudFunction'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - operations
+        - projects
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
@@ -460,8 +509,8 @@ definitions:
         type: string
       sourceArchiveUrl:
         description: |-
-          The URL, starting with gs://, pointing to the zip archive which contains
-          the function.
+          The Google Cloud Storage URL, starting with gs://, pointing to the zip
+          archive which contains the function.
         type: string
       sourceRepository:
         $ref: '#/definitions/SourceRepository'
@@ -548,6 +597,18 @@ definitions:
       nextPageToken:
         description: The standard List next-page token.
         type: string
+    type: object
+  ListOperationsResponse:
+    description: The response message for Operations.ListOperations.
+    properties:
+      nextPageToken:
+        description: The standard List next-page token.
+        type: string
+      operations:
+        description: A list of operations that matches the specified filter in the request.
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
     type: object
   Location:
     description: A resource that represents Google Cloud Platform location.
@@ -698,7 +759,7 @@ definitions:
       error message is needed, put the localized message in the error details or
       localize it in the client. The optional error details may contain arbitrary
       information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` which can be used for common error conditions.
+      in the package `google.rpc` that can be used for common error conditions.
 
       # Language mapping
 
@@ -721,7 +782,7 @@ definitions:
           errors.
 
       - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting purpose.
+          have a `Status` message for error reporting.
 
       - Batch operations. If a client uses batch request and batch response, the
           `Status` message should be used directly inside batch response, one for

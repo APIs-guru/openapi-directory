@@ -9,7 +9,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: |
-    Stackdriver Error Reporting groups and counts similar errors from cloud services. The Stackdriver Error Reporting API provides a way to report new errors and read access to error groups and their associated errors.
+    Groups and counts similar errors from cloud services and applications, reports new errors, and provides access to error groups and their associated errors.
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
@@ -532,6 +532,13 @@ definitions:
           exception is logged, usually close to the place where it was
           caught. This value is in contrast to `Exception.cause_location`,
           which describes the source line where the exception was thrown.
+      sourceReferences:
+        description: |-
+          Source code that was used to build the executable which has
+          caused the given error message.
+        items:
+          $ref: '#/definitions/SourceReference'
+        type: array
       user:
         description: |-
           The user who caused or was affected by the crash.
@@ -830,6 +837,22 @@ definitions:
         description: 1-based. 0 indicates that the line number is unknown.
         format: int32
         type: integer
+    type: object
+  SourceReference:
+    description: |-
+      A reference to a particular snapshot of the source tree used to build and
+      deploy an application.
+    properties:
+      repository:
+        description: |-
+          Optional. A URI string identifying the repository.
+          Example: "https://github.com/GoogleCloudPlatform/kubernetes.git"
+        type: string
+      revisionId:
+        description: |-
+          The canonical and persistent identifier of the deployed revision.
+          Example (git): "0035781c50ec7aa23385dc841529ce8a4b70db1b"
+        type: string
     type: object
   TimedCount:
     description: |-

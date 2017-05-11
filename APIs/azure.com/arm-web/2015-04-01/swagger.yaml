@@ -14,8 +14,8 @@ info:
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-web/2015-04-01/swagger/Domains.json'
       version: '2.0'
   x-providerName: azure.com
-  x-preferred: false
   x-serviceName: arm-web
+  x-preferred: false
   x-tags:
     - Azure
     - Microsoft
@@ -507,6 +507,11 @@ definitions:
       properties:
         description: Domain resource specific properties
         properties:
+          authCode:
+            readOnly: true
+            type: string
+            x-ms-mutability:
+              - create
           autoRenew:
             default: true
             description: '<code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.'
@@ -541,6 +546,18 @@ definitions:
             format: date-time
             readOnly: true
             type: string
+          dnsType:
+            description: Current DNS type
+            enum:
+              - AzureDns
+              - DefaultDomainRegistrarDns
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: DnsType
+          dnsZoneId:
+            description: Azure DNS Zone to use
+            type: string
           domainNotRenewableReasons:
             description: Reasons why domain is not renewable.
             items:
@@ -549,6 +566,7 @@ definitions:
                 - ExpirationNotInRenewalTimeRange
                 - SubscriptionNotActive
               type: string
+            readOnly: true
             type: array
           expirationTime:
             description: Domain expiration timestamp.
@@ -564,11 +582,13 @@ definitions:
             description: All hostnames derived from the domain and assigned to Azure resources.
             items:
               $ref: '#/definitions/HostName'
+            readOnly: true
             type: array
           nameServers:
             description: Name servers.
             items:
               type: string
+            readOnly: true
             type: array
           privacy:
             description: '<code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.'
@@ -621,6 +641,15 @@ definitions:
             x-ms-enum:
               modelAsString: false
               name: DomainStatus
+          targetDnsType:
+            description: Target DNS type (would be used for migration)
+            enum:
+              - AzureDns
+              - DefaultDomainRegistrarDns
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: DnsType
         required:
           - contactAdmin
           - contactBilling

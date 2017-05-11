@@ -126,12 +126,12 @@ paths:
           name: hotelId
           required: true
           type: integer
-        - description: "Return all codes matching the code. Only the combinication of code and type\r\n            make a code unique, so it can happen that you get multiple codes with the same\r\n            value for different types"
+        - description: "Return all results matching the specified code. A code is unique in combination with the type\r\n            which means when you query for a code you could get multiple results each for a different type"
           in: query
           name: code
           required: false
           type: string
-        - description: Return all codes available for the specified type
+        - description: Return all codes for the specified type
           enum:
             - GuestRequest
             - RequestDietary
@@ -1508,7 +1508,7 @@ definitions:
         type: string
       parent:
         $ref: '#/definitions/CodeBaseEntry'
-        description: "Some codes can have a hierarchie and a child code always points to\r\n            the parent"
+        description: "Some codes can have a hierarchy and a child code always points to\r\n            the parent"
       type:
         description: The type or category of the code
         enum:
@@ -1544,10 +1544,10 @@ definitions:
   CodesListRequest:
     properties:
       code:
-        description: "Return all codes matching the code. Only the combinication of code and type\r\n            make a code unique, so it can happen that you get multiple codes with the same\r\n            value for different types"
+        description: "Return all results matching the specified code. A code is unique in combination with the type\r\n            which means when you query for a code you could get multiple results each for a different type"
         type: string
       type:
-        description: Return all codes available for the specified type
+        description: Return all codes for the specified type
         enum:
           - GuestRequest
           - RequestDietary

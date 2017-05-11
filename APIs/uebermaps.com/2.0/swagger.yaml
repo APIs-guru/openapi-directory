@@ -365,7 +365,7 @@ paths:
         '200':
           description: 'Contains map data, map settings and your relation to this map'
           schema:
-            $ref: '#/definitions/Map'
+            $ref: '#/definitions/MapWithRelation'
       summary: Get map
       tags:
         - Maps
@@ -737,6 +737,31 @@ paths:
       summary: Get respot
       tags:
         - Respots
+  /spots:
+    get:
+      description: List your own spots.
+      parameters:
+        - description: Order of spots
+          enum:
+            - created_at_asc
+            - created_at_desc
+            - updated_at_asc
+            - updated_at_desc
+            - title_asc
+            - title_desc
+          in: query
+          name: order
+          type: string
+      responses:
+        '200':
+          description: Contains list of spots.
+          schema:
+            items:
+              $ref: '#/definitions/Spot'
+            type: array
+      summary: List your own spots
+      tags:
+        - Spots
   /spots/search:
     get:
       description: Search spots
@@ -1116,6 +1141,12 @@ definitions:
         type: object
       spot:
         $ref: '#/definitions/Spot'
+      status:
+        enum:
+          - approved
+          - unapproved
+        example: approved
+        type: string
       user:
         $ref: '#/definitions/User'
   Collaborator:
@@ -1208,6 +1239,12 @@ definitions:
       id:
         example: 29628358
         type: integer
+      status:
+        enum:
+          - approved
+          - unapproved
+        example: approved
+        type: string
       updated_at:
         format: date-time
         type: string
@@ -1373,16 +1410,85 @@ definitions:
           - private
         example: public
         type: string
+  MapRelation:
+    properties:
+      access:
+        example:
+          - can_administer.map
+          - can_administer.spots
+          - can_administer.events
+          - can_administer.comments
+          - can_administer.attachments
+          - can_administer.collaborators
+        type: string
+      access_group:
+        enum:
+          - visitor
+          - editor
+          - admin
+        example: owner
+        type: string
+      subscribed:
+        example: true
+        type: boolean
   MapSettings:
     properties:
       editor_access:
-        example: 'can_none.map,can_create.spots,can_create.events,can_create.comments,can_create.attachments,can_create.collaborators'
+        example:
+          - can_administer.map
+          - can_administer.spots
+          - can_administer.events
+          - can_administer.comments
+          - can_administer.attachments
+          - can_administer.collaborators
         type: string
       respotting_to_this_map:
         example: true
         type: boolean
       visitor_access:
-        example: 'can_none.map,can_none.spots,can_none.events,can_create.comments,can_create.attachments,can_none.collaborators'
+        example:
+          - can_administer.map
+          - can_administer.spots
+          - can_administer.events
+          - can_administer.comments
+          - can_administer.attachments
+          - can_administer.collaborators
+        type: string
+  MapWithRelation:
+    properties:
+      counts:
+        $ref: '#/definitions/MapCounts'
+      created_at:
+        format: date-time
+        type: string
+      description:
+        example: 'A collection of restaurants, cafes, clubs and random spots that I recommend in Berlin'
+        type: string
+      id:
+        example: 18234843
+        type: integer
+      map_settings:
+        $ref: '#/definitions/MapSettings'
+      owner_id:
+        example: 9829358
+        type: integer
+      picture_url:
+        example: 'https://...'
+        type: string
+      relation:
+        $ref: '#/definitions/MapRelation'
+      title:
+        example: My favourite places in Berlin
+        type: string
+      updated_at:
+        format: date-time
+        type: string
+      visibility:
+        enum:
+          - public
+          - link
+          - private
+        example: public
         type: string
   Respot:
     properties:
@@ -1430,6 +1536,9 @@ definitions:
         example: 'https://...'
         type: string
       status:
+        enum:
+          - approved
+          - unapproved
         example: approved
         type: string
       time_zone:
@@ -1474,12 +1583,6 @@ definitions:
       title:
         example: Beautiful place out in the country
         type: string
-  SpotWithMap:
-    properties:
-      map:
-        $ref: '#/definitions/Map'
-      spot:
-        $ref: '#/definitions/Spot'
   Subscription:
     properties:
       created_at:

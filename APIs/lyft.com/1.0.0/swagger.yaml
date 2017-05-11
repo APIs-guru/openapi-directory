@@ -819,6 +819,20 @@ definitions:
         type: string
       ride_type:
         $ref: '#/definitions/RideTypeEnum'
+  CurrentRideLocation:
+    allOf:
+      - $ref: '#/definitions/LatLng'
+      - properties:
+          bearing:
+            description: Bearing of the driver's car in degrees
+            format: double
+            type: number
+        type: object
+    example:
+      bearing: 134.8789520264
+      lat: 37.776157
+      lng: -122.393817
+    type: object
   DriverDetail:
     example:
       first_name: Joe
@@ -1079,6 +1093,7 @@ definitions:
   RideDetail:
     description: Detail information about a ride
     example:
+      beacon_color: '#FFFFFF'
       destination:
         address: '987 Second St, Anytown, CA'
         lat: 36.9453452
@@ -1139,6 +1154,9 @@ definitions:
         make: Audi
         model: A4
     properties:
+      beacon_color:
+        description: Hex color code of the driver AMP device.
+        type: string
       can_cancel:
         items:
           description: The array of actors who may cancel the ride at this point
@@ -1190,7 +1208,7 @@ definitions:
         type: array
       location:
         allOf:
-          - $ref: '#/definitions/RideLocation'
+          - $ref: '#/definitions/CurrentRideLocation'
         description: The *current* location info of the ride
         type: object
       origin:
@@ -1210,6 +1228,10 @@ definitions:
           - $ref: '#/definitions/Cost'
         description: The total price for the current ride
         type: object
+      pricing_details_url:
+        description: |
+          The web view showing the pricing structure for the geographic area where the ride was taken         
+        type: string
       primetime_percentage:
         description: The Prime Time percentage applied to the base price
         type: string

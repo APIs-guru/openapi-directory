@@ -231,7 +231,7 @@ paths:
   '/v1/{resourceName}':
     get:
       description: |-
-        Provides information about a person resource for a resource name. Use
+        Provides information about a person for a resource name. Use
         `people/me` to indicate the authenticated user.
       operationId: people.people.get
       parameters:
@@ -322,28 +322,16 @@ paths:
         linked profiles.
       operationId: people.people.connections.list
       parameters:
-        - description: The resource name to return connections for. Only `people/me` is valid.
-          in: path
-          name: resourceName
-          required: true
-          type: string
-          x-reservedExpansion: true
         - description: |-
-            Whether the response should include a sync token, which can be used to get
-            all changes since the last request.
+            The number of connections to include in the response. Valid values are
+            between 1 and 2000, inclusive. Defaults to 100.
           in: query
-          name: requestSyncToken
-          type: boolean
+          name: pageSize
+          type: integer
         - description: The token of the page to be returned.
           in: query
           name: pageToken
           type: string
-        - description: |-
-            The number of connections to include in the response. Valid values are
-            between 1 and 500, inclusive. Defaults to 100.
-          in: query
-          name: pageSize
-          type: integer
         - description: |-
             Comma-separated list of fields to be included in the response. Omitting
             this field will include all fields except for connections.list requests,
@@ -355,11 +343,17 @@ paths:
           name: requestMask.includeField
           type: string
         - description: |-
-            A sync token, returned by a previous call to `people.connections.list`.
-            Only resources changed since the sync token was created will be returned.
+            Whether the response should include a sync token, which can be used to get
+            all changes since the last request.
           in: query
-          name: syncToken
+          name: requestSyncToken
+          type: boolean
+        - description: The resource name to return connections for. Only `people/me` is valid.
+          in: path
+          name: resourceName
+          required: true
           type: string
+          x-reservedExpansion: true
         - description: |-
             The order in which the connections should be sorted. Defaults to
             `LAST_MODIFIED_ASCENDING`.
@@ -369,6 +363,12 @@ paths:
             - LAST_NAME_ASCENDING
           in: query
           name: sortOrder
+          type: string
+        - description: |-
+            A sync token, returned by a previous call to `people.connections.list`.
+            Only resources changed since the sync token was created will be returned.
+          in: query
+          name: syncToken
           type: string
       responses:
         '200':
@@ -744,8 +744,14 @@ definitions:
       nextSyncToken:
         description: The token that can be used to retrieve changes since the last request.
         type: string
+      totalItems:
+        description: The total number of items in the list without pagination.
+        format: int32
+        type: integer
       totalPeople:
-        description: The total number of people in the list without pagination.
+        description: |-
+          DEPRECATED(Please use total_items). The total number of people in the list
+          without pagination.
         format: int32
         type: integer
     type: object
@@ -1056,7 +1062,7 @@ definitions:
       resourceName:
         description: |-
           The resource name for the person, assigned by the server. An ASCII string
-          with a max length of 27 characters. Always starts with `people/`.
+          with a max length of 27 characters, in the form of `people/<person_id>`.
         type: string
       skills:
         description: The person's skills.
@@ -1119,7 +1125,10 @@ definitions:
     description: The response for a single person
     properties:
       httpStatusCode:
-        description: '[HTTP 1.1 status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).'
+        description: |-
+          DEPRECATED(Please use status instead).
+          [HTTP 1.1 status
+          code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
         format: int32
         type: integer
       person:
@@ -1134,6 +1143,9 @@ definitions:
           contact and profile such as a verified email, verified phone number, or a
           profile URL.
         type: string
+      status:
+        $ref: '#/definitions/Status'
+        description: The status of the response.
     type: object
   PhoneNumber:
     description: A person's phone number.
@@ -1330,6 +1342,81 @@ definitions:
           - PROFILE
           - DOMAIN_PROFILE
           - CONTACT
+        type: string
+    type: object
+  Status:
+    description: |-
+      The `Status` type defines a logical error model that is suitable for different
+      programming environments, including REST APIs and RPC APIs. It is used by
+      [gRPC](https://github.com/grpc). The error model is designed to be:
+
+      - Simple to use and understand for most users
+      - Flexible enough to meet unexpected needs
+
+      # Overview
+
+      The `Status` message contains three pieces of data: error code, error message,
+      and error details. The error code should be an enum value of
+      google.rpc.Code, but it may accept additional error codes if needed.  The
+      error message should be a developer-facing English message that helps
+      developers *understand* and *resolve* the error. If a localized user-facing
+      error message is needed, put the localized message in the error details or
+      localize it in the client. The optional error details may contain arbitrary
+      information about the error. There is a predefined set of error detail types
+      in the package `google.rpc` that can be used for common error conditions.
+
+      # Language mapping
+
+      The `Status` message is the logical representation of the error model, but it
+      is not necessarily the actual wire format. When the `Status` message is
+      exposed in different client libraries and different wire protocols, it can be
+      mapped differently. For example, it will likely be mapped to some exceptions
+      in Java, but more likely mapped to some error codes in C.
+
+      # Other uses
+
+      The error model and the `Status` message can be used in a variety of
+      environments, either with or without APIs, to provide a
+      consistent developer experience across different environments.
+
+      Example uses of this error model include:
+
+      - Partial errors. If a service needs to return partial errors to the client,
+          it may embed the `Status` in the normal response to indicate the partial
+          errors.
+
+      - Workflow errors. A typical workflow has multiple steps. Each step may
+          have a `Status` message for error reporting.
+
+      - Batch operations. If a client uses batch request and batch response, the
+          `Status` message should be used directly inside batch response, one for
+          each error sub-response.
+
+      - Asynchronous operations. If an API call embeds asynchronous operation
+          results in its response, the status of those operations should be
+          represented directly using the `Status` message.
+
+      - Logging. If some API errors are stored in logs, the message `Status` could
+          be used directly after any stripping needed for security/privacy reasons.
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: |-
+          A list of messages that carry the error details.  There will be a
+          common set of message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
+      message:
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
         type: string
     type: object
   Tagline:

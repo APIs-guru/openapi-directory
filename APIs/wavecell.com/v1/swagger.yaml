@@ -188,7 +188,6 @@ definitions:
         $ref: '#/definitions/SmsTemplate'
     required:
       - destinations
-      - template
     type: object
   BulkSmsResponse:
     properties:
@@ -196,7 +195,6 @@ definitions:
         format: int32
         type: integer
       batchId:
-        format: uuid
         type: string
       clientBatchId:
         type: string

@@ -375,6 +375,20 @@ paths:
       summary: Return new or used listings for a comparison shopping page
       tags:
         - comparison_shopping_pages
+  '/comparison_shopping_pages/{id}/reviews':
+    get:
+      description: View reviews of a comparison shopping page
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: View reviews of a comparison shopping page
+      tags:
+        - comparison_shopping_pages
   '/conversations/{id}/offer':
     post:
       description: Make an offer to the other participant in the conversation
@@ -3751,6 +3765,23 @@ paths:
       summary: Enable vacation mode. All listings will be unavailable until vacation mode is turned off.
       tags:
         - shop
+  '/shops/{shop_id}/shipping_profiles':
+    get:
+      description: List of shipping profiles for your shop
+      parameters:
+        - in: path
+          name: shop_id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: List of shipping profiles for your shop
+      tags:
+        - shops
   '/shops/{slug}':
     get:
       description: Get details on a shop.
@@ -3812,9 +3843,11 @@ paths:
       parameters:
         - description: Merchandising UUID of the release
           in: query
+          items:
+            type: string
           name: merchandising_uuid
           required: true
-          type: string
+          type: array
       responses:
         default:
           description: Unexpected error

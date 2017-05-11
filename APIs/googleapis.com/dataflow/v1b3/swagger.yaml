@@ -3589,6 +3589,11 @@ definitions:
           Whether to bypass the safety checks for the job's temporary directory.
           Use with caution.
         type: boolean
+      machineType:
+        description: |-
+          The machine type to use for the job. Defaults to the value from the
+          template if not specified.
+        type: string
       maxWorkers:
         description: |-
           The maximum number of Google Compute Engine instances to be made
@@ -3605,7 +3610,8 @@ definitions:
         type: string
       zone:
         description: |-
-          The Compute Engine [availability zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones)
+          The Compute Engine [availability
+          zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones)
           for launching worker instances to run your pipeline.
         type: string
     type: object

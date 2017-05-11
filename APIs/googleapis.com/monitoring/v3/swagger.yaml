@@ -1276,10 +1276,10 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: 'Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Cloud SQL databases use the labels "database_id" and "zone".'
+        description: 'Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Compute Engine VM instances use the labels "project_id", "instance_id", and "zone".'
         type: object
       type:
-        description: 'Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Cloud SQL database is "cloudsql_database".'
+        description: 'Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Compute Engine VM instance is gce_instance.'
         type: string
     type: object
   MonitoredResourceDescriptor:
@@ -1377,7 +1377,7 @@ definitions:
         type: array
       resource:
         $ref: '#/definitions/MonitoredResource'
-        description: The associated resource. A fully-specified monitored resource used to identify the time series.
+        description: The associated monitored resource. Custom metrics can use only certain monitored resource types in their time series data.
       valueType:
         description: 'The value type of the time series. When listing time series, this value type might be different from the value type of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the type of the data in the points field.'
         enum:

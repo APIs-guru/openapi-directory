@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: Use this API to manage the IoT hubs in your subscription.
+  description: Use this API to manage the IoT hubs in your Azure subscription.
   title: iotHubClient
   version: '2016-02-03'
   x-apisguru-categories:
@@ -1123,7 +1123,7 @@ definitions:
         readOnly: true
         type: string
       startTimeUtc:
-        description: The start time of the Job.
+        description: The start time of the job.
         format: date-time-rfc1123
         readOnly: true
         type: string
@@ -1241,6 +1241,7 @@ definitions:
         type: integer
     type: object
   Resource:
+    description: The common properties of an Azure resource.
     properties:
       id:
         description: The resource identifier.

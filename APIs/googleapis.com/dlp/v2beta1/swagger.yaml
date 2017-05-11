@@ -386,6 +386,17 @@ paths:
       operationId: dlp.inspect.results.findings.list
       parameters:
         - description: |-
+            Restrict findings to items that match. Supports info_type and likelihood.
+            <p>Examples:<br/>
+            <li>info_type=EMAIL_ADDRESS
+            <li>info_type=PHONE_NUMBER,EMAIL_ADDRESS
+            <li>likelihood=VERY_LIKELY
+            <li>likelihood=VERY_LIKELY,LIKELY
+            <li>info_type=EMAIL_ADDRESS,likelihood=VERY_LIKELY,LIKELY
+          in: query
+          name: filter
+          type: string
+        - description: |-
             Identifier of the results set returned as metadata of
             the longrunning operation created by a call to CreateInspectOperation.
             Should be in the format of `inspect/results/{id}.
@@ -396,7 +407,7 @@ paths:
           x-reservedExpansion: true
         - description: |-
             Maximum number of results to return.
-            If 0, the implementation will select a reasonable value.
+            If 0, the implementation select a reasonable value.
           in: query
           name: pageSize
           type: integer
@@ -508,6 +519,13 @@ definitions:
       fileSet:
         $ref: '#/definitions/FileSet'
     type: object
+  CloudStoragePath:
+    description: A location in Cloud Storage.
+    properties:
+      path:
+        description: 'The url, in the format of `gs://bucket/<path>`.'
+        type: string
+    type: object
   ContentItem:
     description: Container structure for the content to inspect.
     properties:
@@ -533,6 +551,23 @@ definitions:
       inspectConfig:
         $ref: '#/definitions/InspectConfig'
         description: Configuration for the inspector.
+      outputConfig:
+        $ref: '#/definitions/OutputStorageConfig'
+        description: |-
+          Optional location to store findings. The bucket must already exist and
+          the Google APIs service account for DLP must have write permission to
+          write to the given bucket.
+          <p>Results are split over multiple csv files with each file name matching
+          the pattern "[operation_id]_[count].csv", for example
+          `3094877188788974909_1.csv`. The `operation_id` matches the
+          identifier for the Operation, and the `count` is a counter used for
+          tracking the number of files written. <p>The CSV file(s) contain the
+          following columns regardless of storage type scanned: <li>id <li>info_type
+          <li>likelihood <li>byte size of finding <li>quote <li>time_stamp<br/>
+          <p>For Cloud Storage the next columns are: <li>file_path
+          <li>start_offset<br/>
+          <p>For Cloud Datastore the next columns are: <li>project_id
+          <li>namespace_id <li>path <li>column_name <li>offset
       storageConfig:
         $ref: '#/definitions/StorageConfig'
         description: Specification of the data set to process.
@@ -588,7 +623,7 @@ definitions:
     properties:
       url:
         description: |-
-          The url, in the format gs://<bucket>/<path>. Trailing wildcard in the
+          The url, in the format `gs://<bucket>/<path>`. Trailing wildcard in the
           path is allowed.
         type: string
     type: object
@@ -672,8 +707,8 @@ definitions:
         type: boolean
       includeQuote:
         description: |-
-          When true, a contextual quote from the data that triggered a finding will
-          be included in the response; see Finding.quote.
+          When true, a contextual quote from the data that triggered a finding is
+          included in the response; see Finding.quote.
         type: boolean
       infoTypes:
         description: |-
@@ -718,7 +753,7 @@ definitions:
     properties:
       results:
         description: |-
-          Each content_item from the request will have a result in this list, in the
+          Each content_item from the request has a result in this list, in the
           same order as the request.
         items:
           $ref: '#/definitions/InspectResult'
@@ -870,6 +905,13 @@ definitions:
         description: This field will contain an `InspectOperationResult` object.
         type: object
     type: object
+  OutputStorageConfig:
+    description: Cloud repository for storing output.
+    properties:
+      storagePath:
+        $ref: '#/definitions/CloudStoragePath'
+        description: The path to a Google Cloud Storage location to store output.
+    type: object
   PartitionId:
     description: |-
       Datastore partition ID.
@@ -879,11 +921,6 @@ definitions:
       A partition ID contains several dimensions:
       project ID and namespace ID.
     properties:
-      databaseId:
-        description: |-
-          If not empty, the ID of the database to which the entities
-          belong.
-        type: string
       namespaceId:
         description: 'If not empty, the ID of the namespace to which the entities belong.'
         type: string
@@ -976,7 +1013,7 @@ definitions:
         type: array
     type: object
   RedactContentResponse:
-    description: Results of deidentifying a list of items.
+    description: Results of redacting a list of items.
     properties:
       items:
         description: The redacted content.
@@ -990,8 +1027,8 @@ definitions:
         $ref: '#/definitions/InfoType'
         description: |-
           Type of information to replace. Only one ReplaceConfig per info_type
-          should be provided. If ReplaceConfig does not have an info_type, we'll
-          match it against all info_types that are found but not specified in
+          should be provided. If ReplaceConfig does not have an info_type, the DLP
+          API matches it against all info_types that are found but not specified in
           another ReplaceConfig.
       replaceWith:
         description: Content replacing sensitive information of given type. Max 256 chars.
@@ -1016,7 +1053,7 @@ definitions:
       error message is needed, put the localized message in the error details or
       localize it in the client. The optional error details may contain arbitrary
       information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` which can be used for common error conditions.
+      in the package `google.rpc` that can be used for common error conditions.
 
       # Language mapping
 
@@ -1039,7 +1076,7 @@ definitions:
           errors.
 
       - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting purpose.
+          have a `Status` message for error reporting.
 
       - Batch operations. If a client uses batch request and batch response, the
           `Status` message should be used directly inside batch response, one for

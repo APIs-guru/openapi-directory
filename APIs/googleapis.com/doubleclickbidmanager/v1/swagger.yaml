@@ -30,6 +30,22 @@ info:
   x-serviceName: doubleclickbidmanager
 externalDocs:
   url: 'https://developers.google.com/bid-manager/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 implicit authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/doubleclickbidmanager': View and manage your reports in DoubleClick Bid Manager
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/doubleclickbidmanager': View and manage your reports in DoubleClick Bid Manager
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -98,6 +114,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/DownloadLineItemsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - lineitems
   /lineitems/uploadlineitems:
@@ -122,6 +143,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/UploadLineItemsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - lineitems
   /queries:
@@ -133,6 +159,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListQueriesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
     parameters:
@@ -158,6 +189,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListReportsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - reports
     parameters:
@@ -190,6 +226,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Query'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
   '/query/{queryId}':
@@ -205,6 +246,11 @@ paths:
       responses:
         '200':
           description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
     get:
@@ -221,6 +267,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Query'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
     parameters:
@@ -247,6 +298,11 @@ paths:
       responses:
         '200':
           description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
   /sdf/download:
@@ -271,6 +327,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/DownloadResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - sdf
 definitions:

@@ -605,37 +605,6 @@ paths:
       summary: Gets the line status of for all lines for the given modes
       tags:
         - Line
-  /Line/Route:
-    get:
-      deprecated: false
-      operationId: Line_Route
-      parameters:
-        - collectionFormat: multi
-          description: 'A comma seperated list of service types to filter on. If not specified. Supported values: Regular, Night. Defaulted to ''Regular'' if not specified'
-          in: query
-          items:
-            enum:
-              - Regular
-              - Night
-            type: string
-          name: serviceTypes
-          required: false
-          type: array
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/Line'
-            type: array
-      summary: 'Get all valid routes for all lines, including the name and id of the originating and terminating stops for each route.'
-      tags:
-        - Line
   '/Line/Search/{query}':
     get:
       deprecated: false
@@ -1316,6 +1285,39 @@ paths:
       summary: Gets a list of the available types of Place.
       tags:
         - Place
+  /Place/Search:
+    get:
+      deprecated: false
+      operationId: Place_Search
+      parameters:
+        - description: 'The name of the place, you can use the /Place/Types/{types} endpoint to get a list of places for a given type including their names.'
+          in: query
+          name: name
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: A comma-separated list of the types to return. Max. approx 12 types.
+          in: query
+          items:
+            type: string
+          name: types
+          required: false
+          type: array
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Place'
+            type: array
+      summary: Gets all places that matches the given query
+      tags:
+        - Place
   '/Place/Type/{types}':
     get:
       deprecated: false
@@ -1426,7 +1428,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Object'
-      summary: "Gets any {laces of the given type whose geography intersects the given latitude and longitude. In practice this means the Place\r\n            must be polygonal e.g. a BoroughBoundary."
+      summary: "Gets any places of the given type whose geography intersects the given latitude and longitude. In practice this means the Place\r\n            must be polygonal e.g. a BoroughBoundary."
       tags:
         - Place
   '/Place/{type}/overlay/{z}/{Lat}/{Lon}/{width}/{height}':
@@ -2473,6 +2475,31 @@ paths:
               $ref: '#/definitions/StopPointRouteSection'
             type: array
       summary: Returns the route sections for all the lines that service the given stop point ids
+      tags:
+        - StopPoint
+  '/StopPoint/{stopPointId}/CarParks':
+    get:
+      deprecated: false
+      operationId: StopPoint_GetCarParksById
+      parameters:
+        - description: stopPointId is required to get the car parks.
+          in: path
+          name: stopPointId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Place'
+            type: array
+      summary: Get car parks corresponding to the given stop point id.
       tags:
         - StopPoint
   '/StopPoint/{stopPointId}/TaxiRanks':

@@ -166,8 +166,13 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/AnalysisServicesServer'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/AnalysisServicesServer'
       tags:
         - Servers
+      x-ms-long-running-operation: true
     put:
       description: Provisions the specified Analysis Services server based on the configuration specified in the request.
       operationId: Servers_Create

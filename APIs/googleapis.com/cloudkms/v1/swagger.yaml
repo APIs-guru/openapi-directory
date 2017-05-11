@@ -1020,6 +1020,7 @@ definitions:
           * `group:{emailid}`: An email address that represents a Google group.
              For example, `admins@example.com`.
 
+
           * `domain:{domain}`: A Google Apps domain name that represents all the
              users of that domain. For example, `google.com` or `example.com`.
 
@@ -1035,7 +1036,14 @@ definitions:
     type: object
   CloudAuditOptions:
     description: Write a Cloud Audit log
-    properties: {}
+    properties:
+      logName:
+        description: The log_name to populate in the Cloud Audit Record.
+        enum:
+          - UNSPECIFIED_LOG_NAME
+          - ADMIN_ACTIVITY
+          - DATA_ACCESS
+        type: string
     type: object
   Condition:
     description: A condition to be met.

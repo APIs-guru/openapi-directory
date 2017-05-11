@@ -243,7 +243,7 @@ paths:
   '/{resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses':
     get:
       description: Lists the historical availability statuses for a single resource. Use the nextLink property in the response to get the next page of availability status
-      operationId: Availabilitystatuses_List
+      operationId: AvailabilityStatuses_List
       parameters:
         - description: 'The fully qualified ID of the resource, including the resource name and resource type. Currently the API support not nested and one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resource-group-name}/providers/{resource-provider-name}/{resource-type}/{resource-name} and /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}'
           in: path
@@ -314,7 +314,7 @@ paths:
   '/{resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses/current':
     get:
       description: Gets current availability status for a single resource
-      operationId: AvailabilityStatus_GetByResource
+      operationId: AvailabilityStatuses_GetByResource
       parameters:
         - description: 'The fully qualified ID of the resource, including the resource name and resource type. Currently the API support not nested and one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resource-group-name}/providers/{resource-provider-name}/{resource-type}/{resource-name} and /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}'
           in: path

@@ -418,11 +418,6 @@ paths:
       description: 'Retrieves a list of account user profiles, possibly filtered. This method supports paging.'
       operationId: dfareporting.accountUserProfiles.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only active user profiles.
           in: query
           name: active
@@ -434,26 +429,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name, ID or email. Wildcards (*) are allowed. For example, "user profile*2015" will return objects with names like "user profile June 2015", "user profile April 2015", or simply "user profile 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "user profile" will match objects with name "my user profile", "user profile 2015", or simply "user profile".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -608,11 +613,6 @@ paths:
       description: 'Retrieves the list of accounts, possibly filtered. This method supports paging.'
       operationId: dfareporting.accounts.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only active accounts. Don't set this field to select both active and non-active accounts.
           in: query
           name: active
@@ -624,26 +624,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "account*2015" will return objects with names like "account June 2015", "account April 2015", or simply "account 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "account" will match objects with name "my account", "account 2015", or simply "account".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -765,11 +775,6 @@ paths:
       description: 'Retrieves a list of ads, possibly filtered. This method supports paging.'
       operationId: dfareporting.ads.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only active ads.
           in: query
           name: active
@@ -867,8 +872,11 @@ paths:
             type: string
           name: landingPageIds
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Select only ads with this event tag override ID.
@@ -886,6 +894,11 @@ paths:
             type: string
           name: placementIds
           type: array
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - collectionFormat: multi
           description: Select only ads whose list targeting expression use these remarketing list IDs.
           in: query
@@ -904,14 +917,16 @@ paths:
             type: string
           name: sizeIds
           type: array
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -1078,11 +1093,6 @@ paths:
       description: 'Retrieves a list of advertiser groups, possibly filtered. This method supports paging.'
       operationId: dfareporting.advertiserGroups.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only advertiser groups with these IDs.
           in: query
@@ -1090,26 +1100,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "advertiser*2015" will return objects with names like "advertiser group June 2015", "advertiser group April 2015", or simply "advertiser group 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "advertisergroup" will match objects with name "my advertisergroup", "advertisergroup 2015", or simply "advertisergroup".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -1280,11 +1300,6 @@ paths:
       description: 'Retrieves a list of advertisers, possibly filtered. This method supports paging.'
       operationId: dfareporting.advertisers.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only advertisers with these advertiser group IDs.
           in: query
@@ -1310,8 +1325,11 @@ paths:
           in: query
           name: includeAdvertisersWithoutGroupsOnly
           type: boolean
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Select only advertisers which use another advertiser's floodlight configuration.
@@ -1322,18 +1340,25 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "advertiser*2015" will return objects with names like "advertiser June 2015", "advertiser April 2015", or simply "advertiser 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "advertiser" will match objects with name "my advertiser", "advertiser 2015", or simply "advertiser".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -1521,11 +1546,6 @@ paths:
       description: 'Retrieves a list of campaigns, possibly filtered. This method supports paging.'
       operationId: dfareporting.campaigns.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only campaigns whose advertisers belong to these advertiser groups.
           in: query
@@ -1562,8 +1582,11 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Select only campaigns that have overridden this event tag ID.
@@ -1574,18 +1597,25 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for campaigns by name or ID. Wildcards (*) are allowed. For example, "campaign*2015" will return campaigns with names like "campaign June 2015", "campaign April 2015", or simply "campaign 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "campaign" will match campaigns with name "my campaign", "campaign 2015", or simply "campaign".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -1711,25 +1741,29 @@ paths:
       description: Retrieves the list of creative IDs associated with the specified campaign. This method supports paging.
       operationId: dfareporting.campaignCreativeAssociations.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Campaign ID in this association.
           in: path
           name: campaignId
           required: true
           type: string
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -2025,11 +2059,6 @@ paths:
       description: Retrieves a list of change logs. This method supports paging.
       operationId: dfareporting.changeLogs.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only change logs with the specified action.
           enum:
             - ACTION_ADD
@@ -2063,8 +2092,11 @@ paths:
           in: query
           name: maxChangeTime
           type: string
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: 'Select only change logs whose change time is before the specified minChangeTime.The time should be formatted as an RFC3339 date/time string. For example, for 10:54 PM on July 18th, 2015, in the America/New York time zone, the format is "2015-07-18T22:54:00-04:00". In other words, the year, month, day, the letter T, the hour (24-hour clock system), minute, second, and then the time zone offset.'
@@ -2125,6 +2157,11 @@ paths:
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
           type: string
         - description: 'Select only change logs whose object ID, user name, old or new values match the search string.'
           in: query
@@ -2317,11 +2354,6 @@ paths:
       description: 'Retrieves a list of content categories, possibly filtered. This method supports paging.'
       operationId: dfareporting.contentCategories.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only content categories with these IDs.
           in: query
@@ -2329,26 +2361,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "contentcategory*2015" will return objects with names like "contentcategory June 2015", "contentcategory April 2015", or simply "contentcategory 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "contentcategory" will match objects with name "my contentcategory", "contentcategory 2015", or simply "contentcategory".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -2659,11 +2701,6 @@ paths:
       description: 'Retrieves a list of creative fields, possibly filtered. This method supports paging.'
       operationId: dfareporting.creativeFields.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only creative fields that belong to these advertisers.
           in: query
@@ -2678,26 +2715,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for creative fields by name or ID. Wildcards (*) are allowed. For example, "creativefield*2015" will return creative fields with names like "creativefield June 2015", "creativefield April 2015", or simply "creativefield 2015". Most of the searches also add wild-cards implicitly at the start and the end of the search string. For example, a search string of "creativefield" will match creative fields with the name "my creativefield", "creativefield 2015", or simply "creativefield".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -2809,11 +2856,6 @@ paths:
       description: 'Retrieves a list of creative field values, possibly filtered. This method supports paging.'
       operationId: dfareporting.creativeFieldValues.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
@@ -2826,26 +2868,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: Allows searching for creative field values by their values. Wildcards (e.g. *) are not allowed.
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - VALUE
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -3100,11 +3152,6 @@ paths:
       description: 'Retrieves a list of creative groups, possibly filtered. This method supports paging.'
       operationId: dfareporting.creativeGroups.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only creative groups that belong to these advertisers.
           in: query
@@ -3114,6 +3161,8 @@ paths:
           type: array
         - description: Select only creative groups that belong to this subgroup.
           in: query
+          maximum: 2
+          minimum: 1
           name: groupNumber
           type: integer
         - collectionFormat: multi
@@ -3123,26 +3172,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for creative groups by name or ID. Wildcards (*) are allowed. For example, "creativegroup*2015" will return creative groups with names like "creativegroup June 2015", "creativegroup April 2015", or simply "creativegroup 2015". Most of the searches also add wild-cards implicitly at the start and the end of the search string. For example, a search string of "creativegroup" will match creative groups with the name "my creativegroup", "creativegroup 2015", or simply "creativegroup".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -3289,11 +3348,6 @@ paths:
       description: 'Retrieves a list of creatives, possibly filtered. This method supports paging.'
       operationId: dfareporting.creatives.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only active creatives. Leave blank to select active and inactive creatives.
           in: query
           name: active
@@ -3331,13 +3385,21 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
           type: string
         - collectionFormat: multi
           description: Select only creatives with these rendering IDs.
@@ -3357,14 +3419,16 @@ paths:
             type: string
           name: sizeIds
           type: array
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -3591,11 +3655,6 @@ paths:
       description: 'Retrieves a list of directory site contacts, possibly filtered. This method supports paging.'
       operationId: dfareporting.directorySiteContacts.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only directory site contacts with these directory site IDs. This is a required field.
           in: query
@@ -3610,26 +3669,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name, ID or email. Wildcards (*) are allowed. For example, "directory site contact*2015" will return objects with names like "directory site contact June 2015", "directory site contact April 2015", or simply "directory site contact 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "directory site contact" will match objects with name "my directory site contact", "directory site contact 2015", or simply "directory site contact".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -3696,11 +3765,6 @@ paths:
       description: 'Retrieves a list of directory sites, possibly filtered. This method supports paging.'
       operationId: dfareporting.directorySites.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: This search filter is no longer supported and will have no effect on the results returned.
           in: query
           name: acceptsInStreamVideoPlacements
@@ -3732,8 +3796,11 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
@@ -3744,18 +3811,25 @@ paths:
           in: query
           name: parentId
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name, ID or URL. Wildcards (*) are allowed. For example, "directory site*2015" will return objects with names like "directory site June 2015", "directory site April 2015", or simply "directory site 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "directory site" will match objects with name "my directory site", "directory site 2015" or simply, "directory site".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -3974,11 +4048,6 @@ paths:
       description: 'Retrieves a list of event tags, possibly filtered.'
       operationId: dfareporting.eventTags.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only event tags that belong to this ad.
           in: query
           name: adId
@@ -4017,18 +4086,25 @@ paths:
             type: string
           name: ids
           type: array
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "eventtag*2015" will return objects with names like "eventtag June 2015", "eventtag April 2015", or simply "eventtag 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "eventtag" will match objects with name "my eventtag", "eventtag 2015", or simply "eventtag".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -4264,11 +4340,6 @@ paths:
       description: 'Retrieves a list of floodlight activities, possibly filtered. This method supports paging.'
       operationId: dfareporting.floodlightActivities.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: 'Select only floodlight activities for the specified advertiser ID. Must specify either ids, advertiserId, or floodlightConfigurationId for a non-empty result.'
           in: query
           name: advertiserId
@@ -4306,26 +4377,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "floodlightactivity*2015" will return objects with names like "floodlightactivity June 2015", "floodlightactivity April 2015", or simply "floodlightactivity 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "floodlightactivity" will match objects with name "my floodlightactivity activity", "floodlightactivity 2015", or simply "floodlightactivity".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -4534,11 +4615,6 @@ paths:
       description: 'Retrieves a list of floodlight activity groups, possibly filtered. This method supports paging.'
       operationId: dfareporting.floodlightActivityGroups.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only floodlight activity groups with the specified advertiser ID. Must specify either advertiserId or floodlightConfigurationId for a non-empty result.
           in: query
           name: advertiserId
@@ -4554,26 +4630,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "floodlightactivitygroup*2015" will return objects with names like "floodlightactivitygroup June 2015", "floodlightactivitygroup April 2015", or simply "floodlightactivitygroup 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "floodlightactivitygroup" will match objects with name "my floodlightactivitygroup activity", "floodlightactivitygroup 2015", or simply "floodlightactivitygroup".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -5109,11 +5195,6 @@ paths:
       description: 'Retrieves a list of placement groups, possibly filtered. This method supports paging.'
       operationId: dfareporting.placementGroups.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only placement groups that belong to these advertisers.
           in: query
@@ -5157,8 +5238,11 @@ paths:
           in: query
           name: maxEndDate
           type: string
-        - description: Maximum number of results to return.
+        - default: 800
+          description: Maximum number of results to return.
           in: query
+          maximum: 800
+          minimum: 0
           name: maxResults
           type: integer
         - description: Select only placements or placement groups whose start date is on or before the specified maxStartDate. The date should be formatted as "yyyy-MM-dd".
@@ -5205,6 +5289,11 @@ paths:
             type: string
           name: pricingTypes
           type: array
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for placement groups by name or ID. Wildcards (*) are allowed. For example, "placement*2015" will return placement groups with names like "placement group June 2015", "placement group May 2015", or simply "placements 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "placementgroup" will match placement groups with name "my placementgroup", "placementgroup 2015", or simply "placementgroup".'
           in: query
           name: searchString
@@ -5216,14 +5305,16 @@ paths:
             type: string
           name: siteIds
           type: array
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -5370,11 +5461,6 @@ paths:
       description: 'Retrieves a list of placement strategies, possibly filtered. This method supports paging.'
       operationId: dfareporting.placementStrategies.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only placement strategies with these IDs.
           in: query
@@ -5382,26 +5468,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "placementstrategy*2015" will return objects with names like "placementstrategy June 2015", "placementstrategy April 2015", or simply "placementstrategy 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "placementstrategy" will match objects with name "my placementstrategy", "placementstrategy 2015", or simply "placementstrategy".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -5572,11 +5668,6 @@ paths:
       description: 'Retrieves a list of placements, possibly filtered. This method supports paging.'
       operationId: dfareporting.placements.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only placements that belong to these advertisers.
           in: query
@@ -5640,8 +5731,11 @@ paths:
           in: query
           name: maxEndDate
           type: string
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Select only placements or placement groups whose start date is on or before the specified maxStartDate. The date should be formatted as "yyyy-MM-dd".
@@ -5688,6 +5782,11 @@ paths:
             type: string
           name: pricingTypes
           type: array
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for placements by name or ID. Wildcards (*) are allowed. For example, "placement*2015" will return placements with names like "placement June 2015", "placement May 2015", or simply "placements 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "placement" will match placements with name "my placement", "placement 2015", or simply "placement".'
           in: query
           name: searchString
@@ -5706,14 +5805,16 @@ paths:
             type: string
           name: sizeIds
           type: array
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -5833,11 +5934,6 @@ paths:
       description: Generates tags for a placement.
       operationId: dfareporting.placements.generatetags
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Generate placements belonging to this campaign. This is a required field.
           in: query
           name: campaignId
@@ -5849,6 +5945,11 @@ paths:
             type: string
           name: placementIds
           type: array
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - collectionFormat: multi
           description: Tag formats to generate for these placements.
           in: query
@@ -5860,6 +5961,7 @@ paths:
               - PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY
               - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH
               - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3
+              - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4
               - PLACEMENT_TAG_INTERNAL_REDIRECT
               - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT
               - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY
@@ -6057,11 +6159,6 @@ paths:
       description: 'Retrieves a list of projects, possibly filtered. This method supports paging.'
       operationId: dfareporting.projects.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only projects with these advertiser IDs.
           in: query
@@ -6076,26 +6173,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for projects by name or ID. Wildcards (*) are allowed. For example, "project*2015" will return projects with names like "project June 2015", "project April 2015", or simply "project 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "project" will match projects with name "my project", "project 2015", or simply "project".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -6162,16 +6269,6 @@ paths:
       description: 'Retrieves a list of inventory items, possibly filtered. This method supports paging.'
       operationId: dfareporting.inventoryItems.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
-        - description: Project ID for order documents.
-          in: path
-          name: projectId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only inventory items with these IDs.
           in: query
@@ -6183,8 +6280,11 @@ paths:
           in: query
           name: inPlan
           type: boolean
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - collectionFormat: multi
@@ -6198,6 +6298,16 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Project ID for order documents.
+          in: path
+          name: projectId
+          required: true
+          type: string
         - collectionFormat: multi
           description: Select only inventory items that are associated with these sites.
           in: query
@@ -6205,14 +6315,16 @@ paths:
             type: string
           name: siteId
           type: array
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -6291,16 +6403,6 @@ paths:
       description: 'Retrieves a list of order documents, possibly filtered. This method supports paging.'
       operationId: dfareporting.orderDocuments.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
-        - description: Project ID for order documents.
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Select only order documents that have been approved by at least one user.
           in: query
           name: approved
@@ -6312,8 +6414,11 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - collectionFormat: multi
@@ -6327,6 +6432,16 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Project ID for order documents.
+          in: path
+          name: projectId
+          required: true
+          type: string
         - description: 'Allows searching for order documents by name or ID. Wildcards (*) are allowed. For example, "orderdocument*2015" will return order documents with names like "orderdocument June 2015", "orderdocument April 2015", or simply "orderdocument 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "orderdocument" will match order documents with name "my orderdocument", "orderdocument 2015", or simply "orderdocument".'
           in: query
           name: searchString
@@ -6338,14 +6453,16 @@ paths:
             type: string
           name: siteId
           type: array
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -6417,6 +6534,24 @@ paths:
       description: 'Retrieves a list of orders, possibly filtered. This method supports paging.'
       operationId: dfareporting.orders.list
       parameters:
+        - collectionFormat: multi
+          description: Select only orders with these IDs.
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+        - default: 1000
+          description: Maximum number of results to return.
+          in: query
+          maximum: 1000
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: Value of the nextPageToken from the previous result page.
+          in: query
+          name: pageToken
+          type: string
         - description: User profile ID associated with this request.
           in: path
           name: profileId
@@ -6426,21 +6561,6 @@ paths:
           in: path
           name: projectId
           required: true
-          type: string
-        - collectionFormat: multi
-          description: Select only orders with these IDs.
-          in: query
-          items:
-            type: string
-          name: ids
-          type: array
-        - description: Maximum number of results to return.
-          in: query
-          name: maxResults
-          type: integer
-        - description: Value of the nextPageToken from the previous result page.
-          in: query
-          name: pageToken
           type: string
         - description: 'Allows searching for orders by name or ID. Wildcards (*) are allowed. For example, "order*2015" will return orders with names like "order June 2015", "order April 2015", or simply "order 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "order" will match orders with name "my order", "order 2015", or simply "order".'
           in: query
@@ -6453,14 +6573,16 @@ paths:
             type: string
           name: siteId
           type: array
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -6661,26 +6783,24 @@ paths:
       description: 'Retrieves a list of remarketing lists, possibly filtered. This method supports paging.'
       operationId: dfareporting.remarketingLists.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - description: Select only active or only inactive remarketing lists.
+          in: query
+          name: active
+          type: boolean
         - description: Select only remarketing lists owned by this advertiser.
           in: query
           name: advertiserId
           required: true
           type: string
-        - description: Select only active or only inactive remarketing lists.
-          in: query
-          name: active
-          type: boolean
         - description: Select only remarketing lists that have this floodlight activity ID.
           in: query
           name: floodlightActivityId
           type: string
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "remarketing list*2015" will return objects with names like "remarketing list June 2015", "remarketing list April 2015", or simply "remarketing list 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "remarketing list" will match objects with name "my remarketing list", "remarketing list 2015", or simply "remarketing list".'
@@ -6691,14 +6811,21 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: Field by which to sort the list.
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -7228,11 +7355,6 @@ paths:
       description: 'Retrieves a list of sites, possibly filtered. This method supports paging.'
       operationId: dfareporting.sites.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: This search filter is no longer supported and will have no effect on the results returned.
           in: query
           name: acceptsInStreamVideoPlacements
@@ -7274,26 +7396,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name, ID or keyName. Wildcards (*) are allowed. For example, "site*2015" will return objects with names like "site June 2015", "site April 2015", or simply "site 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "site" will match objects with name "my site", "site 2015", or simply "site".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -7448,13 +7580,10 @@ paths:
       description: 'Retrieves a list of sizes, possibly filtered.'
       operationId: dfareporting.sizes.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only sizes with this height.
           in: query
+          maximum: 32767
+          minimum: 0
           name: height
           type: integer
         - description: Select only IAB standard sizes.
@@ -7468,8 +7597,15 @@ paths:
             type: string
           name: ids
           type: array
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: Select only sizes with this width.
           in: query
+          maximum: 32767
+          minimum: 0
           name: width
           type: integer
       responses:
@@ -7557,11 +7693,6 @@ paths:
       description: 'Gets a list of subaccounts, possibly filtered. This method supports paging.'
       operationId: dfareporting.subaccounts.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only subaccounts with these IDs.
           in: query
@@ -7569,26 +7700,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "subaccount*2015" will return objects with names like "subaccount June 2015", "subaccount April 2015", or simply "subaccount 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "subaccount" will match objects with name "my subaccount", "subaccount 2015", or simply "subaccount".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -7735,22 +7876,20 @@ paths:
       description: 'Retrieves a list of targetable remarketing lists, possibly filtered. This method supports paging.'
       operationId: dfareporting.targetableRemarketingLists.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - description: Select only active or only inactive targetable remarketing lists.
+          in: query
+          name: active
+          type: boolean
         - description: Select only targetable remarketing lists targetable by these advertisers.
           in: query
           name: advertiserId
           required: true
           type: string
-        - description: Select only active or only inactive targetable remarketing lists.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
-          name: active
-          type: boolean
-        - description: Maximum number of results to return.
-          in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "remarketing list*2015" will return objects with names like "remarketing list June 2015", "remarketing list April 2015", or simply "remarketing list 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "remarketing list" will match objects with name "my remarketing list", "remarketing list 2015", or simply "remarketing list".'
@@ -7761,14 +7900,21 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: Field by which to sort the list.
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -7835,11 +7981,6 @@ paths:
       description: 'Retrieves a list of targeting templates, optionally filtered. This method supports paging.'
       operationId: dfareporting.targetingTemplates.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only targeting templates with this advertiser ID.
           in: query
           name: advertiserId
@@ -7851,26 +7992,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "template*2015" will return objects with names like "template June 2015", "template April 2015", or simply "template 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "template" will match objects with name "my template", "template 2015", or simply "template".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -8154,11 +8305,6 @@ paths:
       description: 'Retrieves a list of user roles, possibly filtered. This method supports paging.'
       operationId: dfareporting.userRoles.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only account level user roles not associated with any specific subaccount.
           in: query
           name: accountUserRoleOnly
@@ -8170,26 +8316,36 @@ paths:
             type: string
           name: ids
           type: array
-        - description: Maximum number of results to return.
+        - default: 1000
+          description: Maximum number of results to return.
           in: query
+          maximum: 1000
+          minimum: 0
           name: maxResults
           type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
         - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "userrole*2015" will return objects with names like "userrole June 2015", "userrole April 2015", or simply "userrole 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "userrole" will match objects with name "my userrole", "userrole 2015", or simply "userrole".'
           in: query
           name: searchString
           type: string
-        - description: Field by which to sort the list.
+        - default: ID
+          description: Field by which to sort the list.
           enum:
             - ID
             - NAME
           in: query
           name: sortField
           type: string
-        - description: 'Order of sorted results, default is ASCENDING.'
+        - default: ASCENDING
+          description: Order of sorted results.
           enum:
             - ASCENDING
             - DESCENDING
@@ -8382,6 +8538,7 @@ definitions:
         description: Maximum number of active ads allowed for this account.
         enum:
           - ACTIVE_ADS_TIER_100K
+          - ACTIVE_ADS_TIER_1M
           - ACTIVE_ADS_TIER_200K
           - ACTIVE_ADS_TIER_300K
           - ACTIVE_ADS_TIER_40K
@@ -8452,7 +8609,8 @@ definitions:
           - "45" for RUB 
           - "46" for AED 
           - "47" for BGN 
-          - "48" for HRK
+          - "48" for HRK 
+          - "49" for MXN
         format: int64
         type: string
       defaultCreativeSizeId:
@@ -8492,7 +8650,7 @@ definitions:
           - "zh-TW" (Chinese Traditional)
         type: string
       maximumImageSize:
-        description: Maximum image size allowed for this account.
+        description: 'Maximum image size allowed for this account, in kilobytes. Value must be greater than or equal to 1.'
         format: int64
         type: string
       name:
@@ -8508,7 +8666,7 @@ definitions:
         description: Share Path to Conversion reports with Twitter.
         type: boolean
       teaserSizeLimit:
-        description: File size limit in kilobytes of Rich Media teaser creatives. Must be between 1 and 10240.
+        description: 'File size limit in kilobytes of Rich Media teaser creatives. Acceptable values are 1 to 10240, inclusive.'
         format: int64
         type: string
     type: object
@@ -8527,6 +8685,7 @@ definitions:
         description: Maximum number of active ads allowed for the account.
         enum:
           - ACTIVE_ADS_TIER_100K
+          - ACTIVE_ADS_TIER_1M
           - ACTIVE_ADS_TIER_200K
           - ACTIVE_ADS_TIER_300K
           - ACTIVE_ADS_TIER_40K
@@ -9078,7 +9237,7 @@ definitions:
     description: Audience Segment.
     properties:
       allocation:
-        description: Weight allocated to this segment. Must be between 1 and 1000. The weight assigned will be understood in proportion to the weights assigned to other segments in the same segment group.
+        description: 'Weight allocated to this segment. The weight assigned will be understood in proportion to the weights assigned to other segments in the same segment group. Acceptable values are 1 to 1000, inclusive.'
         format: int32
         type: integer
       id:
@@ -9666,7 +9825,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionsBatchInsertResponse".'
         type: string
       status:
-        description: The status of each conversion's insertion status. The status is returned in the same order that conversions are inserted.
+        description: The insert status of each conversion. Statuses are returned in the same order that conversions are inserted.
         items:
           $ref: '#/definitions/ConversionStatus'
         type: array
@@ -10102,7 +10261,7 @@ definitions:
           type: string
         type: array
       customStartTimeValue:
-        description: 'Custom start time in seconds for making the asset visible. Applicable to the following creative types: all RICH_MEDIA.'
+        description: 'Custom start time in seconds for making the asset visible. Applicable to the following creative types: all RICH_MEDIA. Value must be greater than or equal to 0.'
         format: int32
         type: integer
       detectedFeatures:
@@ -10192,7 +10351,7 @@ definitions:
           - ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR
         type: string
       duration:
-        description: 'Duration in seconds for which an asset will be displayed. Applicable to the following creative types: INSTREAM_VIDEO and VPAID_LINEAR_VIDEO.'
+        description: 'Duration in seconds for which an asset will be displayed. Applicable to the following creative types: INSTREAM_VIDEO and VPAID_LINEAR_VIDEO. Value must be greater than or equal to 1.'
         format: int32
         type: integer
       durationType:
@@ -10262,7 +10421,7 @@ definitions:
         description: 'Whether the asset pushes down other content. Applicable to the following creative types: all RICH_MEDIA. Additionally, only applicable when the asset offsets are 0, the collapsedSize.width matches size.width, and the collapsedSize.height is less than size.height.'
         type: boolean
       pushdownDuration:
-        description: 'Pushdown duration in seconds for an asset. Must be between 0 and 9.99. Applicable to the following creative types: all RICH_MEDIA.Additionally, only applicable when the asset pushdown field is true, the offsets are 0, the collapsedSize.width matches size.width, and the collapsedSize.height is less than size.height.'
+        description: 'Pushdown duration in seconds for an asset. Applicable to the following creative types: all RICH_MEDIA.Additionally, only applicable when the asset pushdown field is true, the offsets are 0, the collapsedSize.width matches size.width, and the collapsedSize.height is less than size.height. Acceptable values are 0 to 9.99, inclusive.'
         format: float
         type: number
       role:
@@ -10319,7 +10478,7 @@ definitions:
           - WINDOW
         type: string
       zIndex:
-        description: 'zIndex value of an asset. This is a read-only field. Applicable to the following creative types: all RICH_MEDIA.Additionally, only applicable to assets whose displayType is NOT one of the following types: ASSET_DISPLAY_TYPE_INPAGE or ASSET_DISPLAY_TYPE_OVERLAY.'
+        description: 'zIndex value of an asset. Applicable to the following creative types: all RICH_MEDIA.Additionally, only applicable to assets whose displayType is NOT one of the following types: ASSET_DISPLAY_TYPE_INPAGE or ASSET_DISPLAY_TYPE_OVERLAY. Acceptable values are -999999999 to 999999999, inclusive.'
         format: int32
         type: integer
       zipFilename:
@@ -10547,6 +10706,7 @@ definitions:
         description: |-
           Rich media exit overrides for this creative assignment.
           Applicable when the creative type is any of the following: 
+          - DISPLAY
           - RICH_MEDIA_INPAGE
           - RICH_MEDIA_INPAGE_FLOATING
           - RICH_MEDIA_IM_EXPAND
@@ -10555,14 +10715,13 @@ definitions:
           - RICH_MEDIA_MOBILE_IN_APP
           - RICH_MEDIA_MULTI_FLOATING
           - RICH_MEDIA_PEEL_DOWN
-          - ADVANCED_BANNER
           - VPAID_LINEAR
           - VPAID_NON_LINEAR
         items:
           $ref: '#/definitions/RichMediaExitOverride'
         type: array
       sequence:
-        description: 'Sequence number of the creative assignment, applicable when the rotation type is CREATIVE_ROTATION_TYPE_SEQUENTIAL.'
+        description: 'Sequence number of the creative assignment, applicable when the rotation type is CREATIVE_ROTATION_TYPE_SEQUENTIAL. Acceptable values are 1 to 65535, inclusive.'
         format: int32
         type: integer
       sslCompliant:
@@ -10573,7 +10732,7 @@ definitions:
         format: date-time
         type: string
       weight:
-        description: 'Weight of the creative assignment, applicable when the rotation type is CREATIVE_ROTATION_TYPE_RANDOM.'
+        description: 'Weight of the creative assignment, applicable when the rotation type is CREATIVE_ROTATION_TYPE_RANDOM. Value must be greater than or equal to 1.'
         format: int32
         type: integer
     type: object
@@ -10732,11 +10891,7 @@ definitions:
         $ref: '#/definitions/DimensionValue'
         description: 'Dimension value for the ID of the advertiser. This is a read-only, auto-generated field.'
       groupNumber:
-        description: |-
-          Subgroup of the creative group. Assign your creative groups to one of the following subgroups in order to filter or manage them more easily. This field is required on insertion and is read-only after insertion.
-          Acceptable values are: 
-          - 1
-          - 2
+        description: 'Subgroup of the creative group. Assign your creative groups to a subgroup in order to filter or manage them more easily. This field is required on insertion and is read-only after insertion. Acceptable values are 1 to 2, inclusive.'
         format: int32
         type: integer
       id:
@@ -11081,7 +11236,7 @@ definitions:
           type: string
         type: array
       hoursOfDay:
-        description: 'Hours of the day when the ad will serve. Must be an integer between 0 and 23 (inclusive), where 0 is midnight to 1 AM, and 23 is 11 PM to midnight. Can be specified with days of week, in which case the ad would serve during these hours on the specified days. For example, if Monday, Wednesday, Friday are the days of week specified and 9-10am, 3-5pm (hours 9, 15, and 16) is specified, the ad would serve Monday, Wednesdays, and Fridays at 9-10am and 3-5pm.'
+        description: 'Hours of the day when the ad will serve, where 0 is midnight to 1 AM and 23 is 11 PM to midnight. Can be specified with days of week, in which case the ad would serve during these hours on the specified days. For example if Monday, Wednesday, Friday are the days of week specified and 9-10am, 3-5pm (hours 9, 15, and 16) is specified, the ad would serve Monday, Wednesdays, and Fridays at 9-10am and 3-5pm. Acceptable values are 0 to 23, inclusive.'
         items:
           format: int32
           type: integer
@@ -11111,7 +11266,7 @@ definitions:
         description: 'Whether or not hard cutoff is enabled. If true, the ad will not serve after the end date and time. Otherwise the ad will continue to be served until it has reached its delivery goals.'
         type: boolean
       impressionRatio:
-        description: 'Impression ratio for this ad. This ratio determines how often each ad is served relative to the others. For example, if ad A has an impression ratio of 1 and ad B has an impression ratio of 3, then DCM will serve ad B three times as often as ad A. Must be between 1 and 10.'
+        description: 'Impression ratio for this ad. This ratio determines how often each ad is served relative to the others. For example, if ad A has an impression ratio of 1 and ad B has an impression ratio of 3, then DCM will serve ad B three times as often as ad A. Acceptable values are 1 to 10, inclusive.'
         format: int64
         type: string
       priority:
@@ -11262,12 +11417,12 @@ definitions:
           $ref: '#/definitions/DirectorySiteContactAssignment'
         type: array
       countryId:
-        description: Country ID of this directory site.
+        description: Country ID of this directory site. This is a read-only field.
         format: int64
         type: string
       currencyId:
         description: |-
-          Currency ID of this directory site.
+          Currency ID of this directory site. This is a read-only field.
           Possible values are: 
           - "1" for USD 
           - "2" for GBP 
@@ -11315,11 +11470,12 @@ definitions:
           - "45" for RUB 
           - "46" for AED 
           - "47" for BGN 
-          - "48" for HRK
+          - "48" for HRK 
+          - "49" for MXN
         format: int64
         type: string
       description:
-        description: Description of this directory site.
+        description: Description of this directory site. This is a read-only field.
         type: string
       id:
         description: 'ID of this directory site. This is a read-only, auto-generated field.'
@@ -11795,7 +11951,7 @@ definitions:
         $ref: '#/definitions/DimensionValue'
         description: 'Dimension value for the ID of the advertiser. This is a read-only, auto-generated field.'
       cacheBustingType:
-        description: Code type used for cache busting in the generated tag.
+        description: Code type used for cache busting in the generated tag. Applicable only when floodlightActivityGroupType is COUNTER and countingMethod is STANDARD_COUNTING or UNIQUE_COUNTING.
         enum:
           - ACTIVE_SERVER_PAGE
           - COLD_FUSION
@@ -12251,11 +12407,11 @@ definitions:
     description: Frequency Cap.
     properties:
       duration:
-        description: 'Duration of time, in seconds, for this frequency cap. The maximum duration is 90 days in seconds, or 7,776,000.'
+        description: 'Duration of time, in seconds, for this frequency cap. The maximum duration is 90 days. Acceptable values are 1 to 7776000, inclusive.'
         format: int64
         type: string
       impressions:
-        description: Number of times an individual user can be served the ad within the specified duration. The maximum allowed is 15.
+        description: 'Number of times an individual user can be served the ad within the specified duration. Acceptable values are 1 to 15, inclusive.'
         format: int64
         type: string
     type: object
@@ -12582,11 +12738,11 @@ definitions:
     description: Lookback configuration settings.
     properties:
       clickDuration:
-        description: 'Lookback window, in days, from the last time a given user clicked on one of your ads. If you enter 0, clicks will not be considered as triggering events for floodlight tracking. If you leave this field blank, the default value for your account will be used.'
+        description: 'Lookback window, in days, from the last time a given user clicked on one of your ads. If you enter 0, clicks will not be considered as triggering events for floodlight tracking. If you leave this field blank, the default value for your account will be used. Acceptable values are 0 to 90, inclusive.'
         format: int32
         type: integer
       postImpressionActivitiesDuration:
-        description: 'Lookback window, in days, from the last time a given user viewed one of your ads. If you enter 0, impressions will not be considered as triggering events for floodlight tracking. If you leave this field blank, the default value for your account will be used.'
+        description: 'Lookback window, in days, from the last time a given user viewed one of your ads. If you enter 0, impressions will not be considered as triggering events for floodlight tracking. If you leave this field blank, the default value for your account will be used. Acceptable values are 0 to 90, inclusive.'
         format: int32
         type: integer
     type: object
@@ -12803,7 +12959,7 @@ definitions:
         $ref: '#/definitions/DimensionValue'
         description: 'Dimension value for the ID of the floodlight activity. This is a read-only, auto-generated field.'
       weight:
-        description: Weight associated with this optimization. Must be greater than 1. The weight assigned will be understood in proportion to the weights assigned to the other optimization activities.
+        description: Weight associated with this optimization. The weight assigned will be understood in proportion to the weights assigned to the other optimization activities. Value must be greater than or equal to 1.
         format: int32
         type: integer
     type: object
@@ -13191,6 +13347,8 @@ definitions:
           - "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
           - "PLACEMENT_TAG_CLICK_COMMANDS"
           - "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
+          - "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
+          - "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4"
           - "PLACEMENT_TAG_TRACKING"
           - "PLACEMENT_TAG_TRACKING_IFRAME"
           - "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
@@ -13202,6 +13360,7 @@ definitions:
             - PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY
             - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH
             - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3
+            - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4
             - PLACEMENT_TAG_INTERNAL_REDIRECT
             - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT
             - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY
@@ -13626,7 +13785,7 @@ definitions:
         description: Comments for this pricing period.
         type: string
       rateOrCostNanos:
-        description: Rate or cost of this pricing period.
+        description: 'Rate or cost of this pricing period in nanos (i.e., multipled by 1000000000). Acceptable values are 0 to 1000000000000000000, inclusive.'
         format: int64
         type: string
       startDate:
@@ -13634,7 +13793,7 @@ definitions:
         format: date
         type: string
       units:
-        description: Units of this pricing period.
+        description: 'Units of this pricing period. Acceptable values are 0 to 10000000000, inclusive.'
         format: int64
         type: string
     type: object
@@ -13867,7 +14026,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#remarketingList".'
         type: string
       lifeSpan:
-        description: Number of days that a user should remain in the remarketing list without an impression.
+        description: 'Number of days that a user should remain in the remarketing list without an impression. Acceptable values are 1 to 540, inclusive.'
         format: int64
         type: string
       listPopulationRule:
@@ -14517,7 +14676,7 @@ definitions:
     description: 'Represents the dimensions of ads, placements, creatives, or creative assets.'
     properties:
       height:
-        description: Height of this size.
+        description: 'Height of this size. Acceptable values are 0 to 32767, inclusive.'
         format: int32
         type: integer
       iab:
@@ -14532,7 +14691,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#size".'
         type: string
       width:
-        description: Width of this size.
+        description: 'Width of this size. Acceptable values are 0 to 32767, inclusive.'
         format: int32
         type: integer
     type: object
@@ -14611,14 +14770,14 @@ definitions:
     description: Placement Tag Data
     properties:
       adId:
-        description: Ad associated with this placement tag.
+        description: Ad associated with this placement tag. Applicable only when format is PLACEMENT_TAG_TRACKING.
         format: int64
         type: string
       clickTag:
         description: Tag string to record a click.
         type: string
       creativeId:
-        description: Creative associated with this placement tag.
+        description: Creative associated with this placement tag. Applicable only when format is PLACEMENT_TAG_TRACKING.
         format: int64
         type: string
       format:
@@ -14630,6 +14789,7 @@ definitions:
           - PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY
           - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH
           - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3
+          - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4
           - PLACEMENT_TAG_INTERNAL_REDIRECT
           - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT
           - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY

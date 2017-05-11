@@ -604,6 +604,13 @@ definitions:
           parameters. Must be 1 - 63 characters.
           The name "boot" is reserved for system use.
         type: string
+      readOnly:
+        description: |-
+          Specifies how a sourced-base persistent disk will be mounted. See
+          https://cloud.google.com/compute/docs/disks/persistent-disks#use_multi_instances
+          for more details.
+          Can only be set at create time.
+        type: boolean
       sizeGb:
         description: |-
           The size of the disk. Defaults to 500 (GB).
@@ -1240,7 +1247,7 @@ definitions:
       error message is needed, put the localized message in the error details or
       localize it in the client. The optional error details may contain arbitrary
       information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` which can be used for common error conditions.
+      in the package `google.rpc` that can be used for common error conditions.
 
       # Language mapping
 
@@ -1263,7 +1270,7 @@ definitions:
           errors.
 
       - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting purpose.
+          have a `Status` message for error reporting.
 
       - Batch operations. If a client uses batch request and batch response, the
           `Status` message should be used directly inside batch response, one for

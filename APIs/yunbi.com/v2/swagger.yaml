@@ -26,7 +26,6 @@ produces:
   - application/json
 tags:
   - name: addresses
-  - name: crowdsales
   - name: deposit
   - name: deposit_address
   - name: deposits
@@ -38,10 +37,10 @@ tags:
   - name: order
   - name: order_book
   - name: orders
+  - name: partners
   - name: tickers
   - name: timestamp
   - name: trades
-  - name: withdraw
 paths:
   '/v2/addresses/{address}.json':
     get:
@@ -57,21 +56,6 @@ paths:
       summary: Check Deposit Address
       tags:
         - addresses
-  '/v2/crowdsales/{key}.json':
-    get:
-      operationId: GET--version-crowdsales--key---format-
-      parameters:
-        - description: Crowdsale plan key
-          in: path
-          name: key
-          required: true
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: Get crowdsales plan info
-      tags:
-        - crowdsales
   /v2/deposit.json:
     get:
       operationId: GET--version-deposit---format-
@@ -557,6 +541,23 @@ paths:
       summary: Create multiple sell/buy orders.
       tags:
         - orders
+  '/v2/partners/orders/{id}/trades.json':
+    get:
+      operationId: GET--version-partners-orders--id-trades---format-
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: query
+          name: access_key_hash
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - partners
   /v2/tickers.json:
     get:
       operationId: GET--version-tickers---format-
@@ -685,43 +686,3 @@ paths:
       summary: Get your executed trades. Trades are sorted in reverse creation order.
       tags:
         - trades
-  /v2/withdraw.json:
-    post:
-      operationId: POST--version-withdraw---format-
-      parameters:
-        - description: Access key.
-          in: formData
-          name: access_key
-          required: true
-          type: string
-        - description: Tonce is an integer represents the milliseconds elapsed since Unix epoch.
-          in: formData
-          name: tonce
-          required: true
-          type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
-          in: formData
-          name: signature
-          required: true
-          type: string
-        - description: Withdraw amount
-          in: formData
-          name: amount
-          required: true
-          type: string
-        - description: Withdrawal address ID
-          in: formData
-          name: id
-          required: true
-          type: integer
-        - description: Withdraw Memo
-          in: formData
-          name: memo
-          required: false
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: Generate withdrawal application
-      tags:
-        - withdraw

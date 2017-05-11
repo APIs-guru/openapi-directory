@@ -282,7 +282,7 @@ paths:
   '/v2beta1/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.projects.logs.delete
+      operationId: logging.organizations.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -311,7 +311,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -449,7 +449,7 @@ paths:
   '/v2beta1/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.projects.logs.list
+      operationId: logging.organizations.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -493,7 +493,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -1174,7 +1174,10 @@ definitions:
           logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR
         type: string
       includeChildren:
-        description: 'Optional. This field presently applies only to sinks in organizations and folders. If true, then logs from children of this entity will also be available to this sink for export. Whether particular log entries from the children are exported depends on the sink''s filter expression. For example, if this sink is associated with an organization, then logs from all projects in the organization as well as from the organization itself will be available for export.'
+        description: |
+          Optional. This field applies only to sinks owned by organizations and folders. If the field is false, the default, only the logs owned by the sink's parent resource are availble for export. If the field is true, then logs from all the projects, folders, and billing accounts contained in the sink's parent resource are also available for export. Whether a particular log entry from the children is exported depends on the sink's filter expression. For example, if this field is true, then the filter resource.type=gce_instance would export all Compute Engine VM instance log entries from all projects in the sink's parent. To only export entries from certain child projects, filter on the project part of the log name:
+          logName:("projects/test-project-a/" OR "projects/test-project-b/") AND
+          resource.type=gce_instance
         type: boolean
       name:
         description: 'Required. The client-assigned sink identifier, unique within the project. Example: "my-syslog-errors-to-pubsub". Sink identifiers are limited to 100 characters and can include only the following characters: upper and lower-case alphanumeric characters, underscores, hyphens, and periods.'
@@ -1204,10 +1207,10 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: 'Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Cloud SQL databases use the labels "database_id" and "zone".'
+        description: 'Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Compute Engine VM instances use the labels "project_id", "instance_id", and "zone".'
         type: object
       type:
-        description: 'Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Cloud SQL database is "cloudsql_database".'
+        description: 'Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Compute Engine VM instance is gce_instance.'
         type: string
     type: object
   MonitoredResourceDescriptor:

@@ -1484,7 +1484,7 @@ paths:
             $bankAccountForm->setAccountType('checking');
 
             try {
-                $bankAccount = $client->customers()->update('bankAccountId', $bankAccountForm);
+                $bankAccount = $client->customers()->create($bankAccountForm, 'bankAccountId');
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
@@ -1727,7 +1727,7 @@ paths:
             $blacklistForm->setExpiredTime('2025-01-01 05:00:00');
 
             try {
-                $blacklist = $client->blacklists()->update('blacklistId', $blacklistForm);
+                $blacklist = $client->blacklists()->create($blacklistForm, 'blacklistId');
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
@@ -2042,6 +2042,33 @@ paths:
                 echo $e->getMessage();
             }
   '/contacts/{id}':
+    delete:
+      description: |
+        Delete a contact with predefined identifier string
+      responses:
+        '204':
+          description: Contact was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '402':
+          description: Contact cannot be deleted
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Delete a contact
+      tags:
+        - Contacts
     get:
       description: |
         Retrieve a contact with specified identifier string
@@ -2877,6 +2904,20 @@ paths:
       parameters:
         - $ref: '#/parameters/collectionLimit'
         - $ref: '#/parameters/collectionOffset'
+        - collectionFormat: csv
+          description: The collection items sort field and order (prefix with "-" for descending sort).
+          in: query
+          items:
+            enum:
+              - createdTime
+              - '-createdTime'
+              - handledTime
+              - '-handledTime'
+              - scheduledTime
+              - '-scheduledTime'
+            type: string
+          name: sort
+          type: array
       responses:
         '200':
           description: A list of custom events was retrieved successfully
@@ -5261,7 +5302,7 @@ paths:
             $invoiceItemForm->setQuantity(5);
 
             try {
-                $invoiceItem = $client->invoiceItems()->create('invoiceId', $invoiceItemForm);
+                $invoiceItem = $client->invoiceItems()->create($invoiceItemForm, 'invoiceId');
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
@@ -6716,7 +6757,7 @@ paths:
             $paymentCardForm->setBillingContactId('contactId');
 
             try {
-                $paymentCard = $client->paymentCards()->update('paymentCardId', $paymentCardForm);
+                $paymentCard = $client->paymentCards()->create($paymentCardForm, 'paymentCardId');
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
@@ -7050,6 +7091,199 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  /paypal-accounts:
+    get:
+      description: |
+        Retrieve a list of PayPal Accounts
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of PayPal Accounts was retrieved successfully
+          schema:
+            items:
+              $ref: '#/definitions/PayPalAccount'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of PayPal accounts
+      tags:
+        - PayPal Accounts
+    post:
+      description: |
+        Create a PayPal Account
+      parameters:
+        - description: PayPalAccount resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PayPalAccount'
+      responses:
+        '201':
+          description: PayPal Account was created
+          schema:
+            $ref: '#/definitions/PayPalAccount'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a PayPal Account
+      tags:
+        - PayPal Accounts
+  '/paypal-accounts/{id}':
+    get:
+      description: |
+        Retrieve a PayPal Account with specified identifier string
+      responses:
+        '200':
+          description: PayPal Account was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/PayPalAccount'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a PayPal Account
+      tags:
+        - PayPal Accounts
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      parameters:
+        - description: PayPal Account
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PayPalAccount'
+      responses:
+        '201':
+          description: PayPal Account was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/PayPalAccount'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '409':
+          description: PayPal Account exist and cannot be updated
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Create a PayPal account with predefined ID
+      tags:
+        - PayPal Accounts
+  '/paypal-accounts/{id}/activation':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Activate a PayPal Account
+      parameters:
+        - description: PayPal Account resource
+          in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              currency:
+                description: Currency (three letter code)
+                type: string
+              redirectURLs:
+                description: Redirect URLs
+                type: object
+              websiteId:
+                description: The Website ID
+                type: string
+            required:
+              - websiteId
+              - currency
+            type: object
+      responses:
+        '201':
+          description: Activate successful
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/PayPalAccount'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Activate a PayPal Account
+      tags:
+        - PayPal Accounts
+  '/paypal-accounts/{id}/deactivation':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Deactivate a PayPal Account
+      responses:
+        '201':
+          description: Deactivate successful
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/PayPalAccount'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Deactivate a PayPal Account
+      tags:
+        - PayPal Accounts
   /plans:
     get:
       description: |
@@ -10602,7 +10836,7 @@ definitions:
       - Other
       - Panda Bank
       - PayPal
-      - PayR
+      - Payr
       - Payvision
       - Peoples Trust Company
       - Privatbank
@@ -11624,6 +11858,7 @@ definitions:
         enum:
           - subscription-ended
           - subscription-trial-ended
+          - subscription-renewed
           - payment-card-expired
           - invoice-past-due
         type: string
@@ -12137,40 +12372,6 @@ definitions:
         description: 'The id of a file upload with the policy materials (may include the cancellation policy, refund policy, and terms of use).'
         type: string
     type: object
-  EMerchantPay:
-    allOf:
-      - $ref: '#/definitions/GatewayAccount'
-      - properties:
-          gatewayConfig:
-            properties:
-              apiKey:
-                description: EMerchantPay Gateway api key
-                format: password
-                type: string
-              clientId:
-                description: EMerchantPay Gateway client ID
-                type: string
-            required:
-              - clientId
-              - apiKey
-            type: object
-          mpi:
-            $ref: '#/definitions/EMerchantPayMpis'
-        required:
-          - gatewayConfig
-        type: object
-    description: EMerchantPay Gateway config
-  EMerchantPayMpis:
-    description: EMerchantPay Mpis
-    discriminator: name
-    properties:
-      name:
-        allOf:
-          - $ref: '#/definitions/MpiName'
-        enum:
-          - Other
-    required:
-      - name
   Email:
     properties:
       email:
@@ -12575,7 +12776,7 @@ definitions:
       - Credorax
       - DataCash
       - Dengi
-      - EMerchantPay
+      - eMerchantPay
       - Flexepin
       - FundSend
       - Forte
@@ -12592,7 +12793,7 @@ definitions:
       - PandaGateway
       - Payeezy
       - PayPal
-      - PayR
+      - Payr
       - Payvision
       - Plugnpay
       - Realex
@@ -12858,6 +13059,7 @@ definitions:
         items:
           allOf:
             - $ref: '#/definitions/InvoiceDiscount'
+        readOnly: true
         type: array
       dueTime:
         allOf:
@@ -13497,7 +13699,7 @@ definitions:
     type: object
   Other:
     allOf:
-      - $ref: '#/definitions/EMerchantPayMpis'
+      - $ref: '#/definitions/eMerchantPayMpis'
       - $ref: '#/definitions/PayvisionMpis'
       - $ref: '#/definitions/VantivLitleMpis'
       - $ref: '#/definitions/WalpayMpis'
@@ -13561,27 +13763,50 @@ definitions:
           - gatewayConfig
         type: object
     description: PayPal Gateway config
-  PayR:
-    allOf:
-      - $ref: '#/definitions/GatewayAccount'
-      - properties:
-          gatewayConfig:
-            properties:
-              clientId:
-                description: PayR Gateway client ID
-                type: string
-              secretWord:
-                description: PayR Gateway secret word
-                format: password
-                type: string
-            required:
-              - clientId
-              - secretWord
-            type: object
-        required:
-          - gatewayConfig
-        type: object
-    description: PayR Gateway config
+  PayPalAccount:
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      billingContactId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The Contact ID. Required if PayPal account is not created from Token
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: PayPal Account created time
+      customFields:
+        $ref: '#/definitions/ResourceCustomFields'
+      customerId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The Customer's ID.
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The PayPal identifier string
+        readOnly: true
+      status:
+        description: PayPal Account status
+        enum:
+          - inactive
+          - active
+          - deactivated
+        type: string
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: PayPal Account updated time
+      username:
+        description: PayPal username.
+        type: string
+    type: object
   Payeezy:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -13994,6 +14219,27 @@ definitions:
         description: Routing Number
         type: integer
     type: object
+  Payr:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              clientId:
+                description: Payr Gateway client ID
+                type: string
+              secretWord:
+                description: Payr Gateway secret word
+                format: password
+                type: string
+            required:
+              - clientId
+              - secretWord
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Payr Gateway config
   Payvision:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -16219,7 +16465,7 @@ definitions:
       - properties:
           gatewayConfig:
             properties:
-              businessCaseSignature:
+              businessSignature:
                 description: Wirecard Gateway merchant business case signature
                 format: password
                 type: string
@@ -16236,7 +16482,7 @@ definitions:
             required:
               - merchantUsername
               - merchantPassword
-              - businessCaseSignature
+              - businessSignature
               - delay
             type: object
           mpi:
@@ -16491,6 +16737,40 @@ definitions:
           - quantity
         type: object
     description: discounts-per-redemption restrictions
+  eMerchantPay:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiKey:
+                description: eMerchantPay Gateway api key
+                format: password
+                type: string
+              clientId:
+                description: eMerchantPay Gateway client ID
+                type: string
+            required:
+              - clientId
+              - apiKey
+            type: object
+          mpi:
+            $ref: '#/definitions/eMerchantPayMpis'
+        required:
+          - gatewayConfig
+        type: object
+    description: eMerchantPay Gateway config
+  eMerchantPayMpis:
+    description: eMerchantPay Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - Other
+    required:
+      - name
   equals:
     allOf:
       - $ref: '#/definitions/Condition'

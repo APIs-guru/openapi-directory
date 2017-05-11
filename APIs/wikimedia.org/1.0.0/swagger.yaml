@@ -684,6 +684,9 @@ definitions:
         description: The page language direction code
         example: ltr
         type: string
+      displaytitle:
+        description: The page title how it should be shown to the user
+        type: string
       extract:
         description: First several sentences of an article in plain text
         type: string
@@ -693,6 +696,9 @@ definitions:
         type: string
       originalimage:
         $ref: '#/definitions/originalimage'
+      pageid:
+        description: The page ID
+        type: integer
       thumbnail:
         $ref: '#/definitions/thumbnail'
       timestamp:

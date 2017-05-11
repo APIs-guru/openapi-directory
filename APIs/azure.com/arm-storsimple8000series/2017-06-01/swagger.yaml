@@ -40,6 +40,7 @@ parameters:
     name: api-version
     required: true
     type: string
+    x-ms-skip-url-encoding: true
   managerNameParameter:
     description: The manager name
     in: path
@@ -49,6 +50,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+    x-ms-skip-url-encoding: true
   resourceGroupNameParameter:
     description: The resource group name
     in: path
@@ -56,12 +58,14 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+    x-ms-skip-url-encoding: true
   subscriptionIdParameter:
     description: The subscription id
     in: path
     name: subscriptionId
     required: true
     type: string
+    x-ms-skip-url-encoding: true
 paths:
   /providers/Microsoft.StorSimple/operations:
     get:
@@ -171,6 +175,196 @@ paths:
             $ref: '#/definitions/Manager'
       tags:
         - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords':
+    get:
+      deprecated: false
+      description: Retrieves all the access control records in a manager.
+      operationId: AccessControlRecords_ListByManager
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of access control records.
+          schema:
+            $ref: '#/definitions/AccessControlRecordList'
+      tags:
+        - AccessControlRecords
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords/{accessControlRecordName}':
+    delete:
+      deprecated: false
+      description: Deletes the access control record.
+      operationId: AccessControlRecords_Delete
+      parameters:
+        - description: The name of the access control record to delete.
+          in: path
+          name: accessControlRecordName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to delete the access control record.
+        '204':
+          description: Successfully deleted the access control record.
+      tags:
+        - AccessControlRecords
+      x-ms-long-running-operation: true
+    get:
+      deprecated: false
+      description: Returns the properties of the specified access control record name.
+      operationId: AccessControlRecords_Get
+      parameters:
+        - description: Name of access control record to be fetched.
+          in: path
+          name: accessControlRecordName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The access control record.
+          schema:
+            $ref: '#/definitions/AccessControlRecord'
+      tags:
+        - AccessControlRecords
+    put:
+      deprecated: false
+      description: Creates or Updates an access control record.
+      operationId: AccessControlRecords_CreateOrUpdate
+      parameters:
+        - description: The name of the access control record.
+          in: path
+          name: accessControlRecordName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The access control record to be added or updated.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/AccessControlRecord'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the access control record.
+          schema:
+            $ref: '#/definitions/AccessControlRecord'
+        '202':
+          description: Accepted the request to create or update the access control record.
+      tags:
+        - AccessControlRecords
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/bandwidthSettings':
+    get:
+      deprecated: false
+      description: Retrieves all the bandwidth setting in a manager.
+      operationId: BandwidthSettings_ListByManager
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of bandwidth settings.
+          schema:
+            $ref: '#/definitions/BandwidthSettingList'
+      tags:
+        - BandwidthSettings
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/bandwidthSettings/{bandwidthSettingName}':
+    delete:
+      deprecated: false
+      description: Deletes the bandwidth setting
+      operationId: BandwidthSettings_Delete
+      parameters:
+        - description: The name of the bandwidth setting.
+          in: path
+          name: bandwidthSettingName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to delete the bandwidth setting.
+        '204':
+          description: Successfully deleted the bandwidth setting.
+      tags:
+        - BandwidthSettings
+      x-ms-long-running-operation: true
+    get:
+      deprecated: false
+      description: Returns the properties of the specified bandwidth setting name.
+      operationId: BandwidthSettings_Get
+      parameters:
+        - description: The name of bandwidth setting to be fetched.
+          in: path
+          name: bandwidthSettingName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The bandwidth setting.
+          schema:
+            $ref: '#/definitions/BandwidthSetting'
+      tags:
+        - BandwidthSettings
+    put:
+      deprecated: false
+      description: Creates or updates the bandwidth setting
+      operationId: BandwidthSettings_CreateOrUpdate
+      parameters:
+        - description: The bandwidth setting name.
+          in: path
+          name: bandwidthSettingName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The bandwidth setting to be added or updated.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/BandwidthSetting'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the bandwidth setting.
+          schema:
+            $ref: '#/definitions/BandwidthSetting'
+        '202':
+          description: Accepted the request to create or update the bandwidth setting.
+      tags:
+        - BandwidthSettings
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/configureDevice':
     post:
       deprecated: false
@@ -205,7 +399,7 @@ paths:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
-        - description: Specify $expand=details to populate additional fields related to the device.
+        - description: Specify $expand=details to populate additional fields related to the device or $expand=rolloverdetails to populate additional fields related to the service data encryption key rollover on device
           in: query
           name: $expand
           required: false
@@ -229,6 +423,7 @@ paths:
           name: deviceName
           required: true
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
@@ -251,11 +446,12 @@ paths:
           name: deviceName
           required: true
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
-        - description: Specify $expand=details to populate additional fields related to the device.
+        - description: Specify $expand=details to populate additional fields related to the device or $expand=rolloverdetails to populate additional fields related to the service data encryption key rollover on device
           in: query
           name: $expand
           required: false
@@ -277,6 +473,7 @@ paths:
           name: deviceName
           required: true
           type: string
+          x-ms-skip-url-encoding: true
         - description: Patch representation of the device.
           in: body
           name: parameters
@@ -305,6 +502,7 @@ paths:
           name: deviceName
           required: true
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
@@ -328,6 +526,7 @@ paths:
           name: deviceName
           required: true
           type: string
+          x-ms-skip-url-encoding: true
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
@@ -339,6 +538,292 @@ paths:
             $ref: '#/definitions/PublicKey'
       tags:
         - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers':
+    get:
+      deprecated: false
+      description: Gets all the volume containers in a device.
+      operationId: VolumeContainers_ListByDevice
+      parameters:
+        - description: The name of the device.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The VolumeContainer List
+          schema:
+            $ref: '#/definitions/VolumeContainerList'
+      tags:
+        - VolumeContainers
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}':
+    delete:
+      deprecated: false
+      description: Deletes the volume container.
+      operationId: VolumeContainers_Delete
+      parameters:
+        - description: The name of the device.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The name of the volume container.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to delete the Volume Container.
+        '204':
+          description: Successfully deleted Volume Container.
+      tags:
+        - VolumeContainers
+      x-ms-long-running-operation: true
+    get:
+      deprecated: false
+      description: Gets the properties of the specified volume container name.
+      operationId: VolumeContainers_Get
+      parameters:
+        - description: The name of the device.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The name of the volume container.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The VolumeContainer.
+          schema:
+            $ref: '#/definitions/VolumeContainer'
+      tags:
+        - VolumeContainers
+    put:
+      deprecated: false
+      description: Creates or updates the volume container.
+      operationId: VolumeContainers_CreateOrUpdate
+      parameters:
+        - description: The name of the device.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The name of the volume container.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The volume container to be added or updated.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/VolumeContainer'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the Volume Container.
+          schema:
+            $ref: '#/definitions/VolumeContainer'
+        '202':
+          description: Accepted the request to create or update the Volume Container
+      tags:
+        - VolumeContainers
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes':
+    get:
+      deprecated: false
+      description: Retrieves all the volumes in a volume container.
+      operationId: Volumes_ListByVolumeContainer
+      parameters:
+        - description: The device name.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The volume container name.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of volumes.
+          schema:
+            $ref: '#/definitions/VolumeList'
+      tags:
+        - Volumes
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes/{volumeName}':
+    delete:
+      deprecated: false
+      description: Deletes the volume.
+      operationId: Volumes_Delete
+      parameters:
+        - description: The device name.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The volume container name.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The volume name.
+          in: path
+          name: volumeName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to create or update the volume.
+        '204':
+          description: Successfully deleted the volume.
+      tags:
+        - Volumes
+      x-ms-long-running-operation: true
+    get:
+      deprecated: false
+      description: Returns the properties of the specified volume name.
+      operationId: Volumes_Get
+      parameters:
+        - description: The device name.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The volume container name.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The volume name.
+          in: path
+          name: volumeName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The volume.
+          schema:
+            $ref: '#/definitions/Volume'
+      tags:
+        - Volumes
+    put:
+      deprecated: false
+      description: Creates or updates the volume.
+      operationId: Volumes_CreateOrUpdate
+      parameters:
+        - description: The device name.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The volume container name.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The volume name.
+          in: path
+          name: volumeName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Volume to be created or updated.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Volume'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the volume.
+          schema:
+            $ref: '#/definitions/Volume'
+        '202':
+          description: Accepted the request to create or update the volume.
+      tags:
+        - Volumes
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumes':
+    get:
+      deprecated: false
+      description: Retrieves all the volumes in a device.
+      operationId: Volumes_ListByDevice
+      parameters:
+        - description: The device name.
+          in: path
+          name: deviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of volumes.
+          schema:
+            $ref: '#/definitions/VolumeList'
+      tags:
+        - Volumes
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/encryptionSettings/default':
     get:
       deprecated: false
@@ -504,7 +989,163 @@ paths:
             $ref: '#/definitions/Key'
       tags:
         - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials':
+    get:
+      deprecated: false
+      description: Gets all the storage account credentials in a manager.
+      operationId: StorageAccountCredentials_ListByManager
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of storage account credentials.
+          schema:
+            $ref: '#/definitions/StorageAccountCredentialList'
+      tags:
+        - StorageAccountCredentials
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials/{storageAccountCredentialName}':
+    delete:
+      deprecated: false
+      description: Deletes the storage account credential.
+      operationId: StorageAccountCredentials_Delete
+      parameters:
+        - description: The name of the storage account credential.
+          in: path
+          name: storageAccountCredentialName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to delete the storage account credential.
+        '204':
+          description: Successfully deleted the storage account credential.
+      tags:
+        - StorageAccountCredentials
+      x-ms-long-running-operation: true
+    get:
+      deprecated: false
+      description: Gets the properties of the specified storage account credential name.
+      operationId: StorageAccountCredentials_Get
+      parameters:
+        - description: The name of storage account credential to be fetched.
+          in: path
+          name: storageAccountCredentialName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The storage account credential.
+          schema:
+            $ref: '#/definitions/StorageAccountCredential'
+      tags:
+        - StorageAccountCredentials
+    put:
+      deprecated: false
+      description: Creates or updates the storage account credential.
+      operationId: StorageAccountCredentials_CreateOrUpdate
+      parameters:
+        - description: The storage account credential name.
+          in: path
+          name: storageAccountCredentialName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The storage account credential to be added or updated.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/StorageAccountCredential'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the storage account credential.
+          schema:
+            $ref: '#/definitions/StorageAccountCredential'
+        '202':
+          description: Accepted the request to create or update the storage account credential.
+      tags:
+        - StorageAccountCredentials
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials/{storageAccountCredentialName}/listAccessKey':
+    post:
+      deprecated: false
+      description: Returns the encrypted storage account access key.
+      operationId: StorageAccountCredentials_ListAccessKey
+      parameters:
+        - description: Name of the storage account credential.
+          in: path
+          name: storageAccountCredentialName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The encrypted storage account access key.
+          schema:
+            $ref: '#/definitions/AsymmetricEncryptedSecret'
+      tags:
+        - StorageAccountCredentials
+      x-ms-pageable: {}
 definitions:
+  AccessControlRecord:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The access control record
+    properties:
+      properties:
+        $ref: '#/definitions/AccessControlRecordProperties'
+        description: Properties of AccessControlRecord
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  AccessControlRecordList:
+    description: Collection of AccessControlRecords
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/AccessControlRecord'
+        type: array
+    required:
+      - value
+    type: object
+  AccessControlRecordProperties:
+    description: Properties of access control record
+    properties:
+      initiatorName:
+        description: The Iscsi initiator name (IQN)
+        type: string
+      volumeCount:
+        description: The number of volumes using this Access Control Record
+        format: int32
+        readOnly: true
+        type: integer
+    required:
+      - initiatorName
+    type: object
   AsymmetricEncryptedSecret:
     description: Represent the secrets intended for encryption with asymmetric key pair.
     properties:
@@ -527,17 +1168,6 @@ definitions:
     required:
       - value
       - encryptionAlgorithm
-    type: object
-  AsymmetricEncryptedSecretList:
-    description: Collection of asymmetric encrypted secret entities
-    properties:
-      value:
-        description: The value.
-        items:
-          $ref: '#/definitions/AsymmetricEncryptedSecret'
-        type: array
-    required:
-      - value
     type: object
   AvailableProviderOperation:
     description: Represents available provider operation.
@@ -569,7 +1199,7 @@ definitions:
         description: The localized friendly form of the resource provider name - it is expected to also include the publisher/company responsible. It should use Title Casing and begin with 'Microsoft' for 1st party services.
         type: string
       resource:
-        description: 'The localized friendly form of the resource type related to this action/operation - it should match the public documentation for the resource provider. It should use Title Casing – for examples, please refer to the ''name'' section.'
+        description: 'The localized friendly form of the resource type related to this action/operation - it should match the public documentation for the resource provider. It should use Title Casing - for examples, please refer to the ''name'' section'
         type: string
     type: object
   AvailableProviderOperationList:
@@ -589,6 +1219,80 @@ definitions:
   AvailableProviderOperationProperties:
     description: Represents properties of AvailableProviderOperation
     properties: {}
+    type: object
+  BandwidthRateSettingProperties:
+    description: The bandwidth rate properties.
+    properties:
+      schedules:
+        description: The schedules.
+        items:
+          $ref: '#/definitions/BandwidthSchedule'
+        type: array
+      volumeCount:
+        description: The number of volumes that uses the Bandwidth Setting.
+        format: int32
+        readOnly: true
+        type: integer
+    required:
+      - schedules
+    type: object
+  BandwidthSchedule:
+    description: The schedule for a given Bandwidth setting.
+    properties:
+      days:
+        description: The days of the week.
+        items:
+          enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: DayOfWeek
+        type: array
+      rateInMbps:
+        description: The rate in MBPS.
+        format: int32
+        type: integer
+      start:
+        $ref: '#/definitions/Time'
+        description: The start time of the schdule.
+      stop:
+        $ref: '#/definitions/Time'
+        description: The stop time of the schdule.
+    required:
+      - start
+      - stop
+      - rateInMbps
+      - days
+    type: object
+  BandwidthSetting:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The bandwidth setting.
+    properties:
+      properties:
+        $ref: '#/definitions/BandwidthRateSettingProperties'
+        description: The properties of the Bandwidth setting.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  BandwidthSettingList:
+    description: Collection of bandwidth setting entities
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/BandwidthSetting'
+        type: array
+    required:
+      - value
     type: object
   BaseModel:
     description: Represents the base class for all other ARM object models
@@ -648,6 +1352,26 @@ definitions:
       - friendlyName
       - currentDeviceName
       - timeZone
+    type: object
+  DNSSettings:
+    description: The DNS(Domain Name Server) settings of a device.
+    properties:
+      primaryDnsServer:
+        description: The primary IPv4 DNS server for the device
+        type: string
+      primaryIpv6DnsServer:
+        description: The primary IPv6 DNS server for the device
+        type: string
+      secondaryDnsServers:
+        description: The secondary IPV4 DNS server for the device
+        items:
+          type: string
+        type: array
+      secondaryIpv6DnsServers:
+        description: The secondary IPV6 DNS server for the device
+        items:
+          type: string
+        type: array
     type: object
   Device:
     allOf:
@@ -789,6 +1513,9 @@ definitions:
         description: Storage in bytes that has been provisioned on the device for tiered volumes
         format: int64
         type: integer
+      rolloverDetails:
+        $ref: '#/definitions/DeviceRolloverDetails'
+        description: Additional details for service data encryption key rollover
       serialNumber:
         description: The serial number.
         type: string
@@ -845,6 +1572,38 @@ definitions:
       - deviceType
       - activeController
       - friendlySoftwareVersion
+    type: object
+  DeviceRolloverDetails:
+    description: Additional device details for Service data encryption key rollover
+    properties:
+      authorizationEligibility:
+        description: Eligibility status of device for Service data encryption key rollover ( i.e. number of volumes)
+        enum:
+          - InEligible
+          - Eligible
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AuthorizationEligibility
+      authorizationStatus:
+        description: The authorization status of the device for service data encryption key rollover.
+        enum:
+          - Disabled
+          - Enabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AuthorizationStatus
+      inEligibilityReason:
+        description: InEligibilityReason of device in case it's not eligible for service data encryption key rollover
+        enum:
+          - DeviceNotOnline
+          - NotSupportedAppliance
+          - RolloverPending
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: InEligibilityCategory
     type: object
   EncryptionSettings:
     allOf:
@@ -1051,6 +1810,56 @@ definitions:
           type: string
         type: array
     type: object
+  StorageAccountCredential:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The storage account credential.
+    properties:
+      properties:
+        $ref: '#/definitions/StorageAccountCredentialProperties'
+        description: The storage account credential properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  StorageAccountCredentialList:
+    description: Collection of Storage account credential entities
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/StorageAccountCredential'
+        type: array
+    required:
+      - value
+    type: object
+  StorageAccountCredentialProperties:
+    description: The storage account credential properties.
+    properties:
+      accessKey:
+        $ref: '#/definitions/AsymmetricEncryptedSecret'
+        description: The details of the storage account password
+      endPoint:
+        description: The storage endpoint
+        type: string
+      sslStatus:
+        description: SSL needs to be enabled or not
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SslStatus
+      volumesCount:
+        description: The count of volumes using this storage account credential.
+        format: int32
+        readOnly: true
+        type: integer
+    required:
+      - endPoint
+      - sslStatus
+    type: object
   SymmetricEncryptedSecret:
     description: Represents secrets encrypted using Symmetric Encryption Key.
     properties:
@@ -1073,4 +1882,204 @@ definitions:
     required:
       - value
       - encryptionAlgorithm
+    type: object
+  Time:
+    description: The Time.
+    properties:
+      hours:
+        description: The hour.
+        format: int32
+        maximum: 23
+        minimum: 0
+        type: integer
+      minutes:
+        description: The minute.
+        format: int32
+        maximum: 59
+        minimum: 0
+        type: integer
+      seconds:
+        description: The minute.
+        format: int32
+        maximum: 59
+        minimum: 0
+        type: integer
+    required:
+      - hours
+      - minutes
+      - seconds
+    type: object
+  Volume:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The volume
+    properties:
+      properties:
+        $ref: '#/definitions/VolumeProperties'
+        description: Properties of the Volume.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  VolumeContainer:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: Volume Container Interface
+    properties:
+      properties:
+        $ref: '#/definitions/VolumeContainerProperties'
+        description: Volume Container properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  VolumeContainerList:
+    description: Collection of Volume Containers.
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/VolumeContainer'
+        type: array
+    required:
+      - value
+    type: object
+  VolumeContainerProperties:
+    description: Properties of Volume Container.
+    properties:
+      bandWidthRateInMbps:
+        description: BandWidthRate set on VC.
+        format: int32
+        type: integer
+      bandwidthSettingId:
+        description: Id of the BandwidthSetting associated with the Volume Container
+        type: string
+      encryptionKey:
+        $ref: '#/definitions/AsymmetricEncryptedSecret'
+        description: The key used to encrypt data in this volume container. It is required when property 'EncryptionStatus' is "Enabled".
+      encryptionStatus:
+        description: Flag to know whether encryption is enabled or not.
+        enum:
+          - Enabled
+          - Disabled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EncryptionStatus
+      ownerShipStatus:
+        description: 'Owner ship status of Volume Container. Only when the status is "NotOwned", the delete operation on the volume container is permitted.'
+        enum:
+          - Owned
+          - NotOwned
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: OwnerShipStatus
+      storageAccountCredentialId:
+        description: Path Id of Storage Account associated with Volume container.
+        type: string
+      totalCloudStorageUsageInBytes:
+        description: Total Cloud Storage for the Volume Container.
+        format: int64
+        readOnly: true
+        type: integer
+      volumeCount:
+        description: Number of Volumes in volume Container.
+        format: int32
+        readOnly: true
+        type: integer
+    required:
+      - storageAccountCredentialId
+    type: object
+  VolumeList:
+    description: Collection of volumes
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/Volume'
+        type: array
+    required:
+      - value
+    type: object
+  VolumeProperties:
+    description: The properties of Volume
+    properties:
+      accessControlRecordIds:
+        description: The access control records.
+        items:
+          type: string
+        type: array
+      backupPolicyIds:
+        description: The list of backup policy ids in which this volume is part of.
+        items:
+          type: string
+        readOnly: true
+        type: array
+      backupStatus:
+        description: The backup status (Enabled | Disabled).
+        enum:
+          - Enabled
+          - Disabled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupStatus
+      monitoringStatus:
+        description: The monitoring status (Enabled | Disabled).
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: MonitoringStatus
+      operationStatus:
+        description: The entity operation status.
+        enum:
+          - None
+          - Updating
+          - Deleting
+          - Restoring
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: OperationStatus
+      sizeInBytes:
+        description: The size of the volume in bytes
+        format: int64
+        type: integer
+      volumeContainerId:
+        description: The volume container.
+        readOnly: true
+        type: string
+      volumeStatus:
+        description: The volume status (Online | Offline).
+        enum:
+          - Online
+          - Offline
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: VolumeStatus
+      volumeType:
+        description: The volume type.
+        enum:
+          - Tiered
+          - Archival
+          - LocallyPinned
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: VolumeType
+    required:
+      - sizeInBytes
+      - volumeType
+      - accessControlRecordIds
+      - volumeStatus
+      - monitoringStatus
     type: object

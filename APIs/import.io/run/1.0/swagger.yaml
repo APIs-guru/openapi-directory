@@ -88,11 +88,6 @@ paths:
           name: extractorId
           required: true
           type: string
-        - description: The loginSessionId required for authenticated extractors. Only required when running authenticated extractors.
-          in: query
-          name: loginSessionId
-          required: false
-          type: string
       responses:
         '200':
           description: OK

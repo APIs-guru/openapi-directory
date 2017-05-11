@@ -3055,6 +3055,13 @@ definitions:
         description: 'The number of purchased licenses (possibly in multiple purchases). If this field is omitted, then there is no limit on the number of licenses that can be provisioned (for example, if the acquisition kind is "free").'
         format: int32
         type: integer
+      permissions:
+        description: |-
+          The permission approval status of the product. This field is only set if the product is approved. Possible states are: 
+          - "currentApproved", the current set of permissions is approved, but additional permissions will require the administrator to reapprove the product (If the product was approved without specifying the approved permissions setting, then this is the default behavior.), 
+          - "needsReapproval", the product has unapproved permissions. No additional product licenses can be assigned until the product is reapproved, 
+          - "allCurrentAndFutureApproved", the current permissions are approved and any future permission updates will be automatically approved without administrator review.
+        type: string
       productId:
         description: 'The ID of the product that the license is for. For example, "app:com.google.android.gm".'
         type: string
@@ -3282,6 +3289,9 @@ definitions:
       newPermissionsEvent:
         $ref: '#/definitions/NewPermissionsEvent'
         description: Notifications about new app permissions.
+      notificationType:
+        description: Type of the notification.
+        type: string
       productApprovalEvent:
         $ref: '#/definitions/ProductApprovalEvent'
         description: Notifications about changes to a product's approval status.
@@ -3457,6 +3467,9 @@ definitions:
       approvalUrlInfo:
         $ref: '#/definitions/ApprovalUrlInfo'
         description: 'The approval URL that was shown to the user. Only the permissions shown to the user with that URL will be accepted, which may not be the product''s entire set of permissions. For example, the URL may only display new permissions from an update after the product was approved, or not include new permissions if the product was updated since the URL was generated.'
+      approvedPermissions:
+        description: 'Sets how new permission requests for the product are handled. "allPermissions" automatically approves all current and future permissions for the product. "currentPermissionsOnly" approves the current set of permissions for the product, but any future permissions added through updates will require manual reapproval. If not specified, only the current set of permissions will be approved.'
+        type: string
     type: object
   ProductsGenerateApprovalUrlResponse:
     properties:

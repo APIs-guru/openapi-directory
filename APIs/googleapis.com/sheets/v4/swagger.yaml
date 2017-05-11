@@ -37,6 +37,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
+      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
       'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
       'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
       'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
@@ -47,6 +48,7 @@ securityDefinitions:
     flow: accessCode
     scopes:
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
+      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
       'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
       'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
       'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
@@ -165,6 +167,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
           Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
@@ -224,6 +230,10 @@ paths:
             - 'https://www.googleapis.com/auth/drive'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
           Oauth2c:
@@ -298,6 +308,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
           Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
@@ -366,6 +380,10 @@ paths:
             - 'https://www.googleapis.com/auth/drive'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
           Oauth2c:
@@ -464,6 +482,10 @@ paths:
             - 'https://www.googleapis.com/auth/drive'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
           Oauth2c:
@@ -573,6 +595,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
           Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
@@ -626,6 +652,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
           Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
@@ -673,6 +703,10 @@ paths:
             - 'https://www.googleapis.com/auth/drive'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
           Oauth2c:
@@ -745,6 +779,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
@@ -815,6 +853,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
           Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
@@ -877,6 +919,10 @@ paths:
             - 'https://www.googleapis.com/auth/drive'
           Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
           Oauth2c:
@@ -1624,7 +1670,9 @@ definitions:
       hyperlink:
         description: |-
           A hyperlink this cell points to, if any.
-          This field is read-only.  (To set it, use a `=HYPERLINK` formula.)
+          This field is read-only.  (To set it, use a `=HYPERLINK` formula
+          in the userEnteredValue.formulaValue
+          field.)
         type: string
       note:
         description: Any note on the cell.

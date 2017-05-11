@@ -320,12 +320,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a particular instance configuration.
-      operationId: spanner.projects.instanceConfigs.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: spanner.projects.instances.operations.get
       parameters:
-        - description: |-
-            Required. The name of the requested instance configuration. Values are of
-            the form `projects/<project>/instanceConfigs/<config>`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -335,7 +336,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/InstanceConfig'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1267,7 +1268,7 @@ definitions:
                 ]
               },
               {
-                "service": "fooservice@googleapis.com"
+                "service": "fooservice.googleapis.com"
                 "audit_log_configs": [
                   {
                     "log_type": "DATA_READ",
@@ -1529,6 +1530,8 @@ definitions:
           Required. A `CREATE DATABASE` statement, which specifies the ID of the
           new database.  The database ID must conform to the regular expression
           `a-z*[a-z0-9]` and be between 2 and 30 characters in length.
+          If the database ID is a reserved word or if it contains a hyphen, the
+          database ID must be enclosed in backticks (`` ` ``).
         type: string
       extraStatements:
         description: |-

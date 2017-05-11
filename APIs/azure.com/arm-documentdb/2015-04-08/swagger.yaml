@@ -526,8 +526,8 @@ paths:
               body: {}
         DocumentDBDatabaseAccountListConnectionStringsMongo:
           parameters:
+            accountName: mongo-ddb1
             api-version: '2015-04-08'
-            name: mongo-ddb1
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -635,6 +635,7 @@ definitions:
           - Session
           - BoundedStaleness
           - Strong
+          - ConsistentPrefix
         type: string
         x-ms-enum:
           modelAsString: false
@@ -715,6 +716,9 @@ definitions:
         description: The consistency policy for the DocumentDB account.
       databaseAccountOfferType:
         $ref: '#/definitions/DatabaseAccountOfferType'
+      enableAutomaticFailover:
+        description: Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
+        type: boolean
       ipRangeFilter:
         $ref: '#/definitions/IPRangeFilter'
         description: 'DocumentDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.'
@@ -790,6 +794,9 @@ definitions:
         description: The connection endpoint for the DocumentDB database account.
         readOnly: true
         type: string
+      enableAutomaticFailover:
+        description: Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
+        type: boolean
       failoverPolicies:
         description: An array that contains the regions ordered by their failover priorities.
         items:
