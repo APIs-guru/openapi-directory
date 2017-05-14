@@ -23,9 +23,6 @@ info:
       converter:
         url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
-    - format: swagger
-      version: '2.0'
-      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/organizations/2016-11-28/swagger.yaml'
       x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
@@ -288,7 +285,7 @@ paths:
   '/#CreateAccount':
     post:
       operationId: CreateAccount
-      description: '<p>Creates an AWS account that is automatically a member of the organization whose credentials made the request. This is an asynchronous request that AWS performs in the background. If you want to check the status of the request later, you need the <code>OperationId</code> response element from this operation to provide as a parameter to the <a>DescribeCreateAccountStatus</a> operation.</p> <p>AWS Organizations preconfigures the new member account with a role (named <code>OrganizationAccountAccessRole</code> by default) that grants administrator permissions to the new account. Principals in the master account can assume the role. AWS Organizations clones the company name and address information for the new account from the organization''s master account.</p> <p>For more information about creating accounts, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html">Creating an AWS Account in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p> <important> <p>You cannot remove accounts that are created with this operation from an organization. That also means that you cannot delete an organization that contains an account that is created with this operation.</p> </important> <note> <p>When you create a member account with this operation, the account is created with the <b>IAM User and Role Access to Billing Information</b> switch enabled. This allows IAM users and roles that are granted appropriate permissions to view billing information. If this is disabled, then only the account root user can access billing information. For information about how to disable this for an account, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html">Granting Access to Your Billing Information and Tools</a>.</p> </note> <p>This operation can be called only from the organization''s master account.</p>'
+      description: '<p>Creates an AWS account that is automatically a member of the organization whose credentials made the request. This is an asynchronous request that AWS performs in the background. If you want to check the status of the request later, you need the <code>OperationId</code> response element from this operation to provide as a parameter to the <a>DescribeCreateAccountStatus</a> operation.</p> <p>AWS Organizations preconfigures the new member account with a role (named <code>OrganizationAccountAccessRole</code> by default) that grants administrator permissions to the new account. Principals in the master account can assume the role. AWS Organizations clones the company name and address information for the new account from the organization''s master account.</p> <p>For more information about creating accounts, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html">Creating an AWS Account in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p> <important> <p>You cannot remove accounts that are created with this operation from an organization. That also means that you cannot delete an organization that contains an account that is created with this operation.</p> </important> <note> <p>When you create a member account with this operation, you can choose whether to create the account with the <b>IAM User and Role Access to Billing Information</b> switch enabled. If you enable it, IAM users and roles that have appropriate permissions can view billing information for the account. If you disable this, then only the account root user can access billing information. For information about how to disable this for an account, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html">Granting Access to Your Billing Information and Tools</a>.</p> </note> <p>This operation can be called only from the organization''s master account.</p>'
       responses:
         '200':
           description: Success
@@ -1380,6 +1377,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListAccountsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1429,6 +1436,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListAccountsForParentRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1478,6 +1495,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListChildrenRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1523,6 +1550,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListCreateAccountStatusRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1564,6 +1601,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListHandshakesForAccountRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1609,6 +1656,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListHandshakesForOrganizationRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1658,6 +1715,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListOrganizationalUnitsForParentRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1707,6 +1774,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListParentsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1752,6 +1829,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListPoliciesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1801,6 +1888,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListPoliciesForTargetRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1846,6 +1943,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListRootsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1895,6 +2002,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTargetsForPolicyRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2212,6 +2329,9 @@ definitions:
       Arn:
         $ref: '#/definitions/AccountArn'
         description: '<p>The Amazon Resource Name (ARN) of the account.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
+      Email:
+        $ref: '#/definitions/Email'
+        description: '<p>The email address associated with the AWS account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for this parameter is a string of characters that represents a standard Internet email address.</p>'
       Name:
         $ref: '#/definitions/AccountName'
         description: '<p>The friendly name of the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
@@ -2369,7 +2489,7 @@ definitions:
         $ref: '#/definitions/ExceptionMessage'
       Reason:
         $ref: '#/definitions/ConstraintViolationExceptionReason'
-    description: 'Performing this operation violates a minimum or maximum value limit. For example, attempting to removing the last SCP from an OU or root, inviting or creating too many accounts to the organization, or attaching too many policies to an account, OU, or root.'
+    description: '<p>Performing this operation violates a minimum or maximum value limit. For example, attempting to removing the last SCP from an OU or root, inviting or creating too many accounts to the organization, or attaching too many policies to an account, OU, or root. This exception includes a reason that contains additional information about the violated limit:</p> <p/> <ul> <li> <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number of accounts in an organization. <b>Note</b>: deleted and closed accounts still count toward your limit.</p> </li> <li> <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of handshakes you can send in one day.</p> </li> <li> <p>OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of organizational units you can have in an organization.</p> </li> <li> <p>OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an organizational unit tree that is too many levels deep.</p> </li> <li> <p>POLICY_NUMBER_LIMIT_EXCEEDED. You attempted to exceed the number of policies that you can have in an organization.</p> </li> <li> <p>MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed the number of policies of a certain type that can be attached to an entity at one time.</p> </li> <li> <p>MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy from an entity that would cause the entity to have fewer than the minimum number of policies of a certain type required.</p> </li> <li> <p>ACCOUNT_CANNOT_LEAVE_ORGANIZATION: You attempted to remove an account from an organization that was created from within organizations.</p> </li> <li> <p>MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with this account, you first must associate a payment instrument, such as a credit card, with the account.</p> </li> <li> <p>MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this operation with this member account, you first must associate a payment instrument, such as a credit card, with the account.</p> </li> <li> <p>ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of accounts that you can create in one day.</p> </li> <li> <p>MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in this organization, you first must migrate the organization''s master account to the marketplace that corresponds to the master account''s address. For example, accounts with India addresses must be associated with the AISPL marketplace. All accounts in an organization must be associated with the same marketplace.</p> </li> </ul>'
   ConstraintViolationExceptionReason:
     type: string
     enum:
@@ -2382,13 +2502,16 @@ definitions:
       - MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED
       - ACCOUNT_CANNOT_LEAVE_ORGANIZATION
       - MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED
+      - MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED
       - ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED
+      - MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE
   CreateAccountFailureReason:
     type: string
     enum:
       - ACCOUNT_LIMIT_EXCEEDED
       - EMAIL_ALREADY_EXISTS
       - INVALID_ADDRESS
+      - INVALID_EMAIL
       - INTERNAL_FAILURE
   CreateAccountRequest:
     type: object
@@ -2410,7 +2533,7 @@ definitions:
         description: '<p>(Optional)</p> <p>The name of an IAM role that Organizations automatically preconfigures in the new member account. This role trusts the master account, allowing users in the master account to assume the role, as permitted by the master account administrator. The role has administrator permissions in the new member account.</p> <p>If you do not specify this parameter, the role name defaults to <code>OrganizationAccountAccessRole</code>.</p> <p>For more information about how to use this role to access the member account, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role">Accessing and Administering the Member Accounts in Your Organization</a> in the <i>AWS Organizations User Guide</i>, and steps 2 and 3 in <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html">Tutorial: Delegate Access Across AWS Accounts Using IAM Roles</a> in the <i>IAM User Guide</i>.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of characters that can consist of uppercase letters, lowercase letters, digits with no spaces, and any of the following characters: =,.@-</p>'
       IamUserAccessToBilling:
         $ref: '#/definitions/IAMUserAccessToBilling'
-        description: 'If set to <code>ALLOW</code>, the new account enables IAM users to access account billing information <i>if</i> they have the required permissions. If set to <code>DENY</code>, then only the root user of the new account can access account billing information. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate">Activating Access to the Billing and Cost Management Console</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
+        description: '<p>If set to <code>ALLOW</code>, the new account enables IAM users to access account billing information <i>if</i> they have the required permissions. If set to <code>DENY</code>, then only the root user of the new account can access account billing information. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate">Activating Access to the Billing and Cost Management Console</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> <p>If you do not specify this parameter, the value defaults to ALLOW, and IAM users and roles with the required permissions can access billing information for the new account.</p>'
   CreateAccountRequestId:
     type: string
     pattern: '^car-[a-z0-9]{8,32}$'
@@ -2457,7 +2580,7 @@ definitions:
         description: '<p>If the account was created successfully, the unique identifier (ID) of the new account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
       FailureReason:
         $ref: '#/definitions/CreateAccountFailureReason'
-        description: 'If the request failed, a description of the reason for the failure.'
+        description: '<p>If the request failed, a description of the reason for the failure.</p> <ul> <li> <p>ACCOUNT_LIMIT_EXCEEDED: The account could not be created because you have reached the limit on the number of accounts in your organization.</p> </li> <li> <p>EMAIL_ALREADY_EXISTS: The account could not be created because another AWS account with that email address already exists.</p> </li> <li> <p>INVALID_ADDRESS: The account could not be created because the address you provided is not valid.</p> </li> <li> <p>INVALID_EMAIL: The account could not be created because the email address you provided is not valid.</p> </li> <li> <p>INTERNAL_FAILURE: The account could not be created because of an internal failure. Try again later. If the problem persists, contact Customer Support.</p> </li> </ul>'
     description: Contains the status about a <a>CreateAccount</a> request to create an AWS account in an organization.
   CreateAccountStatusNotFoundException:
     type: object
@@ -2633,6 +2756,7 @@ definitions:
     example:
       Account:
         Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/555555555555'
+        Email: anika@example.com
         Id: '555555555555'
         Name: Beta Account
     properties:
@@ -2842,7 +2966,7 @@ definitions:
     description: A policy with the same name already exists.
   Email:
     type: string
-    pattern: '[\w+=,.-]+@[\w.-]+\.[\w]+'
+    pattern: '[^\s@]+@[^\s@]+\.[^\s@]+'
     minLength: 6
     maxLength: 64
     format: password
@@ -2956,7 +3080,7 @@ definitions:
         $ref: '#/definitions/ExceptionMessage'
       Reason:
         $ref: '#/definitions/HandshakeConstraintViolationExceptionReason'
-    description: The requested operation would violate the constraint identified in the reason code.
+    description: '<p>The requested operation would violate the constraint identified in the reason code.</p> <ul> <li> <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number of accounts in an organization. <b>Note</b>: deleted and closed accounts still count toward your limit.</p> </li> <li> <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of handshakes you can send in one day.</p> </li> <li> <p>ALREADY_IN_AN_ORGANIZATION: The handshake request is invalid because the invited account is already a member of an organization.</p> </li> <li> <p>ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake request is invalid because the organization has already enabled all features.</p> </li> <li> <p>INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES: You cannot issue new invitations to join an organization while it is in the process of enabling all features. You can resume inviting accounts after you finalize the process when all accounts have agreed to the change.</p> </li> <li> <p>PAYMENT_INSTRUMENT_REQUIRED: You cannot complete the operation with an account that does not have a payment instrument, such as a credit card, associated with it.</p> </li> <li> <p>ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: The request failed because the account is from a different marketplace than the accounts in the organization. For example, accounts with India addresses must be associated with the AISPL marketplace. All accounts in an organization must be from the same marketplace.</p> </li> <li> <p>ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You attempted to change the membership of an account too quickly after its previous change.</p> </li> </ul>'
   HandshakeConstraintViolationExceptionReason:
     type: string
     enum:
@@ -3078,7 +3202,7 @@ definitions:
         $ref: '#/definitions/ExceptionMessage'
       Reason:
         $ref: '#/definitions/InvalidInputExceptionReason'
-    description: You provided invalid values for one or more of the request parameters.
+    description: '<p>The requested operation failed because you provided invalid values for one or more of the request parameters. This exception includes a reason that contains additional information about the violated limit:</p> <ul> <li> <p>INVALID_PARTY_TYPE_TARGET: You specified the wrong type of entity (account, organization, or email) as a party.</p> </li> <li> <p>INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid ARN for the organization.</p> </li> <li> <p>INVALID_SYNTAX_POLICY_ID: You specified an invalid policy ID. </p> </li> <li> <p>INVALID_ENUM: You specified a value that is not valid for that parameter.</p> </li> <li> <p>INVALID_LIST_MEMBER: You provided a list to a parameter that contains at least one invalid value.</p> </li> <li> <p>MAX_LENGTH_EXCEEDED: You provided a string parameter that is longer than allowed.</p> </li> <li> <p>MAX_VALUE_EXCEEDED: You provided a numeric parameter that has a larger value than allowed.</p> </li> <li> <p>MIN_LENGTH_EXCEEDED: You provided a string parameter that is shorter than allowed.</p> </li> <li> <p>MIN_VALUE_EXCEEDED: You provided a numeric parameter that has a smaller value than allowed.</p> </li> <li> <p>IMMUTABLE_POLICY: You specified a policy that is managed by AWS and cannot be modified.</p> </li> <li> <p>INVALID_PATTERN: You provided a value that doesn''t match the required pattern.</p> </li> <li> <p>INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn''t match the required pattern.</p> </li> <li> <p>INPUT_REQUIRED: You must include a value for all required parameters.</p> </li> <li> <p>INVALID_PAGINATION_TOKEN: Get the value for the NextToken parameter from the response to a previous call of the operation.</p> </li> <li> <p>MAX_FILTER_LIMIT_EXCEEDED: You can specify only one filter parameter for the operation.</p> </li> <li> <p>MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only between entities in the same root.</p> </li> </ul>'
   InvalidInputExceptionReason:
     type: string
     enum:
@@ -3166,13 +3290,19 @@ definitions:
     example:
       Accounts:
         - Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/333333333333'
+          Email: juan@example.com
           Id: '333333333333'
           JoinedMethod: INVITED
-          JoinedTimestamp: '2016-12-28T14:43:03.39Z'
+          JoinedTimestamp: 1481835795.536
+          Name: Development Account
+          Status: ACTIVE
         - Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/444444444444'
+          Email: anika@example.com
           Id: '444444444444'
           JoinedMethod: INVITED
-          JoinedTimestamp: '2016-12-28T14:47:33.23Z'
+          JoinedTimestamp: 1481835812.143
+          Name: Test Account
+          Status: ACTIVE
     properties:
       Accounts:
         $ref: '#/definitions/Accounts'
@@ -3195,24 +3325,28 @@ definitions:
     example:
       Accounts:
         - Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/111111111111'
+          Email: bill@example.com
           Id: '111111111111'
           JoinedMethod: INVITED
           JoinedTimestamp: 20161215T193015Z
           Name: Master Account
           Status: ACTIVE
         - Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/222222222222'
+          Email: alice@example.com
           Id: '222222222222'
           JoinedMethod: INVITED
           JoinedTimestamp: 20161215T210221Z
           Name: Developer Account
           Status: ACTIVE
         - Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/333333333333'
+          Email: juan@example.com
           Id: '333333333333'
           JoinedMethod: INVITED
           JoinedTimestamp: 20161215T210347Z
           Name: Test Account
           Status: ACTIVE
         - Arn: 'arn:aws:organizations::111111111111:account/o-exampleorgid/444444444444'
+          Email: anika@example.com
           Id: '444444444444'
           JoinedMethod: INVITED
           JoinedTimestamp: 20161215T210332Z

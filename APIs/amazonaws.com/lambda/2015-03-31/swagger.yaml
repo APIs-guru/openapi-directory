@@ -23,9 +23,6 @@ info:
       converter:
         url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
-    - format: swagger
-      version: '2.0'
-      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/lambda/2015-03-31/swagger.yaml'
       x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
@@ -1222,7 +1219,7 @@ definitions:
     properties:
       Variables:
         $ref: '#/definitions/EnvironmentVariables'
-        description: 'The key-value pairs that represent your environment''s configuration settings. The value you specify cannot contain a ",".'
+        description: The key-value pairs that represent your environment's configuration settings.
     description: The parent object that contains your environment's configuration settings.
   EnvironmentError:
     type: object
@@ -1249,7 +1246,6 @@ definitions:
     format: password
   EnvironmentVariableValue:
     type: string
-    pattern: '[^,]*'
     format: password
   EnvironmentVariables:
     type: array
@@ -2015,6 +2011,9 @@ definitions:
       Publish:
         $ref: '#/definitions/Boolean'
         description: This boolean parameter can be used to request AWS Lambda to update the Lambda function and publish a version as an atomic operation.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the <code>CodeSha256</code> hash value the provided code will also be computed and returned in the response.'
     description: <p/>
   UpdateFunctionConfigurationRequest:
     type: object

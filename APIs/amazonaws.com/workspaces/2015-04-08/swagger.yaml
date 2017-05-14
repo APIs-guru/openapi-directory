@@ -23,9 +23,6 @@ info:
       converter:
         url: 'https://github.com/mermade/aws2openapi'
         version: 1.0.0
-    - format: swagger
-      version: '2.0'
-      url: 'https://raw.githubusercontent.com/mermade/openapi-definitions/master/aws/workspaces/2015-04-08/swagger.yaml'
       x-apisguru-direct: true
   x-apiClientRegistration:
     url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
@@ -375,7 +372,7 @@ paths:
   '/#ModifyWorkspaceProperties':
     post:
       operationId: ModifyWorkspaceProperties
-      description: 'Modifies the WorkSpace properties, including the RunningMode and AutoStop time.'
+      description: 'Modifies the WorkSpace properties, including the running mode and AutoStop time.'
       responses:
         '200':
           description: Success
@@ -478,7 +475,7 @@ paths:
   '/#StartWorkspaces':
     post:
       operationId: StartWorkspaces
-      description: Starts the specified WorkSpaces. The API only works with WorkSpaces that have RunningMode configured as AutoStop and the State set to “STOPPED.”
+      description: Starts the specified WorkSpaces. The WorkSpaces must have a running mode of AutoStop and a state of STOPPED.
       responses:
         '200':
           description: Success
@@ -503,7 +500,7 @@ paths:
   '/#StopWorkspaces':
     post:
       operationId: StopWorkspaces
-      description: ' Stops the specified WorkSpaces. The API only works with WorkSpaces that have RunningMode configured as AutoStop and the State set to AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.'
+      description: ' Stops the specified WorkSpaces. The WorkSpaces must have a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.'
       responses:
         '200':
           description: Success
@@ -559,6 +556,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/ExceptionMessage'
+    description: The user is not authorized to access a resource.
   Alias:
     type: string
   BooleanObject:
@@ -869,7 +867,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/ExceptionMessage'
-    description: The specified WorkSpace has an invalid state for this operation.
+    description: The state of the WorkSpace is not valid for this operation.
   IpAddress:
     type: string
   Limit:
@@ -1134,7 +1132,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/ExceptionMessage'
-    description: 'The WorkSpace does not have the supported configuration for this operation. For more information, see the <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide">Amazon WorkSpaces Administration Guide</a>. '
+    description: 'The configuration of this WorkSpace is not supported for this operation. For more information, see the <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/">Amazon WorkSpaces Administration Guide</a>. '
   UserName:
     type: string
     minLength: 1
