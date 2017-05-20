@@ -89,28 +89,28 @@ securityDefinitions:
     type: apiKey
 parameters:
   acceptEncodingOptionalParameter:
+    collectionFormat: csv
     description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size.
     in: header
     items:
-      collectionFormat: csv
       type: string
     name: Accept-Encoding
     required: false
     type: array
   acceptEncodingRequiredParameter:
+    collectionFormat: csv
     description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size.
     in: header
     items:
-      collectionFormat: csv
       type: string
     name: Accept-Encoding
     required: true
     type: array
   acceptLanguageParameter:
+    collectionFormat: csv
     description: Indicates that the client accepts the following languages.
     in: header
     items:
-      collectionFormat: csv
       type: string
     name: Accept-Language
     required: false
@@ -514,10 +514,10 @@ paths:
           name: countryIsoCode
           required: true
           type: string
-        - description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size.
+        - collectionFormat: csv
+          description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size.
           in: header
           items:
-            collectionFormat: csv
             type: string
           name: Accept-Encoding
           required: true
@@ -554,11 +554,11 @@ paths:
           description: Get the list names
           headers:
             Cache-Control:
+              collectionFormat: csv
               description: |
                 Indicates the directive around the caching mechanisms.\
                 For more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
               items:
-                collectionFormat: csv
                 type: string
               type: array
             ETag:
@@ -570,11 +570,11 @@ paths:
           description: The ETag sent in the http header If-None-Match did not change. So you can keep your version.
           headers:
             Cache-Control:
+              collectionFormat: csv
               description: |
                 Indicates the directive around the caching mechanisms.\
                 For more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
               items:
-                collectionFormat: csv
                 type: string
               type: array
             ETag:
@@ -601,17 +601,17 @@ paths:
           description: The list of values
           headers:
             Cache-Control:
+              collectionFormat: csv
               description: |
                 Indicates the directive around the caching mechanisms.\
                 For more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
               items:
-                collectionFormat: csv
                 type: string
               type: array
             Content-Language:
+              collectionFormat: csv
               description: Indicates the language use in the response
               items:
-                collectionFormat: csv
                 type: string
               type: array
             ETag:
@@ -623,11 +623,11 @@ paths:
           description: The ETag sent in the http header If-None-Match did not change. So you can keep your version.
           headers:
             Cache-Control:
+              collectionFormat: csv
               description: |
                 Indicates the directive around the caching mechanisms.\
                 For more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
               items:
-                collectionFormat: csv
                 type: string
               type: array
             ETag:
@@ -1815,10 +1815,10 @@ paths:
       operationId: Catalog_GetCategories
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
-        - description: Indicates that the client accepts that the response will be compressed to reduce traffic size.
+        - collectionFormat: csv
+          description: Indicates that the client accepts that the response will be compressed to reduce traffic size.
           in: header
           items:
-            collectionFormat: csv
             type: string
           name: Accept-Encoding
           required: true
@@ -1828,9 +1828,9 @@ paths:
           description: Categories
           headers:
             Content-Encoding:
+              collectionFormat: csv
               description: Indicates the compression use in the response
               items:
-                collectionFormat: csv
                 type: string
               type: array
           schema:
@@ -3198,10 +3198,10 @@ paths:
       operationId: GetChannelCategories
       parameters:
         - $ref: '#/parameters/channelIdParameter'
-        - description: Indicates that the client accepts that the response will be compressed to reduce traffic size.
+        - collectionFormat: csv
+          description: Indicates that the client accepts that the response will be compressed to reduce traffic size.
           in: header
           items:
-            collectionFormat: csv
             type: string
           name: Accept-Encoding
           required: true
@@ -3211,9 +3211,9 @@ paths:
           description: Channel categories
           headers:
             Content-Encoding:
+              collectionFormat: csv
               description: Indicates the compression use in the response
               items:
-                collectionFormat: csv
                 type: string
               type: array
           schema:
@@ -3228,10 +3228,10 @@ paths:
       operationId: GetChannelColumns
       parameters:
         - $ref: '#/parameters/channelIdParameter'
-        - description: Indicates that the client accepts that the response will be compressed to reduce traffic size.
+        - collectionFormat: csv
+          description: Indicates that the client accepts that the response will be compressed to reduce traffic size.
           in: header
           items:
-            collectionFormat: csv
             type: string
           name: Accept-Encoding
           required: true
@@ -3249,9 +3249,9 @@ paths:
           description: Channel columns
           headers:
             Content-Encoding:
+              collectionFormat: csv
               description: Indicates the compression use in the response
               items:
-                collectionFormat: csv
                 type: string
               type: array
           schema:
@@ -3959,11 +3959,11 @@ paths:
           description: Get the list names
           headers:
             Cache-Control:
+              collectionFormat: csv
               description: |
                 Indicates the directive around the caching mechanisms.\
                 For more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
               items:
-                collectionFormat: csv
                 type: string
               type: array
             ETag:
@@ -3975,11 +3975,11 @@ paths:
           description: The ETag sent in the http header If-None-Match did not change. So you can keep your version.
           headers:
             Cache-Control:
+              collectionFormat: csv
               description: |
                 Indicates the directive around the caching mechanisms.\
                 For more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
               items:
-                collectionFormat: csv
                 type: string
               type: array
             ETag:
@@ -4008,17 +4008,17 @@ paths:
           description: The list of values
           headers:
             Cache-Control:
+              collectionFormat: csv
               description: |
                 Indicates the directive around the caching mechanisms.\
                 For more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
               items:
-                collectionFormat: csv
                 type: string
               type: array
             Content-Language:
+              collectionFormat: csv
               description: Indicates the language use in the response
               items:
-                collectionFormat: csv
                 type: string
               type: array
             ETag:
@@ -4030,11 +4030,11 @@ paths:
           description: The ETag sent in the http header If-None-Match did not change. So you can keep your version.
           headers:
             Cache-Control:
+              collectionFormat: csv
               description: |
                 Indicates the directive around the caching mechanisms.\
                 For more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
               items:
-                collectionFormat: csv
                 type: string
               type: array
             ETag:
@@ -4441,10 +4441,10 @@ paths:
         Previous implmentation of this feature only returned a partial (light) version of the Orders. The purpose of this API is to reduce the number of incoming requests by returning the complete (full) Order and Order Item(s) properties.
       operationId: GetOrderListFull
       parameters:
-        - description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size
+        - collectionFormat: csv
+          description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size
           in: header
           items:
-            collectionFormat: csv
             type: string
           name: Accept-Encoding
           required: true
@@ -11429,9 +11429,12 @@ definitions:
         description: Report filter name
         example: My report filter
         type: string
+      reportType:
+        $ref: '#/definitions/reportType'
     required:
       - reportFilterName
       - reportFilterId
+      - reportType
       - links
     type: object
   reportFilterHeaderLinks:
@@ -11539,6 +11542,7 @@ definitions:
       - ByChannel
       - ByCategory
       - ByProduct
+      - ByDate
     example: ByProduct
     type: string
   rule:
