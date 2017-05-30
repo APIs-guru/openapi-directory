@@ -1,0 +1,454 @@
+swagger: '2.0'
+schemes:
+  - https
+host: upload.box.com
+basePath: /api/2.0
+info:
+  description: The Box Uploads API allows users to add a new file or add a new file version in the same way as uploading file.
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+  title: Box 2.0 Uploads
+  version: '2.0'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://pbs.twimg.com/profile_images/852979584169410562/etZ6V0rx_400x400.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/box/box-openapi/master/v2.0/upload.openapi-v2.json'
+      version: '2.0'
+  x-providerName: box.com
+  x-serviceName: upload
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  OAuth2Security:
+    authorizationUrl: 'https://account.box.com/api/oauth2/authorize'
+    flow: accessCode
+    tokenUrl: 'https://api.box.com/oauth2/token'
+    type: oauth2
+security:
+  - OAuth2Security: []
+paths:
+  /files/content:
+    post:
+      consumes:
+        - multipart/form-data
+      description: Use the Uploads API to allow users to add a new file.
+      externalDocs:
+        url: 'https://docs.box.com/reference#upload-a-file'
+      operationId: uploadFile
+      parameters:
+        - description: File to upload
+          in: formData
+          name: file
+          required: true
+          type: file
+        - description: File attributes
+          in: formData
+          name: attributes
+          required: true
+          type: string
+      responses:
+        '201':
+          description: The upload would be successful
+          schema:
+            $ref: '#/definitions/FileList'
+        '409':
+          description: Name collision occurs
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: File upload error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Upload File
+      tags:
+        - FileUpload
+  '/files/{FILE_ID}/content':
+    post:
+      consumes:
+        - multipart/form-data
+      description: 'This method is used to upload a new version of an existing file in a user’s account. '
+      externalDocs:
+        url: 'https://docs.box.com/reference#upload-a-new-version-of-a-file'
+      operationId: uploadFileVersion
+      parameters:
+        - in: path
+          name: FILE_ID
+          required: true
+          type: string
+        - description: This is in the ‘etag’ field of the file object
+          in: header
+          name: If-Match
+          required: false
+          type: string
+        - description: File attributes
+          in: formData
+          name: attributes
+          type: string
+        - description: File to upload
+          in: formData
+          name: file
+          required: true
+          type: file
+      responses:
+        '200':
+          description: The upload would be successful
+          schema:
+            $ref: '#/definitions/FileList'
+        default:
+          description: File upload error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Upload File Version
+      tags:
+        - FileUpload
+definitions:
+  BoxFile:
+    allOf:
+      - $ref: '#/definitions/FileReference'
+      - properties:
+          collections:
+            items:
+              $ref: '#/definitions/Collection'
+            type: array
+          comment_count:
+            description: The number of comments on a file.
+            format: int64
+            type: integer
+          content_created_at:
+            description: When the content of this file was created (more info).
+            format: date-time
+            type: string
+          content_modified_at:
+            description: When the content of this file was last modified (more info).
+            format: date-time
+            type: string
+          created_at:
+            description: When this file was created on Box’s servers.
+            format: date-time
+            type: string
+          created_by:
+            $ref: '#/definitions/UserReference'
+            description: The user who first created file.
+          description:
+            description: The description of this file.
+            type: string
+          expiring_embed_link:
+            description: An expiring URL for an embedded preview session in an iframe. This URL will expire after 60 seconds and the session will expire after 60 minutes.
+            type: string
+          extension:
+            description: 'Indicates the suffix, when available, on the file. By default, set to an empty string. The suffix usually indicates the encoding (file format) of the file contents or usage.'
+            type: string
+          file_version:
+            $ref: '#/definitions/FileVersionReference'
+          is_package:
+            description: Whether the file is a package. Used for Mac Packages used by iWorks.
+            type: boolean
+          item_status:
+            description: Whether this item is deleted or not.
+            type: string
+          lock:
+            $ref: '#/definitions/Lock'
+          modified_at:
+            description: When this file was last updated on the Box servers.
+            format: date-time
+            type: string
+          modified_by:
+            $ref: '#/definitions/UserReference'
+            description: The user who last updated this file.
+          owned_by:
+            $ref: '#/definitions/UserReference'
+            description: The user who owns this file.
+          parent:
+            $ref: '#/definitions/ItemReference'
+            description: The folder containing this file.
+          path_collection:
+            $ref: '#/definitions/PathCollection'
+            description: 'The path of folders to this file, starting at the root.'
+          permissions:
+            $ref: '#/definitions/FilePermissions'
+          purged_at:
+            description: When this file will be permanently deleted.
+            format: date-time
+            type: string
+          shared_link:
+            $ref: '#/definitions/SharedLink'
+          size:
+            description: Size of this file in bytes.
+            format: int64
+            type: integer
+          tags:
+            description: All tags applied to this file.
+            items:
+              type: string
+            type: array
+          trashed_at:
+            description: When this file was last moved to the trash.
+            format: date-time
+            type: string
+          version_number:
+            description: The version number of the file.
+            type: string
+          watermark_info:
+            $ref: '#/definitions/WatermarkInfo'
+    description: 'File information describe file objects in Box, with attributes like who created the file, when it was last modified, and other information. The actual content of the file itself is accessible through the /files/{id}/content endpoint.'
+    title: File Object
+    type: object
+  Collection:
+    allOf:
+      - $ref: '#/definitions/Reference'
+      - properties:
+          collection_type:
+            description: The type of the collection. This is used to determine the proper visual treatment for Box-internally created collections. Initially only “favorites” collection-type will be supported.
+            enum:
+              - favorites
+            type: string
+          name:
+            description: The name of this collection. The only collection currently available is named “Favorites”
+            type: string
+    description: 'Collections contain information about the items contained inside of them, including files and folders. The only collection available currently is a “Favorites” collection. The contents of the collection are discovered in a similar way in which the contents of a folder are discovered.'
+    title: Collection Object
+    type: object
+  Error:
+    properties:
+      code:
+        type: string
+      context_info:
+        properties:
+          errors:
+            items:
+              properties:
+                message:
+                  type: string
+                name:
+                  type: string
+                reason:
+                  type: string
+              type: object
+            type: array
+        type: object
+      help-url:
+        type: string
+      message:
+        type: string
+      request-id:
+        type: string
+      status:
+        format: int32
+        type: integer
+      type:
+        enum:
+          - error
+        type: string
+    type: object
+  FileList:
+    allOf:
+      - $ref: '#/definitions/Pagination'
+      - properties:
+          entries:
+            items:
+              $ref: '#/definitions/BoxFile'
+            type: array
+    description: A collection Tasks.
+    type: object
+  FilePermissions:
+    description: The permissions that the current user has on the file
+    properties:
+      can_download:
+        type: boolean
+      can_invite_collaborator:
+        type: boolean
+      can_preview:
+        type: boolean
+      can_rename:
+        type: boolean
+      can_set_share_access:
+        type: boolean
+      can_share:
+        type: boolean
+      can_upload:
+        type: boolean
+      cand_delete:
+        type: boolean
+    type: object
+  FileReference:
+    allOf:
+      - $ref: '#/definitions/ItemReference'
+      - properties:
+          sha1:
+            description: The sha1 hash of this file.
+            type: string
+    description: It references either a file or a folder
+    type: object
+  FileVersionReference:
+    allOf:
+      - $ref: '#/definitions/Reference'
+      - properties:
+          sha1:
+            description: The sha1 hash of this file.
+            type: string
+    description: The version information of the file.
+    type: object
+  ItemReference:
+    allOf:
+      - $ref: '#/definitions/Reference'
+      - properties:
+          etag:
+            description: |-
+              A unique string identifying the version of this folder.
+              May be null for some folders such as root or trash.
+            type: string
+          name:
+            description: The name of the folder.
+            type: string
+          sequence_id:
+            description: |-
+              A unique ID for use with the /events endpoint.
+              May be null for some folders such as root or trash.
+            type: string
+    description: It references either a file or a folder
+    type: object
+  Lock:
+    allOf:
+      - $ref: '#/definitions/Reference'
+      - properties:
+          created_at:
+            format: date-time
+            type: string
+          created_by:
+            $ref: '#/definitions/UserReference'
+          expired_at:
+            format: date-time
+            type: string
+          is_download_prevented:
+            type: boolean
+    description: The lock held on the file.
+    type: object
+  Pagination:
+    properties:
+      limit:
+        format: int64
+        type: integer
+      offset:
+        format: int64
+        type: integer
+      order:
+        items:
+          properties:
+            by:
+              type: string
+            direction:
+              type: string
+          type: object
+        type: array
+      total_count:
+        format: int64
+        type: integer
+    type: object
+  PathCollection:
+    allOf:
+      - $ref: '#/definitions/Pagination'
+      - properties:
+          entries:
+            items:
+              $ref: '#/definitions/ItemReference'
+            type: array
+    description: 'The path of folders, starting at the root.'
+    type: object
+  Reference:
+    properties:
+      id:
+        type: string
+      type:
+        enum:
+          - folder
+          - file
+          - user
+          - file_version
+          - lock
+          - collaboration
+          - comment
+          - task
+          - web_link
+          - collection
+          - task_assignment
+          - event
+          - realtime_server
+          - webhook_event
+          - webhook
+          - enterprise
+          - invite
+          - email_alias
+          - group
+          - group_membership
+          - device_pinner
+          - retention_policy
+          - retention_policy_assignment
+          - file_version_retention
+          - legal_hold_policy
+          - legal_hold_policy_assignment
+          - legal_hold
+        type: string
+    type: object
+  SharedLink:
+    properties:
+      access:
+        type: string
+      download_count:
+        format: int64
+        type: integer
+      download_url:
+        type: string
+      effective_access:
+        type: string
+      is_password_enabled:
+        type: boolean
+      password:
+        type: string
+      permissions:
+        $ref: '#/definitions/SharedLinkPermissions'
+      preview_count:
+        format: int64
+        type: integer
+      unshared_at:
+        type: string
+      url:
+        type: string
+      vanity_url:
+        type: string
+    type: object
+  SharedLinkPermissions:
+    properties:
+      can_download:
+        type: boolean
+      can_preview:
+        type: boolean
+    type: object
+  UserReference:
+    description: It references a user
+    properties:
+      id:
+        description: Unqiue string identifying this user.
+        type: string
+      login:
+        description: The email address this user uses to login.
+        type: string
+      name:
+        description: Name of this user
+        type: string
+      type:
+        enum:
+          - user
+        type: string
+    type: object
+  WatermarkInfo:
+    items:
+      properties:
+        is_watermarked:
+          type: boolean
+    type: array
