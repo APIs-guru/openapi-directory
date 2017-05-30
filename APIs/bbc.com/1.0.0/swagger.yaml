@@ -27,7 +27,7 @@ info:
     - contentType: application/json
       converter:
         url: 'https://github.com/mermade/bbcparse'
-        version: 1.2.0
+        version: 1.3.1
       url: 'http://programmes.api.bbc.com/nitro/api'
     - format: swagger
       url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/nitroApi/swagger.json'
@@ -3114,8 +3114,6 @@ definitions:
         $ref: '#/definitions/master_brand_link'
       media_type:
         $ref: '#/definitions/media_type'
-      most_popular:
-        $ref: '#/definitions/most_popular'
       original_version_duration:
         $ref: '#/definitions/original_version_duration'
       partner:
@@ -3523,8 +3521,6 @@ definitions:
         $ref: '#/definitions/master_brand_link'
       media_type:
         $ref: '#/definitions/media_type'
-      most_popular:
-        $ref: '#/definitions/most_popular'
       original_version_duration:
         $ref: '#/definitions/original_version_duration'
       partner:
@@ -4273,13 +4269,6 @@ definitions:
         type: array
       unstable_mixins:
         $ref: '#/definitions/unstable_mixins'
-    type: object
-  most_popular:
-    additionalProperties: false
-    properties:
-      updated_at:
-        format: date-time
-        type: string
     type: object
   music:
     $ref: '#/definitions/item'

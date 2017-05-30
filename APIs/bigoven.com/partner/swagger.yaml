@@ -323,6 +323,25 @@ paths:
       summary: Synchronize the grocery list.  Call this with a POST to /grocerylist/sync
       tags:
         - GroceryList
+  /image/avatar:
+    post:
+      consumes: []
+      deprecated: false
+      operationId: Images_UploadUserAvatar
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/System.Object'
+        '400':
+          description: 'if bad request (e.g., missing parameters)'
+        '401':
+          description: if the user is unknown
+        '415':
+          description: 'if unsupported media type (e.g., bad JPG)'
+      summary: "POST: /image/avatar\r\n             \r\n            Testing with Postman (validated 11/20/2015):\r\n            1) Remove the Content-Type header; add authentication information\r\n            2) On the request, click Body and choose \"form-data\", then add a line item with \"key\" column set to \"file\" and on the right,\r\n            change the type of the input from Text to File.  Browse and choose a JPG."
+      tags:
+        - Images
   /recipe:
     post:
       consumes:
@@ -1208,6 +1227,11 @@ paths:
           name: include_primarycat
           required: false
           type: string
+        - description: 'csv indicating integer values for up to 3 top-level categories -- valid values are 1...11 [appetizers,bread,breakfast,desserts,drinks,maindish,salads,sidedish,soups,marinades,other]'
+          in: query
+          name: exclude_primarycat
+          required: false
+          type: string
         - description: 'A CSV representing up to 3 ingredients to include, e.g., tomatoes,corn%20%starch,chicken'
           in: query
           name: include_ing
@@ -1233,6 +1257,30 @@ paths:
           name: userset
           required: false
           type: string
+        - description: 'Limit to yield of a given number size or greater. Note that cooks usually enter recipes by Servings, but sometimes they are posted by "dozen", etc. This parameter simply specifies the minimum number for that value entered in "yield."'
+          format: double
+          in: query
+          name: servingsMin
+          required: false
+          type: number
+        - description: 'Optional. If supplied, will restrict results to recipes that can be made in {totalMins} or less. (Convert "1 hour, 15 minutes" to 75 before passing in.)'
+          format: int32
+          in: query
+          name: totalMins
+          required: false
+          type: integer
+        - description: 'Optional. If supplied, will restrict results to recipes that can be made with {maxIngredients} ingredients or less'
+          format: int32
+          in: query
+          name: maxIngredients
+          required: false
+          type: integer
+        - description: 'Optional. If supplied, will restrict results to recipes that have at least {minIngredients}'
+          format: int32
+          in: query
+          name: minIngredients
+          required: false
+          type: integer
         - description: integer; results per page
           format: int32
           in: query
@@ -1323,6 +1371,11 @@ paths:
           name: champion
           required: false
           type: integer
+        - description: 'optional, default is false. When set to true, BigOven will attempt to apply synonyms in search (e.g., excluding pork will also exclude bacon)'
+          in: query
+          name: synonyms
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK

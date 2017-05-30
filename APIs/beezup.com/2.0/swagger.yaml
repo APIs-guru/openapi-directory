@@ -317,25 +317,9 @@ responses:
     schema:
       $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
   importAlreadyInProgress:
-    description: When a catalog importation is already in progress!
+    description: A catalog importation is already in progress!
     schema:
-      properties:
-        errors:
-          items:
-            $ref: '#/definitions/BeezUP.Common.UserErrorMessage'
-          type: array
-        links:
-          additionalProperties: false
-          description: The action links
-          example:
-            currentImportation:
-              href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c
-              method: GET
-          properties:
-            currentImportation:
-              $ref: '#/definitions/links.Importation_GetImportationMonitoringLink'
-          type: object
-      type: object
+      $ref: '#/definitions/importAlreadyInProgressResponse'
   importStarted:
     description: Catalog importation started
     headers:
@@ -493,11 +477,15 @@ paths:
     get:
       description: Use this operation to get the correct link to the channels and to the list of values
       operationId: GetChannelsIndex
+      parameters:
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: Channel list regrouped by country and links to list of values
           schema:
             $ref: '#/definitions/publicChannelIndex'
+        '304':
+          $ref: '#/responses/304_NotModified'
         default:
           $ref: '#/responses/GeneralError'
       summary: Get public channel index
@@ -514,14 +502,8 @@ paths:
           name: countryIsoCode
           required: true
           type: string
-        - collectionFormat: csv
-          description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size.
-          in: header
-          items:
-            type: string
-          name: Accept-Encoding
-          required: true
-          type: array
+        - $ref: '#/parameters/acceptEncodingRequiredParameter'
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: The channel list for one country
@@ -535,6 +517,8 @@ paths:
                     - Marketplace
           schema:
             $ref: '#/definitions/channelInfoList'
+        '304':
+          $ref: '#/responses/304_NotModified'
         '404':
           description: Channel country not found
           schema:
@@ -1605,6 +1589,7 @@ paths:
       summary: Get the auto import configuration
       tags:
         - Catalogs - Auto
+  '/user/catalogs/{storeId}/autoImport/activate':
     post:
       description: 'Once you have made your fist manual catalog importation with success, you can call this operation to import it automatically. No parameter required, we know which one it is.'
       operationId: Importation_ActivateAutoImport
@@ -2040,6 +2025,7 @@ paths:
       summary: Get the latest catalog importation reporting
       tags:
         - Catalogs - Importation Process
+  '/user/catalogs/{storeId}/importations/start':
     post:
       operationId: Importation_StartManualUpdate
       parameters:
@@ -2071,27 +2057,6 @@ paths:
       tags:
         - Catalogs - Importation Process
   '/user/catalogs/{storeId}/importations/{executionId}':
-    delete:
-      operationId: Importation_Cancel
-      parameters:
-        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
-        - $ref: '#/parameters/executionId'
-      responses:
-        '204':
-          description: Catalog importation canceled
-        '404':
-          description: |-
-            Occurs when a user tries to work on the wrong store.
-            Occurs when the message concerns the wrong execution.
-        '409':
-          description: Occurs when this importation is already finished.
-        default:
-          $ref: '#/responses/GeneralError'
-      security:
-        - api_key: []
-      summary: Cancel importation
-      tags:
-        - Catalogs - Importation Process
     get:
       operationId: Importation_GetImportationMonitoring
       parameters:
@@ -2104,11 +2069,39 @@ paths:
             $ref: '#/definitions/importationMonitoring'
         '404':
           description: 'ExecutionId not found or not yet synchronized. If not synchronized within 30 sec after the import has been started, please contact our support'
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
       summary: Get the importation status
+      tags:
+        - Catalogs - Importation Process
+  '/user/catalogs/{storeId}/importations/{executionId}/cancel':
+    post:
+      operationId: Importation_Cancel
+      parameters:
+        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
+        - $ref: '#/parameters/executionId'
+      responses:
+        '204':
+          description: Catalog importation canceled
+        '404':
+          description: |-
+            Occurs when a user tries to work on the wrong store.
+            Occurs when the message concerns the wrong execution.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '409':
+          description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Cancel importation
       tags:
         - Catalogs - Importation Process
   '/user/catalogs/{storeId}/importations/{executionId}/catalogColumns':
@@ -2286,8 +2279,12 @@ paths:
           description: |-
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2320,6 +2317,8 @@ paths:
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2352,6 +2351,8 @@ paths:
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
         default:
@@ -2521,9 +2522,14 @@ paths:
           schema:
             $ref: '#/definitions/productSample'
         '404':
-          description: 'ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support'
+          description: |-
+            ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support
+                  schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Catalog preparation read step is not completed. Please refer to the reporting of this execution for more details.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2579,8 +2585,12 @@ paths:
           description: |-
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2607,7 +2617,7 @@ paths:
       summary: Get the last input configuration
       tags:
         - Catalogs - Catalog
-  '/user/catalogs/{storeId}/products':
+  '/user/catalogs/{storeId}/products/list':
     post:
       operationId: Catalog_GetProducts
       parameters:
@@ -2942,20 +2952,6 @@ paths:
       tags:
         - Channel Catalogs - Exclusion Filters
   '/user/channelCatalogs/{channelCatalogId}/exportations/cache':
-    delete:
-      operationId: DeleteChannelCatalogExportationCache
-      parameters:
-        - $ref: '#/parameters/channelCatalogIdParameter'
-      responses:
-        '204':
-          description: Channel catalog exportation cache deleted
-        default:
-          $ref: '#/responses/GeneralError'
-      security:
-        - api_key: []
-      summary: Delete the exportation cache
-      tags:
-        - Channel Catalogs - Exportations
     get:
       operationId: GetChannelCatalogExportationCacheInfo
       parameters:
@@ -2970,6 +2966,21 @@ paths:
       security:
         - api_key: []
       summary: Get the exportation cache information
+      tags:
+        - Channel Catalogs - Exportations
+  '/user/channelCatalogs/{channelCatalogId}/exportations/cache/clear':
+    post:
+      operationId: ClearChannelCatalogExportationCache
+      parameters:
+        - $ref: '#/parameters/channelCatalogIdParameter'
+      responses:
+        '204':
+          description: Channel catalog exportation cache cleared
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Clear the exportation cache
       tags:
         - Channel Catalogs - Exportations
   '/user/channelCatalogs/{channelCatalogId}/exportations/history':
@@ -3265,11 +3276,17 @@ paths:
         - Channels - Channels Global
   /user/customer/:
     get:
+      parameters:
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/customerIndex'
+        '304':
+          $ref: '#/responses/304_NotModified'
+        default:
+          $ref: '#/responses/GeneralError'
       security:
         - api_key: []
       summary: The index of all operations and LOV
@@ -3278,11 +3295,15 @@ paths:
   /user/customer/account:
     get:
       operationId: GetUserAccountInfo
+      parameters:
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: User account information
           schema:
             $ref: '#/definitions/accountInfo'
+        '304':
+          $ref: '#/responses/304_NotModified'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3362,11 +3383,15 @@ paths:
   /user/customer/account/creditCardInfo:
     get:
       operationId: GetCreditCardInfo
+      parameters:
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: User credit card information
           schema:
             $ref: '#/definitions/creditCardInfoResponse'
+        '304':
+          $ref: '#/responses/304_NotModified'
         '404':
           description: Credit Card not found
         '503':
@@ -3429,11 +3454,15 @@ paths:
   /user/customer/account/profilePictureInfo:
     get:
       operationId: GetProfilePictureInfo
+      parameters:
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: Profile picture information
           schema:
             $ref: '#/definitions/profilePictureInfoResponse'
+        '304':
+          $ref: '#/responses/304_NotModified'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3489,11 +3518,15 @@ paths:
   /user/customer/billingPeriods:
     get:
       operationId: GetBillingPeriods
+      parameters:
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: Get the billing periods conditions
           schema:
             $ref: '#/definitions/billingPeriods'
+        '304':
+          $ref: '#/responses/304_NotModified'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3504,11 +3537,17 @@ paths:
   /user/customer/contracts:
     get:
       operationId: GetContracts
+      parameters:
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: Contract list
           schema:
             $ref: '#/definitions/contracts'
+        '304':
+          $ref: '#/responses/304_NotModified'
+        default:
+          $ref: '#/responses/GeneralError'
       security:
         - api_key: []
       summary: Get contract list
@@ -3614,11 +3653,14 @@ paths:
           name: userId
           required: true
           type: string
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: Get friend info
           schema:
             $ref: '#/definitions/userFriendInfo'
+        '304':
+          $ref: '#/responses/304_NotModified'
         '404':
           description: User not found
         default:
@@ -3631,11 +3673,15 @@ paths:
   /user/customer/invoices:
     get:
       operationId: GetInvoices
+      parameters:
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: Get all invoices of a customer
           schema:
             $ref: '#/definitions/invoices'
+        '304':
+          $ref: '#/responses/304_NotModified'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3646,11 +3692,15 @@ paths:
   /user/customer/offers:
     get:
       operationId: GetStandardOffers
+      parameters:
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: Get all standard offers
           schema:
             $ref: '#/definitions/standardOffers'
+        '304':
+          $ref: '#/responses/304_NotModified'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3703,11 +3753,15 @@ paths:
   /user/customer/stores:
     get:
       operationId: GetStores
+      parameters:
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: Store list response
           schema:
             $ref: '#/definitions/stores'
+        '304':
+          $ref: '#/responses/304_NotModified'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3760,11 +3814,14 @@ paths:
       operationId: GetStore
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: The store information
           schema:
             $ref: '#/definitions/storeHeader'
+        '304':
+          $ref: '#/responses/304_NotModified'
         '404':
           description: Store not found or not authorized
         default:
@@ -3804,11 +3861,14 @@ paths:
       operationId: GetStoreAlerts
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: User account alerts information
           schema:
             $ref: '#/definitions/storeAlerts'
+        '304':
+          $ref: '#/responses/304_NotModified'
         '404':
           description: Store not found or not authorized
         default:
@@ -3890,11 +3950,14 @@ paths:
       operationId: GetShares
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
+        - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
           description: The sharing list of the store
           schema:
             $ref: '#/definitions/storeShares'
+        '304':
+          $ref: '#/responses/304_NotModified'
         '404':
           description: Store not found or customer not the owner
         default:
@@ -4297,6 +4360,10 @@ paths:
           description: Succesfully received and processed batched operations. Please check response to see the status per operation.
           schema:
             $ref: '#/definitions/batchOrderOperationResponse'
+        '400':
+          description: Requested too many batch operations
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -4320,6 +4387,10 @@ paths:
           description: Succesfully received and processed batched operations. Please check response to see the status per operation.
           schema:
             $ref: '#/definitions/batchOrderOperationResponse'
+        '400':
+          description: Requested too many batch operations
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -4343,6 +4414,10 @@ paths:
           description: Succesfully received and processed batched operations. Please check response to see the status per operation.
           schema:
             $ref: '#/definitions/batchOrderOperationResponse'
+        '400':
+          description: Requested too many batch operations
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -4397,6 +4472,10 @@ paths:
           description: Successfully requested new Order report exportation generation
         '400':
           description: Could not process request for given parameters values. Please check error message for more details.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '404':
+          description: No orders have been found for this request.
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
@@ -4463,6 +4542,10 @@ paths:
           description: Could not process request for given parameters values. Please check error message for more details.
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '404':
+          description: No orders have been found for this request.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -4489,6 +4572,10 @@ paths:
           description: Could not process request for given parameters values. Please check error message for more details.
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '404':
+          description: No orders have been found for this request.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -4506,7 +4593,7 @@ paths:
         '200':
           description: Successfully fetched current synchronization status
           schema:
-            $ref: '#/definitions/accountSynchronizations'
+            $ref: '#/definitions/accountSynchronizationList'
         '304':
           $ref: '#/responses/304_NotModified'
         default:
@@ -5492,6 +5579,8 @@ definitions:
     additionalProperties: false
     description: The different actions you can make on this account
     properties:
+      activateUserAccount:
+        $ref: '#/definitions/links.activateUserAccountLink'
       changePassword:
         $ref: '#/definitions/links.changePasswordLink'
       getCreditCardInfo:
@@ -5506,7 +5595,10 @@ definitions:
         $ref: '#/definitions/links.savePersonalInfoLink'
       saveProfilePictureInfo:
         $ref: '#/definitions/links.saveProfilePictureInfoLink'
+      self:
+        $ref: '#/definitions/links.getUserAccountInfoLink'
     required:
+      - self
       - savePersonalInfo
       - changePassword
       - getProfilePictureInfo
@@ -5636,8 +5728,12 @@ definitions:
         $ref: '#/definitions/BeezUP.Common.MarketplaceBusinessCode'
       marketplaceTechnicalCode:
         $ref: '#/definitions/BeezUP.Common.MarketplaceTechnicalCode'
+    required:
+      - accountId
+      - marketplaceTechnicalCode
+      - marketplaceBusinessCode
     type: object
-  accountSynchronizations:
+  accountSynchronizationList:
     properties:
       accountSynchronizations:
         items:
@@ -5830,6 +5926,8 @@ definitions:
         items:
           $ref: '#/definitions/orderOperationResponse'
         type: array
+    required:
+      - operations
     type: object
   beezUPColumnConfiguration:
     description: Describe a BeezUP column
@@ -5891,7 +5989,7 @@ definitions:
       - discountPercentage
     type: object
   billingPeriodInMonth:
-    description: Can be null. The billing period in month based on /billingperiods
+    description: Can be null. The billing period in month based on /billingPeriods
     example: 12
     format: int32
     minimum: 1
@@ -6381,8 +6479,8 @@ definitions:
     type: object
   channelCatalogExportCacheInfoResponseLinks:
     properties:
-      delete:
-        $ref: '#/definitions/links.DeleteChannelCatalogExportationCacheLink'
+      clear:
+        $ref: '#/definitions/links.ClearChannelCatalogExportationCacheLink'
       self:
         $ref: '#/definitions/links.GetChannelCatalogExportationCacheInfoLink'
     required:
@@ -7103,6 +7201,15 @@ definitions:
         description: The channel name
         example: Amazon Direct FRA
         type: string
+      sectors:
+        description: The sector list related to a channel
+        example:
+          - BRICOLAGE
+          - INFO
+          - GENERALIST
+        items:
+          type: string
+        type: array
       types:
         description: The type list related to a channel
         example:
@@ -7929,8 +8036,49 @@ definitions:
       - lovLinks
     type: object
   customerIndexLinks:
+    description: Gives you want you can do on this API
+    properties:
+      accountInfo:
+        $ref: '#/definitions/links.getUserAccountInfoLink'
+      billingPeriods:
+        $ref: '#/definitions/links.getBillingPeriodsLink'
+      contracts:
+        $ref: '#/definitions/links.getContractsLink'
+      friendInfo:
+        $ref: '#/definitions/links.getFriendInfoLink'
+      invoices:
+        $ref: '#/definitions/links.getInvoicesLink'
+      logout:
+        $ref: '#/definitions/links.logoutLink'
+      self:
+        $ref: '#/definitions/links.customerIndexLink'
+      standardOffers:
+        $ref: '#/definitions/links.getStandardOffersLink'
+      stores:
+        $ref: '#/definitions/links.getStoresLink'
+    required:
+      - self
+      - accountInfo
+      - billingPeriods
+      - standardOffers
+      - friendInfo
     type: object
   customerIndexLovLinks:
+    properties:
+      beezUPTimeZoneLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      contractTerminationReasonLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      countryLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      customerStatusLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      invoicePaymentStatusLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      storeCountryLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      storeSectorLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
     type: object
   dateSearchType:
     default: Modification
@@ -8147,13 +8295,13 @@ definitions:
     properties:
       format:
         $ref: '#/definitions/exportOrderListFormat'
-      orderListRequest:
-        $ref: '#/definitions/orderListRequest'
+      orderListRequestWithoutPagination:
+        $ref: '#/definitions/orderListRequestWithoutPagination'
       storeId:
         $ref: '#/definitions/BeezUP.Common.StoreId'
     required:
       - storeId
-      - orderListRequest
+      - orderListRequestWithoutPagination
     type: object
   feedType:
     description: The Feed Type
@@ -8365,6 +8513,30 @@ definitions:
         example: This is a warning
         type: string
     type: object
+  importAlreadyInProgressResponse:
+    properties:
+      errors:
+        description: The error message list
+        items:
+          $ref: '#/definitions/BeezUP.Common.UserErrorMessage'
+        type: array
+      links:
+        $ref: '#/definitions/importAlreadyInProgressResponseLinks'
+    required:
+      - errors
+      - links
+    type: object
+  importAlreadyInProgressResponseLinks:
+    description: The action links
+    properties:
+      cancelCurrentImportation:
+        $ref: '#/definitions/links.Importation_CancelLink'
+      currentImportation:
+        $ref: '#/definitions/links.Importation_GetImportationMonitoringLink'
+    required:
+      - currentImportation
+      - cancelCurrentImportation
+    type: object
   importationMonitoring:
     description: Describe the reporting of the catalog importation
     properties:
@@ -8385,6 +8557,8 @@ definitions:
         example: '2017-04-01T13:10:09Z'
         format: date-time
         type: string
+      links:
+        $ref: '#/definitions/importationMonitoringLinks'
       steps:
         additionalProperties:
           type: boolean
@@ -8407,6 +8581,27 @@ definitions:
       - lastUpdateUtcDate
       - beginUtcDate
       - steps
+    type: object
+  importationMonitoringLinks:
+    description: Applicable operations considering the state of the importation
+    properties:
+      activateAutoImport:
+        $ref: '#/definitions/links.Importation_ActivateAutoImportLink'
+      cancel:
+        $ref: '#/definitions/links.Importation_CancelLink'
+      commit:
+        $ref: '#/definitions/links.Importation_CommitLink'
+      commitColumns:
+        $ref: '#/definitions/links.Importation_CommitColumnsLink'
+      configureRemainingCatalogColumns:
+        $ref: '#/definitions/links.Importation_ConfigureRemainingCatalogColumnsLink'
+      self:
+        $ref: '#/definitions/links.Importation_GetImportationMonitoringLink'
+      technicalProgression:
+        $ref: '#/definitions/links.Importation_TechnicalProgressionLink'
+    required:
+      - self
+      - technicalProgression
     type: object
   importationReporting:
     description: The catalog importation reporting
@@ -8763,6 +8958,12 @@ definitions:
               required: true
               type: string
           templated: true
+  links.ClearChannelCatalogExportationCacheLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/exportations/cache/clear
+          method: POST
   links.ClearMerchantOrderInfoLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -8803,12 +9004,6 @@ definitions:
                 reportFilterId: fb19c53c-2f63-4262-9d94-2d7faa500acd
                 ruleName: My rule
                 startUtcDate: '2016-08-29T09:12:33.001Z'
-  links.DeleteChannelCatalogExportationCacheLink:
-    allOf:
-      - $ref: '#/definitions/BeezUP.Common.Link3'
-      - example:
-          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/exportations/cache
-          method: DELETE
   links.DeleteReportFilterLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9023,9 +9218,48 @@ definitions:
       - example:
           href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/harvest
           method: POST
+  links.Importation_ActivateAutoImportLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/autoImport/activate
+          method: POST
+  links.Importation_CancelLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/cancel
+          method: POST
+  links.Importation_CommitColumnsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/commitColumns
+          method: POST
+  links.Importation_CommitLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/commit
+          method: POST
+  links.Importation_ConfigureRemainingCatalogColumnsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/configureRemainingCatalogColumns
+          method: POST
   links.Importation_GetImportationMonitoringLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c
+          method: GET
+  links.Importation_TechnicalProgressionLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/technicalProgression
+          method: GET
   links.MoveDownRuleLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9186,6 +9420,9 @@ definitions:
                 endUtcDate": '2016-08-29T09:12:33.001Z'
                 ruleName: My Rule Renamed
                 startUtcDate: '2016-08-29T09:12:33.001Z'
+  links.activateUserAccountLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
   links.changePasswordLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9195,6 +9432,12 @@ definitions:
   links.createStoreLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+  links.customerIndexLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer
+          method: GET
   links.deleteNextContractLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9204,12 +9447,41 @@ definitions:
   links.deleteStoreLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+  links.getBillingPeriodsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/billingPeriods
+          method: GET
   links.getContractsLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/contracts
+          method: GET
   links.getCreditCardInfoLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/account/creditCardinfo
+          method: GET
+  links.getFriendInfoLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: '/v2/user/customer/friends/{userId}'
+          method: GET
+          parameters:
+            userId:
+              in: path
+              required: true
+              type: string
+  links.getInvoicesLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/invoices
+          method: GET
   links.getProfilePictureInfoLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9219,12 +9491,33 @@ definitions:
   links.getSharesLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+  links.getStandardOffersLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/offers
+          method: GET
   links.getStoreLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
   links.getStoresLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/stores
+          method: GET
+  links.getUserAccountInfoLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/account
+          method: GET
+  links.logoutLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/security/logout
+          method: POST
   links.reactivateCurrentContractLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -10209,6 +10502,18 @@ definitions:
       - status
     type: object
   orderListRequest:
+    allOf:
+      - $ref: '#/definitions/orderListRequestWithoutPagination'
+      - properties:
+          pageNumber:
+            $ref: '#/definitions/pageNumber'
+          pageSize:
+            $ref: '#/definitions/pageSize'
+        required:
+          - pageSize
+          - pageNumber
+        type: object
+  orderListRequestWithoutPagination:
     properties:
       accountIds:
         description: Account id list
@@ -10269,16 +10574,10 @@ definitions:
         items:
           $ref: '#/definitions/order_MerchantOrderId'
         type: array
-      pageNumber:
-        $ref: '#/definitions/pageNumber'
-      pageSize:
-        $ref: '#/definitions/pageSize'
     required:
       - dateSearchType
       - beginPeriodUtcDate
       - endPeriodUtcDate
-      - pageSize
-      - pageNumber
     type: object
   orderOperationResponse:
     description: The response given by the batch operation for an order
@@ -10745,6 +11044,9 @@ definitions:
           channelTypeLov:
             href: /v2/public/lov/ChannelType
             method: GET
+          sectorLov:
+            href: /v2/public/lov/ParamSector
+            method: GET
           self:
             href: /v2/public/channels
             method: GET
@@ -10752,6 +11054,8 @@ definitions:
           channelCountryLov:
             $ref: '#/definitions/links.GetPublicListOfValuesLink'
           channelTypeLov:
+            $ref: '#/definitions/links.GetPublicListOfValuesLink'
+          sectorLov:
             $ref: '#/definitions/links.GetPublicListOfValuesLink'
           self:
             $ref: '#/definitions/links.GetChannelsIndexLink'
@@ -11845,6 +12149,8 @@ definitions:
         type: array
         uniqueItems: true
     required:
+      - order_MerchantECommerceSoftwareName
+      - order_MerchantECommerceSoftwareVersion
       - orders
     type: object
   setMerchantOrderInfoListRequestItem:
@@ -11866,6 +12172,8 @@ definitions:
         $ref: '#/definitions/order_MerchantOrderId'
     required:
       - order_MerchantOrderId
+      - order_MerchantECommerceSoftwareName
+      - order_MerchantECommerceSoftwareVersion
     type: object
   sourceType:
     description: Indicates the origin of the operation
@@ -12673,6 +12981,14 @@ definitions:
     description: Your role in your company
     example: I'm the Manager on this company
     type: string
+x-basePath: /v2/public/security
+x-beezup-api-ops:
+  apiName: V2PublicSecurity
+  appRoot: BeezUP.Customer.WebService
+  comment: |
+    Change the product name from BeezUP API to UserApi to correspond to the reality
+  namespace: BeezUP.Customer.WebService
+  repo: Customer
 x-tagGroups:
   - name: Public - Security
     tags:

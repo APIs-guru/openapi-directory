@@ -2069,6 +2069,81 @@ paths:
       summary: Edit invoice
       tags:
         - Invoices
+  /mass_messages_users:
+    get:
+      parameters:
+        - description: Used to filter on the `is_read` of the mass messages
+          in: query
+          name: is_read
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/MassMessagesUser'
+                type: array
+              pagination:
+                $ref: '#/definitions/PaginationDetails'
+              success:
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: View list of mass messages for specific user
+      tags:
+        - MassMessagesUsers
+  '/mass_messages_users/{mass_messages_user_id}':
+    get:
+      parameters:
+        - in: path
+          name: mass_messages_user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/MassMessagesUser'
+              success:
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: View mass message
+      tags:
+        - MassMessagesUsers
+    put:
+      parameters:
+        - in: path
+          name: mass_messages_user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  type: object
+                type: array
+              success:
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Edit mass message
+      tags:
+        - MassMessagesUsers
   /materials:
     get:
       parameters:
@@ -2704,21 +2779,43 @@ paths:
           name: show_all
           required: false
           type: boolean
-        - description: ID's of `ProjectStatus(s)` only to look in
+        - description: Used to filter on the `contact_id` of the projects
+          format: uuid
           in: query
-          items:
-            type: string
-          name: project_status
-          required: false
-          type: array
+          name: contact_id
+          type: string
         - description: Used to filter on the `project_status_id` of the projects
           format: uuid
           in: query
           name: project_status_id
           type: string
-        - description: Used to filter on the `name` of the projects
+        - collectionFormat: csv
+          description: Used to filter on the `project_status_id` of the projects (match any of the provided values)
+          in: query
+          items:
+            format: uuid
+            type: string
+          name: project_status_ids
+          type: array
+        - description: Used to search on the `name` of the projects
           in: query
           name: name
+          type: string
+        - description: Used to search on the `erp_id` of the projects
+          in: query
+          name: erp_id
+          type: string
+        - description: Show projects with start time after than this value
+          in: query
+          name: start_time_gte
+          type: string
+        - description: Show projects with start time before this value
+          in: query
+          name: start_time_lte
+          type: string
+        - description: Show only projects with start time on specific date
+          in: query
+          name: start_time_eq
           type: string
       responses:
         '200':
@@ -4837,6 +4934,57 @@ definitions:
       selling_price:
         format: float
         type: number
+      user_id:
+        format: uuid
+        type: string
+    type: object
+  MassMessage:
+    properties:
+      company_id:
+        format: uuid
+        type: string
+      content:
+        maxLength: 8192
+        type: string
+      created:
+        $ref: '#/definitions/created'
+      created_by_id:
+        format: uuid
+        type: string
+      deleted:
+        $ref: '#/definitions/deleted'
+      id:
+        format: uuid
+        type: string
+      modified:
+        $ref: '#/definitions/modified'
+    type: object
+  MassMessagesUser:
+    properties:
+      created:
+        $ref: '#/definitions/created'
+      created_by_id:
+        format: uuid
+        type: string
+      deleted:
+        $ref: '#/definitions/deleted'
+      id:
+        format: uuid
+        type: string
+      is_read:
+        type: boolean
+      is_sent_email:
+        type: boolean
+      mass_message:
+        $ref: '#/definitions/MassMessage'
+      mass_message_id:
+        format: uuid
+        type: string
+      modified:
+        $ref: '#/definitions/modified'
+      modified_by_id:
+        format: uuid
+        type: string
       user_id:
         format: uuid
         type: string

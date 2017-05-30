@@ -1362,6 +1362,9 @@ definitions:
       signInName:
         description: The sign-in name of the user.
         type: string
+      usageLocation:
+        description: 'A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: "US", "JP", and "GB".'
+        type: string
       userPrincipalName:
         description: The principal name of the user.
         type: string
@@ -1383,6 +1386,9 @@ definitions:
       passwordProfile:
         $ref: '#/definitions/PasswordProfile'
         description: Password Profile
+      usageLocation:
+        description: 'A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: "US", "JP", and "GB".'
+        type: string
       userPrincipalName:
         description: The user principal name (someuser@contoso.com). It must contain one of the verified domains for the tenant.
         type: string
@@ -1434,6 +1440,9 @@ definitions:
       passwordProfile:
         $ref: '#/definitions/PasswordProfile'
         description: The password profile of the user.
+      usageLocation:
+        description: 'A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: "US", "JP", and "GB".'
+        type: string
 x-ms-paths:
   '/{tenantID}/{nextLink}?Applications_ListNext':
     get:

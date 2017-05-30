@@ -7,7 +7,7 @@ info:
   contact:
     email: integrations@reverb.com
     name: Reverb API
-    url: 'https://dev.reverb.com'
+    url: 'https://www.reverb-api.com'
   description: reverb
   license:
     name: Apache 2.0
@@ -2889,23 +2889,6 @@ paths:
       summary: 'Returns all orders, newest first.'
       tags:
         - my
-  '/my/orders/buying/buying_history/{seller_id}':
-    get:
-      description: See previous orders from a seller
-      parameters:
-        - in: path
-          name: seller_id
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      security:
-        - oauth2:
-            - read_orders
-      summary: See previous orders from a seller
-      tags:
-        - my
   /my/orders/buying/unpaid:
     get:
       description: 'Returns unpaid orders, newest first.'
@@ -3838,39 +3821,6 @@ paths:
       summary: Get seller's feedback as a seller
       tags:
         - shops
-  /vinyl/listings:
-    get:
-      parameters:
-        - description: Merchandising UUID of the release
-          in: query
-          items:
-            type: string
-          name: merchandising_uuid
-          required: true
-          type: array
-      responses:
-        default:
-          description: Unexpected error
-      tags:
-        - vinyl
-    post:
-      responses:
-        default:
-          description: Unexpected error
-      tags:
-        - vinyl
-  '/vinyl/listings/{id}':
-    get:
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      tags:
-        - vinyl
   /wants:
     get:
       description: A list of wanted items by the user

@@ -240,8 +240,8 @@ paths:
         type: string
       - description: URLs list type (crawled URLs or error URLs)
         enum:
-          - organic
-          - social
+          - crawled
+          - errors
         in: path
         name: list_type
         required: true
@@ -1428,6 +1428,9 @@ definitions:
       features:
         readOnly: true
         type: string
+      friendly_name:
+        readOnly: true
+        type: string
       id:
         format: int64
         readOnly: true
@@ -1477,6 +1480,9 @@ definitions:
         readOnly: true
         type: string
       features:
+        readOnly: true
+        type: string
+      friendly_name:
         readOnly: true
         type: string
       id:

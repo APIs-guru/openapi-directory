@@ -39,163 +39,11 @@ parameters:
     required: true
     type: string
     x-data-threescale-name: app_keys
-  bilingual-language:
-    description: IANA language code
-    enum:
-      - es
-      - en
-      - lv
-      - nso
-      - zu
-      - ms
-      - id
-      - tn
-      - ur
-      - hi
-      - sw
-      - ro
-    in: path
-    name: language
-    required: true
-    type: string
-  bilingual-sourceLanguage:
-    description: IANA language code. If provided output will be filtered by sourceLanguage.
-    enum:
-      - es
-      - en
-      - lv
-      - nso
-      - zu
-      - ms
-      - id
-      - tn
-      - ur
-      - hi
-      - sw
-      - ro
-    in: query
-    name: sourceLanguage
-    required: false
-    type: string
-  bilingual-source_lang:
-    description: IANA language code
-    enum:
-      - en
-      - es
-      - lv
-      - nso
-      - zu
-      - ms
-      - id
-      - tn
-      - ur
-      - hi
-      - sw
-      - ro
-    in: path
-    name: source_lang
-    required: true
-    type: string
-  bilingual-source_language:
-    description: IANA language code. Source Language.
-    enum:
-      - es
-      - en
-      - lv
-      - nso
-      - zu
-      - ms
-      - id
-      - tn
-      - ur
-      - hi
-      - sw
-      - ro
-    in: path
-    name: source_language
-    required: true
-    type: string
-  bilingual-targetLanguage:
-    description: IANA language code. If provided output will be filtered by sourceLanguage.
-    enum:
-      - es
-      - en
-      - lv
-      - nso
-      - zu
-      - ms
-      - id
-      - tn
-      - ur
-      - hi
-      - sw
-      - ro
-    in: query
-    name: targetLanguage
-    required: false
-    type: string
-  bilingual-target_lang:
-    description: IANA language code
-    enum:
-      - es
-      - en
-      - lv
-      - nso
-      - zu
-      - ms
-      - id
-      - tn
-      - ur
-      - hi
-      - sw
-      - ro
-    in: path
-    name: target_lang
-    required: true
-    type: string
-  bilingual-target_language:
-    description: IANA language code. Target Language.
-    enum:
-      - es
-      - en
-      - lv
-      - nso
-      - zu
-      - ms
-      - id
-      - tn
-      - ur
-      - hi
-      - sw
-      - ro
-    in: path
-    name: target_language
-    required: true
-    type: string
   entriesWordId:
     default: ace
     description: An Entry identifier. Case-sensitive.
     in: path
     name: word_id
-    required: true
-    type: string
-  grammaticalFeatures-sourceLanguage:
-    description: IANA language code
-    enum:
-      - es
-      - en
-      - lv
-      - nso
-      - zu
-      - ms
-      - id
-      - tn
-      - ur
-      - hi
-      - sw
-      - ro
-    in: path
-    name: source_language
     required: true
     type: string
   keyValFilters:
@@ -208,6 +56,19 @@ parameters:
     name: filters
     required: true
     type: array
+  monolingual-lemmatron-source_lang:
+    description: IANA language code
+    enum:
+      - en
+      - es
+      - hi
+      - nso
+      - tn
+      - zu
+    in: path
+    name: source_lang
+    required: true
+    type: string
   monolingual-source_lang:
     description: IANA language code
     enum:
@@ -220,21 +81,16 @@ parameters:
     name: source_lang
     required: true
     type: string
-  monolingual_sentences_language:
-    description: IANA language code.
-    enum:
-      - en
-      - es
-    in: path
-    name: source_language
-    required: true
-    type: string
-  regions-source_lang:
+  monolingual-wordlist-source_lang:
     description: IANA language code
     enum:
       - en
+      - es
+      - hi
+      - lv
+      - sw
     in: path
-    name: source_language
+    name: source_lang
     required: true
     type: string
   thesaurus-source_lang:
@@ -246,32 +102,35 @@ parameters:
     required: true
     type: string
 paths:
-  '/domains/{source_language}':
-    get:
-      description: |
-        Returns a list of the available [domains](/glossary?tag=#domains&expand) for a given monolingual language dataset.
-      parameters:
-        - $ref: '#/parameters/bilingual-source_language'
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
-      responses:
-        '200':
-          description: Successful response.
-          schema:
-            $ref: '#/definitions/UtilityLabels'
-            title: DomainsResults
-        '404':
-          description: Unknown source_language.
-      summary: Lists available domains in a given monolingual language dataset.
-      tags:
-        - Utility
-  '/domains/{source_language}/{target_language}':
+  '/domains/{source_domains_language}/{target_domains_language}':
     get:
       description: |
         Returns a list of the available [domains](/glossary?tag=#domains&expand) for a given bilingual language dataset.
       parameters:
-        - $ref: '#/parameters/bilingual-source_language'
-        - $ref: '#/parameters/bilingual-target_language'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - nso
+            - zu
+            - ur
+          in: path
+          name: source_domains_language
+          required: true
+          type: string
+        - description: IANA language code
+          enum:
+            - es
+            - nso
+            - zu
+            - ms
+            - id
+            - tn
+            - ro
+          in: path
+          name: target_domains_language
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -287,6 +146,37 @@ paths:
       summary: Lists available domains in a given bilingual language dataset.
       tags:
         - Utility
+  '/domains/{source_language}':
+    get:
+      description: |
+        Returns a list of the available [domains](/glossary?tag=#domains&expand) for a given monolingual language dataset.
+      parameters:
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - nso
+            - zu
+            - hi
+            - sw
+            - ur
+          in: path
+          name: source_language
+          required: true
+          type: string
+        - $ref: '#/parameters/appId'
+        - $ref: '#/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/UtilityLabels'
+            title: DomainsResults
+        '404':
+          description: Unknown source_language.
+      summary: Lists available domains in a given monolingual language dataset.
+      tags:
+        - Utility
   '/entries/{source_language}/{word_id}/sentences':
     get:
       description: |
@@ -297,7 +187,14 @@ paths:
         description: find more info here
         url: 'https://helloreverb.com/about'
       parameters:
-        - $ref: '#/parameters/monolingual_sentences_language'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+          in: path
+          name: source_language
+          required: true
+          type: string
         - $ref: '#/parameters/entriesWordId'
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
@@ -412,7 +309,14 @@ paths:
 
           <div id="dictionary_entries_filters_examples"></div>
       parameters:
-        - $ref: '#/parameters/monolingual-source_lang'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+          in: path
+          name: source_lang
+          required: true
+          type: string
         - $ref: '#/parameters/entriesWordId'
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
@@ -440,7 +344,13 @@ paths:
 
           <div id="dictionary_entries_filters_pronunciations"></div>
       parameters:
-        - $ref: '#/parameters/monolingual-source_lang'
+        - description: IANA language code
+          enum:
+            - en
+          in: path
+          name: source_lang
+          required: true
+          type: string
         - $ref: '#/parameters/entriesWordId'
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
@@ -565,42 +475,6 @@ paths:
       summary: Retrieve synonyms and antonyms for a given word.
       tags:
         - Thesaurus
-  '/entries/{source_lang}/{word_id}/translations={target_lang}':
-    get:
-      description: |
-        Returns target language translations for a given word ID and source language. 
-        In the event that a word in the dataset does not have a direct translation, the response will be a [definition](/glossary?tag=#entry&expand) in the target language.
-
-          <div id="translation"></div>
-      parameters:
-        - $ref: '#/parameters/bilingual-source_lang'
-        - default: change
-          description: An Entry identifier. Case-sensitive.
-          in: path
-          name: word_id
-          required: true
-          type: string
-        - $ref: '#/parameters/bilingual-target_lang'
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
-      responses:
-        '200':
-          description: Successful response. In case word doesn't have a direct translation a response would be definitions.
-          schema:
-            $ref: '#/definitions/RetrieveEntry'
-            title: InflectionsResults
-        '400':
-          description: any of target languages is unknown
-        '404':
-          description: |
-            no entry is found matching supplied source_lang and id
-            and/or that entry has no senses with translations in the target language(s). 
-        '500':
-          description: |
-            Internal Error. An error occurred while processing the data.
-      summary: Find translation for a given word.
-      tags:
-        - Translation
   '/entries/{source_lang}/{word_id}/{filters}':
     get:
       description: |
@@ -630,6 +504,67 @@ paths:
       summary: Apply filters to entry search.
       tags:
         - Dictionary entries
+  '/entries/{source_translation_language}/{word_id}/translations={target_translation_language}':
+    get:
+      description: |
+        Returns target language translations for a given word ID and source language. 
+        In the event that a word in the dataset does not have a direct translation, the response will be a [definition](/glossary?tag=#entry&expand) in the target language.
+
+          <div id="translation"></div>
+      parameters:
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - nso
+            - zu
+            - ms
+            - id
+            - tn
+            - ur
+          in: path
+          name: source_translation_language
+          required: true
+          type: string
+        - default: change
+          description: An Entry identifier. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          type: string
+        - description: IANA language code
+          enum:
+            - es
+            - nso
+            - zu
+            - ms
+            - id
+            - tn
+            - ro
+          in: path
+          name: target_translation_language
+          required: true
+          type: string
+        - $ref: '#/parameters/appId'
+        - $ref: '#/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response. In case word doesn't have a direct translation a response would be definitions.
+          schema:
+            $ref: '#/definitions/RetrieveEntry'
+            title: InflectionsResults
+        '400':
+          description: any of target languages is unknown
+        '404':
+          description: |
+            no entry is found matching supplied source_lang and id
+            and/or that entry has no senses with translations in the target language(s). 
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Find translation for a given word.
+      tags:
+        - Translation
   /filters:
     get:
       description: |
@@ -682,7 +617,22 @@ paths:
       description: |
         Returns a list of the available [grammatical features](/glossary?tag=#grammaticalfeatures&expand) for a given language dataset.
       parameters:
-        - $ref: '#/parameters/grammaticalFeatures-sourceLanguage'
+        - description: IANA language code. If provided output will be filtered by sourceLanguage.
+          enum:
+            - en
+            - es
+            - lv
+            - nso
+            - zu
+            - ms
+            - tn
+            - ur
+            - hi
+            - sw
+          in: path
+          name: source_language
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -704,7 +654,7 @@ paths:
 
           <div id="lemmatron"></div>
       parameters:
-        - $ref: '#/parameters/monolingual-source_lang'
+        - $ref: '#/parameters/monolingual-lemmatron-source_lang'
         - default: changed
           description: An inflected wordform. Case-sensitive.
           in: path
@@ -733,7 +683,7 @@ paths:
 
           <div id="lemmatron_filters"></div>
       parameters:
-        - $ref: '#/parameters/monolingual-source_lang'
+        - $ref: '#/parameters/monolingual-lemmatron-source_lang'
         - default: change
           description: An inflected wordform. Case-sensitive.
           in: path
@@ -760,8 +710,42 @@ paths:
       description: |
         Returns a list of monolingual and bilingual language datasets available in the API
       parameters:
-        - $ref: '#/parameters/bilingual-sourceLanguage'
-        - $ref: '#/parameters/bilingual-targetLanguage'
+        - description: IANA language code. If provided output will be filtered by sourceLanguage.
+          enum:
+            - es
+            - en
+            - lv
+            - nso
+            - zu
+            - ms
+            - id
+            - tn
+            - ur
+            - hi
+            - sw
+            - ro
+          in: query
+          name: sourceLanguage
+          required: false
+          type: string
+        - description: IANA language code. If provided output will be filtered by sourceLanguage.
+          enum:
+            - es
+            - en
+            - lv
+            - nso
+            - zu
+            - ms
+            - id
+            - tn
+            - ur
+            - hi
+            - sw
+            - ro
+          in: query
+          name: targetLanguage
+          required: false
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -782,7 +766,24 @@ paths:
       description: |
         Returns a list of available [lexical categories](/glossary?tag=#lexicalcategory&expand) for a given language dataset.
       parameters:
-        - $ref: '#/parameters/bilingual-language'
+        - description: IANA language code
+          enum:
+            - es
+            - en
+            - lv
+            - nso
+            - zu
+            - ms
+            - id
+            - tn
+            - ur
+            - hi
+            - sw
+            - ro
+          in: path
+          name: language
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -803,7 +804,13 @@ paths:
       description: |
         Returns a list of the available [regions](/glossary?tag=#regions&expand) for a given monolingual language dataset.
       parameters:
-        - $ref: '#/parameters/regions-source_lang'
+        - description: IANA language code
+          enum:
+            - en
+          in: path
+          name: source_language
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -822,7 +829,20 @@ paths:
       description: |
         Returns a list of the available [registers](/glossary?tag=#registers&expand) for a given monolingual language dataset.
       parameters:
-        - $ref: '#/parameters/bilingual-source_language'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - hi
+            - id
+            - lv
+            - ms
+            - sw
+            - ur
+          in: path
+          name: source_language
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -838,13 +858,36 @@ paths:
       summary: Lists available registers in a given monolingual language dataset.
       tags:
         - Utility
-  '/registers/{source_language}/{target_language}':
+  '/registers/{source_register_language}/{target_register_language}':
     get:
       description: |
         Returns a list of the available [registers](/glossary?tag=#registers&expand) for a given bilingual language dataset.
       parameters:
-        - $ref: '#/parameters/bilingual-source_language'
-        - $ref: '#/parameters/bilingual-target_language'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - ms
+            - id
+            - ur
+          in: path
+          name: source_register_language
+          required: true
+          type: string
+        - description: IANA language code
+          enum:
+            - es
+            - en
+            - nso
+            - zu
+            - ms
+            - id
+            - tn
+            - ro
+          in: path
+          name: target_register_language
+          required: true
+          type: string
         - $ref: '#/parameters/appId'
         - $ref: '#/parameters/appKey'
       responses:
@@ -873,7 +916,17 @@ paths:
         description: find more info here
         url: 'https://helloreverb.com/about'
       parameters:
-        - $ref: '#/parameters/monolingual-source_lang'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - hi
+            - lv
+            - sw
+          in: path
+          name: source_lang
+          required: true
+          type: string
         - default: eye
           description: Search string.
           in: query
@@ -920,7 +973,7 @@ paths:
       summary: Find results for search query.
       tags:
         - Search
-  '/search/{source_lang}/translations={target_lang}':
+  '/search/{source_search_language}/translations={target_search_language}':
     get:
       description: |
 
@@ -931,8 +984,33 @@ paths:
         description: find more info here
         url: 'https://helloreverb.com/about'
       parameters:
-        - $ref: '#/parameters/bilingual-source_lang'
-        - $ref: '#/parameters/bilingual-target_lang'
+        - description: IANA language code
+          enum:
+            - en
+            - es
+            - nso
+            - zu
+            - ms
+            - id
+            - tn
+            - ur
+          in: path
+          name: source_search_language
+          required: true
+          type: string
+        - description: IANA language code
+          enum:
+            - es
+            - nso
+            - zu
+            - ms
+            - id
+            - tn
+            - ro
+          in: path
+          name: target_search_language
+          required: true
+          type: string
         - default: eye
           description: Search string.
           in: query
@@ -986,7 +1064,7 @@ paths:
 
           <div id="wordlist_advanced"></div>
       parameters:
-        - $ref: '#/parameters/monolingual-source_lang'
+        - $ref: '#/parameters/monolingual-wordlist-source_lang'
         - default: lexicalCategory=Noun;domains=sport
           description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5.'
           in: path
@@ -1064,7 +1142,7 @@ paths:
 
           <div id="wordlist"></div>
       parameters:
-        - $ref: '#/parameters/monolingual-source_lang'
+        - $ref: '#/parameters/monolingual-wordlist-source_lang'
         - default: registers=Rare;domains=Art
           description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5.'
           in: path

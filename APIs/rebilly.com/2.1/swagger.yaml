@@ -240,9 +240,8 @@ tags:
       Hosted checkout pages.
     name: Checkout Pages
   - description: |
-      Contacts belong to Customers. A Customer can have many contacts.
-      Some contacts are associated to Invoices, Payment Cards, Subscriptions
-      and Transactions.
+      Contacts are Customer's address book.
+      All contact information used in Invoices, Subscriptions, Transacions, etc is enlisted here. Hovewer, changing a Contact won't change corresponding contact information in related resources
     name: Contacts
   - description: |
       Coupons allows to apply different types of discounts to Invoices, Subscriptions and Plans. Redeemed Coupons will be applied only to Invoices with the same currency.
@@ -782,7 +781,6 @@ paths:
           $ref: '#/responses/NotFound'
         '422':
           $ref: '#/responses/InvalidDataError'
-          description: Invalid data was sent
       summary: Create or update api key with predefined ID
       tags:
         - API Keys
@@ -7858,6 +7856,32 @@ paths:
       summary: Update user's profile
       tags:
         - Profile
+  /profile/totp-reset:
+    post:
+      description: |
+        Reset (renew) totpSecret
+      responses:
+        '201':
+          description: totpSecret reset (renewed) successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Profile'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Reset (renew) totpSecret
+      tags:
+        - Profile
   /queue/custom-events:
     get:
       description: |
@@ -9291,7 +9315,11 @@ paths:
             $paymentCardTokenForm = new Rebilly\Entities\PaymentCardToken();
             $paymentCardTokenForm->setFirstName('John');
             $paymentCardTokenForm->setLastName('Doe');
-            $paymentCardTokenForm->setMethod(Rebilly\Entities\PaymentMethod::METHOD_PAYMENT_CARD);
+            $paymentCardTokenForm->setAddress('1313 Main Street');
+            $paymentCardTokenForm->setCity('Gotham');
+            $paymentCardTokenForm->setPostalCode('12345');
+            $paymentCardTokenForm->setRegion('NY');
+            $paymentCardTokenForm->setCountry('US');
 
             $paymentInstrumentForm = new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
             $paymentInstrumentForm->setPan('4111111111111111');
@@ -10175,7 +10203,6 @@ paths:
           $ref: '#/responses/NotFound'
         '422':
           $ref: '#/responses/InvalidDataError'
-          description: Invalid data was sent
       summary: Create or update user with predefined ID
       tags:
         - Users
@@ -10228,7 +10255,6 @@ paths:
           $ref: '#/responses/NotFound'
         '422':
           $ref: '#/responses/InvalidDataError'
-          description: Invalid data was sent
       summary: Updates user's password with the specified newPassword
       tags:
         - Users
@@ -11211,13 +11237,13 @@ definitions:
       accountType:
         description: Banks's Account type. Required if bank account is not created from Token
         type: string
+      address:
+        allOf:
+          - $ref: '#/definitions/ContactObject'
+        description: The Address. Required if bank account is not created from Token
       bankName:
         description: Bank's name.
         type: string
-      contactId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The Contact ID. Required if bank account is not created from Token
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -11625,6 +11651,8 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: The contact customer ID
+      emails:
+        $ref: '#/definitions/ContactEmails'
       firstName:
         description: The contact first name
         type: string
@@ -11639,9 +11667,8 @@ definitions:
       organization:
         description: The contact organization
         type: string
-      phoneNumber:
-        description: The contact phone number
-        type: string
+      phoneNumbers:
+        $ref: '#/definitions/ContactPhoneNumbers'
       postalCode:
         description: The contact postal code
         maxLength: 10
@@ -11655,6 +11682,24 @@ definitions:
           - $ref: '#/definitions/ServerTimestamp'
         description: The contact updated time
     type: object
+  ContactEmails:
+    description: The contact emails
+    items:
+      properties:
+        label:
+          description: The email label
+          type: string
+        primary:
+          description: True if email is primary
+          type: boolean
+        value:
+          description: The email value
+          type: string
+      required:
+        - label
+        - value
+      type: object
+    type: array
   ContactLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -11667,6 +11712,64 @@ definitions:
     required:
       - rel
     type: object
+  ContactObject:
+    properties:
+      address:
+        description: The contact street address
+        maxLength: 60
+        type: string
+      address2:
+        description: The contact street address (second line)
+        maxLength: 60
+        type: string
+      city:
+        description: The contact city
+        maxLength: 45
+        type: string
+      country:
+        description: The contact country ISO Alpha-2 code
+        pattern: '^[A-Z]{2}$'
+        type: string
+      emails:
+        $ref: '#/definitions/ContactEmails'
+      firstName:
+        description: The contact first name
+        type: string
+      lastName:
+        description: The contact last name
+        type: string
+      organization:
+        description: The contact organization
+        type: string
+      phoneNumbers:
+        $ref: '#/definitions/ContactPhoneNumbers'
+      postalCode:
+        description: The contact postal code
+        maxLength: 10
+        type: string
+      region:
+        description: The contact region (state)
+        maxLength: 45
+        type: string
+    type: object
+  ContactPhoneNumbers:
+    description: The contact phone numbers
+    items:
+      properties:
+        label:
+          description: The phone label
+          type: string
+        primary:
+          description: True if phone is primary
+          type: boolean
+        value:
+          description: The phone value
+          type: string
+      required:
+        - label
+        - value
+      type: object
+    type: array
   Coupon:
     description: Coupons and Discounts
     properties:
@@ -11962,14 +12065,6 @@ definitions:
         $ref: '#/definitions/ResourceCustomFields'
       defaultPaymentInstrument:
         $ref: '#/definitions/PaymentInstrument'
-      email:
-        description: The customer email
-        format: email
-        maxLength: 100
-        type: string
-      firstName:
-        description: The customer first name
-        type: string
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -11979,9 +12074,8 @@ definitions:
         description: The customer IP
         format: ipv4
         type: string
-      lastName:
-        description: The customer last name
-        type: string
+      primaryAddress:
+        $ref: '#/definitions/ContactObject'
       updatedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -12792,6 +12886,7 @@ definitions:
       - Optimal
       - PandaGateway
       - Payeezy
+      - Payflow
       - PayPal
       - Payr
       - Payvision
@@ -13031,10 +13126,10 @@ definitions:
         format: double
         readOnly: true
         type: number
-      billingContactId:
+      billingAddress:
         allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Invoice's billing contact ID
+          - $ref: '#/definitions/ContactObject'
+        description: Invoice's billing address
       closedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -13050,10 +13145,10 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: The customer's ID
-      deliveryContactId:
+      deliveryAddress:
         allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Invoice's delivery contact ID
+          - $ref: '#/definitions/ContactObject'
+        description: Invoice's delivery address
       discounts:
         description: Discounts applied
         items:
@@ -13773,10 +13868,10 @@ definitions:
         minItems: 1
         readOnly: true
         type: array
-      billingContactId:
+      billingAddress:
         allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The Contact ID. Required if PayPal account is not created from Token
+          - $ref: '#/definitions/ContactObject'
+        description: Billing Address. Required if PayPal account is not created from Token
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -13837,6 +13932,32 @@ definitions:
           - gatewayConfig
         type: object
     description: Payeezy Gateway config
+  Payflow:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            description: Payflow credentials object
+            properties:
+              password:
+                description: The password you defined while registering for the account.
+                format: password
+                type: string
+              user:
+                description: 'If you set up one or more additional users on the account, this value is the ID of the user authorized to process transactions. If, however, you have not set up additional users, USER has the same value as VENDOR'
+                type: string
+              vendor:
+                description: Your merchant login ID created when you registered for the account.
+                type: string
+            required:
+              - user
+              - vendor
+              - password
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Payflow config
   Payment:
     properties:
       _links:
@@ -13855,9 +13976,10 @@ definitions:
         description: The payment amount
         format: double
         type: integer
-      billingContactId:
-        description: Billing Contact ID
-        type: string
+      billingAddress:
+        allOf:
+          - $ref: '#/definitions/ContactObject'
+        description: Billing Address
       createdBy:
         description: The process that created this payment
         type: string
@@ -13963,10 +14085,10 @@ definitions:
         description: Payment Card bank name
         readOnly: true
         type: string
-      billingContactId:
+      billingAddress:
         allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: The Billing Contact ID. Required if card is creating not from Token
+          - $ref: '#/definitions/ContactObject'
+        description: The Billing Address. Required if card is creating not from Token
       bin:
         description: The card's bin (the PAN's first 6 digits)
         format: bin
@@ -14145,51 +14267,26 @@ definitions:
         minItems: 1
         readOnly: true
         type: array
-      address:
-        description: Customer's billing address 1
-        type: string
-      address2:
-        description: Customer's billing address 2
-        type: string
-      city:
-        description: Billing address city
-        type: string
-      country:
-        description: Billing country - Two letter code
-        type: string
+      billingAddress:
+        allOf:
+          - $ref: '#/definitions/ContactObject'
+        description: The Address. Required if bank account is not created from Token
       fingerprint:
         description: Device fingerprint hash
-        type: string
-      firstName:
-        description: First name on payment card
         type: string
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: The token identifier string
         readOnly: true
-      lastName:
-        description: Last name on payment card
-        type: string
       method:
         $ref: '#/definitions/Method'
         description: Payment Method
       paymentInstrument:
         $ref: '#/definitions/PaymentTokenInstrument'
-      phoneNumber:
-        description: Phone number
-        type: string
-      postalCode:
-        description: Billing postal code
-        type: string
-      region:
-        description: Billing region
-        type: string
     required:
       - method
       - paymentInstrument
-      - firstName
-      - lastName
     type: object
   PaymentTokenInstrument:
     description: Payment Token instrument object
@@ -15213,10 +15310,10 @@ definitions:
         default: true
         description: Autopay determines if a payment attempt will be automatic
         type: boolean
-      billingContactId:
+      billingAddress:
         allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Unique id for each billing contact
+          - $ref: '#/definitions/ContactObject'
+        description: Billing address
       cancelCategory:
         description: Cancel category
         enum:
@@ -15261,10 +15358,10 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: Unique id for each customer
-      deliveryContactId:
+      deliveryAddress:
         allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Unique id for each delivery contact
+          - $ref: '#/definitions/ContactObject'
+        description: Delivery address
       endTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -15647,10 +15744,10 @@ definitions:
         format: double
         readOnly: true
         type: number
-      billingContactId:
+      billingAddress:
         allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: Billing Contact ID
+          - $ref: '#/definitions/ContactObject'
+        description: Billing Address
       bin:
         description: Payment Card BIN
         format: bin

@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  title: StorSimpleSeries8000ManagementClient
+  title: StorSimple8000SeriesManagementClient
   version: '2017-06-01'
   x-apisguru-categories:
     - cloud
@@ -38,6 +38,13 @@ parameters:
     description: The api version
     in: query
     name: api-version
+    required: true
+    type: string
+    x-ms-skip-url-encoding: true
+  deviceNameParameter:
+    description: The device name
+    in: path
+    name: deviceName
     required: true
     type: string
     x-ms-skip-url-encoding: true
@@ -270,6 +277,31 @@ paths:
       tags:
         - AccessControlRecords
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/alerts':
+    get:
+      deprecated: false
+      description: Retrieves all the alerts in a manager.
+      operationId: Alerts_ListByManager
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: OData Filter options
+          in: query
+          name: $filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The collection of alerts.
+          schema:
+            $ref: '#/definitions/AlertList'
+      tags:
+        - Alerts
+      x-ms-odata: '#/definitions/AlertFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/bandwidthSettings':
     get:
       deprecated: false
@@ -365,6 +397,27 @@ paths:
       tags:
         - BandwidthSettings
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/clearAlerts':
+    post:
+      deprecated: false
+      description: Clear the alerts.
+      operationId: Alerts_Clear
+      parameters:
+        - description: The clear alert request.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ClearAlertRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: Successfully cleared the alerts.
+      tags:
+        - Alerts
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/configureDevice':
     post:
       deprecated: false
@@ -418,12 +471,7 @@ paths:
       description: Deletes the device.
       operationId: Devices_Delete
       parameters:
-        - description: The device name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
@@ -441,12 +489,7 @@ paths:
       description: Returns the properties of the specified device.
       operationId: Devices_Get
       parameters:
-        - description: The device name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
@@ -468,12 +511,7 @@ paths:
       description: Patches the device.
       operationId: Devices_Update
       parameters:
-        - description: The device Name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - description: Patch representation of the device.
           in: body
           name: parameters
@@ -491,18 +529,439 @@ paths:
             $ref: '#/definitions/Device'
       tags:
         - Devices
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/alertSettings/default':
+    get:
+      deprecated: false
+      description: Gets the alert settings of the specified device.
+      operationId: DeviceSettings_GetAlertSettings
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The Alert settings.
+          schema:
+            $ref: '#/definitions/AlertSettings'
+      tags:
+        - DeviceSettings
+    put:
+      deprecated: false
+      description: Creates or updates the alert settings of the specified device.
+      operationId: DeviceSettings_CreateOrUpdateAlertSettings
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The alert settings to be added or updated.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/AlertSettings'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the alert settings.
+          schema:
+            $ref: '#/definitions/AlertSettings'
+        '202':
+          description: Accepted the request to create or update the alert settings.
+      tags:
+        - DeviceSettings
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/authorizeForServiceEncryptionKeyRollover':
+    post:
+      deprecated: false
+      description: Authorizes the specified device for service data encryption key rollover.
+      operationId: Devices_AuthorizeForServiceEncryptionKeyRollover
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: Successfully authorized the device for service encryption key rollover
+      tags:
+        - Devices
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupPolicies':
+    get:
+      deprecated: false
+      description: Gets all the backup policies in a device.
+      operationId: BackupPolicies_ListByDevice
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of backup policies.
+          schema:
+            $ref: '#/definitions/BackupPolicyList'
+      tags:
+        - BackupPolicies
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupPolicies/{backupPolicyName}':
+    delete:
+      deprecated: false
+      description: Deletes the backup policy.
+      operationId: BackupPolicies_Delete
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The name of the backup policy.
+          in: path
+          name: backupPolicyName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to delete the backup policy.
+        '204':
+          description: Successfully deleted the backup policy.
+      tags:
+        - BackupPolicies
+      x-ms-long-running-operation: true
+    get:
+      deprecated: false
+      description: Gets the properties of the specified backup policy name.
+      operationId: BackupPolicies_Get
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The name of backup policy to be fetched.
+          in: path
+          name: backupPolicyName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The backup policy.
+          schema:
+            $ref: '#/definitions/BackupPolicy'
+      tags:
+        - BackupPolicies
+    put:
+      deprecated: false
+      description: Creates or updates the backup policy.
+      operationId: BackupPolicies_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The name of the backup policy to be created/updated.
+          in: path
+          name: backupPolicyName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The backup policy.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/BackupPolicy'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the backup policy.
+          schema:
+            $ref: '#/definitions/BackupPolicy'
+        '202':
+          description: Accepted the request to create or update the backup policy.
+      tags:
+        - BackupPolicies
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupPolicies/{backupPolicyName}/backup':
+    post:
+      deprecated: false
+      description: Backup the backup policy now.
+      operationId: BackupPolicies_BackupNow
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The backup policy name.
+          in: path
+          name: backupPolicyName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The backup Type. This can be cloudSnapshot or localSnapshot.
+          in: query
+          name: backupType
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to backup the backup policy.
+        '204':
+          description: Successfully completed backup of the backup policy.
+      tags:
+        - BackupPolicies
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupPolicies/{backupPolicyName}/schedules':
+    get:
+      deprecated: false
+      description: Gets all the backup schedules in a backup policy.
+      operationId: BackupSchedules_ListByBackupPolicy
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The backup policy name.
+          in: path
+          name: backupPolicyName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of backup schedules.
+          schema:
+            $ref: '#/definitions/BackupScheduleList'
+      tags:
+        - BackupSchedules
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backupPolicies/{backupPolicyName}/schedules/{backupScheduleName}':
+    delete:
+      deprecated: false
+      description: Deletes the backup schedule.
+      operationId: BackupSchedules_Delete
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The backup policy name.
+          in: path
+          name: backupPolicyName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The name the backup schedule.
+          in: path
+          name: backupScheduleName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to delete the backup schedule.
+        '204':
+          description: Successfully deleted the backup schedule.
+      tags:
+        - BackupSchedules
+      x-ms-long-running-operation: true
+    get:
+      deprecated: false
+      description: Gets the properties of the specified backup schedule name.
+      operationId: BackupSchedules_Get
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The backup policy name.
+          in: path
+          name: backupPolicyName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The name of the backup schedule to be fetched
+          in: path
+          name: backupScheduleName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The backup schedule.
+          schema:
+            $ref: '#/definitions/BackupSchedule'
+      tags:
+        - BackupSchedules
+    put:
+      deprecated: false
+      description: Creates or updates the backup schedule.
+      operationId: BackupSchedules_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The backup policy name.
+          in: path
+          name: backupPolicyName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The backup schedule name.
+          in: path
+          name: backupScheduleName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The backup schedule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/BackupSchedule'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the backup schedule.
+          schema:
+            $ref: '#/definitions/BackupSchedule'
+        '202':
+          description: Accepted the request to create or update the backup schedule.
+      tags:
+        - BackupSchedules
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups':
+    get:
+      deprecated: false
+      description: Retrieves all the backups in a device.
+      operationId: Backups_ListByDevice
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: OData Filter options
+          in: query
+          name: $filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The collection of backups.
+          schema:
+            $ref: '#/definitions/BackupList'
+      tags:
+        - Backups
+      x-ms-odata: '#/definitions/BackupFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups/{backupName}':
+    delete:
+      deprecated: false
+      description: Deletes the backup.
+      operationId: Backups_Delete
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The backup name.
+          in: path
+          name: backupName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to delete the backup.
+        '204':
+          description: Successfully deleted the backup.
+      tags:
+        - Backups
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups/{backupName}/elements/{backupElementName}/clone':
+    post:
+      deprecated: false
+      description: Clones the backup element as a new volume.
+      operationId: Backups_Clone
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The backup name.
+          in: path
+          name: backupName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The backup element name.
+          in: path
+          name: backupElementName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The clone request object.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CloneRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully cloned the backup.
+        '202':
+          description: Accepted the request to clone.
+      tags:
+        - Backups
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/backups/{backupName}/restore':
+    post:
+      deprecated: false
+      description: Restores the backup on the device.
+      operationId: Backups_Restore
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The backupSet name
+          in: path
+          name: backupName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully restored the backup.
+        '202':
+          description: Accepted the request to restore.
+      tags:
+        - Backups
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/deactivate':
     post:
       deprecated: false
       description: Deactivates the device.
       operationId: Devices_Deactivate
       parameters:
-        - description: The device name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
@@ -515,18 +974,220 @@ paths:
       tags:
         - Devices
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/hardwareComponentGroups':
+    get:
+      deprecated: false
+      description: Lists the hardware component groups at device-level.
+      operationId: HardwareComponentGroups_ListByDevice
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully fetched hardware component groups.
+          schema:
+            $ref: '#/definitions/HardwareComponentGroupList'
+      tags:
+        - HardwareComponentGroups
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/hardwareComponentGroups/{hardwareComponentGroupName}/changeControllerPowerState':
+    post:
+      deprecated: false
+      description: Changes the power state of the controller.
+      operationId: HardwareComponentGroups_ChangeControllerPowerState
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The hardware component group name.
+          in: path
+          name: hardwareComponentGroupName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The controller power state change request.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ControllerPowerStateChangeRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to change power state of the controller.
+        '204':
+          description: Successfully changed the power state of the controller.
+      tags:
+        - HardwareComponentGroups
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/installUpdates':
+    post:
+      deprecated: false
+      description: Downloads and installs the updates on the device.
+      operationId: Devices_InstallUpdates
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to download and install updates.
+        '204':
+          description: Successfully installed updates.
+      tags:
+        - Devices
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/jobs':
+    get:
+      deprecated: false
+      description: 'Gets all the jobs for specified device. With optional OData query parameters, a filtered set of jobs is returned.'
+      operationId: Jobs_ListByDevice
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: OData Filter options
+          in: query
+          name: $filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The collection of jobs for the specified manager and device name.
+          schema:
+            $ref: '#/definitions/JobList'
+      tags:
+        - Jobs
+      x-ms-odata: '#/definitions/JobFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/jobs/{jobName}':
+    get:
+      deprecated: false
+      description: Gets the details of the specified job name.
+      operationId: Jobs_Get
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The job Name.
+          in: path
+          name: jobName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The job.
+          schema:
+            $ref: '#/definitions/Job'
+      tags:
+        - Jobs
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/jobs/{jobName}/cancel':
+    post:
+      deprecated: false
+      description: Cancels a job on the device.
+      operationId: Jobs_Cancel
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The jobName.
+          in: path
+          name: jobName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to cancel a deviceJob
+        '204':
+          description: Successfully cancelled the deviceJob
+      tags:
+        - Jobs
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/listFailoverSets':
+    post:
+      deprecated: false
+      description: Returns all failover sets for a given device and their eligibility for participating in a failover. A failover set refers to a set of volume containers that need to be failed-over as a single unit to maintain data integrity.
+      operationId: Devices_ListFailoverSets
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Returns the list of failoversets on the given device.
+          schema:
+            $ref: '#/definitions/FailoverSetsList'
+      tags:
+        - Devices
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/networkSettings/default':
+    get:
+      deprecated: false
+      description: Gets the network settings of the specified device.
+      operationId: DeviceSettings_GetNetworkSettings
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The Network settings.
+          schema:
+            $ref: '#/definitions/NetworkSettings'
+      tags:
+        - DeviceSettings
+    patch:
+      deprecated: false
+      description: Updates the network settings on the specified device.
+      operationId: DeviceSettings_UpdateNetworkSettings
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The network settings to be updated.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/NetworkSettingsPatch'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The Network settings.
+          schema:
+            $ref: '#/definitions/NetworkSettings'
+        '202':
+          description: Accepted the request to update network settings.
+      tags:
+        - DeviceSettings
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/publicEncryptionKey':
     post:
       deprecated: false
       description: Returns the public encryption key of the device.
       operationId: Managers_GetDevicePublicEncryptionKey
       parameters:
-        - description: The device name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
@@ -538,18 +1199,141 @@ paths:
             $ref: '#/definitions/PublicKey'
       tags:
         - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/publishSupportPackage':
+    post:
+      deprecated: false
+      description: Triggers collection of support package on a device.
+      operationId: Devices_PublishSupportPackage
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The publish support package request.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SupportPackageRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to publish support package of the device.
+        '204':
+          description: Successfully published the support package.
+      tags:
+        - Devices
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/scanForUpdates':
+    post:
+      deprecated: false
+      description: Scans for updates on the device.
+      operationId: Devices_ScanForUpdates
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to scan for updates.
+        '204':
+          description: Successfully scanned for updates.
+      tags:
+        - Devices
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/sendTestAlertEmail':
+    post:
+      deprecated: false
+      description: Sends a test alert email.
+      operationId: Alerts_SendTestEmail
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The send test alert email request.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SendTestAlertEmailRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: Successfully sent the test email.
+      tags:
+        - Alerts
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/timeSettings/default':
+    get:
+      deprecated: false
+      description: Gets the time settings of the specified device.
+      operationId: DeviceSettings_GetTimeSettings
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The time settings.
+          schema:
+            $ref: '#/definitions/TimeSettings'
+      tags:
+        - DeviceSettings
+    put:
+      deprecated: false
+      description: Creates or updates the time settings of the specified device.
+      operationId: DeviceSettings_CreateOrUpdateTimeSettings
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The time settings to be added or updated.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/TimeSettings'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the time settings.
+          schema:
+            $ref: '#/definitions/TimeSettings'
+        '202':
+          description: Accepted the request to create or update the time settings.
+      tags:
+        - DeviceSettings
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/updateSummary/default':
+    get:
+      deprecated: false
+      description: Returns the update summary of the specified device name.
+      operationId: Devices_GetUpdateSummary
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The update summary.
+          schema:
+            $ref: '#/definitions/Updates'
+      tags:
+        - Devices
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers':
     get:
       deprecated: false
       description: Gets all the volume containers in a device.
       operationId: VolumeContainers_ListByDevice
       parameters:
-        - description: The name of the device.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
@@ -568,12 +1352,7 @@ paths:
       description: Deletes the volume container.
       operationId: VolumeContainers_Delete
       parameters:
-        - description: The name of the device.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - description: The name of the volume container.
           in: path
           name: volumeContainerName
@@ -597,12 +1376,7 @@ paths:
       description: Gets the properties of the specified volume container name.
       operationId: VolumeContainers_Get
       parameters:
-        - description: The name of the device.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - description: The name of the volume container.
           in: path
           name: volumeContainerName
@@ -625,12 +1399,7 @@ paths:
       description: Creates or updates the volume container.
       operationId: VolumeContainers_CreateOrUpdate
       parameters:
-        - description: The name of the device.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - description: The name of the volume container.
           in: path
           name: volumeContainerName
@@ -663,12 +1432,7 @@ paths:
       description: Retrieves all the volumes in a volume container.
       operationId: Volumes_ListByVolumeContainer
       parameters:
-        - description: The device name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - description: The volume container name.
           in: path
           name: volumeContainerName
@@ -693,12 +1457,7 @@ paths:
       description: Deletes the volume.
       operationId: Volumes_Delete
       parameters:
-        - description: The device name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - description: The volume container name.
           in: path
           name: volumeContainerName
@@ -728,12 +1487,7 @@ paths:
       description: Returns the properties of the specified volume name.
       operationId: Volumes_Get
       parameters:
-        - description: The device name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - description: The volume container name.
           in: path
           name: volumeContainerName
@@ -762,12 +1516,7 @@ paths:
       description: Creates or updates the volume.
       operationId: Volumes_CreateOrUpdate
       parameters:
-        - description: The device name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - description: The volume container name.
           in: path
           name: volumeContainerName
@@ -806,12 +1555,7 @@ paths:
       description: Retrieves all the volumes in a device.
       operationId: Volumes_ListByDevice
       parameters:
-        - description: The device name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/deviceNameParameter'
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/managerNameParameter'
@@ -823,6 +1567,66 @@ paths:
             $ref: '#/definitions/VolumeList'
       tags:
         - Volumes
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{sourceDeviceName}/failover':
+    post:
+      deprecated: false
+      description: Failovers a set of volume containers from a specified source device to a target device.
+      operationId: Devices_Failover
+      parameters:
+        - description: The source device name on which failover is performed.
+          in: path
+          name: sourceDeviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: FailoverRequest containing the source device and the list of volume containers to be failed over.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/FailoverRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to failover the device.
+        '204':
+          description: Successfully completed failover of the device.
+      tags:
+        - Devices
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{sourceDeviceName}/listFailoverTargets':
+    post:
+      deprecated: false
+      description: 'Given a list of volume containers to be failed over from a source device, this method returns the eligibility result, as a failover target, for all devices under that resource.'
+      operationId: Devices_ListFailoverTargets
+      parameters:
+        - description: The source device name on which failover is performed.
+          in: path
+          name: sourceDeviceName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: ListFailoverTargetsRequest containing the list of volume containers to be failed over.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ListFailoverTargetsRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The list of target devices and their eligibility for failover.
+          schema:
+            $ref: '#/definitions/FailoverTargetsList'
+      tags:
+        - Devices
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/encryptionSettings/default':
     get:
@@ -921,6 +1725,55 @@ paths:
             $ref: '#/definitions/ManagerExtendedInfo'
       tags:
         - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/features':
+    get:
+      deprecated: false
+      description: Lists the features and their support status
+      operationId: Managers_ListFeatureSupportStatus
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: OData Filter options
+          in: query
+          name: $filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The collection of features.
+          schema:
+            $ref: '#/definitions/FeatureList'
+      tags:
+        - Managers
+      x-ms-odata: '#/definitions/FeatureFilter'
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/jobs':
+    get:
+      deprecated: false
+      description: 'Gets all the jobs for the specified manager. With optional OData query parameters, a filtered set of jobs is returned.'
+      operationId: Jobs_ListByManager
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: OData Filter options
+          in: query
+          name: $filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The collection of device jobs on all devices under the specified manager.
+          schema:
+            $ref: '#/definitions/JobList'
+      tags:
+        - Jobs
+      x-ms-odata: '#/definitions/JobFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/listActivationKey':
     post:
       deprecated: false
@@ -1112,17 +1965,17 @@ definitions:
   AccessControlRecord:
     allOf:
       - $ref: '#/definitions/BaseModel'
-    description: The access control record
+    description: The access control record.
     properties:
       properties:
         $ref: '#/definitions/AccessControlRecordProperties'
-        description: Properties of AccessControlRecord
+        description: The properties of access control record.
         x-ms-client-flatten: true
     required:
       - properties
     type: object
   AccessControlRecordList:
-    description: Collection of AccessControlRecords
+    description: The collection of access control records.
     properties:
       value:
         description: The value.
@@ -1133,24 +1986,263 @@ definitions:
       - value
     type: object
   AccessControlRecordProperties:
-    description: Properties of access control record
+    description: The properties of access control record.
     properties:
       initiatorName:
-        description: The Iscsi initiator name (IQN)
+        description: The iSCSI initiator name (IQN).
         type: string
       volumeCount:
-        description: The number of volumes using this Access Control Record
+        description: The number of volumes using the access control record.
         format: int32
         readOnly: true
         type: integer
     required:
       - initiatorName
     type: object
+  AcsConfiguration:
+    description: The ACS configuration.
+    properties:
+      namespace:
+        description: The namespace.
+        type: string
+      realm:
+        description: The realm.
+        type: string
+      serviceUrl:
+        description: The service URL.
+        type: string
+    required:
+      - namespace
+      - realm
+      - serviceUrl
+    type: object
+  Alert:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The alert.
+    properties:
+      properties:
+        $ref: '#/definitions/AlertProperties'
+        description: The properties of the alert.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  AlertErrorDetails:
+    description: The details of the error for which the alert was raised
+    properties:
+      errorCode:
+        description: The error code
+        type: string
+      errorMessage:
+        description: The error message
+        type: string
+      occurences:
+        description: The number of occurences
+        format: int32
+        type: integer
+    type: object
+  AlertFilter:
+    description: The OData filters to be used for Alert
+    properties:
+      appearedOnTime:
+        description: Specifies the appeared time (in UTC) of the alerts to be filtered. Only 'Greater-Than' and 'Lesser-Than' operators are supported for this property.
+        format: date-time
+        type: string
+      severity:
+        description: Specifies the severity of the alerts to be filtered. Only 'Equality' operator is supported for this property.
+        enum:
+          - Informational
+          - Warning
+          - Critical
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AlertSeverity
+      sourceName:
+        description: Specifies the source name of the alerts to be filtered. Only 'Equality' operator is supported for this property.
+        type: string
+      sourceType:
+        description: Specifies the source type of the alerts to be filtered. Only 'Equality' operator is supported for this property.
+        enum:
+          - Resource
+          - Device
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AlertSourceType
+      status:
+        description: Specifies the status of the alerts to be filtered. Only 'Equality' operator is supported for this property.
+        enum:
+          - Active
+          - Cleared
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AlertStatus
+    type: object
+  AlertList:
+    description: The collection of alerts.
+    properties:
+      nextLink:
+        description: The URI of the next page of alerts.
+        type: string
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/Alert'
+        type: array
+    required:
+      - value
+    type: object
+  AlertNotificationProperties:
+    description: The properties of the alert notification settings.
+    properties:
+      additionalRecipientEmailList:
+        description: The alert notification email list.
+        items:
+          type: string
+        type: array
+      alertNotificationCulture:
+        description: The alert notification culture.
+        type: string
+      emailNotification:
+        description: Indicates whether email notification enabled or not.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AlertEmailNotificationStatus
+      notificationToServiceOwners:
+        description: The value indicating whether alert notification enabled for admin or not.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AlertEmailNotificationStatus
+    required:
+      - emailNotification
+    type: object
+  AlertProperties:
+    description: The properties of alert
+    properties:
+      alertType:
+        description: The type of the alert
+        type: string
+      appearedAtSourceTime:
+        description: The source time at which the alert was raised
+        format: date-time
+        type: string
+      appearedAtTime:
+        description: The UTC time at which the alert was raised
+        format: date-time
+        type: string
+      clearedAtSourceTime:
+        description: The source time at which the alert was cleared
+        format: date-time
+        type: string
+      clearedAtTime:
+        description: The UTC time at which the alert was cleared
+        format: date-time
+        type: string
+      detailedInformation:
+        additionalProperties:
+          type: string
+        description: More details about the alert
+        type: object
+      errorDetails:
+        $ref: '#/definitions/AlertErrorDetails'
+        description: The details of the error for which the alert was raised
+      recommendation:
+        description: The recommended action for the issue raised in the alert
+        type: string
+      resolutionReason:
+        description: The reason for resolving the alert
+        type: string
+      scope:
+        description: The scope of the alert
+        enum:
+          - Resource
+          - Device
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AlertScope
+      severity:
+        description: The severity of the alert
+        enum:
+          - Informational
+          - Warning
+          - Critical
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AlertSeverity
+      source:
+        $ref: '#/definitions/AlertSource'
+        description: The source at which the alert was raised
+      status:
+        description: The current status of the alert
+        enum:
+          - Active
+          - Cleared
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AlertStatus
+      title:
+        description: The title of the alert
+        type: string
+    required:
+      - title
+      - scope
+      - alertType
+      - appearedAtTime
+      - appearedAtSourceTime
+      - source
+      - severity
+      - status
+    type: object
+  AlertSettings:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The alert settings.
+    properties:
+      properties:
+        $ref: '#/definitions/AlertNotificationProperties'
+        description: The properties of the alert notification settings.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  AlertSource:
+    description: The source details at which the alert was raised
+    properties:
+      alertSourceType:
+        description: The source type of the alert
+        enum:
+          - Resource
+          - Device
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AlertSourceType
+      name:
+        description: The name of the source
+        type: string
+      timeZone:
+        description: The time zone of the source
+        type: string
+    type: object
   AsymmetricEncryptedSecret:
     description: Represent the secrets intended for encryption with asymmetric key pair.
     properties:
       encryptionAlgorithm:
-        description: Algorithm used to encrypt "Value".
+        description: The algorithm used to encrypt "Value".
         enum:
           - None
           - AES256
@@ -1199,7 +2291,7 @@ definitions:
         description: The localized friendly form of the resource provider name - it is expected to also include the publisher/company responsible. It should use Title Casing and begin with 'Microsoft' for 1st party services.
         type: string
       resource:
-        description: 'The localized friendly form of the resource type related to this action/operation - it should match the public documentation for the resource provider. It should use Title Casing - for examples, please refer to the ''name'' section'
+        description: 'The localized friendly form of the resource type related to this action/operation - it should match the public documentation for the resource provider. It should use Title Casing - for examples, please refer to the ''name'' section.'
         type: string
     type: object
   AvailableProviderOperationList:
@@ -1220,8 +2312,274 @@ definitions:
     description: Represents properties of AvailableProviderOperation
     properties: {}
     type: object
+  Backup:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The backup.
+    properties:
+      properties:
+        $ref: '#/definitions/BackupProperties'
+        description: The properties of the backup.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  BackupElement:
+    description: The backup element.
+    properties:
+      elementId:
+        description: The path ID that uniquely identifies the backup element.
+        type: string
+      elementName:
+        description: The name of the backup element.
+        type: string
+      elementType:
+        description: The hierarchical type of the backup element.
+        type: string
+      sizeInBytes:
+        description: The size in bytes.
+        format: int64
+        type: integer
+      volumeContainerId:
+        description: The path ID of the volume container.
+        type: string
+      volumeName:
+        description: The name of the volume.
+        type: string
+      volumeType:
+        description: The volume type.
+        enum:
+          - Tiered
+          - Archival
+          - LocallyPinned
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: VolumeType
+    required:
+      - elementId
+      - elementName
+      - elementType
+      - sizeInBytes
+      - volumeName
+      - volumeContainerId
+    type: object
+  BackupFilter:
+    description: The OData filters to be used for backups.
+    properties:
+      backupPolicyId:
+        description: Specifies the backupPolicyId of the backups to be filtered. Only 'Equality' operator is supported for this property.
+        type: string
+      createdTime:
+        description: Specifies the creation time of the backups to be filtered. Only 'Greater Than or Equal To' and 'Lesser Than or Equal To' operators are supported for this property.
+        format: date-time
+        type: string
+      volumeId:
+        description: Specifies the volumeId of the backups to be filtered. Only 'Equality' operator is supported for this property.
+        type: string
+    type: object
+  BackupList:
+    description: The collection of backups.
+    properties:
+      nextLink:
+        description: The NextLink.
+        type: string
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/Backup'
+        type: array
+    required:
+      - value
+    type: object
+  BackupPolicy:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The backup policy.
+    properties:
+      properties:
+        $ref: '#/definitions/BackupPolicyProperties'
+        description: The properties of the backup policy.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  BackupPolicyList:
+    description: The collection of backup policies.
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/BackupPolicy'
+        type: array
+    required:
+      - value
+    type: object
+  BackupPolicyProperties:
+    description: The properties of the backup policy.
+    properties:
+      backupPolicyCreationType:
+        description: The backup policy creation type. Indicates whether this was created through SaaS or through StorSimple Snapshot Manager.
+        enum:
+          - BySaaS
+          - BySSM
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupPolicyCreationType
+      lastBackupTime:
+        description: The time of the last backup for the backup policy.
+        format: date-time
+        readOnly: true
+        type: string
+      nextBackupTime:
+        description: The time of the next backup for the backup policy.
+        format: date-time
+        readOnly: true
+        type: string
+      scheduledBackupStatus:
+        description: Indicates whether atleast one of the schedules in the backup policy is active or not.
+        enum:
+          - Disabled
+          - Enabled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ScheduledBackupStatus
+      schedulesCount:
+        description: The count of schedules the backup policy contains.
+        format: int64
+        readOnly: true
+        type: integer
+      ssmHostName:
+        description: 'If the backup policy was created by StorSimple Snapshot Manager, then this field indicates the hostname of the StorSimple Snapshot Manager.'
+        readOnly: true
+        type: string
+      volumeIds:
+        description: The path IDs of the volumes which are part of the backup policy.
+        items:
+          type: string
+        type: array
+    required:
+      - volumeIds
+    type: object
+  BackupProperties:
+    description: The properties of the backup.
+    properties:
+      backupJobCreationType:
+        description: The backup job creation type.
+        enum:
+          - Adhoc
+          - BySchedule
+          - BySSM
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupJobCreationType
+      backupPolicyId:
+        description: The path ID of the backup policy.
+        type: string
+      backupType:
+        description: The type of the backup.
+        enum:
+          - LocalSnapshot
+          - CloudSnapshot
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupType
+      createdOn:
+        description: The time when the backup was created.
+        format: date-time
+        type: string
+      elements:
+        description: The backup elements.
+        items:
+          $ref: '#/definitions/BackupElement'
+        type: array
+      sizeInBytes:
+        description: The backup size in bytes.
+        format: int64
+        type: integer
+      ssmHostName:
+        description: The StorSimple Snapshot Manager host name.
+        type: string
+    required:
+      - createdOn
+      - sizeInBytes
+      - elements
+    type: object
+  BackupSchedule:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The backup schedule.
+    properties:
+      properties:
+        $ref: '#/definitions/BackupScheduleProperties'
+        description: The properties of the backup schedule.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  BackupScheduleList:
+    description: The backup schedule list.
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/BackupSchedule'
+        type: array
+    required:
+      - value
+    type: object
+  BackupScheduleProperties:
+    description: The properties of the backup schedule.
+    properties:
+      backupType:
+        description: The type of backup which needs to be taken.
+        enum:
+          - LocalSnapshot
+          - CloudSnapshot
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupType
+      lastSuccessfulRun:
+        description: The last successful backup run which was triggered for the schedule.
+        format: date-time
+        readOnly: true
+        type: string
+      retentionCount:
+        description: The number of backups to be retained.
+        format: int64
+        type: integer
+      scheduleRecurrence:
+        $ref: '#/definitions/ScheduleRecurrence'
+        description: The schedule recurrence.
+      scheduleStatus:
+        description: The schedule status.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ScheduleStatus
+      startTime:
+        description: The start time of the schedule.
+        format: date-time
+        type: string
+    required:
+      - scheduleRecurrence
+      - backupType
+      - retentionCount
+      - startTime
+      - scheduleStatus
+    type: object
   BandwidthRateSettingProperties:
-    description: The bandwidth rate properties.
+    description: The properties of the bandwidth setting.
     properties:
       schedules:
         description: The schedules.
@@ -1229,7 +2587,7 @@ definitions:
           $ref: '#/definitions/BandwidthSchedule'
         type: array
       volumeCount:
-        description: The number of volumes that uses the Bandwidth Setting.
+        description: The number of volumes that uses the bandwidth setting.
         format: int32
         readOnly: true
         type: integer
@@ -1237,10 +2595,10 @@ definitions:
       - schedules
     type: object
   BandwidthSchedule:
-    description: The schedule for a given Bandwidth setting.
+    description: The schedule for bandwidth setting.
     properties:
       days:
-        description: The days of the week.
+        description: The days of the week when this schedule is applicable.
         items:
           enum:
             - Sunday
@@ -1256,7 +2614,7 @@ definitions:
             name: DayOfWeek
         type: array
       rateInMbps:
-        description: The rate in MBPS.
+        description: The rate in Mbps.
         format: int32
         type: integer
       start:
@@ -1264,7 +2622,7 @@ definitions:
         description: The start time of the schdule.
       stop:
         $ref: '#/definitions/Time'
-        description: The stop time of the schdule.
+        description: The stop time of the schedule.
     required:
       - start
       - stop
@@ -1278,13 +2636,13 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/BandwidthRateSettingProperties'
-        description: The properties of the Bandwidth setting.
+        description: The properties of the bandwidth setting.
         x-ms-client-flatten: true
     required:
       - properties
     type: object
   BandwidthSettingList:
-    description: Collection of bandwidth setting entities
+    description: The collection of bandwidth setting entities.
     properties:
       value:
         description: The value.
@@ -1298,7 +2656,7 @@ definitions:
     description: Represents the base class for all other ARM object models
     properties:
       id:
-        description: The Path Id that uniquely identifies the object
+        description: The path ID that uniquely identifies the object.
         readOnly: true
         type: string
       kind:
@@ -1310,48 +2668,169 @@ definitions:
           modelAsString: false
           name: Kind
       name:
-        description: The name of the object
+        description: The name of the object.
         readOnly: true
         type: string
       type:
-        description: The hierarchical type of the object
+        description: The hierarchical type of the object.
         readOnly: true
         type: string
+    type: object
+  ChapSettings:
+    description: The Challenge-Handshake Authentication Protocol (CHAP) settings.
+    properties:
+      initiatorSecret:
+        $ref: '#/definitions/AsymmetricEncryptedSecret'
+        description: The CHAP initiator secret.
+      initiatorUser:
+        description: The CHAP initiator user.
+        type: string
+      targetSecret:
+        $ref: '#/definitions/AsymmetricEncryptedSecret'
+        description: The target secret.
+      targetUser:
+        description: The CHAP target user.
+        type: string
+    type: object
+  ClearAlertRequest:
+    description: The request for clearing the alert
+    properties:
+      alerts:
+        description: The list of alert IDs to be cleared
+        items:
+          type: string
+        type: array
+      resolutionMessage:
+        description: The resolution message while clearing the alert
+        type: string
+    required:
+      - alerts
+    type: object
+  CloneRequest:
+    description: The clone job request.
+    properties:
+      backupElement:
+        $ref: '#/definitions/BackupElement'
+        description: The backup element that is cloned.
+      targetAccessControlRecordIds:
+        description: The list of path IDs of the access control records to be associated to the new cloned volume.
+        items:
+          type: string
+        type: array
+      targetDeviceId:
+        description: The path ID of the device which will act as the clone target.
+        type: string
+      targetVolumeName:
+        description: The name of the new volume which will be created and the backup will be cloned into.
+        type: string
+    required:
+      - targetDeviceId
+      - targetVolumeName
+      - targetAccessControlRecordIds
+      - backupElement
     type: object
   ConfigureDeviceRequest:
     allOf:
       - $ref: '#/definitions/BaseModel'
-    description: Mandatory device configuration request
+    description: The mandatory device configuration request.
     properties:
       properties:
         $ref: '#/definitions/ConfigureDeviceRequestProperties'
-        description: Properties of the Configure device.
+        description: The properties of the configure device request.
         x-ms-client-flatten: true
     required:
       - properties
     type: object
   ConfigureDeviceRequestProperties:
-    description: Configure device properties
+    description: The properties of the configure device request.
     properties:
       currentDeviceName:
-        description: Current name of the device
+        description: The current name of the device.
         type: string
       dnsSettings:
         $ref: '#/definitions/SecondaryDNSSettings'
-        description: Secondary DNS Settings of the device.
+        description: The secondary DNS Settings of the device.
       friendlyName:
-        description: Friendly name for the device
+        description: The friendly name for the device.
         type: string
       networkInterfaceData0Settings:
         $ref: '#/definitions/NetworkInterfaceData0Settings'
-        description: Data 0 Network interface card settings.
+        description: The 'Data 0' network interface card settings.
       timeZone:
-        description: 'The device Time Zone. For eg: "Pacific Standard Time"'
+        description: 'The device time zone. For eg: "Pacific Standard Time"'
         type: string
     required:
       - friendlyName
       - currentDeviceName
       - timeZone
+    type: object
+  ControllerPowerStateChangeRequest:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The controller power state change request.
+    properties:
+      properties:
+        $ref: '#/definitions/ControllerPowerStateChangeRequestProperties'
+        description: The properties of the controller power state change request.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  ControllerPowerStateChangeRequestProperties:
+    description: The properties of the controller power state change request.
+    properties:
+      action:
+        description: The power state that the request is expecting for the controller of the device.
+        enum:
+          - Start
+          - Restart
+          - Shutdown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ControllerPowerStateAction
+      activeController:
+        description: The active controller that the request is expecting on the device.
+        enum:
+          - Unknown
+          - None
+          - Controller0
+          - Controller1
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ControllerId
+      controller0State:
+        description: The controller 0's status that the request is expecting on the device.
+        enum:
+          - NotPresent
+          - PoweredOff
+          - Ok
+          - Recovering
+          - Warning
+          - Failure
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ControllerStatus
+      controller1State:
+        description: The controller 1's status that the request is expecting on the device.
+        enum:
+          - NotPresent
+          - PoweredOff
+          - Ok
+          - Recovering
+          - Warning
+          - Failure
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ControllerStatus
+    required:
+      - action
+      - activeController
+      - controller0State
+      - controller1State
     type: object
   DNSSettings:
     description: The DNS(Domain Name Server) settings of a device.
@@ -1363,42 +2842,62 @@ definitions:
         description: The primary IPv6 DNS server for the device
         type: string
       secondaryDnsServers:
-        description: The secondary IPV4 DNS server for the device
+        description: The secondary IPv4 DNS server for the device
         items:
           type: string
         type: array
       secondaryIpv6DnsServers:
-        description: The secondary IPV6 DNS server for the device
+        description: The secondary IPv6 DNS server for the device
         items:
           type: string
         type: array
     type: object
+  DataStatistics:
+    description: 'The additional details related to the data related statistics of a job. Currently applicable only for Backup, Clone and Restore jobs.'
+    properties:
+      cloudData:
+        description: 'The number of bytes of data written to cloud, as part of the job.'
+        format: int64
+        type: integer
+      processedData:
+        description: 'The number of bytes of data processed till now, as part of the job.'
+        format: int64
+        type: integer
+      throughput:
+        description: 'The average throughput of data processed(bytes/sec), as part of the job.'
+        format: int64
+        type: integer
+      totalData:
+        description: 'The total bytes of data to be processed, as part of the job.'
+        format: int64
+        type: integer
+    type: object
   Device:
     allOf:
       - $ref: '#/definitions/BaseModel'
-    description: Represents a StorSimple device along with its properties
+    description: The StorSimple device.
     properties:
       properties:
         $ref: '#/definitions/DeviceProperties'
-        description: Collection of properties for the device
+        description: The properties of the StorSimple device.
         x-ms-client-flatten: true
     required:
       - properties
     type: object
   DeviceDetails:
-    description: Additional details having endpoint count and volume container count
+    description: The additional device details regarding the end point count and volume container count.
     properties:
       endpointCount:
-        description: Total number of endpoints that are currently on the device ( i.e. number of volumes)
+        description: The total number of endpoints that are currently on the device ( i.e. number of volumes).
         format: int32
         type: integer
       volumeContainerCount:
-        description: Total number of volume containers on the device
+        description: The total number of volume containers on the device.
         format: int32
         type: integer
     type: object
   DeviceList:
-    description: Collection of Devices
+    description: The collection of devices.
     properties:
       value:
         description: The value.
@@ -1409,31 +2908,31 @@ definitions:
       - value
     type: object
   DevicePatch:
-    description: Represents the patch request for the device.
+    description: The device patch.
     properties:
       properties:
         $ref: '#/definitions/DevicePatchProperties'
-        description: Properties of the device patch.
+        description: The properties of the device patch.
         x-ms-client-flatten: true
     required:
       - properties
     type: object
   DevicePatchProperties:
-    description: Patch Device properties.
+    description: The properties of the device patch.
     properties:
       deviceDescription:
         description: Short description given for the device
         type: string
     type: object
   DeviceProperties:
-    description: Encases all the properties of the Device
+    description: The properties of the StorSimple device.
     properties:
       activationTime:
         description: The UTC time at which the device was activated
         format: date-time
         type: string
       activeController:
-        description: The active controller.
+        description: The identifier of the active controller of the device.
         enum:
           - Unknown
           - None
@@ -1448,21 +2947,21 @@ definitions:
         format: int32
         type: integer
       availableLocalStorageInBytes:
-        description: Storage in bytes that is available locally on the device
+        description: The storage in bytes that is available locally on the device.
         format: int64
         type: integer
       availableTieredStorageInBytes:
-        description: Storage in bytes that is available on the device for tiered volumes
+        description: The storage in bytes that is available on the device for tiered volumes.
         format: int64
         type: integer
       culture:
-        description: 'Language culture setting on the device. For eg: "en-US"'
+        description: 'The language culture setting on the device. For eg: "en-US"'
         type: string
       details:
         $ref: '#/definitions/DeviceDetails'
-        description: Additional details having endpoint count and volume container count
+        description: The additional device details regarding the end point count and volume container count.
       deviceConfigurationStatus:
-        description: Current state of device configuration
+        description: The current configuration status of the device.
         enum:
           - Complete
           - Pending
@@ -1474,13 +2973,13 @@ definitions:
         description: The device description.
         type: string
       deviceLocation:
-        description: The location of the Virtual appliance
+        description: The location of the virtual appliance.
         type: string
       deviceSoftwareVersion:
-        description: Version number of the software running on the device
+        description: The version number of the software running on the device.
         type: string
       deviceType:
-        description: Type of the device
+        description: The type of the device.
         enum:
           - Invalid
           - Series8000VirtualAppliance
@@ -1493,34 +2992,34 @@ definitions:
         description: The friendly name of the device.
         type: string
       friendlySoftwareName:
-        description: Friendly name for the software version
+        description: The friendly name of the software running on the device.
         type: string
       friendlySoftwareVersion:
         description: The device friendly software version.
         type: string
       modelDescription:
-        description: Name of the device model
+        description: The device model.
         type: string
       networkInterfaceCardCount:
         description: The number of network interface cards
         format: int32
         type: integer
       provisionedLocalStorageInBytes:
-        description: Storage in bytes that has been provisioned on the device
+        description: The storage in bytes that has been provisioned on the device.
         format: int64
         type: integer
       provisionedTieredStorageInBytes:
-        description: Storage in bytes that has been provisioned on the device for tiered volumes
+        description: The storage in bytes that has been provisioned on the device for tiered volumes.
         format: int64
         type: integer
       rolloverDetails:
         $ref: '#/definitions/DeviceRolloverDetails'
-        description: Additional details for service data encryption key rollover
+        description: The additional device details for the service data encryption key rollover.
       serialNumber:
         description: The serial number.
         type: string
       status:
-        description: Current status of the device
+        description: The current status of the device.
         enum:
           - Unknown
           - Online
@@ -1538,14 +3037,14 @@ definitions:
           modelAsString: false
           name: DeviceStatus
       targetIqn:
-        description: The target iqn.
+        description: The target IQN.
         type: string
       totalTieredStorageInBytes:
-        description: Storage in bytes of the total tiered storage available on the device
+        description: The total tiered storage available on the device in bytes.
         format: int64
         type: integer
       usingStorageInBytes:
-        description: Storage in bytes that is being currently used including both local and cloud
+        description: 'The storage in bytes that is currently being used on the device, including both local and cloud.'
         format: int64
         type: integer
       virtualMachineApiType:
@@ -1574,10 +3073,10 @@ definitions:
       - friendlySoftwareVersion
     type: object
   DeviceRolloverDetails:
-    description: Additional device details for Service data encryption key rollover
+    description: The additional device details for the service data encryption key rollover.
     properties:
       authorizationEligibility:
-        description: Eligibility status of device for Service data encryption key rollover ( i.e. number of volumes)
+        description: The eligibility status of device for service data encryption key rollover.
         enum:
           - InEligible
           - Eligible
@@ -1595,7 +3094,7 @@ definitions:
           modelAsString: false
           name: AuthorizationStatus
       inEligibilityReason:
-        description: InEligibilityReason of device in case it's not eligible for service data encryption key rollover
+        description: 'The reason for inEligibility of device, in case it''s not eligible for service data encryption key rollover.'
         enum:
           - DeviceNotOnline
           - NotSupportedAppliance
@@ -1608,20 +3107,20 @@ definitions:
   EncryptionSettings:
     allOf:
       - $ref: '#/definitions/BaseModel'
-    description: The EncryptionSettings
+    description: The encryption settings.
     properties:
       properties:
         $ref: '#/definitions/EncryptionSettingsProperties'
-        description: Properties of the EncryptionSettings.
+        description: The properties of the encryption settings.
         x-ms-client-flatten: true
     required:
       - properties
     type: object
   EncryptionSettingsProperties:
-    description: The properties of EncryptionSettings
+    description: The properties of encryption settings.
     properties:
       encryptionStatus:
-        description: The encryption status which indicates if encryption is enabled or not.
+        description: The encryption status to indicates if encryption is enabled or not.
         enum:
           - Enabled
           - Disabled
@@ -1630,7 +3129,7 @@ definitions:
           modelAsString: false
           name: EncryptionStatus
       keyRolloverStatus:
-        description: 'The key rollover status which indicates if key rollover is required or not. If secrets encryption has been upgraded, then it requires key rollover.'
+        description: 'The key rollover status to indicates if key rollover is required or not. If secret''s encryption has been upgraded, then it requires key rollover.'
         enum:
           - Required
           - NotRequired
@@ -1642,26 +3141,444 @@ definitions:
       - encryptionStatus
       - keyRolloverStatus
     type: object
+  FailoverRequest:
+    description: 'The request object for triggering a failover of volume containers, from a source device to a target device.'
+    properties:
+      targetDeviceId:
+        description: The ARM path ID of the device which will act as the failover target.
+        type: string
+      volumeContainers:
+        description: The list of path IDs of the volume containers which needs to be failed-over to the target device.
+        items:
+          type: string
+        type: array
+    type: object
+  FailoverSet:
+    description: The failover set on a device.
+    properties:
+      eligibilityResult:
+        $ref: '#/definitions/FailoverSetEligibilityResult'
+        description: 'The eligibility result of the failover set, for failover.'
+      volumeContainers:
+        description: 'The list of meta data of volume containers, which are part of the failover set.'
+        items:
+          $ref: '#/definitions/VolumeContainerFailoverMetadata'
+        type: array
+    type: object
+  FailoverSetEligibilityResult:
+    description: 'The eligibility result of failover set, for failover.'
+    properties:
+      errorMessage:
+        description: 'The error message, if the failover set is not eligible for failover.'
+        type: string
+      isEligibleForFailover:
+        description: Represents if this failover set is eligible for failover or not.
+        type: boolean
+    type: object
+  FailoverSetsList:
+    description: The list of failover sets.
+    properties:
+      value:
+        description: The list of failover sets.
+        items:
+          $ref: '#/definitions/FailoverSet'
+        type: array
+    type: object
+  FailoverTarget:
+    description: Represents the eligibility of a device as a failover target device.
+    properties:
+      availableLocalStorageInBytes:
+        description: The amount of free local storage available on the device in bytes.
+        format: int64
+        type: integer
+      availableTieredStorageInBytes:
+        description: The amount of free tiered storage available for the device in bytes.
+        format: int64
+        type: integer
+      dataContainersCount:
+        description: The count of datacontainers on the device.
+        format: int32
+        type: integer
+      deviceId:
+        description: The path ID of the device.
+        type: string
+      deviceLocation:
+        description: The geo location (applicable only for cloud appliances) of the device.
+        type: string
+      deviceSoftwareVersion:
+        description: The software version of the device.
+        type: string
+      deviceStatus:
+        description: The status of the device.
+        enum:
+          - Unknown
+          - Online
+          - Offline
+          - Deactivated
+          - RequiresAttention
+          - MaintenanceMode
+          - Creating
+          - Provisioning
+          - Deactivating
+          - Deleted
+          - ReadyToSetup
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: DeviceStatus
+      eligibilityResult:
+        $ref: '#/definitions/TargetEligibilityResult'
+        description: 'The eligibility result of the device, as a failover target device.'
+      friendlyDeviceSoftwareVersion:
+        description: The friendly name for the current version of software on the device.
+        type: string
+      modelDescription:
+        description: The model number of the device.
+        type: string
+      volumesCount:
+        description: The count of volumes on the device.
+        format: int32
+        type: integer
+    type: object
+  FailoverTargetsList:
+    description: The list of all devices in a resource and their eligibility status as a failover target device.
+    properties:
+      value:
+        description: The list of all the failover targets.
+        items:
+          $ref: '#/definitions/FailoverTarget'
+        type: array
+    type: object
+  Feature:
+    description: The feature.
+    properties:
+      name:
+        description: The name of the feature.
+        type: string
+      status:
+        description: The feature support status.
+        enum:
+          - NotAvailable
+          - UnsupportedDeviceVersion
+          - Supported
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: FeatureSupportStatus
+    required:
+      - name
+      - status
+    type: object
+  FeatureFilter:
+    description: The OData filter to be used for features.
+    properties:
+      deviceId:
+        description: Specifies the device ID for which the features are required. Only 'Equality' operator is supported for this property.
+        type: string
+    type: object
+  FeatureList:
+    description: The collections of features.
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/Feature'
+        type: array
+    required:
+      - value
+    type: object
+  HardwareComponent:
+    description: The hardware component.
+    properties:
+      componentId:
+        description: The component ID.
+        type: string
+      displayName:
+        description: The display name of the hardware component.
+        type: string
+      status:
+        description: The status of the hardware component.
+        enum:
+          - Unknown
+          - NotPresent
+          - PoweredOff
+          - Ok
+          - Recovering
+          - Warning
+          - Failure
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: HardwareComponentStatus
+      statusDisplayName:
+        description: The display name of the status of hardware component.
+        type: string
+    required:
+      - componentId
+      - displayName
+      - status
+      - statusDisplayName
+    type: object
+  HardwareComponentGroup:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The hardware component group.
+    properties:
+      properties:
+        $ref: '#/definitions/HardwareComponentGroupProperties'
+        description: The properties of the hardware component group.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  HardwareComponentGroupList:
+    description: The collection of hardware component groups.
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/HardwareComponentGroup'
+        type: array
+    required:
+      - value
+    type: object
+  HardwareComponentGroupProperties:
+    description: The properties of hardware component group.
+    properties:
+      components:
+        description: The list of hardware components.
+        items:
+          $ref: '#/definitions/HardwareComponent'
+        type: array
+      displayName:
+        description: The display name the hardware component group.
+        type: string
+      lastUpdatedTime:
+        description: The last updated time.
+        format: date-time
+        type: string
+    required:
+      - displayName
+      - lastUpdatedTime
+      - components
+    type: object
+  Job:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The job.
+    properties:
+      endTime:
+        description: The UTC time at which the job completed.
+        format: date-time
+        type: string
+      error:
+        $ref: '#/definitions/JobErrorDetails'
+        description: 'The error details, if any, for the job.'
+      percentComplete:
+        description: The percentage of the job that is already complete.
+        format: int32
+        type: integer
+      properties:
+        $ref: '#/definitions/JobProperties'
+        description: The properties of the job.
+        x-ms-client-flatten: true
+      startTime:
+        description: The UTC time at which the job was started.
+        format: date-time
+        type: string
+      status:
+        description: The current status of the job.
+        enum:
+          - Running
+          - Succeeded
+          - Failed
+          - Canceled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: JobStatus
+    required:
+      - status
+      - percentComplete
+    type: object
+  JobErrorDetails:
+    description: The job error details. Contains list of job error items.
+    properties:
+      code:
+        description: The error code intended for programmatic access.
+        type: string
+      errorDetails:
+        description: The error details.
+        items:
+          $ref: '#/definitions/JobErrorItem'
+        type: array
+      message:
+        description: The error message intended to describe the error in detail.
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  JobErrorItem:
+    description: The job error items.
+    properties:
+      code:
+        description: The error code intended for programmatic access.
+        type: string
+      message:
+        description: The error message intended to describe the error in detail.
+        type: string
+      recommendations:
+        description: The recommended actions.
+        items:
+          type: string
+        type: array
+    required:
+      - code
+      - message
+    type: object
+  JobFilter:
+    description: The OData filter to be used for jobs.
+    properties:
+      jobType:
+        description: 'Specifies the type of the jobs to be filtered. For e.g., "ScheduledBackup", "ManualBackup", "RestoreBackup", "CloneVolume", "FailoverVolumeContainers", "CreateLocallyPinnedVolume", "ModifyVolume", "InstallUpdates", "SupportPackageLogs", or "CreateCloudAppliance". Only ''Equality'' operator can be used for this property.'
+        type: string
+      startTime:
+        description: Specifies the start time of the jobs to be filtered.  Only 'Greater Than or Equal To' and 'Lesser Than or Equal To' operators are supported for this property.
+        format: date-time
+        type: string
+      status:
+        description: 'Specifies the status of the jobs to be filtered. For e.g., "Running", "Succeeded", "Failed" or "Canceled". Only ''Equality'' operator is supported for this property.'
+        type: string
+    type: object
+  JobList:
+    description: The collection of jobs.
+    properties:
+      nextLink:
+        description: The NextLink.
+        type: string
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/Job'
+        type: array
+    required:
+      - value
+    type: object
+  JobProperties:
+    description: The properties of the job.
+    properties:
+      backupPointInTime:
+        description: The time of the backup used for the failover.
+        format: date-time
+        type: string
+      backupType:
+        description: The backup type (CloudSnapshot | LocalSnapshot). Applicable only for backup jobs.
+        enum:
+          - LocalSnapshot
+          - CloudSnapshot
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: BackupType
+      dataStats:
+        $ref: '#/definitions/DataStatistics'
+        description: The data statistics properties of the job.
+      deviceId:
+        description: The device ID in which the job ran.
+        type: string
+      entityLabel:
+        description: The entity identifier for which the job ran.
+        type: string
+      entityType:
+        description: The entity type for which the job ran.
+        type: string
+      isCancellable:
+        description: Represents whether the job is cancellable or not.
+        type: boolean
+      jobStages:
+        description: The job stages.
+        items:
+          $ref: '#/definitions/JobStage'
+        type: array
+      jobType:
+        description: The type of the job.
+        enum:
+          - ScheduledBackup
+          - ManualBackup
+          - RestoreBackup
+          - CloneVolume
+          - FailoverVolumeContainers
+          - CreateLocallyPinnedVolume
+          - ModifyVolume
+          - InstallUpdates
+          - SupportPackageLogs
+          - CreateCloudAppliance
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: JobType
+      sourceDeviceId:
+        description: The source device ID of the failover job.
+        type: string
+    required:
+      - jobType
+    type: object
+  JobStage:
+    description: The details about the specific stage of a job.
+    properties:
+      detail:
+        description: The details of the stage.
+        type: string
+      errorCode:
+        description: The error code of the stage if any.
+        type: string
+      message:
+        description: The message of the job stage.
+        type: string
+      stageStatus:
+        description: The stage status.
+        enum:
+          - Running
+          - Succeeded
+          - Failed
+          - Canceled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: JobStatus
+    required:
+      - stageStatus
+    type: object
   Key:
     description: The key.
     properties:
       activationKey:
-        description: The activation key for the device
+        description: The activation key for the device.
         type: string
     required:
       - activationKey
     type: object
+  ListFailoverTargetsRequest:
+    description: The request object for fetching the list of failover targets (eligible devices for failover).
+    properties:
+      volumeContainers:
+        description: 'The list of path IDs of the volume containers that needs to be failed-over, for which we want to fetch the eligible targets.'
+        items:
+          type: string
+        type: array
+    type: object
   Manager:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: The StorSimple Manager
+    description: The StorSimple Manager.
     properties:
       etag:
-        description: ETag of the Manager
+        description: The etag of the manager.
         type: string
       properties:
         $ref: '#/definitions/ManagerProperties'
-        description: List of properties of the Manager
+        description: The properties of the StorSimple Manager.
         x-ms-client-flatten: true
     type: object
   ManagerExtendedInfo:
@@ -1670,7 +3587,7 @@ definitions:
     description: The extended info of the manager.
     properties:
       etag:
-        description: ETag of the Resource
+        description: The etag of the resource.
         type: string
       properties:
         $ref: '#/definitions/ManagerExtendedInfoProperties'
@@ -1678,35 +3595,35 @@ definitions:
         x-ms-client-flatten: true
     type: object
   ManagerExtendedInfoProperties:
-    description: Properties of the ManagerExtendedInfo
+    description: The properties of the manager extended info.
     properties:
       algorithm:
-        description: Represents the encryption algorithm used to encrypt the keys. None - if Key is saved in plain text format. AlgorithmName - if Key is encrypted
+        description: Represents the encryption algorithm used to encrypt the keys. None - if Key is saved in plain text format. Algorithm name - if key is encrypted
         type: string
       encryptionKey:
-        description: Represents the CEK of the resource
+        description: Represents the CEK of the resource.
         type: string
       encryptionKeyThumbprint:
-        description: Represents the Cert thumbprint that was used to encrypt the CEK
+        description: Represents the Cert thumbprint that was used to encrypt the CEK.
         type: string
       integrityKey:
-        description: Represents the CIK of the resource
+        description: Represents the CIK of the resource.
         type: string
       portalCertificateThumbprint:
         description: Represents the portal thumbprint which can be used optionally to encrypt the entire data before storing it.
         type: string
       version:
-        description: Represents the version of the ExtendedInfo object being persisted
+        description: The version of the extended info being persisted.
         type: string
     required:
       - integrityKey
       - algorithm
     type: object
   ManagerIntrinsicSettings:
-    description: Intrinsic settings which refers to the type of the Storsimple manager
+    description: Intrinsic settings which refers to the type of the Storsimple Manager.
     properties:
       type:
-        description: Refers to the type of the StorSimple Manager
+        description: The type of StorSimple Manager.
         enum:
           - GardaV1
           - HelsinkiV1
@@ -1718,10 +3635,10 @@ definitions:
       - type
     type: object
   ManagerList:
-    description: List of storsimple Managers under a particular resourceGroup
+    description: The list of StorSimple Managers.
     properties:
       value:
-        description: List of Managers
+        description: The list of storsimple managers.
         items:
           $ref: '#/definitions/Manager'
         type: array
@@ -1729,17 +3646,17 @@ definitions:
       - value
     type: object
   ManagerProperties:
-    description: The properties of the Manager
+    description: The properties of the StorSimple Manager.
     properties:
       cisIntrinsicSettings:
         $ref: '#/definitions/ManagerIntrinsicSettings'
-        description: Specifies if the Manager is Garda or Helsinki
+        description: Represents the type of StorSimple Manager.
       provisioningState:
-        description: Specifies the state of the resource as it is getting provisioned. Value of "Succeeded" means the Manager was successfully created
+        description: Specifies the state of the resource as it is getting provisioned. Value of "Succeeded" means the Manager was successfully created.
         type: string
       sku:
         $ref: '#/definitions/ManagerSku'
-        description: Specifies the Sku
+        description: Specifies the Sku.
     type: object
   ManagerSku:
     description: The Sku.
@@ -1755,60 +3672,311 @@ definitions:
     required:
       - name
     type: object
+  NetworkAdapterList:
+    description: The collection of network adapters on the device.
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/NetworkAdapters'
+        type: array
+    required:
+      - value
+    type: object
+  NetworkAdapters:
+    description: Represents the network adapter on device.
+    properties:
+      interfaceId:
+        description: The ID of the network adapter.
+        enum:
+          - Invalid
+          - Data0
+          - Data1
+          - Data2
+          - Data3
+          - Data4
+          - Data5
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: NetInterfaceId
+      isDefault:
+        description: Value indicating whether this instance is default.
+        type: boolean
+      iscsiAndCloudStatus:
+        description: Value indicating cloud and ISCSI status of network adapter.
+        enum:
+          - Disabled
+          - IscsiEnabled
+          - CloudEnabled
+          - IscsiAndCloudEnabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ISCSIAndCloudStatus
+      mode:
+        description: 'The mode of network adapter, either IPv4, IPv6 or both.'
+        enum:
+          - Invalid
+          - IPV4
+          - IPV6
+          - BOTH
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: NetworkMode
+      netInterfaceStatus:
+        description: Value indicating status of network adapter.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: NetInterfaceStatus
+      nicIpv4Settings:
+        $ref: '#/definitions/NicIPv4'
+        description: The IPv4 configuration of the network adapter.
+      nicIpv6Settings:
+        $ref: '#/definitions/NicIPv6'
+        description: The IPv6 configuration of the network adapter.
+      speed:
+        description: The speed of the network adapter.
+        format: int64
+        type: integer
+    required:
+      - interfaceId
+      - netInterfaceStatus
+      - iscsiAndCloudStatus
+      - mode
+    type: object
   NetworkInterfaceData0Settings:
-    description: Network interface Data 0 IP settings
+    description: The 'Data 0' network interface card settings.
     properties:
       controllerOneIp:
-        description: Controller 1's IPv4 address
+        description: The controller 1's IPv4 address.
         type: string
       controllerZeroIp:
-        description: Controller 0's IPv4 address
+        description: The controller 0's IPv4 address.
+        type: string
+    type: object
+  NetworkSettings:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: Represents the network settings of a device.
+    properties:
+      properties:
+        $ref: '#/definitions/NetworkSettingsProperties'
+        description: The properties of network settings of a device.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  NetworkSettingsPatch:
+    description: Represents the patch request for the network settings of a device.
+    properties:
+      properties:
+        $ref: '#/definitions/NetworkSettingsPatchProperties'
+        description: The properties of the network settings patch.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  NetworkSettingsPatchProperties:
+    description: The properties of the network settings patch.
+    properties:
+      dnsSettings:
+        $ref: '#/definitions/DNSSettings'
+        description: The DNS (Domain Name System) settings of device.
+      networkAdapters:
+        $ref: '#/definitions/NetworkAdapterList'
+        description: The network adapter list of device.
+    type: object
+  NetworkSettingsProperties:
+    description: The properties of the network settings of device.
+    properties:
+      dnsSettings:
+        $ref: '#/definitions/DNSSettings'
+        description: The DNS (Domain Name System) settings of device.
+      networkAdapters:
+        $ref: '#/definitions/NetworkAdapterList'
+        description: The network adapter list of device.
+      webproxySettings:
+        $ref: '#/definitions/WebproxySettings'
+        description: The webproxy settings of device.
+    required:
+      - dnsSettings
+      - networkAdapters
+      - webproxySettings
+    type: object
+  NicIPv4:
+    description: Details related to the IPv4 address configuration.
+    properties:
+      controller0Ipv4Address:
+        description: The IPv4 address of Controller0.
+        type: string
+      controller1Ipv4Address:
+        description: The IPv4 address of Controller1.
+        type: string
+      ipv4Address:
+        description: The IPv4 address of the network adapter.
+        type: string
+      ipv4Gateway:
+        description: The IPv4 gateway of the network adapter.
+        type: string
+      ipv4Netmask:
+        description: The IPv4 netmask of the network adapter.
+        type: string
+    type: object
+  NicIPv6:
+    description: Details related to the IPv6 address configuration.
+    properties:
+      controller0Ipv6Address:
+        description: The IPv6 address of Controller0.
+        type: string
+      controller1Ipv6Address:
+        description: The IPv6 address of Controller1.
+        type: string
+      ipv6Address:
+        description: The IPv6 address of the network adapter.
+        type: string
+      ipv6Gateway:
+        description: The IPv6 gateway of the network adapter.
+        type: string
+      ipv6Prefix:
+        description: The IPv6 prefix of the network adapter.
         type: string
     type: object
   PublicKey:
     description: The public key.
     properties:
       key:
-        description: The key
+        description: The key.
         type: string
     required:
       - key
+    type: object
+  RemoteManagementSettings:
+    description: The settings for remote management of a device.
+    properties:
+      remoteManagementCertificate:
+        description: The remote management certificates.
+        type: string
+      remoteManagementMode:
+        description: The remote management mode.
+        enum:
+          - Unknown
+          - Disabled
+          - HttpsEnabled
+          - HttpsAndHttpEnabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RemoteManagementModeConfiguration
+    required:
+      - remoteManagementMode
+    type: object
+  RemoteManagementSettingsPatch:
+    description: The settings for updating remote management mode of the device.
+    properties:
+      remoteManagementMode:
+        description: The remote management mode.
+        enum:
+          - Unknown
+          - Disabled
+          - HttpsEnabled
+          - HttpsAndHttpEnabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RemoteManagementModeConfiguration
+    required:
+      - remoteManagementMode
     type: object
   Resource:
     description: The Azure Resource.
     properties:
       id:
-        description: The Resource Id
+        description: The resource ID.
         readOnly: true
         type: string
       location:
-        description: The Geo location of the Manager
+        description: The geo location of the resource.
         type: string
       name:
-        description: The Resource Name
+        description: The resource name.
         readOnly: true
         type: string
       tags:
         additionalProperties:
           type: string
-        description: Tags attached to the Manager
+        description: The tags attached to the resource.
         type: object
       type:
-        description: The Resource type
+        description: The resource type.
         readOnly: true
         type: string
     required:
       - location
     type: object
     x-ms-azure-resource: true
+  ScheduleRecurrence:
+    description: The schedule recurrence.
+    properties:
+      recurrenceType:
+        description: The recurrence type.
+        enum:
+          - Minutes
+          - Hourly
+          - Daily
+          - Weekly
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RecurrenceType
+      recurrenceValue:
+        description: The recurrence value.
+        format: int32
+        type: integer
+      weeklyDaysList:
+        description: The week days list. Applicable only for schedules of recurrence type 'weekly'.
+        items:
+          enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: DayOfWeek
+        type: array
+    required:
+      - recurrenceType
+      - recurrenceValue
+    type: object
   SecondaryDNSSettings:
-    description: Mandatory DNS settings
+    description: The secondary DNS settings.
     properties:
       secondaryDnsServers:
-        description: Secondary DNS Server address
+        description: The list of secondary DNS Server IP addresses.
         items:
           type: string
         type: array
+    type: object
+  SendTestAlertEmailRequest:
+    description: The request for sending test alert email
+    properties:
+      emailList:
+        description: The list of email IDs to send the test alert email
+        items:
+          type: string
+        type: array
+    required:
+      - emailList
     type: object
   StorageAccountCredential:
     allOf:
@@ -1823,7 +3991,7 @@ definitions:
       - properties
     type: object
   StorageAccountCredentialList:
-    description: Collection of Storage account credential entities
+    description: The collection of storage account credential entities.
     properties:
       value:
         description: The value.
@@ -1838,12 +4006,12 @@ definitions:
     properties:
       accessKey:
         $ref: '#/definitions/AsymmetricEncryptedSecret'
-        description: The details of the storage account password
+        description: The details of the storage account password.
       endPoint:
         description: The storage endpoint
         type: string
       sslStatus:
-        description: SSL needs to be enabled or not
+        description: Signifies whether SSL needs to be enabled or not.
         enum:
           - Enabled
           - Disabled
@@ -1860,11 +4028,77 @@ definitions:
       - endPoint
       - sslStatus
     type: object
+  SupportPackageRequest:
+    description: The support package request entity.
+    properties:
+      customIncludeList:
+        description: The list of log categories
+        items:
+          enum:
+            - RegistryKeys
+            - LogFiles
+            - ClusterManagementLog
+            - BmcLogs
+            - ClusterLog
+            - CbsLogs
+            - StorageCmdlets
+            - ClusterCmdlets
+            - ConfigurationCmdlets
+            - Performance
+            - MdsAgentLogs
+            - NetworkCmdlets
+            - NetworkCmds
+            - EtwLogs
+            - UpdateLogs
+            - PeriodicMgmtSvcLogs
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: CustomSupportPackageType
+        type: array
+      endTime:
+        description: The maximum time stamp of the logs.
+        format: date-time
+        type: string
+      includeArchived:
+        description: The bool which determines whether the archived logs are included or not.
+        type: boolean
+      packageType:
+        description: The support package type.
+        enum:
+          - None
+          - IncludeDefault
+          - IncludeAll
+          - Mini
+          - Custom
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SupportPackageType
+      scope:
+        description: The support package scope (Cluster | Controller).
+        enum:
+          - Cluster
+          - Controller
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ScopeType
+      sdpPassKey:
+        description: The SDP(Support Diagnostics Protocol) pass key.
+        type: string
+      startTime:
+        description: The minimum time stamp of the logs.
+        format: date-time
+        type: string
+    required:
+      - sdpPassKey
+    type: object
   SymmetricEncryptedSecret:
-    description: Represents secrets encrypted using Symmetric Encryption Key.
+    description: Represents the secrets encrypted using Symmetric Encryption Key.
     properties:
       encryptionAlgorithm:
-        description: Algorithm used to encrypt "Value"
+        description: The algorithm used to encrypt the "Value".
         enum:
           - None
           - AES256
@@ -1874,17 +4108,59 @@ definitions:
           modelAsString: false
           name: EncryptionAlgorithm
       value:
-        description: The value of the secret itself. If the secret is in plaintext or null then EncryptionAlgorithm will be none
+        description: The value of the secret itself. If the secret is in plaintext or null then EncryptionAlgorithm will be none.
         type: string
       valueCertificateThumbprint:
-        description: Thumbprint cert that was used to encrypt "Value"
+        description: The thumbprint of the cert that was used to encrypt "Value".
         type: string
     required:
       - value
       - encryptionAlgorithm
     type: object
+  TargetEligibilityErrorMessage:
+    description: The error/warning message due to which the device is ineligible as a failover target device.
+    properties:
+      message:
+        description: The localized error message stating the reason why the device is not eligible as a target device.
+        type: string
+      resolution:
+        description: The localized resolution message for the error.
+        type: string
+      resultCode:
+        description: 'The result code for the error, due to which the device does not qualify as a failover target device.'
+        enum:
+          - TargetAndSourceCannotBeSameError
+          - TargetIsNotOnlineError
+          - TargetSourceIncompatibleVersionError
+          - LocalToTieredVolumesConversionWarning
+          - TargetInsufficientCapacityError
+          - TargetInsufficientLocalVolumeMemoryError
+          - TargetInsufficientTieredVolumeMemoryError
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TargetEligibilityResultCode
+    type: object
+  TargetEligibilityResult:
+    description: 'The eligibility result of device, as a failover target device.'
+    properties:
+      eligibilityStatus:
+        description: 'The eligibility status of device, as a failover target device.'
+        enum:
+          - NotEligible
+          - Eligible
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TargetEligibilityStatus
+      messages:
+        description: 'The list of error messages, if a device does not qualify as a failover target device.'
+        items:
+          $ref: '#/definitions/TargetEligibilityErrorMessage'
+        type: array
+    type: object
   Time:
-    description: The Time.
+    description: The time.
     properties:
       hours:
         description: The hour.
@@ -1899,7 +4175,7 @@ definitions:
         minimum: 0
         type: integer
       seconds:
-        description: The minute.
+        description: The second.
         format: int32
         maximum: 59
         minimum: 0
@@ -1909,14 +4185,72 @@ definitions:
       - minutes
       - seconds
     type: object
+  TimeSettings:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The time settings of a device.
+    properties:
+      properties:
+        $ref: '#/definitions/TimeSettingsProperties'
+        description: The properties of the time settings of a device.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  TimeSettingsProperties:
+    description: The properties of time settings of a device.
+    properties:
+      primaryTimeServer:
+        description: 'The primary Network Time Protocol (NTP) server name, like ''time.windows.com''.'
+        type: string
+      secondaryTimeServer:
+        description: 'The secondary Network Time Protocol (NTP) server name, like ''time.contoso.com''. It''s optional.'
+        items:
+          type: string
+        type: array
+      timeZone:
+        description: 'The timezone of device, like ''(UTC -06:00) Central America'''
+        type: string
+    required:
+      - timeZone
+    type: object
+  Updates:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The updates profile of a device.
+    properties:
+      properties:
+        $ref: '#/definitions/UpdatesProperties'
+        description: The properties of the updates profile.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  UpdatesProperties:
+    description: The properties of the updates profile.
+    properties:
+      isUpdateInProgress:
+        description: Indicates whether an update is in progress or not.
+        type: boolean
+      lastUpdatedTime:
+        description: The time when the last update was completed.
+        format: date-time
+        type: string
+      maintenanceModeUpdatesAvailable:
+        description: Set to 'true' if maintenance mode update available.
+        type: boolean
+      regularUpdatesAvailable:
+        description: Set to 'true' if regular updates are available for the device.
+        type: boolean
+    type: object
   Volume:
     allOf:
       - $ref: '#/definitions/BaseModel'
-    description: The volume
+    description: The volume.
     properties:
       properties:
         $ref: '#/definitions/VolumeProperties'
-        description: Properties of the Volume.
+        description: The properties of the volume.
         x-ms-client-flatten: true
     required:
       - properties
@@ -1924,17 +4258,29 @@ definitions:
   VolumeContainer:
     allOf:
       - $ref: '#/definitions/BaseModel'
-    description: Volume Container Interface
+    description: The volume container.
     properties:
       properties:
         $ref: '#/definitions/VolumeContainerProperties'
-        description: Volume Container properties.
+        description: The volume container properties.
         x-ms-client-flatten: true
     required:
       - properties
     type: object
+  VolumeContainerFailoverMetadata:
+    description: 'The metadata of the volume container, that is being considered as part of a failover set.'
+    properties:
+      volumeContainerId:
+        description: The path ID of the volume container.
+        type: string
+      volumes:
+        description: 'The list of metadata of volumes inside the volume container, which contains valid cloud snapshots.'
+        items:
+          $ref: '#/definitions/VolumeFailoverMetadata'
+        type: array
+    type: object
   VolumeContainerList:
-    description: Collection of Volume Containers.
+    description: The collection of volume container entities.
     properties:
       value:
         description: The value.
@@ -1945,20 +4291,20 @@ definitions:
       - value
     type: object
   VolumeContainerProperties:
-    description: Properties of Volume Container.
+    description: The properties of volume container.
     properties:
       bandWidthRateInMbps:
-        description: BandWidthRate set on VC.
+        description: The bandwidth-rate set on the volume container.
         format: int32
         type: integer
       bandwidthSettingId:
-        description: Id of the BandwidthSetting associated with the Volume Container
+        description: The ID of the bandwidth setting associated with the volume container.
         type: string
       encryptionKey:
         $ref: '#/definitions/AsymmetricEncryptedSecret'
-        description: The key used to encrypt data in this volume container. It is required when property 'EncryptionStatus' is "Enabled".
+        description: The key used to encrypt data in the volume container. It is required when property 'EncryptionStatus' is "Enabled".
       encryptionStatus:
-        description: Flag to know whether encryption is enabled or not.
+        description: The flag to denote whether encryption is enabled or not.
         enum:
           - Enabled
           - Disabled
@@ -1968,7 +4314,7 @@ definitions:
           modelAsString: false
           name: EncryptionStatus
       ownerShipStatus:
-        description: 'Owner ship status of Volume Container. Only when the status is "NotOwned", the delete operation on the volume container is permitted.'
+        description: 'The owner ship status of the volume container. Only when the status is "NotOwned", the delete operation on the volume container is permitted.'
         enum:
           - Owned
           - NotOwned
@@ -1978,23 +4324,57 @@ definitions:
           modelAsString: false
           name: OwnerShipStatus
       storageAccountCredentialId:
-        description: Path Id of Storage Account associated with Volume container.
+        description: The path ID of storage account associated with the volume container.
         type: string
       totalCloudStorageUsageInBytes:
-        description: Total Cloud Storage for the Volume Container.
+        description: The total cloud storage for the volume container.
         format: int64
         readOnly: true
         type: integer
       volumeCount:
-        description: Number of Volumes in volume Container.
+        description: The number of volumes in the volume Container.
         format: int32
         readOnly: true
         type: integer
     required:
       - storageAccountCredentialId
     type: object
+  VolumeFailoverMetadata:
+    description: The metadata of a volume that has valid cloud snapshot.
+    properties:
+      backupCreatedDate:
+        description: The date at which the snapshot was taken.
+        format: date-time
+        type: string
+      backupElementId:
+        description: 'The path ID of the backup-element for this volume, inside the backup set.'
+        type: string
+      backupId:
+        description: The path ID of the backup set.
+        type: string
+      backupPolicyId:
+        description: The path ID of the backup policy using which the snapshot was taken.
+        type: string
+      sizeInBytes:
+        description: The size of the volume in bytes at the time the snapshot was taken.
+        format: int64
+        type: integer
+      volumeId:
+        description: The path ID of the volume.
+        type: string
+      volumeType:
+        description: The type of the volume.
+        enum:
+          - Tiered
+          - Archival
+          - LocallyPinned
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: VolumeType
+    type: object
   VolumeList:
-    description: Collection of volumes
+    description: The collection of volumes.
     properties:
       value:
         description: The value.
@@ -2005,21 +4385,21 @@ definitions:
       - value
     type: object
   VolumeProperties:
-    description: The properties of Volume
+    description: The properties of volume.
     properties:
       accessControlRecordIds:
-        description: The access control records.
+        description: 'The IDs of the access control records, associated with the volume.'
         items:
           type: string
         type: array
       backupPolicyIds:
-        description: The list of backup policy ids in which this volume is part of.
+        description: 'The IDs of the backup policies, in which this volume is part of.'
         items:
           type: string
         readOnly: true
         type: array
       backupStatus:
-        description: The backup status (Enabled | Disabled).
+        description: The backup status of the volume.
         enum:
           - Enabled
           - Disabled
@@ -2029,7 +4409,7 @@ definitions:
           modelAsString: false
           name: BackupStatus
       monitoringStatus:
-        description: The monitoring status (Enabled | Disabled).
+        description: The monitoring status of the volume.
         enum:
           - Enabled
           - Disabled
@@ -2038,7 +4418,7 @@ definitions:
           modelAsString: false
           name: MonitoringStatus
       operationStatus:
-        description: The entity operation status.
+        description: The operation status on the volume.
         enum:
           - None
           - Updating
@@ -2050,15 +4430,15 @@ definitions:
           modelAsString: false
           name: OperationStatus
       sizeInBytes:
-        description: The size of the volume in bytes
+        description: The size of the volume in bytes.
         format: int64
         type: integer
       volumeContainerId:
-        description: The volume container.
+        description: 'The ID of the volume container, in which this volume is created.'
         readOnly: true
         type: string
       volumeStatus:
-        description: The volume status (Online | Offline).
+        description: The volume status.
         enum:
           - Online
           - Offline
@@ -2067,7 +4447,7 @@ definitions:
           modelAsString: false
           name: VolumeStatus
       volumeType:
-        description: The volume type.
+        description: The type of the volume.
         enum:
           - Tiered
           - Archival
@@ -2082,4 +4462,28 @@ definitions:
       - accessControlRecordIds
       - volumeStatus
       - monitoringStatus
+    type: object
+  WebproxySettings:
+    description: The web proxy settings on the device.
+    properties:
+      authentication:
+        description: The authentication type.
+        enum:
+          - Invalid
+          - None
+          - Basic
+          - NTLM
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AuthenticationType
+      connectionUri:
+        description: The connection URI.
+        type: string
+      username:
+        description: The webproxy username.
+        type: string
+    required:
+      - authentication
+      - username
     type: object
