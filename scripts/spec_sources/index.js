@@ -14,7 +14,8 @@ var specSources = {
   'swaggerhub.com': require('./swaggerhub'),
   'apitore.com': require('./apitore'),
   'gov.bc.ca': require('./bcgov'),
-  'bclaws.ca': require('./bcgov')
+  'bclaws.ca': require('./bcgov'),
+  'box.com': require('./box')
 };
 var catalogProviders = _.keys(specSources);
 
