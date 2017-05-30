@@ -118,6 +118,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '483':
+          description: IncompatibleImageException
+          schema:
+            $ref: '#/definitions/IncompatibleImageException'
       parameters:
         - name: body
           in: body
@@ -204,6 +208,18 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '483':
+          description: InvalidRoleException
+          schema:
+            $ref: '#/definitions/InvalidRoleException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
       parameters:
         - name: body
           in: body
@@ -429,7 +445,7 @@ paths:
   '/#DescribeSessions':
     post:
       operationId: DescribeSessions
-      description: 'Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.'
+      description: 'Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.'
       responses:
         '200':
           description: Success
@@ -707,6 +723,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '487':
+          description: IncompatibleImageException
+          schema:
+            $ref: '#/definitions/IncompatibleImageException'
       parameters:
         - name: body
           in: body
@@ -740,6 +760,26 @@ paths:
           description: ResourceInUseException
           schema:
             $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidRoleException
+          schema:
+            $ref: '#/definitions/InvalidRoleException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+        '485':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '486':
+          description: IncompatibleImageException
+          schema:
+            $ref: '#/definitions/IncompatibleImageException'
       parameters:
         - name: body
           in: body
@@ -780,7 +820,7 @@ definitions:
         description: An application can be disabled after image creation if there is a problem.
       Metadata:
         $ref: '#/definitions/Metadata'
-        description: Additional attributes that describes the application.
+        description: Additional attributes that describe the application.
     description: An entry for a single application in the application catalog.
   Applications:
     type: array
@@ -845,7 +885,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ErrorMessage'
-    description: 'An API error occurred, please try again.'
+    description: An API error occurred. Wait a few minutes and try again.
   CreateFleetRequest:
     type: object
     required:
@@ -871,10 +911,10 @@ definitions:
         description: The VPC configuration for the fleet.
       MaxUserDurationInSeconds:
         $ref: '#/definitions/Integer'
-        description: The maximum time up to which a streaming session can run.
+        description: The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.
       DisconnectTimeoutInSeconds:
         $ref: '#/definitions/Integer'
-        description: 'The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to his/her previous session. '
+        description: 'The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600. '
       Description:
         $ref: '#/definitions/Description'
         description: The description of the fleet.
@@ -883,7 +923,7 @@ definitions:
         description: The display name of the fleet.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
-        description: Enable/Disable default Internet access from fleet.
+        description: Enables or disables default Internet access for the fleet.
     description: Contains the parameters for the new fleet to create.
   CreateFleetResult:
     type: object
@@ -905,6 +945,9 @@ definitions:
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: The name displayed to end users on the AppStream 2.0 portal.
+      StorageConnectors:
+        $ref: '#/definitions/StorageConnectorList'
+        description: The storage connectors to be enabled for the stack.
   CreateStackResult:
     type: object
     properties:
@@ -932,7 +975,7 @@ definitions:
         description: The ID of the application that must be launched after the session starts.
       Validity:
         $ref: '#/definitions/Long'
-        description: 'The validity duration of the URL in seconds. After this duration, the URL returned by this operation becomes invalid.'
+        description: The duration up to which the URL returned by this action is valid. The input can be any numeric value in seconds between 1 and 604800 seconds.
       SessionContext:
         $ref: '#/definitions/String'
         description: The sessionContext of the streaming URL.
@@ -1020,7 +1063,7 @@ definitions:
         description: The size of each page of results. The default value is 20 and the maximum supported value is 50.
       AuthenticationType:
         $ref: '#/definitions/AuthenticationType'
-        description: 'The authentication method of the user. It can be <code>API</code> for a user authenticated using a streaming url or <code>SAML</code> for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.'
+        description: 'The authentication method of the user. It can be <code>API</code> for a user authenticated using a streaming URL, or <code>SAML</code> for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.'
   DescribeSessionsResult:
     type: object
     properties:
@@ -1116,10 +1159,10 @@ definitions:
         description: The capacity information for the fleet.
       MaxUserDurationInSeconds:
         $ref: '#/definitions/Integer'
-        description: The maximum time during which a streaming session can run.
+        description: The maximum time for which a streaming session can run. The value can be any numeric value in seconds between 600 and 57600.
       DisconnectTimeoutInSeconds:
         $ref: '#/definitions/Integer'
-        description: 'The time after disconnection when a session is considered to have ended. When a user reconnects after a disconnection, the user is connected to the same session and instance within this time interval.'
+        description: 'The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.'
       State:
         $ref: '#/definitions/FleetState'
         description: The current state for the fleet.
@@ -1134,7 +1177,7 @@ definitions:
         description: The list of fleet errors is appended to this list.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
-        description: 'Default Internet access from the fleet. True (Enabled), False (Disabled).'
+        description: 'Whether default Internet access is enabled for the fleet. '
     description: Contains the parameters for a fleet.
   FleetError:
     type: object
@@ -1201,7 +1244,7 @@ definitions:
         description: The visibility of an image to the user; images can be public or private.
       ImageBuilderSupported:
         $ref: '#/definitions/Boolean'
-        description: Indicates whether an image builder can be launched from this image.
+        description: Whether an image builder can be launched from this image.
       Platform:
         $ref: '#/definitions/PlatformType'
         description: The operating system platform of the image.
@@ -1217,6 +1260,9 @@ definitions:
       CreatedTime:
         $ref: '#/definitions/Timestamp'
         description: The timestamp when the image was created.
+      PublicBaseImageReleasedDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The AWS release date of the public base image. For private images, this date is the release date of the base image from which the image was created.'
     description: New streaming instances are booted from images. The image stores the application catalog and is connected to fleets.
   ImageList:
     type: array
@@ -1244,6 +1290,12 @@ definitions:
     enum:
       - INTERNAL_ERROR
       - IMAGE_BUILDER_NOT_AVAILABLE
+  IncompatibleImageException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The image does not support storage connectors.
   Integer:
     type: integer
   InvalidParameterCombinationException:
@@ -1336,6 +1388,10 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: The specified resource already exists.
+  ResourceIdentifier:
+    type: string
+    description: The ARN of the resource.
+    minLength: 1
   ResourceInUseException:
     type: object
     properties:
@@ -1380,7 +1436,7 @@ definitions:
         description: The current state of the streaming session.
       AuthenticationType:
         $ref: '#/definitions/AuthenticationType'
-        description: The authentication method of the user for whom the session was created. It can be <code>API</code> for a user authenticated using a streaming url or <code>SAML</code> for a SAML federated user.
+        description: The authentication method of the user for whom the session was created. It can be <code>API</code> for a user authenticated using a streaming URL or <code>SAML</code> for a SAML federated user.
     description: Contains the parameters for a streaming session.
   SessionList:
     type: array
@@ -1414,7 +1470,33 @@ definitions:
       CreatedTime:
         $ref: '#/definitions/Timestamp'
         description: The timestamp when the stack was created.
+      StorageConnectors:
+        $ref: '#/definitions/StorageConnectorList'
+        description: The storage connectors to be enabled for the stack.
+      StackErrors:
+        $ref: '#/definitions/StackErrors'
+        description: The list of errors associated with the stack.
     description: Details about a stack.
+  StackError:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/StackErrorCode'
+        description: The error code of a stack error.
+      ErrorMessage:
+        $ref: '#/definitions/String'
+        description: The error message of a stack error.
+    description: Contains the parameters for a stack error.
+  StackErrorCode:
+    type: string
+    enum:
+      - STORAGE_CONNECTOR_ERROR
+      - INTERNAL_SERVICE_ERROR
+  StackErrors:
+    type: array
+    description: A list of stack errors.
+    items:
+      $ref: '#/definitions/StackError'
   StackList:
     type: array
     description: A list of stacks.
@@ -1442,6 +1524,28 @@ definitions:
   StopFleetResult:
     type: object
     properties: {}
+  StorageConnector:
+    type: object
+    required:
+      - ConnectorType
+    properties:
+      ConnectorType:
+        $ref: '#/definitions/StorageConnectorType'
+        description: 'The type of storage connector. The possible values include: HOMEFOLDERS.'
+      ResourceIdentifier:
+        $ref: '#/definitions/ResourceIdentifier'
+        description: The ARN associated with the storage connector.
+    description: Contains the parameters for a storage connector.
+  StorageConnectorList:
+    type: array
+    description: A list of storage connectors.
+    items:
+      $ref: '#/definitions/StorageConnector'
+  StorageConnectorType:
+    type: string
+    enum:
+      - HOMEFOLDERS
+    description: 'The type of storage connector. The possible values include: HOMEFOLDERS.'
   String:
     type: string
     minLength: 1
@@ -1454,7 +1558,6 @@ definitions:
     description: A list of subnet IDs.
     items:
       $ref: '#/definitions/String'
-    minItems: 1
   Timestamp:
     type: string
     format: date-time
@@ -1480,10 +1583,10 @@ definitions:
         description: The VPC configuration for the fleet.
       MaxUserDurationInSeconds:
         $ref: '#/definitions/Integer'
-        description: The maximum time during which a streaming session can run.
+        description: The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.
       DisconnectTimeoutInSeconds:
         $ref: '#/definitions/Integer'
-        description: 'The time after disconnection when a session is considered to have ended. When the user reconnects after a disconnection, the user is connected to the same instance within this time interval.'
+        description: 'The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.'
       DeleteVpcConfig:
         $ref: '#/definitions/Boolean'
         description: Delete the VPC association for the specified fleet.
@@ -1495,7 +1598,7 @@ definitions:
         description: The name displayed to end users on the AppStream 2.0 portal.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
-        description: Enable/Disable default Internet access from fleet.
+        description: Enables or disables default Internet access for the fleet.
   UpdateFleetResult:
     type: object
     properties:
@@ -1516,6 +1619,12 @@ definitions:
       Name:
         $ref: '#/definitions/String'
         description: The name of the stack to update.
+      StorageConnectors:
+        $ref: '#/definitions/StorageConnectorList'
+        description: The storage connectors to be enabled for the stack.
+      DeleteStorageConnectors:
+        $ref: '#/definitions/Boolean'
+        description: Remove all the storage connectors currently enabled for the stack.
   UpdateStackResult:
     type: object
     properties:
@@ -1533,8 +1642,6 @@ definitions:
       - PRIVATE
   VpcConfig:
     type: object
-    required:
-      - SubnetIds
     properties:
       SubnetIds:
         $ref: '#/definitions/SubnetIdList'

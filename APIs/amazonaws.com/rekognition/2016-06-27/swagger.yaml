@@ -100,7 +100,7 @@ paths:
   /:
     post:
       operationId: CompareFaces
-      description: '<p>Compares a face in the <i>source</i> input image with each face detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and uses it to compare with each face detected in the target image. </p> </note> <p>In response, the operation returns an array of face matches ordered by similarity score with the highest similarity scores first. For each face match, the response provides a bounding box of the face and <code>confidence</code> value (indicating the level of confidence that the bounding box contains a face). The response also provides a <code>similarity</code> score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with the similarity score of greater than or equal to 80% are returned in the response. You can change this value.</p> </note> <p>In addition to the face matches, the response returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <note> <p> This is a stateless API operation. That is, the operation does not persist any data.</p> </note> <p>For an example, see <a>get-started-exercise-compare-faces</a> </p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>'
+      description: '<p>Compares a face in the <i>source</i> input image with each face detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> </note> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don''t match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>If the image doesn''t contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn''t persist.</p> </note> <p>For an example, see <a>get-started-exercise-compare-faces</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -157,7 +157,7 @@ paths:
   '/#CreateCollection':
     post:
       operationId: CreateCollection
-      description: '<p>Creates a collection in an AWS Region. You can add faces to the collection using the operation. </p> <p>For example, you might create collections, one for each of your application users. A user can then index faces using the <code>IndexFaces</code> operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container. </p> <p>For an example, see <a>example1</a>. </p> <p>This operation requires permissions to perform the <code>rekognition:CreateCollection</code> action.</p>'
+      description: '<p>Creates a collection in an AWS Region. You can add faces to the collection using the operation. </p> <p>For example, you might create collections, one for each of your application users. A user can then index faces using the <code>IndexFaces</code> operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container. </p> <note> <p>Collection names are case-sensitive.</p> </note> <p>For an example, see <a>example1</a>. </p> <p>This operation requires permissions to perform the <code>rekognition:CreateCollection</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -418,7 +418,7 @@ paths:
   '/#DetectModerationLabels':
     post:
       operationId: DetectModerationLabels
-      description: '<p>Detects explicit or suggestive adult content in a specified .jpeg or .png image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate. For information about moderation labels, see <a>howitworks-moderateimage</a>.</p>'
+      description: '<p>Detects explicit or suggestive adult content in a specified JPEG or PNG format image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate. For information about moderation labels, see <a>howitworks-moderateimage</a>.</p>'
       responses:
         '200':
           description: Success
@@ -839,7 +839,7 @@ definitions:
       Face:
         $ref: '#/definitions/ComparedFace'
         description: Provides face metadata (bounding box and confidence that the bounding box actually contains a face).
-    description: 'For the provided the bounding box, confidence level that the bounding box actually contains a face, and the similarity between the face in the bounding box and the face in the source image.'
+    description: Provides information about a face in a target image that matches the source image face analysed by <code>CompareFaces</code>. The <code>Face</code> property contains the bounding box of the face in the target image. The <code>Similarity</code> property is the confidence that the source image face matches the face in the bounding box.
   CompareFacesMatchList:
     type: array
     items:
@@ -862,13 +862,13 @@ definitions:
     properties:
       SourceImage:
         $ref: '#/definitions/Image'
-        description: Source image either as bytes or an S3 object
+        description: 'The source image, either as bytes or as an S3 object.'
       TargetImage:
         $ref: '#/definitions/Image'
-        description: Target image either as bytes or an S3 object
+        description: 'The target image, either as bytes or as an S3 object.'
       SimilarityThreshold:
         $ref: '#/definitions/Percent'
-        description: The minimum level of confidence in the match you want included in the result.
+        description: The minimum level of confidence in the face matches that a match must meet to be included in the <code>FaceMatches</code> array.
   CompareFacesResponse:
     type: object
     example:
@@ -891,10 +891,23 @@ definitions:
     properties:
       SourceImageFace:
         $ref: '#/definitions/ComparedSourceImageFace'
-        description: The face from the source image that was used for comparison.
+        description: The face in the source image that was used for comparison.
       FaceMatches:
         $ref: '#/definitions/CompareFacesMatchList'
-        description: 'Provides an array of <code>CompareFacesMatch</code> objects. Each object provides the bounding box, confidence that the bounding box contains a face, and the similarity between the face in the bounding box and the face in the source image.'
+        description: 'An array of faces in the target image that match the source image face. Each <code>CompareFacesMatch</code> object provides the bounding box, the confidence level that the bounding box contains a face, and the similarity score for the face in the bounding box and the face in the source image.'
+      UnmatchedFaces:
+        $ref: '#/definitions/CompareFacesUnmatchList'
+        description: An array of faces in the target image that did not match the source image face.
+      SourceImageOrientationCorrection:
+        $ref: '#/definitions/OrientationCorrection'
+        description: '<p> The orientation of the source image (counterclockwise direction). If your application displays the source image, you can use this value to correct image orientation. The bounding box coordinates returned in <code>SourceImageFace</code> represent the location of the face before the image orientation is corrected. </p> <note> <p>If the source image is in .jpeg format, it might contain exchangeable image (Exif) metadata that includes the image''s orientation. If the Exif metadata for the source image populates the orientation field, the value of <code>OrientationCorrection</code> is nil and the <code>SourceImageFace</code> bounding box coordinates represent the location of the face after Exif metadata is used to correct the orientation. Images in .png format don''t contain Exif metadata.</p> </note>'
+      TargetImageOrientationCorrection:
+        $ref: '#/definitions/OrientationCorrection'
+        description: '<p> The orientation of the target image (in counterclockwise direction). If your application displays the target image, you can use this value to correct the orientation of the image. The bounding box coordinates returned in <code>FaceMatches</code> and <code>UnmatchedFaces</code> represent face locations before the image orientation is corrected. </p> <note> <p>If the target image is in .jpg format, it might contain Exif metadata that includes the orientation of the image. If the Exif metadata for the target image populates the orientation field, the value of <code>OrientationCorrection</code> is nil and the bounding box coordinates in <code>FaceMatches</code> and <code>UnmatchedFaces</code> represent the location of the face after Exif metadata is used to correct the orientation. Images in .png format don''t contain Exif metadata.</p> </note>'
+  CompareFacesUnmatchList:
+    type: array
+    items:
+      $ref: '#/definitions/ComparedFace'
   ComparedFace:
     type: object
     properties:
@@ -903,7 +916,16 @@ definitions:
       Confidence:
         $ref: '#/definitions/Percent'
         description: Level of confidence that what the bounding box contains is a face.
-    description: Provides face metadata (bounding box and confidence that the bounding box actually contains a face).
+      Landmarks:
+        $ref: '#/definitions/Landmarks'
+        description: An array of facial landmarks.
+      Pose:
+        $ref: '#/definitions/Pose'
+        description: 'Indicates the pose of the face as determined by its pitch, roll, and yaw.'
+      Quality:
+        $ref: '#/definitions/ImageQuality'
+        description: 'Identifies face image brightness and sharpness. '
+    description: Provides face metadata for target image faces that are analysed by <code>CompareFaces</code>.
   ComparedSourceImageFace:
     type: object
     properties:
@@ -998,7 +1020,7 @@ definitions:
         description: 'The image in which you want to detect faces. You can specify a blob or an S3 object. '
       Attributes:
         $ref: '#/definitions/Attributes'
-        description: '<p>A list of facial attributes you want to be returned. This can be the default list of attributes or all attributes. If you don''t specify a value for <code>Attributes</code> or if you specify <code>["DEFAULT"]</code>, the API returns the following subset of facial attributes: <code>BoundingBox</code>, <code>Confidence</code>, <code>Pose</code>, <code>Quality</code> and <code>Landmarks</code>. If you provide <code>["ALL"]</code>, all facial attributes are returned but the operation will take longer to complete.</p> <p>If you provide both, <code>["ALL", "DEFAULT"]</code>, the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). </p>'
+        description: '<p>An array of facial attributes you want to be returned. This can be the default list of attributes or all attributes. If you don''t specify a value for <code>Attributes</code> or if you specify <code>["DEFAULT"]</code>, the API returns the following subset of facial attributes: <code>BoundingBox</code>, <code>Confidence</code>, <code>Pose</code>, <code>Quality</code> and <code>Landmarks</code>. If you provide <code>["ALL"]</code>, all facial attributes are returned but the operation will take longer to complete.</p> <p>If you provide both, <code>["ALL", "DEFAULT"]</code>, the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). </p>'
   DetectFacesResponse:
     type: object
     example:
@@ -1039,7 +1061,7 @@ definitions:
         description: 'Details of each face found in the image. '
       OrientationCorrection:
         $ref: '#/definitions/OrientationCorrection'
-        description: '<p>The algorithm detects the image orientation. If it detects that the image was rotated, it returns the degrees of rotation. If your application is displaying the image, you can use this value to adjust the orientation. </p> <p>For example, if the service detects that the input image was rotated by 90 degrees, it corrects orientation, performs face detection, and then returns the faces. That is, the bounding box coordinates in the response are based on the corrected orientation. </p> <note> <p>If the source image Exif metadata populates the orientation field, Amazon Rekognition does not perform orientation correction and the value of OrientationCorrection will be nil.</p> </note>'
+        description: '<p> The orientation of the input image (counter-clockwise direction). If your application displays the image, you can use this value to correct image orientation. The bounding box coordinates returned in <code>FaceDetails</code> represent face locations before the image orientation is corrected. </p> <note> <p>If the source image is in .jpeg format, it might contain exchangeable image (Exif) metadata that includes the image''s orientation. If so, and the Exif metadata for the source image populates the orientation field, the value of <code>OrientationCorrection</code> is nil and the <code>FaceDetails</code> bounding box coordinates represent face locations after Exif metadata is used to correct the image orientation. Images in .png format don''t contain Exif metadata.</p> </note>'
   DetectLabelsRequest:
     type: object
     required:
@@ -1075,7 +1097,7 @@ definitions:
         description: 'An array of labels for the real-world objects detected. '
       OrientationCorrection:
         $ref: '#/definitions/OrientationCorrection'
-        description: '<p> Amazon Rekognition returns the orientation of the input image that was detected (clockwise direction). If your application displays the image, you can use this value to correct the orientation. If Amazon Rekognition detects that the input image was rotated (for example, by 90 degrees), it first corrects the orientation before detecting the labels. </p> <note> <p>If the source image Exif metadata populates the orientation field, Amazon Rekognition does not perform orientation correction and the value of OrientationCorrection will be nil.</p> </note>'
+        description: '<p> The orientation of the input image (counter-clockwise direction). If your application displays the image, you can use this value to correct the orientation. If Amazon Rekognition detects that the input image was rotated (for example, by 90 degrees), it first corrects the orientation before detecting the labels. </p> <note> <p>If the source image Exif metadata populates the orientation field, Amazon Rekognition does not perform orientation correction and the value of OrientationCorrection will be nil.</p> </note>'
   DetectModerationLabelsRequest:
     type: object
     required:
@@ -1091,7 +1113,7 @@ definitions:
     properties:
       ModerationLabels:
         $ref: '#/definitions/ModerationLabels'
-        description: 'A list of labels for explicit or suggestive adult content found in the image. The list includes the top-level label and each child label detected in the image. This is useful for filtering specific categories of content. '
+        description: 'An array of labels for explicit or suggestive adult content found in the image. The list includes the top-level label and each child label detected in the image. This is useful for filtering specific categories of content. '
   Emotion:
     type: object
     properties:
@@ -1198,10 +1220,10 @@ definitions:
         description: 'The emotions detected on the face, and the confidence level in the determination. For example, HAPPY, SAD, and ANGRY. '
       Landmarks:
         $ref: '#/definitions/Landmarks'
-        description: Indicates the location of the landmark on the face.
+        description: Indicates the location of landmarks on the face.
       Pose:
         $ref: '#/definitions/Pose'
-        description: 'Indicates the pose of the face as determined by pitch, roll, and the yaw.'
+        description: 'Indicates the pose of the face as determined by its pitch, roll, and yaw.'
       Quality:
         $ref: '#/definitions/ImageQuality'
         description: Identifies image brightness and sharpness.
@@ -1278,7 +1300,7 @@ definitions:
       S3Object:
         $ref: '#/definitions/S3Object'
         description: Identifies an S3 object as the image source.
-    description: '<p>Provides the source image either as bytes or an S3 object.</p> <p>The region for the S3 bucket containing the S3 object must match the region you use for Amazon Rekognition operations.</p> <p>You may need to Base64-encode the image bytes depending on the language you are using and whether or not you are using the AWS SDK. For more information, see <a>example4</a>.</p> <p>If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes using the Bytes property is not supported. You must first upload the image to an Amazon S3 bucket and then call the operation using the S3Object property.</p> <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3 object. For more information, see <a>manage-access-resource-policies</a>. </p>'
+    description: '<p>Provides the source image either as bytes or an S3 object.</p> <p>You pass image bytes to a Rekognition API operation by using the <code>Bytes</code> property. For example, you would use the <code>Bytes</code> property to pass an image loaded from a local file system. Image bytes passed by using the <code>Bytes</code> property must be base64-encoded. Your code may not need to encode image bytes if you are using an AWS SDK to call Rekognition API operations. For more information, see <a>example4</a>.</p> <p> You pass images stored in an S3 bucket to a Rekognition API operation by using the <code>S3Object</code> property. Images stored in an S3 bucket do not need to be base64-encoded.</p> <p>The region for the S3 bucket containing the S3 object must match the region you use for Amazon Rekognition operations.</p> <p>If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes using the Bytes property is not supported. You must first upload the image to an Amazon S3 bucket and then call the operation using the S3Object property.</p> <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3 object. For more information, see <a>manage-access-resource-policies</a>. </p>'
   ImageBlob:
     type: string
     minLength: 1
@@ -1324,7 +1346,7 @@ definitions:
         description: ID you want to assign to all the faces detected in the image.
       DetectionAttributes:
         $ref: '#/definitions/Attributes'
-        description: '<p>A list of facial attributes that you want to be returned. This can be the default list of attributes or all attributes. If you don''t specify a value for <code>Attributes</code> or if you specify <code>["DEFAULT"]</code>, the API returns the following subset of facial attributes: <code>BoundingBox</code>, <code>Confidence</code>, <code>Pose</code>, <code>Quality</code> and <code>Landmarks</code>. If you provide <code>["ALL"]</code>, all facial attributes are returned but the operation will take longer to complete.</p> <p>If you provide both, <code>["ALL", "DEFAULT"]</code>, the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). </p>'
+        description: '<p>An array of facial attributes that you want to be returned. This can be the default list of attributes or all attributes. If you don''t specify a value for <code>Attributes</code> or if you specify <code>["DEFAULT"]</code>, the API returns the following subset of facial attributes: <code>BoundingBox</code>, <code>Confidence</code>, <code>Pose</code>, <code>Quality</code> and <code>Landmarks</code>. If you provide <code>["ALL"]</code>, all facial attributes are returned but the operation will take longer to complete.</p> <p>If you provide both, <code>["ALL", "DEFAULT"]</code>, the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). </p>'
   IndexFacesResponse:
     type: object
     example:
@@ -1414,7 +1436,7 @@ definitions:
         description: 'An array of faces detected and added to the collection. For more information, see <a>howitworks-index-faces</a>. '
       OrientationCorrection:
         $ref: '#/definitions/OrientationCorrection'
-        description: '<p>The algorithm detects the image orientation. If it detects that the image was rotated, it returns the degree of rotation. You can use this value to correct the orientation and also appropriately analyze the bounding box coordinates that are returned. </p> <note> <p>If the source image Exif metadata populates the orientation field, Amazon Rekognition does not perform orientation correction and the value of OrientationCorrection will be nil.</p> </note>'
+        description: '<p>The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct image orientation. The bounding box coordinates returned in <code>FaceRecords</code> represent face locations before the image orientation is corrected. </p> <note> <p>If the source image is in jpeg format, it might contain exchangeable image (Exif) metadata. If so, and the Exif metadata populates the orientation field, the value of <code>OrientationCorrection</code> is nil and the bounding box coordinates in <code>FaceRecords</code> represent face locations after Exif metadata is used to correct the image orientation. Images in .png format don''t contain Exif metadata.</p> </note>'
   InternalServerError:
     type: object
     properties: {}
@@ -1704,7 +1726,7 @@ definitions:
       Pitch:
         $ref: '#/definitions/Degree'
         description: Value representing the face rotation on the pitch axis.
-    description: 'Indicates the pose of the face as determined by pitch, roll, and the yaw.'
+    description: 'Indicates the pose of the face as determined by its pitch, roll, and yaw.'
   ProvisionedThroughputExceededException:
     type: object
     properties: {}

@@ -186,7 +186,7 @@ paths:
   '/#CreateFleet':
     post:
       operationId: CreateFleet
-      description: '<p>Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see <a href="http://aws.amazon.com/ec2/instance-types/">Amazon EC2 Instance Types</a> for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the <code>ACTIVE</code> status, it can begin hosting game sessions.</p> <p>To create a new fleet, provide a fleet name, an EC2 instance type, and a build ID of the game build to deploy. You can also configure the new fleet with the following settings: (1) a runtime configuration describing what server processes to run on each instance in the fleet (required to create fleet), (2) access permissions for inbound traffic, (3) fleet-wide game session protection, and (4) the location of default log files for Amazon GameLift to upload and store.</p> <p>If the CreateFleet call is successful, Amazon GameLift performs the following tasks:</p> <ul> <li> <p>Creates a fleet record and sets the status to <code>NEW</code> (followed by other statuses as the fleet is activated).</p> </li> <li> <p>Sets the fleet''s capacity to 1 "desired", which causes Amazon GameLift to start one new EC2 instance.</p> </li> <li> <p>Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, Amazon GameLift staggers each launch by a few seconds.</p> </li> <li> <p>Begins writing events to the fleet event log, which can be accessed in the Amazon GameLift console.</p> </li> <li> <p>Sets the fleet''s status to <code>ACTIVE</code> once one server process in the fleet is ready to host a game session.</p> </li> </ul> <p>After a fleet is created, use the following actions to change fleet properties and configuration:</p> <ul> <li> <p> <a>UpdateFleetAttributes</a> -- Update fleet metadata, including name and description.</p> </li> <li> <p> <a>UpdateFleetCapacity</a> -- Increase or decrease the number of instances you want the fleet to maintain.</p> </li> <li> <p> <a>UpdateFleetPortSettings</a> -- Change the IP address and port ranges that allow access to incoming traffic.</p> </li> <li> <p> <a>UpdateRuntimeConfiguration</a> -- Change how server processes are launched in the fleet, including launch path, launch parameters, and the number of concurrent processes.</p> </li> <li> <p> <a>PutScalingPolicy</a> -- Create or update rules that are used to set the fleet''s capacity (autoscaling).</p> </li> </ul>'
+      description: '<p>Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see <a href="http://aws.amazon.com/ec2/instance-types/">Amazon EC2 Instance Types</a> for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the <code>ACTIVE</code> status, it can begin hosting game sessions.</p> <p>To create a new fleet, you must specify the following: (1) fleet name, (2) build ID of an uploaded game build, (3) an EC2 instance type, and (4) a runtime configuration that describes which server processes to run on each instance in the fleet. (Although the runtime configuration is not a required parameter, the fleet cannot be successfully created without it.) You can also configure the new fleet with the following settings: fleet description, access permissions for inbound traffic, fleet-wide game session protection, and resource creation limit. If you use Amazon CloudWatch for metrics, you can add the new fleet to a metric group, which allows you to view aggregated metrics for a set of fleets. Once you specify a metric group, the new fleet''s metrics are included in the metric group''s data.</p> <p>If the CreateFleet call is successful, Amazon GameLift performs the following tasks:</p> <ul> <li> <p>Creates a fleet record and sets the status to <code>NEW</code> (followed by other statuses as the fleet is activated).</p> </li> <li> <p>Sets the fleet''s capacity to 1 "desired", which causes Amazon GameLift to start one new EC2 instance.</p> </li> <li> <p>Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, Amazon GameLift staggers each launch by a few seconds.</p> </li> <li> <p>Begins writing events to the fleet event log, which can be accessed in the Amazon GameLift console.</p> </li> <li> <p>Sets the fleet''s status to <code>ACTIVE</code> once one server process in the fleet is ready to host a game session.</p> </li> </ul> <p>After a fleet is created, use the following actions to change fleet properties and configuration:</p> <ul> <li> <p> <a>UpdateFleetAttributes</a> -- Update fleet metadata, including name and description.</p> </li> <li> <p> <a>UpdateFleetCapacity</a> -- Increase or decrease the number of instances you want the fleet to maintain.</p> </li> <li> <p> <a>UpdateFleetPortSettings</a> -- Change the IP address and port ranges that allow access to incoming traffic.</p> </li> <li> <p> <a>UpdateRuntimeConfiguration</a> -- Change how server processes are launched in the fleet, including launch path, launch parameters, and the number of concurrent processes.</p> </li> <li> <p> <a>PutScalingPolicy</a> -- Create or update rules that are used to set the fleet''s capacity (autoscaling).</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -318,6 +318,10 @@ paths:
           description: UnauthorizedException
           schema:
             $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
       parameters:
         - name: body
           in: body
@@ -1673,7 +1677,7 @@ paths:
   '/#StartGameSessionPlacement':
     post:
       operationId: StartGameSessionPlacement
-      description: '<p>Places a request for a new game session in a queue (see <a>CreateGameSessionQueue</a>). When processing a placement request, Amazon GameLift searches for available resources on the queue''s destinations, scanning each until it finds resources or the placement request times out. A game session placement request can also request player sessions. When a new game session is successfully created, Amazon GameLift creates a player session for each player included in the request.</p> <p>When placing a game session, by default Amazon GameLift tries each fleet in the order they are listed in the queue configuration. Ideally, a queue''s destinations are listed in preference order. Alternatively, when requesting a game session with players, you can also provide latency data for each player in relevant regions. Latency data indicates the performance lag a player experiences when connected to a fleet in the region. Amazon GameLift uses latency data to reorder the list of destinations to place the game session in a region with minimal lag. If latency data is provided for multiple players, Amazon GameLift calculates each region''s average lag for all players and reorders to get the best game play across all players. </p> <p>To place a new game session request, specify the queue name and a set of game session properties and settings. Also provide a unique ID (such as a UUID) for the placement. You''ll use this ID to track the status of the placement request. Optionally, provide a set of IDs and player data for each player you want to join to the new game session. To optimize game play for the players, also provide latency data for all players. If successful, a new game session placement is created. To track the status of a placement request, call <a>DescribeGameSessionPlacement</a> and check the request''s status. If the status is Fulfilled, a new game session has been created and a game session ARN and region are referenced. If the placement request times out, you have the option of resubmitting the request or retrying it with a different queue. </p>'
+      description: '<p>Places a request for a new game session in a queue (see <a>CreateGameSessionQueue</a>). When processing a placement request, Amazon GameLift searches for available resources on the queue''s destinations, scanning each until it finds resources or the placement request times out.</p> <p>A game session placement request can also request player sessions. When a new game session is successfully created, Amazon GameLift creates a player session for each player included in the request.</p> <p>When placing a game session, by default Amazon GameLift tries each fleet in the order they are listed in the queue configuration. Ideally, a queue''s destinations are listed in preference order.</p> <p>Alternatively, when requesting a game session with players, you can also provide latency data for each player in relevant regions. Latency data indicates the performance lag a player experiences when connected to a fleet in the region. Amazon GameLift uses latency data to reorder the list of destinations to place the game session in a region with minimal lag. If latency data is provided for multiple players, Amazon GameLift calculates each region''s average lag for all players and reorders to get the best game play across all players. </p> <p>To place a new game session request, specify the following:</p> <ul> <li> <p>The queue name and a set of game session properties and settings</p> </li> <li> <p>A unique ID (such as a UUID) for the placement. You use this ID to track the status of the placement request</p> </li> <li> <p>(Optional) A set of IDs and player data for each player you want to join to the new game session</p> </li> <li> <p>Latency data for all players (if you want to optimize game play for the players)</p> </li> </ul> <p>If successful, a new game session placement is created.</p> <p>To track the status of a placement request, call <a>DescribeGameSessionPlacement</a> and check the request''s status. If the status is <code>Fulfilled</code>, a new game session has been created and a game session ARN and region are referenced. If the placement request times out, you can resubmit the request or retry it with a different queue. </p>'
       responses:
         '200':
           description: Success
@@ -2322,6 +2326,9 @@ definitions:
       ResourceCreationLimitPolicy:
         $ref: '#/definitions/ResourceCreationLimitPolicy'
         description: Policy that limits the number of game sessions an individual player can create over a span of time for this fleet.
+      MetricGroups:
+        $ref: '#/definitions/MetricGroupList'
+        description: 'Names of metric groups to add this fleet to. Use an existing metric group name to add this fleet to the group, or use a new name to create a new metric group. Currently, a fleet can only be included in one metric group at a time.'
     description: Represents the input for a request action.
   CreateFleetOutput:
     type: object
@@ -3046,6 +3053,9 @@ definitions:
       ResourceCreationLimitPolicy:
         $ref: '#/definitions/ResourceCreationLimitPolicy'
         description: Fleet policy to limit the number of game sessions an individual player can create over a span of time.
+      MetricGroups:
+        $ref: '#/definitions/MetricGroupList'
+        description: 'Names of metric groups that this fleet is included in. In Amazon CloudWatch, you can view metrics for an individual fleet or aggregated metrics for a fleets that are in a fleet metric group. Currently, a fleet can be included in only one metric group at a time.'
     description: General properties describing a fleet.
   FleetAttributesList:
     type: array
@@ -3189,6 +3199,10 @@ definitions:
         $ref: '#/definitions/NonZeroAndMaxString'
         description: 'Unique identifier for a player. This ID is used to enforce a resource protection policy (if one exists), that limits the number of game sessions a player can create.'
     description: Properties describing a game session.
+  GameSessionActivationTimeoutSeconds:
+    type: integer
+    minimum: 1
+    maximum: 600
   GameSessionDetail:
     type: object
     properties:
@@ -3277,7 +3291,7 @@ definitions:
         description: Descriptive label that is associated with queue. Queue names must be unique within each region.
       GameSessionQueueArn:
         $ref: '#/definitions/ArnStringModel'
-        description: 'Amazon Resource Name (<a href="http://docs.aws.amazon.com/docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html">ARN</a>) that is assigned to a game session queue and uniquely identifies it. Format is <code>arn:aws:gamelift:&lt;region&gt;::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>.'
+        description: 'Amazon Resource Name (<a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html">ARN</a>) that is assigned to a game session queue and uniquely identifies it. Format is <code>arn:aws:gamelift:&lt;region&gt;::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>.'
       TimeoutInSeconds:
         $ref: '#/definitions/WholeNumber'
         description: 'Maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a TIMED_OUT status.'
@@ -3571,15 +3585,31 @@ definitions:
         $ref: '#/definitions/NonZeroAndMaxString'
         description: 'Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.'
     description: Represents the returned data in response to a request action.
+  MaxConcurrentGameSessionActivations:
+    type: integer
+    minimum: 1
+    maximum: 2147483647
+  MetricGroup:
+    type: string
+    minLength: 1
+    maxLength: 255
+  MetricGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricGroup'
+    maxItems: 1
   MetricName:
     type: string
     enum:
       - ActivatingGameSessions
       - ActiveGameSessions
       - ActiveInstances
+      - AvailableGameSessions
       - AvailablePlayerSessions
       - CurrentPlayerSessions
       - IdleInstances
+      - PercentAvailableGameSessions
+      - PercentIdleInstances
       - QueueDepth
       - WaitTime
   NonBlankAndLengthConstraintString:
@@ -3852,7 +3882,13 @@ definitions:
     properties:
       ServerProcesses:
         $ref: '#/definitions/ServerProcessList'
-        description: Collection of server process configurations describing what server processes to run on each instance in a fleet
+        description: Collection of server process configurations that describe which server processes to run on each instance in a fleet.
+      MaxConcurrentGameSessionActivations:
+        $ref: '#/definitions/MaxConcurrentGameSessionActivations'
+        description: Maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.
+      GameSessionActivationTimeoutSeconds:
+        $ref: '#/definitions/GameSessionActivationTimeoutSeconds'
+        description: 'Maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.'
     description: '<p>Collection of server process configurations that describe what processes should be run on each instance in a fleet. An instance can launch and maintain multiple server processes based on the runtime configuration; it regularly checks for an updated runtime configuration and starts new server processes to match the latest version.</p> <p>The key purpose of a runtime configuration with multiple server process configurations is to be able to run more than one kind of game server in a single fleet. You can include configurations for more than one server executable in order to run two or more different programs to run on the same instance. This option might be useful, for example, to run more than one version of your game server on the same fleet. Another option is to specify configurations for the same server executable but with different launch parameters.</p> <p>A Amazon GameLift instance is limited to 50 processes running simultaneously. To calculate the total number of processes specified in a runtime configuration, add the values of the <code>ConcurrentExecutions</code> parameter for each <code> <a>ServerProcess</a> </code> object in the runtime configuration.</p>'
   S3Location:
     type: object
@@ -4110,6 +4146,9 @@ definitions:
       ResourceCreationLimitPolicy:
         $ref: '#/definitions/ResourceCreationLimitPolicy'
         description: 'Policy that limits the number of game sessions an individual player can create over a span of time. '
+      MetricGroups:
+        $ref: '#/definitions/MetricGroupList'
+        description: 'Names of metric groups to include this fleet with. A fleet metric group is used in Amazon CloudWatch to aggregate metrics from multiple fleets. Use an existing metric group name to add this fleet to the group, or use a new name to create a new metric group. Currently, a fleet can only be included in one metric group at a time.'
     description: Represents the input for a request action.
   UpdateFleetAttributesOutput:
     type: object

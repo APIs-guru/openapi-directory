@@ -98,7 +98,7 @@ paths:
   /:
     post:
       operationId: AttachInstances
-      description: '<p>Attaches one or more EC2 instances to the specified Auto Scaling group.</p> <p>When you attach instances, Auto Scaling increases the desired capacity of the group by the number of instances being attached. If the number of instances being attached plus the desired capacity of the group exceeds the maximum size of the group, the operation fails.</p> <p>If there is a Classic load balancer attached to your Auto Scaling group, the instances are also registered with the load balancer. If there are target groups attached to your Auto Scaling group, the instances are also registered with the target groups.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-instance-asg.html">Attach EC2 Instances to Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      description: '<p>Attaches one or more EC2 instances to the specified Auto Scaling group.</p> <p>When you attach instances, Auto Scaling increases the desired capacity of the group by the number of instances being attached. If the number of instances being attached plus the desired capacity of the group exceeds the maximum size of the group, the operation fails.</p> <p>If there is a Classic Load Balancer attached to your Auto Scaling group, the instances are also registered with the load balancer. If there are target groups attached to your Auto Scaling group, the instances are also registered with the target groups.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-instance-asg.html">Attach EC2 Instances to Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -154,7 +154,7 @@ paths:
   '/#AttachLoadBalancers':
     post:
       operationId: AttachLoadBalancers
-      description: '<p>Attaches one or more Classic load balancers to the specified Auto Scaling group.</p> <p>To attach an Application load balancer instead, see <a>AttachLoadBalancerTargetGroups</a>.</p> <p>To describe the load balancers for an Auto Scaling group, use <a>DescribeLoadBalancers</a>. To detach the load balancer from the Auto Scaling group, use <a>DetachLoadBalancers</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html">Attach a Load Balancer to Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      description: '<p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group.</p> <p>To attach an Application Load Balancer instead, see <a>AttachLoadBalancerTargetGroups</a>.</p> <p>To describe the load balancers for an Auto Scaling group, use <a>DescribeLoadBalancers</a>. To detach the load balancer from the Auto Scaling group, use <a>DetachLoadBalancers</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html">Attach a Load Balancer to Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -799,7 +799,7 @@ paths:
   '/#DescribeLoadBalancers':
     post:
       operationId: DescribeLoadBalancers
-      description: '<p>Describes the load balancers for the specified Auto Scaling group.</p> <p>Note that this operation describes only Classic load balancers. If you have Application load balancers, use <a>DescribeLoadBalancerTargetGroups</a> instead.</p>'
+      description: '<p>Describes the load balancers for the specified Auto Scaling group.</p> <p>Note that this operation describes only Classic Load Balancers. If you have Application Load Balancers, use <a>DescribeLoadBalancerTargetGroups</a> instead.</p>'
       responses:
         '200':
           description: Success
@@ -1112,7 +1112,7 @@ paths:
   '/#DetachInstances':
     post:
       operationId: DetachInstances
-      description: '<p>Removes one or more instances from the specified Auto Scaling group.</p> <p>After the instances are detached, you can manage them independently from the rest of the Auto Scaling group.</p> <p>If you do not specify the option to decrement the desired capacity, Auto Scaling launches instances to replace the ones that are detached.</p> <p>If there is a Classic load balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/detach-instance-asg.html">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      description: '<p>Removes one or more instances from the specified Auto Scaling group.</p> <p>After the instances are detached, you can manage them independent of the Auto Scaling group.</p> <p>If you do not specify the option to decrement the desired capacity, Auto Scaling launches instances to replace the ones that are detached.</p> <p>If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/detach-instance-asg.html">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1170,7 +1170,7 @@ paths:
   '/#DetachLoadBalancers':
     post:
       operationId: DetachLoadBalancers
-      description: '<p>Detaches one or more Classic load balancers from the specified Auto Scaling group.</p> <p>Note that this operation detaches only Classic load balancers. If you have Application load balancers, use <a>DetachLoadBalancerTargetGroups</a> instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using <a>DescribeLoadBalancers</a>. Note that the instances remain running.</p>'
+      description: '<p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p> <p>Note that this operation detaches only Classic Load Balancers. If you have Application Load Balancers, use <a>DetachLoadBalancerTargetGroups</a> instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using <a>DescribeLoadBalancers</a>. Note that the instances remain running.</p>'
       responses:
         '200':
           description: Success
@@ -1253,7 +1253,7 @@ paths:
   '/#EnterStandby':
     post:
       operationId: EnterStandby
-      description: '<p>Moves the specified instances into <code>Standby</code> mode.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html">Auto Scaling Lifecycle</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      description: '<p>Moves the specified instances into the standby state.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1313,7 +1313,7 @@ paths:
   '/#ExitStandby':
     post:
       operationId: ExitStandby
-      description: '<p>Moves the specified instances out of <code>Standby</code> mode.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html">Auto Scaling Lifecycle</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      description: '<p>Moves the specified instances out of the standby state.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1689,7 +1689,7 @@ paths:
   '/#UpdateAutoScalingGroup':
     post:
       operationId: UpdateAutoScalingGroup
-      description: '<p>Updates the configuration for the specified Auto Scaling group.</p> <p>To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to <code>False</code>, you must first disable the collection of group metrics. Otherwise, you will get an error. If you have previously enabled the collection of group metrics, you can disable it using <a>DisableMetricsCollection</a>.</p> <p>The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Scaling activities that are currently in progress aren''t affected.</p> <p>Note the following:</p> <ul> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MinSize</code>.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MaxSize</code>.</p> </li> <li> <p>All other optional parameters are left unchanged if not specified.</p> </li> </ul>'
+      description: '<p>Updates the configuration for the specified Auto Scaling group.</p> <p>The new settings take effect on any scaling activities after this call returns. Scaling activities that are currently in progress aren''t affected.</p> <p>To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to <code>false</code>, you must first disable the collection of group metrics. Otherwise, you will get an error. If you have previously enabled the collection of group metrics, you can disable it using <a>DisableMetricsCollection</a>.</p> <p>Note the following:</p> <ul> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MinSize</code>.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MaxSize</code>.</p> </li> <li> <p>All other optional parameters are left unchanged if not specified.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1744,7 +1744,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
-    description: Contains the output of DescribeScalingActivities.
   Activity:
     type: object
     required:
@@ -1795,7 +1794,6 @@ definitions:
       Activity:
         $ref: '#/definitions/Activity'
         description: A scaling activity.
-    description: Contains the output of TerminateInstancesInAutoScalingGroup.
   AdjustmentType:
     type: object
     properties:
@@ -1850,7 +1848,6 @@ definitions:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
         description: The name of the group.
-    description: Contains the parameters for AttachInstances.
   AttachLoadBalancerTargetGroupsResultType:
     type: object
     properties: {}
@@ -1870,11 +1867,9 @@ definitions:
       TargetGroupARNs:
         $ref: '#/definitions/TargetGroupARNs'
         description: The Amazon Resource Names (ARN) of the target groups.
-    description: Contains the parameters for AttachLoadBalancerTargetGroups.
   AttachLoadBalancersResultType:
     type: object
     properties: {}
-    description: Contains the output of AttachLoadBalancers.
   AttachLoadBalancersType:
     type: object
     required:
@@ -1891,7 +1886,6 @@ definitions:
       LoadBalancerNames:
         $ref: '#/definitions/LoadBalancerNames'
         description: One or more load balancer names.
-    description: Contains the parameters for AttachLoadBalancers.
   AutoScalingGroup:
     type: object
     required:
@@ -1995,8 +1989,7 @@ definitions:
         description: The token for the next set of items to return. (You received this token from a previous call.)
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
-        description: The maximum number of items to return with this call.
-    description: Contains the parameters for DescribeAutoScalingGroups.
+        description: The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
   AutoScalingGroups:
     type: array
     items:
@@ -2023,6 +2016,7 @@ definitions:
               InstanceId: i-4ba0837f
               LaunchConfigurationName: my-launch-config
               LifecycleState: InService
+              ProtectedFromScaleIn: false
           LaunchConfigurationName: my-launch-config
           LoadBalancerNames: []
           MaxSize: 1
@@ -2040,7 +2034,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
-    description: Contains the output for DescribeAutoScalingGroups.
   AutoScalingInstanceDetails:
     type: object
     required:
@@ -2069,7 +2062,7 @@ definitions:
         description: The last reported health status of this instance. "Healthy" means that the instance is healthy and should remain in service. "Unhealthy" means that the instance is unhealthy and Auto Scaling should terminate and replace it.
       LaunchConfigurationName:
         $ref: '#/definitions/XmlStringMaxLen255'
-        description: The launch configuration associated with the instance.
+        description: The launch configuration used to launch the instance. This value is not available if you attached the instance to the Auto Scaling group.
       ProtectedFromScaleIn:
         $ref: '#/definitions/InstanceProtected'
         description: Indicates whether the instance is protected from termination by Auto Scaling when scaling in.
@@ -2096,7 +2089,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
-    description: Contains the output of DescribeAutoScalingInstances.
   AutoScalingNotificationTypes:
     type: array
     items:
@@ -2151,7 +2143,6 @@ definitions:
   CompleteLifecycleActionAnswer:
     type: object
     properties: {}
-    description: Contains the output of CompleteLifecycleAction.
   CompleteLifecycleActionType:
     type: object
     required:
@@ -2179,7 +2170,6 @@ definitions:
       InstanceId:
         $ref: '#/definitions/XmlStringMaxLen19'
         description: The ID of the instance.
-    description: Contains the parameters for CompleteLifecycleAction.
   Cooldown:
     type: integer
   CreateAutoScalingGroupType:
@@ -2216,7 +2206,7 @@ definitions:
         description: The maximum size of the group.
       DesiredCapacity:
         $ref: '#/definitions/AutoScalingGroupDesiredCapacity'
-        description: The number of EC2 instances that should be running in the group. This number must be greater than or equal to the minimum size of the group and less than or equal to the maximum size of the group.
+        description: 'The number of EC2 instances that should be running in the group. This number must be greater than or equal to the minimum size of the group and less than or equal to the maximum size of the group. If you do not specify a desired capacity, the default is the minimum size of the group.'
       DefaultCooldown:
         $ref: '#/definitions/Cooldown'
         description: '<p>The amount of time, in seconds, after a scaling activity completes before another scaling activity can start. The default is 300.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html">Auto Scaling Cooldowns</a> in the <i>Auto Scaling User Guide</i>.</p>'
@@ -2225,7 +2215,7 @@ definitions:
         description: One or more Availability Zones for the group. This parameter is optional if you specify one or more subnets.
       LoadBalancerNames:
         $ref: '#/definitions/LoadBalancerNames'
-        description: '<p>One or more Classic load balancers. To specify an Application load balancer, use <code>TargetGroupARNs</code> instead.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html">Using a Load Balancer With an Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
+        description: '<p>One or more Classic Load Balancers. To specify an Application Load Balancer, use <code>TargetGroupARNs</code> instead.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html">Using a Load Balancer With an Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
       TargetGroupARNs:
         $ref: '#/definitions/TargetGroupARNs'
         description: The Amazon Resource Names (ARN) of the target groups.
@@ -2250,7 +2240,6 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: '<p>One or more tags.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html">Tagging Auto Scaling Groups and Instances</a> in the <i>Auto Scaling User Guide</i>.</p>'
-    description: Contains the parameters for CreateAutoScalingGroup.
   CreateLaunchConfigurationType:
     type: object
     required:
@@ -2268,7 +2257,7 @@ definitions:
         description: The name of the launch configuration. This name must be unique within the scope of your AWS account.
       ImageId:
         $ref: '#/definitions/XmlStringMaxLen255'
-        description: 'The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html">Finding an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+        description: '<p>The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances.</p> <p>If you do not specify <code>InstanceId</code>, you must specify <code>ImageId</code>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html">Finding an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       KeyName:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: 'The name of the key pair. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
@@ -2286,10 +2275,10 @@ definitions:
         description: 'The user data to make available to the launched EC2 instances. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance Metadata and User Data</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       InstanceId:
         $ref: '#/definitions/XmlStringMaxLen19'
-        description: '<p>The ID of the instance to use to create the launch configuration.</p> <p>The new launch configuration derives attributes from the instance, with the exception of the block device mapping.</p> <p>To create a launch configuration with a block device mapping or override any other instance attributes, specify them as part of the same request.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html">Create a Launch Configuration Using an EC2 Instance</a> in the <i>Auto Scaling User Guide</i>.</p>'
+        description: '<p>The ID of the instance to use to create the launch configuration. The new launch configuration derives attributes from the instance, with the exception of the block device mapping.</p> <p>If you do not specify <code>InstanceId</code>, you must specify both <code>ImageId</code> and <code>InstanceType</code>.</p> <p>To create a launch configuration with a block device mapping or override any other instance attributes, specify them as part of the same request.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html">Create a Launch Configuration Using an EC2 Instance</a> in the <i>Auto Scaling User Guide</i>.</p>'
       InstanceType:
         $ref: '#/definitions/XmlStringMaxLen255'
-        description: 'The instance type of the EC2 instance. For information about available instance types, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes"> Available Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> '
+        description: '<p>The instance type of the EC2 instance.</p> <p>If you do not specify <code>InstanceId</code>, you must specify <code>InstanceType</code>.</p> <p>For information about available instance types, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes">Available Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> </p>'
       KernelId:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The ID of the kernel associated with the AMI.
@@ -2301,7 +2290,7 @@ definitions:
         description: 'One or more mappings that specify how block devices are exposed to the instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html">Block Device Mapping</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       InstanceMonitoring:
         $ref: '#/definitions/InstanceMonitoring'
-        description: Enables detailed monitoring (<code>true</code>) or basic monitoring (<code>false</code>) for the Auto Scaling instances.
+        description: Enables detailed monitoring (<code>true</code>) or basic monitoring (<code>false</code>) for the Auto Scaling instances. The default is <code>true</code>.
       SpotPrice:
         $ref: '#/definitions/SpotPrice'
         description: 'The maximum hourly price to be paid for any Spot Instance launched to fulfill the request. Spot Instances are launched when the price you specify exceeds the current Spot market price. For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/US-SpotInstances.html">Launching Spot Instances in Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.'
@@ -2317,7 +2306,6 @@ definitions:
       PlacementTenancy:
         $ref: '#/definitions/XmlStringMaxLen64'
         description: '<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware and can only be launched into a VPC.</p> <p>You must set the value of this parameter to <code>dedicated</code> if want to launch Dedicated Instances into a shared tenancy VPC (VPC with instance placement tenancy attribute set to <code>default</code>).</p> <p>If you specify this parameter, be sure to specify at least one subnet when you create your group.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html">Launching Auto Scaling Instances in a VPC</a> in the <i>Auto Scaling User Guide</i>.</p> <p>Valid values: <code>default</code> | <code>dedicated</code> </p>'
-    description: Contains the parameters for CreateLaunchConfiguration.
   CreateOrUpdateTagsType:
     type: object
     required:
@@ -2338,7 +2326,6 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: One or more tags.
-    description: Contains the parameters for CreateOrUpdateTags.
   DeleteAutoScalingGroupType:
     type: object
     required:
@@ -2353,11 +2340,9 @@ definitions:
       ForceDelete:
         $ref: '#/definitions/ForceDelete'
         description: 'Specifies that the group will be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.'
-    description: Contains the parameters for DeleteAutoScalingGroup.
   DeleteLifecycleHookAnswer:
     type: object
     properties: {}
-    description: Contains the output of DeleteLifecycleHook.
   DeleteLifecycleHookType:
     type: object
     required:
@@ -2373,7 +2358,6 @@ definitions:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
         description: The name of the Auto Scaling group for the lifecycle hook.
-    description: Contains the parameters for DeleteLifecycleHook.
   DeleteNotificationConfigurationType:
     type: object
     required:
@@ -2389,7 +2373,6 @@ definitions:
       TopicARN:
         $ref: '#/definitions/ResourceName'
         description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.
-    description: Contains the parameters for DeleteNotificationConfiguration.
   DeletePolicyType:
     type: object
     required:
@@ -2404,7 +2387,6 @@ definitions:
       PolicyName:
         $ref: '#/definitions/ResourceName'
         description: The name or Amazon Resource Name (ARN) of the policy.
-    description: Contains the parameters for DeletePolicy.
   DeleteScheduledActionType:
     type: object
     required:
@@ -2420,7 +2402,6 @@ definitions:
       ScheduledActionName:
         $ref: '#/definitions/ResourceName'
         description: The name of the action to delete.
-    description: Contains the parameters for DeleteScheduledAction.
   DeleteTagsType:
     type: object
     required:
@@ -2435,7 +2416,6 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: One or more tags.
-    description: Contains the parameters for DeleteTags.
   DescribeAccountLimitsAnswer:
     type: object
     example:
@@ -2456,7 +2436,6 @@ definitions:
       NumberOfLaunchConfigurations:
         $ref: '#/definitions/NumberOfLaunchConfigurations'
         description: The current number of launch configurations for your AWS account.
-    description: Contains the parameters for DescribeAccountLimits.
   DescribeAdjustmentTypesAnswer:
     type: object
     example:
@@ -2468,7 +2447,6 @@ definitions:
       AdjustmentTypes:
         $ref: '#/definitions/AdjustmentTypes'
         description: The policy adjustment types.
-    description: Contains the parameters for DescribeAdjustmentTypes.
   DescribeAutoScalingInstancesType:
     type: object
     example:
@@ -2480,11 +2458,10 @@ definitions:
         description: 'The instances to describe; up to 50 instance IDs. If you omit this parameter, all Auto Scaling instances are described. If you specify an ID that does not exist, it is ignored with no error.'
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
-        description: The maximum number of items to return with this call.
+        description: The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
       NextToken:
         $ref: '#/definitions/XmlString'
         description: The token for the next set of items to return. (You received this token from a previous call.)
-    description: Contains the parameters for DescribeAutoScalingInstances.
   DescribeAutoScalingNotificationTypesAnswer:
     type: object
     example:
@@ -2498,7 +2475,6 @@ definitions:
       AutoScalingNotificationTypes:
         $ref: '#/definitions/AutoScalingNotificationTypes'
         description: The notification types.
-    description: Contains the output of DescribeAutoScalingNotificationTypes.
   DescribeLifecycleHookTypesAnswer:
     type: object
     example:
@@ -2509,7 +2485,6 @@ definitions:
       LifecycleHookTypes:
         $ref: '#/definitions/AutoScalingNotificationTypes'
         description: The lifecycle hook types.
-    description: Contains the output of DescribeLifecycleHookTypes.
   DescribeLifecycleHooksAnswer:
     type: object
     example:
@@ -2526,7 +2501,6 @@ definitions:
       LifecycleHooks:
         $ref: '#/definitions/LifecycleHooks'
         description: The lifecycle hooks for the specified group.
-    description: Contains the output of DescribeLifecycleHooks.
   DescribeLifecycleHooksType:
     type: object
     required:
@@ -2540,7 +2514,6 @@ definitions:
       LifecycleHookNames:
         $ref: '#/definitions/LifecycleHookNames'
         description: 'The names of one or more lifecycle hooks. If you omit this parameter, all lifecycle hooks are described.'
-    description: Contains the parameters for DescribeLifecycleHooks.
   DescribeLoadBalancerTargetGroupsRequest:
     type: object
     required:
@@ -2556,8 +2529,7 @@ definitions:
         description: The token for the next set of items to return. (You received this token from a previous call.)
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
-        description: The maximum number of items to return with this call.
-    description: Contains the parameters for DescribeLoadBalancerTargetGroups.
+        description: The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
   DescribeLoadBalancerTargetGroupsResponse:
     type: object
     example:
@@ -2571,7 +2543,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
-    description: Contains the output of DescribeLoadBalancerTargetGroups.
   DescribeLoadBalancersRequest:
     type: object
     required:
@@ -2587,8 +2558,7 @@ definitions:
         description: The token for the next set of items to return. (You received this token from a previous call.)
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
-        description: The maximum number of items to return with this call.
-    description: Contains the parameters for DescribeLoadBalancers.
+        description: The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
   DescribeLoadBalancersResponse:
     type: object
     example:
@@ -2602,7 +2572,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
-    description: Contains the output of DescribeLoadBalancers.
   DescribeMetricCollectionTypesAnswer:
     type: object
     example:
@@ -2624,7 +2593,6 @@ definitions:
       Granularities:
         $ref: '#/definitions/MetricGranularityTypes'
         description: The granularities for the metrics.
-    description: Contains the output of DescribeMetricsCollectionTypes.
   DescribeNotificationConfigurationsAnswer:
     type: object
     required:
@@ -2644,7 +2612,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
-    description: Contains the output from DescribeNotificationConfigurations.
   DescribeNotificationConfigurationsType:
     type: object
     example:
@@ -2659,8 +2626,7 @@ definitions:
         description: The token for the next set of items to return. (You received this token from a previous call.)
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
-        description: The maximum number of items to return with this call.
-    description: Contains the parameters for DescribeNotificationConfigurations.
+        description: The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
   DescribePoliciesType:
     type: object
     example:
@@ -2680,8 +2646,7 @@ definitions:
         description: The token for the next set of items to return. (You received this token from a previous call.)
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
-        description: The maximum number of items to be returned with each call.
-    description: Contains the parameters for DescribePolicies.
+        description: The maximum number of items to be returned with each call. The default value is 50 and the maximum value is 100.
   DescribeScalingActivitiesType:
     type: object
     example:
@@ -2695,11 +2660,10 @@ definitions:
         description: The name of the group.
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
-        description: The maximum number of items to return with this call.
+        description: The maximum number of items to return with this call. The default value is 100.
       NextToken:
         $ref: '#/definitions/XmlString'
         description: The token for the next set of items to return. (You received this token from a previous call.)
-    description: Contains the parameters for DescribeScalingActivities.
   DescribeScheduledActionsType:
     type: object
     example:
@@ -2722,8 +2686,7 @@ definitions:
         description: The token for the next set of items to return. (You received this token from a previous call.)
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
-        description: The maximum number of items to return with this call.
-    description: Contains the parameters for DescribeScheduledActions.
+        description: The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
   DescribeTagsType:
     type: object
     example:
@@ -2740,8 +2703,7 @@ definitions:
         description: The token for the next set of items to return. (You received this token from a previous call.)
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
-        description: The maximum number of items to return with this call.
-    description: Contains the parameters for DescribeTags.
+        description: The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
   DescribeTerminationPolicyTypesAnswer:
     type: object
     example:
@@ -2755,7 +2717,6 @@ definitions:
       TerminationPolicyTypes:
         $ref: '#/definitions/TerminationPolicies'
         description: 'The termination policies supported by Auto Scaling (<code>OldestInstance</code>, <code>OldestLaunchConfiguration</code>, <code>NewestInstance</code>, <code>ClosestToNextInstanceHour</code>, and <code>Default</code>).'
-    description: Contains the output of DescribeTerminationPolicyTypes.
   DetachInstancesAnswer:
     type: object
     example:
@@ -2772,7 +2733,6 @@ definitions:
       Activities:
         $ref: '#/definitions/Activities'
         description: The activities related to detaching the instances from the Auto Scaling group.
-    description: Contains the output of DetachInstances.
   DetachInstancesQuery:
     type: object
     required:
@@ -2793,7 +2753,6 @@ definitions:
       ShouldDecrementDesiredCapacity:
         $ref: '#/definitions/ShouldDecrementDesiredCapacity'
         description: 'If <code>True</code>, the Auto Scaling group decrements the desired capacity value by the number of instances detached.'
-    description: Contains the parameters for DetachInstances.
   DetachLoadBalancerTargetGroupsResultType:
     type: object
     properties: {}
@@ -2816,7 +2775,6 @@ definitions:
   DetachLoadBalancersResultType:
     type: object
     properties: {}
-    description: Contains the output for DetachLoadBalancers.
   DetachLoadBalancersType:
     type: object
     required:
@@ -2833,7 +2791,6 @@ definitions:
       LoadBalancerNames:
         $ref: '#/definitions/LoadBalancerNames'
         description: One or more load balancer names.
-    description: Contains the parameters for DetachLoadBalancers.
   DisableMetricsCollectionQuery:
     type: object
     required:
@@ -2849,7 +2806,6 @@ definitions:
       Metrics:
         $ref: '#/definitions/Metrics'
         description: '<p>One or more of the following metrics. If you omit this parameter, all metrics are disabled.</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul>'
-    description: Contains the parameters for DisableMetricsCollection.
   Ebs:
     type: object
     properties:
@@ -2892,7 +2848,6 @@ definitions:
       Granularity:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The granularity to associate with the metrics to collect. The only valid value is <code>1Minute</code>.
-    description: Contains the parameters for EnableMetricsCollection.
   EnabledMetric:
     type: object
     properties:
@@ -2923,7 +2878,6 @@ definitions:
       Activities:
         $ref: '#/definitions/Activities'
         description: The activities related to moving instances into <code>Standby</code> mode.
-    description: Contains the output of EnterStandby.
   EnterStandbyQuery:
     type: object
     required:
@@ -2944,7 +2898,6 @@ definitions:
       ShouldDecrementDesiredCapacity:
         $ref: '#/definitions/ShouldDecrementDesiredCapacity'
         description: 'Specifies whether the instances moved to <code>Standby</code> mode count as part of the Auto Scaling group''s desired capacity. If set, the desired capacity for the Auto Scaling group decrements by the number of instances moved to <code>Standby</code> mode.'
-    description: Contains the parameters for EnteStandby.
   EstimatedInstanceWarmup:
     type: integer
   ExecutePolicyType:
@@ -2971,7 +2924,6 @@ definitions:
       BreachThreshold:
         $ref: '#/definitions/MetricScale'
         description: <p>The breach threshold for the alarm.</p> <p>This parameter is required if the policy type is <code>StepScaling</code> and not supported otherwise.</p>
-    description: Contains the parameters for ExecutePolicy.
   ExitStandbyAnswer:
     type: object
     example:
@@ -2988,7 +2940,6 @@ definitions:
       Activities:
         $ref: '#/definitions/Activities'
         description: The activities related to moving instances out of <code>Standby</code> mode.
-    description: Contains the parameters for ExitStandby.
   ExitStandbyQuery:
     type: object
     required:
@@ -3004,7 +2955,6 @@ definitions:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
         description: The name of the Auto Scaling group.
-    description: Contains the parameters for ExitStandby.
   Filter:
     type: object
     properties:
@@ -3067,8 +3017,8 @@ definitions:
     properties:
       Enabled:
         $ref: '#/definitions/MonitoringEnabled'
-        description: 'If <code>True</code>, instance monitoring is enabled.'
-    description: Describes whether instance monitoring is enabled.
+        description: 'If <code>true</code>, detailed monitoring is enabled. Otherwise, basic monitoring is enabled.'
+    description: Describes whether detailed monitoring is enabled for the Auto Scaling instances.
   InstanceProtected:
     type: boolean
   Instances:
@@ -3158,7 +3108,6 @@ definitions:
       LaunchConfigurationName:
         $ref: '#/definitions/ResourceName'
         description: The name of the launch configuration.
-    description: Contains the parameters for DeleteLaunchConfiguration.
   LaunchConfigurationNames:
     type: array
     items:
@@ -3177,8 +3126,7 @@ definitions:
         description: The token for the next set of items to return. (You received this token from a previous call.)
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
-        description: The maximum number of items to return with this call. The default is 100.
-    description: Contains the parameters for DescribeLaunchConfigurations.
+        description: The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
   LaunchConfigurations:
     type: array
     items:
@@ -3208,7 +3156,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
-    description: Contains the output of DescribeLaunchConfigurations.
   LifecycleActionResult:
     type: string
   LifecycleActionToken:
@@ -3292,7 +3239,7 @@ definitions:
       State:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: '<p>One of the following load balancer states:</p> <ul> <li> <p> <code>Adding</code> - The instances in the group are being registered with the load balancer.</p> </li> <li> <p> <code>Added</code> - All instances in the group are registered with the load balancer.</p> </li> <li> <p> <code>InService</code> - At least one instance in the group passed an ELB health check.</p> </li> <li> <p> <code>Removing</code> - The instances in the group are being deregistered from the load balancer. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.</p> </li> <li> <p> <code>Removed</code> - All instances in the group are deregistered from the load balancer.</p> </li> </ul>'
-    description: '<p>Describes the state of a Classic load balancer.</p> <p>If you specify a load balancer when creating the Auto Scaling group, the state of the load balancer is <code>InService</code>.</p> <p>If you attach a load balancer to an existing Auto Scaling group, the initial state is <code>Adding</code>. The state transitions to <code>Added</code> after all instances in the group are registered with the load balancer. If ELB health checks are enabled for the load balancer, the state transitions to <code>InService</code> after at least one instance in the group passes the health check. If EC2 health checks are enabled instead, the load balancer remains in the <code>Added</code> state.</p>'
+    description: '<p>Describes the state of a Classic Load Balancer.</p> <p>If you specify a load balancer when creating the Auto Scaling group, the state of the load balancer is <code>InService</code>.</p> <p>If you attach a load balancer to an existing Auto Scaling group, the initial state is <code>Adding</code>. The state transitions to <code>Added</code> after all instances in the group are registered with the load balancer. If ELB health checks are enabled for the load balancer, the state transitions to <code>InService</code> after at least one instance in the group passes the health check. If EC2 health checks are enabled instead, the load balancer remains in the <code>Added</code> state.</p>'
   LoadBalancerStates:
     type: array
     items:
@@ -3405,7 +3352,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
-    description: Contains the output of DescribePolicies.
   PolicyARNType:
     type: object
     example:
@@ -3414,7 +3360,6 @@ definitions:
       PolicyARN:
         $ref: '#/definitions/ResourceName'
         description: The Amazon Resource Name (ARN) of the policy.
-    description: Contains the output of PutScalingPolicy.
   PolicyIncrement:
     type: integer
   PolicyNames:
@@ -3458,7 +3403,6 @@ definitions:
       Processes:
         $ref: '#/definitions/Processes'
         description: The names of the process types.
-    description: Contains the output of DescribeScalingProcessTypes.
   Progress:
     type: integer
   PropagateAtLaunch:
@@ -3468,7 +3412,6 @@ definitions:
   PutLifecycleHookAnswer:
     type: object
     properties: {}
-    description: Contains the output of PutLifecycleHook.
   PutLifecycleHookType:
     type: object
     required:
@@ -3505,7 +3448,6 @@ definitions:
       DefaultResult:
         $ref: '#/definitions/LifecycleActionResult'
         description: Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. This parameter can be either <code>CONTINUE</code> or <code>ABANDON</code>. The default value is <code>ABANDON</code>.
-    description: Contains the parameters for PutLifecycleHook.
   PutNotificationConfigurationType:
     type: object
     required:
@@ -3527,7 +3469,6 @@ definitions:
       NotificationTypes:
         $ref: '#/definitions/AutoScalingNotificationTypes'
         description: 'The type of event that will cause the notification to be sent. For details about notification types supported by Auto Scaling, see <a>DescribeAutoScalingNotificationTypes</a>.'
-    description: Contains the parameters for PutNotificationConfiguration.
   PutScalingPolicyType:
     type: object
     required:
@@ -3573,7 +3514,6 @@ definitions:
       EstimatedInstanceWarmup:
         $ref: '#/definitions/EstimatedInstanceWarmup'
         description: '<p>The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. The default is to use the value specified for the default cooldown period for the group.</p> <p>This parameter is not supported if the policy type is <code>SimpleScaling</code>.</p>'
-    description: Contains the parameters for PutScalingPolicy.
   PutScheduledUpdateGroupActionType:
     type: object
     required:
@@ -3615,11 +3555,9 @@ definitions:
       DesiredCapacity:
         $ref: '#/definitions/AutoScalingGroupDesiredCapacity'
         description: The number of EC2 instances that should be running in the group.
-    description: Contains the parameters for PutScheduledUpdateGroupAction.
   RecordLifecycleActionHeartbeatAnswer:
     type: object
     properties: {}
-    description: Contains the output of RecordLifecycleActionHeartBeat.
   RecordLifecycleActionHeartbeatType:
     type: object
     required:
@@ -3642,7 +3580,6 @@ definitions:
       InstanceId:
         $ref: '#/definitions/XmlStringMaxLen19'
         description: The ID of the instance.
-    description: Contains the parameters for RecordLifecycleActionHeartbeat.
   ResourceContentionFault:
     type: object
     properties:
@@ -3717,7 +3654,7 @@ definitions:
         description: 'The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity.'
       Cooldown:
         $ref: '#/definitions/Cooldown'
-        description: 'The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start.'
+        description: 'The amount of time, in seconds, after a scaling activity completes before any further dynamic scaling activities can start.'
       StepAdjustments:
         $ref: '#/definitions/StepAdjustments'
         description: A set of adjustments that enable you to scale based on the size of the alarm breach.
@@ -3746,7 +3683,6 @@ definitions:
       ScalingProcesses:
         $ref: '#/definitions/ProcessNames'
         description: '<p>One or more of the following processes. If you omit this parameter, all processes are specified.</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> </ul>'
-    description: Contains the parameters for SuspendProcesses and ResumeProcesses.
   ScheduledActionNames:
     type: array
     items:
@@ -3771,7 +3707,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
-    description: Contains the output of DescribeScheduledActions.
   ScheduledUpdateGroupAction:
     type: object
     properties:
@@ -3833,7 +3768,6 @@ definitions:
       HonorCooldown:
         $ref: '#/definitions/HonorCooldown'
         description: 'By default, <code>SetDesiredCapacity</code> overrides any cooldown period associated with the Auto Scaling group. Specify <code>True</code> to make Auto Scaling to wait for the cool-down period associated with the Auto Scaling group to complete before initiating a scaling activity to set your Auto Scaling group to its new capacity.'
-    description: Contains the parameters for SetDesiredCapacity.
   SetInstanceHealthQuery:
     type: object
     required:
@@ -3852,11 +3786,9 @@ definitions:
       ShouldRespectGracePeriod:
         $ref: '#/definitions/ShouldRespectGracePeriod'
         description: '<p>If the Auto Scaling group of the specified instance has a <code>HealthCheckGracePeriod</code> specified for the group, by default, this call will respect the grace period. Set this to <code>False</code>, if you do not want the call to respect the grace period associated with the group.</p> <p>For more information, see the description of the health check grace period for <a>CreateAutoScalingGroup</a>.</p>'
-    description: Contains the parameters for SetInstanceHealth.
   SetInstanceProtectionAnswer:
     type: object
     properties: {}
-    description: Contains the output of SetInstanceProtection.
   SetInstanceProtectionQuery:
     type: object
     required:
@@ -3878,7 +3810,6 @@ definitions:
       ProtectedFromScaleIn:
         $ref: '#/definitions/ProtectedFromScaleIn'
         description: Indicates whether the instance is protected from termination by Auto Scaling when scaling in.
-    description: Contains the parameters for SetInstanceProtection.
   ShouldDecrementDesiredCapacity:
     type: boolean
   ShouldRespectGracePeriod:
@@ -3999,7 +3930,6 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
-    description: Contains the output of DescribeTags.
   TargetGroupARNs:
     type: array
     items:
@@ -4019,7 +3949,6 @@ definitions:
       ShouldDecrementDesiredCapacity:
         $ref: '#/definitions/ShouldDecrementDesiredCapacity'
         description: 'If <code>true</code>, terminating the instance also decrements the size of the Auto Scaling group.'
-    description: Contains the parameters for TerminateInstanceInAutoScalingGroup.
   TerminationPolicies:
     type: array
     items:
@@ -4074,7 +4003,6 @@ definitions:
       NewInstancesProtectedFromScaleIn:
         $ref: '#/definitions/InstanceProtected'
         description: Indicates whether newly launched instances are protected from termination by Auto Scaling when scaling in.
-    description: Contains the parameters for UpdateAutoScalingGroup.
   Values:
     type: array
     items:

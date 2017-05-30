@@ -100,7 +100,7 @@ paths:
   /:
     post:
       operationId: AddTagsToResource
-      description: '<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances. Tags enable you to categorize your managed instances in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account''s managed instances that helps you track each instance''s owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 10 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don''t have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. </p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.</p>'
+      description: '<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances, Maintenance Windows, or Parameter Store parameters. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account''s managed instances that helps you track each instance''s owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 10 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don''t have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. </p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -690,7 +690,7 @@ paths:
   '/#DeregisterManagedInstance':
     post:
       operationId: DeregisterManagedInstance
-      description: 'Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don’t plan to use Run Command on the server, we suggest uninstalling the SSM Agent first.'
+      description: 'Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don''t plan to use Run Command on the server, we suggest uninstalling the SSM Agent first.'
       responses:
         '200':
           description: Success
@@ -1009,7 +1009,7 @@ paths:
   '/#DescribeDocumentPermission':
     post:
       operationId: DescribeDocumentPermission
-      description: 'Describes the permissions for a Systems Manager document. If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user’s AWS account ID) or publicly (<i>All</i>). '
+      description: 'Describes the permissions for a Systems Manager document. If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user''s AWS account ID) or publicly (<i>All</i>). '
       responses:
         '200':
           description: Success
@@ -2983,6 +2983,14 @@ paths:
           description: TooManyUpdates
           schema:
             $ref: '#/definitions/TooManyUpdates'
+        '488':
+          description: InvalidDocument
+          schema:
+            $ref: '#/definitions/InvalidDocument'
+        '489':
+          description: InvalidTarget
+          schema:
+            $ref: '#/definitions/InvalidTarget'
       parameters:
         - name: body
           in: body
@@ -3470,7 +3478,7 @@ definitions:
     properties:
       Status:
         $ref: '#/definitions/StatusName'
-        description: 'The status of the association. Status can be: <code>Pending</code>, <code>Success</code>, or <code>Failed</code>.'
+        description: 'The status of the association. Status can be: Pending, Success, or Failed.'
       DetailedStatus:
         $ref: '#/definitions/StatusName'
         description: A detailed status of the association.
@@ -3562,7 +3570,7 @@ definitions:
         description: A list of details about the current state of all steps that comprise an execution. An Automation document contains a list of steps that are executed in order.
       Parameters:
         $ref: '#/definitions/AutomationParameterMap'
-        description: 'The key-value map of execution parameters, which were supplied when calling <code>StartAutomationExecution</code>.'
+        description: 'The key-value map of execution parameters, which were supplied when calling StartAutomationExecution.'
       Outputs:
         $ref: '#/definitions/AutomationParameterMap'
         description: The list of execution outputs as defined in the automation document.
@@ -3752,7 +3760,7 @@ definitions:
         description: The instance IDs against which this command was requested.
       Targets:
         $ref: '#/definitions/Targets'
-        description: 'An array of search criteria that targets instances using a <code>Key</code>,<code>Value</code> combination that you specify. <code>Targets</code> is required if you don''t provide one or more instance IDs in the call.'
+        description: 'An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don''t provide one or more instance IDs in the call.'
       RequestedDateTime:
         $ref: '#/definitions/DateTime'
         description: The date and time the command was requested.
@@ -3761,7 +3769,7 @@ definitions:
         description: The status of the command.
       StatusDetails:
         $ref: '#/definitions/StatusDetails'
-        description: '<p>A detailed status of the command execution. <code>StatusDetails</code> includes more information than <code>Status</code> because it includes states resulting from error and concurrency control parameters. <code>StatusDetails</code> can show different results than <code>Status</code>. For more information about these statuses, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html">Run Command Status</a>. <code>StatusDetails</code> can be one of the following values:</p> <ul> <li> <p>Pending – The command has not been sent to any instances.</p> </li> <li> <p>In Progress – The command has been sent to at least one instance but has not reached a final state on all instances.</p> </li> <li> <p>Success – The command successfully executed on all invocations. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out – The value of <code>MaxErrors</code> or more command invocations shows a status of <code>Delivery Timed Out</code>. This is a terminal state.</p> </li> <li> <p>Execution Timed Out – The value of <code>MaxErrors</code> or more command invocations shows a status of <code>Execution Timed Out</code>. This is a terminal state.</p> </li> <li> <p>Failed – The value of <code>MaxErrors</code> or more command invocations shows a status of <code>Failed</code>. This is a terminal state.</p> </li> <li> <p>Incomplete – The command was attempted on all instances and one or more invocations does not have a value of <code>Success</code> but not enough invocations failed for the status to be <code>Failed</code>. This is a terminal state.</p> </li> <li> <p>Canceled – The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Rate Exceeded – The number of instances targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before executing it on any instance. This is a terminal state.</p> </li> </ul>'
+        description: '<p>A detailed status of the command execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html">Run Command Status</a>. StatusDetails can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to any instances.</p> </li> <li> <p>In Progress: The command has been sent to at least one instance but has not reached a final state on all instances.</p> </li> <li> <p>Success: The command successfully executed on all invocations. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of Delivery Timed Out. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The value of MaxErrors or more command invocations shows a status of Execution Timed Out. This is a terminal state.</p> </li> <li> <p>Failed: The value of MaxErrors or more command invocations shows a status of Failed. This is a terminal state.</p> </li> <li> <p>Incomplete: The command was attempted on all instances and one or more invocations does not have a value of Success but not enough invocations failed for the status to be Failed. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Rate Exceeded: The number of instances targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before executing it on any instance. This is a terminal state.</p> </li> </ul>'
       OutputS3Region:
         $ref: '#/definitions/S3Region'
         description: The region where the Amazon Simple Storage Service (Amazon S3) output bucket is located. The default value is the region where Run Command is being called.
@@ -3773,19 +3781,19 @@ definitions:
         description: The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command.
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
-        description: 'The maximum number of instances that are allowed to execute the command at the same time. You can specify a number of instances, such as 10, or a percentage of instances, such as 10%. The default value is 50. For more information about how to use <code>MaxConcurrency</code>, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: 'The maximum number of instances that are allowed to execute the command at the same time. You can specify a number of instances, such as 10, or a percentage of instances, such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
-        description: 'The maximum number of errors allowed before the system stops sending the command to additional targets. You can specify a number of errors, such as 10, or a percentage or errors, such as 10%. The default value is 50. For more information about how to use <code>MaxErrors</code>, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: 'The maximum number of errors allowed before the system stops sending the command to additional targets. You can specify a number of errors, such as 10, or a percentage or errors, such as 10%. The default value is 50. For more information about how to use MaxErrors, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
       TargetCount:
         $ref: '#/definitions/TargetCount'
         description: The number of targets for the command.
       CompletedCount:
         $ref: '#/definitions/CompletedCount'
-        description: 'The number of targets for which the command invocation reached a terminal state. Terminal states include the following: <code>Success</code>, <code>Failed</code>, <code>Execution Timed Out</code>, <code>Delivery Timed Out</code>, <code>Canceled</code>, <code>Terminated</code>, or <code>Undeliverable</code>.'
+        description: 'The number of targets for which the command invocation reached a terminal state. Terminal states include the following: Success, Failed, Execution Timed Out, Delivery Timed Out, Canceled, Terminated, or Undeliverable.'
       ErrorCount:
         $ref: '#/definitions/ErrorCount'
-        description: The number of targets for which the status is <code>Failed</code> or <code>Execution Timed Out</code>.
+        description: The number of targets for which the status is Failed or Execution Timed Out.
       ServiceRole:
         $ref: '#/definitions/ServiceRole'
         description: 'The IAM service role that Run Command uses to act on your behalf when sending notifications about command status changes. '
@@ -3836,7 +3844,7 @@ definitions:
         description: The instance ID in which this invocation was requested.
       InstanceName:
         $ref: '#/definitions/InstanceTagName'
-        description: 'The name of the invocation target. For Amazon EC2 instances this is the value for the <code>aws:Name</code> tag. For on-premises instances, this is the name of the instance.'
+        description: 'The name of the invocation target. For Amazon EC2 instances this is the value for the aws:Name tag. For on-premises instances, this is the name of the instance.'
       Comment:
         $ref: '#/definitions/Comment'
         description: 'User-specified information about the command, such as a brief description of what the command should do.'
@@ -3851,16 +3859,16 @@ definitions:
         description: 'Whether or not the invocation succeeded, failed, or is pending.'
       StatusDetails:
         $ref: '#/definitions/StatusDetails'
-        description: '<p>A detailed status of the command execution for each invocation (each instance targeted by the command). <code>StatusDetails</code> includes more information than <code>Status</code> because it includes states resulting from error and concurrency control parameters. <code>StatusDetails</code> can show different results than <code>Status</code>. For more information about these statuses, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html">Run Command Status</a>. <code>StatusDetails</code> can be one of the following values:</p> <ul> <li> <p>Pending – The command has not been sent to the instance.</p> </li> <li> <p>In Progress – The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Success – The execution of the command or plugin was successfully completed. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out – The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command’s <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is <code>Success</code> or <code>Incomplete</code>. This is a terminal state.</p> </li> <li> <p>Execution Timed Out – Command execution started on the instance, but the execution was not complete before the execution timeout expired. Execution timeouts count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed – The command was not successful on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled – The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable – The command can''t be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don''t count against the parent command’s <code>MaxErrors</code> limit and don''t contribute to whether the parent command status is <code>Success</code> or <code>Incomplete</code>. This is a terminal state.</p> </li> <li> <p>Terminated – The parent command exceeded its <code>MaxErrors</code> limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>'
+        description: '<p>A detailed status of the command execution for each invocation (each instance targeted by the command). StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html">Run Command Status</a>. StatusDetails can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to the instance.</p> </li> <li> <p>In Progress: The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Success: The execution of the command or plugin was successfully completed. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command''s MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: Command execution started on the instance, but the execution was not complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The command was not successful on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable: The command can''t be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don''t count against the parent command''s MaxErrors limit and don''t contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>'
       TraceOutput:
         $ref: '#/definitions/InvocationTraceOutput'
         description: ' Gets the trace output sent by the agent. '
       StandardOutputUrl:
         $ref: '#/definitions/Url'
-        description: 'The URL to the plugin’s StdOut file in Amazon S3, if the Amazon S3 bucket was defined for the parent command. For an invocation, <code>StandardOutputUrl</code> is populated if there is just one plugin defined for the command, and the Amazon S3 bucket was defined for the command.'
+        description: 'The URL to the plugin''s StdOut file in Amazon S3, if the Amazon S3 bucket was defined for the parent command. For an invocation, StandardOutputUrl is populated if there is just one plugin defined for the command, and the Amazon S3 bucket was defined for the command.'
       StandardErrorUrl:
         $ref: '#/definitions/Url'
-        description: 'The URL to the plugin’s StdErr file in Amazon S3, if the Amazon S3 bucket was defined for the parent command. For an invocation, <code>StandardErrorUrl</code> is populated if there is just one plugin defined for the command, and the Amazon S3 bucket was defined for the command.'
+        description: 'The URL to the plugin''s StdErr file in Amazon S3, if the Amazon S3 bucket was defined for the parent command. For an invocation, StandardErrorUrl is populated if there is just one plugin defined for the command, and the Amazon S3 bucket was defined for the command.'
       CommandPlugins:
         $ref: '#/definitions/CommandPluginList'
       ServiceRole:
@@ -3904,7 +3912,7 @@ definitions:
         description: The status of this plugin. You can execute a document with multiple plugins.
       StatusDetails:
         $ref: '#/definitions/StatusDetails'
-        description: '<p>A detailed status of the plugin execution. <code>StatusDetails</code> includes more information than <code>Status</code> because it includes states resulting from error and concurrency control parameters. <code>StatusDetails</code> can show different results than <code>Status</code>. For more information about these statuses, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html">Run Command Status</a>. <code>StatusDetails</code> can be one of the following values:</p> <ul> <li> <p>Pending – The command has not been sent to the instance.</p> </li> <li> <p>In Progress – The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Success – The execution of the command or plugin was successfully completed. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out – The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command’s <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is <code>Success</code> or <code>Incomplete</code>. This is a terminal state.</p> </li> <li> <p>Execution Timed Out – Command execution started on the instance, but the execution was not complete before the execution timeout expired. Execution timeouts count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed – The command was not successful on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled – The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable – The command can''t be delivered to the instance. The instance might not exist, or it might not be responding. Undeliverable invocations don''t count against the parent command’s <code>MaxErrors</code> limit, and they don''t contribute to whether the parent command status is <code>Success</code> or <code>Incomplete</code>. This is a terminal state.</p> </li> <li> <p>Terminated – The parent command exceeded its <code>MaxErrors</code> limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>'
+        description: '<p>A detailed status of the plugin execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html">Run Command Status</a>. StatusDetails can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to the instance.</p> </li> <li> <p>In Progress: The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Success: The execution of the command or plugin was successfully completed. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command''s MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: Command execution started on the instance, but the execution was not complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The command was not successful on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable: The command can''t be delivered to the instance. The instance might not exist, or it might not be responding. Undeliverable invocations don''t count against the parent command''s MaxErrors limit, and they don''t contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>'
       ResponseCode:
         $ref: '#/definitions/ResponseCode'
         description: 'A numeric response code generated after executing the plugin. '
@@ -3928,10 +3936,10 @@ definitions:
         description: The name of the region where the output is stored in Amazon S3.
       OutputS3BucketName:
         $ref: '#/definitions/S3BucketName'
-        description: '<p>The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:</p> <p> <code>test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript</code> </p> <p> <code>test_folder</code> is the name of the Amazon S3 bucket;</p> <p> <code>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix</code> is the name of the S3 prefix;</p> <p> <code>i-1234567876543</code> is the instance ID;</p> <p> <code>awsrunShellScript</code> is the name of the plugin.</p>'
+        description: '<p>The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:</p> <p> test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript </p> <p>test_folder is the name of the Amazon S3 bucket;</p> <p> ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;</p> <p>i-1234567876543 is the instance ID;</p> <p>awsrunShellScript is the name of the plugin.</p>'
       OutputS3KeyPrefix:
         $ref: '#/definitions/S3KeyPrefix'
-        description: '<p>The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:</p> <p> <code>test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript</code> </p> <p> <code>test_folder</code> is the name of the Amazon S3 bucket;</p> <p> <code>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix</code> is the name of the S3 prefix;</p> <p> <code>i-1234567876543</code> is the instance ID;</p> <p> <code>awsrunShellScript</code> is the name of the plugin.</p>'
+        description: '<p>The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:</p> <p> test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript </p> <p>test_folder is the name of the Amazon S3 bucket;</p> <p> ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;</p> <p>i-1234567876543 is the instance ID;</p> <p>awsrunShellScript is the name of the plugin.</p>'
     description: Describes plugin details.
   CommandPluginList:
     type: array
@@ -3978,7 +3986,7 @@ definitions:
     properties:
       Description:
         $ref: '#/definitions/ActivationDescription'
-        description: 'A user-defined description of the resource that you want to register with Amazon EC2. '
+        description: 'A userdefined description of the resource that you want to register with Amazon EC2. '
       DefaultInstanceName:
         $ref: '#/definitions/DefaultInstanceName'
         description: 'The name of the registered, managed instance as it will appear in the Amazon EC2 console or when you use the AWS command line tools to list EC2 resources.'
@@ -4020,10 +4028,10 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentName'
-        description: ' The name of the configuration document. '
+        description: 'The name of the configuration document. '
       InstanceId:
         $ref: '#/definitions/InstanceId'
-        description: ' The ID of the instance. '
+        description: 'The ID of the instance. '
       Parameters:
         $ref: '#/definitions/Parameters'
         description: 'A description of the parameters for a document. '
@@ -4039,7 +4047,7 @@ definitions:
       OutputLocation:
         $ref: '#/definitions/InstanceAssociationOutputLocation'
         description: An Amazon S3 bucket where you want to store the results of this request.
-    description: ' Describes the association of a Systems Manager document and an instance.'
+    description: Describes the association of a Systems Manager document and an instance.
   CreateAssociationBatchResult:
     type: object
     properties:
@@ -4068,13 +4076,13 @@ definitions:
         description: 'The parameters for the documents runtime configuration. '
       Targets:
         $ref: '#/definitions/Targets'
-        description: 'The targets (either instances or tags) for the association. Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.'
+        description: The targets (either instances or tags) for the association.
       ScheduleExpression:
         $ref: '#/definitions/ScheduleExpression'
-        description: 'A cron expression when the association will be applied to the target(s). Supported expressions are every half, 1, 2, 4, 8 or 12 hour(s); every specified day and time of the week. For example: cron(0 0/30 * 1/1 * ? *) to run every thirty minutes; cron(0 0 0/4 1/1 * ? *) to run every four hours; and cron(0 0 10 ? * SUN *) to run every Sunday at 10 a.m.'
+        description: A cron expression when the association will be applied to the target(s).
       OutputLocation:
         $ref: '#/definitions/InstanceAssociationOutputLocation'
-        description: '<p>An Amazon S3 bucket where you want to store the output details of the request. For example:</p> <p> <code>"{ \"S3Location\": { \"OutputS3Region\": \"&lt;region&gt;\", \"OutputS3BucketName\": \"bucket name\", \"OutputS3KeyPrefix\": \"folder name\" } }"</code> </p>'
+        description: An Amazon S3 bucket where you want to store the output details of the request.
   CreateAssociationResult:
     type: object
     properties:
@@ -4160,7 +4168,7 @@ definitions:
         description: A description of the patch baseline.
       ClientToken:
         $ref: '#/definitions/ClientToken'
-        description: Caller-provided idempotency token.
+        description: User-provided idempotency token.
   CreatePatchBaselineResult:
     type: object
     properties:
@@ -4575,7 +4583,7 @@ definitions:
         description: The name of the patch group for which the patch state information should be retrieved.
       Filters:
         $ref: '#/definitions/InstancePatchStateFilterList'
-        description: '<p>Each entry in the array is a structure containing:</p> <p>Key (string 1 ≤ length ≤ 200)</p> <p> Values (array containing a single string)</p> <p> Type (string “Equal”, “NotEqual”, “LessThan”, “GreaterThan”)</p>'
+        description: '<p>Each entry in the array is a structure containing:</p> <p>Key (string between 1 and 200 characters)</p> <p> Values (array containing a single string)</p> <p> Type (string "Equal", "NotEqual", "LessThan", "GreaterThan")</p>'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. (You received this token from a previous call.)
@@ -4624,7 +4632,7 @@ definitions:
         description: The ID of the instance whose patch state information should be retrieved.
       Filters:
         $ref: '#/definitions/PatchOrchestratorFilterList'
-        description: '<p>Each entry in the array is a structure containing:</p> <p>Key (string, 1 ≤ length ≤ 128)</p> <p>Values (array of strings 1 ≤ length ≤ 256)</p>'
+        description: '<p>Each entry in the array is a structure containing:</p> <p>Key (string, between 1 and 128 characters)</p> <p>Values (array of strings, each string between 1 and 256 characters)</p>'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. (You received this token from a previous call.)
@@ -4636,7 +4644,7 @@ definitions:
     properties:
       Patches:
         $ref: '#/definitions/PatchComplianceDataList'
-        description: '<p>Each entry in the array is a structure containing:</p> <p>Title (string)</p> <p>KBId (string)</p> <p>Classification (string)</p> <p>Severity (string)</p> <p>State (string – “INSTALLED”, “INSTALLED_OTHER”, “MISSING”, “NOT_APPLICABLE”, “FAILED”)</p> <p>InstalledTime (DateTime)</p> <p>InstalledBy (string)</p>'
+        description: '<p>Each entry in the array is a structure containing:</p> <p>Title (string)</p> <p>KBId (string)</p> <p>Classification (string)</p> <p>Severity (string)</p> <p>State (string: "INSTALLED", "INSTALLED OTHER", "MISSING", "NOT APPLICABLE", "FAILED")</p> <p>InstalledTime (DateTime)</p> <p>InstalledBy (string)</p>'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -4706,7 +4714,7 @@ definitions:
         description: The ID of the Maintenance Window whose executions should be retrieved.
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
-        description: '<p>Each entry in the array is a structure containing:</p> <p>Key (string, 1 ≤ length ≤ 128)</p> <p>Values (array of strings 1 ≤ length ≤ 256)</p> <p>The supported Keys are <code>ExecutedBefore</code> and <code>ExecutedAfter</code> with the value being a date/time string such as 2016-11-04T05:00:00Z.</p>'
+        description: '<p>Each entry in the array is a structure containing:</p> <p>Key (string, between 1 and 128 characters)</p> <p>Values (array of strings, each string is between 1 and 256 characters)</p> <p>The supported Keys are ExecutedBefore and ExecutedAfter with the value being a date/time string such as 2016-11-04T05:00:00Z.</p>'
       MaxResults:
         $ref: '#/definitions/MaintenanceWindowMaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -4732,7 +4740,7 @@ definitions:
         description: The ID of the Maintenance Window whose targets should be retrieved.
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
-        description: 'Optional filters that can be used to narrow down the scope of the returned window targets. The supported filter keys are <code>Type</code>, <code>WindowTargetId</code> and <code>OwnerInformation</code>.'
+        description: 'Optional filters that can be used to narrow down the scope of the returned window targets. The supported filter keys are Type, WindowTargetId and OwnerInformation.'
       MaxResults:
         $ref: '#/definitions/MaintenanceWindowMaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -4758,7 +4766,7 @@ definitions:
         description: The ID of the Maintenance Window whose tasks should be retrieved.
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
-        description: 'Optional filters used to narrow down the scope of the returned tasks. The supported filter keys are <code>WindowTaskId</code>, <code>TaskArn</code>, <code>Priority</code>, and <code>TaskType</code>.'
+        description: 'Optional filters used to narrow down the scope of the returned tasks. The supported filter keys are WindowTaskId, TaskArn, Priority, and TaskType.'
       MaxResults:
         $ref: '#/definitions/MaintenanceWindowMaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -4779,7 +4787,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/MaintenanceWindowFilterList'
-        description: Optional filters used to narrow down the scope of the returned Maintenance Windows. Supported filter keys are <code>Name</code> and <code>Enabled</code>.
+        description: Optional filters used to narrow down the scope of the returned Maintenance Windows. Supported filter keys are Name and Enabled.
       MaxResults:
         $ref: '#/definitions/MaintenanceWindowMaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -4821,7 +4829,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/PatchOrchestratorFilterList'
-        description: '<p>Each element in the array is a structure containing: </p> <p>Key: (string, “NAME_PREFIX” or “OWNER”)</p> <p>Value: (array of strings, exactly 1 entry, 1 ≤ length ≤ 255)</p>'
+        description: '<p>Each element in the array is a structure containing: </p> <p>Key: (string, "NAME_PREFIX" or "OWNER")</p> <p>Value: (array of strings, exactly 1 entry, between 1 and 255 characters)</p>'
       MaxResults:
         $ref: '#/definitions/PatchBaselineMaxResults'
         description: The maximum number of patch baselines to return (per page).
@@ -4856,7 +4864,7 @@ definitions:
         description: The number of instances with installed patches.
       InstancesWithInstalledOtherPatches:
         $ref: '#/definitions/Integer'
-        description: The number of instances with patches installed that aren’t defined in the patch baseline.
+        description: The number of instances with patches installed that aren't defined in the patch baseline.
       InstancesWithMissingPatches:
         $ref: '#/definitions/Integer'
         description: The number of instances with missing patches from the patch baseline.
@@ -4865,7 +4873,7 @@ definitions:
         description: The number of instances with patches from the patch baseline that failed to install.
       InstancesWithNotApplicablePatches:
         $ref: '#/definitions/Integer'
-        description: The number of instances with patches that aren’t applicable.
+        description: The number of instances with patches that aren't applicable.
   DescribePatchGroupsRequest:
     type: object
     properties:
@@ -4880,7 +4888,7 @@ definitions:
     properties:
       Mappings:
         $ref: '#/definitions/PatchGroupPatchBaselineMappingList'
-        description: '<p>Each entry in the array contains:</p> <p>PatchGroup: string (1 ≤ length ≤ 256, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)</p> <p>PatchBaselineIdentity: A PatchBaselineIdentity element. </p>'
+        description: '<p>Each entry in the array contains:</p> <p>PatchGroup: string (between 1 and 256 characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)</p> <p>PatchBaselineIdentity: A PatchBaselineIdentity element. </p>'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -4928,7 +4936,7 @@ definitions:
         description: The AWS user account of the person who created the document.
       CreatedDate:
         $ref: '#/definitions/DateTime'
-        description: ' The date when the document was created.'
+        description: The date when the document was created.
       Status:
         $ref: '#/definitions/DocumentStatus'
         description: The status of the SSM document.
@@ -4937,7 +4945,7 @@ definitions:
         description: The document version.
       Description:
         $ref: '#/definitions/DescriptionInDocument'
-        description: ' A description of the document. '
+        description: 'A description of the document. '
       Parameters:
         $ref: '#/definitions/DocumentParameterList'
         description: A description of the parameters for a document.
@@ -4956,7 +4964,7 @@ definitions:
       DefaultVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The default version.
-    description: ' Describes an SSM document. '
+    description: 'Describes an SSM document. '
   DocumentFilter:
     type: object
     required:
@@ -5038,7 +5046,7 @@ definitions:
         description: The name of the parameter.
       Type:
         $ref: '#/definitions/DocumentParameterType'
-        description: The type of parameter. The type can be either “String” or “StringList”.
+        description: The type of parameter. The type can be either String or StringList.
       Description:
         $ref: '#/definitions/DocumentParameterDescrption'
         description: 'A description of what the parameter does, how to use it, the default value, and whether or not the parameter is optional.'
@@ -5127,7 +5135,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: Error returned when the ID specified for a resource (e.g. a Maintenance Window) doesn’t exist.
+    description: Error returned when the ID specified for a resource (e.g. a Maintenance Window) doesn't exist.
   DuplicateDocumentContent:
     type: object
     properties:
@@ -5178,6 +5186,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FailedCreateAssociation'
+  FailureDetails:
+    type: object
+    properties:
+      FailureStage:
+        $ref: '#/definitions/String'
+        description: 'The stage of the Automation execution when the failure occurred. The stages include the following: InputValidation, PreVerification, Invocation, PostVerification.'
+      FailureType:
+        $ref: '#/definitions/String'
+        description: 'The type of Automation failure. Failure types include the following: Action, Permission, Throttling, Verification, Internal.'
+      Details:
+        $ref: '#/definitions/AutomationParameterMap'
+        description: Detailed information about the Automation step failure.
+    description: Information about an Automation failure.
   Fault:
     type: string
     enum:
@@ -5191,7 +5212,7 @@ definitions:
     properties:
       AutomationExecutionId:
         $ref: '#/definitions/AutomationExecutionId'
-        description: The unique identifier for an existing automation execution to examine. The execution ID is returned by <code>StartAutomationExecution</code> when the execution of an Automation document is initiated.
+        description: The unique identifier for an existing automation execution to examine. The execution ID is returned by StartAutomationExecution when the execution of an Automation document is initiated.
   GetAutomationExecutionResult:
     type: object
     properties:
@@ -5233,25 +5254,25 @@ definitions:
         description: 'The name of the plugin for which you want detailed results. For example, aws:RunShellScript is a plugin.'
       ResponseCode:
         $ref: '#/definitions/ResponseCode'
-        description: 'The error level response code for the plugin script. If the response code is <code>-1</code>, then the command has not started executing on the instance, or it was not received by the instance.'
+        description: 'The error level response code for the plugin script. If the response code is -1, then the command has not started executing on the instance, or it was not received by the instance.'
       ExecutionStartDateTime:
         $ref: '#/definitions/StringDateTime'
         description: 'The date and time the plugin started executing. Date and time are written in ISO 8601 format. For example, August 28, 2016 is represented as 2016-08-28. If the plugin has not started to execute, the string is empty.'
       ExecutionElapsedTime:
         $ref: '#/definitions/StringDateTime'
-        description: Duration since <code>ExecutionStartDateTime</code>.
+        description: Duration since ExecutionStartDateTime.
       ExecutionEndDateTime:
         $ref: '#/definitions/StringDateTime'
         description: 'The date and time the plugin was finished executing. Date and time are written in ISO 8601 format. For example, August 28, 2016 is represented as 2016-08-28. If the plugin has not started to execute, the string is empty.'
       Status:
         $ref: '#/definitions/CommandInvocationStatus'
-        description: The status of the parent command for this invocation. This status can be different than <code>StatusDetails</code>.
+        description: The status of the parent command for this invocation. This status can be different than StatusDetails.
       StatusDetails:
         $ref: '#/definitions/StatusDetails'
-        description: '<p>A detailed status of the command execution for an invocation. <code>StatusDetails</code> includes more information than <code>Status</code> because it includes states resulting from error and concurrency control parameters. <code>StatusDetails</code> can show different results than <code>Status</code>. For more information about these statuses, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html">Run Command Status</a>. <code>StatusDetails</code> can be one of the following values:</p> <ul> <li> <p>Pending – The command has not been sent to the instance.</p> </li> <li> <p>In Progress – The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Delayed – The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, the instance was stopped, etc. The system will try to deliver the command again.</p> </li> <li> <p>Success – The command or plugin was executed successfully. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out – The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command’s <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is <code>Success</code> or <code>Incomplete</code>. This is a terminal state.</p> </li> <li> <p>Execution Timed Out – The command started to execute on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed – The command wasn''t executed successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled – The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable – The command can''t be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don''t count against the parent command’s <code>MaxErrors</code> limit and don''t contribute to whether the parent command status is <code>Success</code> or <code>Incomplete</code>. This is a terminal state.</p> </li> <li> <p>Terminated – The parent command exceeded its <code>MaxErrors</code> limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>'
+        description: '<p>A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html">Run Command Status</a>. StatusDetails can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to the instance.</p> </li> <li> <p>In Progress: The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Delayed: The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, the instance was stopped, etc. The system will try to deliver the command again.</p> </li> <li> <p>Success: The command or plugin was executed successfully. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command''s MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The command started to execute on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The command wasn''t executed successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable: The command can''t be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don''t count against the parent command''s MaxErrors limit and don''t contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>'
       StandardOutputContent:
         $ref: '#/definitions/StandardOutputContent'
-        description: 'The first 24,000 characters written by the plugin to stdout. If the command has not finished executing, if <code>ExecutionStatus</code> is neither <code>Succeeded</code> nor <code>Failed</code>, then this string is empty.'
+        description: 'The first 24,000 characters written by the plugin to stdout. If the command has not finished executing, if ExecutionStatus is neither Succeeded nor Failed, then this string is empty.'
       StandardOutputUrl:
         $ref: '#/definitions/Url'
         description: 'The URL for the complete text written by the plugin to stdout in Amazon S3. If an Amazon S3 bucket was not specified, then this string is empty.'
@@ -5430,7 +5451,7 @@ definitions:
         description: The type of task executed.
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParametersList'
-        description: '<p>The parameters passed to the task when it was executed. The map has the following format:</p> <p>Key: string, 1 ≤ length ≤ 255</p> <p>Value: an array of strings where each string 1 ≤ length ≤ 255</p>'
+        description: '<p>The parameters passed to the task when it was executed. The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
       Priority:
         $ref: '#/definitions/MaintenanceWindowTaskPriority'
         description: The priority of the task.
@@ -5606,7 +5627,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: 'Error returned when an idempotent operation is retried and the parameters don’t match the original call to the API with the same idempotency token. '
+    description: 'Error returned when an idempotent operation is retried and the parameters don''t match the original call to the API with the same idempotency token. '
   InstanceAggregatedAssociationOverview:
     type: object
     properties:
@@ -5821,7 +5842,7 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/InstanceInformationStringFilterKey'
-        description: '<p>The filter key name to describe your instances. For example:</p> <p>"InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|”AssociationStatus”|”Tag Key”</p>'
+        description: '<p>The filter key name to describe your instances. For example:</p> <p>"InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag Key"</p>'
       Values:
         $ref: '#/definitions/InstanceInformationFilterValueSet'
         description: The filter values.
@@ -5867,13 +5888,13 @@ definitions:
         description: The number of patches not specified in the patch baseline that are installed on the instance.
       MissingCount:
         $ref: '#/definitions/PatchMissingCount'
-        description: The number of patches from the patch baseline that are applicable for the instance but aren’t currently installed.
+        description: The number of patches from the patch baseline that are applicable for the instance but aren't currently installed.
       FailedCount:
         $ref: '#/definitions/PatchFailedCount'
         description: 'The number of patches from the patch baseline that were attempted to be installed during the last patching operation, but failed to install.'
       NotApplicableCount:
         $ref: '#/definitions/PatchNotApplicableCount'
-        description: The number of patches from the patch baseline that aren’t applicable for the instance and hence aren’t installed on the instance.
+        description: The number of patches from the patch baseline that aren't applicable for the instance and hence aren't installed on the instance.
       OperationStartTime:
         $ref: '#/definitions/PatchOperationStartTime'
         description: The time the most recent patching operation was started on the instance.
@@ -6170,7 +6191,7 @@ definitions:
     properties:
       TypeName:
         $ref: '#/definitions/InventoryItemTypeName'
-        description: 'The name of the inventory type. Default inventory item type names start with <code>AWS</code>. Custom inventory type names will start with <code>Custom</code>. Default inventory item types include the following: <code>AWS:AWSComponent</code>, <code>AWS:Application</code>, <code>AWS:InstanceInformation</code>, <code>AWS:Network</code>, and <code>AWS:WindowsUpdate</code>.'
+        description: 'The name of the inventory type. Default inventory item type names start with AWS. Custom inventory type names will start with Custom. Default inventory item types include the following: AWS:AWSComponent, AWS:Application, AWS:InstanceInformation, AWS:Network, and AWS:WindowsUpdate.'
       SchemaVersion:
         $ref: '#/definitions/InventoryItemSchemaVersion'
         description: The schema version for the inventory item.
@@ -6179,7 +6200,7 @@ definitions:
         description: The time the inventory information was collected.
       ContentHash:
         $ref: '#/definitions/InventoryItemContentHash'
-        description: 'MD5 hash of the inventory item type contents. The content hash is used to determine whether to update inventory information. The <code>PutInventory</code> API does not update the inventory item type contents if the MD5 hash has not changed since last update. '
+        description: 'MD5 hash of the inventory item type contents. The content hash is used to determine whether to update inventory information. The PutInventory API does not update the inventory item type contents if the MD5 hash has not changed since last update. '
       Content:
         $ref: '#/definitions/InventoryItemEntryList'
         description: The inventory data of the inventory type.
@@ -6242,7 +6263,7 @@ definitions:
     properties:
       TypeName:
         $ref: '#/definitions/InventoryItemTypeName'
-        description: 'The name of the inventory type. Default inventory item type names start with <code>AWS</code>. Custom inventory type names will start with <code>Custom</code>. Default inventory item types include the following: <code>AWS:AWSComponent</code>, <code>AWS:Application</code>, <code>AWS:InstanceInformation</code>, <code>AWS:Network</code>, and <code>AWS:WindowsUpdate</code>.'
+        description: 'The name of the inventory type. Default inventory item type names start with AWS. Custom inventory type names will start with Custom. Default inventory item types include the following: AWS:AWSComponent, AWS:Application, AWS:InstanceInformation, AWS:Network, and AWS:WindowsUpdate.'
       Version:
         $ref: '#/definitions/InventoryItemSchemaVersion'
         description: The schema version for the inventory item.
@@ -6308,7 +6329,7 @@ definitions:
         description: The time inventory item data was captured.
       ContentHash:
         $ref: '#/definitions/InventoryItemContentHash'
-        description: 'MD5 hash of the inventory item type contents. The content hash is used to determine whether to update inventory information. The <code>PutInventory</code> API does not update the inventory item type contents if the MD5 hash has not changed since last update. '
+        description: 'MD5 hash of the inventory item type contents. The content hash is used to determine whether to update inventory information. The PutInventory API does not update the inventory item type contents if the MD5 hash has not changed since last update. '
       Content:
         $ref: '#/definitions/InventoryItemEntryList'
         description: 'Contains all the inventory data of the item type. Results include attribute names and values. '
@@ -7201,7 +7222,7 @@ definitions:
         description: The ID of the MSRC bulletin the patch is related to.
       Language:
         $ref: '#/definitions/PatchLanguage'
-        description: The language of the patch if it’s language-specific.
+        description: The language of the patch if it's language-specific.
     description: Represents metadata about a patch.
   PatchBaselineIdentity:
     type: object
@@ -7707,7 +7728,7 @@ definitions:
     properties:
       TypeName:
         $ref: '#/definitions/InventoryItemTypeName'
-        description: 'Name of the inventory item type. Valid value: “AWS:InstanceInformation”. Default Value: “AWS:InstanceInformation”.'
+        description: 'Name of the inventory item type. Valid value: AWS:InstanceInformation. Default Value: AWS:InstanceInformation.'
     description: The inventory item result attribute.
   ResultAttributeList:
     type: array
@@ -7757,10 +7778,10 @@ definitions:
     properties:
       InstanceIds:
         $ref: '#/definitions/InstanceIdList'
-        description: Required. The instance IDs where the command should execute. You can specify a maximum of 50 IDs.
+        description: 'The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags.'
       Targets:
         $ref: '#/definitions/Targets'
-        description: '(Optional) An array of search criteria that targets instances using a <code>Key</code>,<code>Value</code> combination that you specify. <code>Targets</code> is required if you don''t provide one or more instance IDs in the call. For more information about how to use <code>Targets</code>, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: '(Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don''t provide one or more instance IDs in the call. For more information about how to use Targets, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
       DocumentName:
         $ref: '#/definitions/DocumentARN'
         description: Required. The name of the Systems Manager document to execute. This can be a public document or a custom document.
@@ -7790,10 +7811,10 @@ definitions:
         description: The directory structure within the S3 bucket where the responses should be stored.
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
-        description: '(Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as “10” or a percentage such as “10%”. The default value is 50. For more information about how to use <code>MaxConcurrency</code>, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: '(Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
-        description: 'The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of <code>MaxErrors</code>, the systems stops sending the command to additional targets. You can specify a number like “10” or a percentage like “10%”. The default value is 50. For more information about how to use <code>MaxErrors</code>, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: 'The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 50. For more information about how to use MaxErrors, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
         description: 'The IAM role that Systems Manager uses to send notifications. '
@@ -7869,13 +7890,13 @@ definitions:
         description: The action this step performs. The action determines the behavior of the step.
       ExecutionStartTime:
         $ref: '#/definitions/DateTime'
-        description: 'If a step has begun execution, this contains the time the step started. If the step is in <code>Pending</code> status, this field is not populated.'
+        description: 'If a step has begun execution, this contains the time the step started. If the step is in Pending status, this field is not populated.'
       ExecutionEndTime:
         $ref: '#/definitions/DateTime'
         description: 'If a step has finished execution, this contains the time the execution ended. If the step has not yet concluded, this field is not populated.'
       StepStatus:
         $ref: '#/definitions/AutomationExecutionStatus'
-        description: 'The execution status for this step. Valid values include: <code>Pending</code>, <code>InProgress</code>, <code>Success</code>, <code>Cancelled</code>, <code>Failed</code>, and <code>TimedOut</code>.'
+        description: 'The execution status for this step. Valid values include: Pending, InProgress, Success, Cancelled, Failed, and TimedOut.'
       ResponseCode:
         $ref: '#/definitions/String'
         description: The response code returned by the execution of the step.
@@ -7891,6 +7912,9 @@ definitions:
       FailureMessage:
         $ref: '#/definitions/String'
         description: 'If a step failed, this message explains why the execution failed.'
+      FailureDetails:
+        $ref: '#/definitions/FailureDetails'
+        description: Information about the Automation failure.
     description: Detailed information about an the execution state of an Automation step.
   StepExecutionList:
     type: array
@@ -7950,11 +7974,11 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/TargetKey'
-        description: 'User-defined criteria for sending commands that target instances that meet the criteria. <code>Key</code> can be <code>tag:&lt;Amazon EC2 tag&gt;</code> or <code>InstanceIds</code>. For more information about how to send commands that target instances using <code>Key</code>,<code>Value</code> parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: 'User-defined criteria for sending commands that target instances that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or InstanceIds. For more information about how to send commands that target instances using Key,Value parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
       Values:
         $ref: '#/definitions/TargetValues'
-        description: 'User-defined criteria that maps to <code>Key</code>. For example, if you specified <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to execute a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using <code>Key</code>,<code>Value</code> parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
-    description: 'An array of search criteria that targets instances using a <code>Key</code>,<code>Value</code> combination that you specify. <code>Targets</code> is required if you don''t provide one or more instance IDs in the call.'
+        description: 'User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to execute a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using Key,Value parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+    description: 'An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don''t provide one or more instance IDs in the call.'
   TargetCount:
     type: integer
   TargetKey:
@@ -7983,7 +8007,7 @@ definitions:
   TooManyTagsError:
     type: object
     properties: {}
-    description: The <code>Targets</code> parameter includes too many tags. Remove one or more tags and try the command again.
+    description: The Targets parameter includes too many tags. Remove one or more tags and try the command again.
   TooManyUpdates:
     type: object
     properties:
@@ -8001,7 +8025,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: Inventory item type schema version has to match supported versions in the service. Check output of <code>GetInventorySchema</code> to see the available schema version for each type.
+    description: Inventory item type schema version has to match supported versions in the service. Check output of GetInventorySchema to see the available schema version for each type.
   UnsupportedParameterType:
     type: object
     properties:
@@ -8030,10 +8054,16 @@ definitions:
         description: 'The document version you want update for the association. '
       ScheduleExpression:
         $ref: '#/definitions/ScheduleExpression'
-        description: 'The cron expression used to schedule the association that you want to update. Supported expressions are every half, 1, 2, 4, 8 or 12 hour(s); every specified day and time of the week. For example: cron(0 0/30 * 1/1 * ? *) to run every thirty minutes; cron(0 0 0/4 1/1 * ? *) to run every four hours; and cron(0 0 10 ? * SUN *) to run every Sunday at 10 a.m.'
+        description: The cron expression used to schedule the association that you want to update.
       OutputLocation:
         $ref: '#/definitions/InstanceAssociationOutputLocation'
-        description: '<p>An Amazon S3 bucket where you want to store the results of this request.</p> <p> <code>"{ \"S3Location\": { \"OutputS3Region\": \"&lt;region&gt;\", \"OutputS3BucketName\": \"bucket name\", \"OutputS3KeyPrefix\": \"folder name\" } }"</code> </p>'
+        description: An Amazon S3 bucket where you want to store the results of this request.
+      Name:
+        $ref: '#/definitions/DocumentName'
+        description: The name of the association document.
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: The targets of the association.
   UpdateAssociationResult:
     type: object
     properties:

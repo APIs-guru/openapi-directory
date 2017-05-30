@@ -3,7 +3,7 @@ info:
   version: '2016-11-28'
   x-release: v4
   title: Amazon Lightsail
-  description: '<p>Amazon Lightsail is the easiest way to get started with AWS for developers who just need virtual private servers. Lightsail includes everything you need to launch your project quickly - a virtual machine, SSD-based storage, data transfer, DNS management, and a static IP - for a low, predictable price. You manage those Lightsail servers through the Lightsail console or by using the API or command-line interface (CLI).</p> <p>For more information about Lightsail concepts and tasks, see the <a href="http://lightsail.aws.amazon.com/ls/docs">Lightsail Dev Guide</a>.</p> <p>To use the Lightsail API or the CLI, you will need to use AWS Identity and Access Management (IAM) to generate access keys. For details about how to set this up, see the <a href="http://lightsail.aws.amazon.com/ls/docs/how-to/articles/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Lightsail Dev Guide</a>.</p>'
+  description: '<p>Amazon Lightsail is the easiest way to get started with AWS for developers who just need virtual private servers. Lightsail includes everything you need to launch your project quickly - a virtual machine, SSD-based storage, data transfer, DNS management, and a static IP - for a low, predictable price. You manage those Lightsail servers through the Lightsail console or by using the API or command-line interface (CLI).</p> <p>For more information about Lightsail concepts and tasks, see the <a href="https://lightsail.aws.amazon.com/ls/docs/all">Lightsail Dev Guide</a>.</p> <p>To use the Lightsail API or the CLI, you will need to use AWS Identity and Access Management (IAM) to generate access keys. For details about how to set this up, see the <a href="http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Lightsail Dev Guide</a>.</p>'
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -1902,7 +1902,7 @@ paths:
   '/#GetRegions':
     post:
       operationId: GetRegions
-      description: Returns a list of all valid regions for Amazon Lightsail.
+      description: Returns a list of all valid regions for Amazon Lightsail. Use the <code>include availability zones</code> parameter to also return the availability zones in a region.
       responses:
         '200':
           description: Success
@@ -2260,6 +2260,59 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PeerVpcRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutInstancePublicPorts':
+    post:
+      operationId: PutInstancePublicPorts
+      description: 'Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutInstancePublicPortsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutInstancePublicPortsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2655,7 +2708,7 @@ definitions:
     properties:
       zoneName:
         $ref: '#/definitions/NonEmptyString'
-        description: The name of the Availability Zone.
+        description: The name of the Availability Zone. The format is <code>us-east-1a</code> (case-sensitive).
       state:
         $ref: '#/definitions/NonEmptyString'
         description: The state of the Availability Zone.
@@ -2831,7 +2884,7 @@ definitions:
         description: The names for your new instances.
       availabilityZone:
         $ref: '#/definitions/string'
-        description: 'The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-1a</code> (case sensitive).'
+        description: 'The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-1a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
       instanceSnapshotName:
         $ref: '#/definitions/ResourceName'
         description: The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots.
@@ -2863,7 +2916,7 @@ definitions:
         description: 'The names to use for your new Lightsail instances. Separate multiple values using quotation marks and commas, for example: <code>["MyFirstInstance","MySecondInstance"]</code> '
       availabilityZone:
         $ref: '#/definitions/string'
-        description: 'The Availability Zone in which to create your instance. Use the following format: <code>us-east-1a</code> (case sensitive).'
+        description: 'The Availability Zone in which to create your instance. Use the following format: <code>us-east-1a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
       customImageName:
         $ref: '#/definitions/ResourceName'
         description: The name for your custom image.
@@ -3275,7 +3328,7 @@ definitions:
     type: object
     properties:
       portStates:
-        $ref: '#/definitions/PortStateList'
+        $ref: '#/definitions/InstancePortStateList'
         description: Information about the port states resulting from your request.
   GetInstanceRequest:
     type: object
@@ -3624,7 +3677,7 @@ definitions:
         description: The last port in the range.
       protocol:
         $ref: '#/definitions/NetworkProtocol'
-        description: 'The protocol. '
+        description: '<p>The protocol being used. Can be one of the following.</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on Wikipedia.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> </ul>'
       accessFrom:
         $ref: '#/definitions/string'
         description: 'The location from which access is allowed (e.g., <code>Anywhere (0.0.0.0/0)</code>).'
@@ -3642,6 +3695,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InstancePortInfo'
+  InstancePortState:
+    type: object
+    properties:
+      fromPort:
+        $ref: '#/definitions/Port'
+        description: The first port in the range.
+      toPort:
+        $ref: '#/definitions/Port'
+        description: The last port in the range.
+      protocol:
+        $ref: '#/definitions/NetworkProtocol'
+        description: '<p>The protocol being used. Can be one of the following.</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on Wikipedia.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> </ul>'
+      state:
+        $ref: '#/definitions/PortState'
+        description: Specifies whether the instance port is <code>open</code> or <code>closed</code>.
+    description: Describes the port state.
+  InstancePortStateList:
+    type: array
+    items:
+      $ref: '#/definitions/InstancePortState'
   InstanceSnapshot:
     type: object
     properties:
@@ -3716,7 +3789,7 @@ definitions:
         $ref: '#/definitions/string'
       tip:
         $ref: '#/definitions/string'
-    description: Lightsail throws this exception when user input does not conform to the validation rules of an input field.
+    description: '<p>Lightsail throws this exception when user input does not conform to the validation rules of an input field.</p> <note> <p>Domain-related APIs are only available in the N. Virginia (us-east-1) Region. Please set your Region configuration to us-east-1 to create, view, or edit these resources.</p> </note>'
   IpAddress:
     type: string
     pattern: '([0-9]{1,3}\.){3}[0-9]{1,3}'
@@ -3957,6 +4030,7 @@ definitions:
       - StartInstance
       - RebootInstance
       - OpenInstancePublicPorts
+      - PutInstancePublicPorts
       - CloseInstancePublicPorts
       - AllocateStaticIp
       - ReleaseStaticIp
@@ -4000,15 +4074,33 @@ definitions:
         $ref: '#/definitions/NetworkProtocol'
         description: 'The protocol. '
     description: Describes information about the ports on your virtual private server (or <i>instance</i>).
+  PortInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/PortInfo'
   PortState:
     type: string
     enum:
       - open
       - closed
-  PortStateList:
-    type: array
-    items:
-      $ref: '#/definitions/PortState'
+  PutInstancePublicPortsRequest:
+    type: object
+    required:
+      - portInfos
+      - instanceName
+    properties:
+      portInfos:
+        $ref: '#/definitions/PortInfoList'
+        description: Specifies information about the public port(s).
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The Lightsail instance name of the public port(s) you are setting.
+  PutInstancePublicPortsResult:
+    type: object
+    properties:
+      operation:
+        $ref: '#/definitions/Operation'
+        description: Describes metadata about the operation you just executed.
   RebootInstanceRequest:
     type: object
     required:
@@ -4040,7 +4132,7 @@ definitions:
         description: 'The region name (e.g., <code>us-east-1</code>).'
       availabilityZones:
         $ref: '#/definitions/AvailabilityZoneList'
-        description: The Availability Zones.
+        description: The Availability Zones. Follows the format <code>us-east-1a</code> (case-sensitive).
     description: Describes the AWS Region.
   RegionList:
     type: array
@@ -4078,7 +4170,7 @@ definitions:
     properties:
       availabilityZone:
         $ref: '#/definitions/string'
-        description: The Availability Zone.
+        description: The Availability Zone. Follows the format <code>us-east-1a</code> (case-sensitive).
       regionName:
         $ref: '#/definitions/RegionName'
         description: The AWS Region name.
