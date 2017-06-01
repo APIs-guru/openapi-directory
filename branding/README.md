@@ -19,8 +19,9 @@ We recommended using the [Sansation](http://www.dafont.com/sansation.font) font,
 If you want to write article or blog post, please use our banner image:
 ![Banner](https://raw.githubusercontent.com/APIs-guru/openapi-directory/master/branding/banner.svg)
 
-Please add **"How can I request/add/fix an API?"** section into customer documentation or FAQ.
-<BR>**TBD**: Create sample text.
+### Adding an API to the collection
+
+Please see the [FAQ](https://github.com/APIs-guru/openapi-directory/wiki/FAQ#how-can-i-add-an-api-to-the-collection) in the [wiki](https://github.com/APIs-guru/openapi-directory/wiki/)
 
 [Logo]: https://apis.guru/branding/logo.svg "Logo"
 [Vertical logo]: https://apis.guru/branding/logo_vertical.svg "Vertical logo"
