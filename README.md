@@ -40,9 +40,9 @@ What does APIs.guru do?
 Update procedure
 --------------------------
 All specs are automatically updated from their original source.
-You can see it under `x-origin` property inside [each](https://github.com/APIs-guru/api-models/search?utf8=%E2%9C%93&q=x-origin+filename%3Aswagger.yaml) of `swagger.yaml` files.
+You can see it under `x-origin` property inside [each](https://github.com/APIs-guru/openapi-directory/search?utf8=%E2%9C%93&q=x-origin+filename%3Aswagger.yaml) of `swagger.yaml` files.
 We run our update script at least weekly and manually check diffs before commit.
-If you see some APIs are not updated for more than 2 weeks please open [an issue](https://github.com/APIs-guru/api-models/issues/new).
+If you see some APIs are not updated for more than 2 weeks please open [an issue](https://github.com/APIs-guru/openapi-directory/issues/new).
 
 Existing integrations
 --------------------------
@@ -60,8 +60,8 @@ Also used as test suite in following projects:
  - [ReDoc](https://github.com/Rebilly/ReDoc) - Swagger-generated API Reference Documentation
  - [ardoq-swagger-addon](https://github.com/ardoq/ardoq-swagger-addon) - Ardoq Open API (Swagger) Addon
  - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for Swagger(OpenApi) Request parameters and Response objects.
- 
- 
+
+
 
 API spec acceptance criteria
 --------------------------
