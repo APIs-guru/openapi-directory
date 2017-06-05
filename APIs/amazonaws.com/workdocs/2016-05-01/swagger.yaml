@@ -250,6 +250,120 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}/versions/{VersionId}/comment':
+    post:
+      operationId: CreateComment
+      description: Adds a new comment to the specified document version.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCommentResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+        '482':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '483':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '484':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: DocumentLockedForCommentsException
+          schema:
+            $ref: '#/definitions/DocumentLockedForCommentsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCommentRequest'
+        - name: DocumentId
+          in: path
+          type: string
+          required: true
+        - name: VersionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/resources/{ResourceId}/customMetadata':
+    delete:
+      operationId: DeleteCustomMetadata
+      description: Deletes custom metadata from the specified resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteCustomMetadataResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '483':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+        '484':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteCustomMetadataRequest'
+        - name: ResourceId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /api/v1/folders:
     post:
       operationId: CreateFolder
@@ -297,6 +411,55 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateFolderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/resources/{ResourceId}/labels':
+    delete:
+      operationId: DeleteLabels
+      description: Deletes the specified list of labels from a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLabelsResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '483':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLabelsRequest'
+        - name: ResourceId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -403,10 +566,73 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}/versions/{VersionId}/comment/{CommentId}':
+    delete:
+      operationId: DeleteComment
+      description: Deletes the specified comment from the document version.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+        '482':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '483':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '484':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: DocumentLockedForCommentsException
+          schema:
+            $ref: '#/definitions/DocumentLockedForCommentsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteCommentRequest'
+        - name: DocumentId
+          in: path
+          type: string
+          required: true
+        - name: VersionId
+          in: path
+          type: string
+          required: true
+        - name: CommentId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/api/v1/documents/{DocumentId}':
     patch:
       operationId: UpdateDocument
-      description: 'Updates the specified attributes of the specified document. The user must have access to both the document and its parent folder, if applicable.'
+      description: 'Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.'
       responses:
         '200':
           description: Success
@@ -532,7 +758,7 @@ paths:
   '/api/v1/folders/{FolderId}/contents':
     get:
       operationId: DescribeFolderContents
-      description: '<p>Describes the contents of the specified folder, including its documents and sub-folders.</p> <p>By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.</p>'
+      description: '<p>Describes the contents of the specified folder, including its documents and subfolders.</p> <p>By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.</p>'
       responses:
         '200':
           description: Success
@@ -683,6 +909,63 @@ paths:
           schema:
             $ref: '#/definitions/UpdateUserRequest'
         - name: UserId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}/versions/{VersionId}/comments':
+    get:
+      operationId: DescribeComments
+      description: List all the comments for the specified document version.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeCommentsResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: ProhibitedStateException
+          schema:
+            $ref: '#/definitions/ProhibitedStateException'
+        '482':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '483':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '484':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeCommentsRequest'
+        - name: DocumentId
+          in: path
+          type: string
+          required: true
+        - name: VersionId
           in: path
           type: string
           required: true
@@ -906,6 +1189,14 @@ paths:
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '489':
+          description: DraftUploadOutOfSyncException
+          schema:
+            $ref: '#/definitions/DraftUploadOutOfSyncException'
+        '490':
+          description: ResourceAlreadyCheckedOutException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyCheckedOutException'
       parameters:
         - name: body
           in: body
@@ -996,12 +1287,114 @@ definitions:
       ShareResults:
         $ref: '#/definitions/ShareResultsList'
         description: The share results.
+  AuthenticationHeaderType:
+    type: string
+    minLength: 1
+    maxLength: 8199
+    format: password
+  BooleanType:
+    type: boolean
+  Comment:
+    type: object
+    required:
+      - CommentId
+    properties:
+      CommentId:
+        $ref: '#/definitions/CommentIdType'
+        description: The ID of the comment.
+      ParentId:
+        $ref: '#/definitions/CommentIdType'
+        description: The ID of the parent comment.
+      ThreadId:
+        $ref: '#/definitions/CommentIdType'
+        description: The ID of the root comment in the thread.
+      Text:
+        $ref: '#/definitions/CommentTextType'
+        description: The text of the comment.
+      Contributor:
+        $ref: '#/definitions/User'
+        description: The details of the user who made the comment.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time that the comment was created.
+      Status:
+        $ref: '#/definitions/CommentStatusType'
+        description: The status of the comment.
+      Visibility:
+        $ref: '#/definitions/CommentVisibilityType'
+        description: 'The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.'
+      RecipientId:
+        $ref: '#/definitions/IdType'
+        description: 'If the comment is a reply to another user''s comment, this field contains the user ID of the user being replied to.'
+    description: Describes a comment.
+  CommentIdType:
+    type: string
+    pattern: '[\w+-.@]+'
+    minLength: 1
+    maxLength: 128
+  CommentList:
+    type: array
+    items:
+      $ref: '#/definitions/Comment'
+  CommentStatusType:
+    type: string
+    enum:
+      - DRAFT
+      - PUBLISHED
+      - DELETED
+  CommentTextType:
+    type: string
+    minLength: 1
+    maxLength: 2048
+    format: password
+  CommentVisibilityType:
+    type: string
+    enum:
+      - PUBLIC
+      - PRIVATE
   ConcurrentModificationException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/ErrorMessageType'
     description: The resource hierarchy is changing.
+  CreateCommentRequest:
+    type: object
+    required:
+      - Text
+    properties:
+      ParentId:
+        $ref: '#/definitions/CommentIdType'
+        description: The ID of the parent comment.
+      ThreadId:
+        $ref: '#/definitions/CommentIdType'
+        description: The ID of the root comment in the thread.
+      Text:
+        $ref: '#/definitions/CommentTextType'
+        description: The text of the comment.
+      Visibility:
+        $ref: '#/definitions/CommentVisibilityType'
+        description: 'The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.'
+      NotifyCollaborators:
+        $ref: '#/definitions/BooleanType'
+        description: Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.
+  CreateCommentResponse:
+    type: object
+    properties:
+      Comment:
+        $ref: '#/definitions/Comment'
+        description: The comment that has been created.
+  CreateCustomMetadataRequest:
+    type: object
+    required:
+      - CustomMetadata
+    properties:
+      CustomMetadata:
+        $ref: '#/definitions/CustomMetadataMap'
+        description: Custom metadata in the form of name-value pairs.
+  CreateCustomMetadataResponse:
+    type: object
+    properties: {}
   CreateFolderRequest:
     type: object
     required:
@@ -1019,6 +1412,17 @@ definitions:
       Metadata:
         $ref: '#/definitions/FolderMetadata'
         description: The metadata of the folder.
+  CreateLabelsRequest:
+    type: object
+    required:
+      - Labels
+    properties:
+      Labels:
+        $ref: '#/definitions/Labels'
+        description: List of labels to add to the resource.
+  CreateLabelsResponse:
+    type: object
+    properties: {}
   CreateNotificationSubscriptionRequest:
     type: object
     required:
@@ -1055,6 +1459,9 @@ definitions:
       Username:
         $ref: '#/definitions/UsernameType'
         description: The login name of the user.
+      EmailAddress:
+        $ref: '#/definitions/EmailAddressType'
+        description: The email address of the user.
       GivenName:
         $ref: '#/definitions/UserAttributeValueType'
         description: The given name of the user.
@@ -1076,6 +1483,38 @@ definitions:
       User:
         $ref: '#/definitions/User'
         description: The user information.
+  CustomMetadataKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/CustomMetadataKeyType'
+    maxItems: 8
+  CustomMetadataKeyType:
+    type: string
+    pattern: '[a-zA-Z0-9_-][a-zA-Z0-9 _-]*'
+    minLength: 1
+    maxLength: 56
+  CustomMetadataLimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The limit has been reached on the number of custom properties for the specified resource.
+  CustomMetadataMap:
+    type: array
+    minItems: 1
+    maxItems: 8
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/CustomMetadataKeyType'
+        value:
+          $ref: '#/definitions/CustomMetadataValueType'
+  CustomMetadataValueType:
+    type: string
+    pattern: '[a-zA-Z0-9_-][a-zA-Z0-9 _-]*'
+    minLength: 1
+    maxLength: 56
   DeactivateUserRequest:
     type: object
     properties: {}
@@ -1083,6 +1522,15 @@ definitions:
     type: object
     properties: {}
     description: The last user in the organization is being deactivated.
+  DeleteCommentRequest:
+    type: object
+    properties: {}
+  DeleteCustomMetadataRequest:
+    type: object
+    properties: {}
+  DeleteCustomMetadataResponse:
+    type: object
+    properties: {}
   DeleteDocumentRequest:
     type: object
     properties: {}
@@ -1092,12 +1540,30 @@ definitions:
   DeleteFolderRequest:
     type: object
     properties: {}
+  DeleteLabelsRequest:
+    type: object
+    properties: {}
+  DeleteLabelsResponse:
+    type: object
+    properties: {}
   DeleteNotificationSubscriptionRequest:
     type: object
     properties: {}
   DeleteUserRequest:
     type: object
     properties: {}
+  DescribeCommentsRequest:
+    type: object
+    properties: {}
+  DescribeCommentsResponse:
+    type: object
+    properties:
+      Comments:
+        $ref: '#/definitions/CommentList'
+        description: The list of comments for the specified document version.
+      Marker:
+        $ref: '#/definitions/MarkerType'
+        description: The marker for the next set of results. This marker was received from a previous call.
   DescribeDocumentVersionsRequest:
     type: object
     properties: {}
@@ -1118,7 +1584,7 @@ definitions:
     properties:
       Folders:
         $ref: '#/definitions/FolderMetadataList'
-        description: The sub-folders in the specified folder.
+        description: The subfolders in the specified folder.
       Documents:
         $ref: '#/definitions/DocumentMetadataList'
         description: The documents in the specified folder.
@@ -1168,6 +1634,12 @@ definitions:
     type: string
     minLength: 1
     maxLength: 128
+  DocumentLockedForCommentsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: This exception is thrown when the document is locked for comments and user tries to create or delete a comment on that document.
   DocumentMetadata:
     type: object
     properties:
@@ -1192,6 +1664,9 @@ definitions:
       ResourceState:
         $ref: '#/definitions/ResourceStateType'
         description: The resource state.
+      Labels:
+        $ref: '#/definitions/Labels'
+        description: List of labels on the document.
     description: Describes the document.
   DocumentMetadataList:
     type: array
@@ -1287,6 +1762,12 @@ definitions:
     type: string
     enum:
       - ACTIVE
+  DraftUploadOutOfSyncException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: This exception is thrown when a valid checkout ID is not presented on document version upload calls for a document that has been checked out from Web client.
   EmailAddressType:
     type: string
     pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
@@ -1356,6 +1837,13 @@ definitions:
       Signature:
         $ref: '#/definitions/HashType'
         description: The unique identifier created from the subfolders and documents of the folder.
+      Labels:
+        $ref: '#/definitions/Labels'
+        description: List of labels on the folder.
+      Size:
+        $ref: '#/definitions/SizeType'
+      LatestVersionSize:
+        $ref: '#/definitions/SizeType'
     description: Describes a folder.
   FolderMetadataList:
     type: array
@@ -1378,7 +1866,10 @@ definitions:
     properties:
       Metadata:
         $ref: '#/definitions/DocumentMetadata'
-        description: The document object.
+        description: The metadata details of the document.
+      CustomMetadata:
+        $ref: '#/definitions/CustomMetadataMap'
+        description: The custom metadata on the document.
   GetDocumentVersionRequest:
     type: object
     properties: {}
@@ -1388,6 +1879,9 @@ definitions:
       Metadata:
         $ref: '#/definitions/DocumentVersionMetadata'
         description: The version metadata.
+      CustomMetadata:
+        $ref: '#/definitions/CustomMetadataMap'
+        description: The custom metadata on the document version.
   GetFolderPathRequest:
     type: object
     properties: {}
@@ -1406,6 +1900,9 @@ definitions:
       Metadata:
         $ref: '#/definitions/FolderMetadata'
         description: The metadata of the folder.
+      CustomMetadata:
+        $ref: '#/definitions/CustomMetadataMap'
+        description: The custom metadata on the folder.
   HashType:
     type: string
     pattern: '[&\w+-.@]+'
@@ -1478,12 +1975,22 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessageType'
     description: The operation is invalid.
+  Label:
+    type: string
+    pattern: '[a-zA-Z0-9_-][a-zA-Z0-9 _-]*'
+    minLength: 1
+    maxLength: 20
+  Labels:
+    type: array
+    items:
+      $ref: '#/definitions/Label'
+    maxItems: 20
   LimitExceededException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/ErrorMessageType'
-    description: 'You''ve exceeded the maximum of 100,000 folders under the parent folder.'
+    description: 'The maximum of 100,000 folders under the parent folder has been exceeded.'
   LimitType:
     type: integer
     minimum: 1
@@ -1502,6 +2009,11 @@ definitions:
       - zh_TW
       - pt_BR
       - default
+  MarkerType:
+    type: string
+    pattern: '[\u0000-\u00FF]+'
+    minLength: 1
+    maxLength: 2048
   MessageType:
     type: string
     minLength: 0
@@ -1580,6 +2092,11 @@ definitions:
   RemoveResourcePermissionRequest:
     type: object
     properties: {}
+  ResourceAlreadyCheckedOutException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
   ResourceIdType:
     type: string
     pattern: '[\w+-.@]+'
@@ -1771,6 +2288,12 @@ definitions:
   TimestampType:
     type: string
     format: date-time
+  TooManyLabelsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The limit has been reached on the number of labels for the specified resource.
   TooManySubscriptionsException:
     type: object
     properties:
@@ -1953,6 +2476,6 @@ definitions:
       - ADMIN
   UsernameType:
     type: string
-    pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?'
+    pattern: '[\w\-+.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?'
     minLength: 1
     maxLength: 256

@@ -1600,9 +1600,14 @@ definitions:
     description: Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
   AbortMultipartUploadOutput:
     type: object
+    example: {}
     properties: {}
   AbortMultipartUploadRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: bigobject
+      UploadId: xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--
     properties: {}
   AbortRuleId:
     type: string
@@ -1865,6 +1870,11 @@ definitions:
       wrapped: false
   CompleteMultipartUploadOutput:
     type: object
+    example:
+      Bucket: acexamplebucket
+      ETag: '"4d9031c7644d8081c2829f4ea23c55f7-2"'
+      Key: bigobject
+      Location: 'https://examplebucket.s3.amazonaws.com/bigobject'
     properties:
       Location:
         $ref: '#/definitions/Location'
@@ -1877,6 +1887,16 @@ definitions:
         description: Entity tag of the object.
   CompleteMultipartUploadRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: bigobject
+      MultipartUpload:
+        Parts:
+          - ETag: '"d8c2eafd90c266e19ab9dcacc479f8af"'
+            PartNumber: '1'
+          - ETag: '"d8c2eafd90c266e19ab9dcacc479f8af"'
+            PartNumber: '2'
+      UploadId: 7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--
     properties:
       MultipartUpload:
         $ref: '#/definitions/CompletedMultipartUpload'
@@ -1927,11 +1947,19 @@ definitions:
     type: string
   CopyObjectOutput:
     type: object
+    example:
+      CopyObjectResult:
+        ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
+        LastModified: '2016-12-15T17:38:53.000Z'
     properties:
       CopyObjectResult:
         $ref: '#/definitions/CopyObjectResult'
   CopyObjectRequest:
     type: object
+    example:
+      Bucket: destinationbucket
+      CopySource: /sourcebucket/HappyFacejpg
+      Key: HappyFaceCopyjpg
     properties: {}
   CopyObjectResult:
     type: object
@@ -1981,9 +2009,13 @@ definitions:
         description: 'Specifies the region where the bucket will be created. If you don''t specify a region, the bucket will be created in US Standard.'
   CreateBucketOutput:
     type: object
+    example:
+      Location: /examplebucket
     properties: {}
   CreateBucketRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties:
       CreateBucketConfiguration:
         $ref: '#/definitions/CreateBucketConfiguration'
@@ -1991,6 +2023,10 @@ definitions:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   CreateMultipartUploadOutput:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: largeobject
+      UploadId: ibZBv_75gd9r8lH_gqXatLdxMVpAlj6ZQjEs.OwyF3953YdwbcQnMA2BLGn8Lx12fQNICtMw5KyteFeHw.Sjng--
     properties:
       Bucket:
         $ref: '#/definitions/BucketName'
@@ -2003,6 +2039,9 @@ definitions:
         description: ID for the initiated multipart upload.
   CreateMultipartUploadRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: largeobject
     properties: {}
   CreationDate:
     type: string
@@ -2029,30 +2068,44 @@ definitions:
     properties: {}
   DeleteBucketCorsRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   DeleteBucketInventoryConfigurationRequest:
     type: object
     properties: {}
   DeleteBucketLifecycleRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   DeleteBucketMetricsConfigurationRequest:
     type: object
     properties: {}
   DeleteBucketPolicyRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   DeleteBucketReplicationRequest:
     type: object
+    example:
+      Bucket: example
     properties: {}
   DeleteBucketRequest:
     type: object
+    example:
+      Bucket: forrandall2
     properties: {}
   DeleteBucketTaggingRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   DeleteBucketWebsiteRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   DeleteMarker:
     type: boolean
@@ -2083,18 +2136,35 @@ definitions:
       wrapped: false
   DeleteObjectOutput:
     type: object
+    example: {}
     properties: {}
   DeleteObjectRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: objectkey.jpg
     properties: {}
   DeleteObjectTaggingOutput:
     type: object
+    example:
+      VersionId: 'null'
     properties: {}
   DeleteObjectTaggingRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: HappyFace.jpg
     properties: {}
   DeleteObjectsOutput:
     type: object
+    example:
+      Deleted:
+        - DeleteMarker: 'true'
+          DeleteMarkerVersionId: A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F
+          Key: objectkey1
+        - DeleteMarker: 'true'
+          DeleteMarkerVersionId: iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt
+          Key: objectkey2
     properties:
       Deleted:
         $ref: '#/definitions/DeletedObjects'
@@ -2104,6 +2174,13 @@ definitions:
     type: object
     required:
       - Delete
+    example:
+      Bucket: examplebucket
+      Delete:
+        Objects:
+          - Key: objectkey1
+          - Key: objectkey2
+        Quiet: false
     properties:
       Delete:
         $ref: '#/definitions/Delete'
@@ -2270,11 +2347,22 @@ definitions:
     properties: {}
   GetBucketCorsOutput:
     type: object
+    example:
+      CORSRules:
+        - AllowedHeaders:
+            - Authorization
+          AllowedMethods:
+            - GET
+          AllowedOrigins:
+            - '*'
+          MaxAgeSeconds: 3000
     properties:
       CORSRules:
         $ref: '#/definitions/CORSRules'
   GetBucketCorsRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   GetBucketInventoryConfigurationOutput:
     type: object
@@ -2287,27 +2375,50 @@ definitions:
     properties: {}
   GetBucketLifecycleConfigurationOutput:
     type: object
+    example:
+      Rules:
+        - ID: Rule for TaxDocs/
+          Prefix: TaxDocs
+          Status: Enabled
+          Transitions:
+            - Days: 365
+              StorageClass: STANDARD_IA
     properties:
       Rules:
         $ref: '#/definitions/LifecycleRules'
   GetBucketLifecycleConfigurationRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   GetBucketLifecycleOutput:
     type: object
+    example:
+      Rules:
+        - Expiration:
+            Days: 1
+          ID: delete logs
+          Prefix: 123/
+          Status: Enabled
     properties:
       Rules:
         $ref: '#/definitions/Rules'
   GetBucketLifecycleRequest:
     type: object
+    example:
+      Bucket: acl1
     properties: {}
   GetBucketLocationOutput:
     type: object
+    example:
+      LocationConstraint: us-west-2
     properties:
       LocationConstraint:
         $ref: '#/definitions/BucketLocationConstraint'
   GetBucketLocationRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   GetBucketLoggingOutput:
     type: object
@@ -2328,45 +2439,77 @@ definitions:
     properties: {}
   GetBucketNotificationConfigurationRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   GetBucketPolicyOutput:
     type: object
+    example:
+      Policy: '{"Version":"2008-10-17","Id":"LogPolicy","Statement":[{"Sid":"Enables the log delivery group to publish logs to your bucket ","Effect":"Allow","Principal":{"AWS":"111122223333"},"Action":["s3:GetBucketAcl","s3:GetObjectAcl","s3:PutObject"],"Resource":["arn:aws:s3:::policytest1/*","arn:aws:s3:::policytest1"]}]}'
     properties:
       Policy:
         $ref: '#/definitions/Policy'
         description: The bucket policy as a JSON document.
   GetBucketPolicyRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   GetBucketReplicationOutput:
     type: object
+    example:
+      ReplicationConfiguration:
+        Role: 'arn:aws:iam::acct-id:role/example-role'
+        Rules:
+          - Destination:
+              Bucket: 'arn:aws:s3:::destination-bucket'
+            ID: MWIwNTkwZmItMTE3MS00ZTc3LWJkZDEtNzRmODQwYzc1OTQy
+            Prefix: Tax
+            Status: Enabled
     properties:
       ReplicationConfiguration:
         $ref: '#/definitions/ReplicationConfiguration'
   GetBucketReplicationRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   GetBucketRequestPaymentOutput:
     type: object
+    example:
+      Payer: BucketOwner
     properties:
       Payer:
         $ref: '#/definitions/Payer'
         description: Specifies who pays for the download and request fees.
   GetBucketRequestPaymentRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   GetBucketTaggingOutput:
     type: object
     required:
       - TagSet
+    example:
+      TagSet:
+        - Key: key1
+          Value: value1
+        - Key: key2
+          Value: value2
     properties:
       TagSet:
         $ref: '#/definitions/TagSet'
   GetBucketTaggingRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   GetBucketVersioningOutput:
     type: object
+    example:
+      MFADelete: Disabled
+      Status: Enabled
     properties:
       Status:
         $ref: '#/definitions/BucketVersioningStatus'
@@ -2376,9 +2519,16 @@ definitions:
         description: 'Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.'
   GetBucketVersioningRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   GetBucketWebsiteOutput:
     type: object
+    example:
+      ErrorDocument:
+        Key: error.html
+      IndexDocument:
+        Suffix: index.html
     properties:
       RedirectAllRequestsTo:
         $ref: '#/definitions/RedirectAllRequestsTo'
@@ -2390,9 +2540,36 @@ definitions:
         $ref: '#/definitions/RoutingRules'
   GetBucketWebsiteRequest:
     type: object
+    example:
+      Bucket: examplebucket
     properties: {}
   GetObjectAclOutput:
     type: object
+    example:
+      Grants:
+        - Grantee:
+            DisplayName: owner-display-name
+            ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+            Type: CanonicalUser
+          Permission: WRITE
+        - Grantee:
+            DisplayName: owner-display-name
+            ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+            Type: CanonicalUser
+          Permission: WRITE_ACP
+        - Grantee:
+            DisplayName: owner-display-name
+            ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+            Type: CanonicalUser
+          Permission: READ
+        - Grantee:
+            DisplayName: owner-display-name
+            ID: 852b113eexamplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+            Type: CanonicalUser
+          Permission: READ_ACP
+      Owner:
+        DisplayName: owner-display-name
+        ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
     properties:
       Owner:
         $ref: '#/definitions/Owner'
@@ -2401,33 +2578,62 @@ definitions:
         description: A list of grants.
   GetObjectAclRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: HappyFace.jpg
     properties: {}
   GetObjectOutput:
     type: object
+    example:
+      AcceptRanges: bytes
+      ContentLength: '10'
+      ContentRange: bytes 0-9/43
+      ContentType: text/plain
+      ETag: '"0d94420ffd0bc68cd3d152506b97a9cc"'
+      LastModified: 'Thu, 09 Oct 2014 22:57:28 GMT'
+      Metadata: {}
+      VersionId: 'null'
     properties:
       Body:
         $ref: '#/definitions/Body'
         description: Object data.
   GetObjectRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: SampleFile.txt
+      Range: bytes=0-9
     properties: {}
   GetObjectTaggingOutput:
     type: object
     required:
       - TagSet
+    example:
+      TagSet:
+        - Key: Key1
+          Value: Value1
+      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
     properties:
       TagSet:
         $ref: '#/definitions/TagSet'
   GetObjectTaggingRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: exampleobject
+      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
     properties: {}
   GetObjectTorrentOutput:
     type: object
+    example: {}
     properties:
       Body:
         $ref: '#/definitions/Body'
   GetObjectTorrentRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: HappyFace.jpg
     properties: {}
   GlacierJobParameters:
     type: object
@@ -2484,12 +2690,25 @@ definitions:
       $ref: '#/definitions/Grant'
   HeadBucketRequest:
     type: object
+    example:
+      Bucket: acl1
     properties: {}
   HeadObjectOutput:
     type: object
+    example:
+      AcceptRanges: bytes
+      ContentLength: '3191'
+      ContentType: image/jpeg
+      ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
+      LastModified: 'Thu, 15 Dec 2016 01:19:41 GMT'
+      Metadata: {}
+      VersionId: 'null'
     properties: {}
   HeadObjectRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: HappyFace.jpg
     properties: {}
   HostName:
     type: string
@@ -2805,6 +3024,17 @@ definitions:
     properties: {}
   ListBucketsOutput:
     type: object
+    example:
+      Buckets:
+        - CreationDate: '2012-02-15T21: 03: 02.000Z'
+          Name: examplebucket
+        - CreationDate: '2011-07-24T19: 33: 50.000Z'
+          Name: examplebucket2
+        - CreationDate: '2010-12-17T00: 56: 49.000Z'
+          Name: examplebucket3
+      Owner:
+        DisplayName: own-display-name
+        ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31
     properties:
       Buckets:
         $ref: '#/definitions/Buckets'
@@ -2812,6 +3042,35 @@ definitions:
         $ref: '#/definitions/Owner'
   ListMultipartUploadsOutput:
     type: object
+    example:
+      Bucket: acl1
+      IsTruncated: true
+      KeyMarker: ''
+      MaxUploads: '2'
+      NextKeyMarker: someobjectkey
+      NextUploadIdMarker: examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--
+      UploadIdMarker: ''
+      Uploads:
+        - Initiated: '2014-05-01T05:40:58.000Z'
+          Initiator:
+            DisplayName: ownder-display-name
+            ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+          Key: JavaFile
+          Owner:
+            DisplayName: mohanataws
+            ID: 852b113e7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+          StorageClass: STANDARD
+          UploadId: gZ30jIqlUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--
+        - Initiated: '2014-05-01T05:41:27.000Z'
+          Initiator:
+            DisplayName: ownder-display-name
+            ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+          Key: JavaFile
+          Owner:
+            DisplayName: ownder-display-name
+            ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+          StorageClass: STANDARD
+          UploadId: b7tZSqIlo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--
     properties:
       Bucket:
         $ref: '#/definitions/BucketName'
@@ -2848,9 +3107,36 @@ definitions:
         description: Encoding type used by Amazon S3 to encode object keys in the response.
   ListMultipartUploadsRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      KeyMarker: nextkeyfrompreviousresponse
+      MaxUploads: '2'
+      UploadIdMarker: valuefrompreviousresponse
     properties: {}
   ListObjectVersionsOutput:
     type: object
+    example:
+      Versions:
+        - ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
+          IsLatest: true
+          Key: HappyFace.jpg
+          LastModified: '2016-12-15T01:19:41.000Z'
+          Owner:
+            DisplayName: owner-display-name
+            ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+          Size: 3191
+          StorageClass: STANDARD
+          VersionId: 'null'
+        - ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
+          IsLatest: false
+          Key: HappyFace.jpg
+          LastModified: '2016-12-13T00:58:26.000Z'
+          Owner:
+            DisplayName: owner-display-name
+            ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+          Size: 3191
+          StorageClass: STANDARD
+          VersionId: PHtexPGjH2y.zBgT8LmB7wwLI2mpbz.k
     properties:
       IsTruncated:
         $ref: '#/definitions/IsTruncated'
@@ -2885,9 +3171,31 @@ definitions:
         description: Encoding type used by Amazon S3 to encode object keys in the response.
   ListObjectVersionsRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Prefix: HappyFace.jpg
     properties: {}
   ListObjectsOutput:
     type: object
+    example:
+      Contents:
+        - ETag: '"70ee1738b6b21e2c8a43f3a5ab0eee71"'
+          Key: example1.jpg
+          LastModified: '2014-11-21T19:40:05.000Z'
+          Owner:
+            DisplayName: myname
+            ID: 12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+          Size: 11
+          StorageClass: STANDARD
+        - ETag: '"9c8af9a76df052144598c115ef33e511"'
+          Key: example2.jpg
+          LastModified: '2013-11-15T01:10:49.000Z'
+          Owner:
+            DisplayName: myname
+            ID: 12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+          Size: 713193
+          StorageClass: STANDARD
+      NextMarker: eyJNYXJrZXIiOiBudWxsLCAiYm90b190cnVuY2F0ZV9hbW91bnQiOiAyfQ==
     properties:
       IsTruncated:
         $ref: '#/definitions/IsTruncated'
@@ -2914,9 +3222,30 @@ definitions:
         description: Encoding type used by Amazon S3 to encode object keys in the response.
   ListObjectsRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      MaxKeys: '2'
     properties: {}
   ListObjectsV2Output:
     type: object
+    example:
+      Contents:
+        - ETag: '"70ee1738b6b21e2c8a43f3a5ab0eee71"'
+          Key: happyface.jpg
+          LastModified: '2014-11-21T19:40:05.000Z'
+          Size: 11
+          StorageClass: STANDARD
+        - ETag: '"becf17f89c30367a9a44495d62ed521a-1"'
+          Key: test.jpg
+          LastModified: '2014-05-02T04:51:50.000Z'
+          Size: 4192256
+          StorageClass: STANDARD
+      IsTruncated: true
+      KeyCount: '2'
+      MaxKeys: '2'
+      Name: examplebucket
+      NextContinuationToken: 1w41l63U0xa8q7smH50vCxyTQqdxo69O3EmK28Bi5PcROI4wI/EyIJg==
+      Prefix: ''
     properties:
       IsTruncated:
         $ref: '#/definitions/IsTruncated'
@@ -2956,9 +3285,29 @@ definitions:
         description: StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket
   ListObjectsV2Request:
     type: object
+    example:
+      Bucket: examplebucket
+      MaxKeys: '2'
     properties: {}
   ListPartsOutput:
     type: object
+    example:
+      Initiator:
+        DisplayName: owner-display-name
+        ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+      Owner:
+        DisplayName: owner-display-name
+        ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+      Parts:
+        - ETag: '"d8c2eafd90c266e19ab9dcacc479f8af"'
+          LastModified: '2016-12-16T00:11:42.000Z'
+          PartNumber: '1'
+          Size: 26246026
+        - ETag: '"d8c2eafd90c266e19ab9dcacc479f8af"'
+          LastModified: '2016-12-16T00:15:01.000Z'
+          PartNumber: '2'
+          Size: 26246026
+      StorageClass: STANDARD
     properties:
       Bucket:
         $ref: '#/definitions/BucketName'
@@ -2993,6 +3342,10 @@ definitions:
         description: The class of storage used to store the object.
   ListPartsRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: bigobject
+      UploadId: example7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--
     properties: {}
   Location:
     type: string
@@ -3180,6 +3533,19 @@ definitions:
     description: 'Container for specifying the notification configuration of the bucket. If this element is empty, notifications are turned off on the bucket.'
   NotificationConfigurationDeprecated:
     type: object
+    example:
+      QueueConfiguration:
+        Event: 's3:ObjectCreated:Put'
+        Events:
+          - 's3:ObjectCreated:Put'
+        Id: MDQ2OGQ4NDEtOTBmNi00YTM4LTk0NzYtZDIwN2I3NWQ1NjIx
+        Queue: 'arn:aws:sqs:us-east-1:acct-id:S3ObjectCreatedEventQueue'
+      TopicConfiguration:
+        Event: 's3:ObjectCreated:Copy'
+        Events:
+          - 's3:ObjectCreated:Copy'
+        Id: YTVkMWEzZGUtNTY1NS00ZmE2LWJjYjktMmRlY2QwODFkNTJi
+        Topic: 'arn:aws:sns:us-east-1:acct-id:S3ObjectCreatedEventTopic'
     properties:
       TopicConfiguration:
         $ref: '#/definitions/TopicConfigurationDeprecated'
@@ -3367,6 +3733,10 @@ definitions:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketAclRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      GrantFullControl: id=examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484
+      GrantWrite: 'uri=http://acs.amazonaws.com/groups/s3/LogDelivery'
     properties:
       AccessControlPolicy:
         $ref: '#/definitions/AccessControlPolicy'
@@ -3386,6 +3756,29 @@ definitions:
     type: object
     required:
       - CORSConfiguration
+    example:
+      Bucket: ''
+      CORSConfiguration:
+        CORSRules:
+          - AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - PUT
+              - POST
+              - DELETE
+            AllowedOrigins:
+              - 'http://www.example.com'
+            ExposeHeaders:
+              - x-amz-server-side-encryption
+            MaxAgeSeconds: 3000
+          - AllowedHeaders:
+              - Authorization
+            AllowedMethods:
+              - GET
+            AllowedOrigins:
+              - '*'
+            MaxAgeSeconds: 3000
+      ContentMD5: ''
     properties:
       CORSConfiguration:
         $ref: '#/definitions/CORSConfiguration'
@@ -3403,6 +3796,19 @@ definitions:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketLifecycleConfigurationRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      LifecycleConfiguration:
+        Rules:
+          - Expiration:
+              Days: 3650
+            Filter:
+              Prefix: documents/
+            ID: TestOnly
+            Status: Enabled
+            Transitions:
+              - Days: 365
+                StorageClass: GLACIER
     properties:
       LifecycleConfiguration:
         $ref: '#/definitions/BucketLifecycleConfiguration'
@@ -3419,6 +3825,17 @@ definitions:
     type: object
     required:
       - BucketLoggingStatus
+    example:
+      Bucket: sourcebucket
+      BucketLoggingStatus:
+        LoggingEnabled:
+          TargetBucket: targetbucket
+          TargetGrants:
+            - Grantee:
+                Type: Group
+                URI: 'http://acs.amazonaws.com/groups/global/AllUsers'
+              Permission: READ
+          TargetPrefix: MyBucketLogs/
     properties:
       BucketLoggingStatus:
         $ref: '#/definitions/BucketLoggingStatus'
@@ -3438,6 +3855,13 @@ definitions:
     type: object
     required:
       - NotificationConfiguration
+    example:
+      Bucket: examplebucket
+      NotificationConfiguration:
+        TopicConfigurations:
+          - Events:
+              - 's3:ObjectCreated:*'
+            TopicArn: 'arn:aws:sns:us-west-2:123456789012:s3-notification-topic'
     properties:
       NotificationConfiguration:
         $ref: '#/definitions/NotificationConfiguration'
@@ -3456,6 +3880,9 @@ definitions:
     type: object
     required:
       - Policy
+    example:
+      Bucket: examplebucket
+      Policy: '{"Version": "2012-10-17", "Statement": [{ "Sid": "id-1","Effect": "Allow","Principal": {"AWS": "arn:aws:iam::123456789012:root"}, "Action": [ "s3:PutObject","s3:PutObjectAcl"], "Resource": ["arn:aws:s3:::acl3/*" ] } ]}'
     properties:
       Policy:
         $ref: '#/definitions/Policy'
@@ -3464,6 +3891,16 @@ definitions:
     type: object
     required:
       - ReplicationConfiguration
+    example:
+      Bucket: examplebucket
+      ReplicationConfiguration:
+        Role: 'arn:aws:iam::123456789012:role/examplerole'
+        Rules:
+          - Destination:
+              Bucket: 'arn:aws:s3:::destinationbucket'
+              StorageClass: STANDARD
+            Prefix: ''
+            Status: Enabled
     properties:
       ReplicationConfiguration:
         $ref: '#/definitions/ReplicationConfiguration'
@@ -3473,6 +3910,10 @@ definitions:
     type: object
     required:
       - RequestPaymentConfiguration
+    example:
+      Bucket: examplebucket
+      RequestPaymentConfiguration:
+        Payer: Requester
     properties:
       RequestPaymentConfiguration:
         $ref: '#/definitions/RequestPaymentConfiguration'
@@ -3482,6 +3923,14 @@ definitions:
     type: object
     required:
       - Tagging
+    example:
+      Bucket: examplebucket
+      Tagging:
+        TagSet:
+          - Key: Key1
+            Value: Value1
+          - Key: Key2
+            Value: Value2
     properties:
       Tagging:
         $ref: '#/definitions/Tagging'
@@ -3491,6 +3940,11 @@ definitions:
     type: object
     required:
       - VersioningConfiguration
+    example:
+      Bucket: examplebucket
+      VersioningConfiguration:
+        MFADelete: Disabled
+        Status: Enabled
     properties:
       VersioningConfiguration:
         $ref: '#/definitions/VersioningConfiguration'
@@ -3500,6 +3954,14 @@ definitions:
     type: object
     required:
       - WebsiteConfiguration
+    example:
+      Bucket: examplebucket
+      ContentMD5: ''
+      WebsiteConfiguration:
+        ErrorDocument:
+          Key: error.html
+        IndexDocument:
+          Suffix: index.html
     properties:
       WebsiteConfiguration:
         $ref: '#/definitions/WebsiteConfiguration'
@@ -3507,9 +3969,16 @@ definitions:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutObjectAclOutput:
     type: object
+    example: {}
     properties: {}
   PutObjectAclRequest:
     type: object
+    example:
+      AccessControlPolicy: {}
+      Bucket: examplebucket
+      GrantFullControl: 'emailaddress=user1@example.com,emailaddress=user2@example.com'
+      GrantRead: 'uri=http://acs.amazonaws.com/groups/global/AllUsers'
+      Key: HappyFace.jpg
     properties:
       AccessControlPolicy:
         $ref: '#/definitions/AccessControlPolicy'
@@ -3517,20 +3986,41 @@ definitions:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutObjectOutput:
     type: object
+    example:
+      ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
+      ServerSideEncryption: AES256
+      VersionId: CG612hodqujkf8FaaNfp8U..FIhLROcp
     properties: {}
   PutObjectRequest:
     type: object
+    example:
+      Body: HappyFace.jpg
+      Bucket: examplebucket
+      Key: HappyFace.jpg
+      ServerSideEncryption: AES256
+      StorageClass: STANDARD_IA
     properties:
       Body:
         $ref: '#/definitions/Body'
         description: Object data.
   PutObjectTaggingOutput:
     type: object
+    example:
+      VersionId: 'null'
     properties: {}
   PutObjectTaggingRequest:
     type: object
     required:
       - Tagging
+    example:
+      Bucket: examplebucket
+      Key: HappyFace.jpg
+      Tagging:
+        TagSet:
+          - Key: Key3
+            Value: Value3
+          - Key: Key4
+            Value: Value4
     properties:
       Tagging:
         $ref: '#/definitions/Tagging'
@@ -3692,9 +4182,17 @@ definitions:
     type: string
   RestoreObjectOutput:
     type: object
+    example: {}
     properties: {}
   RestoreObjectRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      Key: archivedobjectkey
+      RestoreRequest:
+        Days: 1
+        GlacierJobParameters:
+          Tier: Expedited
     properties:
       RestoreRequest:
         $ref: '#/definitions/RestoreRequest'
@@ -3942,17 +4440,35 @@ definitions:
     type: string
   UploadPartCopyOutput:
     type: object
+    example:
+      CopyPartResult:
+        ETag: '"b0c6f0e7e054ab8fa2536a2677f8734d"'
+        LastModified: '2016-12-29T21:24:43.000Z'
     properties:
       CopyPartResult:
         $ref: '#/definitions/CopyPartResult'
   UploadPartCopyRequest:
     type: object
+    example:
+      Bucket: examplebucket
+      CopySource: bucketname/sourceobjectkey
+      Key: examplelargeobject
+      PartNumber: '1'
+      UploadId: exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--
     properties: {}
   UploadPartOutput:
     type: object
+    example:
+      ETag: '"d8c2eafd90c266e19ab9dcacc479f8af"'
     properties: {}
   UploadPartRequest:
     type: object
+    example:
+      Body: fileToUpload
+      Bucket: examplebucket
+      Key: examplelargeobject
+      PartNumber: '1'
+      UploadId: xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--
     properties:
       Body:
         $ref: '#/definitions/Body'

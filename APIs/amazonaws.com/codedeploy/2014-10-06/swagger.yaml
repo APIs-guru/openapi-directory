@@ -1519,6 +1519,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListGitHubAccountTokenNames':
+    post:
+      operationId: ListGitHubAccountTokenNames
+      description: Lists the names of stored connections to GitHub accounts.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListGitHubAccountTokenNamesOutput'
+        '480':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '481':
+          description: ResourceValidationException
+          schema:
+            $ref: '#/definitions/ResourceValidationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListGitHubAccountTokenNamesInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListOnPremisesInstances':
     post:
       operationId: ListOnPremisesInstances
@@ -2024,6 +2057,9 @@ definitions:
       linkedToGitHub:
         $ref: '#/definitions/Boolean'
         description: 'True if the user has authenticated with GitHub for the specified application; otherwise, false.'
+      gitHubAccountName:
+        $ref: '#/definitions/GitHubAccountTokenName'
+        description: The name for a connection to a GitHub account.
     description: Information about an application.
   ApplicationLimitExceededException:
     type: object
@@ -2105,7 +2141,7 @@ definitions:
       revisions:
         $ref: '#/definitions/RevisionLocationList'
         description: 'Information to get about the application revisions, including type and location.'
-    description: Represents the input of a batch get application revisions operation.
+    description: Represents the input of a BatchGetApplicationRevisions operation.
   BatchGetApplicationRevisionsOutput:
     type: object
     properties:
@@ -2118,21 +2154,21 @@ definitions:
       revisions:
         $ref: '#/definitions/RevisionInfoList'
         description: 'Additional information about the revisions, including the type and location.'
-    description: Represents the output of a batch get application revisions operation.
+    description: Represents the output of a BatchGetApplicationRevisions operation.
   BatchGetApplicationsInput:
     type: object
     properties:
       applicationNames:
         $ref: '#/definitions/ApplicationsList'
         description: A list of application names separated by spaces.
-    description: Represents the input of a batch get applications operation.
+    description: Represents the input of a BatchGetApplications operation.
   BatchGetApplicationsOutput:
     type: object
     properties:
       applicationsInfo:
         $ref: '#/definitions/ApplicationsInfoList'
         description: Information about the applications.
-    description: Represents the output of a batch get applications operation.
+    description: Represents the output of a BatchGetApplications operation.
   BatchGetDeploymentGroupsInput:
     type: object
     required:
@@ -2145,7 +2181,7 @@ definitions:
       deploymentGroupNames:
         $ref: '#/definitions/DeploymentGroupsList'
         description: The deployment groups' names.
-    description: Represents the input of a batch get deployment groups operation.
+    description: Represents the input of a BatchGetDeploymentGroups operation.
   BatchGetDeploymentGroupsOutput:
     type: object
     properties:
@@ -2155,7 +2191,7 @@ definitions:
       errorMessage:
         $ref: '#/definitions/ErrorMessage'
         description: Information about errors that may have occurred during the API call.
-    description: Represents the output of a batch get deployment groups operation.
+    description: Represents the output of a BatchGetDeploymentGroups operation.
   BatchGetDeploymentInstancesInput:
     type: object
     required:
@@ -2168,7 +2204,7 @@ definitions:
       instanceIds:
         $ref: '#/definitions/InstancesList'
         description: The unique IDs of instances in the deployment group.
-    description: Represents the input of a batch get deployment instances operation.
+    description: Represents the input of a BatchGetDeploymentInstances operation.
   BatchGetDeploymentInstancesOutput:
     type: object
     properties:
@@ -2178,35 +2214,35 @@ definitions:
       errorMessage:
         $ref: '#/definitions/ErrorMessage'
         description: Information about errors that may have occurred during the API call.
-    description: Represents the output of a batch get deployment instance operation.
+    description: Represents the output of a BatchGetDeploymentInstances operation.
   BatchGetDeploymentsInput:
     type: object
     properties:
       deploymentIds:
         $ref: '#/definitions/DeploymentsList'
         description: 'A list of deployment IDs, separated by spaces.'
-    description: Represents the input of a batch get deployments operation.
+    description: Represents the input of a BatchGetDeployments operation.
   BatchGetDeploymentsOutput:
     type: object
     properties:
       deploymentsInfo:
         $ref: '#/definitions/DeploymentsInfoList'
         description: Information about the deployments.
-    description: Represents the output of a batch get deployments operation.
+    description: Represents the output of a BatchGetDeployments operation.
   BatchGetOnPremisesInstancesInput:
     type: object
     properties:
       instanceNames:
         $ref: '#/definitions/InstanceNameList'
         description: The names of the on-premises instances about which to get information.
-    description: Represents the input of a batch get on-premises instances operation.
+    description: Represents the input of a BatchGetOnPremisesInstances operation.
   BatchGetOnPremisesInstancesOutput:
     type: object
     properties:
       instanceInfos:
         $ref: '#/definitions/InstanceInfoList'
         description: Information about the on-premises instances.
-    description: Represents the output of a batch get on-premises instances operation.
+    description: Represents the output of a BatchGetOnPremisesInstances operation.
   BatchLimitExceededException:
     type: object
     properties: {}
@@ -2262,14 +2298,14 @@ definitions:
       applicationName:
         $ref: '#/definitions/ApplicationName'
         description: The name of the application. This name must be unique with the applicable IAM user or AWS account.
-    description: Represents the input of a create application operation.
+    description: Represents the input of a CreateApplication operation.
   CreateApplicationOutput:
     type: object
     properties:
       applicationId:
         $ref: '#/definitions/ApplicationId'
         description: A unique application ID.
-    description: Represents the output of a create application operation.
+    description: Represents the output of a CreateApplication operation.
   CreateDeploymentConfigInput:
     type: object
     required:
@@ -2281,14 +2317,14 @@ definitions:
       minimumHealthyHosts:
         $ref: '#/definitions/MinimumHealthyHosts'
         description: '<p>The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.</p> <p>The type parameter takes either of the following values:</p> <ul> <li> <p>HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.</p> </li> </ul> <p>The value parameter takes an integer.</p> <p>For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.</p>'
-    description: Represents the input of a create deployment configuration operation.
+    description: Represents the input of a CreateDeploymentConfig operation.
   CreateDeploymentConfigOutput:
     type: object
     properties:
       deploymentConfigId:
         $ref: '#/definitions/DeploymentConfigId'
         description: A unique deployment configuration ID.
-    description: Represents the output of a create deployment configuration operation.
+    description: Represents the output of a CreateDeploymentConfig operation.
   CreateDeploymentGroupInput:
     type: object
     required:
@@ -2335,14 +2371,14 @@ definitions:
       loadBalancerInfo:
         $ref: '#/definitions/LoadBalancerInfo'
         description: Information about the load balancer used in a deployment.
-    description: Represents the input of a create deployment group operation.
+    description: Represents the input of a CreateDeploymentGroup operation.
   CreateDeploymentGroupOutput:
     type: object
     properties:
       deploymentGroupId:
         $ref: '#/definitions/DeploymentGroupId'
         description: A unique deployment group ID.
-    description: Represents the output of a create deployment group operation.
+    description: Represents the output of a CreateDeploymentGroup operation.
   CreateDeploymentInput:
     type: object
     required:
@@ -2378,14 +2414,14 @@ definitions:
       fileExistsBehavior:
         $ref: '#/definitions/FileExistsBehavior'
         description: '<p>Information about how AWS CodeDeploy handles files that already exist in a deployment target location but weren''t part of the previous successful deployment.</p> <p>The fileExistsBehavior parameter takes any of the following values:</p> <ul> <li> <p>DISALLOW: The deployment fails. This is also the default behavior if no option is specified.</p> </li> <li> <p>OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.</p> </li> <li> <p>RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.</p> </li> </ul>'
-    description: Represents the input of a create deployment operation.
+    description: Represents the input of a CreateDeployment operation.
   CreateDeploymentOutput:
     type: object
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
         description: A unique deployment ID.
-    description: Represents the output of a create deployment operation.
+    description: Represents the output of a CreateDeployment operation.
   DeleteApplicationInput:
     type: object
     required:
@@ -2394,7 +2430,7 @@ definitions:
       applicationName:
         $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
-    description: Represents the input of a delete application operation.
+    description: Represents the input of a DeleteApplication operation.
   DeleteDeploymentConfigInput:
     type: object
     required:
@@ -2403,7 +2439,7 @@ definitions:
       deploymentConfigName:
         $ref: '#/definitions/DeploymentConfigName'
         description: The name of a deployment configuration associated with the applicable IAM user or AWS account.
-    description: Represents the input of a delete deployment configuration operation.
+    description: Represents the input of a DeleteDeploymentConfig operation.
   DeleteDeploymentGroupInput:
     type: object
     required:
@@ -2416,14 +2452,14 @@ definitions:
       deploymentGroupName:
         $ref: '#/definitions/DeploymentGroupName'
         description: The name of an existing deployment group for the specified application.
-    description: Represents the input of a delete deployment group operation.
+    description: Represents the input of a DeleteDeploymentGroup operation.
   DeleteDeploymentGroupOutput:
     type: object
     properties:
       hooksNotCleanedUp:
         $ref: '#/definitions/AutoScalingGroupList'
         description: 'If the output contains no data, and the corresponding deployment group contained at least one Auto Scaling group, AWS CodeDeploy successfully removed all corresponding Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group. If the output contains data, AWS CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group.'
-    description: Represents the output of a delete deployment group operation.
+    description: Represents the output of a DeleteDeploymentGroup operation.
   DeploymentAlreadyCompletedException:
     type: object
     properties: {}
@@ -2542,6 +2578,12 @@ definitions:
       loadBalancerInfo:
         $ref: '#/definitions/LoadBalancerInfo'
         description: Information about the load balancer to use in a deployment.
+      lastSuccessfulDeployment:
+        $ref: '#/definitions/LastDeploymentInfo'
+        description: Information about the most recent successful deployment to the deployment group.
+      lastAttemptedDeployment:
+        $ref: '#/definitions/LastDeploymentInfo'
+        description: Information about the most recent attempted deployment to the deployment group.
     description: Information about a deployment group.
   DeploymentGroupInfoList:
     type: array
@@ -2747,7 +2789,7 @@ definitions:
       instanceName:
         $ref: '#/definitions/InstanceName'
         description: The name of the on-premises instance to deregister.
-    description: Represents the input of a deregister on-premises instance operation.
+    description: Represents the input of a DeregisterOnPremisesInstance operation.
   Description:
     type: string
   DescriptionTooLongException:
@@ -2876,14 +2918,14 @@ definitions:
       applicationName:
         $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
-    description: Represents the input of a get application operation.
+    description: Represents the input of a GetApplication operation.
   GetApplicationOutput:
     type: object
     properties:
       application:
         $ref: '#/definitions/ApplicationInfo'
         description: Information about the application.
-    description: Represents the output of a get application operation.
+    description: Represents the output of a GetApplication operation.
   GetApplicationRevisionInput:
     type: object
     required:
@@ -2896,7 +2938,7 @@ definitions:
       revision:
         $ref: '#/definitions/RevisionLocation'
         description: 'Information about the application revision to get, including type and location.'
-    description: Represents the input of a get application revision operation.
+    description: Represents the input of a GetApplicationRevision operation.
   GetApplicationRevisionOutput:
     type: object
     properties:
@@ -2909,7 +2951,7 @@ definitions:
       revisionInfo:
         $ref: '#/definitions/GenericRevisionInfo'
         description: General information about the revision.
-    description: Represents the output of a get application revision operation.
+    description: Represents the output of a GetApplicationRevision operation.
   GetDeploymentConfigInput:
     type: object
     required:
@@ -2918,14 +2960,14 @@ definitions:
       deploymentConfigName:
         $ref: '#/definitions/DeploymentConfigName'
         description: The name of a deployment configuration associated with the applicable IAM user or AWS account.
-    description: Represents the input of a get deployment configuration operation.
+    description: Represents the input of a GetDeploymentConfig operation.
   GetDeploymentConfigOutput:
     type: object
     properties:
       deploymentConfigInfo:
         $ref: '#/definitions/DeploymentConfigInfo'
         description: Information about the deployment configuration.
-    description: Represents the output of a get deployment configuration operation.
+    description: Represents the output of a GetDeploymentConfig operation.
   GetDeploymentGroupInput:
     type: object
     required:
@@ -2938,14 +2980,14 @@ definitions:
       deploymentGroupName:
         $ref: '#/definitions/DeploymentGroupName'
         description: The name of an existing deployment group for the specified application.
-    description: Represents the input of a get deployment group operation.
+    description: Represents the input of a GetDeploymentGroup operation.
   GetDeploymentGroupOutput:
     type: object
     properties:
       deploymentGroupInfo:
         $ref: '#/definitions/DeploymentGroupInfo'
         description: Information about the deployment group.
-    description: Represents the output of a get deployment group operation.
+    description: Represents the output of a GetDeploymentGroup operation.
   GetDeploymentInput:
     type: object
     required:
@@ -2954,7 +2996,7 @@ definitions:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
         description: A deployment ID associated with the applicable IAM user or AWS account.
-    description: Represents the input of a get deployment operation.
+    description: Represents the input of a GetDeployment operation.
   GetDeploymentInstanceInput:
     type: object
     required:
@@ -2967,21 +3009,21 @@ definitions:
       instanceId:
         $ref: '#/definitions/InstanceId'
         description: The unique ID of an instance in the deployment group.
-    description: Represents the input of a get deployment instance operation.
+    description: Represents the input of a GetDeploymentInstance operation.
   GetDeploymentInstanceOutput:
     type: object
     properties:
       instanceSummary:
         $ref: '#/definitions/InstanceSummary'
         description: Information about the instance.
-    description: Represents the output of a get deployment instance operation.
+    description: Represents the output of a GetDeploymentInstance operation.
   GetDeploymentOutput:
     type: object
     properties:
       deploymentInfo:
         $ref: '#/definitions/DeploymentInfo'
         description: Information about the deployment.
-    description: Represents the output of a get deployment operation.
+    description: Represents the output of a GetDeployment operation.
   GetOnPremisesInstanceInput:
     type: object
     required:
@@ -2990,14 +3032,24 @@ definitions:
       instanceName:
         $ref: '#/definitions/InstanceName'
         description: The name of the on-premises instance about which to get information.
-    description: Represents the input of a get on-premises instance operation.
+    description: Represents the input of a GetOnPremisesInstance operation.
   GetOnPremisesInstanceOutput:
     type: object
     properties:
       instanceInfo:
         $ref: '#/definitions/InstanceInfo'
         description: Information about the on-premises instance.
-    description: Represents the output of a get on-premises instance operation.
+    description: Represents the output of a GetOnPremisesInstance operation.
+  GitHubAccountTokenDoesNotExistException:
+    type: object
+    properties: {}
+    description: No GitHub account connection exists with the named specified in the call.
+  GitHubAccountTokenName:
+    type: string
+  GitHubAccountTokenNameList:
+    type: array
+    items:
+      $ref: '#/definitions/GitHubAccountTokenName'
   GitHubLocation:
     type: object
     properties:
@@ -3305,6 +3357,22 @@ definitions:
     description: The trigger was specified in an invalid format.
   Key:
     type: string
+  LastDeploymentInfo:
+    type: object
+    properties:
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: The deployment ID.
+      status:
+        $ref: '#/definitions/DeploymentStatus'
+        description: The status of the most recent deployment.
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp indicating when the most recent deployment to the deployment group completed.
+      createTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp indicating when the most recent deployment to the deployment group started.
+    description: Information about the most recent attempted or successful deployment to a deployment group.
   LifecycleErrorCode:
     type: string
     enum:
@@ -3380,7 +3448,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list application revisions call. It can be used to return the next set of applications in the list.
-    description: Represents the input of a list application revisions operation.
+    description: Represents the input of a ListApplicationRevisions operation.
   ListApplicationRevisionsOutput:
     type: object
     properties:
@@ -3390,14 +3458,14 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier will also be returned. It can be used in a subsequent list application revisions call to return the next set of application revisions in the list.'
-    description: Represents the output of a list application revisions operation.
+    description: Represents the output of a ListApplicationRevisions operation.
   ListApplicationsInput:
     type: object
     properties:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list applications call. It can be used to return the next set of applications in the list.
-    description: Represents the input of a list applications operation.
+    description: Represents the input of a ListApplications operation.
   ListApplicationsOutput:
     type: object
     properties:
@@ -3407,14 +3475,14 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list applications call to return the next set of applications, will also be returned. in the list.'
-    description: Represents the output of a list applications operation.
+    description: Represents the output of a ListApplications operation.
   ListDeploymentConfigsInput:
     type: object
     properties:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'An identifier returned from the previous list deployment configurations call. It can be used to return the next set of deployment configurations in the list. '
-    description: Represents the input of a list deployment configurations operation.
+    description: Represents the input of a ListDeploymentConfigs operation.
   ListDeploymentConfigsOutput:
     type: object
     properties:
@@ -3424,7 +3492,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment configurations call to return the next set of deployment configurations in the list.'
-    description: Represents the output of a list deployment configurations operation.
+    description: Represents the output of a ListDeploymentConfigs operation.
   ListDeploymentGroupsInput:
     type: object
     required:
@@ -3436,7 +3504,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list deployment groups call. It can be used to return the next set of deployment groups in the list.
-    description: Represents the input of a list deployment groups operation.
+    description: Represents the input of a ListDeploymentGroups operation.
   ListDeploymentGroupsOutput:
     type: object
     properties:
@@ -3449,7 +3517,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment groups call to return the next set of deployment groups in the list.'
-    description: Represents the output of a list deployment groups operation.
+    description: Represents the output of a ListDeploymentGroups operation.
   ListDeploymentInstancesInput:
     type: object
     required:
@@ -3467,7 +3535,7 @@ definitions:
       instanceTypeFilter:
         $ref: '#/definitions/InstanceTypeList'
         description: 'The set of instances in a blue/green deployment, either those in the original environment ("BLUE") or those in the replacement environment ("GREEN"), for which you want to view instance information.'
-    description: Represents the input of a list deployment instances operation.
+    description: Represents the input of a ListDeploymentInstances operation.
   ListDeploymentInstancesOutput:
     type: object
     properties:
@@ -3477,7 +3545,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment instances call to return the next set of deployment instances in the list.'
-    description: Represents the output of a list deployment instances operation.
+    description: Represents the output of a ListDeploymentInstances operation.
   ListDeploymentsInput:
     type: object
     properties:
@@ -3496,7 +3564,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list deployments call. It can be used to return the next set of deployments in the list.
-    description: Represents the input of a list deployments operation.
+    description: Represents the input of a ListDeployments operation.
   ListDeploymentsOutput:
     type: object
     properties:
@@ -3506,7 +3574,24 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployments call to return the next set of deployments in the list.'
-    description: Represents the output of a list deployments operation.
+    description: Represents the output of a ListDeployments operation.
+  ListGitHubAccountTokenNamesInput:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'An identifier returned from the previous ListGitHubAccountTokenNames call. It can be used to return the next set of names in the list. '
+    description: Represents the input of a ListGitHubAccountTokenNames operation.
+  ListGitHubAccountTokenNamesOutput:
+    type: object
+    properties:
+      tokenNameList:
+        $ref: '#/definitions/GitHubAccountTokenNameList'
+        description: A list of names of connections to GitHub accounts.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent ListGitHubAccountTokenNames call to return the next set of names in the list. '
+    description: Represents the output of a ListGitHubAccountTokenNames operation.
   ListOnPremisesInstancesInput:
     type: object
     properties:
@@ -3519,7 +3604,7 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list on-premises instances call. It can be used to return the next set of on-premises instances in the list.
-    description: Represents the input of a list on-premises instances operation.
+    description: Represents the input of a ListOnPremisesInstances operation.
   ListOnPremisesInstancesOutput:
     type: object
     properties:
@@ -3587,7 +3672,7 @@ definitions:
       revision:
         $ref: '#/definitions/RevisionLocation'
         description: 'Information about the application revision to register, including type and location.'
-    description: Represents the input of a register application revision operation.
+    description: Represents the input of a RegisterApplicationRevision operation.
   RegisterOnPremisesInstanceInput:
     type: object
     required:
@@ -3620,9 +3705,13 @@ definitions:
       instanceNames:
         $ref: '#/definitions/InstanceNameList'
         description: The names of the on-premises instances from which to remove tags.
-    description: Represents the input of a remove tags from on-premises instances operation.
+    description: Represents the input of a RemoveTagsFromOnPremisesInstances operation.
   Repository:
     type: string
+  ResourceValidationException:
+    type: object
+    properties: {}
+    description: The specified resource could not be validated.
   RevisionDoesNotExistException:
     type: object
     properties: {}
@@ -3733,7 +3822,7 @@ definitions:
       autoRollbackEnabled:
         $ref: '#/definitions/NullableBoolean'
         description: 'Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.'
-    description: Represents the input of a stop deployment operation.
+    description: Represents the input of a StopDeployment operation.
   StopDeploymentOutput:
     type: object
     properties:
@@ -3743,7 +3832,7 @@ definitions:
       statusMessage:
         $ref: '#/definitions/Message'
         description: An accompanying status message.
-    description: Represents the output of a stop deployment operation.
+    description: Represents the output of a StopDeployment operation.
   StopStatus:
     type: string
     enum:
@@ -3872,7 +3961,7 @@ definitions:
       newApplicationName:
         $ref: '#/definitions/ApplicationName'
         description: The new name to give the application.
-    description: Represents the input of an update application operation.
+    description: Represents the input of an UpdateApplication operation.
   UpdateDeploymentGroupInput:
     type: object
     required:
@@ -3921,14 +4010,14 @@ definitions:
       loadBalancerInfo:
         $ref: '#/definitions/LoadBalancerInfo'
         description: Information about the load balancer used in a deployment.
-    description: Represents the input of an update deployment group operation.
+    description: Represents the input of an UpdateDeploymentGroup operation.
   UpdateDeploymentGroupOutput:
     type: object
     properties:
       hooksNotCleanedUp:
         $ref: '#/definitions/AutoScalingGroupList'
         description: 'If the output contains no data, and the corresponding deployment group contained at least one Auto Scaling group, AWS CodeDeploy successfully removed all corresponding Auto Scaling lifecycle event hooks from the AWS account. If the output contains data, AWS CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the AWS account.'
-    description: Represents the output of an update deployment group operation.
+    description: Represents the output of an UpdateDeploymentGroup operation.
   Value:
     type: string
   VersionId:

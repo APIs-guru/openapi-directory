@@ -1018,6 +1018,14 @@ paths:
           description: TooManyRegistrationsForTargetIdException
           schema:
             $ref: '#/definitions/TooManyRegistrationsForTargetIdException'
+        '484':
+          description: TooManyTargetsException
+          schema:
+            $ref: '#/definitions/TooManyTargetsException'
+        '485':
+          description: TargetGroupNotFoundException
+          schema:
+            $ref: '#/definitions/TargetGroupNotFoundException'
       parameters:
         - name: body
           in: body
@@ -1874,6 +1882,12 @@ definitions:
       RuleArns:
         $ref: '#/definitions/RuleArns'
         description: The Amazon Resource Names (ARN) of the rules.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The marker for the next set of results. (You received this marker from a previous call.)
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of results to return with this call.
   DescribeRulesOutput:
     type: object
     example:
@@ -1892,6 +1906,9 @@ definitions:
       Rules:
         $ref: '#/definitions/Rules'
         description: Information about the rules.
+      NextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
   DescribeSSLPoliciesInput:
     type: object
     example:

@@ -1820,7 +1820,7 @@ definitions:
         description: 'The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. For more information, see .'
       voiceId:
         $ref: '#/definitions/String'
-        description: The Amazon Parrot voice ID that Amazon Lex uses for voice interactions with the user.
+        description: The Amazon Polly voice ID that Amazon Lex uses for voice interactions with the user.
       checksum:
         $ref: '#/definitions/String'
         description: Checksum identifying the version of the bot that was created.
@@ -2078,9 +2078,39 @@ definitions:
         description: 'A pagination token that fetches the next page of associations. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of associations, specify the pagination token in the next request. '
   GetBotRequest:
     type: object
+    example:
+      name: DocOrderPizza
+      versionOrAlias: $LATEST
     properties: {}
   GetBotResponse:
     type: object
+    example:
+      version: $LATEST
+      name: DocOrderPizzaBot
+      abortStatement:
+        messages:
+          - content: I don't understand. Can you try again?
+            contentType: PlainText
+          - content: 'I''m sorry, I don''t understand.'
+            contentType: PlainText
+      checksum: 20172ee3-fa06-49b2-bbc5-667c090303e9
+      childDirected: true
+      clarificationPrompt:
+        maxAttempts: 1
+        messages:
+          - content: 'I''m sorry, I didn''t hear that. Can you repeate what you just said?'
+            contentType: PlainText
+          - content: Can you say that again?
+            contentType: PlainText
+      createdDate: 1494360160.133
+      description: Orders a pizza from a local pizzeria.
+      idleSessionTTLInSeconds: 300
+      intents:
+        - intentName: DocOrderPizza
+          intentVersion: $LATEST
+      lastUpdatedDate: 1494360160.133
+      locale: en-US
+      status: NOT_BUILT
     properties:
       name:
         $ref: '#/definitions/BotName'
@@ -2114,7 +2144,7 @@ definitions:
         description: 'The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. For more information, see .'
       voiceId:
         $ref: '#/definitions/String'
-        description: 'The Amazon Parrot voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .'
+        description: 'The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .'
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the bot used to identify a specific revision of the bot's <code>$LATEST</code> version.
@@ -2141,9 +2171,20 @@ definitions:
         description: 'A pagination token for fetching the next page of bot versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. '
   GetBotsRequest:
     type: object
+    example:
+      maxResults: 5
+      nextToken: ''
     properties: {}
   GetBotsResponse:
     type: object
+    example:
+      bots:
+        - version: $LATEST
+          name: DocOrderPizzaBot
+          createdDate: 1494360160.133
+          description: Orders a pizza from a local pizzeria.
+          lastUpdatedDate: 1494360160.133
+          status: NOT_BUILT
     properties:
       bots:
         $ref: '#/definitions/BotMetadataList'
@@ -2192,9 +2233,96 @@ definitions:
         description: 'If the response is truncated, the response includes a pagination token that you can use in your next request to fetch the next page of slot types.'
   GetIntentRequest:
     type: object
+    example:
+      version: $LATEST
+      name: DocOrderPizza
     properties: {}
   GetIntentResponse:
     type: object
+    example:
+      version: $LATEST
+      name: DocOrderPizza
+      checksum: ca9bc13d-afc8-4706-bbaf-091f7a5935d6
+      conclusionStatement:
+        messages:
+          - content: 'All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.'
+            contentType: PlainText
+          - content: 'OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.'
+            contentType: PlainText
+        responseCard: foo
+      confirmationPrompt:
+        maxAttempts: 1
+        messages:
+          - content: 'Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?'
+            contentType: PlainText
+      createdDate: 1494359783.453
+      description: Order a pizza from a local pizzeria.
+      fulfillmentActivity:
+        type: ReturnIntent
+      lastUpdatedDate: 1494359783.453
+      rejectionStatement:
+        messages:
+          - content: 'Ok, I''ll cancel your order.'
+            contentType: PlainText
+          - content: I cancelled your order.
+            contentType: PlainText
+      sampleUtterances:
+        - Order me a pizza.
+        - 'Order me a {Type} pizza.'
+        - 'I want a {Crust} crust {Type} pizza'
+        - 'I want a {Crust} crust {Type} pizza with {Sauce} sauce.'
+      slots:
+        - name: Type
+          description: The type of pizza to order.
+          priority: 1
+          sampleUtterances:
+            - 'Get me a {Type} pizza.'
+            - 'A {Type} pizza please.'
+            - 'I''d like a {Type} pizza.'
+          slotConstraint: Required
+          slotType: DocPizzaType
+          slotTypeVersion: $LATEST
+          valueElicitationPrompt:
+            maxAttempts: 1
+            messages:
+              - content: What type of pizza would you like?
+                contentType: PlainText
+              - content: Vegie or cheese pizza?
+                contentType: PlainText
+              - content: I can get you a vegie or a cheese pizza.
+                contentType: PlainText
+        - name: Crust
+          description: The type of pizza crust to order.
+          priority: 2
+          sampleUtterances:
+            - 'Make it a {Crust} crust.'
+            - 'I''d like a {Crust} crust.'
+          slotConstraint: Required
+          slotType: DocPizzaCrustType
+          slotTypeVersion: $LATEST
+          valueElicitationPrompt:
+            maxAttempts: 1
+            messages:
+              - content: What type of crust would you like?
+                contentType: PlainText
+              - content: Thick or thin crust?
+                contentType: PlainText
+        - name: Sauce
+          description: The type of sauce to use on the pizza.
+          priority: 3
+          sampleUtterances:
+            - 'Make it {Sauce} sauce.'
+            - 'I''d like {Sauce} sauce.'
+          slotConstraint: Required
+          slotType: DocPizzaSauceType
+          slotTypeVersion: $LATEST
+          valueElicitationPrompt:
+            maxAttempts: 1
+            messages:
+              - content: White or red sauce?
+                contentType: PlainText
+              - content: Garlic or tomato sauce?
+                contentType: PlainText
     properties:
       name:
         $ref: '#/definitions/IntentName'
@@ -2255,9 +2383,19 @@ definitions:
         description: 'A pagination token for fetching the next page of intent versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. '
   GetIntentsRequest:
     type: object
+    example:
+      maxResults: 10
+      nextToken: ''
     properties: {}
   GetIntentsResponse:
     type: object
+    example:
+      intents:
+        - version: $LATEST
+          name: DocOrderPizza
+          createdDate: 1494359783.453
+          description: Order a pizza from a local pizzeria.
+          lastUpdatedDate: 1494359783.453
     properties:
       intents:
         $ref: '#/definitions/IntentMetadataList'
@@ -2267,9 +2405,22 @@ definitions:
         description: 'If the response is truncated, the response includes a pagination token that you can specify in your next request to fetch the next page of intents. '
   GetSlotTypeRequest:
     type: object
+    example:
+      version: $LATEST
+      name: DocPizzaCrustType
     properties: {}
   GetSlotTypeResponse:
     type: object
+    example:
+      version: $LATEST
+      name: DocPizzaCrustType
+      checksum: 210b3d5a-90a3-4b22-ac7e-f50c2c71095f
+      createdDate: 1494359274.403
+      description: Available crust types
+      enumerationValues:
+        - value: thick
+        - value: thin
+      lastUpdatedDate: 1494359274.403
     properties:
       name:
         $ref: '#/definitions/SlotTypeName'
@@ -2306,9 +2457,29 @@ definitions:
         description: 'A pagination token for fetching the next page of slot type versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. '
   GetSlotTypesRequest:
     type: object
+    example:
+      maxResults: 10
+      nextToken: ''
     properties: {}
   GetSlotTypesResponse:
     type: object
+    example:
+      slotTypes:
+        - version: $LATEST
+          name: DocPizzaCrustType
+          createdDate: 1494359274.403
+          description: Available crust types
+          lastUpdatedDate: 1494359274.403
+        - version: $LATEST
+          name: DocPizzaSauceType
+          createdDate: 1494356442.23
+          description: Available pizza sauces
+          lastUpdatedDate: 1494356442.23
+        - version: $LATEST
+          name: DocPizzaType
+          createdDate: 1494359198.656
+          description: Available pizzas
+          lastUpdatedDate: 1494359198.656
     properties:
       slotTypes:
         $ref: '#/definitions/SlotTypeMetadataList'
@@ -2537,6 +2708,29 @@ definitions:
     required:
       - locale
       - childDirected
+    example:
+      name: DocOrderPizzaBot
+      abortStatement:
+        messages:
+          - content: I don't understand. Can you try again?
+            contentType: PlainText
+          - content: 'I''m sorry, I don''t understand.'
+            contentType: PlainText
+      childDirected: true
+      clarificationPrompt:
+        maxAttempts: 1
+        messages:
+          - content: 'I''m sorry, I didn''t hear that. Can you repeate what you just said?'
+            contentType: PlainText
+          - content: Can you say that again?
+            contentType: PlainText
+      description: Orders a pizza from a local pizzeria.
+      idleSessionTTLInSeconds: 300
+      intents:
+        - intentName: DocOrderPizza
+          intentVersion: $LATEST
+      locale: en-US
+      processBehavior: SAVE
     properties:
       description:
         $ref: '#/definitions/Description'
@@ -2555,7 +2749,7 @@ definitions:
         description: '<p>The maximum time in seconds that Amazon Lex retains the data gathered in a conversation.</p> <p>A user interaction session remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Lex deletes any data provided before the timeout.</p> <p>For example, suppose that a user chooses the OrderPizza intent, but gets sidetracked halfway through placing an order. If the user doesn''t complete the order within the specified time, Amazon Lex discards the slot information that it gathered, and the user must start over.</p> <p>If you don''t include the <code>idleSessionTTLInSeconds</code> element in a <code>PutBot</code> operation request, Amazon Lex uses the default value. This is also true if the request replaces an existing bot.</p> <p>The default is 300 seconds (5 minutes).</p>'
       voiceId:
         $ref: '#/definitions/String'
-        description: 'The Amazon Parrot voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/API_Voice.html">Voice</a> in the <i>Amazon Polly Developer Guide</i>.'
+        description: 'The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/API_Voice.html">Voice</a> in the <i>Amazon Polly Developer Guide</i>.'
       checksum:
         $ref: '#/definitions/String'
         description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new bot, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a bot, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
@@ -2570,6 +2764,33 @@ definitions:
         description: '<p>For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA.</p> <p>If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="https://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ.</a> </p>'
   PutBotResponse:
     type: object
+    example:
+      version: $LATEST
+      name: DocOrderPizzaBot
+      abortStatement:
+        messages:
+          - content: I don't understand. Can you try again?
+            contentType: PlainText
+          - content: 'I''m sorry, I don''t understand.'
+            contentType: PlainText
+      checksum: 20172ee3-fa06-49b2-bbc5-667c090303e9
+      childDirected: true
+      clarificationPrompt:
+        maxAttempts: 1
+        messages:
+          - content: 'I''m sorry, I didn''t hear that. Can you repeate what you just said?'
+            contentType: PlainText
+          - content: Can you say that again?
+            contentType: PlainText
+      createdDate: 1494360160.133
+      description: Orders a pizza from a local pizzeria.
+      idleSessionTTLInSeconds: 300
+      intents:
+        - intentName: DocOrderPizza
+          intentVersion: $LATEST
+      lastUpdatedDate: 1494360160.133
+      locale: en-US
+      status: NOT_BUILT
     properties:
       name:
         $ref: '#/definitions/BotName'
@@ -2603,7 +2824,7 @@ definitions:
         description: 'The maximum length of time that Amazon Lex retains the data gathered in a conversation. For more information, see .'
       voiceId:
         $ref: '#/definitions/String'
-        description: 'The Amazon Parrot voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .'
+        description: 'The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .'
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the bot that you created.
@@ -2618,6 +2839,86 @@ definitions:
         description: '<p>For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA.</p> <p>If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="https://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ.</a> </p>'
   PutIntentRequest:
     type: object
+    example:
+      name: DocOrderPizza
+      conclusionStatement:
+        messages:
+          - content: 'All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.'
+            contentType: PlainText
+          - content: 'OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.'
+            contentType: PlainText
+        responseCard: foo
+      confirmationPrompt:
+        maxAttempts: 1
+        messages:
+          - content: 'Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?'
+            contentType: PlainText
+      description: Order a pizza from a local pizzeria.
+      fulfillmentActivity:
+        type: ReturnIntent
+      rejectionStatement:
+        messages:
+          - content: 'Ok, I''ll cancel your order.'
+            contentType: PlainText
+          - content: I cancelled your order.
+            contentType: PlainText
+      sampleUtterances:
+        - Order me a pizza.
+        - 'Order me a {Type} pizza.'
+        - 'I want a {Crust} crust {Type} pizza'
+        - 'I want a {Crust} crust {Type} pizza with {Sauce} sauce.'
+      slots:
+        - name: Type
+          description: The type of pizza to order.
+          priority: 1
+          sampleUtterances:
+            - 'Get me a {Type} pizza.'
+            - 'A {Type} pizza please.'
+            - 'I''d like a {Type} pizza.'
+          slotConstraint: Required
+          slotType: DocPizzaType
+          slotTypeVersion: $LATEST
+          valueElicitationPrompt:
+            maxAttempts: 1
+            messages:
+              - content: What type of pizza would you like?
+                contentType: PlainText
+              - content: Vegie or cheese pizza?
+                contentType: PlainText
+              - content: I can get you a vegie or a cheese pizza.
+                contentType: PlainText
+        - name: Crust
+          description: The type of pizza crust to order.
+          priority: 2
+          sampleUtterances:
+            - 'Make it a {Crust} crust.'
+            - 'I''d like a {Crust} crust.'
+          slotConstraint: Required
+          slotType: DocPizzaCrustType
+          slotTypeVersion: $LATEST
+          valueElicitationPrompt:
+            maxAttempts: 1
+            messages:
+              - content: What type of crust would you like?
+                contentType: PlainText
+              - content: Thick or thin crust?
+                contentType: PlainText
+        - name: Sauce
+          description: The type of sauce to use on the pizza.
+          priority: 3
+          sampleUtterances:
+            - 'Make it {Sauce} sauce.'
+            - 'I''d like {Sauce} sauce.'
+          slotConstraint: Required
+          slotType: DocPizzaSauceType
+          slotTypeVersion: $LATEST
+          valueElicitationPrompt:
+            maxAttempts: 1
+            messages:
+              - content: White or red sauce?
+                contentType: PlainText
+              - content: Garlic or tomato sauce?
+                contentType: PlainText
     properties:
       description:
         $ref: '#/definitions/Description'
@@ -2654,6 +2955,90 @@ definitions:
         description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new intent, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a intent, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
   PutIntentResponse:
     type: object
+    example:
+      version: $LATEST
+      name: DocOrderPizza
+      checksum: ca9bc13d-afc8-4706-bbaf-091f7a5935d6
+      conclusionStatement:
+        messages:
+          - content: 'All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.'
+            contentType: PlainText
+          - content: 'OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.'
+            contentType: PlainText
+        responseCard: foo
+      confirmationPrompt:
+        maxAttempts: 1
+        messages:
+          - content: 'Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?'
+            contentType: PlainText
+      createdDate: 1494359783.453
+      description: Order a pizza from a local pizzeria.
+      fulfillmentActivity:
+        type: ReturnIntent
+      lastUpdatedDate: 1494359783.453
+      rejectionStatement:
+        messages:
+          - content: 'Ok, I''ll cancel your order.'
+            contentType: PlainText
+          - content: I cancelled your order.
+            contentType: PlainText
+      sampleUtterances:
+        - Order me a pizza.
+        - 'Order me a {Type} pizza.'
+        - 'I want a {Crust} crust {Type} pizza'
+        - 'I want a {Crust} crust {Type} pizza with {Sauce} sauce.'
+      slots:
+        - name: Sauce
+          description: The type of sauce to use on the pizza.
+          priority: 3
+          sampleUtterances:
+            - 'Make it {Sauce} sauce.'
+            - 'I''d like {Sauce} sauce.'
+          slotConstraint: Required
+          slotType: DocPizzaSauceType
+          slotTypeVersion: $LATEST
+          valueElicitationPrompt:
+            maxAttempts: 1
+            messages:
+              - content: White or red sauce?
+                contentType: PlainText
+              - content: Garlic or tomato sauce?
+                contentType: PlainText
+        - name: Type
+          description: The type of pizza to order.
+          priority: 1
+          sampleUtterances:
+            - 'Get me a {Type} pizza.'
+            - 'A {Type} pizza please.'
+            - 'I''d like a {Type} pizza.'
+          slotConstraint: Required
+          slotType: DocPizzaType
+          slotTypeVersion: $LATEST
+          valueElicitationPrompt:
+            maxAttempts: 1
+            messages:
+              - content: What type of pizza would you like?
+                contentType: PlainText
+              - content: Vegie or cheese pizza?
+                contentType: PlainText
+              - content: I can get you a vegie or a cheese pizza.
+                contentType: PlainText
+        - name: Crust
+          description: The type of pizza crust to order.
+          priority: 2
+          sampleUtterances:
+            - 'Make it a {Crust} crust.'
+            - 'I''d like a {Crust} crust.'
+          slotConstraint: Required
+          slotType: DocPizzaCrustType
+          slotTypeVersion: $LATEST
+          valueElicitationPrompt:
+            maxAttempts: 1
+            messages:
+              - content: What type of crust would you like?
+                contentType: PlainText
+              - content: Thick or thin crust?
+                contentType: PlainText
     properties:
       name:
         $ref: '#/definitions/IntentName'
@@ -2702,6 +3087,12 @@ definitions:
         description: Checksum of the <code>$LATEST</code>version of the intent created or updated.
   PutSlotTypeRequest:
     type: object
+    example:
+      name: PizzaSauceType
+      description: Available pizza sauces
+      enumerationValues:
+        - value: red
+        - value: white
     properties:
       description:
         $ref: '#/definitions/Description'
@@ -2714,6 +3105,16 @@ definitions:
         description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new slot type, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a slot type, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
   PutSlotTypeResponse:
     type: object
+    example:
+      version: $LATEST
+      name: DocPizzaSauceType
+      checksum: cfd00ed1-775d-4357-947c-aca7e73b44ba
+      createdDate: 1494356442.23
+      description: Available pizza sauces
+      enumerationValues:
+        - value: red
+        - value: white
+      lastUpdatedDate: 1494356442.23
     properties:
       name:
         $ref: '#/definitions/SlotTypeName'
