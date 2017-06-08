@@ -1346,8 +1346,8 @@ definitions:
         additionalProperties:
           type: string
         description: |-
-          The resource labels for the cluster to use to annotate any related GCE
-          resources.
+          The resource labels for the cluster to use to annotate any related
+          Google Compute Engine resources.
         type: object
       selfLink:
         description: '[Output only] Server-defined URL for the resource.'
@@ -1687,7 +1687,7 @@ definitions:
         description: |-
           Whether the nodes are created as preemptible VM instances. See:
           https://cloud.google.com/compute/docs/instances/preemptible for more
-          inforamtion about preemptible VM instances.
+          information about preemptible VM instances.
         type: boolean
       serviceAccount:
         description: |-

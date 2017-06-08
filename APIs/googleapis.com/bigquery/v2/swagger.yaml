@@ -1353,7 +1353,7 @@ definitions:
         description: Whether the query result was fetched from the query cache.
         type: boolean
       errors:
-        description: '[Output-only] All errors and warnings encountered during the running of the job. Errors here do not necessarily mean that the job has completed or was unsuccessful.'
+        description: '[Output-only] The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful.'
         items:
           $ref: '#/definitions/ErrorProto'
         type: array
@@ -1569,7 +1569,7 @@ definitions:
     properties:
       allowLargeResults:
         default: false
-        description: '[Optional] If true and query uses legacy SQL dialect, allows the query to produce arbitrarily large result tables at a slight cost in performance. Requires destinationTable to be set. For standard SQL queries, this flag is ignored and large results are always allowed.'
+        description: '[Optional] If true and query uses legacy SQL dialect, allows the query to produce arbitrarily large result tables at a slight cost in performance. Requires destinationTable to be set. For standard SQL queries, this flag is ignored and large results are always allowed. However, you must still set destinationTable when result size exceeds the allowed maximum response size.'
         type: boolean
       createDisposition:
         description: '[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a ''notFound'' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.'
@@ -1579,7 +1579,7 @@ definitions:
         description: '[Optional] Specifies the default dataset to use for unqualified table names in the query.'
       destinationTable:
         $ref: '#/definitions/TableReference'
-        description: '[Optional] Describes the table where the query results should be stored. If not present, a new table will be created to store the results.'
+        description: '[Optional] Describes the table where the query results should be stored. If not present, a new table will be created to store the results. This property must be set for large results that exceed the maximum response size.'
       flattenResults:
         default: true
         description: '[Optional] If true and query uses legacy SQL dialect, flattens all nested and repeated fields in the query results. allowLargeResults must be true if this is set to false. For standard SQL queries, this flag is ignored and results are never flattened.'
@@ -1603,7 +1603,7 @@ definitions:
         description: '[Optional] Specifies a priority for the query. Possible values include INTERACTIVE and BATCH. The default value is INTERACTIVE.'
         type: string
       query:
-        description: '[Required] BigQuery SQL query to execute.'
+        description: '[Required] SQL query text to execute. The useLegacySql field can be used to indicate whether the query uses legacy SQL or standard SQL.'
         type: string
       queryParameters:
         description: Query parameters for standard SQL queries.
@@ -1817,7 +1817,7 @@ definitions:
         $ref: '#/definitions/ErrorProto'
         description: '[Output-only] Final error result of the job. If present, indicates that the job has completed and was unsuccessful.'
       errors:
-        description: '[Output-only] All errors encountered during the running of the job. Errors here do not necessarily mean that the job has completed or was unsuccessful.'
+        description: '[Output-only] The first errors encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful.'
         items:
           $ref: '#/definitions/ErrorProto'
         type: array
@@ -1978,7 +1978,7 @@ definitions:
         description: Whether the query result was fetched from the query cache.
         type: boolean
       errors:
-        description: '[Output-only] All errors and warnings encountered during the running of the job. Errors here do not necessarily mean that the job has completed or was unsuccessful.'
+        description: '[Output-only] The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful.'
         items:
           $ref: '#/definitions/ErrorProto'
         type: array
@@ -2185,7 +2185,7 @@ definitions:
   TableFieldSchema:
     properties:
       description:
-        description: '[Optional] The field description. The maximum length is 16K characters.'
+        description: '[Optional] The field description. The maximum length is 1,024 characters.'
         type: string
       fields:
         description: '[Optional] Describes the nested schema fields if the type property is set to RECORD.'

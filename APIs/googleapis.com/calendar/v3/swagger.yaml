@@ -519,15 +519,15 @@ paths:
       description: Returns events on the specified calendar.
       operationId: calendar.events.list
       parameters:
+        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
+          in: query
+          name: alwaysIncludeEmail
+          type: boolean
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
           required: true
           type: string
-        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
-          in: query
-          name: alwaysIncludeEmail
-          type: boolean
         - description: Specifies event ID in the iCalendar format to be included in the response. Optional.
           in: query
           name: iCalUID
@@ -538,7 +538,7 @@ paths:
           name: maxAttendees
           type: integer
         - default: 250
-          description: Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
+          description: 'Maximum number of events returned on one result page. The number of events in the resulting page may be less than this value, or none at all, even if there are more events matching the query. Incomplete pages can be detected by a non-empty nextPageToken field in the response. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.'
           in: query
           minimum: 1
           name: maxResults
@@ -770,15 +770,15 @@ paths:
       description: Watch for changes to Events resources.
       operationId: calendar.events.watch
       parameters:
+        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
+          in: query
+          name: alwaysIncludeEmail
+          type: boolean
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
           required: true
           type: string
-        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
-          in: query
-          name: alwaysIncludeEmail
-          type: boolean
         - description: Specifies event ID in the iCalendar format to be included in the response. Optional.
           in: query
           name: iCalUID
@@ -789,7 +789,7 @@ paths:
           name: maxAttendees
           type: integer
         - default: 250
-          description: Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
+          description: 'Maximum number of events returned on one result page. The number of events in the resulting page may be less than this value, or none at all, even if there are more events matching the query. Incomplete pages can be detected by a non-empty nextPageToken field in the response. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.'
           in: query
           minimum: 1
           name: maxResults
@@ -816,6 +816,10 @@ paths:
           in: query
           name: q
           type: string
+        - in: body
+          name: resource
+          schema:
+            $ref: '#/definitions/Channel'
         - collectionFormat: multi
           description: Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.
           in: query
@@ -869,10 +873,6 @@ paths:
           in: query
           name: updatedMin
           type: string
-        - in: body
-          name: resource
-          schema:
-            $ref: '#/definitions/Channel'
       responses:
         '200':
           description: Successful response

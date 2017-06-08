@@ -1,0 +1,1228 @@
+swagger: '2.0'
+schemes:
+  - https
+host: bigquerydatatransfer.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Transfers data from partner SaaS applications to Google BigQuery on a scheduled, managed basis.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: BigQuery Data Transfer Service
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://bigquerydatatransfer.googleapis.com/$discovery/rest?version=v1'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: bigquerydatatransfer
+externalDocs:
+  url: 'https://cloud.google.com/bigquery/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 implicit authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: projects
+paths:
+  '/v1/{name}':
+    delete:
+      description: Deletes the specified transfer run.
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.delete
+      parameters:
+        - description: |-
+            The field will contain name of the resource requested, for example:
+            `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+    get:
+      description: Returns information about the particular transfer run.
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.get
+      parameters:
+        - description: |-
+            The field will contain name of the resource requested, for example:
+            `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TransferRun'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: |-
+        Updates a data transfer configuration.
+        All fields must be set, even if they are not updated.
+      operationId: bigquerydatatransfer.projects.transferConfigs.patch
+      parameters:
+        - description: |-
+            Optional OAuth2 authorization code to use with this transfer configuration.
+            If it is provided, the transfer configuration will be associated with the
+            gaia id of the authorizing user.
+            In order to obtain authorization_code, please make a
+            request to
+            https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
+
+            * client_id should be OAuth client_id of BigQuery DTS API for the given
+              data source returned by ListDataSources method.
+            * data_source_scopes are the scopes returned by ListDataSources method.
+            * redirect_uri is an optional parameter. If not specified, then
+              authorization code is posted to the opener of authorization flow window.
+              Otherwise it will be sent to the redirect uri. A special value of
+              urn:ietf:wg:oauth:2.0:oob means that authorization code should be
+              returned in the title bar of the browser, with the page text prompting
+              the user to copy the code and paste it in the application.
+          in: query
+          name: authorizationCode
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TransferConfig'
+        - description: |-
+            The resource name of the transfer run.
+            Transfer run names have the form
+            `projects/{project_id}/transferConfigs/{config_id}`.
+            Where `config_id` is usually a uuid, even though it is not
+            guaranteed or required. The name is ignored when creating a transfer run.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: Required list of fields to be updated in this request.
+          in: query
+          name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TransferConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+  '/v1/{name}:checkValidCreds':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns true if valid credentials exist for the given data source and
+        requesting user.
+      operationId: bigquerydatatransfer.projects.dataSources.checkValidCreds
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CheckValidCredsRequest'
+        - description: |-
+            The data source in the form:
+            `projects/{project_id}/dataSources/{data_source_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CheckValidCredsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+  '/v1/{name}:isEnabled':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Returns true if data transfer is enabled for a project.
+      operationId: bigquerydatatransfer.projects.locations.isEnabled
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IsEnabledRequest'
+        - description: |-
+            The name of the project resource in the form:
+            `projects/{project_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IsEnabledResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+  '/v1/{name}:setEnabled':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Enables or disables data transfer for a project. This
+        method requires the additional scope of
+        'https://www.googleapis.com/auth/cloudplatformprojects'
+        to manage the cloud project permissions.
+      operationId: bigquerydatatransfer.projects.locations.setEnabled
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetEnabledRequest'
+        - description: |-
+            The name of the project resource in the form:
+            `projects/{project_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      tags:
+        - projects
+  '/v1/{parent}/dataSources':
+    get:
+      description: |-
+        Lists supported data sources and returns their settings,
+        which can be used for UI rendering.
+      operationId: bigquerydatatransfer.projects.dataSources.list
+      parameters:
+        - description: Page size. The default page size is the maximum value of 1000 results.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Pagination token, which can be used to request a specific page
+            of `ListDataSourcesRequest` list results. For multiple-page
+            results, `ListDataSourcesResponse` outputs
+            a `next_page` token, which can be used as the
+            `page_token` value to request the next page of list results.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The BigQuery project id for which data sources should be returned.
+            Must be in the form: `projects/{project_id}`
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListDataSourcesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{parent}/runs':
+    get:
+      description: Returns information about running and completed jobs.
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.list
+      parameters:
+        - description: Page size. The default page size is the maximum value of 1000 results.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Pagination token, which can be used to request a specific page
+            of `ListTransferRunsRequest` list results. For multiple-page
+            results, `ListTransferRunsResponse` outputs
+            a `next_page` token, which can be used as the
+            `page_token` value to request the next page of list results.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Name of transfer configuration for which transfer runs should be retrieved.
+            Format of transfer configuration resource name is:
+            `projects/{project_id}/transferConfigs/{config_id}`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: Indicates how run attempts are to be pulled.
+          enum:
+            - RUN_ATTEMPT_UNSPECIFIED
+            - LATEST
+          in: query
+          name: runAttempt
+          type: string
+        - collectionFormat: multi
+          description: 'When specified, only transfer runs with requested statuses are returned.'
+          in: query
+          items:
+            enum:
+              - TRANSFER_STATUS_UNSPECIFIED
+              - INACTIVE
+              - PENDING
+              - RUNNING
+              - SUCCEEDED
+              - FAILED
+              - CANCELLED
+            type: string
+          name: statuses
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListTransferRunsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{parent}/transferConfigs':
+    get:
+      description: Returns information about all data transfers in the project.
+      operationId: bigquerydatatransfer.projects.transferConfigs.list
+      parameters:
+        - collectionFormat: multi
+          description: 'When specified, only configurations of requested data sources are returned.'
+          in: query
+          items:
+            type: string
+          name: dataSourceIds
+          type: array
+        - collectionFormat: multi
+          description: Page size. The default page size is the maximum value of 1000 results.
+          in: query
+          items:
+            type: string
+          name: pageSize
+          type: integer
+        - description: |-
+            Pagination token, which can be used to request a specific page
+            of `ListTransfersRequest` list results. For multiple-page
+            results, `ListTransfersResponse` outputs
+            a `next_page` token, which can be used as the
+            `page_token` value to request the next page of list results.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The BigQuery project id for which data sources
+            should be returned: `projects/{project_id}`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListTransferConfigsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a new data transfer configuration.
+      operationId: bigquerydatatransfer.projects.transferConfigs.create
+      parameters:
+        - description: |-
+            Optional OAuth2 authorization code to use with this transfer configuration.
+            This is required if new credentials are needed, as indicated by
+            `CheckValidCreds`.
+            In order to obtain authorization_code, please make a
+            request to
+            https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
+
+            * client_id should be OAuth client_id of BigQuery DTS API for the given
+              data source returned by ListDataSources method.
+            * data_source_scopes are the scopes returned by ListDataSources method.
+            * redirect_uri is an optional parameter. If not specified, then
+              authorization code is posted to the opener of authorization flow window.
+              Otherwise it will be sent to the redirect uri. A special value of
+              urn:ietf:wg:oauth:2.0:oob means that authorization code should be
+              returned in the title bar of the browser, with the page text prompting
+              the user to copy the code and paste it in the application.
+          in: query
+          name: authorizationCode
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TransferConfig'
+        - description: The BigQuery project id where the transfer configuration should be created.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TransferConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+  '/v1/{parent}/transferLogs':
+    get:
+      description: Returns user facing log messages for the data transfer run.
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.transferLogs.list
+      parameters:
+        - collectionFormat: multi
+          description: |-
+            Message types to return. If not populated - INFO, WARNING and ERROR
+            messages are returned.
+          in: query
+          items:
+            enum:
+              - MESSAGE_SEVERITY_UNSPECIFIED
+              - INFO
+              - WARNING
+              - ERROR
+            type: string
+          name: messageTypes
+          type: array
+        - description: Page size. The default page size is the maximum value of 1000 results.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Pagination token, which can be used to request a specific page
+            of `ListTransferLogsRequest` list results. For multiple-page
+            results, `ListTransferLogsResponse` outputs
+            a `next_page` token, which can be used as the
+            `page_token` value to request the next page of list results.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Transfer run name in the form:
+            `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListTransferLogsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{parent}:scheduleRuns':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates transfer runs for a time range [range_start_time, range_end_time].
+        For each date - or whatever granularity the data source supports - in the
+        range, one transfer run is created.
+        Note that runs are created per UTC time in the time range.
+      operationId: bigquerydatatransfer.projects.transferConfigs.scheduleRuns
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ScheduleTransferRunsRequest'
+        - description: |-
+            Transfer configuration name in the form:
+            `projects/{project_id}/transferConfigs/{config_id}`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ScheduleTransferRunsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+      tags:
+        - projects
+definitions:
+  CheckValidCredsRequest:
+    description: |-
+      A request to determine whether the user has valid credentials. This method
+      is used to limit the number of OAuth popups in the user interface. The
+      user id is inferred from the API call context.
+      If the data source has the Google+ authorization type, this method
+      returns false, as it cannot be determined whether the credentials are
+      already valid merely based on the user id.
+    properties: {}
+    type: object
+  CheckValidCredsResponse:
+    description: A response indicating whether the credentials exist and are valid.
+    properties:
+      hasValidCreds:
+        description: 'If set to `true`, the credentials exist and are valid.'
+        type: boolean
+    type: object
+  DataSource:
+    description: |-
+      Represents data source metadata. Metadata is sufficient to
+      render UI and request proper OAuth tokens.
+    properties:
+      authorizationType:
+        description: Indicates the type of authorization.
+        enum:
+          - AUTHORIZATION_TYPE_UNSPECIFIED
+          - AUTHORIZATION_CODE
+          - GOOGLE_PLUS_AUTHORIZATION_CODE
+        type: string
+      clientId:
+        description: |-
+          Data source client id which should be used to receive refresh token.
+          When not supplied, no offline credentials are populated for data transfer.
+        type: string
+      dataRefreshType:
+        description: |-
+          Specifies whether the data source supports automatic data refresh for the
+          past few days, and how it's supported.
+          For some data sources, data might not be complete until a few days later,
+          so it's useful to refresh data automatically.
+        enum:
+          - NONE
+          - SLIDING_WINDOW
+          - CUSTOM_SLIDING_WINDOW
+        type: string
+      dataSourceId:
+        description: Data source id.
+        type: string
+      defaultDataRefreshWindowDays:
+        description: |-
+          Default data refresh window on days.
+          Only meaningful when `data_refresh_type` = `SLIDING_WINDOW`.
+        format: int32
+        type: integer
+      defaultSchedule:
+        description: |-
+          Default data transfer schedule.
+          Examples of valid schedules include:
+          `1st,3rd monday of month 15:30`,
+          `every wed,fri of jan,jun 13:15`, and
+          `first sunday of quarter 00:00`.
+        type: string
+      description:
+        description: User friendly data source description string.
+        type: string
+      displayName:
+        description: User friendly data source name.
+        type: string
+      helpUrl:
+        description: Url for the help document for this data source.
+        type: string
+      manualRunsDisabled:
+        description: |-
+          Disables backfilling and manual run scheduling
+          for the data source.
+        type: boolean
+      name:
+        description: Data source resource name.
+        type: string
+      parameters:
+        description: Data source parameters.
+        items:
+          $ref: '#/definitions/DataSourceParameter'
+        type: array
+      scopes:
+        description: |-
+          Api auth scopes for which refresh token needs to be obtained. Only valid
+          when `client_id` is specified. Ignored otherwise. These are scopes needed
+          by a data source to prepare data and ingest them into BigQuery,
+          e.g., https://www.googleapis.com/auth/bigquery
+        items:
+          type: string
+        type: array
+      statusUpdateDeadlineSeconds:
+        description: |-
+          The number of seconds to wait for a status update from the data source
+          before BigQuery marks the transfer as failed.
+        format: int32
+        type: integer
+      supportsCustomSchedule:
+        description: |-
+          Specifies whether the data source supports a user defined schedule, or
+          operates on the default schedule.
+          When set to `true`, user can override default schedule.
+        type: boolean
+      supportsMultipleTransfers:
+        description: |-
+          Indicates whether the data source supports multiple transfers
+          to different BigQuery targets.
+        type: boolean
+      transferType:
+        description: |-
+          Transfer type. Currently supports only batch transfers,
+          which are transfers that use the BigQuery batch APIs (load or
+          query) to ingest the data.
+        enum:
+          - TRANSFER_TYPE_UNSPECIFIED
+          - BATCH
+          - STREAMING
+        type: string
+    type: object
+  DataSourceParameter:
+    description: |-
+      Represents a data source parameter with validation rules, so that
+      parameters can be rendered in the UI. These parameters are given to us by
+      supported data sources, and include all needed information for rendering
+      and validation.
+      Thus, whoever uses this api can decide to generate either generic ui,
+      or custom data source specific forms.
+    properties:
+      allowedValues:
+        description: All possible values for the parameter.
+        items:
+          type: string
+        type: array
+      description:
+        description: Parameter description.
+        type: string
+      displayName:
+        description: Parameter display name in the user interface.
+        type: string
+      fields:
+        description: 'When parameter is a record, describes child fields.'
+        items:
+          $ref: '#/definitions/DataSourceParameter'
+        type: array
+      immutable:
+        description: Cannot be changed after initial creation.
+        type: boolean
+      maxValue:
+        description: For integer and double values specifies maxminum allowed value.
+        format: double
+        type: number
+      minValue:
+        description: For integer and double values specifies minimum allowed value.
+        format: double
+        type: number
+      paramId:
+        description: Parameter identifier.
+        type: string
+      recurse:
+        description: |-
+          If set to true, schema should be taken from the parent with the same
+          parameter_id. Only applicable when parameter type is RECORD.
+        type: boolean
+      repeated:
+        description: Can parameter have multiple values.
+        type: boolean
+      required:
+        description: Is parameter required.
+        type: boolean
+      type:
+        description: Parameter type.
+        enum:
+          - TYPE_UNSPECIFIED
+          - STRING
+          - INTEGER
+          - DOUBLE
+          - BOOLEAN
+          - RECORD
+          - PLUS_PAGE
+        type: string
+      validationDescription:
+        description: |-
+          Description of the requirements for this field, in case the user input does
+          not fulfill the regex pattern or min/max values.
+        type: string
+      validationHelpUrl:
+        description: URL to a help document to further explain the naming requirements.
+        type: string
+      validationRegex:
+        description: Regular expression which can be used for parameter validation.
+        type: string
+    type: object
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
+    type: object
+  IsEnabledRequest:
+    description: A request to determine whether data transfer is enabled for the project.
+    properties: {}
+    type: object
+  IsEnabledResponse:
+    description: A response to indicate whether data transfer is enabled for the project.
+    properties:
+      enabled:
+        description: Indicates whether the project is enabled.
+        type: boolean
+    type: object
+  ListDataSourcesResponse:
+    description: Returns list of supported data sources and their metadata.
+    properties:
+      dataSources:
+        description: List of supported data sources and their transfer settings.
+        items:
+          $ref: '#/definitions/DataSource'
+        type: array
+      nextPageToken:
+        description: |-
+          The next-pagination token. For multiple-page list results,
+          this token can be used as the
+          `ListDataSourcesRequest.page_token`
+          to request the next page of list results.
+          @OutputOnly
+        type: string
+    type: object
+  ListTransferConfigsResponse:
+    description: The returned list of pipelines in the project.
+    properties:
+      nextPageToken:
+        description: |-
+          The next-pagination token. For multiple-page list results,
+          this token can be used as the
+          `ListTransferConfigsRequest.page_token`
+          to request the next page of list results.
+          @OutputOnly
+        type: string
+      transferConfigs:
+        description: |-
+          The stored pipeline transfer configurations.
+          @OutputOnly
+        items:
+          $ref: '#/definitions/TransferConfig'
+        type: array
+    type: object
+  ListTransferLogsResponse:
+    description: The returned list transfer run messages.
+    properties:
+      nextPageToken:
+        description: |-
+          The next-pagination token. For multiple-page list results,
+          this token can be used as the
+          `GetTransferRunLogRequest.page_token`
+          to request the next page of list results.
+          @OutputOnly
+        type: string
+      transferMessages:
+        description: |-
+          The stored pipeline transfer messages.
+          @OutputOnly
+        items:
+          $ref: '#/definitions/TransferMessage'
+        type: array
+    type: object
+  ListTransferRunsResponse:
+    description: The returned list of pipelines in the project.
+    properties:
+      nextPageToken:
+        description: |-
+          The next-pagination token. For multiple-page list results,
+          this token can be used as the
+          `ListTransferRunsRequest.page_token`
+          to request the next page of list results.
+          @OutputOnly
+        type: string
+      transferRuns:
+        description: |-
+          The stored pipeline transfer runs.
+          @OutputOnly
+        items:
+          $ref: '#/definitions/TransferRun'
+        type: array
+    type: object
+  ScheduleTransferRunsRequest:
+    description: A request to schedule transfer runs for a time range.
+    properties:
+      rangeEndTime:
+        description: End time of the range of transfer runs.
+        format: google-datetime
+        type: string
+      rangeStartTime:
+        description: Start time of the range of transfer runs.
+        format: google-datetime
+        type: string
+    type: object
+  ScheduleTransferRunsResponse:
+    description: A response to schedule transfer runs for a time range.
+    properties:
+      createdRuns:
+        description: The transfer runs that were created.
+        items:
+          $ref: '#/definitions/TransferRun'
+        type: array
+    type: object
+  SetEnabledRequest:
+    description: A request to set whether data transfer is enabled or disabled for a project.
+    properties:
+      enabled:
+        description: Whether data transfer should be enabled or disabled for the project.
+        type: boolean
+    type: object
+  TransferConfig:
+    description: |-
+      Represents a data transfer configuration. A transfer configuration
+      contains all metadata needed to perform a data transfer. For example,
+      `destination_dataset_id` specifies where data should be stored.
+      When a new transfer configuration is created, the specified
+      `destination_dataset_id` is created when needed and shared with the
+      appropriate data source service account.
+    properties:
+      dataRefreshWindowDays:
+        description: |-
+          The number of days to look back to automatically refresh the data.
+          For example, if `data_refresh_window_days = 10`, then every day
+          BigQuery reingests data for [today-10, today-1], rather than ingesting data
+          for just [today-1].
+          Only valid if the data source supports the feature. Set the value to  0
+          to use the default value.
+        format: int32
+        type: integer
+      dataSourceId:
+        description: Data source id. Cannot be changed once data transfer is created.
+        type: string
+      destinationDatasetId:
+        description: The BigQuery target dataset id.
+        type: string
+      disabled:
+        description: |-
+          Is this config disabled. When set to true, no runs are scheduled
+          for a given transfer.
+        type: boolean
+      displayName:
+        description: User specified display name for the data transfer.
+        type: string
+      name:
+        description: |-
+          The resource name of the transfer run.
+          Transfer run names have the form
+          `projects/{project_id}/transferConfigs/{config_id}`.
+          Where `config_id` is usually a uuid, even though it is not
+          guaranteed or required. The name is ignored when creating a transfer run.
+        type: string
+      nextRunTime:
+        description: |-
+          Next time when data transfer will run. Output only. Applicable
+          only for batch data transfers.
+          @OutputOnly
+        format: google-datetime
+        type: string
+      params:
+        additionalProperties:
+          description: Properties of the object.
+        description: Data transfer specific parameters.
+        type: object
+      schedule:
+        description: |-
+          Data transfer schedule in GROC format.
+          If the data source does not support a custom schedule, this should be
+          empty. If it is empty, the default value for the data source will be
+          used.
+          The specified times are in UTC.
+          Examples of valid GROC include:
+          `1st,3rd monday of month 15:30`,
+          `every wed,fri of jan,jun 13:15`, and
+          `first sunday of quarter 00:00`.
+        type: string
+      status:
+        description: |-
+          Status of the most recently updated transfer run.
+          @OutputOnly
+        enum:
+          - TRANSFER_STATUS_UNSPECIFIED
+          - INACTIVE
+          - PENDING
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - CANCELLED
+        type: string
+      updateTime:
+        description: |-
+          Data transfer modification time. Ignored by server on input.
+          @OutputOnly
+        format: google-datetime
+        type: string
+    type: object
+  TransferMessage:
+    description: Represents a user facing message for a particular data transfer run.
+    properties:
+      messageText:
+        description: Message text.
+        type: string
+      messageTime:
+        description: Time when message was logged.
+        format: google-datetime
+        type: string
+      severity:
+        description: Message severity.
+        enum:
+          - MESSAGE_SEVERITY_UNSPECIFIED
+          - INFO
+          - WARNING
+          - ERROR
+        type: string
+    type: object
+  TransferRun:
+    description: Represents a data transfer run.
+    properties:
+      dataSourceId:
+        description: |-
+          Data source id.
+          @OutputOnly
+        type: string
+      destinationDatasetId:
+        description: The BigQuery target dataset id.
+        type: string
+      endTime:
+        description: |-
+          Time when transfer run ended. Parameter ignored by server for input
+          requests.
+          @OutputOnly
+        format: google-datetime
+        type: string
+      name:
+        description: |-
+          The resource name of the transfer run.
+          Transfer run names have the form
+          `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`.
+          The name is ignored when creating a transfer run.
+        type: string
+      params:
+        additionalProperties:
+          description: Properties of the object.
+        description: Data transfer specific parameters.
+        type: object
+      runTime:
+        description: |-
+          For batch transfer runs, specifies the date and time that
+          data should be ingested.
+        format: google-datetime
+        type: string
+      schedule:
+        description: |-
+          Describes the schedule of this transfer run if it was created as part of
+          a regular schedule. For batch transfer runs that are directly created,
+          this is empty.
+          NOTE: the system might choose to delay the schedule depending on the
+          current load, so `schedule_time` doesn't always matches this.
+          @OutputOnly
+        type: string
+      scheduleTime:
+        description: Minimum time after which a transfer run can be started.
+        format: google-datetime
+        type: string
+      startTime:
+        description: |-
+          Time when transfer run was started. Parameter ignored by server for input
+          requests.
+          @OutputOnly
+        format: google-datetime
+        type: string
+      status:
+        description: |-
+          Data transfer run status. Ignored for input requests.
+          @OutputOnly
+        enum:
+          - TRANSFER_STATUS_UNSPECIFIED
+          - INACTIVE
+          - PENDING
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - CANCELLED
+        type: string
+      updateTime:
+        description: |-
+          Last time the data transfer run status was updated.
+          @OutputOnly
+        format: google-datetime
+        type: string
+    type: object

@@ -124,6 +124,7 @@ parameters:
     type: string
 tags:
   - name: shortLinks
+  - name: v1
 paths:
   /v1/shortLinks:
     parameters:
@@ -169,6 +170,49 @@ paths:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - shortLinks
+  '/v1/{dynamicLink}/linkStats':
+    get:
+      description: |-
+        Fetches analytics stats of a short Dynamic Link for a given
+        duration. Metrics include number of clicks, redirects, installs,
+        app first opens, and app reopens.
+      operationId: firebasedynamiclinks.getLinkStats
+      parameters:
+        - description: The span of time requested in days.
+          in: query
+          name: durationDays
+          type: string
+        - description: 'Dynamic Link URL. e.g. https://abcd.app.goo.gl/wxyz'
+          in: path
+          name: dynamicLink
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DynamicLinkStats'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/firebase'
+      tags:
+        - v1
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   AnalyticsInfo:
     description: Tracking parameters supported by Dynamic Link.
@@ -232,6 +276,32 @@ definitions:
           $ref: '#/definitions/DynamicLinkWarning'
         type: array
     type: object
+  DynamicLinkEventStat:
+    description: Dynamic Link event stat.
+    properties:
+      count:
+        description: The number of times this event occurred.
+        format: int64
+        type: string
+      event:
+        description: Link event.
+        enum:
+          - DYNAMIC_LINK_EVENT_UNSPECIFIED
+          - CLICK
+          - REDIRECT
+          - APP_INSTALL
+          - APP_FIRST_OPEN
+          - APP_RE_OPEN
+        type: string
+      platform:
+        description: Requested platform.
+        enum:
+          - DYNAMIC_LINK_PLATFORM_UNSPECIFIED
+          - ANDROID
+          - IOS
+          - DESKTOP
+        type: string
+    type: object
   DynamicLinkInfo:
     description: Information about a Dynamic Link.
     properties:
@@ -239,16 +309,16 @@ definitions:
         $ref: '#/definitions/AnalyticsInfo'
         description: |-
           Parameters used for tracking. See all tracking parameters in the
-          [documentation](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+          [documentation](https://firebase.google.com/docs/dynamic-links/create-manually).
       androidInfo:
         $ref: '#/definitions/AndroidInfo'
         description: |-
           Android related information. See Android related parameters in the
-          [documentation](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+          [documentation](https://firebase.google.com/docs/dynamic-links/create-manually).
       dynamicLinkDomain:
         description: |-
           Dynamic Links domain that the project owns, e.g. abcd.app.goo.gl
-          [Learn more](https://firebase.google.com/docs/dynamic-links/android#set-up-firebase-and-the-dynamic-links-sdk)
+          [Learn more](https://firebase.google.com/docs/dynamic-links/android/receive)
           on how to set up Dynamic Link domain associated with your Firebase project.
 
           Required.
@@ -257,13 +327,13 @@ definitions:
         $ref: '#/definitions/IosInfo'
         description: |-
           iOS related information. See iOS related parameters in the
-          [documentation](https://firebase.google.com/docs/dynamic-links/ios#create-a-dynamic-link-programmatically).
+          [documentation](https://firebase.google.com/docs/dynamic-links/create-manually).
       link:
         description: |-
           The link your app will open, You can specify any URL your app can handle.
           This link must be a well-formatted URL, be properly URL-encoded, and use
           the HTTP or HTTPS scheme. See 'link' parameters in the
-          [documentation](https://firebase.google.com/docs/dynamic-links/android#create-a-dynamic-link-programmatically).
+          [documentation](https://firebase.google.com/docs/dynamic-links/create-manually).
 
           Required.
         type: string
@@ -275,6 +345,15 @@ definitions:
         description: |-
           Parameters for social meta tag params.
           Used to set meta tag data for link previews on social sites.
+    type: object
+  DynamicLinkStats:
+    description: Analytics stats of a Dynamic Link for a given timeframe.
+    properties:
+      linkEventStats:
+        description: Dynamic Link event stats.
+        items:
+          $ref: '#/definitions/DynamicLinkEventStat'
+        type: array
     type: object
   DynamicLinkWarning:
     description: Dynamic Links warning messages.

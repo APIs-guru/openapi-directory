@@ -704,12 +704,6 @@ paths:
       description: Lists the messages in the user's mailbox.
       operationId: gmail.users.messages.list
       parameters:
-        - default: me
-          description: The user's email address. The special value me can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - default: false
           description: Include messages from SPAM and TRASH in the results.
           in: query
@@ -731,9 +725,15 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: 'Only return messages matching the specified query. Supports the same query format as the Gmail search box. For example, "from:someuser@example.com rfc822msgid: is:unread". Parameter cannot be used when accessing the api using the gmail.metadata scope.'
+        - description: 'Only return messages matching the specified query. Supports the same query format as the Gmail search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread". Parameter cannot be used when accessing the api using the gmail.metadata scope.'
           in: query
           name: q
+          type: string
+        - default: me
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
           type: string
       responses:
         '200':

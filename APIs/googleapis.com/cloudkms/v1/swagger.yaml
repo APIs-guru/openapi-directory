@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Manages encryption for your cloud services the same way you do on-premise. You can generate, use, rotate, and destroy AES256 encryption keys.'
+  description: 'Manages encryption for your cloud services the same way you do on-premises. You can generate, use, rotate, and destroy AES256 encryption keys.'
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
@@ -268,7 +268,7 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
     post:
-      description: Decrypt data that was protected by Encrypt.
+      description: Decrypts data that was protected by Encrypt.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.decrypt
       parameters:
         - description: |-
@@ -364,7 +364,7 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
     post:
-      description: 'Encrypt data, so that it can only be recovered by a call to Decrypt.'
+      description: 'Encrypts data, so that it can only be recovered by a call to Decrypt.'
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.encrypt
       parameters:
         - description: |-
@@ -999,6 +999,14 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
+          This field is GOOGLE_INTERNAL.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -1256,6 +1264,39 @@ definitions:
         description: The resource name of the CryptoKeyVersion used in encryption.
         type: string
     type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          [Common Expression Language](http://go/api-expr) syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
+    type: object
   KeyRing:
     description: A KeyRing is a toplevel logical grouping of CryptoKeys.
     properties:
@@ -1420,7 +1461,6 @@ definitions:
       bindings:
         description: |-
           Associates a list of `members` to a `role`.
-          Multiple `bindings` must not be specified for the same `role`.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'

@@ -13,7 +13,7 @@ info:
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Speech
-  version: v1beta1
+  version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
@@ -23,9 +23,9 @@ info:
         url: 'https://github.com/lucybot/api-spec-converter'
         version: 2.0.1
       format: google
-      url: 'https://speech.googleapis.com/$discovery/rest?version=v1beta1'
+      url: 'https://speech.googleapis.com/$discovery/rest?version=v1'
       version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: speech
 externalDocs:
@@ -126,7 +126,7 @@ tags:
   - name: operations
   - name: speech
 paths:
-  /v1beta1/operations:
+  /v1/operations:
     get:
       description: |-
         Lists operations that match the specified filter in the request. If the
@@ -170,20 +170,20 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-  '/v1beta1/operations/{name}':
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/operations/{name}':
     delete:
       description: |-
         Deletes a long-running operation. This method indicates that the client is
@@ -236,34 +236,34 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-  '/v1beta1/operations/{name}:cancel':
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/operations/{name}:cancel':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -278,6 +278,10 @@ paths:
         corresponding to `Code.CANCELLED`.
       operationId: speech.operations.cancel
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CancelOperationRequest'
         - description: The name of the operation resource to be cancelled.
           in: path
           name: name
@@ -296,35 +300,33 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
-  '/v1beta1/speech:asyncrecognize':
+  '/v1/speech:longrunningrecognize':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Performs asynchronous speech recognition: receive results via the
-        [google.longrunning.Operations]
-        (/speech/reference/rest/v1beta1/operations#Operation)
-        interface. Returns either an
+        google.longrunning.Operations interface. Returns either an
         `Operation.error` or an `Operation.response` which contains
-        an `AsyncRecognizeResponse` message.
-      operationId: speech.speech.asyncrecognize
+        a `LongRunningRecognizeResponse` message.
+      operationId: speech.speech.longrunningrecognize
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/AsyncRecognizeRequest'
+            $ref: '#/definitions/LongRunningRecognizeRequest'
       responses:
         '200':
           description: Successful response
@@ -337,36 +339,36 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - speech
-  '/v1beta1/speech:syncrecognize':
+  '/v1/speech:recognize':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Performs synchronous speech recognition: receive results after all audio
         has been sent and processed.
-      operationId: speech.speech.syncrecognize
+      operationId: speech.speech.recognize
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/SyncRecognizeRequest'
+            $ref: '#/definitions/RecognizeRequest'
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/SyncRecognizeResponse'
+            $ref: '#/definitions/RecognizeResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -375,17 +377,9 @@ paths:
       tags:
         - speech
 definitions:
-  AsyncRecognizeRequest:
-    description: The top-level message sent by the client for the `AsyncRecognize` method.
-    properties:
-      audio:
-        $ref: '#/definitions/RecognitionAudio'
-        description: '*Required* The audio data to be recognized.'
-      config:
-        $ref: '#/definitions/RecognitionConfig'
-        description: |-
-          *Required* Provides information to the recognizer that specifies how to
-          process the request.
+  CancelOperationRequest:
+    description: The request message for Operations.CancelOperation.
+    properties: {}
     type: object
   Empty:
     description: |-
@@ -411,6 +405,20 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
+    type: object
+  LongRunningRecognizeRequest:
+    description: |-
+      The top-level message sent by the client for the `LongRunningRecognize`
+      method.
+    properties:
+      audio:
+        $ref: '#/definitions/RecognitionAudio'
+        description: '*Required* The audio data to be recognized.'
+      config:
+        $ref: '#/definitions/RecognitionConfig'
+        description: |-
+          *Required* Provides information to the recognizer that specifies how to
+          process the request.
     type: object
   Operation:
     description: |-
@@ -493,13 +501,15 @@ definitions:
           - MULAW
           - AMR
           - AMR_WB
+          - OGG_OPUS
+          - SPEEX_WITH_HEADER_BYTE
         type: string
       languageCode:
         description: |-
-          *Optional* The language of the supplied audio as a BCP-47 language tag.
-          Example: "en-GB"  https://www.rfc-editor.org/rfc/bcp/bcp47.txt
-          If omitted, defaults to "en-US". See
-          [Language Support](https://cloud.google.com/speech/docs/languages)
+          *Required* The language of the supplied audio as a
+          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+          Example: "en-US".
+          See [Language Support](https://cloud.google.com/speech/docs/languages)
           for a list of the currently supported language codes.
         type: string
       maxAlternatives:
@@ -519,7 +529,7 @@ definitions:
           with asterisks, e.g. "f***". If set to `false` or omitted, profanities
           won't be filtered out.
         type: boolean
-      sampleRate:
+      sampleRateHertz:
         description: |-
           *Required* Sample rate in Hertz of the audio data sent in all
           `RecognitionAudio` messages. Valid values are: 8000-48000.
@@ -528,9 +538,37 @@ definitions:
           the audio source (instead of re-sampling).
         format: int32
         type: integer
-      speechContext:
-        $ref: '#/definitions/SpeechContext'
+      speechContexts:
         description: '*Optional* A means to provide context to assist the speech recognition.'
+        items:
+          $ref: '#/definitions/SpeechContext'
+        type: array
+    type: object
+  RecognizeRequest:
+    description: The top-level message sent by the client for the `Recognize` method.
+    properties:
+      audio:
+        $ref: '#/definitions/RecognitionAudio'
+        description: '*Required* The audio data to be recognized.'
+      config:
+        $ref: '#/definitions/RecognitionConfig'
+        description: |-
+          *Required* Provides information to the recognizer that specifies how to
+          process the request.
+    type: object
+  RecognizeResponse:
+    description: |-
+      The only message returned to the client by the `Recognize` method. It
+      contains the result as zero or more sequential `SpeechRecognitionResult`
+      messages.
+    properties:
+      results:
+        description: |-
+          *Output-only* Sequential list of transcription results corresponding to
+          sequential portions of audio.
+        items:
+          $ref: '#/definitions/SpeechRecognitionResult'
+        type: array
     type: object
   SpeechContext:
     description: |-
@@ -574,6 +612,8 @@ definitions:
         description: |-
           *Output-only* May contain one or more recognition hypotheses (up to the
           maximum specified in `max_alternatives`).
+          These alternatives are ordered in terms of accuracy, with the first/top
+          alternative being the most probable, as ranked by the recognizer.
         items:
           $ref: '#/definitions/SpeechRecognitionAlternative'
         type: array
@@ -652,30 +692,4 @@ definitions:
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
         type: string
-    type: object
-  SyncRecognizeRequest:
-    description: The top-level message sent by the client for the `SyncRecognize` method.
-    properties:
-      audio:
-        $ref: '#/definitions/RecognitionAudio'
-        description: '*Required* The audio data to be recognized.'
-      config:
-        $ref: '#/definitions/RecognitionConfig'
-        description: |-
-          *Required* Provides information to the recognizer that specifies how to
-          process the request.
-    type: object
-  SyncRecognizeResponse:
-    description: |-
-      The only message returned to the client by `SyncRecognize`. method. It
-      contains the result as zero or more sequential `SpeechRecognitionResult`
-      messages.
-    properties:
-      results:
-        description: |-
-          *Output-only* Sequential list of transcription results corresponding to
-          sequential portions of audio.
-        items:
-          $ref: '#/definitions/SpeechRecognitionResult'
-        type: array
     type: object

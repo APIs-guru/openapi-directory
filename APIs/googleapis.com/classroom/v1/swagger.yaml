@@ -44,6 +44,9 @@ securityDefinitions:
       'https://www.googleapis.com/auth/classroom.coursework.me.readonly': View your course work and grades in Google Classroom
       'https://www.googleapis.com/auth/classroom.coursework.students': Manage course work and grades for students in the Google Classroom classes you teach and view the course work and grades for classes you administer
       'https://www.googleapis.com/auth/classroom.coursework.students.readonly': View course work and grades for students in the Google Classroom classes you teach or administer
+      'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly': View your Google Classroom guardians
+      'https://www.googleapis.com/auth/classroom.guardianlinks.students': View and manage guardians for students in your Google Classroom classes
+      'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly': View guardians for students in your Google Classroom classes
       'https://www.googleapis.com/auth/classroom.profile.emails': View the email addresses of people in your classes
       'https://www.googleapis.com/auth/classroom.profile.photos': View the profile photos of people in your classes
       'https://www.googleapis.com/auth/classroom.rosters': Manage your Google Classroom class rosters
@@ -62,6 +65,9 @@ securityDefinitions:
       'https://www.googleapis.com/auth/classroom.coursework.me.readonly': View your course work and grades in Google Classroom
       'https://www.googleapis.com/auth/classroom.coursework.students': Manage course work and grades for students in the Google Classroom classes you teach and view the course work and grades for classes you administer
       'https://www.googleapis.com/auth/classroom.coursework.students.readonly': View course work and grades for students in the Google Classroom classes you teach or administer
+      'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly': View your Google Classroom guardians
+      'https://www.googleapis.com/auth/classroom.guardianlinks.students': View and manage guardians for students in your Google Classroom classes
+      'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly': View guardians for students in your Google Classroom classes
       'https://www.googleapis.com/auth/classroom.profile.emails': View the email addresses of people in your classes
       'https://www.googleapis.com/auth/classroom.profile.photos': View the profile photos of people in your classes
       'https://www.googleapis.com/auth/classroom.rosters': Manage your Google Classroom class rosters
@@ -2341,6 +2347,15 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListGuardianInvitationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
       tags:
         - userProfiles
     parameters:
@@ -2405,6 +2420,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/GuardianInvitation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
       tags:
         - userProfiles
   '/v1/userProfiles/{studentId}/guardianInvitations/{invitationId}':
@@ -2441,6 +2461,15 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/GuardianInvitation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
       tags:
         - userProfiles
     parameters:
@@ -2511,6 +2540,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/GuardianInvitation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
       tags:
         - userProfiles
   '/v1/userProfiles/{studentId}/guardians':
@@ -2582,6 +2616,19 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListGuardiansResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
       tags:
         - userProfiles
     parameters:
@@ -2641,6 +2688,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
       tags:
         - userProfiles
     get:
@@ -2682,6 +2734,19 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Guardian'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly'
       tags:
         - userProfiles
     parameters:

@@ -1862,6 +1862,11 @@ definitions:
           @OutputOnly
         format: google-datetime
         type: string
+      internalCompanyId:
+        description: |-
+          The internal company ID.
+          Only available for a whitelisted set of api clients.
+        type: string
       isPending:
         description: The flag that indicates if the company is pending verification.
         type: boolean
@@ -1877,6 +1882,15 @@ definitions:
         type: string
       phoneNumber:
         description: The phone number for the company's primary address.
+        type: string
+      primaryAddress:
+        $ref: '#/definitions/Location'
+        description: The primary location of the company.
+      primaryCountryCode:
+        description: The primary country code of the company.
+        type: string
+      primaryLanguageCode:
+        description: The primary language code of the company.
         type: string
       resolvedTimestamp:
         description: |-
@@ -2251,9 +2265,6 @@ definitions:
           assert (0.0, -170.0) == NormalizeLatLng(180.0, 10.0)
           assert (-90.0, 10.0) == NormalizeLatLng(270.0, 10.0)
           assert (90.0, 10.0) == NormalizeLatLng(-270.0, 10.0)
-
-      The code in logs/storage/validator/logs_validator_traits.cc treats this type
-      as if it were annotated as ST_LOCATION.
     properties:
       latitude:
         description: 'The latitude in degrees. It must be in the range [-90.0, +90.0].'
@@ -3027,6 +3038,11 @@ definitions:
         type: array
       id:
         description: The ID of the user.
+        type: string
+      internalId:
+        description: |-
+          The internal user ID.
+          Only available for a whitelisted set of api clients.
         type: string
       lastAccessTime:
         description: |-

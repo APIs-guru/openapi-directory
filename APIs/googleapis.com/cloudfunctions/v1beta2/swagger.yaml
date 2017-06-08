@@ -25,7 +25,7 @@ info:
       format: google
       url: 'https://cloudfunctions.googleapis.com/$discovery/rest?version=v1beta2'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: cloudfunctions
 externalDocs:
@@ -132,15 +132,20 @@ paths:
         Lists operations that match the specified filter in the request. If the
         server doesn't support this method, it returns `UNIMPLEMENTED`.
 
-        NOTE: the `name` binding below allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`.
+        NOTE: the `name` binding allows API services to override the binding
+        to use different resource name schemes, such as `users/*/operations`. To
+        override the binding, API services can add a binding such as
+        `"/v1/{name=users/*}/operations"` to their service configuration.
+        For backwards compatibility, the default name includes the operations
+        collection id, however overriding users must ensure the name binding
+        is the parent resource, without the operations collection id.
       operationId: cloudfunctions.operations.list
       parameters:
         - description: The standard list filter.
           in: query
           name: filter
           type: string
-        - description: The name of the operation collection.
+        - description: The name of the operation's parent resource.
           in: query
           name: name
           type: string

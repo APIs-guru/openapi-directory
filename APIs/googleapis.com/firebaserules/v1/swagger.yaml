@@ -607,6 +607,15 @@ paths:
       tags:
         - projects
 definitions:
+  Arg:
+    description: Arg matchers for the mock function.
+    properties:
+      anyValue:
+        $ref: '#/definitions/Empty'
+        description: Argument matches any value provided.
+      exactValue:
+        description: Argument exactly matches value provided.
+    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -646,6 +655,37 @@ definitions:
       function:
         description: Name of the function invoked.
         type: string
+    type: object
+  FunctionMock:
+    description: |-
+      Mock function definition.
+
+      Mocks must refer to a function declared by the target service. The type of
+      the function args and result will be inferred at test time. If either the
+      arg or result values are not compatible with function type declaration, the
+      request will be considered invalid.
+
+      More than one `FunctionMock` may be provided for a given function name so
+      long as the `Arg` matchers are distinct. There may be only one function
+      for a given overload where all `Arg` values are `Arg.any_value`.
+    properties:
+      args:
+        description: |-
+          The list of `Arg` values to match. The order in which the arguments are
+          provided is the order in which they must appear in the function
+          invocation.
+        items:
+          $ref: '#/definitions/Arg'
+        type: array
+      function:
+        description: |-
+          The name of the function.
+
+          The function name must match one provided by a service declaration.
+        type: string
+      result:
+        $ref: '#/definitions/Result'
+        description: The mock result of the function call.
     type: object
   Issue:
     description: 'Issues include warnings, errors, and deprecation notices.'
@@ -743,6 +783,17 @@ definitions:
         format: google-datetime
         type: string
     type: object
+  Result:
+    description: Possible result values from the function mock invocation.
+    properties:
+      undefined:
+        $ref: '#/definitions/Empty'
+        description: 'The result is undefined, meaning the result could not be computed.'
+      value:
+        description: |-
+          The result is an actual value. The type of the value must match that
+          of the type declared by the service.
+    type: object
   Ruleset:
     description: |-
       `Ruleset` is an immutable copy of `Source` with a globally unique identifier
@@ -789,6 +840,61 @@ definitions:
         description: Line number of the source fragment. 1-based.
         format: int32
         type: integer
+    type: object
+  TestCase:
+    description: |-
+      `TestCase` messages provide the request context and an expectation as to
+      whether the given context will be allowed or denied. Test cases may specify
+      the `request`, `resource`, and `function_mocks` to mock a function call to
+      a service-provided function.
+
+      The `request` object represents context present at request-time.
+
+      The `resource` is the value of the target resource as it appears in
+      persistent storage before the request is executed.
+    properties:
+      expectation:
+        description: Test expectation.
+        enum:
+          - EXPECTATION_UNSPECIFIED
+          - ALLOW
+          - DENY
+        type: string
+      functionMocks:
+        description: |-
+          Optional function mocks for service-defined functions. If not set, any
+          service defined function is expected to return an error, which may or may
+          not influence the test outcome.
+        items:
+          $ref: '#/definitions/FunctionMock'
+        type: array
+      request:
+        description: |-
+          Request context.
+
+          The exact format of the request context is service-dependent. See the
+          appropriate service documentation for information about the supported
+          fields and types on the request. Minimally, all services support the
+          following fields and types:
+
+          Request field  | Type
+          ---------------|-----------------
+          auth.uid       | `string`
+          auth.token     | `map<string, string>`
+          headers        | `map<string, string>`
+          method         | `string`
+          params         | `map<string, string>`
+          path           | `string`
+          time           | `google.protobuf.Timestamp`
+
+          If the request value is not well-formed for the service, the request will
+          be rejected as an invalid argument.
+      resource:
+        description: |-
+          Optional resource value as it appears in persistent storage before the
+          request is fulfilled.
+
+          The resource type depends on the `request.path` value.
     type: object
   TestResult:
     description: |-
@@ -845,6 +951,9 @@ definitions:
           Optional `Source` to be checked for correctness.
 
           This field must not be set when the resource name refers to a `Ruleset`.
+      testSuite:
+        $ref: '#/definitions/TestSuite'
+        description: Inline `TestSuite` to run.
     type: object
   TestRulesetResponse:
     description: The response for FirebaseRulesService.TestRuleset.
@@ -863,5 +972,18 @@ definitions:
           `TestSuite`.
         items:
           $ref: '#/definitions/TestResult'
+        type: array
+    type: object
+  TestSuite:
+    description: |-
+      `TestSuite` is a collection of `TestCase` instances that validate the logical
+      correctness of a `Ruleset`. The `TestSuite` may be referenced in-line within
+      a `TestRuleset` invocation or as part of a `Release` object as a pre-release
+      check.
+    properties:
+      testCases:
+        description: Collection of test cases associated with the `TestSuite`.
+        items:
+          $ref: '#/definitions/TestCase'
         type: array
     type: object

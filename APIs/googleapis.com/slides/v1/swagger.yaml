@@ -2122,13 +2122,13 @@ definitions:
       endIndex:
         description: |-
           The optional zero-based index of the end of the collection.
-          Required for `SPECIFIC_RANGE` delete mode.
+          Required for `FIXED_RANGE` ranges.
         format: int32
         type: integer
       startIndex:
         description: |-
           The optional zero-based index of the beginning of the collection.
-          Required for `SPECIFIC_RANGE` and `FROM_START_INDEX` ranges.
+          Required for `FIXED_RANGE` and `FROM_START_INDEX` ranges.
         format: int32
         type: integer
       type:
@@ -2218,6 +2218,17 @@ definitions:
           cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
           format.
         type: string
+      pageObjectIds:
+        description: |-
+          If non-empty, limits the matches to page elements only on the given pages.
+
+          Returns a 400 bad request error if given the page object ID of a
+          notes page or a
+          notes master, or if a
+          page with that object ID doesn't exist in the presentation.
+        items:
+          type: string
+        type: array
       replaceMethod:
         description: The replace method.
         enum:
@@ -2259,6 +2270,17 @@ definitions:
           - NOT_LINKED_IMAGE
           - LINKED
         type: string
+      pageObjectIds:
+        description: |-
+          If non-empty, limits the matches to page elements only on the given pages.
+
+          Returns a 400 bad request error if given the page object ID of a
+          notes page or a
+          notes master, or if a
+          page with that object ID doesn't exist in the presentation.
+        items:
+          type: string
+        type: array
       spreadsheetId:
         description: The ID of the Google Sheets spreadsheet that contains the chart.
         type: string
@@ -2277,6 +2299,16 @@ definitions:
       containsText:
         $ref: '#/definitions/SubstringMatchCriteria'
         description: Finds text in a shape matching this substring.
+      pageObjectIds:
+        description: |-
+          If non-empty, limits the matches to page elements only on the given pages.
+
+          Returns a 400 bad request error if given the page object ID of a
+          notes master,
+          or if a page with that object ID doesn't exist in the presentation.
+        items:
+          type: string
+        type: array
       replaceText:
         description: The text that will replace the matched text.
         type: string

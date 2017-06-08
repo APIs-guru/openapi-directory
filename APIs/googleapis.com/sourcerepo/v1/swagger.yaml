@@ -30,7 +30,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: sourcerepo
 externalDocs:
-  url: 'https://cloud.google.com/eap/cloud-repositories/cloud-sourcerepo-api'
+  url: 'https://cloud.google.com/source-repositories/docs/apis'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -38,6 +38,8 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/source.read_only': View the contents of your source code repositories
+      'https://www.googleapis.com/auth/source.read_write': Manage the contents of your source code repositories
     type: oauth2
   Oauth2c:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -45,6 +47,8 @@ securityDefinitions:
     flow: accessCode
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/source.read_only': View the contents of your source code repositories
+      'https://www.googleapis.com/auth/source.read_write': Manage the contents of your source code repositories
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
@@ -149,6 +153,14 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
     get:
@@ -173,6 +185,14 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
     parameters:
@@ -191,7 +211,9 @@ paths:
       - $ref: '#/parameters/prettyPrint'
   '/v1/{name}/repos':
     get:
-      description: Returns all repos belonging to a project.
+      description: |-
+        Returns all repos belonging to a project. The sizes of the repos are
+        not set by ListRepos.  To get the size of a repo, use GetRepo.
       operationId: sourcerepo.projects.repos.list
       parameters:
         - description: |-
@@ -202,6 +224,19 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            Maximum number of repositories to return; between 1 and 500.
+            If not set or zero, defaults to 100 at the server.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Resume listing repositories where a prior ListReposResponse
+            left off. This is an opaque token that must be obtained from
+            a recent, prior ListReposResponse's next_page_token field.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -212,6 +247,14 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
     parameters:
@@ -245,7 +288,7 @@ paths:
       - $ref: '#/parameters/prettyPrint'
     post:
       description: |-
-        Creates a repo in the given project with the given name..
+        Creates a repo in the given project with the given name.
 
         If the named repository already exists, `CreateRepo` returns
         `ALREADY_EXISTS`.
@@ -273,6 +316,14 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
   '/v1/{resource}:getIamPolicy':
@@ -301,6 +352,14 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
     parameters:
@@ -360,6 +419,14 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
   '/v1/{resource}:testIamPermissions':
@@ -406,6 +473,14 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
 definitions:
@@ -414,7 +489,7 @@ definitions:
       Specifies the audit configuration for a service.
       The configuration determines which permission types are logged, and what
       identities, if any, are exempted from logging.
-      An AuditConifg must have one or more AuditLogConfigs.
+      An AuditConfig must have one or more AuditLogConfigs.
 
       If there are AuditConfigs for both `allServices` and a specific service,
       the union of the two AuditConfigs is used for that service: the log_types
@@ -544,6 +619,7 @@ definitions:
           * `group:{emailid}`: An email address that represents a Google group.
              For example, `admins@example.com`.
 
+
           * `domain:{domain}`: A Google Apps domain name that represents all the
              users of that domain. For example, `google.com` or `example.com`.
 
@@ -559,7 +635,14 @@ definitions:
     type: object
   CloudAuditOptions:
     description: Write a Cloud Audit log
-    properties: {}
+    properties:
+      logName:
+        description: The log_name to populate in the Cloud Audit Record.
+        enum:
+          - UNSPECIFIED_LOG_NAME
+          - ADMIN_ACTIVITY
+          - DATA_ACCESS
+        type: string
     type: object
   Condition:
     description: A condition to be met.
@@ -634,8 +717,14 @@ definitions:
     properties: {}
     type: object
   ListReposResponse:
-    description: Response for ListRepos.
+    description: Response for ListRepos.  The size is not set in the returned repositories.
     properties:
+      nextPageToken:
+        description: |-
+          If non-empty, additional repositories exist within the project. These
+          can be retrieved by including this value in the next ListReposRequest's
+          page_token field.
+        type: string
       repos:
         description: The listed repos.
         items:
@@ -768,10 +857,13 @@ definitions:
       name:
         description: |-
           Resource name of the repository, of the form
-          `projects/<project>/repos/<repo>`.
+          `projects/<project>/repos/<repo>`.  The repo name may contain slashes.
+          eg, `projects/myproject/repos/name/with/slash`
         type: string
       size:
-        description: The size in bytes of the repo.
+        description: |-
+          The disk usage of the repo, in bytes.
+          Only returned by GetRepo.
         format: int64
         type: string
       url:

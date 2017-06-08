@@ -283,7 +283,7 @@ paths:
   '/v2/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.organizations.logs.delete
+      operationId: logging.billingAccounts.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -312,7 +312,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -450,7 +450,7 @@ paths:
   '/v2/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.organizations.logs.list
+      operationId: logging.billingAccounts.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -494,7 +494,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -608,7 +608,7 @@ paths:
   '/v2/{parent}/sinks':
     get:
       description: Lists sinks.
-      operationId: logging.organizations.sinks.list
+      operationId: logging.billingAccounts.sinks.list
       parameters:
         - description: |
             Required. The parent resource whose sinks are to be listed:
@@ -652,7 +652,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -669,7 +669,7 @@ paths:
       - $ref: '#/parameters/key'
     post:
       description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the current time is outside the sink''s start and end times or the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
-      operationId: logging.organizations.sinks.create
+      operationId: logging.billingAccounts.sinks.create
       parameters:
         - description: |-
             Required. The resource in which to create the sink:
@@ -706,11 +706,11 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
   '/v2/{sinkName}':
     delete:
       description: 'Deletes a sink. If the sink has a unique writer_identity, then that service account is also deleted.'
-      operationId: logging.organizations.sinks.delete
+      operationId: logging.billingAccounts.sinks.delete
       parameters:
         - description: |-
             Required. The full resource name of the sink to delete, including the parent resource and the sink identifier:
@@ -739,10 +739,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     get:
       description: Gets a sink.
-      operationId: logging.organizations.sinks.get
+      operationId: logging.billingAccounts.sinks.get
       parameters:
         - description: |-
             Required. The resource name of the sink:
@@ -779,7 +779,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -796,7 +796,7 @@ paths:
       - $ref: '#/parameters/key'
     put:
       description: 'Updates a sink. If the named sink doesn''t exist, then this method is identical to sinks.create. If the named sink does exist, then this method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated filter might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.organizations.sinks.update
+      operationId: logging.billingAccounts.sinks.update
       parameters:
         - description: |-
             Required. The full resource name of the sink to update, including the parent resource and the sink identifier:
@@ -837,7 +837,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
 definitions:
   Empty:
     description: |-
@@ -1045,6 +1045,10 @@ definitions:
           description: Properties of the object. Contains field @type with type URL.
         description: 'The log entry payload, represented as a protocol buffer. Some Google Cloud Platform services use this field for their log entry payloads.'
         type: object
+      receiveTimestamp:
+        description: Output only. The time the log entry was received by Stackdriver Logging.
+        format: google-datetime
+        type: string
       resource:
         $ref: '#/definitions/MonitoredResource'
         description: 'Required. The monitored resource associated with this log entry. Example: a log entry that reports a database error would be associated with the monitored resource designating the particular database that reported the error.'
@@ -1176,8 +1180,8 @@ definitions:
         type: string
       includeChildren:
         description: |
-          Optional. This field applies only to sinks owned by organizations and folders. If the field is false, the default, only the logs owned by the sink's parent resource are availble for export. If the field is true, then logs from all the projects, folders, and billing accounts contained in the sink's parent resource are also available for export. Whether a particular log entry from the children is exported depends on the sink's filter expression. For example, if this field is true, then the filter resource.type=gce_instance would export all Compute Engine VM instance log entries from all projects in the sink's parent. To only export entries from certain child projects, filter on the project part of the log name:
-          logName:("projects/test-project-a/" OR "projects/test-project-b/") AND
+          Optional. This field applies only to sinks owned by organizations and folders. If the field is false, the default, only the logs owned by the sink's parent resource are available for export. If the field is true, then logs from all the projects, folders, and billing accounts contained in the sink's parent resource are also available for export. Whether a particular log entry from the children is exported depends on the sink's filter expression. For example, if this field is true, then the filter resource.type=gce_instance would export all Compute Engine VM instance log entries from all projects in the sink's parent. To only export entries from certain child projects, filter on the project part of the log name:
+          logName:("projects/test-project1/" OR "projects/test-project2/") AND
           resource.type=gce_instance
         type: boolean
       name:

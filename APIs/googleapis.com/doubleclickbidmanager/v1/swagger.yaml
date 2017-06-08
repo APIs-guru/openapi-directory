@@ -342,7 +342,6 @@ definitions:
         description: 'File specification (column names, types, order) in which the line items will be returned. Default to EWF.'
         enum:
           - EWF
-          - SDF
         type: string
       filterIds:
         description: 'Ids of the specified filter type used to filter line items to fetch. If omitted, all the line items will be returned.'
@@ -431,6 +430,7 @@ definitions:
           - FILTER_AGE
           - FILTER_BRANDSAFE_CHANNEL_ID
           - FILTER_BROWSER
+          - FILTER_BUDGET_SEGMENT_DESCRIPTION
           - FILTER_CAMPAIGN_DAILY_FREQUENCY
           - FILTER_CARRIER
           - FILTER_CHANNEL_ID
@@ -591,6 +591,7 @@ definitions:
             - FILTER_AGE
             - FILTER_BRANDSAFE_CHANNEL_ID
             - FILTER_BROWSER
+            - FILTER_BUDGET_SEGMENT_DESCRIPTION
             - FILTER_CAMPAIGN_DAILY_FREQUENCY
             - FILTER_CARRIER
             - FILTER_CHANNEL_ID
@@ -900,6 +901,7 @@ definitions:
             - METRIC_PROFIT_VIEWABLE_ECPM_ADVERTISER
             - METRIC_PROFIT_VIEWABLE_ECPM_PARTNER
             - METRIC_PROFIT_VIEWABLE_ECPM_USD
+            - METRIC_REACH_COOKIE_FREQUENCY
             - METRIC_REACH_COOKIE_REACH
             - METRIC_REVENUE_ADVERTISER
             - METRIC_REVENUE_ECPAPC_ADVERTISER

@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Google Cloud Natural Language API provides natural language understanding technologies to developers. Examples include sentiment analysis, entity recognition, and text annotations.'
+  description: 'Provides natural language understanding technologies to developers. Examples include sentiment analysis, entity recognition, entity sentiment analysis, and text annotations.'
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
@@ -550,7 +550,7 @@ definitions:
           The language of the document (if not specified, the language is
           automatically detected). Both ISO and BCP-47 language codes are
           accepted.<br>
-          [Language Support](https://cloud.google.com/natural-language/docs/languages)
+          [Language Support](/natural-language/docs/languages)
           lists currently supported languages for each API method.
           If the language (either specified by the caller or automatically detected)
           is not supported by the called API method, an `INVALID_ARGUMENT` error
@@ -833,7 +833,7 @@ definitions:
       error message is needed, put the localized message in the error details or
       localize it in the client. The optional error details may contain arbitrary
       information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` which can be used for common error conditions.
+      in the package `google.rpc` that can be used for common error conditions.
 
       # Language mapping
 
@@ -856,7 +856,7 @@ definitions:
           errors.
 
       - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting purpose.
+          have a `Status` message for error reporting.
 
       - Batch operations. If a client uses batch request and batch response, the
           `Status` message should be used directly inside batch response, one for

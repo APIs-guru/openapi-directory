@@ -1239,7 +1239,7 @@ definitions:
       Specifies the audit configuration for a service.
       The configuration determines which permission types are logged, and what
       identities, if any, are exempted from logging.
-      An AuditConifg must have one or more AuditLogConfigs.
+      An AuditConfig must have one or more AuditLogConfigs.
 
       If there are AuditConfigs for both `allServices` and a specific service,
       the union of the two AuditConfigs is used for that service: the log_types
@@ -1777,7 +1777,9 @@ definitions:
           segment of the name must be between 6 and 30 characters in length.
         type: string
       nodeCount:
-        description: Required. The number of nodes allocated to this instance.
+        description: |-
+          Required. The number of nodes allocated to this instance. This may be zero
+          in API responses for instances that are not yet in state `READY`.
         format: int32
         type: integer
       state:

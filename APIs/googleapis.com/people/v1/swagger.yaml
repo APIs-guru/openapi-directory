@@ -150,12 +150,9 @@ paths:
       operationId: people.people.getBatchGet
       parameters:
         - description: |-
-            Comma-separated list of fields to be included in the response. Omitting
-            this field will include all fields except for connections.list requests,
-            which have a default mask that includes common fields like metadata, name,
-            photo, and profile url.
-            Each path should start with `person.`: for example, `person.names` or
-            `person.photos`.
+            Required. Comma-separated list of person fields to be included in the
+            response. Each path should start with `person.`: for example,
+            `person.names` or `person.photos`.
           in: query
           name: requestMask.includeField
           type: string
@@ -231,10 +228,17 @@ paths:
   '/v1/{resourceName}':
     get:
       description: |-
-        Provides information about a person for a resource name. Use
+        Provides information about a person by specifying a resource name. Use
         `people/me` to indicate the authenticated user.
       operationId: people.people.get
       parameters:
+        - description: |-
+            Required. Comma-separated list of person fields to be included in the
+            response. Each path should start with `person.`: for example,
+            `person.names` or `person.photos`.
+          in: query
+          name: requestMask.includeField
+          type: string
         - description: |-
             The resource name of the person to provide information about.
 
@@ -247,16 +251,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            Comma-separated list of fields to be included in the response. Omitting
-            this field will include all fields except for connections.list requests,
-            which have a default mask that includes common fields like metadata, name,
-            photo, and profile url.
-            Each path should start with `person.`: for example, `person.names` or
-            `person.photos`.
-          in: query
-          name: requestMask.includeField
-          type: string
       responses:
         '200':
           description: Successful response
@@ -333,12 +327,9 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Comma-separated list of fields to be included in the response. Omitting
-            this field will include all fields except for connections.list requests,
-            which have a default mask that includes common fields like metadata, name,
-            photo, and profile url.
-            Each path should start with `person.`: for example, `person.names` or
-            `person.photos`.
+            Required. Comma-separated list of person fields to be included in the
+            response. Each path should start with `person.`: for example,
+            `person.names` or `person.photos`.
           in: query
           name: requestMask.includeField
           type: string
@@ -1194,7 +1185,10 @@ definitions:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the photo.
       url:
-        description: The URL of the photo.
+        description: |-
+          The URL of the photo. You can change the desired size by appending a query
+          parameter `sz=<size>` at the end of the url. Example:
+          `https://lh3.googleusercontent.com/-T_wVWLlmg7w/AAAAAAAAAAI/AAAAAAAABa8/00gzXvDBYqw/s100/photo.jpg?sz=50`
         type: string
     type: object
   ProfileMetadata:

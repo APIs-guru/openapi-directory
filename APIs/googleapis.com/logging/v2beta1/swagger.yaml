@@ -282,7 +282,7 @@ paths:
   '/v2beta1/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.organizations.logs.delete
+      operationId: logging.projects.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -311,7 +311,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -449,7 +449,7 @@ paths:
   '/v2beta1/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.organizations.logs.list
+      operationId: logging.projects.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -493,7 +493,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -1044,6 +1044,10 @@ definitions:
           description: Properties of the object. Contains field @type with type URL.
         description: 'The log entry payload, represented as a protocol buffer. Some Google Cloud Platform services use this field for their log entry payloads.'
         type: object
+      receiveTimestamp:
+        description: Output only. The time the log entry was received by Stackdriver Logging.
+        format: google-datetime
+        type: string
       resource:
         $ref: '#/definitions/MonitoredResource'
         description: 'Required. The monitored resource associated with this log entry. Example: a log entry that reports a database error would be associated with the monitored resource designating the particular database that reported the error.'
@@ -1175,8 +1179,8 @@ definitions:
         type: string
       includeChildren:
         description: |
-          Optional. This field applies only to sinks owned by organizations and folders. If the field is false, the default, only the logs owned by the sink's parent resource are availble for export. If the field is true, then logs from all the projects, folders, and billing accounts contained in the sink's parent resource are also available for export. Whether a particular log entry from the children is exported depends on the sink's filter expression. For example, if this field is true, then the filter resource.type=gce_instance would export all Compute Engine VM instance log entries from all projects in the sink's parent. To only export entries from certain child projects, filter on the project part of the log name:
-          logName:("projects/test-project-a/" OR "projects/test-project-b/") AND
+          Optional. This field applies only to sinks owned by organizations and folders. If the field is false, the default, only the logs owned by the sink's parent resource are available for export. If the field is true, then logs from all the projects, folders, and billing accounts contained in the sink's parent resource are also available for export. Whether a particular log entry from the children is exported depends on the sink's filter expression. For example, if this field is true, then the filter resource.type=gce_instance would export all Compute Engine VM instance log entries from all projects in the sink's parent. To only export entries from certain child projects, filter on the project part of the log name:
+          logName:("projects/test-project1/" OR "projects/test-project2/") AND
           resource.type=gce_instance
         type: boolean
       name:

@@ -136,12 +136,7 @@ paths:
       description: Lists instances under a given project in the alphabetical order of the instance name.
       operationId: sql.instances.list
       parameters:
-        - description: Project ID of the project for which to list Cloud SQL instances.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: A filter expression for filtering listed instances.
+        - description: 'An expression for filtering the results of the request, such as by name or label.'
           in: query
           name: filter
           type: string
@@ -152,6 +147,11 @@ paths:
         - description: A previously-returned page token representing part of the larger set of results to view.
           in: query
           name: pageToken
+          type: string
+        - description: Project ID of the project for which to list Cloud SQL instances.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -2060,6 +2060,9 @@ definitions:
           SQL: The file contains SQL statements.
           CSV: The file contains CSV data.
         type: string
+      importUser:
+        description: The PostgreSQL user to use for this import operation. Defaults to cloudsqlsuperuser. Does not apply to MySQL instances.
+        type: string
       kind:
         default: 'sql#importContext'
         description: 'This is always sql#importContext.'
@@ -2153,16 +2156,6 @@ definitions:
         type: string
       type:
         description: 'The type of this IP address. A PRIMARY address is an address that can accept incoming connections. An OUTGOING address is the source address of connections originating from the instance, if supported.'
-        type: string
-    type: object
-  Labels:
-    description: User defined labels for Cloud SQL instances.
-    properties:
-      key:
-        description: The key of the label.
-        type: string
-      value:
-        description: The value of the label.
         type: string
     type: object
   LocationPreference:
@@ -2292,7 +2285,6 @@ definitions:
         description: Name of the database instance related to this operation.
         type: string
       targetLink:
-        description: The URI of the instance related to the operation.
         type: string
       targetProject:
         description: The project ID of the target instance related to this operation.
@@ -2421,11 +2413,6 @@ definitions:
         default: 'sql#settings'
         description: 'This is always sql#settings.'
         type: string
-      labels:
-        description: User defined labels.
-        items:
-          $ref: '#/definitions/Labels'
-        type: array
       locationPreference:
         $ref: '#/definitions/LocationPreference'
         description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance. App Engine co-location is only applicable to First Generation instances.
@@ -2443,7 +2430,7 @@ definitions:
         format: int64
         type: string
       storageAutoResize:
-        description: Configuration to increase storage size automatically. The default value is false. Applies only to Second Generation instances.
+        description: Configuration to increase storage size automatically. The default value is true. Applies only to Second Generation instances.
         type: boolean
       storageAutoResizeLimit:
         description: 'The maximum size to which storage capacity can be automatically increased. The default value is 0, which specifies that there is no limit. Applies only to Second Generation instances.'
@@ -2452,6 +2439,12 @@ definitions:
       tier:
         description: 'The tier of service for this instance, for example D1, D2. For more information, see pricing.'
         type: string
+      userLabels:
+        additionalProperties:
+          description: 'An individual label entry, composed of a key and a value.'
+          type: string
+        description: 'User-provided labels, represented as a dictionary where each label is a single key value pair.'
+        type: object
     type: object
   SslCert:
     description: SslCerts Resource

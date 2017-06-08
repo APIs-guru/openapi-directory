@@ -38,6 +38,7 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
+      'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
       'https://www.googleapis.com/auth/userinfo.email': View your email address
     type: oauth2
   Oauth2c:
@@ -47,6 +48,7 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
+      'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
       'https://www.googleapis.com/auth/userinfo.email': View your email address
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
@@ -172,6 +174,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -237,6 +243,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -301,6 +311,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -348,6 +362,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -405,6 +423,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -458,6 +480,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -510,6 +536,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -587,6 +617,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -645,6 +679,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -713,6 +751,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -766,6 +808,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -818,6 +864,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -885,6 +935,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -950,6 +1004,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -998,6 +1056,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -1055,6 +1117,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -1114,6 +1180,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -1171,6 +1241,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -1249,6 +1323,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -1308,6 +1386,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -1381,6 +1463,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -1439,6 +1525,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -1492,6 +1582,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -1539,6 +1633,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -1620,6 +1718,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -1668,6 +1770,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -1714,6 +1820,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -1793,6 +1903,10 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -2008,9 +2122,6 @@ definitions:
         type: array
       systemStageName:
         description: The system stage name.
-        type: string
-      userStageName:
-        description: The user stage name.
         type: string
     type: object
   ConcatPosition:
@@ -4031,7 +4142,7 @@ definitions:
       error message is needed, put the localized message in the error details or
       localize it in the client. The optional error details may contain arbitrary
       information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` which can be used for common error conditions.
+      in the package `google.rpc` that can be used for common error conditions.
 
       # Language mapping
 
@@ -4054,7 +4165,7 @@ definitions:
           errors.
 
       - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting purpose.
+          have a `Status` message for error reporting.
 
       - Batch operations. If a client uses batch request and batch response, the
           `Status` message should be used directly inside batch response, one for
@@ -4405,13 +4516,6 @@ definitions:
   TemplateMetadata:
     description: Metadata describing a template.
     properties:
-      bypassTempDirValidation:
-        description: |-
-          If true, will bypass the validation that the temp directory is
-          writable. This should only be used with templates for pipelines
-          that are guaranteed not to need to write to the temp directory,
-          which is subject to change based on the optimizer.
-        type: boolean
       description:
         description: Optional. A description of the template.
         type: string

@@ -3678,7 +3678,6 @@ definitions:
       bindings:
         description: |-
           Associates a list of `members` to a `role`.
-          Multiple `bindings` must not be specified for the same `role`.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'

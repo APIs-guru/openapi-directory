@@ -207,28 +207,33 @@ paths:
         Lists operations that match the specified filter in the request. If the
         server doesn't support this method, it returns `UNIMPLEMENTED`.
 
-        NOTE: the `name` binding below allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`.
+        NOTE: the `name` binding allows API services to override the binding
+        to use different resource name schemes, such as `users/*/operations`. To
+        override the binding, API services can add a binding such as
+        `"/v1/{name=users/*}/operations"` to their service configuration.
+        For backwards compatibility, the default name includes the operations
+        collection id, however overriding users must ensure the name binding
+        is the parent resource, without the operations collection id.
       operationId: ml.projects.operations.list
       parameters:
-        - description: The name of the operation collection.
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
         - description: The standard list page size.
           in: query
           name: pageSize
           type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -777,6 +782,15 @@ definitions:
         description: HTTP body binary data.
         format: byte
         type: string
+      extensions:
+        description: |-
+          Application specific response metadata. Must be set in the first response
+          for streaming APIs.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
     type: object
   GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric:
     description: An observed value of a metric.
@@ -789,6 +803,32 @@ definitions:
         description: The global training step for this metric.
         format: int64
         type: string
+    type: object
+  GoogleCloudMlV1__AutomaticScaling:
+    description: Options for automatically scaling a model.
+    properties:
+      minNodes:
+        description: |-
+          Optional. The minimum number of nodes to allocate for this model. These
+          nodes are always up, starting from the time the model is deployed, so the
+          cost of operating this model will be at least
+          `rate` * `min_nodes` * number of hours since last billing cycle,
+          where `rate` is the cost per node-hour as documented in
+          [pricing](https://cloud.google.com/ml-engine/pricing#prediction_pricing),
+          even if no predictions are performed. There is additional cost for each
+          prediction performed.
+
+          Unlike manual scaling, if the load gets too heavy for the nodes
+          that are up, the service will automatically add nodes to handle the
+          increased load as well as scale back as traffic drops, always maintaining
+          at least `min_nodes`. You will be charged for the time in which additional
+          nodes are used.
+
+          If not specified, `min_nodes` defaults to 0, in which case, when traffic
+          to a model stops (and after a cool-down period), nodes will be shut down
+          and no charges will be incurred until traffic to the model resumes.
+        format: int32
+        type: integer
     type: object
   GoogleCloudMlV1__CancelJobRequest:
     description: Request message for the CancelJob method.
@@ -974,8 +1014,8 @@ definitions:
         description: |-
           The number of nodes to allocate for this model. These nodes are always up,
           starting from the time the model is deployed, so the cost of operating
-          this model will be proportional to nodes * number of hours since
-          deployment.
+          this model will be proportional to `nodes` * number of hours since
+          last billing cycle plus the cost for each prediction performed.
         format: int32
         type: integer
     type: object
@@ -1457,7 +1497,7 @@ definitions:
             <dt>complex_model_m_gpu</dt>
             <dd>
             A machine equivalent to
-            <code suppresswarning="true">coplex_model_m</code> that also includes
+            <code suppresswarning="true">complex_model_m</code> that also includes
             four GPUs.
             </dd>
           </dl>
@@ -1569,6 +1609,13 @@ definitions:
       information about all of the versions of a given model by calling
       [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
     properties:
+      automaticScaling:
+        $ref: '#/definitions/GoogleCloudMlV1__AutomaticScaling'
+        description: |-
+          Automatically scale the number of nodes used to serve the model in
+          response to increases and decreases in traffic. Care should be
+          taken to ramp up traffic according to the model's ability to scale
+          or you will start seeing increases in latency and 429 response codes.
       createTime:
         description: Output only. The time the version was created.
         format: google-datetime
@@ -1606,12 +1653,12 @@ definitions:
       manualScaling:
         $ref: '#/definitions/GoogleCloudMlV1__ManualScaling'
         description: |-
-          Optional. Manually select the number of nodes to use for serving the
-          model. If unset (i.e., by default), the number of nodes used to serve
-          the model automatically scales with traffic. However, care should be
-          taken to ramp up traffic according to the model's ability to scale. If
-          your model needs to handle bursts of traffic beyond it's ability to
-          scale, it is recommended you set this field appropriately.
+          Manually select the number of nodes to use for serving the
+          model. You should generally use `automatic_scaling` with an appropriate
+          `min_nodes` instead, but this option is available if you want more
+          predictable billing. Beware that latency and error rates will increase
+          if the traffic exceeds that capability of the system to serve it based
+          on the selected number of nodes.
       name:
         description: |-
           Required.The name specified for the version when it was created.
@@ -1624,6 +1671,32 @@ definitions:
           If not set, Google Cloud ML will choose a version.
         type: string
     type: object
+  GoogleCloudMlV1beta1__AutomaticScaling:
+    description: Options for automatically scaling a model.
+    properties:
+      minNodes:
+        description: |-
+          Optional. The minimum number of nodes to allocate for this model. These
+          nodes are always up, starting from the time the model is deployed, so the
+          cost of operating this model will be at least
+          `rate` * `min_nodes` * number of hours since last billing cycle,
+          where `rate` is the cost per node-hour as documented in
+          [pricing](https://cloud.google.com/ml-engine/pricing#prediction_pricing),
+          even if no predictions are performed. There is additional cost for each
+          prediction performed.
+
+          Unlike manual scaling, if the load gets too heavy for the nodes
+          that are up, the service will automatically add nodes to handle the
+          increased load as well as scale back as traffic drops, always maintaining
+          at least `min_nodes`. You will be charged for the time in which additional
+          nodes are used.
+
+          If not specified, `min_nodes` defaults to 0, in which case, when traffic
+          to a model stops (and after a cool-down period), nodes will be shut down
+          and no charges will be incurred until traffic to the model resumes.
+        format: int32
+        type: integer
+    type: object
   GoogleCloudMlV1beta1__ManualScaling:
     description: Options for manually scaling a model.
     properties:
@@ -1631,8 +1704,8 @@ definitions:
         description: |-
           The number of nodes to allocate for this model. These nodes are always up,
           starting from the time the model is deployed, so the cost of operating
-          this model will be proportional to nodes * number of hours since
-          deployment.
+          this model will be proportional to `nodes` * number of hours since
+          last billing cycle.
         format: int32
         type: integer
     type: object
@@ -1678,6 +1751,13 @@ definitions:
       information about all of the versions of a given model by calling
       [projects.models.versions.list](/ml-engine/reference/rest/v1beta1/projects.models.versions/list).
     properties:
+      automaticScaling:
+        $ref: '#/definitions/GoogleCloudMlV1beta1__AutomaticScaling'
+        description: |-
+          Automatically scale the number of nodes used to serve the model in
+          response to increases and decreases in traffic. Care should be
+          taken to ramp up traffic according to the model's ability to scale
+          or you will start seeing increases in latency and 429 response codes.
       createTime:
         description: Output only. The time the version was created.
         format: google-datetime
@@ -1715,12 +1795,12 @@ definitions:
       manualScaling:
         $ref: '#/definitions/GoogleCloudMlV1beta1__ManualScaling'
         description: |-
-          Optional. Manually select the number of nodes to use for serving the
-          model. If unset (i.e., by default), the number of nodes used to serve
-          the model automatically scales with traffic. However, care should be
-          taken to ramp up traffic according to the model's ability to scale. If
-          your model needs to handle bursts of traffic beyond it's ability to
-          scale, it is recommended you set this field appropriately.
+          Manually select the number of nodes to use for serving the
+          model. You should generally use `automatic_scaling` with an appropriate
+          `min_nodes` instead, but this option is available if you want predictable
+          billing. Beware that latency and error rates will increase if the
+          traffic exceeds that capability of the system to serve it based on
+          the selected number of nodes.
       name:
         description: |-
           Required.The name specified for the version when it was created.
@@ -1820,7 +1900,7 @@ definitions:
       error message is needed, put the localized message in the error details or
       localize it in the client. The optional error details may contain arbitrary
       information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` which can be used for common error conditions.
+      in the package `google.rpc` that can be used for common error conditions.
 
       # Language mapping
 
@@ -1843,7 +1923,7 @@ definitions:
           errors.
 
       - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting purpose.
+          have a `Status` message for error reporting.
 
       - Batch operations. If a client uses batch request and batch response, the
           `Status` message should be used directly inside batch response, one for

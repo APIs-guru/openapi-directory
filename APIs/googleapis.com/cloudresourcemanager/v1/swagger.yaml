@@ -685,12 +685,13 @@ paths:
         + Membership changes that leave the project without any owners that have
         accepted the Terms of Service (ToS) will be rejected.
 
-        + There must be at least one owner who has accepted the Terms of
-        Service (ToS) agreement in the policy. Calling `setIamPolicy()` to
-        remove the last ToS-accepted owner from the policy will fail. This
-        restriction also applies to legacy projects that no longer have owners
-        who have accepted the ToS. Edits to IAM policies will be rejected until
-        the lack of a ToS-accepting owner is rectified.
+        + If the project is not part of an organization, there must be at least
+        one owner who has accepted the Terms of Service (ToS) agreement in the
+        policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner
+        from the policy will fail. This restriction also applies to legacy
+        projects that no longer have owners who have accepted the ToS. Edits to
+        IAM policies will be rejected until the lack of a ToS-accepting owner is
+        rectified.
 
         + Calling this method requires enabling the App Engine Admin API.
 
@@ -1405,6 +1406,7 @@ definitions:
           * `group:{emailid}`: An email address that represents a Google group.
              For example, `admins@example.com`.
 
+
           * `domain:{domain}`: A Google Apps domain name that represents all the
              users of that domain. For example, `google.com` or `example.com`.
 
@@ -1589,14 +1591,14 @@ definitions:
         description: The type of operation error experienced.
         enum:
           - ERROR_TYPE_UNSPECIFIED
-          - FOLDER_HEIGHT_VIOLATION
+          - ACTIVE_FOLDER_HEIGHT_VIOLATION
           - MAX_CHILD_FOLDERS_VIOLATION
           - FOLDER_NAME_UNIQUENESS_VIOLATION
-          - RESOURCE_DELETED
-          - PARENT_DELETED
-          - CYCLE_INTRODUCED_ERROR
-          - FOLDER_BEING_MOVED
-          - FOLDER_TO_DELETE_NON_EMPTY
+          - RESOURCE_DELETED_VIOLATION
+          - PARENT_DELETED_VIOLATION
+          - CYCLE_INTRODUCED_VIOLATION
+          - FOLDER_BEING_MOVED_VIOLATION
+          - FOLDER_TO_DELETE_NON_EMPTY_VIOLATION
           - DELETED_FOLDER_HEIGHT_VIOLATION
         type: string
     type: object
@@ -2132,7 +2134,6 @@ definitions:
       bindings:
         description: |-
           Associates a list of `members` to a `role`.
-          Multiple `bindings` must not be specified for the same `role`.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'

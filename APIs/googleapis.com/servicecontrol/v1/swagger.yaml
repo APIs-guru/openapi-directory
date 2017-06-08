@@ -1243,14 +1243,8 @@ definitions:
         enum:
           - UNSPECIFIED
           - RESOURCE_EXHAUSTED
-          - PROJECT_SUSPENDED
-          - SERVICE_NOT_ENABLED
           - BILLING_NOT_ACTIVE
           - PROJECT_DELETED
-          - PROJECT_INVALID
-          - IP_ADDRESS_BLOCKED
-          - REFERER_BLOCKED
-          - CLIENT_APP_BLOCKED
           - API_KEY_INVALID
           - API_KEY_EXPIRED
           - SPATULA_HEADER_INVALID
@@ -1557,6 +1551,8 @@ definitions:
               The request was made by the Google Cloud SDK CLI (gcloud).
           +   `AppEngine-Google; (+http://code.google.com/appengine; appid: s~my-project`:
               The request was made from the `my-project` App Engine app.
+
+          NOLINT
         type: string
     type: object
   StartReconciliationRequest:

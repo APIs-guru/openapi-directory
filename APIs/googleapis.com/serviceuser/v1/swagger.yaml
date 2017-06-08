@@ -906,7 +906,11 @@ definitions:
           allowed to proceed.
         type: boolean
       apis:
-        description: The list of APIs served by this endpoint.
+        description: |-
+          The list of APIs served by this endpoint.
+
+          If no APIs are specified this translates to "all APIs" exported by the
+          service, as defined in the top-level service configuration.
         items:
           type: string
         type: array
@@ -1046,7 +1050,7 @@ definitions:
     type: object
   Http:
     description: |-
-      Defines the HTTP configuration for a service. It contains a list of
+      Defines the HTTP configuration for an API service. It contains a list of
       HttpRule, each specifying the mapping of an RPC method
       to one or more HTTP REST API methods.
     properties:
@@ -1071,11 +1075,11 @@ definitions:
   HttpRule:
     description: |-
       `HttpRule` defines the mapping of an RPC method to one or more HTTP
-      REST APIs.  The mapping determines what portions of the request
-      message are populated from the path, query parameters, or body of
-      the HTTP request.  The mapping is typically specified as an
-      `google.api.http` annotation, see "google/api/annotations.proto"
-      for details.
+      REST API methods. The mapping specifies how different portions of the RPC
+      request message are mapped to URL path, URL query parameters, and
+      HTTP request body. The mapping is typically specified as an
+      `google.api.http` annotation on the RPC method,
+      see "google/api/annotations.proto" for details.
 
       The mapping consists of a field specifying the path template and
       method kind.  The path template can refer to fields in the request
@@ -1123,6 +1127,11 @@ definitions:
       parameters. Assume the following definition of the request message:
 
 
+          service Messaging {
+            rpc GetMessage(GetMessageRequest) returns (Message) {
+              option (google.api.http).get = "/v1/messages/{message_id}";
+            }
+          }
           message GetMessageRequest {
             message SubMessage {
               string subfield = 1;
@@ -1235,7 +1244,7 @@ definitions:
       to the request message are as follows:
 
       1. The `body` field specifies either `*` or a field path, or is
-         omitted. If omitted, it assumes there is no HTTP body.
+         omitted. If omitted, it indicates there is no HTTP request body.
       2. Leaf fields (recursive expansion of nested messages in the
          request) can be classified into three types:
           (a) Matched in the URL template.
@@ -1254,28 +1263,34 @@ definitions:
           FieldPath = IDENT { "." IDENT } ;
           Verb     = ":" LITERAL ;
 
-      The syntax `*` matches a single path segment. It follows the semantics of
-      [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2 Simple String
-      Expansion.
+      The syntax `*` matches a single path segment. The syntax `**` matches zero
+      or more path segments, which must be the last part of the path except the
+      `Verb`. The syntax `LITERAL` matches literal text in the path.
 
-      The syntax `**` matches zero or more path segments. It follows the semantics
-      of [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.3 Reserved
-      Expansion. NOTE: it must be the last segment in the path except the Verb.
-
-      The syntax `LITERAL` matches literal text in the URL path.
-
-      The syntax `Variable` matches the entire path as specified by its template;
-      this nested template must not contain further variables. If a variable
+      The syntax `Variable` matches part of the URL path as specified by its
+      template. A variable template must not contain other variables. If a variable
       matches a single path segment, its template may be omitted, e.g. `{var}`
       is equivalent to `{var=*}`.
 
+      If a variable contains exactly one path segment, such as `"{var}"` or
+      `"{var=*}"`, when such a variable is expanded into a URL path, all characters
+      except `[-_.~0-9a-zA-Z]` are percent-encoded. Such variables show up in the
+      Discovery Document as `{var}`.
+
+      If a variable contains one or more path segments, such as `"{var=foo/*}"`
+      or `"{var=**}"`, when such a variable is expanded into a URL path, all
+      characters except `[-_.~/0-9a-zA-Z]` are percent-encoded. Such variables
+      show up in the Discovery Document as `{+var}`.
+
+      NOTE: While the single segment variable matches the semantics of
+      [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2
+      Simple String Expansion, the multi segment variable **does not** match
+      RFC 6570 Reserved Expansion. The reason is that the Reserved Expansion
+      does not expand special characters like `?` and `#`, which would lead
+      to invalid URLs.
+
       NOTE: the field paths in variables and in the `body` must not refer to
       repeated fields or map fields.
-
-      Use CustomHttpPattern to specify any HTTP method that is not included in the
-      `pattern` field, such as HEAD, or "*" to leave the HTTP method unspecified for
-      a given URL path rule. The wild-card rule is useful for services that provide
-      content to Web (HTML) clients.
     properties:
       additionalBindings:
         description: |-
@@ -1294,7 +1309,11 @@ definitions:
         type: string
       custom:
         $ref: '#/definitions/CustomHttpPattern'
-        description: Custom pattern is used for defining custom verbs.
+        description: |-
+          The custom pattern is used for specifying an HTTP method that is not
+          included in the `pattern` field, such as HEAD, or "*" to leave the
+          HTTP method unspecified for this rule. The wild-card rule is useful
+          for services that provide content to Web (HTML) clients.
       delete:
         description: Used for deleting a resource.
         type: string
@@ -1349,6 +1368,24 @@ definitions:
           "projects.aggregated". Because, semantically, this rpc is actually an
           operation on the "projects.addresses" collection, the `rest_collection`
           field is configured to override the derived collection name.
+        type: string
+      restMethodName:
+        description: |-
+          Optional. The rest method name is by default derived from the URL
+          pattern. If specified, this field overrides the default method name.
+          Example:
+
+              rpc CreateResource(CreateResourceRequest)
+                  returns (CreateResourceResponse) {
+                option (google.api.http) = {
+                  post: "/v1/resources",
+                  body: "resource",
+                  rest_method_name: "insert"
+                };
+              }
+
+          This method has the automatically derived rest method name "create", but
+           for backwards compatability with apiary, it is specified as insert.
         type: string
       selector:
         description: |-
@@ -1498,32 +1535,81 @@ definitions:
     type: object
   MediaDownload:
     description: |-
+      Defines the Media configuration for a service in case of a download.
       Use this only for Scotty Requests. Do not use this for media support using
       Bytestream, add instead [][google.bytestream.RestByteStream] as an API to
       your configuration for Bytestream methods.
     properties:
+      completeNotification:
+        description: |-
+          A boolean that determines whether a notification for the completion of a
+          download should be sent to the backend.
+        type: boolean
       downloadService:
         description: |-
-          DO NOT USE THIS FIELD UNTIL THIS WARNING IS REMOVED.
+          DO NOT USE FIELDS BELOW THIS LINE UNTIL THIS WARNING IS REMOVED.
 
           Specify name of the download service if one is used for download.
+        type: string
+      dropzone:
+        description: Name of the Scotty dropzone to use for the current API.
         type: string
       enabled:
         description: Whether download is enabled.
         type: boolean
+      maxDirectDownloadSize:
+        description: |-
+          Optional maximum acceptable size for direct download.
+          The size is specified in bytes.
+        format: int64
+        type: string
+      useDirectDownload:
+        description: |-
+          A boolean that determines if direct download from ESF should be used for
+          download of this media.
+        type: boolean
     type: object
   MediaUpload:
     description: |-
+      Defines the Media configuration for a service in case of an upload.
       Use this only for Scotty Requests. Do not use this for media support using
       Bytestream, add instead [][google.bytestream.RestByteStream] as an API to
       your configuration for Bytestream methods.
     properties:
+      completeNotification:
+        description: |-
+          A boolean that determines whether a notification for the completion of an
+          upload should be sent to the backend. These notifications will not be seen
+          by the client and will not consume quota.
+        type: boolean
+      dropzone:
+        description: Name of the Scotty dropzone to use for the current API.
+        type: string
       enabled:
         description: Whether upload is enabled.
         type: boolean
+      maxSize:
+        description: |-
+          Optional maximum acceptable size for an upload.
+          The size is specified in bytes.
+        format: int64
+        type: string
+      mimeTypes:
+        description: |-
+          An array of mimetype patterns. Esf will only accept uploads that match one
+          of the given patterns.
+        items:
+          type: string
+        type: array
+      progressNotification:
+        description: Whether to receive a notification for progress changes of media upload.
+        type: boolean
+      startNotification:
+        description: Whether to receive a notification on the start of media upload.
+        type: boolean
       uploadService:
         description: |-
-          DO NOT USE THIS FIELD UNTIL THIS WARNING IS REMOVED.
+          DO NOT USE FIELDS BELOW THIS LINE UNTIL THIS WARNING IS REMOVED.
 
           Specify name of the upload service if one is used for upload.
         type: string
@@ -1698,10 +1784,7 @@ definitions:
   MetricRule:
     description: |-
       Bind API methods to metrics. Binding a method to a metric causes that
-      metric's configured quota, billing, and monitoring behaviors to apply to the
-      method call.
-
-      Used by metric-based quotas only.
+      metric's configured quota behaviors to apply to the method call.
     properties:
       metricCosts:
         additionalProperties:
@@ -2160,10 +2243,7 @@ definitions:
              value_type: INT64
     properties:
       limits:
-        description: |-
-          List of `QuotaLimit` definitions for the service.
-
-          Used by metric-based quotas only.
+        description: List of `QuotaLimit` definitions for the service.
         items:
           $ref: '#/definitions/QuotaLimit'
         type: array
@@ -2171,8 +2251,6 @@ definitions:
         description: |-
           List of `MetricRule` definitions, each one mapping a selected method to one
           or more metrics.
-
-          Used by metric-based quotas only.
         items:
           $ref: '#/definitions/MetricRule'
         type: array
@@ -2257,10 +2335,6 @@ definitions:
           Name of the quota limit. The name is used to refer to the limit when
           overriding the default limit on per-consumer basis.
 
-          For group-based quota limits, the name must be unique within the quota
-          group. If a name is not provided, it will be generated from the limit_by
-          and duration fields.
-
           For metric-based quota limits, the name must be provided, and it must be
           unique within the service. The name can only include alphanumeric
           characters as well as '-'.
@@ -2286,21 +2360,10 @@ definitions:
             * "/d"  for quota every 24 hours, starting 00:00 US Pacific Time.
             * Otherwise the quota won't be reset by time, such as storage limit.
           * One and only one of the granted containers:
-            * "/{organization}" quota for an organization.
-            * "/{project}" quota for a project.
-            * "/{folder}" quota for a folder.
-            * "/{resource}" quota for a universal resource.
-          * Zero or more quota segmentation dimension. Not all combos are valid.
-            * "/{region}" quota for every region. Not to be used with time intervals.
-            * Otherwise the resources granted on the target is not segmented.
-            * "/{zone}" quota for every zone. Not to be used with time intervals.
-            * Otherwise the resources granted on the target is not segmented.
-            * "/{resource}" quota for a resource associated with a project or org.
+            * "/{project}" quota for a project
 
           Here are some examples:
           * "1/min/{project}" for quota per minute per project.
-          * "1/min/{user}" for quota per minute per user.
-          * "1/min/{organization}" for quota per minute per organization.
 
           Note: the order of unit components is insignificant.
           The "1" at the beginning is required to follow the metric unit syntax.
@@ -2311,39 +2374,7 @@ definitions:
         additionalProperties:
           format: int64
           type: string
-        description: |-
-          Tiered limit values. Also allows for regional or zone overrides for these
-          values if "/{region}" or "/{zone}" is specified in the unit field.
-
-          Currently supported tiers from low to high:
-          VERY_LOW, LOW, STANDARD, HIGH, VERY_HIGH
-
-          To apply different limit values for users according to their tiers, specify
-          the values for the tiers you want to differentiate. For example:
-          {LOW:100, STANDARD:500, HIGH:1000, VERY_HIGH:5000}
-
-          The limit value for each tier is optional except for the tier STANDARD.
-          The limit value for an unspecified tier falls to the value of its next
-          tier towards tier STANDARD. For the above example, the limit value for tier
-          STANDARD is 500.
-
-          To apply the same limit value for all users, just specify limit value for
-          tier STANDARD. For example: {STANDARD:500}.
-
-          To apply a regional overide for a tier, add a map entry with key
-          "<TIER>/<region>", where <region> is a region name. Similarly, for a zone
-          override, add a map entry with key "<TIER>/{zone}".
-          Further, a wildcard can be used at the end of a zone name in order to
-          specify zone level overrides. For example:
-          LOW: 10, STANDARD: 50, HIGH: 100,
-          LOW/us-central1: 20, STANDARD/us-central1: 60, HIGH/us-central1: 200,
-          LOW/us-central1-*: 10, STANDARD/us-central1-*: 20, HIGH/us-central1-*: 80
-
-          The regional overrides tier set for each region must be the same as
-          the tier set for default limit values. Same rule applies for zone overrides
-          tier as well.
-
-          Used by metric-based quotas only.
+        description: 'Tiered limit values, currently only STANDARD is supported.'
         type: object
     type: object
   SearchServicesResponse:
@@ -2483,10 +2514,7 @@ definitions:
           e.g. `calendar.googleapis.com`.
         type: string
       producerProjectId:
-        description: |-
-          The id of the Google developer project that owns the service.
-          Members of this project can manage the service configuration,
-          manage consumption of the service, etc.
+        description: The Google project that owns this service.
         type: string
       quota:
         $ref: '#/definitions/Quota'
@@ -2508,7 +2536,7 @@ definitions:
           $ref: '#/definitions/Type'
         type: array
       title:
-        description: The product title associated with this service.
+        description: The product title for this service.
         type: string
       types:
         description: |-
@@ -2571,7 +2599,7 @@ definitions:
       error message is needed, put the localized message in the error details or
       localize it in the client. The optional error details may contain arbitrary
       information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` which can be used for common error conditions.
+      in the package `google.rpc` that can be used for common error conditions.
 
       # Language mapping
 
@@ -2642,7 +2670,6 @@ definitions:
           - IN_PROGRESS
           - FAILED
           - CANCELLED
-          - FAILED_ROLLED_BACK
         type: string
     type: object
   SystemParameter:
