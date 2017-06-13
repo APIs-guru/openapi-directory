@@ -207,6 +207,7 @@ function validatePreferred(specs) {
     var id = util.getApiId(swagger);
     preferred[id] = preferred[id] || {};
     preferred[id][swagger.info.version] = swagger.info['x-preferred'];
+	assert(Object.keys(swagger.paths).length>0, `"${id}" has no paths`);
   });
 
   _.each(preferred, function (versions, id) {
