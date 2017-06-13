@@ -154,7 +154,7 @@ function updateCollection(dir, command) {
   specSources.getLeads(util.getSpecs(dir))
     .then(leads => _.toPairs(leads))
     .each(([filename, lead]) => {
-      return writeSpecFromLead(lead, command)
+      if (lead) return writeSpecFromLead(lead, command)
         .then(swagger => {
           var newFilename = util.getSwaggerPath(swagger);
           if (newFilename !== filename)
@@ -985,6 +985,11 @@ process.on('exit', function() {
     for (var w of warnings) {
       console.log(w);
     }
+  }
+  if (specSources.deletions.length) {
+  	for (var d of specSources.deletions) {
+	  console.log('Deleted? '+d);
+	}
   }
 });
 

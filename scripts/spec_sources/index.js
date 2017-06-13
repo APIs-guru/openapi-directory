@@ -6,6 +6,8 @@ var Promise = require('bluebird');
 
 var util = require('../util');
 
+exports.deletions = [];
+
 var specSources = {
   'googleapis.com': require('./google'),
   'azure.com': require('./azure'),
@@ -54,7 +56,8 @@ exports.getLeads = function (specs) {
 
       return _(specs).mapValues((swagger, filename) => {
         var lead = leads[util.getOriginUrl(swagger)];
-        assert(lead, '!!! Delete ' + filename);
+		if (!lead) exports.deletions.push(filename);
+        //assert(lead, '!!! Delete ' + filename);
         return lead;
       }).value();
     })
