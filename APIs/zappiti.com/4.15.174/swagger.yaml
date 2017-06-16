@@ -6,7 +6,7 @@ basePath: /
 info:
   description: 'Move your app forward with the Zappiti Player API. Use http://your-player-ip:8990/ as base URL for your requests.'
   title: Zappiti Player
-  version: 4.14.170
+  version: 4.15.174
   x-apisguru-categories:
     - entertainment
   x-logo:
@@ -42,6 +42,22 @@ paths:
       summary: Check if Zappiti Service app status on the player
       tags:
         - Zappiti Service
+  /ConnectionDetails:
+    post:
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ConnectionDetailsRequest'
+      responses:
+        '200':
+          description: ConnectionDetailsResult
+          schema:
+            $ref: '#/definitions/ConnectionDetailsResult'
+      summary: Get user's login details
+      tags:
+        - General
   /InstallZappitiService:
     post:
       description: ''
@@ -74,7 +90,7 @@ paths:
             $ref: '#/definitions/IsAliveResult'
       summary: Get server status
       tags:
-        - Other
+        - General
   /LastMedia:
     post:
       parameters:
@@ -138,6 +154,37 @@ definitions:
     properties:
       ErrorCode:
         $ref: '#/definitions/ErrorCode'
+    type: object
+  ConnectionDetailsRequest:
+    properties:
+      ApiKey:
+        description: Client API Key
+        format: uuid
+        type: string
+    type: object
+  ConnectionDetailsResult:
+    properties:
+      AuthKey:
+        description: User's Authentification key
+        format: uuid
+        type: string
+      Collection:
+        description: User's collection id
+        format: string
+        type: string
+      Email:
+        description: User's email used for the collection
+        format: string
+        type: string
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+      ServerIp:
+        description: Server's IP
+        format: string
+        type: string
+      ServerPort:
+        description: Port used by the server
+        type: integer
     type: object
   ErrorCode:
     enum:
