@@ -20,6 +20,18 @@ var makeRequest = require('makeRequest');
 var util = require('./util');
 var specSources = require('./spec_sources');
 var sp = require('./sortParameters.js');
+var httpCache;
+try {
+  httpCache = YAML.safeLoad(fs.readFileSync(pathLib.join(__dirname,'../metadata/httpCache.yaml'),'utf8'));
+}
+catch (ex) {
+  console.log(ex.message);
+  httpCache = { cache: [] };
+}
+var resolverContext = {
+  anyDiff: false,
+  called: false
+}
 
 var warnings = [];
 
@@ -34,14 +46,56 @@ var jsondiffpatch = require('jsondiffpatch').create({
   }
 });
 
+function getCacheIndex(url) {
+  return _.findIndex(httpCache.cache,function(e){
+    return e.url === url;
+  });
+}
+
+function getCacheEntry(url) {
+  var cacheIndex =_.findIndex(httpCache.cache,function(e){
+    return e.url === url;
+  });
+  if (cacheIndex>=0)
+    return httpCache.cache[cacheIndex];
+  else {
+    var cacheEntry = { url: url };
+    httpCache.cache.push(cacheEntry);
+    return cacheEntry;
+  }
+}
+
 converter.ResourceReaders.url = function (url) {
+  resolverContext.called = true;
   var options = {
     headers: {
       'Accept': 'application/json,*/*',
-    }
+    },
+	retries : 10
   };
+  var cacheEntry = getCacheEntry(url);
+  if (cacheEntry && cacheEntry.etag && resolverContext.etag && resolverContext.format !== 'swagger_1') {
+    options.headers['If-None-Match'] = cacheEntry.etag;
+  }
   return makeRequest('get', url, options)
-    .then(([, data]) => data.split('\r').join(''));
+    .then(function(result){
+      if (result[0].statusCode === 304) {
+		throw new Error('Warning: 304 Not Modified');
+        result[1] = {}; //util.exec('git show '+cacheEntry.gitHash.trim());
+      }
+      else {
+        //fs.writeFileSync('../metadata/tmp', result[1], 'utf8');
+        //cacheEntry.gitHash = util.exec('git hash-object -w ../metadata/tmp').trim();
+        resolverContext.anyDiff = true;
+      }
+      for (var h in result[0].headers) {
+        h = h.toLowerCase();
+        if ((h === 'last-modified') || (h == 'etag')) {
+          cacheEntry[h] = result[0].headers[h];
+        }
+      }
+      return result[1].split('\r').join('');
+    });
 }
 
 class SpecError extends Error {
@@ -84,7 +138,10 @@ program
 program
   .command('update')
   .description('run update')
+  .option('-f, --force', 'update even if skip flag set')
   .option('-q, --quiet', 'suppress two common warnings')
+  .option('-r, --resume <PROVIDER>','resume update at a particular provider')
+  .option('-s, --slow', 'do not use httpCache etag info')
   .arguments('[DIR]')
   .action(updateCollection);
 
@@ -153,15 +210,43 @@ function fixupSwagger(swaggerPath) {
 function updateCollection(dir, command) {
   specSources.getLeads(util.getSpecs(dir))
     .then(leads => _.toPairs(leads))
+	.then(leadPairs => {
+		if (command.resume) {
+			_.remove(leadPairs, function(lp){
+				console.log(lp[0],command.resume);
+				return (lp[0] < command.resume);
+			});
+		}
+		return leadPairs;
+	})
     .each(([filename, lead]) => {
-      if (lead) return writeSpecFromLead(lead, command)
-        .then(swagger => {
-          var newFilename = util.getSwaggerPath(swagger);
-          if (newFilename !== filename)
-            warnings.push(`Definition was moved from "${filename}" to "${newFilename}"`);
-        });
+      if (lead) {
+        var origin = _.cloneDeep(util.getOrigin(lead));
+        if (Array.isArray(origin))
+	      origin = origin.pop();
+        var source = origin.url;
+        var cacheEntry = getCacheEntry(source);
+	    if ((cacheEntry.skip && !command.force) || (origin['x-apisguru-direct'])) {
+          console.log('SKIP '+source);
+	      return null;
+	    }
+        return writeSpecFromLead(lead, command)
+          .then(swagger => {
+            if (swagger) {
+              var newFilename = util.getSwaggerPath(swagger);
+              if (newFilename !== filename)
+                warnings.push(`Spec was moved from "${filename}" to "${newFilename}"`);
+            }
+            else {
+              assert(!resolverContext.anyDiff,'anyDiff must be false here');
+            }
+          });
+      }
     })
-    .done();
+    .done(function(){
+      console.log('Finishing successfully');
+      fs.writeFileSync(pathLib.join(__dirname,'../metadata/httpCache.yaml'),YAML.safeDump(httpCache, {lineWidth:-1}),'utf8');
+    });
 }
 
 function checkPreferred(dir, command) {
@@ -336,11 +421,19 @@ function writeSpecFromLead(lead,command) {
 
 function writeSpec(source, format, exPatch, command) {
   var context = {source};
+  resolverContext = {
+    anyDiff: false,
+    called: false,
+    source: source,
+	format: format,
+	etag: !command.slow
+  };
 
   return converter.getSpec(source, format)
     .then(spec => {
       context.spec = spec;
-
+      if (resolverContext.called && !resolverContext.anyDiff)
+        throw Error('Warning: 304 Not modified');
       var fixup = util.readYaml(getOriginFixupPath(spec));
       jsondiffpatch.patch(spec, fixup);
 
@@ -349,7 +442,8 @@ function writeSpec(source, format, exPatch, command) {
     .then(swagger => {
       context.swagger = swagger;
 
-      patchSwagger(swagger, exPatch);
+      delete exPatch.info.version; // testing
+	  patchSwagger(swagger, exPatch);
 
       expandPathTemplates(swagger);
       replaceSpacesInSchemaNames(swagger);
@@ -386,6 +480,7 @@ function writeSpec(source, format, exPatch, command) {
 	  delete exPatch.info['x-providerName'];
 	  delete exPatch.info['x-serviceName'];
 	  delete exPatch.info['x-preferred'];
+	  delete exPatch.info['x-origin'];
 
       if (Object.keys(exPatch.info).length) {
         var patchFilename = pathLib.join(util.getPathComponents(context.swagger, true).join('/'),'patch.yaml');
@@ -399,7 +494,11 @@ function writeSpec(source, format, exPatch, command) {
       return context.swagger;
     })
     .catch(e => {
-      throw new SpecError(e, context);
+      if (e.message.indexOf('Can not')>=0)
+	    e.message = 'Warning: '+e.message;
+      if (resolverContext.anyDiff || (!e.message.startsWith('Warning')))
+        throw new SpecError(e, context);
+      console.log(e.message);
     });
 }
 
@@ -765,7 +864,12 @@ function errorToString(error, context) {
   else
     result += error.stack + '\n';
 
-  if (_.get(validation, 'warnings')) {
+  var warnings = (validation && validation.warnings ? validation.warnings : []);
+  _.remove(warnings, function (warning) {
+     return ((warning.code === 'UNUSED_DEFINITION') || (warning.code === 'EXTRA_REFERENCE_PROPERTIES'));
+  });
+
+  if (warnings.length) {
     result += '******************** Warnings ' + source + ' *************************\n';
     result += util.Yaml2String(validation.warnings);
   }
@@ -918,7 +1022,8 @@ function convertToSwagger(spec) {
             version: converterVersion
         };
       }
-      swagger.spec.info['x-origin'].push(newOrigin);
+	  if (!_.isEqual(_.last(swagger.spec.info['x-origin']),newOrigin))
+        swagger.spec.info['x-origin'].push(newOrigin);
       return swagger.spec;
     });
 }
